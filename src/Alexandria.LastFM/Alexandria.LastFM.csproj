@@ -34,6 +34,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeUtil.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="LastFMPlugin.cs" />
     <Compile Include="Old\BlockingClient.cs" />
