@@ -93,7 +93,8 @@ namespace AlexandriaOrg.Alexandria.Client
 					Alexandria.LastFM.LastFMPlugin plugin = new AlexandriaOrg.Alexandria.LastFM.LastFMPlugin();
 					plugin.SetUserPassword("uberweasel", "automatic");
 					plugin.Start();
-					plugin.Queue.Add("R.E.M.", "Automatic For the People", "Drive", 271, DateTime.Now);
+					DateTime started = DateTime.Now.AddSeconds(-250);
+					plugin.Queue.Add("Tool", "Undertow", "Sober", 306, started);
 					//MessageBox.Show("Track submitted to Last.fm", "Test Last.fm");
 					//plugin.Stop();
 					//Alexandria.LastFM.l
