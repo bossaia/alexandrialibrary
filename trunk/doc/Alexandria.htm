@@ -1,0 +1,42 @@
+<!doctype xhtml public "-//w3c//dtd xhtml 4.0 transitional//en" >
+<html>
+	<header>
+		<title>Alexandria Library Application Design</title>
+	</header>
+	<style>
+		#h1 { FONT-WEIGHT: bold; FONT-SIZE: 24pt; FONT-FAMILY: Tahoma,Arial,Geneva,Sans-Serif; }
+		#h2 { FONT-WEIGHT: bold; FONT-SIZE: 18pt; FONT-FAMILY: Tahoma,Arial,Geneva,Sans-Serif; }
+		.SampleClass { border-collapse:collapse; }
+	</style>
+	<body>
+		<h1>Design Overview</h1>
+		<p>Alexandria is a cross-platform application suite for discovering, organizing, viewing, reviewing and adding metadata to digital media.</p>
+		<h2>Architecture</h2>
+		<p>Alexandria is designed around a dynamic plugin model that minimizes the interdependence of the constituant parts. This allows plugin modules 
+		to be designed against a common API and with minimal external dependencies.  Because of this focus on independence between plugin modules it is 
+		possible for even core functionality such as the playback engine to be swapped out without (necessarily) impacting the overall functionality of 
+		the sytem.  Additionally, plugin modules use a capability model to communicate what features and options they support so it can be made clear to 
+		then end user the what the functional differences are between two plugins of the same type.  Fundamental to the design of Alexandria is the 
+		client-server model such that an Alexandria client can access media resources both locally and remotely; from ad-hoc distributed providers such 
+		as internet radio stations as well as other Alexandria users who can serve their media to others.  In this regard an Alexandria client has the 
+		potention to act as both a client and a server.
+		</p>		
+		<h2>Framework</h2>
+		<p>Alexandria is based on version 2.0 of the .NET framework which means that plugin modules can be written in any language which 
+		targets version 2.0 of the .NET CLR.  Alexandria can be compiled and run against the Mono and Microsoft .NET runtimes.  Examples of languages 
+		that can be used to write Alexandria plugins are as follows:
+		<table>
+			<tr><td>CLR</td><td colspan="2">Framework Version</td></tr>
+			<tr><td>Language</td><td>Mono</td><td>.NET</td></tr>
+			<tr><td>C#</td><td>1.2</td><td>2.0</td></tr>
+			<tr><td>VB.NET</td><td>1.2*</td><td>2.0</td></tr>
+			<tr><td>IronPython</td><td>1.2</td><td>2.0</td></tr>
+			<tr><td>Boo</td><td>1.2</td><td>NA</td></tr>
+		</table>
+		* VB.NET is still experimental/incomplete in Mono 1.2
+		</p>
+		<h2>Plugin Types</h2>
+		<p>Plugin modules provide all of the functionality in Alexandria.
+		</p>
+	</body>
+</html>
