@@ -1,0 +1,144 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlexandriaOrg.Alexandria</RootNamespace>
+    <AssemblyName>Alexandria</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlexandriaException.cs" />
+    <Compile Include="AudioPlayer.cs" />
+    <Compile Include="CDTableOfContents.cs" />
+    <Compile Include="CompactDisc.cs" />
+    <Compile Include="ConsoleTool.cs" />
+    <Compile Include="DataConverter.cs" />
+    <Compile Include="Data\Album.cs" />
+    <Compile Include="Data\Artist.cs" />
+    <Compile Include="Data\ArtistEvent.cs" />
+    <Compile Include="Data\BaseEvent.cs" />
+    <Compile Include="Data\Collaboration.cs" />
+    <Compile Include="Data\DataFactory.cs" />
+    <Compile Include="Data\DataRecord.cs" />
+    <Compile Include="Data\Genre.cs" />
+    <Compile Include="Data\GroupArtist.cs" />
+    <Compile Include="Data\GroupFormedEvent.cs" />
+    <Compile Include="Data\IndividualArtist.cs" />
+    <Compile Include="Data\Profile.cs" />
+    <Compile Include="Data\Role.cs" />
+    <Compile Include="Data\Song.cs" />
+    <Compile Include="Data\Track.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="Device.cs" />
+    <Compile Include="Drive.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="IAudioPlayer.cs" />
+    <Compile Include="IAudioResource.cs" />
+    <Compile Include="IMediaFile.cs" />
+    <Compile Include="IMediaPlaylist.cs" />
+    <Compile Include="IMediaController.cs" />
+    <Compile Include="IMediaResource.cs" />
+    <Compile Include="ISound.cs" />
+    <Compile Include="ISoundCommand.cs" />
+    <Compile Include="ISoundStatus.cs" />
+    <Compile Include="ITagEngine.cs" />
+    <Compile Include="LocalHardDrive.cs" />
+    <Compile Include="LocalMediaFile.cs" />
+    <Compile Include="M3uPlaylist.cs" />
+    <Compile Include="MediaLibrary.cs" />
+    <Compile Include="MediaFile.cs" />
+    <Compile Include="MediaFileFormat.cs" />
+    <Compile Include="MediaFormats\Flac.cs" />
+    <Compile Include="MediaFormats\Wma.cs" />
+    <Compile Include="AudioInfo.cs" />
+    <Compile Include="MediaItem.cs" />
+    <Compile Include="MediaPlayer.cs" />
+    <Compile Include="MediaPlaylist.cs" />
+    <Compile Include="MediaController.cs" />
+    <Compile Include="IAudioTag.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="MediaFormats\Mp3.cs" />
+    <Compile Include="MediaFormats\Ogg.cs" />
+    <Compile Include="MediaFormats\Wav.cs" />
+    <Compile Include="MetadataProvider.cs" />
+    <Compile Include="NetworkDrive.cs" />
+    <Compile Include="OpticalDrive.cs" />
+    <Compile Include="PlaybackEventArgs.cs" />
+    <Compile Include="PlaybackStatus.cs" />
+    <Compile Include="PlaybackStatusPaused.cs" />
+    <Compile Include="PlaybackStatusPlaying.cs" />
+    <Compile Include="PlaybackStatusStopped.cs" />
+    <Compile Include="PluginAttributes\AudioPlayerClassAttribute.cs" />
+    <Compile Include="PluginAttributes\DataFactoryClassAttribute.cs" />
+    <Compile Include="PluginAttributes\MetadataProviderClassAttribute.cs" />
+    <Compile Include="PluginAttributes\PluginAttribute.cs" />
+    <Compile Include="PluginAttributes\SoundClassAttribute.cs" />
+    <Compile Include="PluginAttributes\TagEngineClassAttribute.cs" />
+    <Compile Include="PluginManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RamDrive.cs" />
+    <Compile Include="RemoteMediaFile.cs" />
+    <Compile Include="RemovableDrive.cs" />
+    <Compile Include="ResourceFormat.cs" />
+    <Compile Include="ResourceIdentifier.cs" />
+    <Compile Include="Search.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="SoundCommand.cs" />
+    <Compile Include="SoundLoadCommand.cs" />
+    <Compile Include="SoundPauseCommand.cs" />
+    <Compile Include="SoundPlayCommand.cs" />
+    <Compile Include="SoundSeekCommand.cs" />
+    <Compile Include="SoundStatus.cs" />
+    <Compile Include="SoundStopCommand.cs" />
+    <Compile Include="SoundStreamCommand.cs" />
+    <Compile Include="SoundUpdateCommand.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="TagEngine.cs" />
+    <Compile Include="TimerWorkerThread.cs" />
+    <Compile Include="TimerWorkItem.cs" />
+    <Compile Include="TimerSynchronizer.cs" />
+    <Compile Include="XmlShareablePlaylist.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alexandria.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
