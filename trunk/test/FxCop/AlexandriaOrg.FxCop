@@ -1,0 +1,4070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="1.35" Name="Alexandria FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">http://www.gotdotnet.com/team/fxcop//xsl/1.35/FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded" NewOnly="False" />
+   <Report Status="Active" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>20</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>3</RuleExceptionsThreshold>
+  <Spelling Locale="en-us" />
+  <VersionAware>False</VersionAware>
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+ </ProjectOptions>
+ <Targets>
+  <AssemblyReferenceDirectories>
+   <Directory>$(ProjectDir)/Alexandria.Client/bin/Debug/</Directory>
+   <Directory>$(ProjectDir)/Alexandria/bin/Debug/</Directory>
+  </AssemblyReferenceDirectories>
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/Alexandria.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaClient.exe" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaDb4o.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaFmod.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaMusicBrainz.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaTagLib.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/../Alexandria.Server/bin/Debug/AlexandriaServer.exe" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="1.35">
+  <Targets>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/Alexandria.dll">
+    <Modules>
+     <Module Name="alexandria.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-01 01:39:47Z">
+        <Issue Name="NoStrongName">
+         <Item>Alexandria</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="0" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaClient.exe">
+    <Modules>
+     <Module Name="alexandriaclient.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-12-07 10:04:46Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaClient</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="30" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaDb4o.dll">
+    <Modules>
+     <Module Name="alexandriadb4o.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-12 08:18:03Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaDb4o</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="5" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaFmod.dll">
+    <Modules>
+     <Module Name="alexandriafmod.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-16 07:07:58Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaFmod</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="10" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="AlexandriaOrg.Alexandria.Fmod">
+        <Types>
+         <Type Name="CDTocCore">
+          <Members>
+           <Member Name="Frames">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>Frames</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Minutes">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>Minutes</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfTracks">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NumberOfTracks</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Seconds">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>Seconds</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ChannelSpectrum">
+          <Members>
+           <Member Name="ChannelOffset">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ChannelOffset</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfValues">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>NumberOfValues</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SpectrumArray">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>SpectrumArray</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="WindowType">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>WindowType</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ChannelWaveData">
+          <Members>
+           <Member Name="ChannelOffset">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ChannelOffset</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfValues">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>NumberOfValues</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="WaveArray">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>WaveArray</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ConeSettings">
+          <Members>
+           <Member Name="InsideAngle">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>InsideAngle</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OutsideAngle">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OutsideAngle</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OutsideVolume">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OutsideVolume</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="CreateSoundExtendedInfo">
+          <Members>
+           <Member Name="DecodeBufferSize">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>DecodeBufferSize</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DefaultFrequency">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>DefaultFrequency</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DlsName">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>DlsName</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="EncryptionKey">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>EncryptionKey</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FileOffset">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>FileOffset</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Format">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>Format</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="InclusionList">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>InclusionList</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>InclusionList</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="6" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="InclusionListNumber">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>InclusionListNumber</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="InitialSubSound">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>InitialSubSound</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Length">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>Length</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="MaximumPolyphony">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>MaximumPolyphony</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NonBlockCallback">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NonBlockCallback</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfChannels">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NumberOfChannels</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfSubSounds">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NumberOfSubSounds</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="PcmReadCallback">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>PcmReadCallback</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="PcmSetPositionCallback">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>PcmSetPositionCallback</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="StructureSize">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>StructureSize</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="UserData">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>UserData</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="18" />
+               </User>
+              </Notes>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>UserData</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="6" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspCreateCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspDescription">
+          <Members>
+           <Member Name="Channels">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Channels</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ConfigurationHeight">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>ConfigurationHeight</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ConfigurationWidth">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>ConfigurationWidth</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Name">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Name</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="NumberOfParameters">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>NumberOfParameters</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="UserData">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>UserData</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>UserData</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="6" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Version">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Version</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspDialogCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;,System.IntPtr,System.Boolean):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspGetParameterCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;,System.Int32,System.Single&amp;,System.Text.StringBuilder):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspParameterDescription">
+          <Members>
+           <Member Name="DefaultValue">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DefaultValue</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Description">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Description</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Label">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Label</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Max">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Max</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Min">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Min</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Name">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Name</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspReadCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;,System.IntPtr,System.IntPtr,System.UInt32,System.Int32,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="11" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspReleaseCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspResetCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspSetParameterCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;,System.Int32,System.Single):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DspSetPositionCallback">
+          <Members>
+           <Member Name="Invoke(AlexandriaOrg.Alexandria.Fmod.Dsp&amp;,System.UInt32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>dsp</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="FmodAudioPlayer">
+          <Members>
+           <Member Name="CloseRippingStream(System.IntPtr,System.IntPtr):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String,System.Exception)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 20:01:18Z">
+              <Issue>
+               <Item>FmodAudioPlayer.CloseRippingStream(IntPtr, IntPtr):Result</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String, Exception)</Item>
+               <Item>There was an error closing the ripping stream: __</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OpenRippingStream(System.String,System.Int32,System.UInt32&amp;,System.IntPtr&amp;,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String,System.Exception)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 20:01:18Z">
+              <Issue>
+               <Item>FmodAudioPlayer.OpenRippingStream(String, Int32, UInt32&amp;, IntPtr&amp;, IntPtr&amp;):Result</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String, Exception)</Item>
+               <Item>There was an error opening the ripping stream: __</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ripTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 20:01:18Z">
+              <Issue>
+               <Item>FmodAudioPlayer.ripTimer_Elapsed(Object, ElapsedEventArgs):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String)</Item>
+               <Item>An error occurred while ripping the stream, the stream could not be restarted: __</Item>
+              </Issue>
+              <Issue>
+               <Item>FmodAudioPlayer.ripTimer_Elapsed(Object, ElapsedEventArgs):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String)</Item>
+               <Item>Unable to read from streaming sound for ripping: __</Item>
+              </Issue>
+              <Issue>
+               <Item>FmodAudioPlayer.ripTimer_Elapsed(Object, ElapsedEventArgs):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String)</Item>
+               <Item>Unable to read from streaming sound for ripping: __</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SaveStreamToLocalFile(System.String,System.String):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 20:01:18Z">
+              <Issue>
+               <Item>FmodAudioPlayer.SaveStreamToLocalFile(String, String):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String)</Item>
+               <Item>The sound system could not create a new sound: __</Item>
+              </Issue>
+              <Issue>
+               <Item>FmodAudioPlayer.SaveStreamToLocalFile(String, String):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String)</Item>
+               <Item>The sound was not created successfully: __</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String,System.Exception)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 20:01:18Z">
+              <Issue>
+               <Item>FmodAudioPlayer.SaveStreamToLocalFile(String, String):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String, Exception)</Item>
+               <Item>There was an error saving this stream to a local file: __</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Geometry">
+          <Members>
+           <Member Name="Save(System.IntPtr):System.Int32">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>Geometry.Save(IntPtr):Int32</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="InputDsp">
+          <Members>
+           <Member Name="GetVolume():System.Void">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>InputDsp.GetVolume():Void</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SetVolume():System.Void">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>InputDsp.SetVolume():Void</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods">
+          <Members>
+           <Member Name="FMOD_Channel_Get3DMinMaxDistance(System.IntPtr,System.Single&amp;,System.Single&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 06:23:12Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_Get3DMinMaxDistance(IntPtr, Single&amp;, Single&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetCurrentSound(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-12-17 01:11:45Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetCurrentSound(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="35" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetLoopCount(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:10:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetLoopCount(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetLoopPoints(System.IntPtr,System.UInt32&amp;,AlexandriaOrg.Alexandria.Fmod.TimeUnits,System.UInt32&amp;,AlexandriaOrg.Alexandria.Fmod.TimeUnits):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:10:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetLoopPoints(IntPtr, UInt32&amp;, TimeUnits, UInt32&amp;, TimeUnits):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetSpeakerLevels(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.SpeakerPosition,System.Single[],System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetSpeakerLevels(IntPtr, SpeakerPosition, Single[], Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetSpeakerMix(System.IntPtr,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Single&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetSpeakerMix(IntPtr, Single&amp;, Single&amp;, Single&amp;, Single&amp;, Single&amp;, Single&amp;, Single&amp;, Single&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_GetSystemObject(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-23 22:28:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_GetSystemObject(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="19" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_SetSpeakerLevels(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.SpeakerPosition,System.Single[],System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_SetSpeakerLevels(IntPtr, SpeakerPosition, Single[], Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Channel_SetSpeakerMix(System.IntPtr,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Channel_SetSpeakerMix(IntPtr, Single, Single, Single, Single, Single, Single, Single, Single):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_ChannelGroup_GetDSPHead(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-23 22:28:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_ChannelGroup_GetDSPHead(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="19" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_ChannelGroup_GetSystemObject(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-23 22:28:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_ChannelGroup_GetSystemObject(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="19" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_GetDefaults(System.IntPtr,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:38:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_GetDefaults(IntPtr, Single&amp;, Single&amp;, Single&amp;, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_GetInputLevels(System.IntPtr,System.Int32,AlexandriaOrg.Alexandria.Fmod.Speaker,System.Single[],System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_GetInputLevels(IntPtr, Int32, Speaker, Single[], Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_GetInputMix(System.IntPtr,System.Int32,System.Single&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_GetInputMix(IntPtr, Int32, Single&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="14" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_GetSystemObject(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-23 22:28:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_GetSystemObject(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="19" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_SetInputLevels(System.IntPtr,System.Int32,AlexandriaOrg.Alexandria.Fmod.Speaker,System.Single[],System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_SetInputLevels(IntPtr, Int32, Speaker, Single[], Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_SetInputMix(System.IntPtr,System.Int32,System.Single):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_SetInputMix(IntPtr, Int32, Single):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="14" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_DSP_ShowConfigDialog(System.IntPtr,System.IntPtr,System.Boolean):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_DSP_ShowConfigDialog(IntPtr, IntPtr, Boolean):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_GetNumPolygons(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_GetNumPolygons(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_GetPolygonAttributes(System.IntPtr,System.Int32,System.Single&amp;,System.Single&amp;,System.Boolean&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_GetPolygonAttributes(IntPtr, Int32, Single&amp;, Single&amp;, Boolean&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_GetPolygonNumVertices(System.IntPtr,System.Int32,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_GetPolygonNumVertices(IntPtr, Int32, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_GetPolygonVertex(System.IntPtr,System.Int32,System.Int32,AlexandriaOrg.Alexandria.Fmod.Vector&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_GetPolygonVertex(IntPtr, Int32, Int32, Vector&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_SetPolygonAttributes(System.IntPtr,System.Int32,System.Single,System.Single,System.Boolean):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_SetPolygonAttributes(IntPtr, Int32, Single, Single, Boolean):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Geometry_SetPolygonVertex(System.IntPtr,System.Int32,System.Int32,AlexandriaOrg.Alexandria.Fmod.Vector&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Geometry_SetPolygonVertex(IntPtr, Int32, Int32, Vector&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Sound_Get3DMinMaxDistance(System.IntPtr,System.Single&amp;,System.Single&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 06:23:12Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Sound_Get3DMinMaxDistance(IntPtr, Single&amp;, Single&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Sound_GetDefaults(System.IntPtr,System.Single&amp;,System.Single&amp;,System.Single&amp;,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:38:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Sound_GetDefaults(IntPtr, Single&amp;, Single&amp;, Single&amp;, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Sound_GetLoopCount(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:10:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Sound_GetLoopCount(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Sound_GetLoopPoints(System.IntPtr,System.UInt32&amp;,AlexandriaOrg.Alexandria.Fmod.TimeUnits,System.UInt32&amp;,AlexandriaOrg.Alexandria.Fmod.TimeUnits):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 07:38:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Sound_GetLoopPoints(IntPtr, UInt32&amp;, TimeUnits, UInt32&amp;, TimeUnits):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_Sound_GetSystemObject(System.IntPtr,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-23 22:28:14Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_Sound_GetSystemObject(IntPtr, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="19" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_CreateSound(System.IntPtr,System.Byte[],AlexandriaOrg.Alexandria.Fmod.Modes,AlexandriaOrg.Alexandria.Fmod.CreateSoundExtendedInfo&amp;,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-12-17 01:11:45Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_CreateSound(IntPtr, Byte[], Modes, CreateSoundExtendedInfo&amp;, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="35" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_CreateSound(System.IntPtr,System.Byte[],AlexandriaOrg.Alexandria.Fmod.Modes,System.Int32,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_CreateSound(IntPtr, Byte[], Modes, Int32, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="14" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_CreateSound(System.IntPtr,System.String,AlexandriaOrg.Alexandria.Fmod.Modes,AlexandriaOrg.Alexandria.Fmod.CreateSoundExtendedInfo&amp;,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-12-17 01:11:45Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_CreateSound(IntPtr, String, Modes, CreateSoundExtendedInfo&amp;, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="35" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_CreateStream(System.IntPtr,System.Byte[],AlexandriaOrg.Alexandria.Fmod.Modes,System.Int32,System.IntPtr&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_CreateStream(IntPtr, Byte[], Modes, Int32, IntPtr&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="14" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_Get3DNumListeners(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_Get3DNumListeners(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetCDROMDriveName(System.IntPtr,System.Int32,System.Text.StringBuilder,System.Int32,System.Text.StringBuilder,System.Int32,System.Text.StringBuilder,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetCDROMDriveName(IntPtr, Int32, StringBuilder, Int32, StringBuilder, Int32, StringBuilder, Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetNetworkProxy(System.IntPtr,System.Text.StringBuilder,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetNetworkProxy(IntPtr, StringBuilder, Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetNumCDROMDrives(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetNumCDROMDrives(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetNumPlugins(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.PluginType,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetNumPlugins(IntPtr, PluginType, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetOutputByPlugin(System.IntPtr,System.Int32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetOutputByPlugin(IntPtr, Int32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetPluginInfo(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.PluginType,System.Int32,System.Text.StringBuilder,System.Int32,System.UInt32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetPluginInfo(IntPtr, PluginType, Int32, StringBuilder, Int32, UInt32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetReverbProperties(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.ReverbProperties&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetReverbProperties(IntPtr, ReverbProperties&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_GetVersion(System.IntPtr,System.UInt32&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_GetVersion(IntPtr, UInt32&amp;):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_Set3DNumListeners(System.IntPtr,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_Set3DNumListeners(IntPtr, Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_SetFileSystem(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.FileOpenCallback,AlexandriaOrg.Alexandria.Fmod.FileCloseCallback,AlexandriaOrg.Alexandria.Fmod.FileReadCallback,AlexandriaOrg.Alexandria.Fmod.FileSeekCallback,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_SetFileSystem(IntPtr, FileOpenCallback, FileCloseCallback, FileReadCallback, FileSeekCallback, Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_SetNetworkProxy(System.IntPtr,System.String):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_SetNetworkProxy(IntPtr, String):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="17" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_SetOutputByPlugin(System.IntPtr,System.Int32):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_SetOutputByPlugin(IntPtr, Int32):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FMOD_System_SetReverbProperties(System.IntPtr,AlexandriaOrg.Alexandria.Fmod.ReverbProperties):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>NativeMethods.FMOD_System_SetReverbProperties(IntPtr, ReverbProperties):Result</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Polygon">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2006-11-20 05:52:23Z">
+            <Issue>
+             <Item>AlexandriaOrg.Alexandria.Fmod.Polygon</Item>
+             <Item>Collection</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="8" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="PositionAndVelocity">
+          <Members>
+           <Member Name="Position">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Position</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Velocity">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Velocity</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ReverbChannelProperties">
+          <Members>
+           <Member Name="AirAbsorptionFactor">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>AirAbsorptionFactor</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Direct">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Direct</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DirectHF">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DirectHF</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DopplerFactor">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DopplerFactor</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Exclusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Exclusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ExclusionLFRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ExclusionLFRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Flags">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Flags</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Obstruction">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Obstruction</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ObstructionLFRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ObstructionLFRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Occlusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Occlusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OcclusionDirectRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OcclusionDirectRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OcclusionLFRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OcclusionLFRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OcclusionRoomRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OcclusionRoomRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="OutsideVolumeHF">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>OutsideVolumeHF</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RollOffFactor">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>RollOffFactor</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Room">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Room</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RoomHF">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>RoomHF</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RoomRollOffFactor">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>RoomRollOffFactor</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ReverbProperties">
+          <Members>
+           <Member Name="AirAbsorptionHighFrequency">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>AirAbsorptionHighFrequency</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DecayHighFrequencyRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>DecayHighFrequencyRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DecayLowFrequencyRatio">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>DecayLowFrequencyRatio</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DecayTime">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DecayTime</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Density">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Density</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Diffusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Diffusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="EchoDepth">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>EchoDepth</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="EchoTime">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>EchoTime</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Environment">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Environment</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="EnvironmentDiffusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>EnvironmentDiffusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="EnvironmentSize">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>EnvironmentSize</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="HighFrequencyReference">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>HighFrequencyReference</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Instance">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Instance</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="LowFrequencyReference">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>LowFrequencyReference</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ModulationDepth">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ModulationDepth</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ModulationTime">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ModulationTime</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Reflections">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Reflections</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReflectionsDelay">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ReflectionsDelay</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReflectionsPan">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ReflectionsPan</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Reverb">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Reverb</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReverbDelay">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ReverbDelay</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReverbFlags">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>ReverbFlags</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReverbPan">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ReverbPan</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Room">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Room</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RoomHighFrequency">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>RoomHighFrequency</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RoomLowFrequency">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>RoomLowFrequency</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="RoomRollOffFactor">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>RoomRollOffFactor</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Rotation">
+          <Members>
+           <Member Name="Forward">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:21:07Z">
+              <Issue>
+               <Item>Forward</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Up">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:21:07Z">
+              <Issue>
+               <Item>Up</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Sound">
+          <Members>
+           <Member Name="GetTag(System.String,System.Int32,AlexandriaOrg.Alexandria.Fmod.Tag&amp;):AlexandriaOrg.Alexandria.Fmod.Result">
+            <Messages>
+             <Message Id="2#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Certainty="50">
+               <Item>tag</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SaveToWavFile(System.String):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.AlexandriaException.#ctor(System.String,System.Exception)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-23 22:18:49Z">
+              <Issue>
+               <Item>Sound.SaveToWavFile(String):Void</Item>
+               <Item>1</Item>
+               <Item>AlexandriaException.AlexandriaException(String, Exception)</Item>
+               <Item>There was an error saving this sound to ____ : ____:__</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SoundDelay">
+          <Members>
+           <Member Name="End">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>End</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Start">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Start</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SoundLock">
+          <Messages>
+           <Message TypeName="TypesThatOwnNativeResourcesShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1049" Status="Excluded" Created="2006-11-16 07:07:58Z">
+            <Issue>
+             <Item>SoundLock</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="7" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="SoundOcclusion">
+          <Members>
+           <Member Name="DirectOcclusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DirectOcclusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ReverbOcclusion">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>ReverbOcclusion</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SoundSystem">
+          <Members>
+           <Member Name="CreateDsp(AlexandriaOrg.Alexandria.Fmod.DspDescription&amp;):AlexandriaOrg.Alexandria.Fmod.Dsp">
+            <Messages>
+             <Message Id="0#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Certainty="50">
+               <Item>description</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="CreateStream(AlexandriaOrg.Alexandria.Fmod.FmodAudioPlayer,System.String,AlexandriaOrg.Alexandria.Fmod.Modes,AlexandriaOrg.Alexandria.Fmod.CreateSoundExtendedInfo&amp;):AlexandriaOrg.Alexandria.Fmod.Sound">
+            <Messages>
+             <Message Id="3#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-12-17 01:11:45Z">
+              <Issue Certainty="50">
+               <Item>info</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="34" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="CreateStream(AlexandriaOrg.Alexandria.Fmod.Sound,System.Byte[],AlexandriaOrg.Alexandria.Fmod.Modes,AlexandriaOrg.Alexandria.Fmod.CreateSoundExtendedInfo&amp;):AlexandriaOrg.Alexandria.Fmod.Sound">
+            <Messages>
+             <Message Id="3#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-12-17 01:11:45Z">
+              <Issue Certainty="50">
+               <Item>info</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="34" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="PlayDsp(AlexandriaOrg.Alexandria.Fmod.ChannelIndex,AlexandriaOrg.Alexandria.Fmod.Dsp,System.Boolean,AlexandriaOrg.Alexandria.Fmod.Channel&amp;):System.Void">
+            <Messages>
+             <Message Id="3#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue Level="CriticalWarning">
+               <Item>channel</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="PlaySound(AlexandriaOrg.Alexandria.Fmod.ChannelIndex,AlexandriaOrg.Alexandria.Fmod.Sound,System.Boolean,AlexandriaOrg.Alexandria.Fmod.Channel&amp;):System.Void">
+            <Messages>
+             <Message Id="3#" TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue Level="CriticalWarning">
+               <Item>channel</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="16" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Version">
+            <Accessors>
+             <Accessor Name="get_Version():System.UInt32">
+              <Messages>
+               <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-16 07:07:58Z">
+                <Issue>
+                 <Item>SoundSystem.get_Version():UInt32</Item>
+                </Issue>
+                <Notes>
+                 <User Name="Dan">
+                  <Note Id="9" />
+                 </User>
+                </Notes>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SpeakerSystem">
+          <Members>
+           <Member Name=".ctor(AlexandriaOrg.Alexandria.Fmod.Channel,AlexandriaOrg.Alexandria.Fmod.SpeakerMode)">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>SpeakerSystem.SpeakerSystem(Channel, SpeakerMode)</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Refresh():System.Void">
+            <Messages>
+             <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>SpeakerSystem.Refresh():Void</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="9" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SpeakerVolume">
+          <Members>
+           <Member Name="SetVolumeLevels(System.Single[]):System.Void">
+            <Messages>
+             <Message Id="System.ArgumentException.#ctor(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-22 05:26:53Z">
+              <Issue>
+               <Item>SpeakerVolume.SetVolumeLevels(Single[]):Void</Item>
+               <Item>1</Item>
+               <Item>ArgumentException.ArgumentException(String)</Item>
+               <Item>The specified volumeLevels array has an invalid length</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="20" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SpeakerVolumeMix">
+          <Members>
+           <Member Name="BackLeft">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>BackLeft</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="BackRight">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>BackRight</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FrontCenter">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>FrontCenter</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FrontLeft">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>FrontLeft</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FrontRight">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>FrontRight</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SideLeft">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>SideLeft</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="SideRight">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>SideRight</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Subwoofer">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-20 04:53:27Z">
+              <Issue>
+               <Item>Subwoofer</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="15" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Tag">
+          <Members>
+           <Member Name="Data">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Data</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+             <Message TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Data</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="6" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DataLength">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DataLength</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="DataType">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>DataType</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="IsUpdated">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>IsUpdated</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Name">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Name</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Type">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Type</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Vector">
+          <Members>
+           <Member Name="X">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>X</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Y">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Y</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Z">
+            <Messages>
+             <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Excluded" Created="2006-11-16 07:07:58Z">
+              <Issue>
+               <Item>Z</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="12" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaMusicBrainz.dll">
+    <Modules>
+     <Module Name="alexandriamusicbrainz.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-07 04:58:32Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaMusicBrainz</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="1" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="AlexandriaOrg.Alexandria.MusicBrainz">
+        <Types>
+         <Type Name="MusicBrainzClient">
+          <Members>
+           <Member Name="GetFragmentFromUrl(System.String):System.String">
+            <Messages>
+             <Message TypeName="UriReturnValuesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1055" Status="Excluded" Created="2006-11-11 21:17:26Z">
+              <Issue>
+               <Item>MusicBrainzClient.GetFragmentFromUrl(String):String</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="3" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="GetIdFromUrl(System.String):System.String">
+            <Messages>
+             <Message TypeName="UriReturnValuesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1055" Status="Excluded" Created="2006-11-07 04:58:32Z">
+              <Issue>
+               <Item>MusicBrainzClient.GetIdFromUrl(String):String</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="3" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Rdf">
+          <Members>
+           <Member Name="AmazonCoverArtUrlPrefix">
+            <Messages>
+             <Message TypeName="UriPropertiesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1056" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>AmazonCoverArtUrlPrefix</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="13" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ExpressionAlbumGetAmazonCoverArtUrl">
+            <Messages>
+             <Message TypeName="UriPropertiesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1056" Status="Excluded" Created="2006-11-19 22:44:04Z">
+              <Issue>
+               <Item>ExpressionAlbumGetAmazonCoverArtUrl</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="13" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="SimpleDisc">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2006-11-07 04:58:32Z">
+            <Issue>
+             <Item>AlexandriaOrg.Alexandria.MusicBrainz.SimpleDisc</Item>
+             <Item>Collection</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="2" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Client/bin/Debug/AlexandriaTagLib.dll">
+    <Modules>
+     <Module Name="alexandriataglib.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-26 04:12:03Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaTagLib</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="23" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="AlexandriaOrg.Alexandria.TagLib">
+        <Types>
+         <Type Name="ApeItem">
+          <Members>
+           <Member Name="Parse(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>ApeItem.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>APE.Item.Parse() -- no data in item</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ByteVector">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2006-11-26 04:12:03Z">
+            <Issue>
+             <Item>AlexandriaOrg.Alexandria.TagLib.ByteVector</Item>
+             <Item>Collection</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="21" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="FromLong(System.Int64,System.Boolean):AlexandriaOrg.Alexandria.TagLib.ByteVector">
+            <Messages>
+             <Message Id="1#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FromShort(System.Int16,System.Boolean):AlexandriaOrg.Alexandria.TagLib.ByteVector">
+            <Messages>
+             <Message Id="1#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="FromUInt(System.UInt32,System.Boolean):AlexandriaOrg.Alexandria.TagLib.ByteVector">
+            <Messages>
+             <Message Id="1#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ToLong(System.Boolean):System.Int64">
+            <Messages>
+             <Message Id="0#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ToShort(System.Boolean):System.Int16">
+            <Messages>
+             <Message Id="0#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ToUInt(System.Boolean):System.UInt32">
+            <Messages>
+             <Message Id="0#" TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720" Status="Excluded" Created="2006-11-26 04:12:03Z">
+              <Issue>
+               <Item>mostSignificantByteFirst</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="24" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="FlacFile">
+          <Members>
+           <Member Name="Save():System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>FlacFile.Save():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Flac.File.Save() -- Id3v2 header is broken. Ignoring.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Scan(System.Int64,System.Int64):AlexandriaOrg.Alexandria.TagLib.ByteVector">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>FlacFile.Scan(Int64, Int64):ByteVector</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Flac.File.Scan () -- FLAC stream not found</Item>
+              </Issue>
+              <Issue>
+               <Item>FlacFile.Scan(Int64, Int64):ByteVector</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Flac.File.Scan() -- FLAC stream corrupted</Item>
+              </Issue>
+              <Issue>
+               <Item>FlacFile.Scan(Int64, Int64):ByteVector</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Flac.File.Scan() -- invalid FLAC stream</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="FlacProperties">
+          <Members>
+           <Member Name="Read(AlexandriaOrg.Alexandria.TagLib.ByteVector,System.Int64):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-04 06:38:39Z">
+              <Issue>
+               <Item>FlacProperties.Read(ByteVector, Int64):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>FLAC.Properties.Read() - FLAC properties must contain at least 18 bytes.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="29" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v1Tag">
+          <Members>
+           <Member Name="Read():System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>Id3v1Tag.Read():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>ID3v1 tag is not valid or could not be read at the specified offset.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2AttachedPictureFrame">
+          <Members>
+           <Member Name="ParseAttachedPictureFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-06 05:05:01Z">
+              <Issue>
+               <Item>Id3v2AttachedPictureFrame.ParseAttachedPictureFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A picture frame must contain at least 5 bytes.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="31" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ParseFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-03 13:49:40Z">
+              <Issue>
+               <Item>Id3v2AttachedPictureFrame.ParseFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A picture frame must contain at least 5 bytes.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="26" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2CommentsFrame">
+          <Members>
+           <Member Name="ParseCommentsFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-06 05:48:34Z">
+              <Issue>
+               <Item>Id3v2CommentsFrame.ParseCommentsFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A comment frame must contain at least 5 bytes.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="32" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ParseFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-01 05:56:20Z">
+              <Issue>
+               <Item>Id3v2CommentsFrame.ParseFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A comment frame must contain at least 5 bytes.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2FrameFactory">
+          <Members>
+           <Member Name="UpdateFrame(AlexandriaOrg.Alexandria.TagLib.Id3v2FrameHeader):System.Boolean">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>Id3v2FrameFactory.UpdateFrame(Id3v2FrameHeader):Boolean</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>ID3v2.4 no longer supports the frame type ____.  It will be discarded from the tag.</Item>
+              </Issue>
+              <Issue>
+               <Item>Id3v2FrameFactory.UpdateFrame(Id3v2FrameHeader):Boolean</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>ID3v2.4 no longer supports the frame type ____.  It will be discarded from the tag.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2FrameHeader">
+          <Members>
+           <Member Name="SetData(AlexandriaOrg.Alexandria.TagLib.ByteVector,System.UInt32):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>Id3v2FrameHeader.SetData(ByteVector, UInt32):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>You must at least specify a frame ID.</Item>
+              </Issue>
+              <Issue>
+               <Item>Id3v2FrameHeader.SetData(ByteVector, UInt32):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>You must at least specify a frame ID.</Item>
+              </Issue>
+              <Issue>
+               <Item>Id3v2FrameHeader.SetData(ByteVector, UInt32):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>You must at least specify a frame ID.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2PrivateFrame">
+          <Members>
+           <Member Name="ParseFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-03 09:51:18Z">
+              <Issue>
+               <Item>Id3v2PrivateFrame.ParseFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A private frame must contain at least 1 byte.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="25" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="ParsePrivateFields(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-06 05:48:34Z">
+              <Issue>
+               <Item>Id3v2PrivateFrame.ParsePrivateFields(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>A private frame must contain at least 1 byte.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="32" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Id3v2Tag">
+          <Members>
+           <Member Name="Parse(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>Id3v2Tag.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Padding *and* a footer found.  This is not allowed by the spec.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MpcFile">
+          <Members>
+           <Member Name="Save():System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpcFile.Save():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpc.File.Save() -- Id3v2 header is broken. Ignoring.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Mpeg4AppleElementaryStreamDescriptor">
+          <Members>
+           <Member Name=".ctor(AlexandriaOrg.Alexandria.TagLib.Mpeg4BoxHeader,AlexandriaOrg.Alexandria.TagLib.Mpeg4Box)">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-02 23:03:16Z">
+              <Issue>
+               <Item>Mpeg4AppleElementaryStreamDescriptor.Mpeg4AppleElementaryStreamDescriptor(Mpeg4BoxHeader, Mpeg4Box)</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>TagLib.Mpeg4.AppleElementaryStreamDescriptor () - Could not identify decoder configuration descriptor.</Item>
+              </Issue>
+              <Issue>
+               <Item>Mpeg4AppleElementaryStreamDescriptor.Mpeg4AppleElementaryStreamDescriptor(Mpeg4BoxHeader, Mpeg4Box)</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>TagLib.Mpeg4.AppleElementaryStreamDescriptor () - Could not identify decoder specific descriptor.</Item>
+              </Issue>
+              <Issue>
+               <Item>Mpeg4AppleElementaryStreamDescriptor.Mpeg4AppleElementaryStreamDescriptor(Mpeg4BoxHeader, Mpeg4Box)</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>TagLib.Mpeg4.AppleElementaryStreamDescriptor () - Could not read data. Too small.</Item>
+              </Issue>
+              <Issue>
+               <Item>Mpeg4AppleElementaryStreamDescriptor.Mpeg4AppleElementaryStreamDescriptor(Mpeg4BoxHeader, Mpeg4Box)</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>TagLib.Mpeg4.AppleElementaryStreamDescriptor () - Could not read data. Too small.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Mpeg4AppleTag">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2006-11-27 07:32:48Z">
+            <Issue>
+             <Item>AlexandriaOrg.Alexandria.TagLib.Mpeg4AppleTag</Item>
+             <Item>Collection</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="21" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="Mpeg4Box">
+          <Members>
+           <Member Name="OverwriteHeader(System.Int64):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-28 07:41:51Z">
+              <Issue>
+               <Item>Mpeg4Box.OverwriteHeader(Int64):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Box.OverWriteHeader() - No header to overwrite.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MpegFile">
+          <Members>
+           <Member Name="Save(AlexandriaOrg.Alexandria.TagLib.TagTypes,System.Boolean):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpegFile.Save(TagTypes, Boolean):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpc.File.Save() -- Id3v2 header is broken. Ignoring.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="Strip(AlexandriaOrg.Alexandria.TagLib.TagTypes,System.Boolean):System.Boolean">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpegFile.Strip(TagTypes, Boolean):Boolean</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpc.File.Save() -- Id3v2 header is broken. Ignoring.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegFile.Strip(TagTypes, Boolean):Boolean</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.File.Strip() - Cannot strip tags from a read only file.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegFile.Strip(TagTypes, Boolean):Boolean</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.File.Strip() - Cannot strip tags from a read only file.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MpegHeader">
+          <Members>
+           <Member Name="Parse(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpegHeader.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Header.Parse() -- First byte did not match MPEG synch.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegHeader.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Header.Parse() -- Invalid sample rate.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegHeader.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Header.Parse() -- Second byte did not match MPEG synch.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+             <Message Id="Body" TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue Name="Body">
+               <Item>MpegHeader.Parse(ByteVector):Void</Item>
+               <Item>System.Int32[,,]</Item>
+              </Issue>
+              <Issue Name="Body">
+               <Item>MpegHeader.Parse(ByteVector):Void</Item>
+               <Item>System.Int32[,]</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="27" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MpegProperties">
+          <Members>
+           <Member Name="Read():System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpegProperties.Read():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Properties.Read() -- Could not find a valid first MPEG frame in the stream.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegProperties.Read():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Properties.Read() -- Could not find a valid last MPEG frame in the stream.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegProperties.Read():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Mpeg.Properties.Read() -- Page headers were invalid.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MpegXingHeader">
+          <Members>
+           <Member Name="Parse(AlexandriaOrg.Alexandria.TagLib.ByteVector):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>MpegXingHeader.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>MPEG::XingHeader::parse() -- Xing header doesn't contain the total number of frames.</Item>
+              </Issue>
+              <Issue>
+               <Item>MpegXingHeader.Parse(ByteVector):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>MPEG::XingHeader::parse() -- Xing header doesn't contain the total stream size.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggFlacFile">
+          <Members>
+           <Member Name="Scan():System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>OggFlacFile.Scan():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Ogg.Flac.File.Scan() -- Invalid Ogg/FLAC stream</Item>
+              </Issue>
+              <Issue>
+               <Item>OggFlacFile.Scan():Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Ogg.Flac.File.Scan() -- Unknown metadata block</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggPage">
+          <Members>
+           <Member Name="Packets">
+            <Accessors>
+             <Accessor Name="get_Packets():AlexandriaOrg.Alexandria.TagLib.ByteVectorCollection">
+              <Messages>
+               <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-30 07:55:00Z">
+                <Issue>
+                 <Item>OggPage.get_Packets():ByteVectorCollection</Item>
+                 <Item>1</Item>
+                 <Item>TagLibDebugger.Debug(String):Void</Item>
+                 <Item>Ogg.Page.Packets -- attempting to read packets from an invalid page.</Item>
+                </Issue>
+                <Notes>
+                 <User Name="Dan">
+                  <Note Id="22" />
+                  <Note Id="33" />
+                 </User>
+                </Notes>
+               </Message>
+              </Messages>
+             </Accessor>
+            </Accessors>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggPageHeader">
+          <Members>
+           <Member Name="Read(AlexandriaOrg.Alexandria.TagLib.OggFile,System.Int64):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-11-27 07:32:48Z">
+              <Issue>
+               <Item>OggPageHeader.Read(OggFile, Int64):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Ogg.PageHeader.Read() -- error reading page header</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="22" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggVorbisFile">
+          <Members>
+           <Member Name="Read(AlexandriaOrg.Alexandria.TagLib.ReadStyle):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-04 06:16:47Z">
+              <Issue>
+               <Item>OggVorbisFile.Read(ReadStyle):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Vorbis.File.Read() - Could not find the Vorbis comment header.</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="28" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggVorbisProperties">
+          <Members>
+           <Member Name="Read(AlexandriaOrg.Alexandria.TagLib.OggVorbisFile):System.Void">
+            <Messages>
+             <Message Id="AlexandriaOrg.Alexandria.TagLib.TagLibDebugger.Debug(System.String)" TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303" Status="Excluded" Created="2006-12-04 06:38:39Z">
+              <Issue>
+               <Item>OggVorbisProperties.Read(OggVorbisFile):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Vorbis.Properties.Read() -- Could not find valid first and last Ogg pages.</Item>
+              </Issue>
+              <Issue>
+               <Item>OggVorbisProperties.Read(OggVorbisFile):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Vorbis.Properties.Read() -- Either the PCM values for the start or end of this file was incorrect or the sample rate is zero.</Item>
+              </Issue>
+              <Issue>
+               <Item>OggVorbisProperties.Read(OggVorbisFile):Void</Item>
+               <Item>1</Item>
+               <Item>TagLibDebugger.Debug(String):Void</Item>
+               <Item>Vorbis.Properties.Read() -- invalid Vorbis identification header</Item>
+              </Issue>
+              <Notes>
+               <User Name="Dan">
+                <Note Id="29" />
+                <Note Id="33" />
+               </User>
+              </Notes>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="OggXiphComment">
+          <Messages>
+           <Message TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710" Status="Excluded" Created="2006-11-27 07:32:48Z">
+            <Issue>
+             <Item>AlexandriaOrg.Alexandria.TagLib.OggXiphComment</Item>
+             <Item>Collection</Item>
+            </Issue>
+            <Notes>
+             <User Name="Dan">
+              <Note Id="21" />
+             </User>
+            </Notes>
+           </Message>
+          </Messages>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/../Alexandria.Server/bin/Debug/AlexandriaServer.exe">
+    <Modules>
+     <Module Name="alexandriaserver.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2006-11-20 07:29:36Z">
+        <Issue Name="NoStrongName">
+         <Item>AlexandriaServer</Item>
+        </Issue>
+        <Notes>
+         <User Name="Dan">
+          <Note Id="4" />
+         </User>
+        </Notes>
+       </Message>
+      </Messages>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Notes>
+   <User Name="Dan">
+    <Note Id="0" Modified="2006-11-03 05:17:10Z">Because this library references weak-named components it cannot be strong- named</Note>
+    <Note Id="1" Modified="2006-11-07 04:59:31Z">For now, I am avoiding giving the assemblies strong names</Note>
+    <Note Id="2" Modified="2006-11-11 09:03:33Z">Event though this class includes a collection of SimpleTracks it also represents a physical disc so it is more intuitive to name it SimpleDisc than SimpleTrackCollection.</Note>
+    <Note Id="3" Modified="2006-11-11 22:21:41Z">This is a false positive.  Both od these methods need to return string, they are not returning a Url so they should not declare a return type of System.Uri.</Note>
+    <Note Id="4" Modified="2006-11-20 08:44:08Z">Since there is the need to reference assemblies that do not have strong names we will not be giving any of the assmemblies strong names (for now)</Note>
+    <Note Id="5" Modified="2006-11-12 08:19:55Z">For now, I am avoiding giving the assemblies strong names.</Note>
+    <Note Id="6" Modified="2006-11-22 08:20:20Z">These structures are used to interact with unmanaged code via P/Invoke calls and thus must expose publi IntPtr properties.  This cannot be avoided.</Note>
+    <Note Id="7" Modified="2006-11-17 07:11:49Z">SoundLock does not itself load or unload unmanaged resources - it is simply an abstraction for performing locking and unlocking operations on a sound.  Sound implements IDisposable so its unmanaged resources will be released when it is disposed.  The SoundLock class is not responsible for disposing of the sound.</Note>
+    <Note Id="8" Modified="2006-11-20 08:59:15Z">Though it is true that a polygon is a collection of vertices it is more intuitive to name it a polygon than to name it a VertextCollection.</Note>
+    <Note Id="9" Modified="2006-11-20 00:05:45Z">The purpose of the FMOD wrapper classes is to expose all of the avaialble functionality in the FMOD library.  It does not matter whether or not a given function is used, it is more important to expose all available functionality and let the client library decide which features they want to use.</Note>
+    <Note Id="10" Modified="2006-11-16 07:10:18Z">Because some of the Alexandria assemblies may need to reference weak-named assemblies I have decided not to given any of the Alexandria assmblies strong names.</Note>
+    <Note Id="11" Modified="2006-11-16 07:12:52Z">Theses delegates match the signatures of the underlying unmanaged code and thus cannot be changed</Note>
+    <Note Id="12" Modified="2006-11-16 07:24:36Z">These structures are used passed to and from unmanaged code and must use fields instead of properties because P/Invoke is not able to marshall properties into unmanaged fields.</Note>
+    <Note Id="13" Modified="2006-11-20 09:01:05Z">The methods happen to have Url in their names because they involve the use of a Url but they are returning strings not Uri elements so they should not be changed</Note>
+    <Note Id="14" Modified="2006-11-20 09:05:13Z">The purpose of these wrapper methods is to expose all of the functionality of the FMOD engine.  It doesn't matter if all of the code is not publicly visible at present.  Simply having the necessary P/Invoke methods available for reference will make it possible to define the public interface at a later date</Note>
+    <Note Id="15" Modified="2006-11-20 10:07:04Z">The classes and structures with these public instance fields are used to interact with unamanaged code via P/Invoke.  For this reason properties are not an option.</Note>
+    <Note Id="16" Modified="2006-11-22 08:22:17Z">The method signatures of the external unmanged DllImport methods require that these value types be passed by reference.  In order for API to work with the unmanaged FMOD calls these signatures must not be changed.  This is not an option.</Note>
+    <Note Id="17" Modified="2006-11-22 08:23:28Z">These method signatures are left as a reference of the supported features of the unmanaged FMOD API.  They may be implemented later so it would not make sense to remove them now, even though they are not currently called.</Note>
+    <Note Id="18" Modified="2006-11-22 08:25:48Z">These structures are used to interface with the unmanaged FMOD API and in order to do so must expose public instance fields.  Unfortunately the external calls will not work with properties.</Note>
+    <Note Id="19" Modified="2006-11-23 22:29:27Z">These are uncalled but will be kept as a reference of functions that the FMOD unmanaged API exposes.  They may be used later.</Note>
+    <Note Id="20" Modified="2006-11-24 08:17:43Z">A resource table is planned to be implemented later - for now these types of errors are allowable.</Note>
+    <Note Id="21" Modified="2006-11-30 07:56:38Z">These classes are not being renamed with a Collection suffix because the names that they currently have are more descriptive of what they do and how the fix into the TagLib API.</Note>
+    <Note Id="22" Modified="2006-12-02 23:08:45Z">Calls to TagLibDebugger.Debug() do not need to be localized</Note>
+    <Note Id="23" Modified="2006-11-26 04:42:07Z">The decision has been made to not give assemblies strong names (for now).  This may change in the future.</Note>
+    <Note Id="24" Modified="2006-11-26 04:43:30Z">This parameter needs to be named mostSignificantByteFirst because that is what it means.  There is no way to rename it without using the word byte that would not make the purpose of this parameter less clear.</Note>
+    <Note Id="25" Modified="2006-12-03 09:54:01Z">Parameters passed to TagLibDebugger.Debug do not need to be localized</Note>
+    <Note Id="26" Modified="2006-12-03 13:50:22Z">Calls to TagLibDebugger.Debug do not need to be localized</Note>
+    <Note Id="27" Modified="2006-12-04 05:53:03Z">The design of this array is efficient, there is no need to refactor it</Note>
+    <Note Id="28" Modified="2006-12-04 06:21:13Z">Calls to TagLibDebugger.Debug() can be localized</Note>
+    <Note Id="29" Modified="2006-12-04 06:39:30Z">Calls to TagLibDebugger.Debug() can be localized</Note>
+    <Note Id="30" Modified="2006-12-07 10:06:29Z">For now assemblies are not being given strong names, this may change in the future</Note>
+    <Note Id="31" Modified="2006-12-06 05:05:39Z">Calls to TagLibDebugger.Debug can be localized</Note>
+    <Note Id="32" Modified="2006-12-06 05:49:02Z">Calls to TagLibDebugger.Debug can be localized</Note>
+    <Note Id="33" Modified="2006-12-06 08:25:23Z">Calls to TagLibDebugger.Debug() can remain localized because this is only used by developers for program debugging.  An end user will never see these debug messages so it makes no sense to provide globalization for them.</Note>
+    <Note Id="34" Modified="2006-12-17 01:15:15Z">The design of AudioPlayer and they way that sounds are loaded requires overloads of the CreateSound and CreateStream methods that pass Sound instances by reference.</Note>
+    <Note Id="35" Modified="2006-12-17 01:16:15Z">Native methods are kept for reference purposes even if they are not currently being used.</Note>
+   </User>
+  </Notes>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign '{0}' with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidTypeNamesInParameters" Category="Microsoft.Naming" CheckId="CA1720">
+    <Resolution Name="Default">Remove the type identifier from parameter name '{0}'.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+    <Resolution Name="Default">'{0}' appears to have no upstream public or protected callers.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+    <Resolution Name="Default">Make '{0}' private or internal (Friend in VB, public private in C++) and provide a public or protected property to access it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotPassLiteralsAsLocalizedParameters" Category="Microsoft.Globalization" CheckId="CA1303">
+    <Resolution Name="Default">{0} passes a literal as parameter {1} of a call to {2}. Retrieve the following string argument from a resource table instead: '{3}'</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotPassTypesByReference" Category="Microsoft.Design" CheckId="CA1045">
+    <Resolution Name="Default">Consider a design that does not require that '{0}' be a reference parameter.</Resolution>
+   </Rule>
+   <Rule TypeName="IdentifiersShouldHaveCorrectSuffix" Category="Microsoft.Naming" CheckId="CA1710">
+    <Resolution Name="Default">Rename '{0}' to end in '{1}'.</Resolution>
+   </Rule>
+   <Rule TypeName="PointersShouldNotBeVisible" Category="Microsoft.Security" CheckId="CA2111">
+    <Resolution Name="Default">Make '{0}' private.</Resolution>
+   </Rule>
+   <Rule TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814">
+    <Resolution Name="Body">'{0}' uses a multidimensional array of '{1}'. Replace it with a jagged array if possible. (Jagged arrays are not CLS Compliant.)</Resolution>
+   </Rule>
+   <Rule TypeName="TypesThatOwnNativeResourcesShouldBeDisposable" Category="Microsoft.Design" CheckId="CA1049">
+    <Resolution Name="Default">Implement IDisposable on '{0}'.</Resolution>
+   </Rule>
+   <Rule TypeName="UriPropertiesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1056">
+    <Resolution Name="Default">Change the type of property '{0}' from string to System.Uri.</Resolution>
+   </Rule>
+   <Rule TypeName="UriReturnValuesShouldNotBeStrings" Category="Microsoft.Design" CheckId="CA1055">
+    <Resolution Name="Default">Change the return type of {0} from string to System.Uri.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>
