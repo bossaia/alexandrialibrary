@@ -117,14 +117,14 @@
   -->
   <PropertyGroup>
     <PostBuildEvent>copy "$(ProjectDir)..\Alexandria.Fmod\bin\Debug\AlexandriaFmod.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\Libraries\FMOD\fmodex.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\FMOD\fmodex.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\Alexandria.Db4o\bin\Debug\AlexandriaDb4o.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\Libraries\db4o\db4o.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\db4o\db4o.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\Alexandria.TagLib\bin\Debug\AlexandriaTagLib.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\Alexandria.MusicBrainz\bin\Debug\AlexandriaMusicBrainz.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\Libraries\MusicBrainz\musicbrainz.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\MusicBrainz\musicbrainz.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\Alexandria.MediaInfo\bin\Debug\AlexandriaMediaInfo.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\Libraries\MediaInfo\mediainfo.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\Libraries\SQLite\sqlite3.dll" "$(TargetDir)"</PostBuildEvent>
+copy "$(ProjectDir)..\..\vendor\MediaInfo\mediainfo.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\SQLite\sqlite3.dll" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
