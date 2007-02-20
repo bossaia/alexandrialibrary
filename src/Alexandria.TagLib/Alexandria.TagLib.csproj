@@ -1,0 +1,153 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlexandriaOrg.Alexandria.TagLib</RootNamespace>
+    <AssemblyName>AlexandriaTagLib</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Ape\ApeFooter.cs" />
+    <Compile Include="Ape\ApeItem.cs" />
+    <Compile Include="Ape\ApeTag.cs" />
+    <Compile Include="Asf\AsfContentDescriptionObject.cs" />
+    <Compile Include="Asf\AsfContentDescriptor.cs" />
+    <Compile Include="Asf\AsfExtendedContentDescriptionObject.cs" />
+    <Compile Include="Asf\AsfFile.cs" />
+    <Compile Include="Asf\AsfFilePropertiesObject.cs" />
+    <Compile Include="Asf\AsfGuid.cs" />
+    <Compile Include="Asf\AsfHeaderObject.cs" />
+    <Compile Include="Asf\AsfObject.cs" />
+    <Compile Include="Asf\AsfPaddingObject.cs" />
+    <Compile Include="Asf\AsfProperties.cs" />
+    <Compile Include="Asf\AsfStreamPropertiesObject.cs" />
+    <Compile Include="Asf\AsfTag.cs" />
+    <Compile Include="Asf\AsfUnknownObject.cs" />
+    <Compile Include="AudioProperties.cs" />
+    <Compile Include="ByteVector.cs" />
+    <Compile Include="ByteVectorCollection.cs" />
+    <Compile Include="ChannelData.cs" />
+    <Compile Include="CombinedTag.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Id3v2\Id3v2UserTextIdentificationFrame.cs" />
+    <Compile Include="IFileAbstraction.cs" />
+    <Compile Include="IPicture.cs" />
+    <Compile Include="LocalFileAbstraction.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoAudioSampleEntry.cs" />
+    <Compile Include="TagLibDebugger.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="Flac\FlacFile.cs" />
+    <Compile Include="Flac\FlacProperties.cs" />
+    <Compile Include="Id3v1\Id3v1GenreList.cs" />
+    <Compile Include="Id3v1\Id3v1StringHandler.cs" />
+    <Compile Include="Id3v1\Id3v1Tag.cs" />
+    <Compile Include="Id3v2\Id3v2ExtendedHeader.cs" />
+    <Compile Include="Id3v2\Id3v2Footer.cs" />
+    <Compile Include="Id3v2\Id3v2Frame.cs" />
+    <Compile Include="Id3v2\Id3v2FrameFactory.cs" />
+    <Compile Include="Id3v2\Id3v2FrameHeader.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2AttachedPictureFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2CommentsFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2PrivateFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2RelativeVolumeFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2TextIdentificationFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2UniqueFileIdentifierFrame.cs" />
+    <Compile Include="Id3v2\Frames\Id3v2UnknownFrame.cs" />
+    <Compile Include="Id3v2\Id3v2Header.cs" />
+    <Compile Include="Id3v2\Id3v2SynchData.cs" />
+    <Compile Include="Id3v2\Id3v2Tag.cs" />
+    <Compile Include="IntCollection.cs" />
+    <Compile Include="Mpc\MpcFile.cs" />
+    <Compile Include="Mpc\MpcProperties.cs" />
+    <Compile Include="Mpeg4\Mpeg4AppleTag.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4AppleAdditionalInfoBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4AppleAnnotationBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4AppleDataBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4AppleElementaryStreamDescriptor.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4AppleItemListBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4Box.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4FileBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4FullBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoChunkLargeOffsetBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoChunkOffsetBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoFreeSpaceBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoHandlerBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoMediaBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoMediaInformationBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoMetaBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoMovieBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoMovieHeaderBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoSampleDescriptionBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoSampleEntry.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoSampleTableBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoTrackBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4IsoUserDataBox.cs" />
+    <Compile Include="Mpeg4\Boxes\Mpeg4UnknownBox.cs" />
+    <Compile Include="Mpeg4\Mpeg4BoxHeader.cs" />
+    <Compile Include="Mpeg4\Mpeg4File.cs" />
+    <Compile Include="Mpeg4\Mpeg4Properties.cs" />
+    <Compile Include="Mpeg\MpegFile.cs" />
+    <Compile Include="Mpeg\MpegHeader.cs" />
+    <Compile Include="Mpeg\MpegProperties.cs" />
+    <Compile Include="Mpeg\MpegXingHeader.cs" />
+    <Compile Include="Ogg\OggFile.cs" />
+    <Compile Include="Ogg\Flac\OggFlacFile.cs" />
+    <Compile Include="Ogg\OggPage.cs" />
+    <Compile Include="Ogg\OggPageHeader.cs" />
+    <Compile Include="Ogg\Vorbis\OggVorbisFile.cs" />
+    <Compile Include="Ogg\Vorbis\OggVorbisProperties.cs" />
+    <Compile Include="Ogg\OggXiphComment.cs" />
+    <Compile Include="Picture.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyException.cs" />
+    <Compile Include="StringCollection.cs" />
+    <Compile Include="SupportedMimeTypeAttribute.cs" />
+    <Compile Include="Tag.cs" />
+    <Compile Include="TagLibEngine.cs" />
+    <Compile Include="TagLibException.cs" />
+    <Compile Include="UnsupportedFormatException.cs" />
+    <Compile Include="WavPack\WavPackFile.cs" />
+    <Compile Include="WavPack\WavPackProperties.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
+      <Name>Alexandria</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
