@@ -1,0 +1,116 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlexandriaOrg.Alexandria.Fmod</RootNamespace>
+    <AssemblyName>AlexandriaFmod</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Alexandria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Alexandria\bin\Debug\Alexandria.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FmodAudioPlayer.cs" />
+    <Compile Include="Channel.cs" />
+    <Compile Include="ChannelGroup.cs" />
+    <Compile Include="ChannelGroupCollection.cs" />
+    <Compile Include="ChannelCollection.cs" />
+    <Compile Include="CompactDiscSound.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="DriverCollection.cs" />
+    <Compile Include="Dsp.cs" />
+    <Compile Include="DspCollection.cs" />
+    <Compile Include="DspParameter.cs" />
+    <Compile Include="DspParameterCollection.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="FmodError.cs" />
+    <Compile Include="FmodSoundCommand.cs" />
+    <Compile Include="Geometry.cs" />
+    <Compile Include="IHasDefault.cs" />
+    <Compile Include="ILoopTarget.cs" />
+    <Compile Include="InputDsp.cs" />
+    <Compile Include="InputDspCollection.cs" />
+    <Compile Include="IRangeTarget.cs" />
+    <Compile Include="Listener.cs" />
+    <Compile Include="ListenerCollection.cs" />
+    <Compile Include="LocalSoundLoaded.cs" />
+    <Compile Include="LocalSoundNotLoaded.cs" />
+    <Compile Include="RemoteSoundNotReady.cs" />
+    <Compile Include="RemoteSoundReady.cs" />
+    <Compile Include="SoundLoadCommand.cs" />
+    <Compile Include="SoundLoop.cs" />
+    <Compile Include="NativeMethods.cs" />
+    <Compile Include="OpticalDrive.cs" />
+    <Compile Include="OpticalDriveCollection.cs" />
+    <Compile Include="OutputDsp.cs" />
+    <Compile Include="OutputDspCollection.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="PluginCollection.cs" />
+    <Compile Include="Polygon.cs" />
+    <Compile Include="PolygonCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="RecordDriverCollection.cs" />
+    <Compile Include="ReverbChannelFlag.cs" />
+    <Compile Include="ReverbFlags.cs" />
+    <Compile Include="ReverbPreset.cs" />
+    <Compile Include="ReverbProperties.cs" />
+    <Compile Include="Sound.cs" />
+    <Compile Include="SoundBuffer.cs" />
+    <Compile Include="SoundDefault.cs" />
+    <Compile Include="SoundLock.cs" />
+    <Compile Include="SoundPlayCommand.cs" />
+    <Compile Include="SoundStreamCommand.cs" />
+    <Compile Include="SoundSystem.cs" />
+    <Compile Include="SoundSystemFactory.cs" />
+    <Compile Include="SoundUpdateCommand.cs" />
+    <Compile Include="SoundVariation.cs" />
+    <Compile Include="Speaker.cs" />
+    <Compile Include="SpeakerSystem.cs" />
+    <Compile Include="SpeakerVolume.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="SoundCollection.cs" />
+    <Compile Include="TagCollection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
