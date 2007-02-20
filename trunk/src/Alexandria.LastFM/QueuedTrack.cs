@@ -8,24 +8,23 @@ namespace AlexandriaOrg.Alexandria.LastFM
 	{
 		#region Constructors
 		/*
-			public QueuedTrack(TrackInfo track, DateTime start_time)
-			{
-				this.artist = track.Artist;
-				this.album = track.Album;
-				this.title = track.Title;
-				this.duration = (int)track.Duration.TotalSeconds;
-				this.start_time = start_time.ToUniversalTime();
-			}
-			*/
+		public QueuedTrack(TrackInfo track, DateTime start_time)
+		{
+			this.artist = track.Artist;
+			this.album = track.Album;
+			this.title = track.Title;
+			this.duration = (int)track.Duration.TotalSeconds;
+			this.start_time = start_time.ToUniversalTime();
+		}
+		*/
 
-		public QueuedTrack(string artist, string album,
-							string title, int duration, DateTime start_time)
+		public QueuedTrack(string artist, string album, string title, int duration, DateTime start_time)
 		{
 			this.artist = artist;
 			this.album = album;
 			this.title = title;
 			this.duration = duration;
-			this.start_time = start_time;
+			this.start_time = start_time.ToUniversalTime();
 		}
 		#endregion
 

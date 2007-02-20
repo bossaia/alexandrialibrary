@@ -227,6 +227,11 @@ namespace AlexandriaOrg.Alexandria.LastFM //Banshee.Plugins.Audioscrobbler
 					break;
 				case State.WAITING_FOR_RESP:
 					System.Diagnostics.Debug.WriteLine("Waiting for response...");
+					if (current_async_result != null)
+					{
+						System.Diagnostics.Debug.WriteLine("  Completed Asynchronously: " + (current_async_result.IsCompleted).ToString());
+						System.Diagnostics.Debug.WriteLine("  Completed Synchronously : " + (current_async_result.CompletedSynchronously));
+					}
 					break;
 				case State.WAITING_FOR_REQ_STREAM:
 				case State.WAITING_FOR_HANDSHAKE_RESP:
@@ -343,6 +348,8 @@ namespace AlexandriaOrg.Alexandria.LastFM //Banshee.Plugins.Audioscrobbler
 
 			string line;
 			line = sr.ReadLine();
+
+			System.Diagnostics.Debug.WriteLine("Response:\n" + line);
 
 			DateTime now = DateTime.Now;
 			if (line.StartsWith("FAILED"))
