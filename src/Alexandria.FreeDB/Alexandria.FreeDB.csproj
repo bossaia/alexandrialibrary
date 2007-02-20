@@ -1,0 +1,76 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26BF108C-8B39-4C9E-A545-4AC01AA3C0E6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlexandriaOrg.Alexandria.FreeDB</RootNamespace>
+    <AssemblyName>AlexandriaFreeDB</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CDBufferFiller.cs" />
+    <Compile Include="CDDrive.cs" />
+    <Compile Include="CDDriveEvents.cs" />
+    <Compile Include="CDEntry.cs" />
+    <Compile Include="CDRomToc.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="DeviceChangeNotificationWindow.cs" />
+    <Compile Include="Disc.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="EventArgs.cs" />
+    <Compile Include="FreedbHelper.cs" />
+    <Compile Include="PreventMediaRemoval.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryResult.cs" />
+    <Compile Include="QueryResultCollection.cs" />
+    <Compile Include="RawReadInfo.cs" />
+    <Compile Include="Site.cs" />
+    <Compile Include="SiteCollection.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="Track.cs" />
+    <Compile Include="TrackCollection.cs" />
+    <Compile Include="TrackDataList.cs" />
+    <Compile Include="Win32Functions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
+      <Name>Alexandria</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
