@@ -108,7 +108,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 				writer.WriteElementString("Album", track.Album);
 				writer.WriteElementString("Title", track.Title);
 				writer.WriteElementString("Duration", track.Duration.ToString());
-				writer.WriteElementString("StartTime", track.StartTime.ToFileTime().ToString()); //DateTimeUtil.ToTimeT(track.StartTime).ToString());
+				writer.WriteElementString("StartTime", DateTimeUtil.ToTimeT(track.StartTime).ToString());
 				writer.WriteEndElement(); // Track
 			}
 			writer.WriteEndElement(); // AudioscrobblerQueue
@@ -159,7 +159,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 						else if (child.Name == "StartTime" && child.ChildNodes.Count != 0)
 						{
 							long time = Convert.ToInt64(child.ChildNodes[0].Value);
-							start_time = DateTime.FromFileTime(time); //DateTimeUtil.FromTimeT(time);
+							start_time = DateTimeUtil.FromTimeT(time);
 						}
 					}
 
