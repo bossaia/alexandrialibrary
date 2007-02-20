@@ -1,0 +1,121 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Hell.IMDBServices.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PowerSearch_Matches" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Here are the (?&lt;Matches&gt;\d{1,}) matching titles</Value>
+    </Setting>
+    <Setting Name="PowerSearch_OLRegion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;OL&gt;(?&lt;OLRegion&gt;.*?)&lt;/OL&gt;</Value>
+    </Setting>
+    <Setting Name="PowerSearch_LIRegion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(?&lt;LIRegion&gt;&lt;LI&gt;.*?&lt;/LI&gt;)</Value>
+    </Setting>
+    <Setting Name="PowerSearch_MainValues" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;li&gt;.*?/title/tt(?&lt;Code&gt;\d{7})/"&gt;(?&lt;Title&gt;.*?)[(](?&lt;Year&gt;(?:[?]{4}|\d{4}))[)/](?&lt;Flags&gt;.*?)(?&lt;Rating&gt;\d{1,2}[.]\d).*?(?&lt;Votes&gt;\d*?)[ ]votes[)](?&lt;Akas&gt;.*?)&lt;/li&gt;</Value>
+    </Setting>
+    <Setting Name="PowerSearch_AKA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[.]{3}aka(?&lt;Title&gt;.*?)[(](?:[?]|\d){4}[)/]</Value>
+    </Setting>
+    <Setting Name="MovieSearch_LI" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(?&lt;LI&gt;&lt;li&gt;.*?/title/tt.*?&lt;/li&gt;)</Value>
+    </Setting>
+    <Setting Name="MovieSearch_MainValues" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;li&gt;.*?/title/tt(?&lt;Code&gt;\d{7}).*?["]&gt;(?&lt;Title&gt;.*?)&lt;/a&gt;.*?[(](?&lt;Year&gt;(?:[?]{4}|\d{4}))[)/](?&lt;Akas&gt;.*?)&lt;/li&gt;</Value>
+    </Setting>
+    <Setting Name="MovieSearch_AKA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">aka &lt;em&gt;(?&lt;Title&gt;.*?)&lt;/em&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Title" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;strong class="title"&gt;(?:\s){0,}(?&lt;Title&gt;.*?)(?:\s){0,}&lt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Year" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Sections/Years/(?&lt;Year&gt;\d{4})</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Poster" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="poster".*?src="(?&lt;Poster&gt;.*?)"</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Genre" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/Sections/Genres/(?&lt;Genre&gt;.*?)/</Value>
+    </Setting>
+    <Setting Name="MovieDetails_RatingVotes" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">User Rating:.*?(?&lt;Rating&gt;(?:\d){1,2}[.]\d).*?[(](?&lt;Votes&gt;\d(?:\d|,){0,}) votes</Value>
+    </Setting>
+    <Setting Name="MovieDetails_AKAS" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Also Known As:(?&lt;Akas&gt;.*?)&lt;b class</Value>
+    </Setting>
+    <Setting Name="MovieDetails_AKA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;br&gt;(?&lt;Aka&gt;.*?)&lt;br&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_MPAA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;b class="ch"&gt;&lt;a href="/mpaa"&gt;MPAA&lt;/a&gt;[:]&lt;/b&gt;(?&lt;MPAA&gt;.*?)\s*?&lt;br&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Plot" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;p class="plotpar"&gt;(?&lt;Plot&gt;.*?)&lt;/p&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Directors" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">class="blackcatheader"&gt;Directed by(?&lt;Directors&gt;.*?)&lt;/table&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Director" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/name/nm(?&lt;Code&gt;\d{7})/["]&gt;(?&lt;Name&gt;.*?)&lt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Writers" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">class="blackcatheader"&gt;Writing credits(?&lt;Writers&gt;.*?)&lt;/table&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Writer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/name/nm(?&lt;Code&gt;\d{7})/["]&gt;(?&lt;Name&gt;.*?)&lt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Actors" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">class="blackcatheader"&gt;Cast&lt;(?&lt;Actors&gt;.*?)&lt;/table&gt;</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Actor" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">href=\"/name/nm(?&lt;Code&gt;\d{7})/["]&gt;(?&lt;Name&gt;.*?)&lt;.*?&lt;/td&gt;.*?&lt;/td&gt;.*?&lt;td.*?&gt;(?:&lt;a href="quotes"&gt;){0,1}(?&lt;Role&gt;.*?)&lt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;strong class="title"&gt;(?&lt;Name&gt;.*?)&lt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Headshot" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="headshot".*?src="(?&lt;Headshot&gt;.*?)"</Value>
+    </Setting>
+    <Setting Name="PersonDetails_DateOfBirth" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;div class="ch"&gt;Date of birth.*?day=(?&lt;Day&gt;\d{1,2})&amp;month=(?&lt;Month&gt;.*?)".*?BornInYear[?](?&lt;Year&gt;\d{4})"</Value>
+    </Setting>
+    <Setting Name="UserAgent" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.2) Gecko/20060308 Firefox/1.5.0.2
+</Value>
+    </Setting>
+    <Setting Name="MovieDetails_Code" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;form action="/Vote" method="post"&gt;&lt;select name="(?&lt;Code&gt;.*?)"</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Directed" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="director"&gt;Director.*?&lt;ol&gt;(?&lt;Directed&gt;.*?)&lt;/ol&gt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_LIRegion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(?&lt;LIRegion&gt;&lt;LI&gt;.*?&lt;/LI&gt;)</Value>
+    </Setting>
+    <Setting Name="PersonDetails_MainValues" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">href="/title/tt(?&lt;Code&gt;.*?)/".*?&gt;(?&lt;Title&gt;.*?)&lt;.*?[(](?&lt;Year&gt;\d{4}).*?[)](?&lt;AKAs&gt;.*?&lt;/li&gt;)</Value>
+    </Setting>
+    <Setting Name="PersonDetails_AKA" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">aka (?&lt;AKA&gt;.*?)(?:&lt;br&gt;|&lt;/li&gt;)</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Writed" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="writer"&gt;Writer.*?&lt;ol&gt;(?&lt;Writed&gt;.*?)&lt;/ol&gt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Acted" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="act.*?"&gt;Act.*?&lt;ol&gt;(?&lt;Acted&gt;.*?)&lt;/ol&gt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_Bio" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;dt class="ch"&gt;Mini biography&lt;/dt&gt;(?:.*?)&lt;dd&gt;&lt;p class="biopar"&gt;(?&lt;Bio&gt;.*?)&lt;/p&gt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_MostVoted" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;a name="act.*?"&gt;Act(?:.*?)&lt;/a&gt;(?:.*?)&lt;table(?&lt;MostVoted&gt;.*?)&lt;/table&gt;</Value>
+    </Setting>
+    <Setting Name="PersonDetails_TRRegion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(?&lt;TRRegion&gt;&lt;tr&gt;.*?&lt;/tr&gt;)</Value>
+    </Setting>
+    <Setting Name="PersonDetails_MostVotedMain" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;td align="right"&gt;(?&lt;Votes&gt;.*?)&lt;/td&gt;(?:.*?)href="/title/tt(?&lt;Code&gt;.*?)/"&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
