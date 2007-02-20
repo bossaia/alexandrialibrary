@@ -1,0 +1,130 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3095580F-8714-4D19-B88E-DB51162D112B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlexandriaOrg.Alexandria.Client</RootNamespace>
+    <AssemblyName>AlexandriaClient</AssemblyName>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="App.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.Amazon\Alexandria.Amazon.csproj">
+      <Project>{1C0A1DBB-45B1-4F0A-9A40-4176BCF4445E}</Project>
+      <Name>Alexandria.Amazon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.AsciiGenerator\Alexandria.AsciiGenerator.csproj">
+      <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
+      <Name>Alexandria.AsciiGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
+      <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
+      <Name>Alexandria.Imdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.LastFM\Alexandria.LastFM.csproj">
+      <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
+      <Name>Alexandria.LastFM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Pandora\Alexandria.Pandora.csproj">
+      <Project>{9C611D67-417B-4382-8531-7A9D9633E609}</Project>
+      <Name>Alexandria.Pandora</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
+      <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>
+      <Name>Alexandria.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
+      <Name>Alexandria</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)..\Alexandria.Fmod\bin\Debug\AlexandriaFmod.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Libraries\FMOD\fmodex.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.Db4o\bin\Debug\AlexandriaDb4o.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Libraries\db4o\db4o.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.TagLib\bin\Debug\AlexandriaTagLib.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.MusicBrainz\bin\Debug\AlexandriaMusicBrainz.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Libraries\MusicBrainz\musicbrainz.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.MediaInfo\bin\Debug\AlexandriaMediaInfo.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Libraries\MediaInfo\mediainfo.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Libraries\SQLite\sqlite3.dll" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

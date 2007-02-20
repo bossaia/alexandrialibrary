@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PlayPauseButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 49</value>
+  </data>
+  <data name="PlayPauseButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 47</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PlayPauseButton.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="PlayPauseButton.Text" xml:space="preserve">
+    <value>Play</value>
+  </data>
+  <data name="&gt;&gt;PlayPauseButton.Name" xml:space="preserve">
+    <value>PlayPauseButton</value>
+  </data>
+  <data name="&gt;&gt;PlayPauseButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlayPauseButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PlayPauseButton.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="StopButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>141, 49</value>
+  </data>
+  <data name="StopButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 47</value>
+  </data>
+  <data name="StopButton.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="StopButton.Text" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="&gt;&gt;StopButton.Name" xml:space="preserve">
+    <value>StopButton</value>
+  </data>
+  <data name="&gt;&gt;StopButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StopButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;StopButton.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="PlaybackTrackBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 49</value>
+  </data>
+  <data name="PlaybackTrackBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 45</value>
+  </data>
+  <data name="PlaybackTrackBar.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTrackBar.Name" xml:space="preserve">
+    <value>PlaybackTrackBar</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTrackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTrackBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTrackBar.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
+    <value>QueueListView</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 161</value>
+  </data>
+  <data name="QueueGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>644, 223</value>
+  </data>
+  <data name="QueueGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="QueueGroupBox.Text" xml:space="preserve">
+    <value>Queue</value>
+  </data>
+  <data name="&gt;&gt;QueueGroupBox.Name" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QueueGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QueueGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;QueueGroupBox.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>631, 198</value>
+  </data>
+  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
+    <value>QueueListView</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="columnNumber.Text" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="columnNumber.Width" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="columnName.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="columnName.Width" type="System.Int32, mscorlib">
+    <value>82</value>
+  </data>
+  <data name="columnArtist.Text" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="columnArtist.Width" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="columnLength.Text" xml:space="preserve">
+    <value>Length</value>
+  </data>
+  <data name="columnLength.Width" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="columnFileName.Text" xml:space="preserve">
+    <value>File Name</value>
+  </data>
+  <data name="columnFileName.Width" type="System.Int32, mscorlib">
+    <value>400</value>
+  </data>
+  <data name="VolumeTrackBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>64, 110</value>
+  </data>
+  <data name="VolumeTrackBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 45</value>
+  </data>
+  <data name="VolumeTrackBar.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;VolumeTrackBar.Name" xml:space="preserve">
+    <value>VolumeTrackBar</value>
+  </data>
+  <data name="&gt;&gt;VolumeTrackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VolumeTrackBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;VolumeTrackBar.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="MuteButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 110</value>
+  </data>
+  <data name="MuteButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 23</value>
+  </data>
+  <data name="MuteButton.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="MuteButton.Text" xml:space="preserve">
+    <value>Mute</value>
+  </data>
+  <data name="&gt;&gt;MuteButton.Name" xml:space="preserve">
+    <value>MuteButton</value>
+  </data>
+  <data name="&gt;&gt;MuteButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MuteButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;MuteButton.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="VolumeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="VolumeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 120</value>
+  </data>
+  <data name="VolumeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="VolumeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="VolumeLabel.Text" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="&gt;&gt;VolumeLabel.Name" xml:space="preserve">
+    <value>VolumeLabel</value>
+  </data>
+  <data name="&gt;&gt;VolumeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VolumeLabel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;VolumeLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <metadata name="FileMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 0</value>
+  </metadata>
+  <data name="FileMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="FileMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 24</value>
+  </data>
+  <data name="FileMenuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;FileMenuStrip.Name" xml:space="preserve">
+    <value>FileMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;FileMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileMenuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>0, 393</value>
+  </metadata>
+  <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 393</value>
+  </data>
+  <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>668, 22</value>
+  </data>
+  <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="StatusStrip.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Name" xml:space="preserve">
+    <value>StatusStrip</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PlaybackStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="PlaybackStatusLabel.Text" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="PositionStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="PositionStatus.Text" xml:space="preserve">
+    <value>0/0</value>
+  </data>
+  <data name="StreamingStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="StreamingStatus.Text" xml:space="preserve">
+    <value>Not Streaming</value>
+  </data>
+  <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>364, 17</value>
+  </metadata>
+  <data name="NextButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>207, 50</value>
+  </data>
+  <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 44</value>
+  </data>
+  <data name="NextButton.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="NextButton.Text" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="&gt;&gt;NextButton.Name" xml:space="preserve">
+    <value>NextButton</value>
+  </data>
+  <data name="&gt;&gt;NextButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NextButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;NextButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PreviousButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 50</value>
+  </data>
+  <data name="PreviousButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 46</value>
+  </data>
+  <data name="PreviousButton.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="PreviousButton.Text" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Name" xml:space="preserve">
+    <value>PreviousButton</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>278, 110</value>
+  </data>
+  <data name="SaveButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 23</value>
+  </data>
+  <data name="SaveButton.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="SaveButton.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="&gt;&gt;SaveButton.Name" xml:space="preserve">
+    <value>SaveButton</value>
+  </data>
+  <data name="&gt;&gt;SaveButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SaveButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="PlaybackTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>490, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>668, 415</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAGACoDAAAFgAAACgAAAAgAAAAQAAAAAEAGAAAAAAAgAwAAAAAAAAAAAAAAAAAAAAA
+        AAABAAESAwEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEC
+        EQIBAAEBAAECEQIBAAEBAAEBAAEBAAECEQISAwEBAAECEQIBAAEbEwFKRwNKRwNKRwNNLwI1IgQ1IgRN
+        LwJNLwJKRwNKRwNKRwNeXgFeXgFzdQNzdQNzdQNzdQNzdQOYiw6Yiw6Yiw6Yiw5zdQNzdQNzdQNzdQNz
+        dQNzdQNzdQNzdQMSAwEBAAFNLwJKRwM1IgQ1IgQbEwE1IgQ1IgRNLwJNLwJKRwNKRwNKRwNeXgFeXgFe
+        XgFeXgFeXgFzdQNzdQOYiw6Yiw6Yiw6Yiw5zdQNzdQNzdQNeXgFzdQNzdQNeXgEBAAESAwE1IgQ1IgQb
+        EwEbEwEbEwE1IgQ1IgQ1IgQ1IgRNLwJKRwNNLwJKRwNeXgFzdQNzdQNzdQNzdQNzdQNzdQOYiw5zdQNz
+        dQNzdQNzdQNzdQNeXgFeXgFeXgFeXgECEQIBAAEbEwEBAAEBAAESAwECEQIbEwEbEwE1IgQ1IgRNLwJK
+        RwNKRwNeXgGYiw63rHK0tEa0tEa0tEaYiw5zdQNzdQNzdQNzdQNzdQNeXgFeXgFeXgFeXgFKRwNKRwMB
+        AAEBAAEbEwECEQISAwESAwECEQIbEwEbEwEbEwE1IgQ1IgQ1IgRNLwJKRwN7cSPX0pHe4ZTe4ZTe4ZSk
+        pDtzdQNzdQNzdQNzdQNzdQNeXgFeXgFeXgFKRwNKRwNKRwMBAAEBAAESAwEBAAEBAAEBAAEBAAECEQIb
+        EwE1IgQ1IgQ1IgQ1IgRNLwI1IgReXgHX0pHX0pHX0pHX0pGYiw5eXgFzdQNeXgFeXgFeXgFeXgFeXgFK
+        RwNKRwNKRwNKRwMBAAEBAAESAwEBAAEBAAESAwEBAAECEQICEQIbEwEbEwEbEwE1IgRNLwI1IgReXgHU
+        0W/e4ZTX0pHX0pGYiw5eXgFzdQNeXgFeXgFeXgFKRwNKRwNKRwNKRwNKRwNKRwMBAAEBAAEBAAEBAAEB
+        AAEBAAEBAAEBAAEBAAEbEwEbEwEbEwE1IgQbEwE1IgRKRwPCw2zh47TX0pHX0pFzdQNeXgFeXgFeXgFe
+        XgFKRwNKRwNKRwNKRwNKRwNKRwM1IgQSAwEBAAEBAAEBAAEBAAEBAAEBAAEBAAESAwEbEwEbEwEbEwE1
+        IgQbEwE1IgRNLwK0tEbh47TUy7LU0W9zdQNeXgFeXgFeXgFKRwNKRwNKRwNKRwNNLwJNLwJNLwI1IgQB
+        AAEBAAEBAAEBAAEBAAEBAAEBAAEBAAECEQICEQICEQIBAAECEQIbEwEbEwE1IgS0tEbh47Th47TCw2xe
+        XgFKRwNKRwNeXgFKRwNKRwNKRwNKRwNNLwI1IgQ1IgQbEwEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEC
+        EQIbEwECEQIBAAECEQIbEwEbEwEbEwGkpDvh47Th47S0tEZNLwJKRwNKRwNKRwNKRwNNLwJNLwI1IgQ1
+        IgQbEwEbEwEbEwEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAECEQIAARMBAAEBAAEBAAECEQIbEwEbEwGY
+        iw7h47Th47SkpDtNLwJKRwNKRwNKRwNNLwJNLwI1IgQ1IgQ1IgQbEwEbEwEbEwEBAAEBAAEBAAEBAAEB
+        AAEBAAEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAECEQJzdQPh47T38bOYiw41IgRNLwJNLwJKRwM1
+        IgQ1IgQ1IgQ1IgQbEwEbEwECEQIbEwEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEbEwEa
+        FRYCEQIbEwECEQJKRwPh47Th47R7cSNNLwJNLwJKRwNKRwM1IgQ1IgQ1IgQbEwEbEwECEQICEQICEQIB
+        AAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEbEwF7cSOkpDu0tEa0tEakpDu0tEbh47T38bOYiw57
+        cSN7cSOYiw5zdQNKRwM1IgQbEwECEQICEQIBAAECEQISAwEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEB
+        AAEBAAEBAAGYiw7SyVrU0W/e4ZTo6uv589P589P589Pe4ZTe4ZTSrnvTrVi0tEZKRwMbEwEbEwECEQIB
+        AAEBAAESAwEBAAEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAEbEwEAARN7cSPCw2zU0W/U0W+0tEbh
+        47T9++v38bPh47S0tEa0tEa0tEa0tEZKRwMbEwEbEwECEQIBAAEBAAEBAAEBAAEBAAEBAAECEQICEQIB
+        AAEBAAEBAAEBAAEBAAEBAAEBAAFzdQNzdQM1IgQAARNzdQP589PU0W+kpDvh47R7cSM1IgReXgF7cSNe
+        XgEbEwECEQIBAAEBAAEBAAEBAAESAwEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAECEQIBAAEAARMB
+        AAEBAAECEQLX0pH589M1IgQSAwHX0pHCw2wbEwEbEwECEQIbEwECEQICEQIBAAEBAAEBAAESAwESAwEB
+        AAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAEBAAECEQIBAAEBAAEBAAFzdQP589OkpDsCEQIAARN7cSPh
+        47RKRwMRBQ8BAAESAwEBAAEBAAEBAAEBAAEBAAECEQIBAAEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEB
+        AAEAARMBAAEBAAEBAAEBAAG0tEbe4ZQ1IgQBAAECExobEwHl23OkpDsSAwEBAAEBAAEBAAEBAAEBAAEB
+        AAEBAAECEQIBAAEBAAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEbEwHo6XLSyVob
+        EwEBAAECEQIAAROkpDvCw2wCEQIAARMBAAEBAAEBAAEBAAEBAAESAwESAwESAwEBAAEBAAECEQICEQIB
+        AAEBAAEBAAEBAAEBAAEAARMbEwEAARMCEQJNLwLe4ZSkpDsBAAECEQIBAAECEQJ7cSPCw2wIKQ4BAAEB
+        AAEBAAEBAAEBAAEBAAEBAAECEQICEQIBAAEBAAEbEwECEQICEQIBAAEBAAEBAAECEQIAARMCEQIBAAEA
+        ARNNLwL+/IOYiw4BAAEBAAEBAAEBAAF7cSPCw2w1IgQBAAEBAAESAwEBAAEBAAEBAAEBAAECEQICEQIB
+        AAEBAAECEQICEQIBAAEBAAEBAAEBAAEBAAEBAAERBQ8CEQIBAAE1IgT97nikpDsBAAEBAAEAARMBAAF7
+        cSPU0W8bEwEAARMBAAEBAAEBAAEBAAEBAAEBAAECEQISAwEBAAEBAAECEQICEQICEQICEQIBAAEBAAES
+        AwECEQIBAAEBAAECEQIbEwHSyVr+/IM1IgQAARMCEQICEQLl23O0tEYBAAEbEwEBAAESAwEBAAEBAAEB
+        AAEBAAECEQICEQIBAAEBAAECEQICEQICEQICEQICEQIBAAEBAAECEQIBAAECEQIAARMbEwGkpDv38bPS
+        yVpKRwMbEwHSyVr38bN7cSMRBQ8BAAEAARMCEQIBAAEBAAEBAAEBAAECEQICEQIBAAEBAAECEQICEQIC
+        EQICEQICEQIBAAEBAAEBAAEBAAEBAAECEQIBAAEbEwHz80738bP38bP38bP589Pl23MbEwEBAAEBAAEB
+        AAECEQIBAAEBAAEBAAEBAAECEQICEQIBAAEBAAECEQICEQICEQICEQICEQIBAAECEQIBAAEBAAEBAAEB
+        AAEBAAEBAAE1IgS0tEb+/IPe4ZS0tEY1IgQBAAEBAAEBAAECEQICEQIBAAEBAAECEQICEQIbEwEbEwEB
+        AAEBAAECEQICEQISAwESAwESAwEBAAEBAAEBAAEBAAEBAAEbEwECEQIBAAEBAAECEQICEQJKLSQBAAEA
+        ARMAARMCEQICEQIAARMCEQIBAAEBAAECEQICEQICEQICEQIBAAEBAAEBAAEBAAEBAAEBAAEBAAEBAAEB
+        AAEBAAEBAAEBAAEBAAEAARMCEQIBAAEAARMBAAEBAAEBAAECEQIBAAEBAAEBAAEBAAEBAAEBAAEBAAEB
+        AAEBAAEBAAEBAAEBAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Alexandria</value>
+  </data>
+  <data name="&gt;&gt;columnNumber.Name" xml:space="preserve">
+    <value>columnNumber</value>
+  </data>
+  <data name="&gt;&gt;columnNumber.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnName.Name" xml:space="preserve">
+    <value>columnName</value>
+  </data>
+  <data name="&gt;&gt;columnName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnArtist.Name" xml:space="preserve">
+    <value>columnArtist</value>
+  </data>
+  <data name="&gt;&gt;columnArtist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnLength.Name" xml:space="preserve">
+    <value>columnLength</value>
+  </data>
+  <data name="&gt;&gt;columnLength.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;columnFileName.Name" xml:space="preserve">
+    <value>columnFileName</value>
+  </data>
+  <data name="&gt;&gt;columnFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileToolStripMenuItem.Name" xml:space="preserve">
+    <value>FileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;FileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;OpenToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ExitToolStripMenuItem.Name" xml:space="preserve">
+    <value>ExitToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;ExitToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlaybackStatusLabel.Name" xml:space="preserve">
+    <value>PlaybackStatusLabel</value>
+  </data>
+  <data name="&gt;&gt;PlaybackStatusLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PositionStatus.Name" xml:space="preserve">
+    <value>PositionStatus</value>
+  </data>
+  <data name="&gt;&gt;PositionStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StreamingStatus.Name" xml:space="preserve">
+    <value>StreamingStatus</value>
+  </data>
+  <data name="&gt;&gt;StreamingStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FileOpenDialog.Name" xml:space="preserve">
+    <value>FileOpenDialog</value>
+  </data>
+  <data name="&gt;&gt;FileOpenDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTimer.Name" xml:space="preserve">
+    <value>PlaybackTimer</value>
+  </data>
+  <data name="&gt;&gt;PlaybackTimer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>
