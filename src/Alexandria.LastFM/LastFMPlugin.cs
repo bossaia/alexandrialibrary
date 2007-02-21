@@ -42,7 +42,7 @@ using System.Timers;
 //using Banshee.Base;
 //using Banshee;
 
-namespace AlexandriaOrg.Alexandria.LastFM //Banshee.Plugins.Audioscrobbler
+namespace AlexandriaOrg.Alexandria.LastFM
 {
 	public class LastFMPlugin
 	{
