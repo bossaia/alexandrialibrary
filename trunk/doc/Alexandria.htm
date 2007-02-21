@@ -3,17 +3,21 @@
 	<head>
 		<title>Alexandria Library Application Design</title>
 		<style type="text/css">
-			H1 { FONT-WEIGHT: bold; FONT-SIZE: 20pt; FONT-FAMILY: Bookman,Tahoma,Arial,Geneva,Sans-Serif; }
-			H2 { FONT-WEIGHT: bold; FONT-SIZE: 14pt; FONT-FAMILY: Bookman,Tahoma,Arial,Geneva,Sans-Serif; }
-			BODY { FONT-SIZE: 10pt; FONT-FAMILY: Arial; background-color: lightblue; color: black;}
-			TABLE.default { background-color: lightgray; color: black; border-width: 1; border-style: solid;}
-			TR.header { background-color: gray; color: white; }
-			.SampleClass { FONT-WEIGHT: bold; FONT-SIZE: 32pt; FONT-FAMILY: Tahoma,Arial,Geneva,Sans-Serif; }
+			H1 { font-weight: bold; font-size: 20pt; font-family: Helvetica,Tahoma,Arial,Geneva,Sans-Serif; }
+			H2 { font-weight: bold; font-size: 14pt; font-family: Helvetica,Tahoma,Arial,Geneva,Sans-Serif; }
+			BODY, DIV.default { display: block; font-size: 10pt; font-family: Arial; background-color: lightblue; color: black;}
+			TABLE.default { float: left; margin: 8px; background-color: lightgray; color: darkblue; border-width: 1px; border-style: solid; padding: none; border-color: darkblue; }
+			TD.title { font-weight: bold; font-size: 10pt; font-family: Tahoma; background-color: lightgray; color: darkblue; }
+			TD.header_left { background-color: darkgray; color: white; }
+			TD.header_right { background-color: darkblue; color: white; }
+			TD.entry_left { color: black; }
+			TD.note { border-top-width: 1px;  border-top-style: solid; border-top-color: darkblue; }
+			.otherNote { color: black; font-size: 8pt; font-family: Tahoma,Arial,Geneva,Sans-Serif; }
 		</style>
 	</head>
 	<body>
 		<form action="">
-		<h1>Design Overview</h1>
+		<h1>Alexandria Library Application Design</h1>
 		<p>Alexandria is a cross-platform application suite for discovering, organizing, viewing, reviewing and adding metadata to digital media.</p>
 		<h2>Architecture</h2>
 		<p>Alexandria is designed around a dynamic plugin model that minimizes the interdependence of the constituant parts. This allows plugin modules 
@@ -26,19 +30,22 @@
 		potention to act as both a client and a server.
 		</p>		
 		<h2>Framework</h2>
-		<p>Alexandria is based on version 2.0 of the .NET framework which means that plugin modules can be written in any language which 
-		targets version 2.0 of the .NET CLR.  Alexandria can be compiled and run against the Mono and Microsoft .NET runtimes.  Examples of languages 
-		that can be used to write Alexandria plugins are as follows:
-		</p>
+		<div class="default">Alexandria is based on version 2.0 of the .NET framework which means that plugin modules can be written in any language which 
+		targets version 2.0 of the .NET CLR.  Alexandria can be compiled and run against the Mono and Microsoft .NET runtimes.  The languages that can be used
+		to write plugin modules depend on the runtime that is used.
 		<table class="default">
-			<tr class="header"><td rowspan="2">CLR Language</td><td colspan="2">Framework Version</td></tr>
-			<tr class="header"><td>Mono</td><td>.NET</td></tr>
-			<tr><td>C#</td><td>1.2</td><td>2.0</td></tr>
-			<tr><td>VB.NET</td><td>1.2*</td><td>2.0</td></tr>
-			<tr><td>IronPython</td><td>1.2</td><td>2.0</td></tr>
-			<tr><td>Boo</td><td>1.2</td><td>NA</td></tr>
+		    <tr><td colspan="3" class="title">Table 1: Framework Language Support</td></tr>
+			<tr><td class="header_left">Language</td><td class="header_right">Mono 1.2</td><td class="header_right">.NET 2.0</td></tr>
+			<tr><td>C#</td><td>full</td><td>full</td></tr>
+			<tr><td>VB.NET</td><td>partial*</td><td>full</td></tr>
+			<tr><td>IronPython</td><td>full</td><td>full</td></tr>
+			<tr><td>Boo</td><td>full</td><td>none</td></tr>
+			<tr><td colspan="3" class="note">* VB.NET is still experimental/incomplete in Mono 1.2</td></tr>
 		</table>
-		* VB.NET is still experimental/incomplete in Mono 1.2		
+		This table illustrates the CLR languages that can be used to write Alexandria plugins against Mono and Microsoft .NET and the version of the runtime that
+		is required. For example, C# can be used to write plugins against Mono version 1.2 or version 2.0 of the .NET runtime. This table is by no means exhaustive and work continues
+		on adding support for various languages to both Mono and .NET. Be sure to check the appropriate links in the resources section to see if your language of choice is supported.
+		</div>
 		<h2>Plugin Types</h2>
 		<p>Plugin modules provide all of the functionality in Alexandria.
 		</p>
