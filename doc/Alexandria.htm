@@ -52,13 +52,22 @@
 		compact discs, metadata tags, reviews, and user ratings are all media resources.  Thus it is important to think about the various plugin types in terms of what they do with
 		the various media resource types.  The following table gives an overview of the functions that each plugin type provides:
 		<table class="default" style="float: center">
-			<tr><td colspan="8" class="title">Table 2: Plugin Types</td></tr>
-			<tr><td rowspan="2" class="header_right">Plugin Type</td><td colspan="5" class="header_right" align="center">Resource Category</td><td rowspan="2" class="header_right">By Resource Type</td><td rowspan="2" class="header_right" align="center">Examples</td></tr>
-			<tr><td class="header_right">Audio</td><td class="header_right">Video</td><td class="header_right">Image</td><td class="header_right">Text</td><td class="header_right">Metadata</td></tr>
-			<tr><td>Playback</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>no</td><td>yes</td><td><a target="_blank" href="http://fmod.org">FMOD</a>, <a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
-			<tr><td>Storage</td><td>no</td><td>no</td><td>no</td><td>yes</td><td>no</td><td>no</td><td><a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
+			<tr><td colspan="5" class="title">Table 2: Plugin Interfaces</td></tr>
+			<tr><td class="header_right">Plugin Interface</td><td class="header_right">Input Interface</td><td class="header_right">Output Interface</td><td class="header_right">Notes</td><td class="header_right">Links</td></tr>
+			<tr><td>IAudioEnginePlugin</td><td>IAudio</td><td>N/A</td><td>Takes an audio resource and plays it</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
+			<tr><td>IVideoEnginePlugin</td><td>IVideo</td><td>N/A</td><td>Takes a video resource and plays it</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
+			<tr><td>IImageEnginePlugin</td><td>IImage</td><td>N/A</td><td>Takes an image resource and displays it</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
+			<tr><td>ITextEnginePlugin</td><td>IText</td><td>N/A</td><td>Takes a text resource and displays it</td><td></td></tr>
+			<tr><td>IStoragePlugin</td><td>IStorable</td><td>N/A</td><td>Takes a storable resource and saves it to the specified storage medium</td><td><a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
+			<tr><td>ISearchPlugin</td><td>ISearchQuery</td><td>ISearchResult</td><td>Takes a search query and returns a search result</td><td><a target="_blank" href="http://www.amazon.com">Amazon</a>, <a target="_blank" href="http://www.imdb.com">IMDB</a>, <a target="_blank" href="http://musicbrainz.org">MusicBrainz</a></td></tr>
+			<tr><td>ISubmissionPlugin</td><td>ISubmissionQuery</td><td>ISubmissionResult</td><td>Takes a submission query and returns a submission result</td><td><a target="_blank" href="http://www.last.fm">Last.fm</a></tr>
+			<tr><td>IIdentifierPlugin</td><td>IHasPath</td><td>IResource</td><td>Takes a uri and returns a resource</td><td></td></tr>
+			<tr><td>IConverterPlugin</td><td>IResource</td><td>IResource</td><td>Takes a resource and returns a resource with a different resource type</td><td></td></tr>
+			<tr><td>IDefinitionPlugin</td><td>N/A</td><td>IResourceType</td><td>Defines a resurce type</td><td></td></tr>
 		</table>
 		</div>
+		<h2>Resource Lifecycle</h2>
+		<div class="default">In Alexandria resources have a lifecycle:<ol><li>Get Uri (search/open)</li><li>Identify Resource</li><li>Validate Resource (optional)</li><li>Render/Edit/Convert/Submit Resource</li><li>Store Resource (optional)</li><li>Close Resource</li></ol></div>
 		</form>
 	</body>
 </html>
