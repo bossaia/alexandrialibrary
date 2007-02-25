@@ -34,8 +34,8 @@
 		targets version 2.0 of the .NET CLR.  Alexandria can be compiled and run against the Mono and Microsoft .NET runtimes.  The languages that can be used
 		to write plugin modules depend on the runtime that is used.
 		<table class="default">
-		    <tr><td colspan="3" class="title">Table 1: Framework Language Support</td></tr>
-			<tr><td class="header_left">Language</td><td class="header_right">Mono 1.2</td><td class="header_right">.NET 2.0</td></tr>
+			<tr><td colspan="3" class="title">Table 1: Framework Language Support</td></tr>
+			<tr><td class="header_right">Language</td><td class="header_right">Mono 1.2</td><td class="header_right">.NET 2.0</td></tr>
 			<tr><td>C#</td><td>full</td><td>full</td></tr>
 			<tr><td>VB.NET</td><td>partial*</td><td>full</td></tr>
 			<tr><td>IronPython</td><td>full</td><td>full</td></tr>
@@ -47,8 +47,18 @@
 		on adding support for various languages to both Mono and .NET. Be sure to check the appropriate links in the resources section to see if your language of choice is supported.
 		</div>
 		<h2>Plugin Types</h2>
-		<p>Plugin modules provide all of the functionality in Alexandria.
-		</p>
+		<div class="default">Plugin modules provide all of the functionality in Alexandria. A single plugin can provide multiple different functions within the Alexandria application suite. Each of
+		the different plugin types provides functions for handling media resources.  Media resources are the most fundamental piece of the Alexandria application; digital audio files,
+		compact discs, metadata tags, reviews, and user ratings are all media resources.  Thus it is important to think about the various plugin types in terms of what they do with
+		the various media resource types.  The following table gives an overview of the functions that each plugin type provides:
+		<table class="default" style="float: center">
+			<tr><td colspan="8" class="title">Table 2: Plugin Types</td></tr>
+			<tr><td rowspan="2" class="header_right">Plugin Type</td><td colspan="5" class="header_right" align="center">Resource Category</td><td rowspan="2" class="header_right">By Resource Type</td><td rowspan="2" class="header_right" align="center">Examples</td></tr>
+			<tr><td class="header_right">Audio</td><td class="header_right">Video</td><td class="header_right">Image</td><td class="header_right">Text</td><td class="header_right">Metadata</td></tr>
+			<tr><td>Playback</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>no</td><td>yes</td><td><a target="_blank" href="http://fmod.org">FMOD</a>, <a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
+			<tr><td>Storage</td><td>no</td><td>no</td><td>no</td><td>yes</td><td>no</td><td>no</td><td><a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
+		</table>
+		</div>
 		</form>
 	</body>
 </html>
