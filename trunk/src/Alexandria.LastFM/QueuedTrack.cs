@@ -18,11 +18,12 @@ namespace AlexandriaOrg.Alexandria.LastFM
 		}
 		*/
 
-		public QueuedTrack(string artist, string album, string title, int duration, DateTime start_time)
+		public QueuedTrack(string artist, string album, string title, string musicBrainzId, int duration, DateTime start_time)
 		{
 			this.artist = artist;
 			this.album = album;
 			this.title = title;
+			this.musicBrainzId = musicBrainzId;
 			this.duration = duration;
 			this.start_time = start_time.ToUniversalTime();
 		}
@@ -32,6 +33,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 		private string artist;
 		private string album;
 		private string title;
+		private string musicBrainzId;
 		private int duration;
 		private DateTime start_time;
 		#endregion
@@ -55,6 +57,11 @@ namespace AlexandriaOrg.Alexandria.LastFM
 		public string Title
 		{
 			get { return title; }
+		}
+
+		public string MusicBrainzId
+		{
+			get { return musicBrainzId; }
 		}
 
 		public int Duration
