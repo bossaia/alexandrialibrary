@@ -107,6 +107,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 				writer.WriteElementString("Artist", track.Artist);
 				writer.WriteElementString("Album", track.Album);
 				writer.WriteElementString("Title", track.Title);
+				writer.WriteElementString("MusicBrainzId", track.MusicBrainzId);
 				writer.WriteElementString("Duration", track.Duration.ToString());
 				writer.WriteElementString("StartTime", DateTimeUtil.ToTimeT(track.StartTime).ToString());
 				writer.WriteEndElement(); // Track
@@ -132,9 +133,10 @@ namespace AlexandriaOrg.Alexandria.LastFM
 
 				foreach (XmlNode node in nodes)
 				{
-					string artist = "";
-					string album = "";
-					string title = "";
+					string artist = string.Empty;
+					string album = string.Empty;
+					string title = string.Empty;
+					string musicBrainzId = string.Empty;
 					int duration = 0;
 					DateTime start_time = new DateTime(0);
 
@@ -156,6 +158,11 @@ namespace AlexandriaOrg.Alexandria.LastFM
 						{
 							duration = Convert.ToInt32(child.ChildNodes[0].Value);
 						}
+						// THIS SECTION MAY NEED TO BE REMOVED
+						else if (child.Name == "MusicBrainzId" && child.ChildNodes.Count != 0)
+						{
+							musicBrainzId = child.ChildNodes[0].Value;
+						}
 						else if (child.Name == "StartTime" && child.ChildNodes.Count != 0)
 						{
 							long time = Convert.ToInt64(child.ChildNodes[0].Value);
@@ -163,7 +170,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 						}
 					}
 
-					queue.Add(new QueuedTrack(artist, album, title, duration, start_time));
+					queue.Add(new QueuedTrack(artist, album, title, musicBrainzId, duration, start_time));
 				}
 			}
 			catch
@@ -181,7 +188,9 @@ namespace AlexandriaOrg.Alexandria.LastFM
 			for (i = 0; i < queue.Count; i++)
 			{
 				/* we queue a maximum of 10 tracks per request */
-				if (i == 9) break;
+				// For testing purposes queue only 1 track
+				// normal check here is: i == 9
+				if (i > 0) break;
 
 				QueuedTrack track = (QueuedTrack)queue[i];
 
@@ -190,7 +199,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 						 HttpUtility.UrlEncode(track.Artist),
 						 HttpUtility.UrlEncode(track.Title),
 						 HttpUtility.UrlEncode(track.Album),
-						 "" /* musicbrainz id */,
+						 string.Empty, //track.MusicBrainzId,
 						 track.Duration.ToString(),
 						 HttpUtility.UrlEncode(track.StartTime.ToString("yyyy-MM-dd HH:mm:ss")),
 						 i);
@@ -202,9 +211,9 @@ namespace AlexandriaOrg.Alexandria.LastFM
 		#endregion
 
 		#region Add
-		public void Add(string artist, string album, string title, int duration, DateTime start_time)		
+		public void Add(string artist, string album, string title, string musicBrainzId,int duration, DateTime start_time)		
 		{
-			queue.Add(new QueuedTrack(artist, album, title, duration, start_time));
+			queue.Add(new QueuedTrack(artist, album, title, musicBrainzId, duration, start_time));
 			dirty = true;
 			RaiseTrackAdded(this, new EventArgs());
 		}
