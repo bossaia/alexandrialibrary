@@ -32,7 +32,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Security.Cryptography;
-//using Mono.Security.Cryptography;
+using Mono.Security.Cryptography;
 using System.Collections;
 using System.Web;
 using System.Timers;
@@ -61,7 +61,7 @@ namespace AlexandriaOrg.Alexandria.LastFM
 		private const int TICK_INTERVAL = 2000; /* 2 seconds */
 		private const int FAILURE_LOG_MINUTES = 5; /* 5 minute delay on logging failure to upload information */
 		private const int RETRY_SECONDS = 60; /* 60 second delay for transmission retries */
-		private const string CLIENT_ID = "bsh"; //TODO: get my own three letter plugin code
+		private const string CLIENT_ID = "axa";
 		private const string CLIENT_VERSION = "0.1";
 		private const string SCROBBLER_URL = "http://post.audioscrobbler.com/";
 		private const string SCROBBLER_VERSION = "1.1";
@@ -124,16 +124,17 @@ namespace AlexandriaOrg.Alexandria.LastFM
 
 			byte[] hash = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(pass));
 			
+			/* .NET replacement logic - I'm not sure if this works
 			string hexName = string.Empty;
 			for(int i =0; i < hash.Length; i++)
 			{
 				hexName += hash[i].ToString("X").ToLowerInvariant();
 			}
-			//string.Format("{0:x2}", hash);  
-			//Convert.ToString(hash); 
-			//CryptoConvert.ToHex(hash).ToLower(); <-- this was the original call
+			 
+			return hexName; 
+			*/
 			
-			return hexName;
+			return CryptoConvert.ToHex(hash).ToLower();
 		}
 		#endregion
 
