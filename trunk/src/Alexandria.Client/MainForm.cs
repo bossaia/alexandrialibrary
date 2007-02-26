@@ -94,7 +94,9 @@ namespace AlexandriaOrg.Alexandria.Client
 					plugin.SetUserPassword("uberweasel", "automatic");
 					plugin.Start();
 					DateTime started = DateTime.Now.AddSeconds(-250);
-					plugin.Queue.Add("Tool", "Undertow", "Sober", 306, started);
+					plugin.Queue.Add("Tool", "Undertow", "Sober", "0dfaa81e-9326-4eff-9604-c20d1c613227", 306, started);
+					//plugin.Queue.RemoveRange(0, 1);
+					//plugin.Stop();
 					//MessageBox.Show("Track submitted to Last.fm", "Test Last.fm");
 					//plugin.Stop();
 					//Alexandria.LastFM.l
