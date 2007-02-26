@@ -194,6 +194,8 @@ namespace AlexandriaOrg.Alexandria.LastFM
 
 				QueuedTrack track = (QueuedTrack)queue[i];
 
+				DateTime submitTime = DateTime.Now.Subtract(new TimeSpan(0, 3, 0));
+
 				sb.AppendFormat(
 						 "&a[{6}]={0}&t[{6}]={1}&b[{6}]={2}&m[{6}]={3}&l[{6}]={4}&i[{6}]={5}",
 						 HttpUtility.UrlEncode(track.Artist),
@@ -201,7 +203,8 @@ namespace AlexandriaOrg.Alexandria.LastFM
 						 HttpUtility.UrlEncode(track.Album),
 						 string.Empty, //track.MusicBrainzId,
 						 track.Duration.ToString(),
-						 HttpUtility.UrlEncode(track.StartTime.ToString("yyyy-MM-dd HH:mm:ss")),
+						 HttpUtility.UrlEncode(submitTime.ToString("yyyy-MM-dd HH:mm:ss")),
+						 //track.StartTime.ToString("yyyy-MM-dd HH:mm:ss")),
 						 i);
 			}
 
