@@ -13,6 +13,9 @@
 			TD.entry_left { color: black; }
 			TD.note { border-top-width: 1px;  border-top-style: solid; border-top-color: darkblue; }
 			.otherNote { color: black; font-size: 8pt; font-family: Tahoma,Arial,Geneva,Sans-Serif; }
+			.code { color: black; font-size: 10pt; font-family: Courier; background-color: white; }
+			.code_keyword { color: blue; font-size: 10pt; font-family: Courier; background-color: white; }
+			.code_class { color: gray; font-size: 10pt; font-family: Courier; background-color: white; }
 		</style>
 	</head>
 	<body>
@@ -66,6 +69,21 @@
 			<tr><td>IDefinitionPlugin</td><td>N/A</td><td>IResourceType</td><td>Defines a resurce type</td><td></td></tr>
 		</table>
 		</div>
+		<h2>Resource Types</h2>
+		<div class="default">There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the definition of IResource:<br/><br/>
+		<div class="code_keyword">
+		public interface <span class="code_class">IResource</span><br/>
+		{<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IResourceType</span><span class="code"> Type { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span><span class="code">&lt;</span>string<span class="code">,</span> IResource<span class="code">&gt;</span><span class="code"> Resources { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		}<br/>
+		</div><br/>
+		The following table illustrates the standard resource types:
+		<table class="default">
+			<tr><td colspan="3" class="title">Table 3: Resource Types</td></tr>
+			<tr><td class="header_right">Resource Interface</td><td class="header_right">Properties</td><td class="header_right">Methods</td></tr>
+			<tr><td>IAudio</td><td>Milliseconds, Position, Status</td><td>Load, Play, Pause, Stop, Seek</td></tr>
+		</table>
 		<h2>Resource Lifecycle</h2>
 		<div class="default">In Alexandria resources have a lifecycle:<ol><li>Get Uri (search/open)</li><li>Identify Resource</li><li>Validate Resource (optional)</li><li>Render/Edit/Convert/Submit Resource</li><li>Store Resource (optional)</li><li>Close Resource</li></ol></div>
 		</form>
