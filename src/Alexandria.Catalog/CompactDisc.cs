@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria.Catalog
 {
-	public class Class1
+	public class CompactDisc
 	{
 	}
 }
