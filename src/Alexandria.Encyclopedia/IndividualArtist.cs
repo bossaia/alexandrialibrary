@@ -7,11 +7,11 @@ namespace AlexandriaOrg.Alexandria.Data
 	public class IndividualArtist : Artist
 	{
 		#region Constructors
-		public IndividualArtist() : base()
+		public IndividualArtist()
 		{
 		}
 		
-		public IndividualArtist(string id) : base(id)
+		public IndividualArtist(string id)
 		{
 		}
 		#endregion

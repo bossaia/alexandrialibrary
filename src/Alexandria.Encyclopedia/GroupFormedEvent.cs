@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Encyclopedia
 {
 	public class GroupFormedEvent : ArtistEvent
 	{
@@ -11,7 +11,7 @@ namespace AlexandriaOrg.Alexandria.Data
 		{
 		}
 		
-		public GroupFormedEvent(string id) : base(id, "Group Formed")
+		public GroupFormedEvent(string id) : this()
 		{
 		}
 		#endregion

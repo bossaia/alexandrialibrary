@@ -2,20 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace AlexandriaOrg.Alexandria
 {
-	public class Artist : DataRecord
+	public class Artist
 	{
 		#region Private Fields
 		private string name;
 		#endregion
 		
 		#region Constructors
-		public Artist() : base()
+		public Artist()
 		{
 		}
 		
-		public Artist(string id) : base(id)
+		public Artist(string id)
 		{
 		}
 		#endregion

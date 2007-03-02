@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Encyclopedia
 {
-	public class Collaboration : DataRecord
+	public class Collaboration
 	{
 		#region Private Fields
 		private Artist artist;
@@ -12,11 +12,11 @@ namespace AlexandriaOrg.Alexandria.Data
 		#endregion
 		
 		#region Constructors
-		public Collaboration() : base()
+		public Collaboration()
 		{
 		}
 		
-		public Collaboration(string id) : base(id)
+		public Collaboration(string id)
 		{
 		}
 		#endregion
