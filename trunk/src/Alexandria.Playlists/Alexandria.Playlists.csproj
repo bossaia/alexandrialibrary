@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{37A4F396-6488-49DC-8313-5166EBE70AA7}</ProjectGuid>
+    <ProjectGuid>{7AEE0050-9E26-4B81-9951-E5CF7D2A02E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Catalog</RootNamespace>
-    <AssemblyName>Alexandria.Catalog</AssemblyName>
+    <RootNamespace>Alexandria.Playlists</RootNamespace>
+    <AssemblyName>Alexandria.Playlists</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,10 +33,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompactDisc.cs" />
-    <Compile Include="DigitalVideoDisc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Track.cs" />
+    <Compile Include="XmlShareablePlaylist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
