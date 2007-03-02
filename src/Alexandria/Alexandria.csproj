@@ -111,7 +111,6 @@
     <Compile Include="RemoteMediaFile.cs" />
     <Compile Include="RemovableDrive.cs" />
     <Compile Include="ResourceFormat.cs" />
-    <Compile Include="ResourceIdentifier.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="SoundCommand.cs" />
