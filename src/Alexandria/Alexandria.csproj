@@ -68,7 +68,7 @@
     <Compile Include="IMediaFile.cs" />
     <Compile Include="IMediaPlaylist.cs" />
     <Compile Include="IMediaController.cs" />
-    <Compile Include="IMediaResource.cs" />
+    <Compile Include="IResource.cs" />
     <Compile Include="ISound.cs" />
     <Compile Include="ISoundCommand.cs" />
     <Compile Include="ISoundStatus.cs" />

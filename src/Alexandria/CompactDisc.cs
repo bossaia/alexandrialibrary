@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AlexandriaOrg.Alexandria
 {
-	public class CompactDisc : IMediaResource
+	public class CompactDisc : IResource
 	{
 		#region IMediaResource Members
 
@@ -44,7 +44,7 @@ namespace AlexandriaOrg.Alexandria
 			}
 		}
 
-		public IList<IMediaResource> Resources
+		public IDictionary<object, IResource> Resources
 		{
 			get
 			{
