@@ -2,20 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Encyclopedia
 {
-	public class Genre : DataRecord
+	public class Genre
 	{
 		#region Private Fields
 		private string name;
 		#endregion
 		
 		#region Constructors
-		public Genre() : base()
+		public Genre()
 		{
 		}
 		
-		public Genre(string id) : base(id)
+		public Genre(string id)
 		{
 		}
 		#endregion

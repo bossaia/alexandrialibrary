@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace AlexandriaOrg.Alexandria
 {
-	public abstract class BaseEvent : DataRecord
+	public abstract class BaseEvent
 	{
 		#region Private Fields
 		private string type;
@@ -12,12 +12,12 @@ namespace AlexandriaOrg.Alexandria.Data
 		#endregion
 		
 		#region Constructors
-		protected BaseEvent(string type) : base()
+		protected BaseEvent(string type)
 		{
 			this.type = type;
 		}
 		
-		protected BaseEvent(string id, string type) : base(id)
+		protected BaseEvent(string id, string type)
 		{
 			this.type = type;
 		}
