@@ -57,16 +57,16 @@
 		<table class="default" style="float: center">
 			<tr><td colspan="5" class="title">Table 2: Plugin Interfaces</td></tr>
 			<tr><td class="header_right">Plugin Interface</td><td class="header_right">Input Interface</td><td class="header_right">Output Interface</td><td class="header_right">Notes</td><td class="header_right">Links</td></tr>
-			<tr><td>IAudioEnginePlugin</td><td>IAudio</td><td>N/A</td><td>Takes an audio resource and plays it</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
-			<tr><td>IVideoEnginePlugin</td><td>IVideo</td><td>N/A</td><td>Takes a video resource and plays it</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
-			<tr><td>IImageEnginePlugin</td><td>IImage</td><td>N/A</td><td>Takes an image resource and displays it</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
-			<tr><td>ITextEnginePlugin</td><td>IText</td><td>N/A</td><td>Takes a text resource and displays it</td><td></td></tr>
+			<tr><td>IAudioPlugin</td><td>IAudioResource</td><td>N/A</td><td>Takes an audio resource and plays it</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
+			<tr><td>IVideoPlugin</td><td>IVideoResource</td><td>N/A</td><td>Takes a video resource and plays it</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
+			<tr><td>IImagePlugin</td><td>IImageResource</td><td>N/A</td><td>Takes an image resource and displays it</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
+			<tr><td>ITextPlugin</td><td>ITextResource</td><td>N/A</td><td>Takes a text resource and displays it</td><td></td></tr>
 			<tr><td>IStoragePlugin</td><td>IStorable</td><td>N/A</td><td>Takes a storable resource and saves it to the specified storage medium</td><td><a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
-			<tr><td>ISearchPlugin</td><td>ISearchQuery</td><td>ISearchResult</td><td>Takes a search query and returns a search result</td><td><a target="_blank" href="http://www.amazon.com">Amazon</a>, <a target="_blank" href="http://www.imdb.com">IMDB</a>, <a target="_blank" href="http://musicbrainz.org">MusicBrainz</a></td></tr>
-			<tr><td>ISubmissionPlugin</td><td>ISubmissionQuery</td><td>ISubmissionResult</td><td>Takes a submission query and returns a submission result</td><td><a target="_blank" href="http://www.last.fm">Last.fm</a></tr>
-			<tr><td>IIdentifierPlugin</td><td>IHasPath</td><td>IResource</td><td>Takes a uri and returns a resource</td><td></td></tr>
+			<tr><td>ISearchPlugin</td><td>ISearch</td><td>ISearchResult</td><td>Takes a search query and returns a search result</td><td><a target="_blank" href="http://www.amazon.com">Amazon</a>, <a target="_blank" href="http://www.imdb.com">IMDB</a>, <a target="_blank" href="http://musicbrainz.org">MusicBrainz</a></td></tr>
+			<tr><td>ISubmissionPlugin</td><td>ISubmission</td><td>ISubmissionResult</td><td>Takes a submission query and returns a submission result</td><td><a target="_blank" href="http://www.last.fm">Last.fm</a></tr>
+			<tr><td>IIdentifierPlugin</td><td>System.Uri</td><td>IResource</td><td>Takes a uri and returns a resource</td><td></td></tr>
 			<tr><td>IConverterPlugin</td><td>IResource</td><td>IResource</td><td>Takes a resource and returns a resource with a different resource type</td><td></td></tr>
-			<tr><td>IDefinitionPlugin</td><td>N/A</td><td>IResourceType</td><td>Defines a resurce type</td><td></td></tr>
+			<tr><td>IDefinitionPlugin</td><td>N/A</td><td>ResourceFormat</td><td>Defines a resurce type</td><td></td></tr>
 		</table>
 		</div>
 		<h2>Resource Types</h2>
@@ -74,8 +74,9 @@
 		<div class="code_keyword">
 		public interface <span class="code_class">IResource</span><br/>
 		{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IResourceType</span><span class="code"> Type { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span><span class="code">&lt;</span>string<span class="code">,</span> IResource<span class="code">&gt;</span><span class="code"> Resources { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Uri</span><span class="code"> Uri { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ResourceFormat</span><span class="code"> Format { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span><span class="code">&lt;</span>object<span class="code">,</span> IResource<span class="code">&gt;</span><span class="code"> Resources { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
 		}<br/>
 		</div><br/>
 		The following table illustrates the standard resource types:
