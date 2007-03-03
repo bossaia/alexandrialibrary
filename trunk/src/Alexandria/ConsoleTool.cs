@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	/// <summary>
 	/// A generic OO wrapper around a command line tool

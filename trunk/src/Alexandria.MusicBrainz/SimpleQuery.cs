@@ -29,6 +29,7 @@
 
 using System;
 using System.Security.Permissions;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {
@@ -59,7 +60,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 					}))
 				{
 					//"File Lookup Query unsuccessful"
-					throw new AlexandriaException(Subsystem.MetadataProvider);
+					throw new AlexandriaException("File Lookup Query unsuccessful");
 				}
 
 				client.Select(rdf.SelectRewind);
@@ -67,7 +68,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 				if (!client.Select(rdf.SelectLookupResult, 1))
 				{
 					// "Selection failed"
-					throw new AlexandriaException(Subsystem.MetadataProvider);
+					throw new AlexandriaException("Selection failed");
 				}
 				
 				track = new SimpleTrack();
@@ -111,7 +112,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 						break;
 					default:
 						//"Invalid result type: " + result_type
-						throw new AlexandriaException(Subsystem.MetadataProvider);
+						throw new AlexandriaException("Invalid result type: " + result_type);
 				}
             }
             return track;

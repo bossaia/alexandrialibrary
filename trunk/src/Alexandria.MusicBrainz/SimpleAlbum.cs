@@ -30,6 +30,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {
@@ -66,7 +67,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 				string error = client.QueryError;
 				System.Diagnostics.Debug.WriteLine("query=" + query.ToString() + " select=" + select.ToString() + " error=" + error);
 				// could not fetch album
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Could not fetch album");
             }
 
 			this.id = client.GetId(client.GetResultData(rdf.ExpressionAlbumGetAlbumId));
@@ -86,7 +87,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
             if(track_count <= 0)
             {
 				// Invalid track count from album query            
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Invalid track count from album query");
             }
                         
             tracks = new List<SimpleTrack>(track_count);//[track_count];

@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Reflection;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public abstract class MediaFileFormat
 	{
 		#region Private Fields
 		private string name;
-		private MimeType mime;
+		private System.Net.Mime.ContentType mime;
 		private IList<FileExtension> allowedFileExtensions;
 		private FileExtension defaultFileExtension;
 		private bool supportsTags;
@@ -20,14 +21,14 @@ namespace AlexandriaOrg.Alexandria
 		#endregion
 		
 		#region Constructors
-		protected MediaFileFormat(string name, MimeType mime, bool supportsTags)
+		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags)
 		{
 			this.name = name;
 			this.mime = mime;
 			this.supportsTags = supportsTags;
 		}
 		
-		protected MediaFileFormat(string name, MimeType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions) : this(name, mime, supportsTags)
+		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions) : this(name, mime, supportsTags)
 		{
 			this.allowedFileExtensions = allowedFileExtensions;
 			if (allowedFileExtensions != null && allowedFileExtensions.Count > 0)
@@ -36,7 +37,7 @@ namespace AlexandriaOrg.Alexandria
 			}
 		}
 
-		protected MediaFileFormat(string name, MimeType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions, FileExtension defaultFileExtension) : this(name, mime, supportsTags)
+		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions, FileExtension defaultFileExtension) : this(name, mime, supportsTags)
 		{
 			this.allowedFileExtensions = allowedFileExtensions;
 			this.defaultFileExtension = defaultFileExtension;
@@ -49,7 +50,7 @@ namespace AlexandriaOrg.Alexandria
 			get {return name;}
 		}
 		
-		public MimeType Mime
+		public System.Net.Mime.ContentType Mime
 		{
 			get {return mime;}
 		}

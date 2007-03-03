@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public class AudioPlayer : MediaPlayer,IAudioPlayer,IDisposable
 	{

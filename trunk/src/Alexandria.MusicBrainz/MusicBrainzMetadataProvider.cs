@@ -3,11 +3,11 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Text;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {
-	[PluginAttributes.MetadataProviderClass]
+	[MetadataProviderClass]
 	public class MusicBrainzMetadataProvider : MetadataProvider
 	{
 		#region Private Constant Fields
@@ -22,9 +22,9 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 
 		#region LookupAlbumById
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		private Data.Album LookupAlbumById(string id)
+		private IResource LookupAlbumById(string id)
 		{
-			Data.Album album = null;
+			IResource album = null;
 
 			StringBuilder output = new StringBuilder();
 
@@ -201,9 +201,9 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 		#region Private Static Methods
 		
 		#region LookupCdInDrive
-		private static Alexandria.Data.Album LookupCdInDrive(OpticalDrive drive)
+		private static IResource LookupCdInDrive(OpticalDrive drive)
 		{
-			Alexandria.Data.Album album = null;
+			IResource album = null;
 			
 			if (drive != null)
 			{							
@@ -241,6 +241,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 						Debug.WriteLine("Release Date  : " + disc.ReleaseDate);
 						Debug.WriteLine("");
 
+						/*
 						AlexandriaOrg.Alexandria.Data.Artist artist = new AlexandriaOrg.Alexandria.Data.Artist();
 						artist.Name = disc.ArtistName;
 
@@ -272,12 +273,13 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 							track.Number = Convert.ToUInt32(simpleTrack.Index);
 							album.Tracks.Add(track.Number, track);
 						}
+						*/
 					}
 				}
 				catch (Exception ex)
 				{
 					//Debug.WriteLine("Error reading from CD: " + ex.Message);
-					throw new AlexandriaException(Subsystem.MetadataProvider, ex);
+					throw new AlexandriaException("Error reading from CD", ex);
 				}
 			}
 			else throw new ArgumentNullException("drive");
@@ -295,18 +297,18 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public override Data.Album GetAlbum(OpticalDrive drive)
+		public override IResource GetAlbum(OpticalDrive drive)
 		{
 			return LookupCdInDrive(drive);
 		}
 
-		public override Data.Album GetAlbum(Search albumSearch)
+		public override IResource GetAlbum(Search albumSearch)
 		{
 			return null;
 		}
 
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public Data.Album GetAlbum(string id)
+		public IResource GetAlbum(string id)
 		{
 			return LookupAlbumById(id);
 		}

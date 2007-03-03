@@ -2,24 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
-{
-	#region Subsystem
-	public enum Subsystem
-	{
-		Unknown = 0,
-		Core,
-		Data,
-		MediaFormats,
-		Plugin,
-		Client,
-		Server,
-		MetadataProvider,
-		AudioPlayer,
-		TagEngine
-	}
-	#endregion
-	
+namespace Alexandria
+{	
 	#region SeekDirection
 	public enum SeekDirection
 	{

@@ -4,15 +4,11 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {	
 	[Serializable]
 	public class AlexandriaException : Exception, ISerializable
 	{
-		#region Private Fields
-		private Subsystem subsystem = Subsystem.Unknown;
-		#endregion
-		
 		#region Constructors
 		public AlexandriaException() : base()
 		{
@@ -21,51 +17,19 @@ namespace AlexandriaOrg.Alexandria
 		/// <summary>
 		/// An exception in the Alexandria system
 		/// </summary>
-		/// <param name="subsystem">The subsystem of Alexandria where this exception occured</param>
-		public AlexandriaException(Subsystem subsystem) : base()
-		{
-			this.subsystem = subsystem;
-		}
-
-		/// <summary>
-		/// An exception in the Alexandria system
-		/// </summary>
-		/// <param name="subsystem">The subsystem of Alexandria where this exception occured</param>
 		/// <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified</param>
-		public AlexandriaException(Subsystem subsystem, Exception innerException) : base(null, innerException)
+		public AlexandriaException(Exception innerException) : base(null, innerException)
 		{
-			this.subsystem = subsystem;
 		}
 		
 		/// <summary>
 		/// An exception in the Alexandria system
 		/// </summary>
-		/// <param name="subsystem">The subsystem of Alexandria where this exception occured</param>
 		/// <param name="message">The message that describes this error</param>
-		public AlexandriaException(Subsystem subsystem, string message) : base(message)
-		{
-			this.subsystem = subsystem;
-		}
-		
-		/// <summary>
-		/// An exception in the Alexandria system
-		/// </summary>
-		/// <param name="subsystem">The subsystem of Alexandria where this exception occured</param>
-		/// <param name="message">The message that describes the error</param>
-		/// <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified</param>
-		public AlexandriaException(Subsystem subsystem, string message, Exception innerException) : base(message, innerException)
-		{
-			this.subsystem = subsystem;
-		}
-		
-		/// <summary>
-		/// An exception in the Alexandria system
-		/// </summary>
-		/// <param name="message">The message that describes the error</param>
 		public AlexandriaException(string message) : base(message)
 		{
 		}
-
+		
 		/// <summary>
 		/// An exception in the Alexandria system
 		/// </summary>
@@ -74,7 +38,7 @@ namespace AlexandriaOrg.Alexandria
 		public AlexandriaException(string message, Exception innerException) : base(message, innerException)
 		{
 		}
-		
+				
 		/// <summary>
 		/// An exception in the Alexandria system
 		/// </summary>
@@ -85,17 +49,6 @@ namespace AlexandriaOrg.Alexandria
 		}
 		#endregion
 		
-		#region Public Properties
-		/// <summary>
-		/// Get the sub-system of Alexandria where this exception occured
-		/// </summary>
-		public Subsystem Subsystem
-		{
-			get {return subsystem;}
-			protected set {subsystem = value;}
-		}
-		#endregion
-
 		#region ISerializable Members
 		/// <summary>
 		/// Get object data for serialization of this exception

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	internal class TimerWorkerThread : IDisposable
 	{

@@ -30,7 +30,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public static class DataConverter
 	{

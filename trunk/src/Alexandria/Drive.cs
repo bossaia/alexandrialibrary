@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public class Drive : Device
 	{

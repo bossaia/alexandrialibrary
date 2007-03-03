@@ -7,11 +7,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria.Playlist
 {
-    public class M3uPlaylist:MediaPlaylist
+    public class M3uPlaylist : MediaPlaylist
     {
-
         #region Constructors
         public M3uPlaylist(string path): base(path)
         {
@@ -39,8 +38,6 @@ namespace AlexandriaOrg.Alexandria
             }
            
         }
-
         #endregion
-
     }
 }

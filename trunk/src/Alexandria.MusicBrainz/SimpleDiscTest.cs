@@ -29,6 +29,7 @@
  
 using System;
 using System.Diagnostics;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {
@@ -71,7 +72,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 			catch (Exception ex)
 			{
 				Debug.WriteLine("Error reading from CD: " + ex.Message);
-				throw new AlexandriaException(Subsystem.MetadataProvider, ex);
+				throw new AlexandriaException("Error reading from CD", ex);
 			}
 		}
 	}

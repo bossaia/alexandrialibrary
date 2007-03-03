@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using AlexandriaOrg.Alexandria.Data;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	#region AuthenticationResult
 	public struct AuthenticationResult
@@ -82,6 +81,7 @@ namespace AlexandriaOrg.Alexandria
 	#endregion
 
 	#region MimeType
+	/*
 	public struct MimeType
 	{
 		#region Constructors
@@ -145,5 +145,6 @@ namespace AlexandriaOrg.Alexandria
 		}
 		#endregion
 	}
+	*/
 	#endregion
 }

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Security.Permissions;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	[SecurityPermission(SecurityAction.Demand, ControlThread = true)]
 	public class TimerSynchronizer : ISynchronizeInvoke, IDisposable

@@ -30,6 +30,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {
@@ -131,7 +132,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
             if(track_count <= 0)
             {
 				// "Reading audio CD Table of Contents returned an invalid track count."
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Reading audio CD Table of Contents returned an invalid track count.");
             }
             
             lengths = new int[track_count];
@@ -150,7 +151,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 			{
 				// "Could not query CD"
 				Debug.WriteLine("Could not query CD");
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Could not query CD");
             }
 
 			int disc_count = client.GetResultInt(rdf.ExpressionGetNumberAlbums);
@@ -159,7 +160,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
             {
 				// "No Discs Found"
 				Debug.WriteLine("No Discs Found");
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("No Discs Found");
             }
             
             // handle more than 1 disc? not sure how this works? for multi-disc sets? 
@@ -169,7 +170,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 			{
 				// "Could not select disc"
 				Debug.WriteLine("Could not select disc");
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Could not select disc");
             }
 
 			amazonAsin = client.GetResultData(rdf.ExpressionAlbumGetAmazonAsin, 1);
@@ -185,7 +186,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
             {
 				// "Invalid track count from album query"
 				Debug.WriteLine("Invalid track count from album query");
-                throw new AlexandriaException(Subsystem.MetadataProvider);
+                throw new AlexandriaException("Invalid track count from album query");
             }
                         
             tracks = new List<SimpleTrack>(track_count);

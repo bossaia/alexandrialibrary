@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria;
 
 namespace Alexandria
 {
@@ -17,7 +16,7 @@ namespace Alexandria
 		{
 		}
 		
-		public User(string id) : base(id)
+		public User(string id) : this()
 		{
 		}
 		#endregion
@@ -63,7 +62,7 @@ namespace Alexandria
 		{
 			AuthenticationResult result;
 		
-			User user = PluginManager.DataFactory.GetUser(name);
+			User user = new User(); //PluginManager.DataFactory.GetUser(name);
 			if (user != null)
 			{
 				if (password == user.Password)

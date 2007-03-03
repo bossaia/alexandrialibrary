@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.MediaFormats
+namespace Alexandria.MediaFormats
 {
 	public class Wav : MediaFileFormat
 	{
 		#region Constructors
-		public Wav() : base("PCM Wave", new MimeType(ContentType.Audio, "x-wav"), false)
+		public Wav() : base("PCM Wave", new System.Net.Mime.ContentType("audio/x-wav"), false)
 		{
 			List<FileExtension> extensions = new List<FileExtension>();
 			extensions.Add(FileExtension.Wav);

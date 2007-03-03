@@ -22,7 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
