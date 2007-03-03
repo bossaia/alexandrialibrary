@@ -1,16 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Encyclopedia
 {
-	public class Track : DataRecord
+	public class Track
 	{
 		#region Private Fields
 		private string name;
-		private Artist artist;
-		private Song song;
-		private Album album;
+		private IArtistResource artist;
+		private ISongResource song;
+		private IAlbumResource album;
 		private uint length;
 		private uint milliseconds;
 		private uint number;
@@ -21,7 +22,7 @@ namespace AlexandriaOrg.Alexandria.Data
 		{
 		}
 		
-		public Track(string id) : base(id)
+		public Track(string id) : this()
 		{
 		}
 		#endregion
@@ -33,19 +34,19 @@ namespace AlexandriaOrg.Alexandria.Data
 			set {name = value;}
 		}
 		
-		public Artist Artist
+		public IArtistResource Artist
 		{
 			get {return artist;}
 			set {artist = value;}
 		}
 		
-		public Song Song
+		public ISongResource Song
 		{
 			get {return song;}
 			set {song = value;}
 		}
 		
-		public Album Album
+		public IAlbumResource Album
 		{
 			get {return album;}
 			set {album = value;}

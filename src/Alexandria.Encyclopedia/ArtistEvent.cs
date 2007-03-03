@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Encyclopedia
 {
 	public class ArtistEvent
 	{
@@ -11,11 +11,11 @@ namespace AlexandriaOrg.Alexandria.Data
 		#endregion
 		
 		#region Constructors
-		public ArtistEvent(string type) : base(type)
+		public ArtistEvent(string type)
 		{
 		}
 		
-		public ArtistEvent(string id, string type) : base(type)
+		public ArtistEvent(string id, string type)
 		{
 		}
 		#endregion

@@ -44,6 +44,9 @@
     <Compile Include="CompactDisc.cs" />
     <Compile Include="ConsoleTool.cs" />
     <Compile Include="DataConverter.cs" />
+    <Compile Include="IAlbumResource.cs" />
+    <Compile Include="IArtistResource.cs" />
+    <Compile Include="ISongResource.cs" />
     <Compile Include="Profile.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="User.cs" />

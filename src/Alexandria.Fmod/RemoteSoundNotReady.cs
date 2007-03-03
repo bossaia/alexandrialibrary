@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public sealed class RemoteSoundNotReady : SoundStatus
+	public sealed class RemoteSoundNotReady : Alexandria.SoundStatus
 	{
 		#region Constructors
 		private RemoteSoundNotReady() : base(false, true, false, false, false, false)

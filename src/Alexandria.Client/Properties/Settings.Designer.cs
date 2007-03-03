@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Concentric.Muse.Properties
+namespace Alexandria.Client.Properties
 {
 
 

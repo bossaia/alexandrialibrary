@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria.Encyclopedia
 {
 	public class Album
 	{
 		#region Private Fields
 		private string name;
 		private DateTime releaseDate;
-		private Artist artist;
+		private IArtistResource artist;
 		private string amazonAsin;
 		private Uri coverArtUrl;
 		List<Collaboration> collaborations = new List<Collaboration>();
@@ -41,7 +42,7 @@ namespace AlexandriaOrg.Alexandria
 			set {releaseDate = value;}
 		}
 		
-		public Artist Artist
+		public IArtistResource Artist
 		{
 			get {return artist;}
 			set {artist = value;}
