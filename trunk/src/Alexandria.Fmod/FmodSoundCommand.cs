@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public abstract class FmodSoundCommand : AlexandriaOrg.Alexandria.SoundCommand
+	public abstract class FmodSoundCommand : Alexandria.SoundCommand
 	{
 		#region Constructors
 		protected FmodSoundCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound, SoundCommandType type) : base(type)

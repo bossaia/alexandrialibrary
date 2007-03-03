@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AlexandriaOrg.Alexandria.Client.Properties {
-    using System;
-    
-    
+using System;
+
+namespace Alexandria.Client.Properties
+{    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

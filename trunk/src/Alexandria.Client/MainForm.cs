@@ -7,11 +7,10 @@ using System.Drawing;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using AlexandriaOrg.Alexandria;
-using AlexandriaOrg.Alexandria.Data;
-using AlexandriaOrg.Alexandria.Client.Properties;
+using Alexandria;
+using Alexandria.Client.Properties;
 
-namespace AlexandriaOrg.Alexandria.Client
+namespace Alexandria.Client
 {
 	public partial class MainForm : Form
 	{
@@ -37,14 +36,14 @@ namespace AlexandriaOrg.Alexandria.Client
 		private uint position;
 		private uint length;
 		private AudioPlayer audioPlayer;
-		private DataFactory dataFactory;
+		//private DataFactory dataFactory;
 		private TagEngine tagEngine;
 		private MetadataProvider metadataProvider;
 		//private PlaybackFunction playDelegate = null;
 		//private PlaybackFunction pauseDelegate = null;
 		//private PlaybackFunction stopDelegate = null;
 		private bool seeking;
-		private XmlShareablePlaylist playlist;
+		//private XmlShareablePlaylist playlist;
 		private int currentTrackIndex = -1;
 		private bool trackBarIsInitialized;
 		private bool soundLoadHasTimedOut;
@@ -337,7 +336,8 @@ namespace AlexandriaOrg.Alexandria.Client
 			{
 				this.QueueListView.Items.Clear();
 		
-				playlist = new XmlShareablePlaylist(path);
+				//TODO: add the code to dynamically load the appropriate playlist format
+				//playlist = new XmlShareablePlaylist(path);
 				playlist.Load();
 				
 				this.QueueGroupBox.Text = playlist.Name;
@@ -380,6 +380,7 @@ namespace AlexandriaOrg.Alexandria.Client
         {
             try
             {
+				/*
                 this.QueueListView.Items.Clear();
 
                 M3uPlaylist m3uPlaylist = new M3uPlaylist(path);
@@ -413,6 +414,7 @@ namespace AlexandriaOrg.Alexandria.Client
                 }
 
                 this.QueueListView.Refresh();
+                */
             }
             catch (AlexandriaException ex)
             {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria.Encyclopedia
 {
 	public class Artist
 	{

@@ -1,4 +1,4 @@
-namespace AlexandriaOrg.Alexandria.Client
+namespace Alexandria.Client
 {
 	partial class MainForm
 	{

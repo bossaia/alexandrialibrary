@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
 namespace Alexandria.Catalog
 {
@@ -8,9 +9,9 @@ namespace Alexandria.Catalog
 	{
 		#region Private Fields
 		private string name;
-		private Artist artist;
-		private Song song;
-		private Album album;
+		private IArtistResource artist;
+		private ISongResource song;
+		private IAlbumResource album;
 		private uint length;
 		private uint milliseconds;
 		private uint number;
@@ -33,19 +34,19 @@ namespace Alexandria.Catalog
 			set {name = value;}
 		}
 		
-		public IResource Artist
+		public IArtistResource Artist
 		{
 			get {return artist;}
 			set {artist = value;}
 		}
 		
-		public IResource Song
+		public ISongResource Song
 		{
 			get {return song;}
 			set {song = value;}
 		}
 		
-		public IResource Album
+		public IAlbumResource Album
 		{
 			get {return album;}
 			set {album = value;}
