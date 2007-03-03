@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 using System.Text;
-using AlexandriaOrg.Alexandria.PluginAttributes;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public static class PluginManager
 	{
@@ -17,9 +16,9 @@ namespace AlexandriaOrg.Alexandria
 		private static Assembly audioPlayerAssembly;
 		private static AudioPlayer audioPlayer;
 		private static string audioPlayerPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["AudioPlayerPluginName"];
-		private static Assembly dataFactoryAssembly;
-		private static Data.DataFactory dataFactory;
-		private static string dataFactoryPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["DataFactoryPluginName"];
+		//private static Assembly dataFactoryAssembly;
+		//private static DataFactory dataFactory;
+		//private static string dataFactoryPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["DataFactoryPluginName"];
 		private static Assembly metadataProviderAssembly;
 		private static MetadataProvider metadataProvider;
 		private static string metadataProviderPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["MetadataProviderPluginName"];
@@ -59,7 +58,7 @@ namespace AlexandriaOrg.Alexandria
 		{
 			get
 			{
-				if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(PluginAttributes.AudioPlayerClassAttribute)) as AudioPlayer;
+				if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(AudioPlayerClassAttribute)) as AudioPlayer;
 				return audioPlayer;
 			}
 		}
@@ -77,26 +76,8 @@ namespace AlexandriaOrg.Alexandria
 		{
 			get
 			{
-				if (tagEngine == null) tagEngine = PluginManager.GetObject(TagEngineAssembly, typeof(PluginAttributes.TagEngineClassAttribute)) as TagEngine;
+				if (tagEngine == null) tagEngine = PluginManager.GetObject(TagEngineAssembly, typeof(TagEngineClassAttribute)) as TagEngine;
 				return tagEngine;
-			}
-		}
-
-		public static Assembly DataFactoryAssembly
-		{
-			get
-			{
-				if (dataFactoryAssembly == null) dataFactoryAssembly = PluginManager.GetAssembly(dataFactoryPluginPath);
-				return dataFactoryAssembly;
-			}
-		}
-
-		public static Data.DataFactory DataFactory
-		{
-			get
-			{
-				if (dataFactory == null) dataFactory = PluginManager.GetObject(DataFactoryAssembly, typeof(PluginAttributes.DataFactoryClassAttribute)) as Data.DataFactory;
-				return dataFactory;
 			}
 		}
 		
@@ -113,7 +94,7 @@ namespace AlexandriaOrg.Alexandria
 		{
 			get
 			{
-				if (metadataProvider == null) metadataProvider = PluginManager.GetObject(MetadataProviderAssembly, typeof(PluginAttributes.MetadataProviderClassAttribute)) as MetadataProvider;
+				if (metadataProvider == null) metadataProvider = PluginManager.GetObject(MetadataProviderAssembly, typeof(MetadataProviderClassAttribute)) as MetadataProvider;
 				return metadataProvider;
 			}
 		}

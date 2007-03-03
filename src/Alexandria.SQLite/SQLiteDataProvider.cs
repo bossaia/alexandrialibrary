@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Mono.Data.SqliteClient;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.SQLite
 {

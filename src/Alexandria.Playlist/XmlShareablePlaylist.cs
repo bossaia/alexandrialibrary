@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria.Playlist
 {
 	public class XmlShareablePlaylist : MediaPlaylist
 	{

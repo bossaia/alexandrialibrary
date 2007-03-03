@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FA920B97-91DA-45DA-B482-A1357AAAA9F0}</ProjectGuid>
+    <ProjectGuid>{5373D021-353C-47FE-9BB0-7F6E22F06594}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.FileTools</RootNamespace>
-    <AssemblyName>Alexandria.FileTools</AssemblyName>
+    <RootNamespace>Alexandria.Playlist</RootNamespace>
+    <AssemblyName>Alexandria.Playlist</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,8 +33,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileIdentifier.cs" />
+    <Compile Include="M3uPlaylist.cs" />
+    <Compile Include="MediaPlaylist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlShareablePlaylist.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">

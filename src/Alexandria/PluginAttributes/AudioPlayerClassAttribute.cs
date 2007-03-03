@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.PluginAttributes
+namespace Alexandria
 {
 	[AttributeUsage(AttributeTargets.Class)]
 	public sealed class AudioPlayerClassAttribute : PluginAttribute

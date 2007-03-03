@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
-	[PluginAttributes.TagEngineClass]
+	[TagEngineClass]
 	public class TagLibEngine : TagEngine
 	{
 		#region Constructors

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	[CLSCompliant(false)]
 	public interface IAudioResource : IResource

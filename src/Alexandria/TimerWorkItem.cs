@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Security.Permissions;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	[Serializable]
 	internal class TimerWorkItem : IAsyncResult

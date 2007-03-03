@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public class MediaFile : IMediaFile
 	{
@@ -170,7 +170,7 @@ namespace AlexandriaOrg.Alexandria
 					}
 					catch (Exception ex)
 					{
-						throw new AlexandriaException(Subsystem.Core, ex);
+						throw new AlexandriaException(ex);
 					}
 				}
 				else if (value.Contains(COLON))
@@ -188,7 +188,7 @@ namespace AlexandriaOrg.Alexandria
 						}
 						catch (Exception ex)
 						{
-							throw new AlexandriaException(Subsystem.Core, ex);
+							throw new AlexandriaException(ex);
 						}
 					}
 					else
@@ -201,7 +201,7 @@ namespace AlexandriaOrg.Alexandria
 						}
 						catch (Exception ex)
 						{
-							throw new AlexandriaException(Subsystem.Core, ex);
+							throw new AlexandriaException(ex);
 						}
 					}
 				}
@@ -229,7 +229,7 @@ namespace AlexandriaOrg.Alexandria
 				}
 				catch (Exception ex)
 				{
-					throw new AlexandriaException(Subsystem.Core, ex);
+					throw new AlexandriaException(ex);
 				}
 			}
 			return 0;

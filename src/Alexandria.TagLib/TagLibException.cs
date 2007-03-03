@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
@@ -24,19 +25,19 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			this.error = error;
 		}
 
-		public TagLibException(string message) : base(Subsystem.TagEngine, message)
+		public TagLibException(string message) : base(message)
 		{
 		}
 
-		public TagLibException(Exception innerException) : base(Subsystem.TagEngine, innerException)
+		public TagLibException(Exception innerException) : base(innerException)
 		{
 		}
 
-		public TagLibException(string message, Exception innerException) : base(Subsystem.TagEngine, message, innerException)
+		public TagLibException(string message, Exception innerException) : base(message, innerException)
 		{
 		}
 
-		public TagLibException() : base(Subsystem.TagEngine)
+		public TagLibException() : base()
 		{
 		}
 		
@@ -47,7 +48,6 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		/// <param name="context">The System.Runtime.Serialization.StreamingContext that contains contextual information about the source or destination</param>
 		private TagLibException(SerializationInfo info, StreamingContext context) : base(info, context)
 		{
-			this.Subsystem = Subsystem.TagEngine;
 		}
 		#endregion
 		

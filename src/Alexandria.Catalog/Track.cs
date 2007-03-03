@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Data
+namespace Alexandria.Catalog
 {
-	public class Track : DataRecord
+	public class Track
 	{
 		#region Private Fields
 		private string name;
@@ -17,11 +17,11 @@ namespace AlexandriaOrg.Alexandria.Data
 		#endregion
 		
 		#region Constructors
-		public Track() : base()
+		public Track()
 		{
 		}
 		
-		public Track(string id) : base(id)
+		public Track(string id) : this()
 		{
 		}
 		#endregion
@@ -33,19 +33,19 @@ namespace AlexandriaOrg.Alexandria.Data
 			set {name = value;}
 		}
 		
-		public Artist Artist
+		public IResource Artist
 		{
 			get {return artist;}
 			set {artist = value;}
 		}
 		
-		public Song Song
+		public IResource Song
 		{
 			get {return song;}
 			set {song = value;}
 		}
 		
-		public Album Album
+		public IResource Album
 		{
 			get {return album;}
 			set {album = value;}

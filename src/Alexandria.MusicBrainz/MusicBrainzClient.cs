@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.MusicBrainz
 {

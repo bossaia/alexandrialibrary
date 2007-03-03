@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria
+namespace Alexandria
 {
 	public class ResourceFormat
 	{
@@ -17,7 +18,7 @@ namespace AlexandriaOrg.Alexandria
 			}
 		}
 
-		public IList<MimeType> MimeTypes
+		public IList<ContentType> ContentTypes
 		{
 			get
 			{
