@@ -7,11 +7,12 @@ namespace Alexandria
 	public class MediaController
 	{
 		#region Private Fields
-		private List<MediaItem> items;
-		private GetAudioInfo getAudioInfo;
+		//private List<MediaItem> items;
+		//private GetAudioInfo getAudioInfo;
 		#endregion
 		
 		#region Constructors
+		/*
 		public MediaController(GetAudioInfo getAudioInfo)
 		{
 			this.getAudioInfo = getAudioInfo;
@@ -38,21 +39,23 @@ namespace Alexandria
 				}
 			}
 		}
+		*/
 		#endregion
 		
 		#region Public Properties
-		public IList<MediaItem> Items
-		{
-			get {return items;}
-		}
+		//public IList<MediaItem> Items
+		//{
+			//get {return items;}
+		//}
 		
-		public GetAudioInfo GetAudioInfo
-		{
-			get {return getAudioInfo;}
-		}
+		//public GetAudioInfo GetAudioInfo
+		//{
+			//get {return getAudioInfo;}
+		//}
 		#endregion
 		
 		#region Public Methods
+		/*
 		public void Load(IMediaPlaylist playlist, TagEngine tagEngine)
 		{
 			foreach(MediaFile file in playlist.Files)
@@ -83,6 +86,7 @@ namespace Alexandria
 				}
 			}
 		}
+		*/
 		#endregion
 	}
 }

@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Alexandria
 {
+	/*
 	public class MediaItem
 	{
 		#region Private Fields
 		private MediaFile file;
-		private AudioInfo info;
+		//private AudioInfo info;
 		#endregion
 		
 		#region Constructors
@@ -35,4 +36,5 @@ namespace Alexandria
 		}
 		#endregion
 	}
+	*/
 }

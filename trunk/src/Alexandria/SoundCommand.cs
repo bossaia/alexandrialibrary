@@ -33,9 +33,9 @@ namespace Alexandria
 		#endregion
 	
 		#region Public Methods
-		public abstract bool IsValid(SoundStatus status);
+		public abstract bool IsValid(AudioStatus status);
 		
-		public abstract void Execute(SoundStatus status);
+		public abstract void Execute(AudioStatus status);
 		#endregion
 	}
 }

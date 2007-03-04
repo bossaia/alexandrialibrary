@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public sealed class LocalSoundNotLoaded : SoundStatus
+	public sealed class LocalSoundNotLoaded : AudioStatus
 	{
 		#region Constructors
 		private LocalSoundNotLoaded() : base(true, false, false, false, false, false)
