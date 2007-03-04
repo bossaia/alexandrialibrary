@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.LastFM
+namespace Alexandria.LastFM
 {
     public static class DateTimeUtil
     {

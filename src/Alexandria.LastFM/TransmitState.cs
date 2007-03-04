@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.LastFM
+namespace Alexandria.LastFM
 {
 	/// <summary>
 	/// Async code for transmitting the current queue of tracks

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace AlexandriaOrg.Alexandria.Imdb
+namespace Alexandria.Imdb
 {
 	public class Person
 	{

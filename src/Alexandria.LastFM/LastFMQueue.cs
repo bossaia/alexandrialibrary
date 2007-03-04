@@ -35,13 +35,14 @@ using Mono.Security.Cryptography;
 using System.Collections;
 using System.Web;
 using System.Xml;
+using Alexandria;
 
 //using GLib;
 //using Banshee.MediaEngine;
 //using Banshee.Base;
 //using Banshee;
 
-namespace AlexandriaOrg.Alexandria.LastFM
+namespace Alexandria.LastFM
 {
 	public class LastFMQueue
 	{

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid.XmlReader;
+using Alexandria;
+using Alexandria.Droid.XmlReader;
 
-namespace AlexandriaOrg.Alexandria.Droid.SignatureFile
+namespace Alexandria.Droid.SignatureFile
 {
 	public class SideFragment : SimpleElement
 	{

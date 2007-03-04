@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid.BinaryReader;
-using AlexandriaOrg.Alexandria.Droid.SignatureFile;
+using Alexandria;
+using Alexandria.Droid.BinaryReader;
+using Alexandria.Droid.SignatureFile;
 
-namespace AlexandriaOrg.Alexandria.Droid
+namespace Alexandria.Droid
 {
 	public class AnalysisThread
 	{

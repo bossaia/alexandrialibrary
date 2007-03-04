@@ -89,7 +89,7 @@ namespace Alexandria.Client
 			{
 				try
 				{
-					Alexandria.LastFM.LastFMPlugin plugin = new AlexandriaOrg.Alexandria.LastFM.LastFMPlugin();
+					Alexandria.LastFM.LastFMPlugin plugin = new Alexandria.LastFM.LastFMPlugin();
 					plugin.SetUserPassword("uberweasel", "automatic");
 					plugin.Start();
 					DateTime started = DateTime.Now.AddSeconds(-250);
@@ -111,7 +111,7 @@ namespace Alexandria.Client
 			{
 				try
 				{
-					SQLite.SQLiteDataProvider provider = new AlexandriaOrg.Alexandria.SQLite.SQLiteDataProvider();
+					Alexandria.SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider();
 					string data = provider.Test();
 					MessageBox.Show(data, "SQLite Test");
 				}
@@ -124,7 +124,7 @@ namespace Alexandria.Client
 			bool testPandora = false;
 			if (testPandora)
 			{
-				Alexandria.Pandora.PandoraClient pandoraClient = new AlexandriaOrg.Alexandria.Pandora.PandoraClient();
+				Alexandria.Pandora.PandoraClient pandoraClient = new Alexandria.Pandora.PandoraClient();
 				pandoraClient.FindFiles();
 				pandoraClient.DownloadFiles();
 			}
@@ -132,7 +132,7 @@ namespace Alexandria.Client
 			bool testImdb = false;
 			if (testImdb)
 			{
-				Alexandria.Imdb.ImdbMetadataProvider imdbProvider = new AlexandriaOrg.Alexandria.Imdb.ImdbMetadataProvider();
+				Alexandria.Imdb.ImdbMetadataProvider imdbProvider = new Alexandria.Imdb.ImdbMetadataProvider();
 				List<Alexandria.Imdb.Movie> movies = imdbProvider.SearchMovie("Mutiny on the Bounty");
 				string movieList = string.Empty;
 				foreach (Imdb.Movie movie in movies)
@@ -154,7 +154,7 @@ namespace Alexandria.Client
 				//string path = @"C:\Dev\Testing\03 Bonus High Frequency Sounds.wma";
 				string path = string.Empty; //NOTE: Assign a real path to identify a file
 				
-				MessageBox.Show("The file " + path + " has a mime type of:\n\n" + ResourceIdentifier.GetMimeType(path), "Resource Identifier");
+				MessageBox.Show("The file " + path + " has a mime type of:\n\n" + FileTools.FileIdentifier.GetContentType(path).ToString(), "Resource Identifier");
 			}
 			
 			bool testAscii = false;
@@ -164,7 +164,7 @@ namespace Alexandria.Client
 				string outputFileName = @"C:\test.txt";
 				Image image = Image.FromFile(imageFileName);
 				
-				AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.TextProcessingSettings settings = new AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.TextProcessingSettings();
+				Alexandria.AsciiGenerator.AsciiConversion.TextProcessingSettings settings = new Alexandria.AsciiGenerator.AsciiConversion.TextProcessingSettings();
 				settings.Size = new Size(image.Width, image.Height);
 				settings.CalculateCharacterSize = true;
 				settings.Font = Alexandria.AsciiGenerator.Variables.DefaultFont;
@@ -172,7 +172,7 @@ namespace Alexandria.Client
 				
 				//StringBuilder builder = new StringBuilder();
 				System.IO.StreamWriter writer = new System.IO.StreamWriter(outputFileName);
-				string[] text = AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.AsciiConverter.Convert(image, settings);
+				string[] text = Alexandria.AsciiGenerator.AsciiConversion.AsciiConverter.Convert(image, settings);
 				foreach(string line in text)
 				{
 					writer.WriteLine(line);
@@ -189,7 +189,7 @@ namespace Alexandria.Client
 				try
 				{
 					Amazon.WebServiceClient client = new Amazon.WebServiceClient();
-					string results = client.BasicSearch(AlexandriaOrg.Alexandria.Amazon.SearchMode.Books, "Sharks");
+					string results = client.BasicSearch(Alexandria.Amazon.SearchMode.Books, "Sharks");
 					MessageBox.Show(results, "Amazon Test");
 				}
 				catch (Exception ex)
@@ -222,6 +222,7 @@ namespace Alexandria.Client
 			{
 				try
 				{
+					/*
 					dataFactory = PluginManager.DataFactory;
 					
 					User user = dataFactory.GetUser("Administrator");
@@ -237,6 +238,7 @@ namespace Alexandria.Client
 					{
 						//string name = user.Password;
 					}
+					*/
 				}
 				catch (AlexandriaException ex)
 				{
@@ -261,8 +263,8 @@ namespace Alexandria.Client
 						//if (cdDrive != null)
 						//{
 						OpticalDrive cdDrive = new OpticalDrive(@"E:\");
-						Album album = metadataProvider.GetAlbum(cdDrive);
-						MessageBox.Show(album.MusicBrainzId + " : " + album.Name, "MusicBrainz Test", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+						IAlbumResource album = metadataProvider.GetAlbum(cdDrive);
+						//MessageBox.Show(album.MusicBrainzId + " : " + album.Name, "MusicBrainz Test", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 						//}
 					//}
 				}
@@ -334,6 +336,7 @@ namespace Alexandria.Client
 		{
 			try
 			{
+				/*
 				this.QueueListView.Items.Clear();
 		
 				//TODO: add the code to dynamically load the appropriate playlist format
@@ -369,6 +372,7 @@ namespace Alexandria.Client
 				}
 				
 				this.QueueListView.Refresh();
+				*/
 			}
 			catch (AlexandriaException ex)
 			{
@@ -484,7 +488,7 @@ namespace Alexandria.Client
 				ListViewItem item = this.QueueListView.Items[currentTrackIndex];
 				item.Selected = true;
 				//string path = item.SubItems[4].Text;
-				LoadMediaFile(playlist.Files[currentTrackIndex]);
+				//LoadMediaFile(playlist.Files[currentTrackIndex]);
 				trackSelected = true;
 			}
 			catch (ApplicationException)

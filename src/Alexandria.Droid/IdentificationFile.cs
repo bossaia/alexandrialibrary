@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid.BinaryReader;
-using AlexandriaOrg.Alexandria.Droid.XmlReader;
+using Alexandria;
+using Alexandria.Droid.BinaryReader;
+using Alexandria.Droid.XmlReader;
 
-namespace AlexandriaOrg.Alexandria.Droid
+namespace Alexandria.Droid
 {
 	public class IdentificationFile : SimpleElement
 	{

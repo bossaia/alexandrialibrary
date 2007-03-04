@@ -7,8 +7,8 @@
     <ProjectGuid>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.AsciiGenerator</RootNamespace>
-    <AssemblyName>AlexandriaAsciiGenerator</AssemblyName>
+    <RootNamespace>Alexandria.AsciiGenerator</RootNamespace>
+    <AssemblyName>Alexandria.AsciiGenerator</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

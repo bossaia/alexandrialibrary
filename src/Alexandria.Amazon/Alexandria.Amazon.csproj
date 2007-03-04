@@ -7,8 +7,8 @@
     <ProjectGuid>{1C0A1DBB-45B1-4F0A-9A40-4176BCF4445E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Amazon</RootNamespace>
-    <AssemblyName>AlexandriaAmazon</AssemblyName>
+    <RootNamespace>Alexandria.Amazon</RootNamespace>
+    <AssemblyName>Alexandria.Amazon</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,32 +72,32 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Web References\AmazonWebService\AmazonSearch.wsdl" />
-    <None Include="Web References\AmazonWebService\GetTransactionDetailsResponse1.datasource">
+    <None Include="Web References\AmazonWebService\GetTransactionDetailsResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\ListingProductDetails1.datasource">
+    <None Include="Web References\AmazonWebService\ListingProductDetails.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\MarketplaceSearch1.datasource">
+    <None Include="Web References\AmazonWebService\MarketplaceSearch.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\ProductInfo1.datasource">
+    <None Include="Web References\AmazonWebService\ProductInfo.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\ProductLine1.datasource">
+    <None Include="Web References\AmazonWebService\ProductLine.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\AmazonWebService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\AmazonWebService\SellerProfile1.datasource">
+    <None Include="Web References\AmazonWebService\SellerProfile.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\SellerSearch1.datasource">
+    <None Include="Web References\AmazonWebService\SellerSearch.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\AmazonWebService\ShoppingCart1.datasource">
+    <None Include="Web References\AmazonWebService\ShoppingCart.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
   </ItemGroup>

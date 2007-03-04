@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
@@ -85,7 +85,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				catch (Exception ex)
 				{
 					// Failed to read tag
-					throw new AlexandriaException(Subsystem.AudioPlayer, ex);
+					throw new AlexandriaException(ex);
 				}
 
 				tags.Add(tag);

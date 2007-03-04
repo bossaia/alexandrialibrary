@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public sealed class RemoteSoundNotReady : Alexandria.SoundStatus
+	public sealed class RemoteSoundNotReady : SoundStatus
 	{
 		#region Constructors
 		private RemoteSoundNotReady() : base(false, true, false, false, false, false)

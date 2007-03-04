@@ -28,7 +28,7 @@ using System.Text;
 using System.Drawing;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion
+namespace Alexandria.AsciiGenerator.AsciiConversion
 {
 	/// <summary>
 	/// Abstract class for all values to text conversions

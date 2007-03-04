@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
@@ -36,7 +37,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				catch (Exception ex)
 				{
 					//throw new InvalidOperationException("Could not find record driver " + i.ToString(Sy ) + " in this FMOD SoundSystem", ex);
-					throw new AlexandriaException(Subsystem.AudioPlayer, ex);
+					throw new AlexandriaException(ex);
 				}
 				driver = new Driver(SoundSystem.Handle, i, nameBuilder.ToString());
 				

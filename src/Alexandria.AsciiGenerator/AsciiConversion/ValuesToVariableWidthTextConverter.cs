@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion
+namespace Alexandria.AsciiGenerator.AsciiConversion
 {
 	/// <summary>
 	/// Class to convert a fixed size array into strings in a specific font using the characters set

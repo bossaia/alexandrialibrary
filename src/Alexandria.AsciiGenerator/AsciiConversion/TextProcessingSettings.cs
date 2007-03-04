@@ -24,9 +24,9 @@
 // $Id: TextProcessingSettings.cs,v 1.1 2007/01/03 16:12:27 wardog_uk Exp $
 //----------------------------------------------------------------------------
 using System;
-using AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.Filters;
+using Alexandria.AsciiGenerator.AsciiConversion.Filters;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion
+namespace Alexandria.AsciiGenerator.AsciiConversion
 {
 	/// <summary>
 	/// Summary description for ConversionSettings.

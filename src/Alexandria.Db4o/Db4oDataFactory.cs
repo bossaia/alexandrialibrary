@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using AlexandriaOrg.Alexandria;
-using AlexandriaOrg.Alexandria.Data;
 using com.db4o;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Db4o
+namespace Alexandria.Db4o
 {
-	[PluginAttributes.DataFactoryClass]
-	public class Db4oDataFactory : DataFactory
+	[Alexandria.DataFactoryClass]
+	public class Db4oDataFactory
 	{
 		#region Private Constants
 		private const string USER_DATABASE_PATH = @"Data\";
@@ -51,30 +50,31 @@ namespace AlexandriaOrg.Alexandria.Db4o
 		#region Public Methods
 		
 		#region GetAlbum
-		public override Album GetAlbum()
+		public IAlbumResource GetAlbum()
 		{
-			return base.GetAlbum();
+			return null;
 		}
 
-		public override Album GetAlbum(Guid id)
+		public IAlbumResource GetAlbum(Guid id)
 		{
-			return base.GetAlbum(id);
+			return null;
 		}
 		#endregion
 		
 		#region GetArtist
-		public override Artist GetArtist()
+		public IArtistResource GetArtist()
 		{
-			return base.GetArtist();
+			return null;
 		}
 
-		public override Artist GetArtist(Guid id)
+		public IArtistResource GetArtist(Guid id)
 		{
-			return base.GetArtist(id);
+			return null;
 		}
 		#endregion
 		
 		#region GetCollaboration
+		/*
 		public override Collaboration GetCollaboration()
 		{
 			return base.GetCollaboration();
@@ -84,22 +84,24 @@ namespace AlexandriaOrg.Alexandria.Db4o
 		{
 			return base.GetCollaboration(id);
 		}
+		*/
 		#endregion
 		
 		#region GetSong
-		public override Song GetSong()
+		public ISongResource GetSong()
 		{
-			return base.GetSong();
+			return null;
 		}
 
-		public override Song GetSong(Guid id)
+		public ISongResource GetSong(Guid id)
 		{
-			return base.GetSong(id);
+			return null;
 		}
 		#endregion
 		
 		#region GetTrack
-		public override Track GetTrack()
+		/*
+		public override Alexandria.I GetTrack()
 		{
 			return base.GetTrack();
 		}
@@ -108,40 +110,41 @@ namespace AlexandriaOrg.Alexandria.Db4o
 		{
 			return base.GetTrack(id);
 		}
+		*/
 		#endregion
 		
 		#region GetUser
-		public override Alexandria.Data.User GetUser()
+		public User GetUser()
 		{
-			return base.GetUser();
+			return null;
 		}
 
-		public override Alexandria.Data.User GetUser(Guid id)
+		public User GetUser(Guid id)
 		{
-			return base.GetUser(id);
+			return null;
 		}
 
-		public override Alexandria.Data.User GetUser(string name)
+		public User GetUser(string name)
 		{
-			Alexandria.Data.User user = null;
+			User user = null;
 		
 			try
 			{
-				user = new Alexandria.Data.User();
+				user = new Alexandria.User();
 				user.Name = name;
 				user.Password = null;
 				
 				ObjectSet set = UserContainer.Get(user);
 				if (set.HasNext())
 				{
-					user = (Alexandria.Data.User)set.Next();
+					user = (Alexandria.User)set.Next();
 				}
 				else user = null;
 			}
 			catch (Exception ex)
 			{
 				//("Could not get user\n" + ex.Message);
-				throw new AlexandriaException(Subsystem.Data, ex);
+				throw new AlexandriaException(ex);
 			}
 			finally
 			{
@@ -152,7 +155,7 @@ namespace AlexandriaOrg.Alexandria.Db4o
 		#endregion
 		
 		#region AddUser
-		public override bool AddUser(Alexandria.Data.User user)
+		public bool AddUser(Alexandria.User user)
 		{
 			try
 			{
@@ -161,7 +164,7 @@ namespace AlexandriaOrg.Alexandria.Db4o
 			catch (Exception ex)
 			{
 				// Could not add user
-				throw new AlexandriaException(Subsystem.Data, ex);
+				throw new AlexandriaException(ex);
 			}
 			finally
 			{

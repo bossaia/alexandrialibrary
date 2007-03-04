@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Class Holding the current application version

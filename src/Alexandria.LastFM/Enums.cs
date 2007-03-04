@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.LastFM
+namespace Alexandria.LastFM
 {
 	#region State
 	public enum State

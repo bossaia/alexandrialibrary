@@ -8,8 +8,9 @@ using System.Xml.XPath;
 using System.Net;
 using System.IO;
 using System.Runtime.InteropServices;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Pandora
+namespace Alexandria.Pandora
 {
 	public partial class PandoraClient
 	{

@@ -26,7 +26,7 @@
 using System;
 using System.Resources;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Class to handle accessing of the programs resources

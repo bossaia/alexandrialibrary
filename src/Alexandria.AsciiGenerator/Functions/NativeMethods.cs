@@ -27,7 +27,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Drawing;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Class encapsulating system specific calls (Windows Version)

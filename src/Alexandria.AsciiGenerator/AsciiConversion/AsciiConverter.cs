@@ -27,9 +27,9 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-using AlexandriaOrg.Alexandria.AsciiGenerator;
+using Alexandria.AsciiGenerator;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion
+namespace Alexandria.AsciiGenerator.AsciiConversion
 {
 	/// <summary>
 	/// Static class with methods for Image to Text conversion

@@ -5,7 +5,7 @@ using System.Text;
 using Mono.Data.SqliteClient;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.SQLite
+namespace Alexandria.SQLite
 {
 	public class SQLiteDataProvider
 	{

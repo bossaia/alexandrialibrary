@@ -23,7 +23,7 @@
 //----------------------------------------------------------------------------
 // $Id: ConvolutionMatrix.cs,v 1.3 2007/01/03 15:21:28 wardog_uk Exp $
 //----------------------------------------------------------------------------
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Basic class for 3x3 convolution matricies

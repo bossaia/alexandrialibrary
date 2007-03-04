@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Web.Services;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Droid.XmlReader
+namespace Alexandria.Droid.XmlReader
 {
 	public class PronomWebService
 	{

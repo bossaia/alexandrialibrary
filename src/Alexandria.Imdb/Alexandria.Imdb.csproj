@@ -7,8 +7,8 @@
     <ProjectGuid>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Imdb</RootNamespace>
-    <AssemblyName>AlexandriaImdb</AssemblyName>
+    <RootNamespace>Alexandria.Imdb</RootNamespace>
+    <AssemblyName>Alexandria.Imdb</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
