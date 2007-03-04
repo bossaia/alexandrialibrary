@@ -15,7 +15,7 @@ namespace Alexandria
 		string OpenStateName {get;}
 		bool BufferIsStarving {get;}
 		uint PercentBuffered {get;}
-		SoundStatus Status {get;}
+		AudioStatus Status {get;}
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
 		void Save(string filePath);
 		void Load();

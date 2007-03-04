@@ -10,7 +10,7 @@ namespace Alexandria
 		#region Private Fields
 		private string name;		
 		private MediaFile mediaFile;
-		private SoundStatus status;
+		private AudioStatus status;
 		#endregion
 		
 		#region Constructors
@@ -67,7 +67,7 @@ namespace Alexandria
 			get {return 0;}
 		}
 		
-		public SoundStatus Status
+		public AudioStatus Status
 		{
 			get {return status;}
 			protected internal set {status = value;}

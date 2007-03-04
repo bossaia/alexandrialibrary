@@ -140,10 +140,12 @@ namespace Alexandria
 		}
 
 		#region Delegates
+		/*
 		public virtual GetAudioInfo GetAudioInfoHandler
 		{
 			get {return null;}
 		}
+		*/
 		#endregion
 
 		#region Event Handlers

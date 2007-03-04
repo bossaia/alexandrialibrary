@@ -32,7 +32,7 @@ namespace Alexandria
 		EventHandler<PlaybackEventArgs> OnPlaybackStatusChange {get;set;}
 		EventHandler<PlaybackEventArgs> OnStreamingStatusChange {get;set;}
 		EventHandler<PlaybackEventArgs> OnRippingStatusChange {get;set;}
-		GetAudioInfo GetAudioInfoHandler {get;}
+		//GetAudioInfo GetAudioInfoHandler {get;}
 		void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath);
 	}
 }

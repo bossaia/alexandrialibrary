@@ -322,10 +322,10 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 		}
 		
-		public override GetAudioInfo GetAudioInfoHandler
-		{
-			get {return new GetAudioInfo(this.GetAudioInfo);}
-		}
+		//public override GetAudioInfo GetAudioInfoHandler
+		//{
+			//get {return new GetAudioInfo(this.GetAudioInfo);}
+		//}
 		
 		public override string CurrentResult
 		{
@@ -542,6 +542,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			else throw new AlexandriaException("Could not set the position in the current sound because the output channel was not initialized");
 		}
 
+		/*
 		public AudioInfo GetAudioInfo(MediaFile file)
 		{
 			AudioInfo info = null;
@@ -560,6 +561,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 			return info;
 		}
+		*/
 
 		#region Command Methods
 		public SoundLoadCommand CreateSoundLoadCommand(Fmod.Sound sound)
