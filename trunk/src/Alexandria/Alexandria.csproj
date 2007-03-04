@@ -40,8 +40,6 @@
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
     <Compile Include="AudioPlayer.cs" />
-    <Compile Include="CDTableOfContents.cs" />
-    <Compile Include="CompactDisc.cs" />
     <Compile Include="ConsoleTool.cs" />
     <Compile Include="DataConverter.cs" />
     <Compile Include="IAlbumResource.cs" />
