@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Pandora
+namespace Alexandria.Pandora
 {
 	#region INTERNET_CACHE_ENTRY_INFOA
 	// For PInvoke: Contains information about an entry in the Internet cache

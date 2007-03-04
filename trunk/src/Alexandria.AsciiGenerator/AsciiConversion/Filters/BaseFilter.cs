@@ -23,7 +23,7 @@
 //----------------------------------------------------------------------------
 // $Id: AscgenFilter.cs,v 1.1 2007/01/03 15:21:28 wardog_uk Exp $
 //----------------------------------------------------------------------------
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.Filters
+namespace Alexandria.AsciiGenerator.AsciiConversion.Filters
 {
 	/// <summary>
 	/// Base class for the ASCII Filters

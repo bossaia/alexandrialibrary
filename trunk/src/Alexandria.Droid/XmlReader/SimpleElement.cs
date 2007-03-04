@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid;
+using Alexandria;
+using Alexandria.Droid;
 
-namespace AlexandriaOrg.Alexandria.Droid.XmlReader
+namespace Alexandria.Droid.XmlReader
 {
 	public class SimpleElement
 	{

@@ -10,7 +10,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	[Alexandria.SoundClass]
+	[SoundClass]
 	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,ISound
 	{
 		#region Constructors
@@ -19,7 +19,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		/// </summary>
 		/// <param name="soundSystem">The sound system that this sound is associated with</param>
 		/// <param name="mediaFile">The path or url of the file that the sound comes from</param>
-		public Sound(SoundSystem soundSystem, Alexandria.MediaFile mediaFile)
+		public Sound(SoundSystem soundSystem, MediaFile mediaFile)
 		{			
 			this.soundSystem = soundSystem;
 			this.mediaFile = mediaFile;

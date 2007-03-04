@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public abstract class FmodSoundCommand : Alexandria.SoundCommand
+	public abstract class FmodSoundCommand : SoundCommand
 	{
 		#region Constructors
 		protected FmodSoundCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound, SoundCommandType type) : base(type)

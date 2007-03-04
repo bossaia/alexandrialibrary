@@ -27,7 +27,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Class for all general font related functions

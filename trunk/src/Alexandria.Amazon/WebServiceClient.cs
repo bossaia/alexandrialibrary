@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Amazon
+namespace Alexandria.Amazon
 {
 	public class WebServiceClient
 	{
@@ -43,7 +43,7 @@ namespace AlexandriaOrg.Alexandria.Amazon
 				request.tag = accessKeyId;
 				request.devtag = accessKeyId;
 				
-				AmazonWebService.AmazonSearchService searchService = new AlexandriaOrg.Alexandria.Amazon.AmazonWebService.AmazonSearchService();
+				AmazonWebService.AmazonSearchService searchService = new Alexandria.Amazon.AmazonWebService.AmazonSearchService();
 				AmazonWebService.ProductInfo info = searchService.KeywordSearchRequest(request);
 				foreach(AmazonWebService.Details detail in info.Details)
 				{

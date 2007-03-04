@@ -22,9 +22,9 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 
 		#region LookupAlbumById
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		private IResource LookupAlbumById(string id)
+		private IAlbumResource LookupAlbumById(string id)
 		{
-			IResource album = null;
+			IAlbumResource album = null;
 
 			StringBuilder output = new StringBuilder();
 
@@ -201,9 +201,9 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 		#region Private Static Methods
 		
 		#region LookupCdInDrive
-		private static IResource LookupCdInDrive(OpticalDrive drive)
+		private static IAlbumResource LookupCdInDrive(OpticalDrive drive)
 		{
-			IResource album = null;
+			IAlbumResource album = null;
 			
 			if (drive != null)
 			{							
@@ -297,18 +297,18 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public override IResource GetAlbum(OpticalDrive drive)
+		public override IAlbumResource GetAlbum(OpticalDrive drive)
 		{
 			return LookupCdInDrive(drive);
 		}
 
-		public override IResource GetAlbum(Search albumSearch)
+		public override IAlbumResource GetAlbum(Search albumSearch)
 		{
 			return null;
 		}
 
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public IResource GetAlbum(string id)
+		public IAlbumResource GetAlbum(string id)
 		{
 			return LookupAlbumById(id);
 		}

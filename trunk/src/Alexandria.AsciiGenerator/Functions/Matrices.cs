@@ -26,7 +26,7 @@
 using System;
 using System.Drawing.Imaging;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator
+namespace Alexandria.AsciiGenerator
 {
 	/// <summary>
 	/// Class of static functions to create or process ColorMatrix objects

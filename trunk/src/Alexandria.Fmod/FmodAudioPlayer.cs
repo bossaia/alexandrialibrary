@@ -9,7 +9,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {	
-	[PluginAttributes.AudioPlayerClass]
+	[AudioPlayerClass]
 	public class FmodAudioPlayer : AudioPlayer, IDisposable
 	{		
 		#region Private Fields
@@ -392,7 +392,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							}
 							catch (Exception ex)
 							{
-								throw new AlexandriaException(Subsystem.AudioPlayer, ex);
+								throw new AlexandriaException(ex);
 							}
 						}
 						else

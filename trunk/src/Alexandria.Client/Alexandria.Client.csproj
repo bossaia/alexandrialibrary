@@ -83,6 +83,10 @@
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.FileTools\Alexandria.FileTools.csproj">
+      <Project>{FA920B97-91DA-45DA-B482-A1357AAAA9F0}</Project>
+      <Name>Alexandria.FileTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
       <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
       <Name>Alexandria.Imdb</Name>

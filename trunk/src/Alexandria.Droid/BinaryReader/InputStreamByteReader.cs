@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid.SignatureFile;
+using Alexandria;
+using Alexandria.Droid.SignatureFile;
 
-namespace AlexandriaOrg.Alexandria.Droid.BinaryReader
+namespace Alexandria.Droid.BinaryReader
 {
 	public class InputStreamByteReader : StreamByteReader
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Amazon
+namespace Alexandria.Amazon
 {
 	#region SearchMode
 	public enum SearchMode

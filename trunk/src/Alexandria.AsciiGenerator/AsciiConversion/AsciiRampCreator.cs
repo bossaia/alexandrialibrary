@@ -26,7 +26,7 @@
 using System;
 using System.Drawing;
 
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion
+namespace Alexandria.AsciiGenerator.AsciiConversion
 {
 	/// <summary>
 	/// Class to handle creation of ASCII Ramps

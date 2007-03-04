@@ -16,9 +16,9 @@ using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Net.Sockets;
+using Alexandria;
 
-
-namespace AlexandriaOrg.Alexandria.Imdb
+namespace Alexandria.Imdb
 {
 	public class ImdbParser
 	{
@@ -87,7 +87,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 					request.AllowAutoRedirect = true;
 					request.KeepAlive = true;
 					//request.ConnectionGroupName
-					request.UserAgent = global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString();
+					request.UserAgent = global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString();
 					//"Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.0.2) Gecko/20060308 Firefox/1.5.0.2";
 					
 					String encoding = "utf-8";
@@ -159,46 +159,46 @@ namespace AlexandriaOrg.Alexandria.Imdb
 			#region Load the regex-es!
 			try
 			{
-				rPowerSearch_Matches = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PowerSearch_Matches"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPowerSearch_OLRegion = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PowerSearch_OLRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPowerSearch_LIRegion = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PowerSearch_LIRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPowerSearch_MainValues = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PowerSearch_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPowerSearch_AKA = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PowerSearch_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPowerSearch_Matches = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PowerSearch_Matches"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPowerSearch_OLRegion = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PowerSearch_OLRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPowerSearch_LIRegion = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PowerSearch_LIRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPowerSearch_MainValues = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PowerSearch_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPowerSearch_AKA = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PowerSearch_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
-				rMovieSearch_LI = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieSearch_LI"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieSearch_MainValues = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieSearch_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieSearch_AKA = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieSearch_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieSearch_LI = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieSearch_LI"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieSearch_MainValues = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieSearch_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieSearch_AKA = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieSearch_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
-				rMovieDetails_Title = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Title"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Year = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Year"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Poster = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Poster"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Genre = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Genre"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_RatingVotes = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_RatingVotes"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_AKAS = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_AKAS"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_AKA = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_MPAA = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_MPAA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Plot = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Plot"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Directors = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Directors"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Director = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Director"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Writers = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Writers"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Writer = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Writer"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Actors = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Actors"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Actor = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Actor"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rMovieDetails_Code = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Code"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Title = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Title"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Year = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Year"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Poster = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Poster"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Genre = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Genre"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_RatingVotes = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_RatingVotes"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_AKAS = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_AKAS"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_AKA = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_MPAA = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_MPAA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Plot = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Plot"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Directors = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Directors"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Director = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Director"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Writers = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Writers"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Writer = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Writer"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Actors = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Actors"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Actor = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Actor"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rMovieDetails_Code = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["MovieDetails_Code"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
-				rPersonDetails_Name = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Name"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_Headshot = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Headshot"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_DateOfBirth = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_DateOfBirth"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_Directed = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Directed"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_LIRegion = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_LIRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_MainValues = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_AKA = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_Writed = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Writed"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_Acted = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Acted"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_Bio = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Bio"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_MostVoted = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MostVoted"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_TRRegion = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_TRRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
-				rPersonDetails_MostVotedMain = new Regex(global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MostVotedMain"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Name = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Name"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Headshot = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Headshot"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_DateOfBirth = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_DateOfBirth"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Directed = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Directed"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_LIRegion = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_LIRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_MainValues = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MainValues"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_AKA = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_AKA"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Writed = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Writed"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Acted = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Acted"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_Bio = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_Bio"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_MostVoted = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MostVoted"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_TRRegion = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_TRRegion"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+				rPersonDetails_MostVotedMain = new Regex(global::Alexandria.Imdb.Properties.Settings.Default["PersonDetails_MostVotedMain"].ToString(), RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
 			}
 			catch
@@ -266,7 +266,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 			List<Movie> bmd = new List<Movie>();
 
 			WebClient web = new WebClient();
-			web.Headers.Add("user-agent", global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
+			web.Headers.Add("user-agent", global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
 			Page = web.DownloadString("http://us.imdb.com/List?showmyvotes=off&&page=/Title&&vid=on&&votes=5&&tv=on&&exact=off&&tvm=on&&skip=0");
 
 			MatchCollection vMatchCollection_Matches = rPowerSearch_Matches.Matches(Page);
@@ -284,7 +284,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 			for (int i = 0; i < iNumber; i += 200)
 			{
 				//Yesss I am downloading this URL twice...so WHAT?
-				web.Headers.Add("user-agent", global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
+				web.Headers.Add("user-agent", global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
 				Page = web.DownloadString("http://us.imdb.com/List?showmyvotes=off&&page=/Title&&vid=on&&votes=5&&tv=on&&exact=off&&tvm=on&&skip=" + i.ToString());
 				//Position = 0;
 
@@ -337,7 +337,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 			String searchRequest = "http://www.imdb.com/find?s=tt;q=" + TitlePart.Replace(" ", "%20");
 
 			WebClient web = new WebClient();
-			web.Headers.Add("user-agent", global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
+			web.Headers.Add("user-agent", global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
 			Page = web.DownloadString(searchRequest);
 			Page = Decode(Page);
 
@@ -776,7 +776,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 					if (mp.movie.bPoster == null)
 					{
 						WebClient web = new WebClient();
-						web.Headers.Add("user-agent", global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
+						web.Headers.Add("user-agent", global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
 						mp.movie.bPoster = web.DownloadData(mp.movie.sPosterLink);
 						SaveData("m_" + mp.strMovieCode + "_poster.dat", mp.movie.bPoster);
 					}
@@ -1067,7 +1067,7 @@ namespace AlexandriaOrg.Alexandria.Imdb
 				person.bHeadshot = LoadData("p_" + strPersonCode + "_headshot.dat");
 				if (person.bHeadshot == null)
 				{
-					web.Headers.Add("user-agent", global::AlexandriaOrg.Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
+					web.Headers.Add("user-agent", global::Alexandria.Imdb.Properties.Settings.Default["UserAgent"].ToString());
 					person.bHeadshot = web.DownloadData(HeadshotLink);
 					SaveData("p_" + strPersonCode + "_headshot.dat", person.bHeadshot);
 				}

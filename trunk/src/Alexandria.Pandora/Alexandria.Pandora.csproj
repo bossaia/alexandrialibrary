@@ -7,8 +7,8 @@
     <ProjectGuid>{9C611D67-417B-4382-8531-7A9D9633E609}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Pandora</RootNamespace>
-    <AssemblyName>AlexandriaPandora</AssemblyName>
+    <RootNamespace>Alexandria.Pandora</RootNamespace>
+    <AssemblyName>Alexandria.Pandora</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

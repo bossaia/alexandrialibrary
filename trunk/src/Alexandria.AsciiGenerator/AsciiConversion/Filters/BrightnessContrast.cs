@@ -23,7 +23,7 @@
 //----------------------------------------------------------------------------
 // $Id: BrightnessContrast.cs,v 1.1 2007/01/03 15:21:28 wardog_uk Exp $
 //----------------------------------------------------------------------------
-namespace AlexandriaOrg.Alexandria.AsciiGenerator.AsciiConversion.Filters
+namespace Alexandria.AsciiGenerator.AsciiConversion.Filters
 {
 	/// <summary>
 	/// Filter to apply Brightness/Contrast changes to the data

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AlexandriaOrg.Alexandria.Droid;
-using AlexandriaOrg.Alexandria.Droid.BinaryReader;
-using AlexandriaOrg.Alexandria.Droid.XmlReader;
+using Alexandria;
+using Alexandria.Droid;
+using Alexandria.Droid.BinaryReader;
+using Alexandria.Droid.XmlReader;
 
-namespace AlexandriaOrg.Alexandria.Droid.SignatureFile
+namespace Alexandria.Droid.SignatureFile
 {
 	public class FFSignatureFile : SimpleElement
 	{

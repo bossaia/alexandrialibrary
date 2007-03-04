@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace AlexandriaOrg.Alexandria.Amazon.AmazonWebService {
+namespace Alexandria.Amazon.AmazonWebService {
     using System.Diagnostics;
     using System.Web.Services;
     using System.ComponentModel;
@@ -104,7 +104,7 @@ namespace AlexandriaOrg.Alexandria.Amazon.AmazonWebService {
         
         /// <remarks/>
         public AmazonSearchService() {
-            this.Url = global::AlexandriaOrg.Alexandria.Amazon.Properties.Settings.Default.AlexandriaAmazon_Amazon_AmazonSearchService;
+            this.Url = global::Alexandria.Amazon.Properties.Settings.Default.AlexandriaAmazon_Amazon_AmazonSearchService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
