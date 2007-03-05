@@ -35,7 +35,7 @@
   <ItemGroup>
     <Compile Include="CddaToWave.cs" />
     <Compile Include="CDRecord.cs" />
-    <Compile Include="CDTableOfContents.cs" />
+    <Compile Include="TableOfContents.cs" />
     <Compile Include="DeviceDump.cs" />
     <Compile Include="Disc.cs" />
     <Compile Include="IsoDebug.cs" />
