@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.CompactDisc
 {
-	public class CDTableOfContents
+	public class TableOfContents
 	{
 		#region Constructors
-		public CDTableOfContents(int numberOfTracks, List<int> minutes, List<int> seconds, List<int> frames)
+		public TableOfContents(int numberOfTracks, List<int> minutes, List<int> seconds, List<int> frames)
 		{
 			this.numberOfTracks = numberOfTracks;
 			this.minutes = minutes;
@@ -15,7 +15,7 @@ namespace Alexandria
 			this.frames = frames;
 		}
 
-		public CDTableOfContents(int numberOfTracks, int[] minutes, int[] seconds, int[] frames)
+		public TableOfContents(int numberOfTracks, int[] minutes, int[] seconds, int[] frames)
 		{
 			this.numberOfTracks = numberOfTracks;
 
