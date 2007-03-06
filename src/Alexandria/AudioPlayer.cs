@@ -257,7 +257,7 @@ namespace Alexandria
 		}
 
 		[System.CLSCompliant(false)]
-		public virtual void Seek(SeekDirection direction, uint distance)
+		public virtual void Seek(bool isForward, uint distance)
 		{
 
 		}

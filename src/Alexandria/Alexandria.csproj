@@ -97,15 +97,8 @@
     <Compile Include="ResourceFormat.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Sound.cs" />
-    <Compile Include="SoundCommand.cs" />
-    <Compile Include="AudioLoadCommand.cs" />
-    <Compile Include="AudioPauseCommand.cs" />
-    <Compile Include="AudioPlayCommand.cs" />
-    <Compile Include="AudioSeekCommand.cs" />
+    <Compile Include="AudioCommand.cs" />
     <Compile Include="AudioStatus.cs" />
-    <Compile Include="AudioStopCommand.cs" />
-    <Compile Include="AudioStreamCommand.cs" />
-    <Compile Include="AudioUpdateCommand.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="TagEngine.cs" />
     <Compile Include="TimerWorkerThread.cs" />

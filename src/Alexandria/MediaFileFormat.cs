@@ -11,8 +11,8 @@ namespace Alexandria
 		#region Private Fields
 		private string name;
 		private System.Net.Mime.ContentType mime;
-		private IList<FileExtension> allowedFileExtensions;
-		private FileExtension defaultFileExtension;
+		private IList<string> allowedFileExtensions;
+		private string defaultFileExtension;
 		private bool supportsTags;
 		#endregion
 		
@@ -28,7 +28,7 @@ namespace Alexandria
 			this.supportsTags = supportsTags;
 		}
 		
-		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions) : this(name, mime, supportsTags)
+		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<string> allowedFileExtensions) : this(name, mime, supportsTags)
 		{
 			this.allowedFileExtensions = allowedFileExtensions;
 			if (allowedFileExtensions != null && allowedFileExtensions.Count > 0)
@@ -37,7 +37,7 @@ namespace Alexandria
 			}
 		}
 
-		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<FileExtension> allowedFileExtensions, FileExtension defaultFileExtension) : this(name, mime, supportsTags)
+		protected MediaFileFormat(string name, System.Net.Mime.ContentType mime, bool supportsTags, IList<string> allowedFileExtensions, string defaultFileExtension) : this(name, mime, supportsTags)
 		{
 			this.allowedFileExtensions = allowedFileExtensions;
 			this.defaultFileExtension = defaultFileExtension;
@@ -60,13 +60,13 @@ namespace Alexandria
 			get {return supportsTags;}
 		}
 		
-		public IList<FileExtension> AllowedFileExtensions
+		public IList<string> AllowedFileExtensions
 		{
 			get {return allowedFileExtensions;}
 			protected set {allowedFileExtensions = value;}
 		}
 		
-		public FileExtension DefaultFileExtension
+		public string DefaultFileExtension
 		{
 			get {return defaultFileExtension;}
 			protected set {defaultFileExtension = value;}
@@ -87,9 +87,9 @@ namespace Alexandria
 					MediaFileFormat format = (MediaFileFormat)ctorInfo.Invoke(null);
 					if (format != null && format.AllowedFileExtensions.Count > 0)
 					{
-						foreach(FileExtension ext in format.AllowedFileExtensions)
+						foreach(string ext in format.AllowedFileExtensions)
 						{
-							manifest.Add(ext.ToString().ToUpper(System.Globalization.CultureInfo.InvariantCulture), format);
+							manifest.Add(ext.ToUpper(System.Globalization.CultureInfo.InvariantCulture), format);
 						}
 					}
 				}

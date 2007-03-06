@@ -22,7 +22,7 @@ namespace Alexandria
 		void Stop();
 		void Dispose();
 		void SetPosition(uint position);
-		void Seek(SeekDirection direction, uint distance);
+		void Seek(bool isForward, uint distance);
 		EventHandler<PlaybackEventArgs> OnPlay {get;set;}
 		EventHandler<PlaybackEventArgs> OnPause {get;set;}
 		EventHandler<PlaybackEventArgs> OnStop {get;set;}

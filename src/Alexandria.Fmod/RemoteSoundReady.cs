@@ -10,9 +10,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Constructors
 		public RemoteSoundReady() : base(false, false, true, false, false, false)
 		{
-			this.BufferState = BufferState.Ready;
-			this.PlaybackState = PlaybackState.None;
-			this.SeekState = SeekState.None;
+			this.BufferState = AudioBufferState.Ready;
+			this.PlaybackState = AudioPlaybackState.None;
+			this.IsSeeking = false;
 		}
 		#endregion
 		

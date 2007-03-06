@@ -3,45 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Alexandria
-{	
-	#region SeekDirection
-	public enum SeekDirection
-	{
-		Backward = 0,
-		Forward = 1
-	}
-	#endregion
-	
-	#region MediaTypes
-	[Flags]
-	public enum MediaTypes
-	{
-		None = 0x000,
-		Audio = 0x001,
-		Video = 0x002,
-		Image = 0x004
-	}
-	#endregion
-	
-	#region FileExtension
-	public enum FileExtension
-	{
-		None = 0,
-		Ogg,
-		Ogm,
-		Mp3,
-		Wav,
-		Flac,
-		Wma,
-		M4a,
-		Jpg,
-		Jpeg,
-		Pcm
-	}
-	#endregion
-	
-	#region BufferState
-	public enum BufferState
+{		
+	#region AudioBufferState
+	public enum AudioBufferState
 	{
 		None = 0,
 		Loading,
@@ -52,8 +16,8 @@ namespace Alexandria
 	}
 	#endregion
 	
-	#region PlaybackState
-	public enum PlaybackState
+	#region AudioPlaybackState
+	public enum AudioPlaybackState
 	{
 		None = 0,
 		Playing,
@@ -61,17 +25,9 @@ namespace Alexandria
 		Stopped
 	}
 	#endregion
-	
-	#region SeekState
-	public enum SeekState
-	{
-		None = 0,
-		Seeking
-	}
-	#endregion
-	
-	#region SoundCommandType
-	public enum SoundCommandType
+		
+	#region AudioCommandType
+	public enum AudioCommandType
 	{
 		None = 0,
 		Load,
@@ -84,8 +40,8 @@ namespace Alexandria
 	}
 	#endregion
 	
-	#region SoundCommandResult
-	public enum SoundCommandResult
+	#region AudioCommandResult
+	public enum AudioCommandResult
 	{
 		/// <summary>
 		/// There was no result from this Update
@@ -96,33 +52,21 @@ namespace Alexandria
 		/// </summary>
 		InvalidCommand,
 		/// <summary>
-		/// The sound has been loaded successfully
+		/// The audio resource has been loaded successfully
 		/// </summary>
-		SoundLoaded,
+		Loaded,
 		/// <summary>
-		/// The was an error loading the sound
+		/// The was an error loading the audio resource
 		/// </summary>
-		SoundLoadError,
+		LoadError,
 		/// <summary>
-		/// The sound is streaming successfully
+		/// The audio resource is streaming successfully
 		/// </summary>
-		SoundStreaming,
+		Streaming,
 		/// <summary>
-		/// There was an error streaming the sound
+		/// There was an error streaming the audio resource
 		/// </summary>
-		SoundStreamError
+		StreamError
 	}
 	#endregion
-
-	public enum ContentType
-	{
-		Application,
-		Audio,
-		Image,
-		Message,
-		Model,
-		Multipart,
-		Text,
-		Video,
-	}
 }

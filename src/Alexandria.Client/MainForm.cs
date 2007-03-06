@@ -39,9 +39,9 @@ namespace Alexandria.Client
 		//private DataFactory dataFactory;
 		private TagEngine tagEngine;
 		private MetadataProvider metadataProvider;
-		//private PlaybackFunction playDelegate = null;
-		//private PlaybackFunction pauseDelegate = null;
-		//private PlaybackFunction stopDelegate = null;
+		//private AudioPlaybackFunction playDelegate = null;
+		//private AudioPlaybackFunction pauseDelegate = null;
+		//private AudioPlaybackFunction stopDelegate = null;
 		private bool seeking;
 		//private XmlShareablePlaylist playlist;
 		private int currentTrackIndex = -1;
@@ -289,9 +289,9 @@ namespace Alexandria.Client
 				audioPlayer.OnStreamingStatusChange += new EventHandler<PlaybackEventArgs>(OnStreamingStatusChange);
 				audioPlayer.OnRippingStatusChange += new EventHandler<PlaybackEventArgs>(OnRippingStatusChange);
 				
-				//playDelegate = new PlaybackFunction(audioPlayer.Play);
-				//pauseDelegate = new PlaybackFunction(audioPlayer.Pause);
-				//stopDelegate = new PlaybackFunction(audioPlayer.Stop);
+				//playDelegate = new AudioPlaybackFunction(audioPlayer.Play);
+				//pauseDelegate = new AudioPlaybackFunction(audioPlayer.Pause);
+				//stopDelegate = new AudioPlaybackFunction(audioPlayer.Stop);
 			
 				this.PlaybackStatusLabel.Text = audioPlayer.CurrentStatus;
 
