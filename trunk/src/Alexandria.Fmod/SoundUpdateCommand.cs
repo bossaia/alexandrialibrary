@@ -8,7 +8,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	public class SoundUpdateCommand : FmodSoundCommand
 	{
 		#region Constructors
-		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, SoundCommandType.Update)
+		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, AudioCommandType.Update)
 		{
 		}
 		#endregion
@@ -34,34 +34,34 @@ namespace AlexandriaOrg.Alexandria.Fmod
 					switch (Sound.OpenState)
 					{
 						case OpenState.Error:
-							Sound.Status.BufferState = BufferState.None;
-							Sound.Status.PlaybackState = PlaybackState.None;
-							Sound.Status.SeekState = SeekState.None;
-							Result = SoundCommandResult.SoundStreamError;
+							Sound.Status.BufferState = AudioBufferState.None;
+							Sound.Status.PlaybackState = AudioPlaybackState.None;
+							Sound.Status.IsSeeking = false;
+							Result = AudioCommandResult.StreamError;
 							break;
 						case OpenState.Buffering:
-							Sound.Status.BufferState = BufferState.Buffering;
+							Sound.Status.BufferState = AudioBufferState.Buffering;
 							break;
 						case OpenState.Connecting:
-							Sound.Status.BufferState = BufferState.Connecting;
+							Sound.Status.BufferState = AudioBufferState.Connecting;
 							break;
 						case OpenState.Loading:
-							Sound.Status.BufferState = BufferState.Loading;
+							Sound.Status.BufferState = AudioBufferState.Loading;
 							break;
 						case OpenState.Ready:
-							Result = SoundCommandResult.SoundStreaming;
+							Result = AudioCommandResult.Streaming;
 							Sound.Status = RemoteSoundReady.Example;
 							break;
 						default:
-							Sound.Status.BufferState = BufferState.None;
-							Sound.Status.PlaybackState = PlaybackState.None;
-							Sound.Status.SeekState = SeekState.None;
-							Result = SoundCommandResult.SoundStreamError;
+							Sound.Status.BufferState = AudioBufferState.None;
+							Sound.Status.PlaybackState = AudioPlaybackState.None;
+							Sound.Status.IsSeeking = false;
+							Result = AudioCommandResult.StreamError;
 							break;
 					}
 				}
 			}
-			else Result = SoundCommandResult.InvalidCommand;
+			else Result = AudioCommandResult.InvalidCommand;
 		}
 		#endregion
 	}

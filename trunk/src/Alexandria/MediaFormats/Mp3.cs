@@ -9,11 +9,11 @@ namespace Alexandria.MediaFormats
 		#region Constructors
 		public Mp3() : base("Motion Picture Experts Group Layer 3", new System.Net.Mime.ContentType("audio/mp3"), true)
 		{
-			List<FileExtension> extensions = new List<FileExtension>();
-			extensions.Add(FileExtension.Mp3);
+			List<string> extensions = new List<string>();
+			extensions.Add("mp3");
 			
 			this.AllowedFileExtensions = extensions;
-			this.DefaultFileExtension = FileExtension.Mp3;
+			this.DefaultFileExtension = "mp3";
 		}
 		#endregion
 	}

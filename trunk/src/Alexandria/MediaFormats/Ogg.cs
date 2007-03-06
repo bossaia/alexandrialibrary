@@ -9,11 +9,11 @@ namespace Alexandria.MediaFormats
 		#region Constructors
 		public Ogg() : base("Ogg Vorbis", new System.Net.Mime.ContentType("application/ogg"), true)
 		{
-			List<FileExtension> extensions = new List<FileExtension>();
-			extensions.Add(FileExtension.Ogg);
+			List<string> extensions = new List<string>();
+			extensions.Add("ogg");
 			
 			this.AllowedFileExtensions = extensions;
-			this.DefaultFileExtension = FileExtension.Ogg;
+			this.DefaultFileExtension = "ogg";
 		}
 		#endregion
 	}

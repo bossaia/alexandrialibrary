@@ -8,11 +8,11 @@ namespace Alexandria.MediaFormats
 	{
 		public Wma() : base("Windows Media Audio", new System.Net.Mime.ContentType("audio/wma"), true)
 		{
-			List<FileExtension> extensions = new List<FileExtension>();
-			extensions.Add(FileExtension.Wma);
+			List<string> extensions = new List<string>();
+			extensions.Add("wma");
 			
 			this.AllowedFileExtensions = extensions;
-			this.DefaultFileExtension = FileExtension.Wma;
+			this.DefaultFileExtension = "wma";
 		}
 	}
 }

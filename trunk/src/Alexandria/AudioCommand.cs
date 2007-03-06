@@ -4,28 +4,28 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class SoundCommand : ISoundCommand
+	public abstract class AudioCommand : ISoundCommand
 	{
 		#region Constructors
-		protected SoundCommand(SoundCommandType type)
+		protected AudioCommand(AudioCommandType type)
 		{
 			this.type = type;
 		}
 		#endregion
 	
 		#region Private Fields
-		private SoundCommandType type = SoundCommandType.None;
-		private SoundCommandResult result = SoundCommandResult.None;
+		private AudioCommandType type = AudioCommandType.None;
+		private AudioCommandResult result = AudioCommandResult.None;
 		#endregion
 	
 		#region Public Properties
-		public SoundCommandType Type
+		public AudioCommandType Type
 		{
 			get {return type;}
 			protected set {type = value;}
 		}
 		
-		public SoundCommandResult Result
+		public AudioCommandResult Result
 		{
 			get {return result;}
 			protected set {result = value;}

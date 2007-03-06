@@ -8,11 +8,11 @@ namespace Alexandria.MediaFormats
 	{
 		public Flac() : base("Free Lossless Audio Codec", new System.Net.Mime.ContentType("audio/flac"), true)
 		{
-			List<FileExtension> extensions = new List<FileExtension>();
-			extensions.Add(FileExtension.Flac);
+			List<string> extensions = new List<string>();
+			extensions.Add("flac");
 			
 			this.AllowedFileExtensions = extensions;
-			this.DefaultFileExtension = FileExtension.Flac;
+			this.DefaultFileExtension = "flac";
 		}
 	}
 }
