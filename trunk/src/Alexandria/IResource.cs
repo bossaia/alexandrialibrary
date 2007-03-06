@@ -9,5 +9,6 @@ namespace Alexandria
 		ResourceFormat Format {get;}
 		Uri Uri {get;}
 		IDictionary<object, IResource> Resources {get;}
+		bool IsLocal {get;}
 	}
 }

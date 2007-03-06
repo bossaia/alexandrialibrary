@@ -24,6 +24,11 @@ namespace Alexandria.CompactDisc
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
+		public bool IsLocal
+		{
+			get { return true; }
+		}
+
 		#endregion
 	}
 }

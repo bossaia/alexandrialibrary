@@ -311,7 +311,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_GetLength(IntPtr soundHandle, ref uint length, TimeUnits lengthType);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Sound_GetFormat(IntPtr soundHandle, ref SoundType type, ref SoundFormat format, ref int channels, ref int bits);
+		internal static extern Result FMOD_Sound_GetFormat(IntPtr soundHandle, ref SoundType type, ref FmodSoundFormat format, ref int channels, ref int bits);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_GetNumSubSounds(IntPtr soundHandle, ref int numberOfSubSounds);
 		[DllImport(Constants.DllName)]
@@ -370,9 +370,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_GetSoftwareChannels(IntPtr systemHandle, ref int numberOfSoftwareChannels);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_System_SetSoftwareFormat(IntPtr systemHandle, int sampleRate, SoundFormat format, int numberOfOutputChannels, int maximumInputChannels, DspResampler resampleMethod);
+		internal static extern Result FMOD_System_SetSoftwareFormat(IntPtr systemHandle, int sampleRate, FmodSoundFormat format, int numberOfOutputChannels, int maximumInputChannels, DspResampler resampleMethod);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_System_GetSoftwareFormat(IntPtr systemHandle, ref int sampleRate, ref SoundFormat format, ref int numberOfOutputChannels, ref int maximumInputChannels, ref DspResampler resampleMethod, ref int bits);
+		internal static extern Result FMOD_System_GetSoftwareFormat(IntPtr systemHandle, ref int sampleRate, ref FmodSoundFormat format, ref int numberOfOutputChannels, ref int maximumInputChannels, ref DspResampler resampleMethod, ref int bits);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_SetDSPBufferSize(IntPtr systemHandle, uint bufferLength, int numberOfBuffers);
 		[DllImport(Constants.DllName)]

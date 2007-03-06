@@ -113,7 +113,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		/// <summary>
 		/// [in] Optional. Specify 0 or SoundFormat_NONE to ignore. Format of the sound specified only if OPENUSER is used.  Other formats use the format determined by the file format.
 		/// </summary>
-		public SoundFormat Format;
+		public FmodSoundFormat Format;
 		
 		/// <summary>
 		/// [in] Optional. Specify 0 to ignore. For streams.  This determines the size of the double buffer (in PCM samples) that a stream uses.  Use this for user created streams if you want to determine the size of the callback buffer passed to you.  Specify 0 to use FMOD's default size which is currently equivalent to 400ms of the sound format created/loaded.
