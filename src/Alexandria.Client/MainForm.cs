@@ -429,14 +429,14 @@ namespace Alexandria.Client
 		private void LoadMediaFile(MediaFile mediaFile)
 		{
 			audioPlayer.SetCurrentMediaFile(mediaFile);
-			this.Marquee = audioPlayer.CurrentSound.Name;
+			//this.Marquee = audioPlayer.CurrentAudio.Name;
 			this.loadedFile = mediaFile.Path;
 			this.Position = 0;
 			
 			//NOTE: remote files have an unknown length
 			if (mediaFile.IsLocal)
 			{
-				uint ms = audioPlayer.CurrentSound.Milliseconds;
+				uint ms = audioPlayer.CurrentAudio.Milliseconds;
 				this.Length = ms;
 				this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(ms));
 				trackBarIsInitialized = true;
@@ -529,7 +529,7 @@ namespace Alexandria.Client
 
 		private void InitializeTrackBar()
 		{
-			this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(this.audioPlayer.CurrentSound.MediaFile.Length));
+			this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(this.audioPlayer.CurrentAudio.Milliseconds));
 			trackBarIsInitialized = true;
 		}
 
@@ -561,9 +561,9 @@ namespace Alexandria.Client
 		
 		private void OnStop(object sender, PlaybackEventArgs e)
 		{
-			if (audioPlayer.CurrentSound != null && audioPlayer.CurrentSound.MediaFile != null)
+			if (audioPlayer.CurrentAudio != null)
 			{
-				if (!audioPlayer.CurrentSound.MediaFile.IsLocal)
+				if (!audioPlayer.CurrentAudio.IsLocal)
 				{
 					//string x = "?";
 				}
@@ -598,10 +598,10 @@ namespace Alexandria.Client
 
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
-			if (this.audioPlayer != null && this.audioPlayer.CurrentSound != null)
+			if (this.audioPlayer != null && this.audioPlayer.CurrentAudio != null)
 			{
 				//NOTE: audioPlayer.Position does not seem to be accurate for remote streams
-				if (!seeking && audioPlayer.CurrentSound.MediaFile.IsLocal)
+				if (!seeking && audioPlayer.CurrentAudio.IsLocal)
 				{
 					int position = Convert.ToInt32(audioPlayer.Position);
 					if (position >= this.PlaybackTrackBar.Minimum && position <= this.PlaybackTrackBar.Maximum)
@@ -610,7 +610,7 @@ namespace Alexandria.Client
 					}
 				}
 
-				if (audioPlayer.CurrentSound.MediaFile.IsLocal)
+				if (audioPlayer.CurrentAudio.IsLocal)
 				{					
 					if (this.PlaybackTrackBar.Value < this.PlaybackTrackBar.Maximum)
 					{
@@ -627,11 +627,14 @@ namespace Alexandria.Client
 				}
 				else
 				{
-					this.PlaybackStatusLabel.Text = this.audioPlayer.CurrentSound.OpenStateName + "  " + this.audioPlayer.CurrentSound.PercentBuffered.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) + "%";
+					this.PlaybackStatusLabel.Text = this.audioPlayer.CurrentAudio.Status.BufferState.ToString() + "  " + this.audioPlayer.CurrentAudio.Status.BufferLevel.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) + "%";
 					
-					if (this.audioPlayer.CurrentSound.OpenStateName == "Ready" && !trackBarIsInitialized)
+					if (string.Compare(this.audioPlayer.CurrentAudio.Status.BufferState.ToString(), "ready", true) == 0)
 					{
-						InitializeTrackBar();
+						if (!trackBarIsInitialized)
+						{
+							InitializeTrackBar();
+						}
 					}
 					
 					this.PlaybackTrackBar.Value = Convert.ToInt32(audioPlayer.Position);

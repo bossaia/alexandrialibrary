@@ -68,10 +68,10 @@ namespace Alexandria
 		}
 		
 		/// <summary>
-		/// Get the current sound loaded into this player
+		/// Get the current audio resource loaded into this player
 		/// </summary>
 		[System.CLSCompliant(false)]
-		public virtual ISound CurrentSound
+		public virtual IAudioResource CurrentAudio
 		{
 			get {return null;}
 		}
@@ -266,7 +266,7 @@ namespace Alexandria
 		{
 		}
 		
-		internal virtual void LoadSound(Sound sound, MediaFile file)
+		internal virtual void LoadSound(IAudioResource audio, MediaFile file)
 		{
 		}
 		#endregion

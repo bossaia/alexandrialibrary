@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ISoundCommand
+	public interface IAudioCommand
 	{
 		AudioCommandResult Result{get;}
 		bool IsValid(AudioStatus status);

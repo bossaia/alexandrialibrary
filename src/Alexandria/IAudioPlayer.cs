@@ -7,7 +7,7 @@ namespace Alexandria
 	[System.CLSCompliant(false)]
 	public interface IAudioPlayer
 	{
-		ISound CurrentSound{get;}
+		IAudioResource CurrentAudio{get;}
 		string CurrentStatus{get;}
 		bool IsMuted{get;set;}
 		void SetCurrentMediaFile(MediaFile mediaFile);		

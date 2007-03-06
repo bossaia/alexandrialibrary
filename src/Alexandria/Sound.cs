@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Alexandria
 {
+	/*
 	public class Sound : ISound
 	{
 		#region Private Fields
@@ -102,4 +103,5 @@ namespace Alexandria
 		}
 		#endregion
 	}
+	*/
 }

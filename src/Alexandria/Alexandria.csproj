@@ -46,7 +46,6 @@
     <Compile Include="IArtistResource.cs" />
     <Compile Include="ISongResource.cs" />
     <Compile Include="Profile.cs" />
-    <Compile Include="Role.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Device.cs" />
     <Compile Include="Drive.cs" />
@@ -57,9 +56,8 @@
     <Compile Include="IMediaPlaylist.cs" />
     <Compile Include="IMediaController.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="ISound.cs" />
-    <Compile Include="ISoundCommand.cs" />
-    <Compile Include="ISoundStatus.cs" />
+    <Compile Include="IAudioCommand.cs" />
+    <Compile Include="IAudioStatus.cs" />
     <Compile Include="ITagEngine.cs" />
     <Compile Include="LocalHardDrive.cs" />
     <Compile Include="LocalMediaFile.cs" />
@@ -101,9 +99,6 @@
     <Compile Include="AudioStatus.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="TagEngine.cs" />
-    <Compile Include="TimerWorkerThread.cs" />
-    <Compile Include="TimerWorkItem.cs" />
-    <Compile Include="TimerSynchronizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />

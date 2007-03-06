@@ -25,7 +25,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private int totalHardwareChannels;
 		private int numberOfSoftwareChannels;
 		private int sampleRate;
-		private SoundFormat soundFormat;
+		private FmodSoundFormat soundFormat;
 		private int numberOfOutputChannels;
 		private int maximumInputChannels;
 		private DspResampler resampleMethod;
@@ -490,8 +490,8 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region SoundFormat
-		public SoundFormat SoundFormat
+		#region FmodSoundFormat
+		public FmodSoundFormat SoundFormat
 		{
 			get
 			{

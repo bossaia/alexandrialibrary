@@ -581,7 +581,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	}
 	#endregion
 
-	#region SoundFormat
+	#region FmodSoundFormat
 	/*
 	[ENUM]
 	[
@@ -599,7 +599,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	Sound::getFormat
 	]
 	*/
-	public enum SoundFormat
+	public enum FmodSoundFormat
 	{
 		None,     /* Unitialized / unknown */
 		Pcm8,     /* 8bit integer PCM data */

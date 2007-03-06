@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class AudioStatus : ISoundStatus
+	public abstract class AudioStatus : IAudioStatus
 	{	
 		#region Constructors
 		protected AudioStatus(bool allowsLoad, bool allowsStream, bool allowsPlay, bool allowsPause, bool allowsStop, bool allowsSeek)
@@ -94,7 +94,7 @@ namespace Alexandria
 		#endregion
 		
 		#region Public Methods
-		public virtual void Update(ISoundCommand command)
+		public virtual void Update(IAudioCommand command)
 		{
 			if (command != null)
 				command.Execute(this);

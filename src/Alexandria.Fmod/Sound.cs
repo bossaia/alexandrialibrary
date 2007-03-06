@@ -11,7 +11,7 @@ using Alexandria;
 namespace AlexandriaOrg.Alexandria.Fmod
 {
 	[SoundClass]
-	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,ISound
+	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudioResource
 	{
 		#region Constructors
 		/// <summary>
@@ -110,6 +110,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region Private Fields
+		private ResourceFormat format;
 		private Channel channel = new Channel();
 		private string name;
 		private uint length;
@@ -123,7 +124,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private Range range;
 		private TimeUnits lengthUnit = TimeUnits.Millisecond;
 		private SoundType type = SoundType.Unknown;
-		private SoundFormat format = SoundFormat.None;
+		private FmodSoundFormat fmodSoundFormat = FmodSoundFormat.None;
 		private int numberOfChannels;
 		private int numberOfBitsPerSample;
 		private OpenState openState;
@@ -335,19 +336,19 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref format, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return type;				
 			}
 		}
 		#endregion
 		
 		#region Format
-		public SoundFormat Format
+		public FmodSoundFormat FmodSoundFormat
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref format, ref numberOfChannels, ref numberOfBitsPerSample);
-				return format;
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
+				return fmodSoundFormat;
 			}
 		}
 		#endregion
@@ -357,7 +358,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref format, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return numberOfChannels;
 			}
 		}
@@ -368,7 +369,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref format, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return numberOfBitsPerSample;
 			}
 		}
@@ -432,9 +433,6 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 		}
 		#endregion
-		
-		
-				
 		
 		#region Mode
 		public Modes Mode
@@ -729,7 +727,52 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		#endregion
 
-		#region ISound Members
+		#region IResource Members
+		
+		#region Format
+		public ResourceFormat Format
+		{
+			get { return format; }
+		}
+		#endregion
+		
+		#region Uri
+		public Uri Uri
+		{
+			get { return new Uri(mediaFile.Path); }
+		}
+		#endregion
+		
+		#region Resources
+		public IDictionary<object, IResource> Resources
+		{
+			get
+			{
+				Dictionary<int, IAudioResource> resources = new Dictionary<int,IAudioResource>();
+				if (subSounds != null && subSounds.Count > 0)
+				{
+					int i = 0;
+					foreach(IAudioResource sound in subSounds)
+					{
+						i++;
+						resources.Add(i, sound);
+					}
+				}
+				return (IDictionary<object, IResource>)resources;
+			}
+		}
+		#endregion
+		
+		#region IsLocal
+		public bool IsLocal
+		{
+			get { return mediaFile.IsLocal; }
+		}
+		#endregion
+		
+		#endregion
+
+		#region IAudioResource Members
 		[CLSCompliant(false)]
 		public uint Minutes
 		{
@@ -754,6 +797,11 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			get { return status; }
 			internal set { status = value; }
+		}
+		
+		[CLSCompliant(false)]
+		public void Seek(uint position)
+		{
 		}
 		#endregion
 	}

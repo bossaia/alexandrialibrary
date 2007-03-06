@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class AudioCommand : ISoundCommand
+	public abstract class AudioCommand : IAudioCommand
 	{
 		#region Constructors
 		protected AudioCommand(AudioCommandType type)

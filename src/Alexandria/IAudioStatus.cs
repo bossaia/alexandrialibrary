@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ISoundStatus
+	public interface IAudioStatus
 	{
 		AudioBufferState BufferState{get;}
 		AudioPlaybackState PlaybackState{get;}

@@ -15,7 +15,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Private Fields
 		private Channel channel;
 		private SoundSystem soundSystem;
-		private Sound currentSound;
+		private Sound currentAudio;
 		private bool currentSoundIsCreated;
 		private bool currentSoundIsStreaming;
 		private System.Timers.Timer timer;
@@ -52,10 +52,10 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				{
 					if (disposing)
 					{
-						if (currentSound != null)
+						if (currentAudio != null)
 						{
-							currentSound.Dispose();
-							currentSound = null;
+							currentAudio.Dispose();
+							currentAudio = null;
 						}
 
 						if (channel != null)
@@ -125,9 +125,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{	
 			if (this.Status.Name == PlaybackStatus.Playing.Name)
 			{			
-				if (this.channel != null && this.currentSound != null)
+				if (this.channel != null && this.currentAudio != null)
 				{
-					if (this.channel.Position == currentSound.Milliseconds)
+					if (this.channel.Position == currentAudio.Milliseconds)
 					{
 						PlaybackEventArgs args = new PlaybackEventArgs();
 					
@@ -145,33 +145,33 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			
 				if (currentSoundIsCreated)
 				{
-					if (currentSound.OpenState == OpenState.Ready && channel == null && !currentSound.BufferIsStarving)
+					if (currentAudio.OpenState == OpenState.Ready && channel == null && !currentAudio.BufferIsStarving)
 					{
-						if (streamingStatus != currentSound.OpenState.ToString())
+						if (streamingStatus != currentAudio.OpenState.ToString())
 						{
-							streamingStatus = currentSound.OpenState.ToString();
+							streamingStatus = currentAudio.OpenState.ToString();
 							if (OnStreamingStatusChange != null)
 								OnStreamingStatusChange(this, new PlaybackEventArgs(true, null, streamingStatus, null));
 						}
 							
-						soundSystem.PlaySound(ChannelIndex.Free, currentSound, false, ref channel);
+						soundSystem.PlaySound(ChannelIndex.Free, currentAudio, false, ref channel);
 					}
-					else if (currentSound.OpenState == OpenState.Loading)
+					else if (currentAudio.OpenState == OpenState.Loading)
 					{
-						if (streamingStatus != currentSound.OpenState.ToString())
+						if (streamingStatus != currentAudio.OpenState.ToString())
 						{
-							streamingStatus = currentSound.OpenState.ToString();
+							streamingStatus = currentAudio.OpenState.ToString();
 							if (OnStreamingStatusChange != null)
 								OnStreamingStatusChange(this, new PlaybackEventArgs(true, null, streamingStatus, null));
 						}
 					
 						checkForTimeout = true;
 					}
-					else if (currentSound.OpenState == OpenState.Connecting)
+					else if (currentAudio.OpenState == OpenState.Connecting)
 					{
-						if (streamingStatus != currentSound.OpenState.ToString())
+						if (streamingStatus != currentAudio.OpenState.ToString())
 						{
-							streamingStatus = currentSound.OpenState.ToString();
+							streamingStatus = currentAudio.OpenState.ToString();
 							if (OnStreamingStatusChange != null)
 								OnStreamingStatusChange(this, new PlaybackEventArgs(true, null, streamingStatus, null));
 						}
@@ -179,8 +179,8 @@ namespace AlexandriaOrg.Alexandria.Fmod
 						checkForTimeout = true;
 					}
 					
-					if (currentSound.CurrentResult != Result.Ok)
-						throw new AlexandriaException("Could not play streaming sound: " + currentSound.CurrentResult.ToString());
+					if (currentAudio.CurrentResult != Result.Ok)
+						throw new AlexandriaException("Could not play streaming sound: " + currentAudio.CurrentResult.ToString());
 					
 					if (soundSystem.CurrentResult != Result.Ok)
 						throw new AlexandriaException("Could not play streaming sound: " + soundSystem.CurrentResult.ToString());
@@ -266,9 +266,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		
 		#region Public Properties
 		[CLSCompliant(false)]
-		public override ISound CurrentSound
+		public override IAudioResource CurrentAudio
 		{
-			get {return currentSound;}
+			get {return currentAudio;}
 		}
 		
 		public override bool IsMuted
@@ -367,7 +367,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Protected Methods
 		protected override void PlayCurrentSound()
 		{						
-			if (currentSound != null)
+			if (currentAudio != null)
 			{
 				PlaybackEventArgs e = new PlaybackEventArgs();
 
@@ -388,7 +388,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							{
 								Debug.WriteLine("soundSystem.PlaySound");
 								// The channel was not already paused so start playing a new stream
-								soundSystem.PlaySound(ChannelIndex.Free, currentSound, false, ref channel);
+								soundSystem.PlaySound(ChannelIndex.Free, currentAudio, false, ref channel);
 							}
 							catch (Exception ex)
 							{
@@ -422,7 +422,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		protected override void PauseCurrentSound()
 		{
-			if (currentSound != null)
+			if (currentAudio != null)
 			{
 				PlaybackEventArgs e = new PlaybackEventArgs();
 				if (this.OnPause != null)
@@ -445,7 +445,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		protected override void StopCurrentSound()
 		{
-			if (currentSound != null)
+			if (currentAudio != null)
 			{
 				PlaybackEventArgs e = new PlaybackEventArgs();
 				if (OnStop != null)
@@ -473,7 +473,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Public Methods
 		public override void SetCurrentMediaFile(MediaFile mediaFile)
 		{
-			currentSound = null;
+			currentAudio = null;
 			currentSoundIsCreated = false;
 			currentSoundIsStreaming = false;
 			
@@ -487,7 +487,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			{
 				currentSoundIsStreaming = false;
 				//currentSound = soundSystem.CreateStream(mediaFile.Path, Modes.None);
-				soundSystem.CreateStream(currentSound, mediaFile.Path, Modes.None);
+				soundSystem.CreateStream(currentAudio, mediaFile.Path, Modes.None);
 				//SoundType t = currentSound.Type;
 				//Result x = soundSystem.CurrentResult;				
 			}
@@ -502,7 +502,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 						soundSystem.StreamBufferSize = (64 * 1024);
 						//currentSound = soundSystem.CreateSound(mediaFile.Path, (Mode.Hardware | Mode.Fmod2D | Mode.CreateStream | Mode.NonBlocking));
 						//currentSound = soundSystem.CreateSound(mediaFile.Path, (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking));
-						soundSystem.CreateSound(currentSound, mediaFile.Path, (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking));
+						soundSystem.CreateSound(currentAudio, mediaFile.Path, (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking));
 
 						currentSoundIsCreated = true;
 						currentSoundIsStreaming = true;
@@ -528,9 +528,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				}
 			}
 			
-			if (currentSound != null)
+			if (currentAudio != null)
 			{
-				currentSound.MediaFile = mediaFile;
+				currentAudio.MediaFile = mediaFile;
 			}
 		}
 
@@ -658,7 +658,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 						if (tag.DataType == TagDataType.String)
 						{
-							SoundFormat testFormat = ripSound.Format;
+							FmodSoundFormat testFormat = ripSound.FmodSoundFormat;
 
 							if (tag.Name == "ARTIST")
 							{
