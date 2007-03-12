@@ -24,7 +24,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	#region Public Inner Classes
 	

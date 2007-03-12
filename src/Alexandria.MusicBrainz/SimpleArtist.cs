@@ -28,8 +28,9 @@
  */
 
 using System;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public class SimpleArtist
     {

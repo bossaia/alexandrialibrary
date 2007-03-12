@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MusicBrainzUtility.cs" />
     <Compile Include="IWindowsNetworkControl.cs" />
     <Compile Include="MusicBrainzClient.cs" />
     <Compile Include="MusicBrainzMetadataProvider.cs" />

@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Security.Permissions;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public class SimpleAlbum
     {
@@ -107,7 +107,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
            
             if(client.GetResultInt(rdf.ExpressionAlbumGetNumberReleaseDates) > 0) {
 				client.Select(rdf.SelectReleaseDate, 1);
-				release_date = DataConverter.ToDateTime(client.GetResultData(rdf.ExpressionReleaseGetDate));
+				release_date = MusicBrainzUtility.ToDateTime(client.GetResultData(rdf.ExpressionReleaseGetDate));
 				client.Select(rdf.SelectBack);
             }
 

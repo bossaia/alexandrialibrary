@@ -5,7 +5,7 @@ using System.Security.Permissions;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	[MetadataProviderClass]
 	public class MusicBrainzMetadataProvider : MetadataProvider

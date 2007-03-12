@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	internal interface IWindowsNetworkControl
 	{

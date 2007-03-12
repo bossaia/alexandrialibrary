@@ -24,8 +24,9 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	public class Trm : IDisposable
 	{

@@ -30,7 +30,7 @@
 using System;
 using System.Security.Permissions;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	public static class SimpleLookupTest
 	{
