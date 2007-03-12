@@ -91,7 +91,7 @@ namespace Alexandria.Playlist
 					if (String.Compare(locationNode.Name, NODE_LOCATION, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 					{
 						string location = locationNode.InnerText;
-						MediaFile mediaFile = null;
+						//MediaFile mediaFile = null;
 					
 						if (location != null)
 						{
@@ -105,8 +105,8 @@ namespace Alexandria.Playlist
 								mediaFile = new RemoteMediaFile(location.Substring(PREFIX_HTTP.Length, location.Length - PREFIX_HTTP.Length));
 							}
 							*/
-							mediaFile = MediaFile.Load(location, length);
-							this.Files.Add(mediaFile);
+							//mediaFile = MediaFile.Load(location, length);
+							//this.Files.Add(mediaFile);
 						}
 					}
 				}

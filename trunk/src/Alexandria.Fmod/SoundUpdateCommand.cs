@@ -23,7 +23,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			if (IsValid(status))
 			{
-				if (Sound.MediaFile.IsLocal)
+				if (Sound.IsLocal)
 				{
 					//
 				}

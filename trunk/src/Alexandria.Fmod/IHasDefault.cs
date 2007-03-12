@@ -6,6 +6,6 @@ namespace AlexandriaOrg.Alexandria.Fmod
 {
 	public interface IHasDefault
 	{
-		SoundDefault Default{get;set;}
+		SoundSettings DefaultSettings{get;set;}
 	}
 }

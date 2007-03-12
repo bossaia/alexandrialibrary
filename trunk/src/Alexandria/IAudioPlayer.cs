@@ -10,7 +10,7 @@ namespace Alexandria
 		IAudioResource CurrentAudio{get;}
 		string CurrentStatus{get;}
 		bool IsMuted{get;set;}
-		void SetCurrentMediaFile(MediaFile mediaFile);		
+		//void SetCurrentMediaFile(MediaFile mediaFile);		
 		uint Position{get;}
 		float Volume{get;set;}
 		string CurrentResult{get;}
@@ -33,6 +33,6 @@ namespace Alexandria
 		EventHandler<PlaybackEventArgs> OnStreamingStatusChange {get;set;}
 		EventHandler<PlaybackEventArgs> OnRippingStatusChange {get;set;}
 		//GetAudioInfo GetAudioInfoHandler {get;}
-		void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath);
+		//void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath);
 	}
 }

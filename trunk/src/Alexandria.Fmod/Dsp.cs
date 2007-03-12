@@ -63,7 +63,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private string name = string.Empty;
 		private uint version;
 		private int numberOfChannels;
-		private SoundDefault dspDefault;
+		private SoundSettings dspDefault;
 		private IntPtr userData = IntPtr.Zero;
 		private bool disposed;
 		#endregion
@@ -257,7 +257,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 		
 		#region Default
-		public SoundDefault Default
+		public SoundSettings DefaultSettings
 		{
 			get {return dspDefault;}
 			set

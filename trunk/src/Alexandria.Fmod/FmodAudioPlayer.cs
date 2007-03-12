@@ -471,6 +471,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region Public Methods
+		/*
 		public override void SetCurrentMediaFile(MediaFile mediaFile)
 		{
 			currentAudio = null;
@@ -533,6 +534,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				currentAudio.MediaFile = mediaFile;
 			}
 		}
+		*/
 
 		[CLSCompliant(false)]
 		public override void SetPosition(uint position)
@@ -581,6 +583,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Stream Save Methods
 		
 		#region SaveStreamToLocalFile
+		/*
 		public override void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath)
 		{
 			System.Diagnostics.Debug.WriteLine("SaveStreamToLocalFile");
@@ -620,6 +623,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				throw new AlexandriaException("There was an error saving this stream to a local file: " + ripSound.CurrentResult.ToString(), ex);
 			}
 		}
+		*/
 		#endregion
 
 		#region SaveStreamToLocalFile Events
@@ -718,7 +722,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			if (ripSound == null || ripSound.OpenState == OpenState.Error)
 			{
 				if (ripSound == null)
-					ripSound = new Sound(this.SoundSystem, MediaFile.Load(ripSourceFileName));
+					ripSound = new Sound(this.SoundSystem, new Uri(ripSourceFileName));
 			
 				soundSystem.CreateSound(ripSourceFileName, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking), ripSound);				
 

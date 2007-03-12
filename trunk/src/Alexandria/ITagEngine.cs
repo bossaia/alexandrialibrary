@@ -7,6 +7,6 @@ namespace Alexandria
 	[System.CLSCompliant(false)]
 	public interface ITagEngine
 	{
-		IAudioTag GetAudioTag(MediaFile file);
+		//IAudioTag GetAudioTag(MediaFile file);
 	}
 }

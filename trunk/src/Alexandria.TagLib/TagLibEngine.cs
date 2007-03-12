@@ -16,18 +16,18 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		
 		#region Public Methods
 		[System.CLSCompliant(false)]
-		public override IAudioTag GetAudioTag(MediaFile file)
+		public IAudioTag GetAudioTag(IResource resource)
 		{
 			IAudioTag tag = null;
 			File tagFile = null;
 					
-			if (file != null)
+			if (resource != null)
 			{
-				tagFile = File.Create(file.Path);
+				tagFile = File.Create(resource.Uri.AbsolutePath);
 				if (tagFile != null)
 				{
 					System.Diagnostics.Debug.WriteLine("tagFile has data");
-					switch(file.Format.Mime.ToString())
+					switch(resource.Format.ContentTypes[0].Name.ToLowerInvariant()) //file.Format.Mime.ToString())
 					{
 						case "audio/ogg":
 						case "audio/flac":
