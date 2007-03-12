@@ -31,7 +31,7 @@ using System;
 using System.Security.Permissions;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public static class SimpleQuery
     {

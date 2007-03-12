@@ -27,7 +27,7 @@
  *  DEALINGS IN THE SOFTWARE.
  */
  
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public class Rdf
     {

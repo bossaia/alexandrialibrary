@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public class SimpleDisc : System.Collections.Generic.IEnumerable<SimpleTrack>, IDisposable
     {

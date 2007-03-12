@@ -29,8 +29,9 @@
 
 using System;
 using System.Diagnostics;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
     public class SimpleTrack
     {

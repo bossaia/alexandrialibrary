@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.MusicBrainz
+namespace Alexandria.MusicBrainz
 {
 	#region BitPrintInfo
 	/*
@@ -248,7 +248,7 @@ namespace AlexandriaOrg.Alexandria.MusicBrainz
 
 		public override int GetHashCode()
 		{	
-			return DataConverter.GetHashCode(this.Address) + this.Port;
+			return Alexandria.DataConverter.GetHashCode(this.Address) + this.Port;
 		}
 		#endregion
 		
