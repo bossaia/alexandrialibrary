@@ -13,12 +13,12 @@ namespace Alexandria
 		#endregion
 
 		#region ITagEngine Members
-		[System.CLSCompliant(false)]
-		public virtual IAudioTag GetAudioTag(MediaFile file)
-		{
+		//[System.CLSCompliant(false)]
+		//public virtual IAudioTag GetAudioTag(MediaFile file)
+		//{
 			//throw new Exception("The method or operation is not implemented.");
-			return null;
-		}
+			//return null;
+		//}
 		#endregion
 	}
 }

@@ -9,6 +9,6 @@ namespace Alexandria
 		string Path{get;}
 		string Name{get;}
 		string Version{get;}
-		IList<MediaFile> Files{get;}
+		//IList<MediaFile> Files{get;}
 	}
 }

@@ -11,14 +11,14 @@ namespace Alexandria.Playlist
 		private string path;
 		private string name;
 		private string version;
-		private List<MediaFile> files;
+		private List<IResource> resources;
 		#endregion				
 		
 		#region Constructors
 		protected MediaPlaylist(string path)
 		{
 			this.path = path;
-			files = new List<MediaFile>();
+			//files = new List<MediaFile>();
 			
 			//Load();
 		}
@@ -49,9 +49,9 @@ namespace Alexandria.Playlist
 			protected set {version = value;}
 		}
 		
-		public IList<MediaFile> Files
+		public IList<IResource> Resources
 		{
-			get {return files;}
+			get {return resources;}
 		}
 		#endregion
 		

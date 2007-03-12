@@ -7,7 +7,7 @@ namespace Alexandria
 	public abstract class MetadataProvider
 	{
 		#region GetAlbum
-		public virtual IAlbumResource GetAlbum(OpticalDrive drive)
+		public virtual IAlbumResource GetAlbum(IAudioCompactDisc disc)
 		{
 			return null;
 		}

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Alexandria
 {
 	/// <summary>
-	/// A generic OO wrapper around a command line tool
+	/// A generic wrapper around a command line tool
 	/// </summary>
 	public abstract class ConsoleTool
 	{

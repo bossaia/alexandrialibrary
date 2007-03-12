@@ -34,85 +34,12 @@ namespace Alexandria
 {
 	public static class DataConverter
 	{
-		#region Private Static Fields
-		private static readonly Encoding utf8Encoding = new UTF8Encoding();
-		#endregion
-
-		#region Public Static Methods
-
-		#region ToDateTime
-		public static DateTime ToDateTime(string date)
-		{
-			if (date != null)
-			{
-				// because the DateTime parser is *slow*            
-				string[] parts = date.Split('-');
-
-				if (parts.Length < 3)
-				{
-					return DateTime.MinValue;
-				}
-
-				try
-				{
-					// Year, Month, Day
-					return new DateTime(Convert.ToInt32(parts[0], System.Globalization.NumberFormatInfo.InvariantInfo), Convert.ToInt32(parts[1], System.Globalization.NumberFormatInfo.InvariantInfo), Convert.ToInt32(parts[2], System.Globalization.NumberFormatInfo.InvariantInfo));
-				}
-				catch (ArgumentException)
-				{
-					return DateTime.MinValue;
-				}
-				catch (InvalidCastException)
-				{
-					return DateTime.MinValue;
-				}
-			}
-			else throw new ArgumentNullException("date");
-		}
-		#endregion
-
-		#region ToUtf8
-		public static byte[] ToUtf8(string value)
-		{
-			if (value == null)
-			{
-				return null;
-			}
-			else
-			{
-				int length = utf8Encoding.GetByteCount(value);
-				byte[] result = new byte[length + 1];
-				utf8Encoding.GetBytes(value, 0, value.Length, result, 0);
-				result[length] = 0;
-				return result;
-			}
-		}
-		#endregion
-
-		#region FromUtf8
-		public static string FromUtf8(byte[] value)
-		{
-			if (value == null)
-			{
-				return null;
-			}
-			else
-			{
-				int length = 0;
-				while ((length < value.Length) && (value[length] != 0))
-				{
-					length++;
-				}
-				return utf8Encoding.GetString(value, 0, length);
-			}
-		}
-		#endregion
-
 		#region GetHashCode
 		public static int GetHashCode(string value)
 		{
+			UTF8Encoding encoding = new UTF8Encoding();
 			MD5 md5 = MD5.Create();
-			byte[] hashBytes = md5.ComputeHash(ToUtf8(value));
+			byte[] hashBytes = md5.ComputeHash(encoding.GetBytes(value));
 			return Convert.ToInt32(hashBytes, System.Globalization.NumberFormatInfo.InvariantInfo);
 		}
 		
@@ -123,7 +50,5 @@ namespace Alexandria
 			return Convert.ToInt32(hashBytes, System.Globalization.NumberFormatInfo.InvariantInfo);
 		}
 		#endregion				
-		
-		#endregion
 	}
 }

@@ -28,11 +28,11 @@ namespace Alexandria.Playlist
                 string filePath = reader.ReadLine();
                 if (filePath != null)
                 {
-                    MediaFile file = MediaFile.Load(playlistInfo, filePath);
-                    if (file != null)
-                    {
-                        Files.Add(file);
-                    }
+                    //MediaFile file = MediaFile.Load(playlistInfo, filePath);
+                    //if (file != null)
+                    //{
+                        //Files.Add(file);
+                    //}
                 }
                 
             }

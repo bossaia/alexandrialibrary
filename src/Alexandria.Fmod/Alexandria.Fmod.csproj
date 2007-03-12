@@ -88,7 +88,7 @@
     <Compile Include="ReverbProperties.cs" />
     <Compile Include="Sound.cs" />
     <Compile Include="SoundBuffer.cs" />
-    <Compile Include="SoundDefault.cs" />
+    <Compile Include="SoundSettings.cs" />
     <Compile Include="SoundLock.cs" />
     <Compile Include="SoundPlayCommand.cs" />
     <Compile Include="SoundStreamCommand.cs" />

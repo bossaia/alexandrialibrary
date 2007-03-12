@@ -200,26 +200,26 @@ namespace Alexandria.MusicBrainz
 
 		#region Private Static Methods
 		
-		#region LookupCdInDrive
-		private static IAlbumResource LookupCdInDrive(OpticalDrive drive)
+		#region LookupCd
+		private static IAlbumResource ReadCompactDisc(IAudioCompactDisc disc)
 		{
 			IAlbumResource album = null;
 			
-			if (drive != null)
+			if (disc != null)
 			{							
 				try
 				{
-					Debug.WriteLine("Drive Name:" + drive.Name);
+					Debug.WriteLine("Drive Name:" + disc.Uri.LocalPath);
 				
-					//"/dev/hdc"
-					string driveName = drive.Name;
+					//"/dev/hdc" or D:
+					string driveName = disc.Uri.LocalPath;
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);
 					}
 					Debug.WriteLine("Cleaned up Drive Name: " + driveName);
 					
-					using (SimpleDisc disc = new SimpleDisc(driveName))
+					using (SimpleDisc simpleDisc = new SimpleDisc(driveName))
 					{
 
 						// Actually ask the MB server for metadata. As soon as a SimpleDisc is instantiated,
@@ -231,14 +231,14 @@ namespace Alexandria.MusicBrainz
 						// calling this query
 
 						Debug.WriteLine("Before query CD metadata");
-						disc.QueryCDMetadata();
+						simpleDisc.QueryCDMetadata();
 						Debug.WriteLine("After query CD metadata");
 
-						Debug.WriteLine("Artist Name   : " + disc.ArtistName);
-						Debug.WriteLine("Album Name    : " + disc.AlbumName);
-						Debug.WriteLine("Cover Art URL : " + disc.CoverArtUrl);
-						Debug.WriteLine("Amazon ASIN   : " + disc.AmazonAsin);
-						Debug.WriteLine("Release Date  : " + disc.ReleaseDate);
+						Debug.WriteLine("Artist Name   : " + simpleDisc.ArtistName);
+						Debug.WriteLine("Album Name    : " + simpleDisc.AlbumName);
+						Debug.WriteLine("Cover Art URL : " + simpleDisc.CoverArtUrl);
+						Debug.WriteLine("Amazon ASIN   : " + simpleDisc.AmazonAsin);
+						Debug.WriteLine("Release Date  : " + simpleDisc.ReleaseDate);
 						Debug.WriteLine("");
 
 						/*
@@ -297,9 +297,9 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public override IAlbumResource GetAlbum(OpticalDrive drive)
+		public override IAlbumResource GetAlbum(IAudioCompactDisc disc)
 		{
-			return LookupCdInDrive(drive);
+			return ReadCompactDisc(disc);
 		}
 
 		public override IAlbumResource GetAlbum(Search albumSearch)

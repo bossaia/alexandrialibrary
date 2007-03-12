@@ -19,29 +19,29 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		/// </summary>
 		/// <param name="soundSystem">The sound system that this sound is associated with</param>
 		/// <param name="mediaFile">The path or url of the file that the sound comes from</param>
-		public Sound(SoundSystem soundSystem, MediaFile mediaFile)
+		public Sound(SoundSystem soundSystem, Uri uri)
 		{			
 			this.soundSystem = soundSystem;
-			this.mediaFile = mediaFile;
-			if (mediaFile != null)
+			this.uri = uri;
+			if (uri != null)
 			{
-				if (this.mediaFile.IsLocal)
+				if (string.Compare(uri.Scheme, "file") == 0)
 					status = LocalSoundNotLoaded.Example;
 				else
 					status = RemoteSoundNotReady.Example;
 			}
 		}
 		
-		public Sound(SoundSystem soundSystem, OpticalDrive drive)
+		public Sound(SoundSystem soundSystem, IAudioCompactDisc disc)
 		{
 			this.soundSystem = soundSystem;
-			if (drive != null)
+			if (disc != null)
 			{
-				mediaFile = new MediaFile(drive.Name, true);
-				if (this.mediaFile.IsLocal)
-					status = LocalSoundNotLoaded.Example;
-				else
-					status = RemoteSoundNotReady.Example;
+				//mediaFile = new MediaFile(disc.Uri.AbsolutePath, true);
+				//if (this.mediaFile.IsLocal)
+				status = LocalSoundNotLoaded.Example;
+				//else
+				//status = RemoteSoundNotReady.Example;
 			}
 		}
 		
@@ -56,7 +56,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				this.soundSystem = parentSound.SoundSystem;
 				this.parentSound = parentSound;
 
-				if (parentSound.mediaFile.IsLocal)
+				if (parentSound.IsLocal)
 					status = LocalSoundNotLoaded.Example;
 				else
 					status = RemoteSoundNotReady.Example;
@@ -119,7 +119,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private Result currentResult = Result.Ok;
 		private SoundSystem soundSystem;
 		private SoundLock soundLock;
-		private SoundDefault soundDefault;
+		private SoundSettings defaultSettings;
 		private SoundVariation soundVariation;
 		private Range range;
 		private TimeUnits lengthUnit = TimeUnits.Millisecond;
@@ -135,7 +135,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private SoundCollection subSounds;
 		private TagCollection tags;
 		private IntPtr userData = IntPtr.Zero;
-		private MediaFile mediaFile;
+		private Uri uri; //MediaFile mediaFile;
 		private bool disposed;
 		private AudioStatus status;
 		#endregion
@@ -246,16 +246,16 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Default
-		public SoundDefault Default
+		#region DefaultSettings
+		public SoundSettings DefaultSettings
 		{
-			get {return soundDefault;}
+			get {return defaultSettings;}
 			set
 			{
-				soundDefault = value;
-				if (soundDefault != null)
+				defaultSettings = value;
+				if (defaultSettings != null)
 				{
-					currentResult = NativeMethods.FMOD_Sound_SetDefaults(handle, soundDefault.Frequency, soundDefault.Volume, soundDefault.Pan, soundDefault.Priority);
+					currentResult = NativeMethods.FMOD_Sound_SetDefaults(handle, defaultSettings.Frequency, defaultSettings.Volume, defaultSettings.Pan, defaultSettings.Priority);
 				}
 			}
 		}
@@ -482,15 +482,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 		}
 		#endregion
-		
-		#region MediaFile
-		public MediaFile MediaFile
-		{
-			get {return mediaFile;}
-			set {mediaFile = value;}
-		}
-		#endregion
-		
+				
 		#region Milliseconds
 		/// <summary>
 		/// Get the length of the sound in milliseconds
@@ -551,9 +543,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Load
 		public void Load()
 		{
-			if (this.MediaFile.IsLocal)
+			if (this.IsLocal)
 			{
-				this.SoundSystem.CreateStream(this, this.MediaFile.Path, Modes.None);
+				this.SoundSystem.CreateStream(this, this.Uri.AbsolutePath, Modes.None);
 			}
 			else
 			{
@@ -568,7 +560,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		[CLSCompliant(false)]
 		public void Load(uint streamBufferSize)
 		{
-			if (this.MediaFile.IsLocal)
+			if (this.IsLocal)
 			{
 				Load();
 			}
@@ -577,7 +569,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				this.SoundSystem.StreamBufferUnit = TimeUnits.RawByte; //streamBufferUnit;
 				this.SoundSystem.StreamBufferSize = streamBufferSize;
 				Modes mode = (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking);
-				this.SoundSystem.CreateSound(this, this.MediaFile.Path, mode);
+				this.SoundSystem.CreateSound(this, this.Uri.AbsolutePath, mode);
 			}
 		}
 		#endregion
@@ -657,8 +649,8 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				fmtChunk.Chunk.Size = Marshal.SizeOf(fmtChunk) - Marshal.SizeOf(riffChunk);
 				fmtChunk.FormatTag = 1;
 				fmtChunk.NumberOfChannels = (ushort)this.NumberOfChannels;
-				fmtChunk.SamplesPerSecond = (uint)this.Default.Frequency;
-				fmtChunk.AverageBytesPerSecond = (uint)(this.Default.Frequency * this.NumberOfChannels * this.NumberOfBitsPerSample / 8);
+				fmtChunk.SamplesPerSecond = (uint)this.DefaultSettings.Frequency;
+				fmtChunk.AverageBytesPerSecond = (uint)(this.DefaultSettings.Frequency * this.NumberOfChannels * this.NumberOfBitsPerSample / 8);
 				fmtChunk.BlockSize = (ushort)(1 * this.NumberOfChannels * this.NumberOfBitsPerSample / 8);
 				fmtChunk.NumberOfBitsPerSample = (ushort)this.NumberOfBitsPerSample;
 
@@ -739,7 +731,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Uri
 		public Uri Uri
 		{
-			get { return new Uri(mediaFile.Path); }
+			get { return this.uri; }
 		}
 		#endregion
 		
@@ -766,7 +758,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region IsLocal
 		public bool IsLocal
 		{
-			get { return mediaFile.IsLocal; }
+			get { return this.uri.IsFile; }
 		}
 		#endregion
 		

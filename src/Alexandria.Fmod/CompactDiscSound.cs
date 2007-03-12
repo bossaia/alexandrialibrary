@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AlexandriaOrg.Alexandria;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
 	public class CompactDiscSound : Sound
 	{
 		#region Constructors
-		public CompactDiscSound(SoundSystem soundSystem, OpticalDrive drive) : base(soundSystem, drive)
+		public CompactDiscSound(SoundSystem soundSystem, IAudioCompactDisc disc) : base(soundSystem, disc)
 		{
 		}
 		#endregion

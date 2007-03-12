@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Alexandria
 {
-	public class AudioPlayer : MediaPlayer,IAudioPlayer,IDisposable
+	public class AudioPlayer : IAudioPlayer,IDisposable
 	{
 		#region Private Fields
 		private PlaybackStatus status;
 		private uint position;
-		private IMediaFile currentMediaFile;
+		private IAudioResource currentResource;		
+		//private IMediaFile currentMediaFile;
 		private bool isMuted;
 		private float volume;
 		private double soundLoadTimeout = 3000;
@@ -62,9 +63,10 @@ namespace Alexandria
 		#endregion
 		
 		#region Public Properties
-		public IMediaFile CurrentMediaFile
+		[CLSCompliant(false)]
+		public IAudioResource CurrentResource
 		{
-			get {return currentMediaFile;}
+			get {return currentResource;}
 		}
 		
 		/// <summary>
@@ -230,10 +232,10 @@ namespace Alexandria
 		/// Set the current media file
 		/// </summary>
 		/// <param name="mediaFile">The current media file to use for this player</param>
-		public virtual void SetCurrentMediaFile(MediaFile mediaFile)
-		{
-			currentMediaFile = mediaFile;						
-		}
+		//public virtual void SetCurrentMediaFile(MediaFile mediaFile)
+		//{
+			//currentMediaFile = mediaFile;						
+		//}
 
 		public virtual void Play()
 		{
@@ -262,13 +264,13 @@ namespace Alexandria
 
 		}
 
-		public virtual void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath)
-		{
-		}
+		//public virtual void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath)
+		//{
+		//}
 		
-		internal virtual void LoadSound(IAudioResource audio, MediaFile file)
-		{
-		}
+		//internal virtual void LoadSound(IAudioResource audio, MediaFile file)
+		//{
+		//}
 		#endregion
 	}
 }

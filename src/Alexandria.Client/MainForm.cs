@@ -262,8 +262,10 @@ namespace Alexandria.Client
 						//OpticalDrive cdDrive = drive as OpticalDrive;
 						//if (cdDrive != null)
 						//{
-						OpticalDrive cdDrive = new OpticalDrive(@"E:\");
-						IAlbumResource album = metadataProvider.GetAlbum(cdDrive);
+						
+						//IAudioCompactDisc disc;//new OpticalDrive(@"E:\");
+						//IAlbumResource album = metadataProvider.GetAlbum(cdDrive);
+						
 						//MessageBox.Show(album.MusicBrainzId + " : " + album.Name, "MusicBrainz Test", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 						//}
 					//}
@@ -299,7 +301,7 @@ namespace Alexandria.Client
 				this.PlaybackTimer.Start();
 			
 				// Initialize the Manifest
-				MediaFileFormat.InitializeManifest();								
+				//MediaFileFormat.InitializeManifest();								
 			}
 			catch (AlexandriaException ex)
 			{
@@ -327,7 +329,7 @@ namespace Alexandria.Client
                 }
                 else // Load an individual file
                 {
-                    LoadMediaFile(MediaFile.Load(path));
+                    //LoadMediaFile(MediaFile.Load(path));
                 }
 			}
 		}
@@ -426,6 +428,7 @@ namespace Alexandria.Client
             }
         }
 		
+		/*
 		private void LoadMediaFile(MediaFile mediaFile)
 		{
 			audioPlayer.SetCurrentMediaFile(mediaFile);
@@ -442,6 +445,7 @@ namespace Alexandria.Client
 				trackBarIsInitialized = true;
 			}
 		}
+		*/
 		
 		private void SetVolume()
 		{
@@ -713,8 +717,8 @@ namespace Alexandria.Client
 					}
 					
 					//TODO: change this to get the MediaFile back from the playlist/queue
-					MediaFile mediaFile = MediaFile.Load(path, length);
-					LoadMediaFile(mediaFile);
+					//MediaFile mediaFile = MediaFile.Load(path, length);
+					//LoadMediaFile(mediaFile);
 					
 					PlayPauseButton_Click(this, EventArgs.Empty);
 				}
@@ -779,12 +783,10 @@ namespace Alexandria.Client
 				{
 					string name = this.QueueListView.SelectedItems[0].SubItems[1].Text;
 					string sourceFilePath = this.QueueListView.SelectedItems[0].SubItems[4].Text;
-					MediaFile file = MediaFile.Load(sourceFilePath);
-					string destinationFilePath = RIP_DIR + name + "." + file.Format.DefaultFileExtension.ToString().ToLower(System.Globalization.CultureInfo.InvariantCulture);
+					//MediaFile file = MediaFile.Load(sourceFilePath);
+					//string destinationFilePath = RIP_DIR + name + "." + file.Format.DefaultFileExtension.ToString().ToLower(System.Globalization.CultureInfo.InvariantCulture);
 				
-					audioPlayer.SaveStreamToLocalFile(sourceFilePath, destinationFilePath);
-					//Sound sound = 
-					//audioPlayer.CurrentSound.SaveToWavFile(@"C:\test.wav");
+					//audioPlayer.SaveStreamToLocalFile(sourceFilePath, destinationFilePath);
 				}
 				
 			}
