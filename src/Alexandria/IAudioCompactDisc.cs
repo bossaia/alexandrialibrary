@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaFile
-	{		
-		string Path {get;}
-		bool IsLocal{get;}
+	public interface IAudioCompactDisc : IAudioResource
+	{
+		IList<IAudioResource> Tracks {get;}
 	}
 }
