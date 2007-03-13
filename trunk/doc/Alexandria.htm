@@ -5,12 +5,12 @@
 		<style type="text/css">
 			H1 { font-weight: bold; font-size: 20pt; font-family: Helvetica,Tahoma,Arial,Geneva,Sans-Serif; }
 			H2 { font-weight: bold; font-size: 14pt; font-family: Helvetica,Tahoma,Arial,Geneva,Sans-Serif; }
-			BODY, DIV.default { display: block; font-size: 10pt; font-family: Arial; background-color: lightblue; color: black;}
-			TABLE.default { float: left; margin: 8px; background-color: lightgray; color: darkblue; border-width: 1px; border-style: solid; padding: none; border-color: darkblue; }
-			TD.title { font-weight: bold; font-size: 10pt; font-family: Tahoma; background-color: lightgray; color: darkblue; }
-			TD.header_left { background-color: darkgray; color: white; }
-			TD.header_right { background-color: darkblue; color: white; }
-			TD.entry_left { color: black; }
+			BODY, DIV { display: block; font-size: 10pt; font-family: Arial; background-color: lightblue; color: black;}
+			TABLE { float: left; margin: 8px; background-color: lightgray; color: darkblue; border-width: 1px; border-style: solid; padding: none; border-color: darkblue; }
+			TH.title { font-weight: bold; font-size: 10pt; font-family: Tahoma; background-color: lightgray; color: darkblue; }
+			TH { background-color: darkblue; color: white; }
+			TH.alternate { background-color: darkgray; color: white; }
+			TD { color: black; }
 			TD.note { border-top-width: 1px;  border-top-style: solid; border-top-color: darkblue; }
 			.otherNote { color: black; font-size: 8pt; font-family: Tahoma,Arial,Geneva,Sans-Serif; }
 			.code { color: black; font-size: 10pt; font-family: Courier; background-color: white; }
@@ -33,12 +33,12 @@
 		potention to act as both a client and a server.
 		</p>		
 		<h2>Framework</h2>
-		<div class="default">Alexandria is based on version 2.0 of the .NET framework which means that plugin modules can be written in any language which 
+		<div>Alexandria is based on version 2.0 of the .NET framework which means that plugin modules can be written in any language which 
 		targets version 2.0 of the .NET CLR.  Alexandria can be compiled and run against the Mono and Microsoft .NET runtimes.  The languages that can be used
 		to write plugin modules depend on the runtime that is used.
-		<table class="default">
-			<tr><td colspan="3" class="title">Table 1: Framework Language Support</td></tr>
-			<tr><td class="header_right">Language</td><td class="header_right">Mono 1.2</td><td class="header_right">.NET 2.0</td></tr>
+		<table>
+			<tr><th colspan="3" class="title">Table 1: Framework Language Support</th></tr>
+			<tr><th>Language</th><th>Mono 1.2</th><th>.NET 2.0</th></tr>
 			<tr><td>C#</td><td>full</td><td>full</td></tr>
 			<tr><td>VB.NET</td><td>partial*</td><td>full</td></tr>
 			<tr><td>IronPython</td><td>full</td><td>full</td></tr>
@@ -50,13 +50,13 @@
 		on adding support for various languages to both Mono and .NET. Be sure to check the appropriate links in the resources section to see if your language of choice is supported.
 		</div>
 		<h2>Plugin Types</h2>
-		<div class="default">Plugin modules provide all of the functionality in Alexandria. A single plugin can provide multiple different functions within the Alexandria application suite. Each of
+		<div>Plugin modules provide all of the functionality in Alexandria. A single plugin can provide multiple different functions within the Alexandria application suite. Each of
 		the different plugin types provides functions for handling media resources.  Media resources are the most fundamental piece of the Alexandria application; digital audio files,
 		compact discs, metadata tags, reviews, and user ratings are all media resources.  Thus it is important to think about the various plugin types in terms of what they do with
 		the various media resource types.  The following table gives an overview of the functions that each plugin type provides:
-		<table class="default" style="float: center">
-			<tr><td colspan="5" class="title">Table 2: Plugin Interfaces</td></tr>
-			<tr><td class="header_right">Plugin Interface</td><td class="header_right">Input Interface</td><td class="header_right">Output Interface</td><td class="header_right">Notes</td><td class="header_right">Links</td></tr>
+		<table>
+			<tr><th colspan="5" class="title">Table 2: Plugin Interfaces</th></tr>
+			<tr><th>Plugin Interface</th><th>Input Interface</th><th>Output Interface</th><th>Notes</th><th>Links</th></tr>
 			<tr><td>IAudioPlugin</td><td>IAudioResource</td><td>N/A</td><td>Takes an audio resource and plays it</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
 			<tr><td>IVideoPlugin</td><td>IVideoResource</td><td>N/A</td><td>Takes a video resource and plays it</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
 			<tr><td>IImagePlugin</td><td>IImageResource</td><td>N/A</td><td>Takes an image resource and displays it</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
@@ -70,23 +70,43 @@
 		</table>
 		</div>
 		<h2>Resource Types</h2>
-		<div class="default">There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the definition of IResource:<br/><br/>
+		<div>There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the definition of IResource:</div><br/><br/>
 		<div class="code_keyword">
 		public interface <span class="code_class">IResource</span><br/>
 		{<br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Uri</span><span class="code"> Uri { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ResourceFormat</span><span class="code"> Format { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IResourceFormat</span><span class="code"> Format { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span><span class="code">&lt;</span>object<span class="code">,</span> IResource<span class="code">&gt;</span><span class="code"> Resources { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
 		}<br/>
 		</div><br/>
 		The following table illustrates the standard resource types:
-		<table class="default">
-			<tr><td colspan="3" class="title">Table 3: Resource Types</td></tr>
-			<tr><td class="header_right">Resource Interface</td><td class="header_right">Properties</td><td class="header_right">Methods</td></tr>
+		<table>
+			<tr><th colspan="3" class="title">Table 3: Resource Types</th></tr>
+			<tr><th>Resource Interface</th><th>Properties</th><th>Methods</th></tr>
 			<tr><td>IAudio</td><td>Milliseconds, Position, Status</td><td>Load, Play, Pause, Stop, Seek</td></tr>
 		</table>
 		<h2>Resource Lifecycle</h2>
-		<div class="default">In Alexandria resources have a lifecycle:<ol><li>Get Uri (search/open)</li><li>Identify Resource</li><li>Validate Resource (optional)</li><li>Render/Edit/Convert/Submit Resource</li><li>Store Resource (optional)</li><li>Close Resource</li></ol></div>
+		<div>In Alexandria resources have a lifecycle:<ol><li>Get Uri (search/open)</li><li>Identify Resource</li><li>Validate Resource (optional)</li><li>Open Resource</li><li>Render/Edit/Convert/Submit Resource</li><li>Store Resource (optional)</li><li>Close Resource</li></ol></div>
+		<h2>Ubiquitous Language</h2>
+		<div>Here is a definition of the terms used in the Alexandria domain model:</div>
+		<table>
+		    <tr><th colspan="3" class="title">Table 4: Domain Vocabulary</th></tr>
+		    <tr><th>Term</th><th class="header_right">Definition</th><th>Links</th></tr>
+		    <tr><td>Local</td><td>Located on the same machine that the Alexandria client is running on</td><td></td></tr>
+		    <tr><td>Remote</td><td>Located on a machine other than the one that the Alexandria client is running on</td></tr>
+		    <tr><td>Resource</td><td>Digital media data or metadata that is utilitized by Alexandria.<br />This can be a local file, a remote stream, a compact disc or data from a database</td><td></td></tr>
+		    <tr><td>File</td><td>A file element in a file system. Typically this is a local file but it can also be from a remote file system.<br />The key disction between a file and a stream is that a file allows filesystem functions such as copy, rename and delete whereas a stream is just a read-only collection of media data</td><td></td></tr>
+		    <tr><td>Streaming Media</td><td>Multimedia that is continuously received by,<br />and normally displayed to, the end-user whilst it is being delivered by the provider.</td><td><a href="http://en.wikipedia.org/wiki/Streaming_media#Streaming_media_technologies">Wikipedia</a></td></tr>
+		    <tr><td>Non-Streaming Media</td><td>Multimedia that is cached on the end user's system and can be displayed at any time of their choosing<br />Examples include local digital media files and compact discs</td><td></td></tr>
+		    <tr><td>On-Demand Streaming Media</td><td>Cached on a remote server for a long period of time, and available to be transmitted at a user's request<br />Examples include videos found on youtube and prerecorded podcasts</td><td></td></tr>
+		    <tr><td>Live Streaming Media</td><td>Only available at one particular time, streamed to the end-user in real-time.<br />Examples include television, video streams of live sporting events and live audio broadcasts offered by radio stations</td><td></td></tr>
+		    <tr><td>Optical Disc</td><td>Flat, circular, usually polycarbonate disc whereon data is stored in the form of pits<br />Specifically, this refers to a local non-streaming resource that typically holds audio (Compact Disc) or video (DVD) resources by may include binary data (CD-ROM)</td><td><a href="http://en.wikipedia.org/wiki/Optical_disc">Wikipedia</a></td></tr>
+		    <tr><td>Delivery Mechanism?</td><td>Streaming vs. Non-Streaming</td><td></td></tr>
+		    <tr><td>Media Format</td><td>The format that the digital data is encoded with</td><td></td></tr>
+		    <tr><td>Real-Time Mechanism?</td><td>Live vs. On-Demand</td><td></td></tr>
+		    <tr><td></td><td></td><td></td></tr>
+		    <tr><td></td><td></td><td></td></tr>
+		</table>
 		</form>
 	</body>
 </html>
