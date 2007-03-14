@@ -13,9 +13,9 @@
 			TD { color: black; }
 			TD.note { border-top-width: 1px;  border-top-style: solid; border-top-color: darkblue; }
 			.otherNote { color: black; font-size: 8pt; font-family: Tahoma,Arial,Geneva,Sans-Serif; }
-			.code { color: black; font-size: 10pt; font-family: Courier; background-color: white; }
-			.code_keyword { color: blue; font-size: 10pt; font-family: Courier; background-color: white; }
-			.code_class { color: gray; font-size: 10pt; font-family: Courier; background-color: white; }
+			.code { color: black; font-size: 10pt; font-family: "Courier New", Courier, Monospace; background-color: white; }
+			.code_keyword { color: blue; font-size: 10pt; font-family: "Courier New", Courier, Monospace; background-color: white; }
+			.code_class { color: gray; font-size: 10pt; font-family: "Courier New", Courier, Monospace; background-color: white; }
 		</style>
 	</head>
 	<body>
@@ -57,34 +57,49 @@
 		<table>
 			<tr><th colspan="5" class="title">Table 2: Plugin Interfaces</th></tr>
 			<tr><th>Plugin Interface</th><th>Input Interface</th><th>Output Interface</th><th>Notes</th><th>Links</th></tr>
-			<tr><td>IAudioPlugin</td><td>IAudioResource</td><td>N/A</td><td>Takes an audio resource and plays it</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
-			<tr><td>IVideoPlugin</td><td>IVideoResource</td><td>N/A</td><td>Takes a video resource and plays it</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
-			<tr><td>IImagePlugin</td><td>IImageResource</td><td>N/A</td><td>Takes an image resource and displays it</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
-			<tr><td>ITextPlugin</td><td>ITextResource</td><td>N/A</td><td>Takes a text resource and displays it</td><td></td></tr>
-			<tr><td>IStoragePlugin</td><td>IStorable</td><td>N/A</td><td>Takes a storable resource and saves it to the specified storage medium</td><td><a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
-			<tr><td>ISearchPlugin</td><td>ISearch</td><td>ISearchResult</td><td>Takes a search query and returns a search result</td><td><a target="_blank" href="http://www.amazon.com">Amazon</a>, <a target="_blank" href="http://www.imdb.com">IMDB</a>, <a target="_blank" href="http://musicbrainz.org">MusicBrainz</a></td></tr>
-			<tr><td>ISubmissionPlugin</td><td>ISubmission</td><td>ISubmissionResult</td><td>Takes a submission query and returns a submission result</td><td><a target="_blank" href="http://www.last.fm">Last.fm</a></tr>
-			<tr><td>IIdentifierPlugin</td><td>System.Uri</td><td>IResource</td><td>Takes a uri and returns a resource</td><td></td></tr>
-			<tr><td>IConverterPlugin</td><td>IResource</td><td>IResource</td><td>Takes a resource and returns a resource with a different resource type</td><td></td></tr>
-			<tr><td>IDefinitionPlugin</td><td>N/A</td><td>ResourceFormat</td><td>Defines a resurce type</td><td></td></tr>
+			<tr><td>IAudioFactory</td><td>N/A</td><td>IAudio</td><td>Instantiates an audio resource</td><td><a target="_blank" href="http://fmod.org">FMOD</a></td></tr>
+			<tr><td>IMediaContainerFactory</td><td>N/A</td><td>IMediaContainer</td><td>Instantiates a media container resource</td><td><a target="_blank" href="http://taoframework.com">The Tao Framework</a></td></tr>
+			<tr><td>IImageFactory</td><td>N/A</td><td>IImage</td><td>Instantiates an image resource</td><td><a target="_blank" href="http://freeimage.sourceforge.net/">FreeImage</a></td></tr>
+			<tr><td>ITextFactory</td><td>N/A</td><td>IText</td><td>Instantiates a text resource</td><td></td></tr>
+			<tr><td>IMetadataFactory</td><td>N/A</td><td>IMetadata</td><td>Instantiates a metadata resource</td><td></td></tr>
+			<tr><td>IReaderFactory</td><td>N/A</td><td>IReader</td><td>Instantiates a reader (for searches, filtering, etc.)</td><td><a target="_blank" href="http://www.amazon.com">Amazon</a>, <a target="_blank" href="http://www.imdb.com">IMDB</a>, <a target="_blank" href="http://musicbrainz.org">MusicBrainz</a>, <a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
+			<tr><td>IWriterFactory</td><td>N/A</td><td>IWriter</td><td>Instantiates a writer (for submissions, updates, etc.)</td><td><a target="_blank" href="http://www.last.fm">Last.fm</a>, <a target="_blank" href="http://www.db4o.com">db4o</a>, <a target="_blank" href="http://sqlite.org">SQLite</a></td></tr>
+			<tr><td>ICommandFactory</td><td>IList&lt;ICommandOption&gt;</td><td>ResourceCommand</td><td>Takes a list of command options and returns a resource command delegate</td><td></td></tr>
+			<tr><td>IConverterFactory</td><td>N/A</td><td>IResource</td><td>Instantiates a resource with the requested resource format</td><td></td></tr>
+			<tr><td>IFormatRespository</td><td>N/A</td><td>ResourceFormat</td><td>A repository of resource format definitions</td><td></td></tr>
 		</table>
 		</div>
 		<h2>Resource Types</h2>
-		<div>There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the definition of IResource:</div><br/><br/>
-		<div class="code_keyword">
-		public interface <span class="code_class">IResource</span><br/>
-		{<br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Uri</span><span class="code"> Uri { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IResourceFormat</span><span class="code"> Format { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span><span class="code">&lt;</span>object<span class="code">,</span> IResource<span class="code">&gt;</span><span class="code"> Resources { </span><span class="code_keyword">get</span><span class="code">; }</span><br/>
-		}<br/>
-		</div><br/>
+		<div>There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the resource interface hierarchy in Alexandria starting with IResource:</div><br/>
+		<div class="code">
+		<span class="code_keyword">public interface </span><span class="code_class">IResource</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Uri</span> Uri {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ResourceFormat</span> Format {<span class="code_keyword">get</span>;}<br />}<br /><br />		
+		<span class="code_keyword">public interface </span><span class="code_class">IAudio</span> : <span class="code_class">IResource</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">AudioCapabilities</span> AudioCapabilities {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IAudioSection</span>&gt; AudioSections {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int</span> SelectedAudioSection {<span class="code_keyword">get</span>;<span class="code_keyword">set</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMetadata</span>&gt; Metadata {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int</span> Volume {<span class="code_keyword">get</span>;<span class="code_keyword">set</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Load();<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Play();<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Pause();<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Stop();<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Seek(<span class="code_keyword">int</span> position);<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void</span> Unload();<br />}<br /><br/ >
+		<span class="code_keyword">public interface </span><span class="code_class">IMediaContainer</span> : <span class="code_class">IAudio</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">VideoCapabilities</span> VideoCapabilities {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IVideoSection</span>&gt; VideoSections {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int</span> SelectedVideoSection {<span class="code_keyword">get</span>;<span class="code_keyword">set</span>;}<br />}
+		</div>
+		<br/>
 		The following table illustrates the standard resource types:
 		<table>
 			<tr><th colspan="3" class="title">Table 3: Resource Types</th></tr>
 			<tr><th>Resource Interface</th><th>Properties</th><th>Methods</th></tr>
 			<tr><td>IAudio</td><td>Milliseconds, Position, Status</td><td>Load, Play, Pause, Stop, Seek</td></tr>
 		</table>
+		<br /><br /><br /><br /><br /><br />
 		<h2>Resource Lifecycle</h2>
 		<div>In Alexandria resources have a lifecycle:<ol><li>Get Uri (search/open)</li><li>Identify Resource</li><li>Validate Resource (optional)</li><li>Open Resource</li><li>Render/Edit/Convert/Submit Resource</li><li>Store Resource (optional)</li><li>Close Resource</li></ol></div>
 		<h2>Ubiquitous Language</h2>
@@ -107,6 +122,7 @@
 		    <tr><td></td><td></td><td></td></tr>
 		    <tr><td></td><td></td><td></td></tr>
 		</table>
+		
 		</form>
 	</body>
 </html>
