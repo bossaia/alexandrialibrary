@@ -77,11 +77,13 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ResourceFormat</span> Format {<span class="code_keyword">get</span>;}<br />}<br /><br />		
 		<span class="code_keyword">public interface </span><span class="code_class">IMediaContainer</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaCapabilities</span> MediaCapabilities {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMediaContainer</span>&gt; MediaContainers {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IAudio</span>&gt; Audio {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IVideo</span>&gt; Video {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IImage</span>&gt; Image {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IImage</span>&gt; Images {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IText</span>&gt; Text {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMetadata</span>&gt; Metadata {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMetadata</span>&gt; Metadata {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">ILayout</span>&gt; Layout {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IPlayable</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void </span> Play();<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void </span> Pause();<br />
@@ -110,7 +112,17 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">int</span>&gt; IntegerData {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">double</span>&gt; FloatData {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">decimal</span>&gt; DecimalData {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">DateTime</span>&gt; DateData {<span class="code_keyword">get</span>;}<br />}<br />		
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">DateTime</span>&gt; DateData {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		<span class="code_keyword">public interface </span><span class="code_class">ILayout</span> : <span class="code_class">IResource</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaType</span> MediaType {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int</span> ItemIndex {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		<span class="code_keyword">public enum </span><span class="code_class">MediaType</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;MediaContainer,<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Audio,<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Video,<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Image,<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Text,<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Metadata<br />}<br />		
 		</div>
 		<br/>
 		The following table illustrates the standard resource types:
