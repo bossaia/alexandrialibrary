@@ -8,7 +8,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	public class SoundUpdateCommand : FmodSoundCommand
 	{
 		#region Constructors
-		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, AudioCommandType.Update)
+		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, MediaCommandType.Update)
 		{
 		}
 		#endregion
@@ -34,34 +34,34 @@ namespace AlexandriaOrg.Alexandria.Fmod
 					switch (Sound.OpenState)
 					{
 						case OpenState.Error:
-							Sound.Status.BufferState = AudioBufferState.None;
-							Sound.Status.PlaybackState = AudioPlaybackState.None;
+							Sound.Status.BufferState = MediaBufferState.None;
+							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.IsSeeking = false;
-							Result = AudioCommandResult.StreamError;
+							Result = MediaCommandResult.StreamError;
 							break;
 						case OpenState.Buffering:
-							Sound.Status.BufferState = AudioBufferState.Buffering;
+							Sound.Status.BufferState = MediaBufferState.Buffering;
 							break;
 						case OpenState.Connecting:
-							Sound.Status.BufferState = AudioBufferState.Connecting;
+							Sound.Status.BufferState = MediaBufferState.Connecting;
 							break;
 						case OpenState.Loading:
-							Sound.Status.BufferState = AudioBufferState.Loading;
+							Sound.Status.BufferState = MediaBufferState.Loading;
 							break;
 						case OpenState.Ready:
-							Result = AudioCommandResult.Streaming;
+							Result = MediaCommandResult.Streaming;
 							Sound.Status = RemoteSoundReady.Example;
 							break;
 						default:
-							Sound.Status.BufferState = AudioBufferState.None;
-							Sound.Status.PlaybackState = AudioPlaybackState.None;
+							Sound.Status.BufferState = MediaBufferState.None;
+							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.IsSeeking = false;
-							Result = AudioCommandResult.StreamError;
+							Result = MediaCommandResult.StreamError;
 							break;
 					}
 				}
 			}
-			else Result = AudioCommandResult.InvalidCommand;
+			else Result = MediaCommandResult.InvalidCommand;
 		}
 		#endregion
 	}

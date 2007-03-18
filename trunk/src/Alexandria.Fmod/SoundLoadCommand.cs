@@ -8,7 +8,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	public class SoundLoadCommand : FmodSoundCommand
 	{
 		#region Constructors
-		public SoundLoadCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, AudioCommandType.Load)
+		public SoundLoadCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, MediaCommandType.Load)
 		{
 		}
 		#endregion
@@ -29,12 +29,12 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				Sound.Load();
 				if (AudioPlayer.SoundSystem.CurrentResult == Fmod.Result.Ok)
 				{
-					Result = AudioCommandResult.Loaded;
+					Result = MediaCommandResult.Loaded;
 					Sound.Status = LocalSoundLoaded.Example;
 				}
-				else Result = AudioCommandResult.LoadError;
+				else Result = MediaCommandResult.LoadError;
 			}
-			else Result = AudioCommandResult.InvalidCommand;
+			else Result = MediaCommandResult.InvalidCommand;
 		}
 		#endregion
 	}

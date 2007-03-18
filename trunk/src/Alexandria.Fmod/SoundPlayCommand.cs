@@ -8,7 +8,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	public class SoundPlayCommand : FmodSoundCommand
 	{
 		#region Constructors
-		public SoundPlayCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, AudioCommandType.Play)
+		public SoundPlayCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, MediaCommandType.Play)
 		{
 		}
 		#endregion
@@ -35,7 +35,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				
 				}
 			}
-			else Result = AudioCommandResult.InvalidCommand;
+			else Result = MediaCommandResult.InvalidCommand;
 		}
 		#endregion
 	}
