@@ -4,20 +4,20 @@ using System.Text;
 
 namespace Alexandria
 {		
-	#region AudioBufferState
-	public enum AudioBufferState
-	{
+	#region MediaBufferState
+	public enum MediaBufferState
+	{ 
 		None = 0,
-		Loading,
 		Connecting,
+		Loading,
 		Buffering,
 		Ready,
 		Starving
 	}
 	#endregion
 	
-	#region AudioPlaybackState
-	public enum AudioPlaybackState
+	#region MediaPlaybackState
+	public enum MediaPlaybackState
 	{
 		None = 0,
 		Playing,
@@ -26,8 +26,8 @@ namespace Alexandria
 	}
 	#endregion
 		
-	#region AudioCommandType
-	public enum AudioCommandType
+	#region MediaCommandType
+	public enum MediaCommandType
 	{
 		None = 0,
 		Load,
@@ -40,8 +40,8 @@ namespace Alexandria
 	}
 	#endregion
 	
-	#region AudioCommandResult
-	public enum AudioCommandResult
+	#region MediaCommandResult
+	public enum MediaCommandResult
 	{
 		/// <summary>
 		/// There was no result from this Update
