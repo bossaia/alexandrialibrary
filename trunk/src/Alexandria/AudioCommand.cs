@@ -7,25 +7,25 @@ namespace Alexandria
 	public abstract class AudioCommand : IAudioCommand
 	{
 		#region Constructors
-		protected AudioCommand(AudioCommandType type)
+		protected AudioCommand(MediaCommandType type)
 		{
 			this.type = type;
 		}
 		#endregion
 	
 		#region Private Fields
-		private AudioCommandType type = AudioCommandType.None;
-		private AudioCommandResult result = AudioCommandResult.None;
+		private MediaCommandType type = MediaCommandType.None;
+		private MediaCommandResult result = MediaCommandResult.None;
 		#endregion
 	
 		#region Public Properties
-		public AudioCommandType Type
+		public MediaCommandType Type
 		{
 			get {return type;}
 			protected set {type = value;}
 		}
 		
-		public AudioCommandResult Result
+		public MediaCommandResult Result
 		{
 			get {return result;}
 			protected set {result = value;}

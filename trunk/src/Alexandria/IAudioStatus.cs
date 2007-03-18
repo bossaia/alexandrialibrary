@@ -6,8 +6,8 @@ namespace Alexandria
 {
 	public interface IAudioStatus
 	{
-		AudioBufferState BufferState{get;}
-		AudioPlaybackState PlaybackState{get;}
+		MediaBufferState BufferState{get;}
+		MediaPlaybackState PlaybackState{get;}
 		bool IsSeeking{get;}
 		float BufferLevel{get;}
 		bool AllowsLoad{get;}

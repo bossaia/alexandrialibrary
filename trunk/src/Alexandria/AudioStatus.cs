@@ -19,8 +19,8 @@ namespace Alexandria
 		#endregion
 	
 		#region Private Fields
-		private AudioBufferState bufferState = AudioBufferState.None;
-		private AudioPlaybackState playbackState = AudioPlaybackState.None;
+		private MediaBufferState bufferState = MediaBufferState.None;
+		private MediaPlaybackState playbackState = MediaPlaybackState.None;
 		private bool isSeeking = false;
 		private float bufferLevel;
 		private bool allowsLoad;
@@ -32,13 +32,13 @@ namespace Alexandria
 		#endregion
 				
 		#region Public Properties
-		public AudioBufferState BufferState
+		public MediaBufferState BufferState
 		{
 			get {return bufferState;}
 			set {bufferState = value;}
 		}
 		
-		public AudioPlaybackState PlaybackState
+		public MediaPlaybackState PlaybackState
 		{
 			get {return playbackState;}
 			set {playbackState = value;}
