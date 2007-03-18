@@ -73,16 +73,22 @@
 		<div>There is a set of standard interfaces that resources implement depending on how they can be accessed. All resource interfaces all inherit from IResource.  Here is the resource interface hierarchy in Alexandria starting with IResource:</div><br/>
 		<div class="code">
 		<span class="code_keyword">public interface </span><span class="code_class">IResource</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Guid</span> Guid {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">Uri</span> Uri {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ResourceFormat</span> Format {<span class="code_keyword">get</span>;}<br />}<br /><br />		
 		<span class="code_keyword">public interface </span><span class="code_class">IMediaContainer</span> : <span class="code_class">IResource</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaContainerCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaContainerCapability</span> Capability {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IAudio</span>&gt; AudioItems {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IVideo</span>&gt; VideoItems {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IImage</span>&gt; ImageItems {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IText</span>&gt; TextItems {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMetadata</span>&gt; MetadataItems {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">ILayout</span>&gt; LayoutItems {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		<span class="code_keyword">public interface </span><span class="code_class">IAudioCompactDisc</span> : <span class="code_class">IResource</span><br />{<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IAudio</span>&gt; Tracks {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">int</span>&gt; Minutes {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">int</span>&gt; Seconds {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_keyword">int</span>&gt; Frames {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IPlayable</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void </span> Play();<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">void </span> Pause();<br />
@@ -94,35 +100,33 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Treble {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Bass {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IAudio</span> : <span class="code_class">IAudible, IPlayable</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">AudioCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">AudioCapability</span> Capability {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IVisible</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Brightness {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Contrast {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Hue {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int </span> Saturation {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IVideo</span> : <span class="code_class">IVisible, IPlayable</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">VideoCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">VideoCapability</span> Capability {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IImage</span> : <span class="code_class">IVisible</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ImageCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">ImageCapability</span> Capability {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IText</span> : <span class="code_class">IResource, IAudible</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">TextCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">TextCapability</span> Capability {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IMetadata</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">string</span> Name {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MetadataCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object<span class="code">,</span> StringMetadataList</span>&gt; StringItems {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object<span class="code">,</span> IntegerMetadataList</span>&gt; IntegerItems {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object<span class="code">,</span> DoubleMetadataList</span>&gt; DoubleItems {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object<span class="code">,</span> DecimalMetadataList</span>&gt; DecimalItems {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object<span class="code">,</span> DateMetadataList</span>&gt; DateItems {<span class="code_keyword">get</span>;}<br />}<br /><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MetadataCapability</span> Capability {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">MetadataMap</span>&lt;<span class="code_keyword">object</span>, <span class="code_keyword">string</span>&gt;&gt; StringItems {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">MetadataMap</span>&lt;<span class="code_keyword">object</span>, <span class="code_keyword">int</span>&gt;&gt; IntegerItems {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">MetadataMap</span>&lt;<span class="code_keyword">object</span>, <span class="code_keyword">double</span>&gt;&gt; DoubleItems {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">MetadataMap</span>&lt;<span class="code_keyword">object</span>, <span class="code_keyword">decimal</span>&gt;&gt; DecimalItems {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IDictionary</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">MetadataMap</span>&lt;<span class="code_keyword">object</span>, <span class="code_class">DateTime</span>&gt;&gt; DateItems {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">ILayout</span> : <span class="code_class">IResource</span><br />{<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaType</span> MediaType {<span class="code_keyword">get</span>;}<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_keyword">int</span> ItemIndex {<span class="code_keyword">get</span>;}<br />}<br /><br />
 		<span class="code_keyword">public interface </span><span class="code_class">IMediaList</span> : <span class="code_class">IResource</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaListCapabilities</span> Capabilities {<span class="code_keyword">get</span>;}<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMediaListItem</span>&gt; Items {<span class="code_keyword">get</span>;}<br />}<br /><br />
-		
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">MediaListCapability</span> Capability {<span class="code_keyword">get</span>;}<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;<span class="code_class">IList</span>&lt;<span class="code_class">IMediaListItem</span>&gt; Items {<span class="code_keyword">get</span>;}<br />}<br /><br />		
 		<span class="code_keyword">public enum </span><span class="code_class">MediaType</span><br />{<br />
-		&nbsp;&nbsp;&nbsp;&nbsp;MediaContainer,<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;Audio,<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;Video,<br />
 		&nbsp;&nbsp;&nbsp;&nbsp;Image,<br />
