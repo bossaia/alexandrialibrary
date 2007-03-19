@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
-	[TagEngineClass]
+	//[TagEngineClass]
 	public class TagLibEngine : TagEngine
 	{
 		#region Constructors

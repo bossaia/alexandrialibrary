@@ -62,12 +62,6 @@
     <Compile Include="PlaybackStatusPaused.cs" />
     <Compile Include="PlaybackStatusPlaying.cs" />
     <Compile Include="PlaybackStatusStopped.cs" />
-    <Compile Include="AudioPlayerClassAttribute.cs" />
-    <Compile Include="DataFactoryClassAttribute.cs" />
-    <Compile Include="MetadataProviderClassAttribute.cs" />
-    <Compile Include="PluginAttribute.cs" />
-    <Compile Include="SoundClassAttribute.cs" />
-    <Compile Include="TagEngineClassAttribute.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceFormat.cs" />

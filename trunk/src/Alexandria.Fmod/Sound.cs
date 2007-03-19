@@ -10,7 +10,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	[SoundClass]
+	//[SoundClass]
 	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudioResource
 	{
 		#region Constructors

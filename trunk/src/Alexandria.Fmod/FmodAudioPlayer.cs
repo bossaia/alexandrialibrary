@@ -9,7 +9,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {	
-	[AudioPlayerClass]
+	//[AudioPlayerClass]
 	public class FmodAudioPlayer : IAudioPlayer, IDisposable
 	{		
 		#region Private Fields

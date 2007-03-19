@@ -7,7 +7,7 @@ using Alexandria;
 
 namespace Alexandria.MusicBrainz
 {
-	[MetadataProviderClass]
+	//[MetadataProviderClass]
 	public class MusicBrainzMetadataProvider : MetadataProvider
 	{
 		#region Private Constant Fields

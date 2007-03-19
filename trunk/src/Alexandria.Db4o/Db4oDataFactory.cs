@@ -7,7 +7,7 @@ using Alexandria;
 
 namespace Alexandria.Db4o
 {
-	[Alexandria.DataFactoryClass]
+	//[Alexandria.DataFactoryClass]
 	public class Db4oDataFactory
 	{
 		#region Private Constants
