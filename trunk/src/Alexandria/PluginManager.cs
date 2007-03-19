@@ -20,7 +20,7 @@ namespace Alexandria
 		//private static DataFactory dataFactory;
 		//private static string dataFactoryPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["DataFactoryPluginName"];
 		private static Assembly metadataProviderAssembly;
-		private static MetadataProvider metadataProvider;
+		private static IAlbumFactory albumFactory;
 		private static string metadataProviderPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["MetadataProviderPluginName"];
 		#endregion
 		
@@ -93,7 +93,7 @@ namespace Alexandria
 			}
 		}
 		
-		public static MetadataProvider MetadataProvider
+		public static IAlbumFactory AlbumFactory
 		{
 			get
 			{

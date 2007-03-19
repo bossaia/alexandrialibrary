@@ -8,7 +8,7 @@ using Alexandria;
 namespace Alexandria.MusicBrainz
 {
 	//[MetadataProviderClass]
-	public class MusicBrainzMetadataProvider : MetadataProvider
+	public class MusicBrainzMetadataProvider : IAlbumFactory
 	{
 		#region Private Constant Fields
 		private const int CDINDEX_ID_LEN = 28;
@@ -296,17 +296,19 @@ namespace Alexandria.MusicBrainz
 		}
 		#endregion
 		
-		#region Public Methods
-		public override IAlbumResource GetAlbum(IAudioCompactDisc disc)
+		#region IAlbumFactory Members
+		public IAlbumResource GetAlbum(IAudioCompactDisc disc)
 		{
 			return ReadCompactDisc(disc);
 		}
 
-		public override IAlbumResource GetAlbum(Search albumSearch)
+		public IAlbumResource GetAlbum(ISearch albumSearch)
 		{
 			return null;
 		}
+		#endregion
 
+		#region Public Methods
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
 		public IAlbumResource GetAlbum(string id)
 		{
