@@ -59,8 +59,9 @@ namespace Alexandria
 		{
 			get
 			{
-				if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(AudioPlayerClassAttribute)) as IAudioPlayer;
-				return audioPlayer;
+				//if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(AudioPlayerClassAttribute)) as IAudioPlayer;
+				//return audioPlayer;
+				return null;
 			}
 		}
 
@@ -77,8 +78,9 @@ namespace Alexandria
 		{
 			get
 			{
-				if (tagEngine == null) tagEngine = PluginManager.GetObject(TagEngineAssembly, typeof(TagEngineClassAttribute)) as TagEngine;
-				return tagEngine;
+				//if (tagEngine == null) tagEngine = PluginManager.GetObject(TagEngineAssembly, typeof(TagEngineClassAttribute)) as TagEngine;
+				//return tagEngine;
+				return null;
 			}
 		}
 		
@@ -95,8 +97,9 @@ namespace Alexandria
 		{
 			get
 			{
-				if (metadataProvider == null) metadataProvider = PluginManager.GetObject(MetadataProviderAssembly, typeof(MetadataProviderClassAttribute)) as MetadataProvider;
-				return metadataProvider;
+				//if (metadataProvider == null) metadataProvider = PluginManager.GetObject(MetadataProviderAssembly, typeof(MetadataProviderClassAttribute)) as MetadataProvider;
+				//return metadataProvider;
+				return null;
 			}
 		}
 		#endregion
