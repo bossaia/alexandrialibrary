@@ -4,10 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	/// <summary>
-	/// Represents a search strategy
-	/// </summary>
-	public abstract class Search
+	public interface ISearch
 	{
 	}
 }

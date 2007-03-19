@@ -38,7 +38,7 @@ namespace Alexandria.Client
 		private IAudioPlayer audioPlayer;
 		//private DataFactory dataFactory;
 		private TagEngine tagEngine;
-		private MetadataProvider metadataProvider;
+		private IAlbumFactory albumFactory;
 		//private AudioPlaybackFunction playDelegate = null;
 		//private AudioPlaybackFunction pauseDelegate = null;
 		//private AudioPlaybackFunction stopDelegate = null;
@@ -253,7 +253,7 @@ namespace Alexandria.Client
 			{
 				try
 				{
-					metadataProvider = PluginManager.MetadataProvider;
+					albumFactory = PluginManager.AlbumFactory;
 					
 					//OpticalDrive cdDrive = null;
 					
