@@ -248,7 +248,7 @@ namespace Alexandria.MusicBrainz
 
 		public override int GetHashCode()
 		{	
-			return Alexandria.DataConverter.GetHashCode(this.Address) + this.Port;
+			return (this.Address.GetHashCode() ^ this.Port.GetHashCode());
 		}
 		#endregion
 		
@@ -328,7 +328,7 @@ namespace Alexandria.MusicBrainz
 
 		public override int GetHashCode()
 		{
-			return DataConverter.GetHashCode(fileName);
+			return fileName.GetHashCode();
 		}
 		#endregion
 		

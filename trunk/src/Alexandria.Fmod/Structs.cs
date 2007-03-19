@@ -387,7 +387,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		public override int GetHashCode()
 		{
-			return DataConverter.GetHashCode(this.Name + this.Type.ToString() + this.DataType.ToString());
+			return (this.Name.GetHashCode() ^ this.Type.GetHashCode() ^ this.DataType.GetHashCode());
 		}
 
 		public override string ToString()
@@ -648,7 +648,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		public override int GetHashCode()
 		{
-			return (DataConverter.GetHashCode(this.Name) * 100) + (DataConverter.GetHashCode(this.Label) * 10) + DataConverter.GetHashCode(this.Description);
+			return (this.Name.GetHashCode() ^ this.Label.GetHashCode() ^ this.Description.GetHashCode());
 		}
 		#endregion
 		
