@@ -7,7 +7,7 @@ namespace Alexandria
 	public interface IAudioCommand
 	{
 		MediaCommandResult Result{get;}
-		bool IsValid(AudioStatus status);
-		void Execute(AudioStatus status);
+		bool IsValid(IAudioStatus status);
+		void Execute(IAudioStatus status);
 	}
 }

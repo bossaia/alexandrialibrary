@@ -91,6 +91,7 @@
     <Compile Include="SoundSettings.cs" />
     <Compile Include="SoundLock.cs" />
     <Compile Include="SoundPlayCommand.cs" />
+    <Compile Include="SoundStatus.cs" />
     <Compile Include="SoundStreamCommand.cs" />
     <Compile Include="SoundSystem.cs" />
     <Compile Include="SoundSystemFactory.cs" />

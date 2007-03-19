@@ -137,7 +137,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private IntPtr userData = IntPtr.Zero;
 		private Uri uri; //MediaFile mediaFile;
 		private bool disposed;
-		private AudioStatus status;
+		private IAudioStatus status;
 		#endregion
 		
 		#region Internal Methods
@@ -785,7 +785,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 		}
 
-		public AudioStatus Status
+		public IAudioStatus Status
 		{
 			get { return status; }
 			internal set { status = value; }

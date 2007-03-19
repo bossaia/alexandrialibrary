@@ -10,7 +10,7 @@ using Alexandria;
 namespace AlexandriaOrg.Alexandria.Fmod
 {	
 	[AudioPlayerClass]
-	public class FmodAudioPlayer : AudioPlayer, IDisposable
+	public class FmodAudioPlayer : IAudioPlayer, IDisposable
 	{		
 		#region Private Fields
 		private Channel channel;
@@ -20,6 +20,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private bool currentSoundIsStreaming;
 		private System.Timers.Timer timer;
 		private DateTime soundLoadStart = DateTime.MinValue;
+		private PlaybackStatus status;
 		private string streamingStatus;				
 		private static Sound ripSound;
 		private static Channel ripChannel;
@@ -44,7 +45,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 		
 		#region IDisposable Members
-		protected override void Dispose(bool disposing)
+		protected void Dispose(bool disposing)
 		{
 			try
 			{
@@ -100,7 +101,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 			finally
 			{
-				base.Dispose(disposing);
+				//base.Dispose(disposing);
 			}
 		}
 
@@ -123,6 +124,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Private Events
 		private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{	
+			/*
 			if (this.Status.Name == PlaybackStatus.Playing.Name)
 			{			
 				if (this.channel != null && this.currentAudio != null)
@@ -254,6 +256,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 					soundSystem.Update();					
 				}
 			}
+			*/
 		}
 		#endregion
 		
@@ -266,12 +269,12 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		
 		#region Public Properties
 		[CLSCompliant(false)]
-		public override IAudioResource CurrentAudio
+		public IAudioResource CurrentAudio
 		{
 			get {return currentAudio;}
 		}
 		
-		public override bool IsMuted
+		public bool IsMuted
 		{
 			get
 			{
@@ -287,7 +290,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 
 		[CLSCompliant(false)]
-		public override uint Position
+		public uint Position
 		{
 			get
 			{
@@ -307,7 +310,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			}
 		}
 		
-		public override float Volume
+		public float Volume
 		{
 			get
 			{
@@ -327,16 +330,16 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			//get {return new GetAudioInfo(this.GetAudioInfo);}
 		//}
 		
-		public override string CurrentResult
+		public string CurrentResult
 		{
 			get {return this.soundSystem.CurrentResult.ToString();}
 		}
 		
-		public override System.ComponentModel.ISynchronizeInvoke TimerSynch
-		{
-			get {return timer.SynchronizingObject;}
-			set {timer.SynchronizingObject = value;}
-		}
+		//public System.ComponentModel.ISynchronizeInvoke TimerSynch
+		//{
+			//get {return timer.SynchronizingObject;}
+			//set {timer.SynchronizingObject = value;}
+		//}
 		
 		/*
 		public override double PlaybackInterval
@@ -364,112 +367,6 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Protected Methods
-		protected override void PlayCurrentSound()
-		{						
-			if (currentAudio != null)
-			{
-				PlaybackEventArgs e = new PlaybackEventArgs();
-
-				if (OnPlay != null)
-				{
-					OnPlay(this, e);
-				}
-
-				if (e.IsValid)
-				{
-					if (!currentSoundIsStreaming)
-					{
-						if (channel == null) channel = new Channel();										
-				
-						if (!channel.Paused)
-						{
-							try
-							{
-								Debug.WriteLine("soundSystem.PlaySound");
-								// The channel was not already paused so start playing a new stream
-								soundSystem.PlaySound(ChannelIndex.Free, currentAudio, false, ref channel);
-							}
-							catch (Exception ex)
-							{
-								throw new AlexandriaException(ex);
-							}
-						}
-						else
-						{
-							// The channel was already paused so we can just resume playback
-							channel.Paused = false;
-						}
-					}
-					else
-					{
-						if (channel != null)
-						{
-							if (channel.IsPlaying && !channel.Paused)
-							{
-								channel.Paused = true;
-							}
-							else
-							{
-								channel.Paused = false;
-							}
-						}
-					}
-				}
-			}
-			else throw new InvalidOperationException("No sound was defined for the audio player to play");
-		}
-
-		protected override void PauseCurrentSound()
-		{
-			if (currentAudio != null)
-			{
-				PlaybackEventArgs e = new PlaybackEventArgs();
-				if (this.OnPause != null)
-				{
-					OnPause(this, e);
-				}
-				
-				if (e.IsValid)
-				{
-					if (channel != null)
-					{
-						Debug.WriteLine("channel.Pause");
-						this.channel.Paused = true;
-					}
-					else throw new InvalidOperationException("Could not pause the audio player: the output channel is not defined");
-				}
-			}
-			else throw new InvalidOperationException("Could not pause the audio player: the current sound is not defined");
-		}
-
-		protected override void StopCurrentSound()
-		{
-			if (currentAudio != null)
-			{
-				PlaybackEventArgs e = new PlaybackEventArgs();
-				if (OnStop != null)
-				{
-					OnStop(this, e);
-				}
-				
-				if (e.IsValid)
-				{
-					if (channel != null)
-					{
-						Debug.WriteLine("channel.Stop");
-						this.channel.Stop();
-					}
-					else
-					{
-						//throw new InvalidOperationException("Could not stop the audio player: the output channel is not defined");
-					}
-				}
-			}
-			else throw new InvalidOperationException("Could not stop the audio player: the current sound is not defined");
-		}			
-		#endregion
-
 		#region Public Methods
 		/*
 		public override void SetCurrentMediaFile(MediaFile mediaFile)
@@ -537,7 +434,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		*/
 
 		[CLSCompliant(false)]
-		public override void SetPosition(uint position)
+		public void SetPosition(uint position)
 		{
 			if (channel != null)
 				this.channel.Position = position;
@@ -578,6 +475,156 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
+		#endregion
+		
+		#region IAudioPlayer Members
+		public string CurrentStatus
+		{
+			get { return null; }
+		}
+		
+		public double PlaybackInterval
+		{
+			get { return 0L; }
+			set { }
+		}
+		
+		public double SoundLoadTimeout
+		{
+			get { return 0L; }
+			set { }
+		}
+		
+		public void Play()
+		{
+		}
+		
+		public void Pause()
+		{
+		}
+		
+		public void Stop()
+		{
+		}
+		
+		public void Seek(bool forward, uint length)
+		{
+		}
+		
+		public void SetStatus(PlaybackStatus status)
+		{
+			this.status = status;
+		}
+
+		public void PlayCurrentSound()
+		{
+			/*					
+			if (currentAudio != null)
+			{
+				PlaybackEventArgs e = new PlaybackEventArgs();
+
+				if (OnPlay != null)
+				{
+					OnPlay(this, e);
+				}
+
+				if (e.IsValid)
+				{
+					if (!currentSoundIsStreaming)
+					{
+						if (channel == null) channel = new Channel();										
+				
+						if (!channel.Paused)
+						{
+							try
+							{
+								Debug.WriteLine("soundSystem.PlaySound");
+								// The channel was not already paused so start playing a new stream
+								soundSystem.PlaySound(ChannelIndex.Free, currentAudio, false, ref channel);
+							}
+							catch (Exception ex)
+							{
+								throw new AlexandriaException(ex);
+							}
+						}
+						else
+						{
+							// The channel was already paused so we can just resume playback
+							channel.Paused = false;
+						}
+					}
+					else
+					{
+						if (channel != null)
+						{
+							if (channel.IsPlaying && !channel.Paused)
+							{
+								channel.Paused = true;
+							}
+							else
+							{
+								channel.Paused = false;
+							}
+						}
+					}
+				}
+			}
+			else throw new InvalidOperationException("No sound was defined for the audio player to play");
+			*/
+		}
+
+		public void PauseCurrentSound()
+		{
+			/*
+			if (currentAudio != null)
+			{
+				PlaybackEventArgs e = new PlaybackEventArgs();
+				if (this.OnPause != null)
+				{
+					OnPause(this, e);
+				}
+				
+				if (e.IsValid)
+				{
+					if (channel != null)
+					{
+						Debug.WriteLine("channel.Pause");
+						this.channel.Paused = true;
+					}
+					else throw new InvalidOperationException("Could not pause the audio player: the output channel is not defined");
+				}
+			}
+			else throw new InvalidOperationException("Could not pause the audio player: the current sound is not defined");
+			*/
+		}
+
+		public void StopCurrentSound()
+		{
+			/*
+			if (currentAudio != null)
+			{
+				PlaybackEventArgs e = new PlaybackEventArgs();
+				if (OnStop != null)
+				{
+					OnStop(this, e);
+				}
+				
+				if (e.IsValid)
+				{
+					if (channel != null)
+					{
+						Debug.WriteLine("channel.Stop");
+						this.channel.Stop();
+					}
+					else
+					{
+						//throw new InvalidOperationException("Could not stop the audio player: the output channel is not defined");
+					}
+				}
+			}
+			else throw new InvalidOperationException("Could not stop the audio player: the current sound is not defined");
+			*/
+		}
 		#endregion
 
 		#region Stream Save Methods

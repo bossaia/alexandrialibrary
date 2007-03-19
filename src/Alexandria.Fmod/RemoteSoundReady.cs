@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.Fmod
 {
-	public sealed class RemoteSoundReady : AudioStatus
+	public sealed class RemoteSoundReady : SoundStatus
 	{
 		#region Constructors
 		public RemoteSoundReady() : base(false, false, true, false, false, false)

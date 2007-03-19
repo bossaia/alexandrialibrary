@@ -14,12 +14,12 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region Public Methods
-		public override bool IsValid(AudioStatus status)
+		public override bool IsValid(IAudioStatus status)
 		{
 			return true;
 		}
 
-		public override void Execute(AudioStatus status)
+		public override void Execute(IAudioStatus status)
 		{
 			if (IsValid(status))
 			{
@@ -36,14 +36,14 @@ namespace AlexandriaOrg.Alexandria.Fmod
 						case OpenState.Error:
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
-							Sound.Status.IsSeeking = false;
+							Sound.Status.SeekingState = MediaSeekingState.None;
 							Result = MediaCommandResult.StreamError;
 							break;
 						case OpenState.Buffering:
 							Sound.Status.BufferState = MediaBufferState.Buffering;
 							break;
 						case OpenState.Connecting:
-							Sound.Status.BufferState = MediaBufferState.Connecting;
+							Sound.Status.StreamingState = MediaStreamingState.Connecting;
 							break;
 						case OpenState.Loading:
 							Sound.Status.BufferState = MediaBufferState.Loading;
@@ -55,7 +55,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 						default:
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
-							Sound.Status.IsSeeking = false;
+							Sound.Status.SeekingState = MediaSeekingState.None;
 							Result = MediaCommandResult.StreamError;
 							break;
 					}

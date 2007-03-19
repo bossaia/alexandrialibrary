@@ -35,7 +35,7 @@ namespace Alexandria.Client
 		private string loadedFile;
 		private uint position;
 		private uint length;
-		private AudioPlayer audioPlayer;
+		private IAudioPlayer audioPlayer;
 		//private DataFactory dataFactory;
 		private TagEngine tagEngine;
 		private MetadataProvider metadataProvider;
@@ -49,6 +49,8 @@ namespace Alexandria.Client
 		private bool soundLoadHasTimedOut;
 		//private System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(
 		//("Resources", System.Reflection.Assembly.GetExecutingAssembly());
+		private delegate void SimpleEvent();
+		private delegate void AudioPlaybackFunction();
 		#endregion
 
 		#region Private Constant Fields
@@ -282,14 +284,14 @@ namespace Alexandria.Client
 				tagEngine = PluginManager.TagEngine;
 			
 				// wire the events to our test methods
-				audioPlayer.OnPlay += new EventHandler<PlaybackEventArgs>(OnPlay);
-				audioPlayer.OnPause += new EventHandler<PlaybackEventArgs>(OnPause);
-				audioPlayer.OnStop += new EventHandler<PlaybackEventArgs>(OnStop);
-				audioPlayer.OnPlaybackTimerTick += new EventHandler<System.Timers.ElapsedEventArgs>(OnAudioPlayerTimerTick);
-				audioPlayer.OnSoundLoadTimeout += new EventHandler<EventArgs>(OnSoundLoadTimeout);
-				audioPlayer.OnPlaybackStatusChange += new EventHandler<PlaybackEventArgs>(OnPlaybackStatusChange);
-				audioPlayer.OnStreamingStatusChange += new EventHandler<PlaybackEventArgs>(OnStreamingStatusChange);
-				audioPlayer.OnRippingStatusChange += new EventHandler<PlaybackEventArgs>(OnRippingStatusChange);
+				//audioPlayer.OnPlay += new EventHandler<PlaybackEventArgs>(OnPlay);
+				//audioPlayer.OnPause += new EventHandler<PlaybackEventArgs>(OnPause);
+				//audioPlayer.OnStop += new EventHandler<PlaybackEventArgs>(OnStop);
+				//audioPlayer.OnPlaybackTimerTick += new EventHandler<System.Timers.ElapsedEventArgs>(OnAudioPlayerTimerTick);
+				//audioPlayer.OnSoundLoadTimeout += new EventHandler<EventArgs>(OnSoundLoadTimeout);
+				//audioPlayer.OnPlaybackStatusChange += new EventHandler<PlaybackEventArgs>(OnPlaybackStatusChange);
+				//audioPlayer.OnStreamingStatusChange += new EventHandler<PlaybackEventArgs>(OnStreamingStatusChange);
+				//audioPlayer.OnRippingStatusChange += new EventHandler<PlaybackEventArgs>(OnRippingStatusChange);
 				
 				//playDelegate = new AudioPlaybackFunction(audioPlayer.Play);
 				//pauseDelegate = new AudioPlaybackFunction(audioPlayer.Pause);

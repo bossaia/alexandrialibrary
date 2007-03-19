@@ -4,6 +4,6 @@ using System.Text;
 
 namespace Alexandria
 {
-	public delegate void SimpleEvent();
-	public delegate void AudioPlaybackFunction();
+	//public delegate void SimpleEvent();
+	//public delegate void AudioPlaybackFunction();
 }

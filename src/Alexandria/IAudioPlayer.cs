@@ -16,22 +16,26 @@ namespace Alexandria
 		string CurrentResult{get;}
 		double PlaybackInterval{get;set;}
 		double SoundLoadTimeout{get;set;}
-		System.ComponentModel.ISynchronizeInvoke TimerSynch{get;set;}
+		//System.ComponentModel.ISynchronizeInvoke TimerSynch{get;set;}
 		void Play();
 		void Pause();
 		void Stop();
 		void Dispose();
 		void SetPosition(uint position);
 		void Seek(bool isForward, uint distance);
-		EventHandler<PlaybackEventArgs> OnPlay {get;set;}
-		EventHandler<PlaybackEventArgs> OnPause {get;set;}
-		EventHandler<PlaybackEventArgs> OnStop {get;set;}
-		EventHandler<System.Timers.ElapsedEventArgs> OnPlaybackTimerTick{get;set;}
-		EventHandler<PlaybackEventArgs> OnSoundEnd {get;set;}
-		EventHandler<System.EventArgs> OnSoundLoadTimeout {get;set;}
-		EventHandler<PlaybackEventArgs> OnPlaybackStatusChange {get;set;}
-		EventHandler<PlaybackEventArgs> OnStreamingStatusChange {get;set;}
-		EventHandler<PlaybackEventArgs> OnRippingStatusChange {get;set;}
+		void SetStatus(PlaybackStatus status);
+		void PlayCurrentSound();
+		void PauseCurrentSound();
+		void StopCurrentSound();
+		//EventHandler<PlaybackEventArgs> OnPlay {get;set;}
+		//EventHandler<PlaybackEventArgs> OnPause {get;set;}
+		//EventHandler<PlaybackEventArgs> OnStop {get;set;}
+		//EventHandler<System.Timers.ElapsedEventArgs> OnPlaybackTimerTick{get;set;}
+		//EventHandler<PlaybackEventArgs> OnSoundEnd {get;set;}
+		//EventHandler<System.EventArgs> OnSoundLoadTimeout {get;set;}
+		//EventHandler<PlaybackEventArgs> OnPlaybackStatusChange {get;set;}
+		//EventHandler<PlaybackEventArgs> OnStreamingStatusChange {get;set;}
+		//EventHandler<PlaybackEventArgs> OnRippingStatusChange {get;set;}
 		//GetAudioInfo GetAudioInfoHandler {get;}
 		//void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath);
 	}
