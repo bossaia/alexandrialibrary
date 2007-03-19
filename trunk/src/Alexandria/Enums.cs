@@ -8,11 +8,19 @@ namespace Alexandria
 	public enum MediaBufferState
 	{ 
 		None = 0,
-		Connecting,
 		Loading,
 		Buffering,
 		Ready,
 		Starving
+	}
+	#endregion
+	
+	#region MediaStreamingState
+	public enum MediaStreamingState
+	{
+		None = 0,
+		Connecting,
+		Streaming,
 	}
 	#endregion
 	
@@ -25,7 +33,16 @@ namespace Alexandria
 		Stopped
 	}
 	#endregion
-		
+	
+	#region MediaSeekingState
+	public enum MediaSeekingState
+	{
+		None,
+		Backward,
+		Forward
+	}
+	#endregion
+	
 	#region MediaCommandType
 	public enum MediaCommandType
 	{

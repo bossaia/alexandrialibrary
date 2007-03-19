@@ -15,6 +15,6 @@ namespace Alexandria
 		void Seek(uint position);
 		uint Milliseconds {get;}
 		uint Position {get;}
-		AudioStatus Status {get;}
+		IAudioStatus Status {get;}
 	}
 }

@@ -39,8 +39,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
-    <Compile Include="AudioPlayer.cs" />
-    <Compile Include="ConsoleTool.cs" />
     <Compile Include="DataConverter.cs" />
     <Compile Include="IAlbumResource.cs" />
     <Compile Include="IArtistResource.cs" />
@@ -65,19 +63,17 @@
     <Compile Include="PlaybackStatusPaused.cs" />
     <Compile Include="PlaybackStatusPlaying.cs" />
     <Compile Include="PlaybackStatusStopped.cs" />
-    <Compile Include="PluginAttributes\AudioPlayerClassAttribute.cs" />
-    <Compile Include="PluginAttributes\DataFactoryClassAttribute.cs" />
-    <Compile Include="PluginAttributes\MetadataProviderClassAttribute.cs" />
-    <Compile Include="PluginAttributes\PluginAttribute.cs" />
-    <Compile Include="PluginAttributes\SoundClassAttribute.cs" />
-    <Compile Include="PluginAttributes\TagEngineClassAttribute.cs" />
+    <Compile Include="AudioPlayerClassAttribute.cs" />
+    <Compile Include="DataFactoryClassAttribute.cs" />
+    <Compile Include="MetadataProviderClassAttribute.cs" />
+    <Compile Include="PluginAttribute.cs" />
+    <Compile Include="SoundClassAttribute.cs" />
+    <Compile Include="TagEngineClassAttribute.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceFormat.cs" />
     <Compile Include="Search.cs" />
     <Compile Include="Sound.cs" />
-    <Compile Include="AudioCommand.cs" />
-    <Compile Include="AudioStatus.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="TagEngine.cs" />
   </ItemGroup>

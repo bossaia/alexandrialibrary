@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Alexandria
+namespace Alexandria.CompactDisc
 {
 	/// <summary>
 	/// A generic wrapper around a command line tool
@@ -13,8 +14,9 @@ namespace Alexandria
 		{
 			this.path = path;
 		}
-		
-		protected ConsoleTool(string path, IList<string> parameters) : this(path)
+
+		protected ConsoleTool(string path, IList<string> parameters)
+			: this(path)
 		{
 			foreach (string parameter in parameters)
 			{
@@ -41,10 +43,10 @@ namespace Alexandria
 			get { return currentResult; }
 			protected set { currentResult = value; }
 		}
-		
+
 		public IList<string> Parameters
 		{
-			get { return parameters; }			
+			get { return parameters; }
 		}
 		#endregion
 
@@ -52,8 +54,8 @@ namespace Alexandria
 		public void Execute(IDictionary<int, string> parameters)
 		{
 			Execute();
-		}		
-		
+		}
+
 		public void Execute(IDictionary<string, string> parameters)
 		{
 			Execute();
@@ -61,4 +63,3 @@ namespace Alexandria
 		#endregion
 	}
 }
-

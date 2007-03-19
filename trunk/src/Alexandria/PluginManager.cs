@@ -14,7 +14,7 @@ namespace Alexandria
 		private static TagEngine tagEngine;
 		private static string tagEnginePluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["TagEnginePluginName"];
 		private static Assembly audioPlayerAssembly;
-		private static AudioPlayer audioPlayer;
+		private static IAudioPlayer audioPlayer;
 		private static string audioPlayerPluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["AudioPlayerPluginName"];
 		//private static Assembly dataFactoryAssembly;
 		//private static DataFactory dataFactory;
@@ -54,11 +54,12 @@ namespace Alexandria
 			}
 		}
 
-		public static AudioPlayer AudioPlayer
+		[CLSCompliant(false)]
+		public static IAudioPlayer AudioPlayer
 		{
 			get
 			{
-				if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(AudioPlayerClassAttribute)) as AudioPlayer;
+				if (audioPlayer == null) audioPlayer = PluginManager.GetObject(AudioPlayerAssembly, typeof(AudioPlayerClassAttribute)) as IAudioPlayer;
 				return audioPlayer;
 			}
 		}

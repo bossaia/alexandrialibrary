@@ -13,7 +13,7 @@ namespace Alexandria
 		#endregion
 		
 		#region Public Methods
-		public override void Play(AudioPlayer player)
+		public override void Play(IAudioPlayer player)
 		{
 			if (player != null)
 			{
@@ -23,7 +23,7 @@ namespace Alexandria
 			else throw new ArgumentNullException("player");
 		}
 		
-		public override void Pause(AudioPlayer player)
+		public override void Pause(IAudioPlayer player)
 		{
 			if (player != null)
 			{
@@ -33,7 +33,7 @@ namespace Alexandria
 			else throw new ArgumentNullException("player");
 		}
 
-		public override void Stop(AudioPlayer player)
+		public override void Stop(IAudioPlayer player)
 		{
 			if (player != null)
 			{

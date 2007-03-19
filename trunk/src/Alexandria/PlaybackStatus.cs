@@ -63,15 +63,15 @@ namespace Alexandria
 		#endregion
 
 		#region Public Methods
-		public virtual void Play(AudioPlayer player)
+		public virtual void Play(IAudioPlayer player)
 		{
 		}
 
-		public virtual void Stop(AudioPlayer player)
+		public virtual void Stop(IAudioPlayer player)
 		{
 		}
 
-		public virtual void Pause(AudioPlayer player)
+		public virtual void Pause(IAudioPlayer player)
 		{
 		}
 		#endregion
