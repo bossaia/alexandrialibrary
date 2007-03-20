@@ -23,6 +23,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
@@ -511,7 +512,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			}
 		}
 
-		public override IList<IPicture> Pictures
+		public override IList<IImage> Pictures
 		{
 			get
 			{
@@ -521,7 +522,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					return base.Pictures;
 				}
 
-				IList<IPicture> frames = new List<IPicture>(rawFrames.Length);
+				IList<IImage> frames = new List<IImage>(rawFrames.Length);
 				//[rawFrames.Length];
 				for (int i = 0; i < rawFrames.Length; i++)
 				{

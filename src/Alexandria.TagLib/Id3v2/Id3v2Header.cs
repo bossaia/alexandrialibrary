@@ -67,7 +67,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				return;
 
 			// do some sanity checking -- even in ID3v2.3.0 and less the tag size is a
-			// synch-safe integer, so all bytes must be less than 128.  If this is not
+			// synch-safe integer, so all buffer must be less than 128.  If this is not
 			// true then this is an invalid tag.
 
 			// note that we're doing things a little out of order here -- the size is
@@ -90,9 +90,9 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					return;
 				}
 
-			// The first three bytes, data[0..2], are the File Identifier, "ID3". (structure 3.1 "file identifier")
+			// The first three buffer, data[0..2], are the File Identifier, "ID3". (structure 3.1 "file identifier")
 
-			// Read the version number from the fourth and fifth bytes.
+			// Read the version number from the fourth and fifth buffer.
 			majorVersion = data[3];   // (structure 3.1 "major version")
 			revisionNumber = data[4]; // (structure 3.1 "revision number")
 
@@ -104,7 +104,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			experimentalIndicator = ((flags >> 5) & 1) == 1; // (structure 3.1.channelMode)
 			footerPresent = ((flags >> 4) & 1) == 1; // (structure 3.1.d)
 
-			// Get the size from the remaining four bytes (read above)
+			// Get the size from the remaining four buffer (read above)
 
 			tagSize = Id3v2SynchData.ToUInt(sizeData); // (structure 3.1 "size")
 		}

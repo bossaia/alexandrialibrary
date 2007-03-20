@@ -70,10 +70,10 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			// Maximum block size (in samples)
 			pos += 2;
 
-			// Minimum frame size (in bytes)
+			// Minimum frame size (in buffer)
 			pos += 3;
 
-			// Maximum frame size (in bytes)
+			// Maximum frame size (in buffer)
 			pos += 3;
 
 			uint flags = data.Mid(pos, 4).ToUInt(true);

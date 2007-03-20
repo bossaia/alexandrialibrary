@@ -77,7 +77,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				for (int i = 0; i < sizes.Count; i++)
 				{
 					// The size of a packet in an Ogg page is indicated by a series of "lacing
-					// values" where the sum of the values is the packet size in bytes.  Each of
+					// values" where the sum of the values is the packet size in buffer.  Each of
 					// these values is a byte.  A value of less than 255 (0xff) indicates the end
 					// of the packet.
 
@@ -101,7 +101,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		{
 			file.Seek(file_offset);
 
-			// An Ogg page header is at least 27 bytes, so we'll go ahead and read that
+			// An Ogg page header is at least 27 buffer, so we'll go ahead and read that
 			// much and then get the rest when we're ready for it.
 
 			ByteVector data = file.ReadBlock(27);
@@ -138,7 +138,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			if (pageSegmentCount < 1 || page_segments.Count != pageSegmentCount)
 				return;
 
-			// The base size of an Ogg page 27 bytes plus the number of lacing values.
+			// The base size of an Ogg page 27 buffer plus the number of lacing values.
 
 			size = 27 + pageSegmentCount;
 

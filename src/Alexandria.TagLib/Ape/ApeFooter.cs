@@ -66,7 +66,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				if (data.Count < Size)
 					return;
 
-				// The first eight bytes, data[0..7], are the File Identifier, "APETAGEX".
+				// The first eight buffer, data[0..7], are the File Identifier, "APETAGEX".
 
 				// Read the version number
 				version = data.Mid(8, 4).ToUInt(false);

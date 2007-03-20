@@ -147,7 +147,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 						return;
 					}
 
-					// Set the frame ID -- the first three bytes
+					// Set the frame ID -- the first three buffer
 
 					frameId = data.Mid(0, 3);
 
@@ -172,7 +172,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 						return;
 					}
 
-					// Set the frame ID -- the first four bytes
+					// Set the frame ID -- the first four buffer
 
 					frameId = data.Mid(0, 4);
 
@@ -185,7 +185,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 						return;
 					}
 
-					// Set the size -- the frame size is the four bytes starting at byte four in
+					// Set the size -- the frame size is the four buffer starting at byte four in
 					// the frame header (structure 4)
 
 					frameSize = data.Mid(4, 4).ToUInt();
@@ -210,7 +210,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 						return;
 					}
 
-					// Set the frame ID -- the first four bytes
+					// Set the frame ID -- the first four buffer
 
 					frameId = data.Mid(0, 4);
 
@@ -223,7 +223,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 						return;
 					}
 
-					// Set the size -- the frame size is the four bytes starting at byte four in
+					// Set the size -- the frame size is the four buffer starting at byte four in
 					// the frame header (structure 4)
 
 					frameSize = Id3v2SynchData.ToUInt(data.Mid(4, 4));

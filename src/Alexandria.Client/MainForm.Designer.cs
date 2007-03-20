@@ -73,14 +73,14 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.PlayPauseButton, "PlayPauseButton");
 			this.PlayPauseButton.Name = "PlayPauseButton";
 			this.PlayPauseButton.UseVisualStyleBackColor = true;
-			this.PlayPauseButton.Click += new System.EventHandler(this.PlayPauseButton_Click);
+			//this.PlayPauseButton.Click += new System.EventHandler(this.PlayPauseButton_Click);
 			// 
 			// StopButton
 			// 
 			resources.ApplyResources(this.StopButton, "StopButton");
 			this.StopButton.Name = "StopButton";
 			this.StopButton.UseVisualStyleBackColor = true;
-			this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
+			//this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
 			// 
 			// PlaybackTrackBar
 			// 
@@ -234,7 +234,7 @@ namespace Alexandria.Client
 			// 
 			this.PlaybackTimer.Enabled = true;
 			this.PlaybackTimer.Interval = 1000;
-			this.PlaybackTimer.Tick += new System.EventHandler(this.PlaybackTimer_Tick);
+			//this.PlaybackTimer.Tick += new System.EventHandler(this.PlaybackTimer_Tick);
 			// 
 			// MainForm
 			// 

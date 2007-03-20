@@ -130,14 +130,14 @@ namespace Alexandria.Db4o
 		
 			try
 			{
-				user = new Alexandria.User();
+				user = new User();
 				user.Name = name;
 				user.Password = null;
 				
 				ObjectSet set = UserContainer.Get(user);
 				if (set.HasNext())
 				{
-					user = (Alexandria.User)set.Next();
+					user = (User)set.Next();
 				}
 				else user = null;
 			}
@@ -155,7 +155,7 @@ namespace Alexandria.Db4o
 		#endregion
 		
 		#region AddUser
-		public bool AddUser(Alexandria.User user)
+		public bool AddUser(IUser user)
 		{
 			try
 			{

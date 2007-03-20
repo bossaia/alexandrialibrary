@@ -61,7 +61,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			if (largeSize == 0)
 				largeSize = (ulong)spaceAvailable;
 			// If the size is 1, that just tells us we have a massive ULONG size
-			// waiting for us in the next 8 bytes.
+			// waiting for us in the next 8 buffer.
 			else if (largeSize == 1)
 			{
 				// The size is 8 bigger.
@@ -78,7 +78,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				largeSize = (ulong)file.ReadBlock(8).ToLong();
 			}
 
-			// UUID has a special header with 16 extra bytes.
+			// UUID has a special header with 16 extra buffer.
 			if (boxType == "uuid")
 			{
 				// Size is 16 bigger.

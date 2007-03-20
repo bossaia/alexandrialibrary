@@ -11,7 +11,7 @@ namespace Alexandria
 		#region Private Static Fields
 		private static string defaultPluginPath = System.Environment.CurrentDirectory + System.IO.Path.DirectorySeparatorChar;
 		private static Assembly tagEngineAssembly;
-		private static TagEngine tagEngine;
+		private static ITagEngine tagEngine;
 		private static string tagEnginePluginPath = PluginManager.DefaultPluginPath + System.Configuration.ConfigurationManager.AppSettings["TagEnginePluginName"];
 		private static Assembly audioPlayerAssembly;
 		private static IAudioPlayer audioPlayer;
@@ -74,7 +74,7 @@ namespace Alexandria
 			}
 		}
 
-		public static TagEngine TagEngine
+		public static ITagEngine TagEngine
 		{
 			get
 			{

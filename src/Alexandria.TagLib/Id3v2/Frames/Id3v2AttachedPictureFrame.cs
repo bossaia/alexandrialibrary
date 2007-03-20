@@ -22,11 +22,12 @@
 
 using System;
 using System.Collections;
+using Alexandria;
 using AlexandriaOrg.Alexandria.TagLib;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {   
-	public class Id3v2AttachedPictureFrame : Id3v2Frame, IPicture
+	public class Id3v2AttachedPictureFrame : Id3v2Frame, IPicture, IImage
 	{
 		#region Constructors
 		public Id3v2AttachedPictureFrame() : base("APIC")
@@ -81,6 +82,9 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		private PictureType type = PictureType.None;
 		private string description;
 		private ByteVector data;
+		private Guid guid = Guid.NewGuid();
+		private Uri uri;
+		private IResourceFormat resourceFormat;
 		#endregion
 		
 		#region Private Methods
@@ -243,6 +247,30 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				return null;
 			}
 			else throw new ArgumentNullException("tag");
+		}
+		#endregion
+
+		#region IImage Members
+		System.Collections.Generic.IList<byte> IImage.Data
+		{
+			get { return data.Data; }
+		}
+		#endregion
+
+		#region IResource Members
+		public Guid Guid
+		{
+			get { return guid; }
+		}
+
+		public Uri Uri
+		{
+			get { return uri; }
+		}
+
+		public IResourceFormat Format
+		{
+			get { return resourceFormat; }
 		}
 		#endregion
 	}

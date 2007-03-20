@@ -73,7 +73,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				for (int i = 0; i < commentFields; i++)
 				{
 					// Each comment field is in the format "KEY=value" in a UTF8 string and has
-					// 4 bytes before the type starts that gives the length.
+					// 4 buffer before the type starts that gives the length.
 
 					int commentLength = (int)data.Mid(pos, 4).ToUInt(false);
 					pos += 4;

@@ -20,16 +20,20 @@
  ***************************************************************************/
 
 using System;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
-    public class Picture : IPicture
+    public class Picture : IPicture, IImage
     {
 		#region Private Fields
-        private string      mimeType;
+        private string mimeType;
         private PictureType type;
-        private string      description;
-        private ByteVector  data;
+        private string description;
+        private ByteVector data;
+        private Guid guid = Guid.NewGuid();
+        private Uri uri;
+        private IResourceFormat resourceFormat;
         #endregion
    
 		#region Public Properties
@@ -97,6 +101,30 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				return picture;
 			}
 			else throw new ArgumentNullException("uri");
+		}
+		#endregion
+
+		#region IImage Members
+		System.Collections.Generic.IList<byte> IImage.Data
+		{
+			get { return data.Data; }
+		}
+		#endregion
+
+		#region IResource Members
+		public Guid Guid
+		{
+			get { return guid; }
+		}
+
+		public Uri Uri
+		{
+			get { return uri; }
+		}
+
+		public IResourceFormat Format
+		{
+			get { return resourceFormat; }
 		}
 		#endregion
 	}

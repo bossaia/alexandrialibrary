@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
@@ -235,12 +236,12 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			}
 		}
 
-		public override IList<IPicture> Pictures
+		public override IList<IImage> Pictures
 		{
 			get
 			{
 				//ArrayList l = new ArrayList();
-				IList<IPicture> list = new List<IPicture>();
+				IList<IImage> list = new List<IImage>();
 
 				foreach (Mpeg4AppleDataBox box in DataBoxes(FixId("covr")))
 				{
@@ -279,20 +280,24 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					return;
 				}
 
-				Mpeg4AppleDataBox[] boxes = new Mpeg4AppleDataBox[value.Count];
-				for (int i = 0; i < value.Count; i++)
+				IList<IPicture> pictures = value as IList<IPicture>;
+				if (pictures != null)
 				{
-					uint type = (uint)Mpeg4ContentType.ContainsData;
+					Mpeg4AppleDataBox[] boxes = new Mpeg4AppleDataBox[pictures.Count];
+					for (int i = 0; i < pictures.Count; i++)
+					{
+						uint type = (uint)Mpeg4ContentType.ContainsData;
 
-					if (value[i].MimeType == "image/jpeg")
-						type = (uint)Mpeg4ContentType.ContainsJpegData;
-					else if (value[i].MimeType == "image/png")
-						type = (uint)Mpeg4ContentType.ContainsPngData;
+						if (pictures[i].MimeType == "image/jpeg")
+							type = (uint)Mpeg4ContentType.ContainsJpegData;
+						else if (pictures[i].MimeType == "image/png")
+							type = (uint)Mpeg4ContentType.ContainsPngData;
 
-					boxes[i] = new Mpeg4AppleDataBox(value[i].Data, type);
+						boxes[i] = new Mpeg4AppleDataBox(pictures[i].Data, type);
+					}
+
+					SetData("covr", boxes);
 				}
-
-				SetData("covr", boxes);
 			}
 		}
 		#endregion

@@ -37,7 +37,7 @@ namespace Alexandria.Client
 		private uint length;
 		private IAudioPlayer audioPlayer;
 		//private DataFactory dataFactory;
-		private TagEngine tagEngine;
+		private ITagEngine tagEngine;
 		private IAlbumFactory albumFactory;
 		//private AudioPlaybackFunction playDelegate = null;
 		//private AudioPlaybackFunction pauseDelegate = null;
@@ -45,8 +45,8 @@ namespace Alexandria.Client
 		private bool seeking;
 		//private XmlShareablePlaylist playlist;
 		private int currentTrackIndex = -1;
-		private bool trackBarIsInitialized;
-		private bool soundLoadHasTimedOut;
+		//private bool trackBarIsInitialized;
+		//private bool soundLoadHasTimedOut;
 		//private System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(
 		//("Resources", System.Reflection.Assembly.GetExecutingAssembly());
 		private delegate void SimpleEvent();
@@ -458,10 +458,10 @@ namespace Alexandria.Client
 		private string SuspendPlayback()
 		{
 			string status = audioPlayer.CurrentStatus;
-			if (audioPlayer.CurrentStatus == PlaybackStatus.Playing.Name || audioPlayer.CurrentStatus == PlaybackStatus.Paused.Name)
-			{
-				StopButton_Click(this, EventArgs.Empty);
-			}
+			//if (audioPlayer.CurrentStatus == PlaybackStatus.Playing.Name || audioPlayer.CurrentStatus == PlaybackStatus.Paused.Name)
+			//{
+				//StopButton_Click(this, EventArgs.Empty);
+			//}
 			return status;
 		}
 		
@@ -469,7 +469,7 @@ namespace Alexandria.Client
 		{
 			if (status == "Playing")
 			{
-				PlayPauseButton_Click(this, EventArgs.Empty);
+				//PlayPauseButton_Click(this, EventArgs.Empty);
 			}
 		}
 		
@@ -536,7 +536,7 @@ namespace Alexandria.Client
 		private void InitializeTrackBar()
 		{
 			this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(this.audioPlayer.CurrentAudio.Milliseconds));
-			trackBarIsInitialized = true;
+			//trackBarIsInitialized = true;
 		}
 
 		private void TrackLoadFailed()
@@ -545,130 +545,128 @@ namespace Alexandria.Client
 			this.StopButton_Click(this, System.EventArgs.Empty);
 			
 			//Reset the timeout flag
-			soundLoadHasTimedOut = false;
+			//soundLoadHasTimedOut = false;
 		
 			// Try to advance to the next track and resume playback there
 			if (NextTrack())
 			{
-				this.PlayPauseButton_Click(this, System.EventArgs.Empty);
+				//this.PlayPauseButton_Click(this, System.EventArgs.Empty);
 			}
 		}
 		#endregion
 		
 		#region Private Event Methods
-		private void OnPlay(object sender, PlaybackEventArgs e)
-		{
-			//string x = "OnPlay";
-		}
+		//private void OnPlay(object sender, PlaybackEventArgs e)
+		//{
+		//}
 		
-		private void OnPause(object sender, PlaybackEventArgs e)
-		{
-		}
+		//private void OnPause(object sender, PlaybackEventArgs e)
+		//{
+		//}
 		
-		private void OnStop(object sender, PlaybackEventArgs e)
-		{
-			if (audioPlayer.CurrentAudio != null)
-			{
-				if (!audioPlayer.CurrentAudio.IsLocal)
-				{
-					//string x = "?";
-				}
-			}
-		}
+		//private void OnStop(object sender, PlaybackEventArgs e)
+		//{
+			//if (audioPlayer.CurrentAudio != null)
+			//{
+				//if (!audioPlayer.CurrentAudio.IsLocal)
+				//{
+				//}
+			//}
+		//}
 		
-		private void OnTrackEnd(object sender, PlaybackEventArgs e)
-		{
-			this.StopButton_Click(this, EventArgs.Empty);
+		//private void OnTrackEnd(object sender, PlaybackEventArgs e)
+		//{
+			//this.StopButton_Click(this, EventArgs.Empty);
 		
-			if (NextTrack())
-			{
-				PlayPauseButton_Click(this, e);
-			}
-		}
+			//if (NextTrack())
+			//{
+				//PlayPauseButton_Click(this, e);
+			//}
+		//}
 
-		private void OnAudioPlayerTimerTick(object sender, System.Timers.ElapsedEventArgs e)
-		{
-		}
+		//private void OnAudioPlayerTimerTick(object sender, System.Timers.ElapsedEventArgs e)
+		//{
+		//}
 		
-		private void OnSoundLoadTimeout(object sender, System.EventArgs e)
-		{
-			if (!soundLoadHasTimedOut)
-			{
-				soundLoadHasTimedOut = true;
+		//private void OnSoundLoadTimeout(object sender, System.EventArgs e)
+		//{
+			//if (!soundLoadHasTimedOut)
+			//{
+				//soundLoadHasTimedOut = true;
 			
-				SimpleEvent timeoutDelegate = new SimpleEvent(TrackLoadFailed);
+				//SimpleEvent timeoutDelegate = new SimpleEvent(TrackLoadFailed);
 				
-				this.Invoke(timeoutDelegate);
-			}
-		}
+				//this.Invoke(timeoutDelegate);
+			//}
+		//}
 
-		private void PlaybackTimer_Tick(object sender, EventArgs e)
-		{
-			if (this.audioPlayer != null && this.audioPlayer.CurrentAudio != null)
-			{
+		//private void PlaybackTimer_Tick(object sender, EventArgs e)
+		//{
+			//if (this.audioPlayer != null && this.audioPlayer.CurrentAudio != null)
+			//{
 				//NOTE: audioPlayer.Position does not seem to be accurate for remote streams
-				if (!seeking && audioPlayer.CurrentAudio.IsLocal)
-				{
-					int position = Convert.ToInt32(audioPlayer.Position);
-					if (position >= this.PlaybackTrackBar.Minimum && position <= this.PlaybackTrackBar.Maximum)
-					{
-						this.PlaybackTrackBar.Value = position;
-					}
-				}
+				//if (!seeking && audioPlayer.CurrentAudio.IsLocal)
+				//{
+					//int position = Convert.ToInt32(audioPlayer.Position);
+					//if (position >= this.PlaybackTrackBar.Minimum && position <= this.PlaybackTrackBar.Maximum)
+					//{
+						//this.PlaybackTrackBar.Value = position;
+					//}
+				//}
 
-				if (audioPlayer.CurrentAudio.IsLocal)
-				{					
-					if (this.PlaybackTrackBar.Value < this.PlaybackTrackBar.Maximum)
-					{
+				//if (audioPlayer.CurrentAudio.IsLocal)
+				//{					
+					//if (this.PlaybackTrackBar.Value < this.PlaybackTrackBar.Maximum)
+					//{
 						//int addInterval = (this.PlaybackTrackBar.Maximum - this.PlaybackTrackBar.Value) >= (int)this.PlaybackTimer.Interval ? (int)this.PlaybackTimer.Interval : this.PlaybackTrackBar.Maximum - this.PlaybackTrackBar.Value;
 						//this.PlaybackTrackBar.Value += addInterval;
-						this.Position = this.audioPlayer.Position;
-					}
-					else
-					{
-						PlaybackEventArgs onTrackEndArgs = new PlaybackEventArgs();
+						//this.Position = this.audioPlayer.Position;
+					//}
+					//else
+					//{
+						//PlaybackEventArgs onTrackEndArgs = new PlaybackEventArgs();
 												
-						OnTrackEnd(this, onTrackEndArgs);
-					}
-				}
-				else
-				{
-					this.PlaybackStatusLabel.Text = this.audioPlayer.CurrentAudio.Status.BufferState.ToString() + "  " + this.audioPlayer.CurrentAudio.Status.BufferLevel.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) + "%";
+						//OnTrackEnd(this, onTrackEndArgs);
+					//}
+				//}
+				//else
+				//{
+					//this.PlaybackStatusLabel.Text = this.audioPlayer.CurrentAudio.Status.BufferState.ToString() + "  " + this.audioPlayer.CurrentAudio.Status.BufferLevel.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) + "%";
 					
-					if (string.Compare(this.audioPlayer.CurrentAudio.Status.BufferState.ToString(), "ready", true) == 0)
-					{
-						if (!trackBarIsInitialized)
-						{
-							InitializeTrackBar();
-						}
-					}
+					//if (string.Compare(this.audioPlayer.CurrentAudio.Status.BufferState.ToString(), "ready", true) == 0)
+					//{
+						//if (!trackBarIsInitialized)
+						//{
+							//InitializeTrackBar();
+						//}
+					//}
 					
-					this.PlaybackTrackBar.Value = Convert.ToInt32(audioPlayer.Position);
-				}
-			}
-		}		
+					//this.PlaybackTrackBar.Value = Convert.ToInt32(audioPlayer.Position);
+				//}
+			//}
+		//}		
 
-		private void PlayPauseButton_Click(object sender, EventArgs e)
-		{
-			if (!String.IsNullOrEmpty(this.loadedFile))
-			{
-				audioPlayer.Play();
-				SetVolume();
-				this.PlaybackStatusLabel.Text = audioPlayer.CurrentStatus;
+		//private void PlayPauseButton_Click(object sender, EventArgs e)
+		//{
+			//if (!String.IsNullOrEmpty(this.loadedFile))
+			//{
+				//audioPlayer.Play();
+				//SetVolume();
+				//this.PlaybackStatusLabel.Text = audioPlayer.CurrentStatus;
 				
-				if (audioPlayer.CurrentStatus == PlaybackStatus.Playing.Name)
-				{
+				//if (audioPlayer.CurrentStatus == PlaybackStatus.Playing.Name)
+				//{
 					// Playing
-					this.PlayPauseButton.Text = Resources.PlaybackAction_Pause; //PLAYBACK_STATUS_PAUSE;
-				}
-				else
-				{
+					//this.PlayPauseButton.Text = Resources.PlaybackAction_Pause; //PLAYBACK_STATUS_PAUSE;
+				//}
+				//else
+				//{
 					// Paused
-					this.PlayPauseButton.Text = Resources.PlaybackAction_Play; //PLAYBACK_STATUS_PLAY;
-				}
-			}
-			else MessageBox.Show(Resources.ErrorMessage_PlaybackTrackNotSelected, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
-		}
+					//this.PlayPauseButton.Text = Resources.PlaybackAction_Play; //PLAYBACK_STATUS_PLAY;
+				//}
+			//}
+			//else MessageBox.Show(Resources.ErrorMessage_PlaybackTrackNotSelected, Resources.ErrorCaption, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+		//}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
@@ -722,7 +720,7 @@ namespace Alexandria.Client
 					//MediaFile mediaFile = MediaFile.Load(path, length);
 					//LoadMediaFile(mediaFile);
 					
-					PlayPauseButton_Click(this, EventArgs.Empty);
+					//PlayPauseButton_Click(this, EventArgs.Empty);
 				}
 			}
 		}
@@ -798,27 +796,25 @@ namespace Alexandria.Client
 			}
 		}
 		
-		private void OnPlaybackStatusChange(object sender, PlaybackEventArgs e)
-		{
-			//string x = e.PlaybackStatus;
-		}
+		//private void OnPlaybackStatusChange(object sender, PlaybackEventArgs e)
+		//{
+		//}
 		
-		private void OnStreamingStatusChange(object sender, PlaybackEventArgs e)
-		{
-			this.StreamingStatus.Text = e.StreamingStatus;
-			if (e.StreamingStatus == "Streaming Timeout")
-			{
-				if (!soundLoadHasTimedOut)
-				{
-					OnSoundLoadTimeout(this, System.EventArgs.Empty);
-				}
-			}
-		}
+		//private void OnStreamingStatusChange(object sender, PlaybackEventArgs e)
+		//{
+			//this.StreamingStatus.Text = e.StreamingStatus;
+			//if (e.StreamingStatus == "Streaming Timeout")
+			//{
+				//if (!soundLoadHasTimedOut)
+				//{
+					//OnSoundLoadTimeout(this, System.EventArgs.Empty);
+				//}
+			//}
+		//}
 		
-		private void OnRippingStatusChange(object sender, PlaybackEventArgs e)
-		{
-			//string x = e.RippingStatus;
-		}
+		//private void OnRippingStatusChange(object sender, PlaybackEventArgs e)
+		//{
+		//}
 		#endregion
 	}
 }

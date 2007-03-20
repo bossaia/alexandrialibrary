@@ -22,6 +22,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
@@ -280,12 +281,11 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			get { return extDescription; }
 		}
 
-		public override IList<IPicture> Pictures
+		public override IList<IImage> Pictures
 		{
 			get
 			{
-				//ArrayList l = new ArrayList();
-				IList<IPicture> list = new List<IPicture>();
+				IList<IImage> list = new List<IImage>();
 
 				foreach (AsfContentDescriptor descriptor in GetDescriptors("WM/Picture"))
 				{
@@ -319,7 +319,6 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				}
 
 				return list;
-				//(Picture[])list.ToArray(typeof(Picture));
 			}
 
 			set
@@ -330,20 +329,24 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					return;
 				}
 
-				AsfContentDescriptor[] descriptors = new AsfContentDescriptor[value.Count];
-				for (int i = 0; i < value.Count; i++)
+				IList<IPicture> pictures = value as IList<IPicture>;
+				if (pictures != null)
 				{
-					ByteVector vector = new ByteVector();
-					vector.Add((byte)value[i].Type);
-					vector.Add(AsfObject.RenderDWord((uint)value[i].Data.Count));
-					vector.Add(AsfObject.RenderUnicode(value[i].MimeType));
-					vector.Add(AsfObject.RenderUnicode(value[i].Description));
-					vector.Add(value[i].Data);
+					AsfContentDescriptor[] descriptors = new AsfContentDescriptor[pictures.Count];
+					for (int i = 0; i < pictures.Count; i++)
+					{
+						ByteVector vector = new ByteVector();
+						vector.Add((byte)pictures[i].Type);
+						vector.Add(AsfObject.RenderDWord((uint)pictures[i].Data.Count));
+						vector.Add(AsfObject.RenderUnicode(pictures[i].MimeType));
+						vector.Add(AsfObject.RenderUnicode(pictures[i].Description));
+						vector.Add(pictures[i].Data);
 
-					descriptors[i] = new AsfContentDescriptor("WM/Picture", vector);
+						descriptors[i] = new AsfContentDescriptor("WM/Picture", vector);
+					}
+
+					SetDescriptors("WM/Picture", descriptors);
 				}
-
-				SetDescriptors("WM/Picture", descriptors);
 			}
 		}
 		#endregion

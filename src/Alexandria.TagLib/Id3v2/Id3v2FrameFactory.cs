@@ -54,7 +54,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 							return false;
 						}
 
-						// ID3v2.2 only used 3 bytes for the frame ID, so we need to convert all of
+						// ID3v2.2 only used 3 buffer for the frame ID, so we need to convert all of
 						// the frames to their 4 byte ID3v2.4 equivalent.
 
 						ConvertFrame("BUF", "RBUF", header);

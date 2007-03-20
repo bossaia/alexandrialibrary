@@ -450,8 +450,8 @@ namespace AlexandriaOrg.Alexandria.TagLib
 
 				int start_index = Count - pattern.Count;
 
-				// try to match the last n-1 bytes from the vector (where n is the pattern
-				// size) -- continue trying to match n-2, n-3...1 bytes
+				// try to match the last n-1 buffer from the vector (where n is the pattern
+				// size) -- continue trying to match n-2, n-3...1 buffer
 
 				for (int i = 1; i < pattern.Count; i++)
 				{
@@ -694,12 +694,12 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		{
 			// FIXME: Generics would be nice if I could figure them out.
 			//return FromNumber<uint> (value, most_significant_byte_first);
-			ByteVector v = new ByteVector();
+			ByteVector vector = new ByteVector();
 
 			for (int i = 0; i < 4; i++)
-				v.Add((byte)(value >> ((mostSignificantByteFirst ? 3 - i : i) * 8) & 0xFF));
+				vector.Add((byte)(value >> ((mostSignificantByteFirst ? 3 - i : i) * 8) & 0xFF));
 
-			return v;
+			return vector;
 		}
 
 		[System.CLSCompliant(false)]
@@ -735,7 +735,6 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				vector.Add((byte)(value >> ((mostSignificantByteFirst ? 7 - i : i) * 8) & 0xFF));
 
 			return vector;
-
 		}
 
 		public static ByteVector FromLong(long value)
@@ -797,15 +796,15 @@ namespace AlexandriaOrg.Alexandria.TagLib
 
 		public static ByteVector FromStream(System.IO.Stream stream)
 		{
-			byte[] tmp_out;
-			return FromStream(stream, out tmp_out, false);
+			byte[] buffer;
+			return FromStream(stream, out buffer, false);
 		}
 
 		internal static ByteVector FromStream(System.IO.Stream stream, out byte[] firstChunk, bool copyFirstChunk)
 		{
 			ByteVector vector = new ByteVector();
-			byte[] bytes = new byte[4096];
-			int read_size = bytes.Length;
+			byte[] buffer = new byte[4096];
+			int read_size = buffer.Length;
 			int bytes_read = 0;
 			bool set_first_chunk = false;
 
@@ -813,9 +812,9 @@ namespace AlexandriaOrg.Alexandria.TagLib
 
 			while (true)
 			{
-				Array.Clear(bytes, 0, bytes.Length);
-				int n = stream.Read(bytes, 0, read_size);
-				vector.Add(bytes);
+				Array.Clear(buffer, 0, buffer.Length);
+				int n = stream.Read(buffer, 0, read_size);
+				vector.Add(buffer);
 				bytes_read += n;
 
 				if (!set_first_chunk)
@@ -827,7 +826,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 							firstChunk = new byte[read_size];
 						}
 
-						Array.Copy(bytes, firstChunk, n);
+						Array.Copy(buffer, firstChunk, n);
 					}
 					set_first_chunk = true;
 				}

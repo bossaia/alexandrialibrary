@@ -4,10 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IResource
+	public interface IImage : IResource
 	{
-		Guid Guid { get; }
-		Uri Uri { get; }		
-		IResourceFormat Format { get; }
+		IList<byte> Data { get; }
 	}
 }
