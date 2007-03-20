@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IResource
+	public interface IProfile
 	{
-		Guid Guid { get; }
-		Uri Uri { get; }		
-		IResourceFormat Format { get; }
+		string Name { get; }
+		IList<string> Paths { get; }
 	}
 }

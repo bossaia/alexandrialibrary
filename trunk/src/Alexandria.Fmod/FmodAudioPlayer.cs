@@ -20,7 +20,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		private bool currentSoundIsStreaming;
 		private System.Timers.Timer timer;
 		private DateTime soundLoadStart = DateTime.MinValue;
-		private PlaybackStatus status;
+		//private PlaybackStatus status;
 		private string streamingStatus;				
 		private static Sound ripSound;
 		private static Channel ripChannel;
@@ -511,10 +511,10 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 		}
 		
-		public void SetStatus(PlaybackStatus status)
-		{
-			this.status = status;
-		}
+		//public void SetStatus(PlaybackStatus status)
+		//{
+			//this.status = status;
+		//}
 
 		public void PlayCurrentSound()
 		{

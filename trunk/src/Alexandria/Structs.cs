@@ -11,11 +11,11 @@ namespace Alexandria
 		#region Private Fields
 		private bool userNameIsValid;
 		private bool passwordIsValid;
-		private User user;
+		private IUser user;
 		#endregion
 
 		#region Constructors
-		public AuthenticationResult(bool userNameIsValid, bool passwordIsValid, User user)
+		public AuthenticationResult(bool userNameIsValid, bool passwordIsValid, IUser user)
 		{
 			this.userNameIsValid = userNameIsValid;
 			this.passwordIsValid = passwordIsValid;
@@ -34,7 +34,7 @@ namespace Alexandria
 			get { return passwordIsValid; }
 		}
 
-		public User User
+		public IUser User
 		{
 			get { return user; }
 		}

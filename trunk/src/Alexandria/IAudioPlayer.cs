@@ -23,7 +23,7 @@ namespace Alexandria
 		void Dispose();
 		void SetPosition(uint position);
 		void Seek(bool isForward, uint distance);
-		void SetStatus(PlaybackStatus status);
+		//void SetStatus(PlaybackStatus status);
 		void PlayCurrentSound();
 		void PauseCurrentSound();
 		void StopCurrentSound();

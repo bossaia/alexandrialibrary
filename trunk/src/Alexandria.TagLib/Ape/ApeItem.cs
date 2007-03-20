@@ -138,7 +138,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		{
 			if (data != null)
 			{
-				// 11 bytes is the minimum size for an APE item
+				// 11 buffer is the minimum size for an APE item
 				if (data.Count < 11)
 				{
 					TagLibDebugger.Debug("APE.Item.Parse() -- no data in item");

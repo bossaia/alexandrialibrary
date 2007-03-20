@@ -111,8 +111,8 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					data.Add(v);
 
 			// Compute and set the checksum for the Ogg page.  The checksum is taken over
-			// the entire page with the 4 bytes reserved for the checksum zeroed and then
-			// inserted in bytes 22-25 of the page header.
+			// the entire page with the 4 buffer reserved for the checksum zeroed and then
+			// inserted in buffer 22-25 of the page header.
 
 			ByteVector checksum = ByteVector.FromUInt (data.Checksum, false);
 			for (int i = 0; i < 4; i++)

@@ -46,7 +46,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		[CLSCompliant(false)]
 		public virtual uint      DiscCount  {get {return 0;}    set {}}
       
-		public virtual IList<IPicture> Pictures { get { return new List<IPicture>(); } set { } }
+		public virtual IList<IImage> Pictures { get { return new List<IImage>(); } set { } }
 
 		public string FirstArtist { get { return FirstInGroup(Artists); } }
 		public string FirstPerformer { get { return FirstInGroup(Performers); } }

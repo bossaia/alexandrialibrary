@@ -21,7 +21,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		#endregion
 		
 		#region Protected Properties
-		// Offset for those bytes.
+		// Offset for those buffer.
 		protected override long DataPosition
 		{
 			get { return base.DataPosition + 4; }

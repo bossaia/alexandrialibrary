@@ -9,7 +9,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		{
 			File.Seek(base.DataPosition);
 
-			// First 4 bytes contain version and flag data.
+			// First 4 buffer contain version and flag data.
 			version = File.ReadBlock(1)[0];
 			flags = File.ReadBlock(3).ToUInt();
 		}
@@ -42,7 +42,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		#endregion                 
         
         #region Protected Properties
-		// Offset for those four bytes.
+		// Offset for those four buffer.
 		protected override long DataPosition
 		{
 			get { return base.DataPosition + 4; }

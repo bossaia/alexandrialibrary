@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections.Generic;
+using Alexandria;
 
 namespace AlexandriaOrg.Alexandria.TagLib
 {
@@ -265,7 +266,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			}
 		}
 
-		public override IList<IPicture> Pictures
+		public override IList<IImage> Pictures
 		{
 			get
 			{

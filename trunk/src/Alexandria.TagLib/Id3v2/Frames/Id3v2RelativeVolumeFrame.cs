@@ -62,7 +62,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			identification = data.Mid(0, pos).ToString(StringType.Latin1);
 			pos += 1;
 
-			// Each channel is at least 4 bytes.
+			// Each channel is at least 4 buffer.
 
 			while (pos <= data.Count - 4)
 			{

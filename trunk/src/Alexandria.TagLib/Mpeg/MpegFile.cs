@@ -609,7 +609,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 				if(previous_partial_synch_match && SecondSynchByte(buffer[(int)BufferSize - 1]))
 					return position + BufferSize - 1;
             
-				// If there is less than 4 bytes of data (MPEG header size) then this is invalid
+				// If there is less than 4 buffer of data (MPEG header size) then this is invalid
 				if (buffer.Count < 4)
 					return -1;
 

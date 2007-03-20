@@ -82,7 +82,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			{
 				int position = 0;
 
-				// 11 bytes is the minimum size for an APE item
+				// 11 buffer is the minimum size for an APE item
 				for (uint i = 0; i < footer.ItemCount && position <= data.Count - 11; i++)
 				{
 					ApeItem item = new ApeItem();

@@ -7,8 +7,8 @@
     <ProjectGuid>{B08B54A1-29EE-4321-B02C-87562C4B75D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Db4o</RootNamespace>
-    <AssemblyName>AlexandriaDb4o</AssemblyName>
+    <RootNamespace>Alexandria.Db4o</RootNamespace>
+    <AssemblyName>Alexandria.Db4o</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Db4oDataFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">

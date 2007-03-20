@@ -74,7 +74,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			{
 				file.Seek(tagOffset);
 
-				// read the tag -- always 128 bytes
+				// read the tag -- always 128 buffer
 				ByteVector data = file.ReadBlock(128);
 
 				// some initial sanity checking

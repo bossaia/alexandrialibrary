@@ -56,7 +56,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				this.soundSystem = parentSound.SoundSystem;
 				this.parentSound = parentSound;
 
-				if (parentSound.IsLocal)
+				if (parentSound.Uri.IsFile)
 					status = LocalSoundNotLoaded.Example;
 				else
 					status = RemoteSoundNotReady.Example;
@@ -110,7 +110,8 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region Private Fields
-		private ResourceFormat format;
+		private Guid guid = Guid.NewGuid();
+		private IResourceFormat format;
 		private Channel channel = new Channel();
 		private string name;
 		private uint length;
@@ -543,7 +544,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Load
 		public void Load()
 		{
-			if (this.IsLocal)
+			if (this.Uri.IsFile)
 			{
 				this.SoundSystem.CreateStream(this, this.Uri.AbsolutePath, Modes.None);
 			}
@@ -560,7 +561,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		[CLSCompliant(false)]
 		public void Load(uint streamBufferSize)
 		{
-			if (this.IsLocal)
+			if (this.Uri.IsFile)
 			{
 				Load();
 			}
@@ -720,48 +721,20 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region IResource Members
-		
-		#region Format
-		public ResourceFormat Format
+		public Guid Guid
 		{
-			get { return format; }
+			get { return this.guid; }
 		}
-		#endregion
 		
-		#region Uri
 		public Uri Uri
 		{
 			get { return this.uri; }
 		}
-		#endregion
 		
-		#region Resources
-		public IDictionary<object, IResource> Resources
+		public IResourceFormat Format
 		{
-			get
-			{
-				Dictionary<int, IAudioResource> resources = new Dictionary<int,IAudioResource>();
-				if (subSounds != null && subSounds.Count > 0)
-				{
-					int i = 0;
-					foreach(IAudioResource sound in subSounds)
-					{
-						i++;
-						resources.Add(i, sound);
-					}
-				}
-				return (IDictionary<object, IResource>)resources;
-			}
+			get { return this.format; }
 		}
-		#endregion
-		
-		#region IsLocal
-		public bool IsLocal
-		{
-			get { return this.uri.IsFile; }
-		}
-		#endregion
-		
 		#endregion
 
 		#region IAudioResource Members
