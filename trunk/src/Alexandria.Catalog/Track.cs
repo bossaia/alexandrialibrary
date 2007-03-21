@@ -9,9 +9,9 @@ namespace Alexandria.Catalog
 	{
 		#region Private Fields
 		private string name;
-		private IArtistResource artist;
-		private ISongResource song;
-		private IAlbumResource album;
+		private IArtist artist;
+		private ISong song;
+		private IAlbum album;
 		private uint length;
 		private uint milliseconds;
 		private uint number;
@@ -34,19 +34,19 @@ namespace Alexandria.Catalog
 			set {name = value;}
 		}
 		
-		public IArtistResource Artist
+		public IArtist Artist
 		{
 			get {return artist;}
 			set {artist = value;}
 		}
 		
-		public ISongResource Song
+		public ISong Song
 		{
 			get {return song;}
 			set {song = value;}
 		}
 		
-		public IAlbumResource Album
+		public IAlbum Album
 		{
 			get {return album;}
 			set {album = value;}

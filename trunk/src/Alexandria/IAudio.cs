@@ -5,7 +5,7 @@ using System.Text;
 namespace Alexandria
 {
 	[CLSCompliant(false)]
-	public interface IAudioResource : IResource
+	public interface IAudio : IResource
 	{
 		void Load();
 		void Load(uint streamBufferSize);

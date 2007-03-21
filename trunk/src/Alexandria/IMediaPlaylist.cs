@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaPlaylist
+	public interface IMediaPlaylist : IResource
 	{
-		string Path{get;}
-		string Name{get;}
-		string Version{get;}
-		//IList<MediaFile> Files{get;}
+		IList<IMediaContainer> Items { get; }
 	}
 }

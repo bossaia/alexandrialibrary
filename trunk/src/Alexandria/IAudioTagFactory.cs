@@ -5,7 +5,7 @@ using System.Text;
 namespace Alexandria
 {
 	[System.CLSCompliant(false)]
-	public interface ITagEngine
+	public interface IAudioTagFactory
 	{
 		//IAudioTag GetAudioTag(MediaFile file);
 	}

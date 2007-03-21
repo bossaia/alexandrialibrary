@@ -11,7 +11,7 @@ using Alexandria;
 namespace AlexandriaOrg.Alexandria.Fmod
 {
 	//[SoundClass]
-	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudioResource
+	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudio
 	{
 		#region Constructors
 		/// <summary>

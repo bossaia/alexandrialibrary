@@ -109,11 +109,11 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region Public Methods
-		public virtual void Update(IAudioCommand command)
-		{
-			if (command != null)
-				command.Execute(this);
-		}
+		//public virtual void Update(IAudioCommand command)
+		//{
+			//if (command != null)
+				//command.Execute(this);
+		//}
 		#endregion
 	}
 }

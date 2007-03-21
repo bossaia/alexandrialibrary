@@ -10,7 +10,7 @@ namespace Alexandria.Encyclopedia
 		#region Private Fields
 		private string name;
 		private DateTime releaseDate;
-		private IArtistResource artist;
+		private IArtist artist;
 		private string amazonAsin;
 		private Uri coverArtUrl;
 		List<Collaboration> collaborations = new List<Collaboration>();
@@ -42,7 +42,7 @@ namespace Alexandria.Encyclopedia
 			set {releaseDate = value;}
 		}
 		
-		public IArtistResource Artist
+		public IArtist Artist
 		{
 			get {return artist;}
 			set {artist = value;}
