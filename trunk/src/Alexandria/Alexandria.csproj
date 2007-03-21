@@ -46,6 +46,7 @@
     <Compile Include="IAudioCompactDisc.cs" />
     <Compile Include="IImage.cs" />
     <Compile Include="IMediaContainer.cs" />
+    <Compile Include="IMetadata.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="IResourceFormat.cs" />
     <Compile Include="ISearch.cs" />
