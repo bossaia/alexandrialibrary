@@ -6,6 +6,27 @@ namespace Alexandria
 {
 	public class MetadataMap<K, V> : IDictionary<K, V>
 	{
+		#region Inner Classes
+		private class CaseInsensitiveComparer : IEqualityComparer<K>
+		{
+			#region IEqualityComparer<K> Members
+			public bool Equals(K x, K y)
+			{
+				if (x != null && y != null)
+				{
+					return (x.ToString().ToLowerInvariant() == y.ToString().ToLowerInvariant());
+				}
+				else return false;
+			}
+
+			public int GetHashCode(K obj)
+			{
+				return obj.GetHashCode();
+			}
+			#endregion
+		}
+		#endregion
+	
 		#region Constructors
 		public MetadataMap()
 		{
@@ -23,7 +44,7 @@ namespace Alexandria
 		private Guid guid;
 		private string name;
 		private Uri uri;
-		private IDictionary<K, V> map = new Dictionary<K,V>();
+		private IDictionary<K, V> map = new Dictionary<K,V>(new CaseInsensitiveComparer());
 		#endregion
 		
 		#region Public Properties
