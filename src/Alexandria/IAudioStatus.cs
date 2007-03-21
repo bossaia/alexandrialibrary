@@ -17,6 +17,6 @@ namespace Alexandria
 		bool AllowsPause{get;}
 		bool AllowsStop{get;}
 		bool AllowsSeek{get;}
-		void Update(IAudioCommand command);
+		//void Update(IAudioCommand command);
 	}
 }

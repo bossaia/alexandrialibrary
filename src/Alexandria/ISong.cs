@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioCompactDisc : IAudio
+	public interface ISong : IResource
 	{
-		IList<IAudio> Tracks {get;}
 	}
 }

@@ -37,7 +37,7 @@ namespace Alexandria.Client
 		private uint length;
 		private IAudioPlayer audioPlayer;
 		//private DataFactory dataFactory;
-		private ITagEngine tagEngine;
+		private IAudioTagFactory tagEngine;
 		private IAlbumFactory albumFactory;
 		//private AudioPlaybackFunction playDelegate = null;
 		//private AudioPlaybackFunction pauseDelegate = null;

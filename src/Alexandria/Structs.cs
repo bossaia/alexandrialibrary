@@ -80,71 +80,63 @@ namespace Alexandria
 	}
 	#endregion
 
-	#region MimeType
-	/*
-	public struct MimeType
+	#region Version
+	public struct Version : IComparable<Version>
 	{
 		#region Constructors
-		public MimeType(ContentType type, string subtype)
+		public Version(int majorPart, int minorPart, int buildPart, int revisionPart)
 		{
-			this.uuid = Guid.NewGuid();
-			this.type = type;
-			this.subtype = subtype.ToLowerInvariant();
+			numbers = new int[4];
+			numbers[0] = majorPart;
+			numbers[1] = minorPart;
+			numbers[2] = buildPart;
+			numbers[3] = revisionPart;	
 		}
 		#endregion
 		
 		#region Private Fields
-		private Guid uuid;
-		private ContentType type;
-		private string subtype;
+		private int[] numbers;// = new int[4];
 		#endregion
-		
+				
 		#region Public Properties
-		public ContentType Type
+		public int MajorPart
 		{
-			get { return type; }
+			get { return numbers[0]; }
 		}
-
-		public string Subtype
+		
+		public int MinorPart
 		{
-			get {return subtype;}
+			get { return numbers[1]; }
+		}
+		
+		public int BuildPart
+		{
+			get { return numbers[2]; }
+		}
+		
+		public int RevisionPart
+		{
+			get { return numbers[3]; }
 		}
 		#endregion
 		
 		#region Public Methods
 		public override bool Equals(object obj)
 		{
-			if (obj is MimeType)
+			if (obj != null && obj.GetType() == typeof(Version))
 			{
-				MimeType otherMimeType = (MimeType)obj;
-				return (this.Type == otherMimeType.Type && string.Compare(this.Subtype, otherMimeType.Subtype, true) == 0);
+				return (this.CompareTo((Version)obj) == 0);
 			}
 			else return false;
 		}
-
-		public override int GetHashCode()
-		{
-			return this.uuid.GetHashCode();
-		}
-
-		public override string ToString()
-		{
-			return this.type.ToString() + "/" + this.subtype.ToString();
-		}
 		#endregion
-		
-		#region Public Static Methods
-		public static bool operator ==(MimeType m1, MimeType m2)
+
+		#region IComparable<Version> Members
+		public int CompareTo(Version other)
 		{
-			return m1.Equals(m2);
-		}
-		
-		public static bool operator !=(MimeType m1, MimeType m2)
-		{
-			return !m1.Equals(m2);
+			throw new Exception("The method or operation is not implemented.");
 		}
 		#endregion
 	}
-	*/
 	#endregion
 }

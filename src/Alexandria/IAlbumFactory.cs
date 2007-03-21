@@ -6,8 +6,8 @@ namespace Alexandria
 {
 	public interface IAlbumFactory
 	{
-		IAlbumResource GetAlbum(IAudioCompactDisc disc);
+		IAlbum GetAlbum(IAudioCompactDisc disc);
 
-		IAlbumResource GetAlbum(ISearch search);
+		IAlbum GetAlbum(ISearch search);
 	}
 }

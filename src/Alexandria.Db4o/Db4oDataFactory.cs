@@ -50,24 +50,24 @@ namespace Alexandria.Db4o
 		#region Public Methods
 		
 		#region GetAlbum
-		public IAlbumResource GetAlbum()
+		public IAlbum GetAlbum()
 		{
 			return null;
 		}
 
-		public IAlbumResource GetAlbum(Guid id)
+		public IAlbum GetAlbum(Guid id)
 		{
 			return null;
 		}
 		#endregion
 		
 		#region GetArtist
-		public IArtistResource GetArtist()
+		public IArtist GetArtist()
 		{
 			return null;
 		}
 
-		public IArtistResource GetArtist(Guid id)
+		public IArtist GetArtist(Guid id)
 		{
 			return null;
 		}
@@ -88,12 +88,12 @@ namespace Alexandria.Db4o
 		#endregion
 		
 		#region GetSong
-		public ISongResource GetSong()
+		public ISong GetSong()
 		{
 			return null;
 		}
 
-		public ISongResource GetSong(Guid id)
+		public ISong GetSong(Guid id)
 		{
 			return null;
 		}

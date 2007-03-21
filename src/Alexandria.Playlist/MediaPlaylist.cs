@@ -60,5 +60,33 @@ namespace Alexandria.Playlist
 		{
 		}
 		#endregion
+
+		#region IMediaPlaylist Members
+
+		public IList<IMediaContainer> Items
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IResource Members
+
+		public Guid Guid
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public Uri Uri
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IResourceFormat Format
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
 	}
 }

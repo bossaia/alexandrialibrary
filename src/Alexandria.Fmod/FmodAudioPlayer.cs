@@ -269,7 +269,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		
 		#region Public Properties
 		[CLSCompliant(false)]
-		public IAudioResource CurrentAudio
+		public IAudio CurrentAudio
 		{
 			get {return currentAudio;}
 		}

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAlbumResource : IResource
+	public interface IText
 	{
+		System.Text.Encoding Encoding { get; }
 	}
 }
