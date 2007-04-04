@@ -4,11 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioTrack
+	public interface IAudioTrack : IResource
 	{
 		int Number { get; }
 		string Name { get; }
 		IList<IArtist> Artists { get; }
-		IAudio Audio { get; }
 	}
 }
