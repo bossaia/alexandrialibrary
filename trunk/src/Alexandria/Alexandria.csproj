@@ -43,6 +43,7 @@
     <Compile Include="IAlbum.cs" />
     <Compile Include="IArtistFactory.cs" />
     <Compile Include="IArtist.cs" />
+    <Compile Include="IAudioCompactDisc.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="IImage.cs" />
     <Compile Include="IMediaContainer.cs" />
