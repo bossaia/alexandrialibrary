@@ -4,8 +4,11 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioCompactDisc : IAudio
+	public interface IAudioCompactDisc : IResource
 	{
-		IList<IAudio> Tracks {get;}
+		int NumberOfTracks { get; }
+		int Minutes { get; }
+		int Seconds { get; }
+		int Frames { get; }
 	}
 }
