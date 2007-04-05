@@ -6,5 +6,6 @@ namespace Alexandria
 {
 	public interface IArtistFactory
 	{
+		IArtist GetArtist(ISearch search);
 	}
 }
