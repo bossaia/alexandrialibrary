@@ -8,6 +8,7 @@ namespace Alexandria
 	{
 		int Number { get; }
 		string Name { get; }
-		IList<IArtist> Artists { get; }
+		ISong Song { get; }
+		IList<IArtist> Performers { get; }
 	}
 }

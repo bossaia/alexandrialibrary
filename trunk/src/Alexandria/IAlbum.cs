@@ -9,8 +9,7 @@ namespace Alexandria
 		string Name { get; }
 		DateTime ReleaseDate { get; }
 		bool HasVariousArtists { get; }
-		IArtist PrimaryArtist { get; }
-		IList<IArtist> Artists { get; }
+		IList<IArtist> Performers { get; }
 		IList<IAudioTrack> Tracks { get; }
 	}
 }
