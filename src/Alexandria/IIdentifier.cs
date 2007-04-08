@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioFactory : IPlugin
+	public interface IIdentifier : IComparable<IIdentifier>
 	{
-		IAudio GetAudio(Uri uri);
+		string Value { get; }
+		string Type { get; }
 	}
 }

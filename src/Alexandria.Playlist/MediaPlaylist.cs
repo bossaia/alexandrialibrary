@@ -71,18 +71,17 @@ namespace Alexandria.Playlist
 		#endregion
 
 		#region IResource Members
-
-		public Guid Guid
+		public IIdentifier Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		public Uri Uri
+		public ILocation Location
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		public IResourceFormat Format
+		public IFormat Format
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

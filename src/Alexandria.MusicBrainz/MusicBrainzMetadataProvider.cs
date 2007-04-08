@@ -209,10 +209,10 @@ namespace Alexandria.MusicBrainz
 			{							
 				try
 				{
-					Debug.WriteLine("Drive Name:" + disc.Uri.LocalPath);
+					Debug.WriteLine("Drive Name:" + disc.Location.RelativePath);
 				
 					//"/dev/hdc" or D:
-					string driveName = disc.Uri.LocalPath;
+					string driveName = disc.Location.RelativePath;
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);
@@ -314,6 +314,43 @@ namespace Alexandria.MusicBrainz
 		{
 			return LookupAlbumById(id);
 		}
+		#endregion
+
+		#region IResource Members
+
+		public IIdentifier Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public ILocation Location
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IFormat Format
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region INamedResource Members
+
+		public string Name
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IProxyResource Members
+
+		public void Load()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
 		#endregion
 	}
 }

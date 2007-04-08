@@ -33,7 +33,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
         private ByteVector data;
         private Guid guid = Guid.NewGuid();
         private Uri uri;
-        private IResourceFormat resourceFormat;
+        private IFormat resourceFormat;
         #endregion
    
 		#region Public Properties
@@ -105,6 +105,10 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		#endregion
 
 		#region IImage Members
+		public void Load()
+		{
+		}
+		
 		System.Collections.Generic.IList<byte> IImage.Data
 		{
 			get { return data.Data; }
@@ -112,17 +116,17 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		#endregion
 
 		#region IResource Members
-		public Guid Guid
+		public IIdentifier Id
 		{
-			get { return guid; }
+			get { return null; }
 		}
 
-		public Uri Uri
+		public ILocation Location
 		{
-			get { return uri; }
+			get { return null; }
 		}
 
-		public IResourceFormat Format
+		public IFormat Format
 		{
 			get { return resourceFormat; }
 		}

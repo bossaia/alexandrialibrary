@@ -56,7 +56,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				this.soundSystem = parentSound.SoundSystem;
 				this.parentSound = parentSound;
 
-				if (parentSound.Uri.IsFile)
+				if (parentSound.Location.IsLocal)
 					status = LocalSoundNotLoaded.Example;
 				else
 					status = RemoteSoundNotReady.Example;
@@ -111,7 +111,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		#region Private Fields
 		private Guid guid = Guid.NewGuid();
-		private IResourceFormat format;
+		private IFormat format;
 		private Channel channel = new Channel();
 		private string name;
 		private uint length;
@@ -320,9 +320,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Length
+		#region FmodLength
 		[CLSCompliant(false)]
-		public uint Length
+		public uint FmodLength
 		{
 			get
 			{
@@ -494,7 +494,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			get
 			{
 				this.LengthUnit = TimeUnits.Millisecond;
-				return this.Length;
+				return this.FmodLength;
 			}
 		}
 		#endregion
@@ -544,9 +544,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Load
 		public void Load()
 		{
-			if (this.Uri.IsFile)
+			if (this.Location.IsLocal)
 			{
-				this.SoundSystem.CreateStream(this, this.Uri.AbsolutePath, Modes.None);
+				this.SoundSystem.CreateStream(this, this.Location.AbsolutePath, Modes.None);
 			}
 			else
 			{
@@ -561,7 +561,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		[CLSCompliant(false)]
 		public void Load(uint streamBufferSize)
 		{
-			if (this.Uri.IsFile)
+			if (this.Location.IsLocal)
 			{
 				Load();
 			}
@@ -570,7 +570,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 				this.SoundSystem.StreamBufferUnit = TimeUnits.RawByte; //streamBufferUnit;
 				this.SoundSystem.StreamBufferSize = streamBufferSize;
 				Modes mode = (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking);
-				this.SoundSystem.CreateSound(this, this.Uri.AbsolutePath, mode);
+				this.SoundSystem.CreateSound(this, this.Location.AbsolutePath, mode);
 			}
 		}
 		#endregion
@@ -637,7 +637,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 				// Get the length of the sound in PCM bytes
 				this.LengthUnit = TimeUnits.PcmByte;
-				uint pcmLength = this.Length;
+				uint pcmLength = this.FmodLength;
 
 				// Create the WAV structures
 				FmtChunk fmtChunk = new FmtChunk();
@@ -721,30 +721,35 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#endregion
 
 		#region IResource Members
-		public Guid Guid
+		public IIdentifier Id
 		{
-			get { return this.guid; }
+			get { return null; }
 		}
 		
-		public Uri Uri
+		public ILocation Location
 		{
-			get { return this.uri; }
+			get { return null; }
 		}
 		
-		public IResourceFormat Format
+		public IFormat Format
 		{
 			get { return this.format; }
 		}
 		#endregion
 
-		#region IAudioResource Members
+		#region IAudio Members
+		public TimeSpan Length
+		{
+			get { return TimeSpan.Zero; }
+		}
+		
 		[CLSCompliant(false)]
 		public uint Minutes
 		{
 			get
 			{
 				this.LengthUnit = TimeUnits.Millisecond;
-				return (this.Length / 60000);
+				return (this.FmodLength / 60000);
 			}
 		}
 
@@ -754,7 +759,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			get
 			{
 				this.LengthUnit = TimeUnits.Millisecond;
-				return (this.Length / 10000);
+				return (this.FmodLength / 10000);
 			}
 		}
 

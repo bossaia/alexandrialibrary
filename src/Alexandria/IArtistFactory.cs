@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IArtistFactory
+	public interface IArtistFactory : IPlugin
 	{
 		IArtist GetArtist(ISearch search);
 	}

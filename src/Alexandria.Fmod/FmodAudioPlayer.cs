@@ -453,7 +453,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 					Sound sound = new Sound(this.SoundSystem, file);
 					soundSystem.CreateSound(sound, file.Path, (Modes.Software|Modes.Fmod2D|Modes.OpenOnly|Modes.IgnoreTags));
 					sound.LengthUnit = TimeUnits.Millisecond;
-					length = sound.Length;
+					length = sound.FmodLength;
 					sound.Dispose();
 				}
 				info = new AudioInfo(null, length);

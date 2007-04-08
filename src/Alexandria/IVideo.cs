@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IVideo : IResource
+	public interface IVideo : IProxyResource
 	{
 	}
 }

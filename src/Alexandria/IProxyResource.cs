@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioFactory : IPlugin
+	public interface IProxyResource : IResource
 	{
-		IAudio GetAudio(Uri uri);
+		void Load();
 	}
 }
