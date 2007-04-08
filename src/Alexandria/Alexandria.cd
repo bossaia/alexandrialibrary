@@ -213,9 +213,9 @@
     <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
       <Path>
         <Point X="6.125" Y="3.43" />
-        <Point X="6.125" Y="3.596" />
-        <Point X="5.596" Y="3.596" />
-        <Point X="5.596" Y="3.812" />
+        <Point X="6.125" Y="3.598" />
+        <Point X="5.595" Y="3.598" />
+        <Point X="5.595" Y="3.812" />
         <Point X="5.75" Y="3.812" />
       </Path>
     </InheritanceLine>
@@ -236,9 +236,9 @@
     <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
       <Path>
         <Point X="6.125" Y="3.43" />
-        <Point X="6.125" Y="3.596" />
-        <Point X="5.596" Y="3.596" />
-        <Point X="5.596" Y="5.875" />
+        <Point X="6.125" Y="3.598" />
+        <Point X="5.595" Y="3.598" />
+        <Point X="5.595" Y="5.875" />
         <Point X="5.75" Y="5.875" />
       </Path>
     </InheritanceLine>
@@ -252,9 +252,9 @@
     <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
       <Path>
         <Point X="6.125" Y="3.43" />
-        <Point X="6.125" Y="3.596" />
-        <Point X="5.596" Y="3.596" />
-        <Point X="5.596" Y="8.625" />
+        <Point X="6.125" Y="3.598" />
+        <Point X="5.595" Y="3.598" />
+        <Point X="5.595" Y="8.625" />
         <Point X="5.75" Y="8.625" />
       </Path>
     </InheritanceLine>
