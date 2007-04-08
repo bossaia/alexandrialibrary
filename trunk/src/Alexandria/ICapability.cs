@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IText : IResource
+	public interface ICapability
 	{
-		System.Text.Encoding Encoding { get; }
+		//bool CanLazyLoad { get; }
+		//bool CanDelegate { get; }
 	}
 }

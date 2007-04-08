@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IArtist : INamedResource
+	public interface IArtist : IEntity
 	{
 	}
 }

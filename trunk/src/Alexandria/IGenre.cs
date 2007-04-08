@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IGenre : INamedResource
+	public interface IGenre : IEntity
 	{
 	}
 }

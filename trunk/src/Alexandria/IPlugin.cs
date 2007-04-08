@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IPlugin : INamedResource, IProxyResource
+	public interface IPlugin : IEntity, IProxy
 	{
+		ICapability Capability { get; }
 	}
 }

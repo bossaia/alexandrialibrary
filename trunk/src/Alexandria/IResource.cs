@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IResource
+	public interface IResource : IProxy
 	{
 		IIdentifier Id { get; }
 		ILocation Location { get; }

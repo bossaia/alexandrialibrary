@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAlbum : INamedResource
+	public interface IAlbum : IEntity
 	{
 		DateTime ReleaseDate { get; }
 		bool HasVariousArtists { get; }

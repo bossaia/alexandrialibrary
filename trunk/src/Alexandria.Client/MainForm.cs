@@ -297,10 +297,10 @@ namespace Alexandria.Client
 				//pauseDelegate = new AudioPlaybackFunction(audioPlayer.Pause);
 				//stopDelegate = new AudioPlaybackFunction(audioPlayer.Stop);
 			
-				this.PlaybackStatusLabel.Text = audioPlayer.CurrentStatus;
+				//this.PlaybackStatusLabel.Text = audioPlayer.CurrentStatus;
 
 				//this.PlaybackTimer.Enabled = true;
-				this.PlaybackTimer.Start();
+				//this.PlaybackTimer.Start();
 			
 				// Initialize the Manifest
 				//MediaFileFormat.InitializeManifest();								
