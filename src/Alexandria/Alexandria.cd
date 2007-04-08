@@ -2,7 +2,7 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Font Name="Tahoma" Size="8.25" />
   <Class Name="Alexandria.MetadataMap&lt;K, V&gt;" Collapsed="true">
-    <Position X="10" Y="0.75" Width="1.5" />
+    <Position X="8.25" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>MetadataMap.cs</FileName>
       <HashCode>CCIAEAAAAAAEABAQCAAABAQEAAAMBAAACAAgAABQIAA=</HashCode>
@@ -10,14 +10,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Alexandria.PluginAttribute" Collapsed="true">
-    <Position X="10" Y="1.5" Width="1.5" />
+    <Position X="8.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>PluginAttribute.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAQAEAAEAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Alexandria.PluginRepository" Collapsed="true">
-    <Position X="10" Y="2.25" Width="1.5" />
+    <Position X="8.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>PluginRepository.cs</FileName>
       <HashCode>AAEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -399,7 +399,7 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IVideoStatus" Collapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Position X="4.5" Y="2" Width="1.75" />
     <TypeIdentifier>
       <FileName>IVideoStatus.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
