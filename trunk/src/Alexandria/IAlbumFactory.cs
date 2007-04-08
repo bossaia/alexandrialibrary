@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAlbumFactory
+	public interface IAlbumFactory : IPlugin
 	{
 		IAlbum GetAlbum(IAudioCompactDisc disc);
 

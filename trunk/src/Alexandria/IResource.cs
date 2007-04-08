@@ -6,8 +6,8 @@ namespace Alexandria
 {
 	public interface IResource
 	{
-		Guid Guid { get; }
-		Uri Uri { get; }		
-		IResourceFormat Format { get; }
+		IIdentifier Id { get; }
+		ILocation Location { get; }
+		IFormat Format { get; }
 	}
 }

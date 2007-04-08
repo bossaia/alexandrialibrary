@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IImage : IResource
+	public interface IImage : IProxyResource
 	{
 		IList<byte> Data { get; }
 	}

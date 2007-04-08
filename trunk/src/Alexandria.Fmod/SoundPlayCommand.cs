@@ -26,7 +26,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		{
 			if (IsValid(status))
 			{
-				if (Sound.Uri.IsFile)
+				if (Sound.Location.IsLocal)
 				{
 					//AudioPlayer.Play(
 				}

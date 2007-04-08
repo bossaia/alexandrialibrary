@@ -349,7 +349,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		public IntPtr Data;
 		
 		/// <summary>
-		/// [out] Length of the data contained in this Tag
+		/// [out] FmodLength of the data contained in this Tag
 		/// </summary>
 		[CLSCompliant(false)]
 		public uint DataLength;      

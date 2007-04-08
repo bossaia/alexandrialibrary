@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace Alexandria.Encyclopedia
 {
-	public class Album
+	public class Album : IAlbum
 	{
 		#region Private Fields
 		private string name;
@@ -85,6 +85,55 @@ namespace Alexandria.Encyclopedia
 			get {return musicBrainzUrl;}
 			set {musicBrainzUrl = value;}
 		}
+		#endregion
+
+		#region IAlbum Members
+
+
+		public bool HasVariousArtists
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IList<IArtist> Performers
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		IList<IAudioTrack> IAlbum.Tracks
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IList<IGenre> Genres
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IList<IStyle> Styles
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IResource Members
+
+		public IIdentifier Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public ILocation Location
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IFormat Format
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
 		#endregion
 	}
 }

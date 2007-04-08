@@ -535,7 +535,7 @@ namespace Alexandria.Client
 
 		private void InitializeTrackBar()
 		{
-			this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(this.audioPlayer.CurrentAudio.Milliseconds));
+			this.PlaybackTrackBar.SetRange(0, Convert.ToInt32(this.audioPlayer.CurrentAudio.Length.Milliseconds));
 			//trackBarIsInitialized = true;
 		}
 

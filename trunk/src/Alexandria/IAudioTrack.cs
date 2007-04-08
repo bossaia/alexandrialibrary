@@ -4,11 +4,13 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioTrack : IResource
+	public interface IAudioTrack : INamedResource
 	{
 		int Number { get; }
-		string Name { get; }
+		TimeSpan Length { get; }
 		ISong Song { get; }
 		IList<IArtist> Performers { get; }
+		IList<IGenre> Genres { get; }
+		IList<IStyle> Styles { get; }
 	}
 }

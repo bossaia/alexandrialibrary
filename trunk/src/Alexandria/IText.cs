@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IText
+	public interface IText : IProxyResource
 	{
 		System.Text.Encoding Encoding { get; }
 	}

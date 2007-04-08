@@ -92,7 +92,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Length
+		#region FmodLength
 		[CLSCompliant(false)]
 		public uint Length
 		{

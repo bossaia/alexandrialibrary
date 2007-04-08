@@ -23,7 +23,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 					
 			if (resource != null)
 			{
-				tagFile = File.Create(resource.Uri.AbsolutePath);
+				tagFile = File.Create(resource.Location.AbsolutePath);
 				if (tagFile != null)
 				{
 					System.Diagnostics.Debug.WriteLine("tagFile has data");

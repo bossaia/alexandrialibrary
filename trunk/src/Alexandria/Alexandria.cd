@@ -2,59 +2,115 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Font Name="Tahoma" Size="8.25" />
   <Interface Name="Alexandria.IAlbum">
-    <Position X="0.75" Y="3.25" Width="1.75" />
+    <Position X="0.5" Y="3.75" Width="2.25" />
     <TypeIdentifier>
       <FileName>IAlbum.cs</FileName>
-      <HashCode>AAAAAAIAAEAIAAAAAAAAAAQAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAIAAEAIAAAAAAIAAAAAAAAAAAAABABAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IAlbumFactory">
-    <Position X="0.75" Y="1.75" Width="1.75" />
+    <Position X="3.5" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>IAlbumFactory.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IArtist">
-    <Position X="3" Y="3.25" Width="1.5" />
+    <Position X="0.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>IArtist.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IArtistFactory">
-    <Position X="3" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>IArtistFactory.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IAudio">
-    <Position X="5" Y="3.25" Width="1.5" />
+    <Position X="6.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>IAudio.cs</FileName>
-      <HashCode>AAAggAAEAACAAAAgCAAAAAAAAAAAAAAAoAAAAAAAAAA=</HashCode>
+      <HashCode>AAAgAAAEAAAAAAAgCAAAAABAAAAAAAAAoAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.ISong">
-    <Position X="0.75" Y="5.5" Width="1.75" />
+    <Position X="0.5" Y="9.75" Width="1.75" />
     <TypeIdentifier>
       <FileName>ISong.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IAudioFactory">
-    <Position X="5" Y="1.75" Width="1.5" />
+    <Position X="3.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <FileName>IAudioFactory.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IAudioTrack">
-    <Position X="3" Y="5.5" Width="1.5" />
+    <Position X="0.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <FileName>IAudioTrack.cs</FileName>
-      <HashCode>AAAAAAIAAAAAAAAAAEAAAAwAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAAAAAAAEIAAAhAAAAAAAAABAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IResource">
+    <Position X="4.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>IResource.cs</FileName>
+      <HashCode>AAACAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IFormat" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IFormat.cs</FileName>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.INamedResource">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>INamedResource.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.ILocation" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ILocation.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IIdentifier" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IIdentifier.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IProxyResource">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IProxyResource.cs</FileName>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IPlugin" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IPlugin.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IImage">
+    <Position X="6.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>IImage.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
 </ClassDiagram>
