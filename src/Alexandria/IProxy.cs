@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IProxyResource : IResource
+	public interface IProxy
 	{
 		void Load();
 	}

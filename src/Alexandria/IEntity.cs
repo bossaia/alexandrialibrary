@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface INamedResource : IResource
+	public interface IEntity
 	{
+		IIdentifier Id { get; }
+		ILocation Location { get; }
 		string Name { get; }
 	}
 }

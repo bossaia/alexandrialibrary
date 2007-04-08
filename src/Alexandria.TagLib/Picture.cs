@@ -131,5 +131,15 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			get { return resourceFormat; }
 		}
 		#endregion
+
+		#region IEntity Members
+
+
+		public string Name
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
 	}
 }
