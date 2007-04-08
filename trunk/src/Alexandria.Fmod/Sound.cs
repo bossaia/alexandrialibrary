@@ -499,12 +499,12 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Position
+		#region FmodPosition
 		/// <summary>
 		/// Get the current position of the sound in milliseconds
 		/// </summary>
 		[CLSCompliant(false)]
-		public uint Position
+		public uint FmodPosition
 		{
 			get { return this.channel.Position; }
 			set { this.channel.Position = value; }
@@ -770,8 +770,13 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		
 		[CLSCompliant(false)]
-		public void Seek(uint position)
+		public void Seek(TimeSpan position)
 		{
+		}
+		
+		public TimeSpan Position
+		{
+			get { return TimeSpan.Zero; }
 		}
 		#endregion
 	}
