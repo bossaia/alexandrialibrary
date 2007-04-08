@@ -54,6 +54,7 @@
     <Compile Include="ILocation.cs" />
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="IMetadata.cs" />
+    <Compile Include="IPlayable.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="IFormat.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVideo.cs" />
+    <Compile Include="IVideoStatus.cs" />
     <Compile Include="MetadataMap.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAudioPlayer.cs" />
