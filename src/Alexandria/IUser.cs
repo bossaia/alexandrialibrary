@@ -10,6 +10,6 @@ namespace Alexandria
 		string Password { get; }
 		IList<IProfile> Profiles { get; }
 		IProfile Profile { get; }
-		AuthenticationResult Authenticate(string name, string password);
+		bool Authenticate(string name, string password);
 	}
 }

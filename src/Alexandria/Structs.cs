@@ -5,92 +5,17 @@ using System.Text;
 
 namespace Alexandria
 {
-	#region AuthenticationResult
-	public struct AuthenticationResult
-	{
-		#region Private Fields
-		private bool userNameIsValid;
-		private bool passwordIsValid;
-		private IUser user;
-		#endregion
-
-		#region Constructors
-		public AuthenticationResult(bool userNameIsValid, bool passwordIsValid, IUser user)
-		{
-			this.userNameIsValid = userNameIsValid;
-			this.passwordIsValid = passwordIsValid;
-			this.user = user;
-		}
-		#endregion
-
-		#region Public Properties
-		public bool UserNameIsValid
-		{
-			get { return userNameIsValid; }
-		}
-
-		public bool PasswordIsValid
-		{
-			get { return passwordIsValid; }
-		}
-
-		public IUser User
-		{
-			get { return user; }
-		}
-
-		public bool IsValid
-		{
-			get
-			{
-				if (userNameIsValid && passwordIsValid && user != null) return true;
-				else return false;
-			}
-		}
-		#endregion
-		
-		#region Public Methods
-		public override bool Equals(object obj)
-		{
-			if (obj is AuthenticationResult)
-			{
-				AuthenticationResult otherResult = (AuthenticationResult)obj;
-				return (this.IsValid == otherResult.IsValid);
-			}
-			else return false;
-		}
-
-		public override int GetHashCode()
-		{
-			return Convert.ToInt32(IsValid);
-		}
-		#endregion
-		
-		#region Public Static Methods
-		public static bool operator ==(AuthenticationResult r1, AuthenticationResult r2)
-		{
-			return r1.Equals(r2);
-		}
-		
-		public static bool operator !=(AuthenticationResult r1, AuthenticationResult r2)
-		{
-			return !r1.Equals(r2);
-		}
-		#endregion
-	}
-	#endregion
-
 	#region Version
 	public struct Version : IComparable<Version>
 	{
 		#region Constructors
-		public Version(int majorPart, int minorPart, int buildPart, int revisionPart)
+		public Version(int majorNumber, int minorNumber, int buildNumber, int revisionNumber)
 		{
 			numbers = new int[4];
-			numbers[0] = majorPart;
-			numbers[1] = minorPart;
-			numbers[2] = buildPart;
-			numbers[3] = revisionPart;	
+			numbers[0] = majorNumber;
+			numbers[1] = minorNumber;
+			numbers[2] = buildNumber;
+			numbers[3] = revisionNumber;	
 		}
 		#endregion
 		
@@ -99,22 +24,22 @@ namespace Alexandria
 		#endregion
 				
 		#region Public Properties
-		public int MajorPart
+		public int MajorNumber
 		{
 			get { return numbers[0]; }
 		}
 		
-		public int MinorPart
+		public int MinorNumber
 		{
 			get { return numbers[1]; }
 		}
 		
-		public int BuildPart
+		public int BuildNumber
 		{
 			get { return numbers[2]; }
 		}
 		
-		public int RevisionPart
+		public int RevisionNumber
 		{
 			get { return numbers[3]; }
 		}
@@ -134,7 +59,12 @@ namespace Alexandria
 		#region IComparable<Version> Members
 		public int CompareTo(Version other)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			for(int i = 0; i < numbers.Length; i++)
+				if (this.numbers[i] > other.numbers[i])
+					return 1;
+				else if (this.numbers[i] < other.numbers[i]) 
+					return -1;
+			return 0;
 		}
 		#endregion
 	}
