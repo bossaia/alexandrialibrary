@@ -43,7 +43,7 @@ namespace Alexandria.Db4o
 			set { profile = value; }
 		}
 
-		public AuthenticationResult Authenticate(string name, string password)
+		public bool Authenticate(string name, string password)
 		{
 			bool userNameIsValid = false;
 			bool passwordIsValid = false;
@@ -65,7 +65,7 @@ namespace Alexandria.Db4o
 			}
 			else userNameIsValid = false;
 			
-			return new AuthenticationResult(userNameIsValid, passwordIsValid, this);
+			return (userNameIsValid && passwordIsValid);
 		}
 		#endregion
 	}

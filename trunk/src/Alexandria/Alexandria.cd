@@ -1,40 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Font Name="Tahoma" Size="8.25" />
-  <Class Name="Alexandria.MetadataMap&lt;K, V&gt;" Collapsed="true">
-    <Position X="8.25" Y="0.75" Width="1.5" />
+  <Class Name="Alexandria.MetadataMap&lt;K, V&gt;">
+    <Position X="8.25" Y="0.5" Width="2" />
     <TypeIdentifier>
       <FileName>MetadataMap.cs</FileName>
       <HashCode>CCIAEAAAAAAEABAQCAAABAQEAAAMBAAACAAgAABQIAA=</HashCode>
     </TypeIdentifier>
+    <NestedTypes>
+      <Class Name="Alexandria.MetadataMap&lt;K, V&gt;.CaseInsensitiveComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MetadataMap.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="Alexandria.PluginAttribute" Collapsed="true">
-    <Position X="8.25" Y="1.5" Width="1.5" />
+  <Class Name="Alexandria.PluginAttribute">
+    <Position X="12.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>PluginAttribute.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAQAEAAEAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Class Name="Alexandria.PluginRepository" Collapsed="true">
-    <Position X="8.25" Y="2.25" Width="1.5" />
+  <Class Name="Alexandria.PluginRepository">
+    <Position X="12.25" Y="3" Width="1.5" />
     <TypeIdentifier>
       <FileName>PluginRepository.cs</FileName>
       <HashCode>AAEAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
-  <Struct Name="Alexandria.AuthenticationResult" Collapsed="true">
-    <Position X="6.5" Y="3.5" Width="1.5" />
+  <Struct Name="Alexandria.Version">
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Structs.cs</FileName>
-      <HashCode>AAABAAAAAAAAAAAAgAgAAAAAAAAAIIAEACAABAAAAyA=</HashCode>
-    </TypeIdentifier>
-  </Struct>
-  <Struct Name="Alexandria.Version" Collapsed="true">
-    <Position X="8.25" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>Structs.cs</FileName>
-      <HashCode>AAAADAAAAAAAAAQAgAAAIAAAAAAAAABAAAAAAAAAAAE=</HashCode>
+      <HashCode>AAAAEAAAAAAAQAQAgAgAIAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Struct>
@@ -106,10 +107,9 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlayable" FixedToPoint="true">
       <Path>
-        <Point X="8.875" Y="6.641" />
-        <Point X="8.875" Y="6.833" />
-        <Point X="8.058" Y="6.833" />
-        <Point X="8.058" Y="7.062" />
+        <Point X="8" Y="6.07" />
+        <Point X="7.625" Y="6.07" />
+        <Point X="7.625" Y="7.062" />
         <Point X="8.25" Y="7.062" />
       </Path>
     </InheritanceLine>
@@ -262,10 +262,9 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlayable" FixedToPoint="true">
       <Path>
-        <Point X="8.875" Y="6.641" />
-        <Point X="8.875" Y="6.833" />
-        <Point X="8.058" Y="6.833" />
-        <Point X="8.058" Y="8.375" />
+        <Point X="8" Y="5.504" />
+        <Point X="7.625" Y="5.504" />
+        <Point X="7.625" Y="8.375" />
         <Point X="8.25" Y="8.375" />
       </Path>
     </InheritanceLine>
@@ -310,17 +309,11 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IPlayable">
-    <Position X="8" Y="4.5" Width="1.75" />
+    <Position X="8" Y="5" Width="1.75" />
     <TypeIdentifier>
       <FileName>IPlayable.cs</FileName>
       <HashCode>AAAgAAAAAAAAAAAgCAAAAABAAAAAAAAAoAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
-      <Path>
-        <Point X="7" Y="5.138" />
-        <Point X="8.36" Y="5.138" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IAudioCompactDisc">
     <Position X="3.25" Y="11.75" Width="1.75" />
@@ -346,7 +339,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.ICapability" Collapsed="true">
-    <Position X="2.5" Y="2" Width="1.5" />
+    <Position X="2.5" Y="2" Width="1.75" />
     <TypeIdentifier>
       <FileName>ICapability.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -388,15 +381,6 @@
       <FileName>IStyle.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
-      <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
-        <Point X="0.26" Y="6.05" />
-        <Point X="0.26" Y="14.125" />
-        <Point X="0.625" Y="14.125" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IVideoStatus" Collapsed="true">
     <Position X="4.5" Y="2" Width="1.75" />
