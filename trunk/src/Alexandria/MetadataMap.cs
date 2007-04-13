@@ -32,25 +32,25 @@ namespace Alexandria
 		{
 		}
 		
-		public MetadataMap(Guid guid, string name, Uri uri)
+		public MetadataMap(IIdentifier id, string name, ILocation location)
 		{
-			this.guid = guid;
+			//this.guid = guid;
 			this.name = name;
-			this.uri = uri;
+			//this.uri = uri;
 		}
 		#endregion
 		
 		#region Private Fields
-		private Guid guid;
+		//private Guid guid;
 		private string name;
-		private Uri uri;
+		//private Uri uri;
 		private IDictionary<K, V> map = new Dictionary<K,V>(new CaseInsensitiveComparer());
 		#endregion
 		
 		#region Public Properties
-		public Guid Guid
+		public IIdentifier Id
 		{
-			get { return guid; }
+			get { return null; }
 		}
 		
 		public string Name
@@ -58,9 +58,9 @@ namespace Alexandria
 			get { return name; }
 		}
 		
-		public Uri Uri
+		public ILocation Location
 		{
-			get { return uri; }
+			get { return null; }
 		}
 		#endregion
 		

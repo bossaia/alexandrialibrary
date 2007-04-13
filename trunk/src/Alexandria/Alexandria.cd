@@ -5,7 +5,7 @@
     <Position X="8.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>MetadataMap.cs</FileName>
-      <HashCode>CCIAEAAAAAAEABAQCAAABAQEAAAMBAAACAAgAABQIAA=</HashCode>
+      <HashCode>CCICEAAAAAAEABAQCAIABAQAAAAEAAAAAAAgAABQIAA=</HashCode>
     </TypeIdentifier>
     <NestedTypes>
       <Class Name="Alexandria.MetadataMap&lt;K, V&gt;.CaseInsensitiveComparer" Collapsed="true">
@@ -47,8 +47,8 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
         <Point X="0.26" Y="6.05" />
         <Point X="0.26" Y="6.5" />
         <Point X="0.5" Y="6.5" />
@@ -63,7 +63,7 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" FixedFromPoint="true">
       <Path>
-        <Point X="3.219" Y="7.472" />
+        <Point X="3.219" Y="7.352" />
         <Point X="3.219" Y="10.801" />
         <Point X="3.5" Y="10.801" />
       </Path>
@@ -77,8 +77,8 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
       <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
         <Point X="0.26" Y="6.05" />
         <Point X="0.26" Y="8.392" />
         <Point X="0.5" Y="8.392" />
@@ -93,7 +93,7 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true" FixedFromPoint="true">
       <Path>
-        <Point X="3.219" Y="7.472" />
+        <Point X="3.219" Y="7.352" />
         <Point X="3.219" Y="9.551" />
         <Point X="3.5" Y="9.551" />
       </Path>
@@ -123,8 +123,8 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
       <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
         <Point X="0.26" Y="6.05" />
         <Point X="0.26" Y="11.875" />
         <Point X="0.5" Y="11.875" />
@@ -139,7 +139,7 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="3.219" Y="7.472" />
+        <Point X="3.219" Y="7.352" />
         <Point X="3.219" Y="7.938" />
         <Point X="3.5" Y="7.938" />
       </Path>
@@ -153,8 +153,8 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
       <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
         <Point X="0.26" Y="6.05" />
         <Point X="0.26" Y="9.875" />
         <Point X="0.5" Y="9.875" />
@@ -165,14 +165,8 @@
     <Position X="5.25" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>IResource.cs</FileName>
-      <HashCode>AAACAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAACgAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IProxy" ManuallyRouted="true">
-      <Path>
-        <Point X="4.75" Y="4.991" />
-        <Point X="5.25" Y="4.991" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IFormat">
     <Position X="4.5" Y="0.5" Width="1.75" />
@@ -203,55 +197,49 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="2.438" Y="5.81" />
-        <Point X="2.438" Y="6.01" />
+        <Point X="2.938" Y="5.81" />
+        <Point X="2.938" Y="6.01" />
         <Point X="3.375" Y="6.01" />
         <Point X="3.375" Y="6.25" />
       </Path>
     </InheritanceLine>
-    <InheritanceLine Type="Alexandria.IProxy" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="3.938" Y="5.481" />
-        <Point X="3.938" Y="6.25" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IImage">
-    <Position X="5.5" Y="9.75" Width="1.75" />
+    <Position X="5.5" Y="10.25" Width="1.75" />
     <TypeIdentifier>
       <FileName>IImage.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="6.125" Y="5.93" />
-        <Point X="6.125" Y="6.084" />
-        <Point X="5.346" Y="6.084" />
-        <Point X="5.346" Y="9.875" />
-        <Point X="5.5" Y="9.875" />
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.498" />
+        <Point X="5.346" Y="6.498" />
+        <Point X="5.346" Y="10.375" />
+        <Point X="5.5" Y="10.375" />
       </Path>
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IEntity">
-    <Position X="1" Y="4.5" Width="1.75" />
+    <Position X="1.5" Y="4.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>IEntity.cs</FileName>
       <HashCode>AAACAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IMediaContainer">
-    <Position X="5.5" Y="6.25" Width="2" />
+    <Position X="5.5" Y="6.75" Width="2" />
     <TypeIdentifier>
       <FileName>IMediaContainer.cs</FileName>
       <HashCode>AAAAAEAQAAAAEBAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="6.125" Y="5.93" />
-        <Point X="6.125" Y="6.084" />
-        <Point X="5.346" Y="6.084" />
-        <Point X="5.346" Y="6.312" />
-        <Point X="5.5" Y="6.312" />
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.508" />
+        <Point X="5.346" Y="6.508" />
+        <Point X="5.346" Y="6.812" />
+        <Point X="5.5" Y="6.812" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -272,43 +260,36 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IText">
-    <Position X="5.5" Y="8.25" Width="1.75" />
+    <Position X="5.5" Y="8.75" Width="1.75" />
     <TypeIdentifier>
       <FileName>IText.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="6.125" Y="5.93" />
-        <Point X="6.125" Y="6.084" />
-        <Point X="5.346" Y="6.084" />
-        <Point X="5.346" Y="8.375" />
-        <Point X="5.5" Y="8.375" />
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.508" />
+        <Point X="5.346" Y="6.508" />
+        <Point X="5.346" Y="8.875" />
+        <Point X="5.5" Y="8.875" />
       </Path>
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IMetadata">
-    <Position X="5.5" Y="11" Width="2.25" />
+    <Position X="5.5" Y="11.5" Width="3" />
     <TypeIdentifier>
       <FileName>IMetadata.cs</FileName>
       <HashCode>AAAAAAAABABCAAAAABAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="6.125" Y="5.93" />
-        <Point X="6.125" Y="6.084" />
-        <Point X="5.346" Y="6.084" />
-        <Point X="5.346" Y="11.125" />
-        <Point X="5.5" Y="11.125" />
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.519" />
+        <Point X="5.346" Y="6.519" />
+        <Point X="5.346" Y="11.625" />
+        <Point X="5.5" Y="11.625" />
       </Path>
     </InheritanceLine>
-  </Interface>
-  <Interface Name="Alexandria.IProxy">
-    <Position X="3.25" Y="4.5" Width="1.5" />
-    <TypeIdentifier>
-      <FileName>IProxy.cs</FileName>
-      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IPlayable">
     <Position X="8" Y="5.75" Width="1.75" />
@@ -323,11 +304,11 @@
       <FileName>IAudioCompactDisc.cs</FileName>
       <HashCode>AAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAE=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IResource" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
       <Path>
-        <Point X="6.125" Y="5.93" />
-        <Point X="6.125" Y="6.084" />
-        <Point X="5.346" Y="6.084" />
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.519" />
+        <Point X="5.346" Y="6.519" />
         <Point X="5.346" Y="11.937" />
         <Point X="5" Y="11.937" />
       </Path>
@@ -348,15 +329,15 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IGenre" Collapsed="true">
-    <Position X="0.5" Y="13.25" Width="1.5" />
+    <Position X="0.5" Y="13.25" Width="2" />
     <TypeIdentifier>
       <FileName>IGenre.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
       <Path>
-        <Point X="1.875" Y="5.81" />
-        <Point X="1.875" Y="6.05" />
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
         <Point X="0.26" Y="6.05" />
         <Point X="0.26" Y="13.375" />
         <Point X="0.5" Y="13.375" />
@@ -364,11 +345,20 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IMediaPlaylist">
-    <Position X="3" Y="13.5" Width="2.25" />
+    <Position X="2.75" Y="13.5" Width="2.25" />
     <TypeIdentifier>
       <FileName>IMediaPlaylist.cs</FileName>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="Alexandria.IResource" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.125" Y="6.192" />
+        <Point X="6.125" Y="6.503" />
+        <Point X="5.346" Y="6.503" />
+        <Point X="5.346" Y="13.688" />
+        <Point X="5" Y="13.688" />
+      </Path>
+    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.ISearch" Collapsed="true">
     <Position X="0.5" Y="2" Width="1.75" />
@@ -378,11 +368,20 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IStyle" Collapsed="true">
-    <Position X="0.5" Y="14" Width="1.5" />
+    <Position X="0.5" Y="14" Width="2" />
     <TypeIdentifier>
       <FileName>IStyle.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
+    <InheritanceLine Type="Alexandria.IEntity" FixedToPoint="true">
+      <Path>
+        <Point X="2.375" Y="5.81" />
+        <Point X="2.375" Y="6.05" />
+        <Point X="0.26" Y="6.05" />
+        <Point X="0.26" Y="14.312" />
+        <Point X="0.5" Y="14.312" />
+      </Path>
+    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IVideoStatus" Collapsed="true">
     <Position X="4.5" Y="2" Width="1.75" />
