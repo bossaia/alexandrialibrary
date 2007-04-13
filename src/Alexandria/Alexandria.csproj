@@ -58,7 +58,6 @@
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="IFormat.cs" />
-    <Compile Include="IProxy.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="ISong.cs" />
     <Compile Include="IStyle.cs" />
