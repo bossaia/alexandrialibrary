@@ -111,7 +111,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 
 		#region Private Fields
 		private Guid guid = Guid.NewGuid();
-		private IFormat format;
+		private IMediaFormat format;
 		private Channel channel = new Channel();
 		private string name;
 		private uint length;
@@ -731,7 +731,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 			get { return null; }
 		}
 		
-		public IFormat Format
+		public IMediaFormat Format
 		{
 			get { return this.format; }
 		}

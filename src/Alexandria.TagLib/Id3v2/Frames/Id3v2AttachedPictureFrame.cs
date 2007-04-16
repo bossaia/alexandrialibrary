@@ -84,7 +84,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		private ByteVector data;
 		private Guid guid = Guid.NewGuid();
 		private Uri uri;
-		private IFormat resourceFormat;
+		private IMediaFormat resourceFormat;
 		#endregion
 		
 		#region Private Methods
@@ -272,7 +272,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 			get { return null; }
 		}
 
-		public IFormat Format
+		public IMediaFormat Format
 		{
 			get { return resourceFormat; }
 		}

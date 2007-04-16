@@ -18,7 +18,7 @@ namespace Alexandria.CompactDisc
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 		
-		public IFormat Format
+		public IMediaFormat Format
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
