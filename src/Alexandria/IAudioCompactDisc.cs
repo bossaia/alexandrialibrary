@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioCompactDisc : IResource
+	public interface IAudioCompactDisc : IMedia
 	{		
 		int Minutes { get; }
 		int Seconds { get; }

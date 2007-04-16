@@ -70,7 +70,7 @@
     <Compile Include="IAudioPlayer.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="IMediaPlaylist.cs" />
-    <Compile Include="IResource.cs" />
+    <Compile Include="IMedia.cs" />
     <Compile Include="IAudioStatus.cs" />
     <Compile Include="IAudioTagFactory.cs" />
     <Compile Include="IAudioTag.cs" />
