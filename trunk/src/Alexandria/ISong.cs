@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ISong : IEntity
+	public interface ISong : IMetadata
 	{
 		string Lyrics { get; }
 		IList<IArtist> Authors { get; }
