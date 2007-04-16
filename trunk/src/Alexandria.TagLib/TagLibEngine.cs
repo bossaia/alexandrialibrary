@@ -16,7 +16,7 @@ namespace AlexandriaOrg.Alexandria.TagLib
 		
 		#region Public Methods
 		[System.CLSCompliant(false)]
-		public IAudioTag GetAudioTag(IResource resource)
+		public IAudioTag GetAudioTag(IMedia resource)
 		{
 			IAudioTag tag = null;
 			File tagFile = null;

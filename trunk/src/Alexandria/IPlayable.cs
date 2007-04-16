@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IPlayable : IResource
+	public interface IPlayable : IMedia
 	{
 		TimeSpan Length { get; }
 		TimeSpan Position { get; }

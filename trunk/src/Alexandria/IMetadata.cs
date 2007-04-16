@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMetadata : IResource
+	public interface IMetadata : IMedia
 	{
 		MetadataMap<string, string> StringItems { get; }
 		MetadataMap<string, int> IntegerItems { get; }

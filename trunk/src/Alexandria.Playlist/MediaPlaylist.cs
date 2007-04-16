@@ -11,7 +11,7 @@ namespace Alexandria.Playlist
 		private string path;
 		private string name;
 		private string version;
-		private List<IResource> resources;
+		private List<IMedia> resources;
 		#endregion				
 		
 		#region Constructors
@@ -49,7 +49,7 @@ namespace Alexandria.Playlist
 			protected set {version = value;}
 		}
 		
-		public IList<IResource> Resources
+		public IList<IMedia> Resources
 		{
 			get {return resources;}
 		}
