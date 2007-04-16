@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaMetadata : IMedia
+	public interface IMediaTag
 	{
+		IMediaTagFormat Format { get; }
+		IIdentifier Id { get; }
 		MetadataMap<string, string> StringItems { get; }
 		MetadataMap<string, int> IntegerItems { get; }
 		MetadataMap<string, double> DoubleItems { get; }

@@ -8,7 +8,7 @@ namespace Alexandria
 	{
 		IIdentifier Id { get; }
 		ILocation Location { get; }
-		IFormat Format { get; }
+		IMediaFormat Format { get; }
 		void Load();
 	}
 }

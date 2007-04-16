@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IFormat
+	public interface IMediaFormat
 	{
 		string Name { get; }
 		IList<ContentType> ContentTypes { get; }
