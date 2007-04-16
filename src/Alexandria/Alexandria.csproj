@@ -47,13 +47,13 @@
     <Compile Include="IAudioFactory.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="ICapability.cs" />
-    <Compile Include="IEntity.cs" />
+    <Compile Include="IMetadata.cs" />
     <Compile Include="IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="IImage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IMediaContainer.cs" />
-    <Compile Include="IMetadata.cs" />
+    <Compile Include="IMediaMetadata.cs" />
     <Compile Include="IPlayable.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProfile.cs" />

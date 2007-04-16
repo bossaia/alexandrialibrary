@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IAudioTrack : IEntity
+	public interface IAudioTrack : IMetadata
 	{
 		int Number { get; }
 		TimeSpan Length { get; }

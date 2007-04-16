@@ -342,6 +342,11 @@ namespace Alexandria.MusicBrainz
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
+		public Version Version
+		{
+			get { return new Version(); }
+		}
+
 		#endregion
 
 		#region IProxyResource Members

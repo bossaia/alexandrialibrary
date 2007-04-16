@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IArtist : IEntity
+	public interface IArtist : IMetadata
 	{
 		bool IsGroup { get; }
 		DateTime DateStarted { get; }
