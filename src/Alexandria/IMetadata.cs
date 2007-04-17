@@ -9,5 +9,7 @@ namespace Alexandria
 		IIdentifier Id { get; }
 		ILocation Location { get; }
 		string Name { get; }
+		IDictionary<string, MetadataTag> Decompose();
+		void Compose(IDictionary<string, MetadataTag> tags);
 	}
 }
