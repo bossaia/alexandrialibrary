@@ -75,6 +75,7 @@
     <Compile Include="IAudioStatus.cs" />
     <Compile Include="IAudioTagFactory.cs" />
     <Compile Include="IAudioTag.cs" />
+    <Compile Include="MetadataTag.cs" />
     <Compile Include="PluginAttribute.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="PluginRepository.cs" />
