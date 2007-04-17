@@ -86,4 +86,18 @@ namespace Alexandria
 		StreamError
 	}
 	#endregion
+	
+	#region MetadataTagType
+	public enum MetadataTagType
+	{
+		Text,
+		TextList,
+		Numeric,
+		NumericList,
+		Date,
+		DateList,
+		Interval,
+		IntervalList
+	}
+	#endregion
 }
