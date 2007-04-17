@@ -121,5 +121,20 @@ namespace Alexandria.Encyclopedia
 		}
 
 		#endregion
+
+		#region IMetadata Members
+
+
+		public IDictionary<string, MetadataTag> Decompose()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Compose(IDictionary<string, MetadataTag> tags)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		#endregion
 	}
 }
