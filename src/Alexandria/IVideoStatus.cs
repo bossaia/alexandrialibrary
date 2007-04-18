@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IVideoStatus
+	public interface IVideoStatus : IPlayableStatus
 	{
 	}
 }
