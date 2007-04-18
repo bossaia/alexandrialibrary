@@ -69,4 +69,68 @@ namespace Alexandria
 		#endregion
 	}
 	#endregion
+	
+	#region MetadataItem
+	public struct MetadataItem
+	{
+		#region Constructors
+		public MetadataItem(IDictionary<string, MetadataItem> subItems, IDictionary<string, object> tags)
+		{
+			this.subItems = subItems;
+			this.tags = tags;
+		}
+		#endregion
+		
+		#region Private Fields
+		private IDictionary<string, MetadataItem> subItems;
+		private IDictionary<string, object> tags;
+		#endregion
+	
+		#region Public Properties
+		public IDictionary<string, MetadataItem> SubItems
+		{
+			get { return subItems; }
+		}
+		
+		public IDictionary<string, object> Tags
+		{
+			get { return tags; }
+		}
+		#endregion
+	
+		#region Public Methods
+		public void InsertTag<T>(string name, T value)
+		{
+			if (!this.tags.ContainsKey(name))
+			{
+				this.tags.Add(name, value);
+			}			
+		}
+		
+		public T ReadTag<T>(string name)
+		{
+			if (this.tags.ContainsKey(name))
+			{
+				object obj = this.tags[name];
+				if (obj is T)
+					return (T)this.tags[name];
+				else throw new KeyNotFoundException();
+			}
+			else throw new KeyNotFoundException();
+		}
+		
+		public void UpdateTag<T>(string name, T value)
+		{
+			if (this.tags.ContainsKey(name))
+			{
+				object obj = this.tags[name];
+				if (obj is T)
+					this.tags[name] = value;
+				else throw new KeyNotFoundException();
+			}
+			else throw new KeyNotFoundException();
+		}
+		#endregion
+	}
+	#endregion
 }

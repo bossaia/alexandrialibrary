@@ -16,9 +16,9 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		#region Public Methods
 		public override bool IsValid(IAudioStatus status)
 		{
-			if (status != null)
-				return status.AllowsPlay;
-			else
+			//if (status != null)
+				//return status.AllowsPlay;
+			//else
 				return false;
 		}
 

@@ -56,6 +56,7 @@
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="IMediaTag.cs" />
     <Compile Include="IPlayable.cs" />
+    <Compile Include="IPlayableStatus.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="IMediaFormat.cs" />
