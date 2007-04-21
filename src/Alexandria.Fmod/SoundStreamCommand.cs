@@ -9,7 +9,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	{
 		#region Constructors
 		[CLSCompliant(false)]
-		public SoundStreamCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound, uint streamBufferSize) : base(audioPlayer, sound, MediaCommandType.Stream)
+		public SoundStreamCommand(FmodAudioPlayer audioPlayer, Fmod.Sound sound, uint streamBufferSize) : base(audioPlayer, sound)
 		{
 			this.streamBufferSize = streamBufferSize;
 		}
@@ -49,7 +49,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.SeekingState = MediaSeekingState.None;
-							Result = MediaCommandResult.StreamError;
+							//Result = MediaCommandResult.StreamError;
 							break;
 						case OpenState.Buffering:
 							Sound.Status.BufferState = MediaBufferState.Buffering;
@@ -61,20 +61,20 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							Sound.Status.BufferState = MediaBufferState.Loading;
 							break;
 						case OpenState.Ready:
-							Result = MediaCommandResult.Streaming;
+							//Result = MediaCommandResult.Streaming;
 							Sound.Status = RemoteSoundReady.Example;
 							break;
 						default:
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.SeekingState = MediaSeekingState.None;
-							Result = MediaCommandResult.StreamError;
+							//Result = MediaCommandResult.StreamError;
 							break;
 					}
 				}
-				else Result = MediaCommandResult.StreamError;
+				//else Result = MediaCommandResult.StreamError;
 			}
-			else Result = MediaCommandResult.InvalidCommand;
+			//else Result = MediaCommandResult.InvalidCommand;
 		}
 		#endregion
 	}

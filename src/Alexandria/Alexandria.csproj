@@ -45,6 +45,7 @@
     <Compile Include="IArtist.cs" />
     <Compile Include="IAudioCompactDisc.cs" />
     <Compile Include="IAudioFactory.cs" />
+    <Compile Include="IAudioRelease.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="ICapability.cs" />
     <Compile Include="IMediaTagFormat.cs" />
@@ -55,6 +56,8 @@
     <Compile Include="ILocation.cs" />
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="IMediaTag.cs" />
+    <Compile Include="IMetadataFormat.cs" />
+    <Compile Include="IMetadataMap.cs" />
     <Compile Include="IPlayable.cs" />
     <Compile Include="IPlayableStatus.cs" />
     <Compile Include="IPlugin.cs" />
@@ -67,7 +70,6 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="IVideoStatus.cs" />
-    <Compile Include="MetadataMap.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAudioPlayer.cs" />
     <Compile Include="IAudio.cs" />
@@ -76,7 +78,6 @@
     <Compile Include="IAudioStatus.cs" />
     <Compile Include="IAudioTagFactory.cs" />
     <Compile Include="IAudioTag.cs" />
-    <Compile Include="MetadataTag.cs" />
     <Compile Include="PluginAttribute.cs" />
     <Compile Include="PluginManager.cs" />
     <Compile Include="PluginRepository.cs" />

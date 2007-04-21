@@ -6,10 +6,10 @@ namespace Alexandria
 {
 	public interface IMediaContainer : IMedia
 	{
-		IList<IAudio> AudioItems { get; }
-		IList<IVideo> VideoItems { get; }
-		IList<IImage> ImageItems { get; }
-		IList<IText> TextItems { get; }
-		IDictionary<string, MetadataTag> MetadataItems { get; }
+		IList<IAudio> Audio { get; }
+		IList<IVideo> Video { get; }
+		IList<IImage> Images { get; }
+		IList<IText> Text { get; }
+		IList<IMediaTag> MediaTags { get; }
 	}
 }

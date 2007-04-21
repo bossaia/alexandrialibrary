@@ -137,18 +137,15 @@ namespace Alexandria.Encyclopedia
 		#endregion
 
 		#region IMetadata Members
-
-
-		public IDictionary<string, MetadataTag> Decompose()
+		public IMetadataMap CreateMap()
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public void Compose(IDictionary<string, MetadataTag> tags)
+		public void LoadMap(IMetadataMap map)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
-
 		#endregion
 	}
 }
