@@ -50,6 +50,7 @@
     <Compile Include="ICapability.cs" />
     <Compile Include="IMediaCapability.cs" />
     <Compile Include="IMediaPlugin.cs" />
+    <Compile Include="IPlaylistItem.cs" />
     <Compile Include="ITagFormat.cs" />
     <Compile Include="IMetadata.cs" />
     <Compile Include="IGenre.cs" />
@@ -59,7 +60,7 @@
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="IMetadataFormat.cs" />
-    <Compile Include="IMetadataMap.cs" />
+    <Compile Include="IDataMap.cs" />
     <Compile Include="IMetadataPlugin.cs" />
     <Compile Include="IPlayable.cs" />
     <Compile Include="IPlayableStatus.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="IAudioPlayer.cs" />
     <Compile Include="IAudio.cs" />
-    <Compile Include="IMediaPlaylist.cs" />
+    <Compile Include="IPlaylist.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IAudioStatus.cs" />
     <Compile Include="IAudioTagFactory.cs" />

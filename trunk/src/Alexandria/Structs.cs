@@ -75,32 +75,50 @@ namespace Alexandria
 	}
 	#endregion
 	
-	#region MetadataItem
-	public struct MetadataItem<T>
+	#region DataNode
+	public struct DataNode<T>
 	{
 		#region Constructors
-		public MetadataItem(string name, T data)
-		{
-			this.root = name;
-			this.number = 0;
-			this.name = name;			
-			this.data = data;
+		public DataNode(string name, T value)
+		{			
+			this.number = -1;
+			this.name = name;
+			this.value = value;
+			this.childNodes = new List<DataNode<T>>();
 		}
 		
-		public MetadataItem(string root, int number, T data)
+		public DataNode(string name, IList<T> childValues)
+		{	
+			this.name = name;		
+			this.number = -1;
+			this.value = default(T);
+			this.childNodes = new List<DataNode<T>>();
+			
+			if (childValues != null && childValues.Count > 0)
+			{
+				int i = 0;
+				foreach(T value in childValues)
+				{
+					childNodes.Add(new DataNode<T>(name, i, value));
+					i++;
+				}
+			}
+		}
+		
+		private DataNode(string name, int number, T value)
 		{
-			this.root = root;
+			this.name = name;
 			this.number = number;
-			this.name = number > 0 ? string.Format("{0}{1:n}", root, number) : root;
-			this.data = data;
+			this.value = value;
+			this.childNodes = new List<DataNode<T>>();
 		}
 		#endregion
 		
 		#region Private Fields
-		private string root;
-		private int number;
 		private string name;
-		private T data;
+		private int number;
+		private T value;
+		private List<DataNode<T>> childNodes;
 		#endregion
 		
 		#region Public Properties
@@ -114,20 +132,34 @@ namespace Alexandria
 			get { return number; }
 		}
 		
-		public bool IsPartOfList
+		public bool HasChildren
 		{
-			get { return (number > 0); }
+			get { return (this.childNodes != null && this.childNodes.Count > 0); }
 		}
 		
-		public T Data
+		public bool HasSiblings
 		{
-			get { return data; }
-			set { data = value; }
+			get { return (number >= 0); }
 		}
 		
-		public string DataName
+		public T Value
 		{
-			get { return data.ToString(); }
+			get { return this.value; }
+			set { this.value = value; }
+		}
+		
+		public IList<DataNode<T>> ChildNodes
+		{
+			get { return this.childNodes; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public override string ToString()
+		{
+			if (default(T) == null && (object)value == null)
+				return null;
+			else return this.value.ToString();
 		}
 		#endregion
 	}

@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace Alexandria.Playlist
 {
-	public class MediaPlaylist : IMediaPlaylist
+	public class MediaPlaylist : IPlaylist
 	{
 		#region Private Fields
 		private string path;
@@ -75,12 +75,10 @@ namespace Alexandria.Playlist
 		#endregion
 
 		#region IMediaPlaylist Members
-
-		public IList<ILocation> Items
+		public IList<IPlaylistItem> Items
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
-
 		#endregion
 	}
 }

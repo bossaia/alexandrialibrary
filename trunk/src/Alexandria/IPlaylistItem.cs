@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ITag
+	public interface IPlaylistItem
 	{
-		ITagFormat Format { get; }
-		IIdentifier Id { get; }
+		ILocation Location { get;  }
 		IDataMap Map { get; }
 	}
 }
