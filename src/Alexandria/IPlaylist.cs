@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaPlaylist : IMedia
+	public interface IPlaylist : IMedia
 	{
-		IList<ILocation> Items { get; }
+		IList<IPlaylistItem> Items { get; }
 	}
 }

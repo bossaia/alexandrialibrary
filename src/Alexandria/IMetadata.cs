@@ -9,7 +9,7 @@ namespace Alexandria
 		IIdentifier Id { get; }
 		ILocation Location { get; }
 		string Name { get; }
-		IMetadataMap CreateMap();
-		void LoadMap(IMetadataMap map);
+		IDataMap CreateMap();
+		void LoadMap(IDataMap map);
 	}
 }

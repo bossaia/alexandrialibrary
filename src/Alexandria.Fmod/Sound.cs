@@ -587,6 +587,12 @@ namespace AlexandriaOrg.Alexandria.Fmod
 		}
 		#endregion
 
+		#region Resume
+		public void Resume()
+		{
+		}
+		#endregion
+
 		#region Stop
 		public void Stop()
 		{

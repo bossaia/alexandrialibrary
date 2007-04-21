@@ -12,6 +12,7 @@ namespace Alexandria
 		//bool IsPaused { get; }
 		void Play();
 		void Pause();
+		void Resume();
 		void Seek(TimeSpan position);
 		void Stop();
 	}
