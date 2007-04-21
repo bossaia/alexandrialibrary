@@ -54,6 +54,11 @@ namespace Alexandria
 			}
 			else return false;
 		}
+
+		public override int GetHashCode()
+		{
+			return numbers[0].GetHashCode() + numbers[1].GetHashCode() + numbers[2].GetHashCode() + numbers[3].GetHashCode();
+		}
 		#endregion
 
 		#region IComparable<Version> Members
@@ -71,64 +76,58 @@ namespace Alexandria
 	#endregion
 	
 	#region MetadataItem
-	public struct MetadataItem
+	public struct MetadataItem<T>
 	{
 		#region Constructors
-		public MetadataItem(IDictionary<string, MetadataItem> subItems, IDictionary<string, object> tags)
+		public MetadataItem(string name, T data)
 		{
-			this.subItems = subItems;
-			this.tags = tags;
+			this.root = name;
+			this.number = 0;
+			this.name = name;			
+			this.data = data;
+		}
+		
+		public MetadataItem(string root, int number, T data)
+		{
+			this.root = root;
+			this.number = number;
+			this.name = number > 0 ? string.Format("{0}{1:n}", root, number) : root;
+			this.data = data;
 		}
 		#endregion
 		
 		#region Private Fields
-		private IDictionary<string, MetadataItem> subItems;
-		private IDictionary<string, object> tags;
+		private string root;
+		private int number;
+		private string name;
+		private T data;
 		#endregion
-	
+		
 		#region Public Properties
-		public IDictionary<string, MetadataItem> SubItems
+		public string Name
 		{
-			get { return subItems; }
+			get { return name; }
 		}
 		
-		public IDictionary<string, object> Tags
+		public int Number
 		{
-			get { return tags; }
-		}
-		#endregion
-	
-		#region Public Methods
-		public void InsertTag<T>(string name, T value)
-		{
-			if (!this.tags.ContainsKey(name))
-			{
-				this.tags.Add(name, value);
-			}			
+			get { return number; }
 		}
 		
-		public T ReadTag<T>(string name)
+		public bool IsPartOfList
 		{
-			if (this.tags.ContainsKey(name))
-			{
-				object obj = this.tags[name];
-				if (obj is T)
-					return (T)this.tags[name];
-				else throw new KeyNotFoundException();
-			}
-			else throw new KeyNotFoundException();
+			get { return (number > 0); }
 		}
 		
-		public void UpdateTag<T>(string name, T value)
+		public T Data
 		{
-			if (this.tags.ContainsKey(name))
-			{
-				object obj = this.tags[name];
-				if (obj is T)
-					this.tags[name] = value;
-				else throw new KeyNotFoundException();
-			}
-			else throw new KeyNotFoundException();
+			get { return data; }
+			set { data = value; }
+		}
+		
+		public string DataName
+		{
+			get { return data.ToString(); }
 		}
 		#endregion
 	}

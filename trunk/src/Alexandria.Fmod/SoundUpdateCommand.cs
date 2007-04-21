@@ -8,7 +8,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 	public class SoundUpdateCommand : FmodSoundCommand
 	{
 		#region Constructors
-		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound, MediaCommandType.Update)
+		public SoundUpdateCommand(Fmod.FmodAudioPlayer audioPlayer, Fmod.Sound sound) : base(audioPlayer, sound)
 		{
 		}
 		#endregion
@@ -37,7 +37,7 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.SeekingState = MediaSeekingState.None;
-							Result = MediaCommandResult.StreamError;
+							//Result = MediaCommandResult.StreamError;
 							break;
 						case OpenState.Buffering:
 							Sound.Status.BufferState = MediaBufferState.Buffering;
@@ -49,19 +49,19 @@ namespace AlexandriaOrg.Alexandria.Fmod
 							Sound.Status.BufferState = MediaBufferState.Loading;
 							break;
 						case OpenState.Ready:
-							Result = MediaCommandResult.Streaming;
+							//Result = MediaCommandResult.Streaming;
 							Sound.Status = RemoteSoundReady.Example;
 							break;
 						default:
 							Sound.Status.BufferState = MediaBufferState.None;
 							Sound.Status.PlaybackState = MediaPlaybackState.None;
 							Sound.Status.SeekingState = MediaSeekingState.None;
-							Result = MediaCommandResult.StreamError;
+							//Result = MediaCommandResult.StreamError;
 							break;
 					}
 				}
 			}
-			else Result = MediaCommandResult.InvalidCommand;
+			//else Result = MediaCommandResult.InvalidCommand;
 		}
 		#endregion
 	}
