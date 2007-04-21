@@ -357,14 +357,5 @@ namespace Alexandria.MusicBrainz
 		}
 
 		#endregion
-
-		#region IPlugin Members
-
-		public ICapability Capability
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
 	}
 }

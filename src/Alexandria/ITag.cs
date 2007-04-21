@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaTag
+	public interface ITag
 	{
-		IMediaTagFormat Format { get; }
+		ITagFormat Format { get; }
 		IIdentifier Id { get; }
 		IMetadataMap Map { get; }
 	}
