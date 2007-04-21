@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaPlaylist : IMedia
+	public interface ITagFormat
 	{
-		IList<ILocation> Items { get; }
+		string Name { get; }
+		Version Version { get; }
 	}
 }

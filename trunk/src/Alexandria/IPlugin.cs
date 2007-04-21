@@ -8,6 +8,6 @@ namespace Alexandria
 	{
 		string Name { get; }
 		Version Version { get; }
-		ICapability Capability { get; }
+		//ICapability Capability { get; }
 	}
 }

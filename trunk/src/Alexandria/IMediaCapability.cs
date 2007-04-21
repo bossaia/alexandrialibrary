@@ -4,9 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaTagFormat
+	public interface IMediaCapability<T> : ICapability<T>
 	{
-		string Name { get; }
-		Version Version { get; }
 	}
 }

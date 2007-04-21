@@ -11,7 +11,7 @@ namespace Alexandria.Playlist
 		private string path;
 		private string name;
 		private string version;
-		private List<IMedia> resources;
+		//private List<IMedia> resources;
 		#endregion				
 		
 		#region Constructors
@@ -48,26 +48,12 @@ namespace Alexandria.Playlist
 			get {return version;}
 			protected set {version = value;}
 		}
-		
-		public IList<IMedia> Resources
-		{
-			get {return resources;}
-		}
 		#endregion
 		
 		#region Public Methods
 		public virtual void Load()
 		{
 		}
-		#endregion
-
-		#region IMediaPlaylist Members
-
-		public IList<IMediaContainer> Items
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
 		#endregion
 
 		#region IResource Members
@@ -82,6 +68,15 @@ namespace Alexandria.Playlist
 		}
 
 		public IMediaFormat Format
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IMediaPlaylist Members
+
+		public IList<ILocation> Items
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
