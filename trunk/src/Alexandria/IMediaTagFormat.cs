@@ -7,5 +7,6 @@ namespace Alexandria
 	public interface IMediaTagFormat
 	{
 		string Name { get; }
+		Version Version { get; }
 	}
 }
