@@ -12,7 +12,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
   </Class>
-  <Struct Name="Alexandria.Version">
+  <Struct Name="Alexandria.Version" Collapsed="true">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <FileName>Structs.cs</FileName>
@@ -25,7 +25,7 @@
     <Lollipop Position="0.2" />
   </Struct>
   <Struct Name="Alexandria.DataNode&lt;T&gt;">
-    <Position X="2.75" Y="5" Width="2.75" />
+    <Position X="2.75" Y="4.5" Width="2.75" />
     <TypeIdentifier>
       <FileName>Structs.cs</FileName>
       <HashCode>AAAAAAAAAAgAQAAFAEAAAAQAAAAEACAAAACgAAAAgAA=</HashCode>
@@ -175,7 +175,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IMediaContainer">
-    <Position X="6.25" Y="4.75" Width="2.25" />
+    <Position X="6.5" Y="4.75" Width="2.25" />
     <TypeIdentifier>
       <FileName>IMediaContainer.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAABAABAAACAAAAAg=</HashCode>
@@ -186,7 +186,7 @@
         <Point X="9.984" Y="4.414" />
         <Point X="5.841" Y="4.414" />
         <Point X="5.841" Y="4.875" />
-        <Point X="6.25" Y="4.875" />
+        <Point X="6.5" Y="4.875" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -321,7 +321,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IDataMap">
-    <Position X="2.75" Y="2.75" Width="2.75" />
+    <Position X="2.75" Y="2.25" Width="3.25" />
     <TypeIdentifier>
       <FileName>IDataMap.cs</FileName>
       <HashCode>AAgCAAAAAAAAAAEAAAAAAAAAEAABAgAAAAAAAAAIAAA=</HashCode>
