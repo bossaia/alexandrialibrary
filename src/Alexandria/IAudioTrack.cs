@@ -8,6 +8,8 @@ namespace Alexandria
 	{
 		int Number { get; }
 		TimeSpan Length { get; }
+		DateTime ReleaseDate { get; }
+		IAlbum Album { get; }
 		ISong Song { get; }
 		IList<IArtist> Performers { get; }
 		IList<IGenre> Genres { get; }

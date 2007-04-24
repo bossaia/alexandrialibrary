@@ -5,24 +5,11 @@ using Alexandria;
 
 namespace Alexandria.Encyclopedia
 {
-	public class Track : IAudioTrack
-	{
-		#region Private Fields
-		private string name;
-		private IArtist artist;
-		private ISong song;
-		private IAlbum album;
-		private uint length;
-		private uint milliseconds;
-		private uint number;
-		#endregion
-		
+	/*
+	public class Track : BaseAudioTrack
+	{		
 		#region Constructors
 		public Track() : base()
-		{
-		}
-		
-		public Track(string id) : this()
 		{
 		}
 		#endregion
@@ -134,4 +121,5 @@ namespace Alexandria.Encyclopedia
 		}
 		#endregion
 	}
+	*/
 }
