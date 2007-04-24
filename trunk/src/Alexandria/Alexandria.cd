@@ -103,15 +103,15 @@
     <Position X="0.5" Y="8" Width="2" />
     <TypeIdentifier>
       <FileName>IAudioTrack.cs</FileName>
-      <HashCode>AAAAAAIAAAAAAAAAAEIAAAhAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAIAAAAIAAAAAEIAAAhAAAAAAAAABAAACAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IMetadata" ManuallyRouted="true" FixedToPoint="true">
       <Path>
         <Point X="1.5" Y="4.106" />
         <Point X="1.5" Y="4.298" />
         <Point X="0.308" Y="4.298" />
-        <Point X="0.308" Y="8.125" />
-        <Point X="0.5" Y="8.125" />
+        <Point X="0.308" Y="8.146" />
+        <Point X="0.5" Y="8.146" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -133,7 +133,7 @@
     <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>ILocation.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAABAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAACAAAAAAAQAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IIdentifier">

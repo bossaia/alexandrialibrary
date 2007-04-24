@@ -14,7 +14,7 @@ namespace Alexandria.Encyclopedia
 		private string amazonAsin;
 		private Uri coverArtUrl;
 		List<Collaboration> collaborations = new List<Collaboration>();
-		private Dictionary<uint, Track> tracks = new Dictionary<uint,Track>();
+		private Dictionary<uint, IAudioTrack> tracks = new Dictionary<uint, IAudioTrack>();
 		private string musicBrainzId;
 		private Uri musicBrainzUrl;
 		#endregion	
@@ -66,7 +66,7 @@ namespace Alexandria.Encyclopedia
 		}
 		
 		[CLSCompliant(false)]
-		public IDictionary<uint, Track> Tracks
+		public IDictionary<uint, IAudioTrack> Tracks
 		{
 			get {return tracks;}
 		}

@@ -39,6 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
+    <Compile Include="BaseAlbum.cs" />
+    <Compile Include="BaseArtist.cs" />
+    <Compile Include="BaseAudioTrack.cs" />
+    <Compile Include="BaseMetadata.cs" />
     <Compile Include="IAlbumFactory.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IArtistFactory.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="PluginRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs.cs" />
+    <Compile Include="UriLocation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />

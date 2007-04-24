@@ -8,6 +8,6 @@ namespace Alexandria
 	{
 		bool IsLocal { get; }
 		string AbsolutePath { get; }
-		string RelativePath { get; }
+		string LocalPath { get; }
 	}
 }
