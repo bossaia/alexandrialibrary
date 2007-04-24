@@ -74,37 +74,34 @@ namespace Alexandria.Mp3Tunes
 		#region Login
 		public void Login(string username, string password)
 		{
-			string rs;
-			XmlNode status;
-			XmlNode session_id;
-			XmlNode errorMessage;
-			XmlDocument doc = new XmlDocument();
+			try
+			{				
+				XmlNode status;
+				XmlNode session_id;
+				XmlNode errorMessage;
+				XmlDocument doc = new XmlDocument();
 
-			string strParams = String.Format("?output=xml&username={0}" +
-				"&password={1}", HttpUtility.UrlEncode(username),
-				HttpUtility.UrlEncode(password));
+				string safeUsername = HttpUtility.UrlEncode(username);			
+				string safePassword = HttpUtility.UrlEncode(password);
+				string parameters = String.Format("?output=xml&username={0}&password={1}", safeUsername, safePassword);
 
-			rs = Request("https://shop.mp3tunes.com/api/v0/login", strParams);
-			doc.LoadXml(rs);
+				string request = Request("https://shop.mp3tunes.com/api/v0/login", parameters);
+				doc.LoadXml(request);
 
-			status = doc.SelectSingleNode("mp3tunes/status");
-			session_id = doc.SelectSingleNode("mp3tunes/session_id");
-			errorMessage = doc.SelectSingleNode("mp3tunes/errorMessage");
+				status = doc.SelectSingleNode("mp3tunes/status");
+				session_id = doc.SelectSingleNode("mp3tunes/session_id");
+				errorMessage = doc.SelectSingleNode("mp3tunes/errorMessage");
 
-			if (status != null && status.InnerXml == "1" &&
-				session_id != null && session_id.InnerXml != "null")
-			{
-				this.session_id = session_id.InnerXml;
+				if (status != null && status.InnerXml == "1" && session_id != null && session_id.InnerXml != "null")			
+					this.session_id = session_id.InnerXml;			
+				else if (errorMessage != null && errorMessage.InnerXml != "null")			
+					throw new AuthenticationException(errorMessage.InnerXml.ToString());			
+				else
+					throw new AuthenticationException("Wrong username or password.");
 			}
-			else if (errorMessage != null && errorMessage.InnerXml != "null")
+			catch (Exception ex)
 			{
-				throw new AuthenticationException((string)
-												   errorMessage.InnerXml);
-			}
-			else
-			{
-				throw new AuthenticationException("Wrong username or " +
-												   "password.");
+				throw new ApplicationException("There was an error logging in to MP3tunes", ex);
 			}
 		}
 		#endregion
