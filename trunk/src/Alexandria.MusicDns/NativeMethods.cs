@@ -12,6 +12,7 @@ namespace Alexandria.MusicDns
 		/// </summary>
 		internal const string key = "5d49e8b0deb040bc8cd38630b56be205";
 	
+		/*
 		/// <summary>
 		/// Get a PUID based on the raw audio data from a given track
 		/// </summary>
@@ -27,10 +28,11 @@ namespace Alexandria.MusicDns
 		/// <summary>
 		/// Get the version of the Open Fingerprint 
 		/// </summary>
-		/// <param name="major"></param>
-		/// <param name="minor"></param>
-		/// <param name="revision"></param>
+		/// <param name="major">Major version number</param>
+		/// <param name="minor">Minor version number</param>
+		/// <param name="revision">Revision number</param>
 		[DllImport("libofa.dll")]
         internal static extern void ofa_get_version(ref int major, ref int minor, ref int revision);
+        */
 	}
 }
