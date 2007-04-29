@@ -28,7 +28,7 @@ using System.Collections.Generic;
 //using Mono.Unix.Native;
 //#endif
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public abstract class File
 	{

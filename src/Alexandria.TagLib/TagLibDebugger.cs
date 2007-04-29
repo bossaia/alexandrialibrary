@@ -21,7 +21,7 @@
 
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public static class TagLibDebugger
 	{				

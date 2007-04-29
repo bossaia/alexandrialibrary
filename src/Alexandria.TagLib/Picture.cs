@@ -22,7 +22,7 @@
 using System;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
     public class Picture : IPicture, IImage
     {

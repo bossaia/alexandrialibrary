@@ -22,7 +22,7 @@
 
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public static class Id3v2FrameFactory
 	{

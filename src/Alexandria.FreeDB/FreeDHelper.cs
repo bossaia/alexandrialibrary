@@ -23,7 +23,7 @@ using System.IO;
 using System.Collections.Specialized;
 using System.Diagnostics;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	/// <summary>
 	/// Summary description for FreedbHelper.

@@ -5,7 +5,7 @@ using System.Security.Permissions;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[Serializable]
 	public sealed class TagLibException : AlexandriaException, ISerializable

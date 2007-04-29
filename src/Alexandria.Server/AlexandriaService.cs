@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Server
+namespace Alexandria.Server
 {
 	public partial class AlexandriaService : ServiceBase
 	{

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ServiceProcess;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.Server
+namespace Alexandria.Server
 {
 	static class Program
 	{

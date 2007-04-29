@@ -19,7 +19,7 @@
  *   USA                                                                   *
  ***************************************************************************/
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
    public class AsfUnknownObject : AsfObject
    {

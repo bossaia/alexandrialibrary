@@ -19,7 +19,7 @@
 
 using System;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	/// <summary>
 	/// Summary description for Site.

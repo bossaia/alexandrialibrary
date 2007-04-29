@@ -25,7 +25,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Id3v2Tag : Tag
 	{

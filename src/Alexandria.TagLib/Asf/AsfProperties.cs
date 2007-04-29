@@ -21,9 +21,9 @@
  ***************************************************************************/
 
 using System;
-using AlexandriaOrg.Alexandria.TagLib;
+using Alexandria.TagLib;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class AsfProperties : AudioProperties
 	{

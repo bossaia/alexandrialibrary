@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.MediaInfo
+namespace Alexandria.MediaInfo
 {
 	#region StreamType
 	public enum StreamType

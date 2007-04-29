@@ -21,182 +21,35 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Text;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	/// <summary>
 	/// Summary description for CDEntry.
 	/// </summary>
 	public class CDEntry
 	{
-
-
-
-		#region Private Member Variables
-		private string m_Discid;
-		private string m_Artist;
-		private string m_Title;
-		private string m_Year;
-		private string m_Genre;
-		private TrackCollection m_Tracks = new TrackCollection(); // 0 based - first track is at 0 last track is at numtracks - 1
-		private string m_ExtendedData;
-		private string m_PlayOrder;
-
-		/// <summary>
-		/// Property NumberOfTracks (int)
-		/// </summary>
-
-
-
-
-		#endregion
-
-		#region Public Member Variables
-		/// <summary>
-		/// Property Discid (string)
-		/// </summary>
-		public string Discid
-		{
-			get
-			{
-				return this.m_Discid;
-			}
-			set
-			{
-				this.m_Discid = value;
-			}
-		}
-
-		/// <summary>
-		/// Property Artist (string)
-		/// </summary>
-		public string Artist
-		{
-			get
-			{
-				return this.m_Artist;
-			}
-			set
-			{
-				this.m_Artist = value;
-			}
-		}
-
-		/// <summary>
-		/// Property Title (string)
-		/// </summary>
-		public string Title
-		{
-			get
-			{
-				return this.m_Title;
-			}
-			set
-			{
-				this.m_Title = value;
-			}
-		}
-
-		/// <summary>
-		/// Property Year (string)
-		/// </summary>
-		public string Year
-		{
-			get
-			{
-				return this.m_Year;
-			}
-			set
-			{
-				this.m_Year = value;
-			}
-		}
-
-		/// <summary>
-		/// Property Genre (string)
-		/// </summary>
-		public string Genre
-		{
-			get
-			{
-				return this.m_Genre;
-			}
-			set
-			{
-				this.m_Genre = value;
-			}
-		}
-
-
-		/// <summary>
-		/// Property Tracks (StringCollection)
-		/// </summary>
-		public TrackCollection Tracks
-		{
-			get
-			{
-				return this.m_Tracks;
-			}
-			set
-			{
-				this.m_Tracks = value;
-			}
-		}
-
-
-		/// <summary>
-		/// Property ExtendedData (string)
-		/// </summary>
-		public string ExtendedData
-		{
-			get
-			{
-				return this.m_ExtendedData;
-			}
-			set
-			{
-				this.m_ExtendedData = value;
-			}
-		}
-
-
-
-
-		/// <summary>
-		/// Property PlayOrder (string)
-		/// </summary>
-		public string PlayOrder
-		{
-			get
-			{
-				return this.m_PlayOrder;
-			}
-			set
-			{
-				this.m_PlayOrder = value;
-			}
-		}
-
-		public int NumberOfTracks
-		{
-			get
-			{
-				return m_Tracks.Count;
-			}
-		}
-
-		#endregion
-
-
-
+		#region Constructors
 		public CDEntry(StringCollection data)
 		{
 			if (!Parse(data))
 			{
-				throw new Exception("Unable to Parse CDEntry.");
+				throw new AlexandriaException("Unable to Parse CDEntry.");
 			}
 		}
+		#endregion
+	
+		#region Private Fields
+		private string discId;
+		private string artist;
+		private string title;
+		private string year;
+		private string genre;
+		private TrackCollection tracks = new TrackCollection(); // 0 based - first track is at 0 last track is at numtracks - 1
+		private string extendedData;
+		private string playOrder;
+		#endregion
 
-
+		#region Private Methods
 		private bool Parse(StringCollection data)
 		{
 			foreach (string line in data)
@@ -217,38 +70,38 @@ namespace AlexandriaOrg.Alexandria.FreeDB
 				{
 					case "DISCID":
 						{
-							this.m_Discid = line.Substring(index);
+							discId = line.Substring(index);
 							continue;
 						}
 
 					case "DTITLE": // artist / title
 						{
-							this.m_Artist += line.Substring(index);
+							artist += line.Substring(index);
 							continue;
 						}
 
 					case "DYEAR":
 						{
-							this.m_Year = line.Substring(index);
+							year = line.Substring(index);
 							continue;
 						}
 
 					case "DGENRE":
 						{
-							this.m_Genre += line.Substring(index);
+							genre += line.Substring(index);
 							continue;
 						}
 
 					case "EXTD":
 						{
 							// may be more than one - just concatenate them
-							this.m_ExtendedData += line.Substring(index);
+							extendedData += line.Substring(index);
 							continue;
 						}
 
 					case "PLAYORDER":
 						{
-							this.m_PlayOrder += line.Substring(index);
+							playOrder += line.Substring(index);
 							continue;
 						}
 
@@ -272,12 +125,12 @@ namespace AlexandriaOrg.Alexandria.FreeDB
 							}
 
 							//may need to concatenate track info
-							if (trackNumber < m_Tracks.Count)
-								m_Tracks[trackNumber].Title += line.Substring(index);
+							if (trackNumber < tracks.Count)
+								tracks[trackNumber].Title += line.Substring(index);
 							else
 							{
 								Track track = new Track(line.Substring(index));
-								this.m_Tracks.Add(track);
+								tracks.Add(track);
 							}
 							continue;
 						}
@@ -296,20 +149,12 @@ namespace AlexandriaOrg.Alexandria.FreeDB
 								continue;
 							}
 
-							if (trackNumber < 0 || trackNumber > m_Tracks.Count - 1)
+							if (trackNumber < 0 || trackNumber > tracks.Count - 1)
 								continue;
 
-							m_Tracks[trackNumber].ExtendedData += line.Substring(index);
-
-
-
+							tracks[trackNumber].ExtendedData += line.Substring(index);
 						}
-
-
-
-
 						continue;
-
 				} //end of switch
 
 			}
@@ -317,45 +162,132 @@ namespace AlexandriaOrg.Alexandria.FreeDB
 
 			//split the title and artist from DTITLE;
 			// see if we have a slash
-			int slash = this.m_Artist.IndexOf(" / ");
+			int slash = artist.IndexOf(" / ");
 			if (slash == -1)
 			{
-				this.m_Title = m_Artist;
+				title = artist;
 			}
 			else
 			{
-				string titleArtist = m_Artist;
-				this.m_Artist = titleArtist.Substring(0, slash);
+				string titleArtist = artist;
+				artist = titleArtist.Substring(0, slash);
 				slash += 3; // move past " / "
-				this.m_Title = titleArtist.Substring(slash);
+				title = titleArtist.Substring(slash);
 			}
 
-
 			return true;
+		}
+		#endregion
 
-
+		#region Public Properties
+		/// <summary>
+		/// Get or set the Disc ID
+		/// </summary>
+		public string Discid
+		{
+			get { return discId; }
+			set	{ discId = value; }
 		}
 
+		/// <summary>
+		/// Property Artist (string)
+		/// </summary>
+		public string Artist
+		{
+			get { return artist; }
+			set	{ artist = value; }
+		}
+
+		/// <summary>
+		/// Property Title (string)
+		/// </summary>
+		public string Title
+		{
+			get { return title; }
+			set	{ title = value; }
+		}
+
+		/// <summary>
+		/// Property Year (string)
+		/// </summary>
+		public string Year
+		{
+			get { return year; }
+			set	{ year = value; }
+		}
+
+		/// <summary>
+		/// Property Genre (string)
+		/// </summary>
+		public string Genre
+		{
+			get { return genre; }
+			set	{ genre = value; }
+		}
+
+		/// <summary>
+		/// Property Tracks (StringCollection)
+		/// </summary>
+		public TrackCollection Tracks
+		{
+			get { return tracks; }
+			set	{ tracks = value; }
+		}
+
+
+		/// <summary>
+		/// Property ExtendedData (string)
+		/// </summary>
+		public string ExtendedData
+		{
+			get { return extendedData; }
+			set { extendedData = value; }
+		}
+
+		/// <summary>
+		/// Property PlayOrder (string)
+		/// </summary>
+		public string PlayOrder
+		{
+			get { return playOrder; }
+			set { playOrder = value; }
+		}
+
+		/// <summary>
+		/// Property NumberOfTracks (int)
+		/// </summary>
+		public int NumberOfTracks
+		{
+			get
+			{
+				if (tracks != null)
+					return tracks.Count;
+				else return 0;
+			}
+		}
+		#endregion
+
+		#region Public Methods
 		public override string ToString()
 		{
 			StringBuilder builder = new StringBuilder();
 			builder.Append("Title: ");
-			builder.Append(this.m_Title);
+			builder.Append(title);
 			builder.Append("\n");
 			builder.Append("Artist: ");
-			builder.Append(this.m_Artist);
+			builder.Append(artist);
 			builder.Append("\n");
 			builder.Append("Discid: ");
-			builder.Append(this.m_Discid);
+			builder.Append(discId);
 			builder.Append("\n");
 			builder.Append("Genre: ");
-			builder.Append(this.m_Genre);
+			builder.Append(genre);
 			builder.Append("\n");
 			builder.Append("Year: ");
-			builder.Append(this.m_Year);
+			builder.Append(year);
 			builder.Append("\n");
 			builder.Append("Tracks:");
-			foreach (Track track in this.m_Tracks)
+			foreach (Track track in tracks)
 			{
 				builder.Append("\n");
 				builder.Append(track.Title);
@@ -363,5 +295,6 @@ namespace AlexandriaOrg.Alexandria.FreeDB
 
 			return builder.ToString();
 		}
+		#endregion
 	}
 }

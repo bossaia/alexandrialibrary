@@ -24,7 +24,7 @@ using System;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[Serializable]
     public class UnsupportedFormatException : Exception, ISerializable 

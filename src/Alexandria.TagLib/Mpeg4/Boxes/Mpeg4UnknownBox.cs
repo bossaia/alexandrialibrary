@@ -1,6 +1,6 @@
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	/// <summary>
 	/// This class is just used for clarity in saying, YES, this box IS unknown.

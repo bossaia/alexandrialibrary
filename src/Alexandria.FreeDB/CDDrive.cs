@@ -14,27 +14,8 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
-	/*
-	public class CDBufferFiller
-	{
-		byte[] BufferArray;
-		int WritePosition = 0;
-
-		public CDBufferFiller(byte[] aBuffer)
-		{
-			BufferArray = aBuffer;
-		}
-		public void OnCdDataRead(object sender, DataReadEventArgs ea)
-		{
-			Buffer.BlockCopy(ea.Data, 0, BufferArray, WritePosition, (int)ea.DataSize);
-			WritePosition += (int)ea.DataSize;
-		}
-
-	}
-	*/
-
 	/// <summary>
 	/// 
 	/// </summary>

@@ -23,7 +23,7 @@
 using System;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Id3v2UnknownFrame : Id3v2Frame
 	{

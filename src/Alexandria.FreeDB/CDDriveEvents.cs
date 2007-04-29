@@ -15,7 +15,7 @@ using System;
 using System.Runtime.InteropServices;
 //using System.Windows.Forms;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	/*
 	public class DataReadEventArgs : EventArgs

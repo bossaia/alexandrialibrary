@@ -22,7 +22,7 @@
 using System;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Mpeg4Properties : AudioProperties
 	{

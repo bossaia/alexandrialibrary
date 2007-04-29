@@ -23,7 +23,7 @@
 using System;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[SupportedMimeTypeAttribute("taglib/mp3")]
 	[SupportedMimeTypeAttribute("audio/x-mp3")]

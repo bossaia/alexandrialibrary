@@ -1,7 +1,7 @@
 // MediaInfoDLL - All info about media files, for DLL
 // Copyright (C) 2002-2006 Jerome Martinez, Zen@MediaArea.net
 //
-// Modifications (C) 2007 Dan Poage
+// Modifications (C) 2007 Dan Poage dan.poage@gmail.com
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace AlexandriaOrg.Alexandria.MediaInfo
+namespace Alexandria.MediaInfo
 {
 	public class Info : IDisposable
 	{

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {
 	public class SoundLoadCommand : FmodSoundCommand
 	{

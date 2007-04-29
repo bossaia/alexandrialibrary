@@ -1,4 +1,4 @@
-namespace AlexandriaOrg.Alexandria.Server
+namespace Alexandria.Server
 {
 	partial class AlexandriaService
 	{

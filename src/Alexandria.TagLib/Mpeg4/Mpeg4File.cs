@@ -1,6 +1,6 @@
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[SupportedMimeType("taglib/m4a")]
 	[SupportedMimeType("taglib/m4p")]

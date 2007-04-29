@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Mpeg4AppleTag : Tag, IEnumerable<Mpeg4Box>
 	{

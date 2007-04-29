@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class CombinedTag : Tag
 	{
