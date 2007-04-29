@@ -22,9 +22,8 @@
 
 using System;
 using System.Collections;
-using AlexandriaOrg.Alexandria.TagLib;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[SupportedMimeTypeAttribute("taglib/mpc")]
 	[SupportedMimeTypeAttribute("taglib/mp+")]

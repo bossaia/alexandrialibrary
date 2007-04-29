@@ -23,9 +23,8 @@
 using System;
 using System.Collections;
 using Alexandria;
-using AlexandriaOrg.Alexandria.TagLib;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {   
 	public class Id3v2AttachedPictureFrame : Id3v2Frame, IPicture, IImage
 	{

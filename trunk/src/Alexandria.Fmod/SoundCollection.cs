@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using AlexandriaOrg.Alexandria;
+using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {	
 	public class SoundCollection : IEnumerable<Sound>
 	{

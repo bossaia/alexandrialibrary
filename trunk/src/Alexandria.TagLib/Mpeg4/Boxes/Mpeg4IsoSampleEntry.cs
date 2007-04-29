@@ -1,6 +1,6 @@
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Mpeg4IsoSampleEntry : Mpeg4Box
 	{

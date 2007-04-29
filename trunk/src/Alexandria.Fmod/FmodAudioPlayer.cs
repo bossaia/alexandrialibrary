@@ -7,7 +7,7 @@ using System.Text;
 using System.Timers;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {	
 	//[AudioPlayerClass]
 	public class FmodAudioPlayer : IAudioPlayer, IDisposable

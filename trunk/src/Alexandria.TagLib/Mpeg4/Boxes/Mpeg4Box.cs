@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public class Mpeg4Box
 	{

@@ -6,7 +6,7 @@
 /*                                                                                                 */
 /* =============================================================================================== */
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {
 	public abstract class FmodError
 	{

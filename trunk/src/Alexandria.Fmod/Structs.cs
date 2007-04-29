@@ -6,7 +6,7 @@ using System.Security.Permissions;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {
 	#region CreateSoundExtendedInfo
 	/// WAS CREATE_SOUND_EX_INFO

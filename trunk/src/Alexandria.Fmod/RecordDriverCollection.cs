@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {
 	public class RecordDriverCollection : DriverCollection
 	{

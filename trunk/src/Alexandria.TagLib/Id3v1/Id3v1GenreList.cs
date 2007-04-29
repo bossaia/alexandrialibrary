@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public static class Id3v1GenreList
 	{

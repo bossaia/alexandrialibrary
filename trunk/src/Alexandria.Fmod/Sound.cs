@@ -8,7 +8,7 @@ using System.Text;
 using System.Timers;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.Fmod
+namespace Alexandria.Fmod
 {
 	//[SoundClass]
 	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudio

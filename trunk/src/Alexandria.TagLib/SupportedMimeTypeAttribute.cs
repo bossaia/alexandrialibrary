@@ -22,7 +22,7 @@
  
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple=true)]
     public sealed class SupportedMimeTypeAttribute : Attribute 

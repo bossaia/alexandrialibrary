@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	internal class DeviceChangeNotificationWindow : NativeWindow
 	{

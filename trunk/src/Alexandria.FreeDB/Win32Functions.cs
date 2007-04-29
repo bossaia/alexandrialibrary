@@ -15,7 +15,7 @@ using System;
 using System.Runtime.InteropServices;
 
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	/// <summary>
 	/// Wrapper class for Win32 functions and structures needed to handle CD.

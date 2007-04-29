@@ -19,7 +19,7 @@
 using System;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.FreeDB
+namespace Alexandria.FreeDB
 {
 	#region Interface IQueryResultCollection
 

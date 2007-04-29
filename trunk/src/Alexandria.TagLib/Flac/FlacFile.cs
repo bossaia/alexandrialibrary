@@ -23,7 +23,7 @@
 using System;
 using System.Collections;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	[SupportedMimeTypeAttribute("taglib/flac")]
 	[SupportedMimeTypeAttribute("audio/x-flac")]

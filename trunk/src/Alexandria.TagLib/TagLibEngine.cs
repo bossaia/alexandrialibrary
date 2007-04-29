@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	//[TagEngineClass]
 	public class TagLibEngine

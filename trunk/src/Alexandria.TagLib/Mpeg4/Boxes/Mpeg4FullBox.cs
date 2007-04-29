@@ -1,6 +1,6 @@
 using System;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {
 	public abstract class Mpeg4FullBox : Mpeg4Box
 	{

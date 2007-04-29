@@ -23,7 +23,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace AlexandriaOrg.Alexandria.TagLib
+namespace Alexandria.TagLib
 {   
 	public class Id3v2RelativeVolumeFrame : Id3v2Frame
 	{
