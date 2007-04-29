@@ -46,7 +46,7 @@
     <Compile Include="Disc.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="EventArgs.cs" />
-    <Compile Include="FreeDHelper.cs" />
+    <Compile Include="FreeDBHelper.cs" />
     <Compile Include="PreventMediaRemoval.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryResult.cs" />
