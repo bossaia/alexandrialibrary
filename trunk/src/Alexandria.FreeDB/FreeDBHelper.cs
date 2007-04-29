@@ -26,7 +26,7 @@ using System.Diagnostics;
 namespace Alexandria.FreeDB
 {
 	/// <summary>
-	/// Summary description for FreedbHelper.
+	/// Summary description for FreeDBHelper.
 	/// </summary>
 	public class FreeDBHelper
 	{
@@ -74,7 +74,6 @@ namespace Alexandria.FreeDB
 			public const string CODE_INVALID = "-1"; // Invalid code 
 		}
 		#endregion
-
 
 		#region Public Properties
 		/// <summary>
