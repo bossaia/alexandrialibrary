@@ -8,20 +8,21 @@ namespace Alexandria.Mp3Tunes
 	internal class Track : BaseAudioTrack
 	{
 		#region Constructors
-		public Track(IIdentifier id, ILocation location, string name, int number, TimeSpan length, DateTime releaseDate, IAlbum album, ISong song) : base(id, location, name, number, length, releaseDate, album, song)
+		public Track(IIdentifier id, ILocation location, string name, int number, TimeSpan length, DateTime releaseDate, IAlbum album, IArtist artist, ISong song) : base(id, location, name, length, releaseDate, album, artist, song)
 		{
-		}
+			this.number = number;
+		}		
 		#endregion
 		
-		#region IMetadata Members
-		public override IDataMap CreateMap()
+		#region Private Fields
+		private int number;
+		#endregion
+		
+		#region Public Properties
+		public int Number
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public override void LoadMap(IDataMap map)
-		{
-			throw new Exception("The method or operation is not implemented.");
+			get { return number; }
+			set { number = value; }
 		}
 		#endregion
 	}

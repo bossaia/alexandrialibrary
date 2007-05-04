@@ -7,7 +7,7 @@ namespace Alexandria
 	/// <summary>
 	/// An interface for holding data items so that they can be easily retrieved and mapped to other data structures
 	/// </summary>
-	public interface IDataMap
+	public interface IDataMatrix
 	{		
 		/// <summary>
 		/// Get a denormalized dictionary of the names and values of all data nodes
@@ -46,19 +46,19 @@ namespace Alexandria
 		void AddNode<T>(DataNode<T> node);
 				
 		/// <summary>
-		/// Determine whether or not a data node with the given name exists in this map
+		/// Determine whether or not this matrix contains a data node with the given name
 		/// </summary>
 		/// <param name="name">The name of the data node to search for</param>
 		/// <returns>true if the node exists, false otherwise</returns>
-		bool NodeExists(string name);
+		bool Contains(string name);
 		
 		/// <summary>
-		/// Determine whether or not a data node with the given number and a parent with the given name exists in this map
+		/// Determine whether or not this matrix contains a data node with the given number and a parent with the given name
 		/// </summary>
 		/// <param name="name">The name of the parent data node</param>
 		/// <param name="number">The number of the child data node to search for</param>
 		/// <returns>true if the child node exists, false otherwise</returns>
-		bool NodeExists(string name, int number);
+		bool Contains(string name, int number);
 		
 		/// <summary>
 		/// Get the type of the data node with the given name
@@ -96,5 +96,19 @@ namespace Alexandria
 		/// <param name="name">The name of the parent data node</param>
 		/// <param name="number">The number of the child data node to remove</param>
 		void RemoveNode(string name, int number);
+		
+		/// <summary>
+		/// Get the union of the two data matrices
+		/// </summary>
+		/// <param name="matrix">The other matrix</param>
+		/// <returns>A DataMatrix that represents the union of the two matrices</returns>
+		IDataMatrix Union(IDataMatrix matrix);
+		
+		/// <summary>
+		/// Get the difference of the two data matrices
+		/// </summary>
+		/// <param name="matrix">The other matrix</param>
+		/// <returns>A DataMatrix that represents the difference of the two matrices</returns>
+		IDataMatrix Difference(IDataMatrix matrix);
 	}
 }

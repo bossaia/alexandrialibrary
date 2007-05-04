@@ -37,12 +37,12 @@ namespace Alexandria
 			get { return name; }
 		}
 
-		public virtual IDataMap CreateMap()
+		public virtual IDataMatrix CreateMap()
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public virtual void LoadMap(IDataMap map)
+		public virtual void LoadMap(IDataMatrix map)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}

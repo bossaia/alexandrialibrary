@@ -7,51 +7,42 @@ namespace Alexandria
 	public abstract class BaseAlbum : BaseMetadata, IAlbum
 	{
 		#region Constructors
-		public BaseAlbum(IIdentifier id, ILocation location, string name, DateTime releaseDate, bool hasVariousArtists) : base(id, location, name)
+		public BaseAlbum(IIdentifier id, ILocation location, string name, IArtist artist, DateTime releaseDate) : base(id, location, name)
 		{
+			this.artist = artist;
 			this.releaseDate = releaseDate;
-			this.hasVariousArtists = hasVariousArtists;
 		}
 		#endregion
 		
 		#region Private Fields
-		private DateTime releaseDate;
-		private bool hasVariousArtists;
-		private List<IArtist> performers = new List<IArtist>();
+		private IArtist artist;
+		private DateTime releaseDate = DateTime.MinValue;
 		private List<IAudioTrack> tracks = new List<IAudioTrack>();
-		private List<IGenre> genres = new List<IGenre>();
-		private List<IStyle> styles = new List<IStyle>();
 		#endregion
 	
 		#region IAlbum Members
+		/// <summary>
+		/// Get the Artist credited with this album
+		/// </summary>
+		public IArtist Artist
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+		
+		/// <summary>
+		/// Get the earliest release date of this album
+		/// </summary>
 		public DateTime ReleaseDate
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return releaseDate; }
 		}
-
-		public bool HasVariousArtists
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public IList<IArtist> Performers
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
+		
+		/// <summary>
+		/// Get the tracks on this album
+		/// </summary>
 		public IList<IAudioTrack> Tracks
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public IList<IGenre> Genres
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public IList<IStyle> Styles
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return tracks; }
 		}
 		#endregion
 	}

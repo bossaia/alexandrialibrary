@@ -6,12 +6,7 @@ using System.Text;
 namespace Alexandria.MusicDns
 {
 	internal static class NativeMethods
-	{
-		/// <summary>
-		/// The key to use for submitting data
-		/// </summary>
-		internal const string key = "5d49e8b0deb040bc8cd38630b56be205";
-	
+	{	
 		/*
 		/// <summary>
 		/// Get a PUID based on the raw audio data from a given track

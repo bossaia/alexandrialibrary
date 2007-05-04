@@ -6,7 +6,11 @@ namespace Alexandria.Mp3Tunes
 {
 	public class Album : BaseAlbum
 	{
-		public Album(IIdentifier id, ILocation location, string name, DateTime releaseDate, bool hasVariousArtists) : base(id, location, name, releaseDate, hasVariousArtists)
+		public Album(string name) : base(Alexandria.Identifier.None, Alexandria.Location.None, name, null, DateTime.MinValue)
+		{
+		}
+		
+		public Album(IIdentifier id, ILocation location, string name, IArtist artist, DateTime releaseDate) : base(id, location, name, artist, releaseDate)
 		{
 		}
 	}

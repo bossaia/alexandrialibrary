@@ -5,12 +5,9 @@ using System.Text;
 namespace Alexandria
 {
 	public interface IAlbum : IMetadata
-	{
+	{		
+		IArtist Artist { get; }
 		DateTime ReleaseDate { get; }
-		bool HasVariousArtists { get; }
-		IList<IArtist> Performers { get; }
 		IList<IAudioTrack> Tracks { get; }
-		IList<IGenre> Genres { get; }
-		IList<IStyle> Styles { get; }
 	}
 }

@@ -1426,7 +1426,7 @@ namespace Alexandria.Fmod
 
 				try
 				{
-					currentResult = NativeMethods.FMOD_System_CreateSound(handle, disc.Location.LocalPath, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
+					currentResult = NativeMethods.FMOD_System_CreateSound(handle, disc.Location.Path, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
 					//currentResult = FMOD_System_CreateSound(handle, driveName, (Mode.Hardware | Mode.Fmod2D | Mode.IgnoreTags), 0, ref soundHandle);
 				}
 				catch (System.Runtime.InteropServices.ExternalException)

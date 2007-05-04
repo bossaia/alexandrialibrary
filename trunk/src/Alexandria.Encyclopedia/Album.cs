@@ -137,12 +137,12 @@ namespace Alexandria.Encyclopedia
 		#endregion
 
 		#region IMetadata Members
-		public IDataMap CreateMap()
+		public IDataMatrix CreateMap()
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public void LoadMap(IDataMap map)
+		public void LoadMap(IDataMatrix map)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}

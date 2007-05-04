@@ -7,7 +7,6 @@ namespace Alexandria
 	public interface ITag
 	{
 		ITagFormat Format { get; }
-		IIdentifier Id { get; }
-		IDataMap Map { get; }
+		IDataMatrix Matrix { get; }
 	}
 }
