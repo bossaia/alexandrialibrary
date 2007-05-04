@@ -209,10 +209,10 @@ namespace Alexandria.MusicBrainz
 			{							
 				try
 				{
-					Debug.WriteLine("Drive Name:" + disc.Location.LocalPath);
+					Debug.WriteLine("Drive Name:" + disc.Location.Path);
 				
 					//"/dev/hdc" or D:
-					string driveName = disc.Location.LocalPath;
+					string driveName = disc.Location.Path;
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);

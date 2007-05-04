@@ -7,8 +7,8 @@
     <ProjectGuid>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.MusicBrainz</RootNamespace>
-    <AssemblyName>AlexandriaMusicBrainz</AssemblyName>
+    <RootNamespace>Alexandria.MusicBrainz</RootNamespace>
+    <AssemblyName>Alexandria.MusicBrainz</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MusicBrainzId.cs" />
     <Compile Include="MusicBrainzUtility.cs" />
     <Compile Include="IWindowsNetworkControl.cs" />
     <Compile Include="MusicBrainzClient.cs" />

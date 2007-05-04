@@ -6,8 +6,7 @@ namespace Alexandria
 {
 	public interface ILocation
 	{
+		string Path { get; }
 		bool IsLocal { get; }
-		string AbsolutePath { get; }
-		string LocalPath { get; }
 	}
 }

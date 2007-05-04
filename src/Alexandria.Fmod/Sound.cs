@@ -546,7 +546,7 @@ namespace Alexandria.Fmod
 		{
 			if (this.Location.IsLocal)
 			{
-				this.SoundSystem.CreateStream(this, this.Location.AbsolutePath, Modes.None);
+				this.SoundSystem.CreateStream(this, this.Location.Path, Modes.None);
 			}
 			else
 			{
@@ -570,7 +570,7 @@ namespace Alexandria.Fmod
 				this.SoundSystem.StreamBufferUnit = TimeUnits.RawByte; //streamBufferUnit;
 				this.SoundSystem.StreamBufferSize = streamBufferSize;
 				Modes mode = (Modes.Software | Modes.Fmod2D | Modes.CreateStream | Modes.NonBlocking);
-				this.SoundSystem.CreateSound(this, this.Location.AbsolutePath, mode);
+				this.SoundSystem.CreateSound(this, this.Location.Path, mode);
 			}
 		}
 		#endregion

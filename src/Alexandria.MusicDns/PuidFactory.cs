@@ -7,8 +7,19 @@ namespace Alexandria.MusicDns
 	/// <summary>
 	/// This is a wrapper around genpuid.exe (make sure to pass the key from NativeMethods)
 	/// </summary>
-	public class GenPuid
+	public class PuidFactory
 	{
+		#region Private Constants
+		private const string musicDnsKey = "5fe4267b3a269f9463cd2a7f14ac6406";
+		#endregion
+	
+		#region Public Static Methods
+		public Puid GetPuid(ILocation location)
+		{
+			return null;
+		}
+		#endregion
+	
 		//genpuid dns-key [options] [file1] [file2] ...
 		
 		//MusicBrainz lookup
