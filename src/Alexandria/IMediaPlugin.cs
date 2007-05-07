@@ -6,8 +6,9 @@ namespace Alexandria
 {
 	public interface IMediaPlugin : IPlugin
 	{
-		//IMediaCapability<T> GetCapability<T>();
-		//IMediaFactory GetMedia<T>() where T: IMedia;
-		T GetMedia<T>(ISearch search) where T: IMedia;
+		IList<IMediaCapability> Capabilities { get; }
+		IMediaCapability GetCapability<T>() where T: IMedia;
+		T GetMedia<T>(ILocation location) where T: IMedia;
+		IList<IMedia> FindMedia(ISearch search);
 	}
 }

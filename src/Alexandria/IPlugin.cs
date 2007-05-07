@@ -7,6 +7,7 @@ namespace Alexandria
 	public interface IPlugin
 	{
 		string Name { get; }
+		ILocation Location { get; }
 		Version Version { get; }
 		//ICapability Capability { get; }
 	}

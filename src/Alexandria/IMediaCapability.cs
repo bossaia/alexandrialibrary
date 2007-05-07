@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaCapability<T> : ICapability<T>
+	public interface IMediaCapability : ICapability
 	{
 	}
 }

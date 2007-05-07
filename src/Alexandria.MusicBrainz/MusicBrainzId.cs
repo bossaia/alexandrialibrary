@@ -11,7 +11,7 @@ namespace Alexandria.MusicBrainz
 		public enum MusicBrainzIdType
 		{
 			MusicBrainzId = 0,
-			MusicBrainzAlbumId,
+			MusicBrainzReleaseId,
 			MusicBrainzArtistId,
 			MusicBrainzTrackId,
 			MusicBrainzTrmId,

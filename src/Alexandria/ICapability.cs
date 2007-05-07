@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ICapability<T>
+	public interface ICapability
 	{
 		//bool CanLazyLoad { get; }
 		//bool CanDelegate { get; }

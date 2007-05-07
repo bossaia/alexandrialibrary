@@ -8,7 +8,7 @@ using Alexandria;
 namespace Alexandria.MusicBrainz
 {
 	//[MetadataProviderClass]
-	public class MusicBrainzMetadataProvider : IAlbumFactory
+	public class MusicBrainzMetadataProvider
 	{
 		#region Private Constant Fields
 		private const int CDINDEX_ID_LEN = 28;

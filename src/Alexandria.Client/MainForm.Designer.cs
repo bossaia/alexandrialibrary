@@ -15,11 +15,8 @@ namespace Alexandria.Client
 		{
 			if (disposing && (components != null))
 			{
-				if (audioPlayer != null)
-				{
-					audioPlayer.Dispose();
-				}
-				
+				// Dispose other objects here
+							
 				components.Dispose();
 			}
 			base.Dispose(disposing);
@@ -88,8 +85,8 @@ namespace Alexandria.Client
 			this.PlaybackTrackBar.Name = "PlaybackTrackBar";
 			this.PlaybackTrackBar.TickFrequency = 10000;
 			this.PlaybackTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
-			this.PlaybackTrackBar.Scroll += new System.EventHandler(this.PlaybackTrackBar_Scroll);
-			this.PlaybackTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PlaybackTrackBar_MouseUp);
+			//this.PlaybackTrackBar.Scroll += new System.EventHandler(this.PlaybackTrackBar_Scroll);
+			//this.PlaybackTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PlaybackTrackBar_MouseUp);
 			// 
 			// QueueGroupBox
 			// 
@@ -113,7 +110,7 @@ namespace Alexandria.Client
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
-			this.QueueListView.ItemActivate += new System.EventHandler(this.QueueListView_ItemActivate);
+			//this.QueueListView.ItemActivate += new System.EventHandler(this.QueueListView_ItemActivate);
 			// 
 			// columnNumber
 			// 
@@ -140,14 +137,14 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.VolumeTrackBar, "VolumeTrackBar");
 			this.VolumeTrackBar.Name = "VolumeTrackBar";
 			this.VolumeTrackBar.Value = 10;
-			this.VolumeTrackBar.Scroll += new System.EventHandler(this.VolumeTrackBar_Scroll);
+			//this.VolumeTrackBar.Scroll += new System.EventHandler(this.VolumeTrackBar_Scroll);
 			// 
 			// MuteButton
 			// 
 			resources.ApplyResources(this.MuteButton, "MuteButton");
 			this.MuteButton.Name = "MuteButton";
 			this.MuteButton.UseVisualStyleBackColor = true;
-			this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
+			//this.MuteButton.Click += new System.EventHandler(this.MuteButton_Click);
 			// 
 			// VolumeLabel
 			// 
@@ -173,13 +170,13 @@ namespace Alexandria.Client
 			// 
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
 			resources.ApplyResources(this.OpenToolStripMenuItem, "OpenToolStripMenuItem");
-			this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
+			//this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
 			// 
 			// ExitToolStripMenuItem
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
 			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
-			this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
+			//this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
 			// StatusStrip
 			// 
@@ -214,21 +211,21 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.NextButton, "NextButton");
 			this.NextButton.Name = "NextButton";
 			this.NextButton.UseVisualStyleBackColor = true;
-			this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+			//this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
 			// 
 			// PreviousButton
 			// 
 			resources.ApplyResources(this.PreviousButton, "PreviousButton");
 			this.PreviousButton.Name = "PreviousButton";
 			this.PreviousButton.UseVisualStyleBackColor = true;
-			this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+			//this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
 			// 
 			// SaveButton
 			// 
 			resources.ApplyResources(this.SaveButton, "SaveButton");
 			this.SaveButton.Name = "SaveButton";
 			this.SaveButton.UseVisualStyleBackColor = true;
-			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+			//this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
 			// 
 			// PlaybackTimer
 			// 

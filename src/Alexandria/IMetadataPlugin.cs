@@ -6,7 +6,10 @@ namespace Alexandria
 {
 	public interface IMetadataPlugin : IPlugin
 	{
-		T GetMetadata<T>() where T : IMetadata;		
-		T GetMetadata<T>(ISearch search) where T : IMetadata;
+		IList<IMetadataPluginCapability> Capabilities { get; }
+		IMetadataPluginCapability GetCapability<T>() where T : IMetadata;
+		T GetMetadata<T>(ILocation location) where T : IMetadata;		
+		T GetMetadata<T>(IIdentifier id) where T: IMetadata;
+		IList<IMetadata> FindMetadata(ISearch search);
 	}
 }
