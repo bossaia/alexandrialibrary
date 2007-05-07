@@ -182,8 +182,8 @@
       <Path>
         <Point X="8" Y="3.942" />
         <Point X="8" Y="4.422" />
-        <Point X="6.008" Y="4.422" />
-        <Point X="6.008" Y="9.625" />
+        <Point X="6.081" Y="4.422" />
+        <Point X="6.081" Y="9.625" />
         <Point X="6.25" Y="9.625" />
       </Path>
     </InheritanceLine>
