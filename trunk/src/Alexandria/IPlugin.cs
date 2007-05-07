@@ -8,7 +8,7 @@ namespace Alexandria
 	{
 		string Name { get; }
 		ILocation Location { get; }
-		Version Version { get; }
+		IVersion Version { get; }
 		//ICapability Capability { get; }
 	}
 }

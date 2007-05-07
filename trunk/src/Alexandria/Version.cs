@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public struct Version : IComparable<Version>
+	public struct Version : IVersion
 	{
 		#region Constructors
 		public Version(int majorNumber, int minorNumber, int buildNumber, int revisionNumber)
@@ -23,6 +23,11 @@ namespace Alexandria
 		#endregion
 				
 		#region Public Properties
+		public string Name
+		{
+			get { return string.Format("{0}.{1}.{2}.{3}", MajorNumber, MinorNumber, BuildNumber, RevisionNumber); }
+		}
+		
 		public int MajorNumber
 		{
 			get { return numbers[0]; }
@@ -60,14 +65,29 @@ namespace Alexandria
 		}
 		#endregion
 
-		#region IComparable<Version> Members
-		public int CompareTo(Version other)
+		#region IComparable<IVersion> Members
+		public int CompareTo(IVersion other)
 		{
-			for(int i = 0; i < numbers.Length; i++)
-				if (this.numbers[i] > other.numbers[i])
-					return 1;
-				else if (this.numbers[i] < other.numbers[i]) 
-					return -1;
+			if (this.MajorNumber > other.MajorNumber)
+				return 1;
+			else if (this.MajorNumber < other.MajorNumber)
+				return -1;
+
+			if (this.MinorNumber > other.MinorNumber)
+				return 1;
+			else if (this.MinorNumber < other.MinorNumber)
+				return -1;
+
+			if (this.BuildNumber > other.BuildNumber)
+				return 1;
+			else if (this.BuildNumber < other.BuildNumber)
+				return -1;
+
+			if (this.RevisionNumber > other.RevisionNumber)
+				return 1;
+			else if (this.RevisionNumber < other.RevisionNumber)
+				return -1;
+								
 			return 0;
 		}
 		#endregion
