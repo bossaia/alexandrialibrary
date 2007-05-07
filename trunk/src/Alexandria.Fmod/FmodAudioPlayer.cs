@@ -105,7 +105,7 @@ namespace Alexandria.Fmod
 			}
 		}
 
-		public new void Dispose()
+		public void Dispose()
 		{
 			this.Dispose(true);
 			GC.SuppressFinalize(this);
@@ -461,20 +461,6 @@ namespace Alexandria.Fmod
 			return info;
 		}
 		*/
-
-		#region Command Methods
-		public SoundLoadCommand CreateSoundLoadCommand(Fmod.Sound sound)
-		{
-			return new SoundLoadCommand(this, sound);
-		}
-		
-		[CLSCompliant(false)]
-		public SoundStreamCommand CreateSoundStreamCommand(Fmod.Sound sound, uint streamBufferSize)
-		{
-			return new SoundStreamCommand(this, sound, streamBufferSize);
-		}
-		#endregion
-		
 		#endregion
 		
 		#region IAudioPlayer Members

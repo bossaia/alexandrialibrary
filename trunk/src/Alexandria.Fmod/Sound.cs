@@ -25,10 +25,10 @@ namespace Alexandria.Fmod
 			this.uri = uri;
 			if (uri != null)
 			{
-				if (string.Compare(uri.Scheme, "file") == 0)
-					status = LocalSoundNotLoaded.Example;
-				else
-					status = RemoteSoundNotReady.Example;
+				//if (string.Compare(uri.Scheme, "file") == 0)
+					//status = LocalSoundNotLoaded.Example;
+				//else
+					//status = RemoteSoundNotReady.Example;
 			}
 		}
 		
@@ -56,10 +56,11 @@ namespace Alexandria.Fmod
 				this.soundSystem = parentSound.SoundSystem;
 				this.parentSound = parentSound;
 
-				if (parentSound.Location.IsLocal)
-					status = LocalSoundNotLoaded.Example;
-				else
-					status = RemoteSoundNotReady.Example;
+				//TODO: replace this with a SoundFactory that creates either local or streaming sounds
+				//if (parentSound.Location.IsLocal)
+					//status = LocalSoundNotLoaded.Example;
+				//else
+					//status = RemoteSoundNotReady.Example;
 			}
 		}
 		#endregion
@@ -138,7 +139,7 @@ namespace Alexandria.Fmod
 		private IntPtr userData = IntPtr.Zero;
 		private Uri uri; //MediaFile mediaFile;
 		private bool disposed;
-		private IAudioStatus status;
+		SoundStatus status;
 		#endregion
 		
 		#region Internal Methods
@@ -768,11 +769,10 @@ namespace Alexandria.Fmod
 				return (this.FmodLength / 10000);
 			}
 		}
-
-		public IAudioStatus Status
+		
+		SoundStatus Status
 		{
 			get { return status; }
-			internal set { status = value; }
 		}
 		
 		[CLSCompliant(false)]
@@ -784,6 +784,49 @@ namespace Alexandria.Fmod
 		{
 			get { return TimeSpan.Zero; }
 		}
+		#endregion
+
+		#region IAudio Members
+		public bool IsMuted
+		{
+			get { return this.channel.Mute; }
+		}
+
+		public void Mute()
+		{
+			if (!IsMuted)
+			{				
+				this.channel.Mute = true;
+			}
+		}
+
+		public void SetVolume(float volume)
+		{
+			this.channel.Volume = volume;
+		}
+
+		public void Unmute()
+		{
+			if (IsMuted)
+			{				
+				this.channel.Mute = false;
+			}
+		}
+
+		public float Volume
+		{
+			get { return this.channel.Volume; }
+		}
+		#endregion
+
+		#region IPlayable Members
+
+
+		public MediaPlaybackState PlaybackState
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
 		#endregion
 	}
 }

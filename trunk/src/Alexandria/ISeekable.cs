@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IVideoStatus : IPlayableStatus
+	public interface ISeekable : IMedia
 	{
+		MediaSeekingState SeekingState { get; }
+		int SeekingSpeed {get;}
 	}
 }

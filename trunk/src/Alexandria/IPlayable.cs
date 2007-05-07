@@ -6,10 +6,9 @@ namespace Alexandria
 {
 	public interface IPlayable : IMedia
 	{
+		MediaPlaybackState PlaybackState { get; }
 		TimeSpan Length { get; }
 		TimeSpan Position { get; }
-		//bool IsPlaying { get; }
-		//bool IsPaused { get; }
 		void Play();
 		void Pause();
 		void Resume();

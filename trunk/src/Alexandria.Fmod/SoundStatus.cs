@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {
-	public abstract class SoundStatus : IAudioStatus
+	public abstract class SoundStatus
 	{
 		#region Constructors
 		protected SoundStatus(bool allowsLoad, bool allowsStream, bool allowsPlay, bool allowsPause, bool allowsStop, bool allowsSeek)
@@ -20,7 +20,6 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Private Fields
-		private MediaBufferState bufferState = MediaBufferState.None;
 		private MediaStreamingState streamingState = MediaStreamingState.None;
 		private MediaPlaybackState playbackState = MediaPlaybackState.None;
 		private MediaSeekingState seekingState = MediaSeekingState.None;
@@ -35,12 +34,6 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Public Properties
-		public MediaBufferState BufferState
-		{
-			get { return bufferState; }
-			set { bufferState = value; }
-		}
-
 		public MediaStreamingState StreamingState
 		{
 			get { return streamingState; }

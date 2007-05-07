@@ -8,5 +8,6 @@ namespace Alexandria
 	{
 		string Path { get; }
 		bool IsLocal { get; }
+		bool RequiresAuthentication { get; }
 	}
 }

@@ -6,6 +6,6 @@ namespace Alexandria
 {
 	public interface IVideo : IPlayable
 	{
-		IVideoStatus Status { get; }
+		AspectRatio AspectRatio { get; }		
 	}
 }
