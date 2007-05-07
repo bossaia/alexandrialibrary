@@ -4,7 +4,7 @@
   <Struct Name="Alexandria.Version">
     <Position X="4.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Structs.cs</FileName>
+      <FileName>Version.cs</FileName>
       <HashCode>AAAAEAAAAAAAQAQAgAgAIAAAAAAAAIAQAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <Compartments>
