@@ -8,6 +8,6 @@ namespace Alexandria
 	{
 		string Value { get; }
 		string Type { get; }
-		Version Version { get; }
+		IVersion Version { get; }
 	}
 }

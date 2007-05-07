@@ -80,6 +80,7 @@
     <Compile Include="ITagPluginCapability.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="IUser.cs" />
+    <Compile Include="IVersion.cs" />
     <Compile Include="IVideo.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAudio.cs" />

@@ -7,6 +7,6 @@ namespace Alexandria
 	public interface ITagFormat
 	{
 		string Name { get; }
-		Version Version { get; }
+		IVersion Version { get; }
 	}
 }

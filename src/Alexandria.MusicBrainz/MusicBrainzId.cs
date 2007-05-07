@@ -43,7 +43,7 @@ namespace Alexandria.MusicBrainz
 			get { return type.ToString(); }
 		}
 		
-		public Version Version
+		public IVersion Version
 		{
 			get { return version; }
 		}
