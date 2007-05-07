@@ -26,7 +26,7 @@ using Alexandria;
 
 namespace Alexandria.TagLib
 {
-	public class Tag : IAudioTag
+	public class Tag //: IAudioTag
 	{
 		public virtual string Title { get {return null;} set {} }
 		public virtual IList<string> Artists { get {return null;} set {} }

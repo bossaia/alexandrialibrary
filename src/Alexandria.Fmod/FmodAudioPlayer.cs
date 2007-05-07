@@ -10,7 +10,7 @@ using Alexandria;
 namespace Alexandria.Fmod
 {	
 	//[AudioPlayerClass]
-	public class FmodAudioPlayer : IAudioPlayer, IDisposable
+	public class FmodAudioPlayer : IDisposable
 	{		
 		#region Private Fields
 		private Channel channel;

@@ -9,7 +9,7 @@ namespace Alexandria
 		IList<IMediaPlugin> MediaPlugins { get; }
 		IList<ITagPlugin> TagPlugins { get; }
 		IList<IMetadataPlugin> MetadataPlugins { get; }
-		IMediaPlugin GetBestMediaPlugin(IMediaCapability capability, IPluginOptions options);
+		IMediaPlugin GetBestMediaPlugin(IMediaPluginCapability capability, IPluginOptions options);
 		ITagPlugin GetBestTagPlugin(ITagPluginCapability capability, IPluginOptions options);
 		IMetadataPlugin GetBestMetadataPlugin(IMetadataPluginCapability capability, IPluginOptions options);
 	}
