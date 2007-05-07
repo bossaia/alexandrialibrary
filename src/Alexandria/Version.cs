@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Alexandria
 {
-	#region Version
 	public struct Version : IComparable<Version>
 	{
 		#region Constructors
@@ -73,5 +72,4 @@ namespace Alexandria
 		}
 		#endregion
 	}
-	#endregion
 }
