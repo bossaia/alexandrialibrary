@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public struct Version : IVersion
+	public struct Version : IVersion, IComparable<Version>
 	{
 		#region Constructors
 		public Version(int majorNumber, int minorNumber, int buildNumber, int revisionNumber)
@@ -68,26 +68,41 @@ namespace Alexandria
 		#region IComparable<IVersion> Members
 		public int CompareTo(IVersion other)
 		{
-			if (this.MajorNumber > other.MajorNumber)
-				return 1;
-			else if (this.MajorNumber < other.MajorNumber)
-				return -1;
+			if (other != null)
+			{
+				if (this.MajorNumber > other.MajorNumber)
+					return 1;
+				else if (this.MajorNumber < other.MajorNumber)
+					return -1;
 
-			if (this.MinorNumber > other.MinorNumber)
-				return 1;
-			else if (this.MinorNumber < other.MinorNumber)
-				return -1;
+				if (this.MinorNumber > other.MinorNumber)
+					return 1;
+				else if (this.MinorNumber < other.MinorNumber)
+					return -1;
 
-			if (this.BuildNumber > other.BuildNumber)
-				return 1;
-			else if (this.BuildNumber < other.BuildNumber)
-				return -1;
+				if (this.BuildNumber > other.BuildNumber)
+					return 1;
+				else if (this.BuildNumber < other.BuildNumber)
+					return -1;
 
-			if (this.RevisionNumber > other.RevisionNumber)
-				return 1;
-			else if (this.RevisionNumber < other.RevisionNumber)
-				return -1;
-								
+				if (this.RevisionNumber > other.RevisionNumber)
+					return 1;
+				else if (this.RevisionNumber < other.RevisionNumber)
+					return -1;
+									
+				return 0;
+			}
+			else return -1;
+		}
+		#endregion
+
+		#region IComparable<Version> Members
+		public int CompareTo(Version other)
+		{
+			for(int i = 0;i<numbers.Length;i++)
+				if (this.numbers[i] != other.numbers[i])
+					return (this.numbers[i] < other.numbers[i]) ? -1: 1;
+			
 			return 0;
 		}
 		#endregion
