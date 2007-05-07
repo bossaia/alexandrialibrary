@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Alexandria
-{		
-	#region MediaBufferState
-	public enum MediaBufferState
-	{ 
-		None = 0,
-		Loading,
-		Buffering,
-		Ready,
-		Starving
-	}
-	#endregion
-	
+{	
 	#region MediaStreamingState
 	public enum MediaStreamingState
 	{
 		None = 0,
 		Connecting,
 		Streaming,
+		Starving
 	}
 	#endregion
 	
@@ -40,6 +30,19 @@ namespace Alexandria
 		None,
 		Backward,
 		Forward
+	}
+	#endregion
+	
+	#region AspectRatio
+	public enum AspectRatio
+	{
+		None = 0,
+		Native,
+		Widescreen,
+		AnimorphicWidescreen,
+		FullScreen,
+		TohoScope,
+		Other
 	}
 	#endregion
 }

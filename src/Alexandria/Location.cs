@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Alexandria
@@ -9,8 +10,16 @@ namespace Alexandria
 		#region Constructors
 		public Location(string path)
 		{
-			this.path = path;
-			//this.isLocal = isLocal;
+			this.path = path;			
+		}
+		
+		public Location(FileInfo file)
+		{
+			if (file == null)
+				throw new ArgumentNullException("file");
+			
+			this.path = file.FullName;
+			this.isLocal = true;
 		}
 		
 		public Location(Uri uri)
@@ -26,6 +35,7 @@ namespace Alexandria
 		#region Private Fields
 		private string path;
 		bool isLocal;
+		bool requiresAuthentication;
 		#endregion
 		
 		#region Private Static Fields
@@ -39,10 +49,16 @@ namespace Alexandria
 			protected set { path = value; }
 		}
 
-		public virtual bool IsLocal
+		public bool IsLocal
 		{
 			get { return isLocal; }
 			protected set { isLocal = value; }
+		}
+		
+		public bool RequiresAuthentication
+		{
+			get { return requiresAuthentication; }
+			protected set { requiresAuthentication = value; }
 		}
 		#endregion
 	

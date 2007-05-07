@@ -7,6 +7,10 @@ namespace Alexandria
 	[CLSCompliant(false)]
 	public interface IAudio : IPlayable
 	{
-		IAudioStatus Status {get;}
+		float Volume{ get; }
+		void SetVolume(float value);
+		bool IsMuted { get; }
+		void Mute();
+		void Unmute();
 	}
 }

@@ -10,6 +10,6 @@ namespace Alexandria
 		IList<IVideo> Video { get; }
 		IList<IImage> Images { get; }
 		IList<IText> Text { get; }
-		IList<ITag> MediaTags { get; }
+		IList<ITag> Tags { get; }
 	}
 }

@@ -55,7 +55,6 @@
     <Compile Include="DspParameterCollection.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="FmodError.cs" />
-    <Compile Include="FmodSoundCommand.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="IHasDefault.cs" />
     <Compile Include="ILoopTarget.cs" />
@@ -66,9 +65,6 @@
     <Compile Include="ListenerCollection.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
-    <Compile Include="RemoteSoundNotReady.cs" />
-    <Compile Include="RemoteSoundReady.cs" />
-    <Compile Include="SoundLoadCommand.cs" />
     <Compile Include="SoundLoop.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="OpticalDrive.cs" />
@@ -90,12 +86,9 @@
     <Compile Include="SoundBuffer.cs" />
     <Compile Include="SoundSettings.cs" />
     <Compile Include="SoundLock.cs" />
-    <Compile Include="SoundPlayCommand.cs" />
     <Compile Include="SoundStatus.cs" />
-    <Compile Include="SoundStreamCommand.cs" />
     <Compile Include="SoundSystem.cs" />
     <Compile Include="SoundSystemFactory.cs" />
-    <Compile Include="SoundUpdateCommand.cs" />
     <Compile Include="SoundVariation.cs" />
     <Compile Include="Speaker.cs" />
     <Compile Include="SpeakerSystem.cs" />
