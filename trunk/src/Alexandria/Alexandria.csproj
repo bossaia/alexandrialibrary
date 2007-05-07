@@ -43,7 +43,6 @@
     <Compile Include="BaseArtist.cs" />
     <Compile Include="BaseAudioTrack.cs" />
     <Compile Include="BaseMetadata.cs" />
-    <Compile Include="IAlbumFactory.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IArtistFactory.cs" />
     <Compile Include="IArtist.cs" />
@@ -53,11 +52,13 @@
     <Compile Include="IAudioRelease.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="ICapability.cs" />
-    <Compile Include="IDataTransformer.cs" />
     <Compile Include="Identifier.cs" />
     <Compile Include="IMediaCapability.cs" />
     <Compile Include="IMediaPlugin.cs" />
+    <Compile Include="IMetadataPluginCapability.cs" />
     <Compile Include="IPlaylistItem.cs" />
+    <Compile Include="IPluginOptions.cs" />
+    <Compile Include="IPluginRepository.cs" />
     <Compile Include="ISeekable.cs" />
     <Compile Include="IStreamable.cs" />
     <Compile Include="ITagFormat.cs" />
@@ -69,7 +70,6 @@
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="ITag.cs" />
     <Compile Include="IMetadataFormat.cs" />
-    <Compile Include="IDataMatrix.cs" />
     <Compile Include="IMetadataPlugin.cs" />
     <Compile Include="IPlayable.cs" />
     <Compile Include="IPlugin.cs" />
@@ -79,6 +79,7 @@
     <Compile Include="ISong.cs" />
     <Compile Include="IStyle.cs" />
     <Compile Include="ITagPlugin.cs" />
+    <Compile Include="ITagPluginCapability.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVideo.cs" />
@@ -91,8 +92,6 @@
     <Compile Include="IAudioTag.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="PluginAttribute.cs" />
-    <Compile Include="PluginManager.cs" />
-    <Compile Include="PluginRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs.cs" />
   </ItemGroup>
