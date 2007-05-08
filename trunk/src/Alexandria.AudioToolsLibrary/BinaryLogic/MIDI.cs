@@ -213,9 +213,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return false; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_SEQ; }
+			get { return CodecFamily.Sequenced; }
 		}
 		public BinaryLogic.TID3v1 ID3v1
 		{

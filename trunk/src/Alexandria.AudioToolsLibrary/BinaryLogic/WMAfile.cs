@@ -101,19 +101,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return this.FIsVBR; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get 
-			{ 
-				if (FIsLossless)
-				{
-					return AudioReaderFactory.CF_LOSSLESS;
-				}
-				else
-				{
-					return AudioReaderFactory.CF_LOSSY;
-				}
-			}
+			get { return (FIsLossless) ? CodecFamily.Lossless : CodecFamily.Lossy; }
 		}
 		public bool IsStreamed
 		{

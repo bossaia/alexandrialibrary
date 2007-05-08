@@ -132,9 +132,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return false; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_LOSSLESS; }
+			get { return CodecFamily.Lossless; }
 		}
 		public double Duration
 		{

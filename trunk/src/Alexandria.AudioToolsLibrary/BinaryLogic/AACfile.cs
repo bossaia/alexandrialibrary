@@ -152,9 +152,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return (AAC_BITRATE_TYPE_VBR == FBitRateTypeID); }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_LOSSY; }
+			get { return CodecFamily.Lossy; }
 		}
 
 		// Sample rate values

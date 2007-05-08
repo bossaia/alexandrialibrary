@@ -100,9 +100,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return true; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_LOSSY; }
+			get { return CodecFamily.Lossy; }
 		}
 		public String Title // Song title
 		{
