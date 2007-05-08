@@ -60,7 +60,7 @@
     <Compile Include="BinaryLogic\WAVfile.cs" />
     <Compile Include="BinaryLogic\WAVPackfile.cs" />
     <Compile Include="BinaryLogic\WMAfile.cs" />
-    <Compile Include="IMetaDataXReader.cs" />
+    <Compile Include="IMetadataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

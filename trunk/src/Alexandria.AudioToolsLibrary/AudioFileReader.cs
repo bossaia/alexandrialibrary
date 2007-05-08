@@ -12,7 +12,7 @@ namespace Alexandria.AudioToolsLibrary
 	{	
 		private AudioReaderFactory theFactory;					// Reader Factory
 		private IAudioReader audioData;						// Audio data reader used for this file
-		private IMetaDataXReader metaData;						// Metadata reader used for this file
+		private IMetadataReader metaData;						// Metadata reader used for this file
 		private String thePath;									// Path of this file
 
 		// ------------------------------------------------------------------------------------------
