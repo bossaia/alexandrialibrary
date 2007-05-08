@@ -54,7 +54,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	public class TID3v2 : IMetaDataXReader
+	public class TID3v2 : IMetadataReader
 	{
 		public const byte TAG_VERSION_2_2 = 2;             // Code for ID3v2.2.x tag
 		public const byte TAG_VERSION_2_3 = 3;             // Code for ID3v2.3.x tag

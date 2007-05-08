@@ -5,7 +5,7 @@ namespace Alexandria.AudioToolsLibrary
 	/// <summary>
 	/// This Interface defines an object aimed at giving audio metadata information
 	/// </summary>
-	public interface IMetaDataXReader
+	public interface IMetadataReader
 	{
 		/// <summary>
 		/// Returns true if this kind of metadata exists in the file, false if not

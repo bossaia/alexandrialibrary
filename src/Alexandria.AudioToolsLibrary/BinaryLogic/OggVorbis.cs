@@ -38,7 +38,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TOggVorbis : IAudioReader, IMetaDataXReader
+	class TOggVorbis : IAudioReader, IMetadataReader
 	{
 		// Used with ChannelModeID property
 		private const byte VORBIS_CM_MONO = 1;				// Code for mono mode		

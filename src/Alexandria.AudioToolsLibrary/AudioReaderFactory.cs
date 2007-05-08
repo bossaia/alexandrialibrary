@@ -254,9 +254,9 @@ namespace Alexandria.AudioToolsLibrary
 		/// <param name="path">Path of the file</param>
 		/// <param name="theDataReader">AudioDataReader produced for this file</param>
 		/// <returns>Metadata reader able to give metadata info for this file (or the dummy reader if the format is unknown)</returns>
-		public IMetaDataXReader GetMetaReader(String path, IAudioReader theDataReader)
+		public IMetadataReader GetMetaReader(String path, IAudioReader theDataReader)
 		{
-			IMetaDataXReader theMetaReader = null;
+			IMetadataReader theMetaReader = null;
 			
 			// Step 1 : The physical reader may have already parsed the metadata
 			for (int i=0; i<TAG_TYPE_COUNT; i++)
@@ -320,7 +320,7 @@ namespace Alexandria.AudioToolsLibrary
 					(theDataReader is BinaryLogic.TPSFFile) ||
 					(theDataReader is BinaryLogic.TSPCFile) )
 				{
-					theMetaReader = (IMetaDataXReader)theDataReader; // Boorish but correct cast
+					theMetaReader = (IMetadataReader)theDataReader; // Boorish but correct cast
 				}
 			}
 
