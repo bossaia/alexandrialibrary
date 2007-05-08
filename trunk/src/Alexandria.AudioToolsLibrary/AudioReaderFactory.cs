@@ -164,7 +164,7 @@ namespace Alexandria.AudioToolsLibrary
 			return result;
 		}
 
-		public AudioDataReader GetDataReader(String path)
+		public IAudioDataReader GetDataReader(String path)
 		{
 			return GetDataReader(path, GetFormatIDFromPath(path));
 		}
@@ -175,9 +175,9 @@ namespace Alexandria.AudioToolsLibrary
 		/// <param name="formatId">ID of the format</param>
 		/// <param name="path">Path of the file</param>
 		/// <returns>AudioDataReader able to give info about the file's contents (or the dummy reader if the format is unknown)</returns>
-		public AudioDataReader GetDataReader(String path, int formatId)
+		public IAudioDataReader GetDataReader(String path, int formatId)
 		{
-			AudioDataReader theDataReader = null;
+			IAudioDataReader theDataReader = null;
 			
 			switch ( formatId )
 			{
@@ -254,9 +254,9 @@ namespace Alexandria.AudioToolsLibrary
 		/// <param name="path">Path of the file</param>
 		/// <param name="theDataReader">AudioDataReader produced for this file</param>
 		/// <returns>Metadata reader able to give metadata info for this file (or the dummy reader if the format is unknown)</returns>
-		public MetaDataReader GetMetaReader(String path, AudioDataReader theDataReader)
+		public IMetaDataReader GetMetaReader(String path, IAudioDataReader theDataReader)
 		{
-			MetaDataReader theMetaReader = null;
+			IMetaDataReader theMetaReader = null;
 			
 			// Step 1 : The physical reader may have already parsed the metadata
 			for (int i=0; i<TAG_TYPE_COUNT; i++)
@@ -320,7 +320,7 @@ namespace Alexandria.AudioToolsLibrary
 					(theDataReader is BinaryLogic.TPSFFile) ||
 					(theDataReader is BinaryLogic.TSPCFile) )
 				{
-					theMetaReader = (MetaDataReader)theDataReader; // Boorish but correct cast
+					theMetaReader = (IMetaDataReader)theDataReader; // Boorish but correct cast
 				}
 			}
 

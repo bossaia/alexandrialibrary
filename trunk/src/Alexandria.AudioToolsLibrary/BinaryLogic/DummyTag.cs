@@ -6,7 +6,7 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 	/// <summary>
 	/// Dummy metadata provider
 	/// </summary>
-	public class DummyTag : MetaDataReader
+	public class DummyTag : IMetaDataReader
 	{
 		public bool Exists
 		{

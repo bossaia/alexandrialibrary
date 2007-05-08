@@ -27,7 +27,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TWAVfile : AudioDataReader
+	class TWAVfile : IAudioDataReader
 	{
 		// Format type names
 		public const String WAV_FORMAT_UNKNOWN = "Unknown";

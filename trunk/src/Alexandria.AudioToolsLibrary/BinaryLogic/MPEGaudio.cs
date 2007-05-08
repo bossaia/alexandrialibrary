@@ -43,7 +43,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TMPEGaudio : AudioDataReader
+	class TMPEGaudio : IAudioDataReader
 	{
 
 		// Table for bit rates

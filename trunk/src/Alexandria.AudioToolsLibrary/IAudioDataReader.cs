@@ -5,7 +5,7 @@ namespace Alexandria.AudioToolsLibrary
 	/// <summary>
 	/// This Interface defines an object aimed at giving audio "physical" data information
 	/// </summary>
-	public interface AudioDataReader
+	public interface IAudioDataReader
 	{
 		/// <summary>
 		/// Bitrate of the file

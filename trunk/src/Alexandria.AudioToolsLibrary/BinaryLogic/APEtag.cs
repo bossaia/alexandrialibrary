@@ -21,7 +21,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	public class TAPEtag : MetaDataReader
+	public class TAPEtag : IMetaDataReader
 	{
 		private bool FExists;
 		private int FVersion;

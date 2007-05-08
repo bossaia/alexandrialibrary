@@ -38,7 +38,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TDTS : AudioDataReader
+	class TDTS : IAudioDataReader
 	{
 
 		private static int[] BITRATES = new int[32] { 32, 56, 64, 96, 112, 128, 192, 224, 256,

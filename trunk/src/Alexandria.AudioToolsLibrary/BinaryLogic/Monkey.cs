@@ -40,7 +40,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TMonkey : AudioDataReader
+	class TMonkey : IAudioDataReader
 	{
 		// Compression level codes
 		public const int MONKEY_COMPRESSION_FAST       = 1000;  // Fast (poor)
