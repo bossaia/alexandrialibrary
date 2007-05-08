@@ -37,7 +37,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TTTA : IAudioDataReader
+	class TTTA : IAudioReader
 	{
 		private class tta_header
 		{

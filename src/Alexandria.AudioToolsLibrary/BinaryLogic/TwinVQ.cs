@@ -25,7 +25,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TTwinVQ : IAudioDataReader
+	class TTwinVQ : IAudioReader
 	{
 	 
 		// Used with ChannelModeID property

@@ -27,7 +27,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TAACfile : IAudioDataReader
+	class TAACfile : IAudioReader
 	{
 
 		// Header type codes
