@@ -29,7 +29,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	public class TID3v1 : MetaDataReader
+	public class TID3v1 : IMetaDataReader
 	{
 		public const int MAX_MUSIC_GENRES = 148;        // Max. number of music genres
 		public const int DEFAULT_GENRE = 255;               // Index for default genre

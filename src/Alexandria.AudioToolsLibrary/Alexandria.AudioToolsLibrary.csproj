@@ -33,7 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioDataReader.cs" />
+    <Compile Include="IAudioDataReader.cs" />
     <Compile Include="AudioFileReader.cs" />
     <Compile Include="AudioReaderFactory.cs" />
     <Compile Include="BinaryLogic\AACfile.cs" />
@@ -60,7 +60,7 @@
     <Compile Include="BinaryLogic\WAVfile.cs" />
     <Compile Include="BinaryLogic\WAVPackfile.cs" />
     <Compile Include="BinaryLogic\WMAfile.cs" />
-    <Compile Include="MetaDataReader.cs" />
+    <Compile Include="IMetaDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

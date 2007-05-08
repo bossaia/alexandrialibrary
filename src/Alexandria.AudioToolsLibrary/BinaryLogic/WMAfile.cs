@@ -27,7 +27,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TWMAfile : AudioDataReader, MetaDataReader
+	class TWMAfile : IAudioDataReader, IMetaDataReader
 	{
 		// Channel modes
 		public const byte WMA_CM_UNKNOWN = 0;                                               // Unknown

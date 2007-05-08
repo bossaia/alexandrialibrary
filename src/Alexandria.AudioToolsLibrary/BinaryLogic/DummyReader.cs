@@ -6,7 +6,7 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 	/// <summary>
 	/// Dummy physical data provider
 	/// </summary>
-	public class DummyReader : AudioDataReader
+	public class DummyReader : IAudioDataReader
 	{
 		public DummyReader()
 		{

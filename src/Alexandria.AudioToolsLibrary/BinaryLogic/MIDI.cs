@@ -44,7 +44,7 @@ using Alexandria.AudioToolsLibrary;
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 
-	class Midi : AudioDataReader
+	class Midi : IAudioDataReader
 	{
 
 		//Private properties
