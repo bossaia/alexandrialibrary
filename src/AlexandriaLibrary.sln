@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Mp3Tunes", "Alex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.MusicDns", "Alexandria.MusicDns\Alexandria.MusicDns.csproj", "{45EADD97-2719-4805-86BE-D95719932895}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.AlbumArtDownloader", "Alexandria.AlbumArtDownloader\Alexandria.AlbumArtDownloader.csproj", "{846AB010-03EA-4B52-A6BE-281BD732AE7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -151,6 +153,10 @@ Global
 		{45EADD97-2719-4805-86BE-D95719932895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45EADD97-2719-4805-86BE-D95719932895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45EADD97-2719-4805-86BE-D95719932895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{846AB010-03EA-4B52-A6BE-281BD732AE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{846AB010-03EA-4B52-A6BE-281BD732AE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{846AB010-03EA-4B52-A6BE-281BD732AE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{846AB010-03EA-4B52-A6BE-281BD732AE7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
