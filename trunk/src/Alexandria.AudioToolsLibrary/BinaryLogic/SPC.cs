@@ -18,7 +18,7 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 	/// <summary>
 	/// Description résumée de SPC.
 	/// </summary>
-	public class TSPCFile : IAudioDataReader, IMetaDataReader
+	public class TSPCFile : IAudioReader, IMetaDataXReader
 	{
 		private const String SPC_FORMAT_TAG = "SNES-SPC700 Sound File Data v0.30";
 		private const String XTENDED_TAG = "xid6";

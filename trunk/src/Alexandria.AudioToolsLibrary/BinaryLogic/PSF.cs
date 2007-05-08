@@ -18,7 +18,7 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 	/// <summary>
 	/// Description résumée de PSF.
 	/// </summary>
-	public class TPSFFile : IAudioDataReader, IMetaDataReader
+	public class TPSFFile : IAudioReader, IMetaDataXReader
 	{
 		// Format Type Names
 		public const String PSF_FORMAT_UNKNOWN = "Unknown";

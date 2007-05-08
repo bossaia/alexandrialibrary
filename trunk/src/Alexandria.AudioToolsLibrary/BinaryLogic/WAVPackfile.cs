@@ -41,7 +41,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TWAVPackfile : IAudioDataReader
+	class TWAVPackfile : IAudioReader
 	{
 		private long FFileSize;
 		private bool FValid;

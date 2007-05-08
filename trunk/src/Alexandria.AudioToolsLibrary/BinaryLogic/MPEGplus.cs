@@ -49,7 +49,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TMPEGplus : IAudioDataReader
+	class TMPEGplus : IAudioReader
 	{	
 		// Used with ChannelModeID property
 		private const byte MPP_CM_STEREO = 1;               // Index for stereo mode

@@ -53,7 +53,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	public class TFLACFile : IAudioDataReader, IMetaDataReader
+	public class TFLACFile : IAudioReader, IMetaDataXReader
 	{
 
 		private const int META_STREAMINFO      = 0;

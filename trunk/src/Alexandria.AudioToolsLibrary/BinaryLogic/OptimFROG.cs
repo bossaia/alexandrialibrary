@@ -29,7 +29,7 @@ using Alexandria.AudioToolsLibrary;
 
 namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
-	class TOptimFrog : IAudioDataReader
+	class TOptimFrog : IAudioReader
 	{
 
 		private String[] OFR_COMPRESSION = new String[10] 
