@@ -48,9 +48,10 @@
 using System;
 using System.Collections;
 using System.IO;
+using Alexandria.AudioToolsLibrary;
 //using ATL.Logging;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	public class TFLACFile : AudioDataReader, MetaDataReader
 	{

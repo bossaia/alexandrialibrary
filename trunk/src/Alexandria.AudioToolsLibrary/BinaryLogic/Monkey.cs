@@ -36,8 +36,9 @@
 
 using System;
 using System.IO;
+using Alexandria.AudioToolsLibrary;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	class TMonkey : AudioDataReader
 	{

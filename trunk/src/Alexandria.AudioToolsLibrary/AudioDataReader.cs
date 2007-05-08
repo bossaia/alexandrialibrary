@@ -1,6 +1,6 @@
 using System;
 
-namespace ATL.AudioReaders
+namespace Alexandria.AudioToolsLibrary
 {
 	/// <summary>
 	/// This Interface defines an object aimed at giving audio "physical" data information

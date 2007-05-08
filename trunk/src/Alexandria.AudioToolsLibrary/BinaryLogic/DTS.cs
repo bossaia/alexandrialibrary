@@ -33,9 +33,10 @@
 
 using System;
 using System.IO;
+using Alexandria.AudioToolsLibrary;
 //using ATL.Logging;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	class TDTS : AudioDataReader
 	{

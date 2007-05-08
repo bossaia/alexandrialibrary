@@ -20,13 +20,14 @@
 
 using System;
 using System.IO;
+using Alexandria.AudioToolsLibrary;
 
 /*type
   // Used in TID3v1 class
   String04 = string[4];                          // String with max. 4 symbols
   String30 = string[30];                        // String with max. 30 symbols*/
-  
-namespace ATL.AudioReaders.BinaryLogic
+
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	public class TID3v1 : MetaDataReader
 	{

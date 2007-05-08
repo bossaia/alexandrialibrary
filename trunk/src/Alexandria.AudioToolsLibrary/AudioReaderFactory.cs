@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections;
 //using ATL.Logging;
 
-namespace ATL.AudioReaders
+namespace Alexandria.AudioToolsLibrary
 {
 	/// <summary>
 	/// Factory for metadata and physical data readers

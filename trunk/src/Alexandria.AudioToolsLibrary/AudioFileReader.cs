@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace ATL.AudioReaders
+namespace Alexandria.AudioToolsLibrary
 {
 	/// <summary>
 	/// This class is the one which is _really_ called when encountering a file.
