@@ -123,9 +123,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return false; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_SEQ_WAV; }
+			get { return CodecFamily.SequencedWav; }
 		}
 		public String Title // Song title
 		{

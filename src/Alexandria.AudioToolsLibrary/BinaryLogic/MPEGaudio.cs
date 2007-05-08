@@ -241,9 +241,9 @@ namespace Alexandria.AudioToolsLibrary.BinaryLogic
 		{
 			get { return this.FVBR.Found; }
 		}
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
-			get { return AudioReaderFactory.CF_LOSSY; }
+			get { return CodecFamily.Lossy; }
 		}
 		public ushort SampleRate // Sample rate (hz)
 		{

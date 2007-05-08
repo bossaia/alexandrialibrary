@@ -19,12 +19,12 @@ namespace Alexandria.AudioToolsLibrary
 		private const int TAG_TYPE_COUNT = 3;
 
 		// Codec families
-		public const int CF_LOSSY		= 0; // Streamed, lossy data
-		public const int CF_LOSSLESS	= 1; // Streamed, lossless data
-		public const int CF_SEQ_WAV		= 2; // Sequenced with embedded sound library
-		public const int CF_SEQ			= 3; // Sequenced with codec-dependent sound library
+		//public const int CF_LOSSY		= 0; // Streamed, lossy data
+		//public const int CF_LOSSLESS	= 1; // Streamed, lossless data
+		//public const int CF_SEQ_WAV		= 2; // Sequenced with embedded sound library
+		//public const int CF_SEQ			= 3; // Sequenced with codec-dependent sound library
 
-		public const int NB_CODEC_FAMILIES = 4;
+		//public const int NB_CODEC_FAMILIES = 4;
 
 		// Defines the default reading priority of the metadata
 		//# to be improved for cross-tag reading
@@ -34,25 +34,25 @@ namespace Alexandria.AudioToolsLibrary
 		private static AudioReaderFactory theFactory = null;
 	
 		// Codec IDs
-		public const int CID_NONE		= -1;
-		public const int CID_MP3		= 0;
-		public const int CID_OGG		= 1;
-		public const int CID_MPC		= 2;
-		public const int CID_FLAC		= 3;
-		public const int CID_APE		= 4;
-		public const int CID_WMA		= 5;
-		public const int CID_MIDI		= 6;
-		public const int CID_AAC		= 7;
-		public const int CID_AC3		= 8;
-		public const int CID_OFR		= 9;
-		public const int CID_WAVPACK	= 10;
-		public const int CID_WAV		= 11;
-		public const int CID_PSF		= 12;
-		public const int CID_SPC		= 13;
-		public const int CID_DTS		= 14;
-		public const int CID_VQF		= 15;
+		//public const int CID_NONE		= -1;
+		//public const int CID_MP3		= 0;
+		//public const int CID_OGG		= 1;
+		//public const int CID_MPC		= 2;
+		//public const int CID_FLAC		= 3;
+		//public const int CID_APE		= 4;
+		//public const int CID_WMA		= 5;
+		//public const int CID_MIDI		= 6;
+		//public const int CID_AAC		= 7;
+		//public const int CID_AC3		= 8;
+		//public const int CID_OFR		= 9;
+		//public const int CID_WAVPACK	= 10;
+		//public const int CID_WAV		= 11;
+		//public const int CID_PSF		= 12;
+		//public const int CID_SPC		= 13;
+		//public const int CID_DTS		= 14;
+		//public const int CID_VQF		= 15;
 
-		public const int NB_CODECS = 16;
+		//public const int NB_CODECS = 16;
 
 		// ------------------------------------------------------------------------------------------
 		
@@ -82,86 +82,87 @@ namespace Alexandria.AudioToolsLibrary
 		}
 
 		
-		public static int GetFormatIDFromPath(String path)
+		public static Codec GetFormatIDFromPath(string path)
 		{
-			int result = CID_NONE;
+			//int result = CID_NONE;
+			Codec codec = Codec.None;
 
 			if (File.Exists(path))
 			{
-				String ext = Path.GetExtension(path).ToUpper();
+				string ext = Path.GetExtension(path).ToUpper();
 
 				if ( (".MP3" == ext) || (".MP2" == ext) || (".MP1" == ext) )
 				{
-					result = CID_MP3;
+					codec = Codec.MP3;
 				}
 
 				if ( (".OGG" == ext) )
 				{
-					result = CID_OGG;
+					codec = Codec.OGG;
 				}
 
 				if ( (".MP+" == ext) || (".MPC" == ext) )
 				{
-					result = CID_MPC;
+					codec = Codec.MPC;
 				}
 
 				if ( (".FLAC" == ext) )
 				{
-					result = CID_FLAC;
+					codec = Codec.FLAC;
 				}
 
 				if ( (".APE" == ext) )
 				{
-					result = CID_APE;
+					codec = Codec.APE;
 				}
 
 				if ( (".WMA" == ext) )
 				{
-					result = CID_WMA;
+					codec = Codec.WMA;
 				}
 
 				if ( (".MID" == ext) || (".MIDI" == ext) )
 				{
-					result = CID_MIDI;
+					codec = Codec.MIDI;
 				}
 
-				if ( ".AAC" == ext )
+				if ( ".AAC" == ext || ext == ".M4A" || ext == "MP4" )
 				{
-					result = CID_AAC;
+					codec = Codec.AAC;
 				}
 
 				if ( ".AC3" == ext )
 				{
-					result = CID_AC3;
+					codec = Codec.AC3;
 				}
 
 				if ( ( ".OFR" == ext ) || (".OFS" == ext ) )
 				{
-					result = CID_OFR;
+					codec = Codec.OFR;
 				}
 
 				if ( ".WV" == ext )
 				{
-					result = CID_WAVPACK;
+					codec = Codec.WAVPACK;
 				}
 
 				if ( ".WAV" == ext )
 				{
-					result = CID_WAV;
+					codec = Codec.WAV;
 				}
 
 				if (".PSF" == ext)
 				{
-					result = CID_PSF;
+					codec = Codec.PSF;
 				}
 
 				if (".SPC" == ext)
 				{
-					result = CID_SPC;
+					codec = Codec.SPC;
 				}
 			}
 
-			return result;
+			return codec;
 		}
 
 		public IAudioReader GetDataReader(String path)
@@ -170,70 +171,70 @@ namespace Alexandria.AudioToolsLibrary
 		}
 
 		/// <summary>
-		/// Gets the appropriate physical data reader for a given file
+		/// Gets the appropriate physical data reader for a given file and format codec
 		/// </summary>
-		/// <param name="formatId">ID of the format</param>
-		/// <param name="path">Path of the file</param>
+		/// <param name="path">The path of the file</param>
+		/// <param name="code">The codec of the file</param>
 		/// <returns>AudioDataReader able to give info about the file's contents (or the dummy reader if the format is unknown)</returns>
-		public IAudioReader GetDataReader(String path, int formatId)
+		public IAudioReader GetDataReader(String path, Codec codec)
 		{
 			IAudioReader theDataReader = null;
 			
-			switch ( formatId )
+			switch(codec)
 			{
-				case CID_MP3 :		
+				case Codec.MP3:
 					theDataReader = new BinaryLogic.TMPEGaudio();
 					break;
 
-				case CID_OGG :		
+				case Codec.OGG:
 					theDataReader = new BinaryLogic.TOggVorbis();
 					break;
 
-				case CID_MPC :		
+				case Codec.MPC:
 					theDataReader = new BinaryLogic.TMPEGplus();
 					break;
 
-				case CID_FLAC :		
+				case Codec.FLAC:
 					theDataReader = new BinaryLogic.TFLACFile();
 					break;
 
-				case CID_APE :		
+				case Codec.APE:
 					theDataReader = new BinaryLogic.TMonkey();
 					break;
 
-				case CID_WMA :		
+				case Codec.WMA:
 					theDataReader = new BinaryLogic.TWMAfile();
 					break;
 
-				case CID_MIDI :		
+				case Codec.MIDI:
 					theDataReader = new BinaryLogic.Midi();
 					break;
 
-				case CID_AAC :		
+				case Codec.AAC:
 					theDataReader = new BinaryLogic.TAACfile();
 					break;
 
-				case CID_AC3 :		
+				case Codec.AC3:
 					theDataReader = new BinaryLogic.TAC3();
 					break;
 
-				case CID_OFR :		
+				case Codec.OFR:
 					theDataReader = new BinaryLogic.TOptimFrog();
 					break;
 
-				case CID_WAVPACK :		
+				case Codec.WAVPACK:
 					theDataReader = new BinaryLogic.TWAVPackfile();
 					break;
 
-				case CID_WAV :		
+				case Codec.WAV:
 					theDataReader = new BinaryLogic.TWAVfile();
 					break;
 
-				case CID_PSF :		
+				case Codec.PSF:
 					theDataReader = new BinaryLogic.TPSFFile();
 					break;
 
-				case CID_SPC :		
+				case Codec.SPC:
 					theDataReader = new BinaryLogic.TSPCFile();
 					break;
 

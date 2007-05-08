@@ -96,7 +96,7 @@ namespace Alexandria.AudioToolsLibrary
 		/// <summary>
 		/// Codec family
 		/// </summary>
-		public int CodecFamily
+		public CodecFamily CodecFamily
 		{
 			get { return audioData.CodecFamily; }
 		}

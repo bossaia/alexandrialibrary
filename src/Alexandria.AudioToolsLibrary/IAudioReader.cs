@@ -31,7 +31,7 @@ namespace Alexandria.AudioToolsLibrary
 		/// <summary>
 		/// Returns the family of the coded used for that file (see MetaDataManager for codec families)
 		/// </summary>
-		int CodecFamily
+		CodecFamily CodecFamily
 		{
 			get;
 		}

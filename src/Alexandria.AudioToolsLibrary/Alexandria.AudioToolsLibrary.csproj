@@ -33,6 +33,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Codec.cs" />
+    <Compile Include="CodecFamily.cs" />
     <Compile Include="IAudioReader.cs" />
     <Compile Include="AudioFileReader.cs" />
     <Compile Include="AudioReaderFactory.cs" />
