@@ -33,7 +33,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AudioDataReader.cs" />
+    <Compile Include="AudioFileReader.cs" />
+    <Compile Include="AudioReaderFactory.cs" />
+    <Compile Include="BinaryLogic\AACfile.cs" />
+    <Compile Include="BinaryLogic\AC3.cs" />
+    <Compile Include="BinaryLogic\APEtag.cs" />
+    <Compile Include="BinaryLogic\DTS.cs" />
+    <Compile Include="BinaryLogic\DummyReader.cs" />
+    <Compile Include="BinaryLogic\DummyTag.cs" />
+    <Compile Include="BinaryLogic\FLACfile.cs" />
+    <Compile Include="BinaryLogic\ID3v1.cs" />
+    <Compile Include="BinaryLogic\ID3v2.cs" />
+    <Compile Include="BinaryLogic\MIDI.cs" />
+    <Compile Include="BinaryLogic\Monkey.cs" />
+    <Compile Include="BinaryLogic\MPEGaudio.cs" />
+    <Compile Include="BinaryLogic\MPEGplus.cs" />
+    <Compile Include="BinaryLogic\OggVorbis.cs" />
+    <Compile Include="BinaryLogic\OptimFROG.cs" />
+    <Compile Include="BinaryLogic\PSF.cs" />
+    <Compile Include="BinaryLogic\SPC.cs" />
+    <Compile Include="BinaryLogic\TTA.cs" />
+    <Compile Include="BinaryLogic\TwinVQ.cs" />
+    <Compile Include="BinaryLogic\Utils.cs" />
+    <Compile Include="BinaryLogic\VorbisComment.cs" />
+    <Compile Include="BinaryLogic\WAVfile.cs" />
+    <Compile Include="BinaryLogic\WAVPackfile.cs" />
+    <Compile Include="BinaryLogic\WMAfile.cs" />
+    <Compile Include="MetaDataReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
