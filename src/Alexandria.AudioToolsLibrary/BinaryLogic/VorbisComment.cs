@@ -17,7 +17,7 @@
 using System;
 using System.IO;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	class TVorbisComment
 	{  

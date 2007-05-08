@@ -49,9 +49,10 @@
 using System;
 using System.IO;
 using System.Text;
+using Alexandria.AudioToolsLibrary;
 //using ATL.Logging;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	public class TID3v2 : MetaDataReader
 	{

@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	/// <summary>
 	/// Misc. utilities used by binary readers
 	/// </summary>
-	public class Utils
+	public static class Utils
 	{	
 		// Size of the buffer used for memory stream copies
 		// (see CopyMemoryStreamFrom method)

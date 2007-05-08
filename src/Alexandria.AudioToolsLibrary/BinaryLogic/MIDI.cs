@@ -38,9 +38,10 @@ interesting as well...
 using System;
 using System.IO;
 using System.Collections;
+using Alexandria.AudioToolsLibrary;
 //using ATL.Logging;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 
 	class Midi : AudioDataReader

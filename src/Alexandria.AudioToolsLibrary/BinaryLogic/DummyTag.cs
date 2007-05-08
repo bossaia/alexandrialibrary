@@ -1,6 +1,7 @@
 using System;
+using Alexandria.AudioToolsLibrary;
 
-namespace ATL.AudioReaders.BinaryLogic
+namespace Alexandria.AudioToolsLibrary.BinaryLogic
 {
 	/// <summary>
 	/// Dummy metadata provider
