@@ -7,6 +7,6 @@ namespace Alexandria
 	public interface IPlaylistItem
 	{
 		ILocation Location { get;  }
-		IMetadata Metadata { get; }
+		IList<IMetadata> Metadata { get; }
 	}
 }
