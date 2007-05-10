@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface ISeekable : IMedia
 	{
-		MediaSeekingState SeekingState { get; }
+		SeekingState SeekingState { get; }
 		int SeekingSpeed {get;}
 	}
 }

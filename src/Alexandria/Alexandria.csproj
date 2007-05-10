@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
+    <Compile Include="AspectRatio.cs" />
     <Compile Include="BaseAlbum.cs" />
     <Compile Include="BaseArtist.cs" />
     <Compile Include="BaseAudioTrack.cs" />
@@ -82,13 +83,15 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
     <Compile Include="IVideo.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="IAudio.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="PlaybackState.cs" />
     <Compile Include="PluginAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeekingState.cs" />
+    <Compile Include="StreamingState.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>

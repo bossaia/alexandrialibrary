@@ -20,9 +20,9 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Private Fields
-		private MediaStreamingState streamingState = MediaStreamingState.None;
-		private MediaPlaybackState playbackState = MediaPlaybackState.None;
-		private MediaSeekingState seekingState = MediaSeekingState.None;
+		private StreamingState streamingState = StreamingState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		private SeekingState seekingState = SeekingState.None;
 		private bool isSeeking = false;
 		private float bufferLevel;
 		private bool allowsLoad;
@@ -34,19 +34,19 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Public Properties
-		public MediaStreamingState StreamingState
+		public StreamingState StreamingState
 		{
 			get { return streamingState; }
 			set { streamingState = value; }
 		}
 
-		public MediaPlaybackState PlaybackState
+		public PlaybackState PlaybackState
 		{
 			get { return playbackState; }
 			set { playbackState = value; }
 		}
 
-		public MediaSeekingState SeekingState
+		public SeekingState SeekingState
 		{
 			get { return seekingState; }
 			set { seekingState = value; }

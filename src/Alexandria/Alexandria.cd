@@ -414,25 +414,25 @@
       <HashCode>AAAAEAAAAAAAQAAAAAgAAAQAAAAAAAAQAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="Alexandria.MediaStreamingState">
+  <Enum Name="Alexandria.SeekingState">
+    <Position X="12.5" Y="9.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SeekingState.cs</FileName>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAI=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Alexandria.StreamingState">
     <Position X="12.5" Y="6.75" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Enums.cs</FileName>
+      <FileName>StreamingState.cs</FileName>
       <HashCode>AAAAAAAEAAAAAAACAAAAAAAAAQAAAAAAAAAAAAEAAAA=</HashCode>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="Alexandria.MediaPlaybackState">
+  <Enum Name="Alexandria.PlaybackState">
     <Position X="9.5" Y="7.5" Width="1.75" />
     <TypeIdentifier>
-      <FileName>Enums.cs</FileName>
+      <FileName>PlaybackState.cs</FileName>
       <HashCode>AAAgAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAA=</HashCode>
-    </TypeIdentifier>
-  </Enum>
-  <Enum Name="Alexandria.MediaSeekingState">
-    <Position X="12.5" Y="9.75" Width="1.75" />
-    <TypeIdentifier>
-      <FileName>Enums.cs</FileName>
-      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAI=</HashCode>
     </TypeIdentifier>
   </Enum>
 </ClassDiagram>
