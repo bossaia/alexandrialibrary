@@ -822,7 +822,7 @@ namespace Alexandria.Fmod
 		#region IPlayable Members
 
 
-		public MediaPlaybackState PlaybackState
+		public PlaybackState PlaybackState
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

@@ -7,7 +7,7 @@ namespace Alexandria
 	public interface IStreamable : IMedia
 	{
 		float PercentCompleted { get; }
-		MediaStreamingState StreamingState { get; }
+		StreamingState StreamingState { get; }
 		void Connect();
 		void Disconnect();
 	}
