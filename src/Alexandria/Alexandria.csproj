@@ -45,7 +45,6 @@
     <Compile Include="BaseAudioTrack.cs" />
     <Compile Include="BaseMetadata.cs" />
     <Compile Include="IAlbum.cs" />
-    <Compile Include="IArtistFactory.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IAudioCompactDisc.cs" />
     <Compile Include="IAudioRelease.cs" />
