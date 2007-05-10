@@ -48,7 +48,6 @@
     <Compile Include="IArtistFactory.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IAudioCompactDisc.cs" />
-    <Compile Include="IAudioFactory.cs" />
     <Compile Include="IAudioRelease.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="ICapability.cs" />
