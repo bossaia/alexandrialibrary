@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria.AlbumArtDownloader
 {
-	public class AbortedException : Exception
+	public class AlbumArtProvider
 	{
 	}
 }
