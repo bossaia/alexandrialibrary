@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ITagPlugin : IPlugin
+	public interface ITagFactory : IPlugin
 	{
 		IList<ITagPluginCapability> Capabilities { get; }
 		ITagPluginCapability GetCapability<T>() where T : ITag;

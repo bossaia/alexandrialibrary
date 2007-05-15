@@ -52,7 +52,7 @@
     <Compile Include="ICapability.cs" />
     <Compile Include="Identifier.cs" />
     <Compile Include="IMediaPluginCapability.cs" />
-    <Compile Include="IMediaPlugin.cs" />
+    <Compile Include="IMediaFactory.cs" />
     <Compile Include="IMetadataPluginCapability.cs" />
     <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IPluginOptions.cs" />
@@ -67,7 +67,7 @@
     <Compile Include="ILocation.cs" />
     <Compile Include="IMediaContainer.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="IMetadataPlugin.cs" />
+    <Compile Include="IMetadataFactory.cs" />
     <Compile Include="IPlayable.cs" />
     <Compile Include="IPlugin.cs" />
     <Compile Include="IProfile.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="ISearch.cs" />
     <Compile Include="ISong.cs" />
     <Compile Include="IStyle.cs" />
-    <Compile Include="ITagPlugin.cs" />
+    <Compile Include="ITagFactory.cs" />
     <Compile Include="ITagPluginCapability.cs" />
     <Compile Include="IText.cs" />
     <Compile Include="IUser.cs" />

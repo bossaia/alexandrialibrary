@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaPlugin : IPlugin
+	public interface IMediaFactory : IPlugin
 	{
 		IList<IMediaPluginCapability> Capabilities { get; }
 		IMediaPluginCapability GetCapability<T>() where T: IMedia;

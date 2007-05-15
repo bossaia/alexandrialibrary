@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMetadataPlugin : IPlugin
+	public interface IMetadataFactory : IPlugin
 	{
 		IList<IMetadataPluginCapability> Capabilities { get; }
 		IMetadataPluginCapability GetCapability<T>() where T : IMetadata;
