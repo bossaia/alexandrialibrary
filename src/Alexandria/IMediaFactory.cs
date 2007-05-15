@@ -8,7 +8,12 @@ namespace Alexandria
 	{
 		IList<IMediaPluginCapability> Capabilities { get; }
 		IMediaPluginCapability GetCapability<T>() where T: IMedia;
-		T GetMedia<T>(ILocation location) where T: IMedia;
-		IList<IMedia> FindMedia(ISearch search);
+		IMediaPluginCapability GetCapability<T>(IMediaFormat format) where T: IMedia;
+		bool CanCreate<T>() where T: IMedia;
+		bool CanCreate<T>(IMediaFormat format) where T: IMedia;
+		IMedia CreateMedia(ILocation location);
+		IMedia CreateMedia(ILocation location, IMediaFormat format);
+		T CreateMedia<T>(ILocation location) where T: IMedia;
+		T CreateMedia<T>(ILocation location, IMediaFormat format) where T : IMedia;
 	}
 }

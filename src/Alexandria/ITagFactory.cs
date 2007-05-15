@@ -8,7 +8,10 @@ namespace Alexandria
 	{
 		IList<ITagPluginCapability> Capabilities { get; }
 		ITagPluginCapability GetCapability<T>() where T : ITag;
-		T GetTag<T>(ILocation location) where T : ITag;
-		IList<ITag> FindTags(ISearch search);
+		ITagPluginCapability GetCapability<T>(ITagFormat format) where T: ITag;
+		ITag CreateTag(ILocation location);
+		ITag CreateTag(ILocation location, ITagFormat format);
+		T CreateTag<T>(ILocation location) where T : ITag;
+		T CreateTag<T>(ILocation location, ITagFormat format) where T: ITag;
 	}
 }

@@ -11,5 +11,6 @@ namespace Alexandria
 		IList<IImage> Images { get; }
 		IList<IText> Text { get; }
 		IList<ITag> Tags { get; }
+		bool AutoLoadTags { get; set; }
 	}
 }
