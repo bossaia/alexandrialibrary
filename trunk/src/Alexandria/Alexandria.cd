@@ -137,15 +137,15 @@
     <Position X="6.25" Y="4.75" Width="2.25" />
     <TypeIdentifier>
       <FileName>IMediaContainer.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAFAAAAAACAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAQAAFAAAAAACAAAAAg=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="7.984" Y="4.192" />
         <Point X="7.984" Y="4.414" />
         <Point X="6.049" Y="4.414" />
-        <Point X="6.049" Y="4.875" />
-        <Point X="6.25" Y="4.875" />
+        <Point X="6.049" Y="4.887" />
+        <Point X="6.25" Y="4.887" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -342,7 +342,7 @@
     <Position X="3" Y="8" Width="2.75" />
     <TypeIdentifier>
       <FileName>IMediaFactory.cs</FileName>
-      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAABAAAACAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAABABAEAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true" FixedToPoint="true">
       <Path>
@@ -372,15 +372,15 @@
     <Position X="3" Y="10" Width="2.75" />
     <TypeIdentifier>
       <FileName>ITagFactory.cs</FileName>
-      <HashCode>IAAAAAAAEAAAAAAAAAAAAAAAgAAAAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAACA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true">
       <Path>
         <Point X="4.25" Y="3.81" />
         <Point X="4.25" Y="4.49" />
         <Point X="2.918" Y="4.49" />
-        <Point X="2.918" Y="10.906" />
-        <Point X="3" Y="10.906" />
+        <Point X="2.918" Y="10.824" />
+        <Point X="3" Y="10.824" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -388,15 +388,15 @@
     <Position X="3" Y="12" Width="3" />
     <TypeIdentifier>
       <FileName>IMetadataFactory.cs</FileName>
-      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACQAQAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAFAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true">
       <Path>
         <Point X="4.25" Y="3.81" />
         <Point X="4.25" Y="4.51" />
         <Point X="2.918" Y="4.51" />
-        <Point X="2.918" Y="12.906" />
-        <Point X="3" Y="12.906" />
+        <Point X="2.918" Y="12.824" />
+        <Point X="3" Y="12.824" />
       </Path>
     </InheritanceLine>
   </Interface>
