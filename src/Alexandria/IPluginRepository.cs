@@ -6,11 +6,11 @@ namespace Alexandria
 {
 	public interface IPluginRepository : IDisposable
 	{
-		IList<IMediaPlugin> MediaPlugins { get; }
-		IList<ITagPlugin> TagPlugins { get; }
-		IList<IMetadataPlugin> MetadataPlugins { get; }
-		IMediaPlugin GetBestMediaPlugin(IMediaPluginCapability capability, IPluginOptions options);
-		ITagPlugin GetBestTagPlugin(ITagPluginCapability capability, IPluginOptions options);
-		IMetadataPlugin GetBestMetadataPlugin(IMetadataPluginCapability capability, IPluginOptions options);
+		IList<IMediaFactory> MediaPlugins { get; }
+		IList<ITagFactory> TagPlugins { get; }
+		IList<IMetadataFactory> MetadataPlugins { get; }
+		IMediaFactory GetBestMediaPlugin(IMediaPluginCapability capability, IPluginOptions options);
+		ITagFactory GetBestTagPlugin(ITagPluginCapability capability, IPluginOptions options);
+		IMetadataFactory GetBestMetadataPlugin(IMetadataPluginCapability capability, IPluginOptions options);
 	}
 }

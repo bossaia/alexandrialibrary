@@ -338,10 +338,10 @@
       </Path>
     </InheritanceLine>
   </Interface>
-  <Interface Name="Alexandria.IMediaPlugin">
+  <Interface Name="Alexandria.IMediaFactory">
     <Position X="3" Y="8" Width="2.75" />
     <TypeIdentifier>
-      <FileName>IMediaPlugin.cs</FileName>
+      <FileName>IMediaFactory.cs</FileName>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAABAAAACAAgAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true" FixedToPoint="true">
@@ -368,10 +368,10 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Alexandria.ITagPlugin">
+  <Interface Name="Alexandria.ITagFactory">
     <Position X="3" Y="10" Width="2.75" />
     <TypeIdentifier>
-      <FileName>ITagPlugin.cs</FileName>
+      <FileName>ITagFactory.cs</FileName>
       <HashCode>IAAAAAAAEAAAAAAAAAAAAAAAgAAAAAACAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true">
@@ -384,10 +384,10 @@
       </Path>
     </InheritanceLine>
   </Interface>
-  <Interface Name="Alexandria.IMetadataPlugin">
+  <Interface Name="Alexandria.IMetadataFactory">
     <Position X="3" Y="12" Width="3" />
     <TypeIdentifier>
-      <FileName>IMetadataPlugin.cs</FileName>
+      <FileName>IMetadataFactory.cs</FileName>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAACQAQAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IPlugin" ManuallyRouted="true">
