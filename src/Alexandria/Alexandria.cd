@@ -90,7 +90,7 @@
     <Position X="6.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
       <FileName>IMediaFormat.cs</FileName>
-      <HashCode>CAAAAAAAAAAAAAAAAAAAAAQAgAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAQAgAAAgAAAAAAQAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.ILocation">
@@ -430,6 +430,13 @@
     <TypeIdentifier>
       <FileName>ITagable.cs</FileName>
       <HashCode>AAAAAAAAAEAAAAAAAAAAAAEAAAAQAEAAAAAAAAAAAEA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IPlaylistItem">
+    <Position X="6.25" Y="12.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>IPlaylistItem.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Enum Name="Alexandria.SeekingState">
