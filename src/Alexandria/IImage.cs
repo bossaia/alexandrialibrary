@@ -6,6 +6,7 @@ namespace Alexandria
 {
 	public interface IImage : IMedia
 	{
-		IList<byte> Data { get; }
+		//TODO: determine how to abstract this further
+		IList<byte> ImageData { get; }
 	}
 }

@@ -108,10 +108,10 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IImage">
-    <Position X="6.25" Y="8.25" Width="2.25" />
+    <Position X="6.25" Y="8.25" Width="2" />
     <TypeIdentifier>
       <FileName>IImage.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
@@ -170,10 +170,10 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IText">
-    <Position X="6.25" Y="6.75" Width="2.25" />
+    <Position X="6.25" Y="6.75" Width="2" />
     <TypeIdentifier>
       <FileName>IText.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
@@ -201,7 +201,7 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IAudioCompactDisc">
-    <Position X="6.25" Y="9.5" Width="2.25" />
+    <Position X="6.25" Y="9.5" Width="2" />
     <TypeIdentifier>
       <FileName>IAudioCompactDisc.cs</FileName>
       <HashCode>AAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAE=</HashCode>
@@ -362,7 +362,7 @@
     <Position X="3" Y="4.75" Width="2.75" />
     <TypeIdentifier>
       <FileName>IPluginRepository.cs</FileName>
-      <HashCode>AAAAIAgAAAAAAABAAAAAAgAACAAACAACAgAAAAAEAAA=</HashCode>
+      <HashCode>AAUAABgAAAAAAAAAAQABAgAAAAAAAAACAAAABAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IPluginOptions" Collapsed="true">
