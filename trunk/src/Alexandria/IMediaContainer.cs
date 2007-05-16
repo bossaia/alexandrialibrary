@@ -4,13 +4,11 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IMediaContainer : IMedia
+	public interface IMediaContainer : IMedia, ITagable
 	{
 		IList<IAudio> Audio { get; }
 		IList<IVideo> Video { get; }
 		IList<IImage> Images { get; }
 		IList<IText> Text { get; }
-		IList<ITag> Tags { get; }
-		bool AutoLoadTags { get; set; }
 	}
 }
