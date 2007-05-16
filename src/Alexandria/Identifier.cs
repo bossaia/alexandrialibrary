@@ -40,6 +40,26 @@ namespace Alexandria
 		{
 			get { return version; }
 		}
+
+		public IdentificationResult CompareTo(IIdentifier other)
+		{
+			if (other != null)
+			{
+				if (other is Identifier)
+				{
+					if (this.Version.CompareTo(other.Version) == 0)
+					{
+						if ((string.Compare(this.Type, other.Type, true) == 0) && (string.Compare(this.Value, other.Value, true) == 0) && (this.Version.CompareTo(other.Version) == 0))
+							return IdentificationResult.Match;
+						else
+							return IdentificationResult.IdMismatch;
+					}
+					else return IdentificationResult.VersionMismatch;
+				}
+				else return IdentificationResult.TypeMismatch;
+			}
+			else return IdentificationResult.None;
+		}
 		#endregion
 		
 		#region Public Static Properties
@@ -52,21 +72,6 @@ namespace Alexandria
 			
 				return none;
 			}
-		}
-		#endregion
-
-		#region IComparable<IIdentifier> Members
-		public int CompareTo(IIdentifier other)
-		{
-			if (other != null && other is Identifier)
-			{
-				if ((string.Compare(this.Type, other.Type, true) == 0) && (string.Compare(this.Value, other.Value, true) == 0) && (this.Version.CompareTo(other.Version) == 0))
-					return 0;
-				else
-					return -1;
-			}
-			
-			return int.MinValue;
 		}
 		#endregion
 	}

@@ -44,20 +44,25 @@ namespace Alexandria.MusicDns
 		{
 			get { return version; }
 		}
-		#endregion
 
-		#region IComparable<IIdentifier> Members
-		public int CompareTo(IIdentifier other)
+		public IdentificationResult CompareTo(IIdentifier other)
 		{
-			if (other != null && other is Puid)
+			if (other != null)
 			{
-				if (this.Value == other.Value)
-					return 0;
-				else
-					return -1;
+				if (other is Puid)
+				{
+					if (this.Version.CompareTo(other.Version) == 0)
+					{
+						if ((string.Compare(this.Type, other.Type, true) == 0) && (string.Compare(this.Value, other.Value, true) == 0) && (this.Version.CompareTo(other.Version) == 0))
+							return IdentificationResult.Match;
+						else
+							return IdentificationResult.IdMismatch;
+					}
+					else return IdentificationResult.VersionMismatch;
+				}
+				else return IdentificationResult.TypeMismatch;
 			}
-			
-			return int.MinValue;
+			else return IdentificationResult.None;
 		}
 		#endregion
 	}

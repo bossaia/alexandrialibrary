@@ -8,5 +8,7 @@ namespace Alexandria
 	{
 		SeekingState SeekingState { get; }
 		int SeekingSpeed {get;}
+		void Seek(SeekingState direction);
+		void Seek(SeekingState direction, int speed);
 	}
 }
