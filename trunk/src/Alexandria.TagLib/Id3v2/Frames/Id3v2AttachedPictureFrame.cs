@@ -22,6 +22,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Alexandria;
 
 namespace Alexandria.TagLib
@@ -254,7 +255,7 @@ namespace Alexandria.TagLib
 		{
 		}
 		
-		System.Collections.Generic.IList<byte> IImage.Data
+		public IList<byte> ImageData
 		{
 			get { return data.Data; }
 		}
