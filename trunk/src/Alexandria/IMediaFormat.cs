@@ -10,6 +10,7 @@ namespace Alexandria
 		string Name { get; }
 		IList<ContentType> ContentTypes { get; }
 		IList<string> FileExtensions { get; }
-		Encoding Encoding { get; }		
+		Encoding Encoding { get; }
+		bool IsCompatibleWith(IMediaFormat other);
 	}
 }
