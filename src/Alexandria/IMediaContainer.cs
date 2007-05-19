@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface IMediaContainer : IMedia, ITagable
 	{
-		IList<IAudible> Audio { get; }
+		IList<IAudio> Audio { get; }
 		IList<IVideo> Video { get; }
 		IList<IImage> Images { get; }
 		IList<IText> Text { get; }

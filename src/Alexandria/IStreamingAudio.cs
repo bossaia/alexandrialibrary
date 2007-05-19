@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IVideo : IMedia, IAudible, IPlayable, IVisible
-	{		
+	public interface IStreamingAudio: IAudio, IStreaming, IHasDuration, IHasElapsed
+	{
 	}
 }

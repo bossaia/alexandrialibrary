@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IImage : IMedia
-	{
-		//TODO: determine how to abstract this further
-		IList<byte> ImageData { get; }
+	public interface IImage : IMedia, IVisible
+	{		
+		//IList<byte> ImageData { get; }
+		System.Drawing.Image Image { get; }
 	}
 }
