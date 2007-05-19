@@ -4,11 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IStreamable : IMedia
+	public interface IStreamable
 	{
 		float PercentCompleted { get; }
 		StreamingState StreamingState { get; }
-		void Connect();
-		void Disconnect();
 	}
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IPlayable : IMedia
+	public interface IPlayable
 	{
 		PlaybackState PlaybackState { get; }
 		void Play();

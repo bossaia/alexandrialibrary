@@ -4,4 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
+	public enum PositionType
+	{
+		None = 0,
+		Absolute,
+		Relative
+	}
 }

@@ -5,7 +5,7 @@ using System.Text;
 namespace Alexandria
 {
 	[CLSCompliant(false)]
-	public interface IAudio : IPlayable
+	public interface IAudible
 	{
 		float Volume{ get; }
 		void SetVolume(float value);

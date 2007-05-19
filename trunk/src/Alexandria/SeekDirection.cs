@@ -7,7 +7,7 @@ namespace Alexandria
 	/// <summary>
 	/// The current seeking state of a media resource
 	/// </summary>
-	public enum SeekingState
+	public enum SeekDirection
 	{
 		None,
 		Backward,

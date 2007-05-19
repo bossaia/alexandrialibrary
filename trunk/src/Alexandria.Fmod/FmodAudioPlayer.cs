@@ -16,12 +16,12 @@ namespace Alexandria.Fmod
 		private Channel channel;
 		private SoundSystem soundSystem;
 		private Sound currentAudio;
-		private bool currentSoundIsCreated;
-		private bool currentSoundIsStreaming;
+		//private bool currentSoundIsCreated;
+		//private bool currentSoundIsStreaming;
 		private System.Timers.Timer timer;
 		private DateTime soundLoadStart = DateTime.MinValue;
 		//private PlaybackStatus status;
-		private string streamingStatus;				
+		//private string streamingStatus;				
 		private static Sound ripSound;
 		private static Channel ripChannel;
 		private static FileStream ripFileStream;
@@ -269,7 +269,7 @@ namespace Alexandria.Fmod
 		
 		#region Public Properties
 		[CLSCompliant(false)]
-		public IAudio CurrentAudio
+		public IAudible CurrentAudio
 		{
 			get {return currentAudio;}
 		}
@@ -493,6 +493,7 @@ namespace Alexandria.Fmod
 		{
 		}
 		
+		[CLSCompliant(false)]
 		public void Seek(bool forward, uint length)
 		{
 		}
@@ -616,8 +617,7 @@ namespace Alexandria.Fmod
 		#region Stream Save Methods
 		
 		#region SaveStreamToLocalFile
-		/*
-		public override void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath)
+		public void SaveStreamToLocalFile(string sourceFilePath, string destinationFilePath)
 		{
 			System.Diagnostics.Debug.WriteLine("SaveStreamToLocalFile");
 		
@@ -656,7 +656,6 @@ namespace Alexandria.Fmod
 				throw new AlexandriaException("There was an error saving this stream to a local file: " + ripSound.CurrentResult.ToString(), ex);
 			}
 		}
-		*/
 		#endregion
 
 		#region SaveStreamToLocalFile Events
