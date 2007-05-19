@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface IVideo : IMedia, IAudible, IPlayable, IVisible
-	{		
+	public enum BufferState
+	{
+		None = 0,
+		Healthy,
+		Starving
 	}
 }

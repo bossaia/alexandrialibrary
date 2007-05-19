@@ -110,9 +110,32 @@ namespace Alexandria.TagLib
 		{
 		}
 		
-		public IList<byte> ImageData
+		public System.Drawing.Image Image
 		{
-			get { return data.Data; }
+			//TODO: finish implementing this
+			get { return null; }
+		}
+		#endregion
+
+		#region IVisible
+		public float Hue
+		{
+			get { return 0f; }
+		}
+
+		public float Saturation
+		{
+			get { return 0f; }
+		}
+
+		public float Brightness
+		{
+			get { return 0f; }
+		}
+
+		public float Contrast
+		{
+			get { return 0f; }
 		}
 		#endregion
 

@@ -10,6 +10,6 @@ namespace Alexandria
 		string Name { get; }
 		IList<ContentType> ContentTypes { get; }
 		IList<string> FileExtensions { get; }		
-		bool IsCompatibleWith(IMediaFormat other);
+		//bool IsCompatibleWith(IMediaFormat other);
 	}
 }

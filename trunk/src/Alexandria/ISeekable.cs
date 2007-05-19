@@ -4,12 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ISeekable
+	public interface ISeekable : ISeekableBackward, ISeekableForward
 	{
-		bool IsSeeking { get; }
-		SeekDirection SeekDirection { get; }
-		int SeekSpeed {get;}
-		void Seek(SeekDirection direction);
-		void Seek(SeekDirection direction, int speed);
 	}
 }

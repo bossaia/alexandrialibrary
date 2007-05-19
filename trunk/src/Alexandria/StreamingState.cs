@@ -11,7 +11,6 @@ namespace Alexandria
 	{
 		None = 0,
 		Connecting,
-		Streaming,
-		Starving
+		Streaming
 	}
 }
