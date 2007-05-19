@@ -422,6 +422,14 @@
         <Point X="10.75" Y="13" />
       </Path>
     </InheritanceLine>
+    <InheritanceLine Type="Alexandria.IStreaming" FixedFromPoint="true">
+      <Path>
+        <Point X="13" Y="5.351" />
+        <Point X="13" Y="12.808" />
+        <Point X="10.75" Y="12.808" />
+        <Point X="10.75" Y="13" />
+      </Path>
+    </InheritanceLine>
   </Interface>
   <Enum Name="Alexandria.SeekDirection">
     <Position X="13.25" Y="7.75" Width="1.25" />
