@@ -4,11 +4,12 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ISeekable : IMedia
+	public interface ISeekable
 	{
-		SeekingState SeekingState { get; }
-		int SeekingSpeed {get;}
-		void Seek(SeekingState direction);
-		void Seek(SeekingState direction, int speed);
+		bool IsSeeking { get; }
+		SeekDirection SeekDirection { get; }
+		int SeekSpeed {get;}
+		void Seek(SeekDirection direction);
+		void Seek(SeekDirection direction, int speed);
 	}
 }

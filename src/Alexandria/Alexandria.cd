@@ -33,19 +33,12 @@
       </Path>
     </InheritanceLine>
   </Interface>
-  <Interface Name="Alexandria.IAudio">
-    <Position X="9.25" Y="9" Width="2" />
+  <Interface Name="Alexandria.IAudible">
+    <Position X="9.25" Y="8.25" Width="2" />
     <TypeIdentifier>
-      <FileName>IAudio.cs</FileName>
+      <FileName>IAudible.cs</FileName>
       <HashCode>AQAAAAAAAAAAAAAACAAAAgAAAAAAAACAAAIAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IPlayable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="9.112" Y="6.726" />
-        <Point X="9.112" Y="9.111" />
-        <Point X="9.25" Y="9.111" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.ISong">
     <Position X="0.5" Y="9.5" Width="2" />
@@ -108,7 +101,7 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IImage">
-    <Position X="6.25" Y="8.25" Width="2" />
+    <Position X="6.25" Y="8" Width="2" />
     <TypeIdentifier>
       <FileName>IImage.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -118,8 +111,8 @@
         <Point X="7.5" Y="4.192" />
         <Point X="7.5" Y="4.424" />
         <Point X="6.028" Y="4.424" />
-        <Point X="6.028" Y="8.438" />
-        <Point X="6.25" Y="8.438" />
+        <Point X="6.028" Y="8.188" />
+        <Point X="6.25" Y="8.188" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -155,20 +148,6 @@
       </Path>
     </InheritanceLine>
   </Interface>
-  <Interface Name="Alexandria.IVideo">
-    <Position X="9.25" Y="11.25" Width="2" />
-    <TypeIdentifier>
-      <FileName>IVideo.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IPlayable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="9.112" Y="6.726" />
-        <Point X="9.112" Y="11.375" />
-        <Point X="9.25" Y="11.375" />
-      </Path>
-    </InheritanceLine>
-  </Interface>
   <Interface Name="Alexandria.IText">
     <Position X="6.25" Y="6.75" Width="2" />
     <TypeIdentifier>
@@ -191,30 +170,6 @@
       <FileName>IPlayable.cs</FileName>
       <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAACAAAAAAoAAAAAgAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.192" />
-        <Point X="7.5" Y="4.427" />
-        <Point X="10.125" Y="4.427" />
-        <Point X="10.125" Y="4.75" />
-      </Path>
-    </InheritanceLine>
-  </Interface>
-  <Interface Name="Alexandria.IAudioCompactDisc">
-    <Position X="6.25" Y="9.5" Width="2" />
-    <TypeIdentifier>
-      <FileName>IAudioCompactDisc.cs</FileName>
-      <HashCode>AAAAAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAABAAAAAAE=</HashCode>
-    </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.192" />
-        <Point X="7.5" Y="4.422" />
-        <Point X="6.081" Y="4.422" />
-        <Point X="6.081" Y="9.625" />
-        <Point X="6.25" Y="9.625" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IGenre" Collapsed="true">
     <Position X="0.5" Y="11" Width="2" />
@@ -233,7 +188,7 @@
     </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IPlaylist">
-    <Position X="6.25" Y="11.25" Width="2.25" />
+    <Position X="6.25" Y="9.25" Width="2.25" />
     <TypeIdentifier>
       <FileName>IPlaylist.cs</FileName>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -243,8 +198,8 @@
         <Point X="7.5" Y="4.192" />
         <Point X="7.5" Y="4.387" />
         <Point X="6.06" Y="4.387" />
-        <Point X="6.06" Y="11.375" />
-        <Point X="6.25" Y="11.375" />
+        <Point X="6.06" Y="9.375" />
+        <Point X="6.25" Y="9.375" />
       </Path>
     </InheritanceLine>
   </Interface>
@@ -298,33 +253,15 @@
     <Position X="11.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>IStreamable.cs</FileName>
-      <HashCode>AAQAAAAAAAAAAAAAAAEAAIAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.192" />
-        <Point X="7.5" Y="4.422" />
-        <Point X="11.479" Y="4.422" />
-        <Point X="11.479" Y="5" />
-        <Point X="11.75" Y="5" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.ISeekable">
-    <Position X="11.75" Y="8.25" Width="2.5" />
+    <Position X="11.75" Y="7.75" Width="2.5" />
     <TypeIdentifier>
       <FileName>ISeekable.cs</FileName>
-      <HashCode>AAAAgAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAABAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IMedia" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="7.5" Y="4.192" />
-        <Point X="7.5" Y="4.427" />
-        <Point X="11.49" Y="4.427" />
-        <Point X="11.49" Y="8.413" />
-        <Point X="11.75" Y="8.413" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.ISearch" Collapsed="true">
     <Position X="0.5" Y="13.25" Width="2" />
@@ -332,15 +269,6 @@
       <FileName>ISearch.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IMetadata" ManuallyRouted="true">
-      <Path>
-        <Point X="1.25" Y="3.81" />
-        <Point X="1.25" Y="4.158" />
-        <Point X="0.418" Y="4.158" />
-        <Point X="0.418" Y="13.565" />
-        <Point X="0.5" Y="13.565" />
-      </Path>
-    </InheritanceLine>
   </Interface>
   <Interface Name="Alexandria.IMediaFactory">
     <Position X="3" Y="8.25" Width="2.75" />
@@ -418,13 +346,6 @@
       <HashCode>AAAAEAAAAAAAQAAAAAgAAAQAAAAAAAAQAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="Alexandria.ITemporal">
-    <Position X="11.75" Y="11.25" Width="2.5" />
-    <TypeIdentifier>
-      <FileName>ITemporal.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAAABAAAAAAgAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="Alexandria.ITagable">
     <Position X="12" Y="0.5" Width="1.5" />
     <TypeIdentifier>
@@ -433,31 +354,59 @@
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IPlaylistItem">
-    <Position X="6.25" Y="12.5" Width="2.25" />
+    <Position X="6.25" Y="10.5" Width="2.25" />
     <TypeIdentifier>
       <FileName>IPlaylistItem.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="Alexandria.SeekingState">
-    <Position X="12.5" Y="10" Width="1.75" />
+  <Interface Name="Alexandria.IHasDuration">
+    <Position X="11.75" Y="11" Width="2.5" />
     <TypeIdentifier>
-      <FileName>SeekingState.cs</FileName>
+      <FileName>IHasDuration.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IHasElapsed">
+    <Position X="11.75" Y="12.25" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>IHasElapsed.cs</FileName>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Alexandria.IPositionable">
+    <Position X="11.75" Y="13.5" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>IPositionable.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Alexandria.SeekDirection">
+    <Position X="12.5" Y="9.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>SeekDirection.cs</FileName>
       <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAI=</HashCode>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Alexandria.StreamingState">
-    <Position X="12.5" Y="6.75" Width="1.75" />
+    <Position X="12.5" Y="6.25" Width="1.75" />
     <TypeIdentifier>
       <FileName>StreamingState.cs</FileName>
       <HashCode>AAAAAAAEAAAAAAACAAAAAAAAAQAAAAAAAAAAAAEAAAA=</HashCode>
     </TypeIdentifier>
   </Enum>
   <Enum Name="Alexandria.PlaybackState">
-    <Position X="9.5" Y="7.5" Width="1.75" />
+    <Position X="9.5" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <FileName>PlaybackState.cs</FileName>
       <HashCode>AAAgAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAAEAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Alexandria.PositionType">
+    <Position X="12.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>PositionType.cs</FileName>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAAAA=</HashCode>
     </TypeIdentifier>
   </Enum>
 </ClassDiagram>

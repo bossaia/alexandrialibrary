@@ -1416,9 +1416,9 @@ namespace Alexandria.Fmod
 			else throw new ArgumentNullException("sound");
 		}
 		
-		public CompactDiscSound CreateCompactDiscSound(IAudioCompactDisc disc)
+		public CompactDiscSound CreateCompactDiscSound(ILocation location)
 		{
-			if (disc != null)
+			if (location != null)
 			{
 				currentResult = Result.Ok;
 				IntPtr soundHandle = new IntPtr();
@@ -1426,7 +1426,7 @@ namespace Alexandria.Fmod
 
 				try
 				{
-					currentResult = NativeMethods.FMOD_System_CreateSound(handle, disc.Location.Path, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
+					currentResult = NativeMethods.FMOD_System_CreateSound(handle, location.Path, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
 					//currentResult = FMOD_System_CreateSound(handle, driveName, (Mode.Hardware | Mode.Fmod2D | Mode.IgnoreTags), 0, ref soundHandle);
 				}
 				catch (System.Runtime.InteropServices.ExternalException)
@@ -1436,7 +1436,7 @@ namespace Alexandria.Fmod
 
 				if (currentResult == Result.Ok)
 				{
-					sound = new CompactDiscSound(this, disc);
+					sound = new CompactDiscSound(this, location);
 					sound.Handle = soundHandle;
 				}
 				else throw new AlexandriaException("could not create compact disc sound: " + currentResult.ToString());

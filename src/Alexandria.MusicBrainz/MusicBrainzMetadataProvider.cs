@@ -201,18 +201,18 @@ namespace Alexandria.MusicBrainz
 		#region Private Static Methods
 		
 		#region LookupCd
-		private static IAlbum ReadCompactDisc(IAudioCompactDisc disc)
+		private static IAlbum ReadCompactDisc(ILocation location)
 		{
 			IAlbum album = null;
 			
-			if (disc != null)
+			if (location != null)
 			{							
 				try
 				{
-					Debug.WriteLine("Drive Name:" + disc.Location.Path);
+					Debug.WriteLine("Drive Name:" + location.Path);
 				
 					//"/dev/hdc" or D:
-					string driveName = disc.Location.Path;
+					string driveName = location.Path;
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);
@@ -297,9 +297,9 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region IAlbumFactory Members
-		public IAlbum GetAlbum(IAudioCompactDisc disc)
+		public IAlbum GetAlbum(ILocation location)
 		{
-			return ReadCompactDisc(disc);
+			return ReadCompactDisc(location);
 		}
 
 		public IAlbum GetAlbum(ISearch albumSearch)

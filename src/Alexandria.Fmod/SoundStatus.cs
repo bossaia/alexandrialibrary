@@ -22,7 +22,7 @@ namespace Alexandria.Fmod
 		#region Private Fields
 		private StreamingState streamingState = StreamingState.None;
 		private PlaybackState playbackState = PlaybackState.None;
-		private SeekingState seekingState = SeekingState.None;
+		private SeekDirection seekDirection = SeekDirection.None;
 		private bool isSeeking = false;
 		private float bufferLevel;
 		private bool allowsLoad;
@@ -46,10 +46,10 @@ namespace Alexandria.Fmod
 			set { playbackState = value; }
 		}
 
-		public SeekingState SeekingState
+		public SeekDirection SeekDirection
 		{
-			get { return seekingState; }
-			set { seekingState = value; }
+			get { return seekDirection; }
+			set { seekDirection = value; }
 		}
 
 		public bool IsSeeking

@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Alexandria
 {
-	public interface ITemporal : IMedia
+	public interface IPositionable
 	{
-		TimeSpan Length { get; }
-		TimeSpan Position { get; }
 		void SetPosition(TimeSpan position);
+		void SetPosition(TimeSpan position, PositionType type);
 	}
 }

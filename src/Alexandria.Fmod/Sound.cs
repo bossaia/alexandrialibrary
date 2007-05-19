@@ -11,7 +11,7 @@ using Alexandria;
 namespace Alexandria.Fmod
 {
 	//[SoundClass]
-	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudio
+	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudible
 	{
 		#region Constructors
 		/// <summary>
@@ -32,17 +32,17 @@ namespace Alexandria.Fmod
 			}
 		}
 		
-		public Sound(SoundSystem soundSystem, IAudioCompactDisc disc)
+		public Sound(SoundSystem soundSystem, ILocation location)
 		{
 			this.soundSystem = soundSystem;
-			if (disc != null)
-			{
+			//if (disc != null)
+			//{
 				//mediaFile = new MediaFile(disc.Uri.AbsolutePath, true);
 				//if (this.mediaFile.IsLocal)
 				status = LocalSoundNotLoaded.Example;
 				//else
 				//status = RemoteSoundNotReady.Example;
-			}
+			//}
 		}
 		
 		/// <summary>
@@ -741,6 +741,7 @@ namespace Alexandria.Fmod
 		public IMediaFormat Format
 		{
 			get { return this.format; }
+			set { this.format = value; }
 		}
 		#endregion
 

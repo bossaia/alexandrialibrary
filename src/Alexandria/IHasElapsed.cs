@@ -4,4 +4,8 @@ using System.Text;
 
 namespace Alexandria
 {
+	public interface IHasElapsed
+	{
+		TimeSpan Elapsed { get; }
+	}
 }
