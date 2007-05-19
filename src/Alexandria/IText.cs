@@ -7,5 +7,6 @@ namespace Alexandria
 	public interface IText : IMedia
 	{		
 		IList<byte> TextData { get; }
+		Encoding Encoding { get; }
 	}
 }
