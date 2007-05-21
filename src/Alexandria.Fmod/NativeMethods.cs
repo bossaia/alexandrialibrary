@@ -13,9 +13,9 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_Stop(IntPtr channelHandle);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_SetPaused(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]bool paused);
+		internal static extern Result FMOD_Channel_SetPaused(IntPtr channelHandle, bool paused);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_GetPaused(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]ref bool paused);
+		internal static extern Result FMOD_Channel_GetPaused(IntPtr channelHandle, ref bool paused);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_SetVolume(IntPtr channelHandle, float volume);
 		[DllImport(Constants.DllName)]
@@ -41,9 +41,9 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_GetSpeakerLevels(IntPtr channelHandle, SpeakerPosition speakerPosition, [MarshalAs(UnmanagedType.LPArray)]float[] levels, int numlevels);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_SetMute(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]bool mute);
+		internal static extern Result FMOD_Channel_SetMute(IntPtr channelHandle, bool mute);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_GetMute(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]ref bool mute);
+		internal static extern Result FMOD_Channel_GetMute(IntPtr channelHandle, ref bool mute);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_SetPriority(IntPtr channelHandle, int priority);
 		[DllImport(Constants.DllName)]
@@ -77,9 +77,9 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_GetChannelGroup(IntPtr channelHandle, ref IntPtr channelGroupHandle);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_IsPlaying(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]ref bool isPlaying);
+		internal static extern Result FMOD_Channel_IsPlaying(IntPtr channelHandle, ref bool isPlaying);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Channel_IsVirtual(IntPtr channelHandle, [MarshalAs(UnmanagedType.U1)]ref bool isVirtual);
+		internal static extern Result FMOD_Channel_IsVirtual(IntPtr channelHandle, ref bool isVirtual);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Channel_GetAudibility(IntPtr channelHandle, ref float audibility);
 		[DllImport(Constants.DllName)]
@@ -132,7 +132,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_ChannelGroup_Stop(IntPtr channelGroupHandle);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_ChannelGroup_OverridePaused(IntPtr channelGroupHandle, [MarshalAs(UnmanagedType.U1)]bool paused);
+		internal static extern Result FMOD_ChannelGroup_OverridePaused(IntPtr channelGroupHandle, bool paused);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_ChannelGroup_OverrideVolume(IntPtr channelGroupHandle, float volume);
 		[DllImport(Constants.DllName)]
@@ -140,7 +140,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_ChannelGroup_OverridePan(IntPtr channelGroupHandle, float pan);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_ChannelGroup_OverrideMute(IntPtr channelGroupHandle, [MarshalAs(UnmanagedType.U1)]bool mute);
+		internal static extern Result FMOD_ChannelGroup_OverrideMute(IntPtr channelGroupHandle, bool mute);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_ChannelGroup_OverrideReverbProperties(IntPtr channelGroupHandle, ref ReverbChannelProperties properties);
 		[DllImport(Constants.DllName)]
@@ -195,17 +195,17 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_GetInputMix(IntPtr dspHandle, int index, ref float volume);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_DSP_SetActive(IntPtr dspHandle, [MarshalAs(UnmanagedType.U1)]bool active);
+		internal static extern Result FMOD_DSP_SetActive(IntPtr dspHandle, bool active);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_DSP_GetActive(IntPtr dspHandle, [MarshalAs(UnmanagedType.U1)]ref bool active);
+		internal static extern Result FMOD_DSP_GetActive(IntPtr dspHandle, ref bool active);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_SetInputLevels(IntPtr dspHandle, int index, Speaker speaker, float[] levels, int numberOfLevels);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_GetInputLevels(IntPtr dspHandle, int index, Speaker speaker, float[] levels, int numberOfLevels);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_DSP_SetBypass(IntPtr dspHandle, [MarshalAs(UnmanagedType.U1)]bool bypass);
+		internal static extern Result FMOD_DSP_SetBypass(IntPtr dspHandle, bool bypass);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_DSP_GetBypass(IntPtr dspHandle, [MarshalAs(UnmanagedType.U1)]ref bool bypass);
+		internal static extern Result FMOD_DSP_GetBypass(IntPtr dspHandle, ref bool bypass);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_Reset(IntPtr dspHandle);
 		[DllImport(Constants.DllName)]
@@ -217,7 +217,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_GetNumParameters(IntPtr dspHandle, ref int numberOfParameters);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_DSP_ShowConfigDialog(IntPtr dspHandle, IntPtr windowHandle, [MarshalAs(UnmanagedType.U1)]bool show);
+		internal static extern Result FMOD_DSP_ShowConfigDialog(IntPtr dspHandle, IntPtr windowHandle, bool show);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_DSP_GetInfo(IntPtr dspHandle, StringBuilder name, ref uint Version, ref int channels, ref int configwidth, ref int configheight);
 		[DllImport(Constants.DllName)]
@@ -238,7 +238,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Geometry_Release(IntPtr geometry);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Geometry_AddPolygon(IntPtr geometry, float directOcclusion, float reverbOcclusion, [MarshalAs(UnmanagedType.U1)]bool doubleSided, int numVertices, [MarshalAs(UnmanagedType.LPArray)]Vector[] vertices, ref int polygonIndex);
+		internal static extern Result FMOD_Geometry_AddPolygon(IntPtr geometry, float directOcclusion, float reverbOcclusion, bool doubleSided, int numVertices, [MarshalAs(UnmanagedType.LPArray)]Vector[] vertices, ref int polygonIndex);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Geometry_GetNumPolygons(IntPtr geometry, ref int numPolygons);
 		[DllImport(Constants.DllName)]
@@ -250,15 +250,15 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Geometry_GetPolygonVertex(IntPtr geometry, int polygonIndex, int vertexIndex, ref Vector vertex);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Geometry_SetPolygonAttributes(IntPtr geometry, int polygonIndex, float directOcclusion, float reverbOcclusion, [MarshalAs(UnmanagedType.U1)]bool doubleSided);
+		internal static extern Result FMOD_Geometry_SetPolygonAttributes(IntPtr geometry, int polygonIndex, float directOcclusion, float reverbOcclusion, bool doubleSided);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Geometry_GetPolygonAttributes(IntPtr geometry, int polygonIndex, ref float directOcclusion, ref float reverbOcclusion, [MarshalAs(UnmanagedType.U1)]ref bool doubleSided);
+		internal static extern Result FMOD_Geometry_GetPolygonAttributes(IntPtr geometry, int polygonIndex, ref float directOcclusion, ref float reverbOcclusion, ref bool doubleSided);
 		//[DllImport(Constants.DllName)]
 		//internal static extern Result FMOD_Geometry_Flush(IntPtr geometry); //An entry point for this does not exist in the DLL
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Geometry_SetActive(IntPtr gemoetry, [MarshalAs(UnmanagedType.U1)]bool active);
+		internal static extern Result FMOD_Geometry_SetActive(IntPtr gemoetry, bool active);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Geometry_GetActive(IntPtr gemoetry, [MarshalAs(UnmanagedType.U1)]ref bool active);
+		internal static extern Result FMOD_Geometry_GetActive(IntPtr gemoetry, ref bool active);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Geometry_SetRotation(IntPtr geometry, ref Vector forward, ref Vector up);
 		[DllImport(Constants.DllName)]
@@ -319,7 +319,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_GetTag(IntPtr soundHandle, string name, int index, ref Tag tag);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Sound_GetOpenState(IntPtr soundHandle, ref OpenState openState, ref uint percentBuffered, [MarshalAs(UnmanagedType.U1)]ref bool starving);
+		internal static extern Result FMOD_Sound_GetOpenState(IntPtr soundHandle, ref OpenState openState, ref uint percentBuffered, ref bool starving);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_ReadData(IntPtr soundHandle, IntPtr bufferHandle, uint lengthBytes, ref uint readBytes);
 		[DllImport(Constants.DllName)]
@@ -470,9 +470,9 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_CreateChannelGroup(IntPtr systemHandle, string name, ref IntPtr channelGroupHandle);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_System_PlaySound(IntPtr systemHandle, ChannelIndex channelId, IntPtr soundHandle, [MarshalAs(UnmanagedType.U1)]bool paused, ref IntPtr channelHandle);
+		internal static extern Result FMOD_System_PlaySound(IntPtr systemHandle, ChannelIndex channelId, IntPtr soundHandle, bool paused, ref IntPtr channelHandle);
 		[DllImport(Constants.DllName)]
-		public static extern Result FMOD_System_PlayDSP(IntPtr systemHandle, ChannelIndex channelId, IntPtr dspHandle, [MarshalAs(UnmanagedType.U1)]bool paused, ref IntPtr channelHandle);
+		public static extern Result FMOD_System_PlayDSP(IntPtr systemHandle, ChannelIndex channelId, IntPtr dspHandle, bool paused, ref IntPtr channelHandle);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_GetChannel(IntPtr systemHandle, int channelId, ref IntPtr channelHandle);
 		[DllImport(Constants.DllName)]
@@ -500,11 +500,11 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_GetRecordPosition(IntPtr systemHandle, ref uint position);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_System_RecordStart(IntPtr systemHandle, IntPtr sound, [MarshalAs(UnmanagedType.U1)]bool loop);
+		internal static extern Result FMOD_System_RecordStart(IntPtr systemHandle, IntPtr sound, bool loop);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_RecordStop(IntPtr systemHandle);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_System_IsRecording(IntPtr systemHandle, [MarshalAs(UnmanagedType.U1)]ref bool isRecording);
+		internal static extern Result FMOD_System_IsRecording(IntPtr systemHandle, ref bool isRecording);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_System_CreateGeometry(IntPtr systemHandle, int maximumPolygons, int maximumVertices, ref IntPtr geometry);
 		[DllImport(Constants.DllName)]
