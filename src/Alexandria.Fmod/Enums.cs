@@ -489,7 +489,7 @@ namespace Alexandria.Fmod
 	}
 	#endregion
 
-	#region SoundType
+	#region FmodSoundType
 	/*
 	[ENUM]
 	[
@@ -505,7 +505,7 @@ namespace Alexandria.Fmod
 	Sound::getFormat
 	]
 	*/
-	public enum SoundType
+	public enum FmodSoundType
 	{
 		Unknown,         /* 3rd party / unknown plugin format. */
 		Aac,             /* AAC.  Currently unsupported. */
@@ -516,7 +516,7 @@ namespace Alexandria.Fmod
 		Dls,             /* Sound font / downloadable sound bank. */
 		Flac,            /* FLAC lossless codec. */
 		Fsb,             /* FMOD Sample Bank. */
-		GameCubeAdpcm,         /* GameCube ADPCM */
+		GameCubeAdpcm,   /* GameCube ADPCM */
 		IT,              /* Impulse Tracker. */
 		Midi,            /* MIDI. */
 		Mod,             /* Protracker / Fasttracker MOD. */

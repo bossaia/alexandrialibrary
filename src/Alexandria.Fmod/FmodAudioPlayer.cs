@@ -27,7 +27,7 @@ namespace Alexandria.Fmod
 		private static FileStream ripFileStream;
 		private static string ripSourceFileName;
 		private static string ripDestinationFileName;
-		private static SoundType ripSoundType = SoundType.Unknown;
+		private static FmodSoundType ripSoundType = FmodSoundType.Unknown;
 		private static bool ripUpdateFileName;
 		private static string ripTrackArtist = string.Empty;
 		private static string ripTrackTitle = string.Empty;
@@ -267,13 +267,7 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Public Properties
-		[CLSCompliant(false)]
-		public IAudible CurrentAudio
-		{
-			get {return currentAudio;}
-		}
-		
+		#region Public Properties		
 		public bool IsMuted
 		{
 			get
@@ -386,7 +380,7 @@ namespace Alexandria.Fmod
 				currentSoundIsStreaming = false;
 				//currentSound = soundSystem.CreateStream(mediaFile.Path, Modes.None);
 				soundSystem.CreateStream(currentAudio, mediaFile.Path, Modes.None);
-				//SoundType t = currentSound.Type;
+				//FmodSoundType t = currentSound.Type;
 				//Result x = soundSystem.CurrentResult;				
 			}
 			else
@@ -835,12 +829,12 @@ namespace Alexandria.Fmod
 
 					switch (ripSoundType)
 					{
-						case SoundType.Mpeg:       /* MP2/MP3 */
+						case FmodSoundType.Mpeg:       /* MP2/MP3 */
 							{
 								ext = ".mp3";
 								break;
 							}
-						case SoundType.OggVorbis:  /* Ogg vorbis */
+						case FmodSoundType.OggVorbis:  /* Ogg vorbis */
 							{
 								ext = ".ogg";
 								break;

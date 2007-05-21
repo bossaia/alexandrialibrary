@@ -8,68 +8,80 @@ namespace Alexandria.Fmod
 	public class SoundFormat : IMediaFormat
 	{
 		#region Constructors
-		public SoundFormat(FmodSoundFormat fmodSoundFormat, SoundType soundType)
+		public SoundFormat(FmodSoundFormat fmodSoundFormat, FmodSoundType fmodSoundType)
 		{
 			this.fmodSoundFormat = fmodSoundFormat;
-			this.soundType = soundType;
+			this.fmodSoundType = fmodSoundType;
 			
-			switch(soundType)
+			switch(fmodSoundType)
 			{
-				case SoundType.Aac:
-					name = "Advanced Audio Codec";
+				case FmodSoundType.Aac:
+					name = "AAC";
+					description = "Advanced Audio Codec";
 					contentTypes.Add(new ContentType("audio/aac"));
 					contentTypes.Add(new ContentType("audio/m4a"));
 					fileExtensions.Add("aac");
 					fileExtensions.Add("m4a");
 					break;
-				case SoundType.Aiff:
+				case FmodSoundType.Aiff:
 					break;
-				case SoundType.Asf:
+				case FmodSoundType.Asf:
 					break;
-				case SoundType.At3:
+				case FmodSoundType.At3:
 					break;
-				case SoundType.Cdda:
+				case FmodSoundType.Cdda:
 					name = "CDDA";
+					description = "Compact Disc Digital Audio";
 					break;
-				case SoundType.Dls:
+				case FmodSoundType.Dls:
 					break;
-				case SoundType.Flac:
+				case FmodSoundType.Flac:
+					name = "FLAC";
+					description = "Free Lossless Audio Codec";
+					contentTypes.Add(new ContentType("audio/flac"));
+					fileExtensions.Add("flac");
 					break;
-				case SoundType.Fsb:
+				case FmodSoundType.Fsb:
 					break;
-				case SoundType.GameCubeAdpcm:
+				case FmodSoundType.GameCubeAdpcm:
 					break;
-				case SoundType.IT:
+				case FmodSoundType.IT:
 					break;
-				case SoundType.Midi:
+				case FmodSoundType.Midi:
 					break;
-				case SoundType.Mod:
+				case FmodSoundType.Mod:
 					break;
-				case SoundType.Mpeg:
-					name = "MPEG III layer I";
+				case FmodSoundType.Mpeg:
+					name = "MP3";
+					description = "MPEG III Layer I";
 					contentTypes.Add(new ContentType("audio/mp3"));
 					fileExtensions.Add("mp3");
 					break;
-				case SoundType.OggVorbis:
-					name = "Ogg Vorbis";
-					contentTypes.Add(new ContentType("application/ogg"));
+				case FmodSoundType.OggVorbis:
+					name = "Vorbis";
+					description = "Ogg Vorbis";
+					contentTypes.Add(new ContentType("audio/vorbis"));
 					fileExtensions.Add("ogg");
 					break;
-				case SoundType.Playlist:
+				case FmodSoundType.Playlist:
 					break;
-				case SoundType.Raw:
+				case FmodSoundType.Raw:
 					break;
-				case SoundType.S3m:
+				case FmodSoundType.S3m:
 					break;
-				case SoundType.Sf2:
+				case FmodSoundType.Sf2:
 					break;
-				case SoundType.Vag:
+				case FmodSoundType.Vag:
 					break;
-				case SoundType.Wav:
+				case FmodSoundType.Wav:
+					name = "WAV";
+					description = "PCM Wave Audio";
+					contentTypes.Add(new ContentType("audio/wav"));
+					fileExtensions.Add("wav");
 					break;
-				case SoundType.XM:
+				case FmodSoundType.XM:
 					break;
-				case SoundType.Xma:
+				case FmodSoundType.Xma:
 					break;
 				default:
 					break;
@@ -79,8 +91,9 @@ namespace Alexandria.Fmod
 		
 		#region Private Fields
 		private FmodSoundFormat fmodSoundFormat = FmodSoundFormat.None;
-		private SoundType soundType = SoundType.Unknown;
+		private FmodSoundType fmodSoundType = FmodSoundType.Unknown;
 		private string name;
+		private string description;
 		private List<System.Net.Mime.ContentType> contentTypes = new List<System.Net.Mime.ContentType>();
 		private List<string> fileExtensions = new List<string>();
 		#endregion
@@ -89,6 +102,11 @@ namespace Alexandria.Fmod
 		public IList<System.Net.Mime.ContentType> ContentTypes
 		{
 			get { return contentTypes; }
+		}
+
+		public string Description
+		{
+			get { return description; }
 		}
 
 		public IList<string> FileExtensions

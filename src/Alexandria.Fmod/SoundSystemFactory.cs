@@ -23,7 +23,7 @@ namespace Alexandria.Fmod
 			get
 			{
 				if (defaultSoundSystem == null)
-					defaultSoundSystem = CreateSoundSystem(true, 10);
+					defaultSoundSystem = CreateSoundSystem(true, 64);
 					
 				return defaultSoundSystem;
 			}

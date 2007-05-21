@@ -11,7 +11,7 @@ using Alexandria;
 namespace Alexandria.Fmod
 {
 	//[SoundClass]
-	public class Sound : IDisposable,ILoopable,IRangeTarget,IHasDefault,IAudible
+	public class Sound : IDisposable,ILoopable,IRangeTarget,IHasDefault
 	{
 		#region Constructors
 		/// <summary>
@@ -125,7 +125,7 @@ namespace Alexandria.Fmod
 		private SoundVariation soundVariation;
 		private Range range;
 		private TimeUnits lengthUnit = TimeUnits.Millisecond;
-		private SoundType type = SoundType.Unknown;
+		private FmodSoundType fmodSoundType = FmodSoundType.Unknown;
 		private FmodSoundFormat fmodSoundFormat = FmodSoundFormat.None;
 		private int numberOfChannels;
 		private int numberOfBitsPerSample;
@@ -144,11 +144,6 @@ namespace Alexandria.Fmod
 		#endregion
 		
 		#region Internal Properties
-		internal SoundType SoundType
-		{
-			get { return SoundType; }
-		}
-		
 		internal TimeSpan Duration
 		{
 			get
@@ -165,22 +160,22 @@ namespace Alexandria.Fmod
 		#endregion
 		
 		#region Internal Methods
-		internal void StartPlayback()
+		internal void Play()
 		{
 			this.soundSystem.PlaySound(ChannelIndex.Free, this, false, ref channel);
 		}
 
-		internal void PausePlayback()
+		internal void Pause()
 		{
 			this.channel.Paused = true;
 		}
 
-		internal void ResumePlayback()
+		internal void Resume()
 		{
 			this.channel.Paused = false;
 		}
 
-		internal void StopPlayback()
+		internal void Stop()
 		{
 			this.channel.Stop();
 		}
@@ -356,12 +351,12 @@ namespace Alexandria.Fmod
 		#endregion
 		
 		#region Type
-		public SoundType Type
+		public FmodSoundType FmodSoundType
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
-				return type;				
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref fmodSoundType, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
+				return fmodSoundType;				
 			}
 		}
 		#endregion
@@ -371,7 +366,7 @@ namespace Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref fmodSoundType, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return fmodSoundFormat;
 			}
 		}
@@ -382,7 +377,7 @@ namespace Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref fmodSoundType, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return numberOfChannels;
 			}
 		}
@@ -393,7 +388,7 @@ namespace Alexandria.Fmod
 		{
 			get
 			{
-				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref type, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
+				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref fmodSoundType, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
 				return numberOfBitsPerSample;
 			}
 		}
@@ -526,12 +521,12 @@ namespace Alexandria.Fmod
 		/// <summary>
 		/// Get the current position of the sound in milliseconds
 		/// </summary>
-		[CLSCompliant(false)]
-		public uint FmodPosition
-		{
-			get { return this.channel.Position; }
-			set { this.channel.Position = value; }
-		}
+		//[CLSCompliant(false)]
+		//public uint FmodPosition
+		//{
+			//get { return this.channel.Position; }
+			//set { this.channel.Position = value; }
+		//}
 		#endregion
 				
 		#region NumberOfTags
@@ -598,6 +593,7 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 
+		/*
 		#region Play
 		public void Play()
 		{
@@ -621,6 +617,7 @@ namespace Alexandria.Fmod
 		{
 		}
 		#endregion
+		*/
 
 		#region Read
 		/// <summary>
@@ -843,13 +840,10 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region IPlayable Members
-
-
 		public PlaybackState PlaybackState
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
-
 		#endregion
 	}
 }
