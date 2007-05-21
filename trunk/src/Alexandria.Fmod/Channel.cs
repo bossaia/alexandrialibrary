@@ -175,6 +175,7 @@ namespace Alexandria.Fmod
 			{
 				paused = value;
 				currentResult = NativeMethods.FMOD_Channel_SetPaused(handle, paused);
+				Result r = currentResult;
 			}
 		}
 		#endregion

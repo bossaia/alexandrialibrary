@@ -87,6 +87,10 @@
       <Project>{FA920B97-91DA-45DA-B482-A1357AAAA9F0}</Project>
       <Name>Alexandria.FileTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
+      <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
+      <Name>Alexandria.Fmod</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
       <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
       <Name>Alexandria.Imdb</Name>

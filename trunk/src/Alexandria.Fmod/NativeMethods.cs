@@ -311,7 +311,7 @@ namespace Alexandria.Fmod
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_GetLength(IntPtr soundHandle, ref uint length, TimeUnits lengthType);
 		[DllImport(Constants.DllName)]
-		internal static extern Result FMOD_Sound_GetFormat(IntPtr soundHandle, ref SoundType type, ref FmodSoundFormat format, ref int channels, ref int bits);
+		internal static extern Result FMOD_Sound_GetFormat(IntPtr soundHandle, ref FmodSoundType type, ref FmodSoundFormat format, ref int channels, ref int bits);
 		[DllImport(Constants.DllName)]
 		internal static extern Result FMOD_Sound_GetNumSubSounds(IntPtr soundHandle, ref int numberOfSubSounds);
 		[DllImport(Constants.DllName)]

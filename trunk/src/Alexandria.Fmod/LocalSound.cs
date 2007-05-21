@@ -30,9 +30,6 @@ namespace Alexandria.Fmod
 				{
 					this.sound.Dispose();
 					this.sound = null;
-				
-					this.channel.Dispose();
-					this.channel = null;
 				}				
 			}
 			disposed = true;
@@ -51,7 +48,6 @@ namespace Alexandria.Fmod
 	
 		#region Private Fields
 		private Sound sound;
-		private Channel channel = new Channel();
 		
 		private bool disposed;
 		
@@ -68,11 +64,11 @@ namespace Alexandria.Fmod
 		#region Private Methods
 		private void RefreshPlaybackState()
 		{
-			if (this.channel != null)
+			if (this.sound.Channel != null)
 			{
-				if (this.channel.IsPlaying)
+				if (this.sound.Channel.IsPlaying)
 				{
-					if (this.channel.Paused)
+					if (this.sound.Channel.Paused)
 						playbackState = PlaybackState.Paused;
 					else playbackState = PlaybackState.Playing;
 				}
@@ -97,13 +93,9 @@ namespace Alexandria.Fmod
 		{
 			if (sound == null)
 			{
-				if (location != null)
-				{
-					sound = new Sound(SoundSystemFactory.DefaultSoundSystem, location);
-					format = new SoundFormat(sound.FmodSoundFormat, sound.SoundType);
-					duration = sound.Duration;
-				}
-				else throw new InvalidOperationException("Could not load this sound: location undefined");
+				sound = SoundSystemFactory.DefaultSoundSystem.CreateStream(location.Path, Modes.None);
+				format = new SoundFormat(sound.FmodSoundFormat, sound.FmodSoundType);
+				duration = sound.Duration;
 			}
 		}
 
@@ -116,41 +108,40 @@ namespace Alexandria.Fmod
 		#region IAudible Members
 		public bool IsMuted
 		{
-			get { return channel.Mute; }
+			get { return this.sound.Channel.Mute; }
 		}
 
 		public void Mute()
 		{
-			this.channel.Mute = true;
+			this.sound.Channel.Mute = true;
 		}
 
 		public void SetVolume(float volume)
 		{
-			this.channel.Volume = volume;
+			this.sound.Channel.Volume = volume;
 		}
 
 		public void Unmute()
 		{
-			this.channel.Mute = false;
+			this.sound.Channel.Mute = false;
 		}
 
 		public float Volume
 		{
-			get { return channel.Volume; }
+			get { return this.sound.Channel.Volume; }
 		}
-
 		#endregion
 
 		#region IPlayable Members
 		public void Pause()
 		{
-			this.channel.Paused = true;
+			this.sound.Pause();
 			RefreshPlaybackState();
 		}
 
 		public void Play()
 		{
-			SoundSystemFactory.DefaultSoundSystem.PlaySound(ChannelIndex.Free, sound, false, ref channel);
+			this.sound.Play();
 			RefreshPlaybackState();
 		}
 
@@ -161,13 +152,13 @@ namespace Alexandria.Fmod
 
 		public void Resume()
 		{
-			this.channel.Paused = false;
+			this.sound.Resume();
 			RefreshPlaybackState();
 		}
 
 		public void Stop()
 		{
-			this.channel.Stop();
+			this.sound.Stop();
 			RefreshPlaybackState();
 		}
 		#endregion
@@ -232,14 +223,14 @@ namespace Alexandria.Fmod
 		#region IHasElapsed Members
 		public TimeSpan GetElapsed()
 		{			
-			return new TimeSpan(0, 0, 0, 0, (int)channel.Position);
+			return new TimeSpan(0, 0, 0, 0, (int)this.sound.Channel.Position);
 		}
 		#endregion
 
 		#region IPositionable Members
 		public void SetAbsolutePosition(TimeSpan position)
 		{
-			this.channel.Position = (uint)position.Milliseconds;
+			this.sound.Channel.Position = (uint)position.Milliseconds;
 			throw new Exception("The method or operation is not implemented.");
 		}
 
