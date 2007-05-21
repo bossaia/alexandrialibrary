@@ -5,7 +5,7 @@ using System.Text;
 namespace Alexandria.Fmod
 {	
 	[CLSCompliant(false)]
-	public interface ILoopTarget
+	public interface ILoopable
 	{
 		[CLSCompliant(false)]
 		SoundLoop Loop{get;set;}

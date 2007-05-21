@@ -140,7 +140,7 @@
     </TypeIdentifier>
     <InheritanceLine Type="Alexandria.ISeekableBackward" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="0.75" Y="12.692" />
+        <Point X="0.75" Y="12.856" />
         <Point X="0.75" Y="14.328" />
         <Point X="3.125" Y="14.328" />
         <Point X="3.125" Y="14.028" />
@@ -264,28 +264,28 @@
     <Position X="9.75" Y="14.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>IHasElapsed.cs</FileName>
-      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IPositionable">
     <Position X="5.25" Y="14.5" Width="1.75" />
     <TypeIdentifier>
       <FileName>IPositionable.cs</FileName>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAEAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.ISeekableBackward">
     <Position X="0.5" Y="11" Width="2" />
     <TypeIdentifier>
       <FileName>ISeekableBackward.cs</FileName>
-      <HashCode>AAAAIAAAAABAAAAAAAAABAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAABAAAAAAAAIBAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.ISeekableForward">
     <Position X="0.5" Y="14.5" Width="2" />
     <TypeIdentifier>
       <FileName>ISeekableForward.cs</FileName>
-      <HashCode>AAAAIAAAAABAAAAAAAAAAEAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAIAAAAABAAAAAAAAIAEAAAAAAgAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Interface>
   <Interface Name="Alexandria.IBuffered">
@@ -324,19 +324,19 @@
       <FileName>IAudio.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IPlayable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="5.516" Y="10.106" />
-        <Point X="5.516" Y="11.938" />
-        <Point X="6.25" Y="11.938" />
-      </Path>
-    </InheritanceLine>
     <InheritanceLine Type="Alexandria.IMedia" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="8" Y="3.692" />
         <Point X="8" Y="4.132" />
         <Point X="6.028" Y="4.132" />
         <Point X="6.028" Y="11.938" />
+        <Point X="6.25" Y="11.938" />
+      </Path>
+    </InheritanceLine>
+    <InheritanceLine Type="Alexandria.IPlayable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.516" Y="10.106" />
+        <Point X="5.516" Y="11.938" />
         <Point X="6.25" Y="11.938" />
       </Path>
     </InheritanceLine>
@@ -347,13 +347,13 @@
       <FileName>IVideo.cs</FileName>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
-    <InheritanceLine Type="Alexandria.IVisible" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IMedia" FixedToPoint="true">
       <Path>
-        <Point X="8.75" Y="10.187" />
-        <Point X="8.524" Y="10.187" />
-        <Point X="8.524" Y="10.615" />
-        <Point X="8" Y="10.615" />
-        <Point X="8" Y="10.713" />
+        <Point X="8" Y="3.692" />
+        <Point X="8" Y="4.132" />
+        <Point X="6.028" Y="4.132" />
+        <Point X="6.028" Y="10.642" />
+        <Point X="6.25" Y="10.642" />
       </Path>
     </InheritanceLine>
     <InheritanceLine Type="Alexandria.IPlayable" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
@@ -365,13 +365,13 @@
         <Point X="6.25" Y="11.069" />
       </Path>
     </InheritanceLine>
-    <InheritanceLine Type="Alexandria.IMedia" FixedToPoint="true">
+    <InheritanceLine Type="Alexandria.IVisible" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
-        <Point X="8" Y="3.692" />
-        <Point X="8" Y="4.132" />
-        <Point X="6.028" Y="4.132" />
-        <Point X="6.028" Y="10.642" />
-        <Point X="6.25" Y="10.642" />
+        <Point X="8.75" Y="10.187" />
+        <Point X="8.524" Y="10.187" />
+        <Point X="8.524" Y="10.615" />
+        <Point X="8" Y="10.615" />
+        <Point X="8" Y="10.713" />
       </Path>
     </InheritanceLine>
   </Interface>

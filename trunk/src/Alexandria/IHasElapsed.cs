@@ -6,6 +6,6 @@ namespace Alexandria
 {
 	public interface IHasElapsed
 	{
-		TimeSpan Elapsed { get; }
+		TimeSpan GetElapsed();
 	}
 }

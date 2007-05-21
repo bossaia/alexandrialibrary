@@ -11,7 +11,7 @@ using Alexandria;
 namespace Alexandria.Fmod
 {
 	//[SoundClass]
-	public class Sound : IDisposable,ILoopTarget,IRangeTarget,IHasDefault,IAudible
+	public class Sound : IDisposable,ILoopable,IRangeTarget,IHasDefault,IAudible
 	{
 		#region Constructors
 		/// <summary>
@@ -140,6 +140,28 @@ namespace Alexandria.Fmod
 		private Uri uri; //MediaFile mediaFile;
 		private bool disposed;
 		SoundStatus status;
+		private TimeSpan duration = TimeSpan.Zero;
+		#endregion
+		
+		#region Internal Properties
+		internal SoundType SoundType
+		{
+			get { return SoundType; }
+		}
+		
+		internal TimeSpan Duration
+		{
+			get
+			{
+				if (duration == TimeSpan.Zero)
+				{
+					LengthUnit = TimeUnits.Millisecond;
+					duration = new TimeSpan(0, 0, 0, 0, (int)Milliseconds);
+				}
+				
+				return duration;
+			}
+		}
 		#endregion
 		
 		#region Internal Methods
@@ -536,7 +558,7 @@ namespace Alexandria.Fmod
 				return numberOfUpdatedTags;
 			}
 		}
-		#endregion
+		#endregion				
 		
 		#endregion
 

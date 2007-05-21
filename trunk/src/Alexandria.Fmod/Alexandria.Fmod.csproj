@@ -7,8 +7,8 @@
     <ProjectGuid>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Fmod</RootNamespace>
-    <AssemblyName>AlexandriaFmod</AssemblyName>
+    <RootNamespace>Alexandria.Fmod</RootNamespace>
+    <AssemblyName>Alexandria.Fmod</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,14 +57,16 @@
     <Compile Include="FmodError.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="IHasDefault.cs" />
-    <Compile Include="ILoopTarget.cs" />
+    <Compile Include="ILoopable.cs" />
     <Compile Include="InputDsp.cs" />
     <Compile Include="InputDspCollection.cs" />
     <Compile Include="IRangeTarget.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="ListenerCollection.cs" />
+    <Compile Include="LocalSound.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
+    <Compile Include="SoundFormat.cs" />
     <Compile Include="SoundLoop.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="OpticalDrive.cs" />

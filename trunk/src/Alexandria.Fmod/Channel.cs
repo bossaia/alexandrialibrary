@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Fmod
 {
-	public class Channel : ILoopTarget,IDisposable
+	public class Channel : ILoopable,IDisposable
 	{		
 		#region Constructors
 		public Channel()
