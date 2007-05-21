@@ -45,6 +45,7 @@
     <Compile Include="BaseAudioTrack.cs" />
     <Compile Include="BaseMetadata.cs" />
     <Compile Include="BufferState.cs" />
+    <Compile Include="GuidIdentifier.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IAudio.cs" />

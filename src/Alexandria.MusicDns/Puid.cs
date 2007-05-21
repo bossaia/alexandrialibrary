@@ -19,7 +19,6 @@ namespace Alexandria.MusicDns
 		{
 			this.value = value;
 			this.type = MusicDnsIdType.MusicDnsId;
-			this.version = version;
 		}		
 		#endregion
 

@@ -9,12 +9,24 @@ namespace Alexandria.Fmod
 	{		
 		#region Private static fields
 		private static Result currentResult = Result.Ok;
+		private static SoundSystem defaultSoundSystem;
 		#endregion
 		
 		#region Public static properties
 		public static Result CurrentResult
 		{
 			get {return currentResult;}
+		}
+		
+		public static SoundSystem DefaultSoundSystem
+		{
+			get
+			{
+				if (defaultSoundSystem == null)
+					defaultSoundSystem = CreateSoundSystem(true, 10);
+					
+				return defaultSoundSystem;
+			}
 		}
 		#endregion
 		

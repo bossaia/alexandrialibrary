@@ -83,7 +83,7 @@ namespace Alexandria.TagLib
 		private string description;
 		private ByteVector data;
 		private Guid guid = Guid.NewGuid();
-		private Uri uri;
+		//private Uri uri;
 		private IMediaFormat resourceFormat;
 		#endregion
 		

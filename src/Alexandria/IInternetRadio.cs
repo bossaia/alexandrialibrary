@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
+	[CLSCompliant(false)]
 	public interface IInternetRadio : IAudio, IStreaming, IHasElapsed
 	{
 	}

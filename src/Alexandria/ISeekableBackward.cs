@@ -11,5 +11,6 @@ namespace Alexandria
 		int SeekSpeed { get; }
 		void SeekBackward();
 		void SeekBackward(int seekSpeed);
+		void StopSeeking();
 	}
 }

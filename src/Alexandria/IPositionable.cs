@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface IPositionable
 	{
-		void SetPosition(TimeSpan position);
-		void SetPosition(TimeSpan position, PositionType type);
+		void SetAbsolutePosition(TimeSpan position);
+		void SetRelativePosition(TimeSpan position);
 	}
 }
