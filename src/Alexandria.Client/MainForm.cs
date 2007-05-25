@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using Alexandria;
 using Alexandria.Client.Properties;
+using Alexandria.LastFM;
 
 namespace Alexandria.Client
 {
@@ -33,6 +34,30 @@ namespace Alexandria.Client
 			}
 		}
 		#endregion
+
+		protected override void OnLoad(EventArgs e)
+		{
+			try
+			{
+				IAudioscrobblerTrack track = new AudioscrobblerTrack();
+				track.AlbumName = "Undertow";
+				track.ArtistName = "Tool";
+				track.TrackName = "Sober";
+				track.MusicBrainzID = "0dfaa81e-9326-4eff-9604-c20d1c613227";
+				track.TrackPlayed = DateTime.Now - new TimeSpan(0, 2, 4);
+				track.TrackLength = new TimeSpan(0, 5, 6).Milliseconds;
+				AudioscrobblerRequest request = new AudioscrobblerRequest();
+				request.Username = "uberweasel";
+				request.Password = "automatic";
+				//request.SubmitTrack(track);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "LastFM error");
+			}
+						
+			base.OnLoad(e);
+		}
 		
 		#region Private Event Methods
 		private void PlayPauseButton_Click(object sender, EventArgs e)
