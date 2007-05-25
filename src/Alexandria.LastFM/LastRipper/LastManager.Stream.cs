@@ -19,7 +19,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace Alexandria.LastFM.LastManager
+namespace Alexandria.LastFM.LastRipper
 {
 	/*
 	This part of the class handles all stream related matters.
