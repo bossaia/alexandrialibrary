@@ -20,7 +20,7 @@ using System.Net;
 using System.IO;
 using System.Text;
 
-namespace Alexandria.LastFM.LastManager
+namespace Alexandria.LastFM.LastRipper
 {
 	/*
 	This part of the LastManager class contains all MetaInfo related logic.

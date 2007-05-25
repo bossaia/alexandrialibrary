@@ -21,7 +21,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 
-namespace Alexandria.LastFM.LastManager
+namespace Alexandria.LastFM.LastRipper
 {
 
 	///<summary>
