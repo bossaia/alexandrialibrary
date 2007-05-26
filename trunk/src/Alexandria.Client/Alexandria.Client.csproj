@@ -99,9 +99,9 @@
       <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
       <Name>Alexandria.LastFM</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Pandora\Alexandria.Pandora.csproj">
-      <Project>{9C611D67-417B-4382-8531-7A9D9633E609}</Project>
-      <Name>Alexandria.Pandora</Name>
+    <ProjectReference Include="..\Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
+      <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>
+      <Name>Alexandria.Mp3Tunes</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
       <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>

@@ -484,7 +484,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Alexandria.PositionType">
-    <Position X="3.5" Y="14.5" Width="1.25" />
+    <Position X="3.75" Y="14.5" Width="1.25" />
     <TypeIdentifier>
       <FileName>PositionType.cs</FileName>
       <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEAAAA=</HashCode>

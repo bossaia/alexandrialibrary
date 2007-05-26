@@ -41,7 +41,7 @@ namespace Alexandria
 			get { return version; }
 		}
 
-		public IdentificationResult CompareTo(IIdentifier other)
+		public virtual IdentificationResult CompareTo(IIdentifier other)
 		{
 			if (other != null)
 			{

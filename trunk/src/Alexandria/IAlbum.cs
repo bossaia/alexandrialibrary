@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface IAlbum : IMetadata
 	{		
-		IArtist Artist { get; }
+		string Artist { get; }
 		DateTime ReleaseDate { get; }
 		IList<IAudioTrack> Tracks { get; }
 	}
