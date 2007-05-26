@@ -7,7 +7,7 @@ namespace Alexandria
 	public abstract class BaseAlbum : BaseMetadata, IAlbum
 	{
 		#region Constructors
-		public BaseAlbum(IIdentifier id, ILocation location, string name, IArtist artist, DateTime releaseDate) : base(id, location, name)
+		public BaseAlbum(IIdentifier id, ILocation location, string name, string artist, DateTime releaseDate) : base(id, location, name)
 		{
 			this.artist = artist;
 			this.releaseDate = releaseDate;
@@ -15,7 +15,7 @@ namespace Alexandria
 		#endregion
 		
 		#region Private Fields
-		private IArtist artist;
+		private string artist;
 		private DateTime releaseDate = DateTime.MinValue;
 		private List<IAudioTrack> tracks = new List<IAudioTrack>();
 		#endregion
@@ -24,7 +24,7 @@ namespace Alexandria
 		/// <summary>
 		/// Get the Artist credited with this album
 		/// </summary>
-		public IArtist Artist
+		public string Artist
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
