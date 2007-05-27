@@ -15,7 +15,7 @@ namespace Alexandria.Client
 {
 	public partial class MainForm : Form
 	{
-		private ILocalAudio audio;
+		private Fmod.LocalSound audio;
 	
 		#region Constructors
 		public MainForm()
@@ -115,14 +115,35 @@ namespace Alexandria.Client
 				MessageBox.Show(ex.Message, "LastFM error");
 			}
 		}
+		
+		private void TestFMOD()
+		{
+			audio = new Fmod.LocalSound(@"C:\Dev\Testing\Dael.OGG");
+			audio.Load();
+			audio.Play();		
+		}
+		
+		private void TestMusicDNS()
+		{
+			Location location = new Location(@"D:\working\Tests\AudioTest\08 Only.wav");
+			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
+			IAudioTrack track = factory.CreateAudioTrack(location);
+			string puid = track.Id.Value;
+		}
 		#endregion
 		
 		#region Private Event Methods
 		private void PlayPauseButton_Click(object sender, EventArgs e)
-		{
- 			audio = new Fmod.LocalSound(@"C:\Dev\Testing\Dael.OGG");
- 			audio.Load();
- 			audio.Play();
+		{	
+			try
+			{
+				//TestFMOD();
+				TestMusicDNS();
+ 			}
+ 			catch (Exception ex)
+ 			{
+ 				string a = ex.Message;
+ 			} 			
 		}
 
 		void StopButton_Click(object sender, EventArgs e)

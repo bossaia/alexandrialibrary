@@ -103,6 +103,10 @@
       <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>
       <Name>Alexandria.Mp3Tunes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MusicDns\Alexandria.MusicDns.csproj">
+      <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
+      <Name>Alexandria.MusicDns</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
       <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>
       <Name>Alexandria.SQLite</Name>

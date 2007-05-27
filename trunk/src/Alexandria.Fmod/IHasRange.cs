@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria.Fmod
 {
-	public interface IRangeTarget
+	public interface IHasRange
 	{
 		Range Range{get;set;}
 	}

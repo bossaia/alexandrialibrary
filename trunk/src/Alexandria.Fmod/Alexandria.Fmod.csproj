@@ -60,7 +60,7 @@
     <Compile Include="ILoopable.cs" />
     <Compile Include="InputDsp.cs" />
     <Compile Include="InputDspCollection.cs" />
-    <Compile Include="IRangeTarget.cs" />
+    <Compile Include="IHasRange.cs" />
     <Compile Include="Listener.cs" />
     <Compile Include="ListenerCollection.cs" />
     <Compile Include="LocalSound.cs" />

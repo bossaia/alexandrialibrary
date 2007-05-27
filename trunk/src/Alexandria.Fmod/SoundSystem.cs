@@ -1314,7 +1314,7 @@ namespace Alexandria.Fmod
 		}
 		*/
 		
-		public void CreateSound(string filePath, Modes mode, Sound sound)
+		internal void CreateSound(string filePath, Modes mode, Sound sound)
 		{
 			if (sound != null)
 			{
@@ -1390,7 +1390,7 @@ namespace Alexandria.Fmod
 		}
 		*/
 
-		public void CreateSound(Sound sound, string filePath, Modes mode)
+		internal void CreateSound(Sound sound, string filePath, Modes mode)
 		{
 			if (sound != null)
 			{
@@ -1416,7 +1416,7 @@ namespace Alexandria.Fmod
 			else throw new ArgumentNullException("sound");
 		}
 		
-		public CompactDiscSound CreateCompactDiscSound(ILocation location)
+		internal CompactDiscSound CreateCompactDiscSound(ILocation location)
 		{
 			if (location != null)
 			{
@@ -1454,7 +1454,7 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region CreateStream
-		public Sound CreateStream(string filePath, Modes mode, ref CreateSoundExtendedInfo info)
+		internal Sound CreateStream(string filePath, Modes mode, ref CreateSoundExtendedInfo info)
 		{
 			currentResult = Result.Ok;
 			IntPtr soundHandle = new IntPtr();
@@ -1480,7 +1480,7 @@ namespace Alexandria.Fmod
 			return sound;
 		}
 
-		public Sound CreateStream(Sound sound, byte[] data, Modes mode, ref CreateSoundExtendedInfo info)
+		internal Sound CreateStream(Sound sound, byte[] data, Modes mode, ref CreateSoundExtendedInfo info)
 		{
 			if (sound != null)
 			{
@@ -1508,7 +1508,7 @@ namespace Alexandria.Fmod
 			else throw new ArgumentNullException("sound");
 		}
 
-		public Sound CreateStream(string filePath, Modes mode)
+		internal Sound CreateStream(string filePath, Modes mode)
 		{
 			currentResult = Result.Ok;
 			IntPtr soundHandle = new IntPtr();
@@ -1534,7 +1534,7 @@ namespace Alexandria.Fmod
 			return sound;
 		}
 		
-		public void CreateStream(Sound sound, string filePath, Modes mode)
+		internal void CreateStream(Sound sound, string filePath, Modes mode)
 		{
 			if (sound != null)
 			{
@@ -1672,7 +1672,7 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region PlaySound
-		public void PlaySound(ChannelIndex channelId, Sound sound, bool paused, ref Channel channel)
+		internal void PlaySound(ChannelIndex channelId, Sound sound, bool paused, ref Channel channel)
 		{
 			if (sound != null)
 			{
@@ -1818,7 +1818,7 @@ namespace Alexandria.Fmod
 		/// </summary>
 		/// <param name="sound">The sound to store input audio data to</param>
 		/// <param name="loop">Indicates whether or not to loop recording to the beginning of the sound once the end of the sound is reached</param>
-		public void RecordStart(Sound sound, bool loop)
+		internal void RecordStart(Sound sound, bool loop)
 		{
 			if (sound != null)
 			{

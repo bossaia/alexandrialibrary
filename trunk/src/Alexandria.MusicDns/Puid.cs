@@ -19,13 +19,21 @@ namespace Alexandria.MusicDns
 		{
 			this.value = value;
 			this.type = MusicDnsIdType.MusicDnsId;
-		}		
+			this.version = new Version(1, 0, 0, 0);
+		}
+		
+		public Puid(Guid value, Version version)
+		{
+			this.value = value;
+			this.type = MusicDnsIdType.MusicDnsId;
+			this.version = version;
+		}
 		#endregion
 
 		#region Private Fields
 		private Guid value;
 		private MusicDnsIdType type;
-		private readonly Version version = new Version(1, 0, 0, 0);
+		private Version version;		
 		#endregion
 
 		#region IIdentifier Members
@@ -63,6 +71,6 @@ namespace Alexandria.MusicDns
 			}
 			else return IdentificationResult.None;
 		}
-		#endregion
+		#endregion		
 	}
 }
