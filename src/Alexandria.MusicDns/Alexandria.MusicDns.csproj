@@ -38,7 +38,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>metadata.xsd</DependentUpon>
     </Compile>
-    <Compile Include="PuidFactory.cs" />
+    <Compile Include="MetadataFactory.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Puid.cs" />
