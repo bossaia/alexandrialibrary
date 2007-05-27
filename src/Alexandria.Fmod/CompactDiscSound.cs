@@ -5,20 +5,12 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {
-	public class CompactDiscSound : Sound
+	internal class CompactDiscSound : Sound
 	{
 		#region Constructors
-		public CompactDiscSound(SoundSystem soundSystem, ILocation location) : base(soundSystem, location)
+		internal CompactDiscSound(SoundSystem soundSystem, ILocation location) : base(soundSystem, location)
 		{
 		}
-		#endregion
-	
-		#region ICompactDiscSound Members
-		//[CLSCompliant(false)]
-		//public SortedList<uint, ISound> Tracks
-		//{
-			//get { return SubSounds.Items; }
-		//}
 		#endregion
 	}
 }

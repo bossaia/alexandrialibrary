@@ -123,6 +123,5 @@ namespace Alexandria.MusicBrainz
 		[DllImport("musicbrainz")]
 		internal static extern void mb_SetDebug(IntPtr handle, int debug);
 		#endregion
-
 	}
 }

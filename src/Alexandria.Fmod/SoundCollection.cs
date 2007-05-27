@@ -6,10 +6,10 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {	
-	public class SoundCollection : IEnumerable<Sound>
+	internal class SoundCollection : IEnumerable<Sound>
 	{
 		#region Contructors
-		public SoundCollection(Sound parentSound, bool initialize)
+		internal SoundCollection(Sound parentSound, bool initialize)
 		{
 			this.parentSound = parentSound;
 
@@ -24,24 +24,24 @@ namespace Alexandria.Fmod
 		private int totalCount;
 		#endregion
 				
-		#region Public Properties
+		#region Internal Properties
 		
 		#region ParentSound
-		public Sound ParentSound
+		internal Sound ParentSound
 		{
 			get {return parentSound;}
 		}
 		#endregion
 		
 		#region CurrentResult
-		public Result CurrentResult
+		internal Result CurrentResult
 		{
 			get {return currentResult;}
 		}
 		#endregion
 		
 		#region Count
-		public int Count
+		internal int Count
 		{
 			get {return subSounds.Count;}
 		}
@@ -49,10 +49,10 @@ namespace Alexandria.Fmod
 		
 		#endregion
 		
-		#region Public Methods
+		#region Internal Methods
 		
 		#region Refresh
-		public void Refresh()
+		internal void Refresh()
 		{
 			currentResult = NativeMethods.FMOD_Sound_GetNumSubSounds(parentSound.Handle, ref totalCount);
 			
@@ -74,8 +74,7 @@ namespace Alexandria.Fmod
 		#endregion
 		
 		#region SetSubSound
-		[CLSCompliant(false)]
-		public void SetSubSound(uint index, Sound subSound)
+		internal void SetSubSound(uint index, Sound subSound)
 		{
 			if (index > 0 && index <= subSounds.Count)
 			{
@@ -83,10 +82,7 @@ namespace Alexandria.Fmod
 				currentResult = NativeMethods.FMOD_Sound_SetSubSound(parentSound.Handle, (int)index - 1, subSoundHandle);
 				subSounds[index] = subSound;
 			}
-			else
-			{
-				//TODO: handle invalid index
-			}
+			//TODO: handle invalid index on else			
 		}
 		#endregion
 		
@@ -95,7 +91,7 @@ namespace Alexandria.Fmod
 		/// For any sound that has subsounds, this function will determine the order of playback of these subsounds, and it will play / stitch together the subsounds without gaps.
 		/// </summary>
 		/// <remarks>This is a very useful feature for those users wanting to do seamless / gapless stream playback. (ie sports commentary, gapless playback media players etc).</remarks>
-		public void Stitch()
+		internal void Stitch()
 		{
 			int count = subSounds.Count;
 			
@@ -115,8 +111,7 @@ namespace Alexandria.Fmod
 		#endregion
 		
 		#region Remove
-		[CLSCompliant(false)]
-		public bool Remove(uint key)
+		internal bool Remove(uint key)
 		{
 			return subSounds.Remove(key);
 		}

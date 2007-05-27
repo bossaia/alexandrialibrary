@@ -11,7 +11,7 @@ using Alexandria;
 namespace Alexandria.Fmod
 {
 	//[SoundClass]
-	public class Sound : IDisposable,ILoopable,IRangeTarget,IHasDefault
+	internal class Sound : IDisposable, ILoopable, IHasRange, IHasDefault
 	{
 		#region Constructors
 		/// <summary>
@@ -19,7 +19,7 @@ namespace Alexandria.Fmod
 		/// </summary>
 		/// <param name="soundSystem">The sound system that this sound is associated with</param>
 		/// <param name="mediaFile">The path or url of the file that the sound comes from</param>
-		public Sound(SoundSystem soundSystem, Uri uri)
+		internal Sound(SoundSystem soundSystem, Uri uri)
 		{			
 			this.soundSystem = soundSystem;
 			this.uri = uri;
@@ -32,7 +32,7 @@ namespace Alexandria.Fmod
 			}
 		}
 		
-		public Sound(SoundSystem soundSystem, ILocation location)
+		internal Sound(SoundSystem soundSystem, ILocation location)
 		{
 			this.soundSystem = soundSystem;
 			//if (disc != null)
@@ -49,7 +49,7 @@ namespace Alexandria.Fmod
 		/// SubSound constructor
 		/// </summary>
 		/// <param name="parentSound">The parent Sound of this SubSound</param>
-		public Sound(Sound parentSound)
+		internal Sound(Sound parentSound)
 		{
 			if (parentSound != null)
 			{
@@ -112,7 +112,6 @@ namespace Alexandria.Fmod
 
 		#region Private Fields
 		private Guid guid = Guid.NewGuid();
-		private IMediaFormat format;
 		private Channel channel = new Channel();
 		private string name;
 		private uint length;
@@ -137,13 +136,15 @@ namespace Alexandria.Fmod
 		private SoundCollection subSounds;
 		private TagCollection tags;
 		private IntPtr userData = IntPtr.Zero;
-		private Uri uri; //MediaFile mediaFile;
+		private Uri uri;
 		private bool disposed;
 		SoundStatus status;
 		private TimeSpan duration = TimeSpan.Zero;
 		#endregion
 		
 		#region Internal Properties
+		
+		#region Duration
 		internal TimeSpan Duration
 		{
 			get
@@ -158,68 +159,44 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
-		#region Internal Methods
-		internal void Play()
-		{
-			this.soundSystem.PlaySound(ChannelIndex.Free, this, false, ref channel);
-		}
 
-		internal void Pause()
-		{
-			this.channel.Paused = true;
-		}
-
-		internal void Resume()
-		{
-			this.channel.Paused = false;
-		}
-
-		internal void Stop()
-		{
-			this.channel.Stop();
-		}
-		#endregion
-				
-		#region Public Properties
-		
 		#region Channel
-		public Channel Channel
+		internal Channel Channel
 		{
-			get {return channel;}
+			get { return channel; }
 		}
 		#endregion
-		
+
 		#region ParentSound
-		public Sound ParentSound
+		internal Sound ParentSound
 		{
-			get {return parentSound;}
+			get { return parentSound; }
 		}
 		#endregion
-		
+
 		#region Handle
 		/// <summary>
 		/// A pointer handle to the unmanaged sound resources
 		/// </summary>
-		public IntPtr Handle
+		internal IntPtr Handle
 		{
-			get {return handle;}
-			set {handle = value;}
+			get { return handle; }
+			set { handle = value; }
 		}
 		#endregion
-		
+
 		#region CurrentResult
 		/// <summary>
 		/// Gets the current result state of this sound
 		/// </summary>
-		public Result CurrentResult
+		internal Result CurrentResult
 		{
-			get {return currentResult;}
+			get { return currentResult; }
 		}
 		#endregion
-		
+
 		#region SoundSystem
-		public SoundSystem SoundSystem
+		internal SoundSystem SoundSystem
 		{
 			get
 			{
@@ -247,28 +224,28 @@ namespace Alexandria.Fmod
 				}
 				*/
 				#endregion
-			
+
 				return soundSystem;
 			}
-			internal set {soundSystem = value;}
+			set { soundSystem = value; }
 		}
 		#endregion
-		
+
 		#region Lock
 		/// <summary>
 		/// Gets and sets the lock currently conntected to this sound
 		/// </summary>
-		public SoundLock Lock
+		internal SoundLock Lock
 		{
-			get {return soundLock;}
-			set {soundLock = value;}
+			get { return soundLock; }
+			set { soundLock = value; }
 		}
 		#endregion
-		
+
 		#region DefaultSettings
 		public SoundSettings DefaultSettings
 		{
-			get {return defaultSettings;}
+			get { return defaultSettings; }
 			set
 			{
 				defaultSettings = value;
@@ -279,19 +256,19 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region Variation
-		public SoundVariation Variation
+		internal SoundVariation Variation
 		{
-			get {return soundVariation;}
-			set {soundVariation = value;}
+			get { return soundVariation; }
+			set { soundVariation = value; }
 		}
 		#endregion
 
 		#region Range
 		public Range Range
 		{
-			get {return range;}
+			get { return range; }
 			set
 			{
 				range = value;
@@ -302,7 +279,7 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region SubSounds
-		public SoundCollection SubSounds
+		internal SoundCollection SubSounds
 		{
 			get
 			{
@@ -311,14 +288,14 @@ namespace Alexandria.Fmod
 				{
 					subSounds = new SoundCollection(this, true);
 				}
-				
+
 				return subSounds;
 			}
-		}		
+		}
 		#endregion
-		
+
 		#region Name
-		public string Name
+		internal string Name
 		{
 			get
 			{
@@ -329,18 +306,17 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region LengthUnit
-		public TimeUnits LengthUnit
+		internal TimeUnits LengthUnit
 		{
-			get {return lengthUnit;}
-			set {lengthUnit = value;}
+			get { return lengthUnit; }
+			set { lengthUnit = value; }
 		}
 		#endregion
-		
+
 		#region FmodLength
-		[CLSCompliant(false)]
-		public uint FmodLength
+		internal uint FmodLength
 		{
 			get
 			{
@@ -349,20 +325,20 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region Type
-		public FmodSoundType FmodSoundType
+		internal FmodSoundType FmodSoundType
 		{
 			get
 			{
 				currentResult = NativeMethods.FMOD_Sound_GetFormat(handle, ref fmodSoundType, ref fmodSoundFormat, ref numberOfChannels, ref numberOfBitsPerSample);
-				return fmodSoundType;				
+				return fmodSoundType;
 			}
 		}
 		#endregion
-		
+
 		#region Format
-		public FmodSoundFormat FmodSoundFormat
+		internal FmodSoundFormat FmodSoundFormat
 		{
 			get
 			{
@@ -371,9 +347,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region NumberOfChannels
-		public int NumberOfChannels
+		internal int NumberOfChannels
 		{
 			get
 			{
@@ -382,9 +358,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region NumberOfBitsPerSample
-		public int NumberOfBitsPerSample
+		internal int NumberOfBitsPerSample
 		{
 			get
 			{
@@ -393,9 +369,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region Tags
-		public TagCollection Tags
+		internal TagCollection Tags
 		{
 			get
 			{
@@ -404,16 +380,14 @@ namespace Alexandria.Fmod
 				{
 					tags = new TagCollection(handle, true);
 				}
-				
+
 				return tags;
 			}
 		}
 		#endregion
-		
-		//TODO: move all status related properties into SoundStatus classes
-		
+
 		#region OpenState
-		public OpenState OpenState
+		internal OpenState OpenState
 		{
 			get
 			{
@@ -422,17 +396,16 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region OpenStateName
-		public string OpenStateName
+		internal string OpenStateName
 		{
-			get {return OpenState.ToString();}
+			get { return OpenState.ToString(); }
 		}
 		#endregion
-		
+
 		#region PercentBuffered
-		[CLSCompliant(false)]
-		public uint PercentBuffered
+		internal uint PercentBuffered
 		{
 			get
 			{
@@ -441,9 +414,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region BufferIsStarving
-		public bool BufferIsStarving
+		internal bool BufferIsStarving
 		{
 			get
 			{
@@ -452,9 +425,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region Mode
-		public Modes Mode
+		internal Modes Mode
 		{
 			get
 			{
@@ -468,12 +441,11 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region Loop
-		[CLSCompliant(false)]
 		public SoundLoop Loop
 		{
-			get {return loop;}
+			get { return loop; }
 			set
 			{
 				loop = value;
@@ -485,9 +457,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-				
+
 		#region UserData
-		public IntPtr UserData
+		internal IntPtr UserData
 		{
 			get
 			{
@@ -501,13 +473,12 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-				
+
 		#region Milliseconds
 		/// <summary>
 		/// Get the length of the sound in milliseconds
-		/// </summary>
-		[CLSCompliant(false)]
-		public uint Milliseconds
+		/// </summary>		
+		internal uint Milliseconds
 		{
 			get
 			{
@@ -516,21 +487,21 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region FmodPosition
 		/// <summary>
 		/// Get the current position of the sound in milliseconds
 		/// </summary>
 		//[CLSCompliant(false)]
-		//public uint FmodPosition
+		//internal uint FmodPosition
 		//{
-			//get { return this.channel.Position; }
-			//set { this.channel.Position = value; }
+		//get { return this.channel.Position; }
+		//set { this.channel.Position = value; }
 		//}
 		#endregion
-				
+
 		#region NumberOfTags
-		public int NumberOfTags
+		internal int NumberOfTags
 		{
 			get
 			{
@@ -541,9 +512,9 @@ namespace Alexandria.Fmod
 			}
 		}
 		#endregion
-		
+
 		#region NumberOfUpdatedTags
-		public int NumberOfUpdatedTags
+		internal int NumberOfUpdatedTags
 		{
 			get
 			{
@@ -553,14 +524,15 @@ namespace Alexandria.Fmod
 				return numberOfUpdatedTags;
 			}
 		}
-		#endregion				
+		#endregion		
 		
 		#endregion
-
-		#region Public Methods
 		
+		#region Internal Methods
+
 		#region Load
-		public void Load()
+		/*
+		internal void Load()
 		{
 			if (this.Location.IsLocal)
 			{
@@ -577,7 +549,7 @@ namespace Alexandria.Fmod
 		}
 
 		[CLSCompliant(false)]
-		public void Load(uint streamBufferSize)
+		internal void Load(uint streamBufferSize)
 		{
 			if (this.Location.IsLocal)
 			{
@@ -591,33 +563,36 @@ namespace Alexandria.Fmod
 				this.SoundSystem.CreateSound(this, this.Location.Path, mode);
 			}
 		}
+		*/
 		#endregion
 
-		/*
 		#region Play
-		public void Play()
+		internal void Play()
 		{
+			this.soundSystem.PlaySound(ChannelIndex.Free, this, false, ref channel);
 		}
 		#endregion
 
 		#region Pause
-		public void Pause()
-		{			
+		internal void Pause()
+		{
+			this.channel.Paused = true;
 		}
 		#endregion
 
 		#region Resume
-		public void Resume()
+		internal void Resume()
 		{
+			this.channel.Paused = false;
 		}
 		#endregion
 
 		#region Stop
-		public void Stop()
+		internal void Stop()
 		{
+			this.channel.Stop();
 		}
 		#endregion
-		*/
 
 		#region Read
 		/// <summary>
@@ -626,8 +601,7 @@ namespace Alexandria.Fmod
 		/// <param name="buffer">A pointer to a buffer that the data will be read into</param>
 		/// <param name="length">The length in bytes to read</param>
 		/// <returns>The actual number of bytes that were read (this may be less than length, for example when reaching the end of the sound)</returns>
-		[CLSCompliant(false)]
-		public uint Read(IntPtr buffer, uint length)
+		internal uint Read(IntPtr buffer, uint length)
 		{
 			uint bytesRead = 0;
 			currentResult = NativeMethods.FMOD_Sound_ReadData(handle, buffer, length, ref bytesRead);
@@ -635,13 +609,13 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 
-		#region Save
+		#region SaveAsWaveFile
 		/// <summary>
-		/// Save this sound to a PCM Wav file with the given path
+		/// Save this sound to a PCM Wave file with the given path
 		/// </summary>
 		/// <param name="filePath">The path of the file to save this sound to</param>
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public unsafe void Save(string filePath)
+		internal unsafe void SaveAsWaveFile(string filePath)
 		{
 			const int chunkSize = 4096;
 			FileStream file = null;
@@ -744,106 +718,6 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 
-		#endregion
-
-		#region IResource Members
-		public IIdentifier Id
-		{
-			get { return null; }
-		}
-		
-		public ILocation Location
-		{
-			get { return null; }
-		}
-		
-		public IMediaFormat Format
-		{
-			get { return this.format; }
-			set { this.format = value; }
-		}
-		#endregion
-
-		#region IAudio Members
-		public TimeSpan Length
-		{
-			get { return TimeSpan.Zero; }
-		}
-		
-		[CLSCompliant(false)]
-		public uint Minutes
-		{
-			get
-			{
-				this.LengthUnit = TimeUnits.Millisecond;
-				return (this.FmodLength / 60000);
-			}
-		}
-
-		[CLSCompliant(false)]
-		public uint Seconds
-		{
-			get
-			{
-				this.LengthUnit = TimeUnits.Millisecond;
-				return (this.FmodLength / 10000);
-			}
-		}
-		
-		SoundStatus Status
-		{
-			get { return status; }
-		}
-		
-		[CLSCompliant(false)]
-		public void Seek(TimeSpan position)
-		{
-		}
-		
-		public TimeSpan Position
-		{
-			get { return TimeSpan.Zero; }
-		}
-		#endregion
-
-		#region IAudio Members
-		public bool IsMuted
-		{
-			get { return this.channel.Mute; }
-		}
-
-		public void Mute()
-		{
-			if (!IsMuted)
-			{				
-				this.channel.Mute = true;
-			}
-		}
-
-		public void SetVolume(float volume)
-		{
-			this.channel.Volume = volume;
-		}
-
-		public void Unmute()
-		{
-			if (IsMuted)
-			{				
-				this.channel.Mute = false;
-			}
-		}
-
-		public float Volume
-		{
-			get { return this.channel.Volume; }
-		}
-		#endregion
-
-		#region IPlayable Members
-		public PlaybackState PlaybackState
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
 		#endregion
 	}
 }

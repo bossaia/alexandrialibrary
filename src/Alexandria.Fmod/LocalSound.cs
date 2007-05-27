@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using Alexandria;
 
 namespace Alexandria.Fmod
 {
-	public class LocalSound : ILocalAudio, IDisposable
+	public class LocalSound : IDisposable, ILocalAudio, IDataReadable
 	{
 		#region Constructors
 		public LocalSound(string path)
@@ -239,6 +240,77 @@ namespace Alexandria.Fmod
 			SetAbsolutePosition(GetElapsed().Add(position));
 		
 			throw new Exception("The method or operation is not implemented.");
+		}
+		#endregion
+		
+		#region IDataReadable Members
+		public int NumberOfBytes
+		{
+			get
+			{
+				sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
+				return (int)sound.FmodLength;
+			}
+		}
+		
+		public int NumberOfSamples
+		{
+			get
+			{
+				sound.LengthUnit = TimeUnits.PcmSample;
+				return (int)sound.FmodLength;
+			}
+		}
+		
+		public int SampleRate
+		{
+			get { return sound.NumberOfBitsPerSample; }
+		}
+		
+		public bool IsStereo
+		{
+			get { return (sound.NumberOfChannels == 2); }
+		}
+		
+		[CLSCompliant(false)]
+		public IntPtr ReadData(uint length)
+		{
+			//sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
+			//uint numberOfBytes = sound.FmodLength;
+			uint bytesRead;
+			if (length <= int.MaxValue)
+			{
+				IntPtr buffer = IntPtr.Zero;
+				
+				try
+				{
+					buffer = Marshal.AllocHGlobal((int)length); // AllocCoTaskMem((int)numberOfBytes);
+				}
+				catch (OutOfMemoryException ex)
+				{
+					throw new ApplicationException("There was an error reading the sound data: ran out of memory trying to allocate the buffer", ex);
+				}
+								
+				bytesRead = sound.Read(buffer, length);
+				if (bytesRead == length)
+				{
+					return buffer;
+				}
+				else throw new ApplicationException("There was an error reading the sound data: could not read to end of file (unexpected eof?)");
+			}
+			else throw new ApplicationException("There was an error reading the sound data: the sound file is too large - a buffer cannot be created to hold it");
+		}
+		
+		public void CleanupData(IntPtr buffer)
+		{
+			try
+			{			
+				Marshal.FreeHGlobal(buffer); //FreeCoTaskMem(buffer);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("There was an error freeing the memory used for this buffer", ex);
+			}
 		}
 		#endregion
 	}

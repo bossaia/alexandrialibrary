@@ -53,6 +53,7 @@
     <Compile Include="IAudioRelease.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="IBuffered.cs" />
+    <Compile Include="IDataReadable.cs" />
     <Compile Include="IdentificationResult.cs" />
     <Compile Include="Identifier.cs" />
     <Compile Include="IHasDuration.cs" />
