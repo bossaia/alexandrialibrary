@@ -103,7 +103,7 @@ namespace Alexandria.LastFM.LastRipper
 		{
 			this.UserID = UserID;
 			this.Password = Password;
-			System.IO.File.AppendAllText(PlatformSettings.TempPath + "\\" + "thelastripper.log",
+			System.IO.File.AppendAllText(PathSettings.TempPath + "\\" + "thelastripper.log",
 										 "\n -Performs handshake");
 			return this.Handshake();
 		}
