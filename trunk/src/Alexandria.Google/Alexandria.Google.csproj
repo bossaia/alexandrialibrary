@@ -28,12 +28,43 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.GData.AccessControl, Version=1.0.9.8, Culture=neutral, PublicKeyToken=b4b8eb9a7afc8328">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Apps, Version=1.0.9.8, Culture=neutral, PublicKeyToken=e6feebfe441b89cb">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.Apps.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Calendar, Version=1.0.9.8, Culture=neutral, PublicKeyToken=aa6748391206b888">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.Calendar.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client, Version=1.0.9.8, Culture=neutral, PublicKeyToken=04a59ca9b0273830">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.CodeSearch, Version=1.0.9.8, Culture=neutral, PublicKeyToken=cac30bb7c678972d">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.CodeSearch.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions, Version=1.0.9.8, Culture=neutral, PublicKeyToken=0b4c5df2ebf20876">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.GoogleBase, Version=1.0.9.8, Culture=neutral, PublicKeyToken=b361faa2ad5bd3db">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.GoogleBase.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Spreadsheets, Version=1.0.9.8, Culture=neutral, PublicKeyToken=3f77feb76ff0d9a1">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\vendor\Google\Google.GData.Spreadsheets.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
