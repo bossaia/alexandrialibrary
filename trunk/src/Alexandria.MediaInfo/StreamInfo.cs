@@ -46,20 +46,20 @@ using System.Runtime.InteropServices;
 
 namespace Alexandria.MediaInfo
 {
-	public class Info : IDisposable
+	public class StreamInfo : IDisposable
 	{
 		#region Constructors
 		/// <summary>
 		/// Default constructor
 		/// </summary>
-		public Info()
+		public StreamInfo()
 		{
 			handle = NativeMethods.MediaInfo_New();
 		}
 		#endregion
 		
 		#region Finalizer
-		~Info()
+		~StreamInfo()
 		{
 			Dispose(false);
 		}
