@@ -141,7 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PlayPauseButton.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="StopButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 49</value>
@@ -165,7 +165,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StopButton.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="PlaybackTrackBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>273, 49</value>
@@ -186,7 +186,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PlaybackTrackBar.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>631, 198</value>
+  </data>
+  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
     <value>QueueListView</value>
@@ -222,28 +231,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;QueueGroupBox.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
-  </data>
-  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>631, 198</value>
-  </data>
-  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
-    <value>QueueListView</value>
-  </data>
-  <data name="&gt;&gt;QueueListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;QueueListView.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;QueueListView.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>8</value>
   </data>
   <data name="VolumeTrackBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>64, 110</value>
@@ -264,7 +252,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;VolumeTrackBar.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="MuteButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>207, 110</value>
@@ -288,7 +276,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;MuteButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="VolumeLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -315,11 +303,29 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;VolumeLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="FileMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
+  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="FileMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -339,29 +345,35 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Open...</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;xit</value>
+    <value>12</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 393</value>
   </metadata>
+  <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="LoadStatus.Text" xml:space="preserve">
+    <value>Not Loaded</value>
+  </data>
+  <data name="PlaybackStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="PlaybackStatusLabel.Text" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="PositionStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="PositionStatus.Text" xml:space="preserve">
+    <value>0/0</value>
+  </data>
+  <data name="StreamingStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="StreamingStatus.Text" xml:space="preserve">
+    <value>Not Streaming</value>
+  </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 393</value>
   </data>
@@ -384,25 +396,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="PlaybackStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
-  </data>
-  <data name="PlaybackStatusLabel.Text" xml:space="preserve">
-    <value>Stopped</value>
-  </data>
-  <data name="PositionStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 17</value>
-  </data>
-  <data name="PositionStatus.Text" xml:space="preserve">
-    <value>0/0</value>
-  </data>
-  <data name="StreamingStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 17</value>
-  </data>
-  <data name="StreamingStatus.Text" xml:space="preserve">
-    <value>Not Streaming</value>
+    <value>4</value>
   </data>
   <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>364, 17</value>
@@ -429,7 +423,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;NextButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="PreviousButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 50</value>
@@ -453,7 +447,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;PreviousButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="SaveButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 110</value>
@@ -477,16 +471,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SaveButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="PlaybackTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>490, 17</value>
   </metadata>
-  <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
+  <data name="DownloadButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>337, 109</value>
   </data>
-  <data name="LoadStatus.Text" xml:space="preserve">
-    <value>Not Loaded</value>
+  <data name="DownloadButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="DownloadButton.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="DownloadButton.Text" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="&gt;&gt;DownloadButton.Name" xml:space="preserve">
+    <value>DownloadButton</value>
+  </data>
+  <data name="&gt;&gt;DownloadButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DownloadButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;DownloadButton.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -577,6 +589,12 @@
   <data name="&gt;&gt;ExitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;LoadStatus.Name" xml:space="preserve">
+    <value>LoadStatus</value>
+  </data>
+  <data name="&gt;&gt;LoadStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;PlaybackStatusLabel.Name" xml:space="preserve">
     <value>PlaybackStatusLabel</value>
   </data>
@@ -606,12 +624,6 @@
   </data>
   <data name="&gt;&gt;PlaybackTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LoadStatus.Name" xml:space="preserve">
-    <value>LoadStatus</value>
-  </data>
-  <data name="&gt;&gt;LoadStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

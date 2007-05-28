@@ -7,8 +7,8 @@
     <ProjectGuid>{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Tao</RootNamespace>
-    <AssemblyName>AlexandriaTao</AssemblyName>
+    <RootNamespace>Alexandria.Tao</RootNamespace>
+    <AssemblyName>Alexandria.Tao</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

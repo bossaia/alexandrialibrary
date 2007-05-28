@@ -20,9 +20,47 @@ namespace Alexandria.FreeDB
 	/// <summary>
 	/// Wrapper class for Win32 functions and structures needed to handle CD.
 	/// </summary>
-	internal class Win32Functions
+	internal class NativeMethods
 	{
-		public enum DriveTypes : uint
+		#region Private Constants
+		private const int MAXIMUM_NUMBER_TRACKS = 100;
+		#endregion
+		
+		#region Internal Constants
+		//DesiredAccess values
+		internal const uint GENERIC_READ = 0x80000000;
+		internal const uint GENERIC_WRITE = 0x40000000;
+		internal const uint GENERIC_EXECUTE = 0x20000000;
+		internal const uint GENERIC_ALL = 0x10000000;
+
+		//Share constants
+		internal const uint FILE_SHARE_READ = 0x00000001;
+		internal const uint FILE_SHARE_WRITE = 0x00000002;
+		internal const uint FILE_SHARE_DELETE = 0x00000004;
+
+		//CreationDisposition constants
+		internal const uint CREATE_NEW = 1;
+		internal const uint CREATE_ALWAYS = 2;
+		internal const uint OPEN_EXISTING = 3;
+		internal const uint OPEN_ALWAYS = 4;
+		internal const uint TRUNCATE_EXISTING = 5;
+
+		//Storage IO constants
+		internal const uint IOCTL_CDROM_READ_TOC = 0x00024000;
+		internal const uint IOCTL_STORAGE_CHECK_VERIFY = 0x002D4800;
+		internal const uint IOCTL_CDROM_RAW_READ = 0x0002403E;
+		internal const uint IOCTL_STORAGE_MEDIA_REMOVAL = 0x002D4804;
+		internal const uint IOCTL_STORAGE_EJECT_MEDIA = 0x002D4808;
+		internal const uint IOCTL_STORAGE_LOAD_MEDIA = 0x002D480C;
+		#endregion
+
+		#region OLD CODE
+
+		#region Internal Enums
+		
+		/*
+		#region DriveTypes
+		internal enum DriveTypes : uint
 		{
 			DRIVE_UNKNOWN = 0,
 			DRIVE_NO_ROOT_DIR,
@@ -31,82 +69,27 @@ namespace Alexandria.FreeDB
 			DRIVE_REMOTE,
 			DRIVE_CDROM,
 			DRIVE_RAMDISK
-		};
+		}
+		#endregion
 
-		[System.Runtime.InteropServices.DllImport("Kernel32.dll")]
-		public extern static DriveTypes GetDriveType(string drive);
+		#region TRACK_MODE_TYPE
+		public enum TRACK_MODE_TYPE
+		{
+			YellowMode2,
+			XAForm2,
+			CDDA
+		}
+		#endregion
+		*/
+		
+		#endregion
 
-		//DesiredAccess values
-		public const uint GENERIC_READ = 0x80000000;
-		public const uint GENERIC_WRITE = 0x40000000;
-		public const uint GENERIC_EXECUTE = 0x20000000;
-		public const uint GENERIC_ALL = 0x10000000;
+		#region Internal Structs
 
-		//Share constants
-		public const uint FILE_SHARE_READ = 0x00000001;
-		public const uint FILE_SHARE_WRITE = 0x00000002;
-		public const uint FILE_SHARE_DELETE = 0x00000004;
-
-		//CreationDisposition constants
-		public const uint CREATE_NEW = 1;
-		public const uint CREATE_ALWAYS = 2;
-		public const uint OPEN_EXISTING = 3;
-		public const uint OPEN_ALWAYS = 4;
-		public const uint TRUNCATE_EXISTING = 5;
-
-		/// <summary>
-		/// Win32 CreateFile function, look for complete information at Platform SDK
-		/// </summary>
-		/// <param name="FileName">In order to read CD data FileName must be "\\.\\D:" where D is the CDROM drive letter</param>
-		/// <param name="DesiredAccess">Must be GENERIC_READ for CDROMs others access flags are not important in this case</param>
-		/// <param name="ShareMode">O means exlusive access, FILE_SHARE_READ allow open the CDROM</param>
-		/// <param name="lpSecurityAttributes">See Platform SDK documentation for details. NULL pointer could be enough</param>
-		/// <param name="CreationDisposition">Must be OPEN_EXISTING for CDROM drives</param>
-		/// <param name="dwFlagsAndAttributes">0 in fine for this case</param>
-		/// <param name="hTemplateFile">NULL handle in this case</param>
-		/// <returns>INVALID_HANDLE_VALUE on error or the handle to file if success</returns>
-		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static IntPtr CreateFile(string FileName, uint DesiredAccess,
-		  uint ShareMode, IntPtr lpSecurityAttributes,
-		  uint CreationDisposition, uint dwFlagsAndAttributes,
-		  IntPtr hTemplateFile);
-
-		/// <summary>
-		/// The CloseHandle function closes an open object handle.
-		/// </summary>
-		/// <param name="hObject">Handle to an open object.</param>
-		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError.</returns>
-		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static int CloseHandle(IntPtr hObject);
-
-		public const uint IOCTL_CDROM_READ_TOC = 0x00024000;
-		public const uint IOCTL_STORAGE_CHECK_VERIFY = 0x002D4800;
-		public const uint IOCTL_CDROM_RAW_READ = 0x0002403E;
-		public const uint IOCTL_STORAGE_MEDIA_REMOVAL = 0x002D4804;
-		public const uint IOCTL_STORAGE_EJECT_MEDIA = 0x002D4808;
-		public const uint IOCTL_STORAGE_LOAD_MEDIA = 0x002D480C;
-
-		/// <summary>
-		/// Most general form of DeviceIoControl Win32 function
-		/// </summary>
-		/// <param name="hDevice">Handle of device opened with CreateFile, <see cref="Ripper.Win32Functions.CreateFile"/></param>
-		/// <param name="IoControlCode">Code of DeviceIoControl operation</param>
-		/// <param name="lpInBuffer">Pointer to a buffer that contains the data required to perform the operation.</param>
-		/// <param name="InBufferSize">Size of the buffer pointed to by lpInBuffer, in bytes.</param>
-		/// <param name="lpOutBuffer">Pointer to a buffer that receives the operation's output data.</param>
-		/// <param name="nOutBufferSize">Size of the buffer pointed to by lpOutBuffer, in bytes.</param>
-		/// <param name="lpBytesReturned">Receives the size, in bytes, of the data stored into the buffer pointed to by lpOutBuffer. </param>
-		/// <param name="lpOverlapped">Pointer to an OVERLAPPED structure. Discarded for this case</param>
-		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
-		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode,
-		  IntPtr lpInBuffer, uint InBufferSize,
-		  IntPtr lpOutBuffer, uint nOutBufferSize,
-		  ref uint lpBytesReturned,
-		  IntPtr lpOverlapped);
-
+		/*
+		#region TRACK_DATA
 		[StructLayout(LayoutKind.Sequential)]
-		public struct TRACK_DATA
+		internal struct TRACK_DATA
 		{
 			public byte Reserved;
 			private byte BitMapped;
@@ -142,9 +125,15 @@ namespace Alexandria.FreeDB
 			public byte Address_2;
 			public byte Address_3;
 		};
+		#endregion
+		*/
 
-		public const int MAXIMUM_NUMBER_TRACKS = 100;
-
+		#endregion
+		
+		#region Internal Classes
+		
+		/*
+		#region TrackDataList
 		[StructLayout(LayoutKind.Sequential)]
 		public class TrackDataList
 		{
@@ -178,7 +167,11 @@ namespace Alexandria.FreeDB
 				Data = new byte[MAXIMUM_NUMBER_TRACKS * Marshal.SizeOf(typeof(TRACK_DATA))];
 			}
 		}
-
+		#endregion
+		*/
+		
+		/*
+		#region CDROM_TOC
 		[StructLayout(LayoutKind.Sequential)]
 		public class CDROM_TOC
 		{
@@ -194,14 +187,21 @@ namespace Alexandria.FreeDB
 				Length = (ushort)Marshal.SizeOf(this);
 			}
 		}
-
+		#endregion
+		*/
+		
+		/*
+		#region PREVENT_MEDIA_REMOVAL
 		[StructLayout(LayoutKind.Sequential)]
 		public class PREVENT_MEDIA_REMOVAL
 		{
 			public byte PreventMediaRemoval = 0;
 		}
-
-		public enum TRACK_MODE_TYPE { YellowMode2, XAForm2, CDDA }
+		#endregion
+		*/
+		
+		/*
+		#region RAW_READ_INFO
 		[StructLayout(LayoutKind.Sequential)]
 		public class RAW_READ_INFO
 		{
@@ -209,6 +209,58 @@ namespace Alexandria.FreeDB
 			public uint SectorCount = 0;
 			public TRACK_MODE_TYPE TrackMode = TRACK_MODE_TYPE.CDDA;
 		}
+		#endregion
+		*/
+		
+		#endregion
+		
+		#endregion
+
+		#region Internal Static Native Methods
+		/// <summary>
+		/// Get the drive type of the given drive
+		/// </summary>
+		/// <param name="drive">The drive</param>
+		/// <returns>The drive type</returns>
+		[DllImport("Kernel32.dll")]
+		internal static extern DriveType GetDriveType(string drive);
+
+		/// <summary>
+		/// Win32 CreateFile function, look for complete information at Platform SDK
+		/// </summary>
+		/// <param name="FileName">In order to read CD data FileName must be "\\.\\D:" where D is the CDROM drive letter</param>
+		/// <param name="DesiredAccess">Must be GENERIC_READ for CDROMs others access flags are not important in this case</param>
+		/// <param name="ShareMode">O means exlusive access, FILE_SHARE_READ allow open the CDROM</param>
+		/// <param name="lpSecurityAttributes">See Platform SDK documentation for details. NULL pointer could be enough</param>
+		/// <param name="CreationDisposition">Must be OPEN_EXISTING for CDROM drives</param>
+		/// <param name="dwFlagsAndAttributes">0 in fine for this case</param>
+		/// <param name="hTemplateFile">NULL handle in this case</param>
+		/// <returns>INVALID_HANDLE_VALUE on error or the handle to file if success</returns>
+		[DllImport("Kernel32.dll", SetLastError = true)]
+		public extern static IntPtr CreateFile(string FileName, uint DesiredAccess, uint ShareMode, IntPtr lpSecurityAttributes, uint CreationDisposition, uint dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+		/// <summary>
+		/// The CloseHandle function closes an open object handle.
+		/// </summary>
+		/// <param name="hObject">Handle to an open object.</param>
+		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero. To get extended error information, call GetLastError.</returns>
+		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
+		public extern static int CloseHandle(IntPtr hObject);
+
+		/// <summary>
+		/// Most general form of DeviceIoControl Win32 function
+		/// </summary>
+		/// <param name="hDevice">Handle of device opened with CreateFile, <see cref="Ripper.Win32Functions.CreateFile"/></param>
+		/// <param name="IoControlCode">Code of DeviceIoControl operation</param>
+		/// <param name="lpInBuffer">Pointer to a buffer that contains the data required to perform the operation.</param>
+		/// <param name="InBufferSize">Size of the buffer pointed to by lpInBuffer, in bytes.</param>
+		/// <param name="lpOutBuffer">Pointer to a buffer that receives the operation's output data.</param>
+		/// <param name="nOutBufferSize">Size of the buffer pointed to by lpOutBuffer, in bytes.</param>
+		/// <param name="lpBytesReturned">Receives the size, in bytes, of the data stored into the buffer pointed to by lpOutBuffer. </param>
+		/// <param name="lpOverlapped">Pointer to an OVERLAPPED structure. Discarded for this case</param>
+		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
+		[DllImport("Kernel32.dll", SetLastError = true)]
+		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode, IntPtr lpInBuffer, uint InBufferSize, IntPtr lpOutBuffer, uint nOutBufferSize, ref uint lpBytesReturned, IntPtr lpOverlapped);
 
 		/// <summary>
 		/// Overload version of DeviceIOControl to read the TOC (Table of contents)
@@ -222,12 +274,8 @@ namespace Alexandria.FreeDB
 		/// <param name="BytesReturned">Receives the size, in bytes, of the data stored into OutTOC</param>
 		/// <param name="Overlapped">Pointer to an OVERLAPPED structure. Discarded for this case</param>
 		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
-		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode,
-		  IntPtr InBuffer, uint InBufferSize,
-		  [Out] CDROM_TOC OutTOC, uint OutBufferSize,
-		  ref uint BytesReturned,
-		  IntPtr Overlapped);
+		[DllImport("Kernel32.dll", SetLastError = true)]
+		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode, IntPtr InBuffer, uint InBufferSize, [Out] CDRomToc OutTOC, uint OutBufferSize, ref uint BytesReturned, IntPtr Overlapped);
 
 		/// <summary>
 		/// Overload version of DeviceIOControl to lock/unlock the CD
@@ -242,11 +290,7 @@ namespace Alexandria.FreeDB
 		/// <param name="Overlapped">Pointer to an OVERLAPPED structure. Discarded for this case</param>
 		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
 		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode,
-		  [In] PREVENT_MEDIA_REMOVAL InMediaRemoval, uint InBufferSize,
-		  IntPtr OutBuffer, uint OutBufferSize,
-		  ref uint BytesReturned,
-		  IntPtr Overlapped);
+		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode, [In] PreventMediaRemoval InMediaRemoval, uint InBufferSize, IntPtr OutBuffer, uint OutBufferSize, ref uint BytesReturned, IntPtr Overlapped);
 
 		/// <summary>
 		/// Overload version of DeviceIOControl to read digital data
@@ -261,10 +305,7 @@ namespace Alexandria.FreeDB
 		/// <param name="Overlapped">Pointer to an OVERLAPPED structure. Discarded for this case</param>
 		/// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero.</returns>
 		[System.Runtime.InteropServices.DllImport("Kernel32.dll", SetLastError = true)]
-		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode,
-		  [In] RAW_READ_INFO rri, uint InBufferSize,
-		  [In, Out] byte[] OutBuffer, uint OutBufferSize,
-		  ref uint BytesReturned,
-		  IntPtr Overlapped);
+		public extern static int DeviceIoControl(IntPtr hDevice, uint IoControlCode, [In] RawReadInfo rri, uint InBufferSize, [In, Out] byte[] OutBuffer, uint OutBufferSize, ref uint BytesReturned, IntPtr Overlapped);		
+		#endregion
 	}
 }

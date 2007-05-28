@@ -27,7 +27,7 @@ namespace Alexandria
 			if (uri == null)
 				throw new ArgumentNullException("uri");
 		
-			this.path = uri.AbsolutePath;
+			this.path = uri.OriginalString;
 			this.IsLocal = uri.IsFile;
 		}
 		#endregion

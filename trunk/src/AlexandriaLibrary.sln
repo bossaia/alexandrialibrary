@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.AlbumArtDownload
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.AudioToolsLibrary", "Alexandria.AudioToolsLibrary\Alexandria.AudioToolsLibrary.csproj", "{665BE93E-AFF5-4B7E-AB7E-A70C7EDC8E17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Google", "Alexandria.Google\Alexandria.Google.csproj", "{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{665BE93E-AFF5-4B7E-AB7E-A70C7EDC8E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{665BE93E-AFF5-4B7E-AB7E-A70C7EDC8E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{665BE93E-AFF5-4B7E-AB7E-A70C7EDC8E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

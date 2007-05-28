@@ -7,8 +7,8 @@
     <ProjectGuid>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.TagLib</RootNamespace>
-    <AssemblyName>AlexandriaTagLib</AssemblyName>
+    <RootNamespace>Alexandria.TagLib</RootNamespace>
+    <AssemblyName>Alexandria.TagLib</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

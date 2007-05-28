@@ -7,8 +7,8 @@
     <ProjectGuid>{49BF09B5-29AE-4BA1-A208-7B4632173774}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Droid</RootNamespace>
-    <AssemblyName>AlexandriaDroid</AssemblyName>
+    <RootNamespace>Alexandria.Droid</RootNamespace>
+    <AssemblyName>Alexandria.Droid</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

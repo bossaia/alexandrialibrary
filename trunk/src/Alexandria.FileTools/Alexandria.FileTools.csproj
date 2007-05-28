@@ -7,7 +7,7 @@
     <ProjectGuid>{FA920B97-91DA-45DA-B482-A1357AAAA9F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.FileTools</RootNamespace>
+    <RootNamespace>Alexandria.FileTools</RootNamespace>
     <AssemblyName>Alexandria.FileTools</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

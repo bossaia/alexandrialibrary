@@ -36,9 +36,13 @@ namespace Alexandria.Mp3Tunes
 		}
 		#endregion
 	
-		#region Private Fields
-		private string session_id;
+		#region Private Constants
 		private const string partner_token = "2036856440";
+		private const string get_url = "http://content.mp3tunes.com";
+		#endregion
+	
+		#region Private Fields
+		private string session_id;		
 		#endregion
 
 		#region Private Methods
@@ -133,7 +137,7 @@ namespace Alexandria.Mp3Tunes
 					XmlNode trackTitle = node.SelectSingleNode("trackTitle");
 					XmlNode trackNumberNode = node.SelectSingleNode("trackNumber");
 					XmlNode trackLength = node.SelectSingleNode("trackLength");
-					//XmlNode trackFileName = node.SelectSingleNode( "trackFileName" );
+					XmlNode trackFileName = node.SelectSingleNode( "trackFileName" );
 					//XmlNode trackFileKey = node.SelectSingleNode( "trackFileKey" );
 					XmlNode downloadUrl = node.SelectSingleNode("downloadURL");
 					XmlNode albumTitle = node.SelectSingleNode("albumTitle");
@@ -145,8 +149,17 @@ namespace Alexandria.Mp3Tunes
 						trackId = new Mp3TunesTrackIdentifier(trackIdNode.InnerXml);
 					else trackId = new Mp3TunesTrackIdentifier(string.Empty);
 
-					Uri uri = new Uri(downloadUrl.InnerXml);
-					ILocation location = new Location(uri);				
+					string url = string.Format("{0}{1}", System.Web.HttpUtility.UrlDecode(downloadUrl.InnerXml), partner_token);
+					
+					//HACK: fix this later
+					url = url.Replace("&amp;", "&");
+					
+					//string.Format("{0}{1}?sid={2}&partner_token={3}", get_url, downloadUrl.InnerXml, session_id, partner_token);
+					Uri uri = new Uri(url);
+					ILocation location = new Location(uri);
+					System.Diagnostics.Debug.WriteLine("xml=" + downloadUrl.InnerXml);
+					System.Diagnostics.Debug.WriteLine("url=" + url);
+					System.Diagnostics.Debug.WriteLine("loc=" + location.Path);
 
 					int trackNumber = 0;
 					if (trackNumberNode != null && !string.IsNullOrEmpty(trackNumberNode.InnerXml))
@@ -189,7 +202,7 @@ namespace Alexandria.Mp3Tunes
 
 					Album album = new Album(Identifier.None, location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 
-					Track track = new Track(trackId, location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber);
+					Track track = new Track(trackId, location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, trackFileName.InnerXml);
 
 					//tr.Uri = new Uri(downloadURL.InnerXml);
 					//tr.Artist = artistName.InnerXml;

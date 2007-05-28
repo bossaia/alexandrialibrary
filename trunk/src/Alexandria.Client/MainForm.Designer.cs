@@ -45,6 +45,7 @@ namespace Alexandria.Client
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStrip = new System.Windows.Forms.StatusStrip();
+			this.LoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PlaybackStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PositionStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.StreamingStatus = new System.Windows.Forms.ToolStripStatusLabel();
@@ -53,7 +54,7 @@ namespace Alexandria.Client
 			this.PreviousButton = new System.Windows.Forms.Button();
 			this.SaveButton = new System.Windows.Forms.Button();
 			this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
-			this.LoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
+			this.DownloadButton = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			this.QueueGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
@@ -90,7 +91,6 @@ namespace Alexandria.Client
 			// QueueListView
 			// 
 			this.QueueListView.AllowColumnReorder = true;
-			this.QueueListView.FullRowSelect = true;
 			this.QueueListView.HideSelection = false;
 			resources.ApplyResources(this.QueueListView, "QueueListView");
 			this.QueueListView.Name = "QueueListView";
@@ -149,6 +149,11 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.StatusStrip, "StatusStrip");
 			this.StatusStrip.Name = "StatusStrip";
 			// 
+			// LoadStatus
+			// 
+			this.LoadStatus.Name = "LoadStatus";
+			resources.ApplyResources(this.LoadStatus, "LoadStatus");
+			// 
 			// PlaybackStatusLabel
 			// 
 			this.PlaybackStatusLabel.Name = "PlaybackStatusLabel";
@@ -192,15 +197,18 @@ namespace Alexandria.Client
 			this.PlaybackTimer.Enabled = true;
 			this.PlaybackTimer.Interval = 1000;
 			// 
-			// LoadStatus
+			// DownloadButton
 			// 
-			this.LoadStatus.Name = "LoadStatus";
-			resources.ApplyResources(this.LoadStatus, "LoadStatus");
+			resources.ApplyResources(this.DownloadButton, "DownloadButton");
+			this.DownloadButton.Name = "DownloadButton";
+			this.DownloadButton.UseVisualStyleBackColor = true;
+			this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
 			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.DownloadButton);
 			this.Controls.Add(this.SaveButton);
 			this.Controls.Add(this.PreviousButton);
 			this.Controls.Add(this.NextButton);
@@ -251,6 +259,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.Timer PlaybackTimer;
 		private System.Windows.Forms.ToolStripStatusLabel StreamingStatus;
 		private System.Windows.Forms.ToolStripStatusLabel LoadStatus;
+		private System.Windows.Forms.Button DownloadButton;
 	}
 }
 

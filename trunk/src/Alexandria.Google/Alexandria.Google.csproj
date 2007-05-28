@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3255632E-BC89-4EEA-B7B7-E8B0ADF93216}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Server</RootNamespace>
-    <AssemblyName>Alexandria.Server</AssemblyName>
+    <RootNamespace>Alexandria.Google</RootNamespace>
+    <AssemblyName>Alexandria.Google</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,24 +30,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlexandriaService.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="AlexandriaService.Designer.cs">
-      <DependentUpon>AlexandriaService.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

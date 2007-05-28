@@ -196,7 +196,7 @@ namespace Alexandria.MusicDns
 		#region FillTrackInfo
 		private void FillTrackInfo(TrackInfo info, bool lookupByFingerprint, bool getMetadata)
 		{
-			string request = url + "?" + string.Format(fingerprint_request_format,
+			string requestString = url + "?" + string.Format(fingerprint_request_format,
 				musicDnsKey.Trim(),
 				clientVersion.Trim(),
 				lookupByFingerprint ? info.Fingerprint : info.Puid,
@@ -212,29 +212,26 @@ namespace Alexandria.MusicDns
 				string.IsNullOrEmpty(info.Year) ? "0" : info.Year,
 				info.Encoding);
 					
-			HttpWebRequest myRequest = 	(HttpWebRequest)WebRequest.Create(request);
-			
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestString);
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+			Stream responseStream = response.GetResponseStream();
+			StreamReader reader = new StreamReader(responseStream);
 
-			HttpWebResponse hresp = (HttpWebResponse)myRequest.GetResponse();
-			Stream streamResponse = hresp.GetResponseStream();
-			StreamReader streamRead = new StreamReader(streamResponse);
-
-			metadata meta = new metadata();
-			meta.Namespace = metadataNamespace;
-
-			meta.puid.Columns["id"].Namespace = "";
-			meta.puid.Columns["id"].Prefix = "";
-
+			#region Old Metadata Code
+			//metadata meta = new metadata();
+			//meta.Namespace = metadataNamespace;
+			//meta.puid.Columns["id"].Namespace = "";
+			//meta.puid.Columns["id"].Prefix = "";
 			//meta.ReadXml(streamRead);
-			string xmlText = streamRead.ReadToEnd();
+			#endregion
+			
+			string responseXml = reader.ReadToEnd();
 
-			streamRead.Close();
-			hresp.Close();
-
-			string a = xmlText;
+			reader.Close();
+			response.Close();
 
 			XmlDocument xml = new XmlDocument();			
-			xml.LoadXml(xmlText);
+			xml.LoadXml(responseXml);
 						
 			foreach(XmlNode rootNode in xml.ChildNodes)
 			{
@@ -268,6 +265,7 @@ namespace Alexandria.MusicDns
 				}
 			}
 
+			#region Old Metadata Code
 			/*
 			if(meta.track.Rows.Count > 0)
 			{
@@ -295,6 +293,7 @@ namespace Alexandria.MusicDns
 
 			//MusicBrainz lookup
 			//http://musicbrainz.org/show/puid/?puid=2e6d085b-bf25-10d7-4bce-66f21de0e798
+			#endregion
 
 			int major = 0;
 			int minor = 0;
