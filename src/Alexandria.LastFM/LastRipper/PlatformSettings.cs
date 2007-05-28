@@ -2,51 +2,27 @@ using System;
 
 namespace Alexandria.LastFM.LastRipper
 {
-
-	public class PlatformSettings
+	public class PathSettings
 	{
-		public const System.String PathSeparator = "\\";
-		public static System.String TempFilePath
+		public static string TempFilePath
 		{
 			get
 			{
-				return PlatformSettings.TempPath + "TheLastRipper.mp3";
+				return PathSettings.TempPath + "rip.mp3";
 			}
 		}
 
-		public static System.String TempPath
+		public static string TempPath
 		{
 			get
 			{
-				System.String Path = "c:\\temp\\";
-				if (!System.IO.Directory.Exists(Path))
-				{
-					System.IO.Directory.CreateDirectory(Path);
-				}
-				return Path;
+				string path = string.Format("{0}Alexandria{1}LastRipper{2}", System.IO.Path.GetTempPath(), System.IO.Path.PathSeparator, System.IO.Path.PathSeparator);
+				
+				if (!System.IO.Directory.Exists(path))
+					System.IO.Directory.CreateDirectory(path);
+				
+				return path;
 			}
 		}
-		/*public const System.String PathSeparator = "/";
-		public static System.String TempFilePath
-		{
-			get
-			{
-				return PlatformSettings.TempPath + "TheLastRipper.mp3";
-			}
-		}
-		
-		public static System.String TempPath
-		{
-			get
-			{
-				System.String Path = "/tmp/";
-				if(!System.IO.Directory.Exists(Path))
-				{
-					System.IO.Directory.CreateDirectory(Path);
-				}
-				return Path;
-			}
-		}*/
-
 	}
 }

@@ -33,7 +33,7 @@ namespace Alexandria.LastFM.LastRipper
 		protected void StartRecording()
 		{
 			//Create or overwrite tempfile
-			this.TempFile = File.Create(PlatformSettings.TempFilePath);
+			this.TempFile = File.Create(PathSettings.TempFilePath);
 
 			//Getting stream
 			WebRequest wReq = WebRequest.Create(this.StreamURL);
@@ -135,7 +135,7 @@ namespace Alexandria.LastFM.LastRipper
 					this.TempFile.Close();
 
 					//Create or overwrite tempfile
-					this.TempFile = File.Create(PlatformSettings.TempFilePath);
+					this.TempFile = File.Create(PathSettings.TempFilePath);
 
 					//Start recording agian
 					this.ReadHandle = RadioStream.BeginRead(this.Buffer, 0, this.Buffer.Length, new System.AsyncCallback(this.TempSave), RadioStream);
@@ -158,13 +158,13 @@ namespace Alexandria.LastFM.LastRipper
 					this.TempFile.Dispose();
 
 					//Filesystem paths
-					AlbumPath = this.MusicPath + PlatformSettings.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Artist) + PlatformSettings.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Album) + PlatformSettings.PathSeparator;
+					AlbumPath = this.MusicPath + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Artist) + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Album) + System.IO.Path.PathSeparator;
 					NewFilePath = AlbumPath + LastManager.RemoveIllegalChars(SongInfo.Track) + ".mp3";
 
 					//Dont overwrite file if it already exist, new rip may be bad, and we should leave it to the user to sort them manually
 					if (File.Exists(NewFilePath))
 					{
-						File.Delete(PlatformSettings.TempFilePath);
+						File.Delete(PathSettings.TempFilePath);
 					}
 					else
 					{
@@ -172,11 +172,11 @@ namespace Alexandria.LastFM.LastRipper
 						{
 							Directory.CreateDirectory(AlbumPath);
 						}
-						File.Move(PlatformSettings.TempFilePath, NewFilePath);
+						File.Move(PathSettings.TempFilePath, NewFilePath);
 					}
 
 					//Create or overwrite tempfile
-					this.TempFile = File.Create(PlatformSettings.TempFilePath);
+					this.TempFile = File.Create(PathSettings.TempFilePath);
 
 					//Start recording agian
 					this.ReadHandle = RadioStream.BeginRead(this.Buffer, 0, this.Buffer.Length, new System.AsyncCallback(this.TempSave), RadioStream);
