@@ -30,6 +30,7 @@ namespace Alexandria.MusicDns
 		private string lyricist = string.Empty;
 		private string band = string.Empty;
 		private string puid = string.Empty;
+		private string localName = string.Empty;
 		
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
@@ -178,6 +179,11 @@ namespace Alexandria.MusicDns
 		public int TrackNumber
 		{
 			get { return TrackNum; }
+		}
+		
+		public string LocalName
+		{
+			get { return string.Format("{0}.{1}", Name, Format); }
 		}
 		#endregion
 

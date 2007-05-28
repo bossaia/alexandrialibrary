@@ -23,7 +23,7 @@ namespace Alexandria.FreeDB
 	{
 		private IntPtr cdHandle;
 		private bool TocValid = false;
-		private Win32Functions.CDROM_TOC Toc = null;
+		private CDRomToc toc = null; //NativeMethods.CDROM_TOC Toc = null;
 		private char m_Drive = '\0';
 		private DeviceChangeNotificationWindow NotWnd = null;
 
@@ -32,16 +32,16 @@ namespace Alexandria.FreeDB
 
 		public CDDrive()
 		{
-			Toc = new Win32Functions.CDROM_TOC();
+			toc = new CDRomToc(); //NativeMethods.CDROM_TOC();
 			cdHandle = IntPtr.Zero;
 		}
 
 		public bool Open(char Drive)
 		{
 			Close();
-			if (Win32Functions.GetDriveType(Drive + ":\\") == Win32Functions.DriveTypes.DRIVE_CDROM)
+			if (NativeMethods.GetDriveType(Drive + ":\\") == DriveType.DRIVE_CDROM)
 			{
-				cdHandle = Win32Functions.CreateFile("\\\\.\\" + Drive + ':', Win32Functions.GENERIC_READ, Win32Functions.FILE_SHARE_READ, IntPtr.Zero, Win32Functions.OPEN_EXISTING, 0, IntPtr.Zero);
+				cdHandle = NativeMethods.CreateFile("\\\\.\\" + Drive + ':', NativeMethods.GENERIC_READ, NativeMethods.FILE_SHARE_READ, IntPtr.Zero, NativeMethods.OPEN_EXISTING, 0, IntPtr.Zero);
 				if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 				{
 					m_Drive = Drive;
@@ -70,7 +70,7 @@ namespace Alexandria.FreeDB
 			}
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
-				Win32Functions.CloseHandle(cdHandle);
+				NativeMethods.CloseHandle(cdHandle);
 			}
 			cdHandle = IntPtr.Zero;
 			m_Drive = '\0';
@@ -101,7 +101,7 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint BytesRead = 0;
-				TocValid = Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_CDROM_READ_TOC, IntPtr.Zero, 0, Toc, (uint)Marshal.SizeOf(Toc), ref BytesRead, IntPtr.Zero) != 0;
+				TocValid = NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_CDROM_READ_TOC, IntPtr.Zero, 0, toc, (uint)Marshal.SizeOf(toc), ref BytesRead, IntPtr.Zero) != 0;
 			}
 			else
 			{
@@ -111,9 +111,9 @@ namespace Alexandria.FreeDB
 		}
 		protected int GetStartSector(int track)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
-				Win32Functions.TRACK_DATA td = Toc.TrackData[track - 1];
+				TrackData td = toc.TrackData[track - 1];
 				return (td.Address_1 * 60 * 75 + td.Address_2 * 75 + td.Address_3) - 150;
 			}
 			else
@@ -123,9 +123,9 @@ namespace Alexandria.FreeDB
 		}
 		protected int GetEndSector(int track)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
-				Win32Functions.TRACK_DATA td = Toc.TrackData[track];
+				TrackData td = toc.TrackData[track];
 				return (td.Address_1 * 60 * 75 + td.Address_2 * 75 + td.Address_3) - 151;
 			}
 			else
@@ -149,15 +149,15 @@ namespace Alexandria.FreeDB
 		/// <returns>True on success</returns>
 		protected bool ReadSector(int sector, byte[] Buffer, int NumSectors)
 		{
-			if (TocValid && ((sector + NumSectors) <= GetEndSector(Toc.LastTrack)) && (Buffer.Length >= CB_AUDIO * NumSectors))
+			if (TocValid && ((sector + NumSectors) <= GetEndSector(toc.LastTrack)) && (Buffer.Length >= CB_AUDIO * NumSectors))
 			{
-				Win32Functions.RAW_READ_INFO rri = new Win32Functions.RAW_READ_INFO();
-				rri.TrackMode = Win32Functions.TRACK_MODE_TYPE.CDDA;
+				RawReadInfo rri = new RawReadInfo(); //NativeMethods.RAW_READ_INFO();
+				rri.TrackMode = TrackModeType.CDDA; //NativeMethods.TRACK_MODE_TYPE.CDDA;
 				rri.SectorCount = (uint)NumSectors;
 				rri.DiskOffset = sector * CB_CDROMSECTOR;
 
 				uint BytesRead = 0;
-				if (Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_CDROM_RAW_READ, rri, (uint)Marshal.SizeOf(rri), Buffer, (uint)NumSectors * CB_AUDIO, ref BytesRead, IntPtr.Zero) != 0)
+				if (NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_CDROM_RAW_READ, rri, (uint)Marshal.SizeOf(rri), Buffer, (uint)NumSectors * CB_AUDIO, ref BytesRead, IntPtr.Zero) != 0)
 				{
 					return true;
 				}
@@ -180,9 +180,9 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint Dummy = 0;
-				Win32Functions.PREVENT_MEDIA_REMOVAL pmr = new Win32Functions.PREVENT_MEDIA_REMOVAL();
-				pmr.PreventMediaRemoval = 1;
-				return Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_STORAGE_MEDIA_REMOVAL, pmr, (uint)Marshal.SizeOf(pmr), IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
+				PreventMediaRemoval pmr = new PreventMediaRemoval(); //NativeMethods.PREVENT_MEDIA_REMOVAL();
+				pmr.Lock = 1; //PreventMediaRemoval = 1;
+				return NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_STORAGE_MEDIA_REMOVAL, pmr, (uint)Marshal.SizeOf(pmr), IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
 			}
 			else
 			{
@@ -198,9 +198,9 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint Dummy = 0;
-				Win32Functions.PREVENT_MEDIA_REMOVAL pmr = new Win32Functions.PREVENT_MEDIA_REMOVAL();
-				pmr.PreventMediaRemoval = 0;
-				return Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_STORAGE_MEDIA_REMOVAL, pmr, (uint)Marshal.SizeOf(pmr), IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
+				PreventMediaRemoval pmr = new PreventMediaRemoval(); //NativeMethods.PREVENT_MEDIA_REMOVAL();
+				pmr.Lock = 1; //PreventMediaRemoval = 0;
+				return NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_STORAGE_MEDIA_REMOVAL, pmr, (uint)Marshal.SizeOf(pmr), IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
 			}
 			else
 			{
@@ -217,7 +217,7 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint Dummy = 0;
-				return Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_STORAGE_LOAD_MEDIA, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
+				return NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_STORAGE_LOAD_MEDIA, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
 			}
 			else
 			{
@@ -234,7 +234,7 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint Dummy = 0;
-				return Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_STORAGE_EJECT_MEDIA, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
+				return NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_STORAGE_EJECT_MEDIA, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0;
 			}
 			else
 			{
@@ -250,7 +250,7 @@ namespace Alexandria.FreeDB
 			if (((int)cdHandle != -1) && ((int)cdHandle != 0))
 			{
 				uint Dummy = 0;
-				if (Win32Functions.DeviceIoControl(cdHandle, Win32Functions.IOCTL_STORAGE_CHECK_VERIFY, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0)
+				if (NativeMethods.DeviceIoControl(cdHandle, NativeMethods.IOCTL_STORAGE_CHECK_VERIFY, IntPtr.Zero, 0, IntPtr.Zero, 0, ref Dummy, IntPtr.Zero) != 0)
 				{
 					return true;
 				}
@@ -289,7 +289,7 @@ namespace Alexandria.FreeDB
 		{
 			if (TocValid)
 			{
-				return Toc.LastTrack - Toc.FirstTrack + 1;
+				return toc.LastTrack - toc.FirstTrack + 1;
 			}
 			else return -1;
 		}
@@ -302,9 +302,9 @@ namespace Alexandria.FreeDB
 			if (TocValid)
 			{
 				int tracks = 0;
-				for (int i = Toc.FirstTrack - 1; i < Toc.LastTrack; i++)
+				for (int i = toc.FirstTrack - 1; i < toc.LastTrack; i++)
 				{
-					if (Toc.TrackData[i].Control == 0)
+					if (toc.TrackData[i].Control == 0)
 						tracks++;
 				}
 				return tracks;
@@ -327,7 +327,7 @@ namespace Alexandria.FreeDB
 		/// <returns>Negative value means an error. On success returns the number of bytes read</returns>
 		public int ReadTrack(int track, byte[] Data, ref uint DataSize, uint StartSecond, uint Seconds2Read, CdReadProgressEventHandler ProgressEvent)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
 				int StartSect = GetStartSector(track);
 				int EndSect = GetEndSector(track);
@@ -385,7 +385,7 @@ namespace Alexandria.FreeDB
 		/// <returns>Negative value means an error. On success returns the number of bytes read</returns>
 		public int ReadTrack(int track, CdDataReadEventHandler DataReadEvent, uint StartSecond, uint Seconds2Read, CdReadProgressEventHandler ProgressEvent)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack) && (DataReadEvent != null))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack) && (DataReadEvent != null))
 			{
 				int StartSect = GetStartSector(track);
 				int EndSect = GetEndSector(track);
@@ -465,9 +465,9 @@ namespace Alexandria.FreeDB
 
 		public bool IsAudioTrack(int track)
 		{
-			if ((TocValid) && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if ((TocValid) && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
-				return (Toc.TrackData[track - 1].Control & 4) == 0;
+				return (toc.TrackData[track - 1].Control & 4) == 0;
 			}
 			else
 			{
@@ -480,7 +480,7 @@ namespace Alexandria.FreeDB
 			string res = "";
 			for (char c = 'C'; c <= 'Z'; c++)
 			{
-				if (Win32Functions.GetDriveType(c + ":") == Win32Functions.DriveTypes.DRIVE_CDROM)
+				if (NativeMethods.GetDriveType(c + ":") == DriveType.DRIVE_CDROM)
 				{
 					res += c;
 				}
@@ -532,8 +532,8 @@ namespace Alexandria.FreeDB
 			{
 				Console.WriteLine("Track {0}: {1}:{2}", i, GetSeconds(i) / 60, GetSeconds(i) % 60);
 
-				ofs = (((Toc.TrackData[i].Address_1 * 60) + Toc.TrackData[i].Address_2) * 75) + Toc.TrackData[i].Address_3;
-				n = n + cddb_sum((Toc.TrackData[i].Address_1 * 60) + Toc.TrackData[i].Address_2);
+				ofs = (((toc.TrackData[i].Address_1 * 60) + toc.TrackData[i].Address_2) * 75) + toc.TrackData[i].Address_3;
+				n = n + cddb_sum((toc.TrackData[i].Address_1 * 60) + toc.TrackData[i].Address_2);
 				secs += GetSeconds(i);
 				postfix += "+" + string.Format("{0}", ofs);
 
@@ -541,13 +541,13 @@ namespace Alexandria.FreeDB
 			}
 
 
-			int numSecs = Toc.TrackData[i].Address_1 * 60 + Toc.TrackData[i].Address_2;
+			int numSecs = toc.TrackData[i].Address_1 * 60 + toc.TrackData[i].Address_2;
 
 			Console.WriteLine("n = {0}, numSecs = {1}, secs = {2}", n, numSecs, secs);
 
 			postfix += "+" + numSecs;
-			Win32Functions.TRACK_DATA last = Toc.TrackData[numTracks];
-			Win32Functions.TRACK_DATA first = Toc.TrackData[0];
+			TrackData last = toc.TrackData[numTracks];
+			TrackData first = toc.TrackData[0];
 
 			t = ((last.Address_1 * 60) + last.Address_2) -
 				((first.Address_1 * 60) + first.Address_2);
@@ -586,8 +586,8 @@ namespace Alexandria.FreeDB
 			{
 				Console.WriteLine("Track {0}: {1}:{2}", i, GetSeconds(i) / 60, GetSeconds(i) % 60);
 
-				ofs = (((Toc.TrackData[i].Address_1 * 60) + Toc.TrackData[i].Address_2) * 75) + Toc.TrackData[i].Address_3;
-				n = n + cddb_sum((Toc.TrackData[i].Address_1 * 60) + Toc.TrackData[i].Address_2);
+				ofs = (((toc.TrackData[i].Address_1 * 60) + toc.TrackData[i].Address_2) * 75) + toc.TrackData[i].Address_3;
+				n = n + cddb_sum((toc.TrackData[i].Address_1 * 60) + toc.TrackData[i].Address_2);
 				secs += GetSeconds(i);
 				postfix += "+" + string.Format("{0}", ofs);
 
@@ -595,13 +595,13 @@ namespace Alexandria.FreeDB
 			}
 
 
-			int numSecs = Toc.TrackData[i].Address_1 * 60 + Toc.TrackData[i].Address_2;
+			int numSecs = toc.TrackData[i].Address_1 * 60 + toc.TrackData[i].Address_2;
 
 			Console.WriteLine("n = {0}, numSecs = {1}, secs = {2}", n, numSecs, secs);
 
 			postfix += "+" + numSecs;
-			Win32Functions.TRACK_DATA last = Toc.TrackData[numTracks];
-			Win32Functions.TRACK_DATA first = Toc.TrackData[0];
+			TrackData last = toc.TrackData[numTracks];
+			TrackData first = toc.TrackData[0];
 
 			t = ((last.Address_1 * 60) + last.Address_2) -
 				((first.Address_1 * 60) + first.Address_2);
@@ -618,13 +618,13 @@ namespace Alexandria.FreeDB
 
 		protected int GetSeconds(int track)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
 				int start = (GetStartSector(track) + 150) / 75;
 				int end = (GetEndSector(track) + 150) / 75;
 
 				int begin = 2;
-				if (track > Toc.FirstTrack)
+				if (track > toc.FirstTrack)
 					begin = (GetEndSector2(track - 1) + 150) / 75;
 
 				//return (end - begin);
@@ -661,9 +661,9 @@ namespace Alexandria.FreeDB
 
 		protected int GetEndSector2(int track)
 		{
-			if (TocValid && (track >= Toc.FirstTrack) && (track <= Toc.LastTrack))
+			if (TocValid && (track >= toc.FirstTrack) && (track <= toc.LastTrack))
 			{
-				Win32Functions.TRACK_DATA td = Toc.TrackData[track];
+				TrackData td = toc.TrackData[track];
 				return (td.Address_1 * 60 * 75 + td.Address_2 * 75) - 151;
 			}
 			else

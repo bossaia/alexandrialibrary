@@ -15,7 +15,13 @@ namespace Alexandria.Client
 {
 	public partial class MainForm : Form
 	{
+		#region Private Constants and ReadOnly Fields
+		private readonly string tempPath = string.Format("{0}Alexandria\\", System.IO.Path.GetTempPath());
+		#endregion
+	
+		#region Private Fields
 		private Fmod.LocalSound audio;
+		#endregion
 	
 		#region Constructors
 		public MainForm()
@@ -58,6 +64,7 @@ namespace Alexandria.Client
 				this.QueueListView.Columns.Add("Date");
 				this.QueueListView.Columns.Add("Location");
 				this.QueueListView.Columns.Add("TrackID");
+				this.QueueListView.Columns.Add("FileName");
 				
 				LoadStatus.Text = "Searching for tracks...";				
 				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
@@ -69,7 +76,7 @@ namespace Alexandria.Client
 					int loaded = 0;
 					foreach(IAudioTrack track in tracks)
 					{
-						string[] data = new string[8];
+						string[] data = new string[9];
 						data[0] = track.TrackNumber.ToString();
 						data[1] = track.Name;
 						data[2] = track.Artist;
@@ -78,7 +85,7 @@ namespace Alexandria.Client
 						data[5] = string.Format("{0:d}", track.ReleaseDate);
 						data[6] = track.Location.Path;
 						data[7] = track.Id.Value;											
-						
+						data[8] = track.LocalName;
 					
 						ListViewItem item = new ListViewItem(data);
 						this.QueueListView.Items.Add(item);
@@ -125,10 +132,10 @@ namespace Alexandria.Client
 		
 		private void TestMusicDNS()
 		{
-			Location location = new Location(@"D:\working\Tests\AudioTest\08 Only.wav");
+			Location location = new Location(@"D:\working\Tests\AudioTest\01 Bill Hicks - Intro.wav"); //08 Only.wav");
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
 			IAudioTrack track = factory.CreateAudioTrack(location);
-			string puid = track.Id.Value;
+			MessageBox.Show(string.Format("File: {0}\nPuid: {1}", track.Location.Path, track.Id.Value), "MusicDNS Test");
 		}
 		#endregion
 		
@@ -165,5 +172,22 @@ namespace Alexandria.Client
 			TestMp3Tunes();
 		}
 		#endregion
+
+		private void DownloadButton_Click(object sender, EventArgs e)
+		{		
+			if (QueueListView.SelectedItems.Count > 0)
+			{
+				System.Net.WebClient client = new System.Net.WebClient();
+				ListViewItem selectedItem = QueueListView.SelectedItems[0];
+				Uri uri = new Uri(selectedItem.SubItems[6].Text);
+
+				if (!System.IO.Directory.Exists(tempPath))
+					System.IO.Directory.CreateDirectory(tempPath);
+
+				System.IO.FileInfo fileInfo = new System.IO.FileInfo(selectedItem.SubItems[8].Text);
+				string fileName = string.Format("{0}{1}", tempPath, fileInfo.Name);
+				client.DownloadFileAsync(uri, fileName);
+			}
+		}
 	}
 }

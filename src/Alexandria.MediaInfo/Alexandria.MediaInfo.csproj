@@ -7,8 +7,8 @@
     <ProjectGuid>{61BC9FAF-CF0E-4BE9-BE14-F5A443FAA8AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.MediaInfo</RootNamespace>
-    <AssemblyName>AlexandriaMediaInfo</AssemblyName>
+    <RootNamespace>Alexandria.MediaInfo</RootNamespace>
+    <AssemblyName>Alexandria.MediaInfo</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

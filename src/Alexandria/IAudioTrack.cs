@@ -11,5 +11,6 @@ namespace Alexandria
 		TimeSpan Duration { get; }
 		DateTime ReleaseDate { get; }
 		int TrackNumber { get; }
+		string LocalName { get; }
 	}
 }

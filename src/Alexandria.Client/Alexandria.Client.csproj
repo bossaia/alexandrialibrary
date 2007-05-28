@@ -7,8 +7,8 @@
     <ProjectGuid>{3095580F-8714-4D19-B88E-DB51162D112B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.Client</RootNamespace>
-    <AssemblyName>AlexandriaClient</AssemblyName>
+    <RootNamespace>Alexandria.Client</RootNamespace>
+    <AssemblyName>Alexandria.Client</AssemblyName>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

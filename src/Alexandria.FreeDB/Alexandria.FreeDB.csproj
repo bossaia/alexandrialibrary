@@ -7,8 +7,8 @@
     <ProjectGuid>{26BF108C-8B39-4C9E-A545-4AC01AA3C0E6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlexandriaOrg.Alexandria.FreeDB</RootNamespace>
-    <AssemblyName>AlexandriaFreeDB</AssemblyName>
+    <RootNamespace>Alexandria.FreeDB</RootNamespace>
+    <AssemblyName>Alexandria.FreeDB</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,7 +58,7 @@
     <Compile Include="Track.cs" />
     <Compile Include="TrackCollection.cs" />
     <Compile Include="TrackDataList.cs" />
-    <Compile Include="Win32Functions.cs" />
+    <Compile Include="NativeMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
