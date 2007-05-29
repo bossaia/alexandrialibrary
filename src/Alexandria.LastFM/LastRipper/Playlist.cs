@@ -3,14 +3,14 @@ using System;
 namespace Alexandria.LastFM.LastRipper
 {
 
-	public class PlayListX : System.Collections.ArrayList
+	public class Playlist : System.Collections.ArrayList
 	{
 		protected System.String MusicPath;
 
 		///<summary>
 		///
 		///</summary>
-		public PlayListX(System.String MusicPath)
+		public Playlist(System.String MusicPath)
 		{
 			this.MusicPath = MusicPath;
 		}

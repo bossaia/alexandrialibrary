@@ -49,8 +49,8 @@
     <Compile Include="LastRipper\MetaInfo.cs" />
     <Compile Include="LastRipper\MetaMusic.cs" />
     <Compile Include="LastRipper\PathSettings.cs" />
-    <Compile Include="LastRipper\PlayListX.cs" />
-    <Compile Include="LastRipper\PlayListGenerator.cs" />
+    <Compile Include="LastRipper\Playlist.cs" />
+    <Compile Include="LastRipper\PlayListGeneratorX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
