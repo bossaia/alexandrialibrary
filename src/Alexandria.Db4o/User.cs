@@ -15,7 +15,7 @@ namespace Alexandria.Db4o
 		#region Private Fields
 		private string name;
 		private string password;
-		private IList<IProfile> profiles;
+		private IList<IProfile> profiles = new List<IProfile>();
 		private IProfile profile;
 		#endregion
 		
@@ -41,6 +41,11 @@ namespace Alexandria.Db4o
 		{
 			get { return profile; }
 			set { profile = value; }
+		}
+
+		public void AddProfile(IProfile profile)
+		{
+			profiles.Add(profile);
 		}
 
 		public bool Authenticate(string name, string password)

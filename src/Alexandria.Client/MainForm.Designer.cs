@@ -55,6 +55,14 @@ namespace Alexandria.Client
 			this.SaveButton = new System.Windows.Forms.Button();
 			this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
 			this.DownloadButton = new System.Windows.Forms.Button();
+			this.NumberColumn = new System.Windows.Forms.ColumnHeader();
+			this.NameColumn = new System.Windows.Forms.ColumnHeader();
+			this.ArtistColumn = new System.Windows.Forms.ColumnHeader();
+			this.AlbumColumn = new System.Windows.Forms.ColumnHeader();
+			this.LengthColumn = new System.Windows.Forms.ColumnHeader();
+			this.DateColumn = new System.Windows.Forms.ColumnHeader();
+			this.LocationColumn = new System.Windows.Forms.ColumnHeader();
+			this.FormatColumn = new System.Windows.Forms.ColumnHeader();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			this.QueueGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
@@ -91,8 +99,19 @@ namespace Alexandria.Client
 			// QueueListView
 			// 
 			this.QueueListView.AllowColumnReorder = true;
+			this.QueueListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.NumberColumn,
+            this.NameColumn,
+            this.ArtistColumn,
+            this.AlbumColumn,
+            this.LengthColumn,
+            this.DateColumn,
+            this.LocationColumn,
+            this.FormatColumn});
+			this.QueueListView.FullRowSelect = true;
 			this.QueueListView.HideSelection = false;
 			resources.ApplyResources(this.QueueListView, "QueueListView");
+			this.QueueListView.MultiSelect = false;
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
@@ -204,6 +223,38 @@ namespace Alexandria.Client
 			this.DownloadButton.UseVisualStyleBackColor = true;
 			this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
 			// 
+			// NumberColumn
+			// 
+			resources.ApplyResources(this.NumberColumn, "NumberColumn");
+			// 
+			// NameColumn
+			// 
+			resources.ApplyResources(this.NameColumn, "NameColumn");
+			// 
+			// ArtistColumn
+			// 
+			resources.ApplyResources(this.ArtistColumn, "ArtistColumn");
+			// 
+			// AlbumColumn
+			// 
+			resources.ApplyResources(this.AlbumColumn, "AlbumColumn");
+			// 
+			// LengthColumn
+			// 
+			resources.ApplyResources(this.LengthColumn, "LengthColumn");
+			// 
+			// DateColumn
+			// 
+			resources.ApplyResources(this.DateColumn, "DateColumn");
+			// 
+			// LocationColumn
+			// 
+			resources.ApplyResources(this.LocationColumn, "LocationColumn");
+			// 
+			// FormatColumn
+			// 
+			resources.ApplyResources(this.FormatColumn, "FormatColumn");
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -260,6 +311,14 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripStatusLabel StreamingStatus;
 		private System.Windows.Forms.ToolStripStatusLabel LoadStatus;
 		private System.Windows.Forms.Button DownloadButton;
+		private System.Windows.Forms.ColumnHeader NumberColumn;
+		private System.Windows.Forms.ColumnHeader NameColumn;
+		private System.Windows.Forms.ColumnHeader ArtistColumn;
+		private System.Windows.Forms.ColumnHeader AlbumColumn;
+		private System.Windows.Forms.ColumnHeader LengthColumn;
+		private System.Windows.Forms.ColumnHeader DateColumn;
+		private System.Windows.Forms.ColumnHeader LocationColumn;
+		private System.Windows.Forms.ColumnHeader FormatColumn;
 	}
 }
 
