@@ -3,14 +3,14 @@ using System;
 namespace Alexandria.LastFM.LastRipper
 {
 	[SerializableAttribute]
-	public class PlayListGeneratorX : System.Runtime.Serialization.ISerializable
+	public class PlaylistFactory : System.Runtime.Serialization.ISerializable
 	{
 		protected System.String _MusicPath;
 		protected System.String _UserName;
 
-		protected PlayListGeneratorX() { }
+		protected PlaylistFactory() { }
 
-		public PlayListGeneratorX(System.String MusicPath, System.String UserName)
+		public PlaylistFactory(System.String MusicPath, System.String UserName)
 		{
 			this._MusicPath = MusicPath;
 			this._UserName = UserName;
@@ -36,9 +36,9 @@ namespace Alexandria.LastFM.LastRipper
 			Playlist List2;
 			Playlist List3;
 
-			List1 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/toptracks.xml", this.TopTracks, this.TopTracksMixed, "TopTracks");
-			List2 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/recentlovedtracks.xml", this.RecentLovedTracks, this.RecentLovedTracksMixed, "RecentLovedTracks");
-			List3 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/weeklytrackchart.xml", this.WeeklyTrackChart, this.WeeklyTrackChartMixed, "WeeklyTrackChart");
+			List1 = this.CreatePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/toptracks.xml", this.TopTracks, this.TopTracksMixed, "TopTracks");
+			List2 = this.CreatePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/recentlovedtracks.xml", this.RecentLovedTracks, this.RecentLovedTracksMixed, "RecentLovedTracks");
+			List3 = this.CreatePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/weeklytrackchart.xml", this.WeeklyTrackChart, this.WeeklyTrackChartMixed, "WeeklyTrackChart");
 
 			List1.AddRange(List2);
 			List1.AddRange(List3);
@@ -46,7 +46,7 @@ namespace Alexandria.LastFM.LastRipper
 			this.SavePlayList(List1, "Mixed");
 		}
 
-		protected virtual Playlist GeneratePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
+		protected virtual Playlist CreatePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
 		{
 			Playlist List = new Playlist(this._MusicPath);
 
@@ -81,7 +81,7 @@ namespace Alexandria.LastFM.LastRipper
 			}
 		}
 
-		protected PlayListGeneratorX(System.Runtime.Serialization.SerializationInfo Info, System.Runtime.Serialization.StreamingContext context)
+		protected PlaylistFactory(System.Runtime.Serialization.SerializationInfo Info, System.Runtime.Serialization.StreamingContext context)
 		{
 			if (Info == null)
 			{
