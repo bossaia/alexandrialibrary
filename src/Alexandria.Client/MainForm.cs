@@ -64,12 +64,12 @@ namespace Alexandria.Client
 				this.QueueListView.Columns.Add("Date");
 				this.QueueListView.Columns.Add("Location");
 				this.QueueListView.Columns.Add("TrackID");
-				this.QueueListView.Columns.Add("FileName");
+				this.QueueListView.Columns.Add("Format");
 				
 				LoadStatus.Text = "Searching for tracks...";				
 				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
 				musicLocker.Login("dan.poage@gmail.com", "automatic");								
-				IList<IAudioTrack> tracks = musicLocker.GetTracks();
+				IList<IAudioTrack> tracks = musicLocker.GetTracks(false);
 				if (tracks != null)
 				{
 					LoadStatus.Text = string.Format("Found {0,5} tracks...", tracks.Count);
@@ -85,7 +85,7 @@ namespace Alexandria.Client
 						data[5] = string.Format("{0:d}", track.ReleaseDate);
 						data[6] = track.Location.Path;
 						data[7] = track.Id.Value;											
-						data[8] = track.LocalName;
+						data[8] = track.Format;
 					
 						ListViewItem item = new ListViewItem(data);
 						this.QueueListView.Items.Add(item);
@@ -183,9 +183,8 @@ namespace Alexandria.Client
 
 				if (!System.IO.Directory.Exists(tempPath))
 					System.IO.Directory.CreateDirectory(tempPath);
-
-				System.IO.FileInfo fileInfo = new System.IO.FileInfo(selectedItem.SubItems[8].Text);
-				string fileName = string.Format("{0}{1}", tempPath, fileInfo.Name);
+				
+				string fileName = string.Format("{0}{1:##} {2}.{3}", tempPath, selectedItem.SubItems[0].Text, selectedItem.SubItems[1].Text, selectedItem.SubItems[8].Text);
 				client.DownloadFileAsync(uri, fileName);
 			}
 		}

@@ -158,7 +158,7 @@ namespace Alexandria.LastFM.LastRipper
 					this.TempFile.Dispose();
 
 					//Filesystem paths
-					AlbumPath = this.MusicPath + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Artist) + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(SongInfo.Album) + System.IO.Path.PathSeparator;
+					AlbumPath = this.MusicPath + System.IO.Path.DirectorySeparatorChar + LastManager.RemoveIllegalChars(SongInfo.Artist) + System.IO.Path.DirectorySeparatorChar + LastManager.RemoveIllegalChars(SongInfo.Album) + System.IO.Path.DirectorySeparatorChar;
 					NewFilePath = AlbumPath + LastManager.RemoveIllegalChars(SongInfo.Track) + ".mp3";
 
 					//Dont overwrite file if it already exist, new rip may be bad, and we should leave it to the user to sort them manually

@@ -29,8 +29,7 @@ namespace Alexandria.MusicDns
 		private string conductor = string.Empty;
 		private string lyricist = string.Empty;
 		private string band = string.Empty;
-		private string puid = string.Empty;
-		private string localName = string.Empty;
+		private string puid = string.Empty;		
 		
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
@@ -181,9 +180,9 @@ namespace Alexandria.MusicDns
 			get { return TrackNum; }
 		}
 		
-		public string LocalName
+		string IAudioTrack.Format
 		{
-			get { return string.Format("{0}.{1}", Name, Format); }
+			get { return Format; }
 		}
 		#endregion
 

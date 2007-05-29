@@ -32,9 +32,9 @@ namespace Alexandria.LastFM.LastRipper
 
 		public virtual void Generate()
 		{
-			PlayList List1;
-			PlayList List2;
-			PlayList List3;
+			PlayListX List1;
+			PlayListX List2;
+			PlayListX List3;
 
 			List1 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/toptracks.xml", this.TopTracks, this.TopTracksMixed, "TopTracks");
 			List2 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/recentlovedtracks.xml", this.RecentLovedTracks, this.RecentLovedTracksMixed, "RecentLovedTracks");
@@ -46,9 +46,9 @@ namespace Alexandria.LastFM.LastRipper
 			this.SavePlayList(List1, "Mixed");
 		}
 
-		protected virtual PlayList GeneratePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
+		protected virtual PlayListX GeneratePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
 		{
-			PlayList List = new PlayList(this._MusicPath);
+			PlayListX List = new PlayListX(this._MusicPath);
 
 			List.DownloadXML(Feed);
 
@@ -65,7 +65,7 @@ namespace Alexandria.LastFM.LastRipper
 			return List;
 		}
 
-		protected virtual void SavePlayList(PlayList List, System.String FileName)
+		protected virtual void SavePlayList(PlayListX List, System.String FileName)
 		{
 			if (this.m3u)
 			{

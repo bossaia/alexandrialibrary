@@ -7,14 +7,14 @@ namespace Alexandria
 	public abstract class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
-		public BaseAudioTrack(IIdentifier id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string localName) : base(id, location, name)
+		public BaseAudioTrack(IIdentifier id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)
 		{
 			this.album = album;
 			this.artist = artist;
 			this.duration = duration;
 			this.releaseDate = releaseDate;
 			this.trackNumber = trackNumber;
-			this.localName = localName;
+			this.format = format;
 		}
 		#endregion
 		
@@ -24,7 +24,7 @@ namespace Alexandria
 		private TimeSpan duration;
 		private DateTime releaseDate;
 		private int trackNumber;
-		private string localName;
+		private string format;
 		#endregion
 	
 		#region IAudioTrack Members
@@ -53,9 +53,9 @@ namespace Alexandria
 			get { return trackNumber; }
 		}
 		
-		public string LocalName
+		public string Format
 		{
-			get { return localName; }
+			get { return format; }
 		}
 		#endregion
 	}
