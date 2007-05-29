@@ -16,7 +16,7 @@ namespace Alexandria.LastFM.LastRipper
 		{
 			get
 			{
-				string path = string.Format("{0}Alexandria{1}LastRipper{2}", System.IO.Path.GetTempPath(), System.IO.Path.PathSeparator, System.IO.Path.PathSeparator);
+				string path = string.Format("{0}Alexandria{1}LastRipper{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 				
 				if (!System.IO.Directory.Exists(path))
 					System.IO.Directory.CreateDirectory(path);

@@ -61,12 +61,12 @@ namespace Alexandria.LastFM.LastRipper
 			{
 				try
 				{
-					System.IO.File.AppendAllText(PathSettings.TempPath + "\\" + "thelastripper.log",
+					System.IO.File.AppendAllText(PathSettings.TempPath + System.IO.Path.DirectorySeparatorChar + "thelastripper.log",
 										 "\n -Start update");
 
 					HttpWebRequest hReq = (HttpWebRequest)WebRequest.Create(this.ServiceURL + "np.php?session=" + this.SessionID + "&debug=0");
 					hReq.Timeout = 10000;
-					System.IO.File.AppendAllText(PathSettings.TempPath + "\\" + "thelastripper.log",
+					System.IO.File.AppendAllText(PathSettings.TempPath + System.IO.Path.DirectorySeparatorChar + "thelastripper.log",
 											 "\n - URL :" + this.ServiceURL + "np.php?session=" + this.SessionID + "&debug=0");
 					HttpWebResponse hRes = (HttpWebResponse)hReq.GetResponse();
 					Stream ResponseStream = hRes.GetResponseStream();
@@ -84,14 +84,14 @@ namespace Alexandria.LastFM.LastRipper
 				}
 				catch (System.Exception e)
 				{
-					System.IO.File.AppendAllText(PathSettings.TempPath + "\\" + "thelastripper.log",
+					System.IO.File.AppendAllText(PathSettings.TempPath + System.IO.Path.DirectorySeparatorChar + "thelastripper.log",
 										 "\n - Update timeout ERROR: " + e.Message + e.StackTrace);
 					//		System.Threading.Monitor.Exit(LastManager.UpdateLocker);
 					//System.Threading.Thread.CurrentThread.Abort();
 				}
 				finally
 				{
-					System.IO.File.AppendAllText(PathSettings.TempPath + "\\" + "thelastripper.log",
+					System.IO.File.AppendAllText(PathSettings.TempPath + System.IO.Path.DirectorySeparatorChar + "thelastripper.log",
 										 "\n - Update finished");
 					System.Threading.Monitor.Exit(LastManager.UpdateLocker);
 				}

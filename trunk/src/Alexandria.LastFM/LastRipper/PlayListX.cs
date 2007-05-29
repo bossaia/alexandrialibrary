@@ -3,14 +3,14 @@ using System;
 namespace Alexandria.LastFM.LastRipper
 {
 
-	public class PlayList : System.Collections.ArrayList
+	public class PlayListX : System.Collections.ArrayList
 	{
 		protected System.String MusicPath;
 
 		///<summary>
 		///
 		///</summary>
-		public PlayList(System.String MusicPath)
+		public PlayListX(System.String MusicPath)
 		{
 			this.MusicPath = MusicPath;
 		}
@@ -94,12 +94,12 @@ namespace Alexandria.LastFM.LastRipper
 		protected virtual System.Boolean IsAvailable(ref IMetaTrack Track)
 		{
 			System.String TrackPath = "";
-			System.String ArtistDir = this.MusicPath + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(Track.Artist);
+			System.String ArtistDir = this.MusicPath + System.IO.Path.DirectorySeparatorChar + LastManager.RemoveIllegalChars(Track.Artist);
 			if (System.IO.Directory.Exists(ArtistDir))
 			{
 				foreach (System.String Directory in System.IO.Directory.GetDirectories(ArtistDir))
 				{
-					TrackPath = Directory + System.IO.Path.PathSeparator + LastManager.RemoveIllegalChars(Track.Track) + ".mp3";
+					TrackPath = Directory + System.IO.Path.DirectorySeparatorChar + LastManager.RemoveIllegalChars(Track.Track) + ".mp3";
 					if (System.IO.File.Exists(TrackPath))
 					{
 						Track = new MetaMusic(TrackPath);
@@ -112,7 +112,7 @@ namespace Alexandria.LastFM.LastRipper
 
 		public virtual void Save(System.String FileName, PlayListType FileType)
 		{
-			System.IO.FileStream File = System.IO.File.Create(this.MusicPath + System.IO.Path.PathSeparator + FileName);
+			System.IO.FileStream File = System.IO.File.Create(this.MusicPath + System.IO.Path.DirectorySeparatorChar + FileName);
 			System.Text.ASCIIEncoding Encoder = new System.Text.ASCIIEncoding();
 			System.String Content;
 			switch (FileType)
@@ -137,7 +137,7 @@ namespace Alexandria.LastFM.LastRipper
 			System.String PlayList = "";
 			foreach (IMetaMusic Number in this)
 			{
-				PlayList += Number.Artist + System.IO.Path.PathSeparator + Number.Album + System.IO.Path.PathSeparator + Number.Track + ".mp3\n";
+				PlayList += Number.Artist + System.IO.Path.DirectorySeparatorChar + Number.Album + System.IO.Path.DirectorySeparatorChar + Number.Track + ".mp3\n";
 			}
 			return PlayList;
 		}
@@ -148,7 +148,7 @@ namespace Alexandria.LastFM.LastRipper
 			System.Int32 i = 1;
 			foreach (IMetaMusic Number in this)
 			{
-				PlayList += "File" + i + "=" + Number.Artist + System.IO.Path.PathSeparator + Number.Album + System.IO.Path.PathSeparator + Number.Track + ".mp3\n";
+				PlayList += "File" + i + "=" + Number.Artist + System.IO.Path.DirectorySeparatorChar + Number.Album + System.IO.Path.DirectorySeparatorChar + Number.Track + ".mp3\n";
 				PlayList += "Title" + i + "=" + Number.ToString() + "\n";
 				PlayList += "Length" + i + "=" + Number.Trackduration + "\n";
 				i += 1;
@@ -163,7 +163,7 @@ namespace Alexandria.LastFM.LastRipper
 			System.String PlayList = "<smil>\n<body>\n<seq>\n";
 			foreach (IMetaMusic Number in this)
 			{
-				PlayList += "<audio src=\"" + Number.Artist + System.IO.Path.PathSeparator + Number.Album + System.IO.Path.PathSeparator + Number.Track + ".mp3\"/>\n";
+				PlayList += "<audio src=\"" + Number.Artist + System.IO.Path.DirectorySeparatorChar + Number.Album + System.IO.Path.DirectorySeparatorChar + Number.Track + ".mp3\"/>\n";
 			}
 			return PlayList + "</seq>\n</body>\n</smil>";
 		}

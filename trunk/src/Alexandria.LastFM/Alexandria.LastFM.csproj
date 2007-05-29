@@ -49,7 +49,7 @@
     <Compile Include="LastRipper\MetaInfo.cs" />
     <Compile Include="LastRipper\MetaMusic.cs" />
     <Compile Include="LastRipper\PathSettings.cs" />
-    <Compile Include="LastRipper\PlayList.cs" />
+    <Compile Include="LastRipper\PlayListX.cs" />
     <Compile Include="LastRipper\PlayListGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

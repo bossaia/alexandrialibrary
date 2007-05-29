@@ -111,20 +111,34 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 
 		#region GetTracks
-		public List<IAudioTrack> GetTracks()
+		public List<IAudioTrack> GetTracks(bool ignoreCache)
 		{
-			string request;
 			List<IAudioTrack> tracks = new List<IAudioTrack>();
-			
 			XmlDocument doc = new XmlDocument();
-
-			string parameters = String.Format("?output=xml&sid={0}&type=track",
+			
+			string dirPath = string.Format("{0}Alexandria{1}MP3tunes{1}", Path.GetTempPath(), Path.DirectorySeparatorChar);
+			if (!Directory.Exists(dirPath))
+				Directory.CreateDirectory(dirPath);
+				
+			string xmlPath = string.Format("{0}tracks.xml", dirPath);
+			
+			if (ignoreCache || !File.Exists(xmlPath))
+			{
+				string request;
+				string parameters = String.Format("?output=xml&sid={0}&type=track",
 				HttpUtility.UrlEncode(this.session_id));
 
-			request = Request("http://www.mp3tunes.com/api/v0/lockerData",
-						  parameters);
-
-			doc.LoadXml(request);
+				request = Request("http://www.mp3tunes.com/api/v0/lockerData", parameters);
+				
+				doc.LoadXml(request);
+				doc.Save(xmlPath);
+			}
+			else
+			{
+				doc.Load(xmlPath);
+			}
+			
+			
 			XPathNavigator nav = doc.CreateNavigator();
 			XPathNodeIterator iter = nav.Select("/mp3tunes/trackList/item");
 
@@ -198,22 +212,19 @@ namespace Alexandria.Mp3Tunes
 						{
 							releaseDate = DateTime.MinValue;
 						}
+					}						
+						
+					string format = string.Empty;
+					if (!string.IsNullOrEmpty(trackFileName.InnerXml))					
+					{
+						FileInfo fileInfo = new FileInfo(trackFileName.InnerXml);
+						format = fileInfo.Extension.Remove(0, 1);
 					}
 
 					Album album = new Album(Identifier.None, location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 
-					Track track = new Track(trackId, location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, trackFileName.InnerXml);
+					Track track = new Track(trackId, location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
 
-					//tr.Uri = new Uri(downloadURL.InnerXml);
-					//tr.Artist = artistName.InnerXml;
-					//tr.Album = albumTitle.InnerXml;
-					//tr.Title = trackTitle.InnerXml;
-					//tr.Duration = new TimeSpan(Convert.ToInt64(Convert.ToDouble(trackLength.InnerXml)) * 10000);
-					//if (trackNumber != null &&
-						//trackNumber.InnerXml != "")
-					//{
-						//tr.TrackNumber = Convert.ToUInt32(trackNumber.InnerXml);
-					//}
 					tracks.Add(track);
 				}
 				catch (Exception ex)
