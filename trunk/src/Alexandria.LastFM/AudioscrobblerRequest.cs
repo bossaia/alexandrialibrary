@@ -28,6 +28,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using Alexandria;
 
 namespace Alexandria.LastFM
 {
@@ -383,11 +384,11 @@ namespace Alexandria.LastFM
 		/// <summary>
 		/// Submit a single track to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IAudioscrobblerTrack track)
+		public void SubmitTrack(IAudioTrack track)
 		{
 			// Create an IList containing a single track
 			// and send it to the overload of SubmitTrack below (which takes an IList).
-			IList<IAudioscrobblerTrack> tracks = new List<IAudioscrobblerTrack>();
+			IList<IAudioTrack> tracks = new List<IAudioTrack>();
 			tracks.Add(track);
 			this.SubmitTrack(tracks);
 		}
@@ -395,7 +396,7 @@ namespace Alexandria.LastFM
 		/// <summary>
 		/// Submits a list of tracks to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IList<IAudioscrobblerTrack> tracks)
+		public void SubmitTrack(IList<IAudioTrack> tracks)
 		{
 			// if there are no tracks in this request, return
 			if (tracks.Count == 0)
@@ -411,7 +412,7 @@ namespace Alexandria.LastFM
 			// loop through each track and append its info to the url
 			for (int i = 0; i < tracks.Count; i++)
 			{
-				url += ProcessTrack(tracks[i], i);
+				url += ProcessTrack(tracks[i], DateTime.Now, i);
 			}
 
 			// send the request
@@ -438,6 +439,16 @@ namespace Alexandria.LastFM
 			// (isn't used now, but could be used in conjunction
 			// with interval to wait before submitting a request)
 			lastRequest = DateTime.Now;
+		}
+
+		private string ProcessTrack(IAudioTrack track, DateTime timePlayed, int i)
+		{
+			string urlTrack = "&a[{0}]={1}&t[{0}]={2}&b[{0}]={3}&m[{0}]={4}&l[{0}]={5}&i[{0}]={6}";
+			
+			string id = string.Empty;
+			if (track.Id.Type.Contains("MusicBrainz")) id = track.Id.Value;
+
+			return string.Format(urlTrack, i, HttpUtility.UrlEncode(track.Artist), HttpUtility.UrlEncode(track.Name), HttpUtility.UrlEncode(track.Album), HttpUtility.UrlEncode(id), (int)track.Duration.TotalMilliseconds, HttpUtility.UrlEncode(timePlayed.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 		}
 
 		private string ProcessTrack(IAudioscrobblerTrack track, int i)

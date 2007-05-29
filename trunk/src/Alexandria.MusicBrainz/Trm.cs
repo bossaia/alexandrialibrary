@@ -46,14 +46,12 @@ namespace Alexandria.MusicBrainz
 		}
 		#endregion
 
-		#region Finalizer
+		#region IDisposable Members
 		~Trm()
 		{
 			Dispose(false);
 		}
-		#endregion
 
-		#region Dispose
 		protected virtual void Dispose(bool disposing)
 		{
 			NativeMethods.trm_Delete(handle);
