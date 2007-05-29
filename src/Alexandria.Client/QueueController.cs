@@ -24,7 +24,8 @@ namespace Alexandria.Client
 		private ListView queueListView;
 		private ListViewItem selectedItem;
 		private IAudioTrack selectedTrack;
-		private IAudio audio;
+		private IAudioTrack submittedTrack;
+		private IAudio audio;		
 		//Fmod.LocalSound audio;
 		#endregion
 
@@ -45,56 +46,36 @@ namespace Alexandria.Client
 			item.Tag = track.Id;
 			this.queueListView.Items.Add(item);
 		}
-
-		private void Download(ListViewItem selectedItem)
-		{
-			if (selectedItem != null)
-			{
-				System.Net.WebClient client = new System.Net.WebClient();
-				Uri uri = new Uri(selectedItem.SubItems[6].Text);
-
-				if (!System.IO.Directory.Exists(tempPath))
-					System.IO.Directory.CreateDirectory(tempPath);
-
-				string fileName = string.Format("{0}{1:##} {2}.{3}", tempPath, selectedItem.SubItems[0].Text, selectedItem.SubItems[1].Text, selectedItem.SubItems[8].Text);
-				client.DownloadFileAsync(uri, fileName);
-			}
-		}
 		
-		private void TestMp3Tunes()
+		private IList<IAudioTrack> GetMp3TunesTracks(bool ignoreCache)
 		{
 			try
-			{
-				//LoadStatus.Text = "Searching for tracks...";
+			{				
 				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
 				musicLocker.Login("dan.poage@gmail.com", "automatic");
-				IList<IAudioTrack> tracks = musicLocker.GetTracks(false);
-				if (tracks != null)
-				{
-					//LoadStatus.Text = string.Format("Found {0,5} tracks...", tracks.Count);
-					int loaded = 0;
-					foreach (IAudioTrack track in tracks)
-					{
-						LoadTrack(track);
-						loaded++;
-						//LoadStatus.Text = string.Format("Loaded {0,5} of {1} tracks...", loaded, tracks.Count);
-					}
-				}
+				return musicLocker.GetTracks(ignoreCache);
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, "MP3tunes error");
+				MessageBox.Show(ex.Message, "Error loading MP3tunes tracks");
+				return null;
 			}
 		}
 
-		private void TestLastFM()
+		private void SubmitTrackToLastFM(IAudioTrack track)
 		{
 			try
 			{
-				LastFM.IAudioscrobblerTrack track = new LastFM.AudioscrobblerTrack();
-				track.AlbumName = "Undertow";
-				track.ArtistName = "Tool";
-				track.TrackName = "Sober";
+				LastFM.AudioscrobblerRequest request = new Alexandria.LastFM.AudioscrobblerRequest();
+				request.Username = "uberweasel";
+				request.Password = "automatic";
+				request.SubmitTrack(track);
+				
+				/*
+				LastFM.IAudioscrobblerTrack lastFMtrack = new LastFM.AudioscrobblerTrack();
+				track.AlbumName = track.Album;
+				track.ArtistName = track.Artist;
+				track.TrackName = track.Name;
 				track.MusicBrainzID = "0dfaa81e-9326-4eff-9604-c20d1c613227";
 				track.TrackPlayed = DateTime.Now - new TimeSpan(0, 2, 4);
 				track.TrackLength = new TimeSpan(0, 5, 6).Milliseconds;
@@ -102,6 +83,7 @@ namespace Alexandria.Client
 				request.Username = "uberweasel";
 				request.Password = "automatic";
 				//request.SubmitTrack(track);
+				*/
 			}
 			catch (Exception ex)
 			{
@@ -109,23 +91,21 @@ namespace Alexandria.Client
 			}
 		}
 
-		private void TestFMOD()
-		{
-			audio = new Fmod.LocalSound(@"C:\Dev\Testing\Dael.OGG");
-			audio.Load();
-			audio.Play();
-		}
-
-		private void TestMusicDNS()
-		{
-			Location location = new Location(@"D:\working\Tests\AudioTest\01 Bill Hicks - Intro.wav"); //08 Only.wav");
+		private IIdentifier LookupPuid(ILocation location)
+		{			
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
 			IAudioTrack track = factory.CreateAudioTrack(location);
-			MessageBox.Show(string.Format("File: {0}\nPuid: {1}", track.Location.Path, track.Id.Value), "MusicDNS Test");
+			return track.Id;			
 		}
 		#endregion
 		
 		#region Public Methods
+		public void LoadTracks()
+		{
+			IList<IAudioTrack> tracks = GetMp3TunesTracks(false);
+			LoadTracks(tracks);
+		}
+		
 		public void LoadTracks(IList<IAudioTrack> tracks)
 		{
 			queueListView.Items.Clear();
@@ -188,8 +168,26 @@ namespace Alexandria.Client
 			if (audio != null)
 			{
 				if (audio.PlaybackState != PlaybackState.Playing)
+				{
+					if (submittedTrack != null && selectedTrack != null)
+					{
+						if (submittedTrack.Album != selectedTrack.Album &&
+							submittedTrack.Artist != selectedTrack.Artist &&
+							submittedTrack.Name != selectedTrack.Name)
+						{
+							SubmitTrackToLastFM(selectedTrack);
+							submittedTrack = selectedTrack;
+						}
+					}
 					audio.Play();
+				}
 				else audio.Pause();
+			}
+			else
+			{
+				SelectTrack();
+				if (audio != null)
+					Play();
 			}
 		}
 		

@@ -37,6 +37,14 @@ namespace Alexandria.Client
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
+			this.NumberColumn = new System.Windows.Forms.ColumnHeader();
+			this.NameColumn = new System.Windows.Forms.ColumnHeader();
+			this.ArtistColumn = new System.Windows.Forms.ColumnHeader();
+			this.AlbumColumn = new System.Windows.Forms.ColumnHeader();
+			this.LengthColumn = new System.Windows.Forms.ColumnHeader();
+			this.DateColumn = new System.Windows.Forms.ColumnHeader();
+			this.LocationColumn = new System.Windows.Forms.ColumnHeader();
+			this.FormatColumn = new System.Windows.Forms.ColumnHeader();
 			this.VolumeTrackBar = new System.Windows.Forms.TrackBar();
 			this.MuteButton = new System.Windows.Forms.Button();
 			this.VolumeLabel = new System.Windows.Forms.Label();
@@ -52,22 +60,16 @@ namespace Alexandria.Client
 			this.FileOpenDialog = new System.Windows.Forms.OpenFileDialog();
 			this.NextButton = new System.Windows.Forms.Button();
 			this.PreviousButton = new System.Windows.Forms.Button();
-			this.SaveButton = new System.Windows.Forms.Button();
 			this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
-			this.DownloadButton = new System.Windows.Forms.Button();
-			this.NumberColumn = new System.Windows.Forms.ColumnHeader();
-			this.NameColumn = new System.Windows.Forms.ColumnHeader();
-			this.ArtistColumn = new System.Windows.Forms.ColumnHeader();
-			this.AlbumColumn = new System.Windows.Forms.ColumnHeader();
-			this.LengthColumn = new System.Windows.Forms.ColumnHeader();
-			this.DateColumn = new System.Windows.Forms.ColumnHeader();
-			this.LocationColumn = new System.Windows.Forms.ColumnHeader();
-			this.FormatColumn = new System.Windows.Forms.ColumnHeader();
+			this.PlaybackGroupBox = new System.Windows.Forms.GroupBox();
+			this.SeekBackward = new System.Windows.Forms.Button();
+			this.SeekForward = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			this.QueueGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
 			this.StatusStrip.SuspendLayout();
+			this.PlaybackGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -91,14 +93,15 @@ namespace Alexandria.Client
 			// 
 			// QueueGroupBox
 			// 
-			this.QueueGroupBox.Controls.Add(this.QueueListView);
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.QueueListView);
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
 			// 
 			// QueueListView
 			// 
 			this.QueueListView.AllowColumnReorder = true;
+			resources.ApplyResources(this.QueueListView, "QueueListView");
 			this.QueueListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NumberColumn,
             this.NameColumn,
@@ -110,11 +113,42 @@ namespace Alexandria.Client
             this.FormatColumn});
 			this.QueueListView.FullRowSelect = true;
 			this.QueueListView.HideSelection = false;
-			resources.ApplyResources(this.QueueListView, "QueueListView");
 			this.QueueListView.MultiSelect = false;
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
+			// 
+			// NumberColumn
+			// 
+			resources.ApplyResources(this.NumberColumn, "NumberColumn");
+			// 
+			// NameColumn
+			// 
+			resources.ApplyResources(this.NameColumn, "NameColumn");
+			// 
+			// ArtistColumn
+			// 
+			resources.ApplyResources(this.ArtistColumn, "ArtistColumn");
+			// 
+			// AlbumColumn
+			// 
+			resources.ApplyResources(this.AlbumColumn, "AlbumColumn");
+			// 
+			// LengthColumn
+			// 
+			resources.ApplyResources(this.LengthColumn, "LengthColumn");
+			// 
+			// DateColumn
+			// 
+			resources.ApplyResources(this.DateColumn, "DateColumn");
+			// 
+			// LocationColumn
+			// 
+			resources.ApplyResources(this.LocationColumn, "LocationColumn");
+			// 
+			// FormatColumn
+			// 
+			resources.ApplyResources(this.FormatColumn, "FormatColumn");
 			// 
 			// VolumeTrackBar
 			// 
@@ -204,73 +238,46 @@ namespace Alexandria.Client
 			this.PreviousButton.Name = "PreviousButton";
 			this.PreviousButton.UseVisualStyleBackColor = true;
 			// 
-			// SaveButton
-			// 
-			resources.ApplyResources(this.SaveButton, "SaveButton");
-			this.SaveButton.Name = "SaveButton";
-			this.SaveButton.UseVisualStyleBackColor = true;
-			this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-			// 
 			// PlaybackTimer
 			// 
 			this.PlaybackTimer.Enabled = true;
 			this.PlaybackTimer.Interval = 1000;
 			// 
-			// DownloadButton
+			// PlaybackGroupBox
 			// 
-			resources.ApplyResources(this.DownloadButton, "DownloadButton");
-			this.DownloadButton.Name = "DownloadButton";
-			this.DownloadButton.UseVisualStyleBackColor = true;
-			this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
+			resources.ApplyResources(this.PlaybackGroupBox, "PlaybackGroupBox");
+			this.PlaybackGroupBox.Controls.Add(this.SeekForward);
+			this.PlaybackGroupBox.Controls.Add(this.SeekBackward);
+			this.PlaybackGroupBox.Controls.Add(this.PreviousButton);
+			this.PlaybackGroupBox.Controls.Add(this.NextButton);
+			this.PlaybackGroupBox.Controls.Add(this.MuteButton);
+			this.PlaybackGroupBox.Controls.Add(this.VolumeLabel);
+			this.PlaybackGroupBox.Controls.Add(this.VolumeTrackBar);
+			this.PlaybackGroupBox.Controls.Add(this.PlayPauseButton);
+			this.PlaybackGroupBox.Controls.Add(this.StopButton);
+			this.PlaybackGroupBox.Controls.Add(this.PlaybackTrackBar);
+			this.PlaybackGroupBox.Name = "PlaybackGroupBox";
+			this.PlaybackGroupBox.TabStop = false;
 			// 
-			// NumberColumn
+			// SeekBackward
 			// 
-			resources.ApplyResources(this.NumberColumn, "NumberColumn");
+			resources.ApplyResources(this.SeekBackward, "SeekBackward");
+			this.SeekBackward.Name = "SeekBackward";
+			this.SeekBackward.UseVisualStyleBackColor = true;
 			// 
-			// NameColumn
+			// SeekForward
 			// 
-			resources.ApplyResources(this.NameColumn, "NameColumn");
-			// 
-			// ArtistColumn
-			// 
-			resources.ApplyResources(this.ArtistColumn, "ArtistColumn");
-			// 
-			// AlbumColumn
-			// 
-			resources.ApplyResources(this.AlbumColumn, "AlbumColumn");
-			// 
-			// LengthColumn
-			// 
-			resources.ApplyResources(this.LengthColumn, "LengthColumn");
-			// 
-			// DateColumn
-			// 
-			resources.ApplyResources(this.DateColumn, "DateColumn");
-			// 
-			// LocationColumn
-			// 
-			resources.ApplyResources(this.LocationColumn, "LocationColumn");
-			// 
-			// FormatColumn
-			// 
-			resources.ApplyResources(this.FormatColumn, "FormatColumn");
+			resources.ApplyResources(this.SeekForward, "SeekForward");
+			this.SeekForward.Name = "SeekForward";
+			this.SeekForward.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.DownloadButton);
-			this.Controls.Add(this.SaveButton);
-			this.Controls.Add(this.PreviousButton);
-			this.Controls.Add(this.NextButton);
+			this.Controls.Add(this.PlaybackGroupBox);
 			this.Controls.Add(this.StatusStrip);
-			this.Controls.Add(this.VolumeLabel);
-			this.Controls.Add(this.MuteButton);
-			this.Controls.Add(this.VolumeTrackBar);
 			this.Controls.Add(this.QueueGroupBox);
-			this.Controls.Add(this.PlaybackTrackBar);
-			this.Controls.Add(this.StopButton);
-			this.Controls.Add(this.PlayPauseButton);
 			this.Controls.Add(this.FileMenuStrip);
 			this.MainMenuStrip = this.FileMenuStrip;
 			this.Name = "MainForm";
@@ -281,6 +288,8 @@ namespace Alexandria.Client
 			this.FileMenuStrip.PerformLayout();
 			this.StatusStrip.ResumeLayout(false);
 			this.StatusStrip.PerformLayout();
+			this.PlaybackGroupBox.ResumeLayout(false);
+			this.PlaybackGroupBox.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -306,11 +315,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripStatusLabel PositionStatus;
 		private System.Windows.Forms.Button NextButton;
 		private System.Windows.Forms.Button PreviousButton;
-		private System.Windows.Forms.Button SaveButton;
 		private System.Windows.Forms.Timer PlaybackTimer;
 		private System.Windows.Forms.ToolStripStatusLabel StreamingStatus;
 		private System.Windows.Forms.ToolStripStatusLabel LoadStatus;
-		private System.Windows.Forms.Button DownloadButton;
 		private System.Windows.Forms.ColumnHeader NumberColumn;
 		private System.Windows.Forms.ColumnHeader NameColumn;
 		private System.Windows.Forms.ColumnHeader ArtistColumn;
@@ -319,6 +326,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ColumnHeader DateColumn;
 		private System.Windows.Forms.ColumnHeader LocationColumn;
 		private System.Windows.Forms.ColumnHeader FormatColumn;
+		private System.Windows.Forms.GroupBox PlaybackGroupBox;
+		private System.Windows.Forms.Button SeekForward;
+		private System.Windows.Forms.Button SeekBackward;
 	}
 }
 

@@ -40,6 +40,15 @@ namespace Alexandria.Client
 		private QueueController controller;
 		#endregion
 		
+		#region OnLoad
+		protected override void OnLoad(EventArgs e)
+		{			
+			base.OnLoad(e);
+			
+			controller.LoadTracks();
+		}
+		#endregion
+		
 		#region Private Event Methods
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{	
