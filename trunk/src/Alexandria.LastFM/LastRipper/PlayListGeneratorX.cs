@@ -3,14 +3,14 @@ using System;
 namespace Alexandria.LastFM.LastRipper
 {
 	[SerializableAttribute]
-	public class PlayListGenerator : System.Runtime.Serialization.ISerializable
+	public class PlayListGeneratorX : System.Runtime.Serialization.ISerializable
 	{
 		protected System.String _MusicPath;
 		protected System.String _UserName;
 
-		protected PlayListGenerator() { }
+		protected PlayListGeneratorX() { }
 
-		public PlayListGenerator(System.String MusicPath, System.String UserName)
+		public PlayListGeneratorX(System.String MusicPath, System.String UserName)
 		{
 			this._MusicPath = MusicPath;
 			this._UserName = UserName;
@@ -32,9 +32,9 @@ namespace Alexandria.LastFM.LastRipper
 
 		public virtual void Generate()
 		{
-			PlayListX List1;
-			PlayListX List2;
-			PlayListX List3;
+			Playlist List1;
+			Playlist List2;
+			Playlist List3;
 
 			List1 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/toptracks.xml", this.TopTracks, this.TopTracksMixed, "TopTracks");
 			List2 = this.GeneratePlayList("http://ws.audioscrobbler.com/1.0/user/" + this._UserName + "/recentlovedtracks.xml", this.RecentLovedTracks, this.RecentLovedTracksMixed, "RecentLovedTracks");
@@ -46,9 +46,9 @@ namespace Alexandria.LastFM.LastRipper
 			this.SavePlayList(List1, "Mixed");
 		}
 
-		protected virtual PlayListX GeneratePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
+		protected virtual Playlist GeneratePlayList(System.String Feed, System.Boolean Clean, System.Boolean Mixed, System.String FileName)
 		{
-			PlayListX List = new PlayListX(this._MusicPath);
+			Playlist List = new Playlist(this._MusicPath);
 
 			List.DownloadXML(Feed);
 
@@ -65,7 +65,7 @@ namespace Alexandria.LastFM.LastRipper
 			return List;
 		}
 
-		protected virtual void SavePlayList(PlayListX List, System.String FileName)
+		protected virtual void SavePlayList(Playlist List, System.String FileName)
 		{
 			if (this.m3u)
 			{
@@ -81,7 +81,7 @@ namespace Alexandria.LastFM.LastRipper
 			}
 		}
 
-		protected PlayListGenerator(System.Runtime.Serialization.SerializationInfo Info, System.Runtime.Serialization.StreamingContext context)
+		protected PlayListGeneratorX(System.Runtime.Serialization.SerializationInfo Info, System.Runtime.Serialization.StreamingContext context)
 		{
 			if (Info == null)
 			{
