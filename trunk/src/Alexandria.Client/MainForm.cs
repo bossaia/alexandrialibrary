@@ -45,7 +45,7 @@ namespace Alexandria.Client
 		{			
 			base.OnLoad(e);
 			
-			controller.LoadTracks();
+			//controller.LoadTracks();
 		}
 		#endregion
 		

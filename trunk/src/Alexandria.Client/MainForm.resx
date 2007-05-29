@@ -205,10 +205,10 @@
     <value>0</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 168</value>
+    <value>12, 321</value>
   </data>
   <data name="QueueGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 271</value>
+    <value>697, 118</value>
   </data>
   <data name="QueueGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -226,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;QueueGroupBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="QueueListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -235,7 +235,7 @@
     <value>6, 19</value>
   </data>
   <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>680, 246</value>
+    <value>680, 93</value>
   </data>
   <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -388,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 20</value>
@@ -433,7 +433,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
@@ -516,6 +516,51 @@
   <data name="PlaybackGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="&gt;&gt;SeekForward.Name" xml:space="preserve">
+    <value>SeekForward</value>
+  </data>
+  <data name="&gt;&gt;SeekForward.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SeekForward.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SeekForward.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;SeekBackward.Name" xml:space="preserve">
+    <value>SeekBackward</value>
+  </data>
+  <data name="&gt;&gt;SeekBackward.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SeekBackward.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;SeekBackward.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 28</value>
+  </data>
+  <data name="PlaybackGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>697, 119</value>
+  </data>
+  <data name="PlaybackGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Name" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="SeekForward.Location" type="System.Drawing.Point, System.Drawing">
     <value>654, 27</value>
   </data>
@@ -564,25 +609,103 @@
   <data name="&gt;&gt;SeekBackward.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 28</value>
+  <data name="FilterSplitContainer.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="PlaybackGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>697, 134</value>
+  <data name="FilterSplitContainer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 166</value>
   </data>
-  <data name="PlaybackGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="ArtistListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Name" xml:space="preserve">
-    <value>PlaybackGroupBox</value>
+  <data name="ArtistListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 4</value>
   </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ArtistListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>305, 142</value>
   </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Parent" xml:space="preserve">
+  <data name="ArtistListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Name" xml:space="preserve">
+    <value>ArtistListView</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Parent" xml:space="preserve">
+    <value>FilterSplitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel1.Name" xml:space="preserve">
+    <value>FilterSplitContainer.Panel1</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel1.Parent" xml:space="preserve">
+    <value>FilterSplitContainer</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AlbumListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="AlbumListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="AlbumListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 142</value>
+  </data>
+  <data name="AlbumListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Name" xml:space="preserve">
+    <value>AlbumListView</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Parent" xml:space="preserve">
+    <value>FilterSplitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel2.Name" xml:space="preserve">
+    <value>FilterSplitContainer.Panel2</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel2.Parent" xml:space="preserve">
+    <value>FilterSplitContainer</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="FilterSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>693, 149</value>
+  </data>
+  <data name="FilterSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
+    <value>317</value>
+  </data>
+  <data name="FilterSplitContainer.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Name" xml:space="preserve">
+    <value>FilterSplitContainer</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FilterSplitContainer.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;PlaybackGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;FilterSplitContainer.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
