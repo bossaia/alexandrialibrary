@@ -62,14 +62,20 @@ namespace Alexandria.Client
 			this.PreviousButton = new System.Windows.Forms.Button();
 			this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
 			this.PlaybackGroupBox = new System.Windows.Forms.GroupBox();
-			this.SeekBackward = new System.Windows.Forms.Button();
 			this.SeekForward = new System.Windows.Forms.Button();
+			this.SeekBackward = new System.Windows.Forms.Button();
+			this.FilterSplitContainer = new System.Windows.Forms.SplitContainer();
+			this.ArtistListView = new System.Windows.Forms.ListView();
+			this.AlbumListView = new System.Windows.Forms.ListView();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			this.QueueGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
 			this.StatusStrip.SuspendLayout();
 			this.PlaybackGroupBox.SuspendLayout();
+			this.FilterSplitContainer.Panel1.SuspendLayout();
+			this.FilterSplitContainer.Panel2.SuspendLayout();
+			this.FilterSplitContainer.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -259,22 +265,50 @@ namespace Alexandria.Client
 			this.PlaybackGroupBox.Name = "PlaybackGroupBox";
 			this.PlaybackGroupBox.TabStop = false;
 			// 
-			// SeekBackward
-			// 
-			resources.ApplyResources(this.SeekBackward, "SeekBackward");
-			this.SeekBackward.Name = "SeekBackward";
-			this.SeekBackward.UseVisualStyleBackColor = true;
-			// 
 			// SeekForward
 			// 
 			resources.ApplyResources(this.SeekForward, "SeekForward");
 			this.SeekForward.Name = "SeekForward";
 			this.SeekForward.UseVisualStyleBackColor = true;
 			// 
+			// SeekBackward
+			// 
+			resources.ApplyResources(this.SeekBackward, "SeekBackward");
+			this.SeekBackward.Name = "SeekBackward";
+			this.SeekBackward.UseVisualStyleBackColor = true;
+			// 
+			// FilterSplitContainer
+			// 
+			resources.ApplyResources(this.FilterSplitContainer, "FilterSplitContainer");
+			this.FilterSplitContainer.Name = "FilterSplitContainer";
+			// 
+			// FilterSplitContainer.Panel1
+			// 
+			this.FilterSplitContainer.Panel1.Controls.Add(this.ArtistListView);
+			// 
+			// FilterSplitContainer.Panel2
+			// 
+			this.FilterSplitContainer.Panel2.Controls.Add(this.AlbumListView);
+			// 
+			// ArtistListView
+			// 
+			resources.ApplyResources(this.ArtistListView, "ArtistListView");
+			this.ArtistListView.Name = "ArtistListView";
+			this.ArtistListView.UseCompatibleStateImageBehavior = false;
+			this.ArtistListView.View = System.Windows.Forms.View.Details;
+			// 
+			// AlbumListView
+			// 
+			resources.ApplyResources(this.AlbumListView, "AlbumListView");
+			this.AlbumListView.Name = "AlbumListView";
+			this.AlbumListView.UseCompatibleStateImageBehavior = false;
+			this.AlbumListView.View = System.Windows.Forms.View.Details;
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.FilterSplitContainer);
 			this.Controls.Add(this.PlaybackGroupBox);
 			this.Controls.Add(this.StatusStrip);
 			this.Controls.Add(this.QueueGroupBox);
@@ -290,6 +324,9 @@ namespace Alexandria.Client
 			this.StatusStrip.PerformLayout();
 			this.PlaybackGroupBox.ResumeLayout(false);
 			this.PlaybackGroupBox.PerformLayout();
+			this.FilterSplitContainer.Panel1.ResumeLayout(false);
+			this.FilterSplitContainer.Panel2.ResumeLayout(false);
+			this.FilterSplitContainer.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -329,6 +366,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.GroupBox PlaybackGroupBox;
 		private System.Windows.Forms.Button SeekForward;
 		private System.Windows.Forms.Button SeekBackward;
+		private System.Windows.Forms.SplitContainer FilterSplitContainer;
+		private System.Windows.Forms.ListView ArtistListView;
+		private System.Windows.Forms.ListView AlbumListView;
 	}
 }
 
