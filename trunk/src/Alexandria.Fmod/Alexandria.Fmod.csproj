@@ -66,6 +66,7 @@
     <Compile Include="LocalSound.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
+    <Compile Include="RemoteSound.cs" />
     <Compile Include="SoundFormat.cs" />
     <Compile Include="SoundLoop.cs" />
     <Compile Include="NativeMethods.cs" />

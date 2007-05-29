@@ -62,6 +62,13 @@ namespace Alexandria
 		}
 		#endregion
 		
+		#region Public Methods
+		public override string ToString()
+		{
+			return this.value;
+		}
+		#endregion
+		
 		#region Public Static Properties
 		public static IIdentifier None
 		{

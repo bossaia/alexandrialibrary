@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class BaseAudioTrack : BaseMetadata, IAudioTrack
+	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
 		public BaseAudioTrack(IIdentifier id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)

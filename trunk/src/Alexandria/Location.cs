@@ -8,25 +8,16 @@ namespace Alexandria
 	public class Location : ILocation
 	{
 		#region Constructors
-		public Location(string path)
-		{
-			this.path = path;			
+		public Location(string path) : this(new Uri(path))
+		{	
 		}
 		
-		public Location(FileInfo file)
+		public Location(FileInfo file) : this(new Uri(file.FullName))
 		{
-			if (file == null)
-				throw new ArgumentNullException("file");
-			
-			this.path = file.FullName;
-			this.isLocal = true;
 		}
 		
 		public Location(Uri uri)
 		{
-			if (uri == null)
-				throw new ArgumentNullException("uri");
-		
 			this.path = uri.OriginalString;
 			this.IsLocal = uri.IsFile;
 		}
