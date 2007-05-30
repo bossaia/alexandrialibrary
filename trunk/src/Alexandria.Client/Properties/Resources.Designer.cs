@@ -70,15 +70,6 @@ namespace Alexandria.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error.
-        /// </summary>
-        internal static string ErrorCaption {
-            get {
-                return ResourceManager.GetString("ErrorCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to You have not selected a file to play.\nPlease load the file that you wish to play.
         /// </summary>
         internal static string ErrorMessage_PlaybackTrackNotSelected {
