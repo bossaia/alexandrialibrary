@@ -60,12 +60,166 @@ namespace Alexandria.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Alexandria - .
         /// </summary>
         internal static string ApplicationTitle {
             get {
                 return ResourceManager.GetString("ApplicationTitle", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_eject {
+            get {
+                object obj = ResourceManager.GetObject("control_eject", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_eject_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_eject_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_end {
+            get {
+                object obj = ResourceManager.GetObject("control_end", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_end_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_end_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_equalizer {
+            get {
+                object obj = ResourceManager.GetObject("control_equalizer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_equalizer_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_equalizer_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_fastforward {
+            get {
+                object obj = ResourceManager.GetObject("control_fastforward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_fastforward_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_fastforward_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_pause {
+            get {
+                object obj = ResourceManager.GetObject("control_pause", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_pause_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_pause_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_play {
+            get {
+                object obj = ResourceManager.GetObject("control_play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_play_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_play_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_repeat {
+            get {
+                object obj = ResourceManager.GetObject("control_repeat", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_repeat_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_repeat_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_rewind {
+            get {
+                object obj = ResourceManager.GetObject("control_rewind", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_rewind_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_rewind_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_start {
+            get {
+                object obj = ResourceManager.GetObject("control_start", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_start_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_start_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_stop {
+            get {
+                object obj = ResourceManager.GetObject("control_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap control_stop_blue {
+            get {
+                object obj = ResourceManager.GetObject("control_stop_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap delete {
+            get {
+                object obj = ResourceManager.GetObject("delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -102,6 +256,20 @@ namespace Alexandria.Client.Properties {
         internal static string ErrorMessage_TagEngine {
             get {
                 return ResourceManager.GetString("ErrorMessage_TagEngine", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap pencil_add {
+            get {
+                object obj = ResourceManager.GetObject("pencil_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap picture_add {
+            get {
+                object obj = ResourceManager.GetObject("picture_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -174,6 +342,55 @@ namespace Alexandria.Client.Properties {
         internal static string PlaybackStatus_Stopped {
             get {
                 return ResourceManager.GetString("PlaybackStatus_Stopped", resourceCulture);
+            }
+        }
+        
+        internal static System.Drawing.Bitmap resultset_first {
+            get {
+                object obj = ResourceManager.GetObject("resultset_first", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap resultset_last {
+            get {
+                object obj = ResourceManager.GetObject("resultset_last", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap resultset_next {
+            get {
+                object obj = ResourceManager.GetObject("resultset_next", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap shape_square {
+            get {
+                object obj = ResourceManager.GetObject("shape_square", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap sound {
+            get {
+                object obj = ResourceManager.GetObject("sound", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap sound_low {
+            get {
+                object obj = ResourceManager.GetObject("sound_low", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap sound_mute {
+            get {
+                object obj = ResourceManager.GetObject("sound_mute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
