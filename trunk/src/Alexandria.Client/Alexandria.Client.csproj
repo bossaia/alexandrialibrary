@@ -119,70 +119,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
-    <Content Include="Resources\accept.png" />
-    <Content Include="Resources\add.png" />
-    <Content Include="Resources\anchor.png" />
-    <Content Include="Resources\application.png" />
-    <Content Include="Resources\application_add.png" />
-    <Content Include="Resources\application_cascade.png" />
-    <Content Include="Resources\application_delete.png" />
-    <Content Include="Resources\application_double.png" />
-    <Content Include="Resources\application_edit.png" />
-    <Content Include="Resources\application_error.png" />
-    <Content Include="Resources\application_form.png" />
-    <Content Include="Resources\application_form_add.png" />
-    <Content Include="Resources\application_form_delete.png" />
-    <Content Include="Resources\application_form_edit.png" />
-    <Content Include="Resources\application_form_magnify.png" />
-    <Content Include="Resources\application_get.png" />
-    <Content Include="Resources\application_go.png" />
-    <Content Include="Resources\application_home.png" />
-    <Content Include="Resources\application_key.png" />
-    <Content Include="Resources\application_lightning.png" />
-    <Content Include="Resources\application_link.png" />
-    <Content Include="Resources\application_osx.png" />
-    <Content Include="Resources\application_osx_terminal.png" />
-    <Content Include="Resources\application_put.png" />
-    <Content Include="Resources\application_side_boxes.png" />
-    <Content Include="Resources\application_side_contract.png" />
-    <Content Include="Resources\application_side_expand.png" />
-    <Content Include="Resources\application_side_list.png" />
-    <Content Include="Resources\application_side_tree.png" />
-    <Content Include="Resources\application_split.png" />
-    <Content Include="Resources\application_tile_horizontal.png" />
-    <Content Include="Resources\application_tile_vertical.png" />
-    <Content Include="Resources\application_view_columns.png" />
-    <Content Include="Resources\application_view_detail.png" />
-    <Content Include="Resources\application_view_gallery.png" />
-    <Content Include="Resources\application_view_icons.png" />
-    <Content Include="Resources\application_view_list.png" />
-    <Content Include="Resources\application_view_tile.png" />
-    <Content Include="Resources\application_xp.png" />
-    <Content Include="Resources\application_xp_terminal.png" />
-    <Content Include="Resources\arrow_branch.png" />
-    <Content Include="Resources\arrow_divide.png" />
-    <Content Include="Resources\arrow_down.png" />
-    <Content Include="Resources\arrow_in.png" />
-    <Content Include="Resources\arrow_inout.png" />
-    <Content Include="Resources\arrow_join.png" />
-    <Content Include="Resources\arrow_left.png" />
-    <Content Include="Resources\arrow_merge.png" />
-    <Content Include="Resources\arrow_out.png" />
-    <Content Include="Resources\arrow_redo.png" />
-    <Content Include="Resources\arrow_refresh.png" />
-    <Content Include="Resources\arrow_refresh_small.png" />
-    <Content Include="Resources\arrow_right.png" />
-    <Content Include="Resources\arrow_rotate_anticlockwise.png" />
-    <Content Include="Resources\arrow_rotate_clockwise.png" />
-    <Content Include="Resources\arrow_switch.png" />
-    <Content Include="Resources\arrow_turn_left.png" />
-    <Content Include="Resources\arrow_turn_right.png" />
-    <Content Include="Resources\arrow_undo.png" />
-    <Content Include="Resources\arrow_up.png" />
-    <Content Include="Resources\asterisk_orange.png" />
-    <Content Include="Resources\asterisk_yellow.png" />
-    <Content Include="Resources\attach.png" />
-    <Content Include="Resources\award_star_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
