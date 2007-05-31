@@ -45,6 +45,8 @@ namespace Alexandria.Client
 		{			
 			base.OnLoad(e);
 			
+			SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider();
+			MessageBox.Show(provider.Test(), "SQLite Test");
 			//controller.LoadTracks();
 		}
 		#endregion
