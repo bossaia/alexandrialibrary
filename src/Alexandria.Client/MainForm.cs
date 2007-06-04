@@ -44,9 +44,14 @@ namespace Alexandria.Client
 		protected override void OnLoad(EventArgs e)
 		{			
 			base.OnLoad(e);
+
+			string dbDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\Alexandria\\";
+			if (!System.IO.Directory.Exists(dbDir))
+				System.IO.Directory.CreateDirectory(dbDir);
+			string dbPath = dbDir + "Alexandria.db";
 			
-			SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider();
-			MessageBox.Show(provider.Test(), "SQLite Test");
+			SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
+			//MessageBox.Show(provider.Test(), "SQLite Test");
 			//controller.LoadTracks();
 		}
 		#endregion
