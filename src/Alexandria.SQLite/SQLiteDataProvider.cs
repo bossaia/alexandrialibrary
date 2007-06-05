@@ -70,7 +70,14 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region CreateTable
+		#region GetTableFromType
+		private DataTable GetTableFromType(Type type)
+		{
+			return null;
+		}
+		#endregion
+		
+		#region CreateTable		
 		private bool CreateTable(DataTable table)
 		{
 			bool tableCreated = false;
@@ -149,8 +156,18 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Lookup
-		public T Lookup<T>(string id) where T: IMetadata
+		public T Lookup<T>(IIdentifier id) where T: IMetadata
 		{
+			DataTable table = GetTableFromType(typeof(T));
+			//if (TableExists)...
+		
+			return default(T);
+		}
+		
+		public T Lookup<T>(Guid alexandriaId) where T: IMetadata
+		{
+			Type type = typeof(T);
+		
 			return default(T);
 		}
 		#endregion
