@@ -70,14 +70,81 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region GetTableFromType
-		private DataTable GetTableFromType(Type type)
+		#region IsValueType
+		/// <summary>
+		/// Get a value indicating whether or not the given type is a value type
+		/// </summary>
+		/// <param name="type">The type in question</param>
+		/// <returns>True if the type is a value type, false otherwise</returns>
+		/// <remarks>Note - technically string is not a value type it is a primitive type but this is an expedient</remarks>
+		private bool IsValueType(Type type)
 		{
-			return null;
+			bool isValueType = false;
+
+			if (type == typeof(char) ||
+				type == typeof(decimal) ||
+				type == typeof(float) ||
+				type == typeof(double) ||
+				type == typeof(bool) ||
+				type == typeof(byte) ||
+				type == typeof(sbyte) ||
+				type == typeof(ushort) ||
+				type == typeof(short) ||
+				type == typeof(uint) ||
+				type == typeof(int) ||
+				type == typeof(ulong) ||
+				type == typeof(long) ||
+				type == typeof(DateTime) ||
+				type == typeof(TimeSpan))
+			isValueType = true;
+			
+			return isValueType;
 		}
 		#endregion
 		
-		#region CreateTable		
+		#region IsCollection
+		private bool IsCollection(Type type)
+		{
+			//if (type.GetInterface("System.Collections.ICollection") != null)
+				//return true;
+			//else
+			if (type.GetInterface("System.Collections.Generic.ICollection<T>") != null)
+				return true;
+			else
+				return false;
+		}
+		#endregion
+		
+		#region DetermineTablesFromType
+		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
+		{
+			DataTable table = new DataTable(type.Name);
+			
+			foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
+			{
+				if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+				{
+					// Value types and strings are automatically included
+					table.Columns.Add(property.Name, property.PropertyType);
+				}
+				else
+				{
+					if (IsCollection(property.PropertyType))
+					{
+						// Handle the collection
+					}
+					else
+					{
+						DetermineTablesFromType(tables, property.PropertyType);
+					}
+				}
+			}
+			
+			tables.Add(table);
+		}
+		#endregion
+		
+		#region CreateTable
 		private bool CreateTable(DataTable table)
 		{
 			bool tableCreated = false;
@@ -158,7 +225,8 @@ namespace Alexandria.SQLite
 		#region Lookup
 		public T Lookup<T>(IIdentifier id) where T: IMetadata
 		{
-			DataTable table = GetTableFromType(typeof(T));
+			IList<DataTable> tables = new List<DataTable>();
+			DetermineTablesFromType(tables, typeof(T));
 			//if (TableExists)...
 		
 			return default(T);
