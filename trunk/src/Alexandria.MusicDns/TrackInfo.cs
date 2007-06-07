@@ -31,6 +31,9 @@ namespace Alexandria.MusicDns
 		private string band = string.Empty;
 		private string puid = string.Empty;		
 		
+		private Guid alexandriaId = Guid.NewGuid();
+		private IList<IIdentifier> otherIdentifiers = new List<IIdentifier>();
+		ILocation location = null;
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
 	
@@ -38,7 +41,13 @@ namespace Alexandria.MusicDns
 		internal string FileName
 		{
 			get { return fileName; }
-			set { fileName = value; }
+			set
+			{
+				fileName = value;
+				
+				if (!string.IsNullOrEmpty(fileName) && location == null)
+					location = new Location(fileName);
+			}
 		}
 		
 		internal string Fingerprint
@@ -134,7 +143,13 @@ namespace Alexandria.MusicDns
 		internal string Puid
 		{
 			get { return puid; }
-			set { puid = value; }
+			set
+			{
+				puid = value;
+				
+				if (!string.IsNullOrEmpty(puid) && otherIdentifiers.Count == 0)
+					otherIdentifiers.Add(new Puid(new Guid(puid)));
+			}
 		}
 		
 		internal Version Version
@@ -187,14 +202,19 @@ namespace Alexandria.MusicDns
 		#endregion
 
 		#region IMetadata Members
-		public IIdentifier Id
+		public Guid AlexandriaId
 		{
-			get { return new Puid(new Guid(puid), Version); }
+			get { return alexandriaId; }
+		}
+		
+		public IList<IIdentifier> OtherIdentifiers
+		{
+			get { return otherIdentifiers; }
 		}
 
 		public ILocation Location
 		{
-			get { return new Location(FileName); }
+			get { return location; }
 		}
 
 		public string Name

@@ -221,9 +221,10 @@ namespace Alexandria.Mp3Tunes
 						format = fileInfo.Extension.Remove(0, 1);
 					}
 
-					Album album = new Album(Identifier.None, location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
+					Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 
-					Track track = new Track(trackId, location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					Track track = new Track(location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					track.OtherIdentifiers.Add(trackId);
 
 					tracks.Add(track);
 				}

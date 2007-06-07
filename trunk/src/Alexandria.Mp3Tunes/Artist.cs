@@ -6,7 +6,7 @@ namespace Alexandria.Mp3Tunes
 {
 	internal class Artist : BaseArtist
 	{
-		public Artist(IIdentifier id, ILocation location, string name) : base(id, location, name)
+		public Artist(Guid alexandriaId, ILocation location, string name) : base(alexandriaId, location, name)
 		{
 		}
 	}

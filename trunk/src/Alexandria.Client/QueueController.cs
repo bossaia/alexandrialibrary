@@ -43,7 +43,7 @@ namespace Alexandria.Client
 			data[7] = track.Format;
 
 			ListViewItem item = new ListViewItem(data);
-			item.Tag = track.Id;
+			item.Tag = track.OtherIdentifiers[0];
 			this.queueListView.Items.Add(item);
 		}
 		
@@ -95,7 +95,7 @@ namespace Alexandria.Client
 		{			
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
 			IAudioTrack track = factory.CreateAudioTrack(location);
-			return track.Id;			
+			return track.OtherIdentifiers[0];
 		}
 		#endregion
 		
@@ -140,7 +140,8 @@ namespace Alexandria.Client
 				DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
 				ILocation location = new Location(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
-				selectedTrack = new BaseAudioTrack(id, location, name, album, artist, duration, releaseDate, trackNumber, format);
+				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), location, name, album, artist, duration, releaseDate, trackNumber, format);
+				selectedTrack.OtherIdentifiers.Add(id);
 				
 				if (selectedTrack.Location.IsLocal)
 				{

@@ -7,24 +7,34 @@ namespace Alexandria
 	public abstract class BaseMetadata : IMetadata
 	{
 		#region Constructors
-		public BaseMetadata(IIdentifier id, ILocation location, string name)
+		public BaseMetadata(string alexandriaId, string path, string name) : this(new Guid(alexandriaId), new Location(path), name)
 		{
-			this.id = id;
+		}
+		
+		public BaseMetadata(Guid alexandriaId, ILocation location, string name)
+		{
+			this.alexandriaId = alexandriaId;
 			this.location = location;
 			this.name = name;
 		}
 		#endregion
 	
 		#region Private Fields
-		private IIdentifier id;
+		private Guid alexandriaId = default(Guid);
+		private IList<IIdentifier> otherIdentifiers = new List<IIdentifier>();
 		private ILocation location;
 		private string name;
 		#endregion
 	
 		#region IMetadata Members
-		public IIdentifier Id
+		public Guid AlexandriaId
 		{
-			get { return id; }
+			get { return alexandriaId; }
+		}
+		
+		public IList<IIdentifier> OtherIdentifiers
+		{
+			get { return otherIdentifiers; }
 		}
 
 		public ILocation Location
