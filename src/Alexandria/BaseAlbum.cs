@@ -7,7 +7,11 @@ namespace Alexandria
 	public abstract class BaseAlbum : BaseMetadata, IAlbum
 	{
 		#region Constructors
-		public BaseAlbum(IIdentifier id, ILocation location, string name, string artist, DateTime releaseDate) : base(id, location, name)
+		public BaseAlbum(string alexandriaId, string path, string name, string artist, DateTime releaseDate) : this(new Guid(alexandriaId), new Location(path), name, artist, releaseDate)
+		{
+		}
+		
+		public BaseAlbum(Guid alexandriaId, ILocation location, string name, string artist, DateTime releaseDate) : base(alexandriaId, location, name)
 		{
 			this.artist = artist;
 			this.releaseDate = releaseDate;

@@ -6,10 +6,10 @@ namespace Alexandria
 {
 	public interface IMetadata
 	{
-		IIdentifier Id { get; }
+		Guid AlexandriaId { get; }
+		IList<IIdentifier> OtherIdentifiers { get; }
 		ILocation Location { get; }
 		string Name { get; }
-		//IDictionary<string, object> Map { get; }
-		//IList<IMetadata> Children { get; }
+		
 	}
 }

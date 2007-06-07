@@ -7,7 +7,11 @@ namespace Alexandria
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
-		public BaseAudioTrack(IIdentifier id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)
+		public BaseAudioTrack(string alexandriaId, string path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(alexandriaId), new Location(path), name, album, artist, duration, releaseDate, trackNumber, format)
+		{
+		}
+		
+		public BaseAudioTrack(Guid alexandriaId, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(alexandriaId, location, name)
 		{
 			this.album = album;
 			this.artist = artist;
