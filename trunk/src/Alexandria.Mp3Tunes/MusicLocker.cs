@@ -169,11 +169,11 @@ namespace Alexandria.Mp3Tunes
 					url = url.Replace("&amp;", "&");
 					
 					//string.Format("{0}{1}?sid={2}&partner_token={3}", get_url, downloadUrl.InnerXml, session_id, partner_token);
-					Uri uri = new Uri(url);
-					ILocation location = new Location(uri);
+					//Uri uri = new Uri(url);
+					//ILocation location = new Location(uri);
 					System.Diagnostics.Debug.WriteLine("xml=" + downloadUrl.InnerXml);
 					System.Diagnostics.Debug.WriteLine("url=" + url);
-					System.Diagnostics.Debug.WriteLine("loc=" + location.Path);
+					//System.Diagnostics.Debug.WriteLine("loc=" + location.Path);
 
 					int trackNumber = 0;
 					if (trackNumberNode != null && !string.IsNullOrEmpty(trackNumberNode.InnerXml))
@@ -221,9 +221,10 @@ namespace Alexandria.Mp3Tunes
 						format = fileInfo.Extension.Remove(0, 1);
 					}
 
-					Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
-
-					Track track = new Track(location, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
+					
+					string id = Guid.NewGuid().ToString();
+					Track track = new Track(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
 					track.OtherIdentifiers.Add(trackId);
 
 					tracks.Add(track);

@@ -61,6 +61,7 @@
     <Compile Include="IInternetRadio.cs" />
     <Compile Include="ILocalAudio.cs" />
     <Compile Include="IMediaFactory.cs" />
+    <Compile Include="IPersistant.cs" />
     <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IPluginOptions.cs" />
     <Compile Include="IPluginRepository.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ISeekable.cs" />
     <Compile Include="ISeekableBackward.cs" />
     <Compile Include="ISeekableForward.cs" />
+    <Compile Include="IStorageEngine.cs" />
     <Compile Include="IStreaming.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="ITagable.cs" />
@@ -97,6 +99,9 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IVisible.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="PersistanceLoadType.cs" />
+    <Compile Include="PersistanceOptionsAttribute.cs" />
+    <Compile Include="PersistanceSaveType.cs" />
     <Compile Include="PlaybackState.cs" />
     <Compile Include="PluginAttribute.cs" />
     <Compile Include="PositionType.cs" />
