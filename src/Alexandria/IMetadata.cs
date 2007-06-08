@@ -7,7 +7,7 @@ namespace Alexandria
 	public interface IMetadata
 	{
 		Guid Id { get; }
-		IList<IIdentifier> OtherIdentifiers { get; }
+		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
 		ILocation Location { get; }
 		string Name { get; }
 		

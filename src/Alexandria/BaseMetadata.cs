@@ -21,7 +21,7 @@ namespace Alexandria
 	
 		#region Private Fields
 		private Guid id = default(Guid);
-		private IList<IIdentifier> otherIdentifiers = new List<IIdentifier>();
+		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		private ILocation location;
 		private string name;
 		#endregion
@@ -33,10 +33,10 @@ namespace Alexandria
 			get { return id; }
 		}
 		
-		[PersistanceOptions("Metadata_OtherId", PersistanceLoadType.Collection, PersistanceSaveType.Collection)]
-		public IList<IIdentifier> OtherIdentifiers
+		[PersistanceOptions(PersistanceLoadType.Collection, PersistanceSaveType.Collection)]
+		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
-			get { return otherIdentifiers; }
+			get { return metadataIdentifiers; }
 		}
 
 		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]

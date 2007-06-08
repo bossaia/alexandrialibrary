@@ -446,10 +446,10 @@ namespace Alexandria.LastFM
 			string urlTrack = "&a[{0}]={1}&t[{0}]={2}&b[{0}]={3}&m[{0}]={4}&l[{0}]={5}&i[{0}]={6}";
 			
 			string id = string.Empty;
-			foreach(IIdentifier otherId in track.OtherIdentifiers)
+			foreach(IIdentifier metadataId in track.MetadataIdentifiers)
 			{
-				if (otherId.Type.Contains("MusicBrainz"))
-					id = otherId.Value;
+				if (metadataId.Type.Contains("MusicBrainz"))
+					id = metadataId.Value;
 			}
 
 			return string.Format(urlTrack, i, HttpUtility.UrlEncode(track.Artist), HttpUtility.UrlEncode(track.Name), HttpUtility.UrlEncode(track.Album), HttpUtility.UrlEncode(id), (int)track.Duration.TotalMilliseconds, HttpUtility.UrlEncode(timePlayed.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")));

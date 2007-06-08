@@ -32,7 +32,7 @@ namespace Alexandria.MusicDns
 		private string puid = string.Empty;		
 		
 		private Guid id = Guid.NewGuid();
-		private IList<IIdentifier> otherIdentifiers = new List<IIdentifier>();
+		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		ILocation location = null;
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
@@ -147,8 +147,8 @@ namespace Alexandria.MusicDns
 			{
 				puid = value;
 				
-				if (!string.IsNullOrEmpty(puid) && otherIdentifiers.Count == 0)
-					otherIdentifiers.Add(new Puid(new Guid(puid)));
+				if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
+					metadataIdentifiers.Add(new Puid(puid));
 			}
 		}
 		
@@ -207,9 +207,9 @@ namespace Alexandria.MusicDns
 			get { return id; }
 		}
 		
-		public IList<IIdentifier> OtherIdentifiers
+		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
-			get { return otherIdentifiers; }
+			get { return metadataIdentifiers; }
 		}
 
 		public ILocation Location

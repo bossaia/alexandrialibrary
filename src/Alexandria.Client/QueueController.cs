@@ -43,7 +43,7 @@ namespace Alexandria.Client
 			data[7] = track.Format;
 
 			ListViewItem item = new ListViewItem(data);
-			item.Tag = track.OtherIdentifiers[0];
+			item.Tag = track.MetadataIdentifiers[0];
 			this.queueListView.Items.Add(item);
 		}
 		
@@ -95,7 +95,12 @@ namespace Alexandria.Client
 		{			
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
 			IAudioTrack track = factory.CreateAudioTrack(location);
-			return track.OtherIdentifiers[0];
+			foreach(IMetadataIdentifier metadataId in track.MetadataIdentifiers)
+			{
+				if (metadataId.Type.Contains("MusicDnsId"))
+					return metadataId;
+			}
+			return null;
 		}
 		#endregion
 		
@@ -124,7 +129,7 @@ namespace Alexandria.Client
 			{
 				//# Name Artist Album Length Date Location Format
 				selectedItem = queueListView.SelectedItems[0];
-				IIdentifier id = (IIdentifier)selectedItem.Tag;
+				IMetadataIdentifier id = (IMetadataIdentifier)selectedItem.Tag;
 				int trackNumber = Convert.ToInt32(selectedItem.SubItems[0].Text);
 				string name = selectedItem.SubItems[1].Text;
 				string artist = selectedItem.SubItems[2].Text;
@@ -141,7 +146,7 @@ namespace Alexandria.Client
 				ILocation location = new Location(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
 				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), location, name, album, artist, duration, releaseDate, trackNumber, format);
-				selectedTrack.OtherIdentifiers.Add(id);
+				selectedTrack.MetadataIdentifiers.Add(id);
 				
 				if (selectedTrack.Location.IsLocal)
 				{

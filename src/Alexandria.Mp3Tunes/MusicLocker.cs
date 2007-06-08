@@ -225,7 +225,7 @@ namespace Alexandria.Mp3Tunes
 					
 					string id = Guid.NewGuid().ToString();
 					Track track = new Track(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
-					track.OtherIdentifiers.Add(trackId);
+					track.MetadataIdentifiers.Add(trackId);
 
 					tracks.Add(track);
 				}
