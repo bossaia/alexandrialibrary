@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface IMetadata
 	{
-		Guid AlexandriaId { get; }
+		Guid Id { get; }
 		IList<IIdentifier> OtherIdentifiers { get; }
 		ILocation Location { get; }
 		string Name { get; }

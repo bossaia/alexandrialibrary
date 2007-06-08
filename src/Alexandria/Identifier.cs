@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public class Identifier : IIdentifier
+	public abstract class Identifier : IIdentifier
 	{
 		#region Constructors
 		public Identifier(string value, string type, Version version)
@@ -19,10 +19,6 @@ namespace Alexandria
 		private string value;
 		private string type;
 		private Version version;
-		#endregion
-	
-		#region Private Static Fields
-		private static Identifier none;
 		#endregion
 	
 		#region IIdentifier Members
@@ -66,19 +62,6 @@ namespace Alexandria
 		public override string ToString()
 		{
 			return this.value;
-		}
-		#endregion
-		
-		#region Public Static Properties
-		public static IIdentifier None
-		{
-			get
-			{
-				if (none == null)
-					none = new Identifier(string.Empty, string.Empty, new Version(0, 0, 0, 0));
-			
-				return none;
-			}
 		}
 		#endregion
 	}

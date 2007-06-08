@@ -31,7 +31,7 @@ namespace Alexandria.MusicDns
 		private string band = string.Empty;
 		private string puid = string.Empty;		
 		
-		private Guid alexandriaId = Guid.NewGuid();
+		private Guid id = Guid.NewGuid();
 		private IList<IIdentifier> otherIdentifiers = new List<IIdentifier>();
 		ILocation location = null;
 		private Version version = new Version(1, 0, 0, 0);
@@ -202,9 +202,9 @@ namespace Alexandria.MusicDns
 		#endregion
 
 		#region IMetadata Members
-		public Guid AlexandriaId
+		public Guid Id
 		{
-			get { return alexandriaId; }
+			get { return id; }
 		}
 		
 		public IList<IIdentifier> OtherIdentifiers

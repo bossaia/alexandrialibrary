@@ -10,7 +10,7 @@ using Alexandria;
 
 namespace Alexandria.SQLite
 {
-	public class SQLiteDataProvider
+	public class SQLiteDataProvider : IStorageEngine
 	{			
 		#region Constructors
 		public SQLiteDataProvider(string databasePath)
@@ -211,6 +211,13 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region GetChildCollectionByParentId
+		private IList<IPersistant> GetChildCollectionByParentId(Guid id)
+		{
+			return new List<IPersistant>();
+		}
+		#endregion
+		
 		#endregion
 	
 		#region Public Methods
@@ -222,6 +229,7 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		/*
 		#region Lookup
 		public T Lookup<T>(IIdentifier id) where T: IMetadata
 		{
@@ -257,7 +265,24 @@ namespace Alexandria.SQLite
 			return deleted;
 		}
 		#endregion
-		
+		*/
+		#endregion
+
+		#region IStorageEngine Members
+		public T Lookup<T>(Guid id) where T : IPersistant
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Save(IPersistant record)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Delete(IPersistant record)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
 		#endregion
 	}
 }
