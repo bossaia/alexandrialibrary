@@ -116,12 +116,14 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region DetermineTablesFromType
-		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
+		private void DetermineTablesFromType(IList<DataTable> tables, IPersistant record)
 		{
+			Type type = record.GetType();
 			DataTable table = new DataTable(type.Name);
 			
 			foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
 			{
+				/*
 				if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
 				{
 					// Value types and strings are automatically included
@@ -138,6 +140,7 @@ namespace Alexandria.SQLite
 						DetermineTablesFromType(tables, property.PropertyType);
 					}
 				}
+				*/
 			}
 			
 			tables.Add(table);
@@ -218,6 +221,13 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region LookupRecord
+		private IPersistant LookupRecord(Guid id)
+		{
+			return null;
+		}
+		#endregion
+		
 		#endregion
 	
 		#region Public Methods
@@ -226,6 +236,28 @@ namespace Alexandria.SQLite
 		public IDbConnection GetConnection()
 		{
 			return GetSQLiteConnection(GetConnectionString());
+		}
+		#endregion
+		
+		#region Test
+		public string Test()
+		{
+			try
+			{
+				using (SQLiteConnection connection = GetSQLiteConnection(GetConnectionString()))
+				{
+					//connection.Open();
+					//SQLiteCommand createCommand = new SQLiteCommand("CREATE TABLE AudioTrack (Id TEXT PRIMARY KEY, Location TEXT, Name TEXT, Album TEXT, Artist TEXT, Duration INT, ReleaseDate INT, TrackNumber INT, Format TEXT)", connection);
+					//SQLiteCommand createCommand = new SQLiteCommand("CREATE TABLE MetadataId (Id TEXT PRIMARY KEY, ParentId TEXT, IdValue TEXT, IdType TEXT, IdVersion TEXT)", connection);
+					//return createCommand.ExecuteNonQuery().ToString();
+				}
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("SQLite error", ex);
+			}
+			
+			return string.Empty;
 		}
 		#endregion
 		
@@ -271,12 +303,15 @@ namespace Alexandria.SQLite
 		#region IStorageEngine Members
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
-			throw new Exception("The method or operation is not implemented.");
+			IPersistant record = LookupRecord(id);
+			record.Engine = this;
+			
+			return (T)record;
 		}
 
 		public void Save(IPersistant record)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			//GetChildCollectionByParentId(
 		}
 
 		public void Delete(IPersistant record)

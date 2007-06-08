@@ -7,6 +7,13 @@ namespace Alexandria
 	public abstract class BaseMetadataIdentifier : BaseIdentifier, IMetadataIdentifier
 	{
 		#region Constructors
+		public BaseMetadataIdentifier(string parentId, string idValue, string idType, string idVersion) : base(idValue, idType, idVersion)
+		{
+			this.isNew = true;
+			this.id = Guid.NewGuid();
+			this.parentId = new Guid(parentId);
+		}
+		
 		[PersistanceOptions("MetadataID", PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
 		public BaseMetadataIdentifier(string id, string parentId, string idValue, string idType, string idVersion) : this(new Guid(id), new Guid(parentId), idValue, idType, new Version(idVersion))
 		{
@@ -20,8 +27,10 @@ namespace Alexandria
 		#endregion
 	
 		#region Private Fields
-		private Guid id;
+		private Guid id;		
 		private Guid parentId;
+		private bool isNew;
+		private IStorageEngine engine;
 		#endregion
 	
 		#region IMetadataIdentifier Members
@@ -39,21 +48,43 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
+		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString, IsPrimaryKey=true)]
 		public Guid Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 		
-		public void Save(IStorageEngine engine)
+		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
+		public IStorageEngine Engine
 		{
-			throw new Exception("The method or operation is not implemented.");
+			get { return engine; }
+			set { engine = value; }
+		}
+		
+		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
+		public bool IsNew
+		{
+			get { return isNew; }
 		}
 
-		public void Delete(IStorageEngine engine)
+		public void Save()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			if (engine != null)
+			{
+				engine.Save(this);
+				this.isNew = false;
+			}
+			else throw new ArgumentNullException("engine");
 		}
 
+		public void Delete()
+		{
+			if (engine != null)
+			{
+				engine.Delete(this);
+			}
+			else throw new ArgumentNullException("engine");
+		}
 		#endregion
 	}
 }
