@@ -51,8 +51,8 @@ namespace Alexandria.Client
 			string dbPath = dbDir + "Alexandria.db";
 			
 			SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
-			//MessageBox.Show(provider.Test(), "SQLite Test");
-			controller.LoadTracks();
+			MessageBox.Show(provider.Test(), "SQLite Test");
+			//controller.LoadTracks();
 		}
 		#endregion
 		

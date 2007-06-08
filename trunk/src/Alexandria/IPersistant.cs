@@ -6,8 +6,10 @@ namespace Alexandria
 {
 	public interface IPersistant
 	{
-		Guid Id { get; }		
-		void Save(IStorageEngine engine);
-		void Delete(IStorageEngine engine);
+		Guid Id { get; }
+		bool IsNew { get; }
+		IStorageEngine Engine { get; set; }
+		void Save();
+		void Delete();
 	}
 }

@@ -70,15 +70,18 @@ namespace Alexandria.Client
 				request.Username = "uberweasel";
 				request.Password = "automatic";
 				request.SubmitTrack(track);
-				
+
 				/*
 				LastFM.IAudioscrobblerTrack lastFMtrack = new LastFM.AudioscrobblerTrack();
-				track.AlbumName = track.Album;
-				track.ArtistName = track.Artist;
-				track.TrackName = track.Name;
-				track.MusicBrainzID = "0dfaa81e-9326-4eff-9604-c20d1c613227";
+				track.AlbumName = track.Album; "Undertow"
+				track.ArtistName = track.Artist; "Tool"
+				track.TrackName = track.Name; "Sober"
+				track.TrackNumber = 3; 
+				AudioTrackId = "441a8b6f-d6df-4e6e-bd9c-547a1616ac48" 
+				MetadataId   = "90748683-cb71-4e3d-98aa-57a964b60eB0"
+				track.MusicBrainzID =  "0dfaa81e-9326-4eff-9604-c20d1c613227";
 				track.TrackPlayed = DateTime.Now - new TimeSpan(0, 2, 4);
-				track.TrackLength = new TimeSpan(0, 5, 6).Milliseconds;
+				track.TrackLength = new TimeSpan(0, 5, 6).TotalMilliseconds;
 				LastFM.AudioscrobblerRequest request = new LastFM.AudioscrobblerRequest();
 				request.Username = "uberweasel";
 				request.Password = "automatic";
