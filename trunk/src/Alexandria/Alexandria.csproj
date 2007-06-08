@@ -44,6 +44,7 @@
     <Compile Include="BaseArtist.cs" />
     <Compile Include="BaseAudioTrack.cs" />
     <Compile Include="BaseMetadata.cs" />
+    <Compile Include="BaseMetadataIdentifier.cs" />
     <Compile Include="BufferState.cs" />
     <Compile Include="GuidIdentifier.cs" />
     <Compile Include="IAlbum.cs" />
@@ -55,12 +56,13 @@
     <Compile Include="IBuffered.cs" />
     <Compile Include="IDataReadable.cs" />
     <Compile Include="IdentificationResult.cs" />
-    <Compile Include="Identifier.cs" />
+    <Compile Include="BaseIdentifier.cs" />
     <Compile Include="IHasDuration.cs" />
     <Compile Include="IHasElapsed.cs" />
     <Compile Include="IInternetRadio.cs" />
     <Compile Include="ILocalAudio.cs" />
     <Compile Include="IMediaFactory.cs" />
+    <Compile Include="IMetadataIdentifier.cs" />
     <Compile Include="IPersistant.cs" />
     <Compile Include="IPlaylistItem.cs" />
     <Compile Include="IPluginOptions.cs" />

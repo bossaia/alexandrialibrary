@@ -5,7 +5,7 @@ using Alexandria;
 
 namespace Alexandria.MusicDns
 {
-	public class Puid : IIdentifier
+	public class Puid : BaseMetadataIdentifier
 	{
 		#region Public Enums
 		public enum MusicDnsIdType
@@ -15,44 +15,25 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Constructors
-		public Puid(Guid value)
+		public Puid(string value) : this(Guid.NewGuid(), Guid.NewGuid(), value)
 		{
-			this.value = value;
-			this.type = MusicDnsIdType.MusicDnsId;
-			this.version = new Version(1, 0, 0, 0);
 		}
 		
-		public Puid(Guid value, Version version)
+		public Puid(Guid id, Guid parentId, string value) : this(id, parentId, value, new Version(1, 0, 0, 0))
 		{
-			this.value = value;
-			this.type = MusicDnsIdType.MusicDnsId;
-			this.version = version;
+		}
+		
+		public Puid(Guid id, Guid parentId, string value, Version version) : base(id, parentId, value, TYPE, version)
+		{
 		}
 		#endregion
 
-		#region Private Fields
-		private Guid value;
-		private MusicDnsIdType type;
-		private Version version;		
+		#region Private Constants
+		private const string TYPE = "Puid";
 		#endregion
 
 		#region IIdentifier Members
-		public string Value
-		{
-			get { return value.ToString(); }
-		}
-
-		public string Type
-		{
-			get { return type.ToString(); }
-		}
-		
-		public IVersion Version
-		{
-			get { return version; }
-		}
-
-		public IdentificationResult CompareTo(IIdentifier other)
+		public override IdentificationResult CompareTo(IIdentifier other)
 		{
 			if (other != null)
 			{
@@ -72,12 +53,5 @@ namespace Alexandria.MusicDns
 			else return IdentificationResult.None;
 		}
 		#endregion		
-		
-		#region Public Methods
-		public override string ToString()
-		{
-			return this.value.ToString();
-		}
-		#endregion
 	}
 }

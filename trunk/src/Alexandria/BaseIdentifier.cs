@@ -4,10 +4,14 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class Identifier : IIdentifier
+	public abstract class BaseIdentifier : IIdentifier
 	{
 		#region Constructors
-		public Identifier(string value, string type, Version version)
+		public BaseIdentifier(string value, string type, string version) : this(value, type, new Version(version))
+		{
+		}
+
+		public BaseIdentifier(string value, string type, Version version)
 		{
 			this.value = value;
 			this.type = type;
@@ -41,7 +45,7 @@ namespace Alexandria
 		{
 			if (other != null)
 			{
-				if (other is Identifier)
+				if (other is BaseIdentifier)
 				{
 					if (this.Version.CompareTo(other.Version) == 0)
 					{

@@ -16,6 +16,24 @@ namespace Alexandria
 			numbers[2] = buildNumber;
 			numbers[3] = revisionNumber;	
 		}
+		
+		public Version(string version)
+		{			
+			numbers = new int[4];
+			if (!string.IsNullOrEmpty(version))
+			{
+				string[] versionSplit = version.Split(new char[]{'.'}, 4);
+				if (versionSplit != null && versionSplit.Length > 0)
+				{
+					for(int i=0;i<versionSplit.Length;i++)
+					{
+						int number;
+						int.TryParse(versionSplit[i], out number);
+						numbers[i] = number;
+					}
+				}
+			}
+		}
 		#endregion
 		
 		#region Private Fields
