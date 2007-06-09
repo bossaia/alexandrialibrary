@@ -48,20 +48,18 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
-		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString, IsPrimaryKey=true)]
+		[PersistanceProperty(PersistanceFieldType.OneToOne, PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
 		public Guid Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 		
-		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
 		public IStorageEngine Engine
 		{
 			get { return engine; }
 			set { engine = value; }
 		}
 		
-		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
 		public bool IsNew
 		{
 			get { return isNew; }
