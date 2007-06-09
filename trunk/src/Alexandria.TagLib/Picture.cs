@@ -27,6 +27,13 @@ namespace Alexandria.TagLib
 {
     public class Picture : IPicture, IImage
     {
+		#region Constructors
+		public Picture()
+		{
+			this.resourceFormat = null;
+		}
+		#endregion
+    
 		#region Private Fields
         private string mimeType;
         private PictureType type;
