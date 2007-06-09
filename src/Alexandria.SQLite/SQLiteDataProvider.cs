@@ -11,7 +11,7 @@ using Alexandria.Data;
 
 namespace Alexandria.SQLite
 {
-	public class SQLiteDataProvider : IStorageEngine
+	public class SQLiteDataProvider : IDataStore
 	{			
 		#region Constructors
 		public SQLiteDataProvider(string databasePath)
@@ -260,8 +260,8 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region LookupRecord
-		private T LookupRecord<T>(Guid id) where T: class, IPersistant
+		#region GetRecordById
+		private T GetRecordById<T>(Guid id) where T: class, IPersistant
 		{
 			IList<DataTable> tables = new List<DataTable>();
 			DetermineTablesFromType(tables, typeof(T)); 
@@ -342,23 +342,21 @@ namespace Alexandria.SQLite
 		*/
 		#endregion
 
-		#region IStorageEngine Members
+		#region IDataStore Members
 		public T Lookup<T>(Guid id) where T : class,IPersistant
 		{
-			T record = LookupRecord<T>(id);
-			record.Engine = this;
+			T record = GetRecordById<T>(id);
+			record.DataStore = this;
 			
 			return (T)record;
 		}
 
 		public void Save(IPersistant record)
 		{
-			//GetChildCollectionByParentId(
 		}
 
 		public void Delete(IPersistant record)
 		{
-			throw new Exception("The method or operation is not implemented.");
 		}
 		#endregion
 	}

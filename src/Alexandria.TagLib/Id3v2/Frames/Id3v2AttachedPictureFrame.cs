@@ -37,6 +37,8 @@ namespace Alexandria.TagLib
 			type = PictureType.None;
 			//fields = null;
 			//data = null;
+			
+			this.resourceFormat = null;
 		}
 
 		public Id3v2AttachedPictureFrame(IPicture picture) : base("APIC")
@@ -49,6 +51,8 @@ namespace Alexandria.TagLib
 				description = picture.Description;
 				data = picture.Data;
 			}
+
+			this.resourceFormat = null;
 		}
 
 		public Id3v2AttachedPictureFrame(ByteVector data) : base(data)
@@ -62,6 +66,8 @@ namespace Alexandria.TagLib
 			//SetData(data);
 			ParseHeader(data);
 			ParseAttachedPictureFields(data);
+
+			this.resourceFormat = null;
 		}
 
 		protected internal Id3v2AttachedPictureFrame(ByteVector data, Id3v2FrameHeader header) : base(header)
@@ -73,6 +79,8 @@ namespace Alexandria.TagLib
 			//this.data = null;
 
 			ParseAttachedPictureFields(FieldData(data));
+
+			this.resourceFormat = null;
 		}
 		#endregion
 		
