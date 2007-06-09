@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria
 {
-	public abstract class BaseMetadata : IMetadata, Data.IPersistant
+	public abstract class BaseMetadata : IMetadata, IPersistant
 	{
 		#region Constructors
 		public BaseMetadata(string location, string name)
 		{
-			this.isNew = true;
 			this.id = Guid.NewGuid();
 			this.location = new Location(location);
 			this.name = name;
@@ -33,8 +33,7 @@ namespace Alexandria
 		private ILocation location;
 		private string name;
 
-		private bool isNew;
-		private IStorageEngine engine;
+		private IDataStore dataStore;
 		#endregion
 	
 		#region IMetadata Members
@@ -60,34 +59,20 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
-		public bool IsNew
+		public IDataStore DataStore
 		{
-			get { return isNew; }
-		}
-
-		public IStorageEngine Engine
-		{
-			get { return engine; }
-			set { engine = value; }
+			get { return dataStore; }
+			set { dataStore = value; }
 		}
 		
 		public void Save()
 		{
-			if (engine != null)
-			{
-				engine.Save(this);
-				this.isNew = false;
-			}
-			else throw new ArgumentNullException("engine");
+			dataStore.Save(this);
 		}
 
 		public void Delete()
 		{
-			if (engine != null)
-			{
-				engine.Delete(this);
-			}
-			else throw new ArgumentNullException("engine");
+			dataStore.Delete(this);
 		}
 		#endregion
 	}

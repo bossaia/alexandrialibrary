@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria
 {
@@ -9,7 +10,6 @@ namespace Alexandria
 		#region Constructors
 		public BaseMetadataIdentifier(string parentId, string idValue, string idType, string idVersion) : base(idValue, idType, idVersion)
 		{
-			this.isNew = true;
 			this.id = Guid.NewGuid();
 			this.parentId = new Guid(parentId);
 		}
@@ -28,8 +28,7 @@ namespace Alexandria
 		#region Private Fields
 		private Guid id;		
 		private Guid parentId;
-		private bool isNew;
-		private IStorageEngine engine;
+		private IDataStore dataStore;
 		#endregion
 	
 		#region IMetadataIdentifier Members
@@ -52,34 +51,20 @@ namespace Alexandria
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 		
-		public IStorageEngine Engine
+		public IDataStore DataStore
 		{
-			get { return engine; }
-			set { engine = value; }
-		}
-		
-		public bool IsNew
-		{
-			get { return isNew; }
+			get { return dataStore; }
+			set { dataStore = value; }
 		}
 
 		public void Save()
 		{
-			if (engine != null)
-			{
-				engine.Save(this);
-				this.isNew = false;
-			}
-			else throw new ArgumentNullException("engine");
+			dataStore.Save(this);
 		}
 
 		public void Delete()
 		{
-			if (engine != null)
-			{
-				engine.Delete(this);
-			}
-			else throw new ArgumentNullException("engine");
+			dataStore.Delete(this);
 		}
 		#endregion
 	}
