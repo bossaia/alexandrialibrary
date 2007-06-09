@@ -101,8 +101,10 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IVisible.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="PersistanceFieldType.cs" />
     <Compile Include="PersistanceLoadType.cs" />
     <Compile Include="PersistanceOptionsAttribute.cs" />
+    <Compile Include="PersistancePropertyAttribute.cs" />
     <Compile Include="PersistanceSaveType.cs" />
     <Compile Include="PlaybackState.cs" />
     <Compile Include="PluginAttribute.cs" />
@@ -114,6 +116,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
