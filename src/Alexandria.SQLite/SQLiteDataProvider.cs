@@ -116,34 +116,66 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region DetermineTablesFromType
-		private void DetermineTablesFromType(IList<DataTable> tables, IPersistant record)
+		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
 		{
-			Type type = record.GetType();
-			DataTable table = new DataTable(type.Name);
-			
-			foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
+			string tableName = string.Empty;
+			ConstructorInfo ctor;
+		
+			// Get Constructor attributes
+			foreach(ConstructorInfo constructor in type.GetConstructors(BindingFlags.NonPublic|BindingFlags.Public))
 			{
-				/*
-				if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+				foreach (PersistanceOptionsAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceOptionsAttribute), false))
 				{
-					// Value types and strings are automatically included
-					table.Columns.Add(property.Name, property.PropertyType);
+					ctor = constructor;
+					tableName = attribute.TableName;
+					break;					
 				}
-				else
-				{
-					if (IsCollection(property.PropertyType))
-					{
-						// Handle the collection
-					}
-					else
-					{
-						DetermineTablesFromType(tables, property.PropertyType);
-					}
-				}
-				*/
+				
+				if (!string.IsNullOrEmpty(tableName))
+					break;
 			}
-			
-			tables.Add(table);
+
+			if (!string.IsNullOrEmpty(tableName))
+			{
+				DataTable table = new DataTable(tableName);
+				IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
+				int i = 1; int ordinal;
+				
+				foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
+				{
+					foreach (PersistanceOptionsAttribute attribute in property.GetCustomAttributes(typeof(PersistanceOptionsAttribute), false))
+					{
+						if (!attribute.IsChild && !attribute.IsParent)
+						{
+							ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
+							DataColumn column = new DataColumn(property.Name, property.PropertyType);
+							column.Unique = attribute.IsUnique;							
+							columns.Add(ordinal, column);
+							i++;
+						}
+						else
+						{
+							if (!attribute.IsCollection)
+							{
+							}
+							else
+							{
+							
+							}
+						}
+					}								
+				}
+				
+				if (columns.Count > 0)
+				{
+					for(int j=1;j<=columns.Count;j++)
+						table.Columns.Add(columns[j]);
+					
+					tables.Add(table);
+				}
+				else throw new ApplicationException("Could not find any columns for type: " + type.Name);
+			}
+			else throw new ApplicationException("Could not determine the table name for type: " + type.Name);
 		}
 		#endregion
 		
@@ -222,8 +254,11 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region LookupRecord
-		private IPersistant LookupRecord(Guid id)
+		private T LookupRecord<T>(Guid id) where T: class, IPersistant
 		{
+			IList<DataTable> tables = new List<DataTable>();
+			DetermineTablesFromType(tables, typeof(T)); 
+		
 			return null;
 		}
 		#endregion
@@ -301,9 +336,9 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region IStorageEngine Members
-		public T Lookup<T>(Guid id) where T : IPersistant
+		public T Lookup<T>(Guid id) where T : class,IPersistant
 		{
-			IPersistant record = LookupRecord(id);
+			T record = LookupRecord<T>(id);
 			record.Engine = this;
 			
 			return (T)record;

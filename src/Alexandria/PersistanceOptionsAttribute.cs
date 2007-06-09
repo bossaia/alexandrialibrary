@@ -27,10 +27,15 @@ namespace Alexandria
 		#region Private Fields
 		private string tableName = string.Empty;
 		private string fieldName = string.Empty;
-		private int ordinal;
-		private bool isPrimaryKey;
+		private int ordinal;		
 		private PersistanceLoadType loadType = PersistanceLoadType.None;
 		private PersistanceSaveType saveType = PersistanceSaveType.None;
+		private Type itemType;
+		private bool isPrimaryKey;
+		private bool isUnique;
+		private bool isChild;
+		private bool isCollection;
+		private bool isParent;
 		#endregion
 		
 		#region Public Properties
@@ -51,13 +56,7 @@ namespace Alexandria
 			get { return ordinal; }
 			set { ordinal = value; }
 		}
-		
-		public bool IsPrimaryKey
-		{
-			get { return isPrimaryKey; }
-			set { isPrimaryKey = value; }
-		}
-		
+				
 		public PersistanceLoadType LoadType
 		{
 			get { return loadType; }
@@ -68,6 +67,46 @@ namespace Alexandria
 		{
 			get { return saveType; }
 			set { saveType = value; }
+		}
+		
+		public Type ItemType
+		{
+			get { return itemType; }
+			set { itemType = value; }
+		}
+
+		public bool IsPrimaryKey
+		{
+			get { return isPrimaryKey; }
+			set
+			{				
+				isPrimaryKey = value;
+				if (isPrimaryKey) isUnique = true;
+			}
+		}
+		
+		public bool IsUnique
+		{
+			get { return isUnique; }
+			set { isUnique = value; }
+		}
+		
+		public bool IsChild
+		{
+			get { return isChild; }
+			set { isChild = value; }
+		}
+		
+		public bool IsParent
+		{
+			get { return isParent; }
+			set { isParent = value; }
+		}
+		
+		public bool IsCollection
+		{
+			get { return isCollection; }
+			set { isCollection = value; }
 		}
 		#endregion
 	}

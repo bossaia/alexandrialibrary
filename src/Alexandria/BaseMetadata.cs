@@ -44,7 +44,7 @@ namespace Alexandria
 			get { return id; }
 		}
 		
-		[PersistanceOptions(PersistanceLoadType.Collection, PersistanceSaveType.Collection)]
+		[PersistanceOptions(PersistanceLoadType.Collection, PersistanceSaveType.Collection, IsChild=true, IsCollection=true)]
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }
