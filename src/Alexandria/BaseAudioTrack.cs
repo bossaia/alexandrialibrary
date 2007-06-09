@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria
 {
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
-		[PersistanceOptions("AudioTrack", PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
+		[PersistanceConstructor]
 		public BaseAudioTrack(string id, string location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Location(location), name, album, artist, duration, releaseDate, trackNumber, format)
 		{
 		}

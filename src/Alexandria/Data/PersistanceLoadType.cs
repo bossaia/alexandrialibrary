@@ -4,12 +4,10 @@ using System.Text;
 
 namespace Alexandria
 {
-	public enum PersistanceSaveType
+	public enum PersistanceLoadType
 	{
 		None = 0,
-		PropertyGet,
-		PropertyGetToString,
-		Collection,
-		Ignore
+		Constructor,
+		Factory
 	}
 }

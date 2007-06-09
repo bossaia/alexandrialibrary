@@ -46,6 +46,9 @@
     <Compile Include="BaseMetadata.cs" />
     <Compile Include="BaseMetadataIdentifier.cs" />
     <Compile Include="BufferState.cs" />
+    <Compile Include="Data\IDataStore.cs" />
+    <Compile Include="Data\PersistanceClassAttribute.cs" />
+    <Compile Include="Data\PersistanceConstructorAttribute.cs" />
     <Compile Include="GuidIdentifier.cs" />
     <Compile Include="IAlbum.cs" />
     <Compile Include="IArtist.cs" />
@@ -63,10 +66,10 @@
     <Compile Include="ILocalAudio.cs" />
     <Compile Include="IMediaFactory.cs" />
     <Compile Include="IMetadataIdentifier.cs" />
-    <Compile Include="IPersistant.cs" />
+    <Compile Include="Data\IPersistant.cs" />
     <Compile Include="IPlaylistItem.cs" />
-    <Compile Include="IPluginOptions.cs" />
-    <Compile Include="IPluginRepository.cs" />
+    <Compile Include="Plugins\IPluginOptions.cs" />
+    <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="IPositionable.cs" />
     <Compile Include="ISeekable.cs" />
     <Compile Include="ISeekableBackward.cs" />
@@ -85,7 +88,7 @@
     <Compile Include="ITag.cs" />
     <Compile Include="IMetadataFactory.cs" />
     <Compile Include="IPlayable.cs" />
-    <Compile Include="IPlugin.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="IMediaFormat.cs" />
     <Compile Include="ISearch.cs" />
@@ -101,13 +104,11 @@
     <Compile Include="IMedia.cs" />
     <Compile Include="IVisible.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="PersistanceFieldType.cs" />
-    <Compile Include="PersistanceLoadType.cs" />
-    <Compile Include="PersistanceOptionsAttribute.cs" />
-    <Compile Include="PersistancePropertyAttribute.cs" />
-    <Compile Include="PersistanceSaveType.cs" />
+    <Compile Include="Data\PersistanceFieldType.cs" />
+    <Compile Include="Data\PersistanceLoadType.cs" />
+    <Compile Include="Data\PersistancePropertyAttribute.cs" />
     <Compile Include="PlaybackState.cs" />
-    <Compile Include="PluginAttribute.cs" />
+    <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="PositionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeekDirection.cs" />
@@ -116,9 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

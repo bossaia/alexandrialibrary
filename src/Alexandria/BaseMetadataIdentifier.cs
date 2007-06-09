@@ -14,7 +14,6 @@ namespace Alexandria
 			this.parentId = new Guid(parentId);
 		}
 		
-		[PersistanceOptions("MetadataID", PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
 		public BaseMetadataIdentifier(string id, string parentId, string idValue, string idType, string idVersion) : this(new Guid(id), new Guid(parentId), idValue, idType, new Version(idVersion))
 		{
 		}
@@ -48,7 +47,6 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
-		[PersistanceProperty(PersistanceFieldType.OneToOne, PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
 		public Guid Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }

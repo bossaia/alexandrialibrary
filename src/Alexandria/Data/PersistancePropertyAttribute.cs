@@ -17,22 +17,20 @@ namespace Alexandria
 			this.fieldType = fieldType;
 		}
 		
-		public PersistancePropertyAttribute(PersistanceFieldType fieldType, PersistanceLoadType loadType, PersistanceSaveType saveType) : this(fieldType)
+		public PersistancePropertyAttribute(PersistanceFieldType fieldType, PersistanceLoadType loadType) : this(fieldType)
 		{			
 			this.loadType = loadType;
-			this.saveType = saveType;
 		}
 		#endregion
 		
 		#region Private Fields
 		private PersistanceFieldType fieldType = PersistanceFieldType.None;
 		private PersistanceLoadType loadType = PersistanceLoadType.None;
-		private PersistanceSaveType saveType = PersistanceSaveType.None;
 		private string fieldName;
 		private int ordinal;
 		private bool isRequired;
 		private bool isUnique;
-		private bool isPrimaryKey;		
+		private bool isPrimaryKey;
 		#endregion
 		
 		#region Public Properties
@@ -46,12 +44,6 @@ namespace Alexandria
 		{
 			get { return loadType; }
 			set { loadType = value; }
-		}
-		
-		public PersistanceSaveType SaveType
-		{
-			get { return saveType; }
-			set { saveType = value; }
 		}
 		
 		public string FieldName
