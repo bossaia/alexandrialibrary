@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria
 {
-	public abstract class BaseMetadata : IMetadata, IPersistant
+	public abstract class BaseMetadata : IMetadata, Data.IPersistant
 	{
 		#region Constructors
 		public BaseMetadata(string location, string name)
@@ -38,25 +38,21 @@ namespace Alexandria
 		#endregion
 	
 		#region IMetadata Members
-		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString, IsPrimaryKey=true)]
 		public Guid Id
 		{
 			get { return id; }
 		}
 		
-		[PersistanceOptions(PersistanceLoadType.Collection, PersistanceSaveType.Collection, IsChild=true, IsCollection=true)]
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }
 		}
 
-		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGetToString)]
 		public ILocation Location
 		{
 			get { return location; }
 		}
 
-		[PersistanceOptions(PersistanceLoadType.ConstructorByName, PersistanceSaveType.PropertyGet)]
 		public string Name
 		{
 			get { return name; }
@@ -64,13 +60,11 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
-		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
 		public bool IsNew
 		{
 			get { return isNew; }
 		}
 
-		[PersistanceOptions(PersistanceLoadType.Ignore, PersistanceSaveType.Ignore)]
 		public IStorageEngine Engine
 		{
 			get { return engine; }

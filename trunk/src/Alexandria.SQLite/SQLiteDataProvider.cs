@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Alexandria;
+using Alexandria.Data;
 
 namespace Alexandria.SQLite
 {
@@ -119,15 +120,22 @@ namespace Alexandria.SQLite
 		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
 		{
 			string tableName = string.Empty;
+			PersistanceClassAttribute classAttribute;
 			ConstructorInfo ctor;
 		
-			// Get Constructor attributes
+			// Get class attributes
+			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
+			{
+				classAttribute = attribute;
+			}
+		
+			// Get constructor attributes
 			foreach(ConstructorInfo constructor in type.GetConstructors(BindingFlags.NonPublic|BindingFlags.Public))
 			{
-				foreach (PersistanceOptionsAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceOptionsAttribute), false))
+				foreach (PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
 				{
 					ctor = constructor;
-					tableName = attribute.TableName;
+					//tableName = attribute.TableName;
 					break;					
 				}
 				
@@ -143,9 +151,9 @@ namespace Alexandria.SQLite
 				
 				foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
 				{
-					foreach (PersistanceOptionsAttribute attribute in property.GetCustomAttributes(typeof(PersistanceOptionsAttribute), false))
+					foreach (PersistancePropertyAttribute attribute in property.GetCustomAttributes(typeof(PersistancePropertyAttribute), false))
 					{
-						if (!attribute.IsChild && !attribute.IsParent)
+						if (attribute.FieldType == PersistanceFieldType.Basic)
 						{
 							ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
 							DataColumn column = new DataColumn(property.Name, property.PropertyType);
@@ -155,15 +163,14 @@ namespace Alexandria.SQLite
 						}
 						else
 						{
-							if (!attribute.IsCollection)
+							if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
 							{
 							}
-							else
+							else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 							{
-							
 							}
 						}
-					}								
+					}
 				}
 				
 				if (columns.Count > 0)

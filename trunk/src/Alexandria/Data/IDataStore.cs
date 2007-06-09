@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Data;
 
-namespace Alexandria
+namespace Alexandria.Data
 {
-	public interface IStorageEngine
+	public interface IDataStore
 	{
-		T Lookup<T>(Guid id) where T: class,IPersistant;
+		T Lookup<T>(Guid id) where T : class, IPersistant;
 		void Save(IPersistant record);
 		void Delete(IPersistant record);
 	}
