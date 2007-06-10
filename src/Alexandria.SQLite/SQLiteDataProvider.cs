@@ -168,7 +168,9 @@ namespace Alexandria.SQLite
 							}
 							else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 							{
-							}
+								//TODO: determine how to load collections of objects
+								// with the same interface but different factories
+							}							
 						}
 					}
 				}
