@@ -68,6 +68,11 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region GetSQLiteConnection
+		private SQLiteConnection GetSQLiteConnection()
+		{
+			return GetSQLiteConnection(GetConnectionString());
+		}
+		
 		private SQLiteConnection GetSQLiteConnection(string connectionString)
 		{
 			return new SQLiteConnection(connectionString);
@@ -96,56 +101,12 @@ namespace Alexandria.SQLite
 			}
 			else throw new ArgumentNullException("table");
 		}
-		#endregion
-		
-		#region IsValueType
-		/// <summary>
-		/// Get a value indicating whether or not the given type is a value type
-		/// </summary>
-		/// <param name="type">The type in question</param>
-		/// <returns>True if the type is a value type, false otherwise</returns>
-		/// <remarks>Note - technically string is not a value type it is a primitive type but this is an expedient</remarks>
-		private bool IsValueType(Type type)
-		{
-			bool isValueType = false;
-
-			if (type == typeof(char) ||
-				type == typeof(decimal) ||
-				type == typeof(float) ||
-				type == typeof(double) ||
-				type == typeof(bool) ||
-				type == typeof(byte) ||
-				type == typeof(sbyte) ||
-				type == typeof(ushort) ||
-				type == typeof(short) ||
-				type == typeof(uint) ||
-				type == typeof(int) ||
-				type == typeof(ulong) ||
-				type == typeof(long) ||
-				type == typeof(DateTime) ||
-				type == typeof(TimeSpan))
-			isValueType = true;
-			
-			return isValueType;
-		}
-		#endregion
-		
-		#region IsCollection
-		private bool IsCollection(Type type)
-		{
-			//if (type.GetInterface("System.Collections.ICollection") != null)
-				//return true;
-			//else
-			if (type.GetInterface("System.Collections.Generic.ICollection<T>") != null)
-				return true;
-			else
-				return false;
-		}
-		#endregion
-		
+		#endregion				
+				
 		#region InstantiateType
-		private void InstantiateType(Type type)
+		private T InstantiateType<T>(DataTable table) where T: IPersistant
 		{
+			Type type = typeof(T);
 			ConstructorInfo ctor = null;
 			
 			foreach(ConstructorInfo constructor in type.GetConstructors(BindingFlags.NonPublic|BindingFlags.Public))
@@ -159,11 +120,43 @@ namespace Alexandria.SQLite
 				if (ctor != null)
 					break;
 			}
+			
+			return default(T);
 		}
 		#endregion
 		
-		#region DetermineTablesFromType
-		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
+		#region InstantiateCollection
+		private IList<T> InstantiateCollection<T>(DataTable table) where T: IPersistant
+		{
+			return new List<T>();
+		}
+		#endregion
+		
+		#region NormalizeValue
+		private object NormalizeValue(Type type, object value)
+		{
+			if (type == typeof(int))
+			{
+				if (value == DBNull.Value)
+					return 0;
+			}
+			if (type == typeof(DateTime))
+			{
+				if (value == DBNull.Value)
+					return DateTime.MinValue;
+			}
+			else if (type == typeof(TimeSpan))
+			{
+				if (value == null || value == DBNull.Value)
+					return TimeSpan.Zero;
+			}
+			
+			return value;
+		}
+		#endregion
+		
+		#region GetTablesFromType
+		private void GetTablesFromType(IList<DataTable> tables, Type type)
 		{
 			PersistanceClassAttribute classAttribute = null;			
 						
@@ -208,7 +201,7 @@ namespace Alexandria.SQLite
 								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 								{
 									if (attribute.ChildType != null)
-										DetermineTablesFromType(tables, attribute.ChildType);
+										GetTablesFromType(tables, attribute.ChildType);
 								}							
 							}
 						}
@@ -287,14 +280,56 @@ namespace Alexandria.SQLite
 				}
 				sql.Append(")");
 				
-				SQLiteConnection connection = GetSQLiteConnection(GetConnectionString());
-				connection.Open();
-				IDbCommand command = new SQLiteCommand(sql.ToString(), connection);
-				tableCreated = (command.ExecuteNonQuery() == 0);
+				using (SQLiteConnection connection = GetSQLiteConnection(GetConnectionString()))
+				{
+					connection.Open();
+					IDbCommand command = new SQLiteCommand(sql.ToString(), connection);
+					tableCreated = (command.ExecuteNonQuery() == 0);
+				}				
 			}
 			else throw new ArgumentNullException("table");
 			
 			return tableCreated;
+		}
+		#endregion
+		
+		#region LookupTable
+		private void LookupTable(DataTable table, string idFieldName, Guid id)
+		{
+			if (table != null)
+			{
+				string selectFormat = "SELECT {0} FROM {1} WHERE {2} = '{3}'";
+				StringBuilder selectList = new StringBuilder();
+				const string PREFIX = ", ";
+				foreach(DataColumn column in table.Columns)
+				{				
+					if (column.Ordinal > 0)
+						selectList.AppendFormat("{0}{1}", PREFIX, column.ColumnName);
+					else selectList.Append(column.ColumnName);
+				}
+				string sql = string.Format(selectFormat, selectList.ToString(), table.TableName, idFieldName, id.ToString().ToUpperInvariant());
+				
+				using (SQLiteConnection connection = GetSQLiteConnection())
+				{
+					connection.Open();
+					SQLiteCommand command = new SQLiteCommand(sql, connection);
+					using (SQLiteDataReader reader = command.ExecuteReader())
+					{
+						if (reader != null && reader.HasRows)
+						{
+							object[] data = new object[reader.FieldCount];
+							reader.Read();
+							int i = 0;
+							foreach(DataColumn column in table.Columns)
+							{
+								data[i] = NormalizeValue(column.DataType, reader[column.ColumnName]);
+								i++;
+							}							
+							table.Rows.Add(data);
+						}
+					}
+				}
+			}
 		}
 		#endregion
 		
@@ -306,21 +341,36 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region GetRecordById
-		private T GetRecordById<T>(Guid id) where T: class, IPersistant
+		private T GetRecordByParentID<T>(Guid id) where T: IPersistant
+		{
+			return default(T);
+		}
+		
+		private T GetRecordById<T>(Guid id) where T: IPersistant
 		{
 			try
 			{
 				IList<DataTable> tables = new List<DataTable>();
-				DetermineTablesFromType(tables, typeof(T)); 
-				foreach(DataTable table in tables)
-					CreateTable(table);
+				GetTablesFromType(tables, typeof(T)); 
+				
+				if (tables.Count > 0)
+				{
+					DataTable mainTable = tables[tables.Count-1];
+					LookupTable(mainTable, "Id", id);
+					string x = mainTable.TableName;
+					
+					for(int i=0;i<tables.Count-1;i++)
+					{
+						LookupTable(tables[i], "ParentId", id);
+					}
+				}
 			}
 			catch (Exception ex)
 			{
 				throw new ApplicationException("Lookup error", ex);
 			}
 			
-			return null;
+			return default(T);
 		}
 		#endregion
 		
@@ -357,55 +407,18 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		/*
-		#region Lookup
-		public T Lookup<T>(IIdentifier id) where T: IMetadata
-		{
-			IList<DataTable> tables = new List<DataTable>();
-			DetermineTablesFromType(tables, typeof(T));
-			//if (TableExists)...
-		
-			return default(T);
-		}
-		
-		public T Lookup<T>(Guid alexandriaId) where T: IMetadata
-		{
-			Type type = typeof(T);
-		
-			return default(T);
-		}
-		#endregion
-		
-		#region Save
-		public bool Save<T>(T row) where T: IMetadata
-		{
-			bool saved = false;
-			
-			return saved;
-		}
-		#endregion
-		
-		#region Delete
-		public bool Delete<T>(T row) where T: IMetadata
-		{
-			bool deleted = false;
-			
-			return deleted;
-		}
-		#endregion
-		*/
 		#endregion
 
 		#region IDataStore Members
 		public void Initialize(Type type)
 		{
 			IList<DataTable> tables = new List<DataTable>();
-			DetermineTablesFromType(tables, type);
+			GetTablesFromType(tables, type);
 			foreach(DataTable table in tables)
 				CreateTable(table);
 		}
 		
-		public T Lookup<T>(Guid id) where T : class,IPersistant
+		public T Lookup<T>(Guid id) where T : IPersistant
 		{
 			T record = GetRecordById<T>(id);
 			if (record != null)

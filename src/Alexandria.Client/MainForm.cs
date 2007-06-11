@@ -79,9 +79,12 @@ namespace Alexandria.Client
 			
 			try
 			{
+				//ParentID = 4E03C5A9-D50B-4561-B43F-D19D419C78B7
 				SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
-				provider.Initialize(typeof(BaseAudioTrack));
-				MessageBox.Show("Tables created", "SQLite database initialized");
+				BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(new Guid("3CF31AAE-9DC1-4311-8423-FB533E8F948B"));
+				string x = track.Name;
+				//provider.Initialize(typeof(BaseAudioTrack));
+				MessageBox.Show("Test succeeded", "SQLite database initialized");
 			}
 			catch (Exception ex)
 			{
