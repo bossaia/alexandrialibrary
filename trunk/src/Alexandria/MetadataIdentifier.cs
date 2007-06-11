@@ -66,19 +66,19 @@ namespace Alexandria
 		#endregion
 
 		#region IIdentifier Members
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=3)]
 		public string Value
 		{
 			get { return value; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=4)]
 		public string Type
 		{
 			get { return type; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=5)]
 		public IVersion Version
 		{
 			get { return version; }
@@ -106,7 +106,7 @@ namespace Alexandria
 		#endregion
 	
 		#region IMetadataIdentifier Members
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=2)]
 		public Guid ParentId
 		{
 			get { return parentId; }
@@ -115,7 +115,7 @@ namespace Alexandria
 		#endregion
 
 		#region IPersistant Members
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
 		public Guid Id
 		{
 			get { return id; }

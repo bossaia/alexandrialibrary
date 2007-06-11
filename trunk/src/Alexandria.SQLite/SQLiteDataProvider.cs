@@ -191,7 +191,12 @@ namespace Alexandria.SQLite
 							{
 								ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
 								DataColumn column = new DataColumn(property.Name, property.PropertyType);
-								column.Unique = attribute.IsUnique;							
+								column.Unique = attribute.IsUnique;
+								column.AllowDBNull = !attribute.IsRequired;
+								column.DefaultValue = attribute.DefaultValue;
+								if (attribute.MaxLength > 0)																
+									column.MaxLength = attribute.MaxLength;
+								
 								columns.Add(ordinal, column);
 								i++;
 							}
@@ -237,16 +242,20 @@ namespace Alexandria.SQLite
 				foreach(DataColumn column in table.Columns)
 				{
 					string delimiter = string.Empty;
-					if (count > 0) delimiter = ",";
+					if (count > 0) delimiter = ", ";
 					
-					string columnType = string.Empty;
+					string columnType = "TEXT";
 					string columnConstraint = string.Empty;
 					
 					if (column.Unique)					
 						columnConstraint += " UNIQUE";
 					 
+					 if (!column.AllowDBNull)
+						columnConstraint += " NOT NULL";
+					 
 					if (column.DataType == typeof(decimal) ||
-						column.DataType == typeof(string))
+						column.DataType == typeof(string) ||
+						column.DataType == typeof(Guid))
 					{
 						columnType = "TEXT";
 					}
@@ -255,7 +264,6 @@ namespace Alexandria.SQLite
 						column.DataType == typeof(double))
 					{
 						columnType = "REAL";
-						//columnConstraint += " NOT NULL";
 					}
 					else
 					if (column.DataType == typeof(bool) ||
@@ -273,7 +281,7 @@ namespace Alexandria.SQLite
 						columnType = "INTEGER";						
 					}
 					
-					sql.AppendFormat("{0}{1} {2} {3}", delimiter, column.ColumnName, columnType, columnConstraint);
+					sql.AppendFormat("{0}{1} {2}{3}", delimiter, column.ColumnName, columnType, columnConstraint);
 					
 					count++;
 				}
@@ -389,12 +397,21 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region IDataStore Members
+		public void Initialize(Type type)
+		{
+			IList<DataTable> tables = new List<DataTable>();
+			DetermineTablesFromType(tables, type);
+			foreach(DataTable table in tables)
+				CreateTable(table);
+		}
+		
 		public T Lookup<T>(Guid id) where T : class,IPersistant
 		{
 			T record = GetRecordById<T>(id);
-			record.DataStore = this;
+			if (record != null)
+				record.DataStore = this;
 			
-			return (T)record;
+			return record;
 		}
 
 		public void Save(IPersistant record)
