@@ -41,7 +41,7 @@
     <Compile Include="MetadataFactory.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Puid.cs" />
+    <Compile Include="PuidFactory.cs" />
     <Compile Include="TrackInfo.cs" />
   </ItemGroup>
   <ItemGroup>

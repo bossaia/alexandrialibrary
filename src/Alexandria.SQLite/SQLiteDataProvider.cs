@@ -1,3 +1,30 @@
+#region License
+/*
+Copyright (c) 2007 Dan Poage
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -116,75 +143,83 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region DetermineTablesFromType
-		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
+		#region InstantiateType
+		private void InstantiateType(Type type)
 		{
-			string tableName = string.Empty;
-			PersistanceClassAttribute classAttribute;
-			ConstructorInfo ctor;
-		
-			// Get class attributes
-			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
-			{
-				classAttribute = attribute;
-			}
-		
-			// Get constructor attributes
+			ConstructorInfo ctor = null;
+			
 			foreach(ConstructorInfo constructor in type.GetConstructors(BindingFlags.NonPublic|BindingFlags.Public))
 			{
 				foreach (PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
 				{
-					ctor = constructor;
-					//tableName = attribute.TableName;
+					ctor = constructor;					
 					break;					
 				}
 				
-				if (!string.IsNullOrEmpty(tableName))
+				if (ctor != null)
 					break;
 			}
-
-			if (!string.IsNullOrEmpty(tableName))
+		}
+		#endregion
+		
+		#region DetermineTablesFromType
+		private void DetermineTablesFromType(IList<DataTable> tables, Type type)
+		{
+			PersistanceClassAttribute classAttribute = null;			
+						
+			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
 			{
-				DataTable table = new DataTable(tableName);
-				IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
-				int i = 1; int ordinal;
-				
-				foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
+				classAttribute = attribute;
+				break;
+			}
+
+			if (classAttribute != null)
+			{
+				string tableName = classAttribute.TableName;
+
+				if (!string.IsNullOrEmpty(tableName))
 				{
-					foreach (PersistancePropertyAttribute attribute in property.GetCustomAttributes(typeof(PersistancePropertyAttribute), false))
+					DataTable table = new DataTable(tableName);
+					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
+					int i = 1; int ordinal;
+					
+					foreach(PropertyInfo property in type.GetProperties(BindingFlags.GetProperty|BindingFlags.Public|BindingFlags.Instance))
 					{
-						if (attribute.FieldType == PersistanceFieldType.Basic)
+						foreach (PersistancePropertyAttribute attribute in property.GetCustomAttributes(typeof(PersistancePropertyAttribute), false))
 						{
-							ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
-							DataColumn column = new DataColumn(property.Name, property.PropertyType);
-							column.Unique = attribute.IsUnique;							
-							columns.Add(ordinal, column);
-							i++;
-						}
-						else
-						{
-							if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
+							if (attribute.FieldType == PersistanceFieldType.Basic)
 							{
+								ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
+								DataColumn column = new DataColumn(property.Name, property.PropertyType);
+								column.Unique = attribute.IsUnique;							
+								columns.Add(ordinal, column);
+								i++;
 							}
-							else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+							else
 							{
-								//TODO: determine how to load collections of objects
-								// with the same interface but different factories
-							}							
+								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
+								{
+								}
+								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+								{
+									if (attribute.ChildType != null)
+										DetermineTablesFromType(tables, attribute.ChildType);
+								}							
+							}
 						}
 					}
-				}
-				
-				if (columns.Count > 0)
-				{
-					for(int j=1;j<=columns.Count;j++)
-						table.Columns.Add(columns[j]);
 					
-					tables.Add(table);
+					if (columns.Count > 0)
+					{
+						for(int j=1;j<=columns.Count;j++)
+							table.Columns.Add(columns[j]);
+						
+						tables.Add(table);
+					}
+					else throw new ApplicationException("Could not find any columns for type: " + type.Name);
 				}
-				else throw new ApplicationException("Could not find any columns for type: " + type.Name);
+				else throw new ApplicationException("Could not determine the table name for type: " + type.Name);
 			}
-			else throw new ApplicationException("Could not determine the table name for type: " + type.Name);
 		}
 		#endregion
 		
@@ -207,8 +242,8 @@ namespace Alexandria.SQLite
 					string columnType = string.Empty;
 					string columnConstraint = string.Empty;
 					
-					if (string.Compare(column.ColumnName, "ID", true) == 0)
-						columnConstraint += " PRIMARY KEY";
+					if (column.Unique)					
+						columnConstraint += " UNIQUE";
 					 
 					if (column.DataType == typeof(decimal) ||
 						column.DataType == typeof(string))
@@ -235,8 +270,7 @@ namespace Alexandria.SQLite
 						column.DataType == typeof(DateTime) ||
 						column.DataType == typeof(TimeSpan))
 					{
-						columnType = "INTEGER";
-						//columnConstraint += " NOT NULL";
+						columnType = "INTEGER";						
 					}
 					
 					sql.AppendFormat("{0}{1} {2} {3}", delimiter, column.ColumnName, columnType, columnConstraint);
@@ -246,8 +280,9 @@ namespace Alexandria.SQLite
 				sql.Append(")");
 				
 				SQLiteConnection connection = GetSQLiteConnection(GetConnectionString());
+				connection.Open();
 				IDbCommand command = new SQLiteCommand(sql.ToString(), connection);
-				int result = command.ExecuteNonQuery();
+				tableCreated = (command.ExecuteNonQuery() == 0);
 			}
 			else throw new ArgumentNullException("table");
 			
@@ -265,9 +300,18 @@ namespace Alexandria.SQLite
 		#region GetRecordById
 		private T GetRecordById<T>(Guid id) where T: class, IPersistant
 		{
-			IList<DataTable> tables = new List<DataTable>();
-			DetermineTablesFromType(tables, typeof(T)); 
-		
+			try
+			{
+				IList<DataTable> tables = new List<DataTable>();
+				DetermineTablesFromType(tables, typeof(T)); 
+				foreach(DataTable table in tables)
+					CreateTable(table);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("Lookup error", ex);
+			}
+			
 			return null;
 		}
 		#endregion

@@ -37,10 +37,10 @@
     <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="AuthenticationException.cs" />
-    <Compile Include="Mp3TunesTrackIdentifier.cs" />
     <Compile Include="MusicLocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track.cs" />
+    <Compile Include="TrackIdFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">

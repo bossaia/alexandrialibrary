@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria
 {
-	public interface IMetadataIdentifier : IIdentifier, Data.IPersistant
+	public interface IMetadataIdentifier : IIdentifier, IPersistant
 	{
-		Guid MetadataId { get; set; }
+		Guid ParentId { get; set; }
 	}
 }

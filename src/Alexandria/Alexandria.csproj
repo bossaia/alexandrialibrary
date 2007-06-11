@@ -44,7 +44,7 @@
     <Compile Include="BaseArtist.cs" />
     <Compile Include="BaseAudioTrack.cs" />
     <Compile Include="BaseMetadata.cs" />
-    <Compile Include="BaseMetadataIdentifier.cs" />
+    <Compile Include="MetadataIdentifier.cs" />
     <Compile Include="BufferState.cs" />
     <Compile Include="Data\IDataStore.cs" />
     <Compile Include="Data\PersistanceClassAttribute.cs" />
@@ -74,7 +74,6 @@
     <Compile Include="ISeekable.cs" />
     <Compile Include="ISeekableBackward.cs" />
     <Compile Include="ISeekableForward.cs" />
-    <Compile Include="IStorageEngine.cs" />
     <Compile Include="IStreaming.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="ITagable.cs" />
