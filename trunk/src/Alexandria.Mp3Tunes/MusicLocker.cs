@@ -158,10 +158,12 @@ namespace Alexandria.Mp3Tunes
 					XmlNode albumYear = node.SelectSingleNode( "albumYear" ); //This was originally commented out
 					XmlNode artistName = node.SelectSingleNode("artistName");				
 
-					Mp3TunesTrackIdentifier trackId;
+					IMetadataIdentifier trackId;
+					string trackIdValue = string.Empty;					
 					if (trackIdNode != null && !string.IsNullOrEmpty(trackIdNode.InnerXml))
-						trackId = new Mp3TunesTrackIdentifier(trackIdNode.InnerXml);
-					else trackId = new Mp3TunesTrackIdentifier(string.Empty);
+						trackIdValue = trackIdNode.InnerXml;
+						
+					trackId = TrackIdFactory.CreateTrackId(trackIdValue);
 
 					string url = string.Format("{0}{1}", System.Web.HttpUtility.UrlDecode(downloadUrl.InnerXml), partner_token);
 					

@@ -148,7 +148,7 @@ namespace Alexandria.MusicDns
 				puid = value;
 				
 				if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
-					metadataIdentifiers.Add(new Puid(puid));
+					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid));
 			}
 		}
 		

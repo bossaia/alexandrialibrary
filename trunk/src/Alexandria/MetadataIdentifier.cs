@@ -28,47 +28,63 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria
 {
-	public abstract class BaseIdentifier : IIdentifier
+	[PersistanceClass("MetadataID", PersistanceLoadType.Constructor)]
+	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
-		public BaseIdentifier(string value, string type, string version) : this(value, type, new Version(version))
+		public MetadataIdentifier(string parentId, string value, string type, string version) : this(Guid.NewGuid(), new Guid(parentId), value, type, new Version(version))
 		{
 		}
-
-		public BaseIdentifier(string value, string type, Version version)
+		
+		[PersistanceConstructor]
+		public MetadataIdentifier(string id, string parentId, string value, string type, string version) : this(new Guid(id), new Guid(parentId), value, type, new Version(version))
 		{
+		}
+		
+		public MetadataIdentifier(Guid id, Guid parentId, string value, string type, Version version)
+		{
+			this.id = id;
+			this.parentId = parentId;
 			this.value = value;
 			this.type = type;
 			this.version = version;
+			this.dataStore = null;
 		}
 		#endregion
 	
 		#region Private Fields
+		private Guid id;				
+		private Guid parentId;
 		private string value;
 		private string type;
 		private Version version;
+		private IDataStore dataStore;
 		#endregion
-	
+
 		#region IIdentifier Members
-		public string  Value
+		[PersistanceProperty(PersistanceFieldType.Basic)]
+		public string Value
 		{
 			get { return value; }
 		}
 
-		public string  Type
+		[PersistanceProperty(PersistanceFieldType.Basic)]
+		public string Type
 		{
 			get { return type; }
 		}
-		
+
+		[PersistanceProperty(PersistanceFieldType.Basic)]
 		public IVersion Version
 		{
 			get { return version; }
 		}
 
-		public virtual IdentificationResult CompareTo(IIdentifier other)
+		public IdentificationResult CompareTo(IIdentifier other)
 		{
 			if (other != null)
 			{
@@ -88,7 +104,40 @@ namespace Alexandria
 			else return IdentificationResult.None;
 		}
 		#endregion
-		
+	
+		#region IMetadataIdentifier Members
+		[PersistanceProperty(PersistanceFieldType.Basic)]
+		public Guid ParentId
+		{
+			get { return parentId; }
+			set { parentId = value; }
+		}
+		#endregion
+
+		#region IPersistant Members
+		[PersistanceProperty(PersistanceFieldType.Basic)]
+		public Guid Id
+		{
+			get { return id; }
+		}
+				
+		public IDataStore DataStore
+		{
+			get { return dataStore; }
+			set { dataStore = value; }
+		}
+
+		public void Save()
+		{
+			dataStore.Save(this);
+		}
+
+		public void Delete()
+		{
+			dataStore.Delete(this);
+		}
+		#endregion
+
 		#region Public Methods
 		public override string ToString()
 		{
