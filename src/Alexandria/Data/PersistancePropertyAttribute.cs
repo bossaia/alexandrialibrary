@@ -66,6 +66,8 @@ namespace Alexandria
 		private bool isRequired;
 		private bool isUnique;
 		private bool isPrimaryKey;
+		private object defaultValue;
+		private int maxLength;
 		#endregion
 		
 		#region Public Properties
@@ -133,6 +135,18 @@ namespace Alexandria
 					isUnique = true;
 				}
 			}
+		}
+		
+		public object DefaultValue
+		{
+			get { return defaultValue; }
+			set { defaultValue = value; }
+		}
+		
+		public int MaxLength
+		{
+			get { return maxLength; }
+			set { maxLength = value; }
 		}
 		#endregion
 	}

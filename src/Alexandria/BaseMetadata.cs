@@ -64,7 +64,7 @@ namespace Alexandria
 		#endregion
 	
 		#region IMetadata Members
-		[PersistanceProperty(PersistanceFieldType.Basic, IsPrimaryKey=true)]
+		[PersistanceProperty(PersistanceFieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
 		public Guid Id
 		{
 			get { return id; }
@@ -76,13 +76,13 @@ namespace Alexandria
 			get { return metadataIdentifiers; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=2)]
 		public ILocation Location
 		{
 			get { return location; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=3)]
 		public string Name
 		{
 			get { return name; }

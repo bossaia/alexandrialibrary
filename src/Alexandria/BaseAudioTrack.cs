@@ -62,37 +62,37 @@ namespace Alexandria
 		#endregion
 	
 		#region IAudioTrack Members
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=4)]
 		public string Album
 		{
 			get { return album; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=5)]
 		public string Artist
 		{
 			get { return artist; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=6)]
 		public TimeSpan Duration
 		{
 			get { return duration; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=7)]
 		public DateTime ReleaseDate
 		{
 			get { return releaseDate; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=8)]
 		public int TrackNumber
 		{
 			get { return trackNumber; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic)]
+		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=9)]
 		public string Format
 		{
 			get { return format; }

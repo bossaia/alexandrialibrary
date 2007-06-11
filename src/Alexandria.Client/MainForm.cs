@@ -77,8 +77,17 @@ namespace Alexandria.Client
 				System.IO.Directory.CreateDirectory(dbDir);
 			string dbPath = dbDir + "Alexandria.db";
 			
-			SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
-			BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(Guid.NewGuid());
+			try
+			{
+				SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
+				provider.Initialize(typeof(BaseAudioTrack));
+				MessageBox.Show("Tables created", "SQLite database initialized");
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "SQLite Error");
+			}
+			//BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(Guid.NewGuid());
 			//MessageBox.Show(provider.Test(), "SQLite Test");
 			//controller.LoadTracks();
 		}
