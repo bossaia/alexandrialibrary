@@ -159,18 +159,38 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region GetClassAttribute
+		private PersistanceClassAttribute GetClassAttribute(Type type)
+		{
+			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
+			{
+				return attribute;
+			}
+			return null;
+		}
+		#endregion
+		
+		#region GetConstructor
+		private ConstructorInfo GetConstructor(Type type)
+		{
+			foreach (ConstructorInfo constructor in type.GetConstructors(BindingFlags.Public))
+			{
+				foreach (PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
+				{
+					return constructor;
+				}
+			}
+			return null;
+		}
+		#endregion
+		
 		#region GetTableMapFromType
 		private TableMap GetTableMapFromType(Type type)
 		{
 			TableMap map = null;
 		
-			PersistanceClassAttribute classAttribute = null;			
-						
-			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
-			{
-				classAttribute = attribute;
-				break;
-			}
+			PersistanceClassAttribute classAttribute = GetClassAttribute(type);
+			ConstructorInfo constructor = GetConstructor(type);
 
 			if (classAttribute != null)
 			{
@@ -178,7 +198,7 @@ namespace Alexandria.SQLite
 
 				if (!string.IsNullOrEmpty(tableName))
 				{
-					map = new TableMap(new DataTable(tableName), type);					
+					map = new TableMap(new DataTable(tableName), type, classAttribute, constructor);
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
 					int i = 1; int ordinal;
 					
@@ -201,15 +221,12 @@ namespace Alexandria.SQLite
 							}
 							else
 							{
+								PropertyMap propertyMap = new PropertyMap(property, attribute);
 								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
-								{
-									map.Children.Add(property, GetTableMapFromType(property.PropertyType));
-								}
-								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
-								{
-									if (attribute.ChildType != null)
-										map.Children.Add(property, GetTableMapFromType(attribute.ChildType));
-								}					
+									map.Children.Add(propertyMap, GetTableMapFromType(property.PropertyType));
+								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren && attribute.ChildType != null)
+									map.Children.Add(propertyMap, GetTableMapFromType(attribute.ChildType));
+								else throw new ApplicationException("Could not map this property: invalid field type");
 							}
 						}
 					}
@@ -348,8 +365,8 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region GetRecordFromMap
-		private IPersistant GetRecordFromMap(TableMap map)
+		#region GetRecordFromMapConstructor
+		private IPersistant GetRecordFromMapConstructor(TableMap map)
 		{
 			return null;
 		}
@@ -358,30 +375,51 @@ namespace Alexandria.SQLite
 		#region LookupRecordByMap
 		private T LookupRecordByMap<T>(TableMap map) where T: IPersistant
 		{
-			try
+			if (map != null)
 			{
-				if (map != null)
+				LookupTable(map.Table, "Id", map.Id);
+						
+				foreach(KeyValuePair<PropertyMap, TableMap> childPair in map.Children)
 				{
-					LookupTable(map.Table, "Id", map.Id);
-					IPersistant record = GetRecordFromMap(map);
-					string x = map.Table.TableName;
+					//NOTE: figure out how to call LookupRecordByMap<T> for this child
 					
-					foreach(KeyValuePair<PropertyInfo, TableMap> childPair in map.Children)
-					{
-						LookupChildMap(childPair.Value, map.Id);
-						IPersistant childRecord = GetRecordFromMap(childPair.Value);
-						PropertyInfo property = childPair.Key;						
-						//object childObject = property.GetValue(
-						//foreach(P
-						//Type childType = property.
-						//IC childPair.Key.GetValue(
+					/*
+					LookupChildMap(childPair.Value, map.Id);
+					IPersistant childRecord = GetRecordFromMap(childPair.Value);
+					PropertyInfo property = childPair.Key.Property;
+					PersistancePropertyAttribute attribute = childPair.Key.Attribute;
+					if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
+					{							
+						// Property
 					}
+					else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+					{
+						// Collection
+					}
+					*/
 				}
+
+				if (map.ClassAttribute.LoadType == PersistanceLoadType.Constructor)
+				{
+					// load with the constructor
+					if (map.Constructor != null)
+					{
+						IPersistant record = GetRecordFromMapConstructor(map);
+					}
+					else throw new ApplicationException("Lookup error: load constructor undefined");
+				}
+				else if (map.ClassAttribute.LoadType == PersistanceLoadType.Property)
+				{
+					// load with properties
+				}
+				else if (map.ClassAttribute.LoadType == PersistanceLoadType.Factory)
+				{
+					// load with a factory
+					Type factoryType = map.ClassAttribute.FactoryType;
+				}
+				else throw new ApplicationException("Lookup error: invalid class load type");
 			}
-			catch (Exception ex)
-			{
-				throw new ApplicationException("Lookup error", ex);
-			}
+			else throw new ApplicationException("Lookup error: table map undefined");
 			
 			return default(T);
 		}
@@ -393,6 +431,13 @@ namespace Alexandria.SQLite
 			CreateTable(map.Table);
 			foreach(TableMap childMap in map.Children.Values)
 				CreateTablesFromMap(childMap);
+		}
+		#endregion
+		
+		#region GetRecordFromDataRow
+		private T GetRecordFromDataRow<T>(DataRow row)
+		{
+			return default(T);
 		}
 		#endregion
 		
