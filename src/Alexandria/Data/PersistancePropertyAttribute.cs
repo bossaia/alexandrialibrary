@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.Data
 {
 	[AttributeUsage(AttributeTargets.Property)]
 	public class PersistancePropertyAttribute : Attribute

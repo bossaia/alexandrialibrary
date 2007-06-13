@@ -3,23 +3,32 @@ using System.Data;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Alexandria.Data;
 
 namespace Alexandria.SQLite
 {
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(DataTable table, Type type)
+		public TableMap(DataTable table, Type type, PersistanceClassAttribute classAttribute) : this(table, type, classAttribute, null)
+		{
+		}
+
+		public TableMap(DataTable table, Type type, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
 		{
 			this.table = table;
 			this.type = type;
+			this.classAttribute = classAttribute;
+			this.constructor = constructor;
 		}
 		#endregion
 		
 		#region Private Fields
 		private DataTable table;
 		private Type type;
-		private IDictionary<PropertyInfo, TableMap> children = new Dictionary<PropertyInfo, TableMap>();
+		private PersistanceClassAttribute classAttribute;
+		private ConstructorInfo constructor;
+		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
 		private bool idInitialized;
 		private Guid id;
 		#endregion
@@ -33,6 +42,16 @@ namespace Alexandria.SQLite
 		public Type Type
 		{
 			get { return type; }
+		}
+		
+		public PersistanceClassAttribute ClassAttribute
+		{
+			get { return classAttribute; }
+		}
+		
+		public ConstructorInfo Constructor
+		{
+			get { return constructor; }
 		}
 		
 		public Guid Id
@@ -51,7 +70,7 @@ namespace Alexandria.SQLite
 			}
 		}
 		
-		public IDictionary<PropertyInfo, TableMap> Children
+		public IDictionary<PropertyMap, TableMap> Children
 		{
 			get { return children; }
 		}
