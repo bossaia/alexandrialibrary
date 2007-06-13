@@ -373,30 +373,36 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region LookupRecordByMap
+		private IPersistant LookupRecordByMap(TableMap map)
+		{
+			MethodInfo method = this.GetType().GetMethod("LookupRecordByMap", BindingFlags.NonPublic | BindingFlags.Instance);
+			MethodInfo genericMethod = method.MakeGenericMethod(map.Type);
+			
+			return (IPersistant)genericMethod.Invoke(this, new object[]{map});
+		}
+		
 		private T LookupRecordByMap<T>(TableMap map) where T: IPersistant
 		{
 			if (map != null)
 			{
 				LookupTable(map.Table, "Id", map.Id);
-						
+				IDictionary<PropertyInfo, IPersistant> childOneToOneValues = new Dictionary<PropertyInfo, IPersistant>();
+				IDictionary<PropertyInfo, IList<IPersistant>> childOneToManyValues = new Dictionary<PropertyInfo, IList<IPersistant>>();
+				
 				foreach(KeyValuePair<PropertyMap, TableMap> childPair in map.Children)
-				{
-					//NOTE: figure out how to call LookupRecordByMap<T> for this child
-					
-					/*
-					LookupChildMap(childPair.Value, map.Id);
-					IPersistant childRecord = GetRecordFromMap(childPair.Value);
+				{					
 					PropertyInfo property = childPair.Key.Property;
 					PersistancePropertyAttribute attribute = childPair.Key.Attribute;
 					if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
 					{							
 						// Property
+						IPersistant childRecord = LookupRecordByMap(childPair.Value);
 					}
 					else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 					{
 						// Collection
+						IList<IPersistant> childRecords = LookupRecordCollectionByMap(childPair.Value);
 					}
-					*/
 				}
 
 				if (map.ClassAttribute.LoadType == PersistanceLoadType.Constructor)
@@ -422,6 +428,13 @@ namespace Alexandria.SQLite
 			else throw new ApplicationException("Lookup error: table map undefined");
 			
 			return default(T);
+		}
+		#endregion
+		
+		#region LookupRecordCollectionByMap
+		private IList<IPersistant> LookupRecordCollectionByMap(TableMap map)
+		{
+			return new List<IPersistant>();
 		}
 		#endregion
 		
