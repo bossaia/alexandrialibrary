@@ -150,14 +150,20 @@ namespace Alexandria.SQLite
 				if (value == null || value == DBNull.Value)
 					return TimeSpan.Zero;
 			}
+			else if (type == typeof(Version) || type == typeof(IVersion))
+			{
+				return new Version(value.ToString());
+			}
 			
 			return value;
 		}
 		#endregion
 		
-		#region GetTablesFromType
-		private void GetTablesFromType(IList<DataTable> tables, Type type)
+		#region GetTableMapFromType
+		private TableMap GetTableMapFromType(Type type)
 		{
+			TableMap map = null;
+		
 			PersistanceClassAttribute classAttribute = null;			
 						
 			foreach(PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
@@ -172,7 +178,7 @@ namespace Alexandria.SQLite
 
 				if (!string.IsNullOrEmpty(tableName))
 				{
-					DataTable table = new DataTable(tableName);
+					map = new TableMap(new DataTable(tableName), type);					
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
 					int i = 1; int ordinal;
 					
@@ -197,12 +203,13 @@ namespace Alexandria.SQLite
 							{
 								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
 								{
+									map.Children.Add(property, GetTableMapFromType(property.PropertyType));
 								}
 								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 								{
 									if (attribute.ChildType != null)
-										GetTablesFromType(tables, attribute.ChildType);
-								}							
+										map.Children.Add(property, GetTableMapFromType(attribute.ChildType));
+								}					
 							}
 						}
 					}
@@ -210,14 +217,13 @@ namespace Alexandria.SQLite
 					if (columns.Count > 0)
 					{
 						for(int j=1;j<=columns.Count;j++)
-							table.Columns.Add(columns[j]);
-						
-						tables.Add(table);
+							map.Table.Columns.Add(columns[j]);
 					}
 					else throw new ApplicationException("Could not find any columns for type: " + type.Name);
 				}
-				else throw new ApplicationException("Could not determine the table name for type: " + type.Name);
+				else throw new ApplicationException("Could not determine the table name for type: " + type.Name);								
 			}
+			return map;
 		}
 		#endregion
 		
@@ -333,35 +339,42 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region GetChildCollectionByParentId
-		private IList<IPersistant> GetChildCollectionByParentId(Guid id)
+		#region LookupChildMap
+		private void LookupChildMap(TableMap map, Guid parentId)
 		{
-			return new List<IPersistant>();
+			LookupTable(map.Table, "ParentId", parentId);
+			foreach(TableMap childMap in map.Children.Values)
+				LookupTable(childMap.Table, "ParentId", map.Id);
 		}
 		#endregion
 		
-		#region GetRecordById
-		private T GetRecordByParentID<T>(Guid id) where T: IPersistant
+		#region GetRecordFromMap
+		private IPersistant GetRecordFromMap(TableMap map)
 		{
-			return default(T);
+			return null;
 		}
+		#endregion
 		
-		private T GetRecordById<T>(Guid id) where T: IPersistant
+		#region LookupRecordByMap
+		private T LookupRecordByMap<T>(TableMap map) where T: IPersistant
 		{
 			try
 			{
-				IList<DataTable> tables = new List<DataTable>();
-				GetTablesFromType(tables, typeof(T)); 
-				
-				if (tables.Count > 0)
+				if (map != null)
 				{
-					DataTable mainTable = tables[tables.Count-1];
-					LookupTable(mainTable, "Id", id);
-					string x = mainTable.TableName;
+					LookupTable(map.Table, "Id", map.Id);
+					IPersistant record = GetRecordFromMap(map);
+					string x = map.Table.TableName;
 					
-					for(int i=0;i<tables.Count-1;i++)
+					foreach(KeyValuePair<PropertyInfo, TableMap> childPair in map.Children)
 					{
-						LookupTable(tables[i], "ParentId", id);
+						LookupChildMap(childPair.Value, map.Id);
+						IPersistant childRecord = GetRecordFromMap(childPair.Value);
+						PropertyInfo property = childPair.Key;						
+						//object childObject = property.GetValue(
+						//foreach(P
+						//Type childType = property.
+						//IC childPair.Key.GetValue(
 					}
 				}
 			}
@@ -371,6 +384,15 @@ namespace Alexandria.SQLite
 			}
 			
 			return default(T);
+		}
+		#endregion
+		
+		#region CreateTablesFromMap
+		private void CreateTablesFromMap(TableMap map)
+		{
+			CreateTable(map.Table);
+			foreach(TableMap childMap in map.Children.Values)
+				CreateTablesFromMap(childMap);
 		}
 		#endregion
 		
@@ -412,15 +434,14 @@ namespace Alexandria.SQLite
 		#region IDataStore Members
 		public void Initialize(Type type)
 		{
-			IList<DataTable> tables = new List<DataTable>();
-			GetTablesFromType(tables, type);
-			foreach(DataTable table in tables)
-				CreateTable(table);
+			TableMap map = GetTableMapFromType(type);
+			CreateTablesFromMap(map);
 		}
 		
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
-			T record = GetRecordById<T>(id);
+			TableMap map = GetTableMapFromType(typeof(T));
+			T record = LookupRecordByMap<T>(map);
 			if (record != null)
 				record.DataStore = this;
 			
