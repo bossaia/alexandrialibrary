@@ -144,15 +144,21 @@ namespace Alexandria.SQLite
 			{
 				if (value == DBNull.Value)
 					return DateTime.MinValue;
+				else return Convert.ToDateTime(value.ToString());
 			}
 			else if (type == typeof(TimeSpan))
 			{
 				if (value == null || value == DBNull.Value)
 					return TimeSpan.Zero;
+				else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
 			}
 			else if (type == typeof(Version) || type == typeof(IVersion))
 			{
 				return new Version(value.ToString());
+			}
+			else if (type == typeof(Location) || type == typeof(ILocation))
+			{
+				return new Location(value.ToString());
 			}
 			
 			return value;
@@ -173,9 +179,10 @@ namespace Alexandria.SQLite
 		#region GetConstructor
 		private ConstructorInfo GetConstructor(Type type)
 		{
-			foreach (ConstructorInfo constructor in type.GetConstructors(BindingFlags.Public))
+			foreach (ConstructorInfo constructor in type.GetConstructors()) // (BindingFlags.Public))
 			{
-				foreach (PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
+				//foreach (Attribute attribute in constructor.GetCustomAttributes(
+				foreach(PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
 				{
 					return constructor;
 				}
@@ -184,8 +191,14 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region GetTableFromType
+		//private DataTable GetTableFromType(Type type)
+		//{
+		//}
+		#endregion
+		
 		#region GetTableMapFromType
-		private TableMap GetTableMapFromType(Type type)
+		private TableMap GetTableMapFromType(Type type, Guid id)
 		{
 			TableMap map = null;
 		
@@ -198,7 +211,11 @@ namespace Alexandria.SQLite
 
 				if (!string.IsNullOrEmpty(tableName))
 				{
-					map = new TableMap(new DataTable(tableName), type, classAttribute, constructor);
+					DataTable table = new DataTable(tableName);
+					if (id != Guid.Empty)
+						map = new TableMap(table, type, id, classAttribute, constructor);
+					else map = new TableMap(table, type, classAttribute, constructor);
+					
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();				
 					int i = 1; int ordinal;
 					
@@ -223,9 +240,13 @@ namespace Alexandria.SQLite
 							{
 								PropertyMap propertyMap = new PropertyMap(property, attribute);
 								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
-									map.Children.Add(propertyMap, GetTableMapFromType(property.PropertyType));
+								{
+									map.Children.Add(propertyMap, GetTableMapFromType(property.PropertyType, Guid.Empty));
+								}
 								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren && attribute.ChildType != null)
-									map.Children.Add(propertyMap, GetTableMapFromType(attribute.ChildType));
+								{
+									map.Children.Add(propertyMap, GetTableMapFromType(attribute.ChildType, Guid.Empty));
+								}
 								else throw new ApplicationException("Could not map this property: invalid field type");
 							}
 						}
@@ -340,15 +361,18 @@ namespace Alexandria.SQLite
 					{
 						if (reader != null && reader.HasRows)
 						{
-							object[] data = new object[reader.FieldCount];
-							reader.Read();
-							int i = 0;
-							foreach(DataColumn column in table.Columns)
+							while (reader.Read())
 							{
-								data[i] = NormalizeValue(column.DataType, reader[column.ColumnName]);
-								i++;
-							}							
-							table.Rows.Add(data);
+								object[] data = new object[reader.FieldCount];
+							
+								int i = 0;
+								foreach(DataColumn column in table.Columns)
+								{
+									data[i] = NormalizeValue(column.DataType, reader[column.ColumnName]);
+									i++;
+								}							
+								table.Rows.Add(data);
+							}
 						}
 					}
 				}
@@ -386,6 +410,7 @@ namespace Alexandria.SQLite
 			if (map != null)
 			{
 				LookupTable(map.Table, "Id", map.Id);
+				string x1 = map.Table.TableName;
 				IDictionary<PropertyInfo, IPersistant> childOneToOneValues = new Dictionary<PropertyInfo, IPersistant>();
 				IDictionary<PropertyInfo, IList<IPersistant>> childOneToManyValues = new Dictionary<PropertyInfo, IList<IPersistant>>();
 				
@@ -396,12 +421,16 @@ namespace Alexandria.SQLite
 					if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
 					{							
 						// Property
-						IPersistant childRecord = LookupRecordByMap(childPair.Value);
+						//IPersistant childRecord = LookupRecordByMap(childPair.Value);
+						//childOneToOneValues.Add(childPair.Key.Property, childRecord);
 					}
 					else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 					{
 						// Collection
-						IList<IPersistant> childRecords = LookupRecordCollectionByMap(childPair.Value);
+						LookupTable(childPair.Value.Table, "ParentId", map.Id);
+						string x2 = childPair.Value.Table.TableName;
+						//IList<IPersistant> childRecords = LookupRecordCollectionByMap(childPair.Value);
+						//childOneToManyValues.Add(childPair.Key.Property, childRecords);
 					}
 				}
 
@@ -492,13 +521,13 @@ namespace Alexandria.SQLite
 		#region IDataStore Members
 		public void Initialize(Type type)
 		{
-			TableMap map = GetTableMapFromType(type);
+			TableMap map = GetTableMapFromType(type, Guid.Empty);
 			CreateTablesFromMap(map);
 		}
 		
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
-			TableMap map = GetTableMapFromType(typeof(T));
+			TableMap map = GetTableMapFromType(typeof(T), id);
 			T record = LookupRecordByMap<T>(map);
 			if (record != null)
 				record.DataStore = this;
