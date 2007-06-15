@@ -10,16 +10,22 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(DataTable table, Type type, PersistanceClassAttribute classAttribute) : this(table, type, classAttribute, null)
-		{
-		}
-
 		public TableMap(DataTable table, Type type, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
 		{
 			this.table = table;
-			this.type = type;
+			this.type = type;			
 			this.classAttribute = classAttribute;
 			this.constructor = constructor;
+		}
+		
+		public TableMap(DataTable table, Type type, Guid id, PersistanceClassAttribute classAttribute) : this(table, type, id, classAttribute, null)
+		{
+		}
+
+		public TableMap(DataTable table, Type type, Guid id, PersistanceClassAttribute classAttribute, ConstructorInfo constructor) : this(table, type, classAttribute, constructor)
+		{
+			this.id = id;
+			idInitialized = true;
 		}
 		#endregion
 		
@@ -43,6 +49,22 @@ namespace Alexandria.SQLite
 		{
 			get { return type; }
 		}
+
+		public Guid Id
+		{
+			get
+			{
+				if (!idInitialized)
+				{
+					idInitialized = true;
+
+					if (table.Rows.Count > 0)
+						id = new Guid(table.Rows[0]["Id"].ToString());
+				}
+
+				return id;
+			}
+		}
 		
 		public PersistanceClassAttribute ClassAttribute
 		{
@@ -53,23 +75,7 @@ namespace Alexandria.SQLite
 		{
 			get { return constructor; }
 		}
-		
-		public Guid Id
-		{
-			get
-			{
-				if (!idInitialized)
-				{
-					idInitialized = true;
-					
-					if (table.Rows.Count > 0)
-						id = new Guid(table.Rows[0]["Id"].ToString());
-				}
-			
-				return id;
-			}
-		}
-		
+				
 		public IDictionary<PropertyMap, TableMap> Children
 		{
 			get { return children; }
