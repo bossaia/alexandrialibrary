@@ -41,6 +41,7 @@
     <Compile Include="SQLiteDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableMap.cs" />
+    <Compile Include="TableMapFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
