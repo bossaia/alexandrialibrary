@@ -10,22 +10,12 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(DataTable table, Type type, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
+		public TableMap(Type type, DataTable table, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
 		{
+			this.type = type;
 			this.table = table;
-			this.type = type;			
 			this.classAttribute = classAttribute;
 			this.constructor = constructor;
-		}
-		
-		public TableMap(DataTable table, Type type, Guid id, PersistanceClassAttribute classAttribute) : this(table, type, id, classAttribute, null)
-		{
-		}
-
-		public TableMap(DataTable table, Type type, Guid id, PersistanceClassAttribute classAttribute, ConstructorInfo constructor) : this(table, type, classAttribute, constructor)
-		{
-			this.id = id;
-			idInitialized = true;
 		}
 		#endregion
 		
@@ -35,35 +25,18 @@ namespace Alexandria.SQLite
 		private PersistanceClassAttribute classAttribute;
 		private ConstructorInfo constructor;
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
-		private bool idInitialized;
-		private Guid id;
+		private bool isFilled;
 		#endregion
-		
+				
 		#region Public Properties
-		public DataTable Table
-		{
-			get { return table; }
-		}
-		
 		public Type Type
 		{
 			get { return type; }
 		}
-
-		public Guid Id
+		
+		public DataTable Table
 		{
-			get
-			{
-				if (!idInitialized)
-				{
-					idInitialized = true;
-
-					if (table.Rows.Count > 0)
-						id = new Guid(table.Rows[0]["Id"].ToString());
-				}
-
-				return id;
-			}
+			get { return table; }
 		}
 		
 		public PersistanceClassAttribute ClassAttribute
@@ -79,6 +52,18 @@ namespace Alexandria.SQLite
 		public IDictionary<PropertyMap, TableMap> Children
 		{
 			get { return children; }
+		}
+		
+		public bool IsFilled
+		{
+			get { return isFilled; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public void Lookup(string idField, Guid id)
+		{
+			isFilled = true;
 		}
 		#endregion
 	}
