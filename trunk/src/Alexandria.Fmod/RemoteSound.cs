@@ -19,7 +19,7 @@ namespace Alexandria.Fmod
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		public IIdentifier Id
+		public Guid Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

@@ -6,7 +6,7 @@ namespace Alexandria
 {
 	public interface IMedia
 	{
-		IIdentifier Id { get; }
+		Guid Id { get; }
 		ILocation Location { get; }
 		IMediaFormat Format { get; }
 		void Load();
