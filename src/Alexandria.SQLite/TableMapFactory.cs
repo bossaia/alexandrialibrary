@@ -45,7 +45,7 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Internal Methods
-		internal TableMap CreateTableMap(Type type)
+		internal TableMap CreateTableMap(SQLiteDataProvider provider, Type type)
 		{
 			TableMap map = null;
 		
@@ -59,7 +59,7 @@ namespace Alexandria.SQLite
 				if (!string.IsNullOrEmpty(tableName))
 				{
 					DataTable table = new DataTable(tableName);
-					map = new TableMap(type, table, classAttribute, constructor);
+					map = new TableMap(provider, type, table, classAttribute, constructor);
 
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();
 					int i = 1; int ordinal;
@@ -87,9 +87,9 @@ namespace Alexandria.SQLite
 								TableMap childMap = null;
 								
 								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
-									childMap = CreateTableMap(property.PropertyType);
+									childMap = CreateTableMap(provider, property.PropertyType);
 								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren && attribute.ChildType != null)
-									childMap = CreateTableMap(attribute.ChildType);
+									childMap = CreateTableMap(provider, attribute.ChildType);
 								else throw new ApplicationException("Could not map this property: invalid field type");
 
 								map.Children.Add(propertyMap, childMap);
