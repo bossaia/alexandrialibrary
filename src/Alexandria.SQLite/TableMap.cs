@@ -404,13 +404,11 @@ namespace Alexandria.SQLite
 				PersistancePropertyAttribute attribute = childPair.Key.Attribute;
 				if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
 				{
-					// Property
-					//IPersistant childRecord = LookupRecordByMap(childPair.Value);
-					//childOneToOneValues.Add(childPair.Key.Property, childRecord);
+					IPersistant item = GetRecordFromConstructor(childPair.Value.Constructor, childPair.Value.Table.Rows[0]);
+					childPair.Key.Property.SetValue(record, item, null);
 				}
 				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 				{
-					// Collection
 					LookupTable(childPair.Value.Table, "ParentId", id);					
 					IList list = (IList)childPair.Key.Property.GetValue(record, null);
 					
@@ -423,12 +421,7 @@ namespace Alexandria.SQLite
 				}
 			}
 
-			if (ClassAttribute.LoadType == PersistanceLoadType.Constructor)
-			{
-				// load any collections here
-			}
-			
-
+			record.DataStore = provider;
 			return (T)record;
 		}
 		#endregion
