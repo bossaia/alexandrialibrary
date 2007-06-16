@@ -42,6 +42,8 @@ namespace Alexandria.TagLib
         private Guid guid = Guid.NewGuid();
         //private Uri uri;
         private IMediaFormat resourceFormat;
+        
+        private Guid id = Guid.NewGuid();
         #endregion
    
 		#region Public Properties
@@ -146,10 +148,10 @@ namespace Alexandria.TagLib
 		}
 		#endregion
 
-		#region IResource Members
-		public IIdentifier Id
+		#region IMedia Members
+		public Guid Id
 		{
-			get { return null; }
+			get { return id; }
 		}
 
 		public ILocation Location

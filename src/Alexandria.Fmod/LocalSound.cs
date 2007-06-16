@@ -53,7 +53,7 @@ namespace Alexandria.Fmod
 		private bool disposed;
 		
 		private IMediaFormat format;
-		private IIdentifier id = new GuidIdentifier();
+		private Guid id = Guid.NewGuid();
 		private ILocation location;
 		private PlaybackState playbackState = PlaybackState.None;
 		private bool isSeeking;
@@ -85,7 +85,7 @@ namespace Alexandria.Fmod
 			get { return format; }
 		}
 
-		public IIdentifier Id
+		public Guid Id
 		{
 			get { return id; }
 		}

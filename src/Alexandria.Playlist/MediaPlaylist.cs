@@ -12,6 +12,8 @@ namespace Alexandria.Playlist
 		private string name;
 		private string version;
 		//private List<IMedia> resources;
+		
+		private Guid id = Guid.NewGuid();
 		#endregion				
 		
 		#region Constructors
@@ -56,10 +58,10 @@ namespace Alexandria.Playlist
 		}
 		#endregion
 
-		#region IResource Members
-		public IIdentifier Id
+		#region IMedia Members
+		public Guid Id
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return id; }
 		}
 
 		public ILocation Location

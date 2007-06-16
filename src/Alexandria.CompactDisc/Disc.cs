@@ -7,8 +7,8 @@ namespace Alexandria.CompactDisc
 {
 	public abstract class Disc : IMedia
 	{
-		#region IResource Members
-		public IIdentifier Id
+		#region IMedia Members
+		public Guid Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
