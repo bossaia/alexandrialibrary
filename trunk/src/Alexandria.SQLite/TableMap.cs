@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Data.SQLite;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -10,16 +11,23 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(Type type, DataTable table, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
+		public TableMap(SQLiteDataProvider provider, Type type, DataTable table, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
 		{
+			this.provider = provider;
 			this.type = type;
 			this.table = table;
 			this.classAttribute = classAttribute;
 			this.constructor = constructor;
 		}
 		#endregion
+
+		#region Private Constants
+		private const string SCHEMA_TABLES = "Tables";
+		private const string SCHEMA_TABLE_NAME = "TABLE_NAME";
+		#endregion
 		
 		#region Private Fields
+		private SQLiteDataProvider provider;
 		private DataTable table;
 		private Type type;
 		private PersistanceClassAttribute classAttribute;
@@ -27,44 +35,295 @@ namespace Alexandria.SQLite
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
 		private bool isFilled;
 		#endregion
+		
+		#region Private Methods
+		
+		#region NormalizeValue
+		private object NormalizeValue(Type type, object value)
+		{
+			if (type == typeof(int))
+			{
+				if (value == DBNull.Value)
+					return 0;
+			}
+			if (type == typeof(DateTime))
+			{
+				if (value == DBNull.Value)
+					return DateTime.MinValue;
+				else return Convert.ToDateTime(value.ToString());
+			}
+			else if (type == typeof(TimeSpan))
+			{
+				if (value == null || value == DBNull.Value)
+					return TimeSpan.Zero;
+				else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
+			}
+			else if (type == typeof(Version) || type == typeof(IVersion))
+			{
+				return new Version(value.ToString());
+			}
+			else if (type == typeof(Location) || type == typeof(ILocation))
+			{
+				return new Location(value.ToString());
+			}
+			
+			return value;
+		}
+		#endregion
+
+		#region TableExists
+		internal bool TableExists(string tableName)
+		{
+			SQLiteConnection connection = provider.GetSQLiteConnection();
+			DataTable tables = connection.GetSchema(SCHEMA_TABLES);
+			foreach (DataRow tableInfo in tables.Rows)
+			{
+				if (string.Compare(tableInfo[SCHEMA_TABLE_NAME].ToString(), tableName, true) == 0)
+					return true;
+			}
+			return false;
+		}
+
+		internal bool TableExists<T>(T table) where T : IMetadata
+		{
+			if (table != null)
+			{
+				string tableName = table.GetType().Name;
+				return TableExists(tableName);
+			}
+			else throw new ArgumentNullException("table");
+		}
+		#endregion				
+		
+		#region CreateTable
+		private bool CreateTable(DataTable table)
+		{
+			bool tableCreated = false;
+
+			if (table != null)
+			{
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat("CREATE TABLE IF NOT EXISTS {0} (", table.TableName);
+
+				int count = 0;
+				foreach (DataColumn column in table.Columns)
+				{
+					string delimiter = string.Empty;
+					if (count > 0) delimiter = ", ";
+
+					string columnType = "TEXT";
+					string columnConstraint = string.Empty;
+
+					if (column.Unique)
+						columnConstraint += " UNIQUE";
+
+					if (!column.AllowDBNull)
+						columnConstraint += " NOT NULL";
+
+					if (column.DataType == typeof(decimal) ||
+						column.DataType == typeof(string) ||
+						column.DataType == typeof(Guid))
+					{
+						columnType = "TEXT";
+					}
+					else
+						if (column.DataType == typeof(float) ||
+							column.DataType == typeof(double))
+						{
+							columnType = "REAL";
+						}
+						else
+							if (column.DataType == typeof(bool) ||
+								column.DataType == typeof(byte) ||
+								column.DataType == typeof(sbyte) ||
+								column.DataType == typeof(ushort) ||
+								column.DataType == typeof(short) ||
+								column.DataType == typeof(uint) ||
+								column.DataType == typeof(int) ||
+								column.DataType == typeof(ulong) ||
+								column.DataType == typeof(long) ||
+								column.DataType == typeof(DateTime) ||
+								column.DataType == typeof(TimeSpan))
+							{
+								columnType = "INTEGER";
+							}
+
+					sql.AppendFormat("{0}{1} {2}{3}", delimiter, column.ColumnName, columnType, columnConstraint);
+
+					count++;
+				}
+				sql.Append(")");
+
+				using (SQLiteConnection connection = provider.GetSQLiteConnection())
+				{
+					connection.Open();
+					IDbCommand command = new SQLiteCommand(sql.ToString(), connection);
+					tableCreated = (command.ExecuteNonQuery() == 0);
+				}
+			}
+			else throw new ArgumentNullException("table");
+
+			return tableCreated;
+		}
+		#endregion
+
+		#region LookupTable
+		private void LookupTable(DataTable table, string idFieldName, Guid id)
+		{
+			if (table != null)
+			{
+				string selectFormat = "SELECT {0} FROM {1} WHERE {2} = '{3}'";
+				StringBuilder selectList = new StringBuilder();
+				const string PREFIX = ", ";
+				foreach (DataColumn column in table.Columns)
+				{
+					if (column.Ordinal > 0)
+						selectList.AppendFormat("{0}{1}", PREFIX, column.ColumnName);
+					else selectList.Append(column.ColumnName);
+				}
+				string sql = string.Format(selectFormat, selectList.ToString(), table.TableName, idFieldName, id.ToString().ToUpperInvariant());
+
+				using (SQLiteConnection connection = provider.GetSQLiteConnection())
+				{
+					connection.Open();
+					SQLiteCommand command = new SQLiteCommand(sql, connection);
+					using (SQLiteDataReader reader = command.ExecuteReader())
+					{
+						if (reader != null && reader.HasRows)
+						{
+							while (reader.Read())
+							{
+								object[] data = new object[reader.FieldCount];
+
+								int i = 0;
+								foreach (DataColumn column in table.Columns)
+								{
+									data[i] = NormalizeValue(column.DataType, reader[column.ColumnName]);
+									i++;
+								}
+								table.Rows.Add(data);
+							}
+						}
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region GetRecordFromConstructor
+		private IPersistant GetRecordFromConstructor()
+		{
+			return null;
+		}
+		#endregion
+		
+		#endregion
 				
-		#region Public Properties
-		public Type Type
+		#region Internal Properties
+		internal Type Type
 		{
 			get { return type; }
 		}
 		
-		public DataTable Table
+		internal DataTable Table
 		{
 			get { return table; }
 		}
 		
-		public PersistanceClassAttribute ClassAttribute
+		internal PersistanceClassAttribute ClassAttribute
 		{
 			get { return classAttribute; }
 		}
 		
-		public ConstructorInfo Constructor
+		internal ConstructorInfo Constructor
 		{
 			get { return constructor; }
 		}
 				
-		public IDictionary<PropertyMap, TableMap> Children
+		internal IDictionary<PropertyMap, TableMap> Children
 		{
 			get { return children; }
 		}
 		
-		public bool IsFilled
+		internal bool IsFilled
 		{
 			get { return isFilled; }
 		}
 		#endregion
 		
-		#region Public Methods
-		public void Lookup(string idField, Guid id)
+		#region Internal Methods
+		
+		#region CreateTables
+		internal void CreateTables()
 		{
-			isFilled = true;
+			CreateTable(Table);
+			foreach(TableMap childMap in Children.Values)
+			{
+				childMap.CreateTables();
+			}
 		}
+		#endregion
+		
+		#region LookupRecord
+		private IPersistant LookupRecord()
+		{
+			MethodInfo method = this.GetType().GetMethod("LookupRecordByMap", BindingFlags.NonPublic | BindingFlags.Instance);
+			MethodInfo genericMethod = method.MakeGenericMethod(Type);
+
+			return (IPersistant)genericMethod.Invoke(this, null);
+		}
+
+		internal T LookupRecord<T>(Guid id) where T : IPersistant
+		{
+			LookupTable(Table, "Id", id);
+			string x1 = Table.TableName;
+			IDictionary<PropertyInfo, IPersistant> childOneToOneValues = new Dictionary<PropertyInfo, IPersistant>();
+			IDictionary<PropertyInfo, IList<IPersistant>> childOneToManyValues = new Dictionary<PropertyInfo, IList<IPersistant>>();
+
+			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
+			{
+				PropertyInfo property = childPair.Key.Property;
+				PersistancePropertyAttribute attribute = childPair.Key.Attribute;
+				if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
+				{
+					// Property
+					//IPersistant childRecord = LookupRecordByMap(childPair.Value);
+					//childOneToOneValues.Add(childPair.Key.Property, childRecord);
+				}
+				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+				{
+					// Collection
+					LookupTable(childPair.Value.Table, "ParentId", id);
+					string x2 = childPair.Value.Table.TableName;
+					//IList<IPersistant> childRecords = LookupRecordCollectionByMap(childPair.Value);
+					//childOneToManyValues.Add(childPair.Key.Property, childRecords);
+				}
+			}
+
+			if (ClassAttribute.LoadType == PersistanceLoadType.Constructor)
+			{
+				// load with the constructor
+				if (Constructor != null)
+				{
+					IPersistant record = GetRecordFromConstructor();
+				}
+				else throw new ApplicationException("Lookup error: load constructor undefined");
+			}
+			else if (ClassAttribute.LoadType == PersistanceLoadType.Property)
+			{
+				// load with properties
+			}
+			else if (ClassAttribute.LoadType == PersistanceLoadType.Factory)
+			{
+				// load with a factory
+				Type factoryType = ClassAttribute.FactoryType;
+			}
+			else throw new ApplicationException("Lookup error: invalid class load type");			
+
+			return default(T);
+		}
+		#endregion
+		
 		#endregion
 	}
 }
