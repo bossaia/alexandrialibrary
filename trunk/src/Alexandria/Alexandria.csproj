@@ -117,6 +117,8 @@
     <None Include="Alexandria.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Media\Conversion\" />
+    <Folder Include="Media\Playback\" />
     <Folder Include="Metadata\" />
     <Folder Include="Persistance\" />
   </ItemGroup>
