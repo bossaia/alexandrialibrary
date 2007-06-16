@@ -40,26 +40,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
-    <Compile Include="BaseAlbum.cs" />
-    <Compile Include="BaseArtist.cs" />
-    <Compile Include="BaseAudioTrack.cs" />
-    <Compile Include="BaseMetadata.cs" />
-    <Compile Include="MetadataIdentifier.cs" />
-    <Compile Include="BufferState.cs" />
+    <Compile Include="Data\BaseAlbum.cs" />
+    <Compile Include="Data\BaseArtist.cs" />
+    <Compile Include="Data\BaseAudioTrack.cs" />
+    <Compile Include="Data\BaseMetadata.cs" />
+    <Compile Include="Data\MetadataIdentifier.cs" />
+    <Compile Include="Media\BufferState.cs" />
     <Compile Include="Data\IDataStore.cs" />
     <Compile Include="Data\PersistanceClassAttribute.cs" />
     <Compile Include="Data\PersistanceConstructorAttribute.cs" />
-    <Compile Include="GuidIdentifier.cs" />
-    <Compile Include="IAlbum.cs" />
-    <Compile Include="IArtist.cs" />
-    <Compile Include="IAudio.cs" />
-    <Compile Include="IAudioCompactDisc.cs" />
-    <Compile Include="IAudioRelease.cs" />
-    <Compile Include="IAudioTrack.cs" />
-    <Compile Include="IBuffered.cs" />
+    <Compile Include="Data\GuidIdentifier.cs" />
+    <Compile Include="Data\IAlbum.cs" />
+    <Compile Include="Data\IArtist.cs" />
+    <Compile Include="Media\IAudio.cs" />
+    <Compile Include="Media\IAudioCompactDisc.cs" />
+    <Compile Include="Data\IAudioRelease.cs" />
+    <Compile Include="Data\IAudioTrack.cs" />
+    <Compile Include="Media\IBuffered.cs" />
     <Compile Include="IHasRawAudioData.cs" />
-    <Compile Include="IdentificationResult.cs" />
-    <Compile Include="BaseIdentifier.cs" />
+    <Compile Include="Data\IdentificationResult.cs" />
+    <Compile Include="Data\BaseIdentifier.cs" />
     <Compile Include="IHasDuration.cs" />
     <Compile Include="IHasElapsed.cs" />
     <Compile Include="IInternetRadio.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="ITagable.cs" />
     <Compile Include="ITagFormat.cs" />
     <Compile Include="IMetadata.cs" />
-    <Compile Include="IGenre.cs" />
+    <Compile Include="Data\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="IImage.cs" />
     <Compile Include="ILocation.cs" />
@@ -98,9 +98,9 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
     <Compile Include="IVideo.cs" />
-    <Compile Include="IAudible.cs" />
+    <Compile Include="Media\IAudible.cs" />
     <Compile Include="IPlaylist.cs" />
-    <Compile Include="IMedia.cs" />
+    <Compile Include="Media\IMedia.cs" />
     <Compile Include="IVisible.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Data\PersistanceFieldType.cs" />
@@ -116,10 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Media\" />
-    <Folder Include="Playback\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
