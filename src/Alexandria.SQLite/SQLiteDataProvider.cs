@@ -119,6 +119,8 @@ namespace Alexandria.SQLite
 
 		public void Save(IPersistant record)
 		{
+			TableMap map = mapFactory.CreateTableMap(this, record.GetType());
+			map.Save();
 		}
 
 		public void Delete(IPersistant record)

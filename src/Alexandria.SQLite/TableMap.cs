@@ -346,22 +346,25 @@ namespace Alexandria.SQLite
 
 			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
 			{
-				PropertyInfo property = childPair.Key.Property;
-				PersistancePropertyAttribute attribute = childPair.Key.Attribute;
-				if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
+				PropertyMap childPropertyMap = childPair.Key;
+				TableMap childTableMap = childPair.Value;
+				//PropertyInfo property = childPair.Key.Property;
+				//PersistancePropertyAttribute attribute = childPair.Key.Attribute;
+
+				if (childPropertyMap.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
 				{
-					LookupTable(childPair.Value.Table, childPair.Key.Attribute.ForeignKeyName, record.Id);
-					IPersistant item = childPair.Value.GetChildRecordFromDataRow(childPair.Value.Table.Rows[0]);
-					childPair.Key.Property.SetValue(record, item, null);
+					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
+					IPersistant item = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
+					childPropertyMap.Property.SetValue(record, item, null);
 				}
 				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 				{
-					LookupTable(childPair.Value.Table, childPair.Key.Attribute.ForeignKeyName, record.Id);
-					IList list = (IList)childPair.Key.Property.GetValue(record, null);
+					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
+					IList list = (IList)childPropertyMap.Property.GetValue(record, null);
 
 					foreach (DataRow childRow in childPair.Value.Table.Rows)
 					{
-						IPersistant item = childPair.Value.GetChildRecordFromDataRow(childRow);
+						IPersistant item = childTableMap.GetChildRecordFromDataRow(childRow);
 						list.Add(item);
 					}
 					int count = list.Count;
@@ -382,8 +385,15 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetDataRowFromRecord
+		private DataRow GetDataRowFromRecord(IPersistant record)
+		{
+			return null;
+		}
 		#endregion
-				
+		
+		#endregion
+		
 		#region Internal Properties
 		internal Type Type
 		{
@@ -415,7 +425,7 @@ namespace Alexandria.SQLite
 			get { return isFilled; }
 		}
 		#endregion
-		
+				
 		#region Internal Methods
 		
 		#region CreateTables
@@ -435,6 +445,12 @@ namespace Alexandria.SQLite
 			LookupTable(Table, ClassAttribute.IdFieldName, id);
 			T record = GetRecordFromDataRow<T>(Table.Rows[0]);
 			return record;
+		}
+		#endregion
+		
+		#region Save
+		internal void Save()
+		{
 		}
 		#endregion
 		

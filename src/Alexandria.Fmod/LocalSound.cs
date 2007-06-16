@@ -6,7 +6,7 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {
-	public class LocalSound : IDisposable, ILocalAudio, IDataReadable
+	public class LocalSound : IDisposable, ILocalAudio, IHasRawAudioData
 	{
 		#region Constructors
 		public LocalSound(string path)
