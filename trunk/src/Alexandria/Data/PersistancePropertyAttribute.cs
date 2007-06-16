@@ -68,6 +68,8 @@ namespace Alexandria.Data
 		private bool isPrimaryKey;
 		private object defaultValue;
 		private int maxLength;
+		private bool cascadeSave;
+		private bool cascadeDelete;
 		#endregion
 		
 		#region Public Properties
@@ -147,6 +149,18 @@ namespace Alexandria.Data
 		{
 			get { return maxLength; }
 			set { maxLength = value; }
+		}
+		
+		public bool CascadeSave
+		{
+			get { return cascadeSave; } 
+			set { cascadeSave = value; }
+		}
+		
+		public bool CascadeDelete
+		{
+			get { return cascadeDelete; }
+			set { cascadeDelete = value; }
 		}
 		#endregion
 	}

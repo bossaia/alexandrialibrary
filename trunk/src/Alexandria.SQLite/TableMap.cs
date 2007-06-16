@@ -257,23 +257,23 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetRecord
-		private IPersistant GetRecord(TableMap map)
+		private IPersistant GetRecord(TableMap map, DataRow row)
 		{
 			IPersistant record = null;
 		
 			if (map.ClassAttribute.LoadType == PersistanceLoadType.Constructor)
 			{				
 				if (map.Constructor != null)
-					record = GetRecordFromConstructor(map.Constructor, map.Table.Rows[0]);
+					record = GetRecordFromConstructor(map.Constructor, row);
 				else throw new ApplicationException("Lookup error: load constructor undefined");
 			}
-			if (ClassAttribute.LoadType == PersistanceLoadType.Property)
+			else if (ClassAttribute.LoadType == PersistanceLoadType.Property)
 			{
 				if (map.Constructor != null)
 					record = (IPersistant)map.Constructor.Invoke(null);
 				else throw new ApplicationException("Lookup error: load constructor undefined");
 					
-				LoadProperties(record, map, map.Table.Rows[0]);				
+				LoadProperties(record, map, row);				
 			}
 			else if (ClassAttribute.LoadType == PersistanceLoadType.Factory)
 			{
@@ -282,13 +282,14 @@ namespace Alexandria.SQLite
 				{
 					MethodInfo method = GetFactoryMethod(map);
 					if (method != null)
-						record = GetRecordFromMethod(factory, method, map.Table.Rows[0]);
+						record = GetRecordFromMethod(factory, method, row);
 					else throw new ApplicationException("Lookup error: factory method undefined");
 				}
 				else throw new ApplicationException("Lookup error: could not create factory");
 			}
 			else throw new ApplicationException("Lookup error: invalid class load type");
 			
+			record.DataStore = map.provider;
 			return record;
 		}
 		#endregion
@@ -304,7 +305,7 @@ namespace Alexandria.SQLite
 				parameters[i] = row[FormatPascalCase(info[i].Name)];
 			}
 			
-			IPersistant record = (IPersistant)Constructor.Invoke(parameters);
+			IPersistant record = (IPersistant)constructor.Invoke(parameters);
 			
 			return record;
 		}
@@ -336,7 +337,51 @@ namespace Alexandria.SQLite
 			}
 		}
 		#endregion
-		
+
+		#region GetRecordFromDataRow
+		private T GetRecordFromDataRow<T>(DataRow row) where T : IPersistant
+		{
+			IPersistant record = GetRecord(this, row);
+			Guid x = record.Id;
+
+			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
+			{
+				PropertyInfo property = childPair.Key.Property;
+				PersistancePropertyAttribute attribute = childPair.Key.Attribute;
+				if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
+				{
+					LookupTable(childPair.Value.Table, childPair.Key.Attribute.ForeignKeyName, record.Id);
+					IPersistant item = childPair.Value.GetChildRecordFromDataRow(childPair.Value.Table.Rows[0]);
+					childPair.Key.Property.SetValue(record, item, null);
+				}
+				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+				{
+					LookupTable(childPair.Value.Table, childPair.Key.Attribute.ForeignKeyName, record.Id);
+					IList list = (IList)childPair.Key.Property.GetValue(record, null);
+
+					foreach (DataRow childRow in childPair.Value.Table.Rows)
+					{
+						IPersistant item = childPair.Value.GetChildRecordFromDataRow(childRow);
+						list.Add(item);
+					}
+					int count = list.Count;
+				}
+			}
+
+			return (T)record;
+		}
+		#endregion
+
+		#region GetChildRecordFromDataRow
+		private IPersistant GetChildRecordFromDataRow(DataRow row)
+		{
+			MethodInfo method = this.GetType().GetMethod("GetRecordFromDataRow", BindingFlags.NonPublic | BindingFlags.Instance);
+			MethodInfo genericMethod = method.MakeGenericMethod(Type);
+
+			return (IPersistant)genericMethod.Invoke(this, new object[] { row });
+		}
+		#endregion
+
 		#endregion
 				
 		#region Internal Properties
@@ -385,44 +430,11 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region LookupRecord
-		private IPersistant LookupRecord()
+		internal T LookupRecord<T>(Guid id) where T: IPersistant
 		{
-			MethodInfo method = this.GetType().GetMethod("LookupRecordByMap", BindingFlags.NonPublic | BindingFlags.Instance);
-			MethodInfo genericMethod = method.MakeGenericMethod(Type);
-
-			return (IPersistant)genericMethod.Invoke(this, null);
-		}
-
-		internal T LookupRecord<T>(Guid id) where T : IPersistant
-		{
-			LookupTable(Table, "Id", id);
-			IPersistant record = null;
-									
-			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
-			{
-				PropertyInfo property = childPair.Key.Property;
-				PersistancePropertyAttribute attribute = childPair.Key.Attribute;
-				if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
-				{
-					IPersistant item = GetRecordFromConstructor(childPair.Value.Constructor, childPair.Value.Table.Rows[0]);
-					childPair.Key.Property.SetValue(record, item, null);
-				}
-				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
-				{
-					LookupTable(childPair.Value.Table, "ParentId", id);					
-					IList list = (IList)childPair.Key.Property.GetValue(record, null);
-					
-					foreach(DataRow row in childPair.Value.Table.Rows)
-					{
-						IPersistant item = GetRecordFromConstructor(childPair.Value.Constructor, row);
-						list.Add(item);
-					}
-					int x = list.Count;
-				}
-			}
-
-			record.DataStore = provider;
-			return (T)record;
+			LookupTable(Table, ClassAttribute.IdFieldName, id);
+			T record = GetRecordFromDataRow<T>(Table.Rows[0]);
+			return record;
 		}
 		#endregion
 		

@@ -39,10 +39,11 @@ namespace Alexandria.Data
 		{
 		}
 		
-		public PersistanceClassAttribute(string tableName, PersistanceLoadType loadType)
+		public PersistanceClassAttribute(string tableName, PersistanceLoadType loadType, string idFieldName)
 		{
 			this.tableName = tableName;
 			this.loadType = loadType;
+			this.idFieldName = idFieldName;
 		}
 		#endregion
 		
@@ -51,6 +52,7 @@ namespace Alexandria.Data
 		private PersistanceLoadType loadType = PersistanceLoadType.None;
 		private Type factoryType;
 		private string factoryMethodName;
+		private string idFieldName;
 		private bool manuallySetProperties;
 		#endregion
 		
@@ -77,6 +79,12 @@ namespace Alexandria.Data
 		{
 			get { return factoryMethodName; }
 			set { factoryMethodName = value; }
+		}
+		
+		public string IdFieldName
+		{
+			get { return idFieldName; }
+			set { idFieldName = value; }
 		}
 		
 		public bool ManuallySetProperties

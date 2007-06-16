@@ -32,19 +32,19 @@ using Alexandria.Data;
 
 namespace Alexandria
 {
-	[PersistanceClass("MetadataID", PersistanceLoadType.Constructor)]
+	[PersistanceClass("MetadataID", PersistanceLoadType.Constructor, "Id")]
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
 		public MetadataIdentifier(string parentId, string value, string type, string version) : this(Guid.NewGuid(), new Guid(parentId), value, type, new Version(version))
 		{
 		}
-		
-		[PersistanceConstructor]
+				
 		public MetadataIdentifier(string id, string parentId, string value, string type, string version) : this(new Guid(id), new Guid(parentId), value, type, new Version(version))
 		{
 		}
-		
+
+		[PersistanceConstructor]
 		public MetadataIdentifier(Guid id, Guid parentId, string value, string type, Version version)
 		{
 			this.id = id;
