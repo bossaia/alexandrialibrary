@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -210,10 +211,129 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region GetRecordFromConstructor
-		private IPersistant GetRecordFromConstructor()
+		#region FormatPascalCase
+		private string FormatPascalCase(string value)
 		{
-			return null;
+			if (!string.IsNullOrEmpty(value))
+			{
+				if (value.Length > 1)
+				{
+					return value.Substring(0, 1).ToUpperInvariant() + value.Substring(1, value.Length-1);
+				}
+				else return value.ToUpperInvariant();
+			}
+			return value;
+		}
+		#endregion
+
+		#region GetFactory
+		private object GetFactory(Type type)
+		{
+			object factory = null;
+			ConstructorInfo constructor = type.GetConstructor(new Type[]{});
+			if (constructor != null)
+				factory = constructor.Invoke(null);
+			
+			return factory;
+		}
+		#endregion
+
+		#region GetFactoryMethod
+		private MethodInfo GetFactoryMethod(TableMap map)
+		{
+			MethodInfo method = null;
+		
+			if (map.ClassAttribute.FactoryType != null)
+			{
+				if (!string.IsNullOrEmpty(map.ClassAttribute.FactoryMethodName))
+				{
+					Type factoryType = map.ClassAttribute.FactoryType;
+					method = factoryType.GetMethod(map.ClassAttribute.FactoryMethodName);
+				}				
+			}			
+			
+			return method;
+		}
+		#endregion
+
+		#region GetRecord
+		private IPersistant GetRecord(TableMap map)
+		{
+			IPersistant record = null;
+		
+			if (map.ClassAttribute.LoadType == PersistanceLoadType.Constructor)
+			{				
+				if (map.Constructor != null)
+					record = GetRecordFromConstructor(map.Constructor, map.Table.Rows[0]);
+				else throw new ApplicationException("Lookup error: load constructor undefined");
+			}
+			if (ClassAttribute.LoadType == PersistanceLoadType.Property)
+			{
+				if (map.Constructor != null)
+					record = (IPersistant)map.Constructor.Invoke(null);
+				else throw new ApplicationException("Lookup error: load constructor undefined");
+					
+				LoadProperties(record, map, map.Table.Rows[0]);				
+			}
+			else if (ClassAttribute.LoadType == PersistanceLoadType.Factory)
+			{
+				object factory = GetFactory(ClassAttribute.FactoryType);
+				if (factory != null)
+				{
+					MethodInfo method = GetFactoryMethod(map);
+					if (method != null)
+						record = GetRecordFromMethod(factory, method, map.Table.Rows[0]);
+					else throw new ApplicationException("Lookup error: factory method undefined");
+				}
+				else throw new ApplicationException("Lookup error: could not create factory");
+			}
+			else throw new ApplicationException("Lookup error: invalid class load type");
+			
+			return record;
+		}
+		#endregion
+
+		#region GetRecordFromConstructor
+		private IPersistant GetRecordFromConstructor(ConstructorInfo constructor, DataRow row)
+		{
+			ParameterInfo[] info = constructor.GetParameters();
+			object[] parameters = new object[info.Length];
+		
+			for(int i=0;i<info.Length;i++)
+			{
+				parameters[i] = row[FormatPascalCase(info[i].Name)];
+			}
+			
+			IPersistant record = (IPersistant)Constructor.Invoke(parameters);
+			
+			return record;
+		}
+		#endregion				
+		
+		#region GetRecordFromMethod
+		private IPersistant GetRecordFromMethod(object factory, MethodInfo method, DataRow row)
+		{
+			ParameterInfo[] info = method.GetParameters();
+			object[] parameters = new object[info.Length];
+
+			for (int i = 0; i < info.Length; i++)
+			{
+				parameters[i] = row[FormatPascalCase(info[i].Name)];
+			}
+
+			IPersistant record = (IPersistant)method.Invoke(factory, parameters);
+
+			return record;
+		}
+		#endregion
+		
+		#region LoadProperties
+		private void LoadProperties(IPersistant record, TableMap map, DataRow row)
+		{
+			foreach(PropertyInfo property in record.GetType().GetProperties(BindingFlags.Public))
+			{
+				property.SetValue(record, row[property.Name], null);
+			}
 		}
 		#endregion
 		
@@ -276,10 +396,8 @@ namespace Alexandria.SQLite
 		internal T LookupRecord<T>(Guid id) where T : IPersistant
 		{
 			LookupTable(Table, "Id", id);
-			string x1 = Table.TableName;
-			IDictionary<PropertyInfo, IPersistant> childOneToOneValues = new Dictionary<PropertyInfo, IPersistant>();
-			IDictionary<PropertyInfo, IList<IPersistant>> childOneToManyValues = new Dictionary<PropertyInfo, IList<IPersistant>>();
-
+			IPersistant record = null;
+									
 			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
 			{
 				PropertyInfo property = childPair.Key.Property;
@@ -293,34 +411,25 @@ namespace Alexandria.SQLite
 				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
 				{
 					// Collection
-					LookupTable(childPair.Value.Table, "ParentId", id);
-					string x2 = childPair.Value.Table.TableName;
-					//IList<IPersistant> childRecords = LookupRecordCollectionByMap(childPair.Value);
-					//childOneToManyValues.Add(childPair.Key.Property, childRecords);
+					LookupTable(childPair.Value.Table, "ParentId", id);					
+					IList list = (IList)childPair.Key.Property.GetValue(record, null);
+					
+					foreach(DataRow row in childPair.Value.Table.Rows)
+					{
+						IPersistant item = GetRecordFromConstructor(childPair.Value.Constructor, row);
+						list.Add(item);
+					}
+					int x = list.Count;
 				}
 			}
 
 			if (ClassAttribute.LoadType == PersistanceLoadType.Constructor)
 			{
-				// load with the constructor
-				if (Constructor != null)
-				{
-					IPersistant record = GetRecordFromConstructor();
-				}
-				else throw new ApplicationException("Lookup error: load constructor undefined");
+				// load any collections here
 			}
-			else if (ClassAttribute.LoadType == PersistanceLoadType.Property)
-			{
-				// load with properties
-			}
-			else if (ClassAttribute.LoadType == PersistanceLoadType.Factory)
-			{
-				// load with a factory
-				Type factoryType = ClassAttribute.FactoryType;
-			}
-			else throw new ApplicationException("Lookup error: invalid class load type");			
+			
 
-			return default(T);
+			return (T)record;
 		}
 		#endregion
 		

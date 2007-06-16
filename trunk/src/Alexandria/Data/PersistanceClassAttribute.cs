@@ -49,7 +49,8 @@ namespace Alexandria.Data
 		#region Private Fields
 		private string tableName;
 		private PersistanceLoadType loadType = PersistanceLoadType.None;
-		private Type factoryType;		
+		private Type factoryType;
+		private string factoryMethodName;
 		private bool manuallySetProperties;
 		#endregion
 		
@@ -70,6 +71,12 @@ namespace Alexandria.Data
 		{
 			get { return factoryType; }
 			set { factoryType = value; }
+		}
+		
+		public string FactoryMethodName
+		{
+			get { return factoryMethodName; }
+			set { factoryMethodName = value; }
 		}
 		
 		public bool ManuallySetProperties
