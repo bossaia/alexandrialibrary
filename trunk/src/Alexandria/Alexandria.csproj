@@ -57,7 +57,7 @@
     <Compile Include="IAudioRelease.cs" />
     <Compile Include="IAudioTrack.cs" />
     <Compile Include="IBuffered.cs" />
-    <Compile Include="IDataReadable.cs" />
+    <Compile Include="IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
     <Compile Include="BaseIdentifier.cs" />
     <Compile Include="IHasDuration.cs" />
@@ -116,6 +116,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Media\" />
+    <Folder Include="Playback\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
