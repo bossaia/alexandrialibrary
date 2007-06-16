@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.Data
 {
 	public interface IAudioRelease : IMetadata
 	{

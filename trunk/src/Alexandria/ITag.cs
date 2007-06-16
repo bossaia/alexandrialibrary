@@ -8,5 +8,7 @@ namespace Alexandria
 	{
 		ITagFormat Format { get; }
 		IList<IMetadata> Metadata { get; }
+		void Save();
+		void Delete();
 	}
 }

@@ -28,8 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria;
 
-namespace Alexandria
+namespace Alexandria.Data
 {
 	public abstract class BaseArtist : BaseMetadata, IArtist
 	{

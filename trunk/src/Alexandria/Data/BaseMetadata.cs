@@ -28,9 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Data;
+using Alexandria;
 
-namespace Alexandria
+namespace Alexandria.Data
 {
 	public abstract class BaseMetadata : IMetadata, IPersistant
 	{

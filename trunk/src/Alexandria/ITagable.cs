@@ -6,10 +6,7 @@ namespace Alexandria
 {
 	public interface ITagable
 	{
-		IList<ITag> Tags { get; }
-		void LoadTag(int index);
+		IList<ITag> Tags { get; }		
 		void LoadAllTags();
-		void SaveTag(int index);
-		void SaveAllTags();
 	}
 }
