@@ -8,7 +8,7 @@ namespace Alexandria.Encyclopedia
 	public class Collaboration
 	{
 		#region Private Fields
-		private IArtist artist;
+		private Alexandria.Data.IArtist artist;
 		//List<Role> roles = new List<Role>();
 		#endregion
 		
@@ -23,7 +23,7 @@ namespace Alexandria.Encyclopedia
 		#endregion
 		
 		#region Public Properties
-		public IArtist Artist
+		public Alexandria.Data.IArtist Artist
 		{
 			get {return artist;}
 			set {artist = value;}

@@ -58,7 +58,7 @@
     <Compile Include="Media\IBuffered.cs" />
     <Compile Include="Media\IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
-    <Compile Include="Data\BaseIdentifier.cs" />
+    <Compile Include="BaseIdentifier.cs" />
     <Compile Include="Media\IHasDuration.cs" />
     <Compile Include="Media\IHasElapsed.cs" />
     <Compile Include="Media\IInternetRadio.cs" />
@@ -75,15 +75,15 @@
     <Compile Include="Media\ISeekableForward.cs" />
     <Compile Include="Media\IStreaming.cs" />
     <Compile Include="Media\IStreamingAudio.cs" />
-    <Compile Include="Tags\ITagable.cs" />
-    <Compile Include="Tags\ITagFormat.cs" />
+    <Compile Include="ITagable.cs" />
+    <Compile Include="ITagFormat.cs" />
     <Compile Include="Data\IMetadata.cs" />
     <Compile Include="Data\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="Media\IMediaContainer.cs" />
-    <Compile Include="Tags\ITag.cs" />
+    <Compile Include="ITag.cs" />
     <Compile Include="Data\IMetadataFactory.cs" />
     <Compile Include="Media\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
@@ -92,7 +92,7 @@
     <Compile Include="ISearch.cs" />
     <Compile Include="Data\ISong.cs" />
     <Compile Include="Data\IStyle.cs" />
-    <Compile Include="Tags\ITagFactory.cs" />
+    <Compile Include="ITagFactory.cs" />
     <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
@@ -115,6 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Metadata\" />
+    <Folder Include="Persistance\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

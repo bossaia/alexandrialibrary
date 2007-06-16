@@ -22,9 +22,9 @@ namespace Alexandria.MusicBrainz
 
 		#region LookupAlbumById
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		private IAlbum LookupAlbumById(string id)
+		private Alexandria.Data.IAlbum LookupAlbumById(string id)
 		{
-			IAlbum album = null;
+			Alexandria.Data.IAlbum album = null;
 
 			StringBuilder output = new StringBuilder();
 
@@ -201,9 +201,9 @@ namespace Alexandria.MusicBrainz
 		#region Private Static Methods
 		
 		#region LookupCd
-		private static IAlbum ReadCompactDisc(ILocation location)
+		private static Alexandria.Data.IAlbum ReadCompactDisc(ILocation location)
 		{
-			IAlbum album = null;
+			Alexandria.Data.IAlbum album = null;
 			
 			if (location != null)
 			{							
@@ -297,12 +297,12 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region IAlbumFactory Members
-		public IAlbum GetAlbum(ILocation location)
+		public Alexandria.Data.IAlbum GetAlbum(ILocation location)
 		{
 			return ReadCompactDisc(location);
 		}
 
-		public IAlbum GetAlbum(ISearch albumSearch)
+		public Alexandria.Data.IAlbum GetAlbum(ISearch albumSearch)
 		{
 			return null;
 		}
@@ -310,7 +310,7 @@ namespace Alexandria.MusicBrainz
 
 		#region Public Methods
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public IAlbum GetAlbum(string id)
+		public Alexandria.Data.IAlbum GetAlbum(string id)
 		{
 			return LookupAlbumById(id);
 		}

@@ -7,6 +7,6 @@ namespace Alexandria
 	public interface ISong : IMetadata
 	{
 		string Lyrics { get; }
-		IList<IArtist> Authors { get; }
+		IList<Alexandria.Data.IArtist> Authors { get; }
 	}
 }
