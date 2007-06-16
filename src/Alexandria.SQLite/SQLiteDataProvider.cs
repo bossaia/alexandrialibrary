@@ -113,7 +113,7 @@ namespace Alexandria.SQLite
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
 			TableMap map = mapFactory.CreateTableMap(this, typeof(T));
-			T record = map.LookupRecord<T>(id);			
+			T record = map.LookupRecord<T>(id);
 			return record;
 		}
 

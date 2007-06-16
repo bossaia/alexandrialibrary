@@ -70,7 +70,7 @@ namespace Alexandria
 			get { return id; }
 		}
 		
-		[PersistanceProperty(PersistanceFieldType.OneToManyChildren, PersistanceLoadType.Property, "ParentID", typeof(MetadataIdentifier))]
+		[PersistanceProperty(PersistanceFieldType.OneToManyChildren, PersistanceLoadType.Property, "ParentID", typeof(MetadataIdentifier), CascadeSave=true, CascadeDelete=true)]
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }

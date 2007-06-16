@@ -32,15 +32,15 @@ using Alexandria.Data;
 
 namespace Alexandria
 {
-	[PersistanceClass("AudioTrack", PersistanceLoadType.Constructor)]
+	[PersistanceClass("AudioTrack", PersistanceLoadType.Constructor, "Id")]
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
-		#region Constructors
-		[PersistanceConstructor]
+		#region Constructors		
 		public BaseAudioTrack(string id, string location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Location(location), name, album, artist, duration, releaseDate, trackNumber, format)
 		{
 		}
-		
+
+		[PersistanceConstructor]
 		public BaseAudioTrack(Guid id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)
 		{
 			this.album = album;
