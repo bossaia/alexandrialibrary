@@ -104,7 +104,7 @@
     <Compile Include="Location.cs" />
     <Compile Include="Persistance\FieldType.cs" />
     <Compile Include="Persistance\LoadType.cs" />
-    <Compile Include="Persistance\PersistancePropertyAttribute.cs" />
+    <Compile Include="Persistance\PropertyAttribute.cs" />
     <Compile Include="Media\PlaybackState.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="Media\PositionType.cs" />
