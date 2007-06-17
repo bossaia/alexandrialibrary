@@ -31,6 +31,8 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using Alexandria;
+using Alexandria.Media;
+using Alexandria.Metadata;
 
 namespace Alexandria.Client
 {
@@ -175,7 +177,7 @@ namespace Alexandria.Client
 				DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
 				ILocation location = new Location(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
-				selectedTrack = new Alexandria.Data.BaseAudioTrack(Guid.NewGuid(), location, name, album, artist, duration, releaseDate, trackNumber, format);
+				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), location, name, album, artist, duration, releaseDate, trackNumber, format);
 				selectedTrack.MetadataIdentifiers.Add(id);
 				
 				if (selectedTrack.Location.IsLocal)

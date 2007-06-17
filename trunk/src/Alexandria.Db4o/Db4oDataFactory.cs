@@ -4,6 +4,8 @@ using System.IO;
 using System.Text;
 using com.db4o;
 using Alexandria;
+using Alexandria.Metadata;
+using Alexandria.Persistance;
 
 namespace Alexandria.Db4o
 {
@@ -50,24 +52,24 @@ namespace Alexandria.Db4o
 		#region Public Methods
 		
 		#region GetAlbum
-		public Alexandria.Data.IAlbum GetAlbum()
+		public IAlbum GetAlbum()
 		{
 			return null;
 		}
 
-		public Alexandria.Data.IAlbum GetAlbum(Guid id)
+		public IAlbum GetAlbum(Guid id)
 		{
 			return null;
 		}
 		#endregion
 		
 		#region GetArtist
-		public Alexandria.Data.IArtist GetArtist()
+		public IArtist GetArtist()
 		{
 			return null;
 		}
 
-		public Alexandria.Data.IArtist GetArtist(Guid id)
+		public IArtist GetArtist(Guid id)
 		{
 			return null;
 		}

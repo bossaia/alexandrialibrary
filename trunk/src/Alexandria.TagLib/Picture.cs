@@ -22,6 +22,7 @@
 using System;
 using System.Collections.Generic;
 using Alexandria;
+using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {

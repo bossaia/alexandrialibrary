@@ -40,21 +40,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
-    <Compile Include="Data\BaseAlbum.cs" />
-    <Compile Include="Data\BaseArtist.cs" />
-    <Compile Include="Data\BaseAudioTrack.cs" />
-    <Compile Include="Data\BaseMetadata.cs" />
-    <Compile Include="Data\MetadataIdentifier.cs" />
+    <Compile Include="Metadata\BaseAlbum.cs" />
+    <Compile Include="Metadata\BaseArtist.cs" />
+    <Compile Include="Metadata\BaseAudioTrack.cs" />
+    <Compile Include="Metadata\BaseMetadata.cs" />
+    <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Media\BufferState.cs" />
-    <Compile Include="Data\IDataStore.cs" />
-    <Compile Include="Data\PersistanceClassAttribute.cs" />
-    <Compile Include="Data\PersistanceConstructorAttribute.cs" />
-    <Compile Include="Data\IAlbum.cs" />
-    <Compile Include="Data\IArtist.cs" />
+    <Compile Include="Metadata\IDataStore.cs" />
+    <Compile Include="Persistance\PersistanceClassAttribute.cs" />
+    <Compile Include="Persistance\PersistanceConstructorAttribute.cs" />
+    <Compile Include="Metadata\IAlbum.cs" />
+    <Compile Include="Metadata\IArtist.cs" />
     <Compile Include="Media\IAudio.cs" />
     <Compile Include="Media\IAudioCompactDisc.cs" />
-    <Compile Include="Data\IAudioRelease.cs" />
-    <Compile Include="Data\IAudioTrack.cs" />
+    <Compile Include="Metadata\IAudioRelease.cs" />
+    <Compile Include="Metadata\IAudioTrack.cs" />
     <Compile Include="Media\IBuffered.cs" />
     <Compile Include="Media\IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
@@ -64,8 +64,8 @@
     <Compile Include="Media\IInternetRadio.cs" />
     <Compile Include="Media\ILocalAudio.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
-    <Compile Include="Data\IMetadataIdentifier.cs" />
-    <Compile Include="Data\IPersistant.cs" />
+    <Compile Include="Metadata\IMetadataIdentifier.cs" />
+    <Compile Include="Metadata\IPersistant.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
@@ -77,21 +77,21 @@
     <Compile Include="Media\IStreamingAudio.cs" />
     <Compile Include="ITagable.cs" />
     <Compile Include="ITagFormat.cs" />
-    <Compile Include="Data\IMetadata.cs" />
-    <Compile Include="Data\IGenre.cs" />
+    <Compile Include="Metadata\IMetadata.cs" />
+    <Compile Include="Metadata\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="Media\IMediaContainer.cs" />
     <Compile Include="ITag.cs" />
-    <Compile Include="Data\IMetadataFactory.cs" />
+    <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Media\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="IProfile.cs" />
     <Compile Include="Media\IMediaFormat.cs" />
     <Compile Include="ISearch.cs" />
-    <Compile Include="Data\ISong.cs" />
-    <Compile Include="Data\IStyle.cs" />
+    <Compile Include="Metadata\ISong.cs" />
+    <Compile Include="Metadata\IStyle.cs" />
     <Compile Include="ITagFactory.cs" />
     <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
@@ -102,9 +102,9 @@
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Media\IVisible.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Data\PersistanceFieldType.cs" />
-    <Compile Include="Data\PersistanceLoadType.cs" />
-    <Compile Include="Data\PersistancePropertyAttribute.cs" />
+    <Compile Include="Persistance\PersistanceFieldType.cs" />
+    <Compile Include="Persistance\PersistanceLoadType.cs" />
+    <Compile Include="Persistance\PersistancePropertyAttribute.cs" />
     <Compile Include="Media\PlaybackState.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="Media\PositionType.cs" />
@@ -118,9 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Media\Conversion\" />
-    <Folder Include="Media\Playback\" />
-    <Folder Include="Metadata\" />
-    <Folder Include="Persistance\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

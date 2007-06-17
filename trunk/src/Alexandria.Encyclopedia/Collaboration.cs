@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
+using Alexandria.Metadata;
 
 namespace Alexandria.Encyclopedia
 {
 	public class Collaboration
 	{
 		#region Private Fields
-		private Alexandria.Data.IArtist artist;
+		private IArtist artist;
 		//List<Role> roles = new List<Role>();
 		#endregion
 		
@@ -23,7 +24,7 @@ namespace Alexandria.Encyclopedia
 		#endregion
 		
 		#region Public Properties
-		public Alexandria.Data.IArtist Artist
+		public IArtist Artist
 		{
 			get {return artist;}
 			set {artist = value;}
