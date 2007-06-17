@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Data
+namespace Alexandria.Persistance
 {
 	[AttributeUsage(AttributeTargets.Constructor)]
-	public class PersistanceConstructorAttribute : Attribute
+	public class ConstructorAttribute : Attribute
 	{
-		public PersistanceConstructorAttribute()
+		public ConstructorAttribute()
 		{
 		}
 	}

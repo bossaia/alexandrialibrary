@@ -32,24 +32,24 @@ using System.Text;
 namespace Alexandria.Persistance
 {
 	[AttributeUsage(AttributeTargets.Property)]
-	public class PersistancePropertyAttribute : Attribute
+	public class PropertyAttribute : Attribute
 	{
 		#region Constructors
-		public PersistancePropertyAttribute()
+		public PropertyAttribute()
 		{
 		}
 		
-		public PersistancePropertyAttribute(PersistanceFieldType fieldType)
+		public PropertyAttribute(FieldType fieldType)
 		{
 			this.fieldType = fieldType;
 		}
 		
-		public PersistancePropertyAttribute(PersistanceFieldType fieldType, PersistanceLoadType loadType) : this(fieldType)
+		public PropertyAttribute(FieldType fieldType, LoadType loadType) : this(fieldType)
 		{			
 			this.loadType = loadType;
 		}
 		
-		public PersistancePropertyAttribute(PersistanceFieldType fieldType, PersistanceLoadType loadType, string foreignKeyName, Type childType) : this(fieldType, loadType)
+		public PropertyAttribute(FieldType fieldType, LoadType loadType, string foreignKeyName, Type childType) : this(fieldType, loadType)
 		{
 			this.foreignKeyName = foreignKeyName;
 			this.childType = childType;
@@ -57,8 +57,8 @@ namespace Alexandria.Persistance
 		#endregion
 		
 		#region Private Fields
-		private PersistanceFieldType fieldType = PersistanceFieldType.None;
-		private PersistanceLoadType loadType = PersistanceLoadType.None;
+		private FieldType fieldType = FieldType.None;
+		private LoadType loadType = LoadType.None;
 		private string fieldName;
 		private string foreignKeyName;
 		private Type childType;
@@ -73,13 +73,13 @@ namespace Alexandria.Persistance
 		#endregion
 		
 		#region Public Properties
-		public PersistanceFieldType FieldType
+		public FieldType FieldType
 		{
 			get { return fieldType; }
 			set { fieldType = value; }
 		}
 		
-		public PersistanceLoadType LoadType
+		public LoadType LoadType
 		{
 			get { return loadType; }
 			set { loadType = value; }

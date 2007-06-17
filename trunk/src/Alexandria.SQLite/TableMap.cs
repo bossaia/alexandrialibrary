@@ -12,7 +12,7 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(SQLiteDataProvider provider, Type type, DataTable table, PersistanceClassAttribute classAttribute, ConstructorInfo constructor)
+		public TableMap(SQLiteDataProvider provider, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor)
 		{
 			this.provider = provider;
 			this.type = type;
@@ -31,7 +31,7 @@ namespace Alexandria.SQLite
 		private SQLiteDataProvider provider;
 		private DataTable table;
 		private Type type;
-		private PersistanceClassAttribute classAttribute;
+		private ClassAttribute classAttribute;
 		private ConstructorInfo constructor;
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
 		//private bool isFilled;
@@ -261,13 +261,13 @@ namespace Alexandria.SQLite
 		{
 			IPersistant record = null;
 		
-			if (map.ClassAttribute.LoadType == PersistanceLoadType.Constructor)
+			if (map.ClassAttribute.LoadType == LoadType.Constructor)
 			{				
 				if (map.Constructor != null)
 					record = GetRecordFromConstructor(map.Constructor, row);
 				else throw new ApplicationException("Lookup error: load constructor undefined");
 			}
-			else if (ClassAttribute.LoadType == PersistanceLoadType.Property)
+			else if (ClassAttribute.LoadType == LoadType.Property)
 			{
 				if (map.Constructor != null)
 					record = (IPersistant)map.Constructor.Invoke(null);
@@ -275,7 +275,7 @@ namespace Alexandria.SQLite
 					
 				LoadProperties(record, map, row);				
 			}
-			else if (ClassAttribute.LoadType == PersistanceLoadType.Factory)
+			else if (ClassAttribute.LoadType == LoadType.Factory)
 			{
 				object factory = GetFactory(ClassAttribute.FactoryType);
 				if (factory != null)
@@ -351,13 +351,13 @@ namespace Alexandria.SQLite
 				//PropertyInfo property = childPair.Key.Property;
 				//PersistancePropertyAttribute attribute = childPair.Key.Attribute;
 
-				if (childPropertyMap.Attribute.FieldType == PersistanceFieldType.OneToOneChild)
+				if (childPropertyMap.Attribute.FieldType == FieldType.OneToOneChild)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
 					IPersistant item = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
 					childPropertyMap.Property.SetValue(record, item, null);
 				}
-				else if (childPair.Key.Attribute.FieldType == PersistanceFieldType.OneToManyChildren)
+				else if (childPair.Key.Attribute.FieldType == FieldType.OneToManyChildren)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
 					IList list = (IList)childPropertyMap.Property.GetValue(record, null);
@@ -405,7 +405,7 @@ namespace Alexandria.SQLite
 			get { return table; }
 		}
 		
-		internal PersistanceClassAttribute ClassAttribute
+		internal ClassAttribute ClassAttribute
 		{
 			get { return classAttribute; }
 		}

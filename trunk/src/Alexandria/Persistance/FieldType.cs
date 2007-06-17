@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.Persistance
 {
-	public enum PersistanceFieldType
+	public enum FieldType
 	{
 		/// <summary>
 		/// This field does not map to any record

@@ -46,9 +46,9 @@
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Media\BufferState.cs" />
-    <Compile Include="Metadata\IDataStore.cs" />
-    <Compile Include="Persistance\PersistanceClassAttribute.cs" />
-    <Compile Include="Persistance\PersistanceConstructorAttribute.cs" />
+    <Compile Include="Persistance\IDataStore.cs" />
+    <Compile Include="Persistance\ClassAttribute.cs" />
+    <Compile Include="Persistance\ConstructorAttribute.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
     <Compile Include="Metadata\IArtist.cs" />
     <Compile Include="Media\IAudio.cs" />
@@ -65,7 +65,7 @@
     <Compile Include="Media\ILocalAudio.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
-    <Compile Include="Metadata\IPersistant.cs" />
+    <Compile Include="Persistance\IPersistant.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
@@ -102,8 +102,8 @@
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Media\IVisible.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Persistance\PersistanceFieldType.cs" />
-    <Compile Include="Persistance\PersistanceLoadType.cs" />
+    <Compile Include="Persistance\FieldType.cs" />
+    <Compile Include="Persistance\LoadType.cs" />
     <Compile Include="Persistance\PersistancePropertyAttribute.cs" />
     <Compile Include="Media\PlaybackState.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />

@@ -45,9 +45,9 @@ namespace Alexandria.SQLite
 		#region Private Methods
 
 		#region GetClassAttribute
-		private PersistanceClassAttribute GetClassAttribute(Type type)
+		private ClassAttribute GetClassAttribute(Type type)
 		{
-			foreach (PersistanceClassAttribute attribute in type.GetCustomAttributes(typeof(PersistanceClassAttribute), false))
+			foreach (ClassAttribute attribute in type.GetCustomAttributes(typeof(ClassAttribute), false))
 			{
 				return attribute;
 			}
@@ -60,7 +60,7 @@ namespace Alexandria.SQLite
 		{
 			foreach (ConstructorInfo constructor in type.GetConstructors()) // (BindingFlags.Public))
 			{
-				foreach (PersistanceConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(PersistanceConstructorAttribute), false))
+				foreach (ConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
 				{
 					return constructor;
 				}
@@ -77,7 +77,7 @@ namespace Alexandria.SQLite
 			TableMap map = null;
 		
 			ConstructorInfo constructor = GetConstructor(type);
-			PersistanceClassAttribute classAttribute = GetClassAttribute(type);
+			ClassAttribute classAttribute = GetClassAttribute(type);
 
 			if (classAttribute != null)
 			{
@@ -93,9 +93,9 @@ namespace Alexandria.SQLite
 
 					foreach (PropertyInfo property in type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance))
 					{
-						foreach (PersistancePropertyAttribute attribute in property.GetCustomAttributes(typeof(PersistancePropertyAttribute), false))
+						foreach (PropertyAttribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), false))
 						{
-							if (attribute.FieldType == PersistanceFieldType.Basic)
+							if (attribute.FieldType == FieldType.Basic)
 							{
 								ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
 								DataColumn column = new DataColumn(property.Name, property.PropertyType);
@@ -113,9 +113,9 @@ namespace Alexandria.SQLite
 								PropertyMap propertyMap = new PropertyMap(property, attribute);
 								TableMap childMap = null;
 								
-								if (attribute.FieldType == PersistanceFieldType.OneToOneChild)
+								if (attribute.FieldType == FieldType.OneToOneChild)
 									childMap = CreateTableMap(provider, property.PropertyType);
-								else if (attribute.FieldType == PersistanceFieldType.OneToManyChildren && attribute.ChildType != null)
+								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
 									childMap = CreateTableMap(provider, attribute.ChildType);
 								else throw new ApplicationException("Could not map this property: invalid field type");
 

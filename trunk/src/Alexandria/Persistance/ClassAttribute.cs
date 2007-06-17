@@ -28,53 +28,69 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria;
 
-namespace Alexandria.Data
+namespace Alexandria.Persistance
 {
-	public abstract class BaseAlbum : BaseMetadata, IAlbum
+	[AttributeUsage(AttributeTargets.Class|AttributeTargets.Struct)]
+	public class ClassAttribute : Attribute
 	{
 		#region Constructors
-		public BaseAlbum(string alexandriaId, string path, string name, string artist, DateTime releaseDate) : this(new Guid(alexandriaId), new Location(path), name, artist, releaseDate)
+		public ClassAttribute()
 		{
 		}
 		
-		public BaseAlbum(Guid alexandriaId, ILocation location, string name, string artist, DateTime releaseDate) : base(alexandriaId, location, name)
+		public ClassAttribute(string tableName, LoadType loadType, string idFieldName)
 		{
-			this.artist = artist;
-			this.releaseDate = releaseDate;
+			this.tableName = tableName;
+			this.loadType = loadType;
+			this.idFieldName = idFieldName;
 		}
 		#endregion
 		
 		#region Private Fields
-		private string artist;
-		private DateTime releaseDate = DateTime.MinValue;
-		private List<IAudioTrack> tracks = new List<IAudioTrack>();
+		private string tableName;
+		private LoadType loadType = LoadType.None;
+		private Type factoryType;
+		private string factoryMethodName;
+		private string idFieldName;
+		private bool manuallySetProperties;
 		#endregion
-	
-		#region IAlbum Members
-		/// <summary>
-		/// Get the Artist credited with this album
-		/// </summary>
-		public string Artist
+		
+		#region Public Properties
+		public string TableName
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return tableName; }
+			set { tableName = value; }
 		}
 		
-		/// <summary>
-		/// Get the earliest release date of this album
-		/// </summary>
-		public DateTime ReleaseDate
+		public LoadType LoadType
 		{
-			get { return releaseDate; }
+			get { return loadType; }
+			set { loadType = value; }
 		}
 		
-		/// <summary>
-		/// Get the tracks on this album
-		/// </summary>
-		public IList<IAudioTrack> Tracks
+		public Type FactoryType
 		{
-			get { return tracks; }
+			get { return factoryType; }
+			set { factoryType = value; }
+		}
+		
+		public string FactoryMethodName
+		{
+			get { return factoryMethodName; }
+			set { factoryMethodName = value; }
+		}
+		
+		public string IdFieldName
+		{
+			get { return idFieldName; }
+			set { idFieldName = value; }
+		}
+		
+		public bool ManuallySetProperties
+		{
+			get { return manuallySetProperties; }
+			set { manuallySetProperties = value; }
 		}
 		#endregion
 	}
