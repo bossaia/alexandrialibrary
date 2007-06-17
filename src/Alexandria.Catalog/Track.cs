@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
-using Alexandria.Data;
+using Alexandria.Metadata;
 
 namespace Alexandria.Catalog
 {

@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Alexandria.Data;
+using Alexandria.Persistance;
 
 namespace Alexandria.SQLite
 {
@@ -34,7 +34,7 @@ namespace Alexandria.SQLite
 		private PersistanceClassAttribute classAttribute;
 		private ConstructorInfo constructor;
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
-		private bool isFilled;
+		//private bool isFilled;
 		#endregion
 		
 		#region Private Methods
@@ -85,7 +85,7 @@ namespace Alexandria.SQLite
 			return false;
 		}
 
-		internal bool TableExists<T>(T table) where T : IMetadata
+		internal bool TableExists<T>(T table) where T : IPersistant
 		{
 			if (table != null)
 			{
@@ -420,10 +420,10 @@ namespace Alexandria.SQLite
 			get { return children; }
 		}
 		
-		internal bool IsFilled
-		{
-			get { return isFilled; }
-		}
+		//internal bool IsFilled
+		//{
+			//get { return isFilled; }
+		//}
 		#endregion
 				
 		#region Internal Methods

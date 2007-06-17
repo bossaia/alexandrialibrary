@@ -25,6 +25,7 @@ using System.Xml.XPath;
 using System.Text;
 using System.Collections.Generic;
 using System.Globalization;
+using Alexandria.Metadata;
 
 namespace Alexandria.Mp3Tunes
 {

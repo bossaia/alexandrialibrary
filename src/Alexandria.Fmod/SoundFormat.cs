@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
+using Alexandria.Media;
 
 namespace Alexandria.Fmod
 {
