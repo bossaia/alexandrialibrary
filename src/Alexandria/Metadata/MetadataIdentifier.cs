@@ -32,7 +32,7 @@ using Alexandria.Persistance;
 
 namespace Alexandria.Metadata
 {
-	[PersistanceClass("MetadataID", PersistanceLoadType.Constructor, "Id")]
+	[Class("MetadataID", LoadType.Constructor, "Id")]
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
@@ -44,7 +44,7 @@ namespace Alexandria.Metadata
 		{
 		}
 
-		[PersistanceConstructor]
+		[Constructor]
 		public MetadataIdentifier(Guid id, Guid parentId, string value, string type, Version version)
 		{
 			this.id = id;
@@ -66,19 +66,19 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IIdentifier Members
-		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=3)]
+		[Property(FieldType.Basic, IsRequired=true, Ordinal=3)]
 		public string Value
 		{
 			get { return value; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=4)]
+		[Property(FieldType.Basic, Ordinal=4)]
 		public string Type
 		{
 			get { return type; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=5)]
+		[Property(FieldType.Basic, Ordinal=5)]
 		public IVersion Version
 		{
 			get { return version; }
@@ -106,7 +106,7 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IMetadataIdentifier Members
-		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=2)]
+		[Property(FieldType.Basic, IsRequired=true, Ordinal=2)]
 		public Guid ParentId
 		{
 			get { return parentId; }
@@ -115,7 +115,7 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IPersistant Members
-		[PersistanceProperty(PersistanceFieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
+		[Property(FieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
 		public Guid Id
 		{
 			get { return id; }

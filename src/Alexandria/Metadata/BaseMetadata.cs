@@ -65,25 +65,25 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IMetadata Members
-		[PersistanceProperty(PersistanceFieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
+		[Property(FieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
 		public Guid Id
 		{
 			get { return id; }
 		}
 		
-		[PersistanceProperty(PersistanceFieldType.OneToManyChildren, PersistanceLoadType.Property, "ParentID", typeof(MetadataIdentifier), CascadeSave=true, CascadeDelete=true)]
+		[Property(FieldType.OneToManyChildren, LoadType.Property, "ParentID", typeof(MetadataIdentifier), CascadeSave=true, CascadeDelete=true)]
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=2)]
+		[Property(FieldType.Basic, Ordinal=2)]
 		public ILocation Location
 		{
 			get { return location; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, IsRequired=true, Ordinal=3)]
+		[Property(FieldType.Basic, IsRequired=true, Ordinal=3)]
 		public string Name
 		{
 			get { return name; }

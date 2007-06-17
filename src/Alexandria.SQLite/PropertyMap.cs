@@ -36,7 +36,7 @@ namespace Alexandria.SQLite
 	internal class PropertyMap
 	{
 		#region Constructors
-		internal PropertyMap(PropertyInfo property, PersistancePropertyAttribute attribute)
+		internal PropertyMap(PropertyInfo property, PropertyAttribute attribute)
 		{
 			this.property = property;
 			this.attribute = attribute;
@@ -45,7 +45,7 @@ namespace Alexandria.SQLite
 		
 		#region Private Fields
 		private PropertyInfo property;
-		private PersistancePropertyAttribute attribute;
+		private PropertyAttribute attribute;
 		#endregion
 		
 		#region Public Properties
@@ -54,7 +54,7 @@ namespace Alexandria.SQLite
 			get { return property; }
 		}
 		
-		public PersistancePropertyAttribute Attribute
+		public PropertyAttribute Attribute
 		{
 			get { return attribute; }
 		}

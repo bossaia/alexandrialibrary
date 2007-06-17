@@ -33,7 +33,7 @@ using Alexandria.Persistance;
 
 namespace Alexandria.Metadata
 {
-	[PersistanceClass("AudioTrack", PersistanceLoadType.Constructor, "Id")]
+	[Class("AudioTrack", LoadType.Constructor, "Id")]
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors		
@@ -41,7 +41,7 @@ namespace Alexandria.Metadata
 		{
 		}
 
-		[PersistanceConstructor]
+		[Constructor]
 		public BaseAudioTrack(Guid id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)
 		{
 			this.album = album;
@@ -63,37 +63,37 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IAudioTrack Members
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=4)]
+		[Property(FieldType.Basic, Ordinal=4)]
 		public string Album
 		{
 			get { return album; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=5)]
+		[Property(FieldType.Basic, Ordinal=5)]
 		public string Artist
 		{
 			get { return artist; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=6)]
+		[Property(FieldType.Basic, Ordinal=6)]
 		public TimeSpan Duration
 		{
 			get { return duration; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=7)]
+		[Property(FieldType.Basic, Ordinal=7)]
 		public DateTime ReleaseDate
 		{
 			get { return releaseDate; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=8)]
+		[Property(FieldType.Basic, Ordinal=8)]
 		public int TrackNumber
 		{
 			get { return trackNumber; }
 		}
 
-		[PersistanceProperty(PersistanceFieldType.Basic, Ordinal=9)]
+		[Property(FieldType.Basic, Ordinal=9)]
 		public string Format
 		{
 			get { return format; }
