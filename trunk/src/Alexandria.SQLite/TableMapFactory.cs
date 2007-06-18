@@ -69,15 +69,21 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region GetTableMapFromType
+		//private TableMap GetTableMapFromType(SQLiteDataProvider provider, Type type)
+		#endregion
+		
 		#endregion
 		
 		#region Internal Methods
-		internal TableMap CreateTableMap(SQLiteDataProvider provider, Type type)
+		internal TableMap CreateTableMap(IMappingStrategy strategy, Type type)
 		{
 			TableMap map = null;
 		
 			ConstructorInfo constructor = GetConstructor(type);
 			ClassAttribute classAttribute = GetClassAttribute(type);
+
+			//bool fillData = (record != null || records != null);
 
 			if (classAttribute != null)
 			{
@@ -86,9 +92,13 @@ namespace Alexandria.SQLite
 				if (!string.IsNullOrEmpty(tableName))
 				{
 					DataTable table = new DataTable(tableName);
-					map = new TableMap(provider, type, table, classAttribute, constructor);
-
+					map = new TableMap(strategy, type, table, classAttribute, constructor);
+					
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();
+					
+					//TODO: this needs to have one more dimension - the strategy should handle loading data
+					//IDictionary<int, object> data = new Dictionary<int, object>();
+					
 					int i = 1; int ordinal;
 
 					foreach (PropertyInfo property in type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance))
@@ -114,9 +124,23 @@ namespace Alexandria.SQLite
 								TableMap childMap = null;
 								
 								if (attribute.FieldType == FieldType.OneToOneChild)
-									childMap = CreateTableMap(provider, property.PropertyType);
+								{
+									//IPersistant childRecord = null;
+									//if (record != null)
+									//{
+										//childRecord = (IPersistant)property.GetValue(record, null);
+									//}
+									childMap = CreateTableMap(strategy, property.PropertyType);
+								}
 								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
-									childMap = CreateTableMap(provider, attribute.ChildType);
+								{
+									//IList<IPersistant> childRecords = null;
+									//if (record != null)
+									//{
+										//childRecords = (IList<IPersistant>)property.GetValue(record, null);
+									//}
+									childMap = CreateTableMap(strategy, attribute.ChildType);
+								}
 								else throw new ApplicationException("Could not map this property: invalid field type");
 
 								map.Children.Add(propertyMap, childMap);

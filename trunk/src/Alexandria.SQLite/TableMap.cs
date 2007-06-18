@@ -12,9 +12,8 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(SQLiteDataProvider provider, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor)
-		{
-			this.provider = provider;
+		public TableMap(IMappingStrategy strategy, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor)
+		{			
 			this.type = type;
 			this.table = table;
 			this.classAttribute = classAttribute;
@@ -28,13 +27,12 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Private Fields
-		private SQLiteDataProvider provider;
+		private IMappingStrategy strategy;
 		private DataTable table;
 		private Type type;
 		private ClassAttribute classAttribute;
 		private ConstructorInfo constructor;
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
-		//private bool isFilled;
 		#endregion
 		
 		#region Private Methods
@@ -75,7 +73,7 @@ namespace Alexandria.SQLite
 		#region TableExists
 		internal bool TableExists(string tableName)
 		{
-			SQLiteConnection connection = provider.GetSQLiteConnection();
+			SQLiteConnection connection = strategy.Provider.GetSQLiteConnection();
 			DataTable tables = connection.GetSchema(SCHEMA_TABLES);
 			foreach (DataRow tableInfo in tables.Rows)
 			{
@@ -155,7 +153,7 @@ namespace Alexandria.SQLite
 				}
 				sql.Append(")");
 
-				using (SQLiteConnection connection = provider.GetSQLiteConnection())
+				using (SQLiteConnection connection = strategy.Provider.GetSQLiteConnection())
 				{
 					connection.Open();
 					IDbCommand command = new SQLiteCommand(sql.ToString(), connection);
@@ -184,7 +182,7 @@ namespace Alexandria.SQLite
 				}
 				string sql = string.Format(selectFormat, selectList.ToString(), table.TableName, idFieldName, id.ToString().ToUpperInvariant());
 
-				using (SQLiteConnection connection = provider.GetSQLiteConnection())
+				using (SQLiteConnection connection = strategy.Provider.GetSQLiteConnection())
 				{
 					connection.Open();
 					SQLiteCommand command = new SQLiteCommand(sql, connection);
@@ -289,7 +287,7 @@ namespace Alexandria.SQLite
 			}
 			else throw new ApplicationException("Lookup error: invalid class load type");
 			
-			record.DataStore = map.provider;
+			record.DataStore = map.Strategy.Provider;
 			return record;
 		}
 		#endregion
@@ -395,6 +393,11 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Internal Properties
+		internal IMappingStrategy Strategy
+		{
+			get { return strategy; }
+		}
+		
 		internal Type Type
 		{
 			get { return type; }

@@ -106,25 +106,31 @@ namespace Alexandria.SQLite
 		#region IDataStore Members
 		public void Initialize(Type type)
 		{
-			TableMap map = mapFactory.CreateTableMap(this, type);
+			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Initialize);
+			TableMap map = mapFactory.CreateTableMap(strategy, type);
 			map.CreateTables();
 		}
 		
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
-			TableMap map = mapFactory.CreateTableMap(this, typeof(T));
+			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Lookup);
+			TableMap map = mapFactory.CreateTableMap(strategy, typeof(T));
 			T record = map.LookupRecord<T>(id);
 			return record;
 		}
 
 		public void Save(IPersistant record)
 		{
-			TableMap map = mapFactory.CreateTableMap(this, record.GetType());
+			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Save, record);
+			TableMap map = mapFactory.CreateTableMap(strategy, record.GetType());
 			map.Save();
 		}
 
 		public void Delete(IPersistant record)
 		{
+			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Delete, record);
+			TableMap map = mapFactory.CreateTableMap(strategy, record.GetType());
+			//map.Delete();
 		}
 		#endregion
 	}
