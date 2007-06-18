@@ -13,7 +13,8 @@ namespace Alexandria.SQLite
 	{
 		#region Constructors
 		public TableMap(IMappingStrategy strategy, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor)
-		{			
+		{	
+			this.strategy = strategy;
 			this.type = type;
 			this.table = table;
 			this.classAttribute = classAttribute;

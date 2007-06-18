@@ -41,6 +41,7 @@
     <Compile Include="IMappingStrategy.cs" />
     <Compile Include="MappingFunction.cs" />
     <Compile Include="MappingStrategy.cs" />
+    <Compile Include="MappingType.cs" />
     <Compile Include="PropertyMap.cs" />
     <Compile Include="SQLiteDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,5 +9,8 @@ namespace Alexandria.SQLite
 	{
 		SQLiteDataProvider Provider { get; }
 		MappingFunction Function { get; }
+		MappingType Type { get; }
+		IPersistant Record { get; set; }
+		IList<IPersistant> Records { get; set; }
 	}
 }
