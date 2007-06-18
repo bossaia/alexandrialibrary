@@ -97,7 +97,16 @@ namespace Alexandria.SQLite
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();
 					
 					//TODO: this needs to have one more dimension - the strategy should handle loading data
-					//IDictionary<int, object> data = new Dictionary<int, object>();
+					IDictionary<int, object> data = new Dictionary<int, object>();
+					IList<Dictionary<int, object>> dataCollections = new List<Dictionary<int, object>>();
+					if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+					{
+						if (strategy.Type == MappingType.Collection)
+						{
+							foreach(IPersistant p in strategy.Records)
+								dataCollections.Add(new Dictionary<int, object>());
+						}
+					}
 					
 					int i = 1; int ordinal;
 
@@ -117,6 +126,19 @@ namespace Alexandria.SQLite
 
 								columns.Add(ordinal, column);
 								i++;
+								
+								if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+								{
+									if (strategy.Type == MappingType.Singleton)
+									{
+										data[ordinal] = property.GetValue(strategy.Record, null);
+									}
+									else if (strategy.Type == MappingType.Collection)
+									{
+										for(int k=0;k<strategy.Records.Count;k++)
+											dataCollections[k].Add(ordinal, property.GetValue(strategy.Records[k], null));
+									}
+								}
 							}
 							else
 							{
@@ -125,19 +147,20 @@ namespace Alexandria.SQLite
 								
 								if (attribute.FieldType == FieldType.OneToOneChild)
 								{
-									//IPersistant childRecord = null;
-									//if (record != null)
+									//if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
 									//{
-										//childRecord = (IPersistant)property.GetValue(record, null);
+										//IPersistant childRecord = (IPersistant)property.GetValue(strategy.Record, null);
+										//strategy.Record = childRecord;
 									//}
 									childMap = CreateTableMap(strategy, property.PropertyType);
 								}
 								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
 								{
-									//IList<IPersistant> childRecords = null;
-									//if (record != null)
+									//if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
 									//{
-										//childRecords = (IList<IPersistant>)property.GetValue(record, null);
+										//IList<IPersistant> childRecords = null;
+										//childRecords = (IList<IPersistant>)property.GetValue(stategy.Record, null);
+										//strategy.Records = childRecords;
 									//}
 									childMap = CreateTableMap(strategy, attribute.ChildType);
 								}
@@ -152,6 +175,25 @@ namespace Alexandria.SQLite
 					{
 						for (int j = 1; j <= columns.Count; j++)
 							table.Columns.Add(columns[j]);
+							
+						if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+						{
+							if (strategy.Type == MappingType.Singleton)
+							{
+								//TODO: this cast will not work - fix it
+								//object[] dataRow = (object[])data;
+								//table.Rows.Add(dataRow);
+							}
+							else if (strategy.Type == MappingType.Collection)
+							{
+								foreach(Dictionary<int, object> dataCollection in dataCollections)
+								{
+									//TODO: this cast will not work - fix it
+									//object[] dataRow = (object[])dataCollection;
+									//table.Rows.Add(dataRow);
+								}
+							}
+						}
 					}
 					else throw new ApplicationException("Could not find any columns for type: " + type.Name);
 

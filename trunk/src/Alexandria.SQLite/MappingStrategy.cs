@@ -8,7 +8,7 @@ namespace Alexandria.SQLite
 	internal class MappingStrategy : IMappingStrategy
 	{
 		#region Constructor
-		internal MappingStrategy(SQLiteDataProvider provider, MappingFunction function) : this(provider, function, null)
+		internal MappingStrategy(SQLiteDataProvider provider, MappingFunction function) : this(provider, function, (IPersistant)null)
 		{
 		}
 
@@ -16,14 +16,25 @@ namespace Alexandria.SQLite
 		{
 			this.provider = provider;
 			this.function = function;
+			this.type = MappingType.Singleton;
 			this.record = record;
+		}
+
+		internal MappingStrategy(SQLiteDataProvider provider, MappingFunction function, List<IPersistant> records)
+		{
+			this.provider = provider;
+			this.function = function;
+			this.type = MappingType.Collection;
+			this.records = records;
 		}
 		#endregion
 	
 		#region Private Fields
 		private SQLiteDataProvider provider;
 		private MappingFunction function;
+		private MappingType type;
 		private IPersistant record;
+		private IList<IPersistant> records;		
 		#endregion
 	
 		#region IMappingStrategy Members
@@ -35,6 +46,23 @@ namespace Alexandria.SQLite
 		public MappingFunction Function
 		{
 			get { return function; }
+		}
+		
+		public MappingType Type
+		{
+			get { return type; }
+		}
+		
+		public IPersistant Record
+		{
+			get { return record; }
+			set { record = value; }
+		}
+		
+		public IList<IPersistant> Records
+		{
+			get { return records; }
+			set { records = value; }
 		}
 		#endregion
 	}
