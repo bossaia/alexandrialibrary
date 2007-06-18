@@ -69,8 +69,17 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
-		#region GetTableMapFromType
-		//private TableMap GetTableMapFromType(SQLiteDataProvider provider, Type type)
+		#region GetArrayFromDictionary
+		private object[] GetArrayFromDictionary(IDictionary<int, object> dictionary)
+		{
+			object[] array = new object[dictionary.Count];
+			for(int i=0;i<dictionary.Count;i++)
+			{
+				array[i] = dictionary[i];
+			}
+			
+			return array;
+		}
 		#endregion
 		
 		#endregion
@@ -83,8 +92,6 @@ namespace Alexandria.SQLite
 			ConstructorInfo constructor = GetConstructor(type);
 			ClassAttribute classAttribute = GetClassAttribute(type);
 
-			//bool fillData = (record != null || records != null);
-
 			if (classAttribute != null)
 			{
 				string tableName = classAttribute.TableName;
@@ -96,7 +103,6 @@ namespace Alexandria.SQLite
 					
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();
 					
-					//TODO: this needs to have one more dimension - the strategy should handle loading data
 					IDictionary<int, object> data = new Dictionary<int, object>();
 					IList<Dictionary<int, object>> dataCollections = new List<Dictionary<int, object>>();
 					if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
@@ -147,22 +153,52 @@ namespace Alexandria.SQLite
 								
 								if (attribute.FieldType == FieldType.OneToOneChild)
 								{
-									//if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
-									//{
-										//IPersistant childRecord = (IPersistant)property.GetValue(strategy.Record, null);
-										//strategy.Record = childRecord;
-									//}
-									childMap = CreateTableMap(strategy, property.PropertyType);
+									IMappingStrategy childStrategy = strategy;
+									if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+									{
+										if (strategy.Type == MappingType.Singleton)
+										{
+											IPersistant childRecord = (IPersistant)property.GetValue(strategy.Record, null);
+											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecord);
+										}
+										else if (strategy.Type == MappingType.Collection)
+										{
+											IList<IPersistant> records = new List<IPersistant>();
+											foreach(IPersistant child in strategy.Records)
+											{
+												IPersistant childRecord = (IPersistant)property.GetValue(child, null);
+												records.Add(childRecord);
+											}
+											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
+										}
+									}
+									childMap = CreateTableMap(childStrategy, property.PropertyType);
 								}
 								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
 								{
-									//if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
-									//{
-										//IList<IPersistant> childRecords = null;
-										//childRecords = (IList<IPersistant>)property.GetValue(stategy.Record, null);
-										//strategy.Records = childRecords;
-									//}
-									childMap = CreateTableMap(strategy, attribute.ChildType);
+									IMappingStrategy childStrategy = strategy;
+									if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
+									{
+										if (strategy.Type == MappingType.Singleton)
+										{
+											IList<IPersistant> childRecords = null;
+											childRecords = (IList<IPersistant>)property.GetValue(strategy.Record, null);
+											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecords);
+										}
+										else if (strategy.Type == MappingType.Collection)
+										{
+											IList<IPersistant> records = new List<IPersistant>();
+											foreach (IPersistant childRecord in strategy.Records)
+											{
+												IList<IPersistant> childCollection = new List<IPersistant>();
+												childCollection = (IList<IPersistant>)property.GetValue(childRecord, null);
+												foreach(IPersistant grandchildRecord in childCollection)
+													records.Add(grandchildRecord);
+											}
+											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
+										}
+									}
+									childMap = CreateTableMap(childStrategy, attribute.ChildType);
 								}
 								else throw new ApplicationException("Could not map this property: invalid field type");
 
@@ -180,17 +216,15 @@ namespace Alexandria.SQLite
 						{
 							if (strategy.Type == MappingType.Singleton)
 							{
-								//TODO: this cast will not work - fix it
-								//object[] dataRow = (object[])data;
-								//table.Rows.Add(dataRow);
+								object[] dataRow = GetArrayFromDictionary(data);
+								table.Rows.Add(dataRow);
 							}
 							else if (strategy.Type == MappingType.Collection)
 							{
 								foreach(Dictionary<int, object> dataCollection in dataCollections)
 								{
-									//TODO: this cast will not work - fix it
-									//object[] dataRow = (object[])dataCollection;
-									//table.Rows.Add(dataRow);
+									object[] dataRow = GetArrayFromDictionary(dataCollection);
+									table.Rows.Add(dataRow);
 								}
 							}
 						}

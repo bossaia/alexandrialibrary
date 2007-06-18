@@ -20,7 +20,7 @@ namespace Alexandria.SQLite
 			this.record = record;
 		}
 
-		internal MappingStrategy(SQLiteDataProvider provider, MappingFunction function, List<IPersistant> records)
+		internal MappingStrategy(SQLiteDataProvider provider, MappingFunction function, IList<IPersistant> records)
 		{
 			this.provider = provider;
 			this.function = function;
