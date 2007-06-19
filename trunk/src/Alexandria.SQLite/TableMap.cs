@@ -12,13 +12,15 @@ namespace Alexandria.SQLite
 	internal class TableMap
 	{
 		#region Constructors
-		public TableMap(IMappingStrategy strategy, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor)
+		public TableMap(IMappingStrategy strategy, Type type, DataTable table, ClassAttribute classAttribute, ConstructorInfo constructor, bool cascadeSave, bool cascadeDelete)
 		{	
 			this.strategy = strategy;
 			this.type = type;
 			this.table = table;
 			this.classAttribute = classAttribute;
 			this.constructor = constructor;
+			this.cascadeSave = cascadeSave;
+			this.cascadeDelete = cascadeDelete;
 		}
 		#endregion
 
@@ -33,6 +35,8 @@ namespace Alexandria.SQLite
 		private Type type;
 		private ClassAttribute classAttribute;
 		private ConstructorInfo constructor;
+		private bool cascadeSave;
+		private bool cascadeDelete;
 		private IDictionary<PropertyMap, TableMap> children = new Dictionary<PropertyMap, TableMap>();
 		#endregion
 		
@@ -426,19 +430,10 @@ namespace Alexandria.SQLite
 			return (IPersistant)genericMethod.Invoke(this, new object[] { row });
 		}
 		#endregion
-
-		#region GetDataRowFromRecord
-		private DataRow GetDataRowFromRecord(IPersistant record)
-		{
-			return null;
-		}
-		#endregion
 		
 		#region SaveMap
 		private void SaveMap(SQLiteTransaction transaction, TableMap map)
 		{
-			//string idFieldName = map.ClassAttribute.IdFieldName;
-			//string idFieldValue;
 			const string prefixFormat = "REPLACE INTO {0} ({1}) VALUES (";
 			const string suffixFormat = ")"; //") WHERE {0} = '{1}'";
 			
@@ -453,8 +448,7 @@ namespace Alexandria.SQLite
 			}
 		
 			foreach(DataRow row in map.Table.Rows)
-			{
-				//idFieldValue = row[idFieldName].ToString().ToUpperInvariant();
+			{				
 				StringBuilder sql = new StringBuilder();
 				sql.AppendFormat(prefixFormat, map.Table.TableName, sqlFields.ToString());
 												
@@ -466,15 +460,42 @@ namespace Alexandria.SQLite
 					sql.Append(NormalizeToDatabaseValue(map.Table.Columns[j].DataType, row[j]));
 				}
 				
-				sql.Append(suffixFormat);  //Format(suffixFormat, idFieldName, idFieldValue);
+				sql.Append(suffixFormat);
 				
 				SQLiteCommand saveCommand = new SQLiteCommand(sql.ToString(), transaction.Connection, transaction);
-				//SQLiteCommand(sql.ToString(), transaction.Connection, transaction);
 				saveCommand.ExecuteNonQuery();
 			}
 			
 			foreach(TableMap childMap in map.Children.Values)
-				SaveMap(transaction, childMap);
+			{
+				if (childMap.CascadeSave)
+					SaveMap(transaction, childMap);
+			}
+		}
+		#endregion
+		
+		#region DeleteMap
+		private void DeleteMap(SQLiteTransaction transaction, TableMap map)
+		{
+			string idFieldName = map.ClassAttribute.IdFieldName;
+			string idFieldValue;
+			const string format = "DELETE FROM {0} WHERE {1} = '{2}'";
+			
+			foreach (DataRow row in map.Table.Rows)
+			{
+				idFieldValue = row[idFieldName].ToString().ToLowerInvariant();
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat(format, map.Table.TableName, idFieldName, idFieldValue);
+
+				SQLiteCommand deleteCommand = new SQLiteCommand(sql.ToString(), transaction.Connection, transaction);
+				deleteCommand.ExecuteNonQuery();
+			}
+
+			foreach (TableMap childMap in map.Children.Values)
+			{
+				if (childMap.CascadeDelete)
+					DeleteMap(transaction, childMap);
+			}
 		}
 		#endregion
 		
@@ -505,33 +526,38 @@ namespace Alexandria.SQLite
 		{
 			get { return constructor; }
 		}
-				
+		
+		internal bool CascadeSave
+		{
+			get { return cascadeSave; }
+		}
+		
+		internal bool CascadeDelete
+		{
+			get { return cascadeDelete; }
+		}
+		
 		internal IDictionary<PropertyMap, TableMap> Children
 		{
 			get { return children; }
 		}
-		
-		//internal bool IsFilled
-		//{
-			//get { return isFilled; }
-		//}
 		#endregion
 				
 		#region Internal Methods
 		
-		#region CreateTables
-		internal void CreateTables()
+		#region Initialize
+		internal void Initialize()
 		{
 			CreateTable(Table);
 			foreach(TableMap childMap in Children.Values)
 			{
-				childMap.CreateTables();
+				childMap.Initialize();
 			}
 		}
 		#endregion
 		
-		#region LookupRecord
-		internal T LookupRecord<T>(Guid id) where T: IPersistant
+		#region Lookup
+		internal T Lookup<T>(Guid id) where T: IPersistant
 		{
 			LookupTable(Table, ClassAttribute.IdFieldName, id);
 			T record = default(T);
@@ -559,10 +585,38 @@ namespace Alexandria.SQLite
 					transaction.Commit();
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				if (transaction != null)
 					transaction.Rollback();
+					
+				throw ex;
+			}
+		}
+		#endregion
+		
+		#region Delete
+		internal void Delete()
+		{
+			SQLiteTransaction transaction = null;
+			try
+			{
+				using (SQLiteConnection connection = strategy.Provider.GetSQLiteConnection())
+				{
+					connection.Open();
+					transaction = connection.BeginTransaction();
+
+					DeleteMap(transaction, this);
+
+					transaction.Commit();
+				}
+			}
+			catch (Exception ex)
+			{
+				if (transaction != null)
+					transaction.Rollback();
+
+				throw ex;
 			}
 		}
 		#endregion

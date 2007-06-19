@@ -86,7 +86,28 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Internal Methods
+		internal TableMap CreateTableMap(SQLiteDataProvider provider, MappingFunction function, Type type)
+		{
+			IMappingStrategy strategy = new MappingStrategy(provider, function);
+			return CreateTableMap(strategy, type);
+		}
+
+		internal TableMap CreateTableMap(SQLiteDataProvider provider, MappingFunction function, IPersistant record)
+		{
+			if (record != null)
+			{
+				IMappingStrategy strategy = new MappingStrategy(provider, function, record);
+				return CreateTableMap(strategy, record.GetType());
+			}
+			else throw new ArgumentNullException("record");
+		}
+		
 		internal TableMap CreateTableMap(IMappingStrategy strategy, Type type)
+		{
+			return CreateTableMap(strategy, type, false, false);
+		}
+		
+		internal TableMap CreateTableMap(IMappingStrategy strategy, Type type, bool cascadeSave, bool cascadeDelete)
 		{
 			TableMap map = null;
 		
@@ -100,7 +121,7 @@ namespace Alexandria.SQLite
 				if (!string.IsNullOrEmpty(tableName))
 				{
 					DataTable table = new DataTable(tableName);
-					map = new TableMap(strategy, type, table, classAttribute, constructor);
+					map = new TableMap(strategy, type, table, classAttribute, constructor, cascadeSave, cascadeDelete);
 					
 					IDictionary<int, DataColumn> columns = new Dictionary<int, DataColumn>();
 					
@@ -173,7 +194,7 @@ namespace Alexandria.SQLite
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 										}
 									}
-									childMap = CreateTableMap(childStrategy, property.PropertyType);
+									childMap = CreateTableMap(childStrategy, property.PropertyType, attribute.CascadeSave, attribute.CascadeDelete);
 								}
 								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
 								{
@@ -202,7 +223,7 @@ namespace Alexandria.SQLite
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 										}
 									}
-									childMap = CreateTableMap(childStrategy, attribute.ChildType);
+									childMap = CreateTableMap(childStrategy, attribute.ChildType, attribute.CascadeSave, attribute.CascadeDelete);
 								}
 								else throw new ApplicationException("Could not map this property: invalid field type");
 

@@ -78,59 +78,40 @@ namespace Alexandria.SQLite
 			return new SQLiteConnection(connectionString);
 		}
 		#endregion		
-		
-		#region Test
-		public string Test()
-		{
-			try
-			{
-				using (SQLiteConnection connection = GetSQLiteConnection(GetConnectionString()))
-				{
-					//connection.Open();
-					//SQLiteCommand createCommand = new SQLiteCommand("CREATE TABLE AudioTrack (Id TEXT PRIMARY KEY, Location TEXT, Name TEXT, Album TEXT, Artist TEXT, Duration INT, ReleaseDate INT, TrackNumber INT, Format TEXT)", connection);
-					//SQLiteCommand createCommand = new SQLiteCommand("CREATE TABLE MetadataId (Id TEXT PRIMARY KEY, ParentId TEXT, IdValue TEXT, IdType TEXT, IdVersion TEXT)", connection);
-					//return createCommand.ExecuteNonQuery().ToString();
-				}
-			}
-			catch (Exception ex)
-			{
-				throw new ApplicationException("SQLite error", ex);
-			}
-			
-			return string.Empty;
-		}
-		#endregion
-		
+				
 		#endregion
 
 		#region IDataStore Members
 		public void Initialize(Type type)
 		{
-			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Initialize);
-			TableMap map = mapFactory.CreateTableMap(strategy, type);
-			map.CreateTables();
+			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Initialize);
+			//strategy, type);
+			TableMap map = mapFactory.CreateTableMap(this, MappingFunction.Initialize, type);
+			map.Initialize();
 		}
 		
 		public T Lookup<T>(Guid id) where T : IPersistant
 		{
-			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Lookup);
-			TableMap map = mapFactory.CreateTableMap(strategy, typeof(T));
-			T record = map.LookupRecord<T>(id);
-			return record;
+			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Lookup);
+			//strategy, typeof(T));
+			TableMap map = mapFactory.CreateTableMap(this, MappingFunction.Lookup, typeof(T));
+			return map.Lookup<T>(id);
 		}
 
 		public void Save(IPersistant record)
 		{
-			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Save, record);
-			TableMap map = mapFactory.CreateTableMap(strategy, record.GetType());
+			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Save, record);
+			//strategy, record.GetType());
+			TableMap map = mapFactory.CreateTableMap(this, MappingFunction.Save, record);
 			map.Save();
 		}
 
 		public void Delete(IPersistant record)
 		{
-			IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Delete, record);
-			TableMap map = mapFactory.CreateTableMap(strategy, record.GetType());
-			//map.Delete();
+			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Delete, record);
+			//strategy, record.GetType());
+			TableMap map = mapFactory.CreateTableMap(this, MappingFunction.Delete, record);
+			map.Delete();
 		}
 		#endregion
 	}
