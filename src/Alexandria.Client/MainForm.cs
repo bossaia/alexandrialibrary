@@ -31,7 +31,8 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
-using System.Reflection;
+using System.IO;
+//using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Alexandria;
@@ -48,7 +49,9 @@ namespace Alexandria.Client
 		{
 			try
 			{
-				InitializeComponent();				
+				InitializeComponent();
+
+				InitializeConfig();
 				
 				controller = new QueueController(this.QueueListView);
 				
@@ -66,46 +69,30 @@ namespace Alexandria.Client
 		
 		#region Private Fields
 		private QueueController controller;
+		private string dbDir;
+		private string dbFile;
+		private string dbPath;
 		#endregion
 		
-		#region OnLoad
-		protected override void OnLoad(EventArgs e)
-		{			
-			base.OnLoad(e);
-
-			string dbDir = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\Alexandria\\";
-			if (!System.IO.Directory.Exists(dbDir))
-				System.IO.Directory.CreateDirectory(dbDir);
-			string dbPath = dbDir + "Alexandria.db";
+		#region Private Methods
+		
+		#region InitializeConfig
+		private void InitializeConfig()
+		{
+			dbDir = ConfigurationManager.AppSettings["DatabaseDirectory"].ToString();
+			dbFile = ConfigurationManager.AppSettings["DatabaseFile"].ToString();
+			dbPath = dbDir + dbFile;
 			
-			try
-			{
-				// MusicBrainzID childID = A7A30461-E12D-40d9-B258-43387D0F32B2
-				// MusicBrainzID = 0dfaa81e-9326-4eff-9604-c20d1c613227
-				// SampleID childID = FF02A9E8-B597-421f-8E6F-642F0CBD585C
-				//ParentID = 4E03C5A9-D50B-4561-B43F-D19D419C78B7
-				SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
-				BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(new Guid("3cf31aae-9dc1-4311-8423-fb533e8f948b"));
-				Guid newId = new Guid("54038E25-EA9C-4dcb-A9E1-7D4456ECDCE9");
-				track.MetadataIdentifiers.Add(new MetadataIdentifier(newId, track.Id, "ab2490-cc-22-1", "type 5", new Version(0, 3, 9, 0)));
-				track.Save();
-				//provider.Save(track);
-				//provider.Initialize(typeof(BaseAudioTrack));
-				MessageBox.Show("Test succeeded", "SQLite database initialized");
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, "SQLite Error");
-			}
-			//BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(Guid.NewGuid());
-			//MessageBox.Show(provider.Test(), "SQLite Test");
-			//controller.LoadTracks();
+			if (!Directory.Exists(dbDir))
+				Directory.CreateDirectory(dbDir);
 		}
 		#endregion
 		
+		#endregion
+
 		#region Private Event Methods
 		private void PlayPauseButton_Click(object sender, EventArgs e)
-		{	
+		{
 			controller.Play();
 		}
 
@@ -117,7 +104,7 @@ namespace Alexandria.Client
 		private void SaveButton_Click(object sender, EventArgs e)
 		{
 		}
-		
+
 		private void DownloadButton_Click(object sender, EventArgs e)
 		{
 		}
@@ -128,6 +115,34 @@ namespace Alexandria.Client
 			{
 				controller.SelectTrack();
 			}
+		}
+		#endregion
+		
+		#region Protected Overrides
+		
+		#region OnLoad
+		protected override void OnLoad(EventArgs e)
+		{			
+			base.OnLoad(e);
+		}
+		#endregion
+		
+		#endregion
+		
+		#region Internal Properties
+		internal string DatabaseDirectory
+		{
+			get { return dbDir; }
+		}
+		
+		internal string DatabaseFile
+		{
+			get { return dbFile; }
+		}
+		
+		internal string DatabasePath
+		{
+			get { return dbPath; }
 		}
 		#endregion
 	}
