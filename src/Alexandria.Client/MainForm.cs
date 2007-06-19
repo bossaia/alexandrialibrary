@@ -85,8 +85,11 @@ namespace Alexandria.Client
 				// SampleID childID = FF02A9E8-B597-421f-8E6F-642F0CBD585C
 				//ParentID = 4E03C5A9-D50B-4561-B43F-D19D419C78B7
 				SQLite.SQLiteDataProvider provider = new Alexandria.SQLite.SQLiteDataProvider(dbPath);
-				BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(new Guid("3CF31AAE-9DC1-4311-8423-FB533E8F948B"));
-				string x = track.Name;
+				BaseAudioTrack track = provider.Lookup<BaseAudioTrack>(new Guid("3cf31aae-9dc1-4311-8423-fb533e8f948b"));
+				Guid newId = new Guid("54038E25-EA9C-4dcb-A9E1-7D4456ECDCE9");
+				track.MetadataIdentifiers.Add(new MetadataIdentifier(newId, track.Id, "ab2490-cc-22-1", "type 5", new Version(0, 3, 9, 0)));
+				track.Save();
+				//provider.Save(track);
 				//provider.Initialize(typeof(BaseAudioTrack));
 				MessageBox.Show("Test succeeded", "SQLite database initialized");
 			}

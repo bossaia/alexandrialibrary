@@ -80,6 +80,13 @@ namespace Alexandria
 		}
 		#endregion
 	
+		#region Public Methods
+		public override string ToString()
+		{
+			return Path;
+		}
+		#endregion
+	
 		#region Public Static Properties
 		public static ILocation None
 		{
@@ -91,6 +98,6 @@ namespace Alexandria
 				return none;
 			}
 		}
-		#endregion
+		#endregion				
 	}
 }

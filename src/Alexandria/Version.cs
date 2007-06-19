@@ -108,6 +108,11 @@ namespace Alexandria
 		{
 			return numbers[0].GetHashCode() + numbers[1].GetHashCode() + numbers[2].GetHashCode() + numbers[3].GetHashCode();
 		}
+
+		public override string ToString()
+		{
+			return string.Format("{0}.{1}.{2}.{3}", numbers[0], numbers[1], numbers[2], numbers[3]);
+		}
 		#endregion
 
 		#region IComparable<IVersion> Members

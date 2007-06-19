@@ -38,8 +38,8 @@ namespace Alexandria.SQLite
 		
 		#region Private Methods
 		
-		#region NormalizeValue
-		private object NormalizeValue(Type type, object value)
+		#region NormalizeFromDatabaseValue
+		private object NormalizeFromDatabaseValue(Type type, object value)
 		{
 			if (type == typeof(int))
 			{
@@ -68,6 +68,49 @@ namespace Alexandria.SQLite
 			}
 			
 			return value;
+		}
+		#endregion
+
+		#region NormalizeToDatabaseValue
+		private string NormalizeToDatabaseValue(Type type, object value)
+		{
+			if (value == DBNull.Value || value == null)
+				return "NULL";
+			
+			if (type == typeof(short) || type == typeof(int) || type == typeof(long))
+			{
+				return value.ToString();
+			}
+			else if (type == typeof(decimal) || type == typeof(float) || type == typeof(double))
+			{
+				return value.ToString();
+			}
+			else if (type == typeof(Guid))
+			{
+				return string.Format("'{0}'", value.ToString().ToLowerInvariant());
+			}
+			else if (type == typeof(DateTime))
+			{
+				DateTime date = (DateTime)value;
+				if (date == DateTime.MinValue)
+					return "NULL";
+				else return date.ToFileTime().ToString();
+			}
+			else if (type == typeof(TimeSpan))
+			{
+				TimeSpan span = (TimeSpan)value;
+				return span.TotalMilliseconds.ToString();
+			}
+			else if (type == typeof(Version) || type == typeof(IVersion))
+			{
+				return string.Format("'{0}'", value);
+			}
+			else if (type == typeof(Location) || type == typeof(ILocation))
+			{
+				return string.Format("'{0}'", value);
+			}
+
+			return string.Format("'{0}'", value);
 		}
 		#endregion
 
@@ -181,7 +224,7 @@ namespace Alexandria.SQLite
 						selectList.AppendFormat("{0}{1}", PREFIX, column.ColumnName);
 					else selectList.Append(column.ColumnName);
 				}
-				string sql = string.Format(selectFormat, selectList.ToString(), table.TableName, idFieldName, id.ToString().ToUpperInvariant());
+				string sql = string.Format(selectFormat, selectList.ToString(), table.TableName, idFieldName, id.ToString().ToLowerInvariant());
 
 				using (SQLiteConnection connection = strategy.Provider.GetSQLiteConnection())
 				{
@@ -198,7 +241,7 @@ namespace Alexandria.SQLite
 								int i = 0;
 								foreach (DataColumn column in table.Columns)
 								{
-									data[i] = NormalizeValue(column.DataType, reader[column.ColumnName]);
+									data[i] = NormalizeFromDatabaseValue(column.DataType, reader[column.ColumnName]);
 									i++;
 								}
 								table.Rows.Add(data);
@@ -391,6 +434,50 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region SaveMap
+		private void SaveMap(SQLiteTransaction transaction, TableMap map)
+		{
+			//string idFieldName = map.ClassAttribute.IdFieldName;
+			//string idFieldValue;
+			const string prefixFormat = "REPLACE INTO {0} ({1}) VALUES (";
+			const string suffixFormat = ")"; //") WHERE {0} = '{1}'";
+			
+			StringBuilder sqlFields = new StringBuilder();
+			string prefix = ", ";
+			for(int i=0; i<map.Table.Columns.Count; i++)
+			{
+				if (i > 0)
+					sqlFields.Append(prefix);
+					
+				sqlFields.Append(map.Table.Columns[i].ColumnName);
+			}
+		
+			foreach(DataRow row in map.Table.Rows)
+			{
+				//idFieldValue = row[idFieldName].ToString().ToUpperInvariant();
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat(prefixFormat, map.Table.TableName, sqlFields.ToString());
+												
+				for(int j=0; j<map.Table.Columns.Count; j++)
+				{
+					if (j > 0)
+						sql.Append(prefix);
+					
+					sql.Append(NormalizeToDatabaseValue(map.Table.Columns[j].DataType, row[j]));
+				}
+				
+				sql.Append(suffixFormat);  //Format(suffixFormat, idFieldName, idFieldValue);
+				
+				SQLiteCommand saveCommand = new SQLiteCommand(sql.ToString(), transaction.Connection, transaction);
+				//SQLiteCommand(sql.ToString(), transaction.Connection, transaction);
+				saveCommand.ExecuteNonQuery();
+			}
+			
+			foreach(TableMap childMap in map.Children.Values)
+				SaveMap(transaction, childMap);
+		}
+		#endregion
+		
 		#endregion
 		
 		#region Internal Properties
@@ -447,7 +534,11 @@ namespace Alexandria.SQLite
 		internal T LookupRecord<T>(Guid id) where T: IPersistant
 		{
 			LookupTable(Table, ClassAttribute.IdFieldName, id);
-			T record = GetRecordFromDataRow<T>(Table.Rows[0]);
+			T record = default(T);
+			
+			if (Table.Rows.Count > 0)
+				record = GetRecordFromDataRow<T>(Table.Rows[0]);
+				
 			return record;
 		}
 		#endregion
@@ -455,6 +546,24 @@ namespace Alexandria.SQLite
 		#region Save
 		internal void Save()
 		{
+			SQLiteTransaction transaction = null;
+			try
+			{
+				using (SQLiteConnection connection = strategy.Provider.GetSQLiteConnection())
+				{
+					connection.Open();
+					transaction = connection.BeginTransaction();
+					
+					SaveMap(transaction, this);					
+					
+					transaction.Commit();
+				}
+			}
+			catch (Exception)
+			{
+				if (transaction != null)
+					transaction.Rollback();
+			}
 		}
 		#endregion
 		
