@@ -26,6 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
@@ -75,7 +76,7 @@ namespace Alexandria.SQLite
 			object[] array = new object[dictionary.Count];
 			for(int i=0;i<dictionary.Count;i++)
 			{
-				array[i] = dictionary[i];
+				array[i] = dictionary[i+1];
 			}
 			
 			return array;
@@ -181,19 +182,22 @@ namespace Alexandria.SQLite
 									{
 										if (strategy.Type == MappingType.Singleton)
 										{
-											IList<IPersistant> childRecords = null;
-											childRecords = (IList<IPersistant>)property.GetValue(strategy.Record, null);
-											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecords);
+											IList childObjects = null;
+											List<IPersistant> records = new List<IPersistant>();
+											childObjects = (IList)property.GetValue(strategy.Record, null);
+											foreach(IPersistant persistant in childObjects)
+												records.Add(persistant);
+											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 										}
 										else if (strategy.Type == MappingType.Collection)
 										{
 											IList<IPersistant> records = new List<IPersistant>();
 											foreach (IPersistant childRecord in strategy.Records)
 											{
-												IList<IPersistant> childCollection = new List<IPersistant>();
-												childCollection = (IList<IPersistant>)property.GetValue(childRecord, null);
-												foreach(IPersistant grandchildRecord in childCollection)
-													records.Add(grandchildRecord);
+												IList childObjects = null;
+												childObjects = (IList)property.GetValue(childRecord, null);
+												foreach(IPersistant persistant in childObjects)
+													records.Add(persistant);
 											}
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 										}

@@ -77,7 +77,7 @@ namespace Alexandria.SQLite
 		{
 			return new SQLiteConnection(connectionString);
 		}
-		#endregion
+		#endregion		
 		
 		#region Test
 		public string Test()
