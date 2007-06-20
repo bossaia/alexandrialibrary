@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.FileTools", "Ale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Encyclopedia", "Alexandria.Encyclopedia\Alexandria.Encyclopedia.csproj", "{3E60EA66-3B84-4941-A9A3-B842EDAD1D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Catalog", "Alexandria.Catalog\Alexandria.Catalog.csproj", "{37A4F396-6488-49DC-8313-5166EBE70AA7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Playlist", "Alexandria.Playlist\Alexandria.Playlist.csproj", "{5373D021-353C-47FE-9BB0-7F6E22F06594}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDisc", "Alexandria.CompactDisc\Alexandria.CompactDisc.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
@@ -131,10 +129,6 @@ Global
 		{3E60EA66-3B84-4941-A9A3-B842EDAD1D26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E60EA66-3B84-4941-A9A3-B842EDAD1D26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E60EA66-3B84-4941-A9A3-B842EDAD1D26}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37A4F396-6488-49DC-8313-5166EBE70AA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37A4F396-6488-49DC-8313-5166EBE70AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37A4F396-6488-49DC-8313-5166EBE70AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37A4F396-6488-49DC-8313-5166EBE70AA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Release|Any CPU.ActiveCfg = Release|Any CPU
