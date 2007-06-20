@@ -29,11 +29,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.Encyclopedia
 {
-	public interface ITagFormat
+	public class GroupFormedEvent : ArtistEvent
 	{
-		string Name { get; }
-		IVersion Version { get; }
+		#region Constructors
+		public GroupFormedEvent() : base("Group Formed")
+		{
+		}
+		
+		public GroupFormedEvent(string id) : this()
+		{
+		}
+		#endregion
 	}
 }

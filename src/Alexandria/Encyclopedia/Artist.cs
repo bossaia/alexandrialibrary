@@ -28,17 +28,31 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Plugins;
 
-namespace Alexandria
+namespace Alexandria.Encyclopedia
 {
-	public interface ITagFactory : IPlugin
+	public class Artist
 	{
-		ITag CreateTag(ILocation location);
-		ITag CreateTag(ILocation location, ITagFormat format);
-		T CreateTag<T>(ILocation location) where T : ITag;
-		T CreateTag<T>(ILocation location, ITagFormat format) where T: ITag;
-		IList<ITag> CreateTags(ILocation location);
-		IList<ITag> CreateTags(ILocation location, ITagFormat format);
+		#region Private Fields
+		private string name;
+		#endregion
+		
+		#region Constructors
+		public Artist()
+		{
+		}
+		
+		public Artist(string id)
+		{
+		}
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get {return name;}
+			set {name = value;}
+		}
+		#endregion
 	}
 }

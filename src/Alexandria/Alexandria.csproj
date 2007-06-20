@@ -40,6 +40,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
+    <Compile Include="Catalog\BaseCatalog.cs" />
+    <Compile Include="Catalog\BaseCatalogAlbum.cs" />
+    <Compile Include="Catalog\ICatalog.cs" />
+    <Compile Include="Catalog\ICatalogAlbum.cs" />
+    <Compile Include="Encyclopedia\Artist.cs" />
+    <Compile Include="Encyclopedia\ArtistEvent.cs" />
+    <Compile Include="Encyclopedia\BaseEvent.cs" />
+    <Compile Include="Encyclopedia\Collaboration.cs" />
+    <Compile Include="Encyclopedia\Genre.cs" />
+    <Compile Include="Encyclopedia\GroupArtist.cs" />
+    <Compile Include="Encyclopedia\GroupFormedEvent.cs" />
+    <Compile Include="Encyclopedia\IndividualArtist.cs" />
+    <Compile Include="Encyclopedia\Song.cs" />
+    <Compile Include="Encyclopedia\Track.cs" />
     <Compile Include="Metadata\BaseAlbum.cs" />
     <Compile Include="Metadata\BaseArtist.cs" />
     <Compile Include="Metadata\BaseAudioTrack.cs" />
@@ -75,15 +89,12 @@
     <Compile Include="Media\ISeekableForward.cs" />
     <Compile Include="Media\IStreaming.cs" />
     <Compile Include="Media\IStreamingAudio.cs" />
-    <Compile Include="ITagable.cs" />
-    <Compile Include="ITagFormat.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
     <Compile Include="Metadata\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="Media\IMediaContainer.cs" />
-    <Compile Include="ITag.cs" />
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Media\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
@@ -92,7 +103,6 @@
     <Compile Include="ISearch.cs" />
     <Compile Include="Metadata\ISong.cs" />
     <Compile Include="Metadata\IStyle.cs" />
-    <Compile Include="ITagFactory.cs" />
     <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
@@ -111,13 +121,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Media\SeekDirection.cs" />
     <Compile Include="Media\StreamingState.cs" />
+    <Compile Include="Tagging\ITag.cs" />
+    <Compile Include="Tagging\ITagable.cs" />
+    <Compile Include="Tagging\ITagFactory.cs" />
+    <Compile Include="Tagging\ITagFormat.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Catalog\" />
     <Folder Include="Media\Conversion\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

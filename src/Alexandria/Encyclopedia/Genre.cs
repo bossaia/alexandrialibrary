@@ -28,17 +28,31 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Tagging;
 
-namespace Alexandria.Plugins
+namespace Alexandria.Encyclopedia
 {
-	public interface IPluginRepository : IDisposable
+	public class Genre
 	{
-		//IDictionary<string, IMediaFactory> MediaFactories { get; }
-		IDictionary<string, ITagFactory> TagFactores { get; }
-		//IDictionary<string, IMetadataFactory> MetadataFactories { get; }
-		//IMediaFactory GetMediaFactory(IPluginOptions options);
-		ITagFactory GetTagFactory(IPluginOptions options);		
-		//IMetadataFactory GetMetadataFactory(IPluginOptions options);		
+		#region Private Fields
+		private string name;
+		#endregion
+		
+		#region Constructors
+		public Genre()
+		{
+		}
+		
+		public Genre(string id)
+		{
+		}
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get {return name;}
+			set {name = value;}
+		}
+		#endregion
 	}
 }

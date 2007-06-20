@@ -28,17 +28,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Tagging;
+using Alexandria.Metadata;
 
-namespace Alexandria.Plugins
+namespace Alexandria.Catalog
 {
-	public interface IPluginRepository : IDisposable
+	public class BaseCatalogAlbum : ICatalogAlbum
 	{
-		//IDictionary<string, IMediaFactory> MediaFactories { get; }
-		IDictionary<string, ITagFactory> TagFactores { get; }
-		//IDictionary<string, IMetadataFactory> MetadataFactories { get; }
-		//IMediaFactory GetMediaFactory(IPluginOptions options);
-		ITagFactory GetTagFactory(IPluginOptions options);		
-		//IMetadataFactory GetMetadataFactory(IPluginOptions options);		
+		#region Constructors
+		public BaseCatalogAlbum(ICatalog catalog)
+		{
+			this.catalog = catalog;
+		}
+		#endregion
+	
+		#region Private Fields
+		private ICatalog catalog;
+		private IAlbum album;
+		#endregion
+	
+		#region ICatalogAlbum Members
+		public ICatalog Catalog
+		{
+			get { return catalog; }
+		}
+		
+		public IAlbum Album
+		{
+			get { return album; }
+			set { album = value; }
+		}
+		#endregion
 	}
 }
