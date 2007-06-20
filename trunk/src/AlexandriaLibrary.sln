@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria", "Alexandria\Alexandria.csproj", "{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}"
@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TagLib", "Alexan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Tao", "Alexandria.Tao\Alexandria.Tao.csproj", "{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDiscTools", "Alexandria.CompactDisc\Alexandria.CompactDiscTools.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDiscTools", "Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Mp3Tunes", "Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj", "{E2B3A41A-4F81-40D1-933C-A792AC523F52}"
 EndProject
@@ -98,7 +98,7 @@ Global
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Release|Any CPU.Build.0 = elease|Any CPU
 		{9C611D67-417B-4382-8531-7A9D9633E609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9C611D67-417B-4382-8531-7A9D9633E609}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C611D67-417B-4382-8531-7A9D9633E609}.Release|Any CPU.ActiveCfg = Release|Any CPU
