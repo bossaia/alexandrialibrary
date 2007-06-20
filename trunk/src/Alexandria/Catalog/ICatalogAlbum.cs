@@ -30,13 +30,11 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
 
-namespace Alexandria
+namespace Alexandria.Catalog
 {
-	public interface ITag
+	public interface ICatalogAlbum
 	{
-		ITagFormat Format { get; }
-		IList<IMetadata> Metadata { get; }
-		void Save();
-		void Delete();
+		ICatalog Catalog { get; }
+		IAlbum Album { get; set; }
 	}
 }

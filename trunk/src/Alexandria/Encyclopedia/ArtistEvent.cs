@@ -29,11 +29,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria
+namespace Alexandria.Encyclopedia
 {
-	public interface ITagable
+	public class ArtistEvent
 	{
-		IList<ITag> Tags { get; }		
-		void LoadAllTags();
+		#region Private Fields
+		private List<Artist> artists = new List<Artist>();
+		#endregion
+		
+		#region Constructors
+		public ArtistEvent(string type)
+		{
+		}
+		
+		public ArtistEvent(string id, string type)
+		{
+		}
+		#endregion
+		
+		#region Public Properties
+		public IList<Artist> Artists
+		{
+			get {return artists;}
+		}
+		#endregion
 	}
 }
