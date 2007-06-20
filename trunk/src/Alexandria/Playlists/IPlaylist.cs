@@ -28,8 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Media;
 
-namespace Alexandria.Media
+namespace Alexandria.Playlists
 {
 	public interface IPlaylist : IMedia
 	{

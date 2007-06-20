@@ -81,9 +81,9 @@
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistance\IPersistant.cs" />
-    <Compile Include="Media\IPlaylistItem.cs" />
+    <Compile Include="Playlists\IPlaylistItem.cs" />
     <Compile Include="Playlists\M3uPlaylist.cs" />
-    <Compile Include="Playlists\MediaPlaylist.cs" />
+    <Compile Include="Playlists\BasePlaylist.cs" />
     <Compile Include="Playlists\XmlShareablePlaylist.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
@@ -112,7 +112,7 @@
     <Compile Include="IVersion.cs" />
     <Compile Include="Media\IVideo.cs" />
     <Compile Include="Media\IAudible.cs" />
-    <Compile Include="Media\IPlaylist.cs" />
+    <Compile Include="Playlists\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Media\IVisible.cs" />
     <Compile Include="Location.cs" />
