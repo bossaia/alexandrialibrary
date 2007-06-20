@@ -54,6 +54,7 @@
     <Compile Include="Encyclopedia\IndividualArtist.cs" />
     <Compile Include="Encyclopedia\Song.cs" />
     <Compile Include="Encyclopedia\Track.cs" />
+    <Compile Include="Media\FileIdentifier.cs" />
     <Compile Include="Metadata\BaseAlbum.cs" />
     <Compile Include="Metadata\BaseArtist.cs" />
     <Compile Include="Metadata\BaseAudioTrack.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistance\IPersistant.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
+    <Compile Include="Playlists\M3uPlaylist.cs" />
+    <Compile Include="Playlists\MediaPlaylist.cs" />
+    <Compile Include="Playlists\XmlShareablePlaylist.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Media\IPositionable.cs" />

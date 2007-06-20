@@ -33,11 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TagLib", "Alexan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Tao", "Alexandria.Tao\Alexandria.Tao.csproj", "{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.FileTools", "Alexandria.FileTools\Alexandria.FileTools.csproj", "{FA920B97-91DA-45DA-B482-A1357AAAA9F0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Playlist", "Alexandria.Playlist\Alexandria.Playlist.csproj", "{5373D021-353C-47FE-9BB0-7F6E22F06594}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDisc", "Alexandria.CompactDisc\Alexandria.CompactDisc.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDiscTools", "Alexandria.CompactDisc\Alexandria.CompactDiscTools.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Mp3Tunes", "Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj", "{E2B3A41A-4F81-40D1-933C-A792AC523F52}"
 EndProject
@@ -119,14 +115,6 @@ Global
 		{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA920B97-91DA-45DA-B482-A1357AAAA9F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA920B97-91DA-45DA-B482-A1357AAAA9F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA920B97-91DA-45DA-B482-A1357AAAA9F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA920B97-91DA-45DA-B482-A1357AAAA9F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Release|Any CPU.Build.0 = Release|Any CPU
 		{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU

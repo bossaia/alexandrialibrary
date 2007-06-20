@@ -84,10 +84,6 @@
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.FileTools\Alexandria.FileTools.csproj">
-      <Project>{FA920B97-91DA-45DA-B482-A1357AAAA9F0}</Project>
-      <Name>Alexandria.FileTools</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
       <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
       <Name>Alexandria.Fmod</Name>

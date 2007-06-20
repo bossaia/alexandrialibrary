@@ -7,8 +7,8 @@
     <ProjectGuid>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.CompactDisc</RootNamespace>
-    <AssemblyName>Alexandria.CompactDisc</AssemblyName>
+    <RootNamespace>Alexandria.CompactDiscTools</RootNamespace>
+    <AssemblyName>Alexandria.CompactDiscTools</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
