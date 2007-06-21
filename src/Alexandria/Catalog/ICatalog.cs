@@ -29,14 +29,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
-using Alexandria.Playlists;
+//using Alexandria.Media.Playlists;
 
 namespace Alexandria.Catalog
 {
     public interface ICatalog
     {
         IUser User { get; }
-        IList<IAlbum> Albumds { get; }
-        IList<IPlaylist> Playlists { get; }
+        //IList<IAlbum> Albums { get; }
+        //IList<IPlaylist> Playlists { get; }
     }
 }

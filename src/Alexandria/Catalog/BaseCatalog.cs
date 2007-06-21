@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria.Media;
 using Alexandria.Metadata;
-using Alexandria.Playlists;
+//using Alexandria.Playlists;
 
 namespace Alexandria.Catalog
 {
@@ -46,7 +46,7 @@ namespace Alexandria.Catalog
 		#region Private Fields
 		private IUser user;
 		private List<IAlbum> albums = new List<IAlbum>();
-		private List<IPlaylist> playlists = new List<IPlaylist>();
+		//private List<IPlaylist> playlists = new List<IPlaylist>();
 		#endregion
 
 		#region ICatalog Members
@@ -55,15 +55,15 @@ namespace Alexandria.Catalog
 			get { return user; }
 		}
 
-		public IList<Alexandria.Metadata.IAlbum> Albumds
+		public IList<Alexandria.Metadata.IAlbum> Albums
 		{
 			get { return albums; }
 		}
 
-		public IList<Alexandria.Playlists.IPlaylist> Playlists
-		{
-			get { return playlists; }
-		}
+		//public IList<Alexandria.Playlists.IPlaylist> Playlists
+		//{
+			//get { return playlists; }
+		//}
 		#endregion
 	}
 }

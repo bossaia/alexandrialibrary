@@ -31,7 +31,7 @@ using System.Text;
 using Alexandria;
 using Alexandria.Media;
 
-namespace Alexandria.Playlists
+namespace Alexandria.Media.Playlists
 {
 	public class BasePlaylist : IPlaylist
 	{
