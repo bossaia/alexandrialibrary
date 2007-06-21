@@ -1,6 +1,6 @@
 #region License
 /*
-Copyright (c) 2007 Dan Poage
+Copyright (c) 2006 Ed Knapp
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -27,13 +27,40 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
-namespace Alexandria.Playlists
+namespace Alexandria.Media.Playlists
 {
-	public interface IPlaylistItem
-	{
-		ILocation Location { get;  }
-		//IList<IMetadata> Metadata { get; }
-	}
+    public class M3uPlaylist : BasePlaylist
+    {
+        #region Constructors
+        public M3uPlaylist(string path): base(path)
+        {
+
+        }
+        #endregion
+
+        #region Public Methods
+        public override void Load()
+        {
+            FileInfo playlistInfo = new FileInfo(Path);
+            StreamReader reader = playlistInfo.OpenText();
+            while(!reader.EndOfStream)
+            {
+                string filePath = reader.ReadLine();
+                if (filePath != null)
+                {
+                    //MediaFile file = MediaFile.Load(playlistInfo, filePath);
+                    //if (file != null)
+                    //{
+                        //Files.Add(file);
+                    //}
+                }
+                
+            }
+           
+        }
+        #endregion
+    }
 }

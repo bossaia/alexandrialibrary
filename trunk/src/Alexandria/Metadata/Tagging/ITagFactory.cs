@@ -28,12 +28,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Plugins;
 
-namespace Alexandria.Tagging
+namespace Alexandria.Metadata.Tagging
 {
-	public interface ITagable
+	public interface ITagFactory : IPlugin
 	{
-		IList<ITag> Tags { get; }		
-		void LoadAllTags();
+		ITag CreateTag(ILocation location);
+		ITag CreateTag(ILocation location, ITagFormat format);
+		T CreateTag<T>(ILocation location) where T : ITag;
+		T CreateTag<T>(ILocation location, ITagFormat format) where T: ITag;
+		IList<ITag> CreateTags(ILocation location);
+		IList<ITag> CreateTags(ILocation location, ITagFormat format);
 	}
 }

@@ -28,17 +28,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Tagging;
+using Alexandria.Metadata.Tagging;
 
 namespace Alexandria.Plugins
 {
 	public interface IPluginRepository : IDisposable
 	{
+		//TODO: figure out what plugin repository needs to be
 		//IDictionary<string, IMediaFactory> MediaFactories { get; }
-		IDictionary<string, ITagFactory> TagFactores { get; }
+		//IDictionary<string, ITagFactory> TagFactores { get; }
 		//IDictionary<string, IMetadataFactory> MetadataFactories { get; }
 		//IMediaFactory GetMediaFactory(IPluginOptions options);
-		ITagFactory GetTagFactory(IPluginOptions options);		
+		//ITagFactory GetTagFactory(IPluginOptions options);		
 		//IMetadataFactory GetMetadataFactory(IPluginOptions options);		
 	}
 }

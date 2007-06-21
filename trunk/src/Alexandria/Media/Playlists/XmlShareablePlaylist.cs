@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace Alexandria.Playlists
+namespace Alexandria.Media.Playlists
 {
 	public class XmlShareablePlaylist : BasePlaylist
 	{

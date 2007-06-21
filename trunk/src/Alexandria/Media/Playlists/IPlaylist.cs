@@ -28,15 +28,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Tagging;
+using Alexandria.Media;
 
-namespace Alexandria.Media
+namespace Alexandria.Media.Playlists
 {
-	public interface IMediaContainer : IMedia, ITagable
+	public interface IPlaylist : IMedia
 	{
-		IList<IAudio> Audio { get; }
-		IList<IVideo> Video { get; }
-		IList<IImage> Images { get; }
-		IList<IText> Text { get; }
+		IList<IPlaylistItem> Items { get; }
 	}
 }

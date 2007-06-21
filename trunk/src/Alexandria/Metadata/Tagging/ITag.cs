@@ -28,12 +28,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Metadata;
 
-namespace Alexandria.Tagging
+namespace Alexandria.Metadata.Tagging
 {
-	public interface ITagFormat
+	public interface ITag
 	{
-		string Name { get; }
-		IVersion Version { get; }
+		ITagFormat Format { get; }
+		IList<IMetadata> Metadata { get; }
+		void Save();
+		void Delete();
 	}
 }

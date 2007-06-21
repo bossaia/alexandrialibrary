@@ -28,15 +28,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
 
-namespace Alexandria.Tagging
+namespace Alexandria.Media
 {
-	public interface ITag
+	public interface IMediaContainer : IMedia
 	{
-		ITagFormat Format { get; }
-		IList<IMetadata> Metadata { get; }
-		void Save();
-		void Delete();
+		IList<IAudio> Audio { get; }
+		IList<IVideo> Video { get; }
+		IList<IImage> Images { get; }
+		IList<IText> Text { get; }
 	}
 }
