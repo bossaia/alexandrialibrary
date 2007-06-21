@@ -84,7 +84,7 @@
     <Compile Include="Media\Playlists\IPlaylistItem.cs" />
     <Compile Include="Media\Playlists\M3uPlaylist.cs" />
     <Compile Include="Media\Playlists\BasePlaylist.cs" />
-    <Compile Include="Media\Playlists\XmlShareablePlaylist.cs" />
+    <Compile Include="Media\Playlists\XspPlaylist.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Media\Playback\IPositionable.cs" />
