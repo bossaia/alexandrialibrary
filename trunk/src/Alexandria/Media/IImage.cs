@@ -27,12 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Alexandria.Media
 {
 	[CLSCompliant(false)]
-	public interface IVideoFile : IVideo, ISeekable, IHasDuration, IHasElapsed, IPositionable
-	{		
+	public interface IImage : IMedia
+	{
+		Image Image { get; }
 	}
 }

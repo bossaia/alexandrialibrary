@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IVideoStream : IMedia
+	public interface IVideoStream : IVideo, IHasElapsed
 	{
 	}
 }

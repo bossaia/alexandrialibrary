@@ -31,8 +31,9 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IVideoFile : IVideo, ISeekable, IHasDuration, IHasElapsed, IPositionable
-	{		
+	public interface IText : IMedia
+	{
+		Encoding Encoding { get; }
+		byte[] GetData();
 	}
 }

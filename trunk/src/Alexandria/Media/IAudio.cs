@@ -32,7 +32,7 @@ using System.Text;
 namespace Alexandria.Media
 {
 	[CLSCompliant(false)]
-	public interface IVideoFile : IVideo, ISeekable, IHasDuration, IHasElapsed, IPositionable
-	{		
+	public interface IAudio : IMedia, IPlayable
+	{
 	}
 }

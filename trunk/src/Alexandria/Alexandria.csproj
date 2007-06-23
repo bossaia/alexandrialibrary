@@ -59,6 +59,7 @@
     <Compile Include="Media\IAudioFile.cs" />
     <Compile Include="Media\IAudioStream.cs" />
     <Compile Include="Media\IMediaContainerStream.cs" />
+    <Compile Include="Media\IVideo.cs" />
     <Compile Include="Media\IVideoStream.cs" />
     <Compile Include="Media\MediaFactory.cs" />
     <Compile Include="Media\IMediaContainerFile.cs" />
