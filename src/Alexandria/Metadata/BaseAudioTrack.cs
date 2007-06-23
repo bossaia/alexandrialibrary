@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {

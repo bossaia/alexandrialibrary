@@ -28,11 +28,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public interface IMetadataIdentifier : IIdentifier, IPersistant
+	public interface IMetadataIdentifier : IIdentifier, IPersistent
 	{
 		Guid ParentId { get; set; }
 	}

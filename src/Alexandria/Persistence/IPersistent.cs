@@ -29,9 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Persistance
+namespace Alexandria.Persistence
 {
-	public interface IPersistant
+	public interface IPersistent
 	{
 		Guid Id { get; }
 		IDataStore DataStore { get; set; }

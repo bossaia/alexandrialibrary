@@ -61,9 +61,9 @@
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Media\Playback\BufferState.cs" />
-    <Compile Include="Persistance\IDataStore.cs" />
-    <Compile Include="Persistance\ClassAttribute.cs" />
-    <Compile Include="Persistance\ConstructorAttribute.cs" />
+    <Compile Include="Persistence\IDataStore.cs" />
+    <Compile Include="Persistence\ClassAttribute.cs" />
+    <Compile Include="Persistence\ConstructorAttribute.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
     <Compile Include="Metadata\IArtist.cs" />
     <Compile Include="Media\IAudio.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Media\Playback\ILocalAudio.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
-    <Compile Include="Persistance\IPersistant.cs" />
+    <Compile Include="Persistence\IPersistent.cs" />
     <Compile Include="Media\Playlists\IPlaylistItem.cs" />
     <Compile Include="Media\Playlists\M3uPlaylist.cs" />
     <Compile Include="Media\Playlists\BasePlaylist.cs" />
@@ -102,7 +102,6 @@
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Media\Playback\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
-    <Compile Include="IProfile.cs" />
     <Compile Include="Media\IMediaFormat.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="Metadata\ISong.cs" />
@@ -116,9 +115,9 @@
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Media\Playback\IVisible.cs" />
     <Compile Include="Location.cs" />
-    <Compile Include="Persistance\FieldType.cs" />
-    <Compile Include="Persistance\LoadType.cs" />
-    <Compile Include="Persistance\PropertyAttribute.cs" />
+    <Compile Include="Persistence\FieldType.cs" />
+    <Compile Include="Persistence\LoadType.cs" />
+    <Compile Include="Persistence\PropertyAttribute.cs" />
     <Compile Include="Media\Playback\PlaybackState.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="Media\Playback\PositionType.cs" />
@@ -135,7 +134,11 @@
     <None Include="Alexandria.cd" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Media\Audio\" />
     <Folder Include="Media\Conversion\" />
+    <Folder Include="Media\Image\" />
+    <Folder Include="Media\Text\" />
+    <Folder Include="Media\Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
