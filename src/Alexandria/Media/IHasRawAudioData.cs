@@ -32,7 +32,13 @@ using System.Text;
 namespace Alexandria.Media
 {
 	[CLSCompliant(false)]
-	public interface IVideoFile : IVideo, ISeekable, IHasDuration, IHasElapsed, IPositionable
-	{		
+	public interface IHasRawAudioData
+	{
+		int NumberOfBytes { get; }
+		int NumberOfSamples { get; }
+		int SampleRate { get; }
+		bool IsStereo { get; }
+		IntPtr ReadData(uint length);
+		void CleanupData(IntPtr buffer);
 	}
 }

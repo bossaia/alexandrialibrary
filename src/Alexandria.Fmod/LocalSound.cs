@@ -7,7 +7,7 @@ using Alexandria.Media;
 
 namespace Alexandria.Fmod
 {
-	public class LocalSound : IDisposable, ILocalAudio, IAudioRawData
+	public class LocalSound : IDisposable, ILocalAudio, IHasRawAudioData
 	{
 		#region Constructors
 		public LocalSound(string path)
@@ -244,7 +244,7 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 		
-		#region IDataReadable Members
+		#region IHasRawAudioData Members
 		public int NumberOfBytes
 		{
 			get
