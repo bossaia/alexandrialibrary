@@ -31,8 +31,11 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IAudio : IMedia, IAudible, IPlayable
+	public interface IMediaContainerFile : IMedia
 	{
+		IList<IAudioFile> Audio { get; }
+		IList<IVideoFile> Video { get; }
+		IList<IImage> Images { get; }
+		IList<IText> Text { get; }
 	}
 }

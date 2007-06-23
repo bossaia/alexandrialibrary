@@ -31,7 +31,8 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	interface IAudioStream : IAudio, IStreaming
+	[CLSCompliant(false)]
+	public interface IAudioStream : IAudio, IHasElapsed, IStreaming
 	{
 	}
 }

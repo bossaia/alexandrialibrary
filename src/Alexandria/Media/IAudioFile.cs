@@ -31,9 +31,8 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IText : IMedia
-	{		
-		Encoding Encoding { get; }
-		string Text { get; }
+	[CLSCompliant(false)]
+	public interface IAudioFile : IAudio, ISeekable, IHasDuration, IHasElapsed, IPositionable
+	{
 	}
 }

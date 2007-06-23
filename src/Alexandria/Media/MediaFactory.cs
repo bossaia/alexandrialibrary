@@ -5,12 +5,18 @@ using System.Net.Mime;
 using System.Text;
 using Alexandria;
 
-namespace Alexandria.FileTools
+namespace Alexandria.Media
 {
-	public static class FileIdentifier
+	public class MediaFactory
 	{
-		#region Public Static Methods
-		public static System.Net.Mime.ContentType GetContentType(string path)
+		#region Constructors
+		public MediaFactory()
+		{
+		}
+		#endregion
+		
+		#region Private Methods
+		private ContentType GetContentType(string path)
 		{
 			try
 			{
@@ -49,6 +55,13 @@ namespace Alexandria.FileTools
 				throw new AlexandriaException(ex);
 			}
 		}
+		#endregion
+		
+		#region Public Methods
+		public IMedia LookupMedia(ILocation location)
+		{
+			return null;
+		}		
 		#endregion
 	}
 }
