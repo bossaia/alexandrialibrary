@@ -32,7 +32,14 @@ using System.Text;
 namespace Alexandria.Media
 {
 	[CLSCompliant(false)]
-	public interface IInternetRadio : IAudio, IStreaming, IHasElapsed
+	public interface IAudioRawData
 	{
+		int NumberOfBytes { get; }
+		int NumberOfSamples { get; }
+		int SampleRate { get; }
+		bool IsStereo { get; }
+		[CLSCompliant(false)]
+		IntPtr ReadData(uint length);
+		void CleanupData(IntPtr buffer);
 	}
 }
