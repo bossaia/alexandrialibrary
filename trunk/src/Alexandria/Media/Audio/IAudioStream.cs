@@ -31,11 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IAudioCompactDisc
+	interface IAudioStream : IAudio, IStreaming
 	{
-		int NumberOfTracks {get; }
-		IList<int> Minutes { get; }
-		IList<int> Seconds { get; }
-		IList<int> Frames { get; }
 	}
 }
