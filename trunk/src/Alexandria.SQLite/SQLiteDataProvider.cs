@@ -34,7 +34,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using Alexandria;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.SQLite
 {
@@ -90,7 +90,7 @@ namespace Alexandria.SQLite
 			map.Initialize();
 		}
 		
-		public T Lookup<T>(Guid id) where T : IPersistant
+		public T Lookup<T>(Guid id) where T : IPersistent
 		{
 			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Lookup);
 			//strategy, typeof(T));
@@ -98,7 +98,7 @@ namespace Alexandria.SQLite
 			return map.Lookup<T>(id);
 		}
 
-		public void Save(IPersistant record)
+		public void Save(IPersistent record)
 		{
 			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Save, record);
 			//strategy, record.GetType());
@@ -106,7 +106,7 @@ namespace Alexandria.SQLite
 			map.Save();
 		}
 
-		public void Delete(IPersistant record)
+		public void Delete(IPersistent record)
 		{
 			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Delete, record);
 			//strategy, record.GetType());

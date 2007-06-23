@@ -5,7 +5,7 @@ using System.Text;
 using com.db4o;
 using Alexandria;
 using Alexandria.Metadata;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.Db4o
 {

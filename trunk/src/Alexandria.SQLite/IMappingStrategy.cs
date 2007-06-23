@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.SQLite
 {
@@ -10,7 +10,7 @@ namespace Alexandria.SQLite
 		SQLiteDataProvider Provider { get; }
 		MappingFunction Function { get; }
 		MappingType Type { get; }
-		IPersistant Record { get; set; }
-		IList<IPersistant> Records { get; set; }
+		IPersistent Record { get; set; }
+		IList<IPersistent> Records { get; set; }
 	}
 }

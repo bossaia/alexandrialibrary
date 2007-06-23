@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.SQLite
 {
@@ -131,7 +131,7 @@ namespace Alexandria.SQLite
 			return false;
 		}
 
-		internal bool TableExists<T>(T table) where T : IPersistant
+		internal bool TableExists<T>(T table) where T : IPersistent
 		{
 			if (table != null)
 			{
@@ -303,9 +303,9 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetRecord
-		private IPersistant GetRecord(TableMap map, DataRow row)
+		private IPersistent GetRecord(TableMap map, DataRow row)
 		{
-			IPersistant record = null;
+			IPersistent record = null;
 		
 			if (map.ClassAttribute.LoadType == LoadType.Constructor)
 			{				
@@ -316,7 +316,7 @@ namespace Alexandria.SQLite
 			else if (ClassAttribute.LoadType == LoadType.Property)
 			{
 				if (map.Constructor != null)
-					record = (IPersistant)map.Constructor.Invoke(null);
+					record = (IPersistent)map.Constructor.Invoke(null);
 				else throw new ApplicationException("Lookup error: load constructor undefined");
 					
 				LoadProperties(record, map, row);				
@@ -341,7 +341,7 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetRecordFromConstructor
-		private IPersistant GetRecordFromConstructor(ConstructorInfo constructor, DataRow row)
+		private IPersistent GetRecordFromConstructor(ConstructorInfo constructor, DataRow row)
 		{
 			ParameterInfo[] info = constructor.GetParameters();
 			object[] parameters = new object[info.Length];
@@ -351,14 +351,14 @@ namespace Alexandria.SQLite
 				parameters[i] = row[FormatPascalCase(info[i].Name)];
 			}
 			
-			IPersistant record = (IPersistant)constructor.Invoke(parameters);
+			IPersistent record = (IPersistent)constructor.Invoke(parameters);
 			
 			return record;
 		}
 		#endregion				
 		
 		#region GetRecordFromMethod
-		private IPersistant GetRecordFromMethod(object factory, MethodInfo method, DataRow row)
+		private IPersistent GetRecordFromMethod(object factory, MethodInfo method, DataRow row)
 		{
 			ParameterInfo[] info = method.GetParameters();
 			object[] parameters = new object[info.Length];
@@ -368,14 +368,14 @@ namespace Alexandria.SQLite
 				parameters[i] = row[FormatPascalCase(info[i].Name)];
 			}
 
-			IPersistant record = (IPersistant)method.Invoke(factory, parameters);
+			IPersistent record = (IPersistent)method.Invoke(factory, parameters);
 
 			return record;
 		}
 		#endregion
 		
 		#region LoadProperties
-		private void LoadProperties(IPersistant record, TableMap map, DataRow row)
+		private void LoadProperties(IPersistent record, TableMap map, DataRow row)
 		{
 			foreach(PropertyInfo property in record.GetType().GetProperties(BindingFlags.Public))
 			{
@@ -385,9 +385,9 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetRecordFromDataRow
-		private T GetRecordFromDataRow<T>(DataRow row) where T : IPersistant
+		private T GetRecordFromDataRow<T>(DataRow row) where T : IPersistent
 		{
-			IPersistant record = GetRecord(this, row);
+			IPersistent record = GetRecord(this, row);
 			Guid x = record.Id;
 
 			foreach (KeyValuePair<PropertyMap, TableMap> childPair in Children)
@@ -400,7 +400,7 @@ namespace Alexandria.SQLite
 				if (childPropertyMap.Attribute.FieldType == FieldType.OneToOneChild)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
-					IPersistant item = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
+					IPersistent item = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
 					childPropertyMap.Property.SetValue(record, item, null);
 				}
 				else if (childPair.Key.Attribute.FieldType == FieldType.OneToManyChildren)
@@ -410,7 +410,7 @@ namespace Alexandria.SQLite
 
 					foreach (DataRow childRow in childPair.Value.Table.Rows)
 					{
-						IPersistant item = childTableMap.GetChildRecordFromDataRow(childRow);
+						IPersistent item = childTableMap.GetChildRecordFromDataRow(childRow);
 						list.Add(item);
 					}
 					int count = list.Count;
@@ -422,12 +422,12 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetChildRecordFromDataRow
-		private IPersistant GetChildRecordFromDataRow(DataRow row)
+		private IPersistent GetChildRecordFromDataRow(DataRow row)
 		{
 			MethodInfo method = this.GetType().GetMethod("GetRecordFromDataRow", BindingFlags.NonPublic | BindingFlags.Instance);
 			MethodInfo genericMethod = method.MakeGenericMethod(Type);
 
-			return (IPersistant)genericMethod.Invoke(this, new object[] { row });
+			return (IPersistent)genericMethod.Invoke(this, new object[] { row });
 		}
 		#endregion
 		
@@ -557,7 +557,7 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#region Lookup
-		internal T Lookup<T>(Guid id) where T: IPersistant
+		internal T Lookup<T>(Guid id) where T: IPersistent
 		{
 			LookupTable(Table, ClassAttribute.IdFieldName, id);
 			T record = default(T);

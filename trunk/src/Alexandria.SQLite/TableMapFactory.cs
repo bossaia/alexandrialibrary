@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Text;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.SQLite
 {
@@ -92,7 +92,7 @@ namespace Alexandria.SQLite
 			return CreateTableMap(strategy, type);
 		}
 
-		internal TableMap CreateTableMap(SQLiteDataProvider provider, MappingFunction function, IPersistant record)
+		internal TableMap CreateTableMap(SQLiteDataProvider provider, MappingFunction function, IPersistent record)
 		{
 			if (record != null)
 			{
@@ -131,7 +131,7 @@ namespace Alexandria.SQLite
 					{
 						if (strategy.Type == MappingType.Collection)
 						{
-							foreach(IPersistant p in strategy.Records)
+							foreach(IPersistent p in strategy.Records)
 								dataCollections.Add(new Dictionary<int, object>());
 						}
 					}
@@ -180,15 +180,15 @@ namespace Alexandria.SQLite
 									{
 										if (strategy.Type == MappingType.Singleton)
 										{
-											IPersistant childRecord = (IPersistant)property.GetValue(strategy.Record, null);
+											IPersistent childRecord = (IPersistent)property.GetValue(strategy.Record, null);
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecord);
 										}
 										else if (strategy.Type == MappingType.Collection)
 										{
-											IList<IPersistant> records = new List<IPersistant>();
-											foreach(IPersistant child in strategy.Records)
+											IList<IPersistent> records = new List<IPersistent>();
+											foreach(IPersistent child in strategy.Records)
 											{
-												IPersistant childRecord = (IPersistant)property.GetValue(child, null);
+												IPersistent childRecord = (IPersistent)property.GetValue(child, null);
 												records.Add(childRecord);
 											}
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
@@ -204,20 +204,20 @@ namespace Alexandria.SQLite
 										if (strategy.Type == MappingType.Singleton)
 										{
 											IList childObjects = null;
-											List<IPersistant> records = new List<IPersistant>();
+											List<IPersistent> records = new List<IPersistent>();
 											childObjects = (IList)property.GetValue(strategy.Record, null);
-											foreach(IPersistant persistant in childObjects)
+											foreach(IPersistent persistant in childObjects)
 												records.Add(persistant);
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 										}
 										else if (strategy.Type == MappingType.Collection)
 										{
-											IList<IPersistant> records = new List<IPersistant>();
-											foreach (IPersistant childRecord in strategy.Records)
+											IList<IPersistent> records = new List<IPersistent>();
+											foreach (IPersistent childRecord in strategy.Records)
 											{
 												IList childObjects = null;
 												childObjects = (IList)property.GetValue(childRecord, null);
-												foreach(IPersistant persistant in childObjects)
+												foreach(IPersistent persistant in childObjects)
 													records.Add(persistant);
 											}
 											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);

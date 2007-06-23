@@ -29,11 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
-using Alexandria.Persistance;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public abstract class BaseMetadata : IMetadata, IPersistant
+	public abstract class BaseMetadata : IMetadata, IPersistent
 	{
 		#region Constructors
 		public BaseMetadata(string location, string name)

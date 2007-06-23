@@ -34,8 +34,8 @@ namespace Alexandria.Persistence
 	public interface IDataStore
 	{
 		void Initialize(Type type);
-		T Lookup<T>(Guid id) where T : IPersistant;
-		void Save(IPersistant record);
-		void Delete(IPersistant record);
+		T Lookup<T>(Guid id) where T : IPersistent;
+		void Save(IPersistent record);
+		void Delete(IPersistent record);
 	}
 }
