@@ -33,7 +33,8 @@ namespace Alexandria.Media.Playlists
 {
 	public interface IPlaylistItem
 	{
+		string Name { get; }
 		ILocation Location { get;  }
-		//IList<IMetadata> Metadata { get; }
+		TimeSpan Duration { get; }
 	}
 }

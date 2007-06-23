@@ -29,11 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Media.Conversion
 {
-	public interface IImage : IMedia, IVisible
-	{		
-		//IList<byte> ImageData { get; }
-		System.Drawing.Image Image { get; }
+	public interface IConversionStrategy
+	{
+		ILocation Location { get; }
+		IMediaFormat Format { get; }
+		//TODO: figure out the best way to handle the conversion callbacks
 	}
 }

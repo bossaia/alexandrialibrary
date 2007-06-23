@@ -54,9 +54,14 @@
     <Compile Include="Encyclopedia\IndividualArtist.cs" />
     <Compile Include="Encyclopedia\Song.cs" />
     <Compile Include="Encyclopedia\Track.cs" />
-    <Compile Include="Media\Audio\IAudioFile.cs" />
-    <Compile Include="Media\Audio\IAudioStream.cs" />
-    <Compile Include="Media\FileIdentifier.cs" />
+    <Compile Include="Media\Conversion\IConversionStrategy.cs" />
+    <Compile Include="Media\Conversion\IMediaConverter.cs" />
+    <Compile Include="Media\IAudioFile.cs" />
+    <Compile Include="Media\IAudioStream.cs" />
+    <Compile Include="Media\IMediaContainerStream.cs" />
+    <Compile Include="Media\IVideoStream.cs" />
+    <Compile Include="Media\MediaFactory.cs" />
+    <Compile Include="Media\IMediaContainerFile.cs" />
     <Compile Include="Metadata\BaseAlbum.cs" />
     <Compile Include="Metadata\BaseArtist.cs" />
     <Compile Include="Metadata\BaseAudioTrack.cs" />
@@ -68,12 +73,12 @@
     <Compile Include="Persistence\ConstructorAttribute.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
     <Compile Include="Metadata\IArtist.cs" />
-    <Compile Include="Media\Audio\IAudio.cs" />
-    <Compile Include="Media\Audio\IAudioCompactDisc.cs" />
+    <Compile Include="Media\IAudio.cs" />
+    <Compile Include="Media\IAudioCompactDisc.cs" />
     <Compile Include="Metadata\IAudioRelease.cs" />
     <Compile Include="Metadata\IAudioTrack.cs" />
     <Compile Include="Media\Capabilities\IBuffered.cs" />
-    <Compile Include="Media\Audio\IHasRawAudioData.cs" />
+    <Compile Include="Media\IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
     <Compile Include="BaseIdentifier.cs" />
     <Compile Include="Media\Capabilities\IHasDuration.cs" />
@@ -97,9 +102,8 @@
     <Compile Include="Metadata\IMetadata.cs" />
     <Compile Include="Metadata\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
-    <Compile Include="Media\Image\IImage.cs" />
+    <Compile Include="Media\IImage.cs" />
     <Compile Include="ILocation.cs" />
-    <Compile Include="Media\IMediaContainer.cs" />
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Media\Capabilities\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
@@ -107,10 +111,10 @@
     <Compile Include="ISearch.cs" />
     <Compile Include="Metadata\ISong.cs" />
     <Compile Include="Metadata\IStyle.cs" />
-    <Compile Include="Media\Text\IText.cs" />
+    <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
-    <Compile Include="Media\IVideo.cs" />
+    <Compile Include="Media\IVideoFile.cs" />
     <Compile Include="Media\Capabilities\IAudible.cs" />
     <Compile Include="Media\Playlists\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
@@ -133,10 +137,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Media\Conversion\" />
-    <Folder Include="Media\Video\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,13 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Media.Conversion
 {
-	public interface IAudioCompactDisc : IAudio
+	interface IMediaConverter
 	{
-		int NumberOfTracks {get; }
-		IList<int> Minutes { get; }
-		IList<int> Seconds { get; }
-		IList<int> Frames { get; }
+		void Convert(ILocation source, IConversionStrategy strategy);
 	}
 }
