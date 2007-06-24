@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IVideo : IMedia, IVisible, IPlayable
+	public interface IVideo : IMedia
 	{
 	}
 }

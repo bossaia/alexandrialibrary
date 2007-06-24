@@ -29,16 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	/// <summary>
-	/// The playback state of a media resource
-	/// </summary>
-	public enum PlaybackState
+	[CLSCompliant(false)]
+	public interface ILocalAudioOutput : IAudioOutput, ISeekable, IHasDuration, IHasElapsed, IPositionable
 	{
-		None = 0,
-		Playing,
-		Paused,
-		Stopped
 	}
 }

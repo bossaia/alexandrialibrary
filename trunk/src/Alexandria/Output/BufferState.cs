@@ -29,11 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface IBuffered
+	public enum BufferState
 	{
-		float PercentBuffered { get; }
-		BufferState BufferState { get; }
+		None = 0,
+		Healthy,
+		Starving
 	}
 }

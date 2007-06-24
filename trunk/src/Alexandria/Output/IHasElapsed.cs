@@ -29,12 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public enum BufferState
+	public interface IHasElapsed
 	{
-		None = 0,
-		Healthy,
-		Starving
+		TimeSpan GetElapsed();
 	}
 }

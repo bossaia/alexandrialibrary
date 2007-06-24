@@ -29,10 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
 	[CLSCompliant(false)]
-	public interface IAudioFile : IAudio
+	public interface IAudioOutput : IOutput, IAudible, IPlayable
 	{
 	}
 }
