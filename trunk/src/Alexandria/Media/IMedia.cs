@@ -36,6 +36,7 @@ namespace Alexandria.Media
 		Guid Id { get; }
 		ILocation Location { get; }
 		IMediaFormat Format { get; }
-		void Load();
+		//byte[] ReadData(int length);
+		//void Load();
 	}
 }

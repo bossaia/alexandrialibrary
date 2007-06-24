@@ -101,7 +101,6 @@ namespace Alexandria.Media.Playlists
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
-
 		#endregion
 
 		#region IMediaPlaylist Members

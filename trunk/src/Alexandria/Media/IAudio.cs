@@ -33,5 +33,11 @@ namespace Alexandria.Media
 {
 	public interface IAudio : IMedia
 	{
+		int NumberOfBytes { get; }
+		int NumberOfSamples { get; }
+		int SampleRate { get; }
+		bool IsStereo { get; }		
+		//IntPtr ReadData(uint length);
+		//void CleanupData(IntPtr buffer);
 	}
 }
