@@ -27,17 +27,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface IVisible
+	[CLSCompliant(false)]
+	public interface IStreamingAudioOutput: IAudioOutput, IStreaming, IHasDuration, IHasElapsed
 	{
-		//Rectangle Dimensions { get; }
-		float Hue { get; }
-		float Saturation { get; }
-		float Brightness { get; }
-		float Contrast { get; }
 	}
 }

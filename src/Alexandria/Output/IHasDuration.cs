@@ -29,10 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	[CLSCompliant(false)]
-	public interface ILocalAudio: IAudio, ISeekable, IHasDuration, IHasElapsed, IPositionable
+	public interface IHasDuration
 	{
+		TimeSpan Duration { get; }
 	}
 }

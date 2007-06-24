@@ -29,9 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface ISeekable : ISeekableBackward, ISeekableForward
+	public interface IOutput
 	{
+		void Load();
 	}
 }

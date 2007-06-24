@@ -29,14 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface IPlayable
+	[CLSCompliant(false)]
+	public interface IAudible
 	{
-		PlaybackState PlaybackState { get; }
-		void Play();
-		void Pause();
-		void Resume();		
-		void Stop();
+		float Volume{ get; }
+		void SetVolume(float value);
+		bool IsMuted { get; }
+		void Mute();
+		void Unmute();
 	}
 }

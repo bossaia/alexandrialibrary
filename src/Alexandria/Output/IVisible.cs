@@ -27,17 +27,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface ISeekableForward
+	public interface IVisible
 	{
-		bool IsSeeking { get; }
-		SeekDirection SeekDirection { get; }
-		int SeekSpeed { get; }
-		void SeekForward();
-		void SeekForward(int seekSpeed);
-		void StopSeeking();
+		//Rectangle Dimensions { get; }
+		float Hue { get; }
+		float Saturation { get; }
+		float Brightness { get; }
+		float Contrast { get; }
 	}
 }

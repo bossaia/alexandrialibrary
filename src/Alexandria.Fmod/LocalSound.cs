@@ -4,10 +4,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Alexandria;
 using Alexandria.Media;
+using Alexandria.Output;
 
 namespace Alexandria.Fmod
 {
-	public class LocalSound : IDisposable, ILocalAudio, IHasRawAudioData
+	public class LocalSound : IDisposable, ILocalAudioOutput, IHasRawAudioData
 	{
 		#region Constructors
 		public LocalSound(string path)

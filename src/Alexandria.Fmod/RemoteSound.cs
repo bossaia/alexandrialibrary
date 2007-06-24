@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 using Alexandria.Media;
+using Alexandria.Output;
 
 namespace Alexandria.Fmod
 {
-	public class RemoteSound : IStreamingAudio
+	public class RemoteSound : IStreamingAudioOutput
 	{
 		#region Constructors
 		public RemoteSound(string path)

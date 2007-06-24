@@ -29,10 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	[CLSCompliant(false)]
-	public interface IStreamingAudio: IAudio, IStreaming, IHasDuration, IHasElapsed
+	public interface ISeekableForward
 	{
+		bool IsSeeking { get; }
+		SeekDirection SeekDirection { get; }
+		int SeekSpeed { get; }
+		void SeekForward();
+		void SeekForward(int seekSpeed);
+		void StopSeeking();
 	}
 }

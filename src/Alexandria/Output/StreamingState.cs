@@ -29,12 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public enum PositionType
+	/// <summary>
+	/// The streaming state of a media resource
+	/// </summary>
+	public enum StreamingState
 	{
 		None = 0,
-		Absolute,
-		Relative
+		Connecting,
+		Streaming
 	}
 }

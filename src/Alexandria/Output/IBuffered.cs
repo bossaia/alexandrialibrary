@@ -29,15 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface ISeekableBackward
+	public interface IBuffered
 	{
-		bool IsSeeking { get; }
-		SeekDirection SeekDirection { get; }
-		int SeekSpeed { get; }
-		void SeekBackward();
-		void SeekBackward(int seekSpeed);
-		void StopSeeking();
+		float PercentBuffered { get; }
+		BufferState BufferState { get; }
 	}
 }

@@ -29,15 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	[CLSCompliant(false)]
-	public interface IAudible
+	/// <summary>
+	/// The current seeking state of a media resource
+	/// </summary>
+	public enum SeekDirection
 	{
-		float Volume{ get; }
-		void SetVolume(float value);
-		bool IsMuted { get; }
-		void Mute();
-		void Unmute();
+		None,
+		Backward,
+		Forward
 	}
 }

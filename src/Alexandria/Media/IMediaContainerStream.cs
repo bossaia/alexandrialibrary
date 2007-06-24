@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IMediaContainerStream : IMedia, IStreaming
+	public interface IMediaContainerStream : IMedia
 	{
 		IList<IAudioStream> Audio { get; }
 		IList<IVideoStream> Video { get; }

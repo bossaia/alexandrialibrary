@@ -29,15 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	/// <summary>
-	/// The current seeking state of a media resource
-	/// </summary>
-	public enum SeekDirection
+	public enum PositionType
 	{
-		None,
-		Backward,
-		Forward
+		None = 0,
+		Absolute,
+		Relative
 	}
 }

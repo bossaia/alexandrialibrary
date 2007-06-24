@@ -31,8 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IAudio : IMedia, IPlayable
+	public interface IAudio : IMedia
 	{
 	}
 }

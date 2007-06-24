@@ -68,7 +68,10 @@
     <Compile Include="Metadata\BaseAudioTrack.cs" />
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
-    <Compile Include="Media\Capabilities\BufferState.cs" />
+    <Compile Include="Output\BufferState.cs" />
+    <Compile Include="Output\IAudioOutput.cs" />
+    <Compile Include="Output\IOutput.cs" />
+    <Compile Include="Output\IVideoOutput.cs" />
     <Compile Include="Persistence\IDataStore.cs" />
     <Compile Include="Persistence\ClassAttribute.cs" />
     <Compile Include="Persistence\ConstructorAttribute.cs" />
@@ -78,13 +81,13 @@
     <Compile Include="Media\IAudioCompactDisc.cs" />
     <Compile Include="Metadata\IAudioRelease.cs" />
     <Compile Include="Metadata\IAudioTrack.cs" />
-    <Compile Include="Media\Capabilities\IBuffered.cs" />
-    <Compile Include="Media\IHasRawAudioData.cs" />
+    <Compile Include="Output\IBuffered.cs" />
+    <Compile Include="Output\IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
     <Compile Include="BaseIdentifier.cs" />
-    <Compile Include="Media\Capabilities\IHasDuration.cs" />
-    <Compile Include="Media\Capabilities\IHasElapsed.cs" />
-    <Compile Include="Media\Capabilities\ILocalAudio.cs" />
+    <Compile Include="Output\IHasDuration.cs" />
+    <Compile Include="Output\IHasElapsed.cs" />
+    <Compile Include="Output\ILocalAudio.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistence\IPersistent.cs" />
@@ -94,19 +97,19 @@
     <Compile Include="Media\Playlists\XspPlaylist.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
-    <Compile Include="Media\Capabilities\IPositionable.cs" />
-    <Compile Include="Media\Capabilities\ISeekable.cs" />
-    <Compile Include="Media\Capabilities\ISeekableBackward.cs" />
-    <Compile Include="Media\Capabilities\ISeekableForward.cs" />
-    <Compile Include="Media\Capabilities\IStreaming.cs" />
-    <Compile Include="Media\Capabilities\IStreamingAudio.cs" />
+    <Compile Include="Output\IPositionable.cs" />
+    <Compile Include="Output\ISeekable.cs" />
+    <Compile Include="Output\ISeekableBackward.cs" />
+    <Compile Include="Output\ISeekableForward.cs" />
+    <Compile Include="Output\IStreaming.cs" />
+    <Compile Include="Output\IStreamingAudio.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
     <Compile Include="Metadata\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="Metadata\IMetadataFactory.cs" />
-    <Compile Include="Media\Capabilities\IPlayable.cs" />
+    <Compile Include="Output\IPlayable.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Media\IMediaFormat.cs" />
     <Compile Include="ISearch.cs" />
@@ -116,20 +119,20 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
     <Compile Include="Media\IVideoFile.cs" />
-    <Compile Include="Media\Capabilities\IAudible.cs" />
+    <Compile Include="Output\IAudible.cs" />
     <Compile Include="Media\Playlists\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
-    <Compile Include="Media\Capabilities\IVisible.cs" />
+    <Compile Include="Output\IVisible.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Persistence\FieldType.cs" />
     <Compile Include="Persistence\LoadType.cs" />
     <Compile Include="Persistence\PropertyAttribute.cs" />
-    <Compile Include="Media\Capabilities\PlaybackState.cs" />
+    <Compile Include="Output\PlaybackState.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
-    <Compile Include="Media\Capabilities\PositionType.cs" />
+    <Compile Include="Output\PositionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Media\Capabilities\SeekDirection.cs" />
-    <Compile Include="Media\Capabilities\StreamingState.cs" />
+    <Compile Include="Output\SeekDirection.cs" />
+    <Compile Include="Output\StreamingState.cs" />
     <Compile Include="Metadata\Tagging\ITag.cs" />
     <Compile Include="Metadata\Tagging\ITagable.cs" />
     <Compile Include="Metadata\Tagging\ITagFactory.cs" />
@@ -140,7 +143,7 @@
     <None Include="Alexandria.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Output\" />
+    <Folder Include="Media\Capabilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

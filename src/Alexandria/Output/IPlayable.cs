@@ -29,10 +29,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface IHasElapsed
+	public interface IPlayable
 	{
-		TimeSpan GetElapsed();
+		PlaybackState PlaybackState { get; }
+		void Play();
+		void Pause();
+		void Resume();		
+		void Stop();
 	}
 }

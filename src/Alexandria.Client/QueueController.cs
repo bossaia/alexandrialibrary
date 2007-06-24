@@ -32,6 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using Alexandria;
 using Alexandria.Media;
+using Alexandria.Output;
 using Alexandria.Metadata;
 
 namespace Alexandria.Client
@@ -54,7 +55,7 @@ namespace Alexandria.Client
 		private ListViewItem selectedItem;
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
-		private IAudio audio;		
+		private IAudioOutput audio;		
 		//Fmod.LocalSound audio;
 		#endregion
 

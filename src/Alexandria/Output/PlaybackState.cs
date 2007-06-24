@@ -29,10 +29,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	public interface IHasDuration
+	/// <summary>
+	/// The playback state of a media resource
+	/// </summary>
+	public enum PlaybackState
 	{
-		TimeSpan Duration { get; }
+		None = 0,
+		Playing,
+		Paused,
+		Stopped
 	}
 }

@@ -29,15 +29,15 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media
+namespace Alexandria.Output
 {
-	/// <summary>
-	/// The streaming state of a media resource
-	/// </summary>
-	public enum StreamingState
+	public interface ISeekableBackward
 	{
-		None = 0,
-		Connecting,
-		Streaming
+		bool IsSeeking { get; }
+		SeekDirection SeekDirection { get; }
+		int SeekSpeed { get; }
+		void SeekBackward();
+		void SeekBackward(int seekSpeed);
+		void StopSeeking();
 	}
 }
