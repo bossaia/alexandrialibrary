@@ -44,16 +44,6 @@
     <Compile Include="Catalog\BaseCatalogAlbum.cs" />
     <Compile Include="Catalog\ICatalog.cs" />
     <Compile Include="Catalog\ICatalogAlbum.cs" />
-    <Compile Include="Encyclopedia\Artist.cs" />
-    <Compile Include="Encyclopedia\ArtistEvent.cs" />
-    <Compile Include="Encyclopedia\BaseEvent.cs" />
-    <Compile Include="Encyclopedia\Collaboration.cs" />
-    <Compile Include="Encyclopedia\Genre.cs" />
-    <Compile Include="Encyclopedia\GroupArtist.cs" />
-    <Compile Include="Encyclopedia\GroupFormedEvent.cs" />
-    <Compile Include="Encyclopedia\IndividualArtist.cs" />
-    <Compile Include="Encyclopedia\Song.cs" />
-    <Compile Include="Encyclopedia\Track.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
     <Compile Include="Media\IAudioFile.cs" />
