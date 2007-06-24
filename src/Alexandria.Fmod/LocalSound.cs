@@ -8,7 +8,7 @@ using Alexandria.Output;
 
 namespace Alexandria.Fmod
 {
-	public class LocalSound : IDisposable, ILocalAudioOutput, IHasRawAudioData
+	public class LocalSound : IDisposable, ILocalAudioOutput
 	{
 		#region Constructors
 		public LocalSound(string path)
@@ -78,6 +78,43 @@ namespace Alexandria.Fmod
 				else playbackState = PlaybackState.Stopped;
 			}
 			else playbackState = PlaybackState.None;
+		}
+
+		private IntPtr GetReadBuffer(int length)
+		{
+			//sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
+			//uint numberOfBytes = sound.FmodLength;
+			uint bytesRead;
+			
+			IntPtr buffer = IntPtr.Zero;
+
+			try
+			{
+				buffer = Marshal.AllocHGlobal(length); // AllocCoTaskMem((int)numberOfBytes);
+			}
+			catch (OutOfMemoryException ex)
+			{
+				throw new ApplicationException("There was an error reading the sound data: ran out of memory trying to allocate the buffer", ex);
+			}
+
+			bytesRead = sound.Read(buffer, (uint)length);
+			if (bytesRead == length)
+			{
+				return buffer;
+			}
+			else throw new ApplicationException("There was an error reading the sound data: could not read to end of file (unexpected eof?)");
+		}
+
+		private void CleanupReadBuffer(IntPtr buffer)
+		{
+			try
+			{
+				Marshal.FreeHGlobal(buffer); //FreeCoTaskMem(buffer);
+			}
+			catch (Exception ex)
+			{
+				throw new ApplicationException("There was an error freeing the memory used for this buffer", ex);
+			}
 		}
 		#endregion
 	
@@ -274,45 +311,17 @@ namespace Alexandria.Fmod
 			get { return (sound.NumberOfChannels == 2); }
 		}
 		
-		[CLSCompliant(false)]
-		public IntPtr ReadData(uint length)
+		public byte[] ReadData(int length)
 		{
-			//sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
-			//uint numberOfBytes = sound.FmodLength;
-			uint bytesRead;
-			if (length <= int.MaxValue)
+			IntPtr buffer = GetReadBuffer(length);
+			if (buffer != IntPtr.Zero)
 			{
-				IntPtr buffer = IntPtr.Zero;
-				
-				try
-				{
-					buffer = Marshal.AllocHGlobal((int)length); // AllocCoTaskMem((int)numberOfBytes);
-				}
-				catch (OutOfMemoryException ex)
-				{
-					throw new ApplicationException("There was an error reading the sound data: ran out of memory trying to allocate the buffer", ex);
-				}
-								
-				bytesRead = sound.Read(buffer, length);
-				if (bytesRead == length)
-				{
-					return buffer;
-				}
-				else throw new ApplicationException("There was an error reading the sound data: could not read to end of file (unexpected eof?)");
+				byte[] data = null;
+				Marshal.PtrToStructure(buffer, data);
+				CleanupReadBuffer(buffer);
+				return data;
 			}
-			else throw new ApplicationException("There was an error reading the sound data: the sound file is too large - a buffer cannot be created to hold it");
-		}
-		
-		public void CleanupData(IntPtr buffer)
-		{
-			try
-			{			
-				Marshal.FreeHGlobal(buffer); //FreeCoTaskMem(buffer);
-			}
-			catch (Exception ex)
-			{
-				throw new ApplicationException("There was an error freeing the memory used for this buffer", ex);
-			}
+			else return null;
 		}
 		#endregion
 	}

@@ -31,6 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
+	/*
 	[CLSCompliant(false)]
 	public interface IHasRawAudioData
 	{
@@ -41,4 +42,5 @@ namespace Alexandria.Media
 		IntPtr ReadData(uint length);
 		void CleanupData(IntPtr buffer);
 	}
+	*/
 }

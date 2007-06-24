@@ -34,5 +34,6 @@ namespace Alexandria.Output
 	[CLSCompliant(false)]
 	public interface ILocalAudioOutput : IAudioOutput, ISeekable, IHasDuration, IHasElapsed, IPositionable
 	{
+		byte[] ReadData(int length);
 	}
 }
