@@ -82,7 +82,6 @@
     <Compile Include="Metadata\IAudioRelease.cs" />
     <Compile Include="Metadata\IAudioTrack.cs" />
     <Compile Include="Output\IBuffered.cs" />
-    <Compile Include="Output\IHasRawAudioData.cs" />
     <Compile Include="IdentificationResult.cs" />
     <Compile Include="BaseIdentifier.cs" />
     <Compile Include="Output\IHasDuration.cs" />
