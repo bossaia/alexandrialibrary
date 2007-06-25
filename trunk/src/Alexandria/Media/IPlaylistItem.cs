@@ -31,8 +31,10 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IAudioFile : IAudio
+	public interface IPlaylistItem
 	{
+		string Name { get; }
+		ILocation Location { get;  }
+		TimeSpan Duration { get; }
 	}
 }

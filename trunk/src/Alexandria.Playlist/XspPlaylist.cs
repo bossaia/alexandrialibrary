@@ -29,11 +29,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
+using Alexandria.Media;
 
-namespace Alexandria.Media.Playlists
+namespace Alexandria.Playlists
 {
 	public class XspPlaylist : BasePlaylist
 	{
+		#region Constructors
+		public XspPlaylist(string path) : base(path)
+		{
+		}
+		#endregion
+	
 		#region Private Constants
 		private const string ATTRIB_NAME = "name";
 		private const string ATTRIB_VERSION = "version";
@@ -45,11 +52,11 @@ namespace Alexandria.Media.Playlists
 		private const string PREFIX_FILE = "file:///";
 		private const string PREFIX_HTTP = "http://";
 		#endregion
-		
+
 		#region Private Fields
 		private XmlDocument xml;
 		#endregion
-	
+
 		#region Private Methods
 		private void ReadPlaylistNode(XmlNode playlistNode)
 		{
@@ -60,7 +67,7 @@ namespace Alexandria.Media.Playlists
 				{
 					if (String.Compare(playlistAttrib.Name, ATTRIB_NAME, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 					{
-						this.Name = playlistAttrib.Value;					
+						this.Name = playlistAttrib.Value;
 					}
 					else if (String.Compare(playlistAttrib.Name, ATTRIB_VERSION, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 					{
@@ -68,7 +75,7 @@ namespace Alexandria.Media.Playlists
 					}
 				}
 			}
-			
+
 			// Read child nodes
 			foreach (XmlNode childNode in playlistNode.ChildNodes)
 			{
@@ -81,20 +88,20 @@ namespace Alexandria.Media.Playlists
 				}
 			}
 		}
-		
+
 		private void ReadTracklistNode(XmlNode tracklistNode)
 		{
 			string length = string.Empty;
-		
-			foreach(XmlNode trackNode in tracklistNode.ChildNodes)
+
+			foreach (XmlNode trackNode in tracklistNode.ChildNodes)
 			{
 				if (trackNode != null)
 				{
 					if (String.Compare(trackNode.Name, NODE_TRACK, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 					{
 						length = string.Empty;
-						
-						foreach(XmlAttribute trackAttribute in trackNode.Attributes)
+
+						foreach (XmlAttribute trackAttribute in trackNode.Attributes)
 						{
 							if (String.Compare(trackAttribute.Name, ATTRIB_LENGTH, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 							{
@@ -102,13 +109,13 @@ namespace Alexandria.Media.Playlists
 								break;
 							}
 						}
-						
+
 						ReadTrackNode(trackNode, length);
 					}
 				}
 			}
 		}
-		
+
 		private void ReadTrackNode(XmlNode trackNode, string length)
 		{
 			foreach (XmlNode locationNode in trackNode.ChildNodes)
@@ -119,7 +126,7 @@ namespace Alexandria.Media.Playlists
 					{
 						string location = locationNode.InnerText;
 						//MediaFile mediaFile = null;
-					
+
 						if (location != null)
 						{
 							/*
@@ -140,19 +147,13 @@ namespace Alexandria.Media.Playlists
 			}
 		}
 		#endregion
-	
-		#region Constructors
-		public XspPlaylist(string path) : base(path)
-		{
-		}
-		#endregion
-		
+
 		#region Protected Methods
 		public override void Load()
 		{
 			xml = new XmlDocument();
 			xml.Load(this.Path);
-			foreach(XmlNode node in xml.ChildNodes)
+			foreach (XmlNode node in xml.ChildNodes)
 			{
 				if (String.Compare(node.Name, NODE_PLAYLIST, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 				{

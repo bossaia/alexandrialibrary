@@ -31,8 +31,8 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IVideoFile : IVideo
-	{		
+	public interface IPlaylist : IMedia
+	{
+		IList<IPlaylistItem> Items { get; }
 	}
 }
