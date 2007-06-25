@@ -46,13 +46,9 @@
     <Compile Include="Catalog\ICatalogAlbum.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
-    <Compile Include="Media\IAudioFile.cs" />
-    <Compile Include="Media\IAudioStream.cs" />
-    <Compile Include="Media\IMediaContainerStream.cs" />
     <Compile Include="Media\IVideo.cs" />
-    <Compile Include="Media\IVideoStream.cs" />
     <Compile Include="Media\MediaFactory.cs" />
-    <Compile Include="Media\IMediaContainerFile.cs" />
+    <Compile Include="Media\IMediaContainer.cs" />
     <Compile Include="Metadata\BaseAlbum.cs" />
     <Compile Include="Metadata\BaseArtist.cs" />
     <Compile Include="Metadata\BaseAudioTrack.cs" />
@@ -80,10 +76,8 @@
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistence\IPersistent.cs" />
-    <Compile Include="Media\Playlists\IPlaylistItem.cs" />
-    <Compile Include="Media\Playlists\M3uPlaylist.cs" />
-    <Compile Include="Media\Playlists\BasePlaylist.cs" />
-    <Compile Include="Media\Playlists\XspPlaylist.cs" />
+    <Compile Include="Media\IPlaylistItem.cs" />
+    <Compile Include="Media\BasePlaylist.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Output\IPositionable.cs" />
@@ -107,9 +101,8 @@
     <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
     <Compile Include="IVersion.cs" />
-    <Compile Include="Media\IVideoFile.cs" />
     <Compile Include="Output\IAudible.cs" />
-    <Compile Include="Media\Playlists\IPlaylist.cs" />
+    <Compile Include="Media\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Output\IVisible.cs" />
     <Compile Include="Location.cs" />
@@ -130,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Media\IO\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
