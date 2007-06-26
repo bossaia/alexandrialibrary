@@ -46,6 +46,15 @@
     <Compile Include="Catalog\ICatalogAlbum.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
+    <Compile Include="Media\IO\AudioStream.cs" />
+    <Compile Include="Media\IO\BufferState.cs" />
+    <Compile Include="Media\IO\IAudioStream.cs" />
+    <Compile Include="Media\IO\IMediaStream.cs" />
+    <Compile Include="Media\IO\IVideoStream.cs" />
+    <Compile Include="Media\IO\MediaStream.cs" />
+    <Compile Include="Media\IO\NetworkState.cs" />
+    <Compile Include="Media\IO\PlaybackState.cs" />
+    <Compile Include="Media\IO\VideoStream.cs" />
     <Compile Include="Media\IVideo.cs" />
     <Compile Include="Media\MediaFactory.cs" />
     <Compile Include="Media\IMediaContainer.cs" />
@@ -123,9 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Media\IO\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
