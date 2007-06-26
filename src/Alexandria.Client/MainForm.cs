@@ -80,14 +80,14 @@ namespace Alexandria.Client
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
-		private MenuItem notifyExitItem;
+		private MenuItem notifyOpenItem;
 		private MenuItem notifyPlayItem;
 		private MenuItem notifyStopItem;
+		private MenuItem notifyMuteItem;
 		private MenuItem notifyPrevItem;
 		private MenuItem notifyNextItem;
-		private MenuItem notifyMuteItem;
-		private MenuItem notifyOpenItem;
-		
+		private MenuItem notifyShowItem;				
+		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
 		#endregion
 		
@@ -102,6 +102,22 @@ namespace Alexandria.Client
 			
 			if (!Directory.Exists(dbDir))
 				Directory.CreateDirectory(dbDir);
+		}
+		#endregion
+		
+		#region ShowHideForm
+		private void ShowHideForm()
+		{
+			if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
+			{
+				oldWindowState = WindowState;
+				WindowState = FormWindowState.Minimized;
+			}
+			else
+			{
+				Show();
+				WindowState = oldWindowState;
+			}
 		}
 		#endregion
 		
@@ -160,18 +176,7 @@ namespace Alexandria.Client
 			if (m != null)
 			{
 				if (m.Button == MouseButtons.Left)
-				{
-					if (WindowState == FormWindowState.Normal || WindowState == FormWindowState.Maximized)
-					{
-						oldWindowState = WindowState;
-						WindowState = FormWindowState.Minimized;
-					}
-					else
-					{
-						Show();
-						WindowState = oldWindowState;
-					}
-				}
+					ShowHideForm();
 				else if (m.Button == MouseButtons.Right)
 				{
 				}				
@@ -212,6 +217,11 @@ namespace Alexandria.Client
 			MuteButton_Click(sender, e);
 		}
 
+		private void notifyShowItem_Click(object sender, EventArgs e)
+		{
+			ShowHideForm();
+		}
+
 		private void notifyExitItem_Click(object sender, EventArgs e)
 		{
 			Application.Exit();
@@ -230,18 +240,19 @@ namespace Alexandria.Client
 			
 			Icon icon = new Icon(@"..\..\App.ico");
 			notifyIcon.Icon = icon;
-			notifyIcon.Text = "Alexandria Media Library";
+			notifyIcon.Text = "Alexandria";
 			notifyIcon.ContextMenu = notifyMenu;
 			notifyIcon.Visible = true;
 			notifyIcon.Click += new EventHandler(notifyIcon_Click);
 
-			notifyExitItem = new MenuItem("Exit", new EventHandler(notifyExitItem_Click), Shortcut.AltF4);
-			notifyPlayItem = new MenuItem("Play", new EventHandler(notifyPlayItem_Click), Shortcut.CtrlP);
+			notifyOpenItem = new MenuItem("Open Media", new EventHandler(notifyOpenItem_Click));
+			notifyPlayItem = new MenuItem("Play/Pause", new EventHandler(notifyPlayItem_Click), Shortcut.CtrlP);
 			notifyStopItem = new MenuItem("Stop", new EventHandler(notifyStopItem_Click), Shortcut.CtrlS);		
 			notifyPrevItem = new MenuItem("Prev", new EventHandler(notifyPrevItem_Click), Shortcut.CtrlL);
 			notifyNextItem = new MenuItem("Next", new EventHandler(notifyNextItem_Click), Shortcut.CtrlN);
 			notifyMuteItem = new MenuItem("Mute", new EventHandler(notifyMuteItem_Click), Shortcut.CtrlM);
-			notifyOpenItem = new MenuItem("Open", new EventHandler(notifyOpenItem_Click));
+			notifyShowItem = new MenuItem("Show/Hide", new EventHandler(notifyShowItem_Click));
+			notifyExitItem = new MenuItem("Exit", new EventHandler(notifyExitItem_Click), Shortcut.AltF4);
 			
 			notifyMenu.MenuItems.Add(notifyOpenItem);
 			notifyMenu.MenuItems.Add("-");
@@ -249,10 +260,11 @@ namespace Alexandria.Client
 			notifyMenu.MenuItems.Add(notifyStopItem);
 			notifyMenu.MenuItems.Add(notifyMuteItem);
 			notifyMenu.MenuItems.Add("-");
-			notifyMenu.MenuItems.Add(notifyPrevItem);			
+			notifyMenu.MenuItems.Add(notifyPrevItem);
 			notifyMenu.MenuItems.Add(notifyNextItem);
 			notifyMenu.MenuItems.Add("-");
-			notifyMenu.MenuItems.Add(notifyExitItem);			
+			notifyMenu.MenuItems.Add(notifyShowItem);
+			notifyMenu.MenuItems.Add(notifyExitItem);
 		}
 		#endregion
 		
