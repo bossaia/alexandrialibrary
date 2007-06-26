@@ -32,7 +32,7 @@ using System.Text;
 using System.Windows.Forms;
 using Alexandria;
 using Alexandria.Media;
-using Alexandria.Output;
+using Alexandria.Media.IO;
 using Alexandria.Metadata;
 
 namespace Alexandria.Client
@@ -55,7 +55,7 @@ namespace Alexandria.Client
 		private ListViewItem selectedItem;
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
-		private IAudioOutput audio;		
+		private IAudioStream audio;
 		//Fmod.LocalSound audio;
 		#endregion
 
@@ -184,19 +184,20 @@ namespace Alexandria.Client
 				if (selectedTrack.Location.IsLocal)
 				{
 					audio = new Fmod.LocalSound(selectedTrack.Location.Path);
-					audio.Load();
+					//audio.Load();
 				}
 				else
 				{
-					string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-					if (!System.IO.File.Exists(fileName))
+					string path = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+					if (!System.IO.File.Exists(path))
 					{
 						WebClient client = new WebClient();
-						client.DownloadFile(selectedTrack.Location.Path, fileName);
+						client.DownloadFile(selectedTrack.Location.Path, path);
 					}
 					
-					audio = new Fmod.LocalSound(fileName);
-					audio.Load();
+					//location = new Location(path);
+					audio = new Fmod.LocalSound(path);
+					//audio.Load();
 				}
 			}
 			

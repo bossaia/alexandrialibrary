@@ -70,6 +70,7 @@ namespace Alexandria.Fmod
 		private bool mute;
 		private int priority;
 		private uint position;
+		private uint positionInBytes;
 		private ReverbChannelProperties reverbProperties;
 		private ChannelGroup group;
 		private PositionAndVelocity channel3DAttributes;
@@ -299,6 +300,23 @@ namespace Alexandria.Fmod
 			{
 				position = value;
 				currentResult = NativeMethods.FMOD_Channel_SetPosition(handle, position, TimeUnits.Millisecond);
+			}
+		}
+		#endregion
+		
+		#region PositionInBytes
+		[CLSCompliant(false)]
+		public uint PositionInBytes
+		{
+			get
+			{
+				currentResult = NativeMethods.FMOD_Channel_GetPosition(handle, ref positionInBytes, TimeUnits.RawByte);
+				return positionInBytes;
+			}
+			set
+			{
+				positionInBytes = value;
+				currentResult = NativeMethods.FMOD_Channel_SetPosition(handle, positionInBytes, TimeUnits.RawByte);
 			}
 		}
 		#endregion
