@@ -184,7 +184,7 @@
     <value>4, 63</value>
   </data>
   <data name="PlaybackTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 45</value>
+    <value>221, 42</value>
   </data>
   <data name="PlaybackTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -211,7 +211,7 @@
     <value>Vertical</value>
   </data>
   <data name="VolumeTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 92</value>
+    <value>42, 92</value>
   </data>
   <data name="VolumeTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -259,13 +259,13 @@
     <value>0, 0</value>
   </metadata>
   <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Open...</value>
   </data>
   <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
@@ -1798,7 +1798,7 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Alexandria</value>
+    <value>Alexandria Media Library</value>
   </data>
   <data name="&gt;&gt;FileToolStripMenuItem.Name" xml:space="preserve">
     <value>FileToolStripMenuItem</value>
