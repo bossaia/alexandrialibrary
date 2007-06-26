@@ -1,10 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
-using Alexandria;
-using Alexandria.Media;
 using Alexandria.Media.IO;
 
 namespace Alexandria.Fmod
@@ -53,7 +49,7 @@ namespace Alexandria.Fmod
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
 		private NetworkState networkState = NetworkState.None;
-		private PlaybackState playbackState = PlaybackState.None;		
+		private PlaybackState playbackState = PlaybackState.None;
 		#endregion
 		
 		#region Private Methods
@@ -154,7 +150,6 @@ namespace Alexandria.Fmod
 
 		public bool CanTimeout
 		{
-			//TODO: implement timeout functionality at some point
 			get { return false; }
 		}
 
@@ -171,7 +166,13 @@ namespace Alexandria.Fmod
 		public TimeSpan Elapsed
 		{
 			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Milliseconds); }
-			set { sound.Channel.Position = (uint)value.TotalMilliseconds; }
+			set
+			{
+				lock(sound)
+				{
+					sound.Channel.Position = (uint)value.TotalMilliseconds;
+				}
+			}
 		}
 
 		public void Flush()
@@ -200,8 +201,11 @@ namespace Alexandria.Fmod
 
 		public void Pause()
 		{
-			sound.Pause();
-			RefreshPlaybackState();
+			lock(sound)
+			{
+				sound.Pause();
+				RefreshPlaybackState();
+			}
 		}
 
 		public float PercentBuffered
@@ -211,8 +215,11 @@ namespace Alexandria.Fmod
 
 		public void Play()
 		{
-			sound.Play();
-			RefreshPlaybackState();
+			lock(sound)
+			{
+				sound.Play();
+				RefreshPlaybackState();
+			}
 		}
 
 		public PlaybackState PlaybackState
@@ -223,7 +230,13 @@ namespace Alexandria.Fmod
 		public long Position
 		{
 			get { return (long)sound.Channel.PositionInBytes; }
-			set	{ sound.Channel.PositionInBytes = (uint)value; }
+			set
+			{
+				lock(sound)
+				{
+					sound.Channel.PositionInBytes = (uint)value;
+				}
+			}
 		}
 
 		/// <summary>
@@ -242,22 +255,25 @@ namespace Alexandria.Fmod
 			{
 				if (offset + count <= buffer.Length)
 				{
-					Stop();
-
-					IntPtr bufferHandle = IntPtr.Zero;
-					bufferHandle = Marshal.AllocHGlobal(count);				
-
-					int bytesRead = Convert.ToInt32(sound.Read(bufferHandle, (uint)count));
-								
-					if (bufferHandle != IntPtr.Zero && bytesRead > 0)
+					lock(sound)
 					{
-						byte[] data = new byte[bytesRead];
-						Marshal.PtrToStructure(bufferHandle, data);
-						Array.Copy(data, 0, buffer, offset, bytesRead);
-						Marshal.FreeHGlobal(bufferHandle);
-						return bytesRead;
+						Stop();
+
+						IntPtr bufferHandle = IntPtr.Zero;
+						bufferHandle = Marshal.AllocHGlobal(count);				
+
+						int bytesRead = Convert.ToInt32(sound.Read(bufferHandle, (uint)count));
+									
+						if (bufferHandle != IntPtr.Zero && bytesRead > 0)
+						{
+							byte[] data = new byte[bytesRead];
+							Marshal.PtrToStructure(bufferHandle, data);
+							Array.Copy(data, 0, buffer, offset, bytesRead);
+							Marshal.FreeHGlobal(bufferHandle);
+							return bytesRead;
+						}
+						else return 0;
 					}
-					else return 0;
 				}
 				else throw new ArgumentException("The sum of offset and count is larger than the buffer length.");
 			}
@@ -266,55 +282,61 @@ namespace Alexandria.Fmod
 
 		public void Resume()
 		{
-			sound.Resume();
-			RefreshPlaybackState();
+			lock(sound)
+			{
+				sound.Resume();
+				RefreshPlaybackState();
+			}
 		}
 
 		public long Seek(long offset, SeekOrigin origin)
 		{
 			uint trueOffset = (offset <= uint.MaxValue) ? (uint)offset : uint.MaxValue;
 			
-			switch (origin)
+			lock(sound)
 			{
-				case SeekOrigin.Begin:
-					if (trueOffset < 0) trueOffset = 0;
-					else if (trueOffset > Length) trueOffset = (uint)Length;
-					sound.Channel.PositionInBytes = trueOffset;
-					break;
-				case SeekOrigin.Current:
-					uint currentPosition = sound.Channel.PositionInBytes;
-					if (currentPosition + trueOffset > uint.MaxValue)
-					{
-						if (Length < uint.MaxValue)
-							sound.Channel.PositionInBytes = (uint)Length;
-						else sound.Channel.PositionInBytes = uint.MaxValue;
-					}
-					else
-					{
-						if (currentPosition + trueOffset > Length)
-							sound.Channel.PositionInBytes = (uint)Length;
-						else sound.Channel.PositionInBytes = (currentPosition + trueOffset);
-					}
-					break;
-				case SeekOrigin.End:
-					if (Length + trueOffset > uint.MaxValue)
-					{
-						if (Length < uint.MaxValue)
-							sound.Channel.PositionInBytes = (uint)Length;
-						else sound.Channel.PositionInBytes = uint.MaxValue;
-					}
-					else
-					{
-						if (Length + trueOffset > Length)
-							sound.Channel.PositionInBytes = (uint)Length;
-						else sound.Channel.PositionInBytes = Convert.ToUInt32(Length + trueOffset);
-					}
-					break;
-				default:
-					break;
+				switch (origin)
+				{
+					case SeekOrigin.Begin:
+						if (trueOffset < 0) trueOffset = 0;
+						else if (trueOffset > Length) trueOffset = (uint)Length;
+						sound.Channel.PositionInBytes = trueOffset;
+						break;
+					case SeekOrigin.Current:
+						uint currentPosition = sound.Channel.PositionInBytes;
+						if (currentPosition + trueOffset > uint.MaxValue)
+						{
+							if (Length < uint.MaxValue)
+								sound.Channel.PositionInBytes = (uint)Length;
+							else sound.Channel.PositionInBytes = uint.MaxValue;
+						}
+						else
+						{
+							if (currentPosition + trueOffset > Length)
+								sound.Channel.PositionInBytes = (uint)Length;
+							else sound.Channel.PositionInBytes = (currentPosition + trueOffset);
+						}
+						break;
+					case SeekOrigin.End:
+						if (Length + trueOffset > uint.MaxValue)
+						{
+							if (Length < uint.MaxValue)
+								sound.Channel.PositionInBytes = (uint)Length;
+							else sound.Channel.PositionInBytes = uint.MaxValue;
+						}
+						else
+						{
+							if (Length + trueOffset > Length)
+								sound.Channel.PositionInBytes = (uint)Length;
+							else sound.Channel.PositionInBytes = Convert.ToUInt32(Length + trueOffset);
+						}
+						break;
+					default:
+						break;
+				}
+				
+				return Position;
 			}
-			
-			return Position;
 		}
 
 		public void SetLength(long value)
@@ -323,8 +345,11 @@ namespace Alexandria.Fmod
 
 		public void Stop()
 		{
-			sound.Stop();
-			RefreshPlaybackState();
+			lock(sound)
+			{
+				sound.Stop();
+				RefreshPlaybackState();
+			}
 		}
 
 		public void Write(byte[] buffer, int offset, int count)
