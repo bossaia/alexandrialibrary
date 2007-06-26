@@ -84,8 +84,14 @@ namespace Alexandria.Client
 			this.AddBioButton = new System.Windows.Forms.Button();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.GenreTab = new System.Windows.Forms.TabPage();
+			this.label1 = new System.Windows.Forms.Label();
 			this.GenreListView = new System.Windows.Forms.ListView();
 			this.AddGenreButton = new System.Windows.Forms.Button();
+			this.LastFMTab = new System.Windows.Forms.TabPage();
+			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.tabPage5 = new System.Windows.Forms.TabPage();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.MidFilterQueueSplit = new System.Windows.Forms.SplitContainer();
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
@@ -97,12 +103,6 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.LastFMTab = new System.Windows.Forms.TabPage();
-			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
-			this.tabPage5 = new System.Windows.Forms.TabPage();
-			this.label1 = new System.Windows.Forms.Label();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -512,6 +512,12 @@ namespace Alexandria.Client
 			this.GenreTab.Name = "GenreTab";
 			this.GenreTab.UseVisualStyleBackColor = true;
 			// 
+			// label1
+			// 
+			this.label1.BackColor = System.Drawing.Color.LightGray;
+			resources.ApplyResources(this.label1, "label1");
+			this.label1.Name = "label1";
+			// 
 			// GenreListView
 			// 
 			resources.ApplyResources(this.GenreListView, "GenreListView");
@@ -525,6 +531,36 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.AddGenreButton, "AddGenreButton");
 			this.AddGenreButton.Name = "AddGenreButton";
 			this.AddGenreButton.UseVisualStyleBackColor = true;
+			// 
+			// LastFMTab
+			// 
+			resources.ApplyResources(this.LastFMTab, "LastFMTab");
+			this.LastFMTab.Name = "LastFMTab";
+			this.LastFMTab.UseVisualStyleBackColor = true;
+			// 
+			// tabPage3
+			// 
+			resources.ApplyResources(this.tabPage3, "tabPage3");
+			this.tabPage3.Name = "tabPage3";
+			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// tabPage4
+			// 
+			resources.ApplyResources(this.tabPage4, "tabPage4");
+			this.tabPage4.Name = "tabPage4";
+			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// tabPage5
+			// 
+			resources.ApplyResources(this.tabPage5, "tabPage5");
+			this.tabPage5.Name = "tabPage5";
+			this.tabPage5.UseVisualStyleBackColor = true;
+			// 
+			// tabPage1
+			// 
+			resources.ApplyResources(this.tabPage1, "tabPage1");
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// MidFilterQueueSplit
 			// 
@@ -558,6 +594,7 @@ namespace Alexandria.Client
             this.TrackReleaseDateColumn,
             this.TrackFileColumn,
             this.TrackFormatColumn});
+			this.QueueListView.FullRowSelect = true;
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
@@ -593,42 +630,6 @@ namespace Alexandria.Client
 			// TrackFormatColumn
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
-			// 
-			// LastFMTab
-			// 
-			resources.ApplyResources(this.LastFMTab, "LastFMTab");
-			this.LastFMTab.Name = "LastFMTab";
-			this.LastFMTab.UseVisualStyleBackColor = true;
-			// 
-			// tabPage3
-			// 
-			resources.ApplyResources(this.tabPage3, "tabPage3");
-			this.tabPage3.Name = "tabPage3";
-			this.tabPage3.UseVisualStyleBackColor = true;
-			// 
-			// tabPage4
-			// 
-			resources.ApplyResources(this.tabPage4, "tabPage4");
-			this.tabPage4.Name = "tabPage4";
-			this.tabPage4.UseVisualStyleBackColor = true;
-			// 
-			// tabPage5
-			// 
-			resources.ApplyResources(this.tabPage5, "tabPage5");
-			this.tabPage5.Name = "tabPage5";
-			this.tabPage5.UseVisualStyleBackColor = true;
-			// 
-			// label1
-			// 
-			this.label1.BackColor = System.Drawing.Color.LightGray;
-			resources.ApplyResources(this.label1, "label1");
-			this.label1.Name = "label1";
-			// 
-			// tabPage1
-			// 
-			resources.ApplyResources(this.tabPage1, "tabPage1");
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
