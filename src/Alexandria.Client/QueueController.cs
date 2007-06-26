@@ -56,7 +56,6 @@ namespace Alexandria.Client
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
 		private IAudioStream audio;
-		//Fmod.LocalSound audio;
 		#endregion
 
 		#region Private Methods
@@ -209,17 +208,24 @@ namespace Alexandria.Client
 			{
 				if (audio.PlaybackState != PlaybackState.Playing)
 				{
-					if (submittedTrack != null && selectedTrack != null)
+					if (audio.PlaybackState == PlaybackState.Paused)
 					{
-						if (submittedTrack.Album != selectedTrack.Album &&
-							submittedTrack.Artist != selectedTrack.Artist &&
-							submittedTrack.Name != selectedTrack.Name)
-						{
-							SubmitTrackToLastFM(selectedTrack);
-							submittedTrack = selectedTrack;
-						}
+						audio.Resume();
 					}
-					audio.Play();
+					else
+					{
+						if (submittedTrack != null && selectedTrack != null)
+						{
+							if (submittedTrack.Album != selectedTrack.Album &&
+								submittedTrack.Artist != selectedTrack.Artist &&
+								submittedTrack.Name != selectedTrack.Name)
+							{
+								SubmitTrackToLastFM(selectedTrack);
+								submittedTrack = selectedTrack;
+							}
+						}
+						audio.Play();
+					}
 				}
 				else audio.Pause();
 			}

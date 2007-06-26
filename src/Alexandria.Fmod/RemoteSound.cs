@@ -3,75 +3,130 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 using Alexandria.Media;
-using Alexandria.Output;
+using Alexandria.Media.IO;
 
 namespace Alexandria.Fmod
 {
-	public class RemoteSound : IStreamingAudioOutput
+	public class RemoteSound : IAudioStream
 	{
 		#region Constructors
 		public RemoteSound(string path)
 		{
 		}
 		#endregion
-	
-		#region IMedia Members
-		public IMediaFormat Format
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
 
-		public Guid Id
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public void Load()
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public ILocation Location
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
-
-		#region IAudible Members
-
+		#region IAudioStream Members
 		public bool IsMuted
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public void Mute()
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void SetVolume(float value)
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void Unmute()
-		{
-			throw new Exception("The method or operation is not implemented.");
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
 		}
 
 		public float Volume
 		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+		#endregion
+
+		#region IMediaStream Members
+		public BufferState BufferState
+		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		#endregion
+		public bool CanPlay
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
 
-		#region IPlayable Members
+		public bool CanRead
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool CanSeek
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool CanSetElapsed
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool CanSetPosition
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool CanTimeout
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool CanWrite
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public TimeSpan Duration
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public TimeSpan Elapsed
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public void Flush()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public long Length
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public NetworkState NetworkState
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public string Path
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
 
 		public void Pause()
 		{
 			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public float PercentBuffered
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
 		public void Play()
@@ -84,7 +139,34 @@ namespace Alexandria.Fmod
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
+		public long Position
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public int Read(byte[] buffer, int offset, int count)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
 		public void Resume()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public long Seek(long offset, System.IO.SeekOrigin origin)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void SetLength(long value)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
@@ -94,47 +176,10 @@ namespace Alexandria.Fmod
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		#endregion
-
-		#region IStreaming Members
-
-		public StreamingState StreamingState
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
-
-		#region IBuffered Members
-
-		public BufferState BufferState
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public float PercentBuffered
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
-
-		#region IHasDuration Members
-
-		public TimeSpan Duration
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
-
-		#region IHasElapsed Members
-
-		public TimeSpan GetElapsed()
+		public void Write(byte[] buffer, int offset, int count)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
-
 		#endregion
 	}
 }

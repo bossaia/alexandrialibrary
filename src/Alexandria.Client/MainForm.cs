@@ -32,12 +32,12 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
-//using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using Alexandria;
 using Alexandria.Client.Properties;
 using Alexandria.LastFM;
+using Alexandria.Media.IO;
 using Alexandria.Metadata;
 
 namespace Alexandria.Client
@@ -124,6 +124,9 @@ namespace Alexandria.Client
 		protected override void OnLoad(EventArgs e)
 		{			
 			base.OnLoad(e);
+
+			ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });
+			QueueListView.Items.Add(item);
 		}
 		#endregion
 		

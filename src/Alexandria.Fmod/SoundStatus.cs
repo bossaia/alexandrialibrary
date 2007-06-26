@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
-using Alexandria.Output;
+using Alexandria.Media.IO;
 
 namespace Alexandria.Fmod
 {
@@ -21,9 +21,8 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Private Fields
-		private StreamingState streamingState = StreamingState.None;
+		private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
-		private SeekDirection seekDirection = SeekDirection.None;
 		private bool isSeeking = false;
 		private float bufferLevel;
 		private bool allowsLoad;
@@ -35,22 +34,16 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region Public Properties
-		public StreamingState StreamingState
+		public NetworkState NetworkState
 		{
-			get { return streamingState; }
-			set { streamingState = value; }
+			get { return networkState; }
+			set { networkState = value; }
 		}
 
 		public PlaybackState PlaybackState
 		{
 			get { return playbackState; }
 			set { playbackState = value; }
-		}
-
-		public SeekDirection SeekDirection
-		{
-			get { return seekDirection; }
-			set { seekDirection = value; }
 		}
 
 		public bool IsSeeking
