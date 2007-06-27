@@ -28,17 +28,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Metadata;
 
-namespace Alexandria.Media.IO
+namespace Alexandria.Catalog
 {
-	/// <summary>
-	/// The playback state of a media stream
-	/// </summary>
-	public enum PlaybackState
+	public interface ICatalogArtist
 	{
-		None = 0,
-		Playing,
-		Paused,
-		Stopped
+		ICatalog Catalog { get; }
+		IArtist Artist { get; }
 	}
 }

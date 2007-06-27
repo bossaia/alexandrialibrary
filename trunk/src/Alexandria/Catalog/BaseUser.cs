@@ -28,29 +28,70 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Persistence;
 
-namespace Alexandria.Media.IO
+namespace Alexandria.Catalog
 {
-	public abstract class AudioStream : MediaStream, IAudioStream
+	[Class("User", LoadType.Constructor, "Id")]
+	public class BaseUser : IUser, IPersistent
 	{
 		#region Constructors
-		public AudioStream(string path) : base(path)
+		[Constructor]
+		public BaseUser(Guid id, string name, string password)
 		{
-			this.CanPlay = true;
+			this.id = id;
+			this.name = name;
+			this.password = password;
 		}
 		#endregion
 	
-		#region IAudioStream Members
-		public abstract float Volume
+		#region Private Fields
+		private Guid id;
+		private string name;
+		private string password;
+		private IDataStore dataStore;
+		#endregion
+	
+		#region IUser Members
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=2)]
+		public string Name
 		{
-			get;
-			set;
+			get { return name; }
 		}
 
-		public abstract bool IsMuted
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=3)]
+		public string Password
 		{
-			get;
-			set;
+			get { return password; }
+		}
+
+		public bool Authenticate(string name, string password)
+		{
+			return (this.name == name && this.password == password);
+		}
+		#endregion
+
+		#region IPersistent Members
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1)]
+		public Guid Id
+		{
+			get { return id; }
+		}
+
+		public IDataStore DataStore
+		{
+			get { return dataStore; }
+			set { dataStore = value; }
+		}
+
+		public void Save()
+		{
+			dataStore.Save(this);
+		}
+
+		public void Delete()
+		{
+			dataStore.Delete(this);
 		}
 		#endregion
 	}

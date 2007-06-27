@@ -28,17 +28,62 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Persistence;
 
-namespace Alexandria.Media.IO
+namespace Alexandria.Catalog
 {
-	/// <summary>
-	/// The playback state of a media stream
-	/// </summary>
-	public enum PlaybackState
+	public class BaseUserCatalog : IUserCatalog, IPersistent
 	{
-		None = 0,
-		Playing,
-		Paused,
-		Stopped
+		#region Constructors
+		public BaseUserCatalog(Guid id, IUser user, ICatalog catalog)
+		{
+			this.id = id;
+			this.user = user;
+			this.catalog = catalog;
+		}
+		#endregion
+		
+		#region Private Fields
+		Guid id;
+		IUser user;
+		ICatalog catalog;
+		IDataStore dataStore;
+		#endregion
+	
+		#region IUserCatalog Members
+		public IUser User
+		{
+			get { return user; }
+		}
+
+		public ICatalog Catalog
+		{
+			get { return catalog; }
+		}
+		#endregion
+	
+		#region IPersistent Members
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1)]
+		public Guid  Id
+		{
+			get { return id; }
+		}
+
+		public IDataStore DataStore
+		{
+			get { return dataStore; }
+			set { dataStore = value; }
+		}
+
+		public void Save()
+		{
+ 			dataStore.Save(this);
+		}
+
+		public void Delete()
+		{
+ 			dataStore.Delete(this);
+		}
+		#endregion
 	}
 }

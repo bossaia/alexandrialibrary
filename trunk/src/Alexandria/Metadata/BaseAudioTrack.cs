@@ -36,7 +36,7 @@ namespace Alexandria.Metadata
 	[Class("AudioTrack", LoadType.Constructor, "Id")]
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
-		#region Constructors		
+		#region Constructors
 		public BaseAudioTrack(string id, string location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Location(location), name, album, artist, duration, releaseDate, trackNumber, format)
 		{
 		}
