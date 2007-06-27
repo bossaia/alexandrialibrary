@@ -42,6 +42,10 @@ namespace Alexandria.Persistence
 		/// </summary>
 		Basic,
 		/// <summary>
+		/// This field and others all map to a child record
+		/// </summary>
+		ManyToOneChild,
+		/// <summary>
 		/// This field maps to a child record
 		/// </summary>
 		OneToOneChild,

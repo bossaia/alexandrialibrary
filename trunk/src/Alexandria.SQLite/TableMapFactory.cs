@@ -83,6 +83,102 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region AddColumn
+		private int AddColumn(int count, PropertyInfo property, PropertyAttribute attribute, IDictionary<int, DataColumn> columns, IDictionary<int, object> data, IList<Dictionary<int, object>> dataCollections, IMappingStrategy strategy)
+		{			
+			int ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : count;
+			string fieldName = (string.IsNullOrEmpty(attribute.FieldName)) ? property.Name : attribute.FieldName;
+			Type fieldType = (attribute.ChildType == null) ? property.PropertyType : attribute.ChildType;
+			DataColumn column = new DataColumn(fieldName, fieldType);
+			column.Unique = attribute.IsUnique;
+			column.AllowDBNull = !attribute.IsRequired;
+			column.DefaultValue = attribute.DefaultValue;
+			if (attribute.MaxLength > 0)
+				column.MaxLength = attribute.MaxLength;
+
+			columns.Add(ordinal, column);
+			count++;
+
+			if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+			{
+				if (strategy.Type == MappingType.Singleton)
+				{
+					data[ordinal] = property.GetValue(strategy.Record, null);
+				}
+				else if (strategy.Type == MappingType.Collection)
+				{
+					for (int i = 0; i < strategy.Records.Count; i++)
+						dataCollections[i].Add(ordinal, property.GetValue(strategy.Records[i], null));
+				}
+			}
+			
+			return count;
+		}
+		#endregion
+		
+		#region GetChildMap
+		private TableMap GetChildMap(PropertyInfo property, PropertyAttribute attribute, IMappingStrategy strategy)
+		{
+			IMappingStrategy childStrategy = strategy;
+
+			if (attribute.FieldType == FieldType.OneToOneChild || attribute.FieldType == FieldType.ManyToOneChild)
+			{				
+				if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
+				{
+					if (strategy.Type == MappingType.Singleton)
+					{
+						IPersistent childRecord = (IPersistent)property.GetValue(strategy.Record, null);
+						childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecord);
+					}
+					else if (strategy.Type == MappingType.Collection)
+					{
+						IList<IPersistent> records = new List<IPersistent>();
+						foreach (IPersistent child in strategy.Records)
+						{
+							IPersistent childRecord = (IPersistent)property.GetValue(child, null);
+							records.Add(childRecord);
+						}
+						childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
+					}
+				}
+				return CreateTableMap(childStrategy, property.PropertyType, attribute.CascadeSave, attribute.CascadeDelete);
+			}
+			else if (attribute.FieldType == FieldType.OneToManyChildren)
+			{				
+				if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
+				{
+					if (strategy.Type == MappingType.Singleton)
+					{
+						IList childObjects = null;
+						List<IPersistent> records = new List<IPersistent>();
+						childObjects = (IList)property.GetValue(strategy.Record, null);
+						foreach (IPersistent persistant in childObjects)
+							records.Add(persistant);
+						childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
+					}
+					else if (strategy.Type == MappingType.Collection)
+					{
+						IList<IPersistent> records = new List<IPersistent>();
+						foreach (IPersistent childRecord in strategy.Records)
+						{
+							IList childObjects = null;
+							childObjects = (IList)property.GetValue(childRecord, null);
+							foreach (IPersistent persistant in childObjects)
+								records.Add(persistant);
+						}
+						childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
+					}
+				}
+				return CreateTableMap(childStrategy, attribute.ChildType, attribute.CascadeSave, attribute.CascadeDelete);
+			}
+			else throw new ApplicationException("Could not get a child map for this property: invalid field type");
+		}
+		#endregion
+		
+		#endregion
+		
+		#region 
+		
 		#endregion
 		
 		#region Internal Methods
@@ -136,96 +232,26 @@ namespace Alexandria.SQLite
 						}
 					}
 					
-					int i = 1; int ordinal;
-
+					int i = 1;
 					foreach (PropertyInfo property in type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance))
 					{
 						foreach (PropertyAttribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), false))
 						{
 							if (attribute.FieldType == FieldType.Basic)
 							{
-								ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : i;
-								DataColumn column = new DataColumn(property.Name, property.PropertyType);
-								column.Unique = attribute.IsUnique;
-								column.AllowDBNull = !attribute.IsRequired;
-								column.DefaultValue = attribute.DefaultValue;
-								if (attribute.MaxLength > 0)
-									column.MaxLength = attribute.MaxLength;
-
-								columns.Add(ordinal, column);
-								i++;
-								
-								if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
-								{
-									if (strategy.Type == MappingType.Singleton)
-									{
-										data[ordinal] = property.GetValue(strategy.Record, null);
-									}
-									else if (strategy.Type == MappingType.Collection)
-									{
-										for(int k=0;k<strategy.Records.Count;k++)
-											dataCollections[k].Add(ordinal, property.GetValue(strategy.Records[k], null));
-									}
-								}
+								i = AddColumn(i, property, attribute, columns, data, dataCollections, strategy);
 							}
 							else
-							{
+							{							
 								PropertyMap propertyMap = new PropertyMap(property, attribute);
 								TableMap childMap = null;
+
+								if (attribute.FieldType == FieldType.ManyToOneChild)
+								{
+									i = AddColumn(i, property, attribute, columns, data, dataCollections, strategy);
+								}
 								
-								if (attribute.FieldType == FieldType.OneToOneChild)
-								{
-									IMappingStrategy childStrategy = strategy;
-									if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
-									{
-										if (strategy.Type == MappingType.Singleton)
-										{
-											IPersistent childRecord = (IPersistent)property.GetValue(strategy.Record, null);
-											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, childRecord);
-										}
-										else if (strategy.Type == MappingType.Collection)
-										{
-											IList<IPersistent> records = new List<IPersistent>();
-											foreach(IPersistent child in strategy.Records)
-											{
-												IPersistent childRecord = (IPersistent)property.GetValue(child, null);
-												records.Add(childRecord);
-											}
-											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
-										}
-									}
-									childMap = CreateTableMap(childStrategy, property.PropertyType, attribute.CascadeSave, attribute.CascadeDelete);
-								}
-								else if (attribute.FieldType == FieldType.OneToManyChildren && attribute.ChildType != null)
-								{
-									IMappingStrategy childStrategy = strategy;
-									if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
-									{
-										if (strategy.Type == MappingType.Singleton)
-										{
-											IList childObjects = null;
-											List<IPersistent> records = new List<IPersistent>();
-											childObjects = (IList)property.GetValue(strategy.Record, null);
-											foreach(IPersistent persistant in childObjects)
-												records.Add(persistant);
-											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
-										}
-										else if (strategy.Type == MappingType.Collection)
-										{
-											IList<IPersistent> records = new List<IPersistent>();
-											foreach (IPersistent childRecord in strategy.Records)
-											{
-												IList childObjects = null;
-												childObjects = (IList)property.GetValue(childRecord, null);
-												foreach(IPersistent persistant in childObjects)
-													records.Add(persistant);
-											}
-											childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
-										}
-									}
-									childMap = CreateTableMap(childStrategy, attribute.ChildType, attribute.CascadeSave, attribute.CascadeDelete);
-								}
-								else throw new ApplicationException("Could not map this property: invalid field type");
+								childMap = GetChildMap(property, attribute, strategy);
 
 								map.Children.Add(propertyMap, childMap);
 							}
