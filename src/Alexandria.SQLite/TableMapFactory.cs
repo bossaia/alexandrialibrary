@@ -87,9 +87,9 @@ namespace Alexandria.SQLite
 		private int AddColumn(int count, PropertyInfo property, PropertyAttribute attribute, IDictionary<int, DataColumn> columns, IDictionary<int, object> data, IList<Dictionary<int, object>> dataCollections, IMappingStrategy strategy)
 		{			
 			int ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : count;
-			string fieldName = (string.IsNullOrEmpty(attribute.FieldName)) ? property.Name : attribute.FieldName;
-			Type fieldType = (attribute.ChildType == null) ? property.PropertyType : attribute.ChildType;
-			DataColumn column = new DataColumn(fieldName, fieldType);
+			string fieldName = (!string.IsNullOrEmpty(attribute.FieldName)) ? attribute.FieldName : property.Name;
+			Type storedType = (attribute.StoredType != null) ? attribute.StoredType : property.PropertyType;
+			DataColumn column = new DataColumn(fieldName, storedType);
 			column.Unique = attribute.IsUnique;
 			column.AllowDBNull = !attribute.IsRequired;
 			column.DefaultValue = attribute.DefaultValue;
@@ -176,11 +176,7 @@ namespace Alexandria.SQLite
 		#endregion
 		
 		#endregion
-		
-		#region 
-		
-		#endregion
-		
+				
 		#region Internal Methods
 		internal TableMap CreateTableMap(SQLiteDataProvider provider, MappingFunction function, Type type)
 		{

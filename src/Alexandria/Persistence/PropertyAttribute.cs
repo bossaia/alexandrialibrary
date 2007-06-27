@@ -60,6 +60,7 @@ namespace Alexandria.Persistence
 		private FieldType fieldType = FieldType.None;
 		private LoadType loadType = LoadType.None;
 		private string fieldName;
+		private Type storedType;
 		private string foreignKeyName;
 		private Type childType;
 		private int ordinal;
@@ -89,6 +90,12 @@ namespace Alexandria.Persistence
 		{
 			get { return fieldName; }
 			set { fieldName = value; }
+		}
+		
+		public Type StoredType
+		{
+			get { return storedType; }
+			set { storedType = value; }
 		}
 		
 		public string ForeignKeyName

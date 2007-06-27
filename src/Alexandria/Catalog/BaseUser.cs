@@ -49,6 +49,7 @@ namespace Alexandria.Catalog
 		private Guid id;
 		private string name;
 		private string password;
+		private List<IUserCatalog> userCatalogs = new List<IUserCatalog>();
 		private IDataStore dataStore;
 		#endregion
 	
@@ -72,7 +73,7 @@ namespace Alexandria.Catalog
 		#endregion
 
 		#region IPersistent Members
-		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1)]
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
@@ -92,6 +93,14 @@ namespace Alexandria.Catalog
 		public void Delete()
 		{
 			dataStore.Delete(this);
+		}
+		#endregion
+		
+		#region Public Properties
+		[Property(FieldType.OneToManyChildren, LoadType.Property, "UserID", typeof(BaseUserCatalog), CascadeSave=true, CascadeDelete=true)]
+		public IList<IUserCatalog> UserCatalogs
+		{
+			get { return userCatalogs; }
 		}
 		#endregion
 	}
