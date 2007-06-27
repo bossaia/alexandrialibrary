@@ -29,16 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Media.IO
+namespace Alexandria.Catalog
 {
-	/// <summary>
-	/// The playback state of a media stream
-	/// </summary>
-	public enum PlaybackState
+	public interface IUserCatalog
 	{
-		None = 0,
-		Playing,
-		Paused,
-		Stopped
+		IUser User { get; }
+		ICatalog Catalog { get; }
 	}
 }

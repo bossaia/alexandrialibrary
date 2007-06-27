@@ -30,23 +30,28 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria.Media;
 using Alexandria.Metadata;
-//using Alexandria.Playlists;
+using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
-{
-	public class BaseCatalog : ICatalog
+{	
+	[Class("Catalog", LoadType.Constructor, "Id")]
+	public class BaseCatalog : ICatalog, IPersistent
 	{
 		#region Constructors
-		public BaseCatalog(IUser user)
+		[Constructor]
+		public BaseCatalog(Guid id, IUser user)
 		{
+			this.id = id;
 			this.user = user;
 		}
 		#endregion
 	
 		#region Private Fields
+		private Guid id;
 		private IUser user;
-		private List<IAlbum> albums = new List<IAlbum>();
-		//private List<IPlaylist> playlists = new List<IPlaylist>();
+		private List<ICatalogAlbum> albums = new List<ICatalogAlbum>();
+		private List<ICatalogArtist> artists = new List<ICatalogArtist>();
+		private List<ICatalogAudioTrack> tracks = new List<ICatalogAudioTrack>();
 		#endregion
 
 		#region ICatalog Members
@@ -55,15 +60,51 @@ namespace Alexandria.Catalog
 			get { return user; }
 		}
 
-		public IList<Alexandria.Metadata.IAlbum> Albums
+		public IList<ICatalogAlbum> Albums
 		{
 			get { return albums; }
 		}
 
-		//public IList<Alexandria.Playlists.IPlaylist> Playlists
-		//{
-			//get { return playlists; }
-		//}
+		public IList<ICatalogArtist> Artists
+		{
+			get { return artists; }
+		}
+
+		public IList<ICatalogAudioTrack> Tracks
+		{
+			get { return tracks; }
+		}
+		#endregion
+
+		#region IPersistent Members
+
+		public Guid Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IDataStore DataStore
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public void Save()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Delete()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
 		#endregion
 	}
 }

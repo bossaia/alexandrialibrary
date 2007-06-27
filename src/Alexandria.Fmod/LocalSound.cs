@@ -48,7 +48,7 @@ namespace Alexandria.Fmod
 		private Sound sound;
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
-		private NetworkState networkState = NetworkState.None;
+		//private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
 		#endregion
 		
@@ -189,14 +189,14 @@ namespace Alexandria.Fmod
 			}
 		}
 
-		public string Path
-		{
-			get { return path; }
-		}
-
 		public NetworkState NetworkState
 		{
 			get { return NetworkState.None; }
+		}
+
+		public string Path
+		{
+			get { return path; }
 		}
 
 		public void Pause()
