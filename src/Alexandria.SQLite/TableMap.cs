@@ -394,14 +394,19 @@ namespace Alexandria.SQLite
 			{
 				PropertyMap childPropertyMap = childPair.Key;
 				TableMap childTableMap = childPair.Value;
-				//PropertyInfo property = childPair.Key.Property;
-				//PersistancePropertyAttribute attribute = childPair.Key.Attribute;
-
-				if (childPropertyMap.Attribute.FieldType == FieldType.OneToOneChild)
+				
+				if (childPropertyMap.Attribute.FieldType == FieldType.ManyToOneChild)
+				{
+					string childId = row[childPropertyMap.Attribute.FieldName].ToString();
+					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, new Guid(childId));
+					IPersistent child = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
+					childPropertyMap.Property.SetValue(record, child, null);
+				}
+				else if (childPropertyMap.Attribute.FieldType == FieldType.OneToOneChild)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
-					IPersistent item = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
-					childPropertyMap.Property.SetValue(record, item, null);
+					IPersistent child = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
+					childPropertyMap.Property.SetValue(record, child, null);
 				}
 				else if (childPair.Key.Attribute.FieldType == FieldType.OneToManyChildren)
 				{
