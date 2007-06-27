@@ -32,9 +32,11 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {
+	[Class("UserCatalog", LoadType.Constructor, "Id")]
 	public class BaseUserCatalog : IUserCatalog, IPersistent
 	{
 		#region Constructors
+		[Constructor]
 		public BaseUserCatalog(Guid id, IUser user, ICatalog catalog)
 		{
 			this.id = id;
@@ -63,7 +65,7 @@ namespace Alexandria.Catalog
 		#endregion
 	
 		#region IPersistent Members
-		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1)]
+		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid  Id
 		{
 			get { return id; }

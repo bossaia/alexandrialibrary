@@ -121,6 +121,13 @@ namespace Alexandria.Client
 		}
 		#endregion
 		
+		#region TestDB
+		private void TestDB()
+		{
+			
+		}
+		#endregion
+		
 		#endregion
 
 		#region Private Event Methods
@@ -235,6 +242,7 @@ namespace Alexandria.Client
 		{			
 			base.OnLoad(e);
 
+			TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });
 			//QueueListView.Items.Add(item);
 			
