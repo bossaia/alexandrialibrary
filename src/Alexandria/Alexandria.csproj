@@ -68,6 +68,7 @@
     <Compile Include="Metadata\BaseAudioTrack.cs" />
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
+    <Compile Include="Persistence\ClassMap.cs" />
     <Compile Include="Persistence\IDataStore.cs" />
     <Compile Include="Persistence\ClassAttribute.cs" />
     <Compile Include="Persistence\ConstructorAttribute.cs" />
@@ -81,9 +82,13 @@
     <Compile Include="BaseIdentifier.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
+    <Compile Include="Persistence\IPersistenceBroker.cs" />
+    <Compile Include="Persistence\IPersistenceMechanism.cs" />
     <Compile Include="Persistence\IPersistent.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />
+    <Compile Include="Persistence\IPersistentRecord.cs" />
+    <Compile Include="Persistence\PersistenceBroker.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
@@ -107,6 +112,7 @@
     <Compile Include="Persistence\LoadType.cs" />
     <Compile Include="Persistence\PropertyAttribute.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
+    <Compile Include="Plugins\PluginRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Metadata\Tagging\ITag.cs" />
     <Compile Include="Metadata\Tagging\ITagable.cs" />

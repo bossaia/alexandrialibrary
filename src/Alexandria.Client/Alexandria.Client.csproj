@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -47,6 +53,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="About.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -84,9 +94,17 @@
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj">
+      <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
+      <Name>Alexandria.CompactDiscTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
       <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
       <Name>Alexandria.Fmod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.FreeDB\Alexandria.FreeDB.csproj">
+      <Project>{26BF108C-8B39-4C9E-A545-4AC01AA3C0E6}</Project>
+      <Name>Alexandria.FreeDB</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
       <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
@@ -96,17 +114,33 @@
       <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
       <Name>Alexandria.LastFM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MediaInfo\Alexandria.MediaInfo.csproj">
+      <Project>{61BC9FAF-CF0E-4BE9-BE14-F5A443FAA8AD}</Project>
+      <Name>Alexandria.MediaInfo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
       <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>
       <Name>Alexandria.Mp3Tunes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MusicBrainz\Alexandria.MusicBrainz.csproj">
+      <Project>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</Project>
+      <Name>Alexandria.MusicBrainz</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.MusicDns\Alexandria.MusicDns.csproj">
       <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
       <Name>Alexandria.MusicDns</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Playlist\Alexandria.Playlist.csproj">
+      <Project>{5373D021-353C-47FE-9BB0-7F6E22F06594}</Project>
+      <Name>Alexandria.Playlist</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
       <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>
       <Name>Alexandria.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.TagLib\Alexandria.TagLib.csproj">
+      <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>
+      <Name>Alexandria.TagLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
