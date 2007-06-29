@@ -32,13 +32,29 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+
 using Alexandria;
-using Alexandria.Client.Properties;
-using Alexandria.LastFM;
+using Alexandria.Catalog;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
+using Alexandria.Plugins;
+
+using Alexandria.Client.Properties;
+using Alexandria.Fmod;
+using Alexandria.FreeDB;
+using Alexandria.Imdb;
+using Alexandria.LastFM;
+using Alexandria.MediaInfo;
+using Alexandria.Mp3Tunes;
+using Alexandria.MusicBrainz;
+using Alexandria.MusicDns;
+using Alexandria.Playlists;
+using Alexandria.SQLite;
+using Alexandria.TagLib;
 
 namespace Alexandria.Client
 {
@@ -73,6 +89,7 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Private Fields
+		private PluginRepository repository;
 		private QueueController controller;
 		private string dbDir;
 		private string dbFile;
@@ -89,6 +106,35 @@ namespace Alexandria.Client
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
+		#endregion
+		
+		#region Private Constant Fields
+		
+		#region license
+		private const string license = @"Copyright (c) 2007 Dan Poage
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the ""Software""), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.";
+		#endregion
+		
 		#endregion
 		
 		#region Private Methods
@@ -233,6 +279,20 @@ namespace Alexandria.Client
 		{
 			Application.Exit();
 		}
+
+		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			IList<string> plugins = new List<string>();
+			foreach(Assembly assembly in repository.Assemblies)
+			{
+				AssemblyName name = assembly.GetName();				
+				plugins.Add(string.Format("{0} ({1})", name.Name, name.Version));
+			}
+						
+			About about = new About(version, license, plugins);
+			about.ShowDialog(this);
+		}
 		#endregion
 		
 		#region Protected Overrides
@@ -242,7 +302,9 @@ namespace Alexandria.Client
 		{			
 			base.OnLoad(e);
 
-			TestDB();
+			repository = new PluginRepository("Alexandria.*.dll");
+			
+			//TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });
 			//QueueListView.Items.Add(item);
 			

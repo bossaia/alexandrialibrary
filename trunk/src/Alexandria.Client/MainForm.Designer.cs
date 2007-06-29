@@ -103,6 +103,9 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
+			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -171,7 +174,9 @@ namespace Alexandria.Client
 			// FileMenuStrip
 			// 
 			this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileToolStripMenuItem});
+            this.FileToolStripMenuItem,
+            this.ToolsToolStripMenuItem,
+            this.HelpToolStripMenuItem});
 			resources.ApplyResources(this.FileMenuStrip, "FileMenuStrip");
 			this.FileMenuStrip.Name = "FileMenuStrip";
 			// 
@@ -631,6 +636,24 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
+			// ToolsToolStripMenuItem
+			// 
+			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
+			// 
+			// HelpToolStripMenuItem
+			// 
+			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem});
+			this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+			resources.ApplyResources(this.HelpToolStripMenuItem, "HelpToolStripMenuItem");
+			// 
+			// AboutToolStripMenuItem
+			// 
+			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+			resources.ApplyResources(this.AboutToolStripMenuItem, "AboutToolStripMenuItem");
+			this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -750,6 +773,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.TabPage tabPage4;
 		private System.Windows.Forms.TabPage tabPage5;
 		private System.Windows.Forms.TabPage tabPage1;
+		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
 	}
 }
 
