@@ -10,12 +10,12 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Concentric.Alexandria.Collector.MusicBrainz")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("MusicBrainz Search Plugin")]
+[assembly: AssemblyDescription("Audio Metadata")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Concentric.Alexandria.Collector.MusicBrainz")]
-[assembly: AssemblyCopyright("Copyright ©  2006")]
+[assembly: AssemblyProduct("Alexandria.MusicBrainz")]
+[assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

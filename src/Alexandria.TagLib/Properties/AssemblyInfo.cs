@@ -10,12 +10,12 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alexandria Tag Library")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("TagLib# Tagging Plugin")]
+[assembly: AssemblyDescription("Tagging")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("AlexandriaOrg.Alexandria.TagLib")]
-[assembly: AssemblyCopyright("Copyright ©  2006")]
+[assembly: AssemblyProduct("Alexandria.TagLib")]
+[assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

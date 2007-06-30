@@ -38,7 +38,7 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Alexandria Core Library")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
 [assembly: AssemblyProduct("Alexandria")]

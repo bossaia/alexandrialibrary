@@ -10,12 +10,12 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AlexandriaOrg.Alexandria.Db4o")]
-[assembly: AssemblyDescription("Alexandria Db4o Object Database Plugin")]
+[assembly: AssemblyTitle("db4o Object Database Plugin")]
+[assembly: AssemblyDescription("Storage")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("AlexandriaOrg.Alexandria.Db4o")]
-[assembly: AssemblyCopyright("Copyright ©  2006")]
+[assembly: AssemblyProduct("Alexandria.Db4o")]
+[assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

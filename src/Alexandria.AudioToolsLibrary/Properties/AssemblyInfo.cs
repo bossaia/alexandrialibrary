@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alexandria.AudioToolsLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Audio Tools Library Plugin")]
+[assembly: AssemblyDescription("Format Metadata")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Alexandria.AudioToolsLibrary")]

@@ -282,15 +282,39 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			IList<string> plugins = new List<string>();
+			string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+		
+			const string status = "Enabled";
+			IList<PluginInfo> plugins = new List<PluginInfo>();
 			foreach(Assembly assembly in repository.Assemblies)
 			{
-				AssemblyName name = assembly.GetName();				
-				plugins.Add(string.Format("{0} ({1})", name.Name, name.Version));
+				string name = "Unidentified Plugin";
+				string type = "Unknown";
+				string version = "1.0.0.0";
+				
+				foreach(Attribute attrib in assembly.GetCustomAttributes(false))
+				{
+					if (attrib is AssemblyDescriptionAttribute)
+					{
+						AssemblyDescriptionAttribute desc = attrib as AssemblyDescriptionAttribute;
+						type = desc.Description;
+					}
+					else if (attrib is AssemblyTitleAttribute)
+					{
+						AssemblyTitleAttribute title = attrib as AssemblyTitleAttribute;
+						name = title.Title;
+					}
+					else if (attrib is AssemblyVersionAttribute)
+					{
+						AssemblyVersionAttribute ver = attrib as AssemblyVersionAttribute;
+						version = ver.Version;
+					}
+				}
+				
+				plugins.Add(new PluginInfo(name, type, version, status));
 			}
 						
-			About about = new About(version, license, plugins);
+			About about = new About(appVersion, license, plugins);
 			about.ShowDialog(this);
 		}
 		#endregion
