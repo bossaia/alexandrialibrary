@@ -63,7 +63,7 @@ namespace Alexandria
 			get { return type; }
 		}
 		
-		public IVersion Version
+		public Version Version
 		{
 			get { return version; }
 		}

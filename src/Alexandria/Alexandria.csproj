@@ -95,7 +95,6 @@
     <Compile Include="Metadata\IGenre.cs" />
     <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
-    <Compile Include="ILocation.cs" />
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Media\IMediaFormat.cs" />
@@ -104,10 +103,8 @@
     <Compile Include="Metadata\IStyle.cs" />
     <Compile Include="Media\IText.cs" />
     <Compile Include="IUser.cs" />
-    <Compile Include="IVersion.cs" />
     <Compile Include="Media\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
-    <Compile Include="Location.cs" />
     <Compile Include="Persistence\FieldType.cs" />
     <Compile Include="Persistence\LoadType.cs" />
     <Compile Include="Persistence\PropertyAttribute.cs" />
@@ -118,7 +115,6 @@
     <Compile Include="Metadata\Tagging\ITagable.cs" />
     <Compile Include="Metadata\Tagging\ITagFactory.cs" />
     <Compile Include="Metadata\Tagging\ITagFormat.cs" />
-    <Compile Include="Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />

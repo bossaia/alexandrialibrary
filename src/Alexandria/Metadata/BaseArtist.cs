@@ -35,11 +35,11 @@ namespace Alexandria.Metadata
 	public abstract class BaseArtist : BaseMetadata, IArtist
 	{
 		#region Constructors
-		public BaseArtist(string alexandriaId, string path, string name) : this(new Guid(alexandriaId), new Location(path), name)
+		public BaseArtist(string id, string path, string name) : this(new Guid(id), new Uri(path), name)
 		{
 		}
-		
-		public BaseArtist(Guid alexandriaId, ILocation location, string name) : base(alexandriaId, location, name)
+
+		public BaseArtist(Guid id, Uri path, string name) : base(id, path, name)
 		{
 		}
 		#endregion

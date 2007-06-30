@@ -38,11 +38,11 @@ namespace Alexandria.Media
 		bool CanCreateForEach<T>() where T: IList<IMedia>;
 		bool CanCreateFor<T>(IMediaFormat format) where T: IMedia;
 		bool CanCreateForEach<T>(IMediaFormat format) where T: IList<IMedia>;
-		IMedia CreateMedia(ILocation location);
-		IMedia CreateMedia(ILocation location, IMediaFormat format);
-		T CreateMediaFor<T>(ILocation location) where T: IMedia;
-		IMedia CreateMediaForEach<T>(ILocation location) where T : IList<IMedia>;
-		T CreateMediaFor<T>(ILocation location, IMediaFormat format) where T : IMedia;
-		IMedia CreateMediaForEach<T>(ILocation location, IMediaFormat format) where T: IList<IMedia>;
+		IMedia CreateMedia(Uri path);
+		IMedia CreateMedia(Uri path, IMediaFormat format);
+		T CreateMediaFor<T>(Uri path) where T : IMedia;
+		IMedia CreateMediaForEach<T>(Uri path) where T : IList<IMedia>;
+		T CreateMediaFor<T>(Uri path, IMediaFormat format) where T : IMedia;
+		IMedia CreateMediaForEach<T>(Uri path, IMediaFormat format) where T : IList<IMedia>;
 	}
 }

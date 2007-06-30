@@ -45,7 +45,7 @@ namespace Alexandria.Media.Playlists
 		#region Public Methods
 		public override void Load()
 		{
-			FileInfo playlistInfo = new FileInfo(Path);
+			FileInfo playlistInfo = new FileInfo(Path.ToString());
 			StreamReader reader = playlistInfo.OpenText();
 			while (!reader.EndOfStream)
 			{

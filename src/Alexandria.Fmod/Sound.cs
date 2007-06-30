@@ -32,18 +32,18 @@ namespace Alexandria.Fmod
 			}
 		}
 		
-		internal Sound(SoundSystem soundSystem, ILocation location)
-		{
-			this.soundSystem = soundSystem;
+		//internal Sound(SoundSystem soundSystem, Uri path)
+		//{
+			//this.soundSystem = soundSystem;
 			//if (disc != null)
 			//{
 				//mediaFile = new MediaFile(disc.Uri.AbsolutePath, true);
 				//if (this.mediaFile.IsLocal)
-				status = LocalSoundNotLoaded.Example;
+				//status = LocalSoundNotLoaded.Example;
 				//else
 				//status = RemoteSoundNotReady.Example;
 			//}
-		}
+		//}
 		
 		/// <summary>
 		/// SubSound constructor
@@ -138,7 +138,7 @@ namespace Alexandria.Fmod
 		private IntPtr userData = IntPtr.Zero;
 		private Uri uri;
 		private bool disposed;
-		SoundStatus status;
+		//SoundStatus status;
 		private TimeSpan duration = TimeSpan.Zero;
 		#endregion
 		

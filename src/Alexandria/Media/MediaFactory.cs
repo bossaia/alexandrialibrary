@@ -58,7 +58,7 @@ namespace Alexandria.Media
 		#endregion
 		
 		#region Public Methods
-		public IMedia LookupMedia(ILocation location)
+		public IMedia LookupMedia(Uri path)
 		{
 			return null;
 		}		

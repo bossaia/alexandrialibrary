@@ -39,8 +39,6 @@ namespace Alexandria.Client
 			this.PluginListView = new System.Windows.Forms.ListView();
 			this.columnPlugin = new System.Windows.Forms.ColumnHeader();
 			this.columnVersion = new System.Windows.Forms.ColumnHeader();
-			this.columnStatus = new System.Windows.Forms.ColumnHeader();
-			this.columnType = new System.Windows.Forms.ColumnHeader();
 			this.groupBox1.SuspendLayout();
 			this.LicenseGroupBox.SuspendLayout();
 			this.SuspendLayout();
@@ -115,9 +113,7 @@ namespace Alexandria.Client
 			// 
 			this.PluginListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnPlugin,
-            this.columnType,
-            this.columnVersion,
-            this.columnStatus});
+            this.columnVersion});
 			this.PluginListView.FullRowSelect = true;
 			this.PluginListView.Location = new System.Drawing.Point(14, 20);
 			this.PluginListView.MultiSelect = false;
@@ -136,16 +132,6 @@ namespace Alexandria.Client
 			// 
 			this.columnVersion.Text = "Version";
 			this.columnVersion.Width = 56;
-			// 
-			// columnStatus
-			// 
-			this.columnStatus.Text = "Status";
-			this.columnStatus.Width = 61;
-			// 
-			// columnType
-			// 
-			this.columnType.Text = "Type";
-			this.columnType.Width = 95;
 			// 
 			// About
 			// 
@@ -184,8 +170,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.TextBox LicenseTextBox;
 		private System.Windows.Forms.ListView PluginListView;
 		private System.Windows.Forms.ColumnHeader columnPlugin;
-		private System.Windows.Forms.ColumnHeader columnType;
 		private System.Windows.Forms.ColumnHeader columnVersion;
-		private System.Windows.Forms.ColumnHeader columnStatus;
 	}
 }

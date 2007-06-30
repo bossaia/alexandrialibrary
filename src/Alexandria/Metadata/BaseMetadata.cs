@@ -36,21 +36,21 @@ namespace Alexandria.Metadata
 	public abstract class BaseMetadata : IMetadata, IPersistent
 	{
 		#region Constructors
-		public BaseMetadata(string location, string name)
+		public BaseMetadata(string path, string name)
 		{
 			this.id = Guid.NewGuid();
-			this.location = new Location(location);
+			this.path = new Uri(path);
 			this.name = name;
 		}
 		
-		public BaseMetadata(string id, string location, string name) : this(new Guid(id), new Location(location), name)
+		public BaseMetadata(string id, string path, string name) : this(new Guid(id), new Uri(path), name)
 		{
 		}
 		
-		public BaseMetadata(Guid id, ILocation location, string name)
+		public BaseMetadata(Guid id, Uri path, string name)
 		{
 			this.id = id;
-			this.location = location;
+			this.path = path;
 			this.name = name;
 		}
 		#endregion
@@ -58,7 +58,7 @@ namespace Alexandria.Metadata
 		#region Private Fields
 		private Guid id = default(Guid);		
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
-		private ILocation location;
+		private Uri path;
 		private string name;
 
 		private IDataStore dataStore;
@@ -78,9 +78,9 @@ namespace Alexandria.Metadata
 		}
 
 		[Property(FieldType.Basic, Ordinal=2)]
-		public ILocation Location
+		public Uri Path
 		{
-			get { return location; }
+			get { return path; }
 		}
 
 		[Property(FieldType.Basic, IsRequired=true, Ordinal=3)]

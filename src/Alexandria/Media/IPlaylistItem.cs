@@ -34,7 +34,7 @@ namespace Alexandria.Media
 	public interface IPlaylistItem
 	{
 		string Name { get; }
-		ILocation Location { get;  }
+		Uri Path { get;  }
 		TimeSpan Duration { get; }
 	}
 }

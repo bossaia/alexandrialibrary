@@ -14,7 +14,7 @@ namespace Alexandria.CompactDisc
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 		
-		public ILocation Location
+		public Uri Path
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

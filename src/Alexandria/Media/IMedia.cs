@@ -34,7 +34,7 @@ namespace Alexandria.Media
 	public interface IMedia
 	{
 		Guid Id { get; }
-		ILocation Location { get; }
+		Uri Path { get; }
 		IMediaFormat Format { get; }
 		//byte[] ReadData(int length);
 		//void Load();

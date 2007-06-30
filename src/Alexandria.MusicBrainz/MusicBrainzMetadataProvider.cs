@@ -203,18 +203,18 @@ namespace Alexandria.MusicBrainz
 		#region Private Static Methods
 		
 		#region LookupCd
-		private static IAlbum ReadCompactDisc(ILocation location)
+		private static IAlbum ReadCompactDisc(Uri path)
 		{
 			IAlbum album = null;
 			
-			if (location != null)
+			if (path != null)
 			{							
 				try
 				{
-					Debug.WriteLine("Drive Name:" + location.Path);
+					Debug.WriteLine("Drive Name:" + path.ToString());
 				
 					//"/dev/hdc" or D:
-					string driveName = location.Path;
+					string driveName = path.ToString();
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);
@@ -299,9 +299,9 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region IAlbumFactory Members
-		public IAlbum GetAlbum(ILocation location)
+		public IAlbum GetAlbum(Uri path)
 		{
-			return ReadCompactDisc(location);
+			return ReadCompactDisc(path);
 		}
 
 		public IAlbum GetAlbum(ISearch albumSearch)
@@ -325,7 +325,7 @@ namespace Alexandria.MusicBrainz
 			get { throw new Exception("The method or operation is not implemented."); }
 		}
 
-		public ILocation Location
+		public Uri Path
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

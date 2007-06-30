@@ -301,7 +301,7 @@ namespace Alexandria.TagLib
 			get { return id; }
 		}
 
-		public ILocation Location
+		public Uri Path
 		{
 			get { return null; }
 		}

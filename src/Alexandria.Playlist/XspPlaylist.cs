@@ -152,7 +152,7 @@ namespace Alexandria.Playlists
 		public override void Load()
 		{
 			xml = new XmlDocument();
-			xml.Load(this.Path);
+			xml.Load(this.Path.ToString());
 			foreach (XmlNode node in xml.ChildNodes)
 			{
 				if (String.Compare(node.Name, NODE_PLAYLIST, true, System.Globalization.CultureInfo.InvariantCulture) == 0)

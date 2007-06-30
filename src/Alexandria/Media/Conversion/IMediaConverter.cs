@@ -33,6 +33,6 @@ namespace Alexandria.Media.Conversion
 {
 	interface IMediaConverter
 	{
-		void Convert(ILocation source, IConversionStrategy strategy);
+		void Convert(Uri sourcePath, IConversionStrategy strategy);
 	}
 }
