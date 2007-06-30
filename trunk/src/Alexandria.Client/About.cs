@@ -11,15 +11,16 @@ namespace Alexandria.Client
 	public partial class About : Form
 	{
 		#region Constructors
-		public About(string version, string license, IList<string> plugins)
+		public About(string version, string license, IList<PluginInfo> plugins)
 		{
 			InitializeComponent();
 			
 			this.VersionTextBox.Text = version;
 			this.LicenseTextBox.Text = license;
-			foreach(string plugin in plugins)
+			foreach(PluginInfo plugin in plugins)
 			{
-				PluginListbox.Items.Add(plugin);
+				ListViewItem item = new ListViewItem(new string[]{plugin.Name, plugin.Type, plugin.Version, plugin.Status});
+				PluginListView.Items.Add(item);
 			}
 		}
 		#endregion		

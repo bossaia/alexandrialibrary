@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Alexandria.AsciiGenerator")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ASCII Image Generator Plugin")]
+[assembly: AssemblyDescription("Media")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Alexandria.AsciiGenerator")]
