@@ -34,11 +34,11 @@ namespace Alexandria.Metadata.Tagging
 {
 	public interface ITagFactory : IPlugin
 	{
-		ITag CreateTag(ILocation location);
-		ITag CreateTag(ILocation location, ITagFormat format);
-		T CreateTag<T>(ILocation location) where T : ITag;
-		T CreateTag<T>(ILocation location, ITagFormat format) where T: ITag;
-		IList<ITag> CreateTags(ILocation location);
-		IList<ITag> CreateTags(ILocation location, ITagFormat format);
+		ITag CreateTag(Uri path);
+		ITag CreateTag(Uri path, ITagFormat format);
+		T CreateTag<T>(Uri path) where T : ITag;
+		T CreateTag<T>(Uri path, ITagFormat format) where T : ITag;
+		IList<ITag> CreateTags(Uri path);
+		IList<ITag> CreateTags(Uri path, ITagFormat format);
 	}
 }

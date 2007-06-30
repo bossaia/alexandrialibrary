@@ -35,11 +35,11 @@ namespace Alexandria.Metadata
 	public abstract class BaseAlbum : BaseMetadata, IAlbum
 	{
 		#region Constructors
-		public BaseAlbum(string alexandriaId, string path, string name, string artist, DateTime releaseDate) : this(new Guid(alexandriaId), new Location(path), name, artist, releaseDate)
+		public BaseAlbum(string id, string path, string name, string artist, DateTime releaseDate) : this(new Guid(id), new Uri(path), name, artist, releaseDate)
 		{
 		}
 		
-		public BaseAlbum(Guid alexandriaId, ILocation location, string name, string artist, DateTime releaseDate) : base(alexandriaId, location, name)
+		public BaseAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate) : base(id, path, name)
 		{
 			this.artist = artist;
 			this.releaseDate = releaseDate;

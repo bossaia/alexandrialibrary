@@ -34,9 +34,9 @@ namespace Alexandria.Metadata
 {
 	public interface IMetadataFactory : IPlugin
 	{
-		IMetadata CreateMetadata(ILocation location);
+		IMetadata CreateMetadata(Uri path);
 		IMetadata CreateMetadata(IIdentifier id);
-		T CreateMetadata<T>(ILocation location) where T : IMetadata;		
+		T CreateMetadata<T>(Uri path) where T : IMetadata;		
 		T CreateMetadata<T>(IIdentifier id) where T: IMetadata;
 	}
 }

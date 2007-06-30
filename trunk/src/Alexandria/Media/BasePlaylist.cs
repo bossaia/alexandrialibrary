@@ -61,12 +61,6 @@ namespace Alexandria.Media
 		#endregion
 		
 		#region Public Properties
-		public string Path
-		{
-			get { return path; }
-			protected set { path = value; }
-		}
-		
 		public string Name
 		{
 			get {return name;}
@@ -92,7 +86,7 @@ namespace Alexandria.Media
 			get { return id; }
 		}
 
-		public ILocation Location
+		public Uri Path
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

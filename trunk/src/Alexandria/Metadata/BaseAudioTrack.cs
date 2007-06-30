@@ -37,12 +37,12 @@ namespace Alexandria.Metadata
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
-		public BaseAudioTrack(string id, string location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Location(location), name, album, artist, duration, releaseDate, trackNumber, format)
+		public BaseAudioTrack(string id, string path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Uri(path), name, album, artist, duration, releaseDate, trackNumber, format)
 		{
 		}
 
 		[Constructor]
-		public BaseAudioTrack(Guid id, ILocation location, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, location, name)
+		public BaseAudioTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name)
 		{
 			this.album = album;
 			this.artist = artist;

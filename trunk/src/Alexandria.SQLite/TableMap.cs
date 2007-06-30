@@ -62,13 +62,13 @@ namespace Alexandria.SQLite
 					return TimeSpan.Zero;
 				else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
 			}
-			else if (type == typeof(Version) || type == typeof(IVersion))
+			else if (type == typeof(Version))
 			{
 				return new Version(value.ToString());
 			}
-			else if (type == typeof(Location) || type == typeof(ILocation))
+			else if (type == typeof(Uri))
 			{
-				return new Location(value.ToString());
+				return new Uri(value.ToString());
 			}
 			
 			return value;
@@ -105,11 +105,11 @@ namespace Alexandria.SQLite
 				TimeSpan span = (TimeSpan)value;
 				return span.TotalMilliseconds.ToString();
 			}
-			else if (type == typeof(Version) || type == typeof(IVersion))
+			else if (type == typeof(Version))
 			{
 				return string.Format("'{0}'", value);
 			}
-			else if (type == typeof(Location) || type == typeof(ILocation))
+			else if (type == typeof(Uri))
 			{
 				return string.Format("'{0}'", value);
 			}

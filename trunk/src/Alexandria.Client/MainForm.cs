@@ -284,8 +284,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 		
-			const string status = "Enabled";
-			IList<PluginInfo> plugins = new List<PluginInfo>();
+			//const string status = "Enabled";
+			IList<IPlugin> plugins = new List<IPlugin>();
 			foreach(Assembly assembly in repository.Assemblies)
 			{
 				string name = "Unidentified Plugin";
@@ -311,7 +311,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 					}
 				}
 				
-				plugins.Add(new PluginInfo(name, type, version, status));
+				//plugins.Add(new PluginInfo(name, type, version, status));
 			}
 						
 			About about = new About(appVersion, license, plugins);

@@ -27,14 +27,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace Alexandria.Plugins
 {
 	public interface IPlugin
 	{
 		string Name { get; }
-		ILocation Location { get; }
-		IVersion Version { get; }
+		string Description { get; }
+		Uri Path { get; }
+		Version Version { get; }
 	}
 }

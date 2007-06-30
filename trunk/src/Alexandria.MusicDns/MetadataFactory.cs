@@ -80,12 +80,12 @@ namespace Alexandria.MusicDns
 		#endregion
 		
 		#region InitializeTrackInfo
-		private TrackInfo InitializeTrackInfo(ILocation location)
+		private TrackInfo InitializeTrackInfo(Uri path)
 		{
 			int srate = 0;
 			int channels = 0;
 
-			FileStream fs = File.Open(location.Path, FileMode.Open, FileAccess.Read, FileShare.Read);
+			FileStream fs = File.Open(path.ToString(), FileMode.Open, FileAccess.Read, FileShare.Read);
 			if (fs == null)
 				return null;
 
@@ -213,7 +213,7 @@ namespace Alexandria.MusicDns
 			string fingerprint = NativeMethods.ofa_create_print(samples, 0, (int)bytes / 2, srate, stereo);
 			
 			TrackInfo info = new TrackInfo();
-			info.FileName = location.Path;
+			info.FileName = path.ToString();
 			info.Fingerprint = fingerprint;
 			info.LengthInMS = ms;
 			info.Format = waveFormat;			
@@ -335,9 +335,9 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Public Methods
-		public IAudioTrack CreateAudioTrack(ILocation location)
+		public IAudioTrack CreateAudioTrack(Uri path)
 		{
-			TrackInfo info = InitializeTrackInfo(location);
+			TrackInfo info = InitializeTrackInfo(path);
 			FillTrackInfo(info, true, true);			
 			return info;
 		}

@@ -33,7 +33,7 @@ namespace Alexandria.Media.Conversion
 {
 	public interface IConversionStrategy
 	{
-		ILocation Location { get; }
+		Uri Path { get; }
 		IMediaFormat Format { get; }
 		//TODO: figure out the best way to handle the conversion callbacks
 	}

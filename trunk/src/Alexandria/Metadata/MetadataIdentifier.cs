@@ -79,7 +79,7 @@ namespace Alexandria.Metadata
 		}
 
 		[Property(FieldType.Basic, Ordinal=5)]
-		public IVersion Version
+		public Version Version
 		{
 			get { return version; }
 		}

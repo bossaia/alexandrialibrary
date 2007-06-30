@@ -34,6 +34,6 @@ namespace Alexandria.Metadata.Tagging
 	public interface ITagFormat
 	{
 		string Name { get; }
-		IVersion Version { get; }
+		Version Version { get; }
 	}
 }

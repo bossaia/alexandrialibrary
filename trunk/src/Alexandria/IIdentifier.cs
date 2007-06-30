@@ -35,7 +35,7 @@ namespace Alexandria
 	{
 		string Value { get; }
 		string Type { get; }
-		IVersion Version { get; }
+		Version Version { get; }
 		IdentificationResult CompareTo(IIdentifier other);
 	}
 }

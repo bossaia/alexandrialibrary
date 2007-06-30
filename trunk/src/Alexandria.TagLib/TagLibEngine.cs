@@ -24,7 +24,7 @@ namespace Alexandria.TagLib
 					
 			if (resource != null)
 			{
-				tagFile = File.Create(resource.Location.Path);
+				tagFile = File.Create(resource.Path.ToString());
 				if (tagFile != null)
 				{
 					System.Diagnostics.Debug.WriteLine("tagFile has data");

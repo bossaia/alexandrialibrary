@@ -8,7 +8,7 @@ namespace Alexandria.Fmod
 	internal class CompactDiscSound : Sound
 	{
 		#region Constructors
-		internal CompactDiscSound(SoundSystem soundSystem, ILocation location) : base(soundSystem, location)
+		internal CompactDiscSound(SoundSystem soundSystem, Uri path) : base(soundSystem, path)
 		{
 		}
 		#endregion

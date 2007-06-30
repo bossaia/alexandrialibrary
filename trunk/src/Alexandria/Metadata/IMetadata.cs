@@ -35,7 +35,7 @@ namespace Alexandria.Metadata
 	{
 		Guid Id { get; }
 		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
-		ILocation Location { get; }
+		Uri Path { get; }
 		string Name { get; }
 		
 	}

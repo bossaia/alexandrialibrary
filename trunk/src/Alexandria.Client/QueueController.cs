@@ -68,7 +68,7 @@ namespace Alexandria.Client
 			data[3] = track.Album;
 			data[4] = string.Format("{0}:{1:00}", track.Duration.Minutes, track.Duration.Seconds);
 			data[5] = string.Format("{0:d}", track.ReleaseDate);
-			data[6] = track.Location.Path;
+			data[6] = track.Path.ToString();
 			data[7] = track.Format;
 
 			ListViewItem item = new ListViewItem(data);
@@ -123,10 +123,10 @@ namespace Alexandria.Client
 			}
 		}
 
-		private IIdentifier LookupPuid(ILocation location)
+		private IIdentifier LookupPuid(Uri path)
 		{			
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
-			IAudioTrack track = factory.CreateAudioTrack(location);
+			IAudioTrack track = factory.CreateAudioTrack(path);
 			foreach(IMetadataIdentifier metadataId in track.MetadataIdentifiers)
 			{
 				if (metadataId.Type.Contains("MusicDnsId"))
@@ -175,27 +175,27 @@ namespace Alexandria.Client
 				}				
 				TimeSpan duration = new TimeSpan(hours, minutes, seconds);
 				DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
-				ILocation location = new Location(selectedItem.SubItems[6].Text);
+				Uri path = new Uri(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
-				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), location, name, album, artist, duration, releaseDate, trackNumber, format);
+				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);
 				selectedTrack.MetadataIdentifiers.Add(id);
 				
-				if (selectedTrack.Location.IsLocal)
+				if (selectedTrack.Path.IsFile)
 				{
-					audio = new Fmod.LocalSound(selectedTrack.Location.Path);
+					audio = new Fmod.LocalSound(selectedTrack.Path.ToString());
 					//audio.Load();
 				}
 				else
 				{
-					string path = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-					if (!System.IO.File.Exists(path))
+					string downloadPath = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+					if (!System.IO.File.Exists(downloadPath))
 					{
 						WebClient client = new WebClient();
-						client.DownloadFile(selectedTrack.Location.Path, path);
+						client.DownloadFile(selectedTrack.Path, downloadPath);
 					}
 					
 					//location = new Location(path);
-					audio = new Fmod.LocalSound(path);
+					audio = new Fmod.LocalSound(path.ToString());
 					//audio.Load();
 				}
 			}

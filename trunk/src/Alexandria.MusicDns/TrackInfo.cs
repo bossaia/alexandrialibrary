@@ -61,7 +61,7 @@ namespace Alexandria.MusicDns
 		
 		private Guid id = Guid.NewGuid();
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
-		ILocation location = null;
+		Uri path = null;
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
 	
@@ -73,8 +73,8 @@ namespace Alexandria.MusicDns
 			{
 				fileName = value;
 				
-				if (!string.IsNullOrEmpty(fileName) && location == null)
-					location = new Location(fileName);
+				if (!string.IsNullOrEmpty(fileName) && path == null)
+					path = new Uri(fileName);
 			}
 		}
 		
@@ -240,9 +240,9 @@ namespace Alexandria.MusicDns
 			get { return metadataIdentifiers; }
 		}
 
-		public ILocation Location
+		public Uri Path
 		{
-			get { return location; }
+			get { return path; }
 		}
 
 		public string Name
