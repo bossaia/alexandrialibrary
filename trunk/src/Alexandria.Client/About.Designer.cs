@@ -28,17 +28,19 @@ namespace Alexandria.Client
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About));
 			this.OKButton = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.PluginListView = new System.Windows.Forms.ListView();
+			this.columnPlugin = new System.Windows.Forms.ColumnHeader();
+			this.columnVersion = new System.Windows.Forms.ColumnHeader();
 			this.VersionLabel = new System.Windows.Forms.Label();
 			this.FreeSoftwareLabel = new System.Windows.Forms.Label();
 			this.VersionTextBox = new System.Windows.Forms.TextBox();
 			this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
 			this.LicenseTextBox = new System.Windows.Forms.TextBox();
-			this.PluginListView = new System.Windows.Forms.ListView();
-			this.columnPlugin = new System.Windows.Forms.ColumnHeader();
-			this.columnVersion = new System.Windows.Forms.ColumnHeader();
+			this.ImageList = new System.Windows.Forms.ImageList(this.components);
 			this.groupBox1.SuspendLayout();
 			this.LicenseGroupBox.SuspendLayout();
 			this.SuspendLayout();
@@ -62,6 +64,33 @@ namespace Alexandria.Client
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Installed Plugins";
+			// 
+			// PluginListView
+			// 
+			this.PluginListView.AutoArrange = false;
+			this.PluginListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnPlugin,
+            this.columnVersion});
+			this.PluginListView.FullRowSelect = true;
+			this.PluginListView.Location = new System.Drawing.Point(14, 20);
+			this.PluginListView.MultiSelect = false;
+			this.PluginListView.Name = "PluginListView";
+			this.PluginListView.ShowItemToolTips = true;
+			this.PluginListView.Size = new System.Drawing.Size(427, 149);
+			this.PluginListView.SmallImageList = this.ImageList;
+			this.PluginListView.TabIndex = 1;
+			this.PluginListView.UseCompatibleStateImageBehavior = false;
+			this.PluginListView.View = System.Windows.Forms.View.Details;
+			// 
+			// columnPlugin
+			// 
+			this.columnPlugin.Text = "Plugin";
+			this.columnPlugin.Width = 336;
+			// 
+			// columnVersion
+			// 
+			this.columnVersion.Text = "Version";
+			this.columnVersion.Width = 70;
 			// 
 			// VersionLabel
 			// 
@@ -109,29 +138,11 @@ namespace Alexandria.Client
 			this.LicenseTextBox.Size = new System.Drawing.Size(427, 139);
 			this.LicenseTextBox.TabIndex = 0;
 			// 
-			// PluginListView
+			// ImageList
 			// 
-			this.PluginListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnPlugin,
-            this.columnVersion});
-			this.PluginListView.FullRowSelect = true;
-			this.PluginListView.Location = new System.Drawing.Point(14, 20);
-			this.PluginListView.MultiSelect = false;
-			this.PluginListView.Name = "PluginListView";
-			this.PluginListView.Size = new System.Drawing.Size(429, 149);
-			this.PluginListView.TabIndex = 1;
-			this.PluginListView.UseCompatibleStateImageBehavior = false;
-			this.PluginListView.View = System.Windows.Forms.View.Details;
-			// 
-			// columnPlugin
-			// 
-			this.columnPlugin.Text = "Plugin";
-			this.columnPlugin.Width = 190;
-			// 
-			// columnVersion
-			// 
-			this.columnVersion.Text = "Version";
-			this.columnVersion.Width = 56;
+			this.ImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+			this.ImageList.ImageSize = new System.Drawing.Size(16, 16);
+			this.ImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// About
 			// 
@@ -171,5 +182,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ListView PluginListView;
 		private System.Windows.Forms.ColumnHeader columnPlugin;
 		private System.Windows.Forms.ColumnHeader columnVersion;
+		private System.Windows.Forms.ImageList ImageList;
 	}
 }

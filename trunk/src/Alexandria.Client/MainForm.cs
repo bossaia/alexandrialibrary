@@ -283,35 +283,38 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-		
-			//const string status = "Enabled";
-			IList<IPlugin> plugins = new List<IPlugin>();
+			
+			IList<PluginInfo> plugins = new List<PluginInfo>();
 			foreach(Assembly assembly in repository.Assemblies)
 			{
-				string name = "Unidentified Plugin";
-				string type = "Unknown";
-				string version = "1.0.0.0";
+				string title = "Unknown Plugin";
+				string description = "This plugin could not be identified";
+				Version version = new Version(1, 0, 0, 0);
+				string imageFileName = string.Format("{0}.bmp", assembly.Location);
+				if (!System.IO.File.Exists(imageFileName))
+					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.Client.exe.png");
+				Uri imagePath = new Uri(imageFileName);
 				
-				foreach(Attribute attrib in assembly.GetCustomAttributes(false))
+				foreach(Attribute attribute in assembly.GetCustomAttributes(false))
 				{
-					if (attrib is AssemblyDescriptionAttribute)
+					if (attribute is AssemblyTitleAttribute)
 					{
-						AssemblyDescriptionAttribute desc = attrib as AssemblyDescriptionAttribute;
-						type = desc.Description;
+						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
+						title = titleAttribute.Title;
 					}
-					else if (attrib is AssemblyTitleAttribute)
+					else if (attribute is AssemblyDescriptionAttribute)
 					{
-						AssemblyTitleAttribute title = attrib as AssemblyTitleAttribute;
-						name = title.Title;
+						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
+						description = descriptionAttribute.Description;
 					}
-					else if (attrib is AssemblyVersionAttribute)
+					else if (attribute is AssemblyVersionAttribute)
 					{
-						AssemblyVersionAttribute ver = attrib as AssemblyVersionAttribute;
-						version = ver.Version;
+						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
+						version = new Version(versionAttribute.Version);
 					}
 				}
 				
-				//plugins.Add(new PluginInfo(name, type, version, status));
+				plugins.Add(new PluginInfo(title, description, version, imagePath));
 			}
 						
 			About about = new About(appVersion, license, plugins);

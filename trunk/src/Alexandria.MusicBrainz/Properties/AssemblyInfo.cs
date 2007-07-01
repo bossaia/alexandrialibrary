@@ -11,10 +11,10 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MusicBrainz Search Plugin")]
-[assembly: AssemblyDescription("Audio Metadata")]
+[assembly: AssemblyDescription("Search MusicBrainz.org for metadata about music")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alexandria.MusicBrainz")]
+[assembly: AssemblyCompany("The Alexandria Foundation")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

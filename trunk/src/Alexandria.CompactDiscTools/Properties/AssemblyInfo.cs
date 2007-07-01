@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Alexandria Compact Disc Plugin")]
-[assembly: AssemblyDescription("Media")]
+[assembly: AssemblyDescription("Tools for working with compact discs, including ripping")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alexandria.CompactDiscTools")]
+[assembly: AssemblyCompany("The Alexandria Foundation")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

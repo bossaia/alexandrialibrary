@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MediaInfo Plugin")]
-[assembly: AssemblyDescription("Format Metadata")]
+[assembly: AssemblyDescription("Read format metadata and tags for your media files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alexandria.MediaInfo")]
+[assembly: AssemblyCompany("The Alexandria Foundation")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

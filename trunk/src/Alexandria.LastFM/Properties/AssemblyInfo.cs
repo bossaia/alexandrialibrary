@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Last.fm Client Plugin")]
-[assembly: AssemblyDescription("Audio Metadata")]
+[assembly: AssemblyDescription("Submit the tracks that you play to your Last.fm account")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alexandria.LastFM")]
+[assembly: AssemblyCompany("The Alexandria Foundation")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -33,17 +33,43 @@ namespace Alexandria.Client
 {
 	public struct PluginInfo
 	{
-		public PluginInfo(string name, string type, string version, string status)
+		#region Constructors
+		public PluginInfo(string title, string description, Version version, Uri imagePath)
 		{
-			Name = name;
-			Type = type;
-			Version = version;
-			Status = status;
+			this.title = title;
+			this.description = description;
+			this.version = version;
+			this.imagePath = imagePath;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string title;
+		private string description;
+		private Version version;
+		private Uri imagePath;
+		#endregion
+		
+		#region Public Properties
+		public string Title
+		{
+			get { return title; }
 		}
 		
-		public string Name;
-		public string Type;
-		public string Version;
-		public string Status;
+		public string Description
+		{
+			get { return description; }
+		}
+		
+		public Version Version
+		{
+			get { return version; }
+		}
+		
+		public Uri ImagePath
+		{
+			get { return imagePath; }
+		}
+		#endregion
 	}
 }

@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Audio Tools Library Plugin")]
-[assembly: AssemblyDescription("Format Metadata")]
+[assembly: AssemblyDescription("Read format metadata and tags for your audio files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Alexandria.AudioToolsLibrary")]
-[assembly: AssemblyCopyright("Copyright ©  2007")]
+[assembly: AssemblyCompany("The Alexandria Foundation")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

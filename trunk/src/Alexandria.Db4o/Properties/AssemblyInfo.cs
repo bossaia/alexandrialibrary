@@ -11,10 +11,10 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("db4o Object Database Plugin")]
-[assembly: AssemblyDescription("Storage")]
+[assembly: AssemblyDescription("Store catalog and media metadata information in a db4o object database")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("Alexandria.Db4o")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
