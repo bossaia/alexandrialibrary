@@ -11,10 +11,10 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TagLib# Tagging Plugin")]
-[assembly: AssemblyDescription("Tagging")]
+[assembly: AssemblyDescription("Read an write tags for digital media files (ID3, vorbiscomment, ape, asf)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("Alexandria.TagLib")]
+[assembly: AssemblyProduct("The Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

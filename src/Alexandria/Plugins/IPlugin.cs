@@ -37,5 +37,6 @@ namespace Alexandria.Plugins
 		string Description { get; }
 		Uri Path { get; }
 		Version Version { get; }
+		Assembly Assembly { get; }
 	}
 }

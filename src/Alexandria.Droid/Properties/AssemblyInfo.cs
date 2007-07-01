@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DROID File Identification Plugin")]
-[assembly: AssemblyDescription("Metadata")]
+[assembly: AssemblyDescription("Identify the format of your digital media files")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Alexandria.Droid")]

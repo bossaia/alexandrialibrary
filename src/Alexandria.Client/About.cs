@@ -12,18 +12,21 @@ namespace Alexandria.Client
 	public partial class About : Form
 	{
 		#region Constructors
-		public About(string version, string license, IList<IPlugin> plugins)
+		public About(string version, string license, IList<PluginInfo> plugins)
 		{
 			InitializeComponent();
 			
 			this.VersionTextBox.Text = version;
 			this.LicenseTextBox.Text = license;
-			foreach(IPlugin plugin in plugins)
+			int i = 0;
+			foreach(PluginInfo plugin in plugins)
 			{
-				ListViewItem item = new ListViewItem(new string[]{plugin.Name, plugin.Version.ToString()});
-				//item.i
-				//item.ToolTipText = plugin.Description;
+				Image image = Image.FromFile(plugin.ImagePath.LocalPath);
+				ImageList.Images.Add(image);
+				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
+				item.ToolTipText = plugin.Description;
 				PluginListView.Items.Add(item);
+				i++;
 			}
 		}
 		#endregion		
