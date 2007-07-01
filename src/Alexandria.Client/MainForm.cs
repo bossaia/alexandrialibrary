@@ -329,7 +329,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{			
 			base.OnLoad(e);
 
-			repository = new PluginRepository("Alexandria.*.dll");
+			repository = new PluginRepository("Alexandria*.dll");
 			
 			//TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });

@@ -11,7 +11,6 @@ namespace Alexandria.Plugins
 		public PluginRepository(string searchPattern)
 		{
 			LoadAssmblies(searchPattern);
-			int x = assemblies.Count;
 		}
 		#endregion
 
