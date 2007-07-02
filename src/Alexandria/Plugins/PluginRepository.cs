@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Alexandria.Persistence;
 
 namespace Alexandria.Plugins
 {
@@ -16,7 +17,8 @@ namespace Alexandria.Plugins
 
 		#region Private Fields
 		private IList<Assembly> assemblies = new List<Assembly>();
-		private IDictionary<string, ConstructorInfo> constructors = new Dictionary<string,ConstructorInfo>();
+		private IDictionary<string, ConstructorMap> constructorsByRecordType = new Dictionary<string, ConstructorMap>();
+		private IDictionary<Type, ConstructorMap> constructorsByType = new Dictionary<Type, ConstructorMap>();
 		#endregion
 		
 		#region Private Methods
@@ -29,6 +31,24 @@ namespace Alexandria.Plugins
 				{
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
 					assemblies.Add(assembly);
+					
+					foreach(Type type in assembly.GetTypes())
+					{
+						Type persistent = type.GetInterface("IPersistent");
+						if (persistent != null)
+						{
+							foreach(ConstructorInfo constructor in type.GetConstructors())
+							{
+								foreach (Attribute attribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+								{
+									ConstructorAttribute constructorAttribute = (ConstructorAttribute)attribute;
+									ConstructorMap map = new ConstructorMap(constructorAttribute, constructor);
+									constructorsByRecordType.Add(constructorAttribute.RecordType, map);
+									constructorsByType.Add(type, map);
+								}
+							}
+						}
+					}
 				}
 				catch (FileLoadException)
 				{
@@ -44,10 +64,18 @@ namespace Alexandria.Plugins
 			get { return assemblies; }
 		}
 		
-		public IDictionary<string, ConstructorInfo> Constructors
+		public IDictionary<string, ConstructorMap> ConstructorsByRecordType
 		{
-			get { return constructors; }
+			get { return constructorsByRecordType; }
 		}
+		
+		public IDictionary<Type, ConstructorMap> ConstructorsByType
+		{
+			get { return constructorsByType; }
+		}
+		#endregion
+		
+		#region Public Methods
 		#endregion
 	}
 }

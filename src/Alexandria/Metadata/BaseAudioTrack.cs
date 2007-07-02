@@ -41,7 +41,7 @@ namespace Alexandria.Metadata
 		{
 		}
 
-		[Constructor("AudioTrack")]
+		[Constructor("AudioTrack", "B7DE2E27-C3D5-4988-B0CB-51023819341C")]
 		public BaseAudioTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name)
 		{
 			this.album = album;

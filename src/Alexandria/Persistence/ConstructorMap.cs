@@ -26,18 +26,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace Alexandria.Persistence
 {
-	public class PersistentRecordAttribute : Attribute
+	public struct ConstructorMap
 	{
 		#region Constructors
+		public ConstructorMap(ConstructorAttribute attribute, ConstructorInfo constructor)
+		{
+			this.attribute = attribute;
+			this.constructor = constructor;
+		}
 		#endregion
 		
 		#region Private Fields
-		private string name;
+		private ConstructorAttribute attribute;
+		private ConstructorInfo constructor;
+		#endregion
+		
+		#region Public Properties
+		public ConstructorAttribute Attribute
+		{
+			get { return attribute; }
+		}
+		
+		public ConstructorInfo Constructor
+		{
+			get { return constructor; }
+		}
 		#endregion
 	}
 }

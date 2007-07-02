@@ -38,7 +38,7 @@ namespace Alexandria.Catalog
 	public class BaseCatalog : ICatalog, IPersistent
 	{
 		#region Constructors
-		[Constructor("Catalog")]
+		[Constructor("Catalog", "A7612A3C-1A83-4b66-80AD-AB001CA67EA3")]
 		public BaseCatalog(Guid id, IUser user)
 		{
 			this.id = id;
