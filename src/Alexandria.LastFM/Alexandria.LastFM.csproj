@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.LastFM</RootNamespace>
     <AssemblyName>Alexandria.LastFM</AssemblyName>
-    <ApplicationIcon>Alexandria.LastFM.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.LastFM.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.LastFM.dll.ico" />
+    <Content Include="Alexandria.LastFM.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

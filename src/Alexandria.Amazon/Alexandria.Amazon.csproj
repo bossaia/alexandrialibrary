@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Amazon</RootNamespace>
     <AssemblyName>Alexandria.Amazon</AssemblyName>
-    <ApplicationIcon>Alexandria.Amazon.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Amazon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,6 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Amazon.dll.ico" />
+    <Content Include="Alexandria.Amazon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Google</RootNamespace>
     <AssemblyName>Alexandria.Google</AssemblyName>
-    <ApplicationIcon>Alexandria.Google.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Google.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Google.dll.ico" />
+    <Content Include="Alexandria.Google.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
