@@ -24,10 +24,10 @@ namespace Alexandria.Client
 				Bitmap bitmap = (Bitmap)Bitmap.FromFile(plugin.ImagePath.LocalPath);
 				
 				//Create an icon from the bitmap and save it
-				//Icon icon = Icon.FromHandle(bitmap.GetHicon());
-				//string iconPath = plugin.ImagePath.LocalPath.Replace(".bmp", ".ico");
-				//System.IO.FileStream outputStream = new System.IO.FileStream(iconPath, System.IO.FileMode.Create);
-				//icon.Save(outputStream);
+				Icon icon = Icon.FromHandle(bitmap.GetHicon());
+				string iconPath = plugin.ImagePath.LocalPath.Replace(".bmp", ".ico");
+				System.IO.FileStream outputStream = new System.IO.FileStream(iconPath, System.IO.FileMode.Create);
+				icon.Save(outputStream);
 				
 				ImageList.Images.Add(bitmap);
 				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
