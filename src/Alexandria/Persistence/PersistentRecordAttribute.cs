@@ -31,25 +31,13 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	[AttributeUsage(AttributeTargets.Constructor)]
-	public class ConstructorAttribute : Attribute
+	public class PersistentRecordAttribute : Attribute
 	{
 		#region Constructors
-		public ConstructorAttribute(string recordName)
-		{
-			this.recordName = recordName;
-		}
 		#endregion
 		
 		#region Private Fields
-		private string recordName;
-		#endregion
-		
-		#region Public Properties
-		public string RecordName
-		{
-			get { return recordName; }
-		}
+		private string name;
 		#endregion
 	}
 }
