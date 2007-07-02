@@ -39,31 +39,40 @@ namespace Alexandria.Persistence
 		{
 		}
 		
-		public PropertyAttribute(FieldType fieldType)
+		public PropertyAttribute(int ordinal)
+		{
+			this.ordinal = ordinal;
+		}
+		
+		public PropertyAttribute(int ordinal, FieldType fieldType) : this(ordinal)
 		{
 			this.fieldType = fieldType;
 		}
 		
-		public PropertyAttribute(FieldType fieldType, LoadType loadType) : this(fieldType)
+		public PropertyAttribute(int ordinal, FieldType fieldType, LoadType loadType, StoreType storeType) : this(ordinal, fieldType)
 		{			
 			this.loadType = loadType;
+			this.storeType = storeType;
 		}
 		
-		public PropertyAttribute(FieldType fieldType, LoadType loadType, string foreignKeyName, Type childType) : this(fieldType, loadType)
+		public PropertyAttribute(FieldType fieldType, LoadType loadType, StoreType storeType, string foreignKeyName) : this(-1, fieldType, loadType, storeType)
 		{
 			this.foreignKeyName = foreignKeyName;
-			this.childType = childType;
+		}
+
+		public PropertyAttribute(int ordinal, FieldType fieldType, LoadType loadType, StoreType storeType, string foreignKeyName) : this(fieldType, loadType, storeType, foreignKeyName)
+		{
+			this.ordinal = ordinal;
 		}
 		#endregion
 		
 		#region Private Fields
-		private FieldType fieldType = FieldType.None;
-		private LoadType loadType = LoadType.None;
-		private string fieldName;
-		private Type storedType;
-		private string foreignKeyName;
-		private Type childType;
 		private int ordinal;
+		private FieldType fieldType = FieldType.Basic;
+		private LoadType loadType = LoadType.Constructor;
+		private StoreType storeType = StoreType.Basic;
+		private string fieldName;
+		private string foreignKeyName;
 		private bool isRequired;
 		private bool isUnique;
 		private bool isPrimaryKey;
@@ -74,6 +83,12 @@ namespace Alexandria.Persistence
 		#endregion
 		
 		#region Public Properties
+		public int Ordinal
+		{
+			get { return ordinal; }
+			set { ordinal = value; }
+		}
+
 		public FieldType FieldType
 		{
 			get { return fieldType; }
@@ -85,37 +100,25 @@ namespace Alexandria.Persistence
 			get { return loadType; }
 			set { loadType = value; }
 		}
+
+		public StoreType StoreType
+		{
+			get { return storeType; }
+			set { storeType = value; }
+		}
 		
 		public string FieldName
 		{
 			get { return fieldName; }
 			set { fieldName = value; }
 		}
-		
-		public Type StoredType
-		{
-			get { return storedType; }
-			set { storedType = value; }
-		}
-		
+				
 		public string ForeignKeyName
 		{
 			get { return foreignKeyName; }
 			set { foreignKeyName = value; }
 		}
-		
-		public Type ChildType
-		{
-			get { return childType; }
-			set { childType = value; }
-		}
-		
-		public int Ordinal
-		{
-			get { return ordinal; }
-			set { ordinal = value; }
-		}
-		
+				
 		public bool IsRequired
 		{
 			get { return isRequired; }
@@ -125,25 +128,13 @@ namespace Alexandria.Persistence
 		public bool IsUnique
 		{
 			get { return isUnique; }
-			set
-			{
-				isUnique = value;
-				if (!isUnique && isPrimaryKey) isPrimaryKey = false;
-			}
+			set { isUnique = value;	}
 		}
 		
 		public bool IsPrimaryKey
 		{
 			get { return isPrimaryKey; }
-			set
-			{
-				isPrimaryKey = value;
-				if (isPrimaryKey)
-				{
-					isRequired = true;
-					isUnique = true;
-				}
-			}
+			set { isPrimaryKey = value; }
 		}
 		
 		public object DefaultValue

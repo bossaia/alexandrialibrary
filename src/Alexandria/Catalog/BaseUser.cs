@@ -54,13 +54,13 @@ namespace Alexandria.Catalog
 		#endregion
 	
 		#region IUser Members
-		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=2)]
+		[Property(2)]
 		public string Name
 		{
 			get { return name; }
 		}
 
-		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=3)]
+		[Property(3)]
 		public string Password
 		{
 			get { return password; }
@@ -73,7 +73,7 @@ namespace Alexandria.Catalog
 		#endregion
 
 		#region IPersistent Members
-		[Property(FieldType.Basic, LoadType.Constructor, Ordinal=1, IsPrimaryKey=true, IsRequired=true)]
+		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
@@ -97,7 +97,7 @@ namespace Alexandria.Catalog
 		#endregion
 		
 		#region Public Properties
-		[Property(FieldType.OneToManyChildren, LoadType.Property, "UserID", typeof(BaseCatalog), CascadeSave=true, CascadeDelete=true)]
+		[Property(FieldType.OneToManyChildren, LoadType.Property, StoreType.ForeignKey, "UserID", CascadeSave=true, CascadeDelete=true)]
 		public IList<ICatalog> Catalogs
 		{
 			get { return catalogs; }

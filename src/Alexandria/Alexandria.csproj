@@ -90,6 +90,7 @@
     <Compile Include="Media\BasePlaylist.cs" />
     <Compile Include="Persistence\IPersistentRecord.cs" />
     <Compile Include="Persistence\PersistenceBroker.cs" />
+    <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />

@@ -88,7 +88,7 @@ namespace Alexandria.SQLite
 		{			
 			int ordinal = (attribute.Ordinal > 0) ? attribute.Ordinal : count;
 			string fieldName = (!string.IsNullOrEmpty(attribute.FieldName)) ? attribute.FieldName : property.Name;
-			Type storedType = (attribute.StoredType != null) ? attribute.StoredType : property.PropertyType;
+			Type storedType = (attribute.StoreType == StoreType.Id) ? typeof(Guid) : property.PropertyType;
 			DataColumn column = new DataColumn(fieldName, storedType);
 			column.Unique = attribute.IsUnique;
 			column.AllowDBNull = !attribute.IsRequired;
@@ -169,7 +169,9 @@ namespace Alexandria.SQLite
 						childStrategy = new MappingStrategy(strategy.Provider, strategy.Function, records);
 					}
 				}
-				return CreateTableMap(childStrategy, attribute.ChildType, attribute.CascadeSave, attribute.CascadeDelete);
+				//return CreateTableMap(childStrategy, attribute.ChildType, attribute.CascadeSave, attribute.CascadeDelete);
+				//TODO: Fix this so that it can dynamically determine what the child type is
+				return null;				
 			}
 			else throw new ApplicationException("Could not get a child map for this property: invalid field type");
 		}

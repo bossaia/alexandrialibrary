@@ -42,6 +42,14 @@ namespace Alexandria.Persistence
 		/// </summary>
 		Basic,
 		/// <summary>
+		/// This field represents a link back to its parent record
+		/// </summary>
+		LinkToParent,
+		/// <summary>
+		/// This field and others all map to many children records
+		/// </summary>
+		ManyToManyChildren,
+		/// <summary>
 		/// This field and others all map to a child record
 		/// </summary>
 		ManyToOneChild,

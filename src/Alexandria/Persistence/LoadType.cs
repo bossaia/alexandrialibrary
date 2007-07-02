@@ -35,7 +35,6 @@ namespace Alexandria.Persistence
 	{
 		None = 0,
 		Constructor,
-		Factory,
 		Property
 	}
 }

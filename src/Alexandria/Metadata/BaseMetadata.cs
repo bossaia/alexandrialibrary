@@ -65,25 +65,25 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IMetadata Members
-		[Property(FieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
+		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
 		}
 		
-		[Property(FieldType.OneToManyChildren, LoadType.Property, "ParentID", typeof(MetadataIdentifier), CascadeSave=true, CascadeDelete=true)]
+		[Property(FieldType.OneToManyChildren, LoadType.Property, StoreType.ForeignKey, "ParentID", CascadeSave=true, CascadeDelete=true)]
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=2)]
+		[Property(2)]
 		public Uri Path
 		{
 			get { return path; }
 		}
 
-		[Property(FieldType.Basic, IsRequired=true, Ordinal=3)]
+		[Property(3, IsRequired=true)]
 		public string Name
 		{
 			get { return name; }
