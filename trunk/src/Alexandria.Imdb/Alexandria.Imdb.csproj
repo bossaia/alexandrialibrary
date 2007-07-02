@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Imdb</RootNamespace>
     <AssemblyName>Alexandria.Imdb</AssemblyName>
-    <ApplicationIcon>Alexandria.Imdb.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Imdb.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Imdb.dll.ico" />
+    <Content Include="Alexandria.Imdb.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

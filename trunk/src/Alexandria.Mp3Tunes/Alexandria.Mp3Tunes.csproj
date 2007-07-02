@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Mp3Tunes</RootNamespace>
     <AssemblyName>Alexandria.Mp3Tunes</AssemblyName>
-    <ApplicationIcon>Alexandria.Mp3Tunes.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Mp3Tunes.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Mp3Tunes.dll.ico" />
+    <Content Include="Alexandria.Mp3Tunes.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

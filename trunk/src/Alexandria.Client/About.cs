@@ -25,7 +25,7 @@ namespace Alexandria.Client
 				
 				//Create an icon from the bitmap and save it
 				Icon icon = Icon.FromHandle(bitmap.GetHicon());
-				string iconPath = plugin.ImagePath.LocalPath.Replace(".bmp", ".ico");
+				string iconPath = plugin.ImagePath.LocalPath.Replace(".dll.bmp", ".ico");
 				System.IO.FileStream outputStream = new System.IO.FileStream(iconPath, System.IO.FileMode.Create);
 				icon.Save(outputStream);
 				

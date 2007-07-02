@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Tao</RootNamespace>
     <AssemblyName>Alexandria.Tao</AssemblyName>
-    <ApplicationIcon>Alexandria.Tao.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Tao.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Tao.dll.ico" />
+    <Content Include="Alexandria.Tao.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

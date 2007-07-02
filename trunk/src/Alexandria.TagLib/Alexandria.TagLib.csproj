@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.TagLib</RootNamespace>
     <AssemblyName>Alexandria.TagLib</AssemblyName>
-    <ApplicationIcon>Alexandria.TagLib.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.TagLib.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -146,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.TagLib.dll.ico" />
+    <Content Include="Alexandria.TagLib.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.MusicDns</RootNamespace>
     <AssemblyName>Alexandria.MusicDns</AssemblyName>
-    <ApplicationIcon>Alexandria.MusicDns.dll.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.MusicDns.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.MusicDns.dll.ico" />
+    <Content Include="Alexandria.MusicDns.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
