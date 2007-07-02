@@ -15,7 +15,8 @@ namespace Alexandria.Plugins
 		#endregion
 
 		#region Private Fields
-		private List<Assembly> assemblies = new List<Assembly>();
+		private IList<Assembly> assemblies = new List<Assembly>();
+		private IDictionary<string, ConstructorInfo> constructors = new Dictionary<string,ConstructorInfo>();
 		#endregion
 		
 		#region Private Methods
@@ -41,6 +42,11 @@ namespace Alexandria.Plugins
 		public IList<Assembly> Assemblies
 		{
 			get { return assemblies; }
+		}
+		
+		public IDictionary<string, ConstructorInfo> Constructors
+		{
+			get { return constructors; }
 		}
 		#endregion
 	}
