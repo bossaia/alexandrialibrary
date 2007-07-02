@@ -321,18 +321,18 @@ namespace Alexandria.SQLite
 					
 				LoadProperties(record, map, row);				
 			}
-			else if (ClassAttribute.LoadType == LoadType.Factory)
-			{
-				object factory = GetFactory(ClassAttribute.FactoryType);
-				if (factory != null)
-				{
-					MethodInfo method = GetFactoryMethod(map);
-					if (method != null)
-						record = GetRecordFromMethod(factory, method, row);
-					else throw new ApplicationException("Lookup error: factory method undefined");
-				}
-				else throw new ApplicationException("Lookup error: could not create factory");
-			}
+			//else if (ClassAttribute.LoadType == LoadType.Factory)
+			//{
+				//object factory = GetFactory(ClassAttribute.FactoryType);
+				//if (factory != null)
+				//{
+					//MethodInfo method = GetFactoryMethod(map);
+					//if (method != null)
+						//record = GetRecordFromMethod(factory, method, row);
+					//else throw new ApplicationException("Lookup error: factory method undefined");
+				//}
+				//else throw new ApplicationException("Lookup error: could not create factory");
+			//}
 			else throw new ApplicationException("Lookup error: invalid class load type");
 			
 			record.DataStore = map.Strategy.Provider;

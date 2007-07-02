@@ -63,37 +63,37 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IAudioTrack Members
-		[Property(FieldType.Basic, Ordinal=4)]
+		[Property(4)]
 		public string Album
 		{
 			get { return album; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=5)]
+		[Property(5)]
 		public string Artist
 		{
 			get { return artist; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=6)]
+		[Property(6)]
 		public TimeSpan Duration
 		{
 			get { return duration; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=7)]
+		[Property(7)]
 		public DateTime ReleaseDate
 		{
 			get { return releaseDate; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=8)]
+		[Property(8)]
 		public int TrackNumber
 		{
 			get { return trackNumber; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=9)]
+		[Property(9)]
 		public string Format
 		{
 			get { return format; }

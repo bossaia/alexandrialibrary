@@ -66,19 +66,19 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IIdentifier Members
-		[Property(FieldType.Basic, IsRequired=true, Ordinal=3)]
+		[Property(3, IsRequired=true)]
 		public string Value
 		{
 			get { return value; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=4)]
+		[Property(4)]
 		public string Type
 		{
 			get { return type; }
 		}
 
-		[Property(FieldType.Basic, Ordinal=5)]
+		[Property(5)]
 		public Version Version
 		{
 			get { return version; }
@@ -106,16 +106,23 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IMetadataIdentifier Members
-		[Property(FieldType.Basic, IsRequired=true, Ordinal=2)]
+		//[Property(2, IsRequired=true)]
 		public Guid ParentId
 		{
 			get { return parentId; }
 			set { parentId = value; }
 		}
+		
+		[Property(2, FieldType.LinkToParent, LoadType.Constructor, StoreType.Id, IsRequired=true)]
+		public IPersistent Parent
+		{
+			get { return null; }
+			set { }
+		}
 		#endregion
 
 		#region IPersistant Members
-		[Property(FieldType.Basic, IsPrimaryKey=true, IsRequired=true, Ordinal=1)]
+		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
