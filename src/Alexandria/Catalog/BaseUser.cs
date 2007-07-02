@@ -36,7 +36,7 @@ namespace Alexandria.Catalog
 	public class BaseUser : IUser, IPersistent
 	{
 		#region Constructors
-		[Constructor]
+		[Constructor("User")]
 		public BaseUser(Guid id, string name, string password)
 		{
 			this.id = id;
@@ -49,7 +49,7 @@ namespace Alexandria.Catalog
 		private Guid id;
 		private string name;
 		private string password;
-		private List<IUserCatalog> userCatalogs = new List<IUserCatalog>();
+		private List<ICatalog> catalogs = new List<ICatalog>();
 		private IDataStore dataStore;
 		#endregion
 	
@@ -97,10 +97,10 @@ namespace Alexandria.Catalog
 		#endregion
 		
 		#region Public Properties
-		[Property(FieldType.OneToManyChildren, LoadType.Property, "UserID", typeof(BaseUserCatalog), CascadeSave=true, CascadeDelete=true)]
-		public IList<IUserCatalog> UserCatalogs
+		[Property(FieldType.OneToManyChildren, LoadType.Property, "UserID", typeof(BaseCatalog), CascadeSave=true, CascadeDelete=true)]
+		public IList<ICatalog> Catalogs
 		{
-			get { return userCatalogs; }
+			get { return catalogs; }
 		}
 		#endregion
 	}
