@@ -44,7 +44,7 @@ namespace Alexandria.Metadata
 		{
 		}
 
-		[Constructor]
+		[Constructor("MetadataID")]
 		public MetadataIdentifier(Guid id, Guid parentId, string value, string type, Version version)
 		{
 			this.id = id;

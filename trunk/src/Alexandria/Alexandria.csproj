@@ -44,7 +44,6 @@
     <Compile Include="Catalog\BaseCatalog.cs" />
     <Compile Include="Catalog\BaseCatalogAlbum.cs" />
     <Compile Include="Catalog\BaseUser.cs" />
-    <Compile Include="Catalog\BaseUserCatalog.cs" />
     <Compile Include="Catalog\ICatalog.cs" />
     <Compile Include="Catalog\ICatalogAlbum.cs" />
     <Compile Include="Catalog\ICatalogArtist.cs" />
@@ -88,8 +87,8 @@
     <Compile Include="Persistence\IPersistent.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />
-    <Compile Include="Persistence\IPersistentRecord.cs" />
     <Compile Include="Persistence\PersistenceBroker.cs" />
+    <Compile Include="Persistence\PersistentRecordAttribute.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
