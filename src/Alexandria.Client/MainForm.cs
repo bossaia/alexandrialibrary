@@ -292,7 +292,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				Version version = new Version(1, 0, 0, 0);
 				string imageFileName = string.Format("{0}.bmp", assembly.Location);
 				if (!System.IO.File.Exists(imageFileName))
-					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.Client.exe.png");
+					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.dll.bmp");
 				Uri imagePath = new Uri(imageFileName);
 				
 				foreach(Attribute attribute in assembly.GetCustomAttributes(false))

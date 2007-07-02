@@ -1169,6 +1169,7 @@ copy "$(ProjectDir)..\Alexandria.MusicBrainz\bin\Debug\AlexandriaMusicBrainz.dll
 copy "$(ProjectDir)..\..\vendor\MusicBrainz\musicbrainz.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\Alexandria.MediaInfo\bin\Debug\AlexandriaMediaInfo.dll" "$(TargetDir)"
 copy "$(ProjectDir)..\..\vendor\MediaInfo\mediainfo.dll" "$(TargetDir)"
-copy "$(ProjectDir)..\..\vendor\SQLite\sqlite3.dll" "$(TargetDir)"</PostBuildEvent>
+copy "$(ProjectDir)..\..\vendor\SQLite\sqlite3.dll" "$(TargetDir)"
+copy "$(SolutionDir)..\assets\Images\Icons\Plugins\*.bmp" "$(TargetDir)"</PostBuildEvent>
   </PropertyGroup>
 </Project>
