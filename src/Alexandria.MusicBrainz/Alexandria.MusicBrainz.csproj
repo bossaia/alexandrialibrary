@@ -9,6 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.MusicBrainz</RootNamespace>
     <AssemblyName>Alexandria.MusicBrainz</AssemblyName>
+    <ApplicationIcon>Alexandria.MusicBrainz.dll.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -58,6 +59,9 @@
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
       <Name>Alexandria</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Alexandria.MusicBrainz.dll.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

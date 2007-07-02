@@ -111,6 +111,10 @@
       <Project>{26BF108C-8B39-4C9E-A545-4AC01AA3C0E6}</Project>
       <Name>Alexandria.FreeDB</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Google\Alexandria.Google.csproj">
+      <Project>{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}</Project>
+      <Name>Alexandria.Google</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
       <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
       <Name>Alexandria.Imdb</Name>
@@ -146,6 +150,10 @@
     <ProjectReference Include="..\Alexandria.TagLib\Alexandria.TagLib.csproj">
       <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>
       <Name>Alexandria.TagLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Tao\Alexandria.Tao.csproj">
+      <Project>{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}</Project>
+      <Name>Alexandria.Tao</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
