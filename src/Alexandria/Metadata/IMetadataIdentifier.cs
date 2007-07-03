@@ -32,8 +32,9 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public interface IMetadataIdentifier : IIdentifier, IPersistent
+	[Record("MetadataId")]
+	public interface IMetadataIdentifier : IIdentifier, IRecord
 	{
-		Guid ParentId { get; set; }
+		IRecord Parent { get; set; }
 	}
 }

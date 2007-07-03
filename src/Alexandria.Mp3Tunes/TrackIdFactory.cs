@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.Mp3Tunes
 {
@@ -43,9 +44,9 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region Public Static Methods
-		public static IMetadataIdentifier CreateTrackId(string value)
+		public static IMetadataIdentifier CreateTrackId(string value, IRecord parent)
 		{
-			return new MetadataIdentifier(Guid.NewGuid(), Guid.NewGuid(), value, ID_TYPE, version);
+			return new MetadataIdentifier(Guid.NewGuid(), parent, value, ID_TYPE, version);
 		}
 		#endregion
 	}

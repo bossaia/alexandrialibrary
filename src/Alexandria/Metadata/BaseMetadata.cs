@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public abstract class BaseMetadata : IMetadata, IPersistent
+	public abstract class BaseMetadata : IMetadata, IRecord
 	{
 		#region Constructors
 		public BaseMetadata(string path, string name)
@@ -61,7 +61,7 @@ namespace Alexandria.Metadata
 		private Uri path;
 		private string name;
 
-		private IDataStore dataStore;
+		private IPersistenceBroker persistenceBroker;
 		#endregion
 	
 		#region IMetadata Members
@@ -91,20 +91,20 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IPersistant Members
-		public IDataStore DataStore
+		public IPersistenceBroker PersistenceBroker
 		{
-			get { return dataStore; }
-			set { dataStore = value; }
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
 		}
 		
 		public void Save()
 		{
-			dataStore.Save(this);
+			persistenceBroker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			dataStore.Delete(this);
+			persistenceBroker.DeleteRecord(this);
 		}
 		#endregion
 	}

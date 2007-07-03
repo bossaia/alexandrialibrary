@@ -33,15 +33,11 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	[Class("AudioTrack", LoadType.Constructor, "Id")]
+	[Record("AudioTrack")]
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
-		public BaseAudioTrack(string id, string path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : this(new Guid(id), new Uri(path), name, album, artist, duration, releaseDate, trackNumber, format)
-		{
-		}
-
-		[Constructor("AudioTrack", "B7DE2E27-C3D5-4988-B0CB-51023819341C")]
+		[Constructor("B7DE2E27-C3D5-4988-B0CB-51023819341C")]
 		public BaseAudioTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name)
 		{
 			this.album = album;

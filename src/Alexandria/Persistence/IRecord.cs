@@ -26,42 +26,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Alexandria.Persistence
 {
-	public struct ConstructorMap
+	public interface IRecord
 	{
-		#region Constructors
-		public ConstructorMap(RecordAttribute recordAttribute, ConstructorAttribute constructorAttribute, ConstructorInfo constructor)
-		{
-			this.recordAttribute = recordAttribute;
-			this.constructorAttribute = constructorAttribute;
-			this.constructor = constructor;
-		}
-		#endregion
-		
-		#region Private Fields
-		private RecordAttribute recordAttribute;
-		private ConstructorAttribute constructorAttribute;
-		private ConstructorInfo constructor;
-		#endregion
-		
-		#region Public Properties
-		public RecordAttribute RecordAttribute
-		{
-			get { return recordAttribute; }
-		}
-		
-		public ConstructorAttribute ConstructorAttribute
-		{
-			get { return constructorAttribute; }
-		}
-		
-		public ConstructorInfo Constructor
-		{
-			get { return constructor; }
-		}
-		#endregion
+		Guid Id { get; }
+		IPersistenceBroker PersistenceBroker { get; set; }
+		void Save();
+		void Delete();
 	}
 }

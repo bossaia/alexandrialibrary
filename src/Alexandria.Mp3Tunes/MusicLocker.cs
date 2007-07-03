@@ -163,8 +163,6 @@ namespace Alexandria.Mp3Tunes
 					string trackIdValue = string.Empty;					
 					if (trackIdNode != null && !string.IsNullOrEmpty(trackIdNode.InnerXml))
 						trackIdValue = trackIdNode.InnerXml;
-						
-					trackId = TrackIdFactory.CreateTrackId(trackIdValue);
 
 					string url = string.Format("{0}{1}", System.Web.HttpUtility.UrlDecode(downloadUrl.InnerXml), partner_token);
 					
@@ -226,8 +224,9 @@ namespace Alexandria.Mp3Tunes
 
 					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 					
-					string id = Guid.NewGuid().ToString();
-					Track track = new Track(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					Guid id = Guid.NewGuid();
+					Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					trackId = TrackIdFactory.CreateTrackId(trackIdValue, track);
 					track.MetadataIdentifiers.Add(trackId);
 
 					tracks.Add(track);

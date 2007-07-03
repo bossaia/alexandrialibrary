@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace Alexandria.Persistence
 {
 	public interface IPersistenceBroker
 	{
-		T LookupRecord<T>(Guid id) where T: IPersistentRecord;
-		void SaveRecord(IPersistentRecord record);
-		void DeleteRecord(IPersistentRecord record);
+		IDictionary<string, ConstructorMap> ConstructorsByRecordType { get; }
+		IDictionary<Type, ConstructorMap> ConstructorsByType { get; }
+		T LookupRecord<T>(Guid id) where T: IRecord;
+		void SaveRecord(IRecord record);
+		void DeleteRecord(IRecord record);
 		void ConnectTo(IPersistenceMechanism mechanism);
 		void DisconnectFrom(IPersistenceMechanism mechanism);
 	}
