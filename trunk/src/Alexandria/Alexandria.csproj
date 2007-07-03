@@ -88,8 +88,10 @@
     <Compile Include="Persistence\IPersistent.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />
-    <Compile Include="Persistence\IPersistentRecord.cs" />
+    <Compile Include="Persistence\IRecord.cs" />
     <Compile Include="Persistence\PersistenceBroker.cs" />
+    <Compile Include="Persistence\RecordAttribute.cs" />
+    <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />

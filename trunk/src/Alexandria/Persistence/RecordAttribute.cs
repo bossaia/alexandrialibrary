@@ -31,15 +31,25 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	public interface IPersistentRecord
+	[AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface|AttributeTargets.Struct)]
+	public class RecordAttribute : Attribute
 	{
-		Guid Id { get; }
-		IPersistenceBroker PersistenceBroker { get; set; }
-		bool IsLoaded { get; }
-		bool IsDirty { get; }
-		DateTime TimeStamp { get; set; }
-		void Load();
-		void Save();
-		void Delete();
+		#region Constructors
+		public RecordAttribute(string name)
+		{
+			this.name = name;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
 	}
 }

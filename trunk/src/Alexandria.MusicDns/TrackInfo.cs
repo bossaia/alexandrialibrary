@@ -29,10 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.MusicDns
 {
-	internal class TrackInfo : IAudioTrack
+	internal class TrackInfo : IAudioTrack, IRecord
 	{
 		#region Constructors
 		internal TrackInfo()
@@ -63,9 +64,11 @@ namespace Alexandria.MusicDns
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		Uri path = null;
 		private Version version = new Version(1, 0, 0, 0);
+		
+		private IPersistenceBroker persistenceBroker;
 		#endregion
 	
-		#region Internal Properties
+		#region Internal Properties		
 		internal string FileName
 		{
 			get { return fileName; }
@@ -176,7 +179,7 @@ namespace Alexandria.MusicDns
 				puid = value;
 				
 				if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
-					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid));
+					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid, this));
 			}
 		}
 		
@@ -234,7 +237,7 @@ namespace Alexandria.MusicDns
 		{
 			get { return id; }
 		}
-		
+				
 		public IList<IMetadataIdentifier> MetadataIdentifiers
 		{
 			get { return metadataIdentifiers; }
@@ -248,6 +251,24 @@ namespace Alexandria.MusicDns
 		public string Name
 		{
 			get { return Track; }
+		}
+		#endregion
+		
+		#region IRecord Members
+		public IPersistenceBroker PersistenceBroker
+		{
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
+		}
+		
+		public void Save()
+		{
+			persistenceBroker.SaveRecord(this);
+		}
+		
+		public void Delete()
+		{
+			persistenceBroker.DeleteRecord(this);
 		}
 		#endregion
 	}

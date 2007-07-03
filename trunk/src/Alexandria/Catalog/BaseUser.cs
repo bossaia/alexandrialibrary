@@ -32,11 +32,11 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {
-	[Class("User", LoadType.Constructor, "Id")]
-	public class BaseUser : IUser, IPersistent
+	[Record("User")]
+	public class BaseUser : IUser, IRecord
 	{
 		#region Constructors
-		[Constructor("User", "0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
+		[Constructor("0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
 		public BaseUser(Guid id, string name, string password)
 		{
 			this.id = id;
@@ -50,7 +50,7 @@ namespace Alexandria.Catalog
 		private string name;
 		private string password;
 		private List<ICatalog> catalogs = new List<ICatalog>();
-		private IDataStore dataStore;
+		private IPersistenceBroker persistenceBroker;
 		#endregion
 	
 		#region IUser Members
@@ -72,27 +72,27 @@ namespace Alexandria.Catalog
 		}
 		#endregion
 
-		#region IPersistent Members
+		#region IRecord Members
 		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
 		}
 
-		public IDataStore DataStore
+		public IPersistenceBroker PersistenceBroker
 		{
-			get { return dataStore; }
-			set { dataStore = value; }
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
 		}
 
 		public void Save()
 		{
-			dataStore.Save(this);
+			persistenceBroker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			dataStore.Delete(this);
+			persistenceBroker.DeleteRecord(this);
 		}
 		#endregion
 		

@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.MusicDns
 {
@@ -43,9 +44,9 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Public Static Methods
-		internal static IMetadataIdentifier CreatePuid(string value)
+		internal static IMetadataIdentifier CreatePuid(string value, IRecord parent)
 		{
-			return new MetadataIdentifier(Guid.NewGuid(), Guid.NewGuid(), value, ID_TYPE, version);
+			return new MetadataIdentifier(Guid.NewGuid(), parent, value, ID_TYPE, version);
 		}
 		#endregion
 	}

@@ -35,27 +35,20 @@ namespace Alexandria.Persistence
 	public class ConstructorAttribute : Attribute
 	{
 		#region Constructors
-		public ConstructorAttribute(string recordName, string recordType)
+		public ConstructorAttribute(string recordTypeId)
 		{
-			this.recordName = recordName;
-			this.recordType = recordType;
+			this.recordTypeId = recordTypeId;
 		}
 		#endregion
 		
 		#region Private Fields
-		private string recordName;
-		private string recordType;
+		private string recordTypeId;
 		#endregion
 		
 		#region Public Properties
-		public string RecordName
+		public string RecordTypeId
 		{
-			get { return recordName; }
-		}
-		
-		public string RecordType
-		{
-			get { return recordType; }
+			get { return recordTypeId; }
 		}
 		#endregion
 	}

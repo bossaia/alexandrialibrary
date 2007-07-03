@@ -32,37 +32,29 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	[Class("MetadataID", LoadType.Constructor, "Id")]
+	[Record("MetadataID")]
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
-		public MetadataIdentifier(string parentId, string value, string type, string version) : this(Guid.NewGuid(), new Guid(parentId), value, type, new Version(version))
-		{
-		}
-				
-		public MetadataIdentifier(string id, string parentId, string value, string type, string version) : this(new Guid(id), new Guid(parentId), value, type, new Version(version))
-		{
-		}
-
-		[Constructor("MetadataID", "585F6263-29FA-41ae-93A0-9250348CEB4D")]
-		public MetadataIdentifier(Guid id, Guid parentId, string value, string type, Version version)
+		[Constructor("585F6263-29FA-41ae-93A0-9250348CEB4D")]
+		public MetadataIdentifier(Guid id, IRecord parent, string value, string type, Version version)
 		{
 			this.id = id;
-			this.parentId = parentId;
+			this.parent = parent;
 			this.value = value;
 			this.type = type;
 			this.version = version;
-			this.dataStore = null;
+			this.persistenceBroker = null;
 		}
 		#endregion
 	
 		#region Private Fields
-		private Guid id;				
-		private Guid parentId;
+		private Guid id;
+		private IRecord parent;
 		private string value;
 		private string type;
 		private Version version;
-		private IDataStore dataStore;
+		private IPersistenceBroker persistenceBroker;
 		#endregion
 
 		#region IIdentifier Members
@@ -106,18 +98,11 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IMetadataIdentifier Members
-		//[Property(2, IsRequired=true)]
-		public Guid ParentId
-		{
-			get { return parentId; }
-			set { parentId = value; }
-		}
-		
 		[Property(2, FieldType.LinkToParent, LoadType.Constructor, StoreType.Id, IsRequired=true)]
-		public IPersistent Parent
+		public IRecord Parent
 		{
-			get { return null; }
-			set { }
+			get { return parent; }
+			set { parent = value; }
 		}
 		#endregion
 
@@ -128,20 +113,20 @@ namespace Alexandria.Metadata
 			get { return id; }
 		}
 				
-		public IDataStore DataStore
+		public IPersistenceBroker PersistenceBroker
 		{
-			get { return dataStore; }
-			set { dataStore = value; }
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
 		}
 
 		public void Save()
 		{
-			dataStore.Save(this);
+			persistenceBroker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			dataStore.Delete(this);
+			persistenceBroker.DeleteRecord(this);
 		}
 		#endregion
 

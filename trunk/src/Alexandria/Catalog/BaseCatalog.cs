@@ -34,11 +34,11 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {	
-	[Class("Catalog", LoadType.Constructor, "Id")]
-	public class BaseCatalog : ICatalog, IPersistent
+	[Record("Catalog")]
+	public class BaseCatalog : ICatalog, IRecord
 	{
 		#region Constructors
-		[Constructor("Catalog", "A7612A3C-1A83-4b66-80AD-AB001CA67EA3")]
+		[Constructor("A7612A3C-1A83-4b66-80AD-AB001CA67EA3")]
 		public BaseCatalog(Guid id, IUser user)
 		{
 			this.id = id;
@@ -52,6 +52,8 @@ namespace Alexandria.Catalog
 		private List<ICatalogAlbum> albums = new List<ICatalogAlbum>();
 		private List<ICatalogArtist> artists = new List<ICatalogArtist>();
 		private List<ICatalogAudioTrack> tracks = new List<ICatalogAudioTrack>();
+		
+		private IPersistenceBroker persistenceBroker;
 		#endregion
 
 		#region ICatalog Members
@@ -77,34 +79,26 @@ namespace Alexandria.Catalog
 		#endregion
 
 		#region IPersistent Members
-
 		public Guid Id
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return id; }
 		}
 
-		public IDataStore DataStore
+		public IPersistenceBroker PersistenceBroker
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
 		}
 
 		public void Save()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			persistenceBroker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			persistenceBroker.DeleteRecord(this);
 		}
-
 		#endregion
 	}
 }
