@@ -34,43 +34,51 @@ namespace Alexandria.Persistence
 	public class RecordMap
 	{
 		#region Constructors
-		public RecordMap(IPersistenceMechanism mechanism, ConstructorMap constructorMap)
+		public RecordMap(IPersistenceMechanism mechanism, DataRow data)
 		{
 			this.mechanism = mechanism;
-			this.constructorMap = constructorMap;
-			
-			this.dataRow = null;
+			this.data = data;
+			this.constructorMap = GetConstructorMap();
+			//this.idField = idField;
+			//this.idValue = idValue;
 		}
-
-		public RecordMap(IPersistenceMechanism mechanism, ConstructorMap constructorMap, PropertyAttribute propertyAttribute, Guid id) : this(mechanism, constructorMap)
+		
+		public RecordMap(IPersistenceMechanism mechanism, DataRow data, PropertyMap propertyMap) : this(mechanism, data)
 		{
-			this.propertyAttribute = propertyAttribute;
-			this.id = id;
-			
-			this.dataRow = null;
+			this.propertyMap = propertyMap;
 		}
 		#endregion
 		
 		#region Private Fields
 		private IPersistenceMechanism mechanism;
+		private DataRow data;
+		private PropertyMap propertyMap;
 		private ConstructorMap constructorMap;
-		private PropertyAttribute propertyAttribute;
-		private Guid id;
-		private IList<DataColumn> columns = new List<DataColumn>();
-		private DataRow dataRow;
+		private IList<RecordMap> Children = new List<RecordMap>();
+		private string idField;
+		private string idValue;
+		private IRecord record;
 		#endregion
 		
 		#region Private Methods
-		private object GetDatabaseValue(object value)
+		private ConstructorMap GetConstructorMap()
 		{
-			//return mechanism.GetDatabaseValue(value);
-			return value;
+			return new ConstructorMap(null, null);
 		}
 		
-		private object GetRecordValue(object value)
+		private IDictionary<string, object> GetConstructorParameterMap()
 		{
-			//return mechanism.GetRecordValue(value);
-			return value;
+			if (data != null)
+			{
+				IDictionary<string, object> parameterMap = new Dictionary<string, object>();
+				for(int i=0;i<data.ItemArray.Length;i++)
+				{
+					//NOTE: data[i] should already be normalize by the mechanism
+					parameterMap.Add(data.Table.Columns[i].ColumnName, data[i]);
+				}
+				return parameterMap;
+			}
+			else throw new InvalidOperationException("data is undefined");
 		}
 		#endregion
 		
@@ -79,37 +87,41 @@ namespace Alexandria.Persistence
 		{
 			get { return mechanism; }
 		}
-				
+		
+		public DataRow Data
+		{
+			get { return data; }
+		}
+
+		public PropertyMap PropertyMap
+		{
+			get { return propertyMap; }
+		}
+
 		public ConstructorMap ConstructorMap
 		{
 			get { return constructorMap; }
 		}
 
-		public PropertyAttribute PropertyAttribute
+		public string IdField
 		{
-			get { return propertyAttribute; }
+			get { return idField; }
 		}
 		
-		public Guid Id
+		public string IdValue
 		{
-			get { return id; }
+			get { return idValue; }
 		}
-
-		public IList<DataColumn> Columns
+				
+		public IRecord Record
 		{
-			get { return columns; }
-		}
-		
-		public DataRow DataRow
-		{
-			get { return dataRow; }
+			get { return record; }
 		}
 		#endregion
 		
 		#region Public Methods
-		public IRecord CreateRecord()
+		public void Lookup()
 		{
-			return null;
 		}
 		#endregion
 	}

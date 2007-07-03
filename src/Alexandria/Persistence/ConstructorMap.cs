@@ -33,29 +33,22 @@ namespace Alexandria.Persistence
 	public struct ConstructorMap
 	{
 		#region Constructors
-		public ConstructorMap(RecordAttribute recordAttribute, ConstructorAttribute constructorAttribute, ConstructorInfo constructor)
+		public ConstructorMap(ConstructorAttribute attribute, ConstructorInfo constructor)
 		{
-			this.recordAttribute = recordAttribute;
-			this.constructorAttribute = constructorAttribute;
+			this.attribute = attribute;
 			this.constructor = constructor;
 		}
 		#endregion
 		
 		#region Private Fields
-		private RecordAttribute recordAttribute;
-		private ConstructorAttribute constructorAttribute;
+		private ConstructorAttribute attribute;
 		private ConstructorInfo constructor;
 		#endregion
 		
 		#region Public Properties
-		public RecordAttribute RecordAttribute
+		public ConstructorAttribute Attribute
 		{
-			get { return recordAttribute; }
-		}
-		
-		public ConstructorAttribute ConstructorAttribute
-		{
-			get { return constructorAttribute; }
+			get { return attribute; }
 		}
 		
 		public ConstructorInfo Constructor

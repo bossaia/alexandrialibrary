@@ -39,16 +39,27 @@ namespace Alexandria.Persistence
 		{
 			this.name = name;
 		}
+		
+		public RecordAttribute(string name, string idField) : this(name)
+		{
+			this.idField = idField;
+		}
 		#endregion
 		
 		#region Private Fields
 		private string name;
+		private string idField = "Id";
 		#endregion
 		
 		#region Public Properties
 		public string Name
 		{
 			get { return name; }
+		}
+		
+		public string IdField
+		{
+			get { return idField; }
 		}
 		#endregion
 	}
