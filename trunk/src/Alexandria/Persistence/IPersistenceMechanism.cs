@@ -1,6 +1,6 @@
+
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Data;
 
 namespace Alexandria.Persistence
 {
@@ -10,5 +10,8 @@ namespace Alexandria.Persistence
 		bool IsOpen { get; }
 		void Open();
 		void Close();
+		DataTable GetDataTable(string recordName, string idField, string idValue);
+		object GetDatabaseValue(object value);
+		object GetRecordValue(object value);
 	}
 }

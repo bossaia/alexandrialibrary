@@ -6,8 +6,8 @@ namespace Alexandria.Persistence
 {
 	public interface IPersistenceBroker
 	{
-		IDictionary<string, ConstructorMap> ConstructorsByRecordType { get; }
-		IDictionary<Type, ConstructorMap> ConstructorsByType { get; }
+		IDictionary<Type, RecordAttribute> RecordAttributes { get; }
+		IDictionary<string, ConstructorMap> Constructors { get; }
 		T LookupRecord<T>(Guid id) where T: IRecord;
 		void SaveRecord(IRecord record);
 		void DeleteRecord(IRecord record);

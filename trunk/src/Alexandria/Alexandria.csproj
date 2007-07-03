@@ -90,6 +90,7 @@
     <Compile Include="Media\BasePlaylist.cs" />
     <Compile Include="Persistence\IRecord.cs" />
     <Compile Include="Persistence\PersistenceBroker.cs" />
+    <Compile Include="Persistence\PropertyMap.cs" />
     <Compile Include="Persistence\RecordAttribute.cs" />
     <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\StoreType.cs" />

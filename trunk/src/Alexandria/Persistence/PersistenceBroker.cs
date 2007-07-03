@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
-using System.Text;
 using Alexandria.Plugins;
 
 namespace Alexandria.Persistence
@@ -15,14 +15,15 @@ namespace Alexandria.Persistence
 			this.mechanism = mechanism;
 			
 			Initialize();
+			int x = constructors.Count;
 		}
 		#endregion
 	
 		#region Private Fields
 		private IPluginRepository repository;
 		private IPersistenceMechanism mechanism;
-		private IDictionary<string, ConstructorMap> constructorsByRecordType = new Dictionary<string, ConstructorMap>();
-		private IDictionary<Type, ConstructorMap> constructorsByType = new Dictionary<Type, ConstructorMap>();
+		private IDictionary<string, ConstructorMap> constructors = new Dictionary<string, ConstructorMap>();
+		private IDictionary<Type, RecordAttribute> recordAttributes = new Dictionary<Type, RecordAttribute>();
 		#endregion
 		
 		#region Private Methods
@@ -32,18 +33,22 @@ namespace Alexandria.Persistence
 			{
 				foreach (Type type in assembly.GetTypes())
 				{
+					foreach(Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
+					{
+						RecordAttribute recordAttribute = (RecordAttribute)typeAttribute;
+						recordAttributes.Add(type, recordAttribute);
+					}
+				
 					Type persistent = type.GetInterface("IPersistent");
 					if (persistent != null)
 					{
 						foreach (ConstructorInfo constructor in type.GetConstructors())
 						{
-							foreach (Attribute attribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
-							{
-								//TODO: fix the logic for creating a constructor map
-								ConstructorAttribute constructorAttribute = (ConstructorAttribute)attribute;
-								ConstructorMap map = new ConstructorMap(null, constructorAttribute, constructor);
-								constructorsByRecordType.Add(constructorAttribute.RecordTypeId, map);
-								constructorsByType.Add(type, map);
+							foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+							{								
+								ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
+								ConstructorMap map = new ConstructorMap(constructorAttribute, constructor);
+								constructors.Add(constructorAttribute.RecordTypeId, map);
 							}
 						}
 					}
@@ -58,19 +63,22 @@ namespace Alexandria.Persistence
 			get { return mechanism; }
 		}
 		
-		public IDictionary<string, ConstructorMap> ConstructorsByRecordType
+		public IDictionary<Type, RecordAttribute> RecordAttributes
 		{
-			get { return constructorsByRecordType; }
+			get { return recordAttributes; }
 		}
-
-		public IDictionary<Type, ConstructorMap> ConstructorsByType
+		
+		public IDictionary<string, ConstructorMap> Constructors
 		{
-			get { return constructorsByType; }
+			get { return constructors; }
 		}
 		
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{
-			ConstructorMap constructorMap = ConstructorsByType[typeof(T)];
+			RecordAttribute recordAttribute = RecordAttributes[typeof(T)];
+			DataTable table = mechanism.GetDataTable(recordAttribute.Name, recordAttribute.IdField, id.ToString());
+			RecordMap map = new RecordMap(mechanism, table.Rows[0]);
+			//ConstructorMap constructorMap = ConstructorsByType[typeof(T)];
 			//RecordMap recordMap = new RecordMap(mechanism, 
 			return default(T);
 		}

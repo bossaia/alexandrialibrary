@@ -113,6 +113,27 @@ namespace Alexandria.SQLite
 			TableMap map = mapFactory.CreateTableMap(this, MappingFunction.Delete, record);
 			map.Delete();
 		}
+
+		public DataTable GetDataTable(string recordName, string idField, string idValue)
+		{
+			SQLiteCommand command = new SQLiteCommand(string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", recordName, idField, idValue), GetSQLiteConnection());
+			SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+			DataTable table = new DataTable(recordName);
+			adapter.Fill(table);
+			return table;
+		}
+
+		public object GetDatabaseValue(object value)
+		{
+			//return mechanism.GetDatabaseValue(value);
+			return value;
+		}
+
+		public object GetRecordValue(object value)
+		{
+			//return mechanism.GetRecordValue(value);
+			return value;
+		}		
 		#endregion
 	}
 }
