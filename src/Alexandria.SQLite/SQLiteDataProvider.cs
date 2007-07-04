@@ -81,7 +81,7 @@ namespace Alexandria.SQLite
 				
 		#endregion
 
-		#region IDataStore Members
+		#region IPersistenceMechanism Members
 		public void Initialize(Type type)
 		{
 			//IMappingStrategy strategy = new MappingStrategy(this, MappingFunction.Initialize);
@@ -116,10 +116,19 @@ namespace Alexandria.SQLite
 
 		public DataTable GetDataTable(string recordName, string idField, string idValue)
 		{
-			SQLiteCommand command = new SQLiteCommand(string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", recordName, idField, idValue), GetSQLiteConnection());
-			SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-			DataTable table = new DataTable(recordName);
-			adapter.Fill(table);
+			//TODO: change this to return a normalized DataTable
+			DataTable table = null;
+			
+			using (SQLiteConnection connection = GetSQLiteConnection())
+			{
+				connection.Open();
+				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", recordName, idField, idValue);
+				SQLiteCommand command = new SQLiteCommand(commandText, connection);
+				SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+				table = new DataTable(recordName);
+				adapter.Fill(table);
+			}
+			
 			return table;
 		}
 

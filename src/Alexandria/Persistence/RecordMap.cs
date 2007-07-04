@@ -34,16 +34,16 @@ namespace Alexandria.Persistence
 	public class RecordMap
 	{
 		#region Constructors
-		public RecordMap(IPersistenceMechanism mechanism, DataRow data)
+		public RecordMap(IPersistenceMechanism mechanism, DataRow data, ConstructorMap constructorMap)
 		{
 			this.mechanism = mechanism;
 			this.data = data;
-			this.constructorMap = GetConstructorMap();
+			this.constructorMap = constructorMap;
 			//this.idField = idField;
 			//this.idValue = idValue;
 		}
 		
-		public RecordMap(IPersistenceMechanism mechanism, DataRow data, PropertyMap propertyMap) : this(mechanism, data)
+		public RecordMap(IPersistenceMechanism mechanism, DataRow data, ConstructorMap constructorMap, PropertyMap propertyMap) : this(mechanism, data, constructorMap)
 		{
 			this.propertyMap = propertyMap;
 		}
@@ -52,20 +52,16 @@ namespace Alexandria.Persistence
 		#region Private Fields
 		private IPersistenceMechanism mechanism;
 		private DataRow data;
-		private PropertyMap propertyMap;
 		private ConstructorMap constructorMap;
+		private PropertyMap propertyMap;
 		private IList<RecordMap> Children = new List<RecordMap>();
+		private string recordTypeId;
 		private string idField;
 		private string idValue;
 		private IRecord record;
 		#endregion
 		
-		#region Private Methods
-		private ConstructorMap GetConstructorMap()
-		{
-			return new ConstructorMap(null, null);
-		}
-		
+		#region Private Methods		
 		private IDictionary<string, object> GetConstructorParameterMap()
 		{
 			if (data != null)
@@ -73,7 +69,7 @@ namespace Alexandria.Persistence
 				IDictionary<string, object> parameterMap = new Dictionary<string, object>();
 				for(int i=0;i<data.ItemArray.Length;i++)
 				{
-					//NOTE: data[i] should already be normalize by the mechanism
+					//NOTE: data[i] should already be normalized by the mechanism
 					parameterMap.Add(data.Table.Columns[i].ColumnName, data[i]);
 				}
 				return parameterMap;

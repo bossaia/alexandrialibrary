@@ -19,6 +19,10 @@ namespace Alexandria.Persistence
 		}
 		#endregion
 	
+		#region Private Constants
+		private const string RECORD_TYPE_ID = "RecordTypeId";
+		#endregion
+	
 		#region Private Fields
 		private IPluginRepository repository;
 		private IPersistenceMechanism mechanism;
@@ -77,7 +81,8 @@ namespace Alexandria.Persistence
 		{
 			RecordAttribute recordAttribute = RecordAttributes[typeof(T)];
 			DataTable table = mechanism.GetDataTable(recordAttribute.Name, recordAttribute.IdField, id.ToString());
-			RecordMap map = new RecordMap(mechanism, table.Rows[0]);
+			ConstructorMap constructorMap = Constructors[table.Rows[0][RECORD_TYPE_ID].ToString()];
+			RecordMap map = new RecordMap(mechanism, table.Rows[0], constructorMap);
 			//ConstructorMap constructorMap = ConstructorsByType[typeof(T)];
 			//RecordMap recordMap = new RecordMap(mechanism, 
 			return default(T);
