@@ -38,7 +38,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.SQLite
 {
-	public class SQLiteDataProvider : IDataStore
+	public class SQLiteDataProvider : IPersistenceMechanism, IDataStore
 	{			
 		#region Constructors
 		public SQLiteDataProvider(string databasePath)
@@ -46,7 +46,11 @@ namespace Alexandria.SQLite
 			this.databasePath = databasePath;
 		}
 		#endregion
-				
+		
+		#region Private Constant Fields
+		private const string RECORD_TYPE_ID = "RecordTypeId";
+		#endregion
+		
 		#region Private Fields
 		string databasePath;
 		private TableMapFactory mapFactory = new TableMapFactory();
@@ -114,19 +118,45 @@ namespace Alexandria.SQLite
 			map.Delete();
 		}
 
-		public DataTable GetDataTable(string recordName, string idField, string idValue)
+		public DataTable GetDataTable(PersistenceBroker broker, string recordName, string idField, string idValue)
 		{
-			//TODO: change this to return a normalized DataTable
-			DataTable table = null;
+			DataTable table = new DataTable(recordName);
 			
 			using (SQLiteConnection connection = GetSQLiteConnection())
 			{
 				connection.Open();
-				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", recordName, idField, idValue);
+				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}' ORDER BY RecordTypeId", recordName, idField, idValue);
 				SQLiteCommand command = new SQLiteCommand(commandText, connection);
-				SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-				table = new DataTable(recordName);
-				adapter.Fill(table);
+				using (SQLiteDataReader reader = command.ExecuteReader())
+				{
+					if (reader != null && reader.HasRows)
+					{
+						int i = 0;
+						while (reader.Read())
+						{
+							string recordTypeId = reader[RECORD_TYPE_ID].ToString();
+							Type type = broker.Constructors[recordTypeId].Constructor.DeclaringType;
+							List<object> data = new List<object>();
+						
+							if (i == 0)
+							{
+								for(int j=0; j<reader.FieldCount; j++)
+								{
+									//table.Columns.Add(
+									//data.Add(GetRecordValue(reader[j]));
+								}
+							}
+							else
+							{
+							}
+							
+							i++;
+						}
+					}
+				}
+				//SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
+				//table = new DataTable(recordName);
+				//adapter.Fill(table);
 			}
 			
 			return table;
@@ -143,6 +173,35 @@ namespace Alexandria.SQLite
 			//return mechanism.GetRecordValue(value);
 			return value;
 		}		
+		#endregion
+
+		#region IPersistenceMechanism Members
+
+		public string Name
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool IsOpen
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public void Open()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Close()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public DataTable GetDataTable(string recordName, string idField, string idValue)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
 		#endregion
 	}
 }

@@ -6,7 +6,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Plugins
 {
-	public class PluginRepository
+	public class PluginRepository : IPluginRepository
 	{
 		#region Constructors
 		public PluginRepository(string searchPattern)
@@ -46,6 +46,15 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Methods
+		#endregion
+
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			//throw new Exception("The method or operation is not implemented.");
+		}
+
 		#endregion
 	}
 }

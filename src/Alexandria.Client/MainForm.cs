@@ -89,7 +89,7 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Private Fields
-		private PluginRepository repository;
+		private IPluginRepository repository;
 		private QueueController controller;
 		private string dbDir;
 		private string dbFile;
@@ -330,6 +330,10 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			base.OnLoad(e);
 
 			repository = new PluginRepository("Alexandria*.dll");
+			
+			SQLiteDataProvider mechanism = new SQLiteDataProvider(dbPath);
+			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
+			broker.Test();
 			
 			//TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });

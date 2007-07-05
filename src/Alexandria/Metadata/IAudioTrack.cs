@@ -27,17 +27,28 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
 	public interface IAudioTrack : IMetadata
 	{
+		[Property(4)]
 		string Album { get; }
+		
+		[Property(5)]
 		string Artist { get; }
+		
+		[Property(6)]
 		TimeSpan Duration { get; }
+		
+		[Property(7)]
 		DateTime ReleaseDate { get; }
+		
+		[Property(8)]
 		int TrackNumber { get; }
+		
+		[Property(9)]
 		string Format { get; }
 	}
 }
