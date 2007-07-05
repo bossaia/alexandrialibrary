@@ -107,6 +107,39 @@ namespace Alexandria.Persistence
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
+		
+		public void Test()
+		{
+			Dictionary<int, PropertyAttribute> orderedProperties = new Dictionary<int,PropertyAttribute>();
+			List<PropertyAttribute> unorderedProperties = new List<PropertyAttribute>();
+			Type type = typeof(Alexandria.Metadata.IAudioTrack);
+			foreach(PropertyInfo property in type.GetProperties())
+			{
+				foreach(Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+				{
+					PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+					if (propertyAttribute.Ordinal > 0)
+						orderedProperties.Add(propertyAttribute.Ordinal, propertyAttribute);
+					else unorderedProperties.Add(propertyAttribute);
+				}
+			}
+			foreach(Type interfaceType in type.GetInterfaces())
+			{
+				foreach(PropertyInfo interfaceProperty in interfaceType.GetProperties())
+				{
+					foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+					{
+						PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+						if (propertyAttribute.Ordinal > 0)
+							orderedProperties.Add(propertyAttribute.Ordinal, propertyAttribute);
+						else unorderedProperties.Add(propertyAttribute);
+					}
+				}
+			}
+			
+			int x = orderedProperties.Count;
+			int y = unorderedProperties.Count;
+		}
 		#endregion
 	}
 }

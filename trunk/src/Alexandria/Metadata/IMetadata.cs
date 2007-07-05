@@ -28,15 +28,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
 	public interface IMetadata
 	{
+		[Property(1)]
 		Guid Id { get; }
-		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
-		Uri Path { get; }
-		string Name { get; }
 		
+		[Property(FieldType.OneToManyChildren, LoadType.Property, StoreType.Id, "ParentId")]
+		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
+		
+		[Property(2)]
+		Uri Path { get; }
+		
+		[Property(3)]
+		string Name { get; }
 	}
 }
