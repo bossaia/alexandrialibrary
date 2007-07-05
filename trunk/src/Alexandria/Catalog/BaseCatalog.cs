@@ -34,7 +34,6 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {	
-	[Record("Catalog")]
 	public class BaseCatalog : ICatalog, IRecord
 	{
 		#region Constructors
@@ -60,6 +59,7 @@ namespace Alexandria.Catalog
 		public IUser User
 		{
 			get { return user; }
+			set { user = value; }
 		}
 
 		public IList<ICatalogAlbum> Albums

@@ -32,8 +32,7 @@ using Alexandria;
 using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
-{
-	[Record("AudioTrack")]
+{	
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors

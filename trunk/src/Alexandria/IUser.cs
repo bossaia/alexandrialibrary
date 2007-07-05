@@ -27,14 +27,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Alexandria.Persistence;
 
 namespace Alexandria
 {
-	public interface IUser
-	{
+	[Record("User")]
+	public interface IUser : IRecord
+	{		
+		[Property(2)]
 		string Name { get; }
+		
+		[Property(3)]
 		string Password { get; }
+		
 		bool Authenticate(string name, string password);
 	}
 }

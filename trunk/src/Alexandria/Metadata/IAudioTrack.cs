@@ -31,6 +31,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
+	[Record("AudioTrack")]
 	public interface IAudioTrack : IMetadata
 	{
 		[Property(4)]

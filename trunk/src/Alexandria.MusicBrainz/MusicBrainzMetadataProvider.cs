@@ -320,7 +320,7 @@ namespace Alexandria.MusicBrainz
 
 		#region IResource Members
 
-		public IIdentifier Id
+		public IMetadataIdentifier Id
 		{
 			get { throw new Exception("The method or operation is not implemented."); }
 		}

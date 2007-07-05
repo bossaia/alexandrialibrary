@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	[AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface|AttributeTargets.Struct)]
+	[AttributeUsage(AttributeTargets.Interface)]
 	public class RecordAttribute : Attribute
 	{
 		#region Constructors
@@ -40,15 +40,17 @@ namespace Alexandria.Persistence
 			this.name = name;
 		}
 		
-		public RecordAttribute(string name, string idField) : this(name)
+		public RecordAttribute(string name, string idField, string recordTypeIdField) : this(name)
 		{
 			this.idField = idField;
+			this.recordTypeIdField = recordTypeIdField;
 		}
 		#endregion
 		
 		#region Private Fields
 		private string name;
 		private string idField = "Id";
+		private string recordTypeIdField = "RecordTypeId";
 		#endregion
 		
 		#region Public Properties
@@ -60,6 +62,11 @@ namespace Alexandria.Persistence
 		public string IdField
 		{
 			get { return idField; }
+		}
+		
+		public string RecordTypeIdField
+		{
+			get { return recordTypeIdField; }
 		}
 		#endregion
 	}

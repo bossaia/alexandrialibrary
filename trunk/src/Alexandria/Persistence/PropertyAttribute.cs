@@ -73,6 +73,7 @@ namespace Alexandria.Persistence
 		private StoreType storeType = StoreType.Basic;
 		private string fieldName;
 		private string foreignKeyName;
+		private string otherKeyName;
 		private bool isRequired;
 		private bool isUnique;
 		private bool isPrimaryKey;
@@ -118,7 +119,13 @@ namespace Alexandria.Persistence
 			get { return foreignKeyName; }
 			set { foreignKeyName = value; }
 		}
-				
+		
+		public string OtherKeyName
+		{
+			get { return otherKeyName; }
+			set { otherKeyName = value; }
+		}
+		
 		public bool IsRequired
 		{
 			get { return isRequired; }
