@@ -29,13 +29,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {
-    public interface ICatalog
+	[Record("Catalog")]
+    public interface ICatalog : IRecord
     {
-        IUser User { get; }
+		[Property(2, FieldType.LinkToParent, LoadType.Property, StoreType.Id)]
+        IUser User { get; set; }
+        
+        [Property(FieldType.ManyToManyChildren, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="AlbumId")]
         IList<ICatalogAlbum> Albums { get; }
+        
+        [Property(FieldType.ManyToManyChildren, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="TrackId")]
         IList<ICatalogAudioTrack> Tracks { get; }
     }
 }

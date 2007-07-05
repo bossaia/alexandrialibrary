@@ -32,11 +32,8 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public interface IMetadata
-	{
-		[Property(1)]
-		Guid Id { get; }
-		
+	public interface IMetadata : IRecord
+	{		
 		[Property(FieldType.OneToManyChildren, LoadType.Property, StoreType.Id, "ParentId")]
 		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
 		

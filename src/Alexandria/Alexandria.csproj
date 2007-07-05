@@ -79,8 +79,6 @@
     <Compile Include="Media\IAudioCompactDisc.cs" />
     <Compile Include="Metadata\IAudioRelease.cs" />
     <Compile Include="Metadata\IAudioTrack.cs" />
-    <Compile Include="IdentificationResult.cs" />
-    <Compile Include="BaseIdentifier.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistence\IPersistenceBroker.cs" />
@@ -93,12 +91,12 @@
     <Compile Include="Persistence\PropertyMap.cs" />
     <Compile Include="Persistence\RecordAttribute.cs" />
     <Compile Include="Persistence\RecordMap.cs" />
+    <Compile Include="Persistence\RecordProperties.cs" />
     <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
     <Compile Include="Metadata\IGenre.cs" />
-    <Compile Include="IIdentifier.cs" />
     <Compile Include="Media\IImage.cs" />
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />

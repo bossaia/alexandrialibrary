@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria;
+using Alexandria.Metadata;
 
 namespace Alexandria.MusicBrainz
 {
-	public class MusicBrainzId : IIdentifier
+	public class MusicBrainzId : IMetadataIdentifier
 	{
 		#region Public Enum
 		public enum MusicBrainzIdType
@@ -27,12 +27,19 @@ namespace Alexandria.MusicBrainz
 		#endregion
 	
 		#region Private Fields
+		private IMetadata parent;
 		private Guid value;
 		private MusicBrainzIdType type = MusicBrainzIdType.MusicBrainzId;
 		private readonly Version version = new Version(1, 0, 0, 0);
 		#endregion
 	
 		#region IIdentifier Members
+		public IMetadata Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+		
 		public string Value
 		{
 			get { return value.ToString(); }
@@ -48,7 +55,7 @@ namespace Alexandria.MusicBrainz
 			get { return version; }
 		}
 
-		public IdentificationResult CompareTo(IIdentifier other)
+		public IdentificationResult CompareTo(IMetadataIdentifier other)
 		{
 			if (other != null)
 			{
@@ -74,6 +81,37 @@ namespace Alexandria.MusicBrainz
 		{			
 			return this.value.ToString();
 		}
+		#endregion
+
+		#region IRecord Members
+
+		public Guid Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public Alexandria.Persistence.IPersistenceBroker PersistenceBroker
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public void Save()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Delete()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
 		#endregion
 	}
 }

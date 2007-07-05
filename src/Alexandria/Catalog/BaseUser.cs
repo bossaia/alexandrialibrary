@@ -31,9 +31,8 @@ using System.Text;
 using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
-{
-	[Record("User")]
-	public class BaseUser : IUser, IRecord
+{	
+	public class BaseUser : IUser
 	{
 		#region Constructors
 		[Constructor("0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
@@ -73,7 +72,6 @@ namespace Alexandria.Catalog
 		#endregion
 
 		#region IRecord Members
-		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }

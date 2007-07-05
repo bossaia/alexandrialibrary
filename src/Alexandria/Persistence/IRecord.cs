@@ -27,13 +27,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Alexandria.Persistence
 {
 	public interface IRecord
 	{
+		[Property(1, IsPrimaryKey = true, IsRequired = true)]
 		Guid Id { get; }
+		
 		IPersistenceBroker PersistenceBroker { get; set; }
 		void Save();
 		void Delete();

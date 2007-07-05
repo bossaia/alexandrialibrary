@@ -333,7 +333,6 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			
 			SQLiteDataProvider mechanism = new SQLiteDataProvider(dbPath);
 			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
-			broker.Test();
 			
 			//TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });

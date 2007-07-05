@@ -33,8 +33,20 @@ using Alexandria.Persistence;
 namespace Alexandria.Metadata
 {
 	[Record("MetadataId")]
-	public interface IMetadataIdentifier : IIdentifier, IRecord
+	public interface IMetadataIdentifier : IRecord
 	{
-		IRecord Parent { get; set; }
+		[Property(2, FieldType.LinkToParent, LoadType.Constructor, StoreType.Id, "ParentId", IsRequired=true)]
+		IMetadata Parent { get; set; }
+	
+		[Property(3)]
+		string Value { get; }
+		
+		[Property(4)]
+		string Type { get; }
+		
+		[Property(5)]
+		Version Version { get; }
+						
+		IdentificationResult CompareTo(IMetadataIdentifier other);
 	}
 }

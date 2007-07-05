@@ -44,7 +44,7 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Public Static Methods
-		internal static IMetadataIdentifier CreatePuid(string value, IRecord parent)
+		internal static IMetadataIdentifier CreatePuid(string value, IMetadata parent)
 		{
 			return new MetadataIdentifier(Guid.NewGuid(), parent, value, ID_TYPE, version);
 		}

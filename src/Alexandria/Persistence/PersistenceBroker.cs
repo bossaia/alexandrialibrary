@@ -15,7 +15,7 @@ namespace Alexandria.Persistence
 			this.mechanism = mechanism;
 			
 			Initialize();
-			int x = constructors.Count;
+			int x = recordProperties.Count;
 		}
 		#endregion
 	
@@ -27,7 +27,7 @@ namespace Alexandria.Persistence
 		private IPluginRepository repository;
 		private IPersistenceMechanism mechanism;
 		private IDictionary<string, ConstructorMap> constructors = new Dictionary<string, ConstructorMap>();
-		private IDictionary<Type, RecordAttribute> recordAttributes = new Dictionary<Type, RecordAttribute>();
+		private IDictionary<Type, RecordProperties> recordProperties = new Dictionary<Type, RecordProperties>();
 		#endregion
 		
 		#region Private Methods
@@ -37,25 +37,62 @@ namespace Alexandria.Persistence
 			{
 				foreach (Type type in assembly.GetTypes())
 				{
-					foreach(Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
-					{
-						RecordAttribute recordAttribute = (RecordAttribute)typeAttribute;
-						recordAttributes.Add(type, recordAttribute);
-					}
-				
-					Type persistent = type.GetInterface("IPersistent");
-					if (persistent != null)
-					{
-						foreach (ConstructorInfo constructor in type.GetConstructors())
+					if (type.GetInterface("IRecord") != null)
+					{						
+						if (type.IsClass || type.IsValueType)
 						{
-							foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
-							{								
-								ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
-								ConstructorMap map = new ConstructorMap(constructorAttribute, constructor);
-								constructors.Add(constructorAttribute.RecordTypeId, map);
+							foreach (ConstructorInfo constructor in type.GetConstructors())
+							{
+								foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+								{								
+									ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
+									ConstructorMap map = new ConstructorMap(constructorAttribute, constructor);
+									constructors.Add(constructorAttribute.RecordTypeId, map);
+								}
+							}						
+						}
+						else if (type.IsInterface)
+						{
+							RecordAttribute recordAttribute = null;							
+							foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
+							{
+								recordAttribute = (RecordAttribute)typeAttribute;
+							}
+							
+							if (recordAttribute != null)
+							{
+								IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
+								IList<PropertyMap> advancedProperties = new List<PropertyMap>();
+
+								foreach (PropertyInfo property in type.GetProperties())
+								{
+									foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+									{
+										PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+										if (propertyAttribute.Ordinal > 0)
+											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
+										else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
+									}
+								}
+								foreach (Type interfaceType in type.GetInterfaces())
+								{
+									foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
+									{
+										foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+										{
+											PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+											if (propertyAttribute.Ordinal > 0)
+												basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
+											else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
+										}
+									}
+								}
+								
+								RecordProperties properties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
+								recordProperties.Add(type, properties);
 							}
 						}
-					}
+					}					
 				}
 			}
 		}
@@ -67,9 +104,9 @@ namespace Alexandria.Persistence
 			get { return mechanism; }
 		}
 		
-		public IDictionary<Type, RecordAttribute> RecordAttributes
+		public IDictionary<Type, RecordProperties> RecordProperties
 		{
-			get { return recordAttributes; }
+			get { return recordProperties; }
 		}
 		
 		public IDictionary<string, ConstructorMap> Constructors
@@ -79,12 +116,11 @@ namespace Alexandria.Persistence
 		
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{
-			RecordAttribute recordAttribute = RecordAttributes[typeof(T)];
-			DataTable table = mechanism.GetDataTable(recordAttribute.Name, recordAttribute.IdField, id.ToString());
-			ConstructorMap constructorMap = Constructors[table.Rows[0][RECORD_TYPE_ID].ToString()];
-			RecordMap map = new RecordMap(mechanism, table.Rows[0], constructorMap);
-			//ConstructorMap constructorMap = ConstructorsByType[typeof(T)];
-			//RecordMap recordMap = new RecordMap(mechanism, 
+			//RecordAttribute recordAttribute = RecordAttributes[typeof(T)];
+			RecordProperties properties = RecordProperties[typeof(T)];
+			DataTable table = mechanism.GetDataTable(properties.RecordAttribute.Name, properties.RecordAttribute.IdField, id.ToString());
+			//ConstructorMap constructorMap = Constructors[table.Rows[0][RECORD_TYPE_ID].ToString()];
+			//RecordMap map = new RecordMap(mechanism, table.Rows[0], constructorMap);
 			return default(T);
 		}
 
@@ -106,39 +142,6 @@ namespace Alexandria.Persistence
 		public void DisconnectFrom(IPersistenceMechanism mechanism)
 		{
 			throw new Exception("The method or operation is not implemented.");
-		}
-		
-		public void Test()
-		{
-			Dictionary<int, PropertyAttribute> orderedProperties = new Dictionary<int,PropertyAttribute>();
-			List<PropertyAttribute> unorderedProperties = new List<PropertyAttribute>();
-			Type type = typeof(Alexandria.Metadata.IAudioTrack);
-			foreach(PropertyInfo property in type.GetProperties())
-			{
-				foreach(Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
-				{
-					PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-					if (propertyAttribute.Ordinal > 0)
-						orderedProperties.Add(propertyAttribute.Ordinal, propertyAttribute);
-					else unorderedProperties.Add(propertyAttribute);
-				}
-			}
-			foreach(Type interfaceType in type.GetInterfaces())
-			{
-				foreach(PropertyInfo interfaceProperty in interfaceType.GetProperties())
-				{
-					foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
-					{
-						PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-						if (propertyAttribute.Ordinal > 0)
-							orderedProperties.Add(propertyAttribute.Ordinal, propertyAttribute);
-						else unorderedProperties.Add(propertyAttribute);
-					}
-				}
-			}
-			
-			int x = orderedProperties.Count;
-			int y = unorderedProperties.Count;
 		}
 		#endregion
 	}

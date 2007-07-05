@@ -123,7 +123,7 @@ namespace Alexandria.Client
 			}
 		}
 
-		private IIdentifier LookupPuid(Uri path)
+		private IMetadataIdentifier LookupPuid(Uri path)
 		{			
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
 			IAudioTrack track = factory.CreateAudioTrack(path);

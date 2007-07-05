@@ -450,7 +450,7 @@ namespace Alexandria.LastFM
 			string urlTrack = "&a[{0}]={1}&t[{0}]={2}&b[{0}]={3}&m[{0}]={4}&l[{0}]={5}&i[{0}]={6}";
 			
 			string id = string.Empty;
-			foreach(IIdentifier metadataId in track.MetadataIdentifiers)
+			foreach(IMetadataIdentifier metadataId in track.MetadataIdentifiers)
 			{
 				if (metadataId.Type.Contains("MusicBrainz"))
 					id = metadataId.Value;

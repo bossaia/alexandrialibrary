@@ -32,12 +32,20 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	[Record("MetadataID")]
+	public enum IdentificationResult
+	{
+		None = 0,
+		TypeMismatch,
+		VersionMismatch,
+		IdMismatch,
+		Match
+	}
+
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
 		[Constructor("585F6263-29FA-41ae-93A0-9250348CEB4D")]
-		public MetadataIdentifier(Guid id, IRecord parent, string value, string type, Version version)
+		public MetadataIdentifier(Guid id, IMetadata parent, string value, string type, Version version)
 		{
 			this.id = id;
 			this.parent = parent;
@@ -50,37 +58,40 @@ namespace Alexandria.Metadata
 	
 		#region Private Fields
 		private Guid id;
-		private IRecord parent;
+		private IMetadata parent;
 		private string value;
 		private string type;
 		private Version version;
 		private IPersistenceBroker persistenceBroker;
 		#endregion
 
-		#region IIdentifier Members
-		[Property(3, IsRequired=true)]
+		#region IMetadataIdentifier Members
+		public IMetadata Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+		
 		public string Value
 		{
 			get { return value; }
 		}
 
-		[Property(4)]
 		public string Type
 		{
 			get { return type; }
 		}
 
-		[Property(5)]
 		public Version Version
 		{
 			get { return version; }
 		}
 
-		public IdentificationResult CompareTo(IIdentifier other)
+		public IdentificationResult CompareTo(IMetadataIdentifier other)
 		{
 			if (other != null)
 			{
-				if (other is BaseIdentifier)
+				if (other is MetadataIdentifier)
 				{
 					if (this.Version.CompareTo(other.Version) == 0)
 					{
@@ -94,15 +105,6 @@ namespace Alexandria.Metadata
 				else return IdentificationResult.TypeMismatch;
 			}
 			else return IdentificationResult.None;
-		}
-		#endregion
-	
-		#region IMetadataIdentifier Members
-		[Property(2, FieldType.LinkToParent, LoadType.Constructor, StoreType.Id, IsRequired=true)]
-		public IRecord Parent
-		{
-			get { return parent; }
-			set { parent = value; }
 		}
 		#endregion
 
