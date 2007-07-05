@@ -121,7 +121,7 @@ namespace Alexandria.SQLite
 		{
 			IMappingStrategy childStrategy = strategy;
 
-			if (attribute.FieldType == FieldType.OneToOneChild || attribute.FieldType == FieldType.ManyToOneChild)
+			if (attribute.FieldType == FieldType.Parent)
 			{				
 				if (strategy.Function == MappingFunction.Delete || strategy.Function == MappingFunction.Save)
 				{
@@ -143,7 +143,7 @@ namespace Alexandria.SQLite
 				}
 				return CreateTableMap(childStrategy, property.PropertyType, attribute.CascadeSave, attribute.CascadeDelete);
 			}
-			else if (attribute.FieldType == FieldType.OneToManyChildren)
+			else //if (attribute.FieldType == FieldType.)
 			{				
 				if (strategy.Function == MappingFunction.Save || strategy.Function == MappingFunction.Delete)
 				{
@@ -173,7 +173,7 @@ namespace Alexandria.SQLite
 				//TODO: Fix this so that it can dynamically determine what the child type is
 				return null;				
 			}
-			else throw new ApplicationException("Could not get a child map for this property: invalid field type");
+			//else throw new ApplicationException("Could not get a child map for this property: invalid field type");
 		}
 		#endregion
 		
@@ -244,7 +244,7 @@ namespace Alexandria.SQLite
 								PropertyMap propertyMap = new PropertyMap(property, attribute);
 								TableMap childMap = null;
 
-								if (attribute.FieldType == FieldType.ManyToOneChild)
+								if (attribute.FieldType == FieldType.Parent) //FieldType.ManyToOneChild)
 								{
 									i = AddColumn(i, property, attribute, columns, data, dataCollections, strategy);
 								}

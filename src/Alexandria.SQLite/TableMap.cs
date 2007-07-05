@@ -395,20 +395,20 @@ namespace Alexandria.SQLite
 				PropertyMap childPropertyMap = childPair.Key;
 				TableMap childTableMap = childPair.Value;
 				
-				if (childPropertyMap.Attribute.FieldType == FieldType.ManyToOneChild)
+				if (childPropertyMap.Attribute.FieldType == FieldType.Parent) //FieldType.ManyToOneChild)
 				{
 					string childId = row[childPropertyMap.Attribute.FieldName].ToString();
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, new Guid(childId));
 					IPersistent child = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
 					childPropertyMap.Property.SetValue(record, child, null);
 				}
-				else if (childPropertyMap.Attribute.FieldType == FieldType.OneToOneChild)
+				else if (childPropertyMap.Attribute.FieldType == FieldType.Child) //FieldType.OneToOneChild)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
 					IPersistent child = childTableMap.GetChildRecordFromDataRow(childTableMap.Table.Rows[0]);
 					childPropertyMap.Property.SetValue(record, child, null);
 				}
-				else if (childPair.Key.Attribute.FieldType == FieldType.OneToManyChildren)
+				else  //if (childPair.Key.Attribute.FieldType == FieldType.OneToManyChildren)
 				{
 					LookupTable(childTableMap.Table, childPropertyMap.Attribute.ForeignKeyName, record.Id);
 					IList list = (IList)childPropertyMap.Property.GetValue(record, null);

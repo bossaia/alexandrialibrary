@@ -222,10 +222,11 @@ namespace Alexandria.Mp3Tunes
 						format = fileInfo.Extension.Remove(0, 1);
 					}
 
+					Uri originalPath = new Uri(trackFileName.InnerXml);
 					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 					
 					Guid id = Guid.NewGuid();
-					Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format);
+					Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format, originalPath);
 					trackId = TrackIdFactory.CreateTrackId(trackIdValue, track);
 					track.MetadataIdentifiers.Add(trackId);
 

@@ -30,15 +30,32 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.Mp3Tunes
 {
+	[Record("AudioTrack")]
 	internal class Track : BaseAudioTrack
 	{
 		#region Constructors
-		public Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string localName) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, localName)
+		[Constructor("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
+		public Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format, Uri originalPath) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
 		{
-		}		
+			this.originalPath = originalPath;
+		}
+		#endregion
+		
+		#region Private Fields
+		private Uri originalPath;
+		#endregion
+		
+		#region Public Properties
+		[Property(10, FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "AudioTrackId")]
+		public Uri OriginalPath
+		{
+			get { return originalPath; }
+			set { originalPath = value; }
+		}
 		#endregion
 	}
 }

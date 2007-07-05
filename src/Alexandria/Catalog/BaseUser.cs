@@ -95,7 +95,7 @@ namespace Alexandria.Catalog
 		#endregion
 		
 		#region Public Properties
-		[Property(FieldType.OneToManyChildren, LoadType.Property, StoreType.ForeignKey, "UserID", CascadeSave=true, CascadeDelete=true)]
+		[Property(FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "UserID", CascadeSave=true, CascadeDelete=true)]
 		public IList<ICatalog> Catalogs
 		{
 			get { return catalogs; }
