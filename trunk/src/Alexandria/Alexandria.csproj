@@ -70,6 +70,11 @@
     <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Persistence\ClassMap.cs" />
     <Compile Include="Persistence\ConstructorMap.cs" />
+    <Compile Include="Persistence\FieldAttribute.cs" />
+    <Compile Include="Persistence\FieldCascade.cs" />
+    <Compile Include="Persistence\FieldConstraint.cs" />
+    <Compile Include="Persistence\FieldLocation.cs" />
+    <Compile Include="Persistence\FieldRelationship.cs" />
     <Compile Include="Persistence\IDataStore.cs" />
     <Compile Include="Persistence\ClassAttribute.cs" />
     <Compile Include="Persistence\ConstructorAttribute.cs" />

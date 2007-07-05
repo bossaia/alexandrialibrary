@@ -35,7 +35,7 @@ namespace Alexandria.Metadata
 	[Record("MetadataId")]
 	public interface IMetadataIdentifier : IRecord
 	{
-		[Property(2, FieldType.LinkToParent, LoadType.Constructor, StoreType.Id, "ParentId", IsRequired=true)]
+		[Property(2, FieldType.Child, LoadType.Constructor, StoreType.Id, "ParentId", IsRequired=true)]
 		IMetadata Parent { get; set; }
 	
 		[Property(3)]

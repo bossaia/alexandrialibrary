@@ -51,46 +51,44 @@ namespace Alexandria.Persistence
 								}
 							}						
 						}
-						else if (type.IsInterface)
+						
+						RecordAttribute recordAttribute = null;							
+						foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
 						{
-							RecordAttribute recordAttribute = null;							
-							foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
-							{
-								recordAttribute = (RecordAttribute)typeAttribute;
-							}
-							
-							if (recordAttribute != null)
-							{
-								IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
-								IList<PropertyMap> advancedProperties = new List<PropertyMap>();
+							recordAttribute = (RecordAttribute)typeAttribute;
+						}
+						
+						if (recordAttribute != null)
+						{
+							IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
+							IList<PropertyMap> advancedProperties = new List<PropertyMap>();
 
-								foreach (PropertyInfo property in type.GetProperties())
+							foreach (PropertyInfo property in type.GetProperties())
+							{
+								foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
 								{
-									foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+									PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+									if (propertyAttribute.Ordinal > 0)
+										basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
+									else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
+								}
+							}
+							foreach (Type interfaceType in type.GetInterfaces())
+							{
+								foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
+								{
+									foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
 									{
 										PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
 										if (propertyAttribute.Ordinal > 0)
-											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
-										else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
+											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
+										else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
 									}
 								}
-								foreach (Type interfaceType in type.GetInterfaces())
-								{
-									foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
-									{
-										foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
-										{
-											PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-											if (propertyAttribute.Ordinal > 0)
-												basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
-											else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
-										}
-									}
-								}
-								
-								RecordProperties properties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
-								recordProperties.Add(type, properties);
 							}
+							
+							RecordProperties properties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
+							recordProperties.Add(type, properties);
 						}
 					}					
 				}
@@ -136,12 +134,7 @@ namespace Alexandria.Persistence
 
 		public void ConnectTo(IPersistenceMechanism mechanism)
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void DisconnectFrom(IPersistenceMechanism mechanism)
-		{
-			throw new Exception("The method or operation is not implemented.");
+			this.mechanism = mechanism;
 		}
 		#endregion
 	}

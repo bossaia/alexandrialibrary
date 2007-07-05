@@ -32,7 +32,8 @@ using Alexandria;
 using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
-{	
+{
+	[Record("AudioTrack")]
 	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
@@ -58,37 +59,31 @@ namespace Alexandria.Metadata
 		#endregion
 	
 		#region IAudioTrack Members
-		[Property(4)]
 		public string Album
 		{
 			get { return album; }
 		}
-
-		[Property(5)]
+		
 		public string Artist
 		{
 			get { return artist; }
 		}
 
-		[Property(6)]
 		public TimeSpan Duration
 		{
 			get { return duration; }
 		}
 
-		[Property(7)]
 		public DateTime ReleaseDate
 		{
 			get { return releaseDate; }
 		}
 
-		[Property(8)]
 		public int TrackNumber
 		{
 			get { return trackNumber; }
 		}
 
-		[Property(9)]
 		public string Format
 		{
 			get { return format; }

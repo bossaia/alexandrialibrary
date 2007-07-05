@@ -33,33 +33,9 @@ namespace Alexandria.Persistence
 {
 	public enum FieldType
 	{
-		/// <summary>
-		/// This field does not map to any record
-		/// </summary>
 		None = 0,
-		/// <summary>
-		/// This field maps to this record
-		/// </summary>
 		Basic,
-		/// <summary>
-		/// This field represents a link back to its parent record
-		/// </summary>
-		LinkToParent,
-		/// <summary>
-		/// This field and others all map to many children records
-		/// </summary>
-		ManyToManyChildren,
-		/// <summary>
-		/// This field and others all map to a child record
-		/// </summary>
-		ManyToOneChild,
-		/// <summary>
-		/// This field maps to a child record
-		/// </summary>
-		OneToOneChild,
-		/// <summary>
-		/// This field maps to many children records
-		/// </summary>
-		OneToManyChildren
+		Parent,
+		Child
 	}
 }

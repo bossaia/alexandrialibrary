@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	[AttributeUsage(AttributeTargets.Interface)]
+	[AttributeUsage(AttributeTargets.Interface|AttributeTargets.Class|AttributeTargets.Struct)]
 	public class RecordAttribute : Attribute
 	{
 		#region Constructors

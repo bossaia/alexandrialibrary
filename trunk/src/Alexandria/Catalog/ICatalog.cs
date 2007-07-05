@@ -36,13 +36,13 @@ namespace Alexandria.Catalog
 	[Record("Catalog")]
     public interface ICatalog : IRecord
     {
-		[Property(2, FieldType.LinkToParent, LoadType.Property, StoreType.Id)]
+		[Property(2, FieldType.Child, LoadType.Property, StoreType.Id)]
         IUser User { get; set; }
         
-        [Property(FieldType.ManyToManyChildren, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="AlbumId")]
+        [Property(FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="AlbumId")]
         IList<ICatalogAlbum> Albums { get; }
         
-        [Property(FieldType.ManyToManyChildren, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="TrackId")]
+        [Property(FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "CatalogId", OtherKeyName="TrackId")]
         IList<ICatalogAudioTrack> Tracks { get; }
     }
 }
