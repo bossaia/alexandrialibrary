@@ -25,9 +25,8 @@ namespace Alexandria.Persistence
 	
 		#region Private Fields
 		private IPluginRepository repository;
-		private IPersistenceMechanism mechanism;
-		private IDictionary<string, ConstructorMap> constructors = new Dictionary<string, ConstructorMap>();
-		private IDictionary<Type, RecordProperties> recordProperties = new Dictionary<Type, RecordProperties>();
+		private IPersistenceMechanism mechanism;		
+		private IDictionary<string, RecordProperties> recordProperties = new Dictionary<string, RecordProperties>();
 		#endregion
 		
 		#region Private Methods
@@ -38,61 +37,64 @@ namespace Alexandria.Persistence
 				foreach (Type type in assembly.GetTypes())
 				{
 					if (type.GetInterface("IRecord") != null)
-					{						
-						if (type.IsClass || type.IsValueType)
+					{
+						ConstructorMap constructorMap = new ConstructorMap();
+						if (GetConstructorMap(type, ref constructorMap))
 						{
-							foreach (ConstructorInfo constructor in type.GetConstructors())
+							RecordAttribute recordAttribute = GetRecordAttribute(type);
+							if (recordAttribute != null)
 							{
-								foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
-								{								
-									ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
-									ConstructorMap map = new ConstructorMap(constructorAttribute, constructor);
-									constructors.Add(constructorAttribute.RecordTypeId, map);
-								}
-							}						
-						}
-						
-						RecordAttribute recordAttribute = null;							
-						foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
-						{
-							recordAttribute = (RecordAttribute)typeAttribute;
-						}
-						
-						if (recordAttribute != null)
-						{
-							IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
-							IList<PropertyMap> advancedProperties = new List<PropertyMap>();
+								IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
+								IList<PropertyMap> advancedProperties = new List<PropertyMap>();
 
-							foreach (PropertyInfo property in type.GetProperties())
-							{
-								foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+								foreach (PropertyInfo property in type.GetProperties())
 								{
-									PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-									if (propertyAttribute.Ordinal > 0)
-										basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
-									else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
-								}
-							}
-							foreach (Type interfaceType in type.GetInterfaces())
-							{
-								foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
-								{
-									foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+									foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
 									{
 										PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
 										if (propertyAttribute.Ordinal > 0)
-											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
-										else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
+											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
+										else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
 									}
 								}
+								foreach (Type interfaceType in type.GetInterfaces())
+								{
+									foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
+									{
+										foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+										{
+											PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+											if (propertyAttribute.Ordinal > 0)
+												basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
+											else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
+										}
+									}
+								}
+								
+								RecordProperties properties = new RecordProperties(type, constructorMap, recordAttribute, basicProperties, advancedProperties);
+								recordProperties.Add(constructorMap.Attribute.RecordTypeId, properties);
 							}
-							
-							RecordProperties properties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
-							recordProperties.Add(type, properties);
 						}
 					}					
 				}
 			}
+		}
+		
+		private bool GetConstructorMap(Type type, ref ConstructorMap constructorMap)
+		{
+			if (type.IsClass || type.IsValueType)
+			{
+				foreach (ConstructorInfo constructor in type.GetConstructors())
+				{
+					foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+					{
+						ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
+						constructorMap = new ConstructorMap(constructorAttribute, constructor);
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 		#endregion
 	
@@ -102,23 +104,26 @@ namespace Alexandria.Persistence
 			get { return mechanism; }
 		}
 		
-		public IDictionary<Type, RecordProperties> RecordProperties
+		public IDictionary<string, RecordProperties> RecordProperties
 		{
 			get { return recordProperties; }
 		}
 		
-		public IDictionary<string, ConstructorMap> Constructors
+		public RecordAttribute GetRecordAttribute(Type type)
 		{
-			get { return constructors; }
+			RecordAttribute recordAttribute = null;
+			foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
+			{
+				recordAttribute = (RecordAttribute)typeAttribute;
+				break;
+			}
+			return recordAttribute;
 		}
 		
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{
-			//RecordAttribute recordAttribute = RecordAttributes[typeof(T)];
-			RecordProperties properties = RecordProperties[typeof(T)];
-			DataTable table = mechanism.GetDataTable(properties.RecordAttribute.Name, properties.RecordAttribute.IdField, id.ToString());
-			//ConstructorMap constructorMap = Constructors[table.Rows[0][RECORD_TYPE_ID].ToString()];
-			//RecordMap map = new RecordMap(mechanism, table.Rows[0], constructorMap);
+			RecordAttribute recordAttribute = GetRecordAttribute(typeof(T));
+			DataTable table = mechanism.GetDataTable(recordAttribute.Name, recordAttribute.IdField, id.ToString());
 			return default(T);
 		}
 
