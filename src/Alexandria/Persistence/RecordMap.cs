@@ -61,7 +61,7 @@ namespace Alexandria.Persistence
 		private IRecord record;
 		#endregion
 		
-		#region Private Methods		
+		#region Private Methods
 		private IDictionary<string, object> GetConstructorParameterMap()
 		{
 			if (data != null)

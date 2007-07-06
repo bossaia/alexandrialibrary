@@ -30,7 +30,7 @@ using System.Reflection;
 
 namespace Alexandria.Persistence
 {
-	public struct ConstructorMap
+	public class ConstructorMap
 	{
 		#region Constructors
 		public ConstructorMap(ConstructorAttribute attribute, ConstructorInfo constructor)
