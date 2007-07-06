@@ -135,7 +135,8 @@ namespace Alexandria.SQLite
 						while (reader.Read())
 						{
 							string recordTypeId = reader[RECORD_TYPE_ID].ToString();
-							Type type = broker.Constructors[recordTypeId].Constructor.DeclaringType;
+							RecordProperties properties = broker.RecordProperties[recordTypeId];							
+							//broker.Constructors[recordTypeId].Constructor.DeclaringType;
 							List<object> data = new List<object>();
 						
 							if (i == 0)
