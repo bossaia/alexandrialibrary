@@ -10,7 +10,8 @@ namespace Alexandria.Persistence
 		bool IsOpen { get; }
 		void Open();
 		void Close();
-		DataTable GetDataTable(string recordName, string idField, string idValue);
+		DataTable GetDataTable(IPersistenceBroker broker, Type type);
+		void FillDataTable(DataTable table, string idValue);
 		object GetDatabaseValue(object value);
 		object GetRecordValue(object value);
 	}

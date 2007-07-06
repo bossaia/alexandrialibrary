@@ -26,7 +26,8 @@ namespace Alexandria.Persistence
 		#region Private Fields
 		private IPluginRepository repository;
 		private IPersistenceMechanism mechanism;		
-		private IDictionary<string, RecordProperties> recordProperties = new Dictionary<string, RecordProperties>();
+		private IDictionary<string, ConstructorMap> constructorMaps = new Dictionary<string, ConstructorMap>();
+		private IDictionary<Type, RecordProperties> recordProperties = new Dictionary<Type, RecordProperties>();
 		#endregion
 		
 		#region Private Methods
@@ -38,78 +39,23 @@ namespace Alexandria.Persistence
 				{
 					if (type.GetInterface("IRecord") != null)
 					{
-						ConstructorMap constructorMap = new ConstructorMap();
-						if (GetConstructorMap(type, ref constructorMap))
-						{
-							RecordAttribute recordAttribute = GetRecordAttribute(type);
-							if (recordAttribute != null)
+						RecordProperties properties = GetRecordProperties(type);
+						if (properties != null)
+						{	
+							recordProperties.Add(type, properties);
+										
+							ConstructorMap constructorMap = GetConstructorMap(type);
+							if (constructorMap != null)
 							{
-								IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
-								IList<PropertyMap> advancedProperties = new List<PropertyMap>();
-
-								foreach (PropertyInfo property in type.GetProperties())
-								{
-									foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
-									{
-										PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-										if (propertyAttribute.Ordinal > 0)
-											basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
-										else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
-									}
-								}
-								foreach (Type interfaceType in type.GetInterfaces())
-								{
-									foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
-									{
-										foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
-										{
-											PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-											if (propertyAttribute.Ordinal > 0)
-												basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
-											else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
-										}
-									}
-								}
-								
-								RecordProperties properties = new RecordProperties(type, constructorMap, recordAttribute, basicProperties, advancedProperties);
-								recordProperties.Add(constructorMap.Attribute.RecordTypeId, properties);
+								constructorMaps.Add(constructorMap.Attribute.RecordTypeId, constructorMap);
 							}
 						}
 					}					
 				}
 			}
 		}
-		
-		private bool GetConstructorMap(Type type, ref ConstructorMap constructorMap)
-		{
-			if (type.IsClass || type.IsValueType)
-			{
-				foreach (ConstructorInfo constructor in type.GetConstructors())
-				{
-					foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
-					{
-						ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
-						constructorMap = new ConstructorMap(constructorAttribute, constructor);
-						return true;
-					}
-				}
-			}
-			return false;
-		}
-		#endregion
-	
-		#region IPersistenceBroker Members
-		public IPersistenceMechanism Mechanism
-		{
-			get { return mechanism; }
-		}
-		
-		public IDictionary<string, RecordProperties> RecordProperties
-		{
-			get { return recordProperties; }
-		}
-		
-		public RecordAttribute GetRecordAttribute(Type type)
+
+		private RecordAttribute GetRecordAttribute(Type type)
 		{
 			RecordAttribute recordAttribute = null;
 			foreach (Attribute typeAttribute in type.GetCustomAttributes(typeof(RecordAttribute), false))
@@ -119,11 +65,82 @@ namespace Alexandria.Persistence
 			}
 			return recordAttribute;
 		}
-		
-		public T LookupRecord<T>(Guid id) where T : IRecord
+
+		private RecordProperties GetRecordProperties(Type type)
 		{
-			RecordAttribute recordAttribute = GetRecordAttribute(typeof(T));
-			DataTable table = mechanism.GetDataTable(recordAttribute.Name, recordAttribute.IdField, id.ToString());
+			RecordProperties recordProperties = null;
+			RecordAttribute recordAttribute = GetRecordAttribute(type);
+			if (recordAttribute != null)
+			{
+				IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
+				IList<PropertyMap> advancedProperties = new List<PropertyMap>();
+
+				foreach (PropertyInfo property in type.GetProperties())
+				{
+					foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+					{
+						PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+						if (propertyAttribute.Ordinal > 0)
+							basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
+						else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
+					}
+				}
+				foreach (Type interfaceType in type.GetInterfaces())
+				{
+					foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
+					{
+						foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+						{
+							PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
+							if (propertyAttribute.Ordinal > 0)
+								basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
+							else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
+						}
+					}
+				}
+
+				recordProperties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
+			}
+
+			return recordProperties;
+		}
+		
+		private ConstructorMap GetConstructorMap(Type type)
+		{
+			if (type.IsClass || type.IsValueType)
+			{
+				foreach (ConstructorInfo constructor in type.GetConstructors())
+				{
+					foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+					{
+						ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
+						return new ConstructorMap(constructorAttribute, constructor);
+					}
+				}
+			}
+			return null;
+		}
+		#endregion
+	
+		#region IPersistenceBroker Members
+		public IPersistenceMechanism Mechanism
+		{
+			get { return mechanism; }
+		}
+		
+		public IDictionary<string, ConstructorMap> ConstructorMaps
+		{
+			get { return constructorMaps; }
+		}
+		
+		public IDictionary<Type, RecordProperties> RecordProperties
+		{
+			get { return recordProperties; }
+		}
+				
+		public T LookupRecord<T>(Guid id) where T : IRecord
+		{			
+			DataTable table = mechanism.GetDataTable(this, typeof(T));			
 			return default(T);
 		}
 

@@ -118,12 +118,18 @@ namespace Alexandria.SQLite
 			map.Delete();
 		}
 
-		public DataTable GetDataTable(PersistenceBroker broker, string recordName, string idField, string idValue)
+		public void FillDataTable(DataTable table, string idValue)
 		{
-			DataTable table = new DataTable(recordName);
+		}
+
+		public DataTable GetDataTable(IPersistenceBroker broker, Type type)
+		{
+			RecordProperties properties = broker.RecordProperties[type];
+			DataTable table = new DataTable(properties.RecordAttribute.Name);
 			
 			using (SQLiteConnection connection = GetSQLiteConnection())
 			{
+				/*
 				connection.Open();
 				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}' ORDER BY RecordTypeId", recordName, idField, idValue);
 				SQLiteCommand command = new SQLiteCommand(commandText, connection);
@@ -135,29 +141,19 @@ namespace Alexandria.SQLite
 						while (reader.Read())
 						{
 							string recordTypeId = reader[RECORD_TYPE_ID].ToString();
-							RecordProperties properties = broker.RecordProperties[recordTypeId];							
-							//broker.Constructors[recordTypeId].Constructor.DeclaringType;
+							RecordProperties properties = broker.RecordProperties[type];
 							List<object> data = new List<object>();
 						
-							if (i == 0)
+							for(int j = 0; j<properties.BasicPropertyMaps.Count; j++)
 							{
-								for(int j=0; j<reader.FieldCount; j++)
-								{
-									//table.Columns.Add(
-									//data.Add(GetRecordValue(reader[j]));
-								}
-							}
-							else
-							{
+								table.Columns.Add(properties.BasicPropertyMaps[j].Property.Name, properties.BasicPropertyMaps[j].Property.PropertyType);
 							}
 							
 							i++;
 						}
 					}
 				}
-				//SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-				//table = new DataTable(recordName);
-				//adapter.Fill(table);
+				*/
 			}
 			
 			return table;
