@@ -69,7 +69,7 @@
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Persistence\ClassMap.cs" />
-    <Compile Include="Persistence\ConstructorMap.cs" />
+    <Compile Include="Persistence\FactoryMap.cs" />
     <Compile Include="Persistence\FieldAttribute.cs" />
     <Compile Include="Persistence\FieldCascade.cs" />
     <Compile Include="Persistence\FieldConstraint.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Persistence\PersistenceBroker.cs" />
     <Compile Include="Persistence\PropertyMap.cs" />
     <Compile Include="Persistence\RecordAttribute.cs" />
-    <Compile Include="Persistence\RecordProperties.cs" />
+    <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordTypeAttribute.cs" />
     <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
