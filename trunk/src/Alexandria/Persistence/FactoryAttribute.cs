@@ -31,11 +31,11 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	[AttributeUsage(AttributeTargets.Constructor)]
-	public class ConstructorAttribute : Attribute
+	[AttributeUsage(AttributeTargets.Constructor|AttributeTargets.Method)]
+	public class FactoryAttribute : Attribute
 	{
 		#region Constructors
-		public ConstructorAttribute(string recordTypeId)
+		public FactoryAttribute(string recordTypeId)
 		{
 			this.recordTypeId = recordTypeId;
 		}

@@ -124,8 +124,9 @@ namespace Alexandria.SQLite
 
 		public DataTable GetDataTable(IPersistenceBroker broker, Type type)
 		{
-			RecordProperties properties = broker.RecordProperties[type];
-			DataTable table = new DataTable(properties.RecordAttribute.Name);
+			//RecordProperties properties = broker.RecordProperties[type];
+			RecordAttribute recordAttribute = broker.RecordAttributes[type];
+			DataTable table = new DataTable(recordAttribute.Name);
 			
 			using (SQLiteConnection connection = GetSQLiteConnection())
 			{

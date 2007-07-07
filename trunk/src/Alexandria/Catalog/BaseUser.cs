@@ -35,7 +35,7 @@ namespace Alexandria.Catalog
 	public class BaseUser : IUser
 	{
 		#region Constructors
-		[Constructor("0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
+		[Factory("0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
 		public BaseUser(Guid id, string name, string password)
 		{
 			this.id = id;

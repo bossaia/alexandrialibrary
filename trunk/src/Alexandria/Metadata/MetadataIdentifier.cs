@@ -44,7 +44,7 @@ namespace Alexandria.Metadata
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
-		[Constructor("585F6263-29FA-41ae-93A0-9250348CEB4D")]
+		[Factory("585F6263-29FA-41ae-93A0-9250348CEB4D")]
 		public MetadataIdentifier(Guid id, IMetadata parent, string value, string type, Version version)
 		{
 			this.id = id;

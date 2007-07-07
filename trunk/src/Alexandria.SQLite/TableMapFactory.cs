@@ -61,7 +61,7 @@ namespace Alexandria.SQLite
 		{
 			foreach (ConstructorInfo constructor in type.GetConstructors()) // (BindingFlags.Public))
 			{
-				foreach (ConstructorAttribute attribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+				foreach (FactoryAttribute attribute in constructor.GetCustomAttributes(typeof(FactoryAttribute), false))
 				{
 					return constructor;
 				}
