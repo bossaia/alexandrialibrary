@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Alexandria.Persistence
 {
-	public class RecordProperties
+	public class RecordMap
 	{
 		#region Constructors
-		public RecordProperties(Type type, RecordAttribute recordAttribute, IDictionary<int, PropertyMap> basicPropertyMaps, IList<PropertyMap> advancedPropertyMaps)
+		public RecordMap(Type type, RecordTypeAttribute recordTypeAttribute, IDictionary<int, PropertyMap> basicPropertyMaps, IList<PropertyMap> advancedPropertyMaps)
 		{
 			this.type = type;
-			this.recordAttribute = recordAttribute;
+			this.recordTypeAttribute = recordTypeAttribute;
 			this.basicPropertyMaps = basicPropertyMaps;
 			this.advancedPropertyMaps = advancedPropertyMaps;
 		}
@@ -18,7 +18,7 @@ namespace Alexandria.Persistence
 		
 		#region Private Fields
 		private Type type;
-		private RecordAttribute recordAttribute;
+		private RecordTypeAttribute recordTypeAttribute;
 		private IDictionary<int, PropertyMap> basicPropertyMaps;
 		private IList<PropertyMap> advancedPropertyMaps;
 		#endregion
@@ -29,9 +29,9 @@ namespace Alexandria.Persistence
 			get { return type; }
 		}
 		
-		public RecordAttribute RecordAttribute
+		public RecordTypeAttribute RecordTypeAttribute
 		{
-			get { return recordAttribute; }
+			get { return recordTypeAttribute; }
 		}
 		
 		public IDictionary<int, PropertyMap> BasicPropertyMaps

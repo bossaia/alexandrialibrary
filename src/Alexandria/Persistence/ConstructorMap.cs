@@ -30,23 +30,41 @@ using System.Reflection;
 
 namespace Alexandria.Persistence
 {
-	public class ConstructorMap
+	public enum FactoryMapType
+	{
+		Constructor,
+		Method
+	}
+
+	public class FactoryMap
 	{
 		#region Constructors
-		public ConstructorMap(ConstructorAttribute attribute, ConstructorInfo constructor)
+		public FactoryMap(FactoryAttribute attribute, ConstructorInfo constructor)
 		{
 			this.attribute = attribute;
 			this.constructor = constructor;
+			this.type = FactoryMapType.Constructor;
+		}
+		
+		public FactoryMap(FactoryAttribute attribute, object factory, MethodInfo method)
+		{
+			this.attribute = attribute;
+			this.factory = factory;
+			this.method = method;
+			this.type = FactoryMapType.Method;
 		}
 		#endregion
 		
 		#region Private Fields
-		private ConstructorAttribute attribute;
+		private FactoryAttribute attribute;
 		private ConstructorInfo constructor;
+		private object factory;
+		private MethodInfo method;
+		private FactoryMapType type;
 		#endregion
 		
 		#region Public Properties
-		public ConstructorAttribute Attribute
+		public FactoryAttribute Attribute
 		{
 			get { return attribute; }
 		}
@@ -54,6 +72,39 @@ namespace Alexandria.Persistence
 		public ConstructorInfo Constructor
 		{
 			get { return constructor; }
+		}
+		
+		public MethodInfo Method
+		{
+			get { return method; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public ParameterInfo[] GetParameters()
+		{
+			switch (type)
+			{
+				case FactoryMapType.Constructor:
+					return constructor.GetParameters();
+				case FactoryMapType.Method:
+					return method.GetParameters();
+				default:
+					return null;
+			}
+		}
+		
+		public IRecord GetRecord(object[] parameters)
+		{
+			switch (type)
+			{
+				case FactoryMapType.Constructor:
+					return (IRecord)constructor.Invoke(parameters);
+				case FactoryMapType.Method:
+					return (IRecord)method.Invoke(factory, parameters);
+				default:
+					return null;
+			}
 		}
 		#endregion
 	}

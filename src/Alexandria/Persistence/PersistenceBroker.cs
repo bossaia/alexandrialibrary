@@ -15,7 +15,7 @@ namespace Alexandria.Persistence
 			this.mechanism = mechanism;
 			
 			Initialize();
-			int x = recordProperties.Count;
+			int x = recordMaps.Count;
 		}
 		#endregion
 	
@@ -25,9 +25,10 @@ namespace Alexandria.Persistence
 	
 		#region Private Fields
 		private IPluginRepository repository;
-		private IPersistenceMechanism mechanism;		
-		private IDictionary<string, ConstructorMap> constructorMaps = new Dictionary<string, ConstructorMap>();
-		private IDictionary<Type, RecordProperties> recordProperties = new Dictionary<Type, RecordProperties>();
+		private IPersistenceMechanism mechanism;
+		private IDictionary<Type, RecordAttribute> recordAttributes = new Dictionary<Type, RecordAttribute>();
+		private IDictionary<string, FactoryMap> factoryMaps = new Dictionary<string, FactoryMap>();
+		private IDictionary<string, RecordMap> recordMaps = new Dictionary<string, RecordMap>();
 		#endregion
 		
 		#region Private Methods
@@ -37,20 +38,26 @@ namespace Alexandria.Persistence
 			{
 				foreach (Type type in assembly.GetTypes())
 				{
+					FactoryMap factoryMap = GetFactoryMap(type);
+					if (factoryMap != null)
+					{
+						factoryMaps.Add(factoryMap.Attribute.RecordTypeId, factoryMap);
+					}
+				
 					if (type.GetInterface("IRecord") != null)
 					{
-						RecordProperties properties = GetRecordProperties(type);
-						if (properties != null)
-						{	
-							recordProperties.Add(type, properties);
-										
-							ConstructorMap constructorMap = GetConstructorMap(type);
-							if (constructorMap != null)
-							{
-								constructorMaps.Add(constructorMap.Attribute.RecordTypeId, constructorMap);
-							}
+						RecordAttribute recordAttribute = GetRecordAttribute(type);
+						if (recordAttribute != null)
+						{
+							recordAttributes.Add(type, recordAttribute);
 						}
-					}					
+					
+						RecordMap recordMap = GetRecordMap(type);
+						if (recordMap != null)
+						{
+							recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
+						}
+					}				
 				}
 			}
 		}
@@ -66,11 +73,22 @@ namespace Alexandria.Persistence
 			return recordAttribute;
 		}
 
-		private RecordProperties GetRecordProperties(Type type)
+		private RecordTypeAttribute GetRecordTypeAttribute(Type type)
 		{
-			RecordProperties recordProperties = null;
-			RecordAttribute recordAttribute = GetRecordAttribute(type);
-			if (recordAttribute != null)
+			RecordTypeAttribute recordTypeAttribute = null;
+			foreach (Attribute attribute in type.GetCustomAttributes(typeof(RecordTypeAttribute), false))
+			{
+				recordTypeAttribute = (RecordTypeAttribute)attribute;
+				break;
+			}
+			return recordTypeAttribute;
+		}
+
+		private RecordMap GetRecordMap(Type type)
+		{
+			RecordMap recordMap = null;
+			RecordTypeAttribute recordTypeAttribute = GetRecordTypeAttribute(type);
+			if (recordTypeAttribute != null)
 			{
 				IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
 				IList<PropertyMap> advancedProperties = new List<PropertyMap>();
@@ -99,22 +117,41 @@ namespace Alexandria.Persistence
 					}
 				}
 
-				recordProperties = new RecordProperties(type, recordAttribute, basicProperties, advancedProperties);
+				recordMap = new RecordMap(type, recordTypeAttribute, basicProperties, advancedProperties);
 			}
 
-			return recordProperties;
+			return recordMap;
 		}
 		
-		private ConstructorMap GetConstructorMap(Type type)
+		private FactoryMap GetFactoryMap(Type type)
 		{
 			if (type.IsClass || type.IsValueType)
 			{
-				foreach (ConstructorInfo constructor in type.GetConstructors())
+				ConstructorInfo factoryConstructor = null;
+				object factory = null;
+			
+				foreach (ConstructorInfo constructor in type.GetConstructors(BindingFlags.Public|BindingFlags.Instance))
 				{
-					foreach (ConstructorAttribute ctorAttribute in constructor.GetCustomAttributes(typeof(ConstructorAttribute), false))
+					if (constructor.GetParameters().Length == 0)
 					{
-						ConstructorAttribute constructorAttribute = (ConstructorAttribute)ctorAttribute;
-						return new ConstructorMap(constructorAttribute, constructor);
+						factoryConstructor = constructor;
+					}
+					
+					foreach (FactoryAttribute attribute in constructor.GetCustomAttributes(typeof(FactoryAttribute), false))
+					{
+						FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
+						return new FactoryMap(factoryAttribute, constructor);
+					}
+				}
+				
+				factory = factoryConstructor.Invoke(new object[0]);
+				
+				foreach(MethodInfo method in type.GetMethods(BindingFlags.Static|BindingFlags.Public))
+				{
+					foreach (FactoryAttribute attribute in method.GetCustomAttributes(typeof(FactoryAttribute), false))
+					{
+						FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
+						return new FactoryMap(factoryAttribute, factory, method);
 					}
 				}
 			}
@@ -127,15 +164,20 @@ namespace Alexandria.Persistence
 		{
 			get { return mechanism; }
 		}
-		
-		public IDictionary<string, ConstructorMap> ConstructorMaps
+
+		public IDictionary<Type, RecordAttribute> RecordAttributes
 		{
-			get { return constructorMaps; }
+			get { return recordAttributes; }
 		}
 		
-		public IDictionary<Type, RecordProperties> RecordProperties
+		public IDictionary<string, FactoryMap> FactoryMaps
 		{
-			get { return recordProperties; }
+			get { return factoryMaps; }
+		}
+				
+		public IDictionary<string, RecordMap> RecordMaps
+		{
+			get { return recordMaps; }
 		}
 				
 		public T LookupRecord<T>(Guid id) where T : IRecord

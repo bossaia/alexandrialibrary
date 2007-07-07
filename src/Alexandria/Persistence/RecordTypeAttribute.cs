@@ -28,33 +28,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
 
-namespace Alexandria.Mp3Tunes
+namespace Alexandria.Persistence
 {
-	[Record("AudioTrack")]
-	internal class Track : BaseAudioTrack
+	public class RecordTypeAttribute : Attribute
 	{
 		#region Constructors
-		[Factory("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
-		public Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format, Uri originalPath) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
+		public RecordTypeAttribute(string id)
 		{
-			this.originalPath = originalPath;
+			this.id = id;
 		}
 		#endregion
 		
 		#region Private Fields
-		private Uri originalPath;
+		private string id;
 		#endregion
 		
 		#region Public Properties
-		[Property(10, FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "AudioTrackId")]
-		public Uri OriginalPath
+		public string Id
 		{
-			get { return originalPath; }
-			set { originalPath = value; }
+			get { return id; }
 		}
 		#endregion
 	}

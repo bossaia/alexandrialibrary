@@ -77,7 +77,7 @@
     <Compile Include="Persistence\FieldRelationship.cs" />
     <Compile Include="Persistence\IDataStore.cs" />
     <Compile Include="Persistence\ClassAttribute.cs" />
-    <Compile Include="Persistence\ConstructorAttribute.cs" />
+    <Compile Include="Persistence\FactoryAttribute.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
     <Compile Include="Metadata\IArtist.cs" />
     <Compile Include="Media\IAudio.cs" />
@@ -95,8 +95,8 @@
     <Compile Include="Persistence\PersistenceBroker.cs" />
     <Compile Include="Persistence\PropertyMap.cs" />
     <Compile Include="Persistence\RecordAttribute.cs" />
-    <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordProperties.cs" />
+    <Compile Include="Persistence\RecordTypeAttribute.cs" />
     <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
