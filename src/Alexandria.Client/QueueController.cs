@@ -177,6 +177,9 @@ namespace Alexandria.Client
 				DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
 				Uri path = new Uri(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
+				
+				//TODO: fix this to use an IPersistenceBroker
+				/*
 				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);
 				selectedTrack.MetadataIdentifiers.Add(id);
 				
@@ -198,6 +201,7 @@ namespace Alexandria.Client
 					audio = new Fmod.LocalSound(path.ToString());
 					//audio.Load();
 				}
+				*/
 			}
 			
 		}
