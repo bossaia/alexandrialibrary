@@ -35,11 +35,11 @@ using Alexandria.Persistence;
 namespace Alexandria.Mp3Tunes
 {
 	[Record("AudioTrack")]
+	[RecordType("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
 	internal class Track : BaseAudioTrack
 	{
 		#region Constructors
-		[Factory("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
-		public Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format, Uri originalPath) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
+		internal Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format, Uri originalPath) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
 		{
 			this.originalPath = originalPath;
 		}

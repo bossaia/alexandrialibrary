@@ -144,14 +144,17 @@ namespace Alexandria.Persistence
 					}
 				}
 				
-				factory = factoryConstructor.Invoke(new object[0]);
-				
 				foreach(MethodInfo method in type.GetMethods(BindingFlags.Static|BindingFlags.Public))
 				{
 					foreach (FactoryAttribute attribute in method.GetCustomAttributes(typeof(FactoryAttribute), false))
 					{
-						FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
-						return new FactoryMap(factoryAttribute, factory, method);
+						if (factoryConstructor != null)
+						{
+							factory = factoryConstructor.Invoke(new object[0]);
+							FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
+							return new FactoryMap(factoryAttribute, factory, method);
+						}
+						else throw new ApplicationException("Could not find the factory for type: " + type.Name);
 					}
 				}
 			}

@@ -30,10 +30,14 @@
 using System;
 using System.Diagnostics;
 using Alexandria;
+using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.MusicBrainz
 {
-    public class SimpleTrack
+	[Record("AudioTrack")]
+	[RecordType("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
+    public class SimpleTrack : IAudioTrack
     {
 		#region Private Fields
         private string artist;
@@ -51,6 +55,7 @@ namespace Alexandria.MusicBrainz
 		{
 		}
 		
+		[Factory("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
         public SimpleTrack(int index, int length)
         {
             this.index = index;
@@ -125,5 +130,75 @@ namespace Alexandria.MusicBrainz
 				Index, Artist, Title, Minutes, Seconds);
 		}
 		#endregion
-    }
+
+		#region IAudioTrack Members
+
+
+		public TimeSpan Duration
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public DateTime ReleaseDate
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public string Format
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IMetadata Members
+
+		public System.Collections.Generic.IList<IMetadataIdentifier> MetadataIdentifiers
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public Uri Path
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public string Name
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		#endregion
+
+		#region IRecord Members
+
+		public Guid Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public IPersistenceBroker PersistenceBroker
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public void Save()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void Delete()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		#endregion
+	}
 }

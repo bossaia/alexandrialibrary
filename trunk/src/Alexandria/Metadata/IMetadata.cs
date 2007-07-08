@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 namespace Alexandria.Metadata
 {
 	public interface IMetadata : IRecord
-	{		
+	{
 		[Property(FieldType.Parent, LoadType.Property, StoreType.Id, "ParentId")]
 		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
 		
