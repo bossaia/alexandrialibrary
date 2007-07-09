@@ -34,11 +34,12 @@ namespace Alexandria.Persistence
 	public struct LinkRecord
 	{
 		#region Constructors
-		public LinkRecord(string name, string parentFieldName, string childFieldName)
+		public LinkRecord(string name, string parentFieldName, string childFieldName, FieldMap fieldMap)
 		{
 			this.name = name;
 			this.parentFieldName = parentFieldName;
 			this.childFieldName = childFieldName;
+			this.fieldMap = fieldMap;
 		}
 		#endregion
 		
@@ -46,6 +47,7 @@ namespace Alexandria.Persistence
 		private string name;
 		private string parentFieldName;
 		private string childFieldName;
+		private FieldMap fieldMap;
 		#endregion
 		
 		#region Public Properties
@@ -62,6 +64,11 @@ namespace Alexandria.Persistence
 		public string ChildFieldName
 		{
 			get { return childFieldName; }
+		}
+		
+		public FieldMap FieldMap
+		{
+			get { return fieldMap; }
 		}
 		#endregion
 	}

@@ -41,6 +41,8 @@ namespace Alexandria.Metadata
 		Match
 	}
 
+	[Record("MetadataId")]
+	[RecordType("585F6263-29FA-41ae-93A0-9250348CEB4D")]
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
@@ -109,7 +111,6 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IPersistant Members
-		[Property(1, IsPrimaryKey=true, IsRequired=true)]
 		public Guid Id
 		{
 			get { return id; }
