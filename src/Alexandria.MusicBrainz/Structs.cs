@@ -1,3 +1,30 @@
+#region License (MIT)
+/*
+Copyright (c) 2007 Dan Poage
+
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+*/
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -68,6 +95,15 @@ namespace Alexandria.MusicBrainz
 	#region ClientVersion
 	public struct ClientVersion
 	{
+		#region Constructors
+		public ClientVersion(int major, int minor, int revision)
+		{
+			this.major = major;
+			this.minor = minor;
+			this.revision = revision;
+		}
+		#endregion
+	
 		#region Private Fields
 		private int major;
 		private int minor;
@@ -76,15 +112,6 @@ namespace Alexandria.MusicBrainz
 
 		#region Private Static Fields
 		private static ClientVersion defaultVersion = new ClientVersion(0, 0, 0);
-		#endregion
-
-		#region Constructors
-		public ClientVersion(int major, int minor, int revision)
-		{
-			this.major = major;
-			this.minor = minor;
-			this.revision = revision;
-		}
 		#endregion
 
 		#region Public Properties
@@ -188,6 +215,14 @@ namespace Alexandria.MusicBrainz
 	#region ServerInfo
 	public struct ServerInfo
 	{
+		#region Constructors
+		public ServerInfo(string address, short port)
+		{
+			this.address = address;
+			this.port = port;
+		}
+		#endregion
+	
 		#region Private Fields
 		private string address;
 		private short port;
@@ -195,14 +230,6 @@ namespace Alexandria.MusicBrainz
 
 		#region Private Static Fields
 		private static ServerInfo defaultServer = new ServerInfo("mm.musicbrainz.org", 80);
-		#endregion
-
-		#region Constructors
-		public ServerInfo(string address, short port)
-		{
-			this.address = address;
-			this.port = port;
-		}
 		#endregion
 
 		#region Public Properties
@@ -269,14 +296,6 @@ namespace Alexandria.MusicBrainz
 	#region Mp3Info
 	public struct Mp3Info
 	{
-		#region Private Fields
-		private string fileName;
-		private int duration;
-		private int bitRate;
-		private bool stereo;
-		private int sampleRate;
-		#endregion
-		
 		#region Constructors
 		public Mp3Info(string fileName, int duration, int bitRate, bool stereo, int sampleRate)
 		{
@@ -286,6 +305,14 @@ namespace Alexandria.MusicBrainz
 			this.stereo = stereo;
 			this.sampleRate = sampleRate;
 		}
+		#endregion
+		
+		#region Private Fields
+		private string fileName;
+		private int duration;
+		private int bitRate;
+		private bool stereo;
+		private int sampleRate;
 		#endregion
 		
 		#region Public Properties

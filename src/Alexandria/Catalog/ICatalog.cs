@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
