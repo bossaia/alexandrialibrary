@@ -34,22 +34,22 @@ namespace Alexandria.Metadata
 	[Record("AudioTrack")]
 	public interface IAudioTrack : IMetadata
 	{
-		[Property(4)]
+		[Field(4, FieldConstraint.Required)]
 		string Album { get; }
 		
-		[Property(5)]
+		[Field(5)]
 		string Artist { get; }
 		
-		[Property(6)]
+		[Field(6)]
 		TimeSpan Duration { get; }
 		
-		[Property(7)]
+		[Field(7)]
 		DateTime ReleaseDate { get; }
 		
-		[Property(8)]
+		[Field(8)]
 		int TrackNumber { get; }
 		
-		[Property(9)]
+		[Field(9)]
 		string Format { get; }
 	}
 }

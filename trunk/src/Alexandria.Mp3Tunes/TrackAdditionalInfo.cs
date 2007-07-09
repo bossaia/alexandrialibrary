@@ -27,28 +27,59 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alexandria.Metadata;
+using Alexandria;
 using Alexandria.Persistence;
 
-namespace Alexandria.Catalog
+namespace Alexandria.Mp3Tunes
 {
-	[Record("Catalog")]
-    public interface ICatalog : IRecord
-    {
-		[Field(2, FieldConstraint.Required)]
-		string Name { get; }
-    
-		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascade.None)]
-		IUser User { get; set; }
+	[Record("Mp3tunesAudioTrack")]
+	[RecordType("4D5F5337-A34B-4f38-A175-18AF9F1A8A8D")]
+	public class TrackAdditionalInfo : IRecord
+	{
+		#region Constructors
+		[Factory("4D5F5337-A34B-4f38-A175-18AF9F1A8A8D")]
+		public TrackAdditionalInfo(Guid id, string originalPath)
+		{
+			this.id = id;
+			this.originalPath = new Uri(originalPath);
+		}
+		#endregion
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascade.None)]
-        IList<IAlbum> Albums { get; }
-        
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascade.None)]
-        IList<IArtist> Artists { get; }
-        
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascade.None)]
-        IList<IAudioTrack> Tracks { get; }
-    }
+		#region Private Fields
+		private Guid id;
+		private IPersistenceBroker persistenceBroker;
+		private Uri originalPath;
+		#endregion
+
+		#region IRecord Members
+		public Guid Id
+		{
+			get { return id; }
+		}
+
+		public IPersistenceBroker PersistenceBroker
+		{
+			get { return persistenceBroker; }
+			set { persistenceBroker = value; }
+		}
+
+		public void Save()
+		{
+			persistenceBroker.SaveRecord(this);
+		}
+
+		public void Delete()
+		{
+			persistenceBroker.DeleteRecord(this);
+		}
+		#endregion
+		
+		#region Public Properties
+		[Property(2)]
+		public Uri OriginalPath
+		{
+			get { return originalPath; }
+		}
+		#endregion
+	}
 }

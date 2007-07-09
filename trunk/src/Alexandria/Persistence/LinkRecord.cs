@@ -28,27 +28,41 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
 
-namespace Alexandria.Catalog
+namespace Alexandria.Persistence
 {
-	[Record("Catalog")]
-    public interface ICatalog : IRecord
-    {
-		[Field(2, FieldConstraint.Required)]
-		string Name { get; }
-    
-		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascade.None)]
-		IUser User { get; set; }
+	public struct LinkRecord
+	{
+		#region Constructors
+		public LinkRecord(string name, string parentFieldName, string childFieldName)
+		{
+			this.name = name;
+			this.parentFieldName = parentFieldName;
+			this.childFieldName = childFieldName;
+		}
+		#endregion
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascade.None)]
-        IList<IAlbum> Albums { get; }
-        
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascade.None)]
-        IList<IArtist> Artists { get; }
-        
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascade.None)]
-        IList<IAudioTrack> Tracks { get; }
-    }
+		#region Private Fields
+		private string name;
+		private string parentFieldName;
+		private string childFieldName;
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public string ParentFieldName
+		{
+			get { return parentFieldName; }
+		}
+		
+		public string ChildFieldName
+		{
+			get { return childFieldName; }
+		}
+		#endregion
+	}
 }

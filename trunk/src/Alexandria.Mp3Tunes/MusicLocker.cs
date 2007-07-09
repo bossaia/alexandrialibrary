@@ -248,7 +248,9 @@ namespace Alexandria.Mp3Tunes
 		[Factory("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
 		public IAudioTrack GetTrack(Guid id, string path, string name, string album, string artist, int duration, long releaseDate, int trackNumber, string format, string originalPath)
 		{
-			return new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format, new Uri(originalPath));
+			Track track = new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
+			track.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), originalPath);
+			return track;
 		}
 		#endregion
 		

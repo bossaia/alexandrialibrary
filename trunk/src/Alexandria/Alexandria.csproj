@@ -48,6 +48,7 @@
     <Compile Include="Catalog\ICatalogAlbum.cs" />
     <Compile Include="Catalog\ICatalogArtist.cs" />
     <Compile Include="Catalog\ICatalogAudioTrack.cs" />
+    <Compile Include="Catalog\IUser.cs" />
     <Compile Include="Catalog\IUserCatalog.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
@@ -92,8 +93,9 @@
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />
     <Compile Include="Persistence\IRecord.cs" />
+    <Compile Include="Persistence\LinkRecord.cs" />
     <Compile Include="Persistence\PersistenceBroker.cs" />
-    <Compile Include="Persistence\PropertyMap.cs" />
+    <Compile Include="Persistence\FieldMap.cs" />
     <Compile Include="Persistence\RecordAttribute.cs" />
     <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordTypeAttribute.cs" />
@@ -110,7 +112,6 @@
     <Compile Include="Metadata\ISong.cs" />
     <Compile Include="Metadata\IStyle.cs" />
     <Compile Include="Media\IText.cs" />
-    <Compile Include="IUser.cs" />
     <Compile Include="Media\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Persistence\FieldType.cs" />

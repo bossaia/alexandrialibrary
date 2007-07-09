@@ -34,45 +34,53 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {	
+	[Record("Catalog")]
+	[RecordType("A7612A3C-1A83-4b66-80AD-AB001CA67EA3")]
 	public class BaseCatalog : ICatalog, IRecord
 	{
 		#region Constructors
 		[Factory("A7612A3C-1A83-4b66-80AD-AB001CA67EA3")]
-		public BaseCatalog(Guid id, IUser user)
+		public BaseCatalog(Guid id, string name)
 		{
 			this.id = id;
-			this.user = user;
+			this.name = name;
 		}
 		#endregion
 	
 		#region Private Fields
 		private Guid id;
+		private string name;
 		private IUser user;
-		private List<ICatalogAlbum> albums = new List<ICatalogAlbum>();
-		private List<ICatalogArtist> artists = new List<ICatalogArtist>();
-		private List<ICatalogAudioTrack> tracks = new List<ICatalogAudioTrack>();
+		private List<IAlbum> albums = new List<IAlbum>();
+		private List<IArtist> artists = new List<IArtist>();
+		private List<IAudioTrack> tracks = new List<IAudioTrack>();
 		
 		private IPersistenceBroker persistenceBroker;
 		#endregion
 
 		#region ICatalog Members
+		public string Name
+		{
+			get { return name; }
+		}
+		
 		public IUser User
 		{
 			get { return user; }
 			set { user = value; }
 		}
 
-		public IList<ICatalogAlbum> Albums
+		public IList<IAlbum> Albums
 		{
 			get { return albums; }
 		}
 
-		public IList<ICatalogArtist> Artists
+		public IList<IArtist> Artists
 		{
 			get { return artists; }
 		}
 
-		public IList<ICatalogAudioTrack> Tracks
+		public IList<IAudioTrack> Tracks
 		{
 			get { return tracks; }
 		}

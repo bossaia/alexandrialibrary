@@ -90,34 +90,51 @@ namespace Alexandria.Persistence
 			RecordTypeAttribute recordTypeAttribute = GetRecordTypeAttribute(type);
 			if (recordTypeAttribute != null)
 			{
-				IDictionary<int, PropertyMap> basicProperties = new Dictionary<int, PropertyMap>();
-				IList<PropertyMap> advancedProperties = new List<PropertyMap>();
+				IDictionary<int, FieldMap> basicFieldMaps = new Dictionary<int, FieldMap>();
+				IList<FieldMap> advancedFieldMaps = new List<FieldMap>();
+				IList<LinkRecord> linkRecords = new List<LinkRecord>();
 
 				foreach (PropertyInfo property in type.GetProperties())
 				{
-					foreach (Attribute attribute in property.GetCustomAttributes(typeof(PropertyAttribute), true))
+					foreach (Attribute attribute in property.GetCustomAttributes(typeof(FieldAttribute), true))
 					{
-						PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-						if (propertyAttribute.Ordinal > 0)
-							basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, property));
-						else advancedProperties.Add(new PropertyMap(propertyAttribute, property));
+						FieldAttribute fieldAttribute = (FieldAttribute)attribute;
+						if (fieldAttribute.Ordinal > 0)
+							basicFieldMaps.Add(fieldAttribute.Ordinal, new FieldMap(fieldAttribute, property));
+						else
+						{
+							advancedFieldMaps.Add(new FieldMap(fieldAttribute, property));
+
+							if (fieldAttribute.Type == FieldType.Parent && fieldAttribute.Relationship == FieldRelationship.ManyToMany)
+							{
+								linkRecords.Add(new LinkRecord(fieldAttribute.ForeignRecordName, fieldAttribute.ForeignParentFieldName, fieldAttribute.ForeignChildFieldName));
+							}
+						}
 					}
 				}
 				foreach (Type interfaceType in type.GetInterfaces())
 				{
 					foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
 					{
-						foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(PropertyAttribute), true))
+						foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(FieldAttribute), true))
 						{
-							PropertyAttribute propertyAttribute = (PropertyAttribute)attribute;
-							if (propertyAttribute.Ordinal > 0)
-								basicProperties.Add(propertyAttribute.Ordinal, new PropertyMap(propertyAttribute, interfaceProperty));
-							else advancedProperties.Add(new PropertyMap(propertyAttribute, interfaceProperty));
+							FieldAttribute fieldAttribute = (FieldAttribute)attribute;
+							if (fieldAttribute.Ordinal > 0)
+								basicFieldMaps.Add(fieldAttribute.Ordinal, new FieldMap(fieldAttribute, interfaceProperty));
+							else
+							{
+								advancedFieldMaps.Add(new FieldMap(fieldAttribute, interfaceProperty));
+
+								if (fieldAttribute.Type == FieldType.Parent && fieldAttribute.Relationship == FieldRelationship.ManyToMany)
+								{
+									linkRecords.Add(new LinkRecord(fieldAttribute.ForeignRecordName, fieldAttribute.ForeignParentFieldName, fieldAttribute.ForeignChildFieldName));
+								}
+							}
 						}
 					}
 				}
 
-				recordMap = new RecordMap(type, recordTypeAttribute, basicProperties, advancedProperties);
+				recordMap = new RecordMap(type, recordTypeAttribute, basicFieldMaps, advancedFieldMaps, linkRecords);
 			}
 
 			return recordMap;
