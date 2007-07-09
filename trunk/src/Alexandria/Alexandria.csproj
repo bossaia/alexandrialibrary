@@ -42,14 +42,9 @@
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
     <Compile Include="Catalog\BaseCatalog.cs" />
-    <Compile Include="Catalog\BaseCatalogAlbum.cs" />
     <Compile Include="Catalog\BaseUser.cs" />
     <Compile Include="Catalog\ICatalog.cs" />
-    <Compile Include="Catalog\ICatalogAlbum.cs" />
-    <Compile Include="Catalog\ICatalogArtist.cs" />
-    <Compile Include="Catalog\ICatalogAudioTrack.cs" />
     <Compile Include="Catalog\IUser.cs" />
-    <Compile Include="Catalog\IUserCatalog.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
     <Compile Include="Media\IO\AudioStream.cs" />

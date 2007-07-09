@@ -1,3 +1,4 @@
+#region License (LGPL)
 /* --------------------------------------------------------------------------
 
 Copyright (C) 2006 Dan Poage
@@ -19,6 +20,7 @@ License along with this library; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 ----------------------------------------------------------------------------*/
+#endregion
 
 using System;
 using System.Collections;
@@ -31,7 +33,43 @@ using Alexandria;
 namespace Alexandria.MusicBrainz
 {
 	public class MusicBrainzClient : IDisposable
-	{	
+	{
+		#region Constructors
+		/// <summary>
+		/// Default constructor
+		/// </summary>
+		public MusicBrainzClient()
+		{
+			handle = NativeMethods.mb_New();
+			NativeMethods.mb_UseUTF8(handle, 1);
+			BeginSession();
+		}
+		#endregion
+
+		#region Finalizer
+		~MusicBrainzClient()
+		{
+			Dispose(false);
+		}
+		#endregion
+
+		#region IDisposable Members
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				EndSession();
+				NativeMethods.mb_Delete(handle);
+			}
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		#endregion
+	
 		#region Private Contant Fields
 		private const int MAX_STRING_LEN = 8192;
 		#endregion
@@ -93,42 +131,6 @@ namespace Alexandria.MusicBrainz
 		}
 		#endregion
 		
-		#endregion
-
-		#region Constructors
-		/// <summary>
-		/// Default constructor
-		/// </summary>
-		public MusicBrainzClient()
-		{
-			handle = NativeMethods.mb_New();
-			NativeMethods.mb_UseUTF8(handle, 1);
-			BeginSession();
-		}
-		#endregion
-		
-		#region Finalizer
-		~MusicBrainzClient()
-		{
-			Dispose(false);
-		}
-		#endregion
-
-		#region IDisposable Members
-		protected virtual void Dispose(bool disposing)
-		{
-			if (disposing)
-			{
-				EndSession();
-				NativeMethods.mb_Delete(handle);
-			}
-		}
-		
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
 		#endregion
 		
 		#region Public Properties

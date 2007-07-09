@@ -1,4 +1,4 @@
-
+#region License (MIT)
 /***************************************************************************
  *  SimpleDisc.cs
  *  Copyright (C) 2006 Dan Poage
@@ -26,6 +26,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
  *  DEALINGS IN THE SOFTWARE.
  */
+ #endregion
  
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ using Alexandria;
 
 namespace Alexandria.MusicBrainz
 {
-    public class SimpleDisc : System.Collections.Generic.IEnumerable<SimpleTrack>, IDisposable
+    public class SimpleDisc : IEnumerable<SimpleTrack>, IDisposable
     {
 		#region Private Fields
 		private MusicBrainzClient client;
