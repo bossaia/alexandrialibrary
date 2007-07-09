@@ -32,6 +32,8 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Catalog
 {	
+	[Record("User")]
+	[RecordType("0C3095A7-7D8E-491f-844A-5C0FE5BFAF16")]
 	public class BaseUser : IUser
 	{
 		#region Constructors
@@ -53,16 +55,19 @@ namespace Alexandria.Catalog
 		#endregion
 	
 		#region IUser Members
-		[Property(2)]
 		public string Name
 		{
 			get { return name; }
 		}
 
-		[Property(3)]
 		public string Password
 		{
 			get { return password; }
+		}
+		
+		public IList<ICatalog> Catalogs
+		{
+			get { return catalogs; }
 		}
 
 		public bool Authenticate(string name, string password)
@@ -91,14 +96,6 @@ namespace Alexandria.Catalog
 		public void Delete()
 		{
 			persistenceBroker.DeleteRecord(this);
-		}
-		#endregion
-		
-		#region Public Properties
-		[Property(FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "UserID", CascadeSave=true, CascadeDelete=true)]
-		public IList<ICatalog> Catalogs
-		{
-			get { return catalogs; }
 		}
 		#endregion
 	}

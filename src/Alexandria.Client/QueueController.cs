@@ -178,6 +178,8 @@ namespace Alexandria.Client
 				Uri path = new Uri(selectedItem.SubItems[6].Text);
 				string format = selectedItem.SubItems[7].Text;
 				
+				selectedTrack = null;
+				
 				//TODO: fix this to use an IPersistenceBroker
 				/*
 				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);

@@ -39,22 +39,21 @@ namespace Alexandria.Mp3Tunes
 	internal class Track : BaseAudioTrack
 	{
 		#region Constructors
-		internal Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format, Uri originalPath) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
+		internal Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
 		{
-			this.originalPath = originalPath;
 		}
 		#endregion
 		
 		#region Private Fields
-		private Uri originalPath;
+		private TrackAdditionalInfo additionalInfo;
 		#endregion
 		
 		#region Public Properties
-		[Property(10, FieldType.Parent, LoadType.Property, StoreType.ForeignKey, "AudioTrackId")]
-		public Uri OriginalPath
+		[Field(FieldType.Parent, FieldRelationship.OneToOne, "AudioTrackId", FieldCascade.All)]
+		public TrackAdditionalInfo AdditionalInfo
 		{
-			get { return originalPath; }
-			set { originalPath = value; }
+			get { return additionalInfo; }
+			set { additionalInfo = value; }
 		}
 		#endregion
 	}

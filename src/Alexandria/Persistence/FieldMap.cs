@@ -3,10 +3,10 @@ using System.Reflection;
 
 namespace Alexandria.Persistence
 {
-	public struct PropertyMap
+	public struct FieldMap
 	{
 		#region Constructors
-		public PropertyMap(PropertyAttribute attribute, PropertyInfo property)
+		public FieldMap(FieldAttribute attribute, PropertyInfo property)
 		{
 			this.attribute = attribute;
 			this.property = property;
@@ -14,12 +14,12 @@ namespace Alexandria.Persistence
 		#endregion
 		
 		#region Private Fields
-		private PropertyAttribute attribute;
+		private FieldAttribute attribute;
 		private PropertyInfo property;
 		#endregion
 		
 		#region Public Properties
-		public PropertyAttribute Attribute
+		public FieldAttribute Attribute
 		{
 			get { return attribute; }
 		}

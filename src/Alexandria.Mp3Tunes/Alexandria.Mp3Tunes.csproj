@@ -41,6 +41,7 @@
     <Compile Include="MusicLocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track.cs" />
+    <Compile Include="TrackAdditionalInfo.cs" />
     <Compile Include="TrackIdFactory.cs" />
   </ItemGroup>
   <ItemGroup>

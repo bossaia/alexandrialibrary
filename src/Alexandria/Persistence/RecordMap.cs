@@ -7,20 +7,22 @@ namespace Alexandria.Persistence
 	public class RecordMap
 	{
 		#region Constructors
-		public RecordMap(Type type, RecordTypeAttribute recordTypeAttribute, IDictionary<int, PropertyMap> basicPropertyMaps, IList<PropertyMap> advancedPropertyMaps)
+		public RecordMap(Type type, RecordTypeAttribute recordTypeAttribute, IDictionary<int, FieldMap> basicFieldMaps, IList<FieldMap> advancedFieldMaps, IList<LinkRecord> linkRecords)
 		{
 			this.type = type;
 			this.recordTypeAttribute = recordTypeAttribute;
-			this.basicPropertyMaps = basicPropertyMaps;
-			this.advancedPropertyMaps = advancedPropertyMaps;
+			this.basicFieldMaps = basicFieldMaps;
+			this.advancedFieldMaps = advancedFieldMaps;
+			this.linkRecords = linkRecords;
 		}
 		#endregion
 		
 		#region Private Fields
 		private Type type;
 		private RecordTypeAttribute recordTypeAttribute;
-		private IDictionary<int, PropertyMap> basicPropertyMaps;
-		private IList<PropertyMap> advancedPropertyMaps;
+		private IDictionary<int, FieldMap> basicFieldMaps;
+		private IList<FieldMap> advancedFieldMaps;
+		private IList<LinkRecord> linkRecords;
 		#endregion
 		
 		#region Public Properties
@@ -34,14 +36,19 @@ namespace Alexandria.Persistence
 			get { return recordTypeAttribute; }
 		}
 		
-		public IDictionary<int, PropertyMap> BasicPropertyMaps
+		public IDictionary<int, FieldMap> BasicFieldMaps
 		{
-			get { return basicPropertyMaps; }
+			get { return basicFieldMaps; }
 		}
 		
-		public IList<PropertyMap> AdvancedPropertyMaps
+		public IList<FieldMap> AdvancedFieldMaps
 		{
-			get { return advancedPropertyMaps; }
+			get { return advancedFieldMaps; }
+		}
+		
+		public IList<LinkRecord> LinkRecords
+		{
+			get { return linkRecords; }
 		}
 		#endregion
 	}
