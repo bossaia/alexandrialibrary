@@ -35,16 +35,16 @@ namespace Alexandria.Metadata
 	[Record("MetadataId")]
 	public interface IMetadataIdentifier : IRecord
 	{
-		[Property(2, FieldType.Child, LoadType.Constructor, StoreType.Id, "ParentId", IsRequired=true)]
+		[Field(FieldType.Child, FieldRelationship.OneToMany, "ParentId", FieldCascade.None)]
 		IMetadata Parent { get; set; }
 	
-		[Property(3)]
+		[Field(3)]
 		string Value { get; }
 		
-		[Property(4)]
+		[Field(4)]
 		string Type { get; }
 		
-		[Property(5)]
+		[Field(5)]
 		Version Version { get; }
 						
 		IdentificationResult CompareTo(IMetadataIdentifier other);

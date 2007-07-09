@@ -69,15 +69,12 @@
     <Compile Include="Metadata\BaseAudioTrack.cs" />
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
-    <Compile Include="Persistence\ClassMap.cs" />
     <Compile Include="Persistence\FactoryMap.cs" />
     <Compile Include="Persistence\FieldAttribute.cs" />
     <Compile Include="Persistence\FieldCascade.cs" />
     <Compile Include="Persistence\FieldConstraint.cs" />
     <Compile Include="Persistence\FieldLocation.cs" />
     <Compile Include="Persistence\FieldRelationship.cs" />
-    <Compile Include="Persistence\IDataStore.cs" />
-    <Compile Include="Persistence\ClassAttribute.cs" />
     <Compile Include="Persistence\FactoryAttribute.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
     <Compile Include="Metadata\IArtist.cs" />
@@ -89,7 +86,6 @@
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
     <Compile Include="Persistence\IPersistenceBroker.cs" />
     <Compile Include="Persistence\IPersistenceMechanism.cs" />
-    <Compile Include="Persistence\IPersistent.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />
     <Compile Include="Persistence\IRecord.cs" />
@@ -99,7 +95,6 @@
     <Compile Include="Persistence\RecordAttribute.cs" />
     <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordTypeAttribute.cs" />
-    <Compile Include="Persistence\StoreType.cs" />
     <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
@@ -115,8 +110,6 @@
     <Compile Include="Media\IPlaylist.cs" />
     <Compile Include="Media\IMedia.cs" />
     <Compile Include="Persistence\FieldType.cs" />
-    <Compile Include="Persistence\LoadType.cs" />
-    <Compile Include="Persistence\PropertyAttribute.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="Plugins\PluginRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

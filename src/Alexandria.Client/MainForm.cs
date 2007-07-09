@@ -330,8 +330,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			base.OnLoad(e);
 
 			repository = new PluginRepository("Alexandria*.dll");
-			
-			SQLiteDataProvider mechanism = new SQLiteDataProvider(dbPath);
+
+			SQLitePersistenceMechanism mechanism = new SQLitePersistenceMechanism(dbPath);
 			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
 			
 			//TestDB();

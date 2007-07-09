@@ -75,7 +75,7 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region Public Properties
-		[Property(2)]
+		[Field(2)]
 		public Uri OriginalPath
 		{
 			get { return originalPath; }
