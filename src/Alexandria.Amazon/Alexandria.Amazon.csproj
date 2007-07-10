@@ -109,8 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Alexandria.Amazon.dll.ico" />
-    <Content Include="Alexandria.Amazon.ico" />
+    <EmbeddedResource Include="Alexandria.Amazon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

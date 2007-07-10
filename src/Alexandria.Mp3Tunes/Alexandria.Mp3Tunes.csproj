@@ -51,8 +51,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Alexandria.Mp3Tunes.dll.ico" />
-    <Content Include="Alexandria.Mp3Tunes.ico" />
+    <EmbeddedResource Include="Alexandria.Mp3Tunes.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
