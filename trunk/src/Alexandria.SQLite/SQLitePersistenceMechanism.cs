@@ -142,6 +142,62 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetSQLiteFieldName
+		private string GetSQLiteFieldName(FieldMap fieldMap)
+		{
+			string dbFieldName = string.Empty;
+			
+			if (!string.IsNullOrEmpty(fieldMap.Attribute.FieldName))
+			{
+				dbFieldName = fieldMap.Attribute.FieldName;
+			}
+			else
+			{
+				dbFieldName = fieldMap.Property.Name;	
+			}
+			
+			return dbFieldName;
+		}
+		#endregion
+
+		#region GetSQLiteFieldType
+		private string GetSQLiteFieldType(Type type)
+		{
+			//integer, real, text
+			string dbType = "TEXT";
+			
+			if (type == typeof(bool) ||
+				type == typeof(sbyte) ||
+				type == typeof(byte) ||
+				type == typeof(short) ||
+				type == typeof(ushort) ||
+				type == typeof(int) ||
+				type == typeof(uint) ||
+				type == typeof(long) ||
+				type == typeof(ulong) ||
+				type == typeof(DateTime) ||
+				type == typeof(TimeSpan))
+			dbType = "INTEGER";
+			
+			if (type == typeof(float) ||
+				type == typeof(double))
+			dbType = "REAL";
+			
+			return dbType;
+		}
+		#endregion
+
+		#region GetSQLiteFieldConstraints
+		private string GetSQLiteFieldConstraints(FieldConstraints constraints)
+		{
+			StringBuilder dbConstraints = new StringBuilder(string.Empty);
+			if ((constraints & FieldConstraints.Required) == FieldConstraints.Required) dbConstraints.Append(" NOT NULL");
+			if ((constraints & FieldConstraints.Unique) == FieldConstraints.Unique) dbConstraints.Append(" UNIQUE");
+			
+			return dbConstraints.ToString();
+		}
+		#endregion
+
 		#endregion
 
 		#region Internal Methods
@@ -181,9 +237,53 @@ namespace Alexandria.SQLite
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public DataTable GetDataTable(IPersistenceBroker broker, Type type)
+		public void InitializeRecord(RecordMap recordMap)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			using (SQLiteConnection connection = GetSQLiteConnection())
+			{
+				connection.Open();
+				string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+				StringBuilder columns = new StringBuilder();
+				for(int i=1;i<=recordMap.BasicFieldMaps.Count;i++)
+				{
+					if (i > 1) columns.Append(", ");
+					
+					string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
+					string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
+					string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
+					
+					columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
+				}
+			
+				// Add the RecordTypeId
+				columns.Append(", _RecordTypeId TEXT NOT NULL");
+				
+				string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
+				SQLiteCommand createTable = new SQLiteCommand(commandText, connection);
+				createTable.ExecuteNonQuery();
+				
+				foreach(LinkRecord linkRecord in recordMap.LinkRecords)
+				{
+					if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+					{
+						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+						{
+							string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+							SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, connection);
+							createLinkTable.ExecuteNonQuery();
+						}
+					}
+				}
+			}
+		}
+
+		public DataTable GetRecordData(string recodName, string fieldName, string value)
+		{
+			using (SQLiteConnection connection = GetSQLiteConnection())
+			{
+				return null;
+			}
+			//throw new Exception("The method or operation is not implemented.");
 		}
 
 		public void FillDataTable(DataTable table, string idValue)
@@ -191,12 +291,12 @@ namespace Alexandria.SQLite
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public object GetDatabaseValue(object value)
+		public object GetDatabaseValue(Type type, object value)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public object GetRecordValue(object value)
+		public object GetRecordValue(Type type, object value)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}

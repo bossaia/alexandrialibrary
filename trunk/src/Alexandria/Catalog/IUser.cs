@@ -34,13 +34,13 @@ namespace Alexandria.Catalog
 	[Record("User")]
 	public interface IUser : IRecord
 	{
-		[Field(2, FieldConstraint.Required)]
+		[Field(2, FieldConstraints.Required)]
 		string Name { get; }
 
-		[Field(3, FieldConstraint.Required)]
+		[Field(3, FieldConstraints.Required)]
 		string Password { get; }
 
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascade.All)]
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.All)]
 		IList<ICatalog> Catalogs { get; }
 
 		bool Authenticate(string name, string password);
