@@ -290,10 +290,10 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				string title = "Unknown Plugin";
 				string description = "This plugin could not be identified";
 				Version version = new Version(1, 0, 0, 0);
-				string imageFileName = string.Format("{0}.bmp", assembly.Location);
+				string imageFileName = assembly.Location.Replace(".dll", ".bmp"); //string.re string. Format("{0}.bmp", assembly.Location);
 				if (!System.IO.File.Exists(imageFileName))
-					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.dll.bmp");
-				Uri imagePath = new Uri(imageFileName);
+					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.bmp");
+				Bitmap bitmap = (Bitmap)assembly.GetManifestResourceStream(imageFileName);
 				
 				foreach(Attribute attribute in assembly.GetCustomAttributes(false))
 				{
@@ -314,7 +314,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 					}
 				}
 				
-				plugins.Add(new PluginInfo(title, description, version, imagePath));
+				plugins.Add(new PluginInfo(title, description, version, bitmap));
 			}
 						
 			About about = new About(appVersion, license, plugins);
