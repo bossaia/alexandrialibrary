@@ -33,16 +33,12 @@ namespace Alexandria.Persistence
 {
 	public interface IPersistenceMechanism
 	{
-		string Name { get; }		
-		bool IsOpen { get; }
+		string Name { get; }
 		IPersistenceBroker Broker { get; set; }
-		void Open();
-		void Close();
 		DbConnection GetConnection();
 		void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction);
-		//DataTable GetRecordData(string recordName, string fieldName, string value);
+		T LookupRecord<T>(Guid id, DbConnection connection);
 		void SaveRecord(IRecord record, DbTransaction transaction);
-		object GetDatabaseValue(Type type, object value);
-		object GetRecordValue(Type type, object value);
+		void DeleteRecord(IRecord record, DbTransaction transaction);
 	}
 }

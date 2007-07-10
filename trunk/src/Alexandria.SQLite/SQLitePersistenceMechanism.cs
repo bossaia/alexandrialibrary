@@ -220,6 +220,209 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region FieldIsLink
+		private bool FieldIsLink(RecordMap recordMap, FieldMap fieldMap)
+		{
+			foreach(LinkRecord linkRecord in recordMap.LinkRecords)
+			{
+				if (linkRecord.FieldMap.Property == fieldMap.Property)
+					return true;
+			}
+			
+			return false;
+		}
+		#endregion
+
+		#region InitializeParentRecordMap
+		private void InitializeParentRecordMap(RecordMap recordMap, DbTransaction transaction)
+		{
+			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+			StringBuilder columns = new StringBuilder();
+			for (int i = 1; i <= recordMap.BasicFieldMaps.Count; i++)
+			{
+				if (i > 1) columns.Append(", ");
+
+				string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
+				string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
+				string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
+
+				columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
+			}
+
+			// Add the RecordTypeId
+			columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
+
+			string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
+			SQLiteCommand createTable = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			createTable.ExecuteNonQuery();
+		}
+		#endregion
+		
+		#region InitializeLinkedRecordMaps
+		private void InitializeLinkedRecordMaps(RecordMap recordMap, DbTransaction transaction)
+		{
+			foreach (LinkRecord linkRecord in recordMap.LinkRecords)
+			{
+				if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+				{
+					if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+					{
+						string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+						SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						createLinkTable.ExecuteNonQuery();
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region SaveParentRecord
+		private void SaveParentRecord(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
+
+			StringBuilder columns = new StringBuilder();
+			StringBuilder values = new StringBuilder();
+
+			for (int i = 1; i <= recordMap.BasicFieldMaps.Count; i++)
+			{
+				if (i > 1)
+				{
+					columns.Append(", ");
+					values.Append(", ");
+				}
+
+				columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
+
+				object propertyValue = recordMap.BasicFieldMaps[i].Property.GetValue(record, null);
+				string fieldValue = GetSQLiteFieldValue(record, recordMap.BasicFieldMaps[i], propertyValue);
+				values.Append(fieldValue);
+			}
+
+			//Add the RecordTypeId
+			columns.AppendFormat(", {0}", RECORD_TYPE_ID);
+			values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
+
+			string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
+
+			SQLiteCommand saveCommand = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			saveCommand.ExecuteNonQuery();
+		}
+		#endregion
+
+		#region SaveChildRecords
+		private void SaveChildRecords(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			foreach (FieldMap fieldMap in recordMap.AdvancedFieldMaps)
+			{
+				if ((fieldMap.Attribute.Cascades & FieldCascades.Save) == FieldCascades.Save)
+				{
+					//TODO: find a way to cast to a generic IList<IRecord>			
+					IList list = fieldMap.Property.GetValue(record, null) as IList;
+					if (list != null)
+					{
+						foreach (IRecord childRecord in list)
+						{
+							SaveRecord(childRecord, transaction);
+						}
+					}
+					else
+					{
+						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
+						SaveRecord(childRecord, transaction);
+					}
+				}
+			}
+		}
+		#endregion
+		
+		#region SavedLinkedRecords
+		private void SaveLinkedRecords(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			foreach (LinkRecord linkRecord in recordMap.LinkRecords)
+			{
+				if ((linkRecord.FieldMap.Attribute.Cascades & FieldCascades.Save) == FieldCascades.Save)
+				{
+					if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+					{
+						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+						{
+							string cleanupText = string.Format("DELETE FROM {0} WHERE {1} = '{2}'", linkRecord.Name, linkRecord.ParentFieldName, record.Id);
+							SQLiteCommand cleanupCommand = new SQLiteCommand(cleanupText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							cleanupCommand.ExecuteNonQuery();
+
+							IList linkList = (IList)linkRecord.FieldMap.Property.GetValue(record, null);
+							foreach (IRecord childRecord in linkList)
+							{
+								string linkText = string.Format("INSERT INTO {0} ({1}, {2}) VALUES ('{3}', '{4}')", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName, record.Id, childRecord.Id);
+								SQLiteCommand linkCommand = new SQLiteCommand(linkText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+								linkCommand.ExecuteNonQuery();
+							}
+						}
+					}
+				}
+			}
+		}
+		#endregion
+
+		#region DeleteParentRecord
+		private void DeleteParentRecord(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			string deleteFormat = "DELETE FROM {0} WHERE Id = '{1}'";
+			string commandText = string.Format(deleteFormat, recordMap.RecordAttribute.Name, record.Id);
+
+			SQLiteCommand deleteCommand = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			deleteCommand.ExecuteNonQuery();
+		}
+		#endregion
+
+		#region DeleteChildRecords
+		private void DeleteChildRecords(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			foreach (FieldMap fieldMap in recordMap.AdvancedFieldMaps)
+			{
+				if ((fieldMap.Attribute.Cascades & FieldCascades.Delete) == FieldCascades.Delete)
+				{
+					//TODO: find a way to cast to a generic IList<IRecord>			
+					IList list = fieldMap.Property.GetValue(record, null) as IList;
+					if (list != null)
+					{
+						foreach (IRecord childRecord in list)
+						{
+							DeleteRecord(childRecord, transaction);
+						}
+					}
+					else
+					{
+						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
+						DeleteRecord(childRecord, transaction);
+					}
+				}
+			}
+		}
+		#endregion
+		
+		#region Delete LinkedRecord
+		private void DeleteLinkedRecords(IRecord record, RecordMap recordMap, DbTransaction transaction)
+		{
+			foreach (LinkRecord linkRecord in recordMap.LinkRecords)
+			{
+				if ((linkRecord.FieldMap.Attribute.Cascades & FieldCascades.Save) == FieldCascades.Save)
+				{
+					if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+					{
+						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+						{
+							string cleanupText = string.Format("DELETE FROM {0} WHERE {1} = '{2}'", linkRecord.Name, linkRecord.ParentFieldName, record.Id);
+							SQLiteCommand cleanupCommand = new SQLiteCommand(cleanupText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							cleanupCommand.ExecuteNonQuery();
+						}
+					}
+				}
+			}
+		}
+		#endregion
+
 		#endregion
 
 		#region Internal Methods
@@ -244,25 +447,10 @@ namespace Alexandria.SQLite
 			get { return "SQLite Embedded Database"; }
 		}
 
-		public bool IsOpen
-		{
-			get { return (broker != null); }
-		}
-
 		public IPersistenceBroker Broker
 		{
 			get { return broker; }
 			set { broker = value; }
-		}
-
-		public void Open()
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void Close()
-		{
-			throw new Exception("The method or operation is not implemented.");
 		}
 
 		public DbConnection GetConnection()
@@ -271,125 +459,56 @@ namespace Alexandria.SQLite
 		}
 
 		public void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction)
-		{
-			
-			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
-			StringBuilder columns = new StringBuilder();
-			for(int i=1;i<=recordMap.BasicFieldMaps.Count;i++)
-			{
-				if (i > 1) columns.Append(", ");
-				
-				string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
-				string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
-				string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
-				
-				columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
-			}
-		
-			// Add the RecordTypeId
-			columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
-			
-			string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
-			SQLiteCommand createTable = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-			createTable.ExecuteNonQuery();
-			
-			foreach(LinkRecord linkRecord in recordMap.LinkRecords)
-			{
-				if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
-				{
-					if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
-					{
-						string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
-						SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-						createLinkTable.ExecuteNonQuery();
-					}
-				}
-			}
+		{			
+			InitializeParentRecordMap(recordMap, transaction);
+			InitializeLinkedRecordMaps(recordMap, transaction);
 		}
 
-		//public DataTable GetRecordData(string recodName, string fieldName, string value)
-		//{
-			//using (SQLiteConnection connection = GetSQLiteConnection())
-			//{
-				//return null;
-			//}
-			//throw new Exception("The method or operation is not implemented.");
-		//}
+		public T LookupRecord<T>(Guid id, DbConnection connection)
+		{
+			return default(T);
+		}
 
 		public void SaveRecord(IRecord record, DbTransaction transaction)
 		{
-			if (record == null)
-				throw new ArgumentNullException("record");
-			
-			RecordTypeAttribute recordTypeAttribute = broker.GetRecordTypeAttribute(record.GetType());
-			if (recordTypeAttribute == null)
-				throw new ApplicationException("SQLite could not lookup record type");
-				
-			RecordMap recordMap = broker.RecordMaps[recordTypeAttribute.Id];
-			if (recordMap == null)
-				throw new ApplicationException("SQLite could not lookup record map");
-		
-			string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
-				
-			StringBuilder columns = new StringBuilder();
-			StringBuilder values = new StringBuilder();
-			
-			for(int i=1; i<=recordMap.BasicFieldMaps.Count; i++)
+			if (record != null)
 			{
-				if (i > 1)
+				RecordTypeAttribute recordTypeAttribute = broker.GetRecordTypeAttribute(record.GetType());
+				if (recordTypeAttribute != null)
 				{
-					columns.Append(", ");
-					values.Append(", ");
-				}
-
-				columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
-
-				object propertyValue = recordMap.BasicFieldMaps[i].Property.GetValue(record, null);
-				string fieldValue = GetSQLiteFieldValue(record, recordMap.BasicFieldMaps[i], propertyValue);
-				values.Append(fieldValue);
-			}
-			
-			//Add the RecordTypeId
-			columns.AppendFormat(", {0}", RECORD_TYPE_ID);
-			values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
-			
-			string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
-			
-			SQLiteCommand saveCommand = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-			saveCommand.ExecuteNonQuery();
-			
-			foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
-			{		
-				//TODO: find a way to cast to a generic IList<IRecord>			
-				IList list = fieldMap.Property.GetValue(record, null) as IList;
-				if (list != null)
-				{						
-					foreach(IRecord childRecord in list)
-					{						
-						SaveRecord(childRecord, transaction);
+					RecordMap recordMap = broker.RecordMaps[recordTypeAttribute.Id];
+					if (recordMap != null)
+					{
+						SaveParentRecord(record, recordMap, transaction);
+						SaveChildRecords(record, recordMap, transaction);
+						SaveLinkedRecords(record, recordMap, transaction);
 					}
+					else throw new ApplicationException("SQLite could not lookup record map");
 				}
-				else
-				{
-					IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
-					SaveRecord(childRecord, transaction);
-				}
+				else throw new ApplicationException("SQLite could not lookup record type");
 			}
+			else throw new ArgumentNullException("record");
 		}
-
-		public void FillDataTable(RecordMap recordMap, DataTable table, string idValue)
+		
+		public void DeleteRecord(IRecord record, DbTransaction transaction)
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public object GetDatabaseValue(Type type, object value)
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public object GetRecordValue(Type type, object value)
-		{
-			throw new Exception("The method or operation is not implemented.");
+			if (record != null)
+			{
+				RecordTypeAttribute recordTypeAttribute = broker.GetRecordTypeAttribute(record.GetType());
+				if (recordTypeAttribute != null)
+				{
+					RecordMap recordMap = broker.RecordMaps[recordTypeAttribute.Id];
+					if (recordMap != null)
+					{
+						DeleteParentRecord(record, recordMap, transaction);
+						DeleteChildRecords(record, recordMap, transaction);
+						DeleteLinkedRecords(record, recordMap, transaction);
+					}
+					else throw new ApplicationException("SQLite could not lookup record map");
+				}
+				else throw new ApplicationException("SQLite could not lookup record type");
+			}
+			else throw new ArgumentNullException("record");
 		}
 		#endregion
 	}

@@ -33,7 +33,7 @@ namespace Alexandria.Persistence
 {
 	public interface IPersistenceBroker
 	{
-		IPersistenceMechanism Mechanism { get; }
+		IPersistenceMechanism Mechanism { get; set; }
 		IDictionary<Type, RecordAttribute> RecordAttributes { get; }
 		IDictionary<string, FactoryMap> FactoryMaps { get; }
 		IDictionary<string, RecordMap> RecordMaps { get; }
@@ -43,7 +43,5 @@ namespace Alexandria.Persistence
 		T LookupRecord<T>(Guid id) where T: IRecord;
 		void SaveRecord(IRecord record);
 		void DeleteRecord(IRecord record);
-		void ConnectTo(IPersistenceMechanism mechanism);
-		//void DisconnectFrom(IPersistenceMechanism mechanism);
 	}
 }
