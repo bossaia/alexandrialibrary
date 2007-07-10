@@ -37,7 +37,7 @@ namespace Alexandria.Persistence
 		IPersistenceBroker Broker { get; set; }
 		DbConnection GetConnection();
 		void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction);
-		T LookupRecord<T>(Guid id, DbConnection connection);
+		T LookupRecord<T>(Guid id, DbConnection connection) where T: IRecord;
 		void SaveRecord(IRecord record, DbTransaction transaction);
 		void DeleteRecord(IRecord record, DbTransaction transaction);
 	}
