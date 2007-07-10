@@ -290,10 +290,18 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				string title = "Unknown Plugin";
 				string description = "This plugin could not be identified";
 				Version version = new Version(1, 0, 0, 0);
-				string imageFileName = assembly.Location.Replace(".dll", ".bmp"); //string.re string. Format("{0}.bmp", assembly.Location);
-				if (!System.IO.File.Exists(imageFileName))
-					imageFileName = Path.Combine(Environment.CurrentDirectory, "Alexandria.bmp");
-				Bitmap bitmap = (Bitmap)assembly.GetManifestResourceStream(imageFileName);
+				FileInfo assemblyFile = new FileInfo(assembly.Location);
+				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
+				Bitmap bitmap = null;
+				
+				try
+				{
+					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
+				}
+				catch
+				{
+					MessageBox.Show("There was an error loading the icon for the library file: " + assembly.Location, "ERROR");
+				}
 				
 				foreach(Attribute attribute in assembly.GetCustomAttributes(false))
 				{
