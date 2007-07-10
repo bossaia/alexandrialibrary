@@ -160,6 +160,17 @@ namespace Alexandria.Persistence
 
 			return recordMap;
 		}
+
+		public RecordTypeAttribute GetRecordTypeAttribute(Type type)
+		{
+			RecordTypeAttribute recordTypeAttribute = null;
+			foreach (Attribute attribute in type.GetCustomAttributes(typeof(RecordTypeAttribute), false))
+			{
+				recordTypeAttribute = (RecordTypeAttribute)attribute;
+				break;
+			}
+			return recordTypeAttribute;
+		}
 		
 		private FactoryMap GetFactoryMap(Type type)
 		{
@@ -210,11 +221,6 @@ namespace Alexandria.Persistence
 				mechanism.Broker = this;
 			}
 		}
-
-		public IDictionary<Type, RecordAttribute> RecordAttributes
-		{
-			get { return recordAttributes; }
-		}
 		
 		public IDictionary<string, FactoryMap> FactoryMaps
 		{
@@ -226,15 +232,14 @@ namespace Alexandria.Persistence
 			get { return recordMaps; }
 		}
 
-		public RecordTypeAttribute GetRecordTypeAttribute(Type type)
+		public RecordMap GetRecordMap(Type type)
 		{
-			RecordTypeAttribute recordTypeAttribute = null;
-			foreach (Attribute attribute in type.GetCustomAttributes(typeof(RecordTypeAttribute), false))
+			RecordTypeAttribute attribute = GetRecordTypeAttribute(type);
+			if (attribute != null)
 			{
-				recordTypeAttribute = (RecordTypeAttribute)attribute;
-				break;
+				return RecordMaps[attribute.Id];
 			}
-			return recordTypeAttribute;
+			else return null;
 		}
 
 		public void InitializeRecordMaps()
@@ -267,20 +272,9 @@ namespace Alexandria.Persistence
 			using (DbConnection connection = mechanism.GetConnection())
 			{
 				connection.Open();
-				DbTransaction transaction = null;
-				try
-				{
-				
-				}
-				catch (Exception ex)
-				{
-					if (transaction != null)
-						transaction.Rollback();
-						
-					throw ex;
-				}
-				
-				return default(T);
+				T record = mechanism.LookupRecord<T>(id, connection);
+				record.PersistenceBroker = this;
+				return record;
 			}
 		}
 
@@ -294,8 +288,8 @@ namespace Alexandria.Persistence
 				{
 					transaction = connection.BeginTransaction();
 					mechanism.SaveRecord(record, transaction);
-					transaction.Rollback();
-					//transaction.Commit();
+					//transaction.Rollback();
+					transaction.Commit();
 				}
 				catch (Exception ex)
 				{
