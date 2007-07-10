@@ -38,6 +38,7 @@ namespace Alexandria.Persistence
 		void Close();
 		void InitializeRecord(RecordMap recordMap);
 		DataTable GetRecordData(string recordName, string fieldName, string value);
+		void SaveRecord(IRecord record, RecordMap recordMap);
 		object GetDatabaseValue(Type type, object value);
 		object GetRecordValue(Type type, object value);
 	}

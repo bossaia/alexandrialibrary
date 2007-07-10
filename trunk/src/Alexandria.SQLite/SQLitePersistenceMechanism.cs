@@ -286,7 +286,16 @@ namespace Alexandria.SQLite
 			//throw new Exception("The method or operation is not implemented.");
 		}
 
-		public void FillDataTable(DataTable table, string idValue)
+		public void SaveRecord(IRecord record, RecordMap recordMap)
+		{
+			using (SQLiteConnection connection = GetSQLiteConnection())
+			{
+				connection.Open();
+				
+			}
+		}
+
+		public void FillDataTable(RecordMap recordMap, DataTable table, string idValue)
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}
