@@ -40,8 +40,7 @@ namespace Alexandria.Persistence
 		public PersistenceBroker(IPluginRepository repository, IPersistenceMechanism mechanism)
 		{
 			this.repository = repository;
-			
-			ConnectTo(mechanism);
+			Mechanism = mechanism;
 			
 			Initialize();
 			int x = recordMaps.Count;
@@ -205,6 +204,11 @@ namespace Alexandria.Persistence
 		public IPersistenceMechanism Mechanism
 		{
 			get { return mechanism; }
+			set
+			{
+				mechanism = value;
+				mechanism.Broker = this;
+			}
 		}
 
 		public IDictionary<Type, RecordAttribute> RecordAttributes
@@ -259,9 +263,25 @@ namespace Alexandria.Persistence
 		}
 		
 		public T LookupRecord<T>(Guid id) where T : IRecord
-		{			
-			//DataTable table = mechanism.GetDataTable(this, typeof(T));			
-			return default(T);
+		{
+			using (DbConnection connection = mechanism.GetConnection())
+			{
+				connection.Open();
+				DbTransaction transaction = null;
+				try
+				{
+				
+				}
+				catch (Exception ex)
+				{
+					if (transaction != null)
+						transaction.Rollback();
+						
+					throw ex;
+				}
+				
+				return default(T);
+			}
 		}
 
 		public void SaveRecord(IRecord record)
@@ -274,7 +294,8 @@ namespace Alexandria.Persistence
 				{
 					transaction = connection.BeginTransaction();
 					mechanism.SaveRecord(record, transaction);
-					transaction.Commit();
+					transaction.Rollback();
+					//transaction.Commit();
 				}
 				catch (Exception ex)
 				{
@@ -288,13 +309,24 @@ namespace Alexandria.Persistence
 
 		public void DeleteRecord(IRecord record)
 		{
-			throw new Exception("The method or operation is not implemented.");
-		}
+			using (DbConnection connection = mechanism.GetConnection())
+			{
+				connection.Open();
+				DbTransaction transaction = null;
+				try
+				{
+					transaction = connection.BeginTransaction();
+					mechanism.DeleteRecord(record, transaction);
+					transaction.Commit();
+				}
+				catch (Exception ex)
+				{
+					if (transaction != null)
+						transaction.Rollback();
 
-		public void ConnectTo(IPersistenceMechanism mechanism)
-		{
-			this.mechanism = mechanism;
-			mechanism.Broker = this;
+					throw ex;
+				}
+			}
 		}
 		#endregion
 	}
