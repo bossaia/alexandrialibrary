@@ -342,6 +342,15 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			SQLitePersistenceMechanism mechanism = new SQLitePersistenceMechanism(dbPath);
 			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
 			
+			DateTime releaseDate = new DateTime(1993, 1, 1);
+			
+			Mp3Tunes.MusicLocker locker = new MusicLocker();
+			IAudioTrack track = locker.GetTrack(Guid.NewGuid(), "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg", @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
+			track.PersistenceBroker = broker;
+			track.MetadataIdentifiers.Add(new MusicBrainzId(Guid.NewGuid(), MusicBrainzId.MusicBrainzIdType.MusicBrainzTrackId, track));
+			track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId("blah blah mp3tunes id", track));
+			track.Save();
+			
 			//TestDB();
 			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });
 			//QueueListView.Items.Add(item);

@@ -39,7 +39,8 @@ namespace Alexandria.Persistence
 		public PersistenceBroker(IPluginRepository repository, IPersistenceMechanism mechanism)
 		{
 			this.repository = repository;
-			this.mechanism = mechanism;
+			
+			ConnectTo(mechanism);
 			
 			Initialize();
 			int x = recordMaps.Count;
@@ -103,17 +104,6 @@ namespace Alexandria.Persistence
 				break;
 			}
 			return recordAttribute;
-		}
-
-		private RecordTypeAttribute GetRecordTypeAttribute(Type type)
-		{
-			RecordTypeAttribute recordTypeAttribute = null;
-			foreach (Attribute attribute in type.GetCustomAttributes(typeof(RecordTypeAttribute), false))
-			{
-				recordTypeAttribute = (RecordTypeAttribute)attribute;
-				break;
-			}
-			return recordTypeAttribute;
 		}
 
 		private RecordMap GetRecordMap(Type type, RecordAttribute recordAttribute)
@@ -235,7 +225,18 @@ namespace Alexandria.Persistence
 		{
 			get { return recordMaps; }
 		}
-				
+
+		public RecordTypeAttribute GetRecordTypeAttribute(Type type)
+		{
+			RecordTypeAttribute recordTypeAttribute = null;
+			foreach (Attribute attribute in type.GetCustomAttributes(typeof(RecordTypeAttribute), false))
+			{
+				recordTypeAttribute = (RecordTypeAttribute)attribute;
+				break;
+			}
+			return recordTypeAttribute;
+		}
+		
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{			
 			//DataTable table = mechanism.GetDataTable(this, typeof(T));			
@@ -258,6 +259,7 @@ namespace Alexandria.Persistence
 		public void ConnectTo(IPersistenceMechanism mechanism)
 		{
 			this.mechanism = mechanism;
+			mechanism.Broker = this;
 		}
 		#endregion
 	}

@@ -46,10 +46,11 @@ namespace Alexandria.MusicBrainz
 		#endregion
 	
 		#region Constructors
-		public MusicBrainzId(Guid value, MusicBrainzIdType type)
+		public MusicBrainzId(Guid value, MusicBrainzIdType type, IMetadata parent)
 		{
 			this.value = value;
 			this.type = type;
+			this.parent = parent;
 		}
 		#endregion
 	
@@ -135,6 +136,73 @@ namespace Alexandria.MusicBrainz
 		}
 
 		public void Delete()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		#endregion
+
+		#region IMetadataIdentifier Members
+
+		IMetadata IMetadataIdentifier.Parent
+		{
+			get
+			{
+				return parent;
+			}
+			set
+			{
+				parent = value;
+			}
+		}
+
+		string IMetadataIdentifier.Value
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		string IMetadataIdentifier.Type
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		Version IMetadataIdentifier.Version
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		IdentificationResult IMetadataIdentifier.CompareTo(IMetadataIdentifier other)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		#endregion
+
+		#region IRecord Members
+
+		Guid Alexandria.Persistence.IRecord.Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		Alexandria.Persistence.IPersistenceBroker Alexandria.Persistence.IRecord.PersistenceBroker
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		void Alexandria.Persistence.IRecord.Save()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		void Alexandria.Persistence.IRecord.Delete()
 		{
 			throw new Exception("The method or operation is not implemented.");
 		}

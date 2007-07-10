@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Mp3Tunes
 {
-	internal static class TrackIdFactory
+	public static class TrackIdFactory
 	{
 		#region Private Constants
 		private const string ID_TYPE = "MP3tunes TrackID";

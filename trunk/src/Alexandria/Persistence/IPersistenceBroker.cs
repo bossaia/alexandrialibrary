@@ -37,6 +37,7 @@ namespace Alexandria.Persistence
 		IDictionary<Type, RecordAttribute> RecordAttributes { get; }
 		IDictionary<string, FactoryMap> FactoryMaps { get; }
 		IDictionary<string, RecordMap> RecordMaps { get; }
+		RecordTypeAttribute GetRecordTypeAttribute(Type type);
 		T LookupRecord<T>(Guid id) where T: IRecord;
 		void SaveRecord(IRecord record);
 		void DeleteRecord(IRecord record);
