@@ -244,7 +244,10 @@ namespace Alexandria.Persistence
 
 		public void SaveRecord(IRecord record)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			//throw new Exception("The method or operation is not implemented.");
+			RecordTypeAttribute recordTypeAttribute = GetRecordTypeAttribute(record.GetType());			
+			RecordMap recordMap = RecordMaps[recordTypeAttribute.Id];
+			mechanism.SaveRecord(record, recordMap);
 		}
 
 		public void DeleteRecord(IRecord record)
