@@ -37,8 +37,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Alexandria.Tao.dll.ico" />
-    <Content Include="Alexandria.Tao.ico" />
+    <EmbeddedResource Include="Alexandria.Tao.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

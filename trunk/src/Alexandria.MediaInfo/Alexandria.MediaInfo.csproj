@@ -42,8 +42,7 @@
     <Compile Include="StreamType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Alexandria.MediaInfo.dll.ico" />
-    <Content Include="Alexandria.MediaInfo.ico" />
+    <EmbeddedResource Include="Alexandria.MediaInfo.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
