@@ -27,6 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Alexandria.Client
@@ -34,12 +35,12 @@ namespace Alexandria.Client
 	public struct PluginInfo
 	{
 		#region Constructors
-		public PluginInfo(string title, string description, Version version, Uri imagePath)
+		public PluginInfo(string title, string description, Version version, Bitmap bitmap)
 		{
 			this.title = title;
 			this.description = description;
 			this.version = version;
-			this.imagePath = imagePath;
+			this.bitmap = bitmap;
 		}
 		#endregion
 		
@@ -47,7 +48,7 @@ namespace Alexandria.Client
 		private string title;
 		private string description;
 		private Version version;
-		private Uri imagePath;
+		private Bitmap bitmap;
 		#endregion
 		
 		#region Public Properties
@@ -66,9 +67,9 @@ namespace Alexandria.Client
 			get { return version; }
 		}
 		
-		public Uri ImagePath
+		public Bitmap Bitmap
 		{
-			get { return imagePath; }
+			get { return bitmap; }
 		}
 		#endregion
 	}
