@@ -30,8 +30,9 @@ namespace Alexandria.Client
 				//string iconPath = plugin.ImagePath.LocalPath.Replace(".dll.bmp", ".ico");
 				//System.IO.FileStream outputStream = new System.IO.FileStream(iconPath, System.IO.FileMode.Create);
 				//icon.Save(outputStream);
+				if (plugin.Bitmap != null)
+					ImageList.Images.Add(plugin.Bitmap);
 				
-				ImageList.Images.Add(plugins.Bitmap);
 				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
 				item.ToolTipText = plugin.Description;
 				PluginListView.Items.Add(item);
