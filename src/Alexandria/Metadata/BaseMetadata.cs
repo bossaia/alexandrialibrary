@@ -57,6 +57,7 @@ namespace Alexandria.Metadata
 	
 		#region Private Fields
 		private Guid id = default(Guid);		
+		private IRecord parent;
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		private Uri path;
 		private string name;
@@ -86,7 +87,13 @@ namespace Alexandria.Metadata
 		}
 		#endregion
 
-		#region IPersistant Members
+		#region IRecord Members
+		public IRecord Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+		
 		public IPersistenceBroker PersistenceBroker
 		{
 			get { return persistenceBroker; }

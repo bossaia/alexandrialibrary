@@ -341,14 +341,16 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 			SQLitePersistenceMechanism mechanism = new SQLitePersistenceMechanism(dbPath);
 			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
+			//broker.InitializeRecordMaps();
 			
 			DateTime releaseDate = new DateTime(1993, 1, 1);
 			
+			Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
 			Mp3Tunes.MusicLocker locker = new MusicLocker();
-			IAudioTrack track = locker.GetTrack(Guid.NewGuid(), "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg", @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
+			IAudioTrack track = locker.GetTrack(trackId, "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg", @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
 			track.PersistenceBroker = broker;
-			track.MetadataIdentifiers.Add(new MusicBrainzId(Guid.NewGuid(), MusicBrainzId.MusicBrainzIdType.MusicBrainzTrackId, track));
-			track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId("blah blah mp3tunes id", track));
+			track.MetadataIdentifiers.Add(MusicBrainz.MusicBrainzIdFactory.CreateMusicBrainzId(track, Guid.NewGuid()));
+			track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId(track, "mp3tunes_id:2117098401"));
 			track.Save();
 			
 			//TestDB();

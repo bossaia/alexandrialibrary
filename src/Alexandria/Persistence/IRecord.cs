@@ -32,9 +32,9 @@ namespace Alexandria.Persistence
 {
 	public interface IRecord
 	{
-		[Field(1, FieldConstraints.Key)]
+		[Field(1, FieldConstraints.All)]
 		Guid Id { get; }
-		
+		IRecord Parent { get; set; }
 		IPersistenceBroker PersistenceBroker { get; set; }
 		void Save();
 		void Delete();

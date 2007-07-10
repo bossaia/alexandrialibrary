@@ -28,6 +28,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Reflection;
 using Alexandria.Plugins;
 
@@ -87,12 +88,7 @@ namespace Alexandria.Persistence
 						}
 					}				
 				}
-			}
-			
-			foreach(RecordMap recordMap in recordMaps.Values)
-			{
-				mechanism.InitializeRecord(recordMap);
-			}
+			}			
 		}
 
 		private RecordAttribute GetRecordAttribute(Type type)
@@ -236,6 +232,31 @@ namespace Alexandria.Persistence
 			}
 			return recordTypeAttribute;
 		}
+
+		public void InitializeRecordMaps()
+		{
+			using (DbConnection connection = mechanism.GetConnection())
+			{
+				connection.Open();
+				DbTransaction transaction = null;
+				try
+				{
+					transaction = connection.BeginTransaction();
+					foreach (RecordMap recordMap in recordMaps.Values)
+					{
+						mechanism.InitializeRecordMap(recordMap, transaction);
+					}
+					transaction.Commit();
+				}
+				catch (Exception ex)
+				{
+					if (transaction != null)
+						transaction.Rollback();
+
+					throw ex;
+				}
+			}
+		}
 		
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{			
@@ -244,11 +265,25 @@ namespace Alexandria.Persistence
 		}
 
 		public void SaveRecord(IRecord record)
-		{
-			//throw new Exception("The method or operation is not implemented.");
-			RecordTypeAttribute recordTypeAttribute = GetRecordTypeAttribute(record.GetType());			
-			RecordMap recordMap = RecordMaps[recordTypeAttribute.Id];
-			mechanism.SaveRecord(record, recordMap);
+		{			
+			using (DbConnection connection = mechanism.GetConnection())
+			{
+				connection.Open();
+				DbTransaction transaction = null;
+				try
+				{
+					transaction = connection.BeginTransaction();
+					mechanism.SaveRecord(record, transaction);
+					transaction.Commit();
+				}
+				catch (Exception ex)
+				{
+					if (transaction != null)
+						transaction.Rollback();
+						
+					throw ex;
+				}
+			}
 		}
 
 		public void DeleteRecord(IRecord record)

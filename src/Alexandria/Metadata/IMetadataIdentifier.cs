@@ -32,11 +32,11 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	[Record("MetadataId")]
+	[Record("MetadataIdentifier")]
 	public interface IMetadataIdentifier : IRecord
 	{
-		[Field(FieldType.Child, FieldRelationship.OneToMany, 2, "ParentId", FieldConstraints.Key, FieldCascades.None)]
-		IMetadata Parent { get; set; }
+		[Field(FieldType.Child, FieldRelationship.OneToMany, 2, "ParentId", FieldConstraints.Required, FieldCascades.None)]
+		IMetadata MetadataParent { get; set; }
 	
 		[Field(3)]
 		string Value { get; }

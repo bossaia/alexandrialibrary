@@ -86,10 +86,16 @@ namespace Alexandria.Catalog
 		}
 		#endregion
 
-		#region IPersistent Members
+		#region IRecord Members
 		public Guid Id
 		{
 			get { return id; }
+		}
+
+		public IRecord Parent
+		{
+			get { return user; }
+			set { user = (IUser)value; }
 		}
 
 		public IPersistenceBroker PersistenceBroker
