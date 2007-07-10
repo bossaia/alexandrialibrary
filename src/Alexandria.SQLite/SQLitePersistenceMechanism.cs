@@ -26,6 +26,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
@@ -48,11 +49,12 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region Private Constant Fields
-		private const string RECORD_TYPE_ID = "RecordTypeId";
+		private const string RECORD_TYPE_ID = "_RecordTypeId";
 		#endregion
 
 		#region Private Fields
 		string databasePath;
+		IPersistenceBroker broker;
 		#endregion
 
 		#region Private Methods
@@ -99,8 +101,8 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region NormalizeToDatabaseValue
-		private string NormalizeToDatabaseValue(Type type, object value)
+		#region GetSQLiteFieldValue
+		private string GetSQLiteFieldValue(Type type, object value)
 		{
 			if (value == DBNull.Value || value == null)
 				return "NULL";
@@ -219,12 +221,18 @@ namespace Alexandria.SQLite
 		#region IPersistenceMechanism Members
 		public string Name
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return "SQLite Embedded Database"; }
 		}
 
 		public bool IsOpen
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return (broker != null); }
+		}
+
+		public IPersistenceBroker Broker
+		{
+			get { return broker; }
+			set { broker = value; }
 		}
 
 		public void Open()
@@ -256,7 +264,7 @@ namespace Alexandria.SQLite
 				}
 			
 				// Add the RecordTypeId
-				columns.Append(", _RecordTypeId TEXT NOT NULL");
+				columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
 				
 				string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
 				SQLiteCommand createTable = new SQLiteCommand(commandText, connection);
@@ -292,6 +300,52 @@ namespace Alexandria.SQLite
 			{
 				connection.Open();
 				
+				string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
+				
+				StringBuilder columns = new StringBuilder();
+				StringBuilder values = new StringBuilder();
+				
+				for(int i=1; i<=recordMap.BasicFieldMaps.Count; i++)
+				{
+					if (i > 1)
+					{
+						columns.Append(", ");
+						values.Append(", ");
+					}
+					
+					columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
+					values.Append(GetSQLiteFieldValue(recordMap.BasicFieldMaps[i].Property.PropertyType, recordMap.BasicFieldMaps[i].Property.GetValue(record, null)));
+				}
+				
+				//Add the RecordTypeId
+				columns.AppendFormat(", {0}", RECORD_TYPE_ID);
+				values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
+				
+				string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
+				
+				SQLiteCommand saveCommand = new SQLiteCommand(commandText, connection);
+				saveCommand.ExecuteNonQuery();
+				
+				foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
+				{					
+					IList list = fieldMap.Property.GetValue(record, null) as IList;
+					if (list != null)
+					{						
+						foreach(IRecord listChildRecord in list)
+						{
+							RecordTypeAttribute listChildTypeAttribute = broker.GetRecordTypeAttribute(listChildRecord.GetType());
+							RecordMap listChildMap = broker.RecordMaps[listChildTypeAttribute.Id];
+							SaveRecord(listChildRecord, listChildMap);
+						}				
+					}
+					else
+					{
+						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
+						RecordTypeAttribute childTypeAttribute = broker.GetRecordTypeAttribute(childRecord.GetType());
+						RecordMap childMap = broker.RecordMaps[childTypeAttribute.Id];
+						SaveRecord(childRecord, childMap);
+					}
+				}
 			}
 		}
 

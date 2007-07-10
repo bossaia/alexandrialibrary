@@ -32,8 +32,9 @@ namespace Alexandria.Persistence
 {
 	public interface IPersistenceMechanism
 	{
-		string Name { get; }
+		string Name { get; }		
 		bool IsOpen { get; }
+		IPersistenceBroker Broker { get; set; }
 		void Open();
 		void Close();
 		void InitializeRecord(RecordMap recordMap);
