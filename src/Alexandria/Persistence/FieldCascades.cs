@@ -32,7 +32,7 @@ using System.Text;
 namespace Alexandria.Persistence
 {
 	[Flags]
-	public enum FieldCascade
+	public enum FieldCascades
 	{
 		None = 0,
 		Save = 1,

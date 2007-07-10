@@ -34,9 +34,10 @@ namespace Alexandria.Persistence
 	public class RecordMap
 	{
 		#region Constructors
-		public RecordMap(Type type, RecordTypeAttribute recordTypeAttribute, IDictionary<int, FieldMap> basicFieldMaps, IList<FieldMap> advancedFieldMaps, IList<LinkRecord> linkRecords)
+		public RecordMap(Type type, RecordAttribute recordAttribute, RecordTypeAttribute recordTypeAttribute, IDictionary<int, FieldMap> basicFieldMaps, IList<FieldMap> advancedFieldMaps, IList<LinkRecord> linkRecords)
 		{
 			this.type = type;
+			this.recordAttribute = recordAttribute;
 			this.recordTypeAttribute = recordTypeAttribute;
 			this.basicFieldMaps = basicFieldMaps;
 			this.advancedFieldMaps = advancedFieldMaps;
@@ -46,6 +47,7 @@ namespace Alexandria.Persistence
 		
 		#region Private Fields
 		private Type type;
+		private RecordAttribute recordAttribute;
 		private RecordTypeAttribute recordTypeAttribute;
 		private IDictionary<int, FieldMap> basicFieldMaps;
 		private IList<FieldMap> advancedFieldMaps;
@@ -56,6 +58,11 @@ namespace Alexandria.Persistence
 		public Type Type
 		{
 			get { return type; }
+		}
+		
+		public RecordAttribute RecordAttribute
+		{
+			get { return recordAttribute; }
 		}
 		
 		public RecordTypeAttribute RecordTypeAttribute

@@ -36,19 +36,19 @@ namespace Alexandria.Catalog
 	[Record("Catalog")]
     public interface ICatalog : IRecord
     {
-		[Field(2, FieldConstraint.Required)]
+		[Field(2, FieldConstraints.Required)]
 		string Name { get; }
     
-		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascade.None)]
+		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.None)]
 		IUser User { get; set; }
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascade.None)]
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.None)]
         IList<IAlbum> Albums { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascade.None)]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.None)]
         IList<IArtist> Artists { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascade.None)]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascades.None)]
         IList<IAudioTrack> Tracks { get; }
     }
 }

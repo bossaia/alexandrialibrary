@@ -79,13 +79,18 @@ namespace Alexandria.Persistence
 							recordAttributes.Add(type, recordAttribute);
 						}
 					
-						RecordMap recordMap = GetRecordMap(type);
+						RecordMap recordMap = GetRecordMap(type, recordAttribute);
 						if (recordMap != null)
 						{
 							recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
 						}
 					}				
 				}
+			}
+			
+			foreach(RecordMap recordMap in recordMaps.Values)
+			{
+				mechanism.InitializeRecord(recordMap);
 			}
 		}
 
@@ -111,7 +116,7 @@ namespace Alexandria.Persistence
 			return recordTypeAttribute;
 		}
 
-		private RecordMap GetRecordMap(Type type)
+		private RecordMap GetRecordMap(Type type, RecordAttribute recordAttribute)
 		{
 			RecordMap recordMap = null;
 			RecordTypeAttribute recordTypeAttribute = GetRecordTypeAttribute(type);
@@ -165,7 +170,7 @@ namespace Alexandria.Persistence
 					}
 				}
 
-				recordMap = new RecordMap(type, recordTypeAttribute, basicFieldMaps, advancedFieldMaps, linkRecords);
+				recordMap = new RecordMap(type, recordAttribute, recordTypeAttribute, basicFieldMaps, advancedFieldMaps, linkRecords);
 			}
 
 			return recordMap;
@@ -233,7 +238,7 @@ namespace Alexandria.Persistence
 				
 		public T LookupRecord<T>(Guid id) where T : IRecord
 		{			
-			DataTable table = mechanism.GetDataTable(this, typeof(T));			
+			//DataTable table = mechanism.GetDataTable(this, typeof(T));			
 			return default(T);
 		}
 

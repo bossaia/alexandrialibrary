@@ -49,7 +49,7 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region Public Properties
-		[Field(FieldType.Parent, FieldRelationship.OneToOne, "AudioTrackId", FieldCascade.All)]
+		[Field(FieldType.Parent, FieldRelationship.OneToOne, "AudioTrackId", FieldCascades.All)]
 		public TrackAdditionalInfo AdditionalInfo
 		{
 			get { return additionalInfo; }

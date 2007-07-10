@@ -34,7 +34,7 @@ namespace Alexandria.Metadata
 	[Record("AudioTrack")]
 	public interface IAudioTrack : IMetadata
 	{
-		[Field(4, FieldConstraint.Required)]
+		[Field(4, FieldConstraints.Required)]
 		string Album { get; }
 		
 		[Field(5)]

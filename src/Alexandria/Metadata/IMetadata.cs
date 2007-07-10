@@ -34,13 +34,13 @@ namespace Alexandria.Metadata
 {
 	public interface IMetadata : IRecord
 	{
-		[Field(FieldType.Parent, FieldRelationship.OneToMany, "ParentId", FieldCascade.All)]
+		[Field(FieldType.Parent, FieldRelationship.OneToMany, "ParentId", FieldCascades.All)]
 		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
 		
 		[Field(2)]
 		Uri Path { get; }
 		
-		[Field(3, FieldConstraint.Required)]
+		[Field(3, FieldConstraints.Required)]
 		string Name { get; }
 	}
 }

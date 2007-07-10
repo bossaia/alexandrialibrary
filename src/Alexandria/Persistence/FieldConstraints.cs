@@ -32,7 +32,7 @@ using System.Text;
 namespace Alexandria.Persistence
 {
 	[Flags]
-	public enum FieldConstraint
+	public enum FieldConstraints
 	{
 		None = 0,
 		Required = 1,

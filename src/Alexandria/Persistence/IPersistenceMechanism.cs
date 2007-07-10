@@ -36,9 +36,9 @@ namespace Alexandria.Persistence
 		bool IsOpen { get; }
 		void Open();
 		void Close();
-		DataTable GetDataTable(IPersistenceBroker broker, Type type);
-		void FillDataTable(DataTable table, string idValue);
-		object GetDatabaseValue(object value);
-		object GetRecordValue(object value);
+		void InitializeRecord(RecordMap recordMap);
+		DataTable GetRecordData(string recordName, string fieldName, string value);
+		object GetDatabaseValue(Type type, object value);
+		object GetRecordValue(Type type, object value);
 	}
 }
