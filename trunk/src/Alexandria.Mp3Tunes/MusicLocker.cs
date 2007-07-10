@@ -229,7 +229,7 @@ namespace Alexandria.Mp3Tunes
 					Guid id = Guid.NewGuid();
 					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDate.ToFileTime(), trackNumber, format, trackFileName.InnerXml);
 					//Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format, originalPath);
-					trackId = TrackIdFactory.CreateTrackId(trackIdValue, track);
+					trackId = TrackIdFactory.CreateTrackId(track, trackIdValue);
 					track.MetadataIdentifiers.Add(trackId);
 
 					tracks.Add(track);
@@ -250,6 +250,7 @@ namespace Alexandria.Mp3Tunes
 		{
 			Track track = new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
 			track.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), originalPath);
+			track.AdditionalInfo.Parent = track;
 			return track;
 		}
 		#endregion

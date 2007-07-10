@@ -41,16 +41,16 @@ namespace Alexandria.Metadata
 		Match
 	}
 
-	[Record("MetadataId")]
+	[Record("MetadataIdentifier")]
 	[RecordType("585F6263-29FA-41ae-93A0-9250348CEB4D")]
 	public struct MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
 		[Factory("585F6263-29FA-41ae-93A0-9250348CEB4D")]
-		public MetadataIdentifier(Guid id, IMetadata parent, string value, string type, Version version)
+		public MetadataIdentifier(Guid id, IMetadata metadataParent, string value, string type, Version version)
 		{
 			this.id = id;
-			this.parent = parent;
+			this.metadataParent = metadataParent;
 			this.value = value;
 			this.type = type;
 			this.version = version;
@@ -60,7 +60,7 @@ namespace Alexandria.Metadata
 	
 		#region Private Fields
 		private Guid id;
-		private IMetadata parent;
+		private IMetadata metadataParent;
 		private string value;
 		private string type;
 		private Version version;
@@ -68,10 +68,10 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IMetadataIdentifier Members
-		public IMetadata Parent
+		public IMetadata MetadataParent
 		{
-			get { return parent; }
-			set { parent = value; }
+			get { return metadataParent; }
+			set { metadataParent = value; }
 		}
 		
 		public string Value
@@ -110,10 +110,16 @@ namespace Alexandria.Metadata
 		}
 		#endregion
 
-		#region IPersistant Members
+		#region IRecord Members
 		public Guid Id
 		{
 			get { return id; }
+		}
+				
+		public IRecord Parent
+		{
+			get { return metadataParent; }
+			set { metadataParent = (IMetadata)value; }
 		}
 				
 		public IPersistenceBroker PersistenceBroker

@@ -61,6 +61,7 @@ namespace Alexandria.MusicDns
 		private string puid = string.Empty;		
 		
 		private Guid id = Guid.NewGuid();
+		private IRecord parent;
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		Uri path = null;
 		private Version version = new Version(1, 0, 0, 0);
@@ -68,7 +69,7 @@ namespace Alexandria.MusicDns
 		private IPersistenceBroker persistenceBroker;
 		#endregion
 	
-		#region Internal Properties		
+		#region Internal Properties
 		internal string FileName
 		{
 			get { return fileName; }
@@ -255,6 +256,12 @@ namespace Alexandria.MusicDns
 		#endregion
 		
 		#region IRecord Members
+		public IRecord Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+		
 		public IPersistenceBroker PersistenceBroker
 		{
 			get { return persistenceBroker; }

@@ -28,11 +28,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using Alexandria;
+using Alexandria.Metadata;
 using Alexandria.Persistence;
 
 namespace Alexandria.Mp3Tunes
 {
-	[Record("Mp3tunesAudioTrack")]
+	[Record("AudioTrack_Mp3tunes")]
 	[RecordType("4D5F5337-A34B-4f38-A175-18AF9F1A8A8D")]
 	public class TrackAdditionalInfo : IRecord
 	{
@@ -48,6 +49,7 @@ namespace Alexandria.Mp3Tunes
 		#region Private Fields
 		private Guid id;
 		private IPersistenceBroker persistenceBroker;
+		private IAudioTrack track;
 		private Uri originalPath;
 		#endregion
 
@@ -55,6 +57,12 @@ namespace Alexandria.Mp3Tunes
 		public Guid Id
 		{
 			get { return id; }
+		}
+
+		public IRecord Parent
+		{
+			get { return track; }
+			set { track = (IAudioTrack)value; }
 		}
 
 		public IPersistenceBroker PersistenceBroker
@@ -75,7 +83,14 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region Public Properties
-		[Field(2)]
+		[Field(FieldType.Child, FieldRelationship.OneToOne, 2, "AudioTrackId", FieldConstraints.Required, FieldCascades.All)]
+		public IAudioTrack Track
+		{
+			get { return track; }
+			set { track = value; }
+		}
+		
+		[Field(3, FieldConstraints.Required)]
 		public Uri OriginalPath
 		{
 			get { return originalPath; }

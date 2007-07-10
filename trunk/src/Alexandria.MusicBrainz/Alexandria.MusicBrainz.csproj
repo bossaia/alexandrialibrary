@@ -34,7 +34,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MusicBrainzId.cs" />
+    <Compile Include="MusicBrainzIdFactory.cs" />
     <Compile Include="MusicBrainzUtility.cs" />
     <Compile Include="IWindowsNetworkControl.cs" />
     <Compile Include="MusicBrainzClient.cs" />

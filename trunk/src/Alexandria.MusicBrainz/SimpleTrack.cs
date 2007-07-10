@@ -49,6 +49,10 @@ namespace Alexandria.MusicBrainz
         private int track_count;
         private int index;
         private int length;
+        
+        private Guid id = default(Guid);
+        private IRecord parent;
+        private IPersistenceBroker broker;
         #endregion
         
         #region Constructors
@@ -172,34 +176,32 @@ namespace Alexandria.MusicBrainz
 		#endregion
 
 		#region IRecord Members
-
 		public Guid Id
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return id; }
+		}
+
+		public IRecord Parent
+		{
+			get { return parent; }
+			set { parent = value; }
 		}
 
 		public IPersistenceBroker PersistenceBroker
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return broker; }
+			set { broker = value; }
 		}
 
 		public void Save()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			broker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			broker.DeleteRecord(this);
 		}
-
 		#endregion
 	}
 }

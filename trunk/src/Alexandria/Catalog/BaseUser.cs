@@ -48,6 +48,7 @@ namespace Alexandria.Catalog
 	
 		#region Private Fields
 		private Guid id;
+		private IRecord parent;
 		private string name;
 		private string password;
 		private List<ICatalog> catalogs = new List<ICatalog>();
@@ -80,6 +81,12 @@ namespace Alexandria.Catalog
 		public Guid Id
 		{
 			get { return id; }
+		}
+
+		public IRecord Parent
+		{
+			get { return parent; }
+			set { parent = value; }
 		}
 
 		public IPersistenceBroker PersistenceBroker

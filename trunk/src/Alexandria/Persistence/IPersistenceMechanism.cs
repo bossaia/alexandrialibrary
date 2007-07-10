@@ -27,6 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Data;
+using System.Data.Common;
 
 namespace Alexandria.Persistence
 {
@@ -37,9 +38,10 @@ namespace Alexandria.Persistence
 		IPersistenceBroker Broker { get; set; }
 		void Open();
 		void Close();
-		void InitializeRecord(RecordMap recordMap);
-		DataTable GetRecordData(string recordName, string fieldName, string value);
-		void SaveRecord(IRecord record, RecordMap recordMap);
+		DbConnection GetConnection();
+		void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction);
+		//DataTable GetRecordData(string recordName, string fieldName, string value);
+		void SaveRecord(IRecord record, DbTransaction transaction);
 		object GetDatabaseValue(Type type, object value);
 		object GetRecordValue(Type type, object value);
 	}

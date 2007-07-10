@@ -49,6 +49,7 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region Private Constant Fields
+		private const string NULL_STRING = "NULL";
 		private const string RECORD_TYPE_ID = "_RecordTypeId";
 		#endregion
 
@@ -102,44 +103,63 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetSQLiteFieldValue
-		private string GetSQLiteFieldValue(Type type, object value)
+		private string GetSQLiteFieldValue(IRecord record, FieldMap fieldMap, object value)
 		{
-			if (value == DBNull.Value || value == null)
-				return "NULL";
+			if (fieldMap.Attribute.Type == FieldType.Basic)
+			{
+				Type type = fieldMap.Property.PropertyType;
+				
+			
+				if (value == DBNull.Value || value == null)
+					return NULL_STRING;
 
-			if (type == typeof(short) || type == typeof(int) || type == typeof(long))
-			{
-				return value.ToString();
+				if (type == typeof(short) || type == typeof(int) || type == typeof(long))
+				{
+					return value.ToString();
+				}
+				else if (type == typeof(decimal) || type == typeof(float) || type == typeof(double))
+				{
+					return value.ToString();
+				}
+				else if (type == typeof(Guid))
+				{
+					return string.Format("'{0}'", value.ToString().ToLowerInvariant());
+				}
+				else if (type == typeof(DateTime))
+				{
+					DateTime date = (DateTime)value;
+					if (date == DateTime.MinValue)
+						return NULL_STRING;
+					else return date.ToFileTime().ToString();
+				}
+				else if (type == typeof(TimeSpan))
+				{
+					TimeSpan span = (TimeSpan)value;
+					return span.TotalMilliseconds.ToString();
+				}
+				else if (type == typeof(Version))
+				{
+					return string.Format("'{0}'", value);
+				}
+				else if (type == typeof(Uri))
+				{
+					return string.Format("'{0}'", value);
+				}				
 			}
-			else if (type == typeof(decimal) || type == typeof(float) || type == typeof(double))
+			else
 			{
-				return value.ToString();
+				if (fieldMap.Attribute.Type == FieldType.Parent)
+				{
+					return string.Format("'{0}'", record.Id);
+				}
+				else if (fieldMap.Attribute.Type == FieldType.Child)
+				{
+					if (record.Parent != null)
+						return string.Format("'{0}'", record.Parent.Id);
+					else return NULL_STRING;
+				}				
 			}
-			else if (type == typeof(Guid))
-			{
-				return string.Format("'{0}'", value.ToString().ToLowerInvariant());
-			}
-			else if (type == typeof(DateTime))
-			{
-				DateTime date = (DateTime)value;
-				if (date == DateTime.MinValue)
-					return "NULL";
-				else return date.ToFileTime().ToString();
-			}
-			else if (type == typeof(TimeSpan))
-			{
-				TimeSpan span = (TimeSpan)value;
-				return span.TotalMilliseconds.ToString();
-			}
-			else if (type == typeof(Version))
-			{
-				return string.Format("'{0}'", value);
-			}
-			else if (type == typeof(Uri))
-			{
-				return string.Format("'{0}'", value);
-			}
-
+			
 			return string.Format("'{0}'", value);
 		}
 		#endregion
@@ -245,106 +265,114 @@ namespace Alexandria.SQLite
 			throw new Exception("The method or operation is not implemented.");
 		}
 
-		public void InitializeRecord(RecordMap recordMap)
+		public DbConnection GetConnection()
 		{
-			using (SQLiteConnection connection = GetSQLiteConnection())
-			{
-				connection.Open();
-				string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
-				StringBuilder columns = new StringBuilder();
-				for(int i=1;i<=recordMap.BasicFieldMaps.Count;i++)
-				{
-					if (i > 1) columns.Append(", ");
-					
-					string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
-					string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
-					string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
-					
-					columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
-				}
+			return GetSQLiteConnection();
+		}
+
+		public void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction)
+		{
 			
-				// Add the RecordTypeId
-				columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
+			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+			StringBuilder columns = new StringBuilder();
+			for(int i=1;i<=recordMap.BasicFieldMaps.Count;i++)
+			{
+				if (i > 1) columns.Append(", ");
 				
-				string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
-				SQLiteCommand createTable = new SQLiteCommand(commandText, connection);
-				createTable.ExecuteNonQuery();
+				string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
+				string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
+				string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
 				
-				foreach(LinkRecord linkRecord in recordMap.LinkRecords)
+				columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
+			}
+		
+			// Add the RecordTypeId
+			columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
+			
+			string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
+			SQLiteCommand createTable = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			createTable.ExecuteNonQuery();
+			
+			foreach(LinkRecord linkRecord in recordMap.LinkRecords)
+			{
+				if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
 				{
-					if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+					if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
 					{
-						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
-						{
-							string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
-							SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, connection);
-							createLinkTable.ExecuteNonQuery();
-						}
+						string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+						SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						createLinkTable.ExecuteNonQuery();
 					}
 				}
 			}
 		}
 
-		public DataTable GetRecordData(string recodName, string fieldName, string value)
-		{
-			using (SQLiteConnection connection = GetSQLiteConnection())
-			{
-				return null;
-			}
+		//public DataTable GetRecordData(string recodName, string fieldName, string value)
+		//{
+			//using (SQLiteConnection connection = GetSQLiteConnection())
+			//{
+				//return null;
+			//}
 			//throw new Exception("The method or operation is not implemented.");
-		}
+		//}
 
-		public void SaveRecord(IRecord record, RecordMap recordMap)
+		public void SaveRecord(IRecord record, DbTransaction transaction)
 		{
-			using (SQLiteConnection connection = GetSQLiteConnection())
+			if (record == null)
+				throw new ArgumentNullException("record");
+			
+			RecordTypeAttribute recordTypeAttribute = broker.GetRecordTypeAttribute(record.GetType());
+			if (recordTypeAttribute == null)
+				throw new ApplicationException("SQLite could not lookup record type");
+				
+			RecordMap recordMap = broker.RecordMaps[recordTypeAttribute.Id];
+			if (recordMap == null)
+				throw new ApplicationException("SQLite could not lookup record map");
+		
+			string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
+				
+			StringBuilder columns = new StringBuilder();
+			StringBuilder values = new StringBuilder();
+			
+			for(int i=1; i<=recordMap.BasicFieldMaps.Count; i++)
 			{
-				connection.Open();
-				
-				string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
-				
-				StringBuilder columns = new StringBuilder();
-				StringBuilder values = new StringBuilder();
-				
-				for(int i=1; i<=recordMap.BasicFieldMaps.Count; i++)
+				if (i > 1)
 				{
-					if (i > 1)
-					{
-						columns.Append(", ");
-						values.Append(", ");
-					}
-					
-					columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
-					values.Append(GetSQLiteFieldValue(recordMap.BasicFieldMaps[i].Property.PropertyType, recordMap.BasicFieldMaps[i].Property.GetValue(record, null)));
+					columns.Append(", ");
+					values.Append(", ");
 				}
-				
-				//Add the RecordTypeId
-				columns.AppendFormat(", {0}", RECORD_TYPE_ID);
-				values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
-				
-				string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
-				
-				SQLiteCommand saveCommand = new SQLiteCommand(commandText, connection);
-				saveCommand.ExecuteNonQuery();
-				
-				foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
-				{					
-					IList list = fieldMap.Property.GetValue(record, null) as IList;
-					if (list != null)
+
+				columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
+
+				object propertyValue = recordMap.BasicFieldMaps[i].Property.GetValue(record, null);
+				string fieldValue = GetSQLiteFieldValue(record, recordMap.BasicFieldMaps[i], propertyValue);
+				values.Append(fieldValue);
+			}
+			
+			//Add the RecordTypeId
+			columns.AppendFormat(", {0}", RECORD_TYPE_ID);
+			values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
+			
+			string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
+			
+			SQLiteCommand saveCommand = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			saveCommand.ExecuteNonQuery();
+			
+			foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
+			{		
+				//TODO: find a way to cast to a generic IList<IRecord>			
+				IList list = fieldMap.Property.GetValue(record, null) as IList;
+				if (list != null)
+				{						
+					foreach(IRecord childRecord in list)
 					{						
-						foreach(IRecord listChildRecord in list)
-						{
-							RecordTypeAttribute listChildTypeAttribute = broker.GetRecordTypeAttribute(listChildRecord.GetType());
-							RecordMap listChildMap = broker.RecordMaps[listChildTypeAttribute.Id];
-							SaveRecord(listChildRecord, listChildMap);
-						}				
+						SaveRecord(childRecord, transaction);
 					}
-					else
-					{
-						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
-						RecordTypeAttribute childTypeAttribute = broker.GetRecordTypeAttribute(childRecord.GetType());
-						RecordMap childMap = broker.RecordMaps[childTypeAttribute.Id];
-						SaveRecord(childRecord, childMap);
-					}
+				}
+				else
+				{
+					IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
+					SaveRecord(childRecord, transaction);
 				}
 			}
 		}
