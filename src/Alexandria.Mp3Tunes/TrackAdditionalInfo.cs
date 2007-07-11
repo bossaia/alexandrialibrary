@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Mp3Tunes
 {
-	[Record("AudioTrack_Mp3tunes")]
+	[Record("Track_Mp3tunes")]
 	[RecordType("4D5F5337-A34B-4f38-A175-18AF9F1A8A8D")]
 	public class TrackAdditionalInfo : IRecord
 	{

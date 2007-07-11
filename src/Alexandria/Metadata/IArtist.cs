@@ -29,9 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
+	[Record("Artist")]
 	public interface IArtist : IMetadata
 	{
 	}

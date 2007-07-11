@@ -67,9 +67,7 @@ namespace Alexandria.Client
 			{
 				InitializeComponent();
 
-				InitializeConfig();
-				
-				controller = new QueueController(this.QueueListView);
+				//controller = new QueueController(this.QueueListView);
 
 				this.Resize += new EventHandler(MainForm_Resize);
 				this.OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);				
@@ -90,6 +88,8 @@ namespace Alexandria.Client
 		
 		#region Private Fields
 		private IPluginRepository repository;
+		private IPersistenceBroker broker;
+		private IPersistenceMechanism mechanism;
 		private QueueController controller;
 		private string dbDir;
 		private string dbFile;
@@ -139,15 +139,68 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		
 		#region Private Methods
 		
-		#region InitializeConfig
-		private void InitializeConfig()
+		#region InitializePlugins
+		private void InitializePlugins()
+		{
+			repository = new PluginRepository("Alexandria*.dll");
+			
+			InitializePersistence();
+		}
+		#endregion
+		
+		#region InitializePersistence
+		private void InitializePersistence()
 		{
 			dbDir = ConfigurationManager.AppSettings["DatabaseDirectory"].ToString();
 			dbFile = ConfigurationManager.AppSettings["DatabaseFile"].ToString();
 			dbPath = dbDir + dbFile;
-			
+
 			if (!Directory.Exists(dbDir))
 				Directory.CreateDirectory(dbDir);
+			
+			mechanism = new SQLitePersistenceMechanism(dbPath);
+			broker = new PersistenceBroker(repository, mechanism);
+			broker.InitializeRecordMaps();
+		}
+		#endregion
+		
+		#region InitializeInterface
+		private void InitializeInterface()
+		{
+			InitializeNotifyIcon();
+		}
+		#endregion
+		
+		#region InitializeNotifyIcon
+		private void InitializeNotifyIcon()
+		{
+			Icon icon = new Icon(@"..\..\App.ico");
+			notifyIcon.Icon = icon;
+			notifyIcon.Text = "Alexandria";
+			notifyIcon.ContextMenu = notifyMenu;
+			notifyIcon.Visible = true;
+			notifyIcon.Click += new EventHandler(notifyIcon_Click);
+
+			notifyOpenItem = new MenuItem("Open Media", new EventHandler(notifyOpenItem_Click));
+			notifyPlayItem = new MenuItem("Play/Pause", new EventHandler(notifyPlayItem_Click), Shortcut.CtrlP);
+			notifyStopItem = new MenuItem("Stop", new EventHandler(notifyStopItem_Click), Shortcut.CtrlS);
+			notifyPrevItem = new MenuItem("Prev", new EventHandler(notifyPrevItem_Click), Shortcut.CtrlL);
+			notifyNextItem = new MenuItem("Next", new EventHandler(notifyNextItem_Click), Shortcut.CtrlN);
+			notifyMuteItem = new MenuItem("Mute", new EventHandler(notifyMuteItem_Click), Shortcut.CtrlM);
+			notifyShowItem = new MenuItem("Show/Hide", new EventHandler(notifyShowItem_Click));
+			notifyExitItem = new MenuItem("Exit", new EventHandler(notifyExitItem_Click), Shortcut.AltF4);
+
+			notifyMenu.MenuItems.Add(notifyOpenItem);
+			notifyMenu.MenuItems.Add("-");
+			notifyMenu.MenuItems.Add(notifyPlayItem);
+			notifyMenu.MenuItems.Add(notifyStopItem);
+			notifyMenu.MenuItems.Add(notifyMuteItem);
+			notifyMenu.MenuItems.Add("-");
+			notifyMenu.MenuItems.Add(notifyPrevItem);
+			notifyMenu.MenuItems.Add(notifyNextItem);
+			notifyMenu.MenuItems.Add("-");
+			notifyMenu.MenuItems.Add(notifyShowItem);
+			notifyMenu.MenuItems.Add(notifyExitItem);
 		}
 		#endregion
 		
@@ -170,7 +223,33 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region TestDB
 		private void TestDB()
 		{
+			//Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
+			//DateTime releaseDate = new DateTime(1993, 1, 1);
+			//Mp3Tunes.MusicLocker locker = new MusicLocker();
+			//IAudioTrack track = locker.GetTrack(trackId, "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg");
+			//Mp3Tunes.TrackAdditionalInfo additional = new TrackAdditionalInfo(Guid.NewGuid, @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
+			//track.PersistenceBroker = broker;
+			//track.MetadataIdentifiers.Add(MusicBrainz.MusicBrainzIdFactory.CreateMusicBrainzId(track, Guid.NewGuid()));
+			//track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId(track, "mp3tunes_id:2117098401"));
+			//track.Save();			
+			//IAudioTrack track = broker.LookupRecord<IAudioTrack>(trackId);
+			//string x = track.Name;
+
+			controller = new QueueController(this.QueueListView);
+			controller.LoadTracks();
+			int x = controller.Tracks.Count;
+
+			//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
+			//IUser user = broker.LookupRecord<IUser>(userId);
 			
+			
+			//string x = user.Name;
+			//Guid catalogId = new Guid("F1FE3C1E-2C3F-4b8d-AF08-6282A4313B27");
+			//IUser user = new BaseUser(userId, "Dan", "secret");
+			//user.Catalogs.Add(new BaseCatalog(catalogId, "Dan's Music"));
+			//user.Catalogs[0].Tracks.Add(track);
+			//user.PersistenceBroker = broker;
+			//user.Save();
 		}
 		#endregion
 		
@@ -336,64 +415,11 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		protected override void OnLoad(EventArgs e)
 		{			
 			base.OnLoad(e);
-
-			repository = new PluginRepository("Alexandria*.dll");
-
-			SQLitePersistenceMechanism mechanism = new SQLitePersistenceMechanism(dbPath);
-			PersistenceBroker broker = new PersistenceBroker(repository, mechanism);
-			//broker.InitializeRecordMaps();
-						
-			Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
-			//DateTime releaseDate = new DateTime(1993, 1, 1);
-			//Mp3Tunes.MusicLocker locker = new MusicLocker();
-			//IAudioTrack track = locker.GetTrack(trackId, "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg");
-			  //Mp3Tunes.TrackAdditionalInfo additional = new TrackAdditionalInfo(Guid.NewGuid, @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
-			//track.PersistenceBroker = broker;
-			//track.MetadataIdentifiers.Add(MusicBrainz.MusicBrainzIdFactory.CreateMusicBrainzId(track, Guid.NewGuid()));
-			//track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId(track, "mp3tunes_id:2117098401"));
-			//track.Save();			
-			IAudioTrack track = broker.LookupRecord<IAudioTrack>(trackId);
-			//string x = track.Name;
 			
-			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
-			Guid catalogId = new Guid("F1FE3C1E-2C3F-4b8d-AF08-6282A4313B27");
-			IUser user = new BaseUser(userId, "Dan", "secret");
-			user.Catalogs.Add(new BaseCatalog(catalogId, "Dan's Music"));
-			user.Catalogs[0].Tracks.Add(track);
-			user.PersistenceBroker = broker;
-			user.Save();
+			InitializePlugins();
+			InitializeInterface();
 			
-			//TestDB();
-			//ListViewItem item = new ListViewItem(new string[] { "3", "Smoke & Mirrors", "Deadringer", "RJD2", "4:26", "2002/1/1", @"D:\working\Tests\AudioTest\03 Smoke & Mirrors.OGG", "ogg" });
-			//QueueListView.Items.Add(item);
-			
-			Icon icon = new Icon(@"..\..\App.ico");
-			notifyIcon.Icon = icon;
-			notifyIcon.Text = "Alexandria";
-			notifyIcon.ContextMenu = notifyMenu;
-			notifyIcon.Visible = true;
-			notifyIcon.Click += new EventHandler(notifyIcon_Click);
-
-			notifyOpenItem = new MenuItem("Open Media", new EventHandler(notifyOpenItem_Click));
-			notifyPlayItem = new MenuItem("Play/Pause", new EventHandler(notifyPlayItem_Click), Shortcut.CtrlP);
-			notifyStopItem = new MenuItem("Stop", new EventHandler(notifyStopItem_Click), Shortcut.CtrlS);		
-			notifyPrevItem = new MenuItem("Prev", new EventHandler(notifyPrevItem_Click), Shortcut.CtrlL);
-			notifyNextItem = new MenuItem("Next", new EventHandler(notifyNextItem_Click), Shortcut.CtrlN);
-			notifyMuteItem = new MenuItem("Mute", new EventHandler(notifyMuteItem_Click), Shortcut.CtrlM);
-			notifyShowItem = new MenuItem("Show/Hide", new EventHandler(notifyShowItem_Click));
-			notifyExitItem = new MenuItem("Exit", new EventHandler(notifyExitItem_Click), Shortcut.AltF4);
-			
-			notifyMenu.MenuItems.Add(notifyOpenItem);
-			notifyMenu.MenuItems.Add("-");
-			notifyMenu.MenuItems.Add(notifyPlayItem);			
-			notifyMenu.MenuItems.Add(notifyStopItem);
-			notifyMenu.MenuItems.Add(notifyMuteItem);
-			notifyMenu.MenuItems.Add("-");
-			notifyMenu.MenuItems.Add(notifyPrevItem);
-			notifyMenu.MenuItems.Add(notifyNextItem);
-			notifyMenu.MenuItems.Add("-");
-			notifyMenu.MenuItems.Add(notifyShowItem);
-			notifyMenu.MenuItems.Add(notifyExitItem);
+			TestDB();
 		}
 		#endregion
 		

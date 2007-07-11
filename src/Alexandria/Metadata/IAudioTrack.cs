@@ -31,7 +31,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	[Record("AudioTrack")]
+	[Record("Track")]
 	public interface IAudioTrack : IMetadata
 	{
 		[Field(4, FieldConstraints.Required)]

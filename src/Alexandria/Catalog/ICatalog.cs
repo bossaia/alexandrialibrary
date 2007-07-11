@@ -39,16 +39,16 @@ namespace Alexandria.Catalog
 		[Field(2, FieldConstraints.Required)]
 		string Name { get; }
     
-		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.None)]
+		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.Save)]
 		IUser User { get; set; }
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.None, ChildType=typeof(IAlbum))]
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.Save, ChildType=typeof(IAlbum))]
         IList<IAlbum> Albums { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.None, ChildType=typeof(IArtist))]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.Save, ChildType=typeof(IArtist))]
         IList<IArtist> Artists { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascades.None, ChildType=typeof(IAudioTrack))]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogTrack", "CatalogId", "TrackId", FieldCascades.Save, ChildType=typeof(IAudioTrack))]
         IList<IAudioTrack> Tracks { get; }
     }
 }
