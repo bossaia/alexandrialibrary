@@ -56,6 +56,7 @@ namespace Alexandria.Client
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
 		private IAudioStream audio;
+		private IList<IAudioTrack> tracks;
 		#endregion
 
 		#region Private Methods
@@ -82,7 +83,8 @@ namespace Alexandria.Client
 			{				
 				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
 				musicLocker.Login("dan.poage@gmail.com", "automatic");
-				return musicLocker.GetTracks(ignoreCache);
+				tracks = musicLocker.GetTracks(ignoreCache);
+				return tracks;
 			}
 			catch (Exception ex)
 			{
@@ -133,6 +135,13 @@ namespace Alexandria.Client
 					return metadataId;
 			}
 			return null;
+		}
+		#endregion
+		
+		#region Public Properties
+		public IList<IAudioTrack> Tracks
+		{
+			get { return tracks; }
 		}
 		#endregion
 		

@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.MusicDns
 {
-	internal class TrackInfo : IAudioTrack, IRecord
+	internal class TrackInfo : IAudioTrack
 	{
 		#region Constructors
 		internal TrackInfo()

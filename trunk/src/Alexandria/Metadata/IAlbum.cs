@@ -33,10 +33,16 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
+	[Record("Album")]
 	public interface IAlbum : IMetadata
-	{		
+	{	
+		[Field(2, FieldConstraints.Required)]	
 		string Artist { get; }
+		
+		[Field(3)]
 		DateTime ReleaseDate { get; }
+		
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "AlbumTrack", "AlbumId", "TrackId", FieldCascades.Save)]
 		IList<IAudioTrack> Tracks { get; }
 	}
 }

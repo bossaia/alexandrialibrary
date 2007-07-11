@@ -387,6 +387,23 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 		
+		#region GetChildRecordList
+		private IList<IRecord> GetChildRecordList(RecordAttribute recordAttribute, FieldMap fieldMap, string parentId, SQLiteConnection connection)
+		{
+			IList<IRecord> childRecords = null;
+			if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne || fieldMap.Attribute.Relationship == FieldRelationship.OneToMany)
+			{
+				childRecords = LookupRecords(recordAttribute.Name, fieldMap.Attribute.ForeignParentFieldName, parentId, connection);
+			}
+			else if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToOne || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+			{
+				childRecords = LookupLinkedRecords(fieldMap, parentId, connection);
+			}
+			
+			return childRecords;
+		}
+		#endregion
+		
 		#region LookupChildRecords
 		private void LookupChildRecords(IRecord record, RecordMap recordMap, SQLiteConnection connection)
 		{
@@ -402,33 +419,22 @@ namespace Alexandria.SQLite
 					RecordAttribute recordAttribute = broker.RecordAttributes[childType];
 					if (recordAttribute != null)
 					{
-						string recordName = recordAttribute.Name;
-						string fieldName = fieldMap.Attribute.ForeignParentFieldName;
-					
-						if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+						IList<IRecord> childRecordList = GetChildRecordList(recordAttribute, fieldMap, record.Id.ToString(), connection);
+						if (childRecordList != null && childRecordList.Count > 0)
 						{
-							recordName = fieldMap.Attribute.ForeignRecordName;
-						}
-					
-						IList<IRecord> childRecordList = LookupRecords(recordName, fieldName, record.Id.ToString(), connection);
-						if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne)
-						{
-							if (childRecordList != null && childRecordList.Count > 0)
-							{
-								IRecord childRecord = childRecordList[0];
-								childRecord.Parent = record;
-								fieldMap.Property.SetValue(record, childRecord, null);
-							}
-						}
-						else if (fieldMap.Attribute.Relationship == FieldRelationship.OneToMany || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
-						{
-							if (propertyList != null && childRecordList != null)
+							if (propertyList != null)
 							{
 								foreach(IRecord childRecord in childRecordList)
 								{
 									childRecord.Parent = record;
 									propertyList.Add(childRecord);
 								}
+							}
+							else
+							{
+								IRecord childRecord = childRecordList[0];
+								childRecord.Parent = record;
+								fieldMap.Property.SetValue(record, childRecord, null);
 							}
 						}
 					}
@@ -439,6 +445,32 @@ namespace Alexandria.SQLite
 					string y = fieldMap.Property.Name;
 				}
 			}
+		}
+		#endregion
+
+		#region LookupLinkedRecords
+		private IList<IRecord> LookupLinkedRecords(FieldMap fieldMap, string parentId, SQLiteConnection connection)
+		{
+			IList<IRecord> linkedRecords = new List<IRecord>();
+		
+			RecordAttribute recordAttribute = broker.RecordAttributes[fieldMap.Attribute.ChildType];
+		
+			using (SQLiteDataReader reader = GetSQLiteDataReader(fieldMap.Attribute.ForeignRecordName, fieldMap.Attribute.ForeignParentFieldName, parentId, connection))
+			{
+				if (reader != null && reader.HasRows)
+				{
+					while(reader.Read())
+					{
+						string childId = reader[fieldMap.Attribute.ForeignChildFieldName].ToString();
+						IRecord record = LookupParentRecord(recordAttribute.Name, "Id", childId, connection);
+						RecordMap recordMap = broker.GetRecordMap(record.GetType());
+						LookupChildRecords(record, recordMap, connection);
+						linkedRecords.Add(record);
+					}
+				}
+			}
+			
+			return linkedRecords;
 		}
 		#endregion
 
@@ -529,10 +561,15 @@ namespace Alexandria.SQLite
 							IList linkList = (IList)linkRecord.FieldMap.Property.GetValue(record, null);
 							foreach (IRecord childRecord in linkList)
 							{
-								string linkText = string.Format("INSERT INTO {0} ({1}, {2}) VALUES (@ParentIdValue, @ChildIdValue)", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+								//WARNING: There is a bug (probably in System.Data.SQLite) with using parameters to set fields
+								//that make up an aggregate UNIQUE constraint - the data is managled.  The work around is to pass
+								//the values in directly without using parameters which is used below.
+								
+								//string linkText = string.Format("INSERT INTO {0} ({1}, {2}) VALUES (@ParentIdValue, @ChildIdValue)", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+								string linkText = string.Format("REPLACE INTO {0} ({1}, {2}) VALUES ('{3}', '{4}')", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName, record.Id, childRecord.Id);
 								SQLiteCommand linkCommand = new SQLiteCommand(linkText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-								linkCommand.Parameters.Add(new SQLiteParameter("@ParentIdValue", record.Id));
-								linkCommand.Parameters.Add(new SQLiteParameter("@ChildIdValue", childRecord.Id));
+								//linkCommand.Parameters.Add(new SQLiteParameter("@ParentIdValue", record.Id));
+								//linkCommand.Parameters.Add(new SQLiteParameter("@ChildIdValue", childRecord.Id));
 								linkCommand.ExecuteNonQuery();
 							}
 						}

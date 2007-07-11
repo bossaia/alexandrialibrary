@@ -36,7 +36,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.MusicBrainz
 {
-	[Record("AudioTrack")]
+	[Record("Track")]
 	[RecordType("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
     public class SimpleTrack : IAudioTrack
     {
