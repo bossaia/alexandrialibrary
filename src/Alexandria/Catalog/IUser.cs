@@ -40,7 +40,7 @@ namespace Alexandria.Catalog
 		[Field(3, FieldConstraints.Required)]
 		string Password { get; }
 
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.All)]
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.All, ChildType=typeof(ICatalog))]
 		IList<ICatalog> Catalogs { get; }
 
 		bool Authenticate(string name, string password);

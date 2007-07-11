@@ -69,10 +69,17 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region GetFieldNameFromParameterName
-		//TODO: this should be refactored into FactoryMap
-		private string GetFieldNameFromParameterName(string value)
+		#region GetFactoryFieldName
+		//NOTE: Should this be refactored into the FactoryMap?
+		private string GetFactoryFieldName(string value) //, FieldMap fieldMap)
 		{
+			//HACK: We need to definitively match the parameter to the appropriate FieldMap
+			//This is grasping at straws because it relies on the method parameters being in the same order as the database columns
+			//if ((string.Compare(value, fieldMap.Property.Name, true) == 0) && !string.IsNullOrEmpty(fieldMap.Attribute.FieldName))
+			//{
+				//return fieldMap.Attribute.FieldName;
+			//}
+			//else 
 			if (!string.IsNullOrEmpty(value) && value.Length > 1)
 			{
 				return value.Substring(0, 1).ToUpperInvariant() + value.Substring(1, value.Length - 1);
@@ -83,11 +90,42 @@ namespace Alexandria.SQLite
 		
 		#region GetRecordValueFromDatabaseValue
 		private object GetRecordValueFromDatabaseValue(Type type, object value)
-		{
+		{	
+			if (type == typeof(bool))
+			{
+				if (value  == DBNull.Value)
+					return false;
+				else return Convert.ToBoolean(value);
+			}
+			if (type == typeof(byte))
+			{
+				if (value == DBNull.Value)
+					return 0;
+				else return Convert.ToByte(value);
+			}
+			if (type == typeof(short))
+			{
+				if (value == DBNull.Value)
+					return 0;
+				else return Convert.ToInt16(value);
+			}
 			if (type == typeof(int))
 			{
 				if (value == DBNull.Value)
 					return 0;
+				else return Convert.ToInt32(value);
+			}
+			if (type == typeof(long))
+			{
+				if (value == DBNull.Value)
+					return 0;
+				else return Convert.ToInt64(value);
+			}
+			if (type == typeof(decimal))
+			{
+				if (value == DBNull.Value)
+					return 0m;
+				else return Convert.ToDecimal(value);
 			}
 			if (type == typeof(DateTime))
 			{
@@ -100,6 +138,10 @@ namespace Alexandria.SQLite
 				if (value == null || value == DBNull.Value)
 					return TimeSpan.Zero;
 				else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
+			}
+			else if (type == typeof(Guid))
+			{
+				return new Guid(value.ToString());
 			}
 			else if (type == typeof(Version))
 			{
@@ -297,36 +339,113 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region LookupParentRecord
-		private IRecord LookupParentRecord(Guid id, RecordMap recordMap, DbConnection connection)
+		#region LookupRecords
+		private IList<IRecord> LookupRecords(string recordName, string fieldName, string value, SQLiteConnection connection)
 		{
-			FactoryMap factoryMap = broker.FactoryMaps[recordMap.RecordTypeAttribute.Id];
-			if (factoryMap != null)
-			{	
-				using (SQLiteDataReader reader = GetSQLiteDataReader(recordMap.RecordAttribute.Name, "Id", id.ToString(), (SQLiteConnection)connection))
-				{	
-					ParameterInfo[] parameterInfo = factoryMap.GetParameters();
-					object[] parameters = new object[parameterInfo.Length];
-					for(int i = 0; i<parameterInfo.Length; i++)
+			IList<IRecord> records = new List<IRecord>();
+			
+			using (SQLiteDataReader reader = GetSQLiteDataReader(recordName, fieldName, value, connection))
+			{
+				if (reader != null && reader.HasRows)
+				{
+					while(reader.Read())
 					{
-						string fieldName = GetFieldNameFromParameterName(parameterInfo[i].Name);
-						object value = GetRecordValueFromDatabaseValue(parameterInfo[i].ParameterType, reader[fieldName]);
-						parameters[i] = value;
+						string recordTypeId = null;
+						if (reader[RECORD_TYPE_ID] != null)
+							recordTypeId = reader[RECORD_TYPE_ID].ToString();
+							
+						if (!string.IsNullOrEmpty(recordTypeId))
+						{
+							FactoryMap factoryMap = broker.FactoryMaps[recordTypeId];
+							RecordMap recordMap = broker.RecordMaps[recordTypeId];
+							if (factoryMap != null)
+							{
+								if (recordMap != null)
+								{
+									ParameterInfo[] parameterInfo = factoryMap.GetParameters();
+									object[] parameters = new object[parameterInfo.Length];
+									for (int i = 0; i < parameterInfo.Length; i++)
+									{
+										string paramFieldName = GetFactoryFieldName(parameterInfo[i].Name); //, recordMap.BasicFieldMaps[i+1]);
+										object paramValue = GetRecordValueFromDatabaseValue(parameterInfo[i].ParameterType, reader[paramFieldName]);
+										parameters[i] = paramValue;
+									}
+
+									IRecord record = factoryMap.GetRecord(parameters);
+									record.PersistenceBroker = broker;
+									records.Add(record);
+								}
+								else throw new ApplicationException("SQLite could not determine the record map for this record");
+							}
+							else throw new ApplicationException("SQLite could not determine the factory map for this record");
+						}
+						else throw new ApplicationException("SQLite could not determine the type of this record");
 					}
-					
-					IRecord record = factoryMap.GetRecord(parameters);
-					Guid x = record.Id;
-					return record;
 				}
 			}
-			else throw new ApplicationException("SQLite could not lookup the factory map for this type");
+			
+			return records;
+		}
+		#endregion
+
+		#region LookupParentRecord
+		private IRecord LookupParentRecord(string recordName, string fieldName, string value, SQLiteConnection connection)
+		{
+			IList<IRecord> records = LookupRecords(recordName, fieldName, value, connection);
+			return records[0];
 		}
 		#endregion
 		
 		#region LookupChildRecords
-		private void LookupChildRecords(IRecord record, RecordMap recordMap, DbConnection connection)
+		private void LookupChildRecords(IRecord record, RecordMap recordMap, SQLiteConnection connection)
 		{
-		
+			foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
+			{
+				if (fieldMap.Attribute.Type == FieldType.Parent)
+				{
+					Type childType = fieldMap.Property.PropertyType;
+					IList propertyList = fieldMap.Property.GetValue(record, null) as IList;
+					if (propertyList != null)
+						childType = fieldMap.Attribute.ChildType;
+					
+					RecordAttribute recordAttribute = broker.RecordAttributes[childType];
+					if (recordAttribute != null)
+					{
+						string recordName = recordAttribute.Name;
+						string fieldName = fieldMap.Attribute.ForeignParentFieldName;
+					
+						if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+						{
+							recordName = fieldMap.Attribute.ForeignRecordName;
+						}
+					
+						IList<IRecord> childRecordList = LookupRecords(recordName, fieldName, record.Id.ToString(), connection);
+						if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne)
+						{
+							IRecord childRecord = childRecordList[0];
+							childRecord.Parent = record;
+							fieldMap.Property.SetValue(record, childRecord, null);
+							string x = fieldMap.Property.Name;
+						}
+						else if (fieldMap.Attribute.Relationship == FieldRelationship.OneToMany || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+						{
+							if (propertyList != null)
+							{
+								foreach(IRecord childRecord in childRecordList)
+								{
+									childRecord.Parent = record;
+									propertyList.Add(childRecord);
+								}
+							}
+						}
+					}
+					else throw new ApplicationException("SQLite could not lookup record attribute for child record");
+				}
+				else if (fieldMap.Attribute.Type == FieldType.Child)
+				{
+					string y = fieldMap.Property.Name;
+				}
+			}
 		}
 		#endregion
 
@@ -521,15 +640,16 @@ namespace Alexandria.SQLite
 		public T LookupRecord<T>(Guid id, DbConnection connection) where T: IRecord
 		{
 			if (connection != null)
-			{
-				RecordMap recordMap = broker.GetRecordMap(typeof(T));
-				if (recordMap != null)
-				{
-					T record = (T)LookupParentRecord(id, recordMap, connection);
-					LookupChildRecords(record, recordMap, connection);
-					return record;
+			{				
+				RecordAttribute recordAttribute = broker.RecordAttributes[typeof(T)];
+				if (recordAttribute != null)
+				{					
+					IRecord record = LookupParentRecord(recordAttribute.Name, "Id", id.ToString(), (SQLiteConnection)connection);
+					RecordMap recordMap = broker.GetRecordMap(record.GetType());
+					LookupChildRecords(record, recordMap, (SQLiteConnection)connection);
+					return (T)record;
 				}
-				else throw new ApplicationException("SQLite could not lookup the record map for this type");
+				else throw new ApplicationException("SQLite could not lookup the record attribute for this type");
 			}
 			else throw new ArgumentNullException("connection");
 		}

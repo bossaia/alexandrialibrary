@@ -34,6 +34,7 @@ namespace Alexandria.Persistence
 	public interface IPersistenceBroker
 	{
 		IPersistenceMechanism Mechanism { get; set; }
+		IDictionary<Type, RecordAttribute> RecordAttributes { get; }
 		IDictionary<string, FactoryMap> FactoryMaps { get; }
 		IDictionary<string, RecordMap> RecordMaps { get; }
 		

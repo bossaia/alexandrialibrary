@@ -34,7 +34,7 @@ namespace Alexandria.Metadata
 {
 	public interface IMetadata : IRecord
 	{
-		[Field(FieldType.Parent, FieldRelationship.OneToMany, "ParentId", FieldCascades.All)]
+		[Field(FieldType.Parent, FieldRelationship.OneToMany, "ParentId", FieldCascades.All, ChildType=typeof(IMetadataIdentifier))]
 		IList<IMetadataIdentifier> MetadataIdentifiers { get; }
 		
 		[Field(2)]

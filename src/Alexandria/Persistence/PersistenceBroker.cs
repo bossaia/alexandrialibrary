@@ -179,28 +179,26 @@ namespace Alexandria.Persistence
 				ConstructorInfo factoryConstructor = null;
 				object factory = null;
 			
-				foreach (ConstructorInfo constructor in type.GetConstructors(BindingFlags.Public|BindingFlags.Instance))
+				foreach (ConstructorInfo constructor in type.GetConstructors())
 				{
 					if (constructor.GetParameters().Length == 0)
 					{
 						factoryConstructor = constructor;
 					}
 					
-					foreach (FactoryAttribute attribute in constructor.GetCustomAttributes(typeof(FactoryAttribute), false))
+					foreach (FactoryAttribute factoryAttribute in constructor.GetCustomAttributes(typeof(FactoryAttribute), false))
 					{
-						FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
 						return new FactoryMap(factoryAttribute, constructor);
 					}
 				}
 				
-				foreach(MethodInfo method in type.GetMethods(BindingFlags.Static|BindingFlags.Public))
-				{
-					foreach (FactoryAttribute attribute in method.GetCustomAttributes(typeof(FactoryAttribute), false))
+				foreach(MethodInfo method in type.GetMethods())
+				{				
+					foreach (FactoryAttribute factoryAttribute in method.GetCustomAttributes(typeof(FactoryAttribute), false))
 					{
 						if (factoryConstructor != null)
 						{
 							factory = factoryConstructor.Invoke(new object[0]);
-							FactoryAttribute factoryAttribute = (FactoryAttribute)attribute;
 							return new FactoryMap(factoryAttribute, factory, method);
 						}
 						else throw new ApplicationException("Could not find the factory for type: " + type.Name);
@@ -220,6 +218,11 @@ namespace Alexandria.Persistence
 				mechanism = value;
 				mechanism.Broker = this;
 			}
+		}
+		
+		public IDictionary<Type, RecordAttribute> RecordAttributes
+		{
+			get { return recordAttributes; }
 		}
 		
 		public IDictionary<string, FactoryMap> FactoryMaps

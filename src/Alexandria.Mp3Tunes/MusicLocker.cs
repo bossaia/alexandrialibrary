@@ -1,3 +1,4 @@
+#region License (LGPL)
 /*
  * Copyright (C) 2005-2006 MP3tunes, LLC
  *
@@ -15,6 +16,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+#endregion
 
 using System;
 using System.IO;
@@ -227,7 +229,11 @@ namespace Alexandria.Mp3Tunes
 					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 					
 					Guid id = Guid.NewGuid();
-					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDate.ToFileTime(), trackNumber, format, trackFileName.InnerXml);
+					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDate.ToFileTime(), trackNumber, format);
+					Track realTrack = (Track)track;
+					realTrack.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), trackFileName.InnerXml);
+					realTrack.AdditionalInfo.Parent = track;
+
 					//Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format, originalPath);
 					trackId = TrackIdFactory.CreateTrackId(track, trackIdValue);
 					track.MetadataIdentifiers.Add(trackId);
@@ -246,12 +252,9 @@ namespace Alexandria.Mp3Tunes
 		
 		#region GetTrack
 		[Factory("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
-		public IAudioTrack GetTrack(Guid id, string path, string name, string album, string artist, int duration, long releaseDate, int trackNumber, string format, string originalPath)
+		public IAudioTrack GetTrack(Guid id, string path, string name, string album, string artist, int duration, long releaseDate, int trackNumber, string format)
 		{
-			Track track = new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
-			track.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), originalPath);
-			track.AdditionalInfo.Parent = track;
-			return track;
+			return new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
 		}
 		#endregion
 		

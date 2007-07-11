@@ -62,6 +62,7 @@ namespace Alexandria.Persistence
 		private string foreignRecordName;
 		private string foreignParentFieldName;
 		private string foreignChildFieldName;
+		private Type childType;
 		#endregion
 		
 		#region Public Properties
@@ -113,6 +114,12 @@ namespace Alexandria.Persistence
 		public string ForeignChildFieldName
 		{
 			get { return foreignChildFieldName; }
+		}
+		
+		public Type ChildType
+		{
+			get { return childType; }
+			set { childType = value; }
 		}
 		#endregion
 	}
