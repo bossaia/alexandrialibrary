@@ -69,6 +69,18 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetSQLiteConnection
+		private SQLiteConnection GetSQLiteConnection()
+		{
+			return GetSQLiteConnection(GetConnectionString());
+		}
+
+		private SQLiteConnection GetSQLiteConnection(string connectionString)
+		{
+			return new SQLiteConnection(connectionString);
+		}
+		#endregion
+
 		#region GetFactoryFieldName
 		//NOTE: Should this be refactored into the FactoryMap?
 		private string GetFactoryFieldName(string value) //, FieldMap fieldMap)
@@ -162,23 +174,10 @@ namespace Alexandria.SQLite
 			if (fieldMap.Attribute.Type == FieldType.Basic)
 			{
 				Type type = fieldMap.Property.PropertyType;
-				
 			
 				if (value == DBNull.Value || value == null)
 					return NULL_STRING;
 
-				if (type == typeof(short) || type == typeof(int) || type == typeof(long))
-				{
-					return value.ToString();
-				}
-				else if (type == typeof(decimal) || type == typeof(float) || type == typeof(double))
-				{
-					return value.ToString();
-				}
-				else if (type == typeof(Guid))
-				{
-					return string.Format("'{0}'", value);
-				}
 				else if (type == typeof(DateTime))
 				{
 					DateTime date = (DateTime)value;
@@ -190,31 +189,23 @@ namespace Alexandria.SQLite
 				{
 					TimeSpan span = (TimeSpan)value;
 					return span.TotalMilliseconds.ToString();
-				}
-				else if (type == typeof(Version))
-				{
-					return string.Format("'{0}'", value);
-				}
-				else if (type == typeof(Uri))
-				{
-					return string.Format("'{0}'", value);
 				}				
 			}
 			else
 			{
 				if (fieldMap.Attribute.Type == FieldType.Parent)
 				{
-					return string.Format("'{0}'", record.Id);
+					return string.Format("{0}", record.Id);
 				}
 				else if (fieldMap.Attribute.Type == FieldType.Child)
 				{
 					if (record.Parent != null)
-						return string.Format("'{0}'", record.Parent.Id);
+						return string.Format("{0}", record.Parent.Id);
 					else return NULL_STRING;
 				}				
 			}
 			
-			return string.Format("'{0}'", value);
+			return value.ToString();
 		}
 		#endregion
 
@@ -422,14 +413,16 @@ namespace Alexandria.SQLite
 						IList<IRecord> childRecordList = LookupRecords(recordName, fieldName, record.Id.ToString(), connection);
 						if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne)
 						{
-							IRecord childRecord = childRecordList[0];
-							childRecord.Parent = record;
-							fieldMap.Property.SetValue(record, childRecord, null);
-							string x = fieldMap.Property.Name;
+							if (childRecordList != null && childRecordList.Count > 0)
+							{
+								IRecord childRecord = childRecordList[0];
+								childRecord.Parent = record;
+								fieldMap.Property.SetValue(record, childRecord, null);
+							}
 						}
 						else if (fieldMap.Attribute.Relationship == FieldRelationship.OneToMany || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
 						{
-							if (propertyList != null)
+							if (propertyList != null && childRecordList != null)
 							{
 								foreach(IRecord childRecord in childRecordList)
 								{
@@ -454,6 +447,8 @@ namespace Alexandria.SQLite
 		{
 			string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
 
+			SQLiteCommand saveCommand = new SQLiteCommand(string.Empty, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						
 			StringBuilder columns = new StringBuilder();
 			StringBuilder values = new StringBuilder();
 
@@ -464,21 +459,25 @@ namespace Alexandria.SQLite
 					columns.Append(", ");
 					values.Append(", ");
 				}
-
-				columns.Append(GetSQLiteFieldName(recordMap.BasicFieldMaps[i]));
-
+				
+				string columnName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
+				columns.Append(columnName);
+				
 				object propertyValue = recordMap.BasicFieldMaps[i].Property.GetValue(record, null);
 				string fieldValue = GetSQLiteFieldValue(record, recordMap.BasicFieldMaps[i], propertyValue);
-				values.Append(fieldValue);
+				string valueParameterName = string.Format("@Value{0}", i);
+				values.Append(valueParameterName);
+				saveCommand.Parameters.Add(new SQLiteParameter(valueParameterName, fieldValue));
 			}
 
 			//Add the RecordTypeId
 			columns.AppendFormat(", {0}", RECORD_TYPE_ID);
-			values.AppendFormat(", '{0}'", recordMap.RecordTypeAttribute.Id);
+			
+			string recordTypeIdValueParameterName = "@RecordTypeIdValue";
+			values.AppendFormat(", {0}", recordTypeIdValueParameterName);
+			saveCommand.Parameters.Add(new SQLiteParameter(recordTypeIdValueParameterName, recordMap.RecordTypeAttribute.Id));
 
-			string commandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
-
-			SQLiteCommand saveCommand = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+			saveCommand.CommandText = string.Format(saveFormat, recordMap.RecordAttribute.Name, columns, values);
 			saveCommand.ExecuteNonQuery();
 		}
 		#endregion
@@ -496,20 +495,22 @@ namespace Alexandria.SQLite
 					{
 						foreach (IRecord childRecord in list)
 						{
-							SaveRecord(childRecord, transaction);
+							if (childRecord != null)
+								SaveRecord(childRecord, transaction);
 						}
 					}
 					else
 					{
 						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
-						SaveRecord(childRecord, transaction);
+						if (childRecord != null)
+							SaveRecord(childRecord, transaction);
 					}
 				}
 			}
 		}
 		#endregion
 		
-		#region SavedLinkedRecords
+		#region SaveLinkedRecords
 		private void SaveLinkedRecords(IRecord record, RecordMap recordMap, DbTransaction transaction)
 		{
 			foreach (LinkRecord linkRecord in recordMap.LinkRecords)
@@ -520,15 +521,18 @@ namespace Alexandria.SQLite
 					{
 						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
 						{
-							string cleanupText = string.Format("DELETE FROM {0} WHERE {1} = '{2}'", linkRecord.Name, linkRecord.ParentFieldName, record.Id);
+							string cleanupText = string.Format("DELETE FROM {0} WHERE {1} = @IdValue", linkRecord.Name, linkRecord.ParentFieldName);
 							SQLiteCommand cleanupCommand = new SQLiteCommand(cleanupText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							cleanupCommand.Parameters.Add(new SQLiteParameter("@IdValue", record.Id));
 							cleanupCommand.ExecuteNonQuery();
 
 							IList linkList = (IList)linkRecord.FieldMap.Property.GetValue(record, null);
 							foreach (IRecord childRecord in linkList)
 							{
-								string linkText = string.Format("INSERT INTO {0} ({1}, {2}) VALUES ('{3}', '{4}')", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName, record.Id, childRecord.Id);
+								string linkText = string.Format("INSERT INTO {0} ({1}, {2}) VALUES (@ParentIdValue, @ChildIdValue)", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
 								SQLiteCommand linkCommand = new SQLiteCommand(linkText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+								linkCommand.Parameters.Add(new SQLiteParameter("@ParentIdValue", record.Id));
+								linkCommand.Parameters.Add(new SQLiteParameter("@ChildIdValue", childRecord.Id));
 								linkCommand.ExecuteNonQuery();
 							}
 						}
@@ -593,22 +597,6 @@ namespace Alexandria.SQLite
 					}
 				}
 			}
-		}
-		#endregion
-
-		#endregion
-
-		#region Internal Methods
-
-		#region GetSQLiteConnection
-		internal SQLiteConnection GetSQLiteConnection()
-		{
-			return GetSQLiteConnection(GetConnectionString());
-		}
-
-		internal SQLiteConnection GetSQLiteConnection(string connectionString)
-		{
-			return new SQLiteConnection(connectionString);
 		}
 		#endregion
 
