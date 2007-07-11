@@ -43,14 +43,13 @@ namespace Alexandria.Metadata
 
 	[Record("MetadataIdentifier")]
 	[RecordType("585F6263-29FA-41ae-93A0-9250348CEB4D")]
-	public struct MetadataIdentifier : IMetadataIdentifier
+	public class MetadataIdentifier : IMetadataIdentifier
 	{
 		#region Constructors
 		[Factory("585F6263-29FA-41ae-93A0-9250348CEB4D")]
-		public MetadataIdentifier(Guid id, IMetadata metadataParent, string value, string type, Version version)
+		public MetadataIdentifier(Guid id, string value, string type, Version version)
 		{
-			this.id = id;
-			this.metadataParent = metadataParent;
+			this.id = id;			
 			this.value = value;
 			this.type = type;
 			this.version = version;

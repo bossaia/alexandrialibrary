@@ -15,9 +15,11 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Static Methods
-		public static MetadataIdentifier CreateMusicBrainzId(IMetadata parent, Guid musicBrainzId)
+		public static IMetadataIdentifier CreateMusicBrainzId(IMetadata parent, Guid musicBrainzId)
 		{
-			return new MetadataIdentifier(Guid.NewGuid(), parent, musicBrainzId.ToString(), ID_TYPE, version);
+			IMetadataIdentifier identifier = new MetadataIdentifier(Guid.NewGuid(), musicBrainzId.ToString(), ID_TYPE, version);
+			identifier.MetadataParent = parent;
+			return identifier;
 		}
 		#endregion
 	}

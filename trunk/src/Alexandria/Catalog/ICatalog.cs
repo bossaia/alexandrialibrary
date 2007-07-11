@@ -42,13 +42,13 @@ namespace Alexandria.Catalog
 		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.None)]
 		IUser User { get; set; }
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.None)]
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.None, ChildType=typeof(IAlbum))]
         IList<IAlbum> Albums { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.None)]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.None, ChildType=typeof(IArtist))]
         IList<IArtist> Artists { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascades.None)]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAudioTrack", "CatalogId", "AudioTrackId", FieldCascades.None, ChildType=typeof(IAudioTrack))]
         IList<IAudioTrack> Tracks { get; }
     }
 }

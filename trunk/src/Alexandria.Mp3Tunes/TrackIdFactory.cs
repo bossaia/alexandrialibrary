@@ -46,7 +46,9 @@ namespace Alexandria.Mp3Tunes
 		#region Public Static Methods
 		public static IMetadataIdentifier CreateTrackId(IMetadata parent, string value)
 		{
-			return new MetadataIdentifier(Guid.NewGuid(), parent, value, ID_TYPE, version);
+			IMetadataIdentifier identifier = new MetadataIdentifier(Guid.NewGuid(), value, ID_TYPE, version);
+			identifier.MetadataParent = parent;
+			return identifier;
 		}
 		#endregion
 	}
