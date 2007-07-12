@@ -39,10 +39,10 @@ namespace Alexandria.Mp3Tunes
 	{
 		#region Constructors
 		[Factory("4D5F5337-A34B-4f38-A175-18AF9F1A8A8D")]
-		public TrackAdditionalInfo(Guid id, string originalPath)
+		public TrackAdditionalInfo(Guid id, string originalName)
 		{
 			this.id = id;
-			this.originalPath = new Uri(originalPath);
+			this.originalName = originalName;
 		}
 		#endregion
 		
@@ -50,7 +50,7 @@ namespace Alexandria.Mp3Tunes
 		private Guid id;
 		private IPersistenceBroker persistenceBroker;
 		private IAudioTrack track;
-		private Uri originalPath;
+		private string originalName;
 		#endregion
 
 		#region IRecord Members
@@ -91,9 +91,9 @@ namespace Alexandria.Mp3Tunes
 		}
 		
 		[Field(3, FieldConstraints.Required)]
-		public Uri OriginalPath
+		public string OriginalName
 		{
-			get { return originalPath; }
+			get { return originalName; }
 		}
 		#endregion
 	}

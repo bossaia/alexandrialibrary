@@ -41,6 +41,9 @@ namespace Alexandria.Client
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStrip = new System.Windows.Forms.StatusStrip();
 			this.LoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
 			this.PlaybackStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -103,9 +106,8 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -175,6 +177,8 @@ namespace Alexandria.Client
 			// 
 			this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
+            this.catalogToolStripMenuItem,
+            this.userToolStripMenuItem,
             this.ToolsToolStripMenuItem,
             this.HelpToolStripMenuItem});
 			resources.ApplyResources(this.FileMenuStrip, "FileMenuStrip");
@@ -197,6 +201,24 @@ namespace Alexandria.Client
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
 			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
+			// 
+			// ToolsToolStripMenuItem
+			// 
+			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
+			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
+			// 
+			// HelpToolStripMenuItem
+			// 
+			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AboutToolStripMenuItem});
+			this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+			resources.ApplyResources(this.HelpToolStripMenuItem, "HelpToolStripMenuItem");
+			// 
+			// AboutToolStripMenuItem
+			// 
+			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
+			resources.ApplyResources(this.AboutToolStripMenuItem, "AboutToolStripMenuItem");
+			this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
 			// 
 			// StatusStrip
 			// 
@@ -636,23 +658,15 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
-			// ToolsToolStripMenuItem
+			// userToolStripMenuItem
 			// 
-			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
-			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
+			this.userToolStripMenuItem.Name = "userToolStripMenuItem";
+			resources.ApplyResources(this.userToolStripMenuItem, "userToolStripMenuItem");
 			// 
-			// HelpToolStripMenuItem
+			// catalogToolStripMenuItem
 			// 
-			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AboutToolStripMenuItem});
-			this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
-			resources.ApplyResources(this.HelpToolStripMenuItem, "HelpToolStripMenuItem");
-			// 
-			// AboutToolStripMenuItem
-			// 
-			this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-			resources.ApplyResources(this.AboutToolStripMenuItem, "AboutToolStripMenuItem");
-			this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+			this.catalogToolStripMenuItem.Name = "catalogToolStripMenuItem";
+			resources.ApplyResources(this.catalogToolStripMenuItem, "catalogToolStripMenuItem");
 			// 
 			// MainForm
 			// 
@@ -776,6 +790,8 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem catalogToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
 	}
 }
 
