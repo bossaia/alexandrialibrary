@@ -268,6 +268,11 @@ namespace Alexandria.MusicDns
 			set { persistenceBroker = value; }
 		}
 		
+		public bool IsProxy
+		{
+			get { return false; }
+		}
+		
 		public void Save()
 		{
 			persistenceBroker.SaveRecord(this);

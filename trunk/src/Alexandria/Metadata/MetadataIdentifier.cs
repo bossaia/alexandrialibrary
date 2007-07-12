@@ -127,6 +127,11 @@ namespace Alexandria.Metadata
 			set { persistenceBroker = value; }
 		}
 
+		public virtual bool IsProxy
+		{
+			get { return false; }
+		}
+
 		public void Save()
 		{
 			persistenceBroker.SaveRecord(this);

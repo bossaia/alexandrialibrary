@@ -36,6 +36,7 @@ namespace Alexandria.Persistence
 		Guid Id { get; }
 		IRecord Parent { get; set; }
 		IPersistenceBroker PersistenceBroker { get; set; }
+		bool IsProxy { get; }
 		void Save();
 		void Delete();
 	}
