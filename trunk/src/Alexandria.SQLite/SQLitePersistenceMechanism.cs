@@ -388,27 +388,12 @@ namespace Alexandria.SQLite
 			else return null;
 		}
 		#endregion
-		
-		#region GetChildRecordList
-		private IList<IRecord> GetChildRecordList(RecordAttribute recordAttribute, FieldMap fieldMap, string parentId, SQLiteConnection connection)
-		{
-			IList<IRecord> childRecords = null;
-			if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne || fieldMap.Attribute.Relationship == FieldRelationship.OneToMany)
-			{
-				childRecords = LookupRecords(recordAttribute.Name, fieldMap.Attribute.ForeignParentFieldName, parentId, connection);
-			}
-			else if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToOne || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
-			{
-				childRecords = LookupLinkedRecords(fieldMap, parentId, connection);
-			}
-			
-			return childRecords;
-		}
-		#endregion
-		
+				
 		#region LookupChildRecords
 		private void LookupChildRecords(IRecord record, RecordMap recordMap, SQLiteConnection connection)
 		{
+			System.Diagnostics.Debug.WriteLine(string.Format("LookupChildRecords: {0}({1})", recordMap.RecordAttribute.Name, record.Id));
+		
 			foreach(FieldMap fieldMap in recordMap.AdvancedFieldMaps)
 			{
 				if (fieldMap.Attribute.Type == FieldType.Parent)
@@ -453,6 +438,7 @@ namespace Alexandria.SQLite
 		#region LookupLinkedRecords
 		private IList<IRecord> LookupLinkedRecords(FieldMap fieldMap, string parentId, SQLiteConnection connection)
 		{
+			System.Diagnostics.Debug.WriteLine(string.Format("LookupLinkedRecords: {0}({1}", fieldMap.Property.Name, parentId));
 			IList<IRecord> linkedRecords = new List<IRecord>();
 		
 			RecordAttribute recordAttribute = broker.RecordAttributes[fieldMap.Attribute.ChildType];
@@ -473,6 +459,25 @@ namespace Alexandria.SQLite
 			}
 			
 			return linkedRecords;
+		}
+		#endregion
+
+		#region GetChildRecordList
+		private IList<IRecord> GetChildRecordList(RecordAttribute recordAttribute, FieldMap fieldMap, string parentId, SQLiteConnection connection)
+		{
+			System.Diagnostics.Debug.WriteLine(string.Format("GetChildRecordList: {0}.{1}({2})", recordAttribute.Name, fieldMap.Property.Name, parentId));
+		
+			IList<IRecord> childRecords = null;
+			if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne || fieldMap.Attribute.Relationship == FieldRelationship.OneToMany)
+			{
+				childRecords = LookupRecords(recordAttribute.Name, fieldMap.Attribute.ForeignParentFieldName, parentId, connection);
+			}
+			else if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToOne || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+			{
+				childRecords = LookupLinkedRecords(fieldMap, parentId, connection);
+			}
+
+			return childRecords;
 		}
 		#endregion
 
