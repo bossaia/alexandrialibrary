@@ -383,7 +383,9 @@ namespace Alexandria.SQLite
 		private IRecord LookupParentRecord(string recordName, string fieldName, string value, SQLiteConnection connection)
 		{
 			IList<IRecord> records = LookupRecords(recordName, fieldName, value, connection);
-			return records[0];
+			if (records != null && records.Count > 0)
+				return records[0];
+			else return null;
 		}
 		#endregion
 		
@@ -442,7 +444,7 @@ namespace Alexandria.SQLite
 				}
 				else if (fieldMap.Attribute.Type == FieldType.Child)
 				{
-					string y = fieldMap.Property.Name;
+					//string y = fieldMap.Property.Name;
 				}
 			}
 		}
@@ -521,21 +523,25 @@ namespace Alexandria.SQLite
 			{
 				if ((fieldMap.Attribute.Cascades & FieldCascades.Save) == FieldCascades.Save)
 				{
-					//TODO: find a way to cast to a generic IList<IRecord>			
-					IList list = fieldMap.Property.GetValue(record, null) as IList;
-					if (list != null)
+					//NOTE: Only save parent fields - child fields are simply a friendly reference back to the parent
+					if (fieldMap.Attribute.Type == FieldType.Parent)
 					{
-						foreach (IRecord childRecord in list)
+						//TODO: find a way to cast to a generic IList<IRecord>			
+						IList list = fieldMap.Property.GetValue(record, null) as IList;
+						if (list != null)
 						{
+							foreach (IRecord childRecord in list)
+							{
+								if (childRecord != null)
+									SaveRecord(childRecord, transaction);
+							}
+						}
+						else
+						{
+							IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
 							if (childRecord != null)
 								SaveRecord(childRecord, transaction);
 						}
-					}
-					else
-					{
-						IRecord childRecord = (IRecord)fieldMap.Property.GetValue(record, null);
-						if (childRecord != null)
-							SaveRecord(childRecord, transaction);
 					}
 				}
 			}

@@ -205,16 +205,25 @@ namespace Alexandria.Mp3Tunes
 						}
 					}
 					
-					DateTime releaseDate = DateTime.MinValue;
+					//TODO: cleanup this mess
+					long releaseDateFileTime = 0;					
+					DateTime releaseDate = new DateTime(1900, 1, 1);
+					long defaultReleaseDateTime = releaseDate.ToFileTime();
 					if (albumYear != null && !string.IsNullOrEmpty(albumYear.InnerXml))
 					{
 						try
 						{
-							releaseDate = Convert.ToDateTime("1/1/" + albumYear.InnerXml);
+							releaseDate = new DateTime(Convert.ToInt32(albumYear.InnerXml), 1, 1);
+							releaseDateFileTime = releaseDate.ToFileTime();
 						}
 						catch (FormatException)
 						{
-							releaseDate = DateTime.MinValue;
+							//releaseDate = new DateTime(1900, 1, 1);
+							releaseDateFileTime = defaultReleaseDateTime;
+						}
+						catch(ArgumentOutOfRangeException)
+						{
+							releaseDateFileTime = defaultReleaseDateTime;
 						}
 					}						
 						
@@ -229,7 +238,7 @@ namespace Alexandria.Mp3Tunes
 					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 					
 					Guid id = Guid.NewGuid();
-					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDate.ToFileTime(), trackNumber, format);
+					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDateFileTime, trackNumber, format);
 					Track realTrack = (Track)track;
 					realTrack.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), trackFileName.InnerXml);
 					realTrack.AdditionalInfo.Parent = track;

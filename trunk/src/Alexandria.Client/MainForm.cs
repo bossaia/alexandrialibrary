@@ -223,27 +223,36 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region TestDB
 		private void TestDB()
 		{
-			//Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
+			Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
 			//DateTime releaseDate = new DateTime(1993, 1, 1);
 			//Mp3Tunes.MusicLocker locker = new MusicLocker();
 			//IAudioTrack track = locker.GetTrack(trackId, "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg");
-			//Mp3Tunes.TrackAdditionalInfo additional = new TrackAdditionalInfo(Guid.NewGuid, @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
+			  //Mp3Tunes.TrackAdditionalInfo additional = new TrackAdditionalInfo(Guid.NewGuid, @"M:\audio\ogg\Tool\Undertow\03 Sober.ogg");
 			//track.PersistenceBroker = broker;
 			//track.MetadataIdentifiers.Add(MusicBrainz.MusicBrainzIdFactory.CreateMusicBrainzId(track, Guid.NewGuid()));
 			//track.MetadataIdentifiers.Add(Mp3Tunes.TrackIdFactory.CreateTrackId(track, "mp3tunes_id:2117098401"));
-			//track.Save();			
+			//track.Save();
 			//IAudioTrack track = broker.LookupRecord<IAudioTrack>(trackId);
 			//string x = track.Name;
 
 			controller = new QueueController(this.QueueListView);
 			controller.LoadTracks();
-			int x = controller.Tracks.Count;
+			if (controller.Tracks.Count > 0)
+			{
+			//int x = controller.Tracks.Count;
 
-			//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
-			//IUser user = broker.LookupRecord<IUser>(userId);
-			
+				Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
+				IUser user = broker.LookupRecord<IUser>(userId);
+				foreach(IAudioTrack track in controller.Tracks)
+				{
+					user.Catalogs[0].Tracks.Add(track);
+					//user.Save();
+				}
+				user.Save();
+			}
 			
 			//string x = user.Name;
+			
 			//Guid catalogId = new Guid("F1FE3C1E-2C3F-4b8d-AF08-6282A4313B27");
 			//IUser user = new BaseUser(userId, "Dan", "secret");
 			//user.Catalogs.Add(new BaseCatalog(catalogId, "Dan's Music"));
