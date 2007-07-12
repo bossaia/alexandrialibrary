@@ -40,17 +40,17 @@ namespace Alexandria.Persistence
 			this.name = name;
 		}
 		
-		public RecordAttribute(string name, string idField, string recordTypeIdField) : this(name)
+		public RecordAttribute(string name, Type proxyType) : this(name)
 		{
-			this.idField = idField;
-			this.recordTypeIdField = recordTypeIdField;
+			this.isProxy = true;
+			this.proxyType = proxyType;
 		}
 		#endregion
 		
 		#region Private Fields
 		private string name;
-		private string idField = "Id";
-		private string recordTypeIdField = "RecordTypeId";
+		private bool isProxy;
+		private Type proxyType;
 		#endregion
 		
 		#region Public Properties
@@ -59,14 +59,14 @@ namespace Alexandria.Persistence
 			get { return name; }
 		}
 		
-		public string IdField
+		public bool IsProxy
 		{
-			get { return idField; }
+			get { return isProxy; }
 		}
 		
-		public string RecordTypeIdField
+		public Type ProxyType
 		{
-			get { return recordTypeIdField; }
+			get { return proxyType; }
 		}
 		#endregion
 	}

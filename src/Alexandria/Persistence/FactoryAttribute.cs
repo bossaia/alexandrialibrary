@@ -35,20 +35,38 @@ namespace Alexandria.Persistence
 	public class FactoryAttribute : Attribute
 	{
 		#region Constructors
-		public FactoryAttribute(string recordTypeId)
+		public FactoryAttribute(string id)
 		{
-			this.recordTypeId = recordTypeId;
+			this.id = id;
+		}
+		
+		public FactoryAttribute(Type proxyType)
+		{
+			this.isProxy = true;
+			this.proxyType = proxyType;
 		}
 		#endregion
 		
 		#region Private Fields
-		private string recordTypeId;
+		private string id;
+		private bool isProxy;
+		private Type proxyType;
 		#endregion
 		
 		#region Public Properties
-		public string RecordTypeId
+		public string Id
 		{
-			get { return recordTypeId; }
+			get { return id; }
+		}
+		
+		public bool IsProxy
+		{
+			get { return isProxy; }
+		}
+		
+		public Type ProxyType
+		{
+			get { return proxyType; }
 		}
 		#endregion
 	}

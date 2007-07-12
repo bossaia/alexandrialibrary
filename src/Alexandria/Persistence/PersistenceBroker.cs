@@ -43,7 +43,7 @@ namespace Alexandria.Persistence
 			Mechanism = mechanism;
 			
 			Initialize();
-			int x = recordMaps.Count;
+			int x = proxyRecordMaps.Count;
 		}
 		#endregion
 	
@@ -56,12 +56,15 @@ namespace Alexandria.Persistence
 		private IPersistenceMechanism mechanism;
 		private IDictionary<Type, RecordAttribute> recordAttributes = new Dictionary<Type, RecordAttribute>();
 		private IDictionary<string, FactoryMap> factoryMaps = new Dictionary<string, FactoryMap>();
+		private IDictionary<Type, FactoryMap> proxyFactoryMaps = new Dictionary<Type, FactoryMap>();
 		private IDictionary<string, RecordMap> recordMaps = new Dictionary<string, RecordMap>();
+		private IDictionary<Type, RecordMap> proxyRecordMaps = new Dictionary<Type, RecordMap>();
 		#endregion
 		
 		#region Private Methods
 		private void Initialize()
 		{
+			//Initialize lists of factory maps, record maps and record attributes for all plugin assemblies
 			foreach(Assembly assembly in repository.Assemblies)
 			{
 				foreach (Type type in assembly.GetTypes())
@@ -69,7 +72,9 @@ namespace Alexandria.Persistence
 					FactoryMap factoryMap = GetFactoryMap(type);
 					if (factoryMap != null)
 					{
-						factoryMaps.Add(factoryMap.Attribute.RecordTypeId, factoryMap);
+						if (factoryMap.Attribute.IsProxy)
+							proxyFactoryMaps.Add(factoryMap.Attribute.ProxyType, factoryMap);
+						else factoryMaps.Add(factoryMap.Attribute.Id, factoryMap);
 					}
 				
 					if (type.GetInterface("IRecord") != null)
@@ -78,16 +83,29 @@ namespace Alexandria.Persistence
 						if (recordAttribute != null)
 						{
 							recordAttributes.Add(type, recordAttribute);
-						}
-					
-						RecordMap recordMap = GetRecordMap(type, recordAttribute);
-						if (recordMap != null)
-						{
-							recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
+
+							RecordMap recordMap = GetRecordMap(type, recordAttribute);
+							if (recordMap != null)
+							{
+								if (recordMap.RecordTypeAttribute.IsProxy)
+									proxyRecordMaps.Add(recordMap.RecordTypeAttribute.ProxyType, recordMap);
+								else recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
+							}
 						}
 					}				
 				}
-			}			
+			}
+			
+			//Go back and load the factory maps into their associated record maps
+			//This must be done in a second pass because factorie methods can be in any type
+			foreach(string mapId in factoryMaps.Keys)
+			{
+				recordMaps[mapId].FactoryMap = factoryMaps[mapId];
+			}
+			foreach(Type mapId in proxyFactoryMaps.Keys)
+			{
+				proxyRecordMaps[mapId].FactoryMap = proxyFactoryMaps[mapId];
+			}
 		}
 
 		private RecordAttribute GetRecordAttribute(Type type)
@@ -225,14 +243,24 @@ namespace Alexandria.Persistence
 			get { return recordAttributes; }
 		}
 		
-		public IDictionary<string, FactoryMap> FactoryMaps
-		{
-			get { return factoryMaps; }
-		}
+		//public IDictionary<string, FactoryMap> FactoryMaps
+		//{
+			//get { return factoryMaps; }
+		//}
+		
+		//public IDictionary<Type, FactoryMap> ProxyFactoryMaps
+		//{
+			//get { return proxyFactoryMaps; }
+		//}
 				
 		public IDictionary<string, RecordMap> RecordMaps
 		{
 			get { return recordMaps; }
+		}
+
+		public IDictionary<Type, RecordMap> ProxyRecordMaps
+		{
+			get { return proxyRecordMaps; }
 		}
 
 		public RecordMap GetRecordMap(Type type)
