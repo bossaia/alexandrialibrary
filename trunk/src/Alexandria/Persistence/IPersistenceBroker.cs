@@ -35,8 +35,10 @@ namespace Alexandria.Persistence
 	{
 		IPersistenceMechanism Mechanism { get; set; }
 		IDictionary<Type, RecordAttribute> RecordAttributes { get; }
-		IDictionary<string, FactoryMap> FactoryMaps { get; }
+		//IDictionary<string, FactoryMap> FactoryMaps { get; }
+		//IDictionary<Type, FactoryMap> ProxyFactoryMaps { get; }
 		IDictionary<string, RecordMap> RecordMaps { get; }
+		IDictionary<Type, RecordMap> ProxyRecordMaps { get; }
 		
 		RecordMap GetRecordMap(Type type);
 		void InitializeRecordMaps();

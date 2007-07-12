@@ -49,6 +49,7 @@ namespace Alexandria.Persistence
 		private Type type;
 		private RecordAttribute recordAttribute;
 		private RecordTypeAttribute recordTypeAttribute;
+		private FactoryMap factoryMap;
 		private IDictionary<int, FieldMap> basicFieldMaps;
 		private IList<FieldMap> advancedFieldMaps;
 		private IList<LinkRecord> linkRecords;
@@ -68,6 +69,12 @@ namespace Alexandria.Persistence
 		public RecordTypeAttribute RecordTypeAttribute
 		{
 			get { return recordTypeAttribute; }
+		}
+		
+		public FactoryMap FactoryMap
+		{
+			get { return factoryMap; }
+			set { factoryMap = value; }
 		}
 		
 		public IDictionary<int, FieldMap> BasicFieldMaps

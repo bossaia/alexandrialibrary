@@ -64,10 +64,12 @@
     <Compile Include="Metadata\BaseAudioTrack.cs" />
     <Compile Include="Metadata\BaseMetadata.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
+    <Compile Include="Metadata\ProxyAudioTrack.cs" />
     <Compile Include="Persistence\FactoryMap.cs" />
     <Compile Include="Persistence\FieldAttribute.cs" />
     <Compile Include="Persistence\FieldCascades.cs" />
     <Compile Include="Persistence\FieldConstraints.cs" />
+    <Compile Include="Persistence\FieldLoadOptions.cs" />
     <Compile Include="Persistence\FieldLocation.cs" />
     <Compile Include="Persistence\FieldRelationship.cs" />
     <Compile Include="Persistence\FactoryAttribute.cs" />

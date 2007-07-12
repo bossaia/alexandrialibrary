@@ -44,10 +44,20 @@ namespace Alexandria.Persistence
 			this.cascades = cascades;
 		}
 
-		public FieldAttribute(FieldType type, FieldRelationship relationship, string foreignRecordName, string foreignParentFieldName, string foreignChildFieldName, FieldCascades cascade) : this(type, relationship, foreignParentFieldName, cascade)
+		public FieldAttribute(FieldType type, FieldRelationship relationship, string foreignParentFieldName, FieldCascades cascades, FieldLoadOptions loadOptions) : this(type, relationship, foreignParentFieldName, cascades)
+		{
+			this.loadOptions = loadOptions;
+		}
+
+		public FieldAttribute(FieldType type, FieldRelationship relationship, string foreignRecordName, string foreignParentFieldName, string foreignChildFieldName, FieldCascades cascades) : this(type, relationship, foreignParentFieldName, cascades)
 		{
 			this.foreignRecordName = foreignRecordName;
 			this.foreignChildFieldName = foreignChildFieldName;
+		}
+
+		public FieldAttribute(FieldType type, FieldRelationship relationship, string foreignRecordName, string foreignParentFieldName, string foreignChildFieldName, FieldCascades cascades, FieldLoadOptions loadOptions) : this(type, relationship, foreignRecordName, foreignParentFieldName, foreignChildFieldName, cascades)
+		{
+			this.loadOptions = loadOptions;
 		}
 		#endregion
 		
@@ -59,6 +69,7 @@ namespace Alexandria.Persistence
 		private string fieldName;
 		private FieldConstraints constraints = FieldConstraints.None;
 		private FieldCascades cascades = FieldCascades.None;
+		private FieldLoadOptions loadOptions = FieldLoadOptions.None;
 		private string foreignRecordName;
 		private string foreignParentFieldName;
 		private string foreignChildFieldName;
@@ -99,6 +110,11 @@ namespace Alexandria.Persistence
 		public FieldCascades Cascades
 		{
 			get { return cascades; }
+		}
+		
+		public FieldLoadOptions LoadOptions
+		{
+			get { return loadOptions; }
 		}
 		
 		public string ForeignRecordName

@@ -39,16 +39,34 @@ namespace Alexandria.Persistence
 		{
 			this.id = id;
 		}
+		
+		public RecordTypeAttribute(Type proxyType)
+		{
+			this.isProxy = true;
+			this.proxyType = proxyType;
+		}
 		#endregion
 		
 		#region Private Fields
 		private string id;
+		private bool isProxy;
+		private Type proxyType;
 		#endregion
 		
 		#region Public Properties
 		public string Id
 		{
 			get { return id; }
+		}
+
+		public bool IsProxy
+		{
+			get { return isProxy; }
+		}
+		
+		public Type ProxyType
+		{
+			get { return proxyType; }
 		}
 		#endregion
 	}
