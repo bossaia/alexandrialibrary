@@ -71,6 +71,11 @@ namespace Alexandria.Mp3Tunes
 			set { persistenceBroker = value; }
 		}
 
+		public bool IsProxy
+		{
+			get { return false; }
+		}
+		
 		public void Save()
 		{
 			persistenceBroker.SaveRecord(this);

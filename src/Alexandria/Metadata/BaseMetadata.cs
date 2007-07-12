@@ -33,7 +33,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
-	public abstract class BaseMetadata : IMetadata, IRecord
+	public abstract class BaseMetadata : IMetadata
 	{
 		#region Constructors
 		public BaseMetadata(string path, string name)
@@ -98,6 +98,11 @@ namespace Alexandria.Metadata
 		{
 			get { return persistenceBroker; }
 			set { persistenceBroker = value; }
+		}
+
+		public virtual bool IsProxy
+		{
+			get { return false; }
 		}
 		
 		public void Save()

@@ -193,6 +193,11 @@ namespace Alexandria.MusicBrainz
 			set { broker = value; }
 		}
 
+		public bool IsProxy
+		{
+			get { return false; }
+		}
+
 		public void Save()
 		{
 			broker.SaveRecord(this);
