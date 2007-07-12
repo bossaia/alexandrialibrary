@@ -66,9 +66,7 @@ namespace Alexandria.Client
 			try
 			{
 				InitializeComponent();
-
-				//controller = new QueueController(this.QueueListView);
-
+				
 				this.Resize += new EventHandler(MainForm_Resize);
 				this.OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);				
 				this.PlayPauseButton.Click += new EventHandler(PlayPauseButton_Click);
@@ -220,10 +218,21 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		}
 		#endregion
 		
+		#region LoadDefaultUser
+		private void LoadDefaultUser()
+		{
+			//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
+			//IUser user = broker.LookupRecord<IUser>(userId);
+
+			//controller = new QueueController(this.QueueListView);
+			//controller.LoadTracks(user.Catalogs[0].Tracks);
+		}
+		#endregion
+		
 		#region TestDB
 		private void TestDB()
 		{
-			Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
+			//Guid trackId = new Guid("5DD91B74-AC6F-4161-93BC-E0C9F2C4B557");
 			//DateTime releaseDate = new DateTime(1993, 1, 1);
 			//Mp3Tunes.MusicLocker locker = new MusicLocker();
 			//IAudioTrack track = locker.GetTrack(trackId, "http://mp3tunes.com/locker/1412414124/Sober.ogg", "Sober", "Undertow", "Tool", 506000, releaseDate.ToFileTime(), 3, "ogg");
@@ -235,21 +244,21 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			//IAudioTrack track = broker.LookupRecord<IAudioTrack>(trackId);
 			//string x = track.Name;
 
-			controller = new QueueController(this.QueueListView);
-			controller.LoadTracks();
-			if (controller.Tracks.Count > 0)
-			{
-			//int x = controller.Tracks.Count;
+			//controller = new QueueController(this.QueueListView);
+			//controller.LoadTracks();
+			//if (controller.Tracks.Count > 0)
+			//{
+				//int x = controller.Tracks.Count;
 
-				Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
-				IUser user = broker.LookupRecord<IUser>(userId);
-				foreach(IAudioTrack track in controller.Tracks)
-				{
-					user.Catalogs[0].Tracks.Add(track);
+				//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
+				//IUser user = broker.LookupRecord<IUser>(userId);
+				//foreach(IAudioTrack track in controller.Tracks)
+				//{
+					//user.Catalogs[0].Tracks.Add(track);
 					//user.Save();
-				}
-				user.Save();
-			}
+				//}
+				//user.Save();
+			//}
 			
 			//string x = user.Name;
 			
@@ -428,7 +437,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			InitializePlugins();
 			InitializeInterface();
 			
-			TestDB();
+			LoadDefaultUser();
 		}
 		#endregion
 		
