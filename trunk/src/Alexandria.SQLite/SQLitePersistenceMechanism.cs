@@ -306,16 +306,52 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region FieldIsLink
-		private bool FieldIsLink(RecordMap recordMap, FieldMap fieldMap)
+		#region GetIndexColumns
+		private IList<ColumnInfo> GetIndexColumns(TableInfo table, string indexName, SQLiteConnection connection)
 		{
-			foreach(LinkRecord linkRecord in recordMap.LinkRecords)
+			IList<ColumnInfo> columns = new List<ColumnInfo>();
+			
+			string commandText = string.Format("PRAGMA index_info('{0}')", indexName);
+			SQLiteCommand command = new SQLiteCommand(commandText, connection);
+			using (SQLiteDataReader reader = command.ExecuteReader())
 			{
-				if (linkRecord.FieldMap.Property == fieldMap.Property)
-					return true;
+				if (reader != null && reader.HasRows)
+				{
+					while (reader.Read())
+					{
+						int columnIndex = reader.GetInt32(1) + 1;
+						string columnName = reader[2].ToString();
+						
+						ColumnInfo column = table.GetColumnByName(columnName);
+						if (column != default(ColumnInfo))
+							columns.Add(column);
+					}
+				}
 			}
 			
-			return false;
+			return columns;
+		}
+		#endregion
+
+		#region GetIndices
+		private void GetIndices(TableInfo table, SQLiteConnection connection)
+		{			
+			string commandText = string.Format("PRAGMA index_list('{0}')", table.Name);
+			SQLiteCommand command = new SQLiteCommand(commandText, connection);
+			using (SQLiteDataReader reader = command.ExecuteReader())
+			{
+				if (reader != null && reader.HasRows)
+				{
+					while (reader.Read())
+					{
+						string name = reader[1].ToString();
+						bool isUnique = Convert.ToBoolean(reader[2]);
+						IList<ColumnInfo> columns = GetIndexColumns(table, name, connection);
+						IndexInfo indexInfo = new IndexInfo(table, name, isUnique, columns);
+						table.Indices.Add(name, indexInfo);
+					}
+				}
+			}
 		}
 		#endregion
 
@@ -325,8 +361,8 @@ namespace Alexandria.SQLite
 			TableInfo tableInfo = default(TableInfo);
 		
 			string commandText = string.Format("PRAGMA table_info({0})", recordName);
-			SQLiteCommand pragmaCommand = new SQLiteCommand(commandText, connection);
-			using (SQLiteDataReader reader = pragmaCommand.ExecuteReader())
+			SQLiteCommand command = new SQLiteCommand(commandText, connection);
+			using (SQLiteDataReader reader = command.ExecuteReader())
 			{
 				if (reader.HasRows)
 				{					
@@ -343,13 +379,12 @@ namespace Alexandria.SQLite
 						bool isPrimaryKey = Convert.ToBoolean(reader[5]); //0 = NO, 1 = YES
 						columns.Add(ordinal, new ColumnInfo(ordinal, name, type, isRequired, defaultValue, isPrimaryKey));
 					}
-					tableInfo = new TableInfo(recordName, columns, null);
+					tableInfo = new TableInfo(recordName, columns);
 				}
 			}
 			
-			//1. Call pragma index_list(recordName) to get a list of indexes for this table
-			//2. Call pragma index_info(indexName) foreach index to get a list of columns that index references
-			
+			GetIndices(tableInfo, connection);
+						
 			return tableInfo;
 		}
 		
@@ -373,7 +408,7 @@ namespace Alexandria.SQLite
 				//Add RecordTypeId column
 				columns.Add(columns.Count+1, new ColumnInfo(columns.Count+1, RECORD_TYPE_ID, TypeAffinity.Text, true, null, false));
 				
-				tableInfo = new TableInfo(recordMap.RecordAttribute.Name, columns, null);
+				tableInfo = new TableInfo(recordMap.RecordAttribute.Name, columns);
 			}
 			
 			return tableInfo;
@@ -386,10 +421,17 @@ namespace Alexandria.SQLite
 			TableInfo dbTableInfo = GetTableInfo(recordMap.RecordAttribute.Name, transaction.Connection);
 			if (dbTableInfo != default(TableInfo))
 			{
-				TableInfo mapTableInfo = GetTableInfo(recordMap);
-				SQLiteCommand createTable = new SQLiteCommand(mapTableInfo.ToString(), transaction.Connection, transaction);
-				string x = createTable.CommandText;
+				TableInfo table = GetTableInfo(recordMap);
+				SQLiteCommand createTable = new SQLiteCommand(table.ToString(), transaction.Connection, transaction);
+				string x = createTable.CommandText;				
 				//createTable.ExecuteNonQuery();
+				
+				foreach(IndexInfo index in table.Indices)
+				{
+					SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
+					string y = createIndex.CommandText;
+					//createIndex.ExecuteNonQuery();
+				}
 			}
 		}
 		#endregion
