@@ -37,6 +37,7 @@ namespace Alexandria.Persistence
 		None = 0,
 		Required = 1,
 		Unique  = 2,
-		All = Required | Unique
+		RequiredUnique = Required | Unique,
+		PrimaryKey = 4
 	}
 }

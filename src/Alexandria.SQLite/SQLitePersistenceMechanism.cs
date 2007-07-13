@@ -255,6 +255,28 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetSQLiteTypeAffinity
+		private TypeAffinity GetSQLiteTypeAffinity(string type)
+		{
+			switch (type)
+			{
+				case "INTEGER":
+					return TypeAffinity.Int64;
+				case "REAL":
+					return TypeAffinity.Double;
+				default:
+					if (!string.IsNullOrEmpty(type))
+						return TypeAffinity.Text;
+					else return TypeAffinity.Uninitialized;
+			}
+		}
+		
+		private TypeAffinity GetSQLiteTypeAffinity(Type type)
+		{
+			return GetSQLiteTypeAffinity(GetSQLiteFieldType(type));
+		}
+		#endregion
+
 		#region GetSQLiteFieldConstraints
 		private string GetSQLiteFieldConstraints(FieldConstraints constraints)
 		{
@@ -298,49 +320,77 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetTableInfo
-		private SQLiteDataReader GetTableInfo(string recordName, SQLiteConnection connection)
+		private TableInfo GetTableInfo(string recordName, SQLiteConnection connection)
 		{
+			TableInfo tableInfo = default(TableInfo);
+		
 			string commandText = string.Format("PRAGMA table_info({0})", recordName);
 			SQLiteCommand pragmaCommand = new SQLiteCommand(commandText, connection);
-			return pragmaCommand.ExecuteReader();
+			using (SQLiteDataReader reader = pragmaCommand.ExecuteReader())
+			{
+				if (reader.HasRows)
+				{					
+					IDictionary<int, ColumnInfo> columns = new Dictionary<int, ColumnInfo>();
+				
+					while(reader.Read())
+					{
+						reader.Read();
+						int ordinal = reader.GetInt32(0) + 1; //SQLite it 0-based but RecordMap is 1-based
+						string name = reader[1].ToString();
+						TypeAffinity type = GetSQLiteTypeAffinity(reader[2].ToString());
+						bool isRequired = (reader[3].ToString() == "99") ? true : false; //0 = NULL, 99 = NOT NULL
+						object defaultValue = reader[4];
+						bool isPrimaryKey = Convert.ToBoolean(reader[5]); //0 = NO, 1 = YES
+						columns.Add(ordinal, new ColumnInfo(ordinal, name, type, isRequired, defaultValue, isPrimaryKey));
+					}
+					tableInfo = new TableInfo(recordName, columns, null);
+				}
+			}
+			
+			//1. Call pragma index_list(recordName) to get a list of indexes for this table
+			//2. Call pragma index_info(indexName) foreach index to get a list of columns that index references
+			
+			return tableInfo;
+		}
+		
+		private TableInfo GetTableInfo(RecordMap recordMap)
+		{
+			TableInfo tableInfo = default(TableInfo);
+			if (recordMap != null)
+			{
+				IDictionary<int, ColumnInfo> columns = new Dictionary<int, ColumnInfo>();
+			
+				for(int ordinal=1; ordinal<=recordMap.BasicFieldMaps.Count; ordinal++)
+				{
+					string name = GetSQLiteFieldName(recordMap.BasicFieldMaps[ordinal]);
+					TypeAffinity type = GetSQLiteTypeAffinity(recordMap.BasicFieldMaps[ordinal].Property.PropertyType);
+					bool isRequired = ((recordMap.BasicFieldMaps[ordinal].Attribute.Constraints & FieldConstraints.Required) == FieldConstraints.Required);
+					object defaultValue = recordMap.BasicFieldMaps[ordinal].Attribute.DefaultValue;
+					bool isPrimaryKey = ((recordMap.BasicFieldMaps[ordinal].Attribute.Constraints & FieldConstraints.PrimaryKey) == FieldConstraints.PrimaryKey);
+					columns.Add(ordinal, new ColumnInfo(ordinal, name, type, isRequired, defaultValue, isPrimaryKey));
+				}
+				
+				//Add RecordTypeId column
+				columns.Add(columns.Count+1, new ColumnInfo(columns.Count+1, RECORD_TYPE_ID, TypeAffinity.Text, true, null, false));
+				
+				tableInfo = new TableInfo(recordMap.RecordAttribute.Name, columns, null);
+			}
+			
+			return tableInfo;
 		}
 		#endregion
 
 		#region InitializeParentRecordMap
-		private void InitializeParentRecordMap(RecordMap recordMap, DbTransaction transaction)
+		private void InitializeParentRecordMap(RecordMap recordMap, SQLiteTransaction transaction)
 		{
-			SQLiteDataReader tableSchema = GetTableInfo(recordMap.RecordAttribute.Name, (SQLiteConnection)transaction.Connection);
-			if (tableSchema.HasRows)
+			TableInfo dbTableInfo = GetTableInfo(recordMap.RecordAttribute.Name, transaction.Connection);
+			if (dbTableInfo != default(TableInfo))
 			{
-				tableSchema.Read();
-				string ordinal = tableSchema[0].ToString();
-				string name = tableSchema[1].ToString();
-				string type = tableSchema[2].ToString(); //TEXT, REAL, INTEGER, BLOB
-				string isNull = tableSchema[3].ToString(); //0 = NULL, 99 = NOT NULL
-				string defaultValue = tableSchema[4].ToString();
-				string isPrimaryKey = tableSchema[5].ToString(); //0 = NO, 1 = YES
-				object[] data = new object[]{ordinal, name, type, isNull, defaultValue, isPrimaryKey};
+				TableInfo mapTableInfo = GetTableInfo(recordMap);
+				SQLiteCommand createTable = new SQLiteCommand(mapTableInfo.ToString(), transaction.Connection, transaction);
+				string x = createTable.CommandText;
+				//createTable.ExecuteNonQuery();
 			}
-		
-			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
-			StringBuilder columns = new StringBuilder();
-			for (int i = 1; i <= recordMap.BasicFieldMaps.Count; i++)
-			{
-				if (i > 1) columns.Append(", ");
-
-				string fieldName = GetSQLiteFieldName(recordMap.BasicFieldMaps[i]);
-				string fieldType = GetSQLiteFieldType(recordMap.BasicFieldMaps[i].Property.PropertyType);
-				string fieldConstraints = GetSQLiteFieldConstraints(recordMap.BasicFieldMaps[i].Attribute.Constraints);
-
-				columns.AppendFormat("{0} {1}{2}", fieldName, fieldType, fieldConstraints);
-			}
-
-			// Add the RecordTypeId
-			columns.AppendFormat(", {0} TEXT NOT NULL", RECORD_TYPE_ID);
-
-			string commandText = string.Format(createFormat, recordMap.RecordAttribute.Name, columns);
-			SQLiteCommand createTable = new SQLiteCommand(commandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-			createTable.ExecuteNonQuery();
 		}
 		#endregion
 		
@@ -721,6 +771,43 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#endregion
+		
+		//TODO: move these into a static utility class
+		#region Internal Static Methods
+
+		#region GetSQLiteFieldRequired
+		internal static string GetSQLiteFieldRequired(bool isRequired)
+		{
+			return (isRequired) ? "NOT NULL" : string.Empty;
+		}
+		#endregion
+
+		#region GetSQLiteFieldDefault
+		internal static string GetSQLiteFieldDefault(object defaultValue)
+		{
+			return (defaultValue != null) ? string.Format("DEFAULT {0}", defaultValue) : string.Empty;
+		}
+		#endregion
+		
+		#region GetSQLiteFieldType
+		internal static string GetSQLiteFieldType(TypeAffinity type)
+		{
+			string dbType = "TEXT";
+
+			if (type == TypeAffinity.Uninitialized)
+				dbType = string.Empty;
+
+			if (type == TypeAffinity.Int64)
+				dbType = "INTEGER";
+
+			if (type == TypeAffinity.Double)
+				dbType = "REAL";
+
+			return dbType;
+		}
+		#endregion
+		
+		#endregion
 
 		#region IPersistenceMechanism Members
 		public string Name
@@ -741,8 +828,8 @@ namespace Alexandria.SQLite
 
 		public void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction)
 		{			
-			InitializeParentRecordMap(recordMap, transaction);
-			InitializeLinkedRecordMaps(recordMap, transaction);
+			InitializeParentRecordMap(recordMap, (SQLiteTransaction)transaction);
+			InitializeLinkedRecordMaps(recordMap, (SQLiteTransaction)transaction);
 		}
 
 		public T LookupRecord<T>(Guid id, DbConnection connection) where T: IRecord

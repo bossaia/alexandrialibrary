@@ -74,6 +74,7 @@ namespace Alexandria.Persistence
 		private string foreignParentFieldName;
 		private string foreignChildFieldName;
 		private Type childType;
+		private object defaultValue;
 		#endregion
 		
 		#region Public Properties
@@ -136,6 +137,12 @@ namespace Alexandria.Persistence
 		{
 			get { return childType; }
 			set { childType = value; }
+		}
+		
+		public object DefaultValue
+		{
+			get { return defaultValue; }
+			set { defaultValue = value; }
 		}
 		#endregion
 	}
