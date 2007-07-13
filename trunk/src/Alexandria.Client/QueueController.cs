@@ -34,15 +34,22 @@ using Alexandria;
 using Alexandria.Media;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
+using Alexandria.Persistence;
+
+using Alexandria.Mp3Tunes;
 
 namespace Alexandria.Client
 {
 	public class QueueController
 	{
 		#region Constructors
-		public QueueController(ListView queueListView)
+		public QueueController(ListView queueListView, IPersistenceBroker broker)
 		{
 			this.queueListView = queueListView;
+			this.broker = broker;
+			
+			this.locker = new MusicLocker();
+			locker.Login("dan.poage@gmail.com", "automatic");
 		}
 		#endregion
 	
@@ -51,15 +58,29 @@ namespace Alexandria.Client
 		#endregion
 
 		#region Private Fields
+		private IPersistenceBroker broker;
 		private ListView queueListView;
 		private ListViewItem selectedItem;
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
 		private IAudioStream audio;
 		private IList<IAudioTrack> tracks;
+		
+		MusicLocker locker;
 		#endregion
 
 		#region Private Methods
+		private string GetDateString(DateTime date)
+		{
+			if (date == DateTime.MinValue)
+				return string.Empty;
+			else if (date.Year == 1600)
+				return string.Empty;
+			else if (date.Month == 1 && date.Day == 1)
+				return date.Year.ToString();
+			else return string.Format("{0:d}", date);
+		}
+		
 		private void LoadTrack(IAudioTrack track)
 		{
 			string[] data = new string[8];
@@ -68,12 +89,15 @@ namespace Alexandria.Client
 			data[2] = track.Artist;
 			data[3] = track.Album;
 			data[4] = string.Format("{0}:{1:00}", track.Duration.Minutes, track.Duration.Seconds);
-			data[5] = string.Format("{0:d}", track.ReleaseDate);
+			data[5] = GetDateString(track.ReleaseDate);
 			data[6] = track.Path.ToString();
-			data[7] = track.Format;
+			data[7] = track.Format.ToLowerInvariant();
 
 			ListViewItem item = new ListViewItem(data);
-			item.Tag = track.MetadataIdentifiers[0];
+			item.Tag = track.Id;
+			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
+				//item.Tag = track.MetadataIdentifiers[0];
+			
 			this.queueListView.Items.Add(item);
 		}
 		
@@ -170,7 +194,31 @@ namespace Alexandria.Client
 			{
 				//# Name Artist Album Length Date Location Format
 				selectedItem = queueListView.SelectedItems[0];
-				IMetadataIdentifier id = (IMetadataIdentifier)selectedItem.Tag;
+				if (selectedItem.Tag != null)
+				{
+					Guid id = (Guid)selectedItem.Tag;
+					selectedTrack = broker.LookupRecord<IAudioTrack>(id);
+					if (selectedTrack.Path.IsFile)
+					{
+						audio = new Fmod.LocalSound(selectedTrack.Path.ToString());
+					}
+					else
+					{
+						string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+						if (!System.IO.File.Exists(fileName))
+						{
+							WebClient client = new WebClient();
+							Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+							client.DownloadFile(address, fileName);
+						}
+
+						audio = new Fmod.LocalSound(fileName);
+					}
+				}
+				else throw new ApplicationException("Could not load selected track: Id was undefined");
+				
+				/*
+				//IMetadataIdentifier id = (IMetadataIdentifier)selectedItem.Tag;
 				int trackNumber = Convert.ToInt32(selectedItem.SubItems[0].Text);
 				string name = selectedItem.SubItems[1].Text;
 				string artist = selectedItem.SubItems[2].Text;
@@ -190,7 +238,6 @@ namespace Alexandria.Client
 				selectedTrack = null;
 				
 				//TODO: fix this to use an IPersistenceBroker
-				/*
 				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);
 				selectedTrack.MetadataIdentifiers.Add(id);
 				

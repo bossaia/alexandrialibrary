@@ -268,7 +268,10 @@ namespace Alexandria.Persistence
 			RecordTypeAttribute attribute = GetRecordTypeAttribute(type);
 			if (attribute != null)
 			{
-				return RecordMaps[attribute.Id];
+				if (attribute.IsProxy)
+					return ProxyRecordMaps[attribute.ProxyType];
+					//GetRecordMap(attribute.ProxyType);
+				else return RecordMaps[attribute.Id];
 			}
 			else return null;
 		}

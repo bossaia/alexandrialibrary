@@ -29,25 +29,35 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
+	[Record("Artist")]
+	[RecordType("E6B5DC0E-7FE4-47da-AF9F-EB283129E224")]
 	public abstract class BaseArtist : BaseMetadata, IArtist
 	{
 		#region Constructors
-		public BaseArtist(string id, string path, string name) : this(new Guid(id), new Uri(path), name)
+		public BaseArtist(string id, string path, string name, DateTime startDate) : this(new Guid(id), new Uri(path), name, startDate)
 		{
 		}
 
-		public BaseArtist(Guid id, Uri path, string name) : base(id, path, name)
+		[Factory("E6B5DC0E-7FE4-47da-AF9F-EB283129E224")]
+		public BaseArtist(Guid id, Uri path, string name, DateTime startDate) : base(id, path, name)
 		{
+			this.startDate = startDate;
 		}
 		#endregion
 	
 		#region Private Fields
+		private DateTime startDate;
 		#endregion
 	
 		#region IArtist Members
+		public DateTime StartDate
+		{
+			get { return startDate; }
+		}
 		#endregion
 	}
 }
