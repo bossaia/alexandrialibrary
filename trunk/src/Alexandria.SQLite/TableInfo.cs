@@ -1,0 +1,116 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Alexandria.SQLite
+{
+	internal struct TableInfo
+	{
+		internal TableInfo(string name, IDictionary<int, ColumnInfo> columns, IList<IndexInfo> indices)
+		{
+			this.name = name;
+			this.columns = columns;
+			this.indices = indices;
+		}
+		
+		private string name;
+		private IDictionary<int, ColumnInfo> columns;
+		private IList<IndexInfo> indices;
+		
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public IDictionary<int, ColumnInfo> Columns
+		{
+			get { return columns; }
+		}
+
+		public IList<IndexInfo> Indices
+		{
+			get { return indices; }
+		}
+
+		public ColumnInfo GetColumnByName(string name)
+		{			
+			foreach(ColumnInfo column in columns.Values)
+				if (column.Name == name) return column;
+				
+			return default(ColumnInfo);
+		}
+
+		public static bool operator !=(TableInfo t1, TableInfo t2)
+		{
+			return !t1.Equals(t2);
+		}
+
+		public static bool operator ==(TableInfo t1, TableInfo t2)
+		{
+			return t1.Equals(t2);
+		}
+
+		public override bool Equals(object obj)
+		{
+			if (obj != null)
+			{
+				if (obj is TableInfo)
+				{
+					TableInfo other = (TableInfo)obj;
+					if (this.name != other.name)
+						return false;
+					
+					if (this.columns != null)
+					{
+						if (other.columns != null && this.columns.Count == other.columns.Count)
+						{
+							for(int i=1; i<=this.columns.Count; i++)
+							{
+								if (this.columns[i] != other.columns[i])
+									return false;
+							}
+						}
+					}
+					else if (other.columns != null)
+						return false;
+						
+					if (this.indices != null)
+					{
+						if (other.indices != null && this.indices.Count == other.indices.Count)
+						{
+							for(int i=0;i<this.indices.Count; i++)
+							{
+								if (this.indices[i] != other.indices[i])
+									return false;
+							}
+						}
+					}
+					else if (other.columns != null)
+						return false;
+						
+					return true;
+				}
+				else return false;
+			}
+			else return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+			StringBuilder columnList = new StringBuilder();
+			for (int i = 1; i <= columns.Count; i++)
+			{
+				if (i > 1) columnList.Append(", ");
+				columnList.Append(columns[i].ToString());
+			}
+
+			return string.Format(createFormat, name, columnList);
+		}
+	}
+}
