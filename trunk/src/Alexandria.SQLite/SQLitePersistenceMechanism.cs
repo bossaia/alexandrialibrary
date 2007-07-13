@@ -297,9 +297,31 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetTableInfo
+		private SQLiteDataReader GetTableInfo(string recordName, SQLiteConnection connection)
+		{
+			string commandText = string.Format("PRAGMA table_info({0})", recordName);
+			SQLiteCommand pragmaCommand = new SQLiteCommand(commandText, connection);
+			return pragmaCommand.ExecuteReader();
+		}
+		#endregion
+
 		#region InitializeParentRecordMap
 		private void InitializeParentRecordMap(RecordMap recordMap, DbTransaction transaction)
 		{
+			SQLiteDataReader tableSchema = GetTableInfo(recordMap.RecordAttribute.Name, (SQLiteConnection)transaction.Connection);
+			if (tableSchema.HasRows)
+			{
+				tableSchema.Read();
+				string ordinal = tableSchema[0].ToString();
+				string name = tableSchema[1].ToString();
+				string type = tableSchema[2].ToString(); //TEXT, REAL, INTEGER, BLOB
+				string isNull = tableSchema[3].ToString(); //0 = NULL, 99 = NOT NULL
+				string defaultValue = tableSchema[4].ToString();
+				string isPrimaryKey = tableSchema[5].ToString(); //0 = NO, 1 = YES
+				object[] data = new object[]{ordinal, name, type, isNull, defaultValue, isPrimaryKey};
+			}
+		
 			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 			StringBuilder columns = new StringBuilder();
 			for (int i = 1; i <= recordMap.BasicFieldMaps.Count; i++)
