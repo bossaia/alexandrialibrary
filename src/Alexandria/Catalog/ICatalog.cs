@@ -48,7 +48,7 @@ namespace Alexandria.Catalog
         [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.Save, ChildType=typeof(IArtist))]
         IList<IArtist> Artists { get; }
         
-        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogTrack", "CatalogId", "TrackId", FieldCascades.Save, ChildType=typeof(IAudioTrack))]
+        [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogTrack", "CatalogId", "TrackId", FieldCascades.Save, FieldLoadOptions.Proxy, ChildType=typeof(IAudioTrack))]
         IList<IAudioTrack> Tracks { get; }
     }
 }

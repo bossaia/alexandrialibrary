@@ -41,12 +41,13 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 	
 		#region Private Constants
-		private const string partner_token = "2036856440";
-		private const string get_url = "http://content.mp3tunes.com";
+		private const string PARTNER_TOKEN = "2036856440";
+		private const string GET_URL = "http://content.mp3tunes.com";
 		#endregion
 	
 		#region Private Fields
-		private string session_id;		
+		private bool isLoggedIn;
+		private string sessionId;
 		#endregion
 
 		#region Private Methods
@@ -67,14 +68,31 @@ namespace Alexandria.Mp3Tunes
 			res.Close();
 
 			return content;
-		}
+		}		
 		#endregion
 
 		#region Public Properties
-		//public string PartnerToken
-		//{
-			//get { return partner_token; }			
-		//}
+		public bool IsLoggedIn
+		{
+			get { return isLoggedIn; }
+		}
+		
+		public string PartnerToken
+		{
+			get { return PARTNER_TOKEN; }
+		}
+		
+		public string SessionId
+		{
+			get
+			{
+				//TODO: figure out a better way to automate this
+				//if (!isLoggedIn)
+					//Login("dan.poage@gmail.com", "automatic");
+					
+				return sessionId;
+			}
+		}
 		#endregion
 
 		#region Public Methods
@@ -85,7 +103,7 @@ namespace Alexandria.Mp3Tunes
 			try
 			{				
 				XmlNode status;
-				XmlNode session_id;
+				XmlNode sessionIdNode;
 				XmlNode errorMessage;
 				XmlDocument doc = new XmlDocument();
 
@@ -97,15 +115,16 @@ namespace Alexandria.Mp3Tunes
 				doc.LoadXml(request);
 
 				status = doc.SelectSingleNode("mp3tunes/status");
-				session_id = doc.SelectSingleNode("mp3tunes/session_id");
+				sessionIdNode = doc.SelectSingleNode("mp3tunes/session_id");
 				errorMessage = doc.SelectSingleNode("mp3tunes/errorMessage");
 
-				if (status != null && status.InnerXml == "1" && session_id != null && session_id.InnerXml != "null")			
-					this.session_id = session_id.InnerXml;			
+				if (status != null && status.InnerXml == "1" && sessionIdNode != null && sessionIdNode.InnerXml != "null")				
+					this.sessionId = sessionIdNode.InnerXml;
 				else if (errorMessage != null && errorMessage.InnerXml != "null")			
 					throw new AuthenticationException(errorMessage.InnerXml.ToString());			
-				else
-					throw new AuthenticationException("Wrong username or password.");
+				else throw new AuthenticationException("Wrong username or password.");
+				
+				isLoggedIn = true;
 			}
 			catch (Exception ex)
 			{
@@ -130,7 +149,7 @@ namespace Alexandria.Mp3Tunes
 			{
 				string request;
 				string parameters = String.Format("?output=xml&sid={0}&type=track",
-				HttpUtility.UrlEncode(this.session_id));
+				HttpUtility.UrlEncode(SessionId));
 
 				request = Request("http://www.mp3tunes.com/api/v0/lockerData", parameters);
 				
@@ -167,7 +186,7 @@ namespace Alexandria.Mp3Tunes
 					if (trackIdNode != null && !string.IsNullOrEmpty(trackIdNode.InnerXml))
 						trackIdValue = trackIdNode.InnerXml;
 
-					string url = string.Format("{0}{1}", System.Web.HttpUtility.UrlDecode(downloadUrl.InnerXml), partner_token);
+					string url = string.Format("{0}{1}", System.Web.HttpUtility.UrlDecode(downloadUrl.InnerXml), PARTNER_TOKEN);
 					
 					//HACK: fix this later
 					url = url.Replace("&amp;", "&");
@@ -264,6 +283,19 @@ namespace Alexandria.Mp3Tunes
 		public IAudioTrack GetTrack(Guid id, string path, string name, string album, string artist, int duration, long releaseDate, int trackNumber, string format)
 		{
 			return new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
+		}
+		#endregion
+
+		#region GetLockerPath
+		public Uri GetLockerPath(string path)
+		{
+			if (!string.IsNullOrEmpty(path))
+			{
+				string root = path.Substring(0, path.IndexOf('?'));
+				string fullPath = string.Format("{0}?sid={1}&partner_token={2}", root, SessionId, PARTNER_TOKEN);
+				return new Uri(fullPath);
+			}
+			else return null;
 		}
 		#endregion
 		

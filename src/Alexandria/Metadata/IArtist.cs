@@ -36,5 +36,7 @@ namespace Alexandria.Metadata
 	[Record("Artist")]
 	public interface IArtist : IMetadata
 	{
+		[Field(4)]
+		DateTime StartDate { get; }
 	}
 }

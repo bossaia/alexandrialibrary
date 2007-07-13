@@ -221,11 +221,11 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region LoadDefaultUser
 		private void LoadDefaultUser()
 		{
-			//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
-			//IUser user = broker.LookupRecord<IUser>(userId);
+			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
+			IUser user = broker.LookupRecord<IUser>(userId);
 
-			//controller = new QueueController(this.QueueListView);
-			//controller.LoadTracks(user.Catalogs[0].Tracks);
+			controller = new QueueController(this.QueueListView, broker);
+			controller.LoadTracks(user.Catalogs[0].Tracks);
 		}
 		#endregion
 		
@@ -251,7 +251,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				//int x = controller.Tracks.Count;
 
 				//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
-				//IUser user = broker.LookupRecord<IUser>(userId);
+				//IUser user = broker.LookupRecord<IUser>(userId);				
 				//foreach(IAudioTrack track in controller.Tracks)
 				//{
 					//user.Catalogs[0].Tracks.Add(track);
@@ -287,14 +287,14 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.Play() here", "Play");
-			//controller.Play();
+			//MessageBox.Show("call controller.Play() here", "Play");
+			controller.Play();
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.Stop() here", "Stop");
-			//controller.Stop();
+			//MessageBox.Show("call controller.Stop() here", "Stop");
+			controller.Stop();
 		}
 
 		private void MuteButton_Click(object sender, EventArgs e)

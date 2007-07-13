@@ -29,9 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Alexandria;
+using Alexandria.Persistence;
 
 namespace Alexandria.Metadata
 {
+	[Record("Album")]
+	[RecordType("5204CB07-4030-4186-8AD7-A1EC93937AEA")]
 	public abstract class BaseAlbum : BaseMetadata, IAlbum
 	{
 		#region Constructors
@@ -39,6 +42,7 @@ namespace Alexandria.Metadata
 		{
 		}
 		
+		[Factory("5204CB07-4030-4186-8AD7-A1EC93937AEA")]
 		public BaseAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate) : base(id, path, name)
 		{
 			this.artist = artist;

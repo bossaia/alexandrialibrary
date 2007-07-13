@@ -36,10 +36,10 @@ namespace Alexandria.Metadata
 	[Record("Album")]
 	public interface IAlbum : IMetadata
 	{	
-		[Field(2, FieldConstraints.Required)]	
+		[Field(4, FieldConstraints.Required)]	
 		string Artist { get; }
 		
-		[Field(3)]
+		[Field(5)]
 		DateTime ReleaseDate { get; }
 		
 		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "AlbumTrack", "AlbumId", "TrackId", FieldCascades.Save)]

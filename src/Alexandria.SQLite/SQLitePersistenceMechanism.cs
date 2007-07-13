@@ -143,7 +143,8 @@ namespace Alexandria.SQLite
 			{
 				if (value == DBNull.Value)
 					return DateTime.MinValue;
-				else return Convert.ToDateTime(value.ToString());
+				else return DateTime.FromFileTime(Convert.ToInt64(value));
+				//Convert.ToDateTime(value.ToString());
 			}
 			else if (type == typeof(TimeSpan))
 			{
@@ -266,10 +267,19 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetSQLiteDataReader
+		private SQLiteDataReader GetSQLiteDataReader(string linkRecordName, string linkParentField, string linkChildField, string childRecordName, string value, SQLiteConnection connection)
+		{
+			string commandText = string.Format("SELECT {0}.* FROM {1} INNER JOIN {0} ON {1}.{2} = {0}.Id WHERE {1}.{3} = @Id", childRecordName, linkRecordName, linkChildField, linkParentField);
+			SQLiteCommand selectCommand = new SQLiteCommand(commandText, connection);
+			selectCommand.Parameters.Add(new SQLiteParameter("@Id", value));
+			return selectCommand.ExecuteReader();		
+		}
+		
 		private SQLiteDataReader GetSQLiteDataReader(string recordName, string fieldName, string value, SQLiteConnection connection)
 		{
-			string commandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", recordName, fieldName, value);
+			string commandText = string.Format("SELECT * FROM {0} WHERE {1} = @Id", recordName, fieldName);
 			SQLiteCommand selectCommand = new SQLiteCommand(commandText, connection);
+			selectCommand.Parameters.Add(new SQLiteParameter("@Id", value));
 			return selectCommand.ExecuteReader();
 		}
 		#endregion
@@ -330,16 +340,58 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetRecordFromDataReader
+		private IRecord GetRecordFromDataReader(SQLiteDataReader reader, RecordMap recordMap)
+		{
+			ParameterInfo[] parameterInfo = recordMap.FactoryMap.GetParameters();
+			object[] parameters = new object[parameterInfo.Length];
+			for (int i = 0; i < parameterInfo.Length; i++)
+			{
+				string paramFieldName = GetFactoryFieldName(parameterInfo[i].Name); //, recordMap.BasicFieldMaps[i+1]);
+				object paramValue = GetRecordValueFromDatabaseValue(parameterInfo[i].ParameterType, reader[paramFieldName]);
+				parameters[i] = paramValue;
+			}
+
+			IRecord record = recordMap.FactoryMap.GetRecord(parameters);
+			record.PersistenceBroker = broker;
+			return record;
+		}
+		#endregion
+
 		#region LookupRecords
-		private IList<IRecord> LookupRecords(string recordName, string fieldName, string value, Type proxyType, SQLiteConnection connection)
+		private IList<IRecord> LookupRecords(string linkRecordName, string linkParentField, string linkChildField, string childRecordName, string value, Type proxyType, SQLiteConnection connection)
 		{
 			IList<IRecord> records = new List<IRecord>();
 			
-			RecordMap proxyRecordMap = null;
+			RecordMap recordMap = null;
 			if (proxyType != null)
+				recordMap = broker.ProxyRecordMaps[proxyType];
+			
+			using (SQLiteDataReader reader = GetSQLiteDataReader(linkRecordName, linkParentField, linkChildField, childRecordName, value, connection))
 			{
-				proxyRecordMap = broker.ProxyRecordMaps[proxyType];
+				if (reader != null && reader.HasRows)
+				{
+					while(reader.Read())
+					{
+						if (proxyType == null)
+							recordMap = broker.RecordMaps[reader[RECORD_TYPE_ID].ToString()];
+					
+						IRecord record = GetRecordFromDataReader(reader, recordMap);
+						records.Add(record);
+					}
+				}
 			}
+			
+			return records;
+		}
+		
+		private IList<IRecord> LookupRecords(string recordName, string fieldName, string value, Type proxyType, SQLiteConnection connection)
+		{
+			IList<IRecord> records = new List<IRecord>();
+
+			RecordMap recordMap = null;
+			if (proxyType != null)
+				recordMap = broker.ProxyRecordMaps[proxyType];
 			
 			using (SQLiteDataReader reader = GetSQLiteDataReader(recordName, fieldName, value, connection))
 			{
@@ -347,31 +399,11 @@ namespace Alexandria.SQLite
 				{
 					while(reader.Read())
 					{
-						RecordMap recordMap = null;
-						if (proxyRecordMap != null)
-							recordMap = proxyRecordMap;
-						else recordMap = broker.RecordMaps[reader[RECORD_TYPE_ID].ToString()];
-
-						if (recordMap != null)
-						{
-							if (recordMap.FactoryMap != null)
-							{
-								ParameterInfo[] parameterInfo = recordMap.FactoryMap.GetParameters();
-								object[] parameters = new object[parameterInfo.Length];
-								for (int i = 0; i < parameterInfo.Length; i++)
-								{
-									string paramFieldName = GetFactoryFieldName(parameterInfo[i].Name); //, recordMap.BasicFieldMaps[i+1]);
-									object paramValue = GetRecordValueFromDatabaseValue(parameterInfo[i].ParameterType, reader[paramFieldName]);
-									parameters[i] = paramValue;
-								}
-
-								IRecord record = recordMap.FactoryMap.GetRecord(parameters);
-								record.PersistenceBroker = broker;
-								records.Add(record);
-							}
-							else throw new ApplicationException("SQLite could not determine the factory map for this record");
-						}
-						else throw new ApplicationException("SQLite could not determine the record map for this record");
+						if (proxyType == null)
+							recordMap = broker.RecordMaps[reader[RECORD_TYPE_ID].ToString()];
+						
+						IRecord record = GetRecordFromDataReader(reader, recordMap);
+						records.Add(record);
 					}
 				}
 			}
@@ -433,33 +465,45 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region LookupLinkedRecords
-		private IList<IRecord> LookupLinkedRecords(FieldMap fieldMap, string parentId, SQLiteConnection connection)
+		private IList<IRecord> LookupLinkedRecords(FieldMap fieldMap, string parentId, Type proxyType, SQLiteConnection connection)
 		{
 			System.Diagnostics.Debug.WriteLine(string.Format("LookupLinkedRecords: {0}({1}", fieldMap.Property.Name, parentId));
-			IList<IRecord> linkedRecords = new List<IRecord>();
+			IList<IRecord> linkedRecords = null;
 		
 			RecordAttribute recordAttribute = broker.RecordAttributes[fieldMap.Attribute.ChildType];
-			
-			Type proxyType = null;
-			if ((FieldLoadOptions.Proxy & fieldMap.Attribute.LoadOptions) == FieldLoadOptions.Proxy)
-				proxyType = fieldMap.Attribute.ChildType;
-		
-			using (SQLiteDataReader reader = GetSQLiteDataReader(fieldMap.Attribute.ForeignRecordName, fieldMap.Attribute.ForeignParentFieldName, parentId, connection))
+							
+			linkedRecords = LookupRecords(fieldMap.Attribute.ForeignRecordName, fieldMap.Attribute.ForeignParentFieldName, fieldMap.Attribute.ForeignChildFieldName, recordAttribute.Name, parentId, proxyType, connection);
+			if (proxyType == null)
 			{
-				if (reader != null && reader.HasRows)
+				foreach(IRecord record in linkedRecords)
 				{
-					while(reader.Read())
+					RecordMap recordMap = broker.GetRecordMap(record.GetType());
+					LookupChildRecords(record, recordMap, connection);
+				}
+			}
+			return linkedRecords;
+
+			/*
+			}
+			else
+			{
+				linkedRecords = new List<IRecord>();
+				using (SQLiteDataReader reader = GetSQLiteDataReader(fieldMap.Attribute.ForeignRecordName, fieldMap.Attribute.ForeignParentFieldName, parentId, connection))
+				{
+					if (reader != null && reader.HasRows)
 					{
-						string childId = reader[fieldMap.Attribute.ForeignChildFieldName].ToString();
-						IRecord record = LookupParentRecord(recordAttribute.Name, "Id", childId, proxyType, connection);
-						RecordMap recordMap = broker.GetRecordMap(record.GetType());
-						LookupChildRecords(record, recordMap, connection);
-						linkedRecords.Add(record);
+						while(reader.Read())
+						{
+							string childId = reader[fieldMap.Attribute.ForeignChildFieldName].ToString();
+							IRecord record = LookupParentRecord(recordAttribute.Name, "Id", childId, connection);
+							RecordMap recordMap = broker.GetRecordMap(record.GetType());
+							LookupChildRecords(record, recordMap, null, connection);
+							linkedRecords.Add(record);
+						}
 					}
 				}
 			}
-			
-			return linkedRecords;
+			*/
 		}
 		#endregion
 
@@ -475,12 +519,12 @@ namespace Alexandria.SQLite
 				proxyType = fieldMap.Attribute.ChildType;
 			
 			if (fieldMap.Attribute.Relationship == FieldRelationship.OneToOne || fieldMap.Attribute.Relationship == FieldRelationship.OneToMany)
-			{
+			{				
 				childRecords = LookupRecords(recordAttribute.Name, fieldMap.Attribute.ForeignParentFieldName, parentId, proxyType, connection);
 			}
 			else if (fieldMap.Attribute.Relationship == FieldRelationship.ManyToOne || fieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
 			{
-				childRecords = LookupLinkedRecords(fieldMap, parentId, connection);
+				childRecords = LookupLinkedRecords(fieldMap, parentId, proxyType, connection);
 			}
 
 			return childRecords;
