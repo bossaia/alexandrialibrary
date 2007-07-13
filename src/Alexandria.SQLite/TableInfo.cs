@@ -6,16 +6,16 @@ namespace Alexandria.SQLite
 {
 	internal struct TableInfo
 	{
-		internal TableInfo(string name, IDictionary<int, ColumnInfo> columns, IList<IndexInfo> indices)
+		internal TableInfo(string name, IDictionary<int, ColumnInfo> columns)
 		{
 			this.name = name;
 			this.columns = columns;
-			this.indices = indices;
+			this.indices = new Dictionary<string, IndexInfo>();
 		}
 		
 		private string name;
 		private IDictionary<int, ColumnInfo> columns;
-		private IList<IndexInfo> indices;
+		private IDictionary<string, IndexInfo> indices;
 		
 		public string Name
 		{
@@ -27,7 +27,7 @@ namespace Alexandria.SQLite
 			get { return columns; }
 		}
 
-		public IList<IndexInfo> Indices
+		public IDictionary<string, IndexInfo> Indices
 		{
 			get { return indices; }
 		}
@@ -38,7 +38,7 @@ namespace Alexandria.SQLite
 				if (column.Name == name) return column;
 				
 			return default(ColumnInfo);
-		}
+		}		
 
 		public static bool operator !=(TableInfo t1, TableInfo t2)
 		{
@@ -78,14 +78,18 @@ namespace Alexandria.SQLite
 					{
 						if (other.indices != null && this.indices.Count == other.indices.Count)
 						{
-							for(int i=0;i<this.indices.Count; i++)
+							foreach(string key in this.indices.Keys)
 							{
-								if (this.indices[i] != other.indices[i])
-									return false;
+								if (other.indices.ContainsKey(key))
+								{
+									if (this.indices[key] != other.indices[key])
+										return false;
+								}
+								else return false;
 							}
 						}
 					}
-					else if (other.columns != null)
+					else if (other.indices != null)
 						return false;
 						
 					return true;
