@@ -34,13 +34,14 @@ namespace Alexandria.Persistence
 	public class RecordMap
 	{
 		#region Constructors
-		public RecordMap(Type type, RecordAttribute recordAttribute, RecordTypeAttribute recordTypeAttribute, IDictionary<int, FieldMap> basicFieldMaps, IList<FieldMap> advancedFieldMaps, IList<LinkRecord> linkRecords)
+		public RecordMap(Type type, RecordAttribute recordAttribute, RecordTypeAttribute recordTypeAttribute, IDictionary<int, FieldMap> basicFieldMaps, IList<FieldMap> advancedFieldMaps, IList<IndexMap> indexMaps, IList<LinkRecord> linkRecords)
 		{
 			this.type = type;
 			this.recordAttribute = recordAttribute;
 			this.recordTypeAttribute = recordTypeAttribute;
 			this.basicFieldMaps = basicFieldMaps;
 			this.advancedFieldMaps = advancedFieldMaps;
+			this.indexMaps = indexMaps;
 			this.linkRecords = linkRecords;
 		}
 		#endregion
@@ -52,7 +53,8 @@ namespace Alexandria.Persistence
 		private FactoryMap factoryMap;
 		private IDictionary<int, FieldMap> basicFieldMaps;
 		private IList<FieldMap> advancedFieldMaps;
-		private IList<LinkRecord> linkRecords;
+		private IList<IndexMap> indexMaps;
+		private IList<LinkRecord> linkRecords;		
 		#endregion
 		
 		#region Public Properties
@@ -85,6 +87,11 @@ namespace Alexandria.Persistence
 		public IList<FieldMap> AdvancedFieldMaps
 		{
 			get { return advancedFieldMaps; }
+		}
+		
+		public IList<IndexMap> IndexMaps
+		{
+			get { return indexMaps; }
 		}
 		
 		public IList<LinkRecord> LinkRecords

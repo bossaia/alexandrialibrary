@@ -127,6 +127,7 @@ namespace Alexandria.Persistence
 			{
 				IDictionary<int, FieldMap> basicFieldMaps = new Dictionary<int, FieldMap>();
 				IList<FieldMap> advancedFieldMaps = new List<FieldMap>();
+				IList<IndexMap> indexMaps = new List<IndexMap>();
 				IList<LinkRecord> linkRecords = new List<LinkRecord>();
 
 				foreach (PropertyInfo property in type.GetProperties())
@@ -147,6 +148,11 @@ namespace Alexandria.Persistence
 								linkRecords.Add(new LinkRecord(fieldAttribute.ForeignRecordName, fieldAttribute.ForeignParentFieldName, fieldAttribute.ForeignChildFieldName, fieldMap));
 							}
 						}
+					}
+					foreach (IndexAttribute attribute in property.GetCustomAttributes(typeof(IndexAttribute), true))
+					{
+						IndexMap indexMap = new IndexMap(attribute, property);
+						indexMaps.Add(indexMap);
 					}
 				}
 				foreach (Type interfaceType in type.GetInterfaces())
@@ -173,7 +179,7 @@ namespace Alexandria.Persistence
 					}
 				}
 
-				recordMap = new RecordMap(type, recordAttribute, recordTypeAttribute, basicFieldMaps, advancedFieldMaps, linkRecords);
+				recordMap = new RecordMap(type, recordAttribute, recordTypeAttribute, basicFieldMaps, advancedFieldMaps, indexMaps, linkRecords);
 			}
 
 			return recordMap;
