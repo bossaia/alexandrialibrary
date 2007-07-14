@@ -426,7 +426,7 @@ namespace Alexandria.SQLite
 				string x = createTable.CommandText;				
 				//createTable.ExecuteNonQuery();
 				
-				foreach(IndexInfo index in table.Indices)
+				foreach(IndexInfo index in table.Indices.Values)
 				{
 					SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
 					string y = createIndex.CommandText;

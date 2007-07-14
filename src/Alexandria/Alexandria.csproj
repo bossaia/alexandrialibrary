@@ -81,6 +81,8 @@
     <Compile Include="Metadata\IAudioTrack.cs" />
     <Compile Include="Media\IMediaFactory.cs" />
     <Compile Include="Metadata\IMetadataIdentifier.cs" />
+    <Compile Include="Persistence\IndexAttribute.cs" />
+    <Compile Include="Persistence\IndexMap.cs" />
     <Compile Include="Persistence\IPersistenceBroker.cs" />
     <Compile Include="Persistence\IPersistenceMechanism.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
