@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Google", "Alexan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Playlist", "Alexandria.Playlist\Alexandria.Playlist.csproj", "{5373D021-353C-47FE-9BB0-7F6E22F06594}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Db4o", "Alexandria.Db4o\Alexandria.Db4o.csproj", "{B08B54A1-29EE-4321-B02C-87562C4B75D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +122,10 @@ Global
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5373D021-353C-47FE-9BB0-7F6E22F06594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B08B54A1-29EE-4321-B02C-87562C4B75D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08B54A1-29EE-4321-B02C-87562C4B75D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08B54A1-29EE-4321-B02C-87562C4B75D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08B54A1-29EE-4321-B02C-87562C4B75D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
