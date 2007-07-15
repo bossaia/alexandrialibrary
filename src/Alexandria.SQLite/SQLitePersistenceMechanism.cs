@@ -384,7 +384,7 @@ namespace Alexandria.SQLite
 			}
 			
 			GetIndices(tableInfo, connection);
-						
+			
 			return tableInfo;
 		}
 		
@@ -419,18 +419,39 @@ namespace Alexandria.SQLite
 		private void InitializeParentRecordMap(RecordMap recordMap, SQLiteTransaction transaction)
 		{
 			TableInfo dbTableInfo = GetTableInfo(recordMap.RecordAttribute.Name, transaction.Connection);
-			if (dbTableInfo != default(TableInfo))
+			TableInfo classTableInfo = GetTableInfo(recordMap);
+			if (dbTableInfo != classTableInfo)
 			{
-				TableInfo table = GetTableInfo(recordMap);
-				SQLiteCommand createTable = new SQLiteCommand(table.ToString(), transaction.Connection, transaction);
-				string x = createTable.CommandText;				
-				//createTable.ExecuteNonQuery();
-				
-				foreach(IndexInfo index in table.Indices.Values)
+				if (dbTableInfo == default(TableInfo))
 				{
-					SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
-					string y = createIndex.CommandText;
-					//createIndex.ExecuteNonQuery();
+					//TableInfo table = GetTableInfo(recordMap);
+					SQLiteCommand createTable = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection, transaction);
+					//string x = createTable.CommandText;				
+					createTable.ExecuteNonQuery();
+				}
+				else
+				{
+					//Alter
+					//1. create temp table
+					//2. insert record table into temp table
+					//3. drop record table
+					//4. create record table
+					//5. insert temp table into record table
+					//6. drop temp table
+				}
+				
+				foreach(IndexInfo index in classTableInfo.Indices.Values)
+				{
+					if (!dbTableInfo.Indices.ContainsKey(index.Name) || index != dbTableInfo.Indices[index.Name])
+					{
+						SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
+						string y1 = dropIndex.CommandText;
+						//dropIndex.ExecuteNonQuery();
+				
+						SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
+						string y2 = createIndex.CommandText;
+						//createIndex.ExecuteNonQuery();
+					}
 				}
 			}
 		}
