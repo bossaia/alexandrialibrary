@@ -98,6 +98,16 @@ namespace Alexandria.Persistence
 		{
 			get { return linkRecords; }
 		}
+		
+		public string Name
+		{
+			get
+			{
+				if (recordAttribute != null)
+					return recordAttribute.Name;
+				else return null;
+			}
+		}
 		#endregion
 		
 		#region Public Methods

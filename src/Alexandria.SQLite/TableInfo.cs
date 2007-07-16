@@ -17,6 +17,17 @@ namespace Alexandria.SQLite
 		private IDictionary<int, ColumnInfo> columns;
 		private IDictionary<string, IndexInfo> indices;
 		
+		private string GetColumnList()
+		{
+			StringBuilder columnList = new StringBuilder();
+			for (int i = 1; i <= columns.Count; i++)
+			{
+				if (i > 1) columnList.Append(", ");
+				columnList.Append(columns[i].ToString());
+			}
+			return columnList.ToString();
+		}
+		
 		public string Name
 		{
 			get { return name; }
@@ -86,17 +97,22 @@ namespace Alexandria.SQLite
 			return base.GetHashCode();
 		}
 
+		public string GetCreateTempTableCommandText(string tableName)
+		{
+			string createFormat = "CREATE TEMP TABLE IF NOT EXISTS {0} ({1})";
+			return string.Format(createFormat, tableName, GetColumnList());
+		}
+		
+		public string GetInsertCommandText(string tableName)
+		{
+			string insertFormat = "INSERT INTO {0} ({1}) SELECT {1} FROM {2}";
+			return string.Format(insertFormat, tableName, GetColumnList(), GetColumnList(), Name);
+		}
+
 		public override string ToString()
 		{
-			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
-			StringBuilder columnList = new StringBuilder();
-			for (int i = 1; i <= columns.Count; i++)
-			{
-				if (i > 1) columnList.Append(", ");
-				columnList.Append(columns[i].ToString());
-			}
-
-			return string.Format(createFormat, name, columnList);
+			string createFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";			
+			return string.Format(createFormat, name, GetColumnList());
 		}
 	}
 }

@@ -97,7 +97,7 @@ namespace Alexandria.Persistence
 			}
 			
 			//Go back and load the factory maps into their associated record maps
-			//This must be done in a second pass because factorie methods can be in any type
+			//This must be done in a second pass because factory methods can be anywhere
 			foreach(string mapId in factoryMaps.Keys)
 			{
 				recordMaps[mapId].FactoryMap = factoryMaps[mapId];
@@ -159,22 +159,27 @@ namespace Alexandria.Persistence
 				{
 					foreach (PropertyInfo interfaceProperty in interfaceType.GetProperties())
 					{
-						foreach (Attribute attribute in interfaceProperty.GetCustomAttributes(typeof(FieldAttribute), true))
+						foreach (FieldAttribute attribute in interfaceProperty.GetCustomAttributes(typeof(FieldAttribute), true))
 						{
-							FieldAttribute fieldAttribute = (FieldAttribute)attribute;
-							FieldMap fieldMap = new FieldMap(fieldAttribute, interfaceProperty);
+							//FieldAttribute fieldAttribute = (FieldAttribute)attribute;
+							FieldMap fieldMap = new FieldMap(attribute, interfaceProperty);
 							
-							if (fieldAttribute.Location == FieldLocation.Local)
-								basicFieldMaps.Add(fieldAttribute.Ordinal, fieldMap);
-							else if (fieldAttribute.Location == FieldLocation.Foreign)
+							if (attribute.Location == FieldLocation.Local)
+								basicFieldMaps.Add(attribute.Ordinal, fieldMap);
+							else if (attribute.Location == FieldLocation.Foreign)
 							{
 								advancedFieldMaps.Add(fieldMap);
 
-								if (!string.IsNullOrEmpty(fieldAttribute.ForeignParentFieldName))
+								if (!string.IsNullOrEmpty(attribute.ForeignParentFieldName))
 								{
-									linkRecords.Add(new LinkRecord(fieldAttribute.ForeignRecordName, fieldAttribute.ForeignParentFieldName, fieldAttribute.ForeignChildFieldName, fieldMap));
+									linkRecords.Add(new LinkRecord(attribute.ForeignRecordName, attribute.ForeignParentFieldName, attribute.ForeignChildFieldName, fieldMap));
 								}
 							}
+						}
+						foreach (IndexAttribute attribute in interfaceProperty.GetCustomAttributes(typeof(IndexAttribute), true))
+						{
+							IndexMap indexMap = new IndexMap(attribute, interfaceProperty);
+							indexMaps.Add(indexMap);
 						}
 					}
 				}
