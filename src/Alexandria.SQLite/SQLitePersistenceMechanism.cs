@@ -534,11 +534,45 @@ namespace Alexandria.SQLite
 					//dropCommand.ExecuteNonQuery();
 					
 					SQLiteCommand createTableCommand = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection);
-					string x = createTableCommand.CommandText;
+					string x1 = createTableCommand.CommandText;
 					//createTableCommand.ExecuteNonQuery();
 					
-					//TODO: Account for temp table having fewer fields than class table
-					//string secondInsertCommandText = classTableInfo.get
+					string secondInsertFormat = "INSERT INTO {0} ({1}) SELECT {2} FROM {3}";
+					StringBuilder secondInsertSourceColumns = new StringBuilder();
+					StringBuilder secondInsertDestinationColumns = new StringBuilder();
+					if (classTableInfo.Columns.Count >= dbTableInfo.Columns.Count)
+					{
+						for(int i=1;i<=dbTableInfo.Columns.Count;i++)
+						{
+							if (i>1)
+							{
+								secondInsertSourceColumns.Append(", ");
+								secondInsertDestinationColumns.Append(", ");
+							}
+							
+							secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
+							secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
+							
+						}
+					}
+					else
+					{
+						for (int i = 1; i <= classTableInfo.Columns.Count; i++)
+						{
+							if (i > 1)
+							{
+								secondInsertSourceColumns.Append(", ");
+								secondInsertDestinationColumns.Append(", ");
+							}
+
+							secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
+							secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
+						}
+					}					
+					string secondInsertCommandText = string.Format(secondInsertFormat, classTableInfo.Name, secondInsertDestinationColumns, secondInsertSourceColumns, tempName);
+					SQLiteCommand secondInsertCommand = new SQLiteCommand(secondInsertCommandText, transaction.Connection);
+					string x2 = secondInsertCommand.CommandText;
+					//secondInsertCommand.ExecuteNonQuery();
 				}				
 			}
 
