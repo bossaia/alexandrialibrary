@@ -27,7 +27,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace Alexandria.Persistence
 {
@@ -97,6 +97,36 @@ namespace Alexandria.Persistence
 		public IList<LinkRecord> LinkRecords
 		{
 			get { return linkRecords; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public FieldMap GetFieldMapByName(string name)
+		{
+			foreach(FieldMap fieldMap in basicFieldMaps.Values)
+			{
+				if (!string.IsNullOrEmpty(fieldMap.Attribute.FieldName))
+				{
+					if (fieldMap.Attribute.FieldName == name)
+						return fieldMap;
+				}
+				else
+				{
+					if (fieldMap.Property.Name == name)
+						return fieldMap;
+				}
+			}
+			return null;
+		}
+		
+		public FieldMap GetFieldMapByProperty(PropertyInfo property)
+		{
+			foreach(FieldMap fieldMap in basicFieldMaps.Values)
+			{
+				if (property.Name == fieldMap.Property.Name)
+					return fieldMap;
+			}
+			return null;
 		}
 		#endregion
 	}

@@ -356,7 +356,50 @@ namespace Alexandria.SQLite
 		
 		private void GetIndices(TableInfo table, RecordMap recordMap)
 		{
-		
+			Dictionary<string, bool> uniqueFlags = new Dictionary<string,bool>();
+			Dictionary<string, Dictionary<int, ColumnInfo>> aggregateIndices = new Dictionary<string, Dictionary<int, ColumnInfo>>();
+			
+			foreach(IndexMap indexMap in recordMap.IndexMaps)
+			{
+				FieldMap fieldMap = recordMap.GetFieldMapByProperty(indexMap.Property);
+			
+				if (indexMap.Attribute.Ordinal == 0)
+				{
+					ColumnInfo column = table.GetColumnByName(fieldMap.Name);
+					IList<ColumnInfo> columns = new List<ColumnInfo>();
+					columns.Add(column);
+					IndexInfo indexInfo = new IndexInfo(table, indexMap.Attribute.IndexName, indexMap.Attribute.IsUnique, columns);
+					table.Indices.Add(fieldMap.Name, indexInfo);
+				}
+				else
+				{
+					if (!aggregateIndices.ContainsKey(indexMap.Attribute.IndexName))
+					{
+						aggregateIndices.Add(indexMap.Attribute.IndexName, new Dictionary<int,ColumnInfo>());
+					}
+					
+					if (!uniqueFlags.ContainsKey(indexMap.Attribute.IndexName))
+					{
+						uniqueFlags.Add(indexMap.Attribute.IndexName, indexMap.Attribute.IsUnique);
+					}
+					
+					ColumnInfo column = table.GetColumnByName(fieldMap.Name);
+					Dictionary<int, ColumnInfo> indexColumns = aggregateIndices[indexMap.Attribute.IndexName];
+					indexColumns.Add(indexMap.Attribute.Ordinal, column);
+				}				
+			}
+			
+			foreach(string indexName in aggregateIndices.Keys)
+			{
+				IList<ColumnInfo> columns = new List<ColumnInfo>();
+				Dictionary<int, ColumnInfo> columnMap = aggregateIndices[indexName];
+				for(int i=1; i<=columnMap.Count; i++)
+					columns.Add(columnMap[i]);
+				bool isUnique = uniqueFlags[indexName];
+				
+				IndexInfo indexInfo = new IndexInfo(table, indexName, isUnique, columns);
+				table.Indices.Add(indexName, indexInfo);
+			}
 		}
 		#endregion
 
