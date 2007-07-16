@@ -41,6 +41,7 @@ namespace Alexandria.Metadata
 		Uri Path { get; }
 		
 		[Field(3, FieldConstraints.Required)]
+		[Index("Name")]
 		string Name { get; }
 	}
 }

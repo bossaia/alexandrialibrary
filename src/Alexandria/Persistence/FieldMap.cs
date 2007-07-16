@@ -30,7 +30,7 @@ using System.Reflection;
 
 namespace Alexandria.Persistence
 {
-	public struct FieldMap
+	public class FieldMap
 	{
 		#region Constructors
 		public FieldMap(FieldAttribute attribute, PropertyInfo property)
@@ -54,6 +54,20 @@ namespace Alexandria.Persistence
 		public PropertyInfo Property
 		{
 			get { return property; }
+		}
+		
+		public string Name
+		{
+			get
+			{
+				if (attribute != null && property != null)
+				{
+					if (!string.IsNullOrEmpty(attribute.FieldName))
+						return attribute.FieldName;
+					else return property.Name;
+				}
+				else return null;
+			}
 		}
 		#endregion
 	}
