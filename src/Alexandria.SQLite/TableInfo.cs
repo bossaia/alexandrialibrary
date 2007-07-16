@@ -73,25 +73,7 @@ namespace Alexandria.SQLite
 					}
 					else if (other.columns != null)
 						return false;
-						
-					if (this.indices != null)
-					{
-						if (other.indices != null && this.indices.Count == other.indices.Count)
-						{
-							foreach(string key in this.indices.Keys)
-							{
-								if (other.indices.ContainsKey(key))
-								{
-									if (this.indices[key] != other.indices[key])
-										return false;
-								}
-								else return false;
-							}
-						}
-					}
-					else if (other.indices != null)
-						return false;
-						
+											
 					return true;
 				}
 				else return false;
