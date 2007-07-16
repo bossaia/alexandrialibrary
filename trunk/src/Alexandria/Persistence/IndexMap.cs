@@ -28,7 +28,27 @@ namespace Alexandria.Persistence
 		
 		public PropertyInfo Property
 		{
-			get { return Property; }
+			get { return property; }
+		}
+		
+		public string Name
+		{
+			get
+			{
+				if (attribute != null)
+					return attribute.IndexName;
+				else return null;
+			}
+		}
+		
+		public bool IsUnique
+		{
+			get
+			{
+				if (attribute != null)
+					return attribute.IsUnique;
+				else return false;
+			}
 		}
 		#endregion
 	}

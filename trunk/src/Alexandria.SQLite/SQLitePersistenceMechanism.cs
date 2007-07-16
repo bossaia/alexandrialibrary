@@ -333,6 +333,13 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
+		#region GetIndexName
+		private string GetIndexName(string recordName, string indexName)
+		{
+			return string.Format("index_{0}_{1}", recordName, indexName);
+		}
+		#endregion
+
 		#region GetIndices
 		private void GetIndices(TableInfo table, SQLiteConnection connection)
 		{			
@@ -362,29 +369,26 @@ namespace Alexandria.SQLite
 			foreach(IndexMap indexMap in recordMap.IndexMaps)
 			{
 				FieldMap fieldMap = recordMap.GetFieldMapByProperty(indexMap.Property);
+				string indexName = GetIndexName(recordMap.Name, indexMap.Name);
 			
 				if (indexMap.Attribute.Ordinal == 0)
 				{
 					ColumnInfo column = table.GetColumnByName(fieldMap.Name);
 					IList<ColumnInfo> columns = new List<ColumnInfo>();
 					columns.Add(column);
-					IndexInfo indexInfo = new IndexInfo(table, indexMap.Attribute.IndexName, indexMap.Attribute.IsUnique, columns);
+					IndexInfo indexInfo = new IndexInfo(table, indexName, indexMap.IsUnique, columns);
 					table.Indices.Add(fieldMap.Name, indexInfo);
 				}
 				else
 				{
-					if (!aggregateIndices.ContainsKey(indexMap.Attribute.IndexName))
-					{
-						aggregateIndices.Add(indexMap.Attribute.IndexName, new Dictionary<int,ColumnInfo>());
-					}
+					if (!aggregateIndices.ContainsKey(indexName))
+						aggregateIndices.Add(indexName, new Dictionary<int,ColumnInfo>());
 					
-					if (!uniqueFlags.ContainsKey(indexMap.Attribute.IndexName))
-					{
-						uniqueFlags.Add(indexMap.Attribute.IndexName, indexMap.Attribute.IsUnique);
-					}
+					if (!uniqueFlags.ContainsKey(indexName))
+						uniqueFlags.Add(indexName, indexMap.Attribute.IsUnique);
 					
 					ColumnInfo column = table.GetColumnByName(fieldMap.Name);
-					Dictionary<int, ColumnInfo> indexColumns = aggregateIndices[indexMap.Attribute.IndexName];
+					Dictionary<int, ColumnInfo> indexColumns = aggregateIndices[indexName];
 					indexColumns.Add(indexMap.Attribute.Ordinal, column);
 				}				
 			}
@@ -504,9 +508,7 @@ namespace Alexandria.SQLite
 			{
 				if (dbTableInfo == default(TableInfo))
 				{
-					//TableInfo table = GetTableInfo(recordMap);
-					SQLiteCommand createTable = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection, transaction);
-					//string x = createTable.CommandText;				
+					SQLiteCommand createTable = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection, transaction);				
 					createTable.ExecuteNonQuery();
 				}
 				else
@@ -517,30 +519,52 @@ namespace Alexandria.SQLite
 					//3. drop record table
 					//4. create record table
 					//5. insert temp table into record table
-					//6. drop temp table
+					
+					string tempName = "TEMP_" + classTableInfo.Name;
+					string createTempCommandText = dbTableInfo.GetCreateTempTableCommandText(tempName);
+					SQLiteCommand createTempCommand = new SQLiteCommand(createTempCommandText, transaction.Connection);
+					//createTempCommand.ExecuteNonQuery();
+					
+					string firstInsertCommandText = dbTableInfo.GetInsertCommandText(tempName);
+					SQLiteCommand firstInsertCommand = new SQLiteCommand(firstInsertCommandText, transaction.Connection);
+					//firstInsertCommand.ExecuteNonQuery();
+					
+					string dropCommandText = string.Format("DROP TABLE IF EXISTS {0}", dbTableInfo.Name);
+					SQLiteCommand dropCommand = new SQLiteCommand(dropCommandText, transaction.Connection);
+					//dropCommand.ExecuteNonQuery();
+					
+					SQLiteCommand createTableCommand = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection);
+					string x = createTableCommand.CommandText;
+					//createTableCommand.ExecuteNonQuery();
+					
+					//TODO: Account for temp table having fewer fields than class table
+					//string secondInsertCommandText = classTableInfo.get
 				}				
 			}
 
 			if (IndicesHaveChanged(classTableInfo, dbTableInfo))
 			{
+				//Remove non-unique database indices that are no longer defined in the class
 				foreach (IndexInfo index in dbTableInfo.Indices.Values)
 				{
-					SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
-					string y1 = dropIndex.CommandText;
-					//dropIndex.ExecuteNonQuery();
+					if (!classTableInfo.Indices.ContainsKey(index.Name))
+					{
+						//Unique indices cannot be dropped
+						if (!index.IsUnique)
+						{
+							SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
+							dropIndex.ExecuteNonQuery();
+						}
+					}
 				}
 
+				//Create any indices defined in the class that do not exist in the database
 				foreach (IndexInfo index in classTableInfo.Indices.Values)
 				{
-					if (!dbTableInfo.Indices.ContainsKey(index.Name) || index != dbTableInfo.Indices[index.Name])
+					if (!dbTableInfo.Indices.ContainsKey(index.Name))
 					{
-						SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
-						string y1 = dropIndex.CommandText;
-						//dropIndex.ExecuteNonQuery();
-
 						SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
-						string y2 = createIndex.CommandText;
-						//createIndex.ExecuteNonQuery();
+						createIndex.ExecuteNonQuery();
 					}
 				}
 			}
@@ -556,9 +580,18 @@ namespace Alexandria.SQLite
 				{
 					if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
 					{
-						string linkCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
-						SQLiteCommand createLinkTable = new SQLiteCommand(linkCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						string createLinkTableCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+						SQLiteCommand createLinkTable = new SQLiteCommand(createLinkTableCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
 						createLinkTable.ExecuteNonQuery();
+
+						string createLinkParentIndexCommandText = string.Format("CREATE INDEX IF NOT EXISTS index_{0}_{1} ON {0} ({1})", linkRecord.Name, linkRecord.ParentFieldName);
+						SQLiteCommand createLinkParentIndex = new SQLiteCommand(createLinkParentIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						createLinkParentIndex.ExecuteNonQuery();
+						
+						//NOTE: this is already covered by the UNIQUE constraint in the CREATE TABLE command above
+						//string createLinkIndexCommandText = string.Format("CREATE UNIQUE INDEX IF NOT EXISTS index_{0} ON {0} ({1}, {2})", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+						//SQLiteCommand createLinkIndex = new SQLiteCommand(createLinkIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+						//createLinkIndex.ExecuteNonQuery();
 					}
 				}
 			}
@@ -936,9 +969,20 @@ namespace Alexandria.SQLite
 		#endregion
 
 		#region GetSQLiteFieldDefault
-		internal static string GetSQLiteFieldDefault(object defaultValue)
+		internal static string GetSQLiteFieldDefault(TypeAffinity type, object defaultValue)
 		{
-			return (defaultValue != null) ? string.Format("DEFAULT {0}", defaultValue) : string.Empty;
+			switch(type)
+			{
+				case TypeAffinity.Text:
+					if (defaultValue == null) defaultValue = string.Empty;
+					return string.Format("DEFAULT '{0}'", defaultValue);
+				case TypeAffinity.Double:
+				case TypeAffinity.Int64:
+					if (defaultValue == null) defaultValue = 0;
+					return string.Format("DEFAULT {0}", defaultValue);
+				default:
+					return string.Empty;
+			}
 		}
 		#endregion
 		

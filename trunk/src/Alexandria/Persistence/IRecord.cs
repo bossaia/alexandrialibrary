@@ -33,8 +33,9 @@ namespace Alexandria.Persistence
 	public interface IRecord
 	{
 		[Field(1, FieldConstraints.RequiredUnique)]
-		[Index("Id")]
+		[Index("Id", true)]
 		Guid Id { get; }
+		
 		IRecord Parent { get; set; }
 		IPersistenceBroker PersistenceBroker { get; set; }
 		bool IsProxy { get; }

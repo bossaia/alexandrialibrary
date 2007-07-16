@@ -97,8 +97,8 @@ namespace Alexandria.SQLite
 			
 			if (isUnique)
 				indexBuilder.Append("UNIQUE ");
-			
-			indexBuilder.AppendFormat("INDEX {0} IF NOT EXISTS ON {1} (", name, table.Name);
+
+			indexBuilder.AppendFormat("INDEX IF NOT EXISTS {0} ON {1} (", name, table.Name);
 			for(int i=0; i<columns.Count; i++)
 			{
 				if (i > 0)

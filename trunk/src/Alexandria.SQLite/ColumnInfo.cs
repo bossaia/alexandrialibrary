@@ -100,7 +100,7 @@ namespace Alexandria.SQLite
 			if (!string.IsNullOrEmpty(fieldRequired))
 				columnBuilder.AppendFormat(" {0)", fieldRequired);
 			
-			string fieldDefault = SQLitePersistenceMechanism.GetSQLiteFieldDefault(defaultValue);
+			string fieldDefault = SQLitePersistenceMechanism.GetSQLiteFieldDefault(type, defaultValue);
 			if (!string.IsNullOrEmpty(fieldDefault))
 				columnBuilder.AppendFormat(" {0}", fieldDefault);
 
