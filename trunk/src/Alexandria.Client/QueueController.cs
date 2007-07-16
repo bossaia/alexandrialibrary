@@ -70,6 +70,23 @@ namespace Alexandria.Client
 		#endregion
 
 		#region Private Methods
+		private string CleanupFileName(string fileName)
+		{
+			const char safeChar = '_';
+			
+			if (fileName.Length > 2)
+			{
+				string filePostfix = fileName.Substring(2, fileName.Length-2).Replace(':', '_');
+				fileName = fileName.Substring(0, 2) + filePostfix;
+			}
+			
+			fileName = fileName.Replace('/', safeChar);
+			fileName = fileName.Replace('?', safeChar);
+			fileName = fileName.Replace('*', safeChar);
+			
+			return fileName;
+		}
+		
 		private string GetDateString(DateTime date)
 		{
 			if (date == DateTime.MinValue)
@@ -187,7 +204,7 @@ namespace Alexandria.Client
 				}
 			}
 		}
-		
+						
 		public void SelectTrack()
 		{
 			if (queueListView.SelectedItems.Count > 0)
@@ -205,11 +222,22 @@ namespace Alexandria.Client
 					else
 					{
 						string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+						fileName = CleanupFileName(fileName);						
 						if (!System.IO.File.Exists(fileName))
 						{
+							if (!System.IO.Directory.Exists(tempPath))
+								System.IO.Directory.CreateDirectory(tempPath);
+						
 							WebClient client = new WebClient();
 							Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
-							client.DownloadFile(address, fileName);
+							try
+							{
+								client.DownloadFile(address, fileName);
+							}
+							catch (WebException ex)
+							{
+								throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+							}
 						}
 
 						audio = new Fmod.LocalSound(fileName);

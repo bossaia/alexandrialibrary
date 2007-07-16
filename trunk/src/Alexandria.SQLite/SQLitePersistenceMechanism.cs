@@ -353,6 +353,11 @@ namespace Alexandria.SQLite
 				}
 			}
 		}
+		
+		private void GetIndices(TableInfo table, RecordMap recordMap)
+		{
+		
+		}
 		#endregion
 
 		#region GetTableInfo
@@ -370,12 +375,12 @@ namespace Alexandria.SQLite
 				
 					while(reader.Read())
 					{
-						reader.Read();
 						int ordinal = reader.GetInt32(0) + 1; //SQLite it 0-based but RecordMap is 1-based
 						string name = reader[1].ToString();
 						TypeAffinity type = GetSQLiteTypeAffinity(reader[2].ToString());
 						bool isRequired = (reader[3].ToString() == "99") ? true : false; //0 = NULL, 99 = NOT NULL
 						object defaultValue = reader[4];
+						if (defaultValue == DBNull.Value) defaultValue = null;
 						bool isPrimaryKey = Convert.ToBoolean(reader[5]); //0 = NO, 1 = YES
 						columns.Add(ordinal, new ColumnInfo(ordinal, name, type, isRequired, defaultValue, isPrimaryKey));
 					}
@@ -411,7 +416,39 @@ namespace Alexandria.SQLite
 				tableInfo = new TableInfo(recordMap.RecordAttribute.Name, columns);
 			}
 			
+			GetIndices(tableInfo, recordMap);
+			
 			return tableInfo;
+		}
+		#endregion
+
+		#region IndicesHaveChanged
+		private bool IndicesHaveChanged(TableInfo classTableInfo, TableInfo dbTableInfo)
+		{
+			if (classTableInfo.Indices != null)
+			{
+				if (dbTableInfo.Indices != null)
+				{
+					if (classTableInfo.Indices.Count == dbTableInfo.Indices.Count)
+					{
+						foreach (IndexInfo index in classTableInfo.Indices.Values)
+						{
+							if (dbTableInfo.Indices.ContainsKey(index.Name))
+							{
+								if (index != dbTableInfo.Indices[index.Name])
+									return true;
+							}
+							else return true;
+						}
+					}
+					else return true;
+				}
+				else return true;
+			}
+			else if (dbTableInfo.Indices != null)
+				return true;
+				
+			return false;
 		}
 		#endregion
 
@@ -438,16 +475,26 @@ namespace Alexandria.SQLite
 					//4. create record table
 					//5. insert temp table into record table
 					//6. drop temp table
+				}				
+			}
+
+			if (IndicesHaveChanged(classTableInfo, dbTableInfo))
+			{
+				foreach (IndexInfo index in dbTableInfo.Indices.Values)
+				{
+					SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
+					string y1 = dropIndex.CommandText;
+					//dropIndex.ExecuteNonQuery();
 				}
-				
-				foreach(IndexInfo index in classTableInfo.Indices.Values)
+
+				foreach (IndexInfo index in classTableInfo.Indices.Values)
 				{
 					if (!dbTableInfo.Indices.ContainsKey(index.Name) || index != dbTableInfo.Indices[index.Name])
 					{
 						SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
 						string y1 = dropIndex.CommandText;
 						//dropIndex.ExecuteNonQuery();
-				
+
 						SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
 						string y2 = createIndex.CommandText;
 						//createIndex.ExecuteNonQuery();
