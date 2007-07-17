@@ -103,68 +103,75 @@ namespace Alexandria.SQLite
 		#region GetRecordValueFromDatabaseValue
 		private object GetRecordValueFromDatabaseValue(Type type, object value)
 		{	
-			if (type == typeof(bool))
+			try
 			{
-				if (value  == DBNull.Value)
-					return false;
-				else return Convert.ToBoolean(value);
+				if (type == typeof(bool))
+				{
+					if (value  == DBNull.Value)
+						return false;
+					else return Convert.ToBoolean(value);
+				}
+				if (type == typeof(byte))
+				{
+					if (value == DBNull.Value)
+						return 0;
+					else return Convert.ToByte(value);
+				}
+				if (type == typeof(short))
+				{
+					if (value == DBNull.Value)
+						return 0;
+					else return Convert.ToInt16(value);
+				}
+				if (type == typeof(int))
+				{
+					if (value == DBNull.Value)
+						return 0;
+					else return Convert.ToInt32(value);
+				}
+				if (type == typeof(long))
+				{
+					if (value == DBNull.Value)
+						return 0;
+					else return Convert.ToInt64(value);
+				}
+				if (type == typeof(decimal))
+				{
+					if (value == DBNull.Value)
+						return 0m;
+					else return Convert.ToDecimal(value);
+				}
+				if (type == typeof(DateTime))
+				{
+					if (value == DBNull.Value)
+						return DateTime.MinValue;
+					else return DateTime.FromFileTime(Convert.ToInt64(value));
+					//Convert.ToDateTime(value.ToString());
+				}
+				else if (type == typeof(TimeSpan))
+				{
+					if (value == null || value == DBNull.Value)
+						return TimeSpan.Zero;
+					else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
+				}
+				else if (type == typeof(Guid))
+				{
+					return new Guid(value.ToString());
+				}
+				else if (type == typeof(Version))
+				{
+					return new Version(value.ToString());
+				}
+				else if (type == typeof(Uri))
+				{
+					return new Uri(value.ToString());
+				}
 			}
-			if (type == typeof(byte))
+			catch (FormatException ex)
 			{
-				if (value == DBNull.Value)
-					return 0;
-				else return Convert.ToByte(value);
+				throw new AlexandriaException("There was an error converting object value to database value", ex);
 			}
-			if (type == typeof(short))
-			{
-				if (value == DBNull.Value)
-					return 0;
-				else return Convert.ToInt16(value);
-			}
-			if (type == typeof(int))
-			{
-				if (value == DBNull.Value)
-					return 0;
-				else return Convert.ToInt32(value);
-			}
-			if (type == typeof(long))
-			{
-				if (value == DBNull.Value)
-					return 0;
-				else return Convert.ToInt64(value);
-			}
-			if (type == typeof(decimal))
-			{
-				if (value == DBNull.Value)
-					return 0m;
-				else return Convert.ToDecimal(value);
-			}
-			if (type == typeof(DateTime))
-			{
-				if (value == DBNull.Value)
-					return DateTime.MinValue;
-				else return DateTime.FromFileTime(Convert.ToInt64(value));
-				//Convert.ToDateTime(value.ToString());
-			}
-			else if (type == typeof(TimeSpan))
-			{
-				if (value == null || value == DBNull.Value)
-					return TimeSpan.Zero;
-				else return new TimeSpan(0, 0, 0, 0, Convert.ToInt32(value));
-			}
-			else if (type == typeof(Guid))
-			{
-				return new Guid(value.ToString());
-			}
-			else if (type == typeof(Version))
-			{
-				return new Version(value.ToString());
-			}
-			else if (type == typeof(Uri))
-			{
-				return new Uri(value.ToString());
-			}
-
+			
 			return value;
 		}
 		#endregion
@@ -352,7 +359,8 @@ namespace Alexandria.SQLite
 					while (reader.Read())
 					{
 						string name = reader[1].ToString();
-						bool isUnique = Convert.ToBoolean(reader[2]);
+						bool isUnique = (!reader.IsDBNull(2) && reader.GetInt32(2) == 1) ? true : false;
+						
 						IList<ColumnInfo> columns = GetIndexColumns(table, name, connection);
 						IndexInfo indexInfo = new IndexInfo(table, name, isUnique, columns);
 						table.Indices.Add(name, indexInfo);
@@ -425,10 +433,9 @@ namespace Alexandria.SQLite
 						int ordinal = reader.GetInt32(0) + 1; //SQLite it 0-based but RecordMap is 1-based
 						string name = reader[1].ToString();
 						TypeAffinity type = GetSQLiteTypeAffinity(reader[2].ToString());
-						bool isRequired = (reader[3].ToString() == "99") ? true : false; //0 = NULL, 99 = NOT NULL
-						object defaultValue = reader[4];
-						if (defaultValue == DBNull.Value) defaultValue = null;
-						bool isPrimaryKey = Convert.ToBoolean(reader[5]); //0 = NO, 1 = YES
+						bool isRequired = (!reader.IsDBNull(3) && reader.GetInt32(3) == 99) ? true : false; //0 = NULL, 99 = NOT NULL
+						object defaultValue = (!reader.IsDBNull(4)) ? reader[4] : null;
+						bool isPrimaryKey = (!reader.IsDBNull(5) && reader.GetInt32(5) == 1) ? true : false;
 						columns.Add(ordinal, new ColumnInfo(ordinal, name, type, isRequired, defaultValue, isPrimaryKey));
 					}
 					tableInfo = new TableInfo(recordName, columns);
@@ -502,105 +509,128 @@ namespace Alexandria.SQLite
 		#region InitializeParentRecordMap
 		private void InitializeParentRecordMap(RecordMap recordMap, SQLiteTransaction transaction)
 		{
-			TableInfo dbTableInfo = GetTableInfo(recordMap.RecordAttribute.Name, transaction.Connection);
-			TableInfo classTableInfo = GetTableInfo(recordMap);
-			if (dbTableInfo != classTableInfo)
+			try
 			{
-				if (dbTableInfo == default(TableInfo))
+				TableInfo dbTableInfo = GetTableInfo(recordMap.RecordAttribute.Name, transaction.Connection);
+				TableInfo classTableInfo = GetTableInfo(recordMap);
+				if (dbTableInfo != classTableInfo)
 				{
-					SQLiteCommand createTable = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection, transaction);				
-					createTable.ExecuteNonQuery();
-				}
-				else
-				{
-					//Alter
-					//1. create temp table
-					//2. insert record table into temp table
-					//3. drop record table
-					//4. create record table
-					//5. insert temp table into record table
-					
-					string tempName = "TEMP_" + classTableInfo.Name;
-					string createTempCommandText = dbTableInfo.GetCreateTempTableCommandText(tempName);
-					SQLiteCommand createTempCommand = new SQLiteCommand(createTempCommandText, transaction.Connection);
-					//createTempCommand.ExecuteNonQuery();
-					
-					string firstInsertCommandText = dbTableInfo.GetInsertCommandText(tempName);
-					SQLiteCommand firstInsertCommand = new SQLiteCommand(firstInsertCommandText, transaction.Connection);
-					//firstInsertCommand.ExecuteNonQuery();
-					
-					string dropCommandText = string.Format("DROP TABLE IF EXISTS {0}", dbTableInfo.Name);
-					SQLiteCommand dropCommand = new SQLiteCommand(dropCommandText, transaction.Connection);
-					//dropCommand.ExecuteNonQuery();
-					
-					SQLiteCommand createTableCommand = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection);
-					string x1 = createTableCommand.CommandText;
-					//createTableCommand.ExecuteNonQuery();
-					
-					string secondInsertFormat = "INSERT INTO {0} ({1}) SELECT {2} FROM {3}";
-					StringBuilder secondInsertSourceColumns = new StringBuilder();
-					StringBuilder secondInsertDestinationColumns = new StringBuilder();
-					if (classTableInfo.Columns.Count >= dbTableInfo.Columns.Count)
+					if (dbTableInfo == default(TableInfo))
 					{
-						for(int i=1;i<=dbTableInfo.Columns.Count;i++)
-						{
-							if (i>1)
-							{
-								secondInsertSourceColumns.Append(", ");
-								secondInsertDestinationColumns.Append(", ");
-							}
-							
-							secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
-							secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
-							
-						}
+						SQLiteCommand createTable = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection, transaction);
+						System.Diagnostics.Debug.WriteLine("CREATE Parent Table:" + createTable.CommandText);
+						createTable.ExecuteNonQuery();
 					}
 					else
 					{
-						for (int i = 1; i <= classTableInfo.Columns.Count; i++)
+						if (dbTableInfo != classTableInfo)
 						{
-							if (i > 1)
+							string x = dbTableInfo.Name;
+						}
+						//Alter
+						//1. create temp table
+						//2. insert record table into temp table
+						//3. drop record table
+						//4. create record table
+						//5. insert temp table into record table
+						
+						string tempName = "TEMP_" + classTableInfo.Name;
+						string createTempCommandText = dbTableInfo.GetCreateTempTableCommandText(tempName);
+						SQLiteCommand createTempCommand = new SQLiteCommand(createTempCommandText, transaction.Connection);
+						System.Diagnostics.Debug.WriteLine("CREATE Temp Table " + createTempCommandText);
+						createTempCommand.ExecuteNonQuery();
+						
+						string firstInsertCommandText = dbTableInfo.GetInsertCommandText(tempName);
+						SQLiteCommand firstInsertCommand = new SQLiteCommand(firstInsertCommandText, transaction.Connection);
+						System.Diagnostics.Debug.WriteLine("INSERT INTO Temp Table " + firstInsertCommandText);
+						firstInsertCommand.ExecuteNonQuery();
+						
+						string dropCommandText = string.Format("DROP TABLE IF EXISTS {0}", dbTableInfo.Name);
+						SQLiteCommand dropCommand = new SQLiteCommand(dropCommandText, transaction.Connection);
+						System.Diagnostics.Debug.WriteLine("DROP Old Parent Table " + dropCommandText);
+						dropCommand.ExecuteNonQuery();
+						
+						SQLiteCommand createTableCommand = new SQLiteCommand(classTableInfo.ToString(), transaction.Connection);
+						System.Diagnostics.Debug.WriteLine("CREATE New Parent Table " + createTableCommand.CommandText);
+						createTableCommand.ExecuteNonQuery();
+						
+						string secondInsertFormat = "INSERT INTO {0} ({1}) SELECT {2} FROM {3}";
+						StringBuilder secondInsertSourceColumns = new StringBuilder();
+						StringBuilder secondInsertDestinationColumns = new StringBuilder();
+						if (classTableInfo.Columns.Count >= dbTableInfo.Columns.Count)
+						{
+							for(int i=1;i<=dbTableInfo.Columns.Count;i++)
 							{
-								secondInsertSourceColumns.Append(", ");
-								secondInsertDestinationColumns.Append(", ");
+								if (i>1)
+								{
+									secondInsertSourceColumns.Append(", ");
+									secondInsertDestinationColumns.Append(", ");
+								}
+								
+								secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
+								secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
+								
 							}
-
-							secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
-							secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
 						}
-					}					
-					string secondInsertCommandText = string.Format(secondInsertFormat, classTableInfo.Name, secondInsertDestinationColumns, secondInsertSourceColumns, tempName);
-					SQLiteCommand secondInsertCommand = new SQLiteCommand(secondInsertCommandText, transaction.Connection);
-					string x2 = secondInsertCommand.CommandText;
-					//secondInsertCommand.ExecuteNonQuery();
-				}				
-			}
-
-			if (IndicesHaveChanged(classTableInfo, dbTableInfo))
-			{
-				//Remove non-unique database indices that are no longer defined in the class
-				foreach (IndexInfo index in dbTableInfo.Indices.Values)
-				{
-					if (!classTableInfo.Indices.ContainsKey(index.Name))
-					{
-						//Unique indices cannot be dropped
-						if (!index.IsUnique)
+						else
 						{
-							SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
-							dropIndex.ExecuteNonQuery();
+							for (int i = 1; i <= classTableInfo.Columns.Count; i++)
+							{
+								if (i > 1)
+								{
+									secondInsertSourceColumns.Append(", ");
+									secondInsertDestinationColumns.Append(", ");
+								}
+
+								secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
+								secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
+							}
+						}					
+						string secondInsertCommandText = string.Format(secondInsertFormat, classTableInfo.Name, secondInsertDestinationColumns, secondInsertSourceColumns, tempName);
+						SQLiteCommand secondInsertCommand = new SQLiteCommand(secondInsertCommandText, transaction.Connection);
+						System.Diagnostics.Debug.WriteLine("INSERT INTO New Parent Table " + secondInsertCommandText);
+						secondInsertCommand.ExecuteNonQuery();
+					}				
+				}
+
+				if (IndicesHaveChanged(classTableInfo, dbTableInfo))
+				{
+					//Remove non-unique database indices that are no longer defined in the class
+					if (dbTableInfo.Indices != null && dbTableInfo.Indices.Count > 0)
+					{
+						foreach (IndexInfo index in dbTableInfo.Indices.Values)
+						{
+							if (!classTableInfo.Indices.ContainsKey(index.Name))
+							{
+								//Unique indices cannot be dropped
+								if (!index.IsUnique)
+								{
+									SQLiteCommand dropIndex = new SQLiteCommand(string.Format("DROP INDEX IF EXISTS {0}", index.Name), transaction.Connection);
+									System.Diagnostics.Debug.WriteLine("DROP Unused Index " + dropIndex.CommandText);
+									dropIndex.ExecuteNonQuery();
+								}
+							}
+						}
+					}
+
+					//Create any indices defined in the class that do not exist in the database
+					if (classTableInfo.Indices != null && classTableInfo.Indices.Count > 0)
+					{
+						foreach (IndexInfo index in classTableInfo.Indices.Values)
+						{
+							if (dbTableInfo.Indices == null || !dbTableInfo.Indices.ContainsKey(index.Name))
+							{
+								SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
+								System.Diagnostics.Debug.WriteLine("CREATE New Index " + createIndex.CommandText);
+								createIndex.ExecuteNonQuery();
+							}
 						}
 					}
 				}
-
-				//Create any indices defined in the class that do not exist in the database
-				foreach (IndexInfo index in classTableInfo.Indices.Values)
-				{
-					if (!dbTableInfo.Indices.ContainsKey(index.Name))
-					{
-						SQLiteCommand createIndex = new SQLiteCommand(index.ToString(), transaction.Connection, transaction);
-						createIndex.ExecuteNonQuery();
-					}
-				}
+			}
+			catch (Exception ex)
+			{
+				throw new AlexandriaException("There was an error initializing this table in the SQLite database: " + ex.Message, ex);
 			}
 		}
 		#endregion
@@ -608,26 +638,35 @@ namespace Alexandria.SQLite
 		#region InitializeLinkedRecordMaps
 		private void InitializeLinkedRecordMaps(RecordMap recordMap, DbTransaction transaction)
 		{
-			foreach (LinkRecord linkRecord in recordMap.LinkRecords)
+			try
 			{
-				if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
+				foreach (LinkRecord linkRecord in recordMap.LinkRecords)
 				{
-					if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+					if (linkRecord.FieldMap.Attribute.Relationship == FieldRelationship.ManyToMany)
 					{
-						string createLinkTableCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL, UNIQUE ({1}, {2}))", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
-						SQLiteCommand createLinkTable = new SQLiteCommand(createLinkTableCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-						createLinkTable.ExecuteNonQuery();
+						if (linkRecord.FieldMap.Attribute.Type == FieldType.Parent)
+						{
+							string createLinkTableCommandText = string.Format("CREATE TABLE IF NOT EXISTS {0} ({1} NOT NULL, {2} NOT NULL)", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+							SQLiteCommand createLinkTable = new SQLiteCommand(createLinkTableCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							System.Diagnostics.Debug.WriteLine("CREATE Link Table " + createLinkTableCommandText);
+							createLinkTable.ExecuteNonQuery();
 
-						string createLinkParentIndexCommandText = string.Format("CREATE INDEX IF NOT EXISTS index_{0}_{1} ON {0} ({1})", linkRecord.Name, linkRecord.ParentFieldName);
-						SQLiteCommand createLinkParentIndex = new SQLiteCommand(createLinkParentIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-						createLinkParentIndex.ExecuteNonQuery();
-						
-						//NOTE: this is already covered by the UNIQUE constraint in the CREATE TABLE command above
-						//string createLinkIndexCommandText = string.Format("CREATE UNIQUE INDEX IF NOT EXISTS index_{0} ON {0} ({1}, {2})", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
-						//SQLiteCommand createLinkIndex = new SQLiteCommand(createLinkIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
-						//createLinkIndex.ExecuteNonQuery();
+							string createLinkParentIndexCommandText = string.Format("CREATE INDEX IF NOT EXISTS index_{0}_{1} ON {0} ({1})", linkRecord.Name, linkRecord.ParentFieldName);
+							SQLiteCommand createLinkParentIndex = new SQLiteCommand(createLinkParentIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							System.Diagnostics.Debug.WriteLine("CREATE Link Table Parent Index " + createLinkParentIndexCommandText);
+							createLinkParentIndex.ExecuteNonQuery();
+													
+							string createLinkIndexCommandText = string.Format("CREATE UNIQUE INDEX IF NOT EXISTS index_{0} ON {0} ({1}, {2})", linkRecord.Name, linkRecord.ParentFieldName, linkRecord.ChildFieldName);
+							SQLiteCommand createLinkIndex = new SQLiteCommand(createLinkIndexCommandText, (SQLiteConnection)transaction.Connection, (SQLiteTransaction)transaction);
+							System.Diagnostics.Debug.WriteLine("CREATE Link Table Join Index " + createLinkIndexCommandText);
+							createLinkIndex.ExecuteNonQuery();
+						}
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				throw new AlexandriaException("There was an error initializing this join table in the SQLite database: " + ex.Message, ex);
 			}
 		}
 		#endregion
@@ -1008,8 +1047,9 @@ namespace Alexandria.SQLite
 			switch(type)
 			{
 				case TypeAffinity.Text:
-					if (defaultValue == null) defaultValue = string.Empty;
-					return string.Format("DEFAULT '{0}'", defaultValue);
+					if (defaultValue == null || string.IsNullOrEmpty(defaultValue.ToString()) || defaultValue.ToString() == "''")
+						return "DEFAULT ''";
+					else return string.Format("DEFAULT '{0}'", defaultValue);
 				case TypeAffinity.Double:
 				case TypeAffinity.Int64:
 					if (defaultValue == null) defaultValue = 0;
