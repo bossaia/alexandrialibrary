@@ -34,7 +34,7 @@ namespace Alexandria.Mp3Tunes
 {
 	internal class Artist : BaseArtist
 	{
-		public Artist(Guid id, Uri path, string name, DateTime startDate) : base(id, path, name, startDate)
+		public Artist(Guid id, Uri path, string name, DateTime beginDate, DateTime endDate) : base(id, path, name, beginDate, endDate)
 		{
 		}
 	}
