@@ -284,17 +284,6 @@ namespace Alexandria.SQLite
 		}
 		#endregion
 
-		#region GetSQLiteFieldConstraints
-		private string GetSQLiteFieldConstraints(FieldConstraints constraints)
-		{
-			StringBuilder dbConstraints = new StringBuilder(string.Empty);
-			if ((constraints & FieldConstraints.Required) == FieldConstraints.Required) dbConstraints.Append(" NOT NULL");
-			if ((constraints & FieldConstraints.Unique) == FieldConstraints.Unique) dbConstraints.Append(" UNIQUE");
-			
-			return dbConstraints.ToString();
-		}
-		#endregion
-
 		#region GetSQLiteDataReader
 		private SQLiteDataReader GetSQLiteDataReader(string linkRecordName, string linkParentField, string linkChildField, string childRecordName, string value, SQLiteConnection connection)
 		{
@@ -557,35 +546,22 @@ namespace Alexandria.SQLite
 						string secondInsertFormat = "INSERT INTO {0} ({1}) SELECT {2} FROM {3}";
 						StringBuilder secondInsertSourceColumns = new StringBuilder();
 						StringBuilder secondInsertDestinationColumns = new StringBuilder();
-						if (classTableInfo.Columns.Count >= dbTableInfo.Columns.Count)
+						
+						for(int i=1;i<=dbTableInfo.Columns.Count;i++)
 						{
-							for(int i=1;i<=dbTableInfo.Columns.Count;i++)
+							if (i>1)
 							{
-								if (i>1)
-								{
-									secondInsertSourceColumns.Append(", ");
-									secondInsertDestinationColumns.Append(", ");
-								}
-								
-								secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
-								secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
-								
+								secondInsertSourceColumns.Append(", ");
+								secondInsertDestinationColumns.Append(", ");
 							}
+							
+							secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
+							
+							if (dbTableInfo.Columns[i].Name == RECORD_TYPE_ID)
+								secondInsertDestinationColumns.Append(RECORD_TYPE_ID);
+							else secondInsertDestinationColumns.Append(classTableInfo.Columns[i].Name);
 						}
-						else
-						{
-							for (int i = 1; i <= classTableInfo.Columns.Count; i++)
-							{
-								if (i > 1)
-								{
-									secondInsertSourceColumns.Append(", ");
-									secondInsertDestinationColumns.Append(", ");
-								}
 
-								secondInsertSourceColumns.Append(dbTableInfo.Columns[i].Name);
-								secondInsertDestinationColumns.Append(classTableInfo.Columns[i]);
-							}
-						}					
 						string secondInsertCommandText = string.Format(secondInsertFormat, classTableInfo.Name, secondInsertDestinationColumns, secondInsertSourceColumns, tempName);
 						SQLiteCommand secondInsertCommand = new SQLiteCommand(secondInsertCommandText, transaction.Connection);
 						System.Diagnostics.Debug.WriteLine("INSERT INTO New Parent Table " + secondInsertCommandText);

@@ -37,6 +37,9 @@ namespace Alexandria.Metadata
 	public interface IArtist : IMetadata
 	{
 		[Field(4)]
-		DateTime StartDate { get; }
+		DateTime BeginDate { get; }
+		
+		[Field(5)]
+		DateTime EndDate { get; }
 	}
 }

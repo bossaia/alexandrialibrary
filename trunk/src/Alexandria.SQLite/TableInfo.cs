@@ -112,8 +112,8 @@ namespace Alexandria.SQLite
 		
 		public string GetInsertCommandText(string tableName)
 		{
-			string insertFormat = "INSERT INTO {0} ({1}) SELECT {1} FROM {2}";
-			return string.Format(insertFormat, tableName, GetColumnList(), GetColumnList(), Name);
+			string commandText = string.Format("INSERT INTO {0} SELECT * FROM {1}", tableName, Name);
+			return commandText;
 		}
 
 		public override string ToString()

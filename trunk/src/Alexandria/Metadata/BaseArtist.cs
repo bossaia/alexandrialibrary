@@ -38,25 +38,32 @@ namespace Alexandria.Metadata
 	public abstract class BaseArtist : BaseMetadata, IArtist
 	{
 		#region Constructors
-		public BaseArtist(string id, string path, string name, DateTime startDate) : this(new Guid(id), new Uri(path), name, startDate)
+		public BaseArtist(string id, string path, string name, DateTime beginDate, DateTime endDate) : this(new Guid(id), new Uri(path), name, beginDate, endDate)
 		{
 		}
 
 		[Factory("E6B5DC0E-7FE4-47da-AF9F-EB283129E224")]
-		public BaseArtist(Guid id, Uri path, string name, DateTime startDate) : base(id, path, name)
+		public BaseArtist(Guid id, Uri path, string name, DateTime beginDate, DateTime endDate) : base(id, path, name)
 		{
-			this.startDate = startDate;
+			this.beginDate = beginDate;
+			this.endDate = endDate;
 		}
 		#endregion
 	
 		#region Private Fields
-		private DateTime startDate;
+		private DateTime beginDate;
+		private DateTime endDate;
 		#endregion
 	
 		#region IArtist Members
-		public DateTime StartDate
+		public DateTime BeginDate
 		{
-			get { return startDate; }
+			get { return beginDate; }
+		}
+		
+		public DateTime EndDate
+		{
+			get { return endDate; }
 		}
 		#endregion
 	}
