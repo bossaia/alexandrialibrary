@@ -19,11 +19,14 @@ namespace Alexandria.SQLite
 		
 		private string GetColumnList()
 		{
-			StringBuilder columnList = new StringBuilder();
-			for (int i = 1; i <= columns.Count; i++)
+			StringBuilder columnList = new StringBuilder(string.Empty);
+			if (columns != null)
 			{
-				if (i > 1) columnList.Append(", ");
-				columnList.Append(columns[i].ToString());
+				for (int i = 1; i <= columns.Count; i++)
+				{
+					if (i > 1) columnList.Append(", ");
+					columnList.Append(columns[i].ToString());
+				}
 			}
 			return columnList.ToString();
 		}
@@ -68,6 +71,9 @@ namespace Alexandria.SQLite
 				if (obj is TableInfo)
 				{
 					TableInfo other = (TableInfo)obj;
+					return (this.ToString() == other.ToString());
+					
+					/*
 					if (this.name != other.name)
 						return false;
 					
@@ -86,6 +92,7 @@ namespace Alexandria.SQLite
 						return false;
 											
 					return true;
+					*/
 				}
 				else return false;
 			}

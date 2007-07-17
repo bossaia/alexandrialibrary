@@ -56,7 +56,9 @@ namespace Alexandria.SQLite
 				if (obj is IndexInfo)
 				{
 					IndexInfo other = (IndexInfo)obj;
+					return (this.ToString() == other.ToString());
 
+					/*
 					if (this.table != other.table)
 						return false;
 
@@ -81,6 +83,7 @@ namespace Alexandria.SQLite
 						return false;
 
 					return true;
+					*/
 				}
 			}
 			return false;
@@ -99,12 +102,15 @@ namespace Alexandria.SQLite
 				indexBuilder.Append("UNIQUE ");
 
 			indexBuilder.AppendFormat("INDEX IF NOT EXISTS {0} ON {1} (", name, table.Name);
-			for(int i=0; i<columns.Count; i++)
+			if (columns != null && columns.Count > 0)
 			{
-				if (i > 0)
-					indexBuilder.Append(", ");
-					
-				indexBuilder.Append(columns[i].Name);
+				for(int i=0; i<columns.Count; i++)
+				{
+					if (i > 0)
+						indexBuilder.Append(", ");
+						
+					indexBuilder.Append(columns[i].Name);
+				}
 			}
 			indexBuilder.Append(")");
 			

@@ -318,7 +318,8 @@ namespace Alexandria.Persistence
 			{
 				connection.Open();
 				T record = mechanism.LookupRecord<T>(id, connection);
-				record.PersistenceBroker = this;
+				if (record != null)
+					record.PersistenceBroker = this;
 				return record;
 			}
 		}

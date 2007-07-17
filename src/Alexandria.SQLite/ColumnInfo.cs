@@ -94,11 +94,12 @@ namespace Alexandria.SQLite
 		{
 			StringBuilder columnBuilder = new StringBuilder(name);
 			
-			columnBuilder.AppendFormat(" {0}", SQLitePersistenceMechanism.GetSQLiteFieldType(type));
+			string fieldType = SQLitePersistenceMechanism.GetSQLiteFieldType(type);
+			columnBuilder.AppendFormat(" {0}", fieldType);
 			
 			string fieldRequired = SQLitePersistenceMechanism.GetSQLiteFieldRequired(isRequired);
 			if (!string.IsNullOrEmpty(fieldRequired))
-				columnBuilder.AppendFormat(" {0)", fieldRequired);
+				columnBuilder.AppendFormat(" {0}", fieldRequired);
 			
 			string fieldDefault = SQLitePersistenceMechanism.GetSQLiteFieldDefault(type, defaultValue);
 			if (!string.IsNullOrEmpty(fieldDefault))

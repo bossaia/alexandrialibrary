@@ -223,9 +223,15 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
 			IUser user = broker.LookupRecord<IUser>(userId);
-
-			controller = new QueueController(this.QueueListView, broker);
-			controller.LoadTracks(user.Catalogs[0].Tracks);
+			if (user != null)
+			{
+				//TODO: allow the default catalog to be user-defined
+				if (user.Catalogs != null && user.Catalogs.Count > 0)
+				{
+					controller = new QueueController(this.QueueListView, broker);
+					controller.LoadTracks(user.Catalogs[0].Tracks);
+				}
+			}
 		}
 		#endregion
 		
