@@ -28,15 +28,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
+using System.Reflection;
 
 namespace Alexandria.Client
 {
 	public struct PluginInfo
 	{
 		#region Constructors
-		public PluginInfo(string title, string description, Version version, Bitmap bitmap)
-		{
+		public PluginInfo(Assembly assembly, bool enabled, string title, string description, Version version, Bitmap bitmap)
+		{			
+			this.assembly = assembly;
+			this.enabled = enabled;
 			this.title = title;
 			this.description = description;
 			this.version = version;
@@ -45,6 +47,8 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Private Fields
+		private Assembly assembly;
+		private bool enabled;
 		private string title;
 		private string description;
 		private Version version;
@@ -52,6 +56,17 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Public Properties
+		public Assembly Assembly
+		{
+			get { return assembly; }
+		}
+		
+		public bool Enabled
+		{
+			get { return enabled; }
+			set { enabled = value; }
+		}
+		
 		public string Title
 		{
 			get { return title; }

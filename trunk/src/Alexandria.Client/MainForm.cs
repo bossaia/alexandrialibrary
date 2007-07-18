@@ -144,7 +144,9 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializePlugins
 		private void InitializePlugins()
 		{
-			IList<FileInfo> files = new List<FileInfo>();
+			//Con System.Configuration.ConfigurationManager.
+		
+			IDictionary<FileInfo, bool> files = new Dictionary<FileInfo, bool>();
 			foreach(string fileName in ConfigurationManager.AppSettings.AllKeys)
 			{
 				if (!string.IsNullOrEmpty(fileName))
@@ -152,11 +154,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 					bool enabled = false;
 					if (bool.TryParse(ConfigurationManager.AppSettings[fileName], out enabled))
 					{
-						if (enabled)
-						{
-							FileInfo file = new FileInfo(fileName);
-							files.Add(file);
-						}
+						FileInfo file = new FileInfo(fileName);
+						files.Add(file, enabled);
 					}
 				}
 			}
@@ -185,6 +184,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		private void InitializeInterface()
 		{
 			InitializeNotifyIcon();
+			InitializePluginMenu();
 		}
 		#endregion
 		
@@ -293,6 +293,73 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			//user.Catalogs[0].Tracks.Add(track);
 			//user.PersistenceBroker = broker;
 			//user.Save();
+		}
+		#endregion
+
+		#region GetPluginInfo
+		private IList<PluginInfo> GetPluginInfo()
+		{
+			IList<PluginInfo> plugins = new List<PluginInfo>();
+			foreach (KeyValuePair<Assembly, bool> pair in repository.Assemblies)
+			{
+				Assembly assembly = pair.Key;
+				bool enabled = pair.Value;
+				
+				string title = "Unknown Plugin";
+				string description = "This plugin could not be identified";
+				Version version = new Version(1, 0, 0, 0);
+				FileInfo assemblyFile = new FileInfo(assembly.Location);
+				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
+				Bitmap bitmap = null;
+
+				try
+				{
+					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
+				}
+				catch
+				{
+					MessageBox.Show("There was an error loading the icon for the library file: " + assembly.Location, "ERROR");
+				}
+
+				foreach (Attribute attribute in assembly.GetCustomAttributes(false))
+				{
+					if (attribute is AssemblyTitleAttribute)
+					{
+						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
+						title = titleAttribute.Title;
+					}
+					else if (attribute is AssemblyDescriptionAttribute)
+					{
+						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
+						description = descriptionAttribute.Description;
+					}
+					else if (attribute is AssemblyVersionAttribute)
+					{
+						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
+						version = new Version(versionAttribute.Version);
+					}
+				}
+
+				plugins.Add(new PluginInfo(assembly, enabled, title, description, version, bitmap));
+			}
+			return plugins;
+		}
+		#endregion
+		
+		#region InitializePluginMenu
+		private void InitializePluginMenu()
+		{
+			pluginsToolStripMenuItem.DropDown.Items.Clear();
+
+			IList<PluginInfo> plugins = GetPluginInfo();
+			foreach (PluginInfo plugin in plugins)
+			{
+				ToolStripMenuItem item = new ToolStripMenuItem(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
+				//ToolStripButton item = new ToolStripButton(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
+				item.ToolTipText = plugin.Description;
+				item.Tag = plugin;
+				pluginsToolStripMenuItem.DropDown.Items.Add(item);				
+			}
 		}
 		#endregion
 		
@@ -406,49 +473,18 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			
-			IList<PluginInfo> plugins = new List<PluginInfo>();
-			foreach(Assembly assembly in repository.Assemblies)
-			{
-				string title = "Unknown Plugin";
-				string description = "This plugin could not be identified";
-				Version version = new Version(1, 0, 0, 0);
-				FileInfo assemblyFile = new FileInfo(assembly.Location);
-				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
-				Bitmap bitmap = null;
-				
-				try
-				{
-					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
-				}
-				catch
-				{
-					MessageBox.Show("There was an error loading the icon for the library file: " + assembly.Location, "ERROR");
-				}
-				
-				foreach(Attribute attribute in assembly.GetCustomAttributes(false))
-				{
-					if (attribute is AssemblyTitleAttribute)
-					{
-						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
-						title = titleAttribute.Title;
-					}
-					else if (attribute is AssemblyDescriptionAttribute)
-					{
-						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
-						description = descriptionAttribute.Description;
-					}
-					else if (attribute is AssemblyVersionAttribute)
-					{
-						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
-						version = new Version(versionAttribute.Version);
-					}
-				}
-				
-				plugins.Add(new PluginInfo(title, description, version, bitmap));
-			}
+			IList<PluginInfo> plugins = GetPluginInfo();
 						
 			About about = new About(appVersion, license, plugins);
 			about.ShowDialog(this);
+		}
+		
+		private void pluginConfigItem_Click(object sender, EventArgs e)
+		{
+			PluginConfiguration config = new PluginConfiguration();
+			ToolStripItem item = (ToolStripItem)sender;
+			config.PluginInfo = (PluginInfo)item.Tag;
+			config.ShowDialog();
 		}
 		#endregion
 		
@@ -483,6 +519,6 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			get { return dbPath; }
 		}
-		#endregion
+		#endregion		
 	}
 }
