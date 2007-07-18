@@ -83,14 +83,14 @@ namespace Alexandria.Client
 			}
 		}
 		#endregion
-		
+				
 		#region Private Fields
 		private IPluginRepository repository;
 		private IPersistenceBroker broker;
 		private IPersistenceMechanism mechanism;
 		private QueueController controller;
-		private string dbDir;
-		private string dbFile;
+		//private string dbDir;
+		//private string dbFile;
 		private string dbPath;
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
@@ -133,6 +133,10 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.";
 		#endregion
 		
+		private string dbDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + System.IO.Path.DirectorySeparatorChar);
+		//@"C:\Documents and Settings\All Users\Application Data\Alexandria\";
+		private const string dbFile = "Alexandria.db";
+		
 		#endregion
 		
 		#region Private Methods
@@ -140,7 +144,24 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializePlugins
 		private void InitializePlugins()
 		{
-			repository = new PluginRepository("Alexandria*.dll");
+			IList<FileInfo> files = new List<FileInfo>();
+			foreach(string fileName in ConfigurationManager.AppSettings.AllKeys)
+			{
+				if (!string.IsNullOrEmpty(fileName))
+				{
+					bool enabled = false;
+					if (bool.TryParse(ConfigurationManager.AppSettings[fileName], out enabled))
+					{
+						if (enabled)
+						{
+							FileInfo file = new FileInfo(fileName);
+							files.Add(file);
+						}
+					}
+				}
+			}
+		
+			repository = new PluginRepository(files);
 			
 			InitializePersistence();
 		}
@@ -149,8 +170,6 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializePersistence
 		private void InitializePersistence()
 		{
-			dbDir = ConfigurationManager.AppSettings["DatabaseDirectory"].ToString();
-			dbFile = ConfigurationManager.AppSettings["DatabaseFile"].ToString();
 			dbPath = dbDir + dbFile;
 
 			if (!Directory.Exists(dbDir))
