@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Reflection;
 using Alexandria.Persistence;
@@ -9,28 +10,40 @@ namespace Alexandria.Plugins
 	public class PluginRepository : IPluginRepository
 	{
 		#region Constructors
-		public PluginRepository(IList<FileInfo> files)
+		public PluginRepository(IDictionary<FileInfo, bool> files)
 		{
 			LoadAssemblies(files);
 		}
 		#endregion
 
 		#region Private Fields
-		private IList<Assembly> assemblies = new List<Assembly>();
+		private IDictionary<Assembly, bool> assemblies = new Dictionary<Assembly, bool>();
+		private IDictionary<Assembly, Configuration> configurations = new Dictionary<Assembly, Configuration>();
 		#endregion
 		
 		#region Private Methods
-		private void LoadAssemblies(IList<FileInfo> files)
+		private void LoadAssemblies(IDictionary<FileInfo, bool> files)
 		{
 			//DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
 			//foreach(FileInfo file in dir.GetFiles(searchPattern))
 			
-			foreach(FileInfo file in files)
+			foreach(KeyValuePair<FileInfo,bool> pair in files)
 			{
 				try
 				{
+					FileInfo file = pair.Key;
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
-					assemblies.Add(assembly);		
+					assemblies.Add(assembly, pair.Value);
+					
+					string configName = file.FullName + ".config";
+					if (File.Exists(configName))
+					{
+						Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(file.FullName);
+						if (config != null)
+						{
+							configurations.Add(assembly, config);
+						}
+					}
 				}
 				catch (FileLoadException)
 				{
@@ -42,7 +55,7 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Properties
-		public IList<Assembly> Assemblies
+		public IDictionary<Assembly, bool> Assemblies
 		{
 			get { return assemblies; }
 		}		

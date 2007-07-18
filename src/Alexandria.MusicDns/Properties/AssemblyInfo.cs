@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MusicDNS Identification Plugin")]
-[assembly: AssemblyDescription("Use the MusicDNS psychoacoustic analysis service to identify your digital audio files")]
+[assembly: AssemblyDescription("Use the MusicDNS service to analyze and identify your digital audio files")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("The Alexandria Foundation")]
 [assembly: AssemblyProduct("The Alexandria Media Library")]

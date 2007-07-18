@@ -65,34 +65,39 @@ namespace Alexandria.Persistence
 		private void Initialize()
 		{
 			//Initialize lists of factory maps, record maps and record attributes for all plugin assemblies
-			foreach(Assembly assembly in repository.Assemblies)
+			foreach(KeyValuePair<Assembly,bool> pair in repository.Assemblies)
 			{
-				foreach (Type type in assembly.GetTypes())
+				bool enabled = pair.Value;
+				if (enabled)
 				{
-					FactoryMap factoryMap = GetFactoryMap(type);
-					if (factoryMap != null)
+					Assembly assembly = pair.Key;
+					foreach (Type type in assembly.GetTypes())
 					{
-						if (factoryMap.Attribute.IsProxy)
-							proxyFactoryMaps.Add(factoryMap.Attribute.ProxyType, factoryMap);
-						else factoryMaps.Add(factoryMap.Attribute.Id, factoryMap);
-					}
-				
-					if (type.GetInterface("IRecord") != null)
-					{
-						RecordAttribute recordAttribute = GetRecordAttribute(type);
-						if (recordAttribute != null)
+						FactoryMap factoryMap = GetFactoryMap(type);
+						if (factoryMap != null)
 						{
-							recordAttributes.Add(type, recordAttribute);
-
-							RecordMap recordMap = GetRecordMap(type, recordAttribute);
-							if (recordMap != null)
+							if (factoryMap.Attribute.IsProxy)
+								proxyFactoryMaps.Add(factoryMap.Attribute.ProxyType, factoryMap);
+							else factoryMaps.Add(factoryMap.Attribute.Id, factoryMap);
+						}
+					
+						if (type.GetInterface("IRecord") != null)
+						{
+							RecordAttribute recordAttribute = GetRecordAttribute(type);
+							if (recordAttribute != null)
 							{
-								if (recordMap.RecordTypeAttribute.IsProxy)
-									proxyRecordMaps.Add(recordMap.RecordTypeAttribute.ProxyType, recordMap);
-								else recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
+								recordAttributes.Add(type, recordAttribute);
+
+								RecordMap recordMap = GetRecordMap(type, recordAttribute);
+								if (recordMap != null)
+								{
+									if (recordMap.RecordTypeAttribute.IsProxy)
+										proxyRecordMaps.Add(recordMap.RecordTypeAttribute.ProxyType, recordMap);
+									else recordMaps.Add(recordMap.RecordTypeAttribute.Id, recordMap);
+								}
 							}
 						}
-					}				
+					}			
 				}
 			}
 			

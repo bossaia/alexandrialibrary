@@ -41,6 +41,8 @@ namespace Alexandria.Client
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,8 +108,7 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -202,8 +203,20 @@ namespace Alexandria.Client
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
 			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
 			// 
+			// catalogToolStripMenuItem
+			// 
+			this.catalogToolStripMenuItem.Name = "catalogToolStripMenuItem";
+			resources.ApplyResources(this.catalogToolStripMenuItem, "catalogToolStripMenuItem");
+			// 
+			// userToolStripMenuItem
+			// 
+			this.userToolStripMenuItem.Name = "userToolStripMenuItem";
+			resources.ApplyResources(this.userToolStripMenuItem, "userToolStripMenuItem");
+			// 
 			// ToolsToolStripMenuItem
 			// 
+			this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pluginsToolStripMenuItem});
 			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
 			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
 			// 
@@ -658,15 +671,10 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
-			// userToolStripMenuItem
+			// pluginsToolStripMenuItem
 			// 
-			this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-			resources.ApplyResources(this.userToolStripMenuItem, "userToolStripMenuItem");
-			// 
-			// catalogToolStripMenuItem
-			// 
-			this.catalogToolStripMenuItem.Name = "catalogToolStripMenuItem";
-			resources.ApplyResources(this.catalogToolStripMenuItem, "catalogToolStripMenuItem");
+			this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+			resources.ApplyResources(this.pluginsToolStripMenuItem, "pluginsToolStripMenuItem");
 			// 
 			// MainForm
 			// 
@@ -792,6 +800,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem catalogToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
 	}
 }
 

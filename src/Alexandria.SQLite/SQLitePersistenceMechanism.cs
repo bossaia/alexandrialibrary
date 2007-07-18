@@ -1078,23 +1078,27 @@ namespace Alexandria.SQLite
 		public T LookupRecord<T>(Guid id, DbConnection connection) where T: IRecord
 		{
 			if (connection != null)
-			{				
-				RecordAttribute recordAttribute = broker.RecordAttributes[typeof(T)];
-				if (recordAttribute != null)
-				{					
-					IRecord record = LookupParentRecord(recordAttribute.Name, "Id", id.ToString(), recordAttribute.ProxyType, (SQLiteConnection)connection);
-					if (record != null)
-					{
-						if (!record.IsProxy)
+			{	
+				if (broker.RecordAttributes.ContainsKey(typeof(T)))
+				{
+					RecordAttribute recordAttribute = broker.RecordAttributes[typeof(T)];
+					if (recordAttribute != null)
+					{					
+						IRecord record = LookupParentRecord(recordAttribute.Name, "Id", id.ToString(), recordAttribute.ProxyType, (SQLiteConnection)connection);
+						if (record != null)
 						{
-							RecordMap recordMap = broker.GetRecordMap(record.GetType());
-							LookupChildRecords(record, recordMap, (SQLiteConnection)connection);
+							if (!record.IsProxy)
+							{
+								RecordMap recordMap = broker.GetRecordMap(record.GetType());
+								LookupChildRecords(record, recordMap, (SQLiteConnection)connection);
+							}
+							return (T)record;
 						}
-						return (T)record;
+						else return default(T);
 					}
-					else return default(T);
+					else throw new ApplicationException("SQLite could not lookup the record attribute for this type");
 				}
-				else throw new ApplicationException("SQLite could not lookup the record attribute for this type");
+				else throw new AlexandriaException("SQLite Error: no record type is defined for this object");
 			}
 			else throw new ArgumentNullException("connection");
 		}
