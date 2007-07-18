@@ -512,10 +512,6 @@ namespace Alexandria.SQLite
 					}
 					else
 					{
-						if (dbTableInfo != classTableInfo)
-						{
-							string x = dbTableInfo.Name;
-						}
 						//Alter
 						//1. create temp table
 						//2. insert record table into temp table

@@ -9,9 +9,9 @@ namespace Alexandria.Plugins
 	public class PluginRepository : IPluginRepository
 	{
 		#region Constructors
-		public PluginRepository(string searchPattern)
+		public PluginRepository(IList<FileInfo> files)
 		{
-			LoadAssmblies(searchPattern);
+			LoadAssemblies(files);
 		}
 		#endregion
 
@@ -20,20 +20,23 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Private Methods
-		private void LoadAssmblies(string searchPattern)
+		private void LoadAssemblies(IList<FileInfo> files)
 		{
-			DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
-			foreach(FileInfo file in dir.GetFiles(searchPattern))
+			//DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
+			//foreach(FileInfo file in dir.GetFiles(searchPattern))
+			
+			foreach(FileInfo file in files)
 			{
 				try
 				{
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
-					assemblies.Add(assembly);					
+					assemblies.Add(assembly);		
 				}
 				catch (FileLoadException)
 				{
 					//file is not a .NET assembly
 				}
+				//TODO: figure out how I want to handle exceptions
 			}
 		}
 		#endregion
