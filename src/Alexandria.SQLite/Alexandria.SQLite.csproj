@@ -40,7 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColumnInfo.cs" />
+    <Compile Include="DatabaseSynch.cs" />
+    <Compile Include="DatabaseUpdate.cs" />
     <Compile Include="IndexInfo.cs" />
+    <Compile Include="PluginSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLitePersistenceMechanism.cs" />
     <Compile Include="TableInfo.cs" />

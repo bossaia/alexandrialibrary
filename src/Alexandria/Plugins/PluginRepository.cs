@@ -13,12 +13,13 @@ namespace Alexandria.Plugins
 		public PluginRepository(IDictionary<FileInfo, bool> files)
 		{
 			LoadAssemblies(files);
+			int x = configurationMaps.Count;
 		}
 		#endregion
 
 		#region Private Fields
 		private IDictionary<Assembly, bool> assemblies = new Dictionary<Assembly, bool>();
-		private IDictionary<Assembly, Configuration> configurations = new Dictionary<Assembly, Configuration>();
+		private IDictionary<Assembly, ConfigurationMap> configurationMaps = new Dictionary<Assembly, ConfigurationMap>();
 		#endregion
 		
 		#region Private Methods
@@ -38,10 +39,23 @@ namespace Alexandria.Plugins
 					string configName = file.FullName + ".config";
 					if (File.Exists(configName))
 					{
-						Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(file.FullName);
-						if (config != null)
+						Configuration configFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(file.FullName);
+						if (configFile != null)
 						{
-							configurations.Add(assembly, config);
+							IPluginSettings settings = null;
+							foreach(Type type in assembly.GetTypes())
+							{
+								if (type.GetInterface("IPluginSettings") != null)
+								{
+									ConstructorInfo ctor = type.GetConstructor(System.Type.EmptyTypes);
+									if (ctor != null)
+									settings = (IPluginSettings)ctor.Invoke(null);
+								}
+								if (settings != null)
+									break;
+							}
+							ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
+							configurationMaps.Add(assembly, configMap);
 						}
 					}
 				}
@@ -58,7 +72,12 @@ namespace Alexandria.Plugins
 		public IDictionary<Assembly, bool> Assemblies
 		{
 			get { return assemblies; }
-		}		
+		}
+		
+		public IDictionary<Assembly, ConfigurationMap> ConfigurationMaps
+		{
+			get { return configurationMaps; }
+		}
 		#endregion
 		
 		#region Public Methods
