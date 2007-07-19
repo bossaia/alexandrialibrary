@@ -21,6 +21,11 @@ namespace Alexandria.Client
 		{
 			Close();
 		}
+
+		private void CancelBtn_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 		
 		public PluginInfo PluginInfo
 		{

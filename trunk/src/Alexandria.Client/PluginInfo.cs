@@ -29,10 +29,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using Alexandria.Plugins;
 
 namespace Alexandria.Client
 {
-	public struct PluginInfo
+	public class PluginInfo
 	{
 		#region Constructors
 		public PluginInfo(Assembly assembly, bool enabled, string title, string description, Version version, Bitmap bitmap)
@@ -43,6 +44,7 @@ namespace Alexandria.Client
 			this.description = description;
 			this.version = version;
 			this.bitmap = bitmap;
+			this.configurationMaps = new List<ConfigurationMap>();
 		}
 		#endregion
 		
@@ -53,6 +55,7 @@ namespace Alexandria.Client
 		private string description;
 		private Version version;
 		private Bitmap bitmap;
+		private IList<ConfigurationMap> configurationMaps;
 		#endregion
 		
 		#region Public Properties
@@ -85,6 +88,11 @@ namespace Alexandria.Client
 		public Bitmap Bitmap
 		{
 			get { return bitmap; }
+		}
+		
+		public IList<ConfigurationMap> ConfigurationMaps
+		{
+			get { return configurationMaps; }
 		}
 		#endregion
 	}
