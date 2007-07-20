@@ -162,6 +162,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 						
 			repository = new PluginRepository(files);
 			
+			/*
 			bool foundConfig = false;
 			foreach(ConfigurationMap configMap in repository.ConfigurationMaps.Values)
 			{
@@ -174,6 +175,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				}
 				if (foundConfig) break;
 			}
+			*/
 			
 			InitializePersistence();
 		}
@@ -353,7 +355,13 @@ OTHER DEALINGS IN THE SOFTWARE.";
 					}
 				}
 
-				plugins.Add(new PluginInfo(assembly, enabled, title, description, version, bitmap));
+				ConfigurationMap configMap = null;
+				if (repository.ConfigurationMaps.ContainsKey(assembly))
+					configMap = repository.ConfigurationMaps[assembly];
+					
+				PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
+
+				plugins.Add(info);
 			}
 			return plugins;
 		}

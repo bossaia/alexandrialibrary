@@ -56,6 +56,7 @@ namespace Alexandria.Plugins
 			{
 				case PluginSettingType.Text:
 				case PluginSettingType.MaskedText:
+				case PluginSettingType.PasswordText:
 				case PluginSettingType.DirectoryPath:
 				case PluginSettingType.FileName:
 				case PluginSettingType.FilePath:

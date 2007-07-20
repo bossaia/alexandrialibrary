@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Reflection;
 using System.Windows.Forms;
+using Alexandria.Plugins;
 
 namespace Alexandria.Client
 {
@@ -16,6 +17,7 @@ namespace Alexandria.Client
 		}
 
 		private PluginInfo pluginInfo = default(PluginInfo);
+		private ConfigurationMap configurationMap = null;
 
 		private void OKButton_Click(object sender, EventArgs e)
 		{
@@ -33,7 +35,11 @@ namespace Alexandria.Client
 			set
 			{
 				pluginInfo = value;
-				RefreshData();
+				if (value != null)
+				{
+					configurationMap = pluginInfo.ConfigurationMap;
+					RefreshData();
+				}
 			}
 		}
 		
@@ -44,6 +50,67 @@ namespace Alexandria.Client
 			if (pluginInfo.Bitmap != null)
 				this.Icon = Icon.FromHandle(pluginInfo.Bitmap.GetHicon());			
 			PluginDescription.Text = pluginInfo.Description;
+			
+			if (configurationMap != null && configurationMap.Settings != null)
+			{
+				SuspendLayout();
+				
+				foreach(PropertyInfo property in configurationMap.Settings.GetType().GetProperties())
+				{
+					foreach(PluginSettingAttribute attribute in property.GetCustomAttributes(typeof(PluginSettingAttribute), false))
+					{
+						Label label = new Label();
+						label.Text = property.Name;
+						label.TextAlign = ContentAlignment.MiddleLeft;
+						label.AutoSize = true;
+						
+						object value = property.GetValue(configurationMap.Settings, null);
+						
+						if (attribute.Type == PluginSettingType.Boolean)
+						{
+							CheckBox checkBox = new CheckBox();
+							checkBox.Checked = Convert.ToBoolean(value);
+							checkBox.Tag = property;
+							SettingsLayoutPanel.Controls.Add(label);
+							SettingsLayoutPanel.Controls.Add(checkBox);
+						}
+						else if (attribute.Type == PluginSettingType.Text || attribute.Type == PluginSettingType.FileName || attribute.Type == PluginSettingType.PasswordText)
+						{
+							TextBox textBox = new TextBox();						
+							textBox.Tag = property;
+							if (attribute.Type == PluginSettingType.PasswordText)
+								textBox.PasswordChar = '*';
+							
+							textBox.Multiline = false;								
+							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
+							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							SettingsLayoutPanel.Controls.Add(label);
+							SettingsLayoutPanel.Controls.Add(textBox);
+						}
+						else if (attribute.Type == PluginSettingType.DirectoryPath)
+						{
+						}
+						else if (attribute.Type == PluginSettingType.Enumeration)
+						{
+							ComboBox comboBox = new ComboBox();
+							foreach(string name in Enum.GetNames(property.PropertyType))
+							{		
+								comboBox.Items.Add(name);
+							}
+							comboBox.SelectedItem = value.ToString();						
+							//comboBox.DroppedDown = false;
+							//comboBox.AllowDrop = false;
+							comboBox.Tag = property;
+							SettingsLayoutPanel.Controls.Add(label);
+							SettingsLayoutPanel.Controls.Add(comboBox);
+						}
+						
+						break;
+					}
+				}
+				
+				ResumeLayout();
+			}
 		}
 	}
 }
