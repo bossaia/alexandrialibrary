@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Alexandria.Plugins
 {
-	[AttributeUsage(AttributeTargets.Property)]
+	[AttributeUsage(AttributeTargets.Property, AllowMultiple=false)]
 	public class PluginSettingAttribute : Attribute
 	{
 		public PluginSettingAttribute(PluginSettingType type, string description)
