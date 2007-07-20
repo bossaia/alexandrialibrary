@@ -13,7 +13,6 @@ namespace Alexandria.Plugins
 		public PluginRepository(IDictionary<FileInfo, bool> files)
 		{
 			LoadAssemblies(files);
-			int x = configurationMaps.Count;
 		}
 		#endregion
 

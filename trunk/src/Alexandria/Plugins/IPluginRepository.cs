@@ -35,5 +35,6 @@ namespace Alexandria.Plugins
 	public interface IPluginRepository : IDisposable
 	{
 		IDictionary<Assembly, bool> Assemblies { get; }
+		IDictionary<Assembly, ConfigurationMap> ConfigurationMaps { get; }
 	}
 }

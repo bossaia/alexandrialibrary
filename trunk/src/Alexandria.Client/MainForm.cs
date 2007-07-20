@@ -159,8 +159,21 @@ OTHER DEALINGS IN THE SOFTWARE.";
 					}
 				}
 			}
-		
+						
 			repository = new PluginRepository(files);
+			
+			bool foundConfig = false;
+			foreach(ConfigurationMap configMap in repository.ConfigurationMaps.Values)
+			{
+				Alexandria.Mp3Tunes.LockerPluginSettings settings = configMap.Settings as Alexandria.Mp3Tunes.LockerPluginSettings;
+				if (settings != null)
+				{
+					foundConfig = true;
+					settings.LockerSynch = LockerSynch.None;
+					configMap.Save();
+				}
+				if (foundConfig) break;
+			}
 			
 			InitializePersistence();
 		}
