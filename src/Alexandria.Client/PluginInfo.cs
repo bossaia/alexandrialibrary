@@ -36,32 +36,37 @@ namespace Alexandria.Client
 	public class PluginInfo
 	{
 		#region Constructors
-		public PluginInfo(Assembly assembly, bool enabled, string title, string description, Version version, Bitmap bitmap)
+		public PluginInfo(Assembly assembly, ConfigurationMap configurationMap, bool enabled, string title, string description, Version version, Bitmap bitmap)
 		{			
 			this.assembly = assembly;
+			this.configurationMap = configurationMap;
 			this.enabled = enabled;
 			this.title = title;
 			this.description = description;
 			this.version = version;
 			this.bitmap = bitmap;
-			this.configurationMaps = new List<ConfigurationMap>();
 		}
 		#endregion
 		
 		#region Private Fields
 		private Assembly assembly;
+		private ConfigurationMap configurationMap;
 		private bool enabled;
 		private string title;
 		private string description;
 		private Version version;
 		private Bitmap bitmap;
-		private IList<ConfigurationMap> configurationMaps;
 		#endregion
 		
 		#region Public Properties
 		public Assembly Assembly
 		{
 			get { return assembly; }
+		}
+
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
 		}
 		
 		public bool Enabled
@@ -88,11 +93,6 @@ namespace Alexandria.Client
 		public Bitmap Bitmap
 		{
 			get { return bitmap; }
-		}
-		
-		public IList<ConfigurationMap> ConfigurationMaps
-		{
-			get { return configurationMaps; }
 		}
 		#endregion
 	}

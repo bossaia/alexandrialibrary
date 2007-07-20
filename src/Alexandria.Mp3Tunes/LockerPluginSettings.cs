@@ -34,7 +34,7 @@ namespace Alexandria.Mp3Tunes
 			set { userName = value; }
 		}
 
-		[PluginSetting(PluginSettingType.Text, "The password for accessing your MP3tunes Music Locker")]
+		[PluginSetting(PluginSettingType.PasswordText, "The password for accessing your MP3tunes Music Locker")]
 		public string Password
 		{
 			get { return password; }

@@ -35,13 +35,13 @@ namespace Alexandria.Client
 			this.VersionLabel = new System.Windows.Forms.Label();
 			this.SettingsLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.SettingsGroupBox = new System.Windows.Forms.GroupBox();
-			this.checkBox1 = new System.Windows.Forms.CheckBox();
 			this.CancelBtn = new System.Windows.Forms.Button();
 			this.SettingsGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// OKButton
 			// 
+			this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.OKButton.Location = new System.Drawing.Point(198, 206);
 			this.OKButton.Name = "OKButton";
 			this.OKButton.Size = new System.Drawing.Size(75, 23);
@@ -52,6 +52,8 @@ namespace Alexandria.Client
 			// 
 			// PluginDescription
 			// 
+			this.PluginDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.PluginDescription.Location = new System.Drawing.Point(12, 47);
 			this.PluginDescription.Multiline = true;
 			this.PluginDescription.Name = "PluginDescription";
@@ -61,7 +63,7 @@ namespace Alexandria.Client
 			// 
 			// Version
 			// 
-			this.Version.Location = new System.Drawing.Point(254, 10);
+			this.Version.Location = new System.Drawing.Point(63, 12);
 			this.Version.Name = "Version";
 			this.Version.ReadOnly = true;
 			this.Version.Size = new System.Drawing.Size(100, 20);
@@ -70,7 +72,7 @@ namespace Alexandria.Client
 			// VersionLabel
 			// 
 			this.VersionLabel.AutoSize = true;
-			this.VersionLabel.Location = new System.Drawing.Point(206, 13);
+			this.VersionLabel.Location = new System.Drawing.Point(15, 13);
 			this.VersionLabel.Name = "VersionLabel";
 			this.VersionLabel.Size = new System.Drawing.Size(42, 13);
 			this.VersionLabel.TabIndex = 6;
@@ -91,6 +93,9 @@ namespace Alexandria.Client
 			// 
 			// SettingsGroupBox
 			// 
+			this.SettingsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.SettingsGroupBox.AutoSize = true;
 			this.SettingsGroupBox.Controls.Add(this.SettingsLayoutPanel);
 			this.SettingsGroupBox.Location = new System.Drawing.Point(12, 132);
@@ -100,19 +105,9 @@ namespace Alexandria.Client
 			this.SettingsGroupBox.TabStop = false;
 			this.SettingsGroupBox.Text = "Settings";
 			// 
-			// checkBox1
-			// 
-			this.checkBox1.AutoSize = true;
-			this.checkBox1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.checkBox1.Location = new System.Drawing.Point(12, 12);
-			this.checkBox1.Name = "checkBox1";
-			this.checkBox1.Size = new System.Drawing.Size(65, 17);
-			this.checkBox1.TabIndex = 9;
-			this.checkBox1.Text = "Enabled";
-			this.checkBox1.UseVisualStyleBackColor = true;
-			// 
 			// CancelBtn
 			// 
+			this.CancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.CancelBtn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.CancelBtn.Location = new System.Drawing.Point(279, 206);
 			this.CancelBtn.Name = "CancelBtn";
@@ -127,10 +122,10 @@ namespace Alexandria.Client
 			this.AcceptButton = this.OKButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.AutoSize = true;
 			this.CancelButton = this.CancelBtn;
 			this.ClientSize = new System.Drawing.Size(366, 240);
 			this.Controls.Add(this.CancelBtn);
-			this.Controls.Add(this.checkBox1);
 			this.Controls.Add(this.PluginDescription);
 			this.Controls.Add(this.SettingsGroupBox);
 			this.Controls.Add(this.VersionLabel);
@@ -154,7 +149,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.Label VersionLabel;
 		private System.Windows.Forms.TableLayoutPanel SettingsLayoutPanel;
 		private System.Windows.Forms.GroupBox SettingsGroupBox;
-		private System.Windows.Forms.CheckBox checkBox1;
 		private System.Windows.Forms.Button CancelBtn;
 	}
 }

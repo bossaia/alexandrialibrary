@@ -9,6 +9,7 @@ namespace Alexandria.Plugins
 		None = 0,
 		Text,
 		MaskedText,
+		PasswordText,
 		Integer,
 		Real,
 		Boolean,
