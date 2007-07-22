@@ -19,8 +19,38 @@ namespace Alexandria.Client
 		private PluginInfo pluginInfo = default(PluginInfo);
 		private ConfigurationMap configurationMap = null;
 
+		private void ReadConfigValueFromControl(System.Windows.Forms.Control control)
+		{
+			if (control.GetType() == typeof(CheckBox))
+			{
+				CheckBox checkBox = (CheckBox)control;
+				PropertyInfo property = (PropertyInfo)checkBox.Tag;
+				property.SetValue(configurationMap.Settings, checkBox.Checked, null);
+			}
+			else if (control.GetType() == typeof(TextBox))
+			{
+				TextBox textBox = (TextBox)control;
+				PropertyInfo property = (PropertyInfo)textBox.Tag;
+				property.SetValue(configurationMap.Settings, textBox.Text, null);
+			}
+			else if (control.GetType() == typeof(ComboBox))
+			{
+				ComboBox comboBox = (ComboBox)control;
+				PropertyInfo property = (PropertyInfo)comboBox.Tag;
+				string value = (comboBox.SelectedItem != null) ? comboBox.SelectedItem.ToString() : "None";
+				property.SetValue(configurationMap.Settings, Enum.Parse(property.PropertyType, value), null);
+			}
+		}
+
 		private void OKButton_Click(object sender, EventArgs e)
 		{
+			if (configurationMap != null)
+			{
+				foreach(Control control in SettingsLayoutPanel.Controls)
+					ReadConfigValueFromControl(control);
+			
+				configurationMap.Save();
+			}
 			Close();
 		}
 
