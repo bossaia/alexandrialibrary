@@ -12,7 +12,8 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
-    <ApplicationIcon>Alexandria.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,7 +96,6 @@
     <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordTypeAttribute.cs" />
     <Compile Include="Plugins\ConfigurationMap.cs" />
-    <Compile Include="Plugins\IPluginOptions.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
     <Compile Include="Metadata\IGenre.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Plugins\PluginAttribute.cs" />
     <Compile Include="Plugins\PluginRepository.cs" />
     <Compile Include="Plugins\PluginSettingAttribute.cs" />
+    <Compile Include="Plugins\PluginSettings.cs" />
     <Compile Include="Plugins\PluginSettingType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Metadata\Tagging\ITag.cs" />
@@ -123,9 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.bmp" />

@@ -4,10 +4,10 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Mp3Tunes
 {
-	public class LockerPluginSettings : IPluginSettings
+	public class ConfigurationSettings : IPluginSettings
 	{
 		#region Constructors
-		public LockerPluginSettings()
+		public ConfigurationSettings()
 		{
 		}
 		#endregion

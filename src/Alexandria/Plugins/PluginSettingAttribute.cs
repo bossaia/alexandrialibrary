@@ -13,14 +13,20 @@ namespace Alexandria.Plugins
 			this.description = description;
 		}
 
-		public PluginSettingAttribute(PluginSettingType type, string description, string textMask) : this(type, description)		
+		public PluginSettingAttribute(PluginSettingType type, string description, string textMask) : this(type, description)
 		{
 			this.textMask = textMask;
+		}
+		
+		public PluginSettingAttribute(PluginSettingType type, string description, bool isReadOnly) : this(type, description)
+		{
+			this.isReadOnly = isReadOnly;
 		}
 
 		private PluginSettingType type = PluginSettingType.None;		
 		private string description;
 		private string textMask;
+		private bool isReadOnly;
 
 		public PluginSettingType Type
 		{
@@ -35,6 +41,13 @@ namespace Alexandria.Plugins
 		public string TextMask
 		{
 			get { return textMask; }
+			set { textMask = value; }
+		}
+		
+		public bool IsReadOnly
+		{
+			get { return isReadOnly; }
+			set { isReadOnly = value; }
 		}
 	}
 }

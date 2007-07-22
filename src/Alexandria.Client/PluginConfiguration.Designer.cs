@@ -28,6 +28,7 @@ namespace Alexandria.Client
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PluginConfiguration));
 			this.OKButton = new System.Windows.Forms.Button();
 			this.PluginDescription = new System.Windows.Forms.TextBox();
@@ -36,6 +37,7 @@ namespace Alexandria.Client
 			this.SettingsLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
 			this.SettingsGroupBox = new System.Windows.Forms.GroupBox();
 			this.CancelBtn = new System.Windows.Forms.Button();
+			this.DescriptionToolTip = new System.Windows.Forms.ToolTip(this.components);
 			this.SettingsGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -72,7 +74,7 @@ namespace Alexandria.Client
 			// VersionLabel
 			// 
 			this.VersionLabel.AutoSize = true;
-			this.VersionLabel.Location = new System.Drawing.Point(15, 13);
+			this.VersionLabel.Location = new System.Drawing.Point(15, 15);
 			this.VersionLabel.Name = "VersionLabel";
 			this.VersionLabel.Size = new System.Drawing.Size(42, 13);
 			this.VersionLabel.TabIndex = 6;
@@ -150,5 +152,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.TableLayoutPanel SettingsLayoutPanel;
 		private System.Windows.Forms.GroupBox SettingsGroupBox;
 		private System.Windows.Forms.Button CancelBtn;
+		private System.Windows.Forms.ToolTip DescriptionToolTip;
 	}
 }

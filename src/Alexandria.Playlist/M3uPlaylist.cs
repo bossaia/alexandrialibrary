@@ -35,8 +35,7 @@ namespace Alexandria.Media.Playlists
 	public class M3uPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public M3uPlaylist(string path)
-			: base(path)
+		public M3uPlaylist(string path) : base(path)
 		{
 
 		}

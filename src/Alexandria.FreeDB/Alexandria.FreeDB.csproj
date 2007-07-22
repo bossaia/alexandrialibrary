@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.FreeDB</RootNamespace>
     <AssemblyName>Alexandria.FreeDB</AssemblyName>
-    <ApplicationIcon>Alexandria.FreeDB.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,7 @@
     <Compile Include="CDEntry.cs" />
     <Compile Include="CDRomToc.cs" />
     <Compile Include="CDTableOfContents.cs" />
+    <Compile Include="ConfigurationSettings.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="DeviceChangeNotificationWindow.cs" />
@@ -66,9 +68,6 @@
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
       <Name>Alexandria</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.FreeDB.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.FreeDB.bmp" />

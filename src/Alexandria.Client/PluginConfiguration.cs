@@ -25,20 +25,23 @@ namespace Alexandria.Client
 			{
 				CheckBox checkBox = (CheckBox)control;
 				PropertyInfo property = (PropertyInfo)checkBox.Tag;
-				property.SetValue(configurationMap.Settings, checkBox.Checked, null);
+				if (checkBox.Enabled)
+					property.SetValue(configurationMap.Settings, checkBox.Checked, null);
 			}
 			else if (control.GetType() == typeof(TextBox))
 			{
 				TextBox textBox = (TextBox)control;
 				PropertyInfo property = (PropertyInfo)textBox.Tag;
-				property.SetValue(configurationMap.Settings, textBox.Text, null);
+				if (textBox.Enabled)
+					property.SetValue(configurationMap.Settings, textBox.Text, null);
 			}
 			else if (control.GetType() == typeof(ComboBox))
 			{
 				ComboBox comboBox = (ComboBox)control;
 				PropertyInfo property = (PropertyInfo)comboBox.Tag;
 				string value = (comboBox.SelectedItem != null) ? comboBox.SelectedItem.ToString() : "None";
-				property.SetValue(configurationMap.Settings, Enum.Parse(property.PropertyType, value), null);
+				if (comboBox.Enabled)
+					property.SetValue(configurationMap.Settings, Enum.Parse(property.PropertyType, value), null);
 			}
 		}
 
@@ -91,15 +94,16 @@ namespace Alexandria.Client
 					{
 						Label label = new Label();
 						label.Text = property.Name;
-						label.TextAlign = ContentAlignment.BottomLeft;
+						label.Padding = new Padding(0, 7, 0, 0);
 						label.AutoSize = true;
-						
+						DescriptionToolTip.SetToolTip(label, attribute.Description);
+												
 						object value = property.GetValue(configurationMap.Settings, null);
 						
 						if (attribute.Type == PluginSettingType.Boolean)
 						{
 							CheckBox checkBox = new CheckBox();
-							//checkBox.Location.Y = checkBox.Location.Y - 3;
+							checkBox.Enabled = !attribute.IsReadOnly;
 							checkBox.Checked = Convert.ToBoolean(value);
 							checkBox.Tag = property;
 							SettingsLayoutPanel.Controls.Add(label);
@@ -108,59 +112,60 @@ namespace Alexandria.Client
 						else if (attribute.Type == PluginSettingType.Text || attribute.Type == PluginSettingType.FileName || attribute.Type == PluginSettingType.PasswordText)
 						{
 							TextBox textBox = new TextBox();
-							//textBox.Location.Y = textBox.Location.Y - 3;
+							textBox.Enabled = !attribute.IsReadOnly;
 							textBox.Tag = property;
 							if (attribute.Type == PluginSettingType.PasswordText)
 								textBox.PasswordChar = '*';
 							
-							textBox.Multiline = false;								
-							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
-							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							textBox.Multiline = false;
+							string valueString = (value != null) ? value.ToString() : string.Empty;
+							textBox.Text = valueString;
+							textBox.Width = 200;
 							SettingsLayoutPanel.Controls.Add(label);
 							SettingsLayoutPanel.Controls.Add(textBox);
 						}
 						else if (attribute.Type == PluginSettingType.Integer)
 						{
 							MaskedTextBox textBox = new MaskedTextBox();
-							//textBox.Location.Y = textBox.Location.Y - 3;
+							textBox.Enabled = !attribute.IsReadOnly;
 							textBox.Tag = property;
 							//textBox.Mask = "0000000";
 
 							textBox.Multiline = false;
-							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
-							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							
+							string valueString = (value != null) ? value.ToString() : string.Empty;
+							textBox.Text = valueString;
+							textBox.Width = 100;
 							SettingsLayoutPanel.Controls.Add(label);
 							SettingsLayoutPanel.Controls.Add(textBox);
 						}
 						else if (attribute.Type == PluginSettingType.Real)
 						{
 							MaskedTextBox textBox = new MaskedTextBox();
-							//textBox.Location.Y = textBox.Location.Y - 3;
+							textBox.Enabled = !attribute.IsReadOnly;
 							textBox.Tag = property;
 							//textBox.Mask = "0000.00";
 
 							textBox.Multiline = false;
-							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
-							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							string valueString = (value != null) ? value.ToString() : string.Empty;
+							textBox.Text = valueString;
+							textBox.Width = 100;
 							SettingsLayoutPanel.Controls.Add(label);
 							SettingsLayoutPanel.Controls.Add(textBox);
 						}
 						else if (attribute.Type == PluginSettingType.Enumeration)
 						{
 							ComboBox comboBox = new ComboBox();
-							//comboBox.Location.Y = comboBox.Location.Y - 3;
+							comboBox.Enabled = !attribute.IsReadOnly;
 							foreach(string name in Enum.GetNames(property.PropertyType))
-							{		
 								comboBox.Items.Add(name);
-							}
-							comboBox.SelectedItem = value.ToString();						
-							//comboBox.DroppedDown = false;
-							//comboBox.AllowDrop = false;
+							
+							comboBox.Width = 150;
+							comboBox.SelectedItem = value.ToString();
 							comboBox.Tag = property;
 							SettingsLayoutPanel.Controls.Add(label);
 							SettingsLayoutPanel.Controls.Add(comboBox);
 						}
-						
 						break;
 					}
 				}
