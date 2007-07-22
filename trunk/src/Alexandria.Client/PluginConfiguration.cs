@@ -91,7 +91,7 @@ namespace Alexandria.Client
 					{
 						Label label = new Label();
 						label.Text = property.Name;
-						label.TextAlign = ContentAlignment.MiddleLeft;
+						label.TextAlign = ContentAlignment.BottomLeft;
 						label.AutoSize = true;
 						
 						object value = property.GetValue(configurationMap.Settings, null);
@@ -99,6 +99,7 @@ namespace Alexandria.Client
 						if (attribute.Type == PluginSettingType.Boolean)
 						{
 							CheckBox checkBox = new CheckBox();
+							//checkBox.Location.Y = checkBox.Location.Y - 3;
 							checkBox.Checked = Convert.ToBoolean(value);
 							checkBox.Tag = property;
 							SettingsLayoutPanel.Controls.Add(label);
@@ -106,7 +107,8 @@ namespace Alexandria.Client
 						}
 						else if (attribute.Type == PluginSettingType.Text || attribute.Type == PluginSettingType.FileName || attribute.Type == PluginSettingType.PasswordText)
 						{
-							TextBox textBox = new TextBox();						
+							TextBox textBox = new TextBox();
+							//textBox.Location.Y = textBox.Location.Y - 3;
 							textBox.Tag = property;
 							if (attribute.Type == PluginSettingType.PasswordText)
 								textBox.PasswordChar = '*';
@@ -117,12 +119,36 @@ namespace Alexandria.Client
 							SettingsLayoutPanel.Controls.Add(label);
 							SettingsLayoutPanel.Controls.Add(textBox);
 						}
-						else if (attribute.Type == PluginSettingType.DirectoryPath)
+						else if (attribute.Type == PluginSettingType.Integer)
 						{
+							MaskedTextBox textBox = new MaskedTextBox();
+							//textBox.Location.Y = textBox.Location.Y - 3;
+							textBox.Tag = property;
+							//textBox.Mask = "0000000";
+
+							textBox.Multiline = false;
+							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
+							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							SettingsLayoutPanel.Controls.Add(label);
+							SettingsLayoutPanel.Controls.Add(textBox);
+						}
+						else if (attribute.Type == PluginSettingType.Real)
+						{
+							MaskedTextBox textBox = new MaskedTextBox();
+							//textBox.Location.Y = textBox.Location.Y - 3;
+							textBox.Tag = property;
+							//textBox.Mask = "0000.00";
+
+							textBox.Multiline = false;
+							textBox.Size = new Size(textBox.Size.Width * 2, textBox.Size.Height);
+							textBox.Text = (value != null) ? value.ToString() : string.Empty;
+							SettingsLayoutPanel.Controls.Add(label);
+							SettingsLayoutPanel.Controls.Add(textBox);
 						}
 						else if (attribute.Type == PluginSettingType.Enumeration)
 						{
 							ComboBox comboBox = new ComboBox();
+							//comboBox.Location.Y = comboBox.Location.Y - 3;
 							foreach(string name in Enum.GetNames(property.PropertyType))
 							{		
 								comboBox.Items.Add(name);

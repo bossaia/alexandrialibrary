@@ -10,7 +10,6 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {
-	//[SoundClass]
 	internal class Sound : IDisposable, ILoopable, IHasRange, IHasDefault
 	{
 		#region Constructors

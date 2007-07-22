@@ -8,8 +8,7 @@ using System.Timers;
 using Alexandria;
 
 namespace Alexandria.Fmod
-{	
-	//[AudioPlayerClass]
+{
 	public class FmodAudioPlayer : IDisposable
 	{		
 		#region Private Fields
@@ -267,7 +266,7 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Public Properties		
+		#region Public Properties
 		public bool IsMuted
 		{
 			get

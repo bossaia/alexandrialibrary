@@ -55,6 +55,7 @@
     <Compile Include="DspParameter.cs" />
     <Compile Include="DspParameterCollection.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="FmodConfiguration.cs" />
     <Compile Include="FmodError.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="IHasDefault.cs" />
