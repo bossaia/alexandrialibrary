@@ -48,7 +48,6 @@ namespace Alexandria.Fmod
 		private Sound sound;
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
-		//private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
 		#endregion
 		

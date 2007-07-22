@@ -66,10 +66,16 @@ namespace Alexandria.Plugins
 				case PluginSettingType.Integer:
 					if (propertyType == typeof(short))
 						return Convert.ToInt16(value);
+					else if (propertyType == typeof(ushort))
+						return Convert.ToUInt16(value);
 					else if (propertyType == typeof(int))
 						return Convert.ToInt32(value);
+					else if (propertyType == typeof(uint))
+						return Convert.ToUInt32(value);
 					else if (propertyType == typeof(long))
 						return Convert.ToInt64(value);
+					else if (propertyType == typeof(ulong))
+						return Convert.ToUInt64(value);
 					else if (propertyType == typeof(decimal))
 						return Convert.ToDecimal(value);
 					else throw new AlexandriaException("Could not convert configuration integer value");

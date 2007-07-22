@@ -12,10 +12,12 @@ namespace Alexandria.Mp3Tunes
 		}
 		#endregion
 	
+		#region Private Fields
 		private bool enabled;
 		private string userName;
 		private string password;
 		private LockerSynch lockerSynch = LockerSynch.None;
+		#endregion
 	
 		#region IPluginSettings Members
 		[PluginSetting(PluginSettingType.Boolean, "Insdicates whether or not the MP3tunes Music Locker plugin is enabled")]
