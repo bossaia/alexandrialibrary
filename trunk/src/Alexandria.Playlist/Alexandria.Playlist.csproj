@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Playlist</RootNamespace>
     <AssemblyName>Alexandria.Playlist</AssemblyName>
-    <ApplicationIcon>Alexandria.Playlist.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationSettings.cs" />
     <Compile Include="M3uPlaylist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XspPlaylist.cs" />
@@ -43,9 +45,6 @@
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
       <Name>Alexandria</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.Playlist.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Playlist.bmp" />

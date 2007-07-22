@@ -144,39 +144,16 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializePlugins
 		private void InitializePlugins()
 		{
-			//Con System.Configuration.ConfigurationManager.
-		
-			IDictionary<FileInfo, bool> files = new Dictionary<FileInfo, bool>();
+			IList<FileInfo> files = new List<FileInfo>();
 			foreach(string fileName in ConfigurationManager.AppSettings.AllKeys)
 			{
 				if (!string.IsNullOrEmpty(fileName))
 				{
-					bool enabled = false;
-					if (bool.TryParse(ConfigurationManager.AppSettings[fileName], out enabled))
-					{
-						FileInfo file = new FileInfo(fileName);
-						files.Add(file, enabled);
-					}
+					FileInfo file = new FileInfo(fileName);
+					files.Add(file);
 				}
-			}
-						
+			}			
 			repository = new PluginRepository(files);
-			
-			/*
-			bool foundConfig = false;
-			foreach(ConfigurationMap configMap in repository.ConfigurationMaps.Values)
-			{
-				Alexandria.Mp3Tunes.LockerPluginSettings settings = configMap.Settings as Alexandria.Mp3Tunes.LockerPluginSettings;
-				if (settings != null)
-				{
-					foundConfig = true;
-					settings.LockerSynch = LockerSynch.None;
-					configMap.Save();
-				}
-				if (foundConfig) break;
-			}
-			*/
-			
 			InitializePersistence();
 		}
 		#endregion

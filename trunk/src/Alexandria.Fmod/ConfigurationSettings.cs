@@ -5,10 +5,10 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Fmod
 {
-	public class FmodConfiguration : IPluginSettings
+	public class ConfigurationSettings : IPluginSettings
 	{
 		#region Constructors
-		public FmodConfiguration()
+		public ConfigurationSettings()
 		{
 		}
 		#endregion

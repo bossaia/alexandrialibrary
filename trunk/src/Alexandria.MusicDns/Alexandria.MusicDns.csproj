@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.MusicDns</RootNamespace>
     <AssemblyName>Alexandria.MusicDns</AssemblyName>
-    <ApplicationIcon>Alexandria.MusicDns.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationSettings.cs" />
     <Compile Include="metadata.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,9 +68,6 @@
     <None Include="metadata.xsx">
       <DependentUpon>metadata.xsd</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.MusicDns.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.MusicDns.bmp" />

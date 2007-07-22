@@ -1094,13 +1094,10 @@ namespace Alexandria.SQLite
 							}
 							return (T)record;
 						}
-						else return default(T);
 					}
-					else throw new ApplicationException("SQLite could not lookup the record attribute for this type");
 				}
-				else throw new AlexandriaException("SQLite Error: no record type is defined for this object");
 			}
-			else throw new ArgumentNullException("connection");
+			return default(T);
 		}
 
 		public void SaveRecord(IRecord record, DbTransaction transaction)

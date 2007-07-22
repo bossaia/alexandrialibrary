@@ -10,7 +10,7 @@ namespace Alexandria.Plugins
 	public class PluginRepository : IPluginRepository
 	{
 		#region Constructors
-		public PluginRepository(IDictionary<FileInfo, bool> files)
+		public PluginRepository(IList<FileInfo> files)
 		{
 			LoadAssemblies(files);
 		}
@@ -22,18 +22,14 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Private Methods
-		private void LoadAssemblies(IDictionary<FileInfo, bool> files)
+		private void LoadAssemblies(IList<FileInfo> files)
 		{
-			//DirectoryInfo dir = new DirectoryInfo(Environment.CurrentDirectory);
-			//foreach(FileInfo file in dir.GetFiles(searchPattern))
-			
-			foreach(KeyValuePair<FileInfo,bool> pair in files)
+			foreach(FileInfo file in files)
 			{
 				try
 				{
-					FileInfo file = pair.Key;
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
-					assemblies.Add(assembly, pair.Value);
+					bool enabled = false;
 					
 					string configName = file.FullName + ".config";
 					if (File.Exists(configName))
@@ -53,14 +49,27 @@ namespace Alexandria.Plugins
 								if (settings != null)
 									break;
 							}
-							ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
-							configurationMaps.Add(assembly, configMap);
+							
+							if (settings != null)
+							{
+								enabled = settings.Enabled;
+								ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
+								configurationMaps.Add(assembly, configMap);
+							}
 						}
 					}
+					
+					assemblies.Add(assembly, enabled);
 				}
-				catch (FileLoadException)
+				catch (FileNotFoundException ex)
+				{
+					//file does not exist
+					string x = ex.Message;
+				}
+				catch (FileLoadException ex)
 				{
 					//file is not a .NET assembly
+					string x = ex.Message;
 				}
 				//TODO: figure out how I want to handle exceptions
 			}

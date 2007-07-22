@@ -9,7 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Fmod</RootNamespace>
     <AssemblyName>Alexandria.Fmod</AssemblyName>
-    <ApplicationIcon>Alexandria.Fmod.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -55,7 +56,7 @@
     <Compile Include="DspParameter.cs" />
     <Compile Include="DspParameterCollection.cs" />
     <Compile Include="Enums.cs" />
-    <Compile Include="FmodConfiguration.cs" />
+    <Compile Include="ConfigurationSettings.cs" />
     <Compile Include="FmodError.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="IHasDefault.cs" />
@@ -103,9 +104,6 @@
     <Compile Include="TagCollection.cs" />
   </ItemGroup>
   <ItemGroup>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.Fmod.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Fmod.bmp" />

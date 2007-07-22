@@ -82,13 +82,61 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Alexandria.AlbumArtDownloader.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Amazon.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.AsciiGenerator.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.CompactDiscTools.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Db4o.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Alexandria.Fmod.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.FreeDB.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Google.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Imdb.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.LastFM.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.MediaInfo.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Alexandria.Mp3Tunes.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Alexandria.MusicBrainz.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.MusicDns.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Playlist.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Alexandria.SQLite.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.TagLib.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Alexandria.Tao.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />
@@ -121,6 +169,10 @@
     <ProjectReference Include="..\Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj">
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Db4o\Alexandria.Db4o.csproj">
+      <Project>{B08B54A1-29EE-4321-B02C-87562C4B75D2}</Project>
+      <Name>Alexandria.Db4o</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
       <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>

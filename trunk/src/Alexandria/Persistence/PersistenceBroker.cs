@@ -41,9 +41,7 @@ namespace Alexandria.Persistence
 		{
 			this.repository = repository;
 			Mechanism = mechanism;
-			
 			Initialize();
-			int x = proxyRecordMaps.Count;
 		}
 		#endregion
 	
