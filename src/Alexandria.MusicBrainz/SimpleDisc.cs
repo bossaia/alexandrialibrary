@@ -77,7 +77,8 @@ namespace Alexandria.MusicBrainz
 		
 				try
 				{
-					tracks.Add(new SimpleTrack(i + 1, lengths[i]));
+					tracks.Add(new SimpleTrack());
+					//tracks.Add(new SimpleTrack(i + 1, lengths[i]));
 				}
 				catch (IndexOutOfRangeException)
 				{
@@ -196,7 +197,7 @@ namespace Alexandria.MusicBrainz
             {
 				client.Select(rdf.SelectTrack, i);
                 
-                tracks[i - 1] = new SimpleTrack(i, lengths[i - 1]);
+                tracks[i - 1] = new SimpleTrack(); //new SimpleTrack(i, lengths[i - 1]);
 				tracks[i - 1].Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
 				tracks[i - 1].Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
                 tracks[i - 1].Index = i;

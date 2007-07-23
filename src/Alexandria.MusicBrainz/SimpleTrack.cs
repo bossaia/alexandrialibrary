@@ -29,6 +29,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Alexandria;
 using Alexandria.Metadata;
@@ -40,47 +41,57 @@ namespace Alexandria.MusicBrainz
 	[RecordType("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
     public class SimpleTrack : IAudioTrack
     {
+		#region Constructors
+		internal SimpleTrack()
+		{
+			id = Guid.NewGuid();
+		}
+		
+		//public SimpleTrack(int index, int length)
+		//{
+			//this.index = index;
+			//this.length = length;
+		//}
+
+		[Factory("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
+		public SimpleTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber)
+		{
+			this.id = id;
+			this.path = path;
+			this.name = name;
+			this.album = album;
+			this.artist = artist;
+			this.duration = duration;
+			this.releaseDate = releaseDate;
+			this.trackNumber = trackNumber;
+			this.format = "cdda";
+		}
+		#endregion
+    
 		#region Private Fields
+		private Guid id;
+		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
+		private IRecord parent;
+		private IPersistenceBroker broker;
+		
+		private Uri path;
+		private string name;
+		private string album;
         private string artist;
-        private string title;
-        private string album;
+        private TimeSpan duration;
+        private DateTime releaseDate;
+        private int trackNumber;
+        private string format;
+        
+        private string title;        
         private string asin;
         private int track_num;
         private int track_count;
         private int index;
         private int length;
-        
-        private Guid id = default(Guid);
-        private IRecord parent;
-        private IPersistenceBroker broker;
         #endregion
-        
-        #region Constructors
-		internal SimpleTrack()
-		{
-		}
-		
-		[Factory("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
-        public SimpleTrack(int index, int length)
-        {
-            this.index = index;
-            this.length = length;
-        }
-        #endregion
-                
-        #region Public Properties
-        public string Artist
-        {
-			get {return artist;}
-			internal set {artist = value;}
-        }
-                
-        public string Album
-        {
-			get {return album;}
-			internal set {album = value;}
-        }
                         
+        #region Public Properties
         public string Asin
         {
 			get {return asin;}
@@ -137,42 +148,53 @@ namespace Alexandria.MusicBrainz
 		#endregion
 
 		#region IAudioTrack Members
+		public string Artist
+		{
+			get { return artist; }
+			internal set { artist = value; }
+		}
 
-
+		public string Album
+		{
+			get { return album; }
+			internal set { album = value; }
+		}
+		
 		public TimeSpan Duration
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return duration; }
+			internal set { duration = value; }
 		}
 
 		public DateTime ReleaseDate
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return releaseDate; }
+			internal set { releaseDate = value; }
 		}
 
 		public string Format
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return format; }
+			internal set { format = value; }
 		}
-
 		#endregion
 
 		#region IMetadata Members
-
 		public System.Collections.Generic.IList<IMetadataIdentifier> MetadataIdentifiers
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return metadataIdentifiers; }
 		}
 
 		public Uri Path
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return path; }
 		}
 
 		public string Name
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return name; }
+			internal set { name = value; }
 		}
-
 		#endregion
 
 		#region IRecord Members
@@ -200,12 +222,14 @@ namespace Alexandria.MusicBrainz
 
 		public void Save()
 		{
-			broker.SaveRecord(this);
+			if (broker != null)
+				broker.SaveRecord(this);
 		}
 
 		public void Delete()
 		{
-			broker.DeleteRecord(this);
+			if (broker != null)
+				broker.DeleteRecord(this);
 		}
 		#endregion
 	}
