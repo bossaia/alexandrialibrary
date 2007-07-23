@@ -17,6 +17,8 @@ namespace Alexandria.Fmod
 		private bool enabled;
 		private int numberOfChannels = 10;
 		private uint streamBufferSize = 65536;
+		private OutputType outputType = OutputType.AutoDetect;
+		private SpeakerMode speakerMode = SpeakerMode.Stereo;
 		#endregion
 	
 		#region IPluginSettings Members
@@ -37,11 +39,25 @@ namespace Alexandria.Fmod
 		}
 		
 		[CLSCompliant(false)]
-		[PluginSetting(PluginSettingType.Integer, "The size of the memory buffer used to store a streaming sound")]
+		[PluginSetting(PluginSettingType.Integer, "The size in bytes of the memory buffer used for streaming playback")]
 		public uint StreamBufferSize
 		{
 			get { return streamBufferSize; }
 			set { streamBufferSize = value; }
+		}
+		
+		[PluginSetting(PluginSettingType.Enumeration, "The output system to use as a hardware abstraction layer")]
+		public OutputType OutputType
+		{
+			get { return outputType; }
+			set { outputType = value; }
+		}
+		
+		[PluginSetting(PluginSettingType.Enumeration, "The speaker mode to use for outputting sound")]
+		public SpeakerMode SpeakerMode
+		{
+			get { return speakerMode; }
+			set { speakerMode = value; }
 		}
 		#endregion
 	}

@@ -247,7 +247,7 @@ namespace Alexandria.Fmod
 		/// <summary>
 		/// [PSP] Native hardware output.
 		/// </summary>
-		Psp,
+		Psp
 		
 		// NOTE: this value was defined in the reference API but I have
 		// chosen to exclude it because it is deprecated by C# best practices
@@ -382,13 +382,13 @@ namespace Alexandria.Fmod
 	*/
 	public enum SpeakerMode
 	{
-		Raw,           /* There is no specific SpeakerMode.  Sound channels are mapped in order of input to output.  See remarks for more information. */
-		Mono,          /* The Speakers are monaural. */
-		Stereo,        /* The Speakers are stereo (default value). */
-		Surround4Point1,      /* 4.1 Speaker setup.  This includes front, center, left, rear and a subwoofer. Also known as a "quad" Speaker configuration. */
-		Surround5Point1,      /* 5.1 Speaker setup.  This includes front, center, left, rear left, rear right and a subwoofer. */
-		Surround7Point1,      /* 7.1 Speaker setup.  This includes front, center, left, rear left, rear right, side left, side right and a subwoofer. */
-		ProLogic    /* Stereo output, but data is encoded in a way that is picked up by a Prologic/Prologic2 decoder and split into a 5.1 Speaker setup. */
+		Raw,				/* There is no specific SpeakerMode.  Sound channels are mapped in order of input to output.  See remarks for more information. */
+		Mono,				/* The Speakers are monaural. */
+		Stereo,				/* The Speakers are stereo (default value). */
+		Surround4Point1,	/* 4.1 Speaker setup.  This includes front, center, left, rear and a subwoofer. Also known as a "quad" Speaker configuration. */
+		Surround5Point1,	/* 5.1 Speaker setup.  This includes front, center, left, rear left, rear right and a subwoofer. */
+		Surround7Point1,	/* 7.1 Speaker setup.  This includes front, center, left, rear left, rear right, side left, side right and a subwoofer. */
+		ProLogic			/* Stereo output, but data is encoded in a way that is picked up by a Prologic/Prologic2 decoder and split into a 5.1 Speaker setup. */
 	}
 	#endregion
 
@@ -983,7 +983,7 @@ namespace Alexandria.Fmod
 		Flange,             /* This unit produces a flange effect on the sound. */
 		Distortion,         /* This unit distorts the sound. */
 		Normalize,          /* This unit normalizes or amplifies the sound to a certain level. */
-		ParameterEqualizer,     /* This unit attenuates or amplifies a selected frequency range. */
+		ParameterEqualizer, /* This unit attenuates or amplifies a selected frequency range. */
 		PitchShift,         /* This unit bends the pitch of a sound without changing the speed of playback. */
 		Chorus,             /* This unit produces a chorus effect on the sound. */
 		Reverb,             /* This unit produces a reverb effect on the sound. */

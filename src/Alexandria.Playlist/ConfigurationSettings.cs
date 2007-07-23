@@ -14,6 +14,7 @@ namespace Alexandria.Playlist
 	
 		#region Private Fields
 		private bool enabled;
+		private PlaylistFormat defaultPlaylistFormat;
 		#endregion
 	
 		#region IPluginSettings Members
@@ -22,6 +23,15 @@ namespace Alexandria.Playlist
 		{
 			get { return enabled; }
 			set { enabled = value; }
+		}
+		#endregion
+		
+		#region Public Properties
+		[PluginSetting(PluginSettingType.Enumeration, "The default format to save new playlists in")]
+		public PlaylistFormat DefaultPlaylistFormat
+		{
+			get { return defaultPlaylistFormat; }
+			set { defaultPlaylistFormat = value; }
 		}
 		#endregion
 	}

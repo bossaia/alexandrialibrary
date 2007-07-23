@@ -184,6 +184,18 @@ namespace Alexandria.Client
 		{
 			get { return tracks; }
 		}
+		
+		public bool IsMuted
+		{
+			get
+			{
+				if (audio != null)
+				{
+					return audio.IsMuted;
+				}
+				else return false;
+			}
+		}
 		#endregion
 		
 		#region Public Methods
@@ -339,7 +351,15 @@ namespace Alexandria.Client
 					audio = null;
 				}
 			}
-		}		
+		}
+		
+		public void Mute()
+		{
+			if (audio != null)
+			{
+				audio.IsMuted = !audio.IsMuted;
+			}
+		}
 		#endregion
 	}
 }
