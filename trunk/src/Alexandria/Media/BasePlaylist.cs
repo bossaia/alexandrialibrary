@@ -35,30 +35,27 @@ namespace Alexandria.Media
 {
 	public class BasePlaylist : IPlaylist
 	{
-		#region Private Fields
-		private string path;
-		private string name;
-		private string version;
-		//private List<IMedia> resources;
-		
-		private Guid id = Guid.NewGuid();
-		#endregion				
-		
 		#region Constructors
-		protected BasePlaylist(string path)
+		protected BasePlaylist(Uri path)
 		{
 			this.path = path;
-			//files = new List<MediaFile>();
-			
-			//Load();
 		}
 		
-		protected BasePlaylist(string path, string name, string version) : this(path)
+		protected BasePlaylist(Uri path, string name, Version version) : this(path)
 		{
 			this.name = name;
 			this.version = version;
 		}
 		#endregion
+
+		#region Private Fields
+		private Uri path;
+		private IMediaFormat format;
+		private string name;
+		private Version version;
+		private IList<IPlaylistItem> items = new List<IPlaylistItem>();
+		private Guid id = Guid.NewGuid();
+		#endregion				
 		
 		#region Public Properties
 		public string Name
@@ -67,7 +64,7 @@ namespace Alexandria.Media
 			protected set {name = value;}
 		}
 		
-		public string Version
+		public Version Version
 		{
 			get {return version;}
 			protected set {version = value;}
@@ -88,19 +85,19 @@ namespace Alexandria.Media
 
 		public Uri Path
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return path; }
 		}
 
 		public IMediaFormat Format
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return format; }
 		}
 		#endregion
 
 		#region IMediaPlaylist Members
 		public IList<IPlaylistItem> Items
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return items; }
 		}
 		#endregion
 	}

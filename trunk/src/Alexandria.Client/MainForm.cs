@@ -232,6 +232,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region LoadDefaultUser
 		private void LoadDefaultUser()
 		{
+			controller = new QueueController(this.QueueListView, broker);
+		
 			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
 			IUser user = broker.LookupRecord<IUser>(userId);
 			if (user != null)
@@ -239,7 +241,6 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				//TODO: allow the default catalog to be user-defined
 				if (user.Catalogs != null && user.Catalogs.Count > 0)
 				{
-					controller = new QueueController(this.QueueListView, broker);
 					controller.LoadTracks(user.Catalogs[0].Tracks);
 				}
 			}
@@ -372,7 +373,14 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		
 		private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.Open() here", "Open");
+			DialogResult result = FileOpenDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				if (controller != null)
+				{
+					controller.OpenFile(FileOpenDialog.FileName);
+				}
+			}
 		}
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)

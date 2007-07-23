@@ -36,7 +36,7 @@ namespace Alexandria.Playlist
 	public class XspPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public XspPlaylist(string path) : base(path)
+		public XspPlaylist(Uri path) : base(path)
 		{
 		}
 		#endregion
@@ -71,7 +71,13 @@ namespace Alexandria.Playlist
 					}
 					else if (String.Compare(playlistAttrib.Name, ATTRIB_VERSION, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 					{
-						this.Version = playlistAttrib.Value;
+						string version = playlistAttrib.Value;
+						if (!string.IsNullOrEmpty(version))
+						{
+							if (version.Length == 1)
+								version += ".0.0.0";
+							this.Version = new Version(version);
+						}
 					}
 				}
 			}
@@ -129,6 +135,14 @@ namespace Alexandria.Playlist
 
 						if (location != null)
 						{
+							TimeSpan duration = TimeSpan.Zero;
+							if (!string.IsNullOrEmpty(length))
+							{
+								duration = TimeSpan.Parse(length);
+							}
+							
+							PlaylistItem item = new PlaylistItem(new Uri(location), duration);
+							Items.Add(item);
 							/*
 							if (location.StartsWith(PREFIX_FILE, true, System.Globalization.CultureInfo.CurrentCulture))
 							{
@@ -148,7 +162,7 @@ namespace Alexandria.Playlist
 		}
 		#endregion
 
-		#region Protected Methods
+		#region Public Methods
 		public override void Load()
 		{
 			xml = new XmlDocument();
