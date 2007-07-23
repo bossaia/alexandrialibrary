@@ -44,6 +44,7 @@ namespace Alexandria.Client
 			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -108,7 +109,6 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -220,6 +220,11 @@ namespace Alexandria.Client
 			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
 			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
 			// 
+			// pluginsToolStripMenuItem
+			// 
+			this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
+			resources.ApplyResources(this.pluginsToolStripMenuItem, "pluginsToolStripMenuItem");
+			// 
 			// HelpToolStripMenuItem
 			// 
 			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -262,10 +267,6 @@ namespace Alexandria.Client
 			// 
 			this.StreamingStatus.Name = "StreamingStatus";
 			resources.ApplyResources(this.StreamingStatus, "StreamingStatus");
-			// 
-			// FileOpenDialog
-			// 
-			this.FileOpenDialog.FileName = "openFileDialog1";
 			// 
 			// NextButton
 			// 
@@ -670,11 +671,6 @@ namespace Alexandria.Client
 			// TrackFormatColumn
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
-			// 
-			// pluginsToolStripMenuItem
-			// 
-			this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
-			resources.ApplyResources(this.pluginsToolStripMenuItem, "pluginsToolStripMenuItem");
 			// 
 			// MainForm
 			// 

@@ -35,6 +35,8 @@ using Alexandria.Media;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
+using Alexandria.Playlist;
+using Alexandria.TagLib;
 
 using Alexandria.Mp3Tunes;
 
@@ -67,6 +69,8 @@ namespace Alexandria.Client
 		private IList<IAudioTrack> tracks;
 		
 		MusicLocker locker;
+		PlaylistFactory playlistFactory = new PlaylistFactory();
+		TagLibEngine tagLibEngine = new TagLibEngine();
 		#endregion
 
 		#region Private Methods
@@ -97,27 +101,7 @@ namespace Alexandria.Client
 				return date.Year.ToString();
 			else return string.Format("{0:d}", date);
 		}
-		
-		private void LoadTrack(IAudioTrack track)
-		{
-			string[] data = new string[8];
-			data[0] = track.TrackNumber.ToString();
-			data[1] = track.Name;
-			data[2] = track.Artist;
-			data[3] = track.Album;
-			data[4] = string.Format("{0}:{1:00}", track.Duration.Minutes, track.Duration.Seconds);
-			data[5] = GetDateString(track.ReleaseDate);
-			data[6] = track.Path.ToString();
-			data[7] = track.Format.ToLowerInvariant();
-
-			ListViewItem item = new ListViewItem(data);
-			item.Tag = track.Id;
-			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
-				//item.Tag = track.MetadataIdentifiers[0];
-			
-			this.queueListView.Items.Add(item);
-		}
-		
+				
 		private IList<IAudioTrack> GetMp3TunesTracks(bool ignoreCache)
 		{
 			try
@@ -177,6 +161,46 @@ namespace Alexandria.Client
 			}
 			return null;
 		}
+		
+		private void LoadTrackFromPath(string path)
+		{
+			LoadTrackFromPath(new Uri(path));
+		}
+		
+		private void LoadTrackFromPath(Uri path)
+		{
+			if (path != null)
+			{
+				try
+				{
+					IAudioTrack track = tagLibEngine.GetAudioTrack(path);
+					if (track != null)
+						LoadTrack(track);
+				}
+				catch (System.IO.FileNotFoundException)
+				{
+					MessageBox.Show(string.Format("The file does not exist: {0}", path.LocalPath), "Error Loading Track");
+				}
+			}
+			else MessageBox.Show("The file path is not defined", "Error Loading Track");
+		}
+		
+		private bool IsFormat(string path, string format)
+		{
+			if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(format))
+			{
+				if (format.Contains(","))
+				{
+					string[] formats = format.Split(',');
+					foreach(string subFormat in formats)
+						if (path.EndsWith(subFormat)) return true;
+					return false;
+				}
+				else
+					return path.EndsWith(format, StringComparison.InvariantCultureIgnoreCase);
+			}
+			return false;
+		}
 		#endregion
 		
 		#region Public Properties
@@ -199,11 +223,49 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Public Methods
+		public void OpenFile(string path)
+		{
+			if (!string.IsNullOrEmpty(path))
+			{
+				if (IsFormat(path, "xspf,m3u"))
+				{
+					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
+					playlist.Load();
+					foreach(IPlaylistItem item in playlist.Items)
+						LoadTrackFromPath(item.Path);
+				}
+				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
+				{
+					LoadTrackFromPath(path);
+				}
+			}
+		}
+		
+		public void LoadTrack(IAudioTrack track)
+		{
+			string[] data = new string[8];
+			data[0] = track.TrackNumber.ToString();
+			data[1] = track.Name;
+			data[2] = track.Artist;
+			data[3] = track.Album;
+			data[4] = string.Format("{0}:{1:00}", track.Duration.Minutes, track.Duration.Seconds);
+			data[5] = GetDateString(track.ReleaseDate);
+			data[6] = track.Path.LocalPath;
+			data[7] = track.Format.ToLowerInvariant();
+
+			ListViewItem item = new ListViewItem(data);
+			item.Tag = track;
+			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
+			//item.Tag = track.MetadataIdentifiers[0];
+
+			this.queueListView.Items.Add(item);
+		}
+
 		public void LoadTracks()
 		{
 			IList<IAudioTrack> tracks = GetMp3TunesTracks(false);
 			LoadTracks(tracks);
-		}
+		}		
 		
 		public void LoadTracks(IList<IAudioTrack> tracks)
 		{
@@ -225,11 +287,12 @@ namespace Alexandria.Client
 				selectedItem = queueListView.SelectedItems[0];
 				if (selectedItem.Tag != null)
 				{
-					Guid id = (Guid)selectedItem.Tag;
-					selectedTrack = broker.LookupRecord<IAudioTrack>(id);
+					//Guid id = (Guid)selectedItem.Tag;
+					//selectedTrack = broker.LookupRecord<IAudioTrack>(id);
+					selectedTrack = (IAudioTrack)selectedItem.Tag;
 					if (selectedTrack.Path.IsFile)
 					{
-						audio = new Fmod.LocalSound(selectedTrack.Path.ToString());
+						audio = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
 					}
 					else
 					{

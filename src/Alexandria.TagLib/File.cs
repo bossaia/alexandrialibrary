@@ -639,6 +639,9 @@ namespace Alexandria.TagLib
 
 		public static File Create(string path, string mimeType, ReadStyle style)
 		{
+			if (!System.IO.File.Exists(path))
+				throw new System.IO.FileNotFoundException(path);
+		
 			foreach (FileTypeResolver resolver in fileTypeResolvers)
 			{
 				File file = resolver(path, style);

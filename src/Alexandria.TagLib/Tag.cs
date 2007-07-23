@@ -24,11 +24,60 @@ using System;
 using System.Collections.Generic;
 using Alexandria;
 using Alexandria.Media;
+using Alexandria.Metadata;
+using Alexandria.Persistence;
 
 namespace Alexandria.TagLib
 {
-	public class Tag //: IAudioTag
+	public class Tag : IAudioTrack
 	{
+		#region Constructors
+		public Tag()
+		{
+		}
+		#endregion
+		
+		#region Private Fields
+		private Guid id;
+		private string name;
+		private IRecord parent;
+		private IPersistenceBroker broker;
+		private Uri path;
+		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
+		
+		private string album;
+		private IList<string> artists = new List<string>();
+		private TimeSpan duration;
+		private DateTime releaseDate;
+		private string format;
+
+		private IList<string> performers = new List<string>();
+		private IList<string> composers = new List<string>();
+		private IList<string> genres = new List<string>();
+		private string comment;
+		private uint year;
+		private uint track;
+		private uint trackCount;
+		private uint disc;
+		private uint discCount;
+		
+		private IList<IImage> pictures = new List<IImage>();		
+		#endregion
+		
+		#region Private Static Methods
+		private static string FirstInGroup(IList<string> group)
+		{
+			return (group == null || group.Count == 0) ? null : group[0];
+		}
+
+		private static string JoinGroup(IList<string> group)
+		{
+			return new StringCollection(group).ToString(", ");
+		}		
+		#endregion
+		
+		#region OLD CODE
+		/*
 		public virtual string Title { get {return null;} set {} }
 		public virtual IList<string> Artists { get {return null;} set {} }
 		public virtual IList<string> Performers { get { return null; } set { } }		
@@ -36,14 +85,23 @@ namespace Alexandria.TagLib
 		public virtual string Album { get {return null;} set {} }
 		public virtual string Comment { get {return null;} set {} }
 		public virtual IList<string> Genres { get { return null; } set { } }
+		
 		[CLSCompliant(false)]
-		public virtual uint      Year       {get {return 0;}    set {}}
+		public virtual uint Year {get {return 0;}    set {}}
+		
 		[CLSCompliant(false)]
-		public virtual uint      Track      {get {return 0;}    set {}}
+		public virtual uint Track
+		{
+			get {return 0;}
+			set {}
+		}
+		
 		[CLSCompliant(false)]
 		public virtual uint      TrackCount {get {return 0;}    set {}}
+		
 		[CLSCompliant(false)]
 		public virtual uint      Disc       {get {return 0;}    set {}}
+		
 		[CLSCompliant(false)]
 		public virtual uint      DiscCount  {get {return 0;}    set {}}
       
@@ -58,62 +116,274 @@ namespace Alexandria.TagLib
 		public string JoinedPerformers { get { return JoinGroup(Performers); } }
 		public string JoinedComposers { get { return JoinGroup(Composers); } }
 		public string JoinedGenres { get { return JoinGroup(Genres); } }
-
-		private static string FirstInGroup(IList<string> group)
+		*/
+		#endregion
+		
+		#region Public Properties
+		public virtual string Title
 		{
-			return group == null || group.Count == 0 ? null : group[0];
+			get { return name; }
+			set { name = value; }
 		}
-      
-		private static string JoinGroup(IList<string> group)
+		
+		public virtual IList<string> Artists
 		{
-			return new StringCollection(group).ToString(", ");
+			get { return artists; }
+			set { artists = value; }
 		}
 
-      public virtual bool IsEmpty
-      {
-         get
-         {
-            return ((Title == null || Title.Length == 0) &&
+		public virtual IList<string> Performers
+		{
+			get { return performers; }
+			set { performers = value; }
+		}
+
+		public virtual IList<string> Composers
+		{
+			get { return composers; }
+			set { composers = value; }
+		}
+
+		public virtual IList<string> Genres
+		{
+			get { return genres; }
+			set { genres = value; }
+		}
+
+		public virtual IList<IImage> Pictures
+		{
+			get { return pictures; }
+			set { pictures = value; }
+		}
+
+		public virtual string Comment
+		{
+			get { return comment; }
+			set { comment = value; }
+		}
+
+		public string FirstArtist
+		{
+			get { return FirstInGroup(Artists); }
+		}
+		
+		public string FirstPerformer
+		{
+			get { return FirstInGroup(Performers); }
+		}
+		
+		public string FirstComposer
+		{
+			get { return FirstInGroup(Composers); }
+		}
+		
+		public string FirstGenre
+		{
+			get { return FirstInGroup(Genres); }
+		}
+
+		public string JoinedArtists
+		{
+			get { return JoinGroup(Artists); }
+		}
+		
+		public string JoinedPerformers
+		{
+			get { return JoinGroup(Performers); }
+		}
+		
+		public string JoinedComposers
+		{
+			get { return JoinGroup(Composers); }
+		}
+		
+		public string JoinedGenres
+		{
+			get { return JoinGroup(Genres); }
+		}
+		
+		[CLSCompliant(false)]
+		public virtual uint Year
+		{
+			get { return year; }
+			set { year = value; }
+		}
+
+		[CLSCompliant(false)]
+		public virtual uint Track
+		{
+			get { return track; }
+			set { track = value; }
+		}
+
+		[CLSCompliant(false)]
+		public virtual uint TrackCount
+		{
+			get { return trackCount; }
+			set { trackCount = value; }
+		}
+
+		[CLSCompliant(false)]
+		public virtual uint Disc
+		{
+			get { return disc; }
+			set { disc = value; }
+		}
+
+		[CLSCompliant(false)]
+		public virtual uint DiscCount
+		{
+			get { return discCount; }
+			set { discCount = value; }
+		}
+		
+		public virtual bool IsEmpty
+		{
+			get
+			{
+				return ((Title == null || Title.Length == 0) &&
 					(Artists == null || Artists.Count == 0) &&
 					(Performers == null || Performers.Count == 0) &&
 					(Composers == null || Composers.Count == 0) &&
-                    (Album == null || Album.Length == 0) &&
-                    (Comment == null || Comment.Length == 0) &&
+					(Album == null || Album.Length == 0) &&
+					(Comment == null || Comment.Length == 0) &&
 					(Genres == null || Genres.Count == 0) &&
-                    Year == 0 &&
-                    Track == 0 &&
-                    TrackCount == 0 &&
-                    Disc == 0 &&
-                    DiscCount == 0);
-         }
-      }
+					Year == 0 &&
+					Track == 0 &&
+					TrackCount == 0 &&
+					Disc == 0 &&
+					DiscCount == 0);
+			}
+		}
+		#endregion
       
-      public static void Duplicate (Tag source, Tag target, bool overwrite)
-      {
-         if (overwrite || target.Title == null || target.Title.Length == 0)
-            target.Title = source.Title;
-		 if (overwrite || target.Artists == null || target.Artists.Count == 0)
-            target.Artists = source.Artists;
-		 if (overwrite || target.Performers == null || target.Performers.Count == 0)
-            target.Performers = source.Performers;
-		 if (overwrite || target.Composers == null || target.Composers.Count == 0)
-            target.Composers = source.Composers;
-         if (overwrite || target.Album == null || target.Album.Length == 0)
-            target.Album = source.Album;
-         if (overwrite || target.Comment == null || target.Comment.Length == 0)
-            target.Comment = source.Comment;
-		 if (overwrite || target.Genres == null || target.Genres.Count == 0)
-            target.Genres = source.Genres;
-         if (overwrite || target.Year == 0)
-            target.Year = source.Year;
-         if (overwrite || target.Track == 0)
-            target.Track = source.Track;
-         if (overwrite || target.TrackCount == 0)
-            target.TrackCount = source.TrackCount;
-         if (overwrite || target.Disc == 0)
-            target.Disc = source.Disc;
-         if (overwrite || target.DiscCount == 0)
-            target.DiscCount = source.DiscCount;
-      }
-   }
+		#region Public Static Methods
+		public static void Duplicate(Tag source, Tag target, bool overwrite)
+		{
+			if (overwrite || target.Title == null || target.Title.Length == 0)
+				target.Title = source.Title;
+			if (overwrite || target.Artists == null || target.Artists.Count == 0)
+				target.Artists = source.Artists;
+			if (overwrite || target.Performers == null || target.Performers.Count == 0)
+				target.Performers = source.Performers;
+			if (overwrite || target.Composers == null || target.Composers.Count == 0)
+				target.Composers = source.Composers;
+			if (overwrite || target.Album == null || target.Album.Length == 0)
+				target.Album = source.Album;
+			if (overwrite || target.Comment == null || target.Comment.Length == 0)
+				target.Comment = source.Comment;
+			if (overwrite || target.Genres == null || target.Genres.Count == 0)
+				target.Genres = source.Genres;
+			if (overwrite || target.Year == 0)
+				target.Year = source.Year;
+			if (overwrite || target.Track == 0)
+				target.Track = source.Track;
+			if (overwrite || target.TrackCount == 0)
+				target.TrackCount = source.TrackCount;
+			if (overwrite || target.Disc == 0)
+				target.Disc = source.Disc;
+			if (overwrite || target.DiscCount == 0)
+				target.DiscCount = source.DiscCount;
+		}
+		#endregion
+
+		#region IAudioTrack Members
+		public virtual string Album
+		{
+			get { return album; }
+			set { album = value; }
+		}
+		
+		public virtual string Artist
+		{
+			get { return FirstArtist; }
+		}
+
+		public virtual TimeSpan Duration
+		{
+			get { return duration; }
+			set { duration = value; }
+		}
+
+		public virtual DateTime ReleaseDate
+		{
+			get
+			{
+				int year = 1900;
+				if (Year > 0)
+					year = (int)Year;
+				return new DateTime(year, 1, 1);
+			}
+			set { releaseDate = value; }
+		}
+
+		public virtual int TrackNumber
+		{
+			get { return (int)Track; }
+			set { Track = (uint)value; }
+		}
+
+		public virtual string Format
+		{
+			get { return format; }
+			internal set { format = value; }
+		}
+		#endregion
+
+		#region IMetadata Members
+		public IList<IMetadataIdentifier> MetadataIdentifiers
+		{
+			get { return metadataIdentifiers; }
+		}
+
+		public Uri Path
+		{
+			get { return path; }
+			internal set { path = value; }
+		}
+
+		public virtual string Name
+		{
+			get { return Title; }
+			protected set { Title = value; }
+		}
+		#endregion
+
+		#region IRecord Members
+		public Guid Id
+		{
+			get { return id; }
+			protected set { id = value; }
+		}
+
+		public IRecord Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+
+		public IPersistenceBroker PersistenceBroker
+		{
+			get { return broker; }
+			set { broker = value; }
+		}
+
+		public bool IsProxy
+		{
+			get { return false; }
+		}
+
+		void IRecord.Save()
+		{
+			if (broker != null)
+				broker.SaveRecord(this);
+		}
+
+		void IRecord.Delete()
+		{
+			if (broker != null)
+				broker.DeleteRecord(this);
+		}
+		#endregion
+  }
 }

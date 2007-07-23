@@ -34,5 +34,6 @@ namespace Alexandria.Media
 	public interface IPlaylist : IMedia
 	{
 		IList<IPlaylistItem> Items { get; }
+		void Load();
 	}
 }

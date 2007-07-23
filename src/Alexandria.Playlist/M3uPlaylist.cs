@@ -35,7 +35,7 @@ namespace Alexandria.Playlist
 	public class M3uPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public M3uPlaylist(string path) : base(path)
+		public M3uPlaylist(Uri path) : base(path)
 		{
 
 		}
@@ -44,22 +44,17 @@ namespace Alexandria.Playlist
 		#region Public Methods
 		public override void Load()
 		{
-			FileInfo playlistInfo = new FileInfo(Path.ToString());
+			FileInfo playlistInfo = new FileInfo(Path.LocalPath);
 			StreamReader reader = playlistInfo.OpenText();
 			while (!reader.EndOfStream)
 			{
-				string filePath = reader.ReadLine();
-				if (filePath != null)
+				string fileName = reader.ReadLine();
+				if (!string.IsNullOrEmpty(fileName))
 				{
-					//MediaFile file = MediaFile.Load(playlistInfo, filePath);
-					//if (file != null)
-					//{
-					//Files.Add(file);
-					//}
+					IPlaylistItem item = new PlaylistItem(new Uri(fileName));
+					Items.Add(item);
 				}
-
 			}
-
 		}
 		#endregion
 	}

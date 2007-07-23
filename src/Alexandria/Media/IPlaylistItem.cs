@@ -33,8 +33,8 @@ namespace Alexandria.Media
 {
 	public interface IPlaylistItem
 	{
-		string Name { get; }
 		Uri Path { get;  }
 		TimeSpan Duration { get; }
+		string Name { get; }
 	}
 }
