@@ -378,18 +378,25 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
 			//MessageBox.Show("call controller.Play() here", "Play");
-			controller.Play();
+			if (controller != null)
+				controller.Play();
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
 			//MessageBox.Show("call controller.Stop() here", "Stop");
-			controller.Stop();
+			if (controller != null)
+				controller.Stop();
 		}
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.Mute() here", "Mute");
+			//MessageBox.Show("call controller.Mute() here", "Mute");
+			if (controller != null)
+			{
+				controller.Mute();
+				VolumeTrackBar.Enabled = !controller.IsMuted;
+			}
 		}
 
 		private void PreviousButton_Click(object sender, EventArgs e)

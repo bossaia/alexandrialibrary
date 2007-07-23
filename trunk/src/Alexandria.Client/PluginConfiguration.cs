@@ -35,6 +35,33 @@ namespace Alexandria.Client
 				if (textBox.Enabled)
 					property.SetValue(configurationMap.Settings, textBox.Text, null);
 			}
+			else if (control.GetType() == typeof(MaskedTextBox))
+			{
+				MaskedTextBox textBox = (MaskedTextBox)control;
+				PropertyInfo property = (PropertyInfo)textBox.Tag;
+				object value = null;
+				if (property.PropertyType == typeof(short))
+					value = Convert.ToInt16(textBox.Text);
+				else if (property.PropertyType == typeof(ushort))
+					value = Convert.ToUInt16(textBox.Text);
+				else if (property.PropertyType == typeof(int))
+					value = Convert.ToInt32(textBox.Text);
+				else if (property.PropertyType == typeof(uint))
+					value = Convert.ToUInt32(textBox.Text);
+				else if (property.PropertyType == typeof(long))
+					value = Convert.ToInt64(textBox.Text);
+				else if (property.PropertyType == typeof(ulong))
+					value = Convert.ToUInt64(textBox.Text);
+				else if (property.PropertyType == typeof(float))
+					value = Convert.ToSingle(textBox.Text);
+				else if (property.PropertyType == typeof(double))
+					value = Convert.ToDouble(textBox.Text);
+				else if (property.PropertyType == typeof(decimal))
+					value = Convert.ToDecimal(textBox.Text);
+				
+				if (textBox.Enabled)
+					property.SetValue(configurationMap.Settings, value, null);
+			}
 			else if (control.GetType() == typeof(ComboBox))
 			{
 				ComboBox comboBox = (ComboBox)control;
