@@ -52,7 +52,7 @@ using Alexandria.MediaInfo;
 using Alexandria.Mp3Tunes;
 using Alexandria.MusicBrainz;
 using Alexandria.MusicDns;
-using Alexandria.Playlists;
+using Alexandria.Playlist;
 using Alexandria.SQLite;
 using Alexandria.TagLib;
 

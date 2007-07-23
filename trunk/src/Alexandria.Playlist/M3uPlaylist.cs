@@ -28,9 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using Alexandria.Media;
 
-namespace Alexandria.Media.Playlists
+namespace Alexandria.Playlist
 {
 	public class M3uPlaylist : BasePlaylist
 	{
