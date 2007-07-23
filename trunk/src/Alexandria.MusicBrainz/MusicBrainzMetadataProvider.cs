@@ -38,6 +38,12 @@ namespace Alexandria.MusicBrainz
 {
 	public class MusicBrainzMetadataProvider
 	{
+		#region Constructors
+		public MusicBrainzMetadataProvider()
+		{
+		}
+		#endregion
+		
 		#region Private Constant Fields
 		private const int CDINDEX_ID_LEN = 28;
 		#endregion
@@ -249,7 +255,6 @@ namespace Alexandria.MusicBrainz
 					
 					using (SimpleDisc simpleDisc = new SimpleDisc(driveName))
 					{
-
 						// Actually ask the MB server for metadata. As soon as a SimpleDisc is instantiated,
 						// a disc layout is created based on reading the CD TOC directly. This query updates
 						// that layout. For applications where UI must be responsive, run this query in
@@ -268,6 +273,13 @@ namespace Alexandria.MusicBrainz
 						Debug.WriteLine("Amazon ASIN   : " + simpleDisc.AmazonAsin);
 						Debug.WriteLine("Release Date  : " + simpleDisc.ReleaseDate);
 						Debug.WriteLine("");
+
+						album = new SimpleAlbum(Guid.NewGuid(), path, simpleDisc.AlbumName, simpleDisc.ArtistName, simpleDisc.ReleaseDate);
+						foreach(SimpleTrack track in simpleDisc.Tracks)
+						{
+							track.Parent = album;
+							album.Tracks.Add(track);
+						}
 
 						/*
 						AlexandriaOrg.Alexandria.Data.Artist artist = new AlexandriaOrg.Alexandria.Data.Artist();
@@ -317,12 +329,6 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#endregion
-	
-		#region Constructors
-		public MusicBrainzMetadataProvider() : base()
-		{
-		}
-		#endregion
 		
 		#region IAlbumFactory Members
 		public IAlbum GetAlbum(Uri path)
@@ -342,48 +348,6 @@ namespace Alexandria.MusicBrainz
 		{
 			return LookupAlbumById(id);
 		}
-		#endregion
-
-		#region IResource Members
-
-		public IMetadataIdentifier Id
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public Uri Path
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public IMediaFormat Format
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		#endregion
-
-		#region INamedResource Members
-
-		public string Name
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public Version Version
-		{
-			get { return new Version(); }
-		}
-
-		#endregion
-
-		#region IProxyResource Members
-
-		public void Load()
-		{
-			throw new Exception("The method or operation is not implemented.");
-		}
-
 		#endregion
 	}
 }

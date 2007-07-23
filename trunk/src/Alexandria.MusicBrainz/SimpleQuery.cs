@@ -79,9 +79,12 @@ namespace Alexandria.MusicBrainz
 				{
 					case "AlbumTrackResult":
 						client.Select(rdf.SelectLookupResultTrack);
-						track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+						//track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+						track.Name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 						track.Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-						track.Length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
+						int length = (client.GetResultInt(rdf.ExpressionTrackGetTrackDuration) / 1000);
+						track.Duration = new TimeSpan(0, 0, 0, 0, length);
+						//track.Length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
 						client.Select(rdf.SelectBack);
 
 						client.Select(rdf.SelectLookupResultAlbum, 1);
@@ -102,7 +105,8 @@ namespace Alexandria.MusicBrainz
 						if (client.Query(rdf.QueryGetTrackById, new string[] { client.GetId(track_id) }))
 						{
 							client.Select(rdf.SelectTrack, 1);
-							track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+							//track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+							track.Name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 							track.Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
 							track.TrackNumber = client.GetResultInt(rdf.ExpressionTrackGetTrackNumber);
 							track.Length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
