@@ -33,13 +33,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IAudio : IMedia
+	public interface ISubtitle : IMedia
 	{
-		int NumberOfBytes { get; }
-		int NumberOfSamples { get; }
-		int NumberOfChannels { get; }
-		int SampleRate { get; }
-		//IntPtr ReadData(uint length);
-		//void CleanupData(IntPtr buffer);
 	}
 }

@@ -193,13 +193,18 @@ namespace Alexandria.Client
 				{
 					string[] formats = format.Split(',');
 					foreach(string subFormat in formats)
-						if (path.EndsWith(subFormat)) return true;
+						if (path.EndsWith(subFormat, StringComparison.InvariantCultureIgnoreCase)) return true;
 					return false;
 				}
 				else
 					return path.EndsWith(format, StringComparison.InvariantCultureIgnoreCase);
 			}
 			return false;
+		}
+		
+		private string GetDurationString(TimeSpan duration)
+		{
+			return string.Format("{0}:{1:00}", Convert.ToInt32(Math.Truncate(duration.TotalMinutes)), Convert.ToInt32(Math.Truncate(duration.TotalSeconds % 60)));
 		}
 		#endregion
 		
@@ -248,7 +253,7 @@ namespace Alexandria.Client
 			data[1] = track.Name;
 			data[2] = track.Artist;
 			data[3] = track.Album;
-			data[4] = string.Format("{0}:{1:00}", track.Duration.Minutes, track.Duration.Seconds);
+			data[4] = GetDurationString(track.Duration);
 			data[5] = GetDateString(track.ReleaseDate);
 			data[6] = track.Path.LocalPath;
 			data[7] = track.Format.ToLowerInvariant();
@@ -316,6 +321,11 @@ namespace Alexandria.Client
 						}
 
 						audio = new Fmod.LocalSound(fileName);
+					}
+					
+					if (audio != null && audio.Duration != selectedTrack.Duration)
+					{
+						selectedItem.SubItems[4].Text = GetDurationString(audio.Duration);
 					}
 				}
 				else throw new ApplicationException("Could not load selected track: Id was undefined");

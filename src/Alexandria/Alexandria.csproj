@@ -45,9 +45,15 @@
     <Compile Include="Catalog\BaseCatalog.cs" />
     <Compile Include="Catalog\BaseUser.cs" />
     <Compile Include="Catalog\ICatalog.cs" />
+    <Compile Include="Catalog\ICatalogFile.cs" />
+    <Compile Include="Catalog\ICatalogItem.cs" />
     <Compile Include="Catalog\IUser.cs" />
+    <Compile Include="Media\BaseMediaFormat.cs" />
+    <Compile Include="Media\BitRateType.cs" />
+    <Compile Include="Media\CompressionType.cs" />
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
+    <Compile Include="Media\ICodec.cs" />
     <Compile Include="Media\IO\AudioStream.cs" />
     <Compile Include="Media\IO\BufferState.cs" />
     <Compile Include="Media\IO\IAudioStream.cs" />
@@ -57,9 +63,11 @@
     <Compile Include="Media\IO\NetworkState.cs" />
     <Compile Include="Media\IO\PlaybackState.cs" />
     <Compile Include="Media\IO\VideoStream.cs" />
+    <Compile Include="Media\ISubtitle.cs" />
     <Compile Include="Media\IVideo.cs" />
     <Compile Include="Media\MediaFactory.cs" />
     <Compile Include="Media\IMediaContainer.cs" />
+    <Compile Include="Media\MediaType.cs" />
     <Compile Include="Metadata\BaseAlbum.cs" />
     <Compile Include="Metadata\BaseArtist.cs" />
     <Compile Include="Metadata\BaseAudioTrack.cs" />

@@ -196,8 +196,8 @@ namespace Alexandria.TagLib
 
 		public byte this[int index]
 		{
-			get {return data[index];}
-			set {data[index] = value;}
+			get { return data[index]; }
+			set { data[index] = value; }
 		}
 
 		public int Count

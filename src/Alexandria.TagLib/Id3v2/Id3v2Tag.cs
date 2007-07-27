@@ -91,63 +91,70 @@ namespace Alexandria.TagLib
 		{
 			if (data != null)
 			{
-				int frameDataPosition = 0;
-				int frameDataLength = data.Count;
-
-				// check for extended header
-
-				if (header.ExtendedHeader)
+				try
 				{
-					if (ExtendedHeader == null)
-						extendedHeader = new Id3v2ExtendedHeader();
+					int frameDataPosition = 0;
+					int frameDataLength = data.Count;
 
-					ExtendedHeader.SetData(data);
+					// check for extended header
 
-					if (ExtendedHeader.Size <= data.Count)
+					if (header.ExtendedHeader)
 					{
-						frameDataPosition += (int)ExtendedHeader.Size;
-						frameDataLength -= (int)ExtendedHeader.Size;
+						if (ExtendedHeader == null)
+							extendedHeader = new Id3v2ExtendedHeader();
+
+						ExtendedHeader.SetData(data);
+
+						if (ExtendedHeader.Size <= data.Count)
+						{
+							frameDataPosition += (int)ExtendedHeader.Size;
+							frameDataLength -= (int)ExtendedHeader.Size;
+						}
+					}
+
+					// check for footer -- we don'type actually need to parse it, as it *must*
+					// contain the same data as the header, but we do need to account for its
+					// size.
+
+					if (header.FooterPresent && Id3v2Footer.Size <= frameDataLength)
+						frameDataLength -= (int)Id3v2Footer.Size;
+
+					// parse frames
+
+					// Make sure that there is at least enough room in the remaining frame data for
+					// a frame header.
+
+					while (frameDataPosition < frameDataLength - Id3v2FrameHeader.Size(header.MajorVersion))
+					{
+
+						// If the next data is position is 0, assume that we've hit the padding
+						// portion of the frame data.
+						if (data[frameDataPosition] == 0)
+						{
+							if (header.FooterPresent)
+								TagLibDebugger.Debug("Padding *and* a footer found.  This is not allowed by the spec.");
+
+							return;
+						}
+
+						Id3v2Frame frame = Id3v2FrameFactory.CreateFrame(data.Mid(frameDataPosition), header.MajorVersion);
+
+						if (frame == null)
+							return;
+
+						// Checks to make sure that frame parsed correctly.
+						if (frame.Size < 0)
+							return;
+
+						frameDataPosition += (int)(frame.Size + Id3v2FrameHeader.Size(header.MajorVersion));
+						// Only add frames with content so we don'type send out just we got in.
+						if (frame.Size > 0)
+							AddFrame(frame);
 					}
 				}
-
-				// check for footer -- we don'type actually need to parse it, as it *must*
-				// contain the same data as the header, but we do need to account for its
-				// size.
-
-				if (header.FooterPresent && Id3v2Footer.Size <= frameDataLength)
-					frameDataLength -= (int)Id3v2Footer.Size;
-
-				// parse frames
-
-				// Make sure that there is at least enough room in the remaining frame data for
-				// a frame header.
-
-				while (frameDataPosition < frameDataLength - Id3v2FrameHeader.Size(header.MajorVersion))
+				catch (Exception ex)
 				{
-
-					// If the next data is position is 0, assume that we've hit the padding
-					// portion of the frame data.
-					if (data[frameDataPosition] == 0)
-					{
-						if (header.FooterPresent)
-							TagLibDebugger.Debug("Padding *and* a footer found.  This is not allowed by the spec.");
-
-						return;
-					}
-
-					Id3v2Frame frame = Id3v2FrameFactory.CreateFrame(data.Mid(frameDataPosition), header.MajorVersion);
-
-					if (frame == null)
-						return;
-
-					// Checks to make sure that frame parsed correctly.
-					if (frame.Size < 0)
-						return;
-
-					frameDataPosition += (int)(frame.Size + Id3v2FrameHeader.Size(header.MajorVersion));
-					// Only add frames with content so we don'type send out just we got in.
-					if (frame.Size > 0)
-						AddFrame(frame);
+					throw new ApplicationException("There was an error parsing this ID3 tag", ex);
 				}
 			}
 			else throw new ArgumentNullException("data");

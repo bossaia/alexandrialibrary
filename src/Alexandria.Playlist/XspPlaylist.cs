@@ -36,7 +36,7 @@ namespace Alexandria.Playlist
 	public class XspPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public XspPlaylist(Uri path) : base(path)
+		public XspPlaylist(Uri path) : base(path, new XspfFormat())
 		{
 		}
 		#endregion

@@ -36,12 +36,13 @@ namespace Alexandria.Media
 	public class BasePlaylist : IPlaylist
 	{
 		#region Constructors
-		protected BasePlaylist(Uri path)
+		protected BasePlaylist(Uri path, IMediaFormat format)
 		{
 			this.path = path;
+			this.format = format;
 		}
 		
-		protected BasePlaylist(Uri path, string name, Version version) : this(path)
+		protected BasePlaylist(Uri path, IMediaFormat format, string name, Version version) : this(path, format)
 		{
 			this.name = name;
 			this.version = version;
