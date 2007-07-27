@@ -83,8 +83,13 @@ namespace Alexandria.TagLib
 
 			if (l.Count == 2)
 			{
-				description = l[0].ToString(textEncoding);
-				text = l[1].ToString(textEncoding);
+				if (l[0].Data != null && l[0].Data.Count > 0)
+					description = l[0].ToString(textEncoding);
+				else description = string.Empty;
+				
+				if (l[1].Data != null && l[1].Data.Count > 0)
+					text = l[1].ToString(textEncoding);
+				else text = string.Empty;
 			}
 		}
 		

@@ -95,14 +95,15 @@ namespace Alexandria.Fmod
 		private FmodSoundType fmodSoundType = FmodSoundType.Unknown;
 		private string name;
 		private string description;
-		private List<System.Net.Mime.ContentType> contentTypes = new List<System.Net.Mime.ContentType>();
+		private List<ContentType> contentTypes = new List<ContentType>();
 		private List<string> fileExtensions = new List<string>();
+		private List<ICodec> codecs = new List<ICodec>();
 		#endregion
 
 		#region IMediaFormat Members
-		public IList<System.Net.Mime.ContentType> ContentTypes
+		public string Name
 		{
-			get { return contentTypes; }
+			get { return name; }
 		}
 
 		public string Description
@@ -110,14 +111,19 @@ namespace Alexandria.Fmod
 			get { return description; }
 		}
 
+		public IList<ContentType> ContentTypes
+		{
+			get { return contentTypes; }
+		}
+
 		public IList<string> FileExtensions
 		{
 			get { return fileExtensions; }
 		}
 
-		public string Name
+		public IList<ICodec> Codecs
 		{
-			get { return name; }
+			get { return codecs; }
 		}
 		#endregion
 	}

@@ -38,6 +38,10 @@ namespace Alexandria.Media.IO
 		{
 			this.CanPlay = true;
 		}
+		
+		public AudioStream(IAudio audio) : this(audio.Path.LocalPath)
+		{
+		}
 		#endregion
 	
 		#region IAudioStream Members

@@ -29,6 +29,10 @@ namespace Alexandria.TagLib
 				
 				if (tagFile != null && !string.IsNullOrEmpty(tagFile.MimeType))
 				{
+					TimeSpan duration = TimeSpan.Zero;
+					if (tagFile.AudioProperties != null)
+						duration = tagFile.AudioProperties.Duration;
+				
 					System.Diagnostics.Debug.WriteLine("tagFile has data");
 					
 					//switch(resource.Format.ContentTypes[0].Name.ToLowerInvariant()) //file.Format.Mime.ToString())
@@ -99,6 +103,7 @@ namespace Alexandria.TagLib
 					if (tag != null)
 					{
 						tag.Path = new Uri(localPath);
+						tag.Duration = duration;
 					}
 				}
 				else

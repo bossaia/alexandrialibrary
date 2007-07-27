@@ -37,7 +37,8 @@ namespace Alexandria.Media
 		string Name { get; }
 		string Description { get; }
 		IList<ContentType> ContentTypes { get; }
-		IList<string> FileExtensions { get; }		
+		IList<string> FileExtensions { get; }
+		IList<ICodec> Codecs { get; }
 		//bool IsCompatibleWith(IMediaFormat other);
 	}
 }
