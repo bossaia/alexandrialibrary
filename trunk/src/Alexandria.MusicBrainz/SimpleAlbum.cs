@@ -31,6 +31,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
+using System.Text;
 using Alexandria;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
@@ -39,17 +40,9 @@ namespace Alexandria.MusicBrainz
 {
 	[Record("Album")]
 	[RecordType("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-    public class SimpleAlbum : IAlbum
+    internal class SimpleAlbum : IAlbum
     {
 		#region Constructors
-		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public SimpleAlbum(MusicBrainzClient client, string musicBrainzId, Uri path)
-		{
-			this.path = path;
-			Load(client, musicBrainzId);
-		}
-		
-		[Factory("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
 		public SimpleAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
 		{
 			this.id = id;
@@ -75,110 +68,29 @@ namespace Alexandria.MusicBrainz
         private string musicBrainzId;
         private string title;
         private string asin;
-        private Uri cover_art_url;
-        private bool various_artists;
-        //private DateTime release_date = DateTime.MinValue;
-        private SimpleArtist album_artist;
+        private Uri coverArtUrl;
+        private bool variousArtists;
+        private SimpleArtist albumArtist;
         private IList<IAudioTrack> tracks = new List<IAudioTrack>();
-        private Rdf rdf = new Rdf();
         #endregion
-        
-        #region Private Methods
-        //TODO: move this to an AlbumFactory class
-        private void Load(MusicBrainzClient client, string musicBrainzId)
-        {
-			System.Diagnostics.Debug.WriteLine("Parameter AlbumID=" + musicBrainzId);
-
-			client.QueryDepth = 4;
-			musicBrainzId = client.GetId(musicBrainzId);
-
-			System.Diagnostics.Debug.WriteLine("Client AlbumID=" + musicBrainzId);
-
-			bool query = client.Query(rdf.QueryGetAlbumById, new string[] { musicBrainzId });
-			bool select = client.Select(rdf.SelectAlbum, 1);
-
-			if (!query || !select)
-			{
-				string error = client.QueryError;
-				System.Diagnostics.Debug.WriteLine("query=" + query.ToString() + " select=" + select.ToString() + " error=" + error);
-				// could not fetch album
-				throw new AlexandriaException("Could not fetch album");
-			}
-
-			this.musicBrainzId = client.GetId(client.GetResultData(rdf.ExpressionAlbumGetAlbumId));
-			asin = client.GetResultData(rdf.ExpressionAlbumGetAmazonAsin);
-			cover_art_url = new Uri(client.GetResultData(rdf.ExpressionAlbumGetAmazonCoverArtUrl));
-			string artist_name = client.GetResultData(rdf.ExpressionAlbumGetArtistName);
-			string artistSortName = client.GetResultData(rdf.ExpressionAlbumGetArtistSortName);
-			string artistId = client.GetResultData(rdf.ExpressionAlbumGetAlbumArtistId);
-			if (artistId == rdf.IdVariousArtist) various_artists = true;
-			album_artist = new SimpleArtist(artistId, artist_name, artistSortName);
-
-			Console.WriteLine(artist_name);
-			title = client.GetResultData(rdf.ExpressionAlbumGetAlbumName);
-
-			int track_count = client.GetResultInt(rdf.ExpressionAlbumGetNumberTracks, 1);
-
-			if (track_count <= 0)
-			{
-				// Invalid track count from album query            
-				throw new AlexandriaException("Invalid track count from album query");
-			}
-
-			if (client.GetResultInt(rdf.ExpressionAlbumGetNumberReleaseDates) > 0)
-			{
-				client.Select(rdf.SelectReleaseDate, 1);
-				releaseDate = MusicBrainzUtility.ToDateTime(client.GetResultData(rdf.ExpressionReleaseGetDate));
-				client.Select(rdf.SelectBack);
-			}
-
-			tracks = new List<IAudioTrack>(track_count);//[track_count];
-
-			for (int i = 1; i <= tracks.Count; i++)
-			{
-				client.Select(rdf.SelectTrack, i);
-
-				string album = null; //TODO: figure out how to get album here
-				string artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-				string name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
-				int milliseconds = (client.GetResultInt(rdf.ExpressionTrackGetTrackDuration) / 1000);
-				TimeSpan duration = new TimeSpan(0, 0, 0, 0 , milliseconds);
-				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, i);
-				tracks.Add(track);
-
-				//tracks[i - 1] = new SimpleTrack(i, 0);
-				//tracks[i - 1].Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-				//tracks[i - 1].Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
-
-				//int length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
-				//tracks[i - 1].Length = length / 1000;
-
-				client.Select(rdf.SelectBack);
-			}
-
-			client.Select(rdf.SelectBack);
-        }
-        #endregion
-        
+                
         #region Public Methods
         public override string ToString()
         {
-            string ret = String.Empty;
+			StringBuilder builder = new StringBuilder();
+
+			builder.AppendFormat("ID:              {0}\n", MusicBrainzId);
+            builder.AppendFormat("Album Title:     {0}\n", Title);
+            builder.AppendFormat("Amazon ASIN:     {0}\n", Asin);
+            builder.AppendFormat("Cover Art:       {0}\n", CoverArtUrl);
+            builder.AppendFormat("Various Artists: {0}\n", VariousArtists);
+			builder.AppendFormat("Release Date:    {0}\n", ReleaseDate);
+            builder.Append("Tracks:\n");
             
-            ret += "ID:              " + MusicBrainzId + "\n";
-            ret += "Album Title:     " + Title + "\n";
-            ret += "Amazon ASIN:     " + Asin + "\n";
-            ret += "Cover Art:       " + CoverArtUrl + "\n";
-            ret += "Various Artists: " + VariousArtists + "\n";
-            ret += "Release Date:    " + ReleaseDate + "\n";
+            foreach(SimpleTrack track in tracks)
+                builder.AppendFormat("{0}\n", track);
             
-            ret += "Tracks:\n";
-            
-            foreach(SimpleTrack track in tracks) {
-                ret += track + "\n";
-            }
-            
-            return ret;
+            return builder.ToString();
         }
         #endregion
         
@@ -195,7 +107,7 @@ namespace Alexandria.MusicBrainz
         
         public SimpleArtist AlbumArtist
         {
-            get {return album_artist;}
+            get {return albumArtist;}
         }
         
         public string Asin
@@ -205,12 +117,13 @@ namespace Alexandria.MusicBrainz
         
         public Uri CoverArtUrl
         {
-            get {return cover_art_url;}
+            get {return coverArtUrl;}
         }
         
         public bool VariousArtists
         {
-            get {return various_artists;}
+            get { return variousArtists; }
+            set { variousArtists = value; }
         }
         
         public DateTime ReleaseDate

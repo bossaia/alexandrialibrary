@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SQLite Database Plugin")]
-[assembly: AssemblyDescription("Store catalog and media metadata information in a SQLite embedded database")]
+[assembly: AssemblyTitle("SQLite Database")]
+[assembly: AssemblyDescription("Store catalog and media metadata in an embedded SQLite database")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCompany("Telesophy Foundation")]
+[assembly: AssemblyProduct("Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

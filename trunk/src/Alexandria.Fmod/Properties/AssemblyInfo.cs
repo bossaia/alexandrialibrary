@@ -10,11 +10,11 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FMOD Sound System Plugin")]
+[assembly: AssemblyTitle("FMOD Sound System")]
 [assembly: AssemblyDescription("Supports playback of common digital audio formats (mp3, aac, wma, vorbis, flac, wav)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCompany("Telesophy Foundation")]
+[assembly: AssemblyProduct("Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

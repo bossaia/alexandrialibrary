@@ -37,14 +37,14 @@
   <ItemGroup>
     <Compile Include="ConfigurationSettings.cs" />
     <Compile Include="MusicBrainzIdFactory.cs" />
-    <Compile Include="MusicBrainzUtility.cs" />
+    <Compile Include="Utility.cs" />
     <Compile Include="IWindowsNetworkControl.cs" />
     <Compile Include="MusicBrainzClient.cs" />
-    <Compile Include="MusicBrainzMetadataProvider.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Rdf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleAlbum.cs" />
+    <Compile Include="SimpleAlbumFactory.cs" />
     <Compile Include="SimpleArtist.cs" />
     <Compile Include="SimpleDisc.cs" />
     <Compile Include="SimpleDiscTest.cs" />

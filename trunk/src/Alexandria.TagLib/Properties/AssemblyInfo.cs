@@ -10,11 +10,11 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TagLib# Tagging Plugin")]
-[assembly: AssemblyDescription("Read and write tags for digital media files (ID3, vorbiscomment, ape, asf)")]
+[assembly: AssemblyTitle("TagLib#")]
+[assembly: AssemblyDescription("Supports reading and editing the metadata of several popular audio formats (ID3, vorbiscomment, ape, asf)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCompany("Telesophy Foundation")]
+[assembly: AssemblyProduct("Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
