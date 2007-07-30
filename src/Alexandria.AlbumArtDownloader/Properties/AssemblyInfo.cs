@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Album Art Downloader Plugin")]
-[assembly: AssemblyDescription("Download cover art for your music collection")]
+[assembly: AssemblyTitle("Album Art Downloader")]
+[assembly: AssemblyDescription("Download cover art for your digital music collection")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCompany("Telesophy Foundation")]
+[assembly: AssemblyProduct("Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

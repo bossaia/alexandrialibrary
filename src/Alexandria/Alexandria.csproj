@@ -111,7 +111,6 @@
     <Compile Include="Metadata\IMetadataFactory.cs" />
     <Compile Include="Plugins\IPlugin.cs" />
     <Compile Include="Media\IMediaFormat.cs" />
-    <Compile Include="ISearch.cs" />
     <Compile Include="Metadata\ISong.cs" />
     <Compile Include="Metadata\IStyle.cs" />
     <Compile Include="Media\IText.cs" />

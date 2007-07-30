@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.MusicBrainz
 {
-	public static class MusicBrainzUtility
+	public static class Utility
 	{
 		#region Private Static Fields
 		private static readonly UTF8Encoding utf8Encoding = new UTF8Encoding();

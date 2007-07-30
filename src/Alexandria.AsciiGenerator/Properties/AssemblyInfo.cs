@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ASCII Generator Plugin")]
+[assembly: AssemblyTitle("ASCII Art Generator")]
 [assembly: AssemblyDescription("Convert images into ASCII-art text files")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("The Alexandria Foundation")]
-[assembly: AssemblyProduct("The Alexandria Media Library")]
+[assembly: AssemblyCompany("Telesophy Foundation")]
+[assembly: AssemblyProduct("Alexandria Media Library")]
 [assembly: AssemblyCopyright("Copyright © 2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
