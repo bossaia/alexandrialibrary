@@ -164,7 +164,7 @@ namespace Alexandria.Fmod
 
 		public TimeSpan Elapsed
 		{
-			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Milliseconds); }
+			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position); }
 			set
 			{
 				lock(sound)

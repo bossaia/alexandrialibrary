@@ -75,29 +75,6 @@ namespace Alexandria.Client
 			this.OuterPlaybackQueueSplit = new System.Windows.Forms.SplitContainer();
 			this.UpperPlaybackStatusSplit = new System.Windows.Forms.SplitContainer();
 			this.DetailGroupBox = new System.Windows.Forms.GroupBox();
-			this.DetailTabs = new System.Windows.Forms.TabControl();
-			this.ImageTab = new System.Windows.Forms.TabPage();
-			this.ImageExifLabel = new System.Windows.Forms.Label();
-			this.ImageCaption3 = new System.Windows.Forms.Label();
-			this.ImageCaption2 = new System.Windows.Forms.Label();
-			this.ImageCaption1 = new System.Windows.Forms.Label();
-			this.AddImageButton = new System.Windows.Forms.Button();
-			this.DetailPicture3 = new System.Windows.Forms.PictureBox();
-			this.DetailPicture2 = new System.Windows.Forms.PictureBox();
-			this.DetailPicture1 = new System.Windows.Forms.PictureBox();
-			this.BioTab = new System.Windows.Forms.TabPage();
-			this.BioAuthorLabel = new System.Windows.Forms.Label();
-			this.AddBioButton = new System.Windows.Forms.Button();
-			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-			this.GenreTab = new System.Windows.Forms.TabPage();
-			this.label1 = new System.Windows.Forms.Label();
-			this.GenreListView = new System.Windows.Forms.ListView();
-			this.AddGenreButton = new System.Windows.Forms.Button();
-			this.LastFMTab = new System.Windows.Forms.TabPage();
-			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.tabPage4 = new System.Windows.Forms.TabPage();
-			this.tabPage5 = new System.Windows.Forms.TabPage();
-			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.MidFilterQueueSplit = new System.Windows.Forms.SplitContainer();
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
@@ -125,14 +102,6 @@ namespace Alexandria.Client
 			this.UpperPlaybackStatusSplit.Panel1.SuspendLayout();
 			this.UpperPlaybackStatusSplit.Panel2.SuspendLayout();
 			this.UpperPlaybackStatusSplit.SuspendLayout();
-			this.DetailGroupBox.SuspendLayout();
-			this.DetailTabs.SuspendLayout();
-			this.ImageTab.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture3)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture2)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture1)).BeginInit();
-			this.BioTab.SuspendLayout();
-			this.GenreTab.SuspendLayout();
 			this.MidFilterQueueSplit.Panel1.SuspendLayout();
 			this.MidFilterQueueSplit.Panel2.SuspendLayout();
 			this.MidFilterQueueSplit.SuspendLayout();
@@ -159,6 +128,7 @@ namespace Alexandria.Client
 			this.PlaybackTrackBar.Name = "PlaybackTrackBar";
 			this.PlaybackTrackBar.TickFrequency = 10000;
 			this.PlaybackTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+			this.PlaybackTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PlaybackTrackBar_MouseUp);
 			// 
 			// VolumeTrackBar
 			// 
@@ -279,6 +249,7 @@ namespace Alexandria.Client
 			// 
 			this.PlaybackTimer.Enabled = true;
 			this.PlaybackTimer.Interval = 1000;
+			this.PlaybackTimer.Tick += new System.EventHandler(this.PlaybackTimer_Tick);
 			// 
 			// PlaybackGroupBox
 			// 
@@ -435,173 +406,8 @@ namespace Alexandria.Client
 			// DetailGroupBox
 			// 
 			resources.ApplyResources(this.DetailGroupBox, "DetailGroupBox");
-			this.DetailGroupBox.Controls.Add(this.DetailTabs);
 			this.DetailGroupBox.Name = "DetailGroupBox";
 			this.DetailGroupBox.TabStop = false;
-			// 
-			// DetailTabs
-			// 
-			resources.ApplyResources(this.DetailTabs, "DetailTabs");
-			this.DetailTabs.Controls.Add(this.ImageTab);
-			this.DetailTabs.Controls.Add(this.BioTab);
-			this.DetailTabs.Controls.Add(this.GenreTab);
-			this.DetailTabs.Controls.Add(this.LastFMTab);
-			this.DetailTabs.Controls.Add(this.tabPage3);
-			this.DetailTabs.Controls.Add(this.tabPage4);
-			this.DetailTabs.Controls.Add(this.tabPage5);
-			this.DetailTabs.Controls.Add(this.tabPage1);
-			this.DetailTabs.Name = "DetailTabs";
-			this.DetailTabs.SelectedIndex = 0;
-			// 
-			// ImageTab
-			// 
-			this.ImageTab.Controls.Add(this.ImageExifLabel);
-			this.ImageTab.Controls.Add(this.ImageCaption3);
-			this.ImageTab.Controls.Add(this.ImageCaption2);
-			this.ImageTab.Controls.Add(this.ImageCaption1);
-			this.ImageTab.Controls.Add(this.AddImageButton);
-			this.ImageTab.Controls.Add(this.DetailPicture3);
-			this.ImageTab.Controls.Add(this.DetailPicture2);
-			this.ImageTab.Controls.Add(this.DetailPicture1);
-			resources.ApplyResources(this.ImageTab, "ImageTab");
-			this.ImageTab.Name = "ImageTab";
-			this.ImageTab.UseVisualStyleBackColor = true;
-			// 
-			// ImageExifLabel
-			// 
-			this.ImageExifLabel.BackColor = System.Drawing.Color.LightGray;
-			resources.ApplyResources(this.ImageExifLabel, "ImageExifLabel");
-			this.ImageExifLabel.Name = "ImageExifLabel";
-			// 
-			// ImageCaption3
-			// 
-			resources.ApplyResources(this.ImageCaption3, "ImageCaption3");
-			this.ImageCaption3.Name = "ImageCaption3";
-			// 
-			// ImageCaption2
-			// 
-			resources.ApplyResources(this.ImageCaption2, "ImageCaption2");
-			this.ImageCaption2.Name = "ImageCaption2";
-			// 
-			// ImageCaption1
-			// 
-			resources.ApplyResources(this.ImageCaption1, "ImageCaption1");
-			this.ImageCaption1.Name = "ImageCaption1";
-			// 
-			// AddImageButton
-			// 
-			this.AddImageButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.picture_add;
-			resources.ApplyResources(this.AddImageButton, "AddImageButton");
-			this.AddImageButton.Name = "AddImageButton";
-			this.AddImageButton.UseVisualStyleBackColor = true;
-			// 
-			// DetailPicture3
-			// 
-			resources.ApplyResources(this.DetailPicture3, "DetailPicture3");
-			this.DetailPicture3.BackColor = System.Drawing.Color.DarkGray;
-			this.DetailPicture3.Name = "DetailPicture3";
-			this.DetailPicture3.TabStop = false;
-			// 
-			// DetailPicture2
-			// 
-			resources.ApplyResources(this.DetailPicture2, "DetailPicture2");
-			this.DetailPicture2.BackColor = System.Drawing.Color.DarkGray;
-			this.DetailPicture2.Name = "DetailPicture2";
-			this.DetailPicture2.TabStop = false;
-			// 
-			// DetailPicture1
-			// 
-			resources.ApplyResources(this.DetailPicture1, "DetailPicture1");
-			this.DetailPicture1.BackColor = System.Drawing.Color.Transparent;
-			this.DetailPicture1.Name = "DetailPicture1";
-			this.DetailPicture1.TabStop = false;
-			// 
-			// BioTab
-			// 
-			this.BioTab.Controls.Add(this.BioAuthorLabel);
-			this.BioTab.Controls.Add(this.AddBioButton);
-			this.BioTab.Controls.Add(this.richTextBox1);
-			resources.ApplyResources(this.BioTab, "BioTab");
-			this.BioTab.Name = "BioTab";
-			this.BioTab.UseVisualStyleBackColor = true;
-			// 
-			// BioAuthorLabel
-			// 
-			this.BioAuthorLabel.BackColor = System.Drawing.Color.LightGray;
-			resources.ApplyResources(this.BioAuthorLabel, "BioAuthorLabel");
-			this.BioAuthorLabel.Name = "BioAuthorLabel";
-			// 
-			// AddBioButton
-			// 
-			this.AddBioButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.pencil_add;
-			resources.ApplyResources(this.AddBioButton, "AddBioButton");
-			this.AddBioButton.Name = "AddBioButton";
-			this.AddBioButton.UseVisualStyleBackColor = true;
-			// 
-			// richTextBox1
-			// 
-			resources.ApplyResources(this.richTextBox1, "richTextBox1");
-			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.ReadOnly = true;
-			// 
-			// GenreTab
-			// 
-			this.GenreTab.Controls.Add(this.label1);
-			this.GenreTab.Controls.Add(this.GenreListView);
-			this.GenreTab.Controls.Add(this.AddGenreButton);
-			resources.ApplyResources(this.GenreTab, "GenreTab");
-			this.GenreTab.Name = "GenreTab";
-			this.GenreTab.UseVisualStyleBackColor = true;
-			// 
-			// label1
-			// 
-			this.label1.BackColor = System.Drawing.Color.LightGray;
-			resources.ApplyResources(this.label1, "label1");
-			this.label1.Name = "label1";
-			// 
-			// GenreListView
-			// 
-			resources.ApplyResources(this.GenreListView, "GenreListView");
-			this.GenreListView.Name = "GenreListView";
-			this.GenreListView.UseCompatibleStateImageBehavior = false;
-			this.GenreListView.View = System.Windows.Forms.View.Details;
-			// 
-			// AddGenreButton
-			// 
-			this.AddGenreButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.add;
-			resources.ApplyResources(this.AddGenreButton, "AddGenreButton");
-			this.AddGenreButton.Name = "AddGenreButton";
-			this.AddGenreButton.UseVisualStyleBackColor = true;
-			// 
-			// LastFMTab
-			// 
-			resources.ApplyResources(this.LastFMTab, "LastFMTab");
-			this.LastFMTab.Name = "LastFMTab";
-			this.LastFMTab.UseVisualStyleBackColor = true;
-			// 
-			// tabPage3
-			// 
-			resources.ApplyResources(this.tabPage3, "tabPage3");
-			this.tabPage3.Name = "tabPage3";
-			this.tabPage3.UseVisualStyleBackColor = true;
-			// 
-			// tabPage4
-			// 
-			resources.ApplyResources(this.tabPage4, "tabPage4");
-			this.tabPage4.Name = "tabPage4";
-			this.tabPage4.UseVisualStyleBackColor = true;
-			// 
-			// tabPage5
-			// 
-			resources.ApplyResources(this.tabPage5, "tabPage5");
-			this.tabPage5.Name = "tabPage5";
-			this.tabPage5.UseVisualStyleBackColor = true;
-			// 
-			// tabPage1
-			// 
-			resources.ApplyResources(this.tabPage1, "tabPage1");
-			this.tabPage1.Name = "tabPage1";
-			this.tabPage1.UseVisualStyleBackColor = true;
 			// 
 			// MidFilterQueueSplit
 			// 
@@ -636,6 +442,7 @@ namespace Alexandria.Client
             this.TrackFileColumn,
             this.TrackFormatColumn});
 			this.QueueListView.FullRowSelect = true;
+			this.QueueListView.HideSelection = false;
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
@@ -700,15 +507,6 @@ namespace Alexandria.Client
 			this.UpperPlaybackStatusSplit.Panel1.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.Panel2.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.ResumeLayout(false);
-			this.DetailGroupBox.ResumeLayout(false);
-			this.DetailTabs.ResumeLayout(false);
-			this.ImageTab.ResumeLayout(false);
-			this.ImageTab.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture3)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture2)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.DetailPicture1)).EndInit();
-			this.BioTab.ResumeLayout(false);
-			this.GenreTab.ResumeLayout(false);
 			this.MidFilterQueueSplit.Panel1.ResumeLayout(false);
 			this.MidFilterQueueSplit.Panel2.ResumeLayout(false);
 			this.MidFilterQueueSplit.ResumeLayout(false);
@@ -762,35 +560,12 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ColumnHeader AlbumTypeColumn;
 		private System.Windows.Forms.SplitContainer UpperPlaybackStatusSplit;
 		private System.Windows.Forms.GroupBox DetailGroupBox;
-		private System.Windows.Forms.TabControl DetailTabs;
-		private System.Windows.Forms.TabPage ImageTab;
-		private System.Windows.Forms.TabPage BioTab;
-		private System.Windows.Forms.PictureBox DetailPicture3;
-		private System.Windows.Forms.PictureBox DetailPicture2;
-		private System.Windows.Forms.PictureBox DetailPicture1;
-		private System.Windows.Forms.RichTextBox richTextBox1;
-		private System.Windows.Forms.Label ImageCaption1;
-		private System.Windows.Forms.Button AddImageButton;
-		private System.Windows.Forms.TabPage GenreTab;
-		private System.Windows.Forms.Button AddGenreButton;
-		private System.Windows.Forms.Label ImageExifLabel;
-		private System.Windows.Forms.Label ImageCaption3;
-		private System.Windows.Forms.Label ImageCaption2;
-		private System.Windows.Forms.Label BioAuthorLabel;
-		private System.Windows.Forms.Button AddBioButton;
-		private System.Windows.Forms.ListView GenreListView;
 		private System.Windows.Forms.Label NowPlayingLabel;
 		private System.Windows.Forms.Label NowPlayingTitle;
 		private System.Windows.Forms.Button VolumeUpButton;
 		private System.Windows.Forms.Button VolumeDownButton;
 		private System.Windows.Forms.Button RepeatButton;
 		private System.Windows.Forms.Button PreviousButton;
-		private System.Windows.Forms.TabPage LastFMTab;
-		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.TabPage tabPage3;
-		private System.Windows.Forms.TabPage tabPage4;
-		private System.Windows.Forms.TabPage tabPage5;
-		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;

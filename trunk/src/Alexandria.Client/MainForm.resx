@@ -258,60 +258,6 @@
   <metadata name="FileMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
-  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Open...</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;xit</value>
-  </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="catalogToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Catalog</value>
-  </data>
-  <data name="userToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
-  </data>
-  <data name="userToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;User</value>
-  </data>
-  <data name="pluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 22</value>
-  </data>
-  <data name="pluginsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Plugins</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About Alexandria</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
   <data name="FileMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -333,33 +279,63 @@
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="catalogToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Catalog</value>
+  </data>
+  <data name="userToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="userToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;User</value>
+  </data>
+  <data name="ToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="ToolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="pluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
+  </data>
+  <data name="pluginsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Plugins</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;About Alexandria</value>
+  </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 573</value>
+    <value>387, 7</value>
   </metadata>
-  <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 17</value>
-  </data>
-  <data name="LoadStatus.Text" xml:space="preserve">
-    <value>Not Loaded</value>
-  </data>
-  <data name="PlaybackStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 17</value>
-  </data>
-  <data name="PlaybackStatusLabel.Text" xml:space="preserve">
-    <value>Stopped</value>
-  </data>
-  <data name="PositionStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 17</value>
-  </data>
-  <data name="PositionStatus.Text" xml:space="preserve">
-    <value>0/0</value>
-  </data>
-  <data name="StreamingStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 17</value>
-  </data>
-  <data name="StreamingStatus.Text" xml:space="preserve">
-    <value>Not Streaming</value>
-  </data>
   <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 573</value>
   </data>
@@ -384,8 +360,32 @@
   <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="LoadStatus.Text" xml:space="preserve">
+    <value>Not Loaded</value>
+  </data>
+  <data name="PlaybackStatusLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 17</value>
+  </data>
+  <data name="PlaybackStatusLabel.Text" xml:space="preserve">
+    <value>Stopped</value>
+  </data>
+  <data name="PositionStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 17</value>
+  </data>
+  <data name="PositionStatus.Text" xml:space="preserve">
+    <value>0/0</value>
+  </data>
+  <data name="StreamingStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 17</value>
+  </data>
+  <data name="StreamingStatus.Text" xml:space="preserve">
+    <value>Not Streaming</value>
+  </data>
   <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>364, 17</value>
+    <value>123, 5</value>
   </metadata>
   <data name="NextButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -415,10 +415,106 @@
     <value>6</value>
   </data>
   <metadata name="PlaybackTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>490, 17</value>
+    <value>263, 6</value>
   </metadata>
   <data name="PlaybackGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Name" xml:space="preserve">
+    <value>PreviousButton</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PreviousButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;RepeatButton.Name" xml:space="preserve">
+    <value>RepeatButton</value>
+  </data>
+  <data name="&gt;&gt;RepeatButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;RepeatButton.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;RepeatButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;VolumeDownButton.Name" xml:space="preserve">
+    <value>VolumeDownButton</value>
+  </data>
+  <data name="&gt;&gt;VolumeDownButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VolumeDownButton.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;VolumeDownButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;VolumeUpButton.Name" xml:space="preserve">
+    <value>VolumeUpButton</value>
+  </data>
+  <data name="&gt;&gt;VolumeUpButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;VolumeUpButton.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;VolumeUpButton.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingLabel.Name" xml:space="preserve">
+    <value>NowPlayingLabel</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingLabel.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingTitle.Name" xml:space="preserve">
+    <value>NowPlayingTitle</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingTitle.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingTitle.Parent" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;NowPlayingTitle.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 3</value>
+  </data>
+  <data name="PlaybackGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 172</value>
+  </data>
+  <data name="PlaybackGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="PlaybackGroupBox.Text" xml:space="preserve">
+    <value>Playback</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Name" xml:space="preserve">
+    <value>PlaybackGroupBox</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.Parent" xml:space="preserve">
+    <value>UpperPlaybackStatusSplit.Panel1</value>
+  </data>
+  <data name="&gt;&gt;PlaybackGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="PreviousButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -579,30 +675,6 @@
   <data name="&gt;&gt;NowPlayingTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 3</value>
-  </data>
-  <data name="PlaybackGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 172</value>
-  </data>
-  <data name="PlaybackGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="PlaybackGroupBox.Text" xml:space="preserve">
-    <value>Playback</value>
-  </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Name" xml:space="preserve">
-    <value>PlaybackGroupBox</value>
-  </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PlaybackGroupBox.Parent" xml:space="preserve">
-    <value>UpperPlaybackStatusSplit.Panel1</value>
-  </data>
-  <data name="&gt;&gt;PlaybackGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="InnerArtistAlbumSplit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -611,27 +683,6 @@
   </data>
   <data name="ArtistGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ArtistListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ArtistNameColumn.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ArtistNameColumn.Width" type="System.Int32, mscorlib">
-    <value>270</value>
-  </data>
-  <data name="ArtistTypeColumn.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="ArtistListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
-  </data>
-  <data name="ArtistListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 138</value>
-  </data>
-  <data name="ArtistListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;ArtistListView.Name" xml:space="preserve">
     <value>ArtistListView</value>
@@ -683,30 +734,6 @@
   </data>
   <data name="AlbumGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="AlbumListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="AlbumNameColumn.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="AlbumNameColumn.Width" type="System.Int32, mscorlib">
-    <value>250</value>
-  </data>
-  <data name="AlbumReleaseDateColumn.Text" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="AlbumTypeColumn.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="AlbumListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="AlbumListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 137</value>
-  </data>
-  <data name="AlbumListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;AlbumListView.Name" xml:space="preserve">
     <value>AlbumListView</value>
@@ -777,6 +804,75 @@
   <data name="&gt;&gt;InnerArtistAlbumSplit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ArtistListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="ArtistListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="ArtistListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>335, 138</value>
+  </data>
+  <data name="ArtistListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Name" xml:space="preserve">
+    <value>ArtistListView</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.Parent" xml:space="preserve">
+    <value>ArtistGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ArtistListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ArtistNameColumn.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ArtistNameColumn.Width" type="System.Int32, mscorlib">
+    <value>270</value>
+  </data>
+  <data name="ArtistTypeColumn.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AlbumListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="AlbumListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="AlbumListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 137</value>
+  </data>
+  <data name="AlbumListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Name" xml:space="preserve">
+    <value>AlbumListView</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.Parent" xml:space="preserve">
+    <value>AlbumGroupBox</value>
+  </data>
+  <data name="&gt;&gt;AlbumListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AlbumNameColumn.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AlbumNameColumn.Width" type="System.Int32, mscorlib">
+    <value>250</value>
+  </data>
+  <data name="AlbumReleaseDateColumn.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="AlbumTypeColumn.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="OuterPlaybackQueueSplit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -806,712 +902,6 @@
   </data>
   <data name="DetailGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="DetailTabs.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ImageExifLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 39</value>
-  </data>
-  <data name="ImageExifLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 76</value>
-  </data>
-  <data name="ImageExifLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="ImageExifLabel.Text" xml:space="preserve">
-    <value>EXIF Data for the current Image</value>
-  </data>
-  <data name="&gt;&gt;ImageExifLabel.Name" xml:space="preserve">
-    <value>ImageExifLabel</value>
-  </data>
-  <data name="&gt;&gt;ImageExifLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageExifLabel.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;ImageExifLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ImageCaption3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="ImageCaption3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ImageCaption3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 111</value>
-  </data>
-  <data name="ImageCaption3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="ImageCaption3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="ImageCaption3.Text" xml:space="preserve">
-    <value>Caption #3</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption3.Name" xml:space="preserve">
-    <value>ImageCaption3</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption3.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption3.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ImageCaption2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="ImageCaption2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ImageCaption2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 111</value>
-  </data>
-  <data name="ImageCaption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="ImageCaption2.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="ImageCaption2.Text" xml:space="preserve">
-    <value>Caption #2</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption2.Name" xml:space="preserve">
-    <value>ImageCaption2</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption2.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ImageCaption1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom</value>
-  </data>
-  <data name="ImageCaption1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="ImageCaption1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 111</value>
-  </data>
-  <data name="ImageCaption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="ImageCaption1.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="ImageCaption1.Text" xml:space="preserve">
-    <value>Caption #1</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption1.Name" xml:space="preserve">
-    <value>ImageCaption1</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption1.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;ImageCaption1.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="AddImageButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="AddImageButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="AddImageButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="AddImageButton.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;AddImageButton.Name" xml:space="preserve">
-    <value>AddImageButton</value>
-  </data>
-  <data name="&gt;&gt;AddImageButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddImageButton.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;AddImageButton.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="DetailPicture3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Right</value>
-  </data>
-  <data name="DetailPicture3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>306, 8</value>
-  </data>
-  <data name="DetailPicture3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 100</value>
-  </data>
-  <data name="DetailPicture3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture3.Name" xml:space="preserve">
-    <value>DetailPicture3</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture3.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture3.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="DetailPicture2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom</value>
-  </data>
-  <data name="DetailPicture2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 8</value>
-  </data>
-  <data name="DetailPicture2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 100</value>
-  </data>
-  <data name="DetailPicture2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture2.Name" xml:space="preserve">
-    <value>DetailPicture2</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture2.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture2.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="DetailPicture1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left</value>
-  </data>
-  <data name="DetailPicture1.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
-        JC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIy
-        MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCACWAJYDASIAAhEBAxEB/8QA
-        HwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIh
-        MUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVW
-        V1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXG
-        x8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQF
-        BgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAV
-        YnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOE
-        hYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq
-        8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDjrzSY2RljeHG3OI5Cv6GiUX7soG5QMKNrZB9+DVKae3dWkdp0
-        lxjeGBB/CpbWSO4hDfahDIvI2qcH3PNTc7rK9kMea4jUCQSFQeu5ueabq00dyWMKsQUUdO461atLi8nt
-        gECNIh53uNpHt3pVnWTf51vGZoyd0YQ7sexFF0JrS1zmRxnIx9a1LaRSkA+6R6fQ1MBbTeaVhdQGy43d
-        B+NS2dtZzzKFlZQFyoYAjOPam2RGHKxrbHjdd3O09RzXqfjxlbwJojhshjHgd+Ym5rzpNFMgGJBIDwSr
-        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
-</value>
-  </data>
-  <data name="DetailPicture1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 8</value>
-  </data>
-  <data name="DetailPicture1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 100</value>
-  </data>
-  <data name="DetailPicture1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture1.Name" xml:space="preserve">
-    <value>DetailPicture1</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture1.Parent" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;DetailPicture1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ImageTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="ImageTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="ImageTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="ImageTab.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ImageTab.Text" xml:space="preserve">
-    <value>Images</value>
-  </data>
-  <data name="&gt;&gt;ImageTab.Name" xml:space="preserve">
-    <value>ImageTab</value>
-  </data>
-  <data name="&gt;&gt;ImageTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ImageTab.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;ImageTab.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="BioAuthorLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 42</value>
-  </data>
-  <data name="BioAuthorLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 66</value>
-  </data>
-  <data name="BioAuthorLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="BioAuthorLabel.Text" xml:space="preserve">
-    <value>Author information</value>
-  </data>
-  <data name="&gt;&gt;BioAuthorLabel.Name" xml:space="preserve">
-    <value>BioAuthorLabel</value>
-  </data>
-  <data name="&gt;&gt;BioAuthorLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BioAuthorLabel.Parent" xml:space="preserve">
-    <value>BioTab</value>
-  </data>
-  <data name="&gt;&gt;BioAuthorLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AddBioButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="AddBioButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="AddBioButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="AddBioButton.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;AddBioButton.Name" xml:space="preserve">
-    <value>AddBioButton</value>
-  </data>
-  <data name="&gt;&gt;AddBioButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddBioButton.Parent" xml:space="preserve">
-    <value>BioTab</value>
-  </data>
-  <data name="&gt;&gt;AddBioButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="richTextBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="richTextBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 7</value>
-  </data>
-  <data name="richTextBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>313, 110</value>
-  </data>
-  <data name="richTextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Here is a bio about the currently selected artist</value>
-  </data>
-  <data name="&gt;&gt;richTextBox1.Name" xml:space="preserve">
-    <value>richTextBox1</value>
-  </data>
-  <data name="&gt;&gt;richTextBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;richTextBox1.Parent" xml:space="preserve">
-    <value>BioTab</value>
-  </data>
-  <data name="&gt;&gt;richTextBox1.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="BioTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="BioTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="BioTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="BioTab.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="BioTab.Text" xml:space="preserve">
-    <value>Bio</value>
-  </data>
-  <data name="&gt;&gt;BioTab.Name" xml:space="preserve">
-    <value>BioTab</value>
-  </data>
-  <data name="&gt;&gt;BioTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;BioTab.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;BioTab.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 42</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 71</value>
-  </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Add Genres, Styles and Moods</value>
-  </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
-  </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>GenreTab</value>
-  </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="GenreListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="GenreListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 7</value>
-  </data>
-  <data name="GenreListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 106</value>
-  </data>
-  <data name="GenreListView.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;GenreListView.Name" xml:space="preserve">
-    <value>GenreListView</value>
-  </data>
-  <data name="&gt;&gt;GenreListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GenreListView.Parent" xml:space="preserve">
-    <value>GenreTab</value>
-  </data>
-  <data name="&gt;&gt;GenreListView.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="AddGenreButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="AddGenreButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 7</value>
-  </data>
-  <data name="AddGenreButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="AddGenreButton.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;AddGenreButton.Name" xml:space="preserve">
-    <value>AddGenreButton</value>
-  </data>
-  <data name="&gt;&gt;AddGenreButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AddGenreButton.Parent" xml:space="preserve">
-    <value>GenreTab</value>
-  </data>
-  <data name="&gt;&gt;AddGenreButton.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="GenreTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="GenreTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="GenreTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="GenreTab.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="GenreTab.Text" xml:space="preserve">
-    <value>Categories</value>
-  </data>
-  <data name="&gt;&gt;GenreTab.Name" xml:space="preserve">
-    <value>GenreTab</value>
-  </data>
-  <data name="&gt;&gt;GenreTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GenreTab.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;GenreTab.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="LastFMTab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="LastFMTab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="LastFMTab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="LastFMTab.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="LastFMTab.Text" xml:space="preserve">
-    <value>LastFM</value>
-  </data>
-  <data name="&gt;&gt;LastFMTab.Name" xml:space="preserve">
-    <value>LastFMTab</value>
-  </data>
-  <data name="&gt;&gt;LastFMTab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;LastFMTab.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;LastFMTab.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>MP3tunes</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="tabPage4.Text" xml:space="preserve">
-    <value>Tags</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.Name" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Labels</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>407, 127</value>
-  </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Lyrics</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="DetailTabs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 14</value>
-  </data>
-  <data name="DetailTabs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>415, 153</value>
-  </data>
-  <data name="DetailTabs.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;DetailTabs.Name" xml:space="preserve">
-    <value>DetailTabs</value>
-  </data>
-  <data name="&gt;&gt;DetailTabs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DetailTabs.Parent" xml:space="preserve">
-    <value>DetailGroupBox</value>
-  </data>
-  <data name="&gt;&gt;DetailTabs.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="DetailGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
