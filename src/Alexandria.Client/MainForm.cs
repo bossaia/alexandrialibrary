@@ -385,21 +385,18 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			//MessageBox.Show("call controller.Play() here", "Play");
 			if (controller != null)
 				controller.Play();
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
-			//MessageBox.Show("call controller.Stop() here", "Stop");
 			if (controller != null)
 				controller.Stop();
 		}
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			//MessageBox.Show("call controller.Mute() here", "Mute");
 			if (controller != null)
 			{
 				controller.Mute();
@@ -419,7 +416,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			if (QueueListView.SelectedItems.Count > 0)
+			if (controller != null && QueueListView.SelectedItems.Count > 0)
 			{
 				controller.SelectTrack();
 			}
@@ -499,6 +496,59 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			config.PluginInfo = (PluginInfo)item.Tag;
 			config.ShowDialog();
 		}
+
+		private void PlaybackTimer_Tick(object sender, EventArgs e)
+		{
+			if (controller != null && controller.AudioStream != null)
+			{
+				int value = Convert.ToInt32(controller.AudioStream.Elapsed.TotalSeconds);
+				if (value <= PlaybackTrackBar.Maximum)
+					PlaybackTrackBar.Value = value;
+				else PlaybackTrackBar.Value = PlaybackTrackBar.Maximum;
+				
+				controller.UpdateStatus();
+			}
+			else PlaybackTrackBar.Enabled = false;
+		}
+		
+		private void OnSelectedTrackStart(object sender, EventArgs e)
+		{
+			if (controller != null && controller.AudioStream != null)
+			{
+				PlaybackTrackBar.Enabled = true;
+				PlaybackTrackBar.Minimum = 0;
+				PlaybackTrackBar.Maximum = Convert.ToInt32(controller.AudioStream.Duration.TotalSeconds);
+				PlaybackTrackBar.Value = 0;
+			}
+		}
+		
+		private void OnSelectedTrackEnd(object sender, EventArgs e)
+		{
+			if (controller != null)
+			{
+				if (QueueListView.SelectedItems[0] != null)
+				{
+					int nextIndex = 0;
+					if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count-1)
+						nextIndex = QueueListView.SelectedIndices[0] + 1;
+					
+					QueueListView.SelectedItems[0].Selected = false;
+					QueueListView.Items[nextIndex].Selected = true;
+					controller.Play();
+				}	
+			}
+		}
+
+		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (controller.AudioStream != null)
+			{
+				if (controller.AudioStream.CanSetElapsed)
+				{
+					controller.AudioStream.Elapsed = new TimeSpan(0, 0, PlaybackTrackBar.Value);
+				}
+			}
+		}
 		#endregion
 		
 		#region Protected Overrides
@@ -508,10 +558,15 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{			
 			base.OnLoad(e);
 			
+			PlaybackTimer.Start();
+			
 			InitializePlugins();
 			InitializeInterface();
 			
 			LoadDefaultUser();
+			
+			controller.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			controller.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 		

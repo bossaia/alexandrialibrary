@@ -65,12 +65,17 @@ namespace Alexandria.Client
 		private ListViewItem selectedItem;
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
-		private IAudioStream audio;
+		private IAudioStream audioStream;
 		private IList<IAudioTrack> tracks;
 		
 		MusicLocker locker;
 		PlaylistFactory playlistFactory = new PlaylistFactory();
 		TagLibEngine tagLibEngine = new TagLibEngine();
+		
+		private EventHandler<EventArgs> onTrackStart;
+		private EventHandler<EventArgs> onTrackEnd;
+		
+		private bool isPlaying;
 		#endregion
 
 		#region Private Methods
@@ -214,16 +219,33 @@ namespace Alexandria.Client
 			get { return tracks; }
 		}
 		
+		public IAudioStream AudioStream
+		{
+			get { return audioStream; }
+		}
+		
 		public bool IsMuted
 		{
 			get
 			{
-				if (audio != null)
+				if (audioStream != null)
 				{
-					return audio.IsMuted;
+					return audioStream.IsMuted;
 				}
 				else return false;
 			}
+		}
+		
+		public EventHandler<EventArgs> OnTrackStart
+		{
+			get { return onTrackStart; }
+			set { onTrackStart = value; }
+		}
+		
+		public EventHandler<EventArgs> OnTrackEnd
+		{
+			get { return onTrackEnd; }
+			set { onTrackEnd = value; }
 		}
 		#endregion
 		
@@ -289,148 +311,175 @@ namespace Alexandria.Client
 			if (queueListView.SelectedItems.Count > 0)
 			{
 				//# Name Artist Album Length Date Location Format
-				selectedItem = queueListView.SelectedItems[0];
-				if (selectedItem.Tag != null)
+				if (queueListView.SelectedItems[0] != selectedItem)
 				{
-					//Guid id = (Guid)selectedItem.Tag;
-					//selectedTrack = broker.LookupRecord<IAudioTrack>(id);
-					selectedTrack = (IAudioTrack)selectedItem.Tag;
-					if (selectedTrack.Path.IsFile)
+					selectedItem = queueListView.SelectedItems[0];
+					if (selectedItem.Tag != null)
 					{
-						audio = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
-					}
-					else
-					{
-						string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-						fileName = CleanupFileName(fileName);						
-						if (!System.IO.File.Exists(fileName))
+						selectedTrack = (IAudioTrack)selectedItem.Tag;
+						if (selectedTrack.Path.IsFile)
 						{
-							if (!System.IO.Directory.Exists(tempPath))
-								System.IO.Directory.CreateDirectory(tempPath);
-						
-							WebClient client = new WebClient();
-							Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
-							try
-							{
-								client.DownloadFile(address, fileName);
-							}
-							catch (WebException ex)
-							{
-								throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
-							}
+							audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
 						}
+						else
+						{
+							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+							fileName = CleanupFileName(fileName);						
+							if (!System.IO.File.Exists(fileName))
+							{
+								if (!System.IO.Directory.Exists(tempPath))
+									System.IO.Directory.CreateDirectory(tempPath);
+							
+								WebClient client = new WebClient();
+								Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+								try
+								{
+									client.DownloadFile(address, fileName);
+								}
+								catch (WebException ex)
+								{
+									throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+								}
+							}
 
-						audio = new Fmod.LocalSound(fileName);
+							audioStream = new Fmod.LocalSound(fileName);
+						}
+						
+						if (audioStream != null && audioStream.Duration != selectedTrack.Duration)
+						{
+							selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+						}
 					}
-					
-					if (audio != null && audio.Duration != selectedTrack.Duration)
-					{
-						selectedItem.SubItems[4].Text = GetDurationString(audio.Duration);
-					}
+					else throw new ApplicationException("Could not load selected track: Id was undefined");
 				}
-				else throw new ApplicationException("Could not load selected track: Id was undefined");
-				
-				/*
-				//IMetadataIdentifier id = (IMetadataIdentifier)selectedItem.Tag;
-				int trackNumber = Convert.ToInt32(selectedItem.SubItems[0].Text);
-				string name = selectedItem.SubItems[1].Text;
-				string artist = selectedItem.SubItems[2].Text;
-				string album = selectedItem.SubItems[3].Text;
-				string[] durationParts = selectedItem.SubItems[4].Text.Split(':');
-				int hours = 0; int minutes = 0; int seconds = 0;
-				if (durationParts != null && durationParts.Length > 1)
-				{
-					minutes = Convert.ToInt32(durationParts[0]);
-					seconds = Convert.ToInt32(durationParts[1]);
-				}				
-				TimeSpan duration = new TimeSpan(hours, minutes, seconds);
-				DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
-				Uri path = new Uri(selectedItem.SubItems[6].Text);
-				string format = selectedItem.SubItems[7].Text;
-				
-				selectedTrack = null;
-				
-				//TODO: fix this to use an IPersistenceBroker
-				selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);
-				selectedTrack.MetadataIdentifiers.Add(id);
-				
-				if (selectedTrack.Path.IsFile)
-				{
-					audio = new Fmod.LocalSound(selectedTrack.Path.ToString());
-					//audio.Load();
-				}
-				else
-				{
-					string downloadPath = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-					if (!System.IO.File.Exists(downloadPath))
-					{
-						WebClient client = new WebClient();
-						client.DownloadFile(selectedTrack.Path, downloadPath);
-					}
-					
-					//location = new Location(path);
-					audio = new Fmod.LocalSound(path.ToString());
-					//audio.Load();
-				}
-				*/
+			}
+		}
+
+		#region Old SelectTrack code
+		/*
+		//IMetadataIdentifier id = (IMetadataIdentifier)selectedItem.Tag;
+		int trackNumber = Convert.ToInt32(selectedItem.SubItems[0].Text);
+		string name = selectedItem.SubItems[1].Text;
+		string artist = selectedItem.SubItems[2].Text;
+		string album = selectedItem.SubItems[3].Text;
+		string[] durationParts = selectedItem.SubItems[4].Text.Split(':');
+		int hours = 0; int minutes = 0; int seconds = 0;
+		if (durationParts != null && durationParts.Length > 1)
+		{
+			minutes = Convert.ToInt32(durationParts[0]);
+			seconds = Convert.ToInt32(durationParts[1]);
+		}				
+		TimeSpan duration = new TimeSpan(hours, minutes, seconds);
+		DateTime releaseDate = Convert.ToDateTime(selectedItem.SubItems[5].Text);
+		Uri path = new Uri(selectedItem.SubItems[6].Text);
+		string format = selectedItem.SubItems[7].Text;
+		
+		selectedTrack = null;
+		
+		//TODO: fix this to use an IPersistenceBroker
+		selectedTrack = new BaseAudioTrack(Guid.NewGuid(), path, name, album, artist, duration, releaseDate, trackNumber, format);
+		selectedTrack.MetadataIdentifiers.Add(id);
+		
+		if (selectedTrack.Path.IsFile)
+		{
+			audio = new Fmod.LocalSound(selectedTrack.Path.ToString());
+			//audio.Load();
+		}
+		else
+		{
+			string downloadPath = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+			if (!System.IO.File.Exists(downloadPath))
+			{
+				WebClient client = new WebClient();
+				client.DownloadFile(selectedTrack.Path, downloadPath);
 			}
 			
+			//location = new Location(path);
+			audio = new Fmod.LocalSound(path.ToString());
+			//audio.Load();
 		}
+		*/
+		#endregion
 		
 		public void Play()
 		{
-			if (audio != null)
+			if (audioStream != null)
 			{
-				if (audio.PlaybackState != PlaybackState.Playing)
+				if (audioStream.PlaybackState != PlaybackState.Playing)
 				{
-					if (audio.PlaybackState == PlaybackState.Paused)
+					if (audioStream.PlaybackState == PlaybackState.Paused)
 					{
-						audio.Resume();
+						isPlaying = true;
+						audioStream.Resume();
 					}
 					else
 					{
+						if (audioStream.PlaybackState == PlaybackState.Stopped)
+						{
+							if (OnTrackStart != null)
+								OnTrackStart(audioStream, EventArgs.Empty);
+						}
+					
 						if (submittedTrack != null && selectedTrack != null)
 						{
-							if (submittedTrack.Album != selectedTrack.Album &&
-								submittedTrack.Artist != selectedTrack.Artist &&
-								submittedTrack.Name != selectedTrack.Name)
+							if (submittedTrack.Album != selectedTrack.Album && submittedTrack.Artist != selectedTrack.Artist && submittedTrack.Name != selectedTrack.Name)
 							{
 								SubmitTrackToLastFM(selectedTrack);
 								submittedTrack = selectedTrack;
 							}
 						}
-						audio.Play();
+
+						isPlaying = true;
+						audioStream.Play();
 					}
 				}
-				else audio.Pause();
+				else
+				{
+					isPlaying = false;
+					audioStream.Pause();
+				}
 			}
 			else
 			{
 				SelectTrack();
-				if (audio != null)
+				if (audioStream != null)
 					Play();
 			}
 		}
 		
 		public void Stop()
 		{
-			if (audio != null)
+			if (audioStream != null)
 			{
-				audio.Stop();
-				if (audio is IDisposable)
+				isPlaying = false;
+				audioStream.Stop();
+				if (audioStream is IDisposable)
 				{
-					IDisposable disposable = audio as IDisposable;
+					IDisposable disposable = audioStream as IDisposable;
 					disposable.Dispose();
-					audio = null;
+					audioStream = null;
+				}
+			}
+		}
+		
+		public void UpdateStatus()
+		{
+			if (audioStream != null && isPlaying)
+			{
+				if (audioStream.Elapsed >= audioStream.Duration)
+				{
+					Stop();
+					if (OnTrackEnd != null)
+						OnTrackEnd(audioStream, EventArgs.Empty);
 				}
 			}
 		}
 		
 		public void Mute()
 		{
-			if (audio != null)
+			if (audioStream != null)
 			{
-				audio.IsMuted = !audio.IsMuted;
+				audioStream.IsMuted = !audioStream.IsMuted;
 			}
 		}
 		#endregion
