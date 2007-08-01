@@ -37,29 +37,15 @@ namespace Alexandria.MusicBrainz
 {
     public class SimpleDisc : IEnumerable<SimpleTrack>, IDisposable
     {
-		#region Private Fields
-		private MusicBrainzClient client;
-        private List<SimpleTrack> tracks;
-        private int[] lengths;
-        private string artistName;
-        private System.Uri albumUrl;
-        private string albumId;
-        private string albumName;
-        private System.Uri coverArtUrl;
-        private string amazonAsin;
-        private DateTime releaseDate = DateTime.MinValue;
-        private Rdf rdf = new Rdf();
-        #endregion
-
 		#region Constructors
 		public SimpleDisc(string device, MusicBrainzClient client)
-        {
-            this.client = client;
-            client.Device = device;
-           
+		{
+			this.client = client;
+			client.Device = device;
+
 			Debug.WriteLine("Before ReadCDToc");
-           
-            ReadCDToc();
+
+			ReadCDToc();
 
 			Debug.WriteLine("After ReadCDToc lengths.Length=" + lengths.Length.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
@@ -67,14 +53,14 @@ namespace Alexandria.MusicBrainz
 
 			Debug.WriteLine("tracks.Count=" + tracks.Count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-			for(int i = 0; i < lengths.Length; i++)
+			for (int i = 0; i < lengths.Length; i++)
 			{
 				Debug.WriteLine("i=" + i.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 				if (lengths != null)
-					Debug.WriteLine("lengths[i]=" + lengths[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo));					
+					Debug.WriteLine("lengths[i]=" + lengths[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 				else
 					Debug.WriteLine("lengths array is null");
-		
+
 				try
 				{
 					tracks.Add(new SimpleTrack());
@@ -87,15 +73,15 @@ namespace Alexandria.MusicBrainz
 				catch (ArgumentOutOfRangeException)
 				{
 					Debug.WriteLine("argument out of range trying to initialize tracks");
-				}	
+				}
 			}
-        }
-        
-        public SimpleDisc(string device) : this(device, new MusicBrainzClient())
-        {
-        
-        }
-        #endregion
+		}
+
+		public SimpleDisc(string device) : this(device, new MusicBrainzClient())
+		{
+
+		}
+		#endregion
         
         #region Finalizer
         ~SimpleDisc()
@@ -119,6 +105,20 @@ namespace Alexandria.MusicBrainz
 			GC.SuppressFinalize(this);
         }
         #endregion
+
+		#region Private Fields
+		private MusicBrainzClient client;
+		private List<SimpleTrack> tracks;
+		private int[] lengths;
+		private string artistName;
+		private System.Uri albumUrl;
+		private string albumId;
+		private string albumName;
+		private System.Uri coverArtUrl;
+		private string amazonAsin;
+		private DateTime releaseDate = DateTime.MinValue;
+		private Rdf rdf = new Rdf();
+		#endregion
         
         #region Private Methods
         private static int SectorsToSeconds(int sectors)
@@ -181,35 +181,7 @@ namespace Alexandria.MusicBrainz
 			albumUrl = new Uri(client.GetResultData(rdf.ExpressionAlbumGetAlbumId));
             albumId = client.GetIdFromUrl(albumUrl);
 			albumName = client.GetResultData(rdf.ExpressionAlbumGetAlbumName, 1);
-
-			int track_count = client.GetResultInt(rdf.ExpressionAlbumGetNumberTracks, 1);
             
-            if(track_count <= 0)
-            {
-				// "Invalid track count from album query"
-				Debug.WriteLine("Invalid track count from album query");
-                throw new AlexandriaException("Invalid track count from album query");
-            }
-                        
-            tracks = new List<SimpleTrack>(track_count);
-            
-            for(int i = 1; i <= tracks.Count; i++)
-            {
-				client.Select(rdf.SelectTrack, i);
-                
-                tracks[i - 1] = new SimpleTrack(); //new SimpleTrack(i, lengths[i - 1]);
-				tracks[i - 1].Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-				tracks[i - 1].Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
-                tracks[i - 1].Index = i;
-
-				int new_length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
-                if(new_length > 0) {
-                    tracks[i - 1].Length = new_length / 1000;
-                }
-
-				client.Select(rdf.SelectBack);
-            }
-
 			int num_releases = client.GetResultInt(rdf.ExpressionAlbumGetNumberReleaseDates);
             
             if(num_releases > 0) {
@@ -231,6 +203,42 @@ namespace Alexandria.MusicBrainz
 
 				client.Select(rdf.SelectBack);
             }
+
+			int trackCount = client.GetResultInt(rdf.ExpressionAlbumGetNumberTracks, 1);
+			if (trackCount <= 0)
+			{
+				// "Invalid track count from album query"
+				Debug.WriteLine("Invalid track count from album query");
+				throw new AlexandriaException("Invalid track count from album query");
+			}
+
+			tracks = new List<SimpleTrack>(trackCount);
+
+			string pathRoot = string.Format("file://{0}{1}", client.Device, System.IO.Path.DirectorySeparatorChar);
+
+			for (int i = 1; i <= trackCount; i++)
+			{
+				client.Select(rdf.SelectTrack, i);
+
+				//[i - 1] = new SimpleTrack(); //new SimpleTrack(i, lengths[i - 1]);
+				string artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
+				string title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+				int trackNumber = i;
+				Uri path = new Uri(string.Format("{0}Track {1}", pathRoot, i));
+
+				TimeSpan duration = TimeSpan.Zero;
+				int milliseconds = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
+				if (milliseconds > 0)
+				{
+					//duration = duration / 1000;
+					duration = new TimeSpan(0, 0, 0, 0, milliseconds);
+				}
+
+				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), path, title, albumName, artist, duration, releaseDate, trackNumber);
+				tracks.Add(track);
+
+				client.Select(rdf.SelectBack);
+			}
 
 			client.Select(rdf.SelectBack);
         }

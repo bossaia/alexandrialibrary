@@ -47,6 +47,7 @@ namespace Alexandria.Media.IO
 		//private bool canWrite;
 		private long length;		
 		private long position;
+		private int streamIndex;
 		
 		private string path;
 		private bool canPlay;
@@ -89,6 +90,12 @@ namespace Alexandria.Media.IO
 		{
 			get { return position; }
 			set { position = value; }
+		}
+
+		public int StreamIndex
+		{
+			get { return streamIndex; }
+			set { streamIndex = value; }
 		}
 
 		public override int Read(byte[] buffer, int offset, int count)
