@@ -58,19 +58,18 @@ namespace Alexandria.Fmod
 			{
 				if (disposing)
 				{
-					this.channel.Dispose();
-					this.channel = null;
-				
-					if (this.subSounds != null)
-					{
-						//NOTE: Do not use foreach because Remove() breaks the enumerator
-						int count = subSounds.Count;
-						for(int i=1;i<=count;i++)
-						{
-							subSounds[i].Dispose();
-							subSounds.Remove((uint)i);
-						}
-					}
+				}
+
+				if (channel != null && channel.Handle != IntPtr.Zero)
+				{
+					channel.Dispose();
+					channel = null;
+				}
+
+				if (currentSubSound != null && currentSubSound.Handle != IntPtr.Zero)
+				{
+					currentSubSound.Dispose();
+					currentSubSound = null;
 				}
 				
 				if (handle != IntPtr.Zero)
@@ -112,13 +111,32 @@ namespace Alexandria.Fmod
 		private bool bufferIsStarving;
 		private Modes mode;
 		private SoundLoop loop;		
-		private SoundCollection subSounds;
+		//private SoundCollection subSounds;
 		private TagCollection tags;
 		private IntPtr userData = IntPtr.Zero;
 		private Uri uri;
 		private bool disposed;
 		//SoundStatus status;
 		private TimeSpan duration = TimeSpan.Zero;
+
+		private int numberOfSubSounds = -1;
+		private int currentSubSoundIndex;
+		private Sound currentSubSound;
+		#endregion
+		
+		#region Private Methods
+		private void SelectSubSound(int index)
+		{
+			currentSubSoundIndex = index;
+			IntPtr subSoundHandle = new IntPtr();
+			Result result = NativeMethods.FMOD_Sound_GetSubSound(handle, index, ref subSoundHandle);
+			if (result == Result.Ok)
+			{
+				currentSubSound = new Sound(this);
+				currentSubSound.Handle = subSoundHandle;
+			}
+			else throw new ApplicationException(string.Format("Could not get sub-sound {0}", index));
+		}
 		#endregion
 		
 		#region Internal Properties
@@ -258,18 +276,49 @@ namespace Alexandria.Fmod
 		#endregion
 
 		#region SubSounds
-		internal SoundCollection SubSounds
-		{
-			get
-			{
+		//internal SoundCollection SubSounds
+		//{
+			//get
+			//{
 				// Lazy initialization
-				if (subSounds == null && this.Handle != IntPtr.Zero)
-				{
-					subSounds = new SoundCollection(this, true);
-				}
+				//if (subSounds == null && this.Handle != IntPtr.Zero)
+				//{
+					//subSounds = new SoundCollection(this, true);
+				//}
 
-				return subSounds;
+				//return subSounds;
+			//}
+		//}
+		#endregion
+		
+		#region NumberOfSubSounds
+		public int NumberOfSubSounds
+		{
+			get {
+				if (numberOfSubSounds == -1) {
+					NativeMethods.FMOD_Sound_GetNumSubSounds(handle, ref numberOfSubSounds);
+				}
+				
+				return numberOfSubSounds;
 			}
+		}
+		#endregion
+		
+		#region CurrentSubSoundIndex
+		public int CurrentSubSoundIndex
+		{
+			get { return currentSubSoundIndex; }
+			set {
+				if (value != currentSubSoundIndex)
+					SelectSubSound(value);
+			}
+		}
+		#endregion
+		
+		#region CurrentSubSound
+		public Sound CurrentSubSound
+		{
+			get { return currentSubSound; }
 		}
 		#endregion
 

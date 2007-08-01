@@ -87,15 +87,28 @@ namespace Alexandria.Fmod
 		#region RefreshPlaybackState
 		private PlaybackState RefreshPlaybackState()
 		{
-			if (sound != null && sound.SubSounds[streamIndex] != null && sound.Channel != null)
+			if (sound != null && sound.Channel != null)
 			{
-				if (sound.SubSounds[streamIndex].Channel.IsPlaying)
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
 				{
-					if (sound.SubSounds[streamIndex].Channel.Paused)
-						playbackState = PlaybackState.Paused;
-					else playbackState = PlaybackState.Playing;
+					if (sound.CurrentSubSound.Channel.IsPlaying)
+					{
+						if (sound.CurrentSubSound.Channel.Paused)
+							playbackState = PlaybackState.Paused;
+						else playbackState = PlaybackState.Playing;
+					}
+					else playbackState = PlaybackState.Stopped;
 				}
-				else playbackState = PlaybackState.Stopped;
+				else
+				{
+					if (sound.Channel.IsPlaying)
+					{
+						if (sound.Channel.Paused)
+							playbackState = PlaybackState.Paused;
+						else playbackState = PlaybackState.Playing;
+					}
+					else playbackState = PlaybackState.Stopped;
+				}
 			}
 			else playbackState = PlaybackState.None;
 
@@ -164,7 +177,9 @@ namespace Alexandria.Fmod
 		{
 			get
 			{
-				return sound.SubSounds[streamIndex].Duration;
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					return sound.CurrentSubSound.Duration;
+				else return sound.Duration;
 			}
 		}
 
@@ -208,7 +223,10 @@ namespace Alexandria.Fmod
 		{
 			lock (sound)
 			{
-				sound.SubSounds[streamIndex].Pause();
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Pause();
+				else sound.Pause();
+				
 				RefreshPlaybackState();
 			}
 		}
@@ -222,7 +240,10 @@ namespace Alexandria.Fmod
 		{
 			lock (sound)
 			{
-				sound.SubSounds[streamIndex].Play();
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Play();
+				else sound.Play();
+				
 				RefreshPlaybackState();
 			}
 		}
@@ -295,7 +316,10 @@ namespace Alexandria.Fmod
 		{
 			lock (sound)
 			{
-				sound.SubSounds[streamIndex].Resume();
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Resume();
+				else sound.Resume();
+				
 				RefreshPlaybackState();
 			}
 		}
@@ -358,7 +382,10 @@ namespace Alexandria.Fmod
 		{
 			lock (sound)
 			{
-				sound.SubSounds[streamIndex].Stop();
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Stop();
+				else sound.Stop();
+				
 				RefreshPlaybackState();
 			}
 		}
