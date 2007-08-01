@@ -15,6 +15,14 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 
+		#region Private Fields
+		private string path;
+		private Sound sound;
+		private bool disposed;
+		private BufferState bufferState = BufferState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		#endregion
+
 		#region IAudioStream Members
 		public bool IsMuted
 		{
@@ -149,6 +157,12 @@ namespace Alexandria.Fmod
 			{
 				throw new Exception("The method or operation is not implemented.");
 			}
+		}
+
+		public int StreamIndex
+		{
+			get { return 0; }
+			set { }
 		}
 
 		public int Read(byte[] buffer, int offset, int count)

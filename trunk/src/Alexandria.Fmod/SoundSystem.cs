@@ -1416,17 +1416,17 @@ namespace Alexandria.Fmod
 			else throw new ArgumentNullException("sound");
 		}
 		
-		internal CompactDiscSound CreateCompactDiscSound(Uri path)
+		internal Sound CreateSound(string path)
 		{
-			if (path != null)
+			if (!string.IsNullOrEmpty(path))
 			{
 				currentResult = Result.Ok;
 				IntPtr soundHandle = new IntPtr();
-				CompactDiscSound sound = null;
+				Sound sound = null;
 
 				try
 				{
-					currentResult = NativeMethods.FMOD_System_CreateSound(handle, path.ToString(), (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
+					currentResult = NativeMethods.FMOD_System_CreateSound(handle, path, (Modes.Hardware | Modes.Fmod2D | Modes.CreateStream | Modes.OpenOnly | Modes.IgnoreTags), 0, ref soundHandle);
 					//currentResult = FMOD_System_CreateSound(handle, driveName, (Mode.Hardware | Mode.Fmod2D | Mode.IgnoreTags), 0, ref soundHandle);
 				}
 				catch (System.Runtime.InteropServices.ExternalException)
@@ -1436,14 +1436,14 @@ namespace Alexandria.Fmod
 
 				if (currentResult == Result.Ok)
 				{
-					sound = new CompactDiscSound(this, path);
+					sound = new Sound(this, path);
 					sound.Handle = soundHandle;
 				}
 				else throw new AlexandriaException("could not create compact disc sound: " + currentResult.ToString());
 
 				return sound;
 			}
-			else throw new ArgumentNullException("drive");
+			else throw new ArgumentNullException("path");
 		}
 		
 		//public CompactDiscSound CreateCompactDiscSound(char driveLetter)

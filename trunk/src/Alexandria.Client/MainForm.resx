@@ -262,7 +262,7 @@
     <value>0, 0</value>
   </data>
   <data name="FileMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 24</value>
+    <value>831, 24</value>
   </data>
   <data name="FileMenuStrip.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -340,7 +340,7 @@
     <value>0, 573</value>
   </data>
   <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 22</value>
+    <value>831, 22</value>
   </data>
   <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -675,204 +675,6 @@
   <data name="&gt;&gt;NowPlayingTitle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="InnerArtistAlbumSplit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="InnerArtistAlbumSplit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="ArtistGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Name" xml:space="preserve">
-    <value>ArtistListView</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Parent" xml:space="preserve">
-    <value>ArtistGroupBox</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ArtistGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 4</value>
-  </data>
-  <data name="ArtistGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 163</value>
-  </data>
-  <data name="ArtistGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="ArtistGroupBox.Text" xml:space="preserve">
-    <value>Artists</value>
-  </data>
-  <data name="&gt;&gt;ArtistGroupBox.Name" xml:space="preserve">
-    <value>ArtistGroupBox</value>
-  </data>
-  <data name="&gt;&gt;ArtistGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ArtistGroupBox.Parent" xml:space="preserve">
-    <value>InnerArtistAlbumSplit.Panel1</value>
-  </data>
-  <data name="&gt;&gt;ArtistGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel1.Name" xml:space="preserve">
-    <value>InnerArtistAlbumSplit.Panel1</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel1.Parent" xml:space="preserve">
-    <value>InnerArtistAlbumSplit</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AlbumGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Name" xml:space="preserve">
-    <value>AlbumListView</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Parent" xml:space="preserve">
-    <value>AlbumGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AlbumGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 4</value>
-  </data>
-  <data name="AlbumGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>390, 163</value>
-  </data>
-  <data name="AlbumGroupBox.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="AlbumGroupBox.Text" xml:space="preserve">
-    <value>Albums</value>
-  </data>
-  <data name="&gt;&gt;AlbumGroupBox.Name" xml:space="preserve">
-    <value>AlbumGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AlbumGroupBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumGroupBox.Parent" xml:space="preserve">
-    <value>InnerArtistAlbumSplit.Panel2</value>
-  </data>
-  <data name="&gt;&gt;AlbumGroupBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel2.Name" xml:space="preserve">
-    <value>InnerArtistAlbumSplit.Panel2</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel2.Parent" xml:space="preserve">
-    <value>InnerArtistAlbumSplit</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Panel2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="InnerArtistAlbumSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>757, 187</value>
-  </data>
-  <data name="InnerArtistAlbumSplit.SplitterDistance" type="System.Int32, mscorlib">
-    <value>359</value>
-  </data>
-  <data name="InnerArtistAlbumSplit.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Name" xml:space="preserve">
-    <value>InnerArtistAlbumSplit</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.Parent" xml:space="preserve">
-    <value>MidFilterQueueSplit.Panel1</value>
-  </data>
-  <data name="&gt;&gt;InnerArtistAlbumSplit.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ArtistListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ArtistListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
-  </data>
-  <data name="ArtistListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 138</value>
-  </data>
-  <data name="ArtistListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Name" xml:space="preserve">
-    <value>ArtistListView</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.Parent" xml:space="preserve">
-    <value>ArtistGroupBox</value>
-  </data>
-  <data name="&gt;&gt;ArtistListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ArtistNameColumn.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="ArtistNameColumn.Width" type="System.Int32, mscorlib">
-    <value>270</value>
-  </data>
-  <data name="ArtistTypeColumn.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="AlbumListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="AlbumListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="AlbumListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>377, 137</value>
-  </data>
-  <data name="AlbumListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Name" xml:space="preserve">
-    <value>AlbumListView</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.Parent" xml:space="preserve">
-    <value>AlbumGroupBox</value>
-  </data>
-  <data name="&gt;&gt;AlbumListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="AlbumNameColumn.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="AlbumNameColumn.Width" type="System.Int32, mscorlib">
-    <value>250</value>
-  </data>
-  <data name="AlbumReleaseDateColumn.Text" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="AlbumTypeColumn.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
   <data name="OuterPlaybackQueueSplit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -900,31 +702,31 @@
   <data name="&gt;&gt;UpperPlaybackStatusSplit.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="DetailGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="TasksGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="DetailGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TasksGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
   </data>
-  <data name="DetailGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>431, 171</value>
+  <data name="TasksGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>486, 171</value>
   </data>
-  <data name="DetailGroupBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="TasksGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="DetailGroupBox.Text" xml:space="preserve">
-    <value>Details</value>
+  <data name="TasksGroupBox.Text" xml:space="preserve">
+    <value>Tasks</value>
   </data>
-  <data name="&gt;&gt;DetailGroupBox.Name" xml:space="preserve">
-    <value>DetailGroupBox</value>
+  <data name="&gt;&gt;TasksGroupBox.Name" xml:space="preserve">
+    <value>TasksGroupBox</value>
   </data>
-  <data name="&gt;&gt;DetailGroupBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;TasksGroupBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;DetailGroupBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TasksGroupBox.Parent" xml:space="preserve">
     <value>UpperPlaybackStatusSplit.Panel2</value>
   </data>
-  <data name="&gt;&gt;DetailGroupBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;TasksGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;UpperPlaybackStatusSplit.Panel2.Name" xml:space="preserve">
@@ -940,7 +742,7 @@
     <value>1</value>
   </data>
   <data name="UpperPlaybackStatusSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>773, 178</value>
+    <value>828, 178</value>
   </data>
   <data name="UpperPlaybackStatusSplit.SplitterDistance" type="System.Int32, mscorlib">
     <value>330</value>
@@ -972,25 +774,61 @@
   <data name="&gt;&gt;OuterPlaybackQueueSplit.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="MidFilterQueueSplit.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ToolBoxGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="MidFilterQueueSplit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 3</value>
+  <data name="&gt;&gt;ToolBoxListView.Name" xml:space="preserve">
+    <value>ToolBoxListView</value>
   </data>
-  <data name="MidFilterQueueSplit.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
-    <value>Horizontal</value>
+  <data name="&gt;&gt;ToolBoxListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel1.Name" xml:space="preserve">
-    <value>MidFilterQueueSplit.Panel1</value>
+  <data name="&gt;&gt;ToolBoxListView.Parent" xml:space="preserve">
+    <value>ToolBoxGroupBox</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolBoxListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ToolBoxGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 3</value>
+  </data>
+  <data name="ToolBoxGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 349</value>
+  </data>
+  <data name="ToolBoxGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ToolBoxGroupBox.Text" xml:space="preserve">
+    <value>Tool Box</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxGroupBox.Name" xml:space="preserve">
+    <value>ToolBoxGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxGroupBox.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxGroupBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel1.Parent" xml:space="preserve">
-    <value>MidFilterQueueSplit</value>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -1048,7 +886,7 @@
     <value>7, 20</value>
   </data>
   <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>738, 136</value>
+    <value>531, 323</value>
   </data>
   <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1066,10 +904,10 @@
     <value>0</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 4</value>
+    <value>3, 3</value>
   </data>
   <data name="QueueGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>751, 162</value>
+    <value>544, 349</value>
   </data>
   <data name="QueueGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1084,42 +922,42 @@
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;QueueGroupBox.Parent" xml:space="preserve">
-    <value>MidFilterQueueSplit.Panel2</value>
+    <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;QueueGroupBox.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel2.Name" xml:space="preserve">
-    <value>MidFilterQueueSplit.Panel2</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel2.Parent" xml:space="preserve">
-    <value>MidFilterQueueSplit</value>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Panel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="MidFilterQueueSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>763, 349</value>
+  <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 355</value>
   </data>
-  <data name="MidFilterQueueSplit.SplitterDistance" type="System.Int32, mscorlib">
-    <value>173</value>
+  <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
+    <value>277</value>
   </data>
-  <data name="MidFilterQueueSplit.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+  <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Name" xml:space="preserve">
-    <value>MidFilterQueueSplit</value>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Type" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.Parent" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
     <value>OuterPlaybackQueueSplit.Panel2</value>
   </data>
-  <data name="&gt;&gt;MidFilterQueueSplit.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;OuterPlaybackQueueSplit.Panel2.Name" xml:space="preserve">
@@ -1135,7 +973,7 @@
     <value>1</value>
   </data>
   <data name="OuterPlaybackQueueSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>776, 543</value>
+    <value>831, 543</value>
   </data>
   <data name="OuterPlaybackQueueSplit.SplitterDistance" type="System.Int32, mscorlib">
     <value>184</value>
@@ -1155,6 +993,89 @@
   <data name="&gt;&gt;OuterPlaybackQueueSplit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ToolBoxListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="ToolBoxListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="ToolBoxListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 323</value>
+  </data>
+  <metadata name="ToolBoxSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>492, 7</value>
+  </metadata>
+  <data name="ToolBoxSmallImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABW
+        CwAAAk1TRnQBSQFMAgEBBAEAAQkBAAEEAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8A/wD/AP8AGAABoQHH
+        Aa0BzwK0Aq0BpwGhEwABoQFoCCwEJgFoAaESAAGhAa0BtAEJAfQB9QH0ARkB8AG0Aa0BoRIAAWgBUwV6
+        B3UBTQFoAc8B9wGSAe0D7AH4AesEbQLqAWYBAAGhAa0BCQT0ARkBCQHdARkBCQGtAaERAAEyAZoDegNT
+        AnUCTQN1ASYB7wHzBPAIvAHyAeoBAAGnAbsCGQL0AfUB9AEZAgkBGQEJAacBoRAAATIBmgF6AfYB/wGa
+        AVMBdQH/ARsBTQGaAf8BmgF1ASYB7wHwAgcJ7wH3AbwB6gHPAbQB8AHdAQkBGQEJArQBuwEZAgkBGQGR
+        AYYBzwH3AZIC7QTsAvgC6wJtAYYBMgKaAv8BwwFTAZoB/wEaAVMBGgH/AZQBdQEmAQcB8QIHAuwC7QTs
+        Au8BvAFtAe8BtQEJARkBCQEZAbQBBwG8AbQBGQIJARkBtAFtAe8B8wTwCLwB8gFtATIBmgF1ARoBwwGa
+        AXUB9gH/AZoBUwH1Af8CdQEmAQcB8QIHB+0B7ALvAbwBbQHvAQcBtAEZAQkB3QEJArQBuwEZAQkBGQG0
+        AbUBbQHvAfAC7wT3BZIB9wG8AW0BMgGaA3UBegEaAf8B9gF1AXoB/wH1AU0BdQEsAbUB8QG8BgcF7wEH
+        Aa4B7wHxAesIbQLqAfgBvAHrAe8B8QHrCG0C6gH4AbwB6wEyAZoBdQF6AZoB9gH/AfYBegFTAfYB/wGa
+        AVMBdQEsAbUB8wTyB/EB8gG8Aa4B7wHxBe8E9wKSAe8BvAHrAe8B8QXvBPcCkgHvAbwB6wEyApoD/wH2
+        AXoBdQEaAf8B9gF1AVMBegEsAacB8QHzAvEB8AK8AQcCvAHwAfEB8wH3AacBtQHxAbwGBwXvAQcBrgG1
+        AfEBvAYHBe8BBwGuATIBegGaAfYBwwGaAXoBdQEaAv8BmgJTAXoBLAEAAbUB8wHxBvIB8QEHAvABrgEA
+        AbUF8gfxAfIB8AGuAbUF8gfxAfIB8AGuATIBegFTA3UBmgH2Av8BmgJ1AVMBegEsAQABpwHxAfQI8wH0
+        Ae8BpwEAAacBvAHzAvEB8AK8AQcCvAHwAfEB8wH3AqcBvAHzAvEB8AK8AQcCvAHwAfEB8wH3AacBMgF6
+        AXUBmgEaAfYC/wH2AZoEdQF6ASwCAAG1AvACvAMHAu8B9wGuAwABtQHyAfEG8gHxAQcC8AGuAgABtQHy
+        AfEG8gHxAQcC8AGuAQABMgF6AZoD/wH2AZoBegV1AZoBLBEAAacB8AH0CPMB9AHvAacCAAGnAfAB9Ajz
+        AfQB7wGnAQABMgJ6A5oFdQF6AXUBegGaASwSAAG1BAcE7wL3Aa4EAAG1BAcE7wL3Aa4CAAFoAVMFegea
+        AVkBaDAAAaEBaAwyAWgBoQFCAU0BPgcAAT4DAAEoAwABQAMAASADAAEBAQABAQYAAQEWAAP/gQAC/wHg
+        AQcC/wIAAv8BwAEDAv8EAAGAAQEC/wQAAYABAAL/MgABgAEBBgABgAEBBgABwAEDAYABAQGAAQECAAL/
+        AYABAQGAAQECAAL/AcABAwHAAQMCAAb/AgAL
+</value>
+  </data>
+  <data name="ToolBoxListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Name" xml:space="preserve">
+    <value>ToolBoxListView</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Parent" xml:space="preserve">
+    <value>ToolBoxGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1162,7 +1083,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>776, 595</value>
+    <value>831, 595</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1316,36 +1237,6 @@
   <data name="&gt;&gt;PlaybackTimer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ArtistNameColumn.Name" xml:space="preserve">
-    <value>ArtistNameColumn</value>
-  </data>
-  <data name="&gt;&gt;ArtistNameColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ArtistTypeColumn.Name" xml:space="preserve">
-    <value>ArtistTypeColumn</value>
-  </data>
-  <data name="&gt;&gt;ArtistTypeColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumNameColumn.Name" xml:space="preserve">
-    <value>AlbumNameColumn</value>
-  </data>
-  <data name="&gt;&gt;AlbumNameColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumReleaseDateColumn.Name" xml:space="preserve">
-    <value>AlbumReleaseDateColumn</value>
-  </data>
-  <data name="&gt;&gt;AlbumReleaseDateColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AlbumTypeColumn.Name" xml:space="preserve">
-    <value>AlbumTypeColumn</value>
-  </data>
-  <data name="&gt;&gt;AlbumTypeColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;TrackNumberColumn.Name" xml:space="preserve">
     <value>TrackNumberColumn</value>
   </data>
@@ -1393,6 +1284,12 @@
   </data>
   <data name="&gt;&gt;TrackFormatColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxSmallImageList.Name" xml:space="preserve">
+    <value>ToolBoxSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

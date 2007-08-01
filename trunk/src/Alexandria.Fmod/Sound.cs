@@ -22,28 +22,14 @@ namespace Alexandria.Fmod
 		{			
 			this.soundSystem = soundSystem;
 			this.uri = uri;
-			if (uri != null)
-			{
-				//if (string.Compare(uri.Scheme, "file") == 0)
-					//status = LocalSoundNotLoaded.Example;
-				//else
-					//status = RemoteSoundNotReady.Example;
-			}
 		}
 		
-		//internal Sound(SoundSystem soundSystem, Uri path)
-		//{
-			//this.soundSystem = soundSystem;
-			//if (disc != null)
-			//{
-				//mediaFile = new MediaFile(disc.Uri.AbsolutePath, true);
-				//if (this.mediaFile.IsLocal)
-				//status = LocalSoundNotLoaded.Example;
-				//else
-				//status = RemoteSoundNotReady.Example;
-			//}
-		//}
-		
+		internal Sound(SoundSystem soundSystem, string path)
+		{
+			this.soundSystem = soundSystem;
+			this.uri = new Uri(string.Format("file://{0}{1}", path, System.IO.Path.DirectorySeparatorChar));
+		}
+				
 		/// <summary>
 		/// SubSound constructor
 		/// </summary>
@@ -54,12 +40,6 @@ namespace Alexandria.Fmod
 			{
 				this.soundSystem = parentSound.SoundSystem;
 				this.parentSound = parentSound;
-
-				//TODO: replace this with a SoundFactory that creates either local or streaming sounds
-				//if (parentSound.Location.IsLocal)
-					//status = LocalSoundNotLoaded.Example;
-				//else
-					//status = RemoteSoundNotReady.Example;
 			}
 		}
 		#endregion
@@ -83,12 +63,12 @@ namespace Alexandria.Fmod
 				
 					if (this.subSounds != null)
 					{
-						uint i =0;
-						foreach(Sound subSound in this.subSounds)
+						//NOTE: Do not use foreach because Remove() breaks the enumerator
+						int count = subSounds.Count;
+						for(int i=1;i<=count;i++)
 						{
-							subSound.Dispose();
-							this.subSounds.Remove(i);
-							i++;						
+							subSounds[i].Dispose();
+							subSounds.Remove((uint)i);
 						}
 					}
 				}

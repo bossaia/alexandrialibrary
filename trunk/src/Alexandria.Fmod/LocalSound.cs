@@ -238,6 +238,12 @@ namespace Alexandria.Fmod
 			}
 		}
 
+		public int StreamIndex
+		{
+			get { return 0; }
+			set { }
+		}
+
 		/// <summary>
 		/// Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read
 		/// </summary>

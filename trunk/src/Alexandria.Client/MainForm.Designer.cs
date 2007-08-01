@@ -62,20 +62,9 @@ namespace Alexandria.Client
 			this.VolumeUpButton = new System.Windows.Forms.Button();
 			this.NowPlayingLabel = new System.Windows.Forms.Label();
 			this.NowPlayingTitle = new System.Windows.Forms.Label();
-			this.InnerArtistAlbumSplit = new System.Windows.Forms.SplitContainer();
-			this.ArtistGroupBox = new System.Windows.Forms.GroupBox();
-			this.ArtistListView = new System.Windows.Forms.ListView();
-			this.ArtistNameColumn = new System.Windows.Forms.ColumnHeader();
-			this.ArtistTypeColumn = new System.Windows.Forms.ColumnHeader();
-			this.AlbumGroupBox = new System.Windows.Forms.GroupBox();
-			this.AlbumListView = new System.Windows.Forms.ListView();
-			this.AlbumNameColumn = new System.Windows.Forms.ColumnHeader();
-			this.AlbumReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
-			this.AlbumTypeColumn = new System.Windows.Forms.ColumnHeader();
 			this.OuterPlaybackQueueSplit = new System.Windows.Forms.SplitContainer();
 			this.UpperPlaybackStatusSplit = new System.Windows.Forms.SplitContainer();
-			this.DetailGroupBox = new System.Windows.Forms.GroupBox();
-			this.MidFilterQueueSplit = new System.Windows.Forms.SplitContainer();
+			this.TasksGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
 			this.TrackNumberColumn = new System.Windows.Forms.ColumnHeader();
@@ -86,26 +75,26 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.ToolBoxGroupBox = new System.Windows.Forms.GroupBox();
+			this.ToolBoxListView = new System.Windows.Forms.ListView();
+			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
 			this.StatusStrip.SuspendLayout();
 			this.PlaybackGroupBox.SuspendLayout();
-			this.InnerArtistAlbumSplit.Panel1.SuspendLayout();
-			this.InnerArtistAlbumSplit.Panel2.SuspendLayout();
-			this.InnerArtistAlbumSplit.SuspendLayout();
-			this.ArtistGroupBox.SuspendLayout();
-			this.AlbumGroupBox.SuspendLayout();
 			this.OuterPlaybackQueueSplit.Panel1.SuspendLayout();
 			this.OuterPlaybackQueueSplit.Panel2.SuspendLayout();
 			this.OuterPlaybackQueueSplit.SuspendLayout();
 			this.UpperPlaybackStatusSplit.Panel1.SuspendLayout();
 			this.UpperPlaybackStatusSplit.Panel2.SuspendLayout();
 			this.UpperPlaybackStatusSplit.SuspendLayout();
-			this.MidFilterQueueSplit.Panel1.SuspendLayout();
-			this.MidFilterQueueSplit.Panel2.SuspendLayout();
-			this.MidFilterQueueSplit.SuspendLayout();
 			this.QueueGroupBox.SuspendLayout();
+			this.splitContainer1.Panel1.SuspendLayout();
+			this.splitContainer1.Panel2.SuspendLayout();
+			this.splitContainer1.SuspendLayout();
+			this.ToolBoxGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -308,74 +297,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.NowPlayingTitle, "NowPlayingTitle");
 			this.NowPlayingTitle.Name = "NowPlayingTitle";
 			// 
-			// InnerArtistAlbumSplit
-			// 
-			resources.ApplyResources(this.InnerArtistAlbumSplit, "InnerArtistAlbumSplit");
-			this.InnerArtistAlbumSplit.Name = "InnerArtistAlbumSplit";
-			// 
-			// InnerArtistAlbumSplit.Panel1
-			// 
-			this.InnerArtistAlbumSplit.Panel1.Controls.Add(this.ArtistGroupBox);
-			// 
-			// InnerArtistAlbumSplit.Panel2
-			// 
-			this.InnerArtistAlbumSplit.Panel2.Controls.Add(this.AlbumGroupBox);
-			// 
-			// ArtistGroupBox
-			// 
-			resources.ApplyResources(this.ArtistGroupBox, "ArtistGroupBox");
-			this.ArtistGroupBox.Controls.Add(this.ArtistListView);
-			this.ArtistGroupBox.Name = "ArtistGroupBox";
-			this.ArtistGroupBox.TabStop = false;
-			// 
-			// ArtistListView
-			// 
-			resources.ApplyResources(this.ArtistListView, "ArtistListView");
-			this.ArtistListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ArtistNameColumn,
-            this.ArtistTypeColumn});
-			this.ArtistListView.Name = "ArtistListView";
-			this.ArtistListView.UseCompatibleStateImageBehavior = false;
-			this.ArtistListView.View = System.Windows.Forms.View.Details;
-			// 
-			// ArtistNameColumn
-			// 
-			resources.ApplyResources(this.ArtistNameColumn, "ArtistNameColumn");
-			// 
-			// ArtistTypeColumn
-			// 
-			resources.ApplyResources(this.ArtistTypeColumn, "ArtistTypeColumn");
-			// 
-			// AlbumGroupBox
-			// 
-			resources.ApplyResources(this.AlbumGroupBox, "AlbumGroupBox");
-			this.AlbumGroupBox.Controls.Add(this.AlbumListView);
-			this.AlbumGroupBox.Name = "AlbumGroupBox";
-			this.AlbumGroupBox.TabStop = false;
-			// 
-			// AlbumListView
-			// 
-			resources.ApplyResources(this.AlbumListView, "AlbumListView");
-			this.AlbumListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.AlbumNameColumn,
-            this.AlbumReleaseDateColumn,
-            this.AlbumTypeColumn});
-			this.AlbumListView.Name = "AlbumListView";
-			this.AlbumListView.UseCompatibleStateImageBehavior = false;
-			this.AlbumListView.View = System.Windows.Forms.View.Details;
-			// 
-			// AlbumNameColumn
-			// 
-			resources.ApplyResources(this.AlbumNameColumn, "AlbumNameColumn");
-			// 
-			// AlbumReleaseDateColumn
-			// 
-			resources.ApplyResources(this.AlbumReleaseDateColumn, "AlbumReleaseDateColumn");
-			// 
-			// AlbumTypeColumn
-			// 
-			resources.ApplyResources(this.AlbumTypeColumn, "AlbumTypeColumn");
-			// 
 			// OuterPlaybackQueueSplit
 			// 
 			resources.ApplyResources(this.OuterPlaybackQueueSplit, "OuterPlaybackQueueSplit");
@@ -387,7 +308,7 @@ namespace Alexandria.Client
 			// 
 			// OuterPlaybackQueueSplit.Panel2
 			// 
-			this.OuterPlaybackQueueSplit.Panel2.Controls.Add(this.MidFilterQueueSplit);
+			this.OuterPlaybackQueueSplit.Panel2.Controls.Add(this.splitContainer1);
 			// 
 			// UpperPlaybackStatusSplit
 			// 
@@ -401,26 +322,13 @@ namespace Alexandria.Client
 			// 
 			// UpperPlaybackStatusSplit.Panel2
 			// 
-			this.UpperPlaybackStatusSplit.Panel2.Controls.Add(this.DetailGroupBox);
+			this.UpperPlaybackStatusSplit.Panel2.Controls.Add(this.TasksGroupBox);
 			// 
-			// DetailGroupBox
+			// TasksGroupBox
 			// 
-			resources.ApplyResources(this.DetailGroupBox, "DetailGroupBox");
-			this.DetailGroupBox.Name = "DetailGroupBox";
-			this.DetailGroupBox.TabStop = false;
-			// 
-			// MidFilterQueueSplit
-			// 
-			resources.ApplyResources(this.MidFilterQueueSplit, "MidFilterQueueSplit");
-			this.MidFilterQueueSplit.Name = "MidFilterQueueSplit";
-			// 
-			// MidFilterQueueSplit.Panel1
-			// 
-			this.MidFilterQueueSplit.Panel1.Controls.Add(this.InnerArtistAlbumSplit);
-			// 
-			// MidFilterQueueSplit.Panel2
-			// 
-			this.MidFilterQueueSplit.Panel2.Controls.Add(this.QueueGroupBox);
+			resources.ApplyResources(this.TasksGroupBox, "TasksGroupBox");
+			this.TasksGroupBox.Name = "TasksGroupBox";
+			this.TasksGroupBox.TabStop = false;
 			// 
 			// QueueGroupBox
 			// 
@@ -431,6 +339,8 @@ namespace Alexandria.Client
 			// 
 			// QueueListView
 			// 
+			this.QueueListView.AllowColumnReorder = true;
+			this.QueueListView.AllowDrop = true;
 			resources.ApplyResources(this.QueueListView, "QueueListView");
 			this.QueueListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.TrackNumberColumn,
@@ -446,6 +356,8 @@ namespace Alexandria.Client
 			this.QueueListView.Name = "QueueListView";
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
+			this.QueueListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragEnter);
+			this.QueueListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragDrop);
 			// 
 			// TrackNumberColumn
 			// 
@@ -479,6 +391,48 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
+			// splitContainer1
+			// 
+			resources.ApplyResources(this.splitContainer1, "splitContainer1");
+			this.splitContainer1.Name = "splitContainer1";
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.ToolBoxGroupBox);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.QueueGroupBox);
+			// 
+			// ToolBoxGroupBox
+			// 
+			resources.ApplyResources(this.ToolBoxGroupBox, "ToolBoxGroupBox");
+			this.ToolBoxGroupBox.Controls.Add(this.ToolBoxListView);
+			this.ToolBoxGroupBox.Name = "ToolBoxGroupBox";
+			this.ToolBoxGroupBox.TabStop = false;
+			// 
+			// ToolBoxListView
+			// 
+			resources.ApplyResources(this.ToolBoxListView, "ToolBoxListView");
+			this.ToolBoxListView.MultiSelect = false;
+			this.ToolBoxListView.Name = "ToolBoxListView";
+			this.ToolBoxListView.ShowItemToolTips = true;
+			this.ToolBoxListView.SmallImageList = this.ToolBoxSmallImageList;
+			this.ToolBoxListView.UseCompatibleStateImageBehavior = false;
+			this.ToolBoxListView.View = System.Windows.Forms.View.SmallIcon;
+			this.ToolBoxListView.DragLeave += new System.EventHandler(this.ToolBoxListView_DragLeave);
+			this.ToolBoxListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ToolBoxListView_ItemDrag);
+			this.ToolBoxListView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ToolBoxListView_MouseDown);
+			// 
+			// ToolBoxSmallImageList
+			// 
+			this.ToolBoxSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ToolBoxSmallImageList.ImageStream")));
+			this.ToolBoxSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.ToolBoxSmallImageList.Images.SetKeyName(0, "drive.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(1, "drive_cd.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(2, "drive_cd_empty.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(3, "feed.png");
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -496,21 +450,17 @@ namespace Alexandria.Client
 			this.StatusStrip.PerformLayout();
 			this.PlaybackGroupBox.ResumeLayout(false);
 			this.PlaybackGroupBox.PerformLayout();
-			this.InnerArtistAlbumSplit.Panel1.ResumeLayout(false);
-			this.InnerArtistAlbumSplit.Panel2.ResumeLayout(false);
-			this.InnerArtistAlbumSplit.ResumeLayout(false);
-			this.ArtistGroupBox.ResumeLayout(false);
-			this.AlbumGroupBox.ResumeLayout(false);
 			this.OuterPlaybackQueueSplit.Panel1.ResumeLayout(false);
 			this.OuterPlaybackQueueSplit.Panel2.ResumeLayout(false);
 			this.OuterPlaybackQueueSplit.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.Panel1.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.Panel2.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.ResumeLayout(false);
-			this.MidFilterQueueSplit.Panel1.ResumeLayout(false);
-			this.MidFilterQueueSplit.Panel2.ResumeLayout(false);
-			this.MidFilterQueueSplit.ResumeLayout(false);
 			this.QueueGroupBox.ResumeLayout(false);
+			this.splitContainer1.Panel1.ResumeLayout(false);
+			this.splitContainer1.Panel2.ResumeLayout(false);
+			this.splitContainer1.ResumeLayout(false);
+			this.ToolBoxGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -536,13 +486,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripStatusLabel StreamingStatus;
 		private System.Windows.Forms.ToolStripStatusLabel LoadStatus;
 		private System.Windows.Forms.GroupBox PlaybackGroupBox;
-		private System.Windows.Forms.SplitContainer InnerArtistAlbumSplit;
 		private System.Windows.Forms.SplitContainer OuterPlaybackQueueSplit;
-		private System.Windows.Forms.SplitContainer MidFilterQueueSplit;
-		private System.Windows.Forms.GroupBox ArtistGroupBox;
-		private System.Windows.Forms.ListView ArtistListView;
-		private System.Windows.Forms.GroupBox AlbumGroupBox;
-		private System.Windows.Forms.ListView AlbumListView;
 		private System.Windows.Forms.GroupBox QueueGroupBox;
 		private System.Windows.Forms.ListView QueueListView;
 		private System.Windows.Forms.ColumnHeader TrackNumberColumn;
@@ -553,13 +497,8 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ColumnHeader TrackReleaseDateColumn;
 		private System.Windows.Forms.ColumnHeader TrackFileColumn;
 		private System.Windows.Forms.ColumnHeader TrackFormatColumn;
-		private System.Windows.Forms.ColumnHeader ArtistNameColumn;
-		private System.Windows.Forms.ColumnHeader ArtistTypeColumn;
-		private System.Windows.Forms.ColumnHeader AlbumNameColumn;
-		private System.Windows.Forms.ColumnHeader AlbumReleaseDateColumn;
-		private System.Windows.Forms.ColumnHeader AlbumTypeColumn;
 		private System.Windows.Forms.SplitContainer UpperPlaybackStatusSplit;
-		private System.Windows.Forms.GroupBox DetailGroupBox;
+		private System.Windows.Forms.GroupBox TasksGroupBox;
 		private System.Windows.Forms.Label NowPlayingLabel;
 		private System.Windows.Forms.Label NowPlayingTitle;
 		private System.Windows.Forms.Button VolumeUpButton;
@@ -572,6 +511,10 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem catalogToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
+		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.GroupBox ToolBoxGroupBox;
+		private System.Windows.Forms.ListView ToolBoxListView;
+		private System.Windows.Forms.ImageList ToolBoxSmallImageList;
 	}
 }
 

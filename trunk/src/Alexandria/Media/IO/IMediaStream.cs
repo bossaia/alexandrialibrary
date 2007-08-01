@@ -42,6 +42,7 @@ namespace Alexandria.Media.IO
 		void Flush();		
 		long Length { get; }
 		long Position { get; set; }
+		int StreamIndex { get; set; }
 		int Read(byte[] buffer, int offset, int count);
 		long Seek(long offset, SeekOrigin origin);
 		void SetLength(long value);

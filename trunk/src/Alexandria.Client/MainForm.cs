@@ -89,6 +89,8 @@ namespace Alexandria.Client
 		private IPersistenceBroker broker;
 		private IPersistenceMechanism mechanism;
 		private QueueController controller;
+		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
+		
 		//private string dbDir;
 		//private string dbFile;
 		private string dbPath;
@@ -177,6 +179,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			InitializeNotifyIcon();
 			InitializePluginMenu();
+			InitializeToolbox();
 		}
 		#endregion
 		
@@ -358,6 +361,36 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				item.ToolTipText = plugin.Description;
 				item.Tag = plugin;
 				pluginsToolStripMenuItem.DropDown.Items.Add(item);				
+			}
+		}
+		#endregion
+		
+		#region InitializeToolbox
+		private void InitializeToolbox()
+		{
+			foreach(DriveInfo drive in DriveInfo.GetDrives())
+			{
+				if (drive.DriveType == System.IO.DriveType.Fixed)
+				{
+					ListViewItem item = new ListViewItem(drive.Name, 0);
+					item.ToolTipText = string.Format("{0}/{1}", drive.TotalFreeSpace / 1024, drive.TotalSize / 1024);
+					ToolBoxListView.Items.Add(item);
+				}
+				else if (drive.DriveType == System.IO.DriveType.CDRom)
+				{
+					int imageIndex = 2;
+					string toolTipText = "Not Ready";
+					if (drive.IsReady)
+					{
+						imageIndex = 1;
+						toolTipText = drive.VolumeLabel;
+					}
+					
+					ListViewItem item = new ListViewItem(drive.Name, imageIndex);
+					item.ToolTipText = toolTipText;
+					item.Tag = new CompactDiscTrackSource(albumFactory, new Uri(drive.Name));
+					ToolBoxListView.Items.Add(item);
+				}
 			}
 		}
 		#endregion
@@ -546,6 +579,62 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				if (controller.AudioStream.CanSetElapsed)
 				{
 					controller.AudioStream.Elapsed = new TimeSpan(0, 0, PlaybackTrackBar.Value);
+				}
+			}
+		}
+
+		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
+		{
+			//if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
+			//{
+				//if (ToolBoxListView.SelectedItems[0].Tag != null && ToolBoxListView.SelectedItems[0].Tag is ITrackSource)
+				//{
+					//ToolBoxListView.DoDragDrop(ToolBoxListView.SelectedItems[0].Tag, DragDropEffects.Copy);
+				//}
+			//}
+			//else
+			//{
+				//select the item based on e.X, e.Y then use the above logic
+				ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
+				if (item != null && item.Tag != null && item.Tag is ITrackSource)
+				{
+					item.Selected = true;
+					ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
+				}
+			//}
+		}
+
+		private void ToolBoxListView_ItemDrag(object sender, ItemDragEventArgs e)
+		{
+			object x = e.Item;
+		}
+
+		private void ToolBoxListView_DragLeave(object sender, EventArgs e)
+		{
+		}
+
+		private void QueueListView_DragEnter(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.None;
+			
+			if (e.Data != null)
+			{
+				object source = e.Data.GetData(typeof(CompactDiscTrackSource));
+				if (source != null)
+					e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void QueueListView_DragDrop(object sender, DragEventArgs e)
+		{
+			if (e.Data != null)
+			{
+				object data = e.Data.GetData(typeof(CompactDiscTrackSource));
+				if (data != null)
+				{
+					CompactDiscTrackSource trackSource = (CompactDiscTrackSource)data;
+					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
+					controller.LoadTracks(tracks);
 				}
 			}
 		}

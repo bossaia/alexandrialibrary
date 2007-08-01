@@ -288,7 +288,7 @@ namespace Alexandria.MusicBrainz
 					Debug.WriteLine("Drive Name:" + path.ToString());
 
 					//"/dev/hdc" or D:
-					string driveName = path.ToString();
+					string driveName = path.LocalPath;
 					if (driveName.IndexOf(@"\") > -1)
 					{
 						driveName = driveName.Replace(@"\", string.Empty);

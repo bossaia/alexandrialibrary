@@ -112,8 +112,8 @@ namespace Alexandria.MusicBrainz
                 
         public int TrackNumber
         {
-            get {return track_num;}
-            internal set {track_num = value;}
+            get {return trackNumber;}
+            internal set {trackNumber = value;}
         }
                 
         public int TrackCount

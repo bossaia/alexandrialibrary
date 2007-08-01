@@ -38,6 +38,7 @@ using Alexandria.Persistence;
 using Alexandria.Playlist;
 using Alexandria.TagLib;
 
+using Alexandria.Fmod;
 using Alexandria.Mp3Tunes;
 
 namespace Alexandria.Client
@@ -66,6 +67,7 @@ namespace Alexandria.Client
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
 		private IAudioStream audioStream;
+		private int audioStreamIndex;
 		private IList<IAudioTrack> tracks;
 		
 		MusicLocker locker;
@@ -317,32 +319,43 @@ namespace Alexandria.Client
 					if (selectedItem.Tag != null)
 					{
 						selectedTrack = (IAudioTrack)selectedItem.Tag;
-						if (selectedTrack.Path.IsFile)
+						if (selectedTrack.Format == "cdda")
 						{
-							audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
+							string discPath = selectedTrack.Path.LocalPath.Substring(0,2);
+							audioStream = new Fmod.CompactDiscSound(discPath);
+							audioStream.StreamIndex = selectedTrack.TrackNumber;
 						}
 						else
 						{
-							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-							fileName = CleanupFileName(fileName);						
-							if (!System.IO.File.Exists(fileName))
+							if (selectedTrack.Path.IsFile)
 							{
-								if (!System.IO.Directory.Exists(tempPath))
-									System.IO.Directory.CreateDirectory(tempPath);
-							
-								WebClient client = new WebClient();
-								Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
-								try
-								{
-									client.DownloadFile(address, fileName);
-								}
-								catch (WebException ex)
-								{
-									throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
-								}
+								audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
+								audioStream.StreamIndex = 0;
 							}
+							else
+							{
+								string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+								fileName = CleanupFileName(fileName);						
+								if (!System.IO.File.Exists(fileName))
+								{
+									if (!System.IO.Directory.Exists(tempPath))
+										System.IO.Directory.CreateDirectory(tempPath);
+								
+									WebClient client = new WebClient();
+									Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+									try
+									{
+										client.DownloadFile(address, fileName);
+									}
+									catch (WebException ex)
+									{
+										throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+									}
+								}
 
-							audioStream = new Fmod.LocalSound(fileName);
+								audioStream = new Fmod.LocalSound(fileName);
+								audioStream.StreamIndex = 0;
+							}
 						}
 						
 						if (audioStream != null && audioStream.Duration != selectedTrack.Duration)
@@ -404,7 +417,7 @@ namespace Alexandria.Client
 		public void Play()
 		{
 			if (audioStream != null)
-			{
+			{			
 				if (audioStream.PlaybackState != PlaybackState.Playing)
 				{
 					if (audioStream.PlaybackState == PlaybackState.Paused)
@@ -415,7 +428,7 @@ namespace Alexandria.Client
 					else
 					{
 						if (audioStream.PlaybackState == PlaybackState.Stopped)
-						{
+						{						
 							if (OnTrackStart != null)
 								OnTrackStart(audioStream, EventArgs.Empty);
 						}

@@ -6,7 +6,7 @@ using Alexandria;
 
 namespace Alexandria.Fmod
 {	
-	internal class SoundCollection : IEnumerable<Sound>
+	internal class SoundCollection : IEnumerable<Sound>, IList<Sound>
 	{
 		#region Contructors
 		internal SoundCollection(Sound parentSound, bool initialize)
@@ -56,17 +56,18 @@ namespace Alexandria.Fmod
 		{
 			currentResult = NativeMethods.FMOD_Sound_GetNumSubSounds(parentSound.Handle, ref totalCount);
 			
-			Sound subSound;
-			IntPtr subSoundHandle;
+			//Sound subSound;
+			//IntPtr subSoundHandle;
 			
 			subSounds.Clear();
 			//subSounds.Capacity = totalCount + 1;
 			
-			for (uint i = 0; i < totalCount; i++)
+			for (int i = 0; i < totalCount; i++)
 			{				
-				subSoundHandle = IntPtr.Zero;
-				currentResult = NativeMethods.FMOD_Sound_GetSubSound(parentSound.Handle, (int)i, ref subSoundHandle);
-				subSound = new Sound(parentSound);
+				IntPtr subSoundHandle = new IntPtr();
+				currentResult = NativeMethods.FMOD_Sound_GetSubSound(parentSound.Handle, i, ref subSoundHandle);
+				Sound subSound = new Sound(parentSound);
+				//subSound.Handle = new IntPtr();
 				subSound.Handle = subSoundHandle;
 				subSounds.Add((uint)i + 1, subSound);
 			}
@@ -133,6 +134,83 @@ namespace Alexandria.Fmod
 			foreach (Sound sound in subSounds.Values)
 				yield return sound;
 		}
+		#endregion
+
+		#region IList<Sound> Members
+
+		public int IndexOf(Sound item)
+		{
+			if (subSounds != null && subSounds.Count > 0)
+			{
+				for(uint i=0;i<subSounds.Count;i++)
+					if (subSounds[i] == item) return (int)i;
+			}
+			return -1;
+		}
+
+		public void Insert(int index, Sound item)
+		{
+			subSounds[(uint)index] = item;
+		}
+
+		public void RemoveAt(int index)
+		{
+			subSounds.Remove((uint)index);
+		}
+
+		public Sound this[int index]
+		{
+			get { return subSounds[(uint)index]; }
+			set	{ subSounds[(uint)index] = value; }
+		}
+
+		#endregion
+
+		#region ICollection<Sound> Members
+
+		public void Add(Sound item)
+		{
+			subSounds[(uint)subSounds.Count+1] = item;
+		}
+
+		public void Clear()
+		{
+			subSounds.Clear();
+		}
+
+		public bool Contains(Sound item)
+		{		
+			return (IndexOf(item) > -1);
+		}
+
+		public void CopyTo(Sound[] array, int arrayIndex)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		int ICollection<Sound>.Count
+		{
+			get { return subSounds.Count; }
+		}
+
+		public bool IsReadOnly
+		{
+			get { return false; }
+		}
+
+		public bool Remove(Sound item)
+		{
+			for(uint i=0; i<subSounds.Count;i++)
+			{
+				if (subSounds[i] == item)
+				{
+					subSounds.Remove(i);
+					return true;
+				}
+			}
+			return false;
+		}
+
 		#endregion
 	}
 }
