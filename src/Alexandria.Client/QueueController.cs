@@ -356,11 +356,11 @@ namespace Alexandria.Client
 								audioStream = new Fmod.LocalSound(fileName);
 								audioStream.StreamIndex = 0;
 							}
-						}
-						
-						if (audioStream != null && audioStream.Duration != selectedTrack.Duration)
-						{
-							selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+
+							if (audioStream != null && audioStream.Duration != selectedTrack.Duration)
+							{
+								selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+							}
 						}
 					}
 					else throw new ApplicationException("Could not load selected track: Id was undefined");
