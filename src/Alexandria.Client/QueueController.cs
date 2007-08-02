@@ -53,6 +53,11 @@ namespace Alexandria.Client
 			
 			this.locker = new MusicLocker();
 			locker.Login("dan.poage@gmail.com", "automatic");
+			
+			Fmod.ConfigurationSettings configSettings = new Alexandria.Fmod.ConfigurationSettings();
+			
+			//TODO: change this to read from the config file
+			Fmod.SoundSystemFactory.DefaultSoundSystem.OutputType = OutputType.DirectSound;
 		}
 		#endregion
 	
@@ -67,7 +72,7 @@ namespace Alexandria.Client
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
 		private IAudioStream audioStream;
-		private int audioStreamIndex;
+		//private int audioStreamIndex;
 		private IList<IAudioTrack> tracks;
 		
 		MusicLocker locker;
@@ -248,6 +253,19 @@ namespace Alexandria.Client
 		{
 			get { return onTrackEnd; }
 			set { onTrackEnd = value; }
+		}
+
+		public float Volume
+		{
+			get {
+				if (audioStream != null)
+					return audioStream.Volume;
+				else return -1;
+			}
+			set {
+				if (audioStream != null)
+					audioStream.Volume = value;
+			}
 		}
 		#endregion
 		
@@ -475,6 +493,38 @@ namespace Alexandria.Client
 			}
 		}
 		
+		public void Previous()
+		{
+			if (isPlaying)
+				Stop();
+				
+			if (queueListView.SelectedItems[0] != null)
+			{
+				int previousIndex = queueListView.Items.Count-1;
+				if (queueListView.SelectedIndices[0] > 0)
+					previousIndex = queueListView.SelectedIndices[0] - 1;
+
+				queueListView.SelectedItems[0].Selected = false;
+				queueListView.Items[previousIndex].Selected = true;
+			}
+		}
+		
+		public void Next()
+		{
+			if (isPlaying)
+				Stop();
+			
+			if (queueListView.SelectedItems[0] != null)
+			{
+				int nextIndex = 0;
+				if (queueListView.SelectedIndices[0] < queueListView.Items.Count-1)
+					nextIndex = queueListView.SelectedIndices[0] + 1;
+					
+				queueListView.SelectedItems[0].Selected = false;
+				queueListView.Items[nextIndex].Selected = true;
+			}
+		}
+		
 		public void UpdateStatus()
 		{
 			if (audioStream != null && isPlaying)
@@ -494,7 +544,7 @@ namespace Alexandria.Client
 			{
 				audioStream.IsMuted = !audioStream.IsMuted;
 			}
-		}
+		}		
 		#endregion
 	}
 }

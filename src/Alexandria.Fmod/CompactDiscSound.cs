@@ -185,12 +185,17 @@ namespace Alexandria.Fmod
 
 		public TimeSpan Elapsed
 		{
-			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position); }
-			set
-			{
+			get {
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					return new TimeSpan(0, 0, 0, 0, (int)sound.CurrentSubSound.Channel.Position);
+				else return new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position);
+			}
+			set {
 				lock (sound)
 				{
-					sound.Channel.Position = (uint)value.TotalMilliseconds;
+					if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+						sound.CurrentSubSound.Channel.Position = (uint)value.TotalMilliseconds;
+					else sound.Channel.Position = (uint)value.TotalMilliseconds;
 				}
 			}
 		}
