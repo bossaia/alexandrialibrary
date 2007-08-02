@@ -106,6 +106,7 @@ namespace Alexandria.Client
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
+		private bool isSeeking;
 		#endregion
 		
 		#region Private Constant Fields
@@ -395,6 +396,13 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		}
 		#endregion
 		
+		#region GetVolume
+		private float GetVolume()
+		{
+			return Convert.ToSingle(VolumeTrackBar.Value * .1);
+		}
+		#endregion
+		
 		#endregion
 
 		#region Private Event Methods
@@ -418,14 +426,23 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			if (controller != null)
+			if (controller != null && controller.AudioStream != null)
+			{
 				controller.Play();
+				if (controller.AudioStream.PlaybackState == PlaybackState.Playing)
+					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_pause_blue;
+				else PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
+			}
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
 			if (controller != null)
+			{
 				controller.Stop();
+				PlaybackTrackBar.Value = 0;
+				PlaybackTrackBar.Enabled = false;
+			}
 		}
 
 		private void MuteButton_Click(object sender, EventArgs e)
@@ -433,18 +450,45 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			if (controller != null)
 			{
 				controller.Mute();
-				VolumeTrackBar.Enabled = !controller.IsMuted;
+				if (controller.IsMuted)
+				{
+					VolumeTrackBar.Enabled = false;
+					MuteButton.BackgroundImage = Alexandria.Client.Properties.Resources.sound;
+				}
+				else
+				{
+					VolumeTrackBar.Enabled = true;
+					MuteButton.BackgroundImage = Alexandria.Client.Properties.Resources.sound_mute;
+				}
 			}
+		}
+
+		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
+		{
+			if (controller != null)
+				controller.Volume = GetVolume();
 		}
 
 		private void PreviousButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.SelectPrevious() here", "Prev");
+			if (controller != null)
+			{
+				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
+				controller.Previous();
+				if (isPlaying)
+					controller.Play();
+			}
 		}
 
 		private void NextButton_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("call controller.SelectNext() here", "Next");
+			if (controller != null)
+			{
+				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
+				controller.Next();
+				if (isPlaying)
+					controller.Play();
+			}
 		}
 
 		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -532,23 +576,32 @@ OTHER DEALINGS IN THE SOFTWARE.";
 
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
-			if (controller != null && controller.AudioStream != null)
+			if (!isSeeking)
 			{
-				int value = Convert.ToInt32(controller.AudioStream.Elapsed.TotalSeconds);
-				if (value <= PlaybackTrackBar.Maximum)
-					PlaybackTrackBar.Value = value;
-				else PlaybackTrackBar.Value = PlaybackTrackBar.Maximum;
-				
-				controller.UpdateStatus();
+				if (controller != null && controller.AudioStream != null)
+				{
+					int value = Convert.ToInt32(controller.AudioStream.Elapsed.TotalSeconds);
+					if (value <= PlaybackTrackBar.Maximum)
+						PlaybackTrackBar.Value = value;
+					else PlaybackTrackBar.Value = PlaybackTrackBar.Maximum;
+					
+					controller.UpdateStatus();
+				}
+				else
+				{
+					PlaybackTrackBar.Enabled = false;
+					VolumeTrackBar.Enabled = false;
+				}
 			}
-			else PlaybackTrackBar.Enabled = false;
 		}
 		
 		private void OnSelectedTrackStart(object sender, EventArgs e)
 		{
 			if (controller != null && controller.AudioStream != null)
 			{
+				controller.Volume = GetVolume();
 				PlaybackTrackBar.Enabled = true;
+				VolumeTrackBar.Enabled = true;
 				PlaybackTrackBar.Minimum = 0;
 				PlaybackTrackBar.Maximum = Convert.ToInt32(controller.AudioStream.Duration.TotalSeconds);
 				PlaybackTrackBar.Value = 0;
@@ -559,21 +612,19 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null)
 			{
-				if (QueueListView.SelectedItems[0] != null)
-				{
-					int nextIndex = 0;
-					if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count-1)
-						nextIndex = QueueListView.SelectedIndices[0] + 1;
-					
-					QueueListView.SelectedItems[0].Selected = false;
-					QueueListView.Items[nextIndex].Selected = true;
-					controller.Play();
-				}	
+				controller.Next();
+				controller.Play();
 			}
+		}
+
+		private void PlaybackTrackBar_MouseDown(object sender, MouseEventArgs e)
+		{
+			isSeeking = true;
 		}
 
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
+			isSeeking = false;
 			if (controller.AudioStream != null)
 			{
 				if (controller.AudioStream.CanSetElapsed)

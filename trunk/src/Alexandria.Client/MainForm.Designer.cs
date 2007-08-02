@@ -58,13 +58,15 @@ namespace Alexandria.Client
 			this.PlaybackGroupBox = new System.Windows.Forms.GroupBox();
 			this.PreviousButton = new System.Windows.Forms.Button();
 			this.RepeatButton = new System.Windows.Forms.Button();
-			this.VolumeDownButton = new System.Windows.Forms.Button();
-			this.VolumeUpButton = new System.Windows.Forms.Button();
 			this.NowPlayingLabel = new System.Windows.Forms.Label();
 			this.NowPlayingTitle = new System.Windows.Forms.Label();
 			this.OuterPlaybackQueueSplit = new System.Windows.Forms.SplitContainer();
 			this.UpperPlaybackStatusSplit = new System.Windows.Forms.SplitContainer();
 			this.TasksGroupBox = new System.Windows.Forms.GroupBox();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.ToolBoxGroupBox = new System.Windows.Forms.GroupBox();
+			this.ToolBoxListView = new System.Windows.Forms.ListView();
+			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
 			this.TrackNumberColumn = new System.Windows.Forms.ColumnHeader();
@@ -75,10 +77,6 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.ToolBoxGroupBox = new System.Windows.Forms.GroupBox();
-			this.ToolBoxListView = new System.Windows.Forms.ListView();
-			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -90,11 +88,11 @@ namespace Alexandria.Client
 			this.UpperPlaybackStatusSplit.Panel1.SuspendLayout();
 			this.UpperPlaybackStatusSplit.Panel2.SuspendLayout();
 			this.UpperPlaybackStatusSplit.SuspendLayout();
-			this.QueueGroupBox.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.ToolBoxGroupBox.SuspendLayout();
+			this.QueueGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -117,6 +115,7 @@ namespace Alexandria.Client
 			this.PlaybackTrackBar.Name = "PlaybackTrackBar";
 			this.PlaybackTrackBar.TickFrequency = 10000;
 			this.PlaybackTrackBar.TickStyle = System.Windows.Forms.TickStyle.Both;
+			this.PlaybackTrackBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PlaybackTrackBar_MouseDown);
 			this.PlaybackTrackBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PlaybackTrackBar_MouseUp);
 			// 
 			// VolumeTrackBar
@@ -124,6 +123,7 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.VolumeTrackBar, "VolumeTrackBar");
 			this.VolumeTrackBar.Name = "VolumeTrackBar";
 			this.VolumeTrackBar.Value = 10;
+			this.VolumeTrackBar.ValueChanged += new System.EventHandler(this.VolumeTrackBar_ValueChanged);
 			// 
 			// MuteButton
 			// 
@@ -245,8 +245,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.PlaybackGroupBox, "PlaybackGroupBox");
 			this.PlaybackGroupBox.Controls.Add(this.PreviousButton);
 			this.PlaybackGroupBox.Controls.Add(this.RepeatButton);
-			this.PlaybackGroupBox.Controls.Add(this.VolumeDownButton);
-			this.PlaybackGroupBox.Controls.Add(this.VolumeUpButton);
 			this.PlaybackGroupBox.Controls.Add(this.NowPlayingLabel);
 			this.PlaybackGroupBox.Controls.Add(this.NowPlayingTitle);
 			this.PlaybackGroupBox.Controls.Add(this.NextButton);
@@ -271,20 +269,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.RepeatButton, "RepeatButton");
 			this.RepeatButton.Name = "RepeatButton";
 			this.RepeatButton.UseVisualStyleBackColor = true;
-			// 
-			// VolumeDownButton
-			// 
-			resources.ApplyResources(this.VolumeDownButton, "VolumeDownButton");
-			this.VolumeDownButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.sound_low;
-			this.VolumeDownButton.Name = "VolumeDownButton";
-			this.VolumeDownButton.UseVisualStyleBackColor = true;
-			// 
-			// VolumeUpButton
-			// 
-			resources.ApplyResources(this.VolumeUpButton, "VolumeUpButton");
-			this.VolumeUpButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.sound;
-			this.VolumeUpButton.Name = "VolumeUpButton";
-			this.VolumeUpButton.UseVisualStyleBackColor = true;
 			// 
 			// NowPlayingLabel
 			// 
@@ -329,6 +313,48 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.TasksGroupBox, "TasksGroupBox");
 			this.TasksGroupBox.Name = "TasksGroupBox";
 			this.TasksGroupBox.TabStop = false;
+			// 
+			// splitContainer1
+			// 
+			resources.ApplyResources(this.splitContainer1, "splitContainer1");
+			this.splitContainer1.Name = "splitContainer1";
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.ToolBoxGroupBox);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.QueueGroupBox);
+			// 
+			// ToolBoxGroupBox
+			// 
+			resources.ApplyResources(this.ToolBoxGroupBox, "ToolBoxGroupBox");
+			this.ToolBoxGroupBox.Controls.Add(this.ToolBoxListView);
+			this.ToolBoxGroupBox.Name = "ToolBoxGroupBox";
+			this.ToolBoxGroupBox.TabStop = false;
+			// 
+			// ToolBoxListView
+			// 
+			resources.ApplyResources(this.ToolBoxListView, "ToolBoxListView");
+			this.ToolBoxListView.MultiSelect = false;
+			this.ToolBoxListView.Name = "ToolBoxListView";
+			this.ToolBoxListView.ShowItemToolTips = true;
+			this.ToolBoxListView.SmallImageList = this.ToolBoxSmallImageList;
+			this.ToolBoxListView.UseCompatibleStateImageBehavior = false;
+			this.ToolBoxListView.View = System.Windows.Forms.View.SmallIcon;
+			this.ToolBoxListView.DragLeave += new System.EventHandler(this.ToolBoxListView_DragLeave);
+			this.ToolBoxListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ToolBoxListView_ItemDrag);
+			this.ToolBoxListView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ToolBoxListView_MouseDown);
+			// 
+			// ToolBoxSmallImageList
+			// 
+			this.ToolBoxSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ToolBoxSmallImageList.ImageStream")));
+			this.ToolBoxSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.ToolBoxSmallImageList.Images.SetKeyName(0, "drive.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(1, "drive_cd.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(2, "drive_cd_empty.png");
+			this.ToolBoxSmallImageList.Images.SetKeyName(3, "feed.png");
 			// 
 			// QueueGroupBox
 			// 
@@ -391,48 +417,6 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
-			// splitContainer1
-			// 
-			resources.ApplyResources(this.splitContainer1, "splitContainer1");
-			this.splitContainer1.Name = "splitContainer1";
-			// 
-			// splitContainer1.Panel1
-			// 
-			this.splitContainer1.Panel1.Controls.Add(this.ToolBoxGroupBox);
-			// 
-			// splitContainer1.Panel2
-			// 
-			this.splitContainer1.Panel2.Controls.Add(this.QueueGroupBox);
-			// 
-			// ToolBoxGroupBox
-			// 
-			resources.ApplyResources(this.ToolBoxGroupBox, "ToolBoxGroupBox");
-			this.ToolBoxGroupBox.Controls.Add(this.ToolBoxListView);
-			this.ToolBoxGroupBox.Name = "ToolBoxGroupBox";
-			this.ToolBoxGroupBox.TabStop = false;
-			// 
-			// ToolBoxListView
-			// 
-			resources.ApplyResources(this.ToolBoxListView, "ToolBoxListView");
-			this.ToolBoxListView.MultiSelect = false;
-			this.ToolBoxListView.Name = "ToolBoxListView";
-			this.ToolBoxListView.ShowItemToolTips = true;
-			this.ToolBoxListView.SmallImageList = this.ToolBoxSmallImageList;
-			this.ToolBoxListView.UseCompatibleStateImageBehavior = false;
-			this.ToolBoxListView.View = System.Windows.Forms.View.SmallIcon;
-			this.ToolBoxListView.DragLeave += new System.EventHandler(this.ToolBoxListView_DragLeave);
-			this.ToolBoxListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ToolBoxListView_ItemDrag);
-			this.ToolBoxListView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ToolBoxListView_MouseDown);
-			// 
-			// ToolBoxSmallImageList
-			// 
-			this.ToolBoxSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ToolBoxSmallImageList.ImageStream")));
-			this.ToolBoxSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.ToolBoxSmallImageList.Images.SetKeyName(0, "drive.png");
-			this.ToolBoxSmallImageList.Images.SetKeyName(1, "drive_cd.png");
-			this.ToolBoxSmallImageList.Images.SetKeyName(2, "drive_cd_empty.png");
-			this.ToolBoxSmallImageList.Images.SetKeyName(3, "feed.png");
-			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -456,11 +440,11 @@ namespace Alexandria.Client
 			this.UpperPlaybackStatusSplit.Panel1.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.Panel2.ResumeLayout(false);
 			this.UpperPlaybackStatusSplit.ResumeLayout(false);
-			this.QueueGroupBox.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
 			this.ToolBoxGroupBox.ResumeLayout(false);
+			this.QueueGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -501,8 +485,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.GroupBox TasksGroupBox;
 		private System.Windows.Forms.Label NowPlayingLabel;
 		private System.Windows.Forms.Label NowPlayingTitle;
-		private System.Windows.Forms.Button VolumeUpButton;
-		private System.Windows.Forms.Button VolumeDownButton;
 		private System.Windows.Forms.Button RepeatButton;
 		private System.Windows.Forms.Button PreviousButton;
 		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
