@@ -236,7 +236,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region LoadDefaultUser
 		private void LoadDefaultUser()
 		{
-			controller = new QueueController(this.QueueListView, broker);
+			controller = new QueueController(this.QueueListView, broker, repository);
 		
 			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
 			IUser user = broker.LookupRecord<IUser>(userId);

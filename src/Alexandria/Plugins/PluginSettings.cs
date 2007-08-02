@@ -38,13 +38,36 @@ namespace Alexandria.Plugins
 		{
 		}
 		#endregion
-			
+		
+		#region Private Fields
+		private bool enabled = true;
+		private ConfigurationMap configurationMap;
+		#endregion
+		
 		#region IPluginSettings Members
 		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Alexandria Core Library is enabled", true)]
 		public bool Enabled
 		{
-			get { return true; }
-			set { }
+			get { return enabled; }
+			set { enabled = value; }
+		}
+		
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
+			set { configurationMap = value; }
+		}
+		
+		public void Load()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Load();
+		}
+		
+		public void Save()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Save();
 		}
 		#endregion
 	}

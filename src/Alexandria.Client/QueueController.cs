@@ -36,8 +36,8 @@ using Alexandria.Media.IO;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
 using Alexandria.Playlist;
+using Alexandria.Plugins;
 using Alexandria.TagLib;
-
 using Alexandria.Fmod;
 using Alexandria.Mp3Tunes;
 
@@ -46,18 +46,23 @@ namespace Alexandria.Client
 	public class QueueController
 	{
 		#region Constructors
-		public QueueController(ListView queueListView, IPersistenceBroker broker)
+		public QueueController(ListView queueListView, IPersistenceBroker broker, IPluginRepository repository)
 		{
 			this.queueListView = queueListView;
 			this.broker = broker;
 			
 			this.locker = new MusicLocker();
-			locker.Login("dan.poage@gmail.com", "automatic");
+			//locker.Login("dan.poage@gmail.com", "automatic");
 			
 			Fmod.ConfigurationSettings configSettings = new Alexandria.Fmod.ConfigurationSettings();
 			
-			//TODO: change this to read from the config file
-			Fmod.SoundSystemFactory.DefaultSoundSystem.OutputType = OutputType.DirectSound;
+			//TODO: move to Fmod.ConfigurationSettings
+			this.repository = repository;
+			Fmod.ConfigurationSettings fmodConfig = (Fmod.ConfigurationSettings)repository.GetConfigurationMap("Alexandria.Fmod").Settings;
+			if (fmodConfig != null)
+			{
+				Fmod.SoundSystemFactory.DefaultSoundSystem.OutputType = fmodConfig.OutputType;
+			}
 		}
 		#endregion
 	
@@ -66,6 +71,7 @@ namespace Alexandria.Client
 		#endregion
 
 		#region Private Fields
+		private IPluginRepository repository;
 		private IPersistenceBroker broker;
 		private ListView queueListView;
 		private ListViewItem selectedItem;

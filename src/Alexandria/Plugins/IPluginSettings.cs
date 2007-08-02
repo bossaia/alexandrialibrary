@@ -34,5 +34,8 @@ namespace Alexandria.Plugins
 	public interface IPluginSettings
 	{
 		bool Enabled { get; set; }
+		ConfigurationMap ConfigurationMap { get; set; }
+		void Load();
+		void Save();
 	}
 }

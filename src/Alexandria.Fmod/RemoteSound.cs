@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Runtime.InteropServices;
 using Alexandria;
 using Alexandria.Media;
 using Alexandria.Media.IO;
@@ -12,151 +13,239 @@ namespace Alexandria.Fmod
 		#region Constructors
 		public RemoteSound(string path)
 		{
+			this.path = path;
+			sound = SoundSystemFactory.DefaultSoundSystem.CreateStream(path, (Modes.Software|Modes.Fmod2D|Modes.CreateStream|Modes.IgnoreTags));
 		}
 		#endregion
 
+		#region Finalizer
+		~RemoteSound()
+		{
+			Dispose(false);
+		}
+		#endregion
+
+		#region IDisposable Members
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+					this.sound.Dispose();
+					this.sound = null;
+				}
+			}
+			disposed = true;
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		#endregion	
+		
 		#region Private Fields
 		private string path;
 		private Sound sound;
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
+		private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		#endregion
+		
+		#region Private Methods
+		
+		#region RefreshBufferState
+		private BufferState RefreshBufferState()
+		{
+			if (sound != null)
+			{
+				if (sound.BufferIsStarving)
+				{
+					bufferState = BufferState.Starving;
+				}
+				else
+				{
+					if (sound.OpenState == OpenState.Loading)
+						bufferState = BufferState.Loading;
+					else if (sound.OpenState == OpenState.Buffering)
+					{
+						if (sound.PercentBuffered < 100)
+							bufferState = BufferState.Buffering;
+						else bufferState = BufferState.Full;
+					}
+					else bufferState = BufferState.None;
+				}
+			}
+			else bufferState = BufferState.None;
+			
+			return bufferState;
+		}
+		#endregion
+		
+		#region RefreshNetworkState
+		private NetworkState RefreshNetworkState()
+		{
+			if (sound != null && sound.Channel != null)
+			{
+				if (sound.OpenState == OpenState.Connecting)
+					networkState = NetworkState.Connecting;
+				else if (sound.OpenState == OpenState.Ready)
+					networkState = NetworkState.Streaming;
+				else if (sound.OpenState == OpenState.Error)
+					networkState = NetworkState.Error;
+				else networkState = NetworkState.None;
+			}
+			else networkState = NetworkState.None;
+			
+			return networkState;
+		}
+		#endregion
+		
+		#region RefreshPlaybackState
+		private PlaybackState RefreshPlaybackState()
+		{
+			if (sound != null && sound.Channel != null)
+			{
+				if (sound.Channel.IsPlaying)
+				{
+					if (sound.Channel.Paused)
+						playbackState = PlaybackState.Paused;
+					else playbackState = PlaybackState.Playing;
+				}
+				else playbackState = PlaybackState.Stopped;
+			}
+			else playbackState = PlaybackState.None;
+			
+			return playbackState;
+		}
+		#endregion
+		
 		#endregion
 
 		#region IAudioStream Members
 		public bool IsMuted
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return sound.Channel.Mute; }			
+			set { sound.Channel.Mute = value; }
 		}
 
 		public float Volume
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return sound.Channel.Volume; }
+			set { sound.Channel.Volume = value; }
 		}
 		#endregion
 
 		#region IMediaStream Members
 		public BufferState BufferState
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return RefreshBufferState(); }
 		}
 
 		public bool CanPlay
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return true; }
 		}
 
 		public bool CanRead
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return true; }
 		}
 
 		public bool CanSeek
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return false; }
 		}
 
 		public bool CanSetElapsed
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return false; }
 		}
 
 		public bool CanSetPosition
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return false; }
 		}
 
 		public bool CanTimeout
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return true; }
 		}
 
 		public bool CanWrite
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return false; }
 		}
 
 		public TimeSpan Duration
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return sound.Duration; }
 		}
 
 		public TimeSpan Elapsed
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return new TimeSpan(0, 0, 0, 0, (int)sound.Channel.Position); }
+			set { throw new InvalidOperationException("This stream does not support setting the elapsed time"); }
 		}
 
 		public void Flush()
 		{
-			throw new Exception("The method or operation is not implemented.");
 		}
 
 		public long Length
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get
+			{
+				sound.LengthUnit = TimeUnits.RawByte;
+				return (long)sound.FmodLength;
+			}
 		}
 
 		public NetworkState NetworkState
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return RefreshNetworkState(); }
 		}
 
 		public string Path
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return path; }
 		}
 
 		public void Pause()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			lock(sound)
+			{
+				sound.Pause();
+				RefreshPlaybackState();
+			}
 		}
 
 		public float PercentBuffered
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return (float)sound.PercentBuffered; }
 		}
 
 		public void Play()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			lock(sound)
+			{
+				sound.Play();
+				RefreshPlaybackState();
+			}
 		}
 
 		public PlaybackState PlaybackState
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return RefreshPlaybackState(); }
 		}
 
 		public long Position
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
-			set
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return (long)sound.Channel.PositionInBytes; }
+			set { throw new InvalidOperationException("This stream cannot be positioned"); }
 		}
 
 		public int StreamIndex
@@ -165,34 +254,78 @@ namespace Alexandria.Fmod
 			set { }
 		}
 
+		/// <summary>
+		/// Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read
+		/// </summary>
+		/// <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.</param>
+		/// <param name="offset">The zero-based byte offset in buffer at which to begin storing the data read from the current stream.</param>
+		/// <param name="count">The maximum number of bytes to be read from the current stream.</param>
+		/// <returns>The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.</returns>		
+		/// <exception cref="System.ArgumentException"/>
+		/// <exception cref="System.ArgumentNullException"/>
+		/// <exception cref="System.OutOfMemoryException"/>
 		public int Read(byte[] buffer, int offset, int count)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			if (buffer != null)
+			{
+				if (offset + count <= buffer.Length)
+				{
+					lock(sound)
+					{
+						Stop();
+
+						IntPtr bufferHandle = IntPtr.Zero;
+						bufferHandle = Marshal.AllocHGlobal(count);				
+
+						int bytesRead = Convert.ToInt32(sound.Read(bufferHandle, (uint)count));
+									
+						if (bufferHandle != IntPtr.Zero && bytesRead > 0)
+						{
+							byte[] data = new byte[bytesRead];
+							Marshal.PtrToStructure(bufferHandle, data);
+							Array.Copy(data, 0, buffer, offset, bytesRead);
+							Marshal.FreeHGlobal(bufferHandle);
+							return bytesRead;
+						}
+						else return 0;
+					}
+				}
+				else throw new ArgumentException("The sum of offset and count is larger than the buffer length.");
+			}
+			else throw new ArgumentNullException("buffer");
 		}
 
 		public void Resume()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			lock(sound)
+			{
+				sound.Resume();
+				RefreshPlaybackState();
+			}
 		}
 
-		public long Seek(long offset, System.IO.SeekOrigin origin)
+		public long Seek(long offset, SeekOrigin origin)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			throw new InvalidOperationException("This stream is not seekable");
 		}
 
 		public void SetLength(long value)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			throw new InvalidOperationException("This stream does not support setting the length");
 		}
 
 		public void Stop()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			lock(sound)
+			{
+				sound.Stop();
+				RefreshPlaybackState();
+			}
 		}
 
 		public void Write(byte[] buffer, int offset, int count)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			throw new InvalidOperationException("This stream is read-only");
 		}
 		#endregion
 	}

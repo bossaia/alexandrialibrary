@@ -32,9 +32,10 @@ using Alexandria.Metadata.Tagging;
 
 namespace Alexandria.Plugins
 {
-	public interface IPluginRepository : IDisposable
+	public interface IPluginRepository
 	{
 		IDictionary<Assembly, bool> Assemblies { get; }
 		IDictionary<Assembly, ConfigurationMap> ConfigurationMaps { get; }
+		ConfigurationMap GetConfigurationMap(string assemblyName);
 	}
 }

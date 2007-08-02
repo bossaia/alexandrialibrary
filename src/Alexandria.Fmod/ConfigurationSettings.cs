@@ -15,6 +15,7 @@ namespace Alexandria.Fmod
 	
 		#region Private Fields
 		private bool enabled;
+		private ConfigurationMap configurationMap;
 		private int numberOfChannels = 10;
 		private uint streamBufferSize = 65536;
 		private OutputType outputType = OutputType.AutoDetect;
@@ -27,6 +28,24 @@ namespace Alexandria.Fmod
 		{
 			get { return enabled; }
 			set { enabled = value; }
+		}
+		
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
+			set { configurationMap = value; }
+		}
+		
+		public void Load()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Load();
+		}
+		
+		public void Save()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Save();
 		}
 		#endregion
 		
