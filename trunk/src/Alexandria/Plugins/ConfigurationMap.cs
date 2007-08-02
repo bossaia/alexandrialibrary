@@ -35,18 +35,16 @@ namespace Alexandria.Plugins
 	public class ConfigurationMap
 	{
 		#region Constructors
-		public ConfigurationMap(Configuration file, IPluginSettings settings)
+		public ConfigurationMap(Configuration file, IPluginSettings settings) : this(file, settings, true)
+		{
+		}
+		
+		public ConfigurationMap(Configuration file, IPluginSettings settings, bool autoLoad)
 		{
 			this.file = file;
 			this.settings = settings;
-			
-			if (file != null && settings != null)
-			{
-				foreach(KeyValueConfigurationElement element in file.AppSettings.Settings)
-				{
-					SetPluginSetting(element.Key, element.Value);
-				}
-			}
+			if (autoLoad)
+				Load();
 		}
 		#endregion
 	
@@ -136,10 +134,22 @@ namespace Alexandria.Plugins
 		public IPluginSettings Settings
 		{
 			get { return settings; }
+			set { settings = value; }
 		}
 		#endregion
 		
 		#region Public Methods
+		public void Load()
+		{
+			if (file != null && settings != null)
+			{
+				foreach (KeyValueConfigurationElement element in file.AppSettings.Settings)
+				{
+					SetPluginSetting(element.Key, element.Value);
+				}
+			}
+		}
+		
 		public void Save()
 		{
 			foreach(PropertyInfo property in settings.GetType().GetProperties())

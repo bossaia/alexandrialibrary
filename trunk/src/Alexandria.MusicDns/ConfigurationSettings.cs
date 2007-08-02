@@ -14,6 +14,7 @@ namespace Alexandria.MusicDns
 
 		#region Private Fields
 		private bool enabled;
+		private ConfigurationMap configurationMap;
 		#endregion
 
 		#region IPluginSettings Members
@@ -22,6 +23,24 @@ namespace Alexandria.MusicDns
 		{
 			get { return enabled; }
 			set { enabled = value; }
+		}
+
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
+			set { configurationMap = value; }
+		}
+
+		public void Load()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Load();
+		}
+
+		public void Save()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Save();
 		}
 		#endregion
 	}

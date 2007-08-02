@@ -85,7 +85,7 @@ namespace Alexandria.MusicBrainz
         
         private string title;        
         private string asin;
-        private int track_num;
+        //private int track_num;
         private int track_count;
         private int index;
         private int length;

@@ -98,26 +98,31 @@ namespace Alexandria.MusicBrainz
         public string MusicBrainzId
         {
             get {return musicBrainzId;}
+            internal set { musicBrainzId = value; }
         }
         
         public string Title
         {
             get {return title;}
+            internal set { title = value; }
         }
         
         public SimpleArtist AlbumArtist
         {
             get {return albumArtist;}
+            internal set { albumArtist = value; }
         }
         
         public string Asin
         {
             get {return asin;}
+            internal set { asin = value; }
         }
         
         public Uri CoverArtUrl
         {
             get {return coverArtUrl;}
+            internal set { coverArtUrl = value; }
         }
         
         public bool VariousArtists

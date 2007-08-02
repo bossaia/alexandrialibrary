@@ -37,9 +37,10 @@ namespace Alexandria.Media.IO
 	public enum BufferState
 	{
 		None = 0,
+		Error,
 		Loading,
 		Buffering,
-		Starving,
-		Complete
+		Full,
+		Starving
 	}
 }

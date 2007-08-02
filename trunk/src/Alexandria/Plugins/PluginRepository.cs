@@ -81,6 +81,7 @@ namespace Alexandria.Plugins
 							{
 								enabled = settings.Enabled;
 								ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
+								settings.ConfigurationMap = configMap;
 								configurationMaps.Add(assembly, configMap);
 							}
 						}
@@ -116,15 +117,15 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Methods
-		#endregion
-
-		#region IDisposable Members
-
-		public void Dispose()
+		public ConfigurationMap GetConfigurationMap(string assemblyName)
 		{
-			//throw new Exception("The method or operation is not implemented.");
+			foreach(Assembly assembly in ConfigurationMaps.Keys)
+			{
+				if (assembly.FullName.Contains(assemblyName))
+					return ConfigurationMaps[assembly];
+			}
+			return null;
 		}
-
 		#endregion
 	}
 }

@@ -14,6 +14,7 @@ namespace Alexandria.Mp3Tunes
 	
 		#region Private Fields
 		private bool enabled;
+		private ConfigurationMap configurationMap;
 		private string userName;
 		private string password;
 		private LockerSynch lockerSynch = LockerSynch.None;
@@ -25,6 +26,24 @@ namespace Alexandria.Mp3Tunes
 		{
 			get { return enabled; }
 			set { enabled = value; }
+		}
+
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
+			set { configurationMap = value; }
+		}
+
+		public void Load()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Load();
+		}
+
+		public void Save()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Save();
 		}
 		#endregion
 		

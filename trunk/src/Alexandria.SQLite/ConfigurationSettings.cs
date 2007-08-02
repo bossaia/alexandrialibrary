@@ -7,16 +7,22 @@ namespace Alexandria.SQLite
 {
 	public class ConfigurationSettings : IPluginSettings
 	{
+		#region Constructors
 		public ConfigurationSettings()
 		{
 		}
+		#endregion
 		
+		#region Private Fields
 		private bool enabled;
+		private ConfigurationMap configurationMap;
 		private string databaseDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + Path.DirectorySeparatorChar);
 		private string databaseName = "Alexandria.db";
 		private DatabaseUpdate databaseUpdate = DatabaseUpdate.None;
 		private DatabaseSynch databaseSynch = DatabaseSynch.None;
+		#endregion
 		
+		#region IPluginSettings Members
 		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the SQLite plugin is enabled")]
 		public bool Enabled
 		{
@@ -24,6 +30,26 @@ namespace Alexandria.SQLite
 			set { enabled = value; }
 		}
 
+		public ConfigurationMap ConfigurationMap
+		{
+			get { return configurationMap; }
+			set { configurationMap = value; }
+		}
+
+		public void Load()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Load();
+		}
+
+		public void Save()
+		{
+			if (ConfigurationMap != null)
+				ConfigurationMap.Save();
+		}
+		#endregion
+
+		#region Public Properties
 		[PluginSetting(PluginSettingType.DirectoryPath, "The directory where the SQLite database file is located")]
 		public string DatabaseDirectory
 		{
@@ -56,5 +82,6 @@ namespace Alexandria.SQLite
 		{
 			get { return Path.Combine(databaseDirectory, databaseName); }
 		}
+		#endregion
 	}
 }

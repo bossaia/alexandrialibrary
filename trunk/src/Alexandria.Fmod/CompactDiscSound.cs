@@ -73,7 +73,7 @@ namespace Alexandria.Fmod
 					{
 						if (sound.PercentBuffered < 100)
 							bufferState = BufferState.Buffering;
-						else bufferState = BufferState.Complete;
+						else bufferState = BufferState.Full;
 					}
 					else bufferState = BufferState.None;
 				}
