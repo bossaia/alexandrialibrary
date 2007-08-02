@@ -268,7 +268,11 @@ namespace Alexandria.Fmod
 		public int StreamIndex
 		{
 			get { return streamIndex; }
-			set { streamIndex = value; }
+			set { 
+				streamIndex = value;
+				if (sound != null)
+					sound.CurrentSubSoundIndex = streamIndex;
+			}
 		}
 
 		/// <summary>
