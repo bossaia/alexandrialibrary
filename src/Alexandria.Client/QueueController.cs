@@ -267,6 +267,11 @@ namespace Alexandria.Client
 					audioStream.Volume = value;
 			}
 		}
+		
+		public IAudioTrack SelectedTrack
+		{
+			get { return selectedTrack; }
+		}
 		#endregion
 		
 		#region Public Methods

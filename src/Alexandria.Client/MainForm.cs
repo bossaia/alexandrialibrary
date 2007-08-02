@@ -442,6 +442,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				controller.Stop();
 				PlaybackTrackBar.Value = 0;
 				PlaybackTrackBar.Enabled = false;
+				PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
 			}
 		}
 
@@ -476,7 +477,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
 				controller.Previous();
 				if (isPlaying)
-					controller.Play();
+					PlayPauseButton_Click(sender, EventArgs.Empty);
 			}
 		}
 
@@ -487,7 +488,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
 				controller.Next();
 				if (isPlaying)
-					controller.Play();
+					PlayPauseButton_Click(sender, EventArgs.Empty);
 			}
 		}
 
@@ -599,9 +600,13 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null && controller.AudioStream != null)
 			{
+				if (controller.SelectedTrack != null)
+					NowPlayingLabel.Text = string.Format("{0} - {1}", controller.SelectedTrack.Artist, controller.SelectedTrack.Name);
+				
 				controller.Volume = GetVolume();
-				PlaybackTrackBar.Enabled = true;
 				VolumeTrackBar.Enabled = true;
+
+				PlaybackTrackBar.Enabled = true;
 				PlaybackTrackBar.Minimum = 0;
 				PlaybackTrackBar.Maximum = Convert.ToInt32(controller.AudioStream.Duration.TotalSeconds);
 				PlaybackTrackBar.Value = 0;
