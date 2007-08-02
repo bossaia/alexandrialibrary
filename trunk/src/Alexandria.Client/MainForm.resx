@@ -205,7 +205,7 @@
     <value>Top, Bottom, Right</value>
   </data>
   <data name="VolumeTrackBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 16</value>
+    <value>248, 19</value>
   </data>
   <data name="VolumeTrackBar.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Vertical</value>
