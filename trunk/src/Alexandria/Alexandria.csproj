@@ -133,6 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Alexandria.cd" />
+    <None Include="Alexandria.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.bmp" />

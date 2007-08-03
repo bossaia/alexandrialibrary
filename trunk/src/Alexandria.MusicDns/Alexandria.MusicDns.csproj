@@ -54,6 +54,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Alexandria.MusicDns.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="metadata.xsc">
       <DependentUpon>metadata.xsd</DependentUpon>
     </None>
