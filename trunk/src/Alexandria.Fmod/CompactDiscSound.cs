@@ -121,14 +121,30 @@ namespace Alexandria.Fmod
 		#region IAudioStream Members
 		public bool IsMuted
 		{
-			get { return sound.Channel.Mute; }
-			set { sound.Channel.Mute = value; }
+			get {
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					return sound.CurrentSubSound.Channel.Mute;
+				else return sound.Channel.Mute;
+			}
+			set {
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Channel.Mute = value;
+				else sound.Channel.Mute = value;
+			}
 		}
 
 		public float Volume
 		{
-			get { return sound.Channel.Volume; }
-			set { sound.Channel.Volume = value; }
+			get {
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					return sound.CurrentSubSound.Channel.Volume;
+				else return sound.Channel.Volume;
+			}
+			set {
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
+					sound.CurrentSubSound.Channel.Volume = value;
+				else sound.Channel.Volume = value;
+			}
 		}
 		#endregion
 

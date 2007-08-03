@@ -57,7 +57,6 @@ namespace Alexandria.Client
 			this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
 			this.PlaybackGroupBox = new System.Windows.Forms.GroupBox();
 			this.PreviousButton = new System.Windows.Forms.Button();
-			this.RepeatButton = new System.Windows.Forms.Button();
 			this.NowPlayingLabel = new System.Windows.Forms.Label();
 			this.NowPlayingTitle = new System.Windows.Forms.Label();
 			this.OuterPlaybackQueueSplit = new System.Windows.Forms.SplitContainer();
@@ -77,6 +76,8 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
+			this.ToolBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -93,6 +94,7 @@ namespace Alexandria.Client
 			this.splitContainer1.SuspendLayout();
 			this.ToolBoxGroupBox.SuspendLayout();
 			this.QueueGroupBox.SuspendLayout();
+			this.ToolBoxContextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -244,7 +246,6 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.PlaybackGroupBox, "PlaybackGroupBox");
 			this.PlaybackGroupBox.Controls.Add(this.PreviousButton);
-			this.PlaybackGroupBox.Controls.Add(this.RepeatButton);
 			this.PlaybackGroupBox.Controls.Add(this.NowPlayingLabel);
 			this.PlaybackGroupBox.Controls.Add(this.NowPlayingTitle);
 			this.PlaybackGroupBox.Controls.Add(this.NextButton);
@@ -262,13 +263,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.PreviousButton, "PreviousButton");
 			this.PreviousButton.Name = "PreviousButton";
 			this.PreviousButton.UseVisualStyleBackColor = true;
-			// 
-			// RepeatButton
-			// 
-			this.RepeatButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_repeat_blue;
-			resources.ApplyResources(this.RepeatButton, "RepeatButton");
-			this.RepeatButton.Name = "RepeatButton";
-			this.RepeatButton.UseVisualStyleBackColor = true;
 			// 
 			// NowPlayingLabel
 			// 
@@ -337,6 +331,7 @@ namespace Alexandria.Client
 			// ToolBoxListView
 			// 
 			resources.ApplyResources(this.ToolBoxListView, "ToolBoxListView");
+			this.ToolBoxListView.ContextMenuStrip = this.ToolBoxContextMenuStrip;
 			this.ToolBoxListView.MultiSelect = false;
 			this.ToolBoxListView.Name = "ToolBoxListView";
 			this.ToolBoxListView.ShowItemToolTips = true;
@@ -417,6 +412,19 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
+			// ToolBoxContextMenuStrip
+			// 
+			this.ToolBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolBoxContextMenuItemRefresh});
+			this.ToolBoxContextMenuStrip.Name = "ToolBoxContextMenuStrip";
+			resources.ApplyResources(this.ToolBoxContextMenuStrip, "ToolBoxContextMenuStrip");
+			this.ToolBoxContextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolBoxContextMenuStrip_ItemClicked);
+			// 
+			// ToolBoxContextMenuItemRefresh
+			// 
+			this.ToolBoxContextMenuItemRefresh.Name = "ToolBoxContextMenuItemRefresh";
+			resources.ApplyResources(this.ToolBoxContextMenuItemRefresh, "ToolBoxContextMenuItemRefresh");
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -445,6 +453,7 @@ namespace Alexandria.Client
 			this.splitContainer1.ResumeLayout(false);
 			this.ToolBoxGroupBox.ResumeLayout(false);
 			this.QueueGroupBox.ResumeLayout(false);
+			this.ToolBoxContextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -485,7 +494,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.GroupBox TasksGroupBox;
 		private System.Windows.Forms.Label NowPlayingLabel;
 		private System.Windows.Forms.Label NowPlayingTitle;
-		private System.Windows.Forms.Button RepeatButton;
 		private System.Windows.Forms.Button PreviousButton;
 		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
@@ -497,6 +505,8 @@ namespace Alexandria.Client
 		private System.Windows.Forms.GroupBox ToolBoxGroupBox;
 		private System.Windows.Forms.ListView ToolBoxListView;
 		private System.Windows.Forms.ImageList ToolBoxSmallImageList;
+		private System.Windows.Forms.ContextMenuStrip ToolBoxContextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
 	}
 }
 

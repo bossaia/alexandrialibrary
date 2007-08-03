@@ -145,7 +145,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;PlayPauseButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="StopButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -157,7 +157,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="StopButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 21</value>
+    <value>124, 21</value>
   </data>
   <data name="StopButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 40</value>
@@ -175,7 +175,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;StopButton.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="PlaybackTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -184,7 +184,7 @@
     <value>4, 63</value>
   </data>
   <data name="PlaybackTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 45</value>
+    <value>215, 45</value>
   </data>
   <data name="PlaybackTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -199,19 +199,19 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;PlaybackTrackBar.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="VolumeTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
   </data>
   <data name="VolumeTrackBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 19</value>
+    <value>244, 19</value>
   </data>
   <data name="VolumeTrackBar.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Vertical</value>
   </data>
   <data name="VolumeTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 92</value>
+    <value>45, 113</value>
   </data>
   <data name="VolumeTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -226,7 +226,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;VolumeTrackBar.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="MuteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -235,7 +235,7 @@
     <value>Center</value>
   </data>
   <data name="MuteButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 112</value>
+    <value>244, 138</value>
   </data>
   <data name="MuteButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 26</value>
@@ -253,65 +253,11 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;MuteButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="FileMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
   </metadata>
-  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Open...</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 22</value>
-  </data>
-  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
-    <value>E&amp;xit</value>
-  </data>
-  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 20</value>
-  </data>
-  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 20</value>
-  </data>
-  <data name="catalogToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Catalog</value>
-  </data>
-  <data name="userToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
-  </data>
-  <data name="userToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;User</value>
-  </data>
-  <data name="pluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 22</value>
-  </data>
-  <data name="pluginsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Plugins</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="ToolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About Alexandria</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 20</value>
-  </data>
-  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
   <data name="FileMenuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -331,11 +277,89 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="FileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 20</value>
+  </data>
+  <data name="FileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="OpenToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Open...</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ExitToolStripMenuItem.Text" xml:space="preserve">
+    <value>E&amp;xit</value>
+  </data>
+  <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 20</value>
+  </data>
+  <data name="catalogToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Catalog</value>
+  </data>
+  <data name="userToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
+  </data>
+  <data name="userToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;User</value>
+  </data>
+  <data name="ToolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="ToolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="pluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 22</value>
+  </data>
+  <data name="pluginsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Plugins</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 20</value>
+  </data>
+  <data name="HelpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="AboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;About Alexandria</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 573</value>
   </metadata>
+  <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 573</value>
+  </data>
+  <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>831, 22</value>
+  </data>
+  <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="StatusStrip.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Name" xml:space="preserve">
+    <value>StatusStrip</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
   </data>
@@ -360,30 +384,6 @@
   <data name="StreamingStatus.Text" xml:space="preserve">
     <value>Not Streaming</value>
   </data>
-  <data name="StatusStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 573</value>
-  </data>
-  <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 22</value>
-  </data>
-  <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="StatusStrip.Text" xml:space="preserve">
-    <value>statusStrip1</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Name" xml:space="preserve">
-    <value>StatusStrip</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 5</value>
   </metadata>
@@ -394,7 +394,7 @@
     <value>Stretch</value>
   </data>
   <data name="NextButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>178, 25</value>
+    <value>187, 25</value>
   </data>
   <data name="NextButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 32</value>
@@ -412,7 +412,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NextButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="PlaybackTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>263, 6</value>
@@ -444,35 +444,11 @@
   <data name="&gt;&gt;PreviousButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="RepeatButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="RepeatButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 110</value>
-  </data>
-  <data name="RepeatButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>28, 28</value>
-  </data>
-  <data name="RepeatButton.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;RepeatButton.Name" xml:space="preserve">
-    <value>RepeatButton</value>
-  </data>
-  <data name="&gt;&gt;RepeatButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;RepeatButton.Parent" xml:space="preserve">
-    <value>PlaybackGroupBox</value>
-  </data>
-  <data name="&gt;&gt;RepeatButton.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="NowPlayingLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 141</value>
   </data>
   <data name="NowPlayingLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 23</value>
+    <value>213, 23</value>
   </data>
   <data name="NowPlayingLabel.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -493,16 +469,16 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NowPlayingLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="NowPlayingTitle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Nina, 9pt, style=Bold</value>
   </data>
   <data name="NowPlayingTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 114</value>
+    <value>71, 114</value>
   </data>
   <data name="NowPlayingTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 27</value>
+    <value>93, 27</value>
   </data>
   <data name="NowPlayingTitle.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -523,13 +499,13 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NowPlayingTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 3</value>
   </data>
   <data name="PlaybackGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 172</value>
+    <value>295, 172</value>
   </data>
   <data name="PlaybackGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -583,7 +559,7 @@
     <value>4, 4</value>
   </data>
   <data name="TasksGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>486, 171</value>
+    <value>509, 171</value>
   </data>
   <data name="TasksGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -619,7 +595,7 @@
     <value>828, 178</value>
   </data>
   <data name="UpperPlaybackStatusSplit.SplitterDistance" type="System.Int32, mscorlib">
-    <value>330</value>
+    <value>307</value>
   </data>
   <data name="UpperPlaybackStatusSplit.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -656,77 +632,6 @@
   </data>
   <data name="ToolBoxGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ToolBoxListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="ToolBoxListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="ToolBoxListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 323</value>
-  </data>
-  <metadata name="ToolBoxSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>492, 7</value>
-  </metadata>
-  <data name="ToolBoxSmallImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABO
-        CwAAAk1TRnQBSQFMAgEBBAEAAQkBAAEEAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
-        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
-        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
-        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
-        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
-        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
-        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
-        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
-        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
-        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
-        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
-        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
-        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
-        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
-        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
-        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
-        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
-        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
-        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
-        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
-        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
-        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
-        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
-        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
-        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
-        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
-        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
-        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
-        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8A/wD/AP8AGAABoQHH
-        Aa0BzwK0Aq0BpwGhEwABoQFoCCwEJgFoAaESAAGhAa0BtAEJAfQB/wH0ARkB8AG0Aa0BoRIAAWgBUwV6
-        B3UBTQFoAc8B9wGSAe0E7AHrBG0C6gFmAQABoQGtAQkE9AEZAQkB3QEZAQkBrQGhEQABMgGaA3oDUwJ1
-        Ak0DdQEmAe8B8wTwCLwB8gHqAQABpwG7AhkC9AH/AfQBGQIJARkBCQGnAaEQAAEyAZoBegH2Af8BmgFT
-        AXUB/wEbAU0BmgH/AZoBdQEmAe8B8AIHCe8B9wG8AeoBzwG0AfAB3QEJARkBCQK0AbsBGQIJARkBkQGG
-        Ac8B9wGSAu0G7ALrAm0BhgEyApoC/wHDAVMBmgH/ARoBUwEaAf8BlAF1ASYBBwHxAgcC7ALtBOwC7wG8
-        AW0B7wG1AQkBGQEJARkBtAEHAbwBtAEZAgkBGQG0AW0B7wHzBPAIvAHyAW0BMgGaAXUBGgHDAZoBdQH2
-        Af8BmgFTAv8CdQEmAQcB8QIHB+0B7ALvAbwBbQHvAQcBtAEZAQkB3QEJArQBuwEZAQkBGQG0AbUBbQHv
-        AfAC7wT3BZIB9wG8AW0BMgGaA3UBegEaAf8B9gF1AXoC/wFNAXUBLAG1AfEBvAYHBe8BBwGuAe8B8QHr
-        CG0C6gHsAbwB6wHvAfEB6whtAuoB7AG8AesBMgGaAXUBegGaAfYB/wH2AXoBUwH2Af8BmgFTAXUBLAG1
-        AfME8gfxAfIBvAGuAe8B8QXvBPcCkgHvAbwB6wHvAfEF7wT3ApIB7wG8AesBMgKaA/8B9gF6AXUBGgH/
-        AfYBdQFTAXoBLAGnAfEB8wLxAfACvAEHArwB8AHxAfMB9wGnAbUB8QG8BgcF7wEHAa4BtQHxAbwGBwXv
-        AQcBrgEyAXoBmgH2AcMBmgF6AXUBGgL/AZoCUwF6ASwBAAG1AfMB8QbyAfEBBwLwAa4BAAG1BfIH8QHy
-        AfABrgG1BfIH8QHyAfABrgEyAXoBUwN1AZoB9gL/AZoCdQFTAXoBLAEAAacB8QH0CPMB9AHvAacBAAGn
-        AbwB8wLxAfACvAEHArwB8AHxAfMB9wKnAbwB8wLxAfACvAEHArwB8AHxAfMB9wGnATIBegF1AZoBGgH2
-        Av8B9gGaBHUBegEsAgABtQLwArwDBwLvAfcBrgMAAbUB8gHxBvIB8QEHAvABrgIAAbUB8gHxBvIB8QEH
-        AvABrgEAATIBegGaA/8B9gGaAXoFdQGaASwRAAGnAfAB9AjzAfQB7wGnAgABpwHwAfQI8wH0Ae8BpwEA
-        ATICegOaBXUBegF1AXoBmgEsEgABtQQHBO8C9wGuBAABtQQHBO8C9wGuAgABaAFTBXoHmgFZAWgwAAGh
-        AWgMMgFoAaEBQgFNAT4HAAE+AwABKAMAAUADAAEgAwABAQEAAQEGAAEBFgAD/4EAAv8B4AEHAv8CAAL/
-        AcABAwL/BAABgAEBAv8EAAGAAQAC/zIAAYABAQYAAYABAQYAAcABAwGAAQEBgAEBAgAC/wGAAQEBgAEB
-        AgAC/wHAAQMBwAEDAgAG/wIACw==
-</value>
-  </data>
-  <data name="ToolBoxListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;ToolBoxListView.Name" xml:space="preserve">
     <value>ToolBoxListView</value>
@@ -778,63 +683,6 @@
   </data>
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="QueueListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="TrackNumberColumn.Text" xml:space="preserve">
-    <value>#</value>
-  </data>
-  <data name="TrackNumberColumn.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="TrackNameColumn.Text" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="TrackNameColumn.Width" type="System.Int32, mscorlib">
-    <value>140</value>
-  </data>
-  <data name="TrackArtistColumn.DisplayIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="TrackArtistColumn.Text" xml:space="preserve">
-    <value>Artist</value>
-  </data>
-  <data name="TrackArtistColumn.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="TrackAlbumColumn.DisplayIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TrackAlbumColumn.Text" xml:space="preserve">
-    <value>Album</value>
-  </data>
-  <data name="TrackAlbumColumn.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="TrackDurationColumn.Text" xml:space="preserve">
-    <value>Duration</value>
-  </data>
-  <data name="TrackReleaseDateColumn.Text" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="TrackFileColumn.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="TrackFileColumn.Width" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="TrackFormatColumn.Text" xml:space="preserve">
-    <value>Format</value>
-  </data>
-  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
-  </data>
-  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>531, 323</value>
-  </data>
-  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
     <value>QueueListView</value>
@@ -936,7 +784,177 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;OuterPlaybackQueueSplit.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ToolBoxListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="ToolBoxContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>105, 60</value>
+  </metadata>
+  <data name="ToolBoxContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 26</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxContextMenuStrip.Name" xml:space="preserve">
+    <value>ToolBoxContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ToolBoxListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="ToolBoxListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>252, 323</value>
+  </data>
+  <metadata name="ToolBoxSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>492, 7</value>
+  </metadata>
+  <data name="ToolBoxSmallImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABO
+        CwAAAk1TRnQBSQFMAgEBBAEAAQkBAAEEAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD//8A/wD/AP8AGAABoQHH
+        Aa0BzwK0Aq0BpwGhEwABoQFoCCwEJgFoAaESAAGhAa0BtAEJAfQB/wH0ARkB8AG0Aa0BoRIAAWgBUwV6
+        B3UBTQFoAc8B9wGSAe0E7AHrBG0C6gFmAQABoQGtAQkE9AEZAQkB3QEZAQkBrQGhEQABMgGaA3oDUwJ1
+        Ak0DdQEmAe8B8wTwCLwB8gHqAQABpwG7AhkC9AH/AfQBGQIJARkBCQGnAaEQAAEyAZoBegH2Af8BmgFT
+        AXUB/wEbAU0BmgH/AZoBdQEmAe8B8AIHCe8B9wG8AeoBzwG0AfAB3QEJARkBCQK0AbsBGQIJARkBkQGG
+        Ac8B9wGSAu0G7ALrAm0BhgEyApoC/wHDAVMBmgH/ARoBUwEaAf8BlAF1ASYBBwHxAgcC7ALtBOwC7wG8
+        AW0B7wG1AQkBGQEJARkBtAEHAbwBtAEZAgkBGQG0AW0B7wHzBPAIvAHyAW0BMgGaAXUBGgHDAZoBdQH2
+        Af8BmgFTAv8CdQEmAQcB8QIHB+0B7ALvAbwBbQHvAQcBtAEZAQkB3QEJArQBuwEZAQkBGQG0AbUBbQHv
+        AfAC7wT3BZIB9wG8AW0BMgGaA3UBegEaAf8B9gF1AXoC/wFNAXUBLAG1AfEBvAYHBe8BBwGuAe8B8QHr
+        CG0C6gHsAbwB6wHvAfEB6whtAuoB7AG8AesBMgGaAXUBegGaAfYB/wH2AXoBUwH2Af8BmgFTAXUBLAG1
+        AfME8gfxAfIBvAGuAe8B8QXvBPcCkgHvAbwB6wHvAfEF7wT3ApIB7wG8AesBMgKaA/8B9gF6AXUBGgH/
+        AfYBdQFTAXoBLAGnAfEB8wLxAfACvAEHArwB8AHxAfMB9wGnAbUB8QG8BgcF7wEHAa4BtQHxAbwGBwXv
+        AQcBrgEyAXoBmgH2AcMBmgF6AXUBGgL/AZoCUwF6ASwBAAG1AfMB8QbyAfEBBwLwAa4BAAG1BfIH8QHy
+        AfABrgG1BfIH8QHyAfABrgEyAXoBUwN1AZoB9gL/AZoCdQFTAXoBLAEAAacB8QH0CPMB9AHvAacBAAGn
+        AbwB8wLxAfACvAEHArwB8AHxAfMB9wKnAbwB8wLxAfACvAEHArwB8AHxAfMB9wGnATIBegF1AZoBGgH2
+        Av8B9gGaBHUBegEsAgABtQLwArwDBwLvAfcBrgMAAbUB8gHxBvIB8QEHAvABrgIAAbUB8gHxBvIB8QEH
+        AvABrgEAATIBegGaA/8B9gGaAXoFdQGaASwRAAGnAfAB9AjzAfQB7wGnAgABpwHwAfQI8wH0Ae8BpwEA
+        ATICegOaBXUBegF1AXoBmgEsEgABtQQHBO8C9wGuBAABtQQHBO8C9wGuAgABaAFTBXoHmgFZAWgwAAGh
+        AWgMMgFoAaEBQgFNAT4HAAE+AwABKAMAAUADAAEgAwABAQEAAQEGAAEBFgAD/4EAAv8B4AEHAv8CAAL/
+        AcABAwL/BAABgAEBAv8EAAGAAQAC/zIAAYABAQYAAYABAQYAAcABAwGAAQEBgAEBAgAC/wGAAQEBgAEB
+        AgAC/wHAAQMBwAEDAgAG/wIACw==
+</value>
+  </data>
+  <data name="ToolBoxListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Name" xml:space="preserve">
+    <value>ToolBoxListView</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.Parent" xml:space="preserve">
+    <value>ToolBoxGroupBox</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="QueueListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>531, 323</value>
+  </data>
+  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
+    <value>QueueListView</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;QueueListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TrackNumberColumn.Text" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="TrackNumberColumn.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="TrackNameColumn.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TrackNameColumn.Width" type="System.Int32, mscorlib">
+    <value>140</value>
+  </data>
+  <data name="TrackArtistColumn.DisplayIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TrackArtistColumn.Text" xml:space="preserve">
+    <value>Artist</value>
+  </data>
+  <data name="TrackArtistColumn.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="TrackAlbumColumn.DisplayIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TrackAlbumColumn.Text" xml:space="preserve">
+    <value>Album</value>
+  </data>
+  <data name="TrackAlbumColumn.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
+  <data name="TrackDurationColumn.Text" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="TrackReleaseDateColumn.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TrackFileColumn.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="TrackFileColumn.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="TrackFormatColumn.Text" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="ToolBoxContextMenuItemRefresh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 22</value>
+  </data>
+  <data name="ToolBoxContextMenuItemRefresh.Text" xml:space="preserve">
+    <value>Refresh</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1152,6 +1170,12 @@
   </data>
   <data name="&gt;&gt;TrackFormatColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxContextMenuItemRefresh.Name" xml:space="preserve">
+    <value>ToolBoxContextMenuItemRefresh</value>
+  </data>
+  <data name="&gt;&gt;ToolBoxContextMenuItemRefresh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
