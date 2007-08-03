@@ -267,7 +267,7 @@ namespace Alexandria.TagLib
 			}
 		}
 
-		public override IList<IImage> Pictures
+		public override IList<IImageContainer> Pictures
 		{
 			get
 			{

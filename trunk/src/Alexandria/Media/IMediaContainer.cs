@@ -32,9 +32,10 @@ namespace Alexandria.Media
 {
 	public interface IMediaContainer : IMedia
 	{
-		IList<IAudio> Audio { get; }
-		IList<IVideo> Video { get; }
-		IList<IImage> Images { get; }
-		IList<IText> Text { get; }
+		IList<IAudioContainer> Audio { get; }
+		IList<IVideoContainer> Video { get; }
+		IList<IImageContainer> Images { get; }
+		IList<ITextContainer> Text { get; }
+		IList<ISubtitleContainer> Subtitles { get; }
 	}
 }

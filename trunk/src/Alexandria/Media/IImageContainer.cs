@@ -27,15 +27,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IAudio : IMedia
+	[CLSCompliant(false)]
+	public interface IImageContainer : IMedia
 	{
-		int NumberOfBytes { get; }
-		int NumberOfSamples { get; }
-		int NumberOfChannels { get; }
-		int SampleRate { get; }
+		Image Image { get; }
 	}
 }

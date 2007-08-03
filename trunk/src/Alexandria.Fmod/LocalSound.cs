@@ -49,59 +49,11 @@ namespace Alexandria.Fmod
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
 		#endregion
 		
-		#region Private Methods
-		
-		#region RefreshBufferState
-		private BufferState RefreshBufferState()
-		{
-			if (sound != null)
-			{
-				if (sound.BufferIsStarving)
-				{
-					bufferState = BufferState.Starving;
-				}
-				else
-				{
-					if (sound.OpenState == OpenState.Loading)
-						bufferState = BufferState.Loading;
-					else if (sound.OpenState == OpenState.Buffering)
-					{
-						if (sound.PercentBuffered < 100)
-							bufferState = BufferState.Buffering;
-						else bufferState = BufferState.Full;
-					}
-					else bufferState = BufferState.None;
-				}
-			}
-			else bufferState = BufferState.None;
-			
-			return bufferState;
-		}
-		#endregion
-		
-		#region RefreshPlaybackState
-		private PlaybackState RefreshPlaybackState()
-		{
-			if (sound != null && sound.Channel != null)
-			{
-				if (sound.Channel.IsPlaying)
-				{
-					if (sound.Channel.Paused)
-						playbackState = PlaybackState.Paused;
-					else playbackState = PlaybackState.Playing;
-				}
-				else playbackState = PlaybackState.Stopped;
-			}
-			else playbackState = PlaybackState.None;
-			
-			return playbackState;
-		}
-		#endregion
-		
-		#endregion
-
 		#region IAudioStream Members
 		public bool IsMuted
 		{
@@ -119,7 +71,7 @@ namespace Alexandria.Fmod
 		#region IMediaStream Members
 		public BufferState BufferState
 		{
-			get { return RefreshBufferState(); }
+			get { return bufferState; }
 		}
 
 		public bool CanPlay
@@ -176,7 +128,7 @@ namespace Alexandria.Fmod
 
 		public void Flush()
 		{
-			throw new Exception("The method or operation is not implemented.");
+			throw new InvalidOperationException("This stream cannot be flushed");
 		}
 
 		public long Length
@@ -191,6 +143,24 @@ namespace Alexandria.Fmod
 		public NetworkState NetworkState
 		{
 			get { return NetworkState.None; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
+		{
+			get { return onBufferStateChanged; }
+			set { onBufferStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged
+		{
+			get { return onNetworkStateChanged; }
+			set { onNetworkStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged
+		{
+			get { return onPlaybackStateChanged; }
+			set { onPlaybackStateChanged = value; }
 		}
 
 		public string Path
@@ -223,7 +193,7 @@ namespace Alexandria.Fmod
 
 		public PlaybackState PlaybackState
 		{
-			get { return RefreshPlaybackState(); }
+			get { return playbackState; }
 		}
 
 		public long Position
@@ -235,6 +205,68 @@ namespace Alexandria.Fmod
 				{
 					sound.Channel.PositionInBytes = (uint)value;
 				}
+			}
+		}
+
+		public void RefreshBufferState()
+		{
+			BufferState nextBufferState = bufferState;
+
+			if (sound != null)
+			{
+				if (sound.BufferIsStarving)
+				{
+					nextBufferState = BufferState.Starving;
+				}
+				else
+				{
+					if (sound.OpenState == OpenState.Loading)
+						nextBufferState = BufferState.Loading;
+					else if (sound.OpenState == OpenState.Buffering)
+					{
+						if (sound.PercentBuffered < 100)
+							nextBufferState = BufferState.Buffering;
+						else nextBufferState = BufferState.Full;
+					}
+					else nextBufferState = BufferState.None;
+				}
+			}
+			else nextBufferState = BufferState.None;
+
+			if (bufferState != nextBufferState)
+			{
+				//TODO: call before changed event handler here
+				bufferState = nextBufferState;
+				if (OnBufferStateChanged != null)
+					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+			}
+		}
+
+		public void RefreshNetworkState()
+		{
+		}
+
+		public void RefreshPlaybackState()
+		{
+			PlaybackState nextPlaybackState = playbackState;
+
+			if (sound != null && sound.Channel != null)
+			{
+				if (sound.Channel.IsPlaying)
+				{
+					if (sound.Channel.Paused)
+						nextPlaybackState = PlaybackState.Paused;
+					else nextPlaybackState = PlaybackState.Playing;
+				}
+				else nextPlaybackState = PlaybackState.Stopped;
+			}
+			else nextPlaybackState = PlaybackState.None;
+
+			if (playbackState != nextPlaybackState)
+			{
+				playbackState = nextPlaybackState;
+				if (OnPlaybackStateChanged != null)
+					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
 			}
 		}
 
@@ -363,326 +395,4 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 	}
-	
-	#region Old Code
-	/*
-	public class LocalSound : IDisposable, ILocalAudioOutput
-	{
-		#region Constructors
-		public LocalSound(string path)
-		{
-			location = new Location(path);
-		}
-		#endregion
-	
-		#region Finalizer
-		~LocalSound()
-		{
-			Dispose(false);
-		}
-		#endregion
-		
-		#region IDisposable Members
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					this.sound.Dispose();
-					this.sound = null;
-				}				
-			}
-			disposed = true;
-		}
-		
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-		#endregion	
-	
-		#region Constants
-		private const int DEFAULT_SEEK_SPEED = 1;
-		#endregion
-	
-		#region Private Fields
-		private Sound sound;
-		
-		private bool disposed;
-		
-		private IMediaFormat format;
-		private Guid id = Guid.NewGuid();
-		private ILocation location;
-		private PlaybackState playbackState = PlaybackState.None;
-		private bool isSeeking;
-		private int seekSpeed;
-		private SeekDirection seekDirection = SeekDirection.None;
-		private TimeSpan duration = TimeSpan.Zero;
-		#endregion
-	
-		#region Private Methods
-		private void RefreshPlaybackState()
-		{
-			if (this.sound.Channel != null)
-			{
-				if (this.sound.Channel.IsPlaying)
-				{
-					if (this.sound.Channel.Paused)
-						playbackState = PlaybackState.Paused;
-					else playbackState = PlaybackState.Playing;
-				}
-				else playbackState = PlaybackState.Stopped;
-			}
-			else playbackState = PlaybackState.None;
-		}
-
-		private IntPtr GetReadBuffer(int length)
-		{
-			//sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
-			//uint numberOfBytes = sound.FmodLength;
-			uint bytesRead;
-			
-			IntPtr buffer = IntPtr.Zero;
-
-			try
-			{
-				buffer = Marshal.AllocHGlobal(length); // AllocCoTaskMem((int)numberOfBytes);
-			}
-			catch (OutOfMemoryException ex)
-			{
-				throw new ApplicationException("There was an error reading the sound data: ran out of memory trying to allocate the buffer", ex);
-			}
-
-			bytesRead = sound.Read(buffer, (uint)length);
-			if (bytesRead == length)
-			{
-				return buffer;
-			}
-			else throw new ApplicationException("There was an error reading the sound data: could not read to end of file (unexpected eof?)");
-		}
-
-		private void CleanupReadBuffer(IntPtr buffer)
-		{
-			try
-			{
-				Marshal.FreeHGlobal(buffer); //FreeCoTaskMem(buffer);
-			}
-			catch (Exception ex)
-			{
-				throw new ApplicationException("There was an error freeing the memory used for this buffer", ex);
-			}
-		}
-		#endregion
-	
-		#region IMedia Members
-		public IMediaFormat Format
-		{
-			get { return format; }
-		}
-
-		public Guid Id
-		{
-			get { return id; }
-		}
-
-		public void Load()
-		{
-			if (sound == null)
-			{
-				sound = SoundSystemFactory.DefaultSoundSystem.CreateStream(location.Path, Modes.None);
-				format = new SoundFormat(sound.FmodSoundFormat, sound.FmodSoundType);
-				duration = sound.Duration;
-			}
-		}
-
-		public ILocation Location
-		{
-			get { return location; }
-		}
-		#endregion
-
-		#region IAudible Members
-		public bool IsMuted
-		{
-			get { return this.sound.Channel.Mute; }
-		}
-
-		public void Mute()
-		{
-			this.sound.Channel.Mute = true;
-		}
-
-		public void SetVolume(float volume)
-		{
-			this.sound.Channel.Volume = volume;
-		}
-
-		public void Unmute()
-		{
-			this.sound.Channel.Mute = false;
-		}
-
-		public float Volume
-		{
-			get { return this.sound.Channel.Volume; }
-		}
-		#endregion
-
-		#region IPlayable Members
-		public void Pause()
-		{
-			this.sound.Pause();
-			RefreshPlaybackState();
-		}
-
-		public void Play()
-		{
-			this.sound.Play();
-			RefreshPlaybackState();
-		}
-
-		public PlaybackState PlaybackState
-		{
-			get { return playbackState; }
-		}
-
-		public void Resume()
-		{
-			this.sound.Resume();
-			RefreshPlaybackState();
-		}
-
-		public void Stop()
-		{
-			this.sound.Stop();
-			RefreshPlaybackState();
-		}
-		#endregion
-
-		#region ISeekable Members
-		public bool IsSeeking
-		{
-			get { return isSeeking; }
-		}
-
-		public void SeekBackward(int seekSpeed)
-		{
-			this.isSeeking = true;
-			this.seekDirection = SeekDirection.Backward;
-			this.seekSpeed = seekSpeed;
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void SeekBackward()
-		{
-			SeekBackward(DEFAULT_SEEK_SPEED);
-		}
-
-		public void SeekForward(int seekSpeed)
-		{
-			this.isSeeking = true;
-			this.seekDirection = SeekDirection.Forward;
-			this.seekSpeed = seekSpeed;
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void SeekForward()
-		{
-			SeekForward(DEFAULT_SEEK_SPEED);
-		}
-
-		public SeekDirection SeekDirection
-		{
-			get { return seekDirection; }
-		}
-
-		public int SeekSpeed
-		{
-			get { return seekSpeed; }
-		}
-		
-		public void StopSeeking()
-		{
-			isSeeking = false;
-			seekDirection = SeekDirection.None;
-			seekSpeed = 0;
-		}
-		#endregion
-
-		#region IHasDuration Members
-		public TimeSpan Duration
-		{
-			get { return duration; }
-		}
-		#endregion
-
-		#region IHasElapsed Members
-		public TimeSpan GetElapsed()
-		{			
-			return new TimeSpan(0, 0, 0, 0, (int)this.sound.Channel.Position);
-		}
-		#endregion
-
-		#region IPositionable Members
-		public void SetAbsolutePosition(TimeSpan position)
-		{
-			this.sound.Channel.Position = (uint)position.Milliseconds;
-			throw new Exception("The method or operation is not implemented.");
-		}
-
-		public void SetRelativePosition(TimeSpan position)
-		{
-			SetAbsolutePosition(GetElapsed().Add(position));
-		
-			throw new Exception("The method or operation is not implemented.");
-		}
-		#endregion
-		
-		#region IHasRawAudioData Members
-		public int NumberOfBytes
-		{
-			get
-			{
-				sound.LengthUnit = TimeUnits.PcmByte; //RawByte;
-				return (int)sound.FmodLength;
-			}
-		}
-		
-		public int NumberOfSamples
-		{
-			get
-			{
-				sound.LengthUnit = TimeUnits.PcmSample;
-				return (int)sound.FmodLength;
-			}
-		}
-		
-		public int SampleRate
-		{
-			get { return sound.NumberOfBitsPerSample; }
-		}
-		
-		public bool IsStereo
-		{
-			get { return (sound.NumberOfChannels == 2); }
-		}
-		
-		public byte[] ReadData(int length)
-		{
-			IntPtr buffer = GetReadBuffer(length);
-			if (buffer != IntPtr.Zero)
-			{
-				byte[] data = null;
-				Marshal.PtrToStructure(buffer, data);
-				CleanupReadBuffer(buffer);
-				return data;
-			}
-			else return null;
-		}
-		#endregion
-	}
-	*/
-	#endregion
 }

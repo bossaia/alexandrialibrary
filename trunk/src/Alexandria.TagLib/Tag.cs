@@ -61,7 +61,7 @@ namespace Alexandria.TagLib
 		private uint disc;
 		private uint discCount;
 		
-		private IList<IImage> pictures = new List<IImage>();		
+		private IList<IImageContainer> pictures = new List<IImageContainer>();		
 		#endregion
 		
 		#region Private Static Methods
@@ -150,7 +150,7 @@ namespace Alexandria.TagLib
 			set { genres = value; }
 		}
 
-		public virtual IList<IImage> Pictures
+		public virtual IList<IImageContainer> Pictures
 		{
 			get { return pictures; }
 			set { pictures = value; }

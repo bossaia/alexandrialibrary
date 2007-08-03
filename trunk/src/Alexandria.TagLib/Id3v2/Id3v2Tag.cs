@@ -520,7 +520,7 @@ namespace Alexandria.TagLib
 			}
 		}
 
-		public override IList<IImage> Pictures
+		public override IList<IImageContainer> Pictures
 		{
 			get
 			{
@@ -530,7 +530,7 @@ namespace Alexandria.TagLib
 					return base.Pictures;
 				}
 
-				IList<IImage> frames = new List<IImage>(rawFrames.Length);
+				IList<IImageContainer> frames = new List<IImageContainer>(rawFrames.Length);
 				//[rawFrames.Length];
 				for (int i = 0; i < rawFrames.Length; i++)
 				{

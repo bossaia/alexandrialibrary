@@ -237,12 +237,12 @@ namespace Alexandria.TagLib
 			}
 		}
 
-		public override IList<IImage> Pictures
+		public override IList<IImageContainer> Pictures
 		{
 			get
 			{
 				//ArrayList l = new ArrayList();
-				IList<IImage> list = new List<IImage>();
+				IList<IImageContainer> list = new List<IImageContainer>();
 
 				foreach (Mpeg4AppleDataBox box in DataBoxes(FixId("covr")))
 				{

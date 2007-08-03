@@ -28,7 +28,7 @@ using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {   
-	public class Id3v2AttachedPictureFrame : Id3v2Frame, IPicture, IImage
+	public class Id3v2AttachedPictureFrame : Id3v2Frame, IPicture, IImageContainer
 	{
 		#region Constructors
 		public Id3v2AttachedPictureFrame() : base("APIC")
