@@ -386,7 +386,7 @@ namespace Alexandria.Client
 								audioStream.StreamIndex = 0;
 							}
 
-							if (audioStream != null && audioStream.Duration != selectedTrack.Duration)
+							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 							{
 								selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
 							}

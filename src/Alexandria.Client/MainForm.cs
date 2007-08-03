@@ -369,6 +369,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializeToolbox
 		private void InitializeToolbox()
 		{
+			ToolBoxListView.Items.Clear();
 			foreach(DriveInfo drive in DriveInfo.GetDrives())
 			{
 				if (drive.DriveType == System.IO.DriveType.Fixed)
@@ -694,6 +695,14 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				}
 			}
 		}
+
+		private void ToolBoxContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
+			if (e.ClickedItem.Text == "Refresh")
+			{
+				InitializeToolbox();
+			}
+		}
 		#endregion
 		
 		#region Protected Overrides
@@ -733,5 +742,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			get { return dbPath; }
 		}
 		#endregion		
+
+
 	}
 }
