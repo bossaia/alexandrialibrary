@@ -59,6 +59,10 @@ namespace Alexandria.Media.IO
 		private TimeSpan duration = TimeSpan.Zero;
 		private TimeSpan elapsed = TimeSpan.Zero;
 		private float percentBuffered;
+		
+		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
 		#endregion
 
 		#region Stream Members
@@ -153,16 +157,19 @@ namespace Alexandria.Media.IO
 		public BufferState BufferState
 		{
 			get { return bufferState; }
+			protected set { bufferState = value; }
 		}
 
 		public PlaybackState PlaybackState
 		{
 			get { return playbackState; }
+			protected set { playbackState = value; }
 		}
 
 		public NetworkState NetworkState
 		{
 			get { return networkState; }
+			protected set { networkState = value; }
 		}
 
 		public TimeSpan Duration
@@ -181,6 +188,25 @@ namespace Alexandria.Media.IO
 			}
 		}
 
+
+		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
+		{
+			get { return onBufferStateChanged; }
+			set { onBufferStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged
+		{
+			get { return onNetworkStateChanged; }
+			set { onNetworkStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged
+		{
+			get { return onPlaybackStateChanged; }
+			set { onPlaybackStateChanged = value; }
+		}
+		
 		public float PercentBuffered
 		{
 			get { return percentBuffered; }
@@ -209,6 +235,18 @@ namespace Alexandria.Media.IO
 		{
 			if (!CanPlay)
 				throw new InvalidOperationException("MediaStream playback error: this stream does not support playback");
+		}
+
+		public virtual void RefreshBufferState()
+		{
+		}
+		
+		public virtual void RefreshNetworkState()
+		{
+		}
+		
+		public virtual void RefreshPlaybackState()
+		{
 		}
 		#endregion
 	}

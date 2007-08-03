@@ -39,7 +39,7 @@ namespace Alexandria.Media.IO
 			this.CanPlay = true;
 		}
 		
-		public AudioStream(IAudio audio) : this(audio.Path.LocalPath)
+		public AudioStream(IAudioContainer audio) : this(audio.Path.LocalPath)
 		{
 		}
 		#endregion

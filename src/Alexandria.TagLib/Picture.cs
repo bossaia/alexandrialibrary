@@ -26,7 +26,7 @@ using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {
-    public class Picture : IPicture, IImage
+    public class Picture : IPicture, IImageContainer
     {
 		#region Constructors
 		public Picture()

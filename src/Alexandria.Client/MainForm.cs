@@ -32,17 +32,20 @@ using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
 using Alexandria;
 using Alexandria.Catalog;
+using Alexandria.Media;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
 using Alexandria.Plugins;
 
+using Alexandria.Client.Controllers;
 using Alexandria.Client.Properties;
 using Alexandria.Fmod;
 using Alexandria.FreeDB;
@@ -88,7 +91,7 @@ namespace Alexandria.Client
 		private IPluginRepository repository;
 		private IPersistenceBroker broker;
 		private IPersistenceMechanism mechanism;
-		private QueueController controller;
+		private QueueController controller = new QueueController();
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 		
 		//private string dbDir;
@@ -107,6 +110,10 @@ namespace Alexandria.Client
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
 		private bool isSeeking;
+		
+		//QueueController fields
+		private ListViewItem selectedItem;
+		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		#endregion
 		
 		#region Private Constant Fields
@@ -236,8 +243,6 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region LoadDefaultUser
 		private void LoadDefaultUser()
 		{
-			controller = new QueueController(this.QueueListView, broker, repository);
-		
 			Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
 			IUser user = broker.LookupRecord<IUser>(userId);
 			if (user != null)
@@ -245,7 +250,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				//TODO: allow the default catalog to be user-defined
 				if (user.Catalogs != null && user.Catalogs.Count > 0)
 				{
-					controller.LoadTracks(user.Catalogs[0].Tracks);
+					LoadTracks(user.Catalogs[0].Tracks);
 				}
 			}
 		}
@@ -267,14 +272,14 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			//string x = track.Name;
 
 			//controller = new QueueController(this.QueueListView);
-			//controller.LoadTracks();
-			//if (controller.Tracks.Count > 0)
+			//LoadTracks();
+			//if (Tracks.Count > 0)
 			//{
-				//int x = controller.Tracks.Count;
+				//int x = Tracks.Count;
 
 				//Guid userId = new Guid("FC26A3CC-91DC-4d8b-BC54-F28DAE5BD9D6");
 				//IUser user = broker.LookupRecord<IUser>(userId);				
-				//foreach(IAudioTrack track in controller.Tracks)
+				//foreach(IAudioTrack track in Tracks)
 				//{
 					//user.Catalogs[0].Tracks.Add(track);
 					//user.Save();
@@ -403,6 +408,460 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			return Convert.ToSingle(VolumeTrackBar.Value * .1);
 		}
 		#endregion
+
+		#region QueueController Methods
+
+		#region LoadTrack
+		private void LoadTrack(IAudioTrack track)
+		{
+			string[] data = new string[8];
+			data[0] = track.TrackNumber.ToString();
+			data[1] = track.Name;
+			data[2] = track.Artist;
+			data[3] = track.Album;
+			data[4] = GetDurationString(track.Duration);
+			data[5] = GetDateString(track.ReleaseDate);
+			data[6] = track.Path.LocalPath;
+			data[7] = track.Format.ToLowerInvariant();
+
+			ListViewItem item = new ListViewItem(data);
+			item.Tag = track;
+			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
+			//item.Tag = track.MetadataIdentifiers[0];
+
+			QueueListView.Items.Add(item);
+		}
+		#endregion
+
+		#region LoadTracks
+		private void LoadTracks()
+		{
+			IList<IAudioTrack> tracks = GetMp3TunesTracks(false);
+			LoadTracks(tracks);
+		}
+
+		private void LoadTracks(IList<IAudioTrack> tracks)
+		{
+			QueueListView.Items.Clear();
+			if (tracks != null)
+			{
+				foreach (IAudioTrack track in tracks)
+				{
+					LoadTrack(track);
+				}
+			}
+		}
+		#endregion
+
+		#region SelectTrack
+		public void SelectTrack()
+		{
+			if (QueueListView.SelectedItems.Count > 0)
+			{
+				//# Name Artist Album Length Date Location Format
+				if (QueueListView.SelectedItems[0] != selectedItem)
+				{
+					selectedItem = QueueListView.SelectedItems[0];
+					if (selectedItem.Tag != null)
+					{
+						selectedTrack = (IAudioTrack)selectedItem.Tag;
+						if (selectedTrack.Format == "cdda")
+						{
+							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
+							audioStream = new Fmod.CompactDiscSound(discPath);
+							audioStream.StreamIndex = selectedTrack.TrackNumber;
+						}
+						else
+						{
+							if (selectedTrack.Path.IsFile)
+							{
+								audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
+								audioStream.StreamIndex = 0;
+							}
+							else
+							{
+								string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+								fileName = CleanupFileName(fileName);
+								if (!System.IO.File.Exists(fileName))
+								{
+									if (!System.IO.Directory.Exists(tempPath))
+										System.IO.Directory.CreateDirectory(tempPath);
+
+									WebClient client = new WebClient();
+									Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+									try
+									{
+										client.DownloadFile(address, fileName);
+									}
+									catch (WebException ex)
+									{
+										throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+									}
+								}
+
+								audioStream = new Fmod.LocalSound(fileName);
+								audioStream.StreamIndex = 0;
+							}
+
+							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
+							{
+								selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+							}
+						}
+					}
+					else throw new ApplicationException("Could not load selected track: Id was undefined");
+				}
+			}
+		}
+		#endregion
+
+		#region LoadTrackFromPath
+		private void LoadTrackFromPath(string path)
+		{
+			LoadTrackFromPath(new Uri(path));
+		}
+
+		private void LoadTrackFromPath(Uri path)
+		{
+			if (path != null)
+			{
+				try
+				{
+					IAudioTrack track = tagLibEngine.GetAudioTrack(path);
+					if (track != null)
+						LoadTrack(track);
+				}
+				catch (System.IO.FileNotFoundException)
+				{
+					MessageBox.Show(string.Format("The file does not exist: {0}", path.LocalPath), "Error Loading Track");
+				}
+			}
+			else MessageBox.Show("The file path is not defined", "Error Loading Track");
+		}
+		#endregion
+
+		#region Private Fields
+		//private IPluginRepository repository;
+		//private IPersistenceBroker broker;
+		private IAudioTrack selectedTrack;
+		private IAudioTrack submittedTrack;
+		private IAudioStream audioStream;
+		private IList<IAudioTrack> tracks;
+
+		MusicLocker locker = new MusicLocker();
+		PlaylistFactory playlistFactory = new PlaylistFactory();
+		TagLibEngine tagLibEngine = new TagLibEngine();
+
+		private EventHandler<EventArgs> onTrackStart;
+		private EventHandler<EventArgs> onTrackEnd;
+
+		private bool isPlaying;
+		#endregion
+
+		#region Private Properties
+		private IList<IAudioTrack> Tracks
+		{
+			get { return tracks; }
+		}
+
+		private IAudioStream AudioStream
+		{
+			get { return audioStream; }
+		}
+
+		private bool IsMuted
+		{
+			get
+			{
+				if (audioStream != null)
+				{
+					return audioStream.IsMuted;
+				}
+				else return false;
+			}
+		}
+
+		private EventHandler<EventArgs> OnTrackStart
+		{
+			get { return onTrackStart; }
+			set { onTrackStart = value; }
+		}
+
+		private EventHandler<EventArgs> OnTrackEnd
+		{
+			get { return onTrackEnd; }
+			set { onTrackEnd = value; }
+		}
+
+		private float Volume
+		{
+			get
+			{
+				if (audioStream != null)
+					return audioStream.Volume;
+				else return -1;
+			}
+			set
+			{
+				if (audioStream != null)
+					audioStream.Volume = value;
+			}
+		}
+
+		private IAudioTrack SelectedTrack
+		{
+			get { return selectedTrack; }
+			set { selectedTrack = value; }
+		}
+		#endregion
+
+		#region Private Methods
+		private string CleanupFileName(string fileName)
+		{
+			const char safeChar = '_';
+
+			if (fileName.Length > 2)
+			{
+				string filePostfix = fileName.Substring(2, fileName.Length - 2).Replace(':', '_');
+				fileName = fileName.Substring(0, 2) + filePostfix;
+			}
+
+			fileName = fileName.Replace('/', safeChar);
+			fileName = fileName.Replace('?', safeChar);
+			fileName = fileName.Replace('*', safeChar);
+
+			return fileName;
+		}
+
+		private string GetDateString(DateTime date)
+		{
+			if (date == DateTime.MinValue)
+				return string.Empty;
+			else if (date.Year == 1600)
+				return string.Empty;
+			else if (date.Year == 1900)
+				return string.Empty;
+			else if (date.Month == 1 && date.Day == 1)
+				return date.Year.ToString();
+			else return string.Format("{0:d}", date);
+		}
+
+		private IList<IAudioTrack> GetMp3TunesTracks(bool ignoreCache)
+		{
+			try
+			{
+				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
+				musicLocker.Login("dan.poage@gmail.com", "automatic");
+				tracks = musicLocker.GetTracks(ignoreCache);
+				return tracks;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error loading MP3tunes tracks");
+				return null;
+			}
+		}
+
+		private void SubmitTrackToLastFM(IAudioTrack track)
+		{
+			try
+			{
+				LastFM.AudioscrobblerRequest request = new Alexandria.LastFM.AudioscrobblerRequest();
+				request.Username = "uberweasel";
+				request.Password = "automatic";
+				request.SubmitTrack(track);
+
+				/*
+				LastFM.IAudioscrobblerTrack lastFMtrack = new LastFM.AudioscrobblerTrack();
+				track.AlbumName = track.Album; "Undertow"
+				track.ArtistName = track.Artist; "Tool"
+				track.TrackName = track.Name; "Sober"
+				track.TrackNumber = 3; 
+				AudioTrackId = "441a8b6f-d6df-4e6e-bd9c-547a1616ac48" 
+				MetadataId   = "90748683-cb71-4e3d-98aa-57a964b60eB0"
+				track.MusicBrainzID =  "0dfaa81e-9326-4eff-9604-c20d1c613227";
+				track.TrackPlayed = DateTime.Now - new TimeSpan(0, 2, 4);
+				track.TrackLength = new TimeSpan(0, 5, 6).TotalMilliseconds;
+				LastFM.AudioscrobblerRequest request = new LastFM.AudioscrobblerRequest();
+				request.Username = "uberweasel";
+				request.Password = "automatic";
+				//request.SubmitTrack(track);
+				*/
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "LastFM error");
+			}
+		}
+
+		private IMetadataIdentifier LookupPuid(Uri path)
+		{
+			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
+			IAudioTrack track = factory.CreateAudioTrack(path);
+			foreach (IMetadataIdentifier metadataId in track.MetadataIdentifiers)
+			{
+				if (metadataId.Type.Contains("MusicDnsId"))
+					return metadataId;
+			}
+			return null;
+		}
+
+		private bool IsFormat(string path, string format)
+		{
+			if (!string.IsNullOrEmpty(path) && !string.IsNullOrEmpty(format))
+			{
+				if (format.Contains(","))
+				{
+					string[] formats = format.Split(',');
+					foreach (string subFormat in formats)
+						if (path.EndsWith(subFormat, StringComparison.InvariantCultureIgnoreCase)) return true;
+					return false;
+				}
+				else
+					return path.EndsWith(format, StringComparison.InvariantCultureIgnoreCase);
+			}
+			return false;
+		}
+
+		private string GetDurationString(TimeSpan duration)
+		{
+			return string.Format("{0}:{1:00}", Convert.ToInt32(Math.Truncate(duration.TotalMinutes)), Convert.ToInt32(Math.Truncate(duration.TotalSeconds % 60)));
+		}
+
+		private void OpenFile(string path)
+		{
+			if (!string.IsNullOrEmpty(path))
+			{
+				if (IsFormat(path, "xspf,m3u"))
+				{
+					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
+					playlist.Load();
+					foreach (IPlaylistItem item in playlist.Items)
+						LoadTrackFromPath(item.Path);
+				}
+				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
+				{
+					LoadTrackFromPath(path);
+				}
+			}
+		}
+
+		private void Play()
+		{
+			if (audioStream != null)
+			{
+				if (audioStream.PlaybackState != PlaybackState.Playing)
+				{
+					if (audioStream.PlaybackState == PlaybackState.Paused)
+					{
+						isPlaying = true;
+						audioStream.Resume();
+					}
+					else
+					{
+						if (audioStream.PlaybackState == PlaybackState.Stopped)
+						{
+							if (OnTrackStart != null)
+								OnTrackStart(audioStream, EventArgs.Empty);
+						}
+
+						if (submittedTrack != null && selectedTrack != null)
+						{
+							if (submittedTrack.Album != selectedTrack.Album && submittedTrack.Artist != selectedTrack.Artist && submittedTrack.Name != selectedTrack.Name)
+							{
+								SubmitTrackToLastFM(selectedTrack);
+								submittedTrack = selectedTrack;
+							}
+						}
+
+						isPlaying = true;
+						audioStream.Play();
+					}
+				}
+				else
+				{
+					isPlaying = false;
+					audioStream.Pause();
+				}
+			}
+			else
+			{
+				SelectTrack();
+				if (audioStream != null)
+					Play();
+			}
+		}
+
+		private void Stop()
+		{
+			if (audioStream != null)
+			{
+				isPlaying = false;
+				audioStream.Stop();
+				if (audioStream is IDisposable)
+				{
+					IDisposable disposable = audioStream as IDisposable;
+					disposable.Dispose();
+					audioStream = null;
+				}
+			}
+		}
+
+		private void Previous()
+		{
+			if (isPlaying)
+				Stop();
+
+			if (QueueListView.SelectedItems[0] != null)
+			{
+				int previousIndex = QueueListView.Items.Count - 1;
+				if (QueueListView.SelectedIndices[0] > 0)
+					previousIndex = QueueListView.SelectedIndices[0] - 1;
+
+				QueueListView.SelectedItems[0].Selected = false;
+				QueueListView.Items[previousIndex].Selected = true;
+			}
+		}
+
+		private void Next()
+		{
+			if (isPlaying)
+				Stop();
+
+			if (QueueListView.SelectedItems[0] != null)
+			{
+				int nextIndex = 0;
+				if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
+					nextIndex = QueueListView.SelectedIndices[0] + 1;
+
+				QueueListView.SelectedItems[0].Selected = false;
+				QueueListView.Items[nextIndex].Selected = true;
+			}
+		}
+
+		private void UpdateStatus()
+		{
+			if (audioStream != null && isPlaying)
+			{
+				if (audioStream.Elapsed >= audioStream.Duration)
+				{
+					Stop();
+					if (OnTrackEnd != null)
+						OnTrackEnd(audioStream, EventArgs.Empty);
+				}
+			}
+		}
+
+		private void Mute()
+		{
+			if (audioStream != null)
+			{
+				audioStream.IsMuted = !audioStream.IsMuted;
+			}
+		}	
+		#endregion
+		
+		#endregion
 		
 		#endregion
 
@@ -420,17 +879,17 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			{
 				if (controller != null)
 				{
-					controller.OpenFile(FileOpenDialog.FileName);
+					OpenFile(FileOpenDialog.FileName);
 				}
 			}
 		}
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			if (controller != null && controller.AudioStream != null)
+			if (controller != null && AudioStream != null)
 			{
-				controller.Play();
-				if (controller.AudioStream.PlaybackState == PlaybackState.Playing)
+				Play();
+				if (AudioStream.PlaybackState == PlaybackState.Playing)
 					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_pause_blue;
 				else PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
 			}
@@ -440,7 +899,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null)
 			{
-				controller.Stop();
+				Stop();
 				PlaybackTrackBar.Value = 0;
 				PlaybackTrackBar.Enabled = false;
 				PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
@@ -451,8 +910,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null)
 			{
-				controller.Mute();
-				if (controller.IsMuted)
+				Mute();
+				if (IsMuted)
 				{
 					VolumeTrackBar.Enabled = false;
 					MuteButton.BackgroundImage = Alexandria.Client.Properties.Resources.sound;
@@ -468,15 +927,15 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
 		{
 			if (controller != null)
-				controller.Volume = GetVolume();
+				Volume = GetVolume();
 		}
 
 		private void PreviousButton_Click(object sender, EventArgs e)
 		{
 			if (controller != null)
 			{
-				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
-				controller.Previous();
+				bool isPlaying = (AudioStream != null && AudioStream.PlaybackState == PlaybackState.Playing);
+				Previous();
 				if (isPlaying)
 					PlayPauseButton_Click(sender, EventArgs.Empty);
 			}
@@ -486,8 +945,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null)
 			{
-				bool isPlaying = (controller.AudioStream != null && controller.AudioStream.PlaybackState == PlaybackState.Playing);
-				controller.Next();
+				bool isPlaying = (AudioStream != null && AudioStream.PlaybackState == PlaybackState.Playing);
+				Next();
 				if (isPlaying)
 					PlayPauseButton_Click(sender, EventArgs.Empty);
 			}
@@ -497,7 +956,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null && QueueListView.SelectedItems.Count > 0)
 			{
-				controller.SelectTrack();
+				SelectTrack();
 			}
 		}
 
@@ -580,14 +1039,14 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (!isSeeking)
 			{
-				if (controller != null && controller.AudioStream != null)
+				if (controller != null && AudioStream != null)
 				{
-					int value = Convert.ToInt32(controller.AudioStream.Elapsed.TotalSeconds);
+					int value = Convert.ToInt32(AudioStream.Elapsed.TotalSeconds);
 					if (value <= PlaybackTrackBar.Maximum)
 						PlaybackTrackBar.Value = value;
 					else PlaybackTrackBar.Value = PlaybackTrackBar.Maximum;
 					
-					controller.UpdateStatus();
+					UpdateStatus();
 				}
 				else
 				{
@@ -599,17 +1058,17 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		
 		private void OnSelectedTrackStart(object sender, EventArgs e)
 		{
-			if (controller != null && controller.AudioStream != null)
+			if (controller != null && AudioStream != null)
 			{
-				if (controller.SelectedTrack != null)
-					NowPlayingLabel.Text = string.Format("{0} - {1}", controller.SelectedTrack.Artist, controller.SelectedTrack.Name);
+				if (SelectedTrack != null)
+					NowPlayingLabel.Text = string.Format("{0} - {1}", SelectedTrack.Artist, SelectedTrack.Name);
 				
-				controller.Volume = GetVolume();
+				Volume = GetVolume();
 				VolumeTrackBar.Enabled = true;
 
 				PlaybackTrackBar.Enabled = true;
 				PlaybackTrackBar.Minimum = 0;
-				PlaybackTrackBar.Maximum = Convert.ToInt32(controller.AudioStream.Duration.TotalSeconds);
+				PlaybackTrackBar.Maximum = Convert.ToInt32(AudioStream.Duration.TotalSeconds);
 				PlaybackTrackBar.Value = 0;
 			}
 		}
@@ -618,8 +1077,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		{
 			if (controller != null)
 			{
-				controller.Next();
-				controller.Play();
+				Next();
+				Play();
 			}
 		}
 
@@ -631,11 +1090,11 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
 			isSeeking = false;
-			if (controller.AudioStream != null)
+			if (AudioStream != null)
 			{
-				if (controller.AudioStream.CanSetElapsed)
+				if (AudioStream.CanSetElapsed)
 				{
-					controller.AudioStream.Elapsed = new TimeSpan(0, 0, PlaybackTrackBar.Value);
+					AudioStream.Elapsed = new TimeSpan(0, 0, PlaybackTrackBar.Value);
 				}
 			}
 		}
@@ -691,7 +1150,7 @@ OTHER DEALINGS IN THE SOFTWARE.";
 				{
 					CompactDiscTrackSource trackSource = (CompactDiscTrackSource)data;
 					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
-					controller.LoadTracks(tracks);
+					LoadTracks(tracks);
 				}
 			}
 		}
@@ -719,8 +1178,8 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			
 			LoadDefaultUser();
 			
-			controller.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			controller.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+			OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 		
@@ -742,7 +1201,5 @@ OTHER DEALINGS IN THE SOFTWARE.";
 			get { return dbPath; }
 		}
 		#endregion		
-
-
 	}
 }

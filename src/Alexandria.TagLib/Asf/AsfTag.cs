@@ -282,11 +282,11 @@ namespace Alexandria.TagLib
 			get { return extDescription; }
 		}
 
-		public override IList<IImage> Pictures
+		public override IList<IImageContainer> Pictures
 		{
 			get
 			{
-				IList<IImage> list = new List<IImage>();
+				IList<IImageContainer> list = new List<IImageContainer>();
 
 				foreach (AsfContentDescriptor descriptor in GetDescriptors("WM/Picture"))
 				{

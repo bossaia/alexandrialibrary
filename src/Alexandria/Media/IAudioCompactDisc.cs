@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IAudioCompactDisc : IAudio
+	public interface IAudioCompactDisc : IAudioContainer
 	{
 		int NumberOfTracks {get; }
 		IList<int> Minutes { get; }

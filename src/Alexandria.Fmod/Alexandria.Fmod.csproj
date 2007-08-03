@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioStreamFactory.cs" />
     <Compile Include="FmodAudioPlayer.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="ChannelGroup.cs" />

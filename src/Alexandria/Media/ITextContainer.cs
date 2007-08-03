@@ -31,7 +31,9 @@ using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface IVideo : IMedia
+	public interface ITextContainer : IMedia
 	{
+		Encoding Encoding { get; }
+		byte[] GetData();
 	}
 }

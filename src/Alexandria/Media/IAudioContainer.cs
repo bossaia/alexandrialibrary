@@ -27,12 +27,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Text;
 
 namespace Alexandria.Media
 {
-	public interface ISubtitle : IMedia
+	public interface IAudioContainer : IMedia
 	{
-		CultureInfo Culture { get; }
+		int NumberOfBytes { get; }
+		int NumberOfSamples { get; }
+		int NumberOfChannels { get; }
+		int SampleRate { get; }
 	}
 }

@@ -27,14 +27,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 
 namespace Alexandria.Media
 {
-	[CLSCompliant(false)]
-	public interface IImage : IMedia
+	public interface IVideoContainer : IMedia
 	{
-		Image Image { get; }
 	}
 }

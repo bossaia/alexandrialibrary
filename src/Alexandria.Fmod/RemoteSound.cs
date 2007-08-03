@@ -53,78 +53,11 @@ namespace Alexandria.Fmod
 		private BufferState bufferState = BufferState.None;
 		private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
 		#endregion
 		
-		#region Private Methods
-		
-		#region RefreshBufferState
-		private BufferState RefreshBufferState()
-		{
-			if (sound != null)
-			{
-				if (sound.BufferIsStarving)
-				{
-					bufferState = BufferState.Starving;
-				}
-				else
-				{
-					if (sound.OpenState == OpenState.Loading)
-						bufferState = BufferState.Loading;
-					else if (sound.OpenState == OpenState.Buffering)
-					{
-						if (sound.PercentBuffered < 100)
-							bufferState = BufferState.Buffering;
-						else bufferState = BufferState.Full;
-					}
-					else bufferState = BufferState.None;
-				}
-			}
-			else bufferState = BufferState.None;
-			
-			return bufferState;
-		}
-		#endregion
-		
-		#region RefreshNetworkState
-		private NetworkState RefreshNetworkState()
-		{
-			if (sound != null && sound.Channel != null)
-			{
-				if (sound.OpenState == OpenState.Connecting)
-					networkState = NetworkState.Connecting;
-				else if (sound.OpenState == OpenState.Ready)
-					networkState = NetworkState.Streaming;
-				else if (sound.OpenState == OpenState.Error)
-					networkState = NetworkState.Error;
-				else networkState = NetworkState.None;
-			}
-			else networkState = NetworkState.None;
-			
-			return networkState;
-		}
-		#endregion
-		
-		#region RefreshPlaybackState
-		private PlaybackState RefreshPlaybackState()
-		{
-			if (sound != null && sound.Channel != null)
-			{
-				if (sound.Channel.IsPlaying)
-				{
-					if (sound.Channel.Paused)
-						playbackState = PlaybackState.Paused;
-					else playbackState = PlaybackState.Playing;
-				}
-				else playbackState = PlaybackState.Stopped;
-			}
-			else playbackState = PlaybackState.None;
-			
-			return playbackState;
-		}
-		#endregion
-		
-		#endregion
-
 		#region IAudioStream Members
 		public bool IsMuted
 		{
@@ -142,7 +75,7 @@ namespace Alexandria.Fmod
 		#region IMediaStream Members
 		public BufferState BufferState
 		{
-			get { return RefreshBufferState(); }
+			get { return bufferState; }
 		}
 
 		public bool CanPlay
@@ -206,7 +139,25 @@ namespace Alexandria.Fmod
 
 		public NetworkState NetworkState
 		{
-			get { return RefreshNetworkState(); }
+			get { return networkState; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
+		{
+			get { return onBufferStateChanged; }
+			set { onBufferStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged
+		{
+			get { return onNetworkStateChanged; }
+			set { onNetworkStateChanged = value; }
+		}
+
+		public EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged
+		{
+			get { return onPlaybackStateChanged; }
+			set { onPlaybackStateChanged = value; }
 		}
 
 		public string Path
@@ -239,13 +190,94 @@ namespace Alexandria.Fmod
 
 		public PlaybackState PlaybackState
 		{
-			get { return RefreshPlaybackState(); }
+			get { return playbackState; }
 		}
 
 		public long Position
 		{
 			get { return (long)sound.Channel.PositionInBytes; }
 			set { throw new InvalidOperationException("This stream cannot be positioned"); }
+		}
+
+		public void RefreshBufferState()
+		{
+			BufferState nextBufferState = bufferState;
+		
+			if (sound != null)
+			{
+				if (sound.BufferIsStarving)
+				{
+					nextBufferState = BufferState.Starving;
+				}
+				else
+				{
+					if (sound.OpenState == OpenState.Loading)
+						nextBufferState = BufferState.Loading;
+					else if (sound.OpenState == OpenState.Buffering)
+					{
+						if (sound.PercentBuffered < 100)
+							nextBufferState = BufferState.Buffering;
+						else nextBufferState = BufferState.Full;
+					}
+					else nextBufferState = BufferState.None;
+				}
+			}
+			else nextBufferState = BufferState.None;
+
+			if (bufferState != nextBufferState)
+			{
+				bufferState = nextBufferState;
+				if (OnBufferStateChanged != null)
+					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+			}
+		}
+		
+		public void RefreshNetworkState()
+		{
+			NetworkState nextNetworkState = networkState;
+		
+			if (sound != null && sound.Channel != null)
+			{
+				if (sound.OpenState == OpenState.Connecting)
+					nextNetworkState = NetworkState.Connecting;
+				else if (sound.OpenState == OpenState.Ready)
+					nextNetworkState = NetworkState.Streaming;
+				else if (sound.OpenState == OpenState.Error)
+					nextNetworkState = NetworkState.Error;
+				else nextNetworkState = NetworkState.None;
+			}
+			else nextNetworkState = NetworkState.None;
+
+			if (networkState != nextNetworkState)
+			{
+				networkState = nextNetworkState;
+				if (OnNetworkStateChanged != null)
+					OnNetworkStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+			}
+		}
+
+		public void RefreshPlaybackState()
+		{
+			PlaybackState nextPlaybackState = playbackState;
+			
+			if (sound != null && sound.Channel != null)
+			{
+				if (sound.Channel.IsPlaying)
+				{
+					if (sound.Channel.Paused)
+						nextPlaybackState = PlaybackState.Paused;
+					else nextPlaybackState = PlaybackState.Playing;
+				}
+				else nextPlaybackState = PlaybackState.Stopped;
+			}
+			else nextPlaybackState = PlaybackState.None;
+
+			if (playbackState != nextPlaybackState)
+			{
+				playbackState = nextPlaybackState;
+				if (OnPlaybackStateChanged != null)
+					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+			}
 		}
 
 		public int StreamIndex
