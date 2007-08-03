@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Alexandria.Client</RootNamespace>
     <AssemblyName>Alexandria.Client</AssemblyName>
-    <ApplicationIcon>App.ico</ApplicationIcon>
+    <ApplicationIcon>Alexandria.Client.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -90,7 +90,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.config" />
+    <None Include="Alexandria.Client.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -182,7 +184,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.ico" />
+    <Content Include="Alexandria.Client.ico" />
+    <Content Include="Resources\Icons\Ankh.ico" />
     <Content Include="Resources\Icons\Silk\accept.png" />
     <Content Include="Resources\Icons\Silk\add.png" />
     <Content Include="Resources\Icons\Silk\anchor.png" />

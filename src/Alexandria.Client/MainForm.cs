@@ -194,7 +194,9 @@ OTHER DEALINGS IN THE SOFTWARE.";
 		#region InitializeNotifyIcon
 		private void InitializeNotifyIcon()
 		{
-			Icon icon = new Icon(@"..\..\App.ico");
+			Icon icon = new Icon(@"..\..\Alexandria.Client.ico");
+			//Icon icon = Alexandria.Client.Properties.Resources.
+			//Alexandria.Client.Properties.Resources.ic
 			notifyIcon.Icon = icon;
 			notifyIcon.Text = "Alexandria";
 			notifyIcon.ContextMenu = notifyMenu;
