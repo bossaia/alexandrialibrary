@@ -54,6 +54,7 @@
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
     <Compile Include="Media\ICodec.cs" />
+    <Compile Include="Media\IO\AudioStateChangedEventArgs.cs" />
     <Compile Include="Media\IO\AudioStream.cs" />
     <Compile Include="Media\IO\BufferState.cs" />
     <Compile Include="Media\IO\IAudioStream.cs" />
