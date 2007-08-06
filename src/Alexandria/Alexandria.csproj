@@ -58,6 +58,7 @@
     <Compile Include="Media\IO\AudioStream.cs" />
     <Compile Include="Media\IO\BufferState.cs" />
     <Compile Include="Media\IO\IAudioStream.cs" />
+    <Compile Include="Media\IO\IAudioStreamFactory.cs" />
     <Compile Include="Media\IO\IMediaStream.cs" />
     <Compile Include="Media\IO\IVideoStream.cs" />
     <Compile Include="Media\IO\MediaEventArgs.cs" />

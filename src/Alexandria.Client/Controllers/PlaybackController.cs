@@ -21,7 +21,7 @@ namespace Alexandria.Client.Controllers
 		private EventHandler<PlaybackEventArgs> onNetworkStateChanged;
 		private EventHandler<PlaybackEventArgs> onPlaybackStateChanged;
 		private EventHandler<VolumeEventArgs> onVolumeChanged;
-		private Fmod.AudioStreamFactory fmodFactory = new AudioStreamFactory();
+		private IAudioStreamFactory audioStreamFactory = new Fmod.AudioStreamFactory();
 		#endregion
 		
 		#region Private Methods
@@ -89,7 +89,7 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadAudioFile(Uri path)
 		{
-			currentAudioStream = fmodFactory.CreateAudioStream(path);
+			currentAudioStream = audioStreamFactory.CreateAudioStream(path);
 		}
 		#endregion
 	}

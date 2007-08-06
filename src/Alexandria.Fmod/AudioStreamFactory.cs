@@ -4,7 +4,7 @@ using Alexandria.Media.IO;
 
 namespace Alexandria.Fmod
 {
-	public class AudioStreamFactory
+	public class AudioStreamFactory : IAudioStreamFactory
 	{
 		#region Constructors
 		public AudioStreamFactory()
@@ -12,7 +12,7 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 		
-		#region Public Methods
+		#region IAudioStreamFactory Members
 		public IAudioStream CreateAudioStream(Uri path)
 		{
 			if (path != null)
