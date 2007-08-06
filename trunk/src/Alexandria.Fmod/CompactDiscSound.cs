@@ -55,6 +55,7 @@ namespace Alexandria.Fmod
 		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
+		private EventHandler<AudioStateChangedEventArgs> onVolumeChanged;
 		#endregion
 
 		#region IAudioStream Members
@@ -66,9 +67,18 @@ namespace Alexandria.Fmod
 				else return sound.Channel.Mute;
 			}
 			set {
-				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
-					sound.CurrentSubSound.Channel.Mute = value;
-				else sound.Channel.Mute = value;
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null) {
+					if (sound.CurrentSubSound.Channel.Mute != value) {
+						sound.CurrentSubSound.Channel.Mute = value;
+						if (OnVolumeChanged != null)
+							OnVolumeChanged(this, new AudioStateChangedEventArgs(sound.CurrentSubSound.Channel.Volume, sound.CurrentSubSound.Channel.Mute));
+					}
+				}
+				else if (sound.Channel.Mute != value) {
+					sound.Channel.Mute = value;
+					if (OnVolumeChanged != null)
+						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+				}
 			}
 		}
 
@@ -80,10 +90,25 @@ namespace Alexandria.Fmod
 				else return sound.Channel.Volume;
 			}
 			set {
-				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null)
-					sound.CurrentSubSound.Channel.Volume = value;
-				else sound.Channel.Volume = value;
+				if (sound.CurrentSubSoundIndex != -1 && sound.CurrentSubSound != null) {
+					if (sound.CurrentSubSound.Channel.Volume != value) {
+						sound.CurrentSubSound.Channel.Volume = value;
+						if (OnVolumeChanged != null)
+							OnVolumeChanged(this, new AudioStateChangedEventArgs(sound.CurrentSubSound.Channel.Volume, sound.CurrentSubSound.Channel.Mute));
+					}
+				}
+				else if (sound.Channel.Volume != value) {
+					sound.Channel.Volume = value;
+					if (OnVolumeChanged != null)
+						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+				}
 			}
+		}
+
+		public EventHandler<AudioStateChangedEventArgs> OnVolumeChanged
+		{
+			get { return onVolumeChanged; }
+			set { onVolumeChanged = value; }
 		}
 		#endregion
 

@@ -52,6 +52,7 @@
     <Compile Include="Controllers\QueueEventArgs.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
+    <Compile Include="Controllers\VolumeEventArgs.cs" />
     <Compile Include="ITrackSource.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

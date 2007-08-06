@@ -20,27 +20,33 @@ namespace Alexandria.Client.Controllers
 		private EventHandler<PlaybackEventArgs> onBufferStateChanged;
 		private EventHandler<PlaybackEventArgs> onNetworkStateChanged;
 		private EventHandler<PlaybackEventArgs> onPlaybackStateChanged;
-		
+		private EventHandler<VolumeEventArgs> onVolumeChanged;
 		private Fmod.AudioStreamFactory fmodFactory = new AudioStreamFactory();
 		#endregion
 		
 		#region Private Methods
 		private void CurrentAudioStreamBufferStateChanged(object sender, MediaStateChangedEventArgs args)
 		{
-			if (currentAudioStream != null && onBufferStateChanged != null)
+			if (currentAudioStream != null && OnBufferStateChanged != null)
 				OnBufferStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState));
 		}
 
 		private void CurrentAudioStreamNetworkStateChanged(object sender, MediaStateChangedEventArgs args)
 		{
-			if (currentAudioStream != null && onNetworkStateChanged != null)
+			if (currentAudioStream != null && OnNetworkStateChanged != null)
 				OnNetworkStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState));
 		}
 
 		private void CurrentAudioStreamPlaybackStateChanged(object sender, MediaStateChangedEventArgs args)
 		{
-			if (currentAudioStream != null && onPlaybackStateChanged != null)
+			if (currentAudioStream != null && OnPlaybackStateChanged != null)
 				OnPlaybackStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState));
+		}
+		
+		private void CurrentAudioStreamVolumeChanged(object sender, AudioStateChangedEventArgs args)
+		{
+			if (currentAudioStream != null && OnVolumeChanged != null)
+				OnVolumeChanged(currentAudioStream, new VolumeEventArgs(args.Volume, args.IsMuted));
 		}
 		#endregion
 		
@@ -61,6 +67,12 @@ namespace Alexandria.Client.Controllers
 		{
 			get { return onPlaybackStateChanged; }
 			set { onPlaybackStateChanged = value; }
+		}
+		
+		public EventHandler<VolumeEventArgs> OnVolumeChanged
+		{
+			get { return onVolumeChanged; }
+			set { onVolumeChanged = value; }
 		}
 		#endregion
 		

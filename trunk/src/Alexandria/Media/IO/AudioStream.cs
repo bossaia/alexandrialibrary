@@ -56,6 +56,12 @@ namespace Alexandria.Media.IO
 			get;
 			set;
 		}
+		
+		public abstract EventHandler<AudioStateChangedEventArgs> OnVolumeChanged
+		{
+			get;
+			set;
+		}
 		#endregion
 	}
 }

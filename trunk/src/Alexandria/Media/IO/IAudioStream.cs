@@ -35,5 +35,6 @@ namespace Alexandria.Media.IO
 	{
 		float Volume { get; set; }
 		bool IsMuted { get; set; }
+		EventHandler<AudioStateChangedEventArgs> OnVolumeChanged { get; set; }
 	}
 }

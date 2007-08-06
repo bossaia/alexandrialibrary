@@ -52,19 +52,38 @@ namespace Alexandria.Fmod
 		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
+		private EventHandler<AudioStateChangedEventArgs> onVolumeChanged;
 		#endregion
 		
 		#region IAudioStream Members
 		public bool IsMuted
 		{
 			get { return sound.Channel.Mute; }			
-			set { sound.Channel.Mute = value; }
+			set {
+				if (sound.Channel.Mute != value) {
+					sound.Channel.Mute = value;
+					if (OnVolumeChanged != null)
+						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+				}
+			}
 		}
 
 		public float Volume
 		{
 			get { return sound.Channel.Volume; }
-			set { sound.Channel.Volume = value; }
+			set {
+				if (sound.Channel.Volume != value) {
+					sound.Channel.Volume = value;
+					if (OnVolumeChanged != null)
+						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+				}
+			}
+		}
+
+		public EventHandler<AudioStateChangedEventArgs> OnVolumeChanged
+		{
+			get { return onVolumeChanged; }
+			set { onVolumeChanged = value; }
 		}
 		#endregion
 
