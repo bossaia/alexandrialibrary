@@ -68,9 +68,9 @@ namespace Alexandria.Client
 		#endregion
 				
 		#region Private Fields
-		private PlaybackController playbackController = new PlaybackController();
-		private QueueController queueController = new QueueController();
-		private PluginController pluginController = new PluginController();
+		private PlaybackControl playbackController = new PlaybackControl();
+		private QueueControl queueController = new QueueControl();
+		private PluginControl pluginController = new PluginControl();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
