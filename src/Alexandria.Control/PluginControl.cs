@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
 using Alexandria.Plugins;
 
@@ -19,29 +22,9 @@ namespace Alexandria.Control
 		private IPluginRepository repository;
 		private PluginInfo pluginInfo;
 		private ConfigurationMap configurationMap;
-		
-		//private Configuration clientConfiguration;
-		//private Version clientVersion;
-		#endregion
-
-		#region Private Properties
-		private PluginInfo PluginInfo
-		{
-			get { return pluginInfo; }
-			set
-			{
-				pluginInfo = value;
-				if (value != null)
-				{
-					configurationMap = pluginInfo.ConfigurationMap;
-					//RefreshData();
-				}
-			}
-		}
 		#endregion
 
 		#region Private Methods
-		/*
 		private void ReadConfigValueFromControl(System.Windows.Forms.Control control)
 		{
 			if (control.GetType() == typeof(CheckBox))
@@ -93,109 +76,23 @@ namespace Alexandria.Control
 				if (comboBox.Enabled)
 					property.SetValue(configurationMap.Settings, Enum.Parse(property.PropertyType, value), null);
 			}
-		}
-		
-		public void RefreshData()
-		{
-			Text = pluginInfo.Title;
-			Version.Text = pluginInfo.Version.ToString();
-			if (pluginInfo.Bitmap != null)
-				this.Icon = Icon.FromHandle(pluginInfo.Bitmap.GetHicon());
-			PluginDescription.Text = pluginInfo.Description;
-
-			if (configurationMap != null && configurationMap.Settings != null)
-			{
-				SuspendLayout();
-
-				foreach (PropertyInfo property in configurationMap.Settings.GetType().GetProperties())
-				{
-					foreach (PluginSettingAttribute attribute in property.GetCustomAttributes(typeof(PluginSettingAttribute), false))
-					{
-						Label label = new Label();
-						label.Text = property.Name;
-						label.Padding = new Padding(0, 7, 0, 0);
-						label.AutoSize = true;
-						DescriptionToolTip.SetToolTip(label, attribute.Description);
-
-						object value = property.GetValue(configurationMap.Settings, null);
-
-						if (attribute.Type == PluginSettingType.Boolean)
-						{
-							CheckBox checkBox = new CheckBox();
-							checkBox.Enabled = !attribute.IsReadOnly;
-							checkBox.Checked = Convert.ToBoolean(value);
-							checkBox.Tag = property;
-							SettingsLayoutPanel.Controls.Add(label);
-							SettingsLayoutPanel.Controls.Add(checkBox);
-						}
-						else if (attribute.Type == PluginSettingType.Text || attribute.Type == PluginSettingType.FileName || attribute.Type == PluginSettingType.PasswordText)
-						{
-							TextBox textBox = new TextBox();
-							textBox.Enabled = !attribute.IsReadOnly;
-							textBox.Tag = property;
-							if (attribute.Type == PluginSettingType.PasswordText)
-								textBox.PasswordChar = '*';
-
-							textBox.Multiline = false;
-							string valueString = (value != null) ? value.ToString() : string.Empty;
-							textBox.Text = valueString;
-							textBox.Width = 200;
-							SettingsLayoutPanel.Controls.Add(label);
-							SettingsLayoutPanel.Controls.Add(textBox);
-						}
-						else if (attribute.Type == PluginSettingType.Integer)
-						{
-							MaskedTextBox textBox = new MaskedTextBox();
-							textBox.Enabled = !attribute.IsReadOnly;
-							textBox.Tag = property;
-							//textBox.Mask = "0000000";
-
-							textBox.Multiline = false;
-
-							string valueString = (value != null) ? value.ToString() : string.Empty;
-							textBox.Text = valueString;
-							textBox.Width = 100;
-							SettingsLayoutPanel.Controls.Add(label);
-							SettingsLayoutPanel.Controls.Add(textBox);
-						}
-						else if (attribute.Type == PluginSettingType.Real)
-						{
-							MaskedTextBox textBox = new MaskedTextBox();
-							textBox.Enabled = !attribute.IsReadOnly;
-							textBox.Tag = property;
-							//textBox.Mask = "0000.00";
-
-							textBox.Multiline = false;
-							string valueString = (value != null) ? value.ToString() : string.Empty;
-							textBox.Text = valueString;
-							textBox.Width = 100;
-							SettingsLayoutPanel.Controls.Add(label);
-							SettingsLayoutPanel.Controls.Add(textBox);
-						}
-						else if (attribute.Type == PluginSettingType.Enumeration)
-						{
-							ComboBox comboBox = new ComboBox();
-							comboBox.Enabled = !attribute.IsReadOnly;
-							foreach (string name in Enum.GetNames(property.PropertyType))
-								comboBox.Items.Add(name);
-
-							comboBox.Width = 150;
-							comboBox.SelectedItem = value.ToString();
-							comboBox.Tag = property;
-							SettingsLayoutPanel.Controls.Add(label);
-							SettingsLayoutPanel.Controls.Add(comboBox);
-						}
-						break;
-					}
-				}
-
-				ResumeLayout();
-			}
-		}
-		*/
+		}		
 		#endregion
 
 		#region Public Properties
+		public PluginInfo PluginInfo
+		{
+			get { return pluginInfo; }
+			set
+			{
+				pluginInfo = value;
+				if (value != null)
+				{
+					configurationMap = pluginInfo.ConfigurationMap;
+					//RefreshData();
+				}
+			}
+		}
 		#endregion
 
 		#region Public Methods
@@ -204,14 +101,11 @@ namespace Alexandria.Control
 			IList<FileInfo> files = new List<FileInfo>();
 			foreach (string path in pluginPaths)
 			{
-				if (File.Exists(path)) //.LocalPath))
-					files.Add(new FileInfo(path)); //.LocalPath));
+				if (File.Exists(path))
+					files.Add(new FileInfo(path));
 			}
 			
 			repository = new PluginRepository(files);
-			
-			//clientConfiguration = ConfigurationManager.OpenExeConfiguration(clientPath);
-			//clientVersion = clientConfiguration.
 		}
 		
 		public void Load()
@@ -220,6 +114,62 @@ namespace Alexandria.Control
 		
 		public void Save()
 		{
+		}
+
+		public IList<PluginInfo> GetPluginInfo()
+		{
+			IList<PluginInfo> plugins = new List<PluginInfo>();
+			
+			foreach (KeyValuePair<Assembly, bool> pair in repository.Assemblies)
+			{
+				Assembly assembly = pair.Key;
+				bool enabled = pair.Value;
+				
+				string title = "Unknown Plugin";
+				string description = "This plugin could not be identified";
+				Version version = new Version(1, 0, 0, 0);
+				FileInfo assemblyFile = new FileInfo(assembly.Location);
+				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
+				Bitmap bitmap = null;
+
+				try
+				{
+					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
+				}
+				catch
+				{
+					MessageBox.Show("There was an error loading the icon for the library file: " + assembly.Location, "ERROR");
+				}
+
+				foreach (Attribute attribute in assembly.GetCustomAttributes(false))
+				{
+					if (attribute is AssemblyTitleAttribute)
+					{
+						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
+						title = titleAttribute.Title;
+					}
+					else if (attribute is AssemblyDescriptionAttribute)
+					{
+						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
+						description = descriptionAttribute.Description;
+					}
+					else if (attribute is AssemblyVersionAttribute)
+					{
+						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
+						version = new Version(versionAttribute.Version);
+					}
+				}
+
+				ConfigurationMap configMap = null;
+				if (repository.ConfigurationMaps.ContainsKey(assembly))
+					configMap = repository.ConfigurationMaps[assembly];
+					
+				PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
+
+				plugins.Add(info);
+			}
+			
+			return plugins;
 		}
 		#endregion
 	}

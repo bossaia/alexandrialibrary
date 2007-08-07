@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 
-namespace Alexandria.CompactDisc
+namespace Alexandria.CompactDiscTools
 {
 	public class DeviceDump : ConsoleTool
 	{

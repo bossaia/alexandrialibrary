@@ -34,12 +34,25 @@ using Alexandria.Media;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
-using Alexandria.Playlist;
 using Alexandria.Plugins;
-using Alexandria.TagLib;
+
+using Alexandria.AlbumArtDownloader;
+using Alexandria.Amazon;
+using Alexandria.AsciiGenerator;
+using Alexandria.CompactDiscTools;
+using Alexandria.Db4o;
 using Alexandria.Fmod;
+using Alexandria.FreeDB;
+using Alexandria.Google;
+using Alexandria.Imdb;
+using Alexandria.LastFM;
+using Alexandria.MediaInfo;
 using Alexandria.Mp3Tunes;
 using Alexandria.MusicBrainz;
+using Alexandria.MusicDns;
+using Alexandria.Playlist;
+using Alexandria.SQLite;
+using Alexandria.TagLib;
 
 namespace Alexandria.Control
 {
@@ -72,6 +85,7 @@ namespace Alexandria.Control
 		//private IPersistenceBroker broker;
 		//private IPersistenceMechanism mechanism;
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
+		//private Alexandria.
 		#endregion
 
 		#region Private Methods

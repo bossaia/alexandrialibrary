@@ -269,7 +269,7 @@ namespace Alexandria.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Copyright (c) 2007 Dan Poage\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the &quot;&quot;Software&quot;&quot;), to deal in the Software without\n\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and th [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to Copyright (c) 2007 Dan Poage\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the &quot;Software&quot;), to deal in the Software without\n\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MIT_License {
             get {
