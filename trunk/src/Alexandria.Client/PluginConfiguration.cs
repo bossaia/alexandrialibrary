@@ -20,7 +20,7 @@ namespace Alexandria.Client
 		#endregion
 
 		#region Private Fields
-		private PluginController pluginController = new PluginController();
+		private PluginControl pluginController = new PluginControl();
 		#endregion
 		
 		#region Private Event Methods

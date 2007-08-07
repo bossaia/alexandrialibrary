@@ -35,12 +35,12 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Private Fields
-		private PluginController pluginController;
+		private PluginControl pluginController;
 		#endregion
 
 		#region Public Methods
 		[CLSCompliant(false)]
-		public void Initialize(PluginController pluginController)
+		public void Initialize(PluginControl pluginController)
 		{
 			this.pluginController = pluginController;
 		}
