@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Client.Controllers
+namespace Alexandria.Control
 {
-	public class ToolController
+	public class TaskController
 	{
 		#region Constructors
-		public ToolController()
+		public TaskController()
 		{
 		}
 		#endregion

@@ -54,8 +54,9 @@ namespace Alexandria.Media.IO
 		private bool canSetPosition;
 		private bool canSetElapsed;
 		private BufferState bufferState = BufferState.None;
-		private PlaybackState playbackState = PlaybackState.None;
 		private NetworkState networkState = NetworkState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		private TimeSpan duration = TimeSpan.Zero;
 		private TimeSpan elapsed = TimeSpan.Zero;
 		private float percentBuffered;
@@ -63,6 +64,7 @@ namespace Alexandria.Media.IO
 		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onSeekStateChanged;
 		#endregion
 
 		#region Stream Members
@@ -160,16 +162,22 @@ namespace Alexandria.Media.IO
 			protected set { bufferState = value; }
 		}
 
+		public NetworkState NetworkState
+		{
+			get { return networkState; }
+			protected set { networkState = value; }
+		}
+
 		public PlaybackState PlaybackState
 		{
 			get { return playbackState; }
 			protected set { playbackState = value; }
 		}
 
-		public NetworkState NetworkState
+		public SeekState SeekState
 		{
-			get { return networkState; }
-			protected set { networkState = value; }
+			get { return seekState; }
+			protected set { seekState = value; }
 		}
 
 		public TimeSpan Duration
@@ -188,7 +196,6 @@ namespace Alexandria.Media.IO
 			}
 		}
 
-
 		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
 		{
 			get { return onBufferStateChanged; }
@@ -205,6 +212,12 @@ namespace Alexandria.Media.IO
 		{
 			get { return onPlaybackStateChanged; }
 			set { onPlaybackStateChanged = value; }
+		}
+		
+		public EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged
+		{
+			get { return onSeekStateChanged; }
+			set { onSeekStateChanged = value; }
 		}
 		
 		public float PercentBuffered
@@ -246,6 +259,10 @@ namespace Alexandria.Media.IO
 		}
 		
 		public virtual void RefreshPlaybackState()
+		{
+		}
+		
+		public virtual void RefreshSeekState()
 		{
 		}
 		#endregion

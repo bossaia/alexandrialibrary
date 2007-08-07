@@ -49,9 +49,11 @@ namespace Alexandria.Fmod
 		private bool disposed;
 		private BufferState bufferState = BufferState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onSeekStateChanged;
 		private EventHandler<AudioStateChangedEventArgs> onVolumeChanged;
 		#endregion
 		
@@ -182,6 +184,12 @@ namespace Alexandria.Fmod
 			set { onPlaybackStateChanged = value; }
 		}
 
+		public EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged
+		{
+			get { return onSeekStateChanged; }
+			set { onSeekStateChanged = value; }
+		}
+
 		public string Path
 		{
 			get { return path; }
@@ -257,7 +265,7 @@ namespace Alexandria.Fmod
 				//TODO: call before changed event handler here
 				bufferState = nextBufferState;
 				if (OnBufferStateChanged != null)
-					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
 		}
 
@@ -285,8 +293,17 @@ namespace Alexandria.Fmod
 			{
 				playbackState = nextPlaybackState;
 				if (OnPlaybackStateChanged != null)
-					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
+		}
+		
+		public void RefreshSeekState()
+		{
+		}
+
+		public SeekState SeekState
+		{
+			get { return seekState; }
 		}
 
 		public int StreamIndex

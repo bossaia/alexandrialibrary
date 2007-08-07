@@ -66,6 +66,7 @@
     <Compile Include="Media\IO\MediaStream.cs" />
     <Compile Include="Media\IO\NetworkState.cs" />
     <Compile Include="Media\IO\PlaybackState.cs" />
+    <Compile Include="Media\IO\SeekState.cs" />
     <Compile Include="Media\IO\VideoStream.cs" />
     <Compile Include="Media\ISubtitleContainer.cs" />
     <Compile Include="Media\IVideoContainer.cs" />
