@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using Alexandria.Media;
 using Alexandria.Media.IO;
 
-namespace Alexandria.Client.Controllers
+namespace Alexandria.Control
 {
 	public class PlaybackEventArgs : EventArgs
 	{
 		#region Constructors
-		public PlaybackEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState)
+		public PlaybackEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
 		{
 			this.bufferState = bufferState;
 			this.networkState = networkState;
 			this.playbackState = playbackState;
+			this.seekState = seekState;
 		}
 		#endregion
 		
@@ -20,6 +21,7 @@ namespace Alexandria.Client.Controllers
 		private BufferState bufferState = BufferState.None;
 		private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		#endregion
 		
 		#region Public Properties
@@ -36,6 +38,11 @@ namespace Alexandria.Client.Controllers
 		public PlaybackState PlaybackState
 		{
 			get { return playbackState; }
+		}
+		
+		private SeekState SeekState
+		{
+			get { return seekState; }
 		}
 		#endregion
 	}

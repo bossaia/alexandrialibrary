@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria.Metadata;
 
-namespace Alexandria.Client
+namespace Alexandria.Control
 {
 	public interface ITrackSource
 	{

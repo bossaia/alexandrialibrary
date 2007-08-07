@@ -4,7 +4,7 @@ using System.Text;
 using Alexandria.Metadata;
 using Alexandria.MusicBrainz;
 
-namespace Alexandria.Client
+namespace Alexandria.Control
 {
 	public class CompactDiscTrackSource : ITrackSource
 	{

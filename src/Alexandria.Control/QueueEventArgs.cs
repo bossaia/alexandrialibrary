@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Client.Controllers
+namespace Alexandria.Control
 {
 	public class QueueEventArgs : EventArgs
 	{

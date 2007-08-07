@@ -53,9 +53,11 @@ namespace Alexandria.Fmod
 		private BufferState bufferState = BufferState.None;
 		private NetworkState networkState = NetworkState.None;
 		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
 		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> onSeekStateChanged;
 		private EventHandler<AudioStateChangedEventArgs> onVolumeChanged;
 		#endregion
 		
@@ -178,6 +180,12 @@ namespace Alexandria.Fmod
 			get { return onPlaybackStateChanged; }
 			set { onPlaybackStateChanged = value; }
 		}
+		
+		public EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged
+		{
+			get { return onSeekStateChanged; }
+			set { onSeekStateChanged = value; }
+		}
 
 		public string Path
 		{
@@ -247,7 +255,7 @@ namespace Alexandria.Fmod
 			{
 				bufferState = nextBufferState;
 				if (OnBufferStateChanged != null)
-					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
 		}
 		
@@ -271,7 +279,7 @@ namespace Alexandria.Fmod
 			{
 				networkState = nextNetworkState;
 				if (OnNetworkStateChanged != null)
-					OnNetworkStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+					OnNetworkStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
 		}
 
@@ -295,8 +303,17 @@ namespace Alexandria.Fmod
 			{
 				playbackState = nextPlaybackState;
 				if (OnPlaybackStateChanged != null)
-					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState));
+					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
+		}
+		
+		public void RefreshSeekState()
+		{
+		}
+
+		public SeekState SeekState
+		{
+			get { return seekState; }
 		}
 
 		public int StreamIndex
