@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.CompactDisc
+namespace Alexandria.CompactDiscTools
 {
 	public class TableOfContents
 	{

@@ -68,9 +68,9 @@ namespace Alexandria.Client
 		#endregion
 				
 		#region Private Fields
-		private PlaybackControl playbackController = new PlaybackControl();
-		private QueueControl queueController = new QueueControl();
-		private PluginControl pluginController = new PluginControl();
+		private PlaybackControl playbackControl = new PlaybackControl();
+		private QueueControl queueControl = new QueueControl();
+		private PluginControl pluginControl = new PluginControl();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
@@ -102,7 +102,7 @@ namespace Alexandria.Client
 				if (!string.IsNullOrEmpty(fileName))
 					paths.Add(fileName); //new Uri(fileName));
 			}	
-			pluginController.Initialize(paths);
+			pluginControl.Initialize(paths);
 			//InitializePersistence();
 		}
 		#endregion
@@ -184,71 +184,13 @@ namespace Alexandria.Client
 			*/
 		}
 		#endregion
-		
-		#region GetPluginInfo
-		private IList<PluginInfo> GetPluginInfo()
-		{
-			IList<PluginInfo> plugins = new List<PluginInfo>();
-			/*
-			foreach (KeyValuePair<Assembly, bool> pair in repository.Assemblies)
-			{
-				Assembly assembly = pair.Key;
-				bool enabled = pair.Value;
 				
-				string title = "Unknown Plugin";
-				string description = "This plugin could not be identified";
-				Version version = new Version(1, 0, 0, 0);
-				FileInfo assemblyFile = new FileInfo(assembly.Location);
-				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
-				Bitmap bitmap = null;
-
-				try
-				{
-					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
-				}
-				catch
-				{
-					MessageBox.Show("There was an error loading the icon for the library file: " + assembly.Location, "ERROR");
-				}
-
-				foreach (Attribute attribute in assembly.GetCustomAttributes(false))
-				{
-					if (attribute is AssemblyTitleAttribute)
-					{
-						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
-						title = titleAttribute.Title;
-					}
-					else if (attribute is AssemblyDescriptionAttribute)
-					{
-						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
-						description = descriptionAttribute.Description;
-					}
-					else if (attribute is AssemblyVersionAttribute)
-					{
-						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
-						version = new Version(versionAttribute.Version);
-					}
-				}
-
-				ConfigurationMap configMap = null;
-				if (repository.ConfigurationMaps.ContainsKey(assembly))
-					configMap = repository.ConfigurationMaps[assembly];
-					
-				PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
-
-				plugins.Add(info);
-			}
-			*/
-			return plugins;
-		}
-		#endregion
-		
 		#region InitializePluginMenu
 		private void InitializePluginMenu()
 		{
 			pluginsToolStripMenuItem.DropDown.Items.Clear();
 
-			IList<PluginInfo> plugins = GetPluginInfo();
+			IList<PluginInfo> plugins = pluginControl.GetPluginInfo();
 			foreach (PluginInfo plugin in plugins)
 			{
 				ToolStripMenuItem item = new ToolStripMenuItem(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
@@ -256,7 +198,7 @@ namespace Alexandria.Client
 				item.Tag = plugin;
 				pluginsToolStripMenuItem.DropDown.Items.Add(item);				
 			}
-		}
+		}		
 		#endregion
 		
 		#region InitializeToolbox
@@ -311,13 +253,13 @@ namespace Alexandria.Client
 			DialogResult result = FileOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				queueController.OpenFile(FileOpenDialog.FileName);
+				queueControl.OpenFile(FileOpenDialog.FileName);
 			}
 		}
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			playbackController.TogglePlay();
+			playbackControl.TogglePlay();
 			/*
 			if (controller != null && AudioStream != null)
 			{
@@ -331,7 +273,7 @@ namespace Alexandria.Client
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
+			playbackControl.Stop();
 			/*
 			if (controller != null)
 			{
@@ -345,7 +287,7 @@ namespace Alexandria.Client
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			playbackController.ToggleMute();
+			playbackControl.ToggleMute();
 			/*
 			if (controller != null)
 			{
@@ -366,7 +308,7 @@ namespace Alexandria.Client
 
 		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
 		{
-			playbackController.SetVolume(GetVolume());
+			playbackControl.SetVolume(GetVolume());
 		
 			//if (controller != null)
 				//Volume = GetVolume();
@@ -374,8 +316,8 @@ namespace Alexandria.Client
 
 		private void PreviousButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
-			queueController.Previous();
+			playbackControl.Stop();
+			queueControl.Previous();
 		
 			/*
 			if (controller != null)
@@ -390,8 +332,8 @@ namespace Alexandria.Client
 
 		private void NextButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
-			queueController.Next();
+			playbackControl.Stop();
+			queueControl.Next();
 			
 			/*
 			if (controller != null)
@@ -406,7 +348,7 @@ namespace Alexandria.Client
 
 		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			queueController.SelectTrack();
+			queueControl.SelectTrack();
 		
 			/*
 			if (controller != null && QueueListView.SelectedItems.Count > 0)
@@ -475,13 +417,8 @@ namespace Alexandria.Client
 
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			string appVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			
-			IList<PluginInfo> plugins = GetPluginInfo();
-						
-			About about = new About(); //pluginController);
-			about.Initialize(pluginController);
-			//(appVersion, license, plugins);
+			About about = new About();
+			about.Initialize(pluginControl);
 			about.ShowDialog(this);
 		}
 		
@@ -495,11 +432,11 @@ namespace Alexandria.Client
 
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
-			playbackController.RefreshPlaybackStates();
+			playbackControl.RefreshPlaybackStates();
 			
 			if (!seekIsPending)
 			{
-				PlaybackTrackBar.Value = (int)playbackController.GetPosition();
+				PlaybackTrackBar.Value = (int)playbackControl.GetPosition();
 			}
 			
 			/*
@@ -544,8 +481,8 @@ namespace Alexandria.Client
 		
 		private void OnSelectedTrackEnd(object sender, EventArgs e)
 		{
-			queueController.Next();
-			playbackController.Play();
+			queueControl.Next();
+			playbackControl.Play();
 			
 			//if (controller != null)
 			//{
@@ -562,7 +499,7 @@ namespace Alexandria.Client
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
 			seekIsPending = false;
-			playbackController.Seek(PlaybackTrackBar.Value);
+			playbackControl.Seek(PlaybackTrackBar.Value);
 			//if (AudioStream != null)
 			//{
 				//if (AudioStream.CanSetElapsed)
@@ -651,8 +588,8 @@ namespace Alexandria.Client
 			
 			LoadDefaultUser();
 			
-			queueController.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			queueController.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+			queueControl.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			queueControl.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 		

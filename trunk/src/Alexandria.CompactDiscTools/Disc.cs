@@ -4,7 +4,7 @@ using System.Text;
 using Alexandria;
 using Alexandria.Media;
 
-namespace Alexandria.CompactDisc
+namespace Alexandria.CompactDiscTools
 {
 	public abstract class Disc : IMedia
 	{
