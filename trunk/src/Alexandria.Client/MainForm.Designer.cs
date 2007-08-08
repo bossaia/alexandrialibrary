@@ -65,6 +65,8 @@ namespace Alexandria.Client
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.ToolBoxGroupBox = new System.Windows.Forms.GroupBox();
 			this.ToolBoxListView = new System.Windows.Forms.ListView();
+			this.ToolBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.QueueListView = new System.Windows.Forms.ListView();
@@ -76,8 +78,7 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.ToolBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -93,8 +94,8 @@ namespace Alexandria.Client
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.ToolBoxGroupBox.SuspendLayout();
-			this.QueueGroupBox.SuspendLayout();
 			this.ToolBoxContextMenuStrip.SuspendLayout();
+			this.QueueGroupBox.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -177,7 +178,8 @@ namespace Alexandria.Client
 			// ToolsToolStripMenuItem
 			// 
 			this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.pluginsToolStripMenuItem});
+            this.pluginsToolStripMenuItem,
+            this.toolManagerToolStripMenuItem});
 			this.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem";
 			resources.ApplyResources(this.ToolsToolStripMenuItem, "ToolsToolStripMenuItem");
 			// 
@@ -342,6 +344,19 @@ namespace Alexandria.Client
 			this.ToolBoxListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.ToolBoxListView_ItemDrag);
 			this.ToolBoxListView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ToolBoxListView_MouseDown);
 			// 
+			// ToolBoxContextMenuStrip
+			// 
+			this.ToolBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolBoxContextMenuItemRefresh});
+			this.ToolBoxContextMenuStrip.Name = "ToolBoxContextMenuStrip";
+			resources.ApplyResources(this.ToolBoxContextMenuStrip, "ToolBoxContextMenuStrip");
+			this.ToolBoxContextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolBoxContextMenuStrip_ItemClicked);
+			// 
+			// ToolBoxContextMenuItemRefresh
+			// 
+			this.ToolBoxContextMenuItemRefresh.Name = "ToolBoxContextMenuItemRefresh";
+			resources.ApplyResources(this.ToolBoxContextMenuItemRefresh, "ToolBoxContextMenuItemRefresh");
+			// 
 			// ToolBoxSmallImageList
 			// 
 			this.ToolBoxSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ToolBoxSmallImageList.ImageStream")));
@@ -412,18 +427,10 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
 			// 
-			// ToolBoxContextMenuStrip
+			// toolManagerToolStripMenuItem
 			// 
-			this.ToolBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ToolBoxContextMenuItemRefresh});
-			this.ToolBoxContextMenuStrip.Name = "ToolBoxContextMenuStrip";
-			resources.ApplyResources(this.ToolBoxContextMenuStrip, "ToolBoxContextMenuStrip");
-			this.ToolBoxContextMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.ToolBoxContextMenuStrip_ItemClicked);
-			// 
-			// ToolBoxContextMenuItemRefresh
-			// 
-			this.ToolBoxContextMenuItemRefresh.Name = "ToolBoxContextMenuItemRefresh";
-			resources.ApplyResources(this.ToolBoxContextMenuItemRefresh, "ToolBoxContextMenuItemRefresh");
+			this.toolManagerToolStripMenuItem.Name = "toolManagerToolStripMenuItem";
+			resources.ApplyResources(this.toolManagerToolStripMenuItem, "toolManagerToolStripMenuItem");
 			// 
 			// MainForm
 			// 
@@ -452,8 +459,8 @@ namespace Alexandria.Client
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
 			this.ToolBoxGroupBox.ResumeLayout(false);
-			this.QueueGroupBox.ResumeLayout(false);
 			this.ToolBoxContextMenuStrip.ResumeLayout(false);
+			this.QueueGroupBox.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -507,6 +514,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ImageList ToolBoxSmallImageList;
 		private System.Windows.Forms.ContextMenuStrip ToolBoxContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
+		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
 	}
 }
 

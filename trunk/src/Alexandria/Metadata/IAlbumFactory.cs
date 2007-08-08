@@ -26,21 +26,14 @@
 #endregion
 
 using System;
-using System.Data;
-using System.Data.Common;
+using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.Persistence
+namespace Alexandria.Metadata
 {
-	[ToolType("Database Engine", "Stores catalog information and media metadata")]
-	public interface IPersistenceMechanism
+	[ToolType("Album Lookup", "Lookup the album information from a CD")]
+	public interface IAlbumFactory
 	{
-		string Name { get; }
-		IPersistenceBroker Broker { get; set; }
-		DbConnection GetConnection();
-		void InitializeRecordMap(RecordMap recordMap, DbTransaction transaction);
-		T LookupRecord<T>(Guid id, DbConnection connection) where T: IRecord;
-		void SaveRecord(IRecord record, DbTransaction transaction);
-		void DeleteRecord(IRecord record, DbTransaction transaction);
+		IAlbum CreateAlbum(Uri path);
 	}
 }
