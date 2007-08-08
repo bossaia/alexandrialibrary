@@ -9,7 +9,7 @@ namespace Alexandria.Control
 	public class CompactDiscTrackSource : ITrackSource
 	{
 		#region Constructors
-		public CompactDiscTrackSource(SimpleAlbumFactory factory, Uri path)
+		public CompactDiscTrackSource(IAlbumFactory factory, Uri path)
 		{
 			this.factory = factory;
 			this.path = path;
@@ -17,7 +17,7 @@ namespace Alexandria.Control
 		#endregion
 	
 		#region Private Fields
-		private SimpleAlbumFactory factory;
+		private IAlbumFactory factory;
 		private Uri path;
 		#endregion
 	
@@ -26,7 +26,7 @@ namespace Alexandria.Control
 		{
 			try
 			{
-				IAlbum album = factory.CreateSimpleAlbum(path);
+				IAlbum album = factory.CreateAlbum(path);
 				return album.Tracks;
 			}
 			catch (Exception ex)

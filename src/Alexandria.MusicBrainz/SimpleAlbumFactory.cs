@@ -8,7 +8,7 @@ using Alexandria.Persistence;
 
 namespace Alexandria.MusicBrainz
 {
-	public class SimpleAlbumFactory
+	public class SimpleAlbumFactory : IAlbumFactory
 	{
 		#region Constructors
 		public SimpleAlbumFactory()
@@ -373,19 +373,19 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public IAlbum CreateSimpleAlbum(Uri path)
+		public IAlbum CreateAlbum(Uri path)
 		{
 			return LookupAlbumByCompactDisc(path);
 		}
 		
 		//[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public IAlbum CreateSimpleAlbum(string musicBrainzId, Uri path)
+		public IAlbum CreateAlbum(string musicBrainzId, Uri path)
 		{
 			return LookupAlbumById(musicBrainzId, path);
 		}
 
 		[Factory("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-		public IAlbum CreateSimpleAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
+		public IAlbum CreateAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
 		{
 			return new SimpleAlbum(id, path, name, artist, releaseDate);
 		}
