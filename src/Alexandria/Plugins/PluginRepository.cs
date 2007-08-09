@@ -47,7 +47,10 @@ namespace Alexandria.Plugins
 		private IDictionary<Assembly, bool> assemblies = new Dictionary<Assembly, bool>();
 		private IDictionary<Assembly, ConfigurationMap> configurationMaps = new Dictionary<Assembly, ConfigurationMap>();
 		private IDictionary<Type, ToolTypeAttribute> toolTypes = new Dictionary<Type, ToolTypeAttribute>();
-		private IDictionary<Type, List<ITool>> tools = new Dictionary<Type, List<ITool>>();
+		//private IDictionary<Type, List<ITool>> tools = new Dictionary<Type, List<ITool>>();
+		
+		private IDictionary<string, IPlugin> plugins = new Dictionary<string, IPlugin>();
+		private IDictionary<string, ITool> tools = new Dictionary<string, ITool>();
 		#endregion
 		
 		#region Private Methods
@@ -69,10 +72,10 @@ namespace Alexandria.Plugins
 							IPluginSettings settings = null;
 							foreach (Type type in assembly.GetTypes())
 							{
-								foreach (ToolTypeAttribute attribute in type.GetCustomAttributes(typeof(ToolTypeAttribute), false))
-								{
-									toolTypes.Add(type, attribute);
-								}
+								//foreach (ToolTypeAttribute attribute in type.GetCustomAttributes(typeof(ToolTypeAttribute), false))
+								//{
+									//toolTypes.Add(type, attribute);
+								//}
 								
 								if (type.GetInterface("IPluginSettings") != null)
 								{
@@ -112,6 +115,16 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Properties
+		public IDictionary<string, IPlugin> Plugins
+		{
+			get { return plugins; }
+		}
+		
+		public IDictionary<string, ITool> Tools
+		{
+			get { return tools; }
+		}
+		
 		public IDictionary<Assembly, bool> Assemblies
 		{
 			get { return assemblies; }
@@ -124,6 +137,16 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Methods
+		public T GetDefaultTool<T>(IToolCategory category)
+		{
+			return default(T);
+		}
+		
+		public T GetTool<T>(string name)
+		{
+			return default(T);
+		}
+		
 		public ConfigurationMap GetConfigurationMap(string assemblyName)
 		{
 			foreach(Assembly assembly in ConfigurationMaps.Keys)
