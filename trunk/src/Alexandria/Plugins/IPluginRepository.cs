@@ -37,5 +37,10 @@ namespace Alexandria.Plugins
 		IDictionary<Assembly, bool> Assemblies { get; }
 		IDictionary<Assembly, ConfigurationMap> ConfigurationMaps { get; }
 		ConfigurationMap GetConfigurationMap(string assemblyName);
+		
+		IDictionary<string, IPlugin> Plugins { get; }
+		IDictionary<string, ITool> Tools { get; }
+		T GetDefaultTool<T>(IToolCategory category);
+		T GetTool<T>(string name);
 	}
 }

@@ -38,5 +38,6 @@ namespace Alexandria.Plugins
 		Uri Path { get; }
 		Version Version { get; }
 		Assembly Assembly { get; }
+		IPluginSettings Settings { get; }
 	}
 }
