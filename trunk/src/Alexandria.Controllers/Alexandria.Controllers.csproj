@@ -36,15 +36,15 @@
   <ItemGroup>
     <Compile Include="CompactDiscTrackSource.cs" />
     <Compile Include="ITrackSource.cs" />
-    <Compile Include="PlaybackControl.cs" />
+    <Compile Include="PlaybackController.cs" />
     <Compile Include="PlaybackEventArgs.cs" />
-    <Compile Include="PluginControl.cs" />
+    <Compile Include="PluginController.cs" />
     <Compile Include="PluginInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueControl.cs" />
+    <Compile Include="QueueController.cs" />
     <Compile Include="QueueEventArgs.cs" />
-    <Compile Include="TaskControl.cs" />
-    <Compile Include="ToolControl.cs" />
+    <Compile Include="TaskController.cs" />
+    <Compile Include="ToolController.cs" />
     <Compile Include="VolumeEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
