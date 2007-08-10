@@ -31,7 +31,7 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Metadata
 {
-	[ToolType("Album Lookup", "Lookup the album information from a CD")]
+	[ToolCategory("Album Lookup", "Lookup the album information from a CD")]
 	public interface IAlbumFactory
 	{
 		IAlbum CreateAlbum(Uri path);

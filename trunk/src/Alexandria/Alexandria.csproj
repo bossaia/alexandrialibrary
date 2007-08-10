@@ -110,6 +110,7 @@
     <Compile Include="Persistence\RecordAttribute.cs" />
     <Compile Include="Persistence\RecordMap.cs" />
     <Compile Include="Persistence\RecordTypeAttribute.cs" />
+    <Compile Include="Plugins\BasePlugin.cs" />
     <Compile Include="Plugins\ConfigurationMap.cs" />
     <Compile Include="Plugins\IPluginRepository.cs" />
     <Compile Include="Metadata\IMetadata.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="Plugins\PluginSettingAttribute.cs" />
     <Compile Include="Plugins\PluginSettings.cs" />
     <Compile Include="Plugins\PluginSettingType.cs" />
-    <Compile Include="Plugins\ToolTypeAttribute.cs" />
+    <Compile Include="Plugins\ToolCategoryAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Metadata\Tagging\ITag.cs" />
     <Compile Include="Metadata\Tagging\ITagable.cs" />

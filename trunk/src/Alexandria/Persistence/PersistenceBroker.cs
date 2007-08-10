@@ -63,12 +63,11 @@ namespace Alexandria.Persistence
 		private void Initialize()
 		{
 			//Initialize lists of factory maps, record maps and record attributes for all plugin assemblies
-			foreach(KeyValuePair<Assembly,bool> pair in repository.Assemblies)
+			foreach(IPlugin plugin in repository.Plugins.Values)
 			{
-				bool enabled = pair.Value;
-				if (enabled)
+				if (plugin.Enabled)
 				{
-					Assembly assembly = pair.Key;
+					Assembly assembly = plugin.Assembly;
 					foreach (Type type in assembly.GetTypes())
 					{
 						FactoryMap factoryMap = GetFactoryMap(type);

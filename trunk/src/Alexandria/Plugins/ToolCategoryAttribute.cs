@@ -27,22 +27,35 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Alexandria.Plugins
 {
-	public interface IPlugin
+	[AttributeUsage(AttributeTargets.Interface, AllowMultiple=false)]
+	public class ToolCategoryAttribute : Attribute, IToolCategory
 	{
-		Guid Id { get; }
-		string Name { get; }
-		string Description { get; }
-		Uri Path { get; }
-		Version Version { get; }
-		Assembly Assembly { get; }
-		bool Enabled { get; set; }
-		IDictionary<string, ITool> Tools { get; }
-		void Initialize();
-		void SaveSettings();
-		//IPluginSettings Settings { get; }
+		#region Constructors
+		public ToolCategoryAttribute(string name, string description)
+		{
+			this.name = name;
+			this.description = description;
+		}
+		#endregion
+	
+		#region Private Fields
+		private string name;
+		private string description;
+		#endregion
+		
+		#region IToolCategory Members
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public string Description
+		{
+			get { return description; }
+		}
+		#endregion
 	}
 }
