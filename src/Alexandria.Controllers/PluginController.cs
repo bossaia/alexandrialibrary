@@ -148,10 +148,10 @@ namespace Alexandria.Controllers
 		{
 			IList<PluginInfo> plugins = new List<PluginInfo>();
 			
-			foreach (KeyValuePair<Assembly, bool> pair in repository.Assemblies)
+			foreach (IPlugin plugin in repository.Plugins.Values)
 			{
-				Assembly assembly = pair.Key;
-				bool enabled = pair.Value;
+				Assembly assembly = plugin.Assembly;
+				bool enabled = plugin.Enabled;
 				
 				string title = "Unknown Plugin";
 				string description = "This plugin could not be identified";
@@ -189,8 +189,8 @@ namespace Alexandria.Controllers
 				}
 
 				ConfigurationMap configMap = null;
-				if (repository.ConfigurationMaps.ContainsKey(assembly))
-					configMap = repository.ConfigurationMaps[assembly];
+				//if (repository.ConfigurationMaps.ContainsKey(assembly))
+					//configMap = repository.ConfigurationMaps[assembly];
 					
 				PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
 

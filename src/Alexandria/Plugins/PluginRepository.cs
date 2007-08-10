@@ -44,13 +44,14 @@ namespace Alexandria.Plugins
 		#endregion
 
 		#region Private Fields
-		private IDictionary<Assembly, bool> assemblies = new Dictionary<Assembly, bool>();
-		private IDictionary<Assembly, ConfigurationMap> configurationMaps = new Dictionary<Assembly, ConfigurationMap>();
-		private IDictionary<Type, ToolTypeAttribute> toolTypes = new Dictionary<Type, ToolTypeAttribute>();
+		//private IDictionary<Assembly, bool> assemblies = new Dictionary<Assembly, bool>();
+		//private IDictionary<Assembly, ConfigurationMap> configurationMaps = new Dictionary<Assembly, ConfigurationMap>();
+		//private IDictionary<Type, ToolTypeAttribute> toolTypes = new Dictionary<Type, ToolTypeAttribute>();
 		//private IDictionary<Type, List<ITool>> tools = new Dictionary<Type, List<ITool>>();
 		
-		private IDictionary<string, IPlugin> plugins = new Dictionary<string, IPlugin>();
-		private IDictionary<string, ITool> tools = new Dictionary<string, ITool>();
+		private IDictionary<Guid, IPlugin> plugins = new Dictionary<Guid, IPlugin>();
+		private IDictionary<Guid, ITool> tools = new Dictionary<Guid, ITool>();
+		private IDictionary<string, IToolCategory> toolCategories = new Dictionary<string, IToolCategory>();
 		#endregion
 		
 		#region Private Methods
@@ -61,7 +62,7 @@ namespace Alexandria.Plugins
 				try
 				{
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
-					bool enabled = false;
+					//bool enabled = false;
 					
 					string configName = file.FullName + ".config";
 					if (File.Exists(configName))
@@ -69,35 +70,42 @@ namespace Alexandria.Plugins
 						Configuration configFile = System.Configuration.ConfigurationManager.OpenExeConfiguration(file.FullName);
 						if (configFile != null)
 						{
-							IPluginSettings settings = null;
+							//IPluginSettings settings = null;
 							foreach (Type type in assembly.GetTypes())
 							{
-								//foreach (ToolTypeAttribute attribute in type.GetCustomAttributes(typeof(ToolTypeAttribute), false))
-								//{
-									//toolTypes.Add(type, attribute);
-								//}
-								
-								if (type.GetInterface("IPluginSettings") != null)
+								foreach (ToolCategoryAttribute attribute in type.GetCustomAttributes(typeof(ToolCategoryAttribute), false))
 								{
-									ConstructorInfo ctor = type.GetConstructor(System.Type.EmptyTypes);
-									if (ctor != null)
-									settings = (IPluginSettings)ctor.Invoke(null);
+									//TODO: create a new tool category and load it into the list
 								}
-								if (settings != null)
-									break;
+								if (type.GetInterface("IPlugin") != null)
+								{
+								
+								}
+								else if (type.GetInterface("ITool") != null)
+								{
+								
+								}
+								//if (type.GetInterface("IPluginSettings") != null)
+								//{
+									//ConstructorInfo ctor = type.GetConstructor(System.Type.EmptyTypes);
+									//if (ctor != null)
+									//settings = (IPluginSettings)ctor.Invoke(null);
+								//}
+								//if (settings != null)
+									//break;
 							}
 							
-							if (settings != null)
-							{
-								enabled = settings.Enabled;
-								ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
-								settings.ConfigurationMap = configMap;
-								configurationMaps.Add(assembly, configMap);
-							}
+							//if (settings != null)
+							//{
+								//enabled = settings.Enabled;
+								//ConfigurationMap configMap = new ConfigurationMap(configFile, settings);
+								//settings.ConfigurationMap = configMap;
+								//configurationMaps.Add(assembly, configMap);
+							//}
 						}
 					}
 					
-					assemblies.Add(assembly, enabled);
+					//assemblies.Add(assembly, enabled);
 				}
 				catch (FileNotFoundException ex)
 				{
@@ -115,16 +123,22 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region Public Properties
-		public IDictionary<string, IPlugin> Plugins
+		public IDictionary<Guid, IPlugin> Plugins
 		{
 			get { return plugins; }
 		}
 		
-		public IDictionary<string, ITool> Tools
+		public IDictionary<Guid, ITool> Tools
 		{
 			get { return tools; }
 		}
 		
+		public IDictionary<string, IToolCategory> ToolCategories
+		{
+			get { return toolCategories; }
+		}
+		
+		/*
 		public IDictionary<Assembly, bool> Assemblies
 		{
 			get { return assemblies; }
@@ -134,9 +148,16 @@ namespace Alexandria.Plugins
 		{
 			get { return configurationMaps; }
 		}
+		*/
 		#endregion
 		
 		#region Public Methods
+		public IList<ITool> GetTools(IToolCategory category)
+		{
+			return null;
+		}
+		
+		/*
 		public T GetDefaultTool<T>(IToolCategory category)
 		{
 			return default(T);
@@ -156,6 +177,7 @@ namespace Alexandria.Plugins
 			}
 			return null;
 		}
+		*/
 		#endregion
 	}
 }

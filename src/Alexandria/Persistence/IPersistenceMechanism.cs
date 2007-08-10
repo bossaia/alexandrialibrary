@@ -32,7 +32,7 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Persistence
 {
-	[ToolType("Database Engine", "Stores catalog information and media metadata")]
+	[ToolCategory("Database Engine", "Stores catalog information and media metadata")]
 	public interface IPersistenceMechanism
 	{
 		string Name { get; }

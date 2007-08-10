@@ -27,22 +27,68 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Alexandria.Plugins
 {
-	public interface IPlugin
+	public abstract class BasePlugin : IPlugin
 	{
-		Guid Id { get; }
-		string Name { get; }
-		string Description { get; }
-		Uri Path { get; }
-		Version Version { get; }
-		Assembly Assembly { get; }
-		bool Enabled { get; set; }
-		IDictionary<string, ITool> Tools { get; }
-		void Initialize();
-		void SaveSettings();
-		//IPluginSettings Settings { get; }
+		#region IPlugin Members
+		public Guid Id
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public string Name
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public string Description
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public Uri Path
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public Version Version
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public System.Reflection.Assembly Assembly
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public bool Enabled
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public IDictionary<string, ITool> Tools
+		{
+			get { throw new Exception("The method or operation is not implemented."); }
+		}
+
+		public void Initialize()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public void SaveSettings()
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+		#endregion
 	}
 }

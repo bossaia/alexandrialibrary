@@ -31,7 +31,7 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Metadata
 {
-	[ToolType("Audio Track Lookup", "Lookup audio track information from a digital audio file")]
+	[ToolCategory("Audio Track Lookup", "Lookup audio track information from a digital audio file")]
 	public interface IAudioTrackFactory
 	{
 		IAudioTrack CreateAudioTrack(Uri path);
