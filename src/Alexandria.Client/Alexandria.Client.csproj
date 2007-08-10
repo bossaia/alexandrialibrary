@@ -1117,9 +1117,9 @@
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Control\Alexandria.Control.csproj">
-      <Project>{A5EAE1CD-EA79-43C1-B021-5A49EA6F5547}</Project>
-      <Name>Alexandria.Control</Name>
+    <ProjectReference Include="..\Alexandria.Controllers\Alexandria.Controllers.csproj">
+      <Project>{879B598E-DB14-4C02-9C58-0D5769CBE546}</Project>
+      <Name>Alexandria.Controllers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Db4o\Alexandria.Db4o.csproj">
       <Project>{B08B54A1-29EE-4321-B02C-87562C4B75D2}</Project>

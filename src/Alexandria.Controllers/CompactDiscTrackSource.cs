@@ -27,59 +27,40 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Reflection;
 using System.Text;
-using System.Windows.Forms;
+using Alexandria.Metadata;
+using Alexandria.MusicBrainz;
 
-using Alexandria.Controllers;
-
-namespace Alexandria.Client
+namespace Alexandria.Controllers
 {
-	public partial class About : Form
+	public class CompactDiscTrackSource : ITrackSource
 	{
 		#region Constructors
-		public About()
+		public CompactDiscTrackSource(IAlbumFactory factory, Uri path)
 		{
-			InitializeComponent();
+			this.factory = factory;
+			this.path = path;
 		}
 		#endregion
-		
+	
 		#region Private Fields
-		private PluginController pluginController;
+		private IAlbumFactory factory;
+		private Uri path;
 		#endregion
-
-		#region Public Methods
-		[CLSCompliant(false)]
-		public void Initialize(PluginController pluginController)
+	
+		#region ITrackSource Members
+		public IList<Alexandria.Metadata.IAudioTrack> GetAudioTracks()
 		{
-			this.pluginController = pluginController;
-
-			string license = Alexandria.Client.Properties.Resources.MIT_License;
-			license = license.Replace("\\n", "\r\n");
-
-			this.VersionTextBox.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			this.LicenseTextBox.Text = license;
-			int i = 0;
-			foreach(PluginInfo plugin in pluginController.GetPluginInfo())
+			try
 			{
-				if (plugin.Bitmap != null)
-				ImageList.Images.Add(plugin.Bitmap);
-
-				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
-				item.ToolTipText = plugin.Description;
-				PluginListView.Items.Add(item);
-				i++;
+				IAlbum album = factory.CreateAlbum(path);
+				return album.Tracks;
 			}
-		}
-		#endregion
-
-		#region Private Event Methods
-		private void OKButton_Click(object sender, EventArgs e)
-		{
-			Close();
+			catch (Exception ex)
+			{
+				string x = ex.Message;
+			}
+			return null;
 		}
 		#endregion
 	}
