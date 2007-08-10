@@ -27,59 +27,49 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Reflection;
-using System.Text;
-using System.Windows.Forms;
+using Alexandria.Media;
+using Alexandria.Media.IO;
 
-using Alexandria.Controllers;
-
-namespace Alexandria.Client
+namespace Alexandria.Controllers
 {
-	public partial class About : Form
+	public class PlaybackEventArgs : EventArgs
 	{
 		#region Constructors
-		public About()
+		public PlaybackEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
 		{
-			InitializeComponent();
+			this.bufferState = bufferState;
+			this.networkState = networkState;
+			this.playbackState = playbackState;
+			this.seekState = seekState;
 		}
 		#endregion
 		
 		#region Private Fields
-		private PluginController pluginController;
+		private BufferState bufferState = BufferState.None;
+		private NetworkState networkState = NetworkState.None;
+		private PlaybackState playbackState = PlaybackState.None;
+		private SeekState seekState = SeekState.None;
 		#endregion
-
-		#region Public Methods
-		[CLSCompliant(false)]
-		public void Initialize(PluginController pluginController)
+		
+		#region Public Properties
+		public BufferState BufferState
 		{
-			this.pluginController = pluginController;
-
-			string license = Alexandria.Client.Properties.Resources.MIT_License;
-			license = license.Replace("\\n", "\r\n");
-
-			this.VersionTextBox.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			this.LicenseTextBox.Text = license;
-			int i = 0;
-			foreach(PluginInfo plugin in pluginController.GetPluginInfo())
-			{
-				if (plugin.Bitmap != null)
-				ImageList.Images.Add(plugin.Bitmap);
-
-				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
-				item.ToolTipText = plugin.Description;
-				PluginListView.Items.Add(item);
-				i++;
-			}
+			get { return bufferState; }
 		}
-		#endregion
-
-		#region Private Event Methods
-		private void OKButton_Click(object sender, EventArgs e)
+		
+		public NetworkState NetworkState
 		{
-			Close();
+			get { return networkState; }
+		}
+		
+		public PlaybackState PlaybackState
+		{
+			get { return playbackState; }
+		}
+		
+		private SeekState SeekState
+		{
+			get { return seekState; }
 		}
 		#endregion
 	}

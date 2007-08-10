@@ -1,3 +1,30 @@
+#region License (MIT)
+/***************************************************************************
+ *  Copyright (C) 2007 Dan Poage
+ ****************************************************************************/
+
+/*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a
+ *  copy of this software and associated documentation files (the "Software"),  
+ *  to deal in the Software without restriction, including without limitation  
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense,  
+ *  and/or sell copies of the Software, and to permit persons to whom the  
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ *  DEALINGS IN THE SOFTWARE.
+ */
+#endregion
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,7 +33,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-using Alexandria.Control;
+using Alexandria.Controllers;
 
 namespace Alexandria.Client
 {
@@ -20,17 +47,17 @@ namespace Alexandria.Client
 		#endregion
 
 		#region Private Fields
-		private PluginControl pluginControl = new PluginControl();
+		private PluginController pluginController = new PluginController();
 		#endregion
 		
 		#region Private Methods
 		public void RefreshData()
 		{
-			Text =  pluginControl.PluginInfo.Title;
-			Version.Text = pluginControl.PluginInfo.Version.ToString();
-			if (pluginControl.PluginInfo.Bitmap != null)
-				this.Icon = Icon.FromHandle(pluginControl.PluginInfo.Bitmap.GetHicon());
-			PluginDescription.Text = pluginControl.PluginInfo.Description;
+			Text =  pluginController.PluginInfo.Title;
+			Version.Text = pluginController.PluginInfo.Version.ToString();
+			if (pluginController.PluginInfo.Bitmap != null)
+				this.Icon = Icon.FromHandle(pluginController.PluginInfo.Bitmap.GetHicon());
+			PluginDescription.Text = pluginController.PluginInfo.Description;
 
 			/*
 			if (configurationMap != null && configurationMap.Settings != null)
@@ -133,7 +160,7 @@ namespace Alexandria.Client
 			
 				//configurationMap.Save();
 			//}
-			pluginControl.Save();
+			pluginController.Save();
 			Close();
 		}
 

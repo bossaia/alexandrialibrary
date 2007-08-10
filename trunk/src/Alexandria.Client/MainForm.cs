@@ -1,28 +1,28 @@
-#region License
-/*
-Copyright (c) 2007 Dan Poage
+#region License (MIT)
+/***************************************************************************
+ *  Copyright (C) 2007 Dan Poage
+ ****************************************************************************/
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-*/
+/*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
+ *
+ *  Permission is hereby granted, free of charge, to any person obtaining a
+ *  copy of this software and associated documentation files (the "Software"),  
+ *  to deal in the Software without restriction, including without limitation  
+ *  the rights to use, copy, modify, merge, publish, distribute, sublicense,  
+ *  and/or sell copies of the Software, and to permit persons to whom the  
+ *  Software is furnished to do so, subject to the following conditions:
+ *
+ *  The above copyright notice and this permission notice shall be included in 
+ *  all copies or substantial portions of the Software.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+ *  DEALINGS IN THE SOFTWARE.
+ */
 #endregion
 
 using System;
@@ -38,7 +38,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Alexandria.Client.Properties;
-using Alexandria.Control;
+using Alexandria.Controllers;
 
 namespace Alexandria.Client
 {
@@ -68,9 +68,9 @@ namespace Alexandria.Client
 		#endregion
 				
 		#region Private Fields
-		private PlaybackControl playbackControl = new PlaybackControl();
-		private QueueControl queueControl = new QueueControl();
-		private PluginControl pluginControl = new PluginControl();
+		private PlaybackController playbackController = new PlaybackController();
+		private QueueController queueController = new QueueController();
+		private PluginController pluginController = new PluginController();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
@@ -102,7 +102,7 @@ namespace Alexandria.Client
 				if (!string.IsNullOrEmpty(fileName))
 					paths.Add(fileName); //new Uri(fileName));
 			}	
-			pluginControl.Initialize(paths);
+			pluginController.Initialize(paths);
 			//InitializePersistence();
 		}
 		#endregion
@@ -190,7 +190,7 @@ namespace Alexandria.Client
 		{
 			pluginsToolStripMenuItem.DropDown.Items.Clear();
 
-			IList<PluginInfo> plugins = pluginControl.GetPluginInfo();
+			IList<PluginInfo> plugins = pluginController.GetPluginInfo();
 			foreach (PluginInfo plugin in plugins)
 			{
 				ToolStripMenuItem item = new ToolStripMenuItem(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
@@ -253,13 +253,13 @@ namespace Alexandria.Client
 			DialogResult result = FileOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				queueControl.OpenFile(FileOpenDialog.FileName);
+				queueController.OpenFile(FileOpenDialog.FileName);
 			}
 		}
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			playbackControl.TogglePlay();
+			playbackController.TogglePlay();
 			/*
 			if (controller != null && AudioStream != null)
 			{
@@ -273,7 +273,7 @@ namespace Alexandria.Client
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
-			playbackControl.Stop();
+			playbackController.Stop();
 			/*
 			if (controller != null)
 			{
@@ -287,7 +287,7 @@ namespace Alexandria.Client
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			playbackControl.ToggleMute();
+			playbackController.ToggleMute();
 			/*
 			if (controller != null)
 			{
@@ -308,7 +308,7 @@ namespace Alexandria.Client
 
 		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
 		{
-			playbackControl.SetVolume(GetVolume());
+			playbackController.SetVolume(GetVolume());
 		
 			//if (controller != null)
 				//Volume = GetVolume();
@@ -316,8 +316,8 @@ namespace Alexandria.Client
 
 		private void PreviousButton_Click(object sender, EventArgs e)
 		{
-			playbackControl.Stop();
-			queueControl.Previous();
+			playbackController.Stop();
+			queueController.Previous();
 		
 			/*
 			if (controller != null)
@@ -332,8 +332,8 @@ namespace Alexandria.Client
 
 		private void NextButton_Click(object sender, EventArgs e)
 		{
-			playbackControl.Stop();
-			queueControl.Next();
+			playbackController.Stop();
+			queueController.Next();
 			
 			/*
 			if (controller != null)
@@ -348,7 +348,7 @@ namespace Alexandria.Client
 
 		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			queueControl.SelectTrack();
+			queueController.SelectTrack();
 		
 			/*
 			if (controller != null && QueueListView.SelectedItems.Count > 0)
@@ -418,7 +418,7 @@ namespace Alexandria.Client
 		private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			About about = new About();
-			about.Initialize(pluginControl);
+			about.Initialize(pluginController);
 			about.ShowDialog(this);
 		}
 		
@@ -432,11 +432,11 @@ namespace Alexandria.Client
 
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
-			playbackControl.RefreshPlaybackStates();
+			playbackController.RefreshPlaybackStates();
 			
 			if (!seekIsPending)
 			{
-				PlaybackTrackBar.Value = (int)playbackControl.GetPosition();
+				PlaybackTrackBar.Value = (int)playbackController.GetPosition();
 			}
 			
 			/*
@@ -481,8 +481,8 @@ namespace Alexandria.Client
 		
 		private void OnSelectedTrackEnd(object sender, EventArgs e)
 		{
-			queueControl.Next();
-			playbackControl.Play();
+			queueController.Next();
+			playbackController.Play();
 			
 			//if (controller != null)
 			//{
@@ -499,7 +499,7 @@ namespace Alexandria.Client
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
 			seekIsPending = false;
-			playbackControl.Seek(PlaybackTrackBar.Value);
+			playbackController.Seek(PlaybackTrackBar.Value);
 			//if (AudioStream != null)
 			//{
 				//if (AudioStream.CanSetElapsed)
@@ -588,8 +588,8 @@ namespace Alexandria.Client
 			
 			LoadDefaultUser();
 			
-			queueControl.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			queueControl.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+			queueController.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			queueController.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 		
