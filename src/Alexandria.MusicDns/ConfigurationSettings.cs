@@ -18,7 +18,6 @@ namespace Alexandria.MusicDns
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Music DNS Audio Analysis plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

@@ -18,7 +18,6 @@ namespace Alexandria.CompactDiscTools
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Alexandria Compact Disc Tools plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

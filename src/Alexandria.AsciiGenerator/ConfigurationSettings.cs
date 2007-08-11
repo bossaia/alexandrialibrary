@@ -18,7 +18,6 @@ namespace Alexandria.AsciiGenerator
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the ASCII Generator plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

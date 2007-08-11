@@ -18,7 +18,6 @@ namespace Alexandria.MediaInfo
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the MediaInfo Metadata plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

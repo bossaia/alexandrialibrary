@@ -17,8 +17,7 @@ namespace Alexandria.Google
 		private ConfigurationMap configurationMap;
 		#endregion
 
-		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Google Search plugin is enabled")]
+		#region IPluginSettings Members		
 		public bool Enabled
 		{
 			get { return enabled; }

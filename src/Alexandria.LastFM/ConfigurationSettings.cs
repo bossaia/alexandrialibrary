@@ -20,7 +20,6 @@ namespace Alexandria.LastFM
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Last.FM Submission plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }
@@ -47,14 +46,14 @@ namespace Alexandria.LastFM
 		#endregion
 
 		#region Public Properties
-		[PluginSetting(PluginSettingType.Text, "The user name to access your Last.FM account")]
+		[PluginSetting("The user name to access your Last.FM account")]
 		public string UserName
 		{
 			get { return userName; }
 			set { userName = value; }
 		}
 
-		[PluginSetting(PluginSettingType.PasswordText, "The password to access your Last.FM account")]
+		[PluginSetting("The password to access your Last.FM account", PluginSettingType.PasswordText)]
 		public string Password
 		{
 			get { return password; }
