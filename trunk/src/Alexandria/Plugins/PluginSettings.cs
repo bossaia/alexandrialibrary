@@ -45,7 +45,7 @@ namespace Alexandria.Plugins
 		#endregion
 		
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Alexandria Core Library is enabled", true)]
+		[PluginSetting("Indicates whether or not the Alexandria Core Library is enabled", true)]
 		public bool Enabled
 		{
 			get { return enabled; }

@@ -21,7 +21,6 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 	
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Insdicates whether or not the MP3tunes Music Locker plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }
@@ -48,21 +47,21 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region Public Properties
-		[PluginSetting(PluginSettingType.Text, "The user name for acessing your MP3tunes Music Locker")]
+		[PluginSetting("The user name for acessing your MP3tunes Music Locker")]
 		public string UserName
 		{
 			get { return userName; }
 			set { userName = value; }
 		}
 
-		[PluginSetting(PluginSettingType.PasswordText, "The password for accessing your MP3tunes Music Locker")]
+		[PluginSetting("The password for accessing your MP3tunes Music Locker")]
 		public string Password
 		{
 			get { return password; }
 			set { password = value; }
 		}
 		
-		[PluginSetting(PluginSettingType.Enumeration, "Indicates how Alexandria should synchronize your local metadata with your MP3tunes Music Locker")]
+		[PluginSetting("Indicates how Alexandria should synchronize your local metadata with your MP3tunes Music Locker")]
 		public LockerSynch LockerSynch
 		{
 			get { return lockerSynch; }

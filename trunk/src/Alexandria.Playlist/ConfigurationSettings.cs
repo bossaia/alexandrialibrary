@@ -18,8 +18,7 @@ namespace Alexandria.Playlist
 		private PlaylistFormat defaultPlaylistFormat;
 		#endregion
 	
-		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Alexandria Playlist plugin is enabled")]
+		#region IPluginSettings Members		
 		public bool Enabled
 		{
 			get { return enabled; }
@@ -46,7 +45,7 @@ namespace Alexandria.Playlist
 		#endregion
 		
 		#region Public Properties
-		[PluginSetting(PluginSettingType.Enumeration, "The default format to save new playlists in")]
+		[PluginSetting("The default format to save new playlists in")]
 		public PlaylistFormat DefaultPlaylistFormat
 		{
 			get { return defaultPlaylistFormat; }

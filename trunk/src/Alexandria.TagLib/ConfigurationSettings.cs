@@ -18,7 +18,6 @@ namespace Alexandria.TagLib
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the TagLib Metadata Tagging plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

@@ -82,6 +82,7 @@ namespace Alexandria.Plugins
 		private object GetSettingValueFromConfigValue(PluginSettingAttribute attribute, Type propertyType, string value)
 		{
 			//TODO: add some kind of validation and error handling for bad config values
+			/*
 			switch(attribute.Type)
 			{
 				case PluginSettingType.Text:
@@ -122,6 +123,9 @@ namespace Alexandria.Plugins
 				default:
 					return null;
 			}
+			*/
+			
+			return null;
 		}
 		#endregion
 		

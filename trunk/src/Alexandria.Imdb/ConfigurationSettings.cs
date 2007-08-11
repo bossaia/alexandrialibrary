@@ -18,7 +18,6 @@ namespace Alexandria.Imdb
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the IMDB Search plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

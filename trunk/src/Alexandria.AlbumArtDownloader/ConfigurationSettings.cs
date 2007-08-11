@@ -18,7 +18,6 @@ namespace Alexandria.AlbumArtDownloader
 		#endregion
 	
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Album Art Downloader plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

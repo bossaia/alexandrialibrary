@@ -18,7 +18,6 @@ namespace Alexandria.Db4o
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Db4o Object Database plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

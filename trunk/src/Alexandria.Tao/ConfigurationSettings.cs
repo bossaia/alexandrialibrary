@@ -18,7 +18,6 @@ namespace Alexandria.Tao
 		#endregion
 
 		#region IPluginSettings Members
-		[PluginSetting(PluginSettingType.Boolean, "Indicates whether or not the Tao OpenAL Audio plugin is enabled")]
 		public bool Enabled
 		{
 			get { return enabled; }

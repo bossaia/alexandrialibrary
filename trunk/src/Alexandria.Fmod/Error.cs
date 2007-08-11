@@ -8,7 +8,7 @@
 
 namespace Alexandria.Fmod
 {
-	public abstract class FmodError
+	public abstract class Error
 	{
 		public static string GetString(Result result)
 		{

@@ -34,36 +34,35 @@ namespace Alexandria.Plugins
 	public class PluginSettingAttribute : Attribute
 	{
 		#region Constructors
-		public PluginSettingAttribute(PluginSettingType type, string description)
+		public PluginSettingAttribute(string description)
 		{
-			this.type = type;
 			this.description = description;
 		}
 
-		public PluginSettingAttribute(PluginSettingType type, string description, string textMask) : this(type, description)
+		public PluginSettingAttribute(string description, PluginSettingType type) : this(description)
+		{
+			this.type = type;
+		}
+
+		public PluginSettingAttribute(string description, string textMask) : this(description)
 		{
 			this.textMask = textMask;
 		}
 		
-		public PluginSettingAttribute(PluginSettingType type, string description, bool isReadOnly) : this(type, description)
+		public PluginSettingAttribute(string description, bool isReadOnly) : this(description)
 		{
 			this.isReadOnly = isReadOnly;
 		}
 		#endregion
 
 		#region Private Fields
-		private PluginSettingType type = PluginSettingType.None;		
 		private string description;
+		private PluginSettingType type;
 		private string textMask;
 		private bool isReadOnly;
 		#endregion
 
 		#region Public Properties
-		public PluginSettingType Type
-		{
-			get { return type; }
-		}
-
 		public string Description
 		{
 			get { return description; }
