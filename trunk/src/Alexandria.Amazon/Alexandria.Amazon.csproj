@@ -37,7 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MetadataPlugin.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

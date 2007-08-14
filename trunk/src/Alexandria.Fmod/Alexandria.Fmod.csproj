@@ -68,7 +68,7 @@
     <Compile Include="LocalSound.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
-    <Compile Include="PlaybackPlugin.cs" />
+    <Compile Include="AlexandriaPlugin.cs" />
     <Compile Include="ProxyCompactDiscTrack.cs" />
     <Compile Include="RemoteSound.cs" />
     <Compile Include="SoundFormat.cs" />

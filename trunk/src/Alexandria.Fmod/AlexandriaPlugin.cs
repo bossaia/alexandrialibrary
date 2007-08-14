@@ -5,16 +5,12 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Fmod
 {
-	public class PlaybackPlugin : BasePlugin
+	public class AlexandriaPlugin : BasePlugin
 	{
 		#region Constructors
-		public PlaybackPlugin() : base(
-			new Guid("5F1EAB96-2FFC-4cd6-9374-407F77A75FDF"), 
-			"FMOD Sound System",
-			"Supports playback of common digital audio formats (mp3, aac, wma, vorbis, flac, wav)",
-			new Version(1, 0, 0, 0),
-			new Uri("Alexandria.Fmod.dll", UriKind.Relative)			
-		) {}
+		public AlexandriaPlugin() : base(new Guid("5F1EAB96-2FFC-4cd6-9374-407F77A75FDF"))
+		{
+		}
 		#endregion
 
 		#region Private Fields

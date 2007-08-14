@@ -37,7 +37,7 @@ namespace Alexandria.Plugins
 		string Name { get; }
 		string Description { get; }
 		Version Version { get; }
-		Uri Path { get; }
+		Assembly Assembly { get; }
 		bool Enabled { get; set; }
 		IDictionary<string, ITool> Tools { get; }
 		void Load();
