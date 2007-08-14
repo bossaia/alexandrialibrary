@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.FreeDB
+namespace Alexandria.Imdb
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public Plugin()
 		{
 		}
 		#endregion

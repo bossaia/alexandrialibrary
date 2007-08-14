@@ -129,6 +129,7 @@
     <Compile Include="Plugins\ITool.cs" />
     <Compile Include="Plugins\IToolCategory.cs" />
     <Compile Include="Plugins\PluginAttribute.cs" />
+    <Compile Include="Plugins\PluginEventArgs.cs" />
     <Compile Include="Plugins\PluginRepository.cs" />
     <Compile Include="Plugins\PluginSettingAttribute.cs" />
     <Compile Include="Plugins\PluginSettings.cs" />

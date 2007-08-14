@@ -2,21 +2,21 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.AlbumArtDownloader
+namespace Alexandria.MediaInfo
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public Plugin()
 		{
 		}
 		#endregion
-	
+
 		#region Private Fields
 		private bool enabled;
 		private ConfigurationMap configurationMap;
 		#endregion
-	
+
 		#region IPluginSettings Members
 		public bool Enabled
 		{

@@ -67,6 +67,7 @@ namespace Alexandria.Persistence
 			{
 				if (plugin.Enabled)
 				{
+					/*
 					Assembly assembly = plugin.Assembly;
 					foreach (Type type in assembly.GetTypes())
 					{
@@ -94,7 +95,8 @@ namespace Alexandria.Persistence
 								}
 							}
 						}
-					}			
+					}
+					*/		
 				}
 			}
 			

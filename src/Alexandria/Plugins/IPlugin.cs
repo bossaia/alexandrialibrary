@@ -36,13 +36,14 @@ namespace Alexandria.Plugins
 		Guid Id { get; }
 		string Name { get; }
 		string Description { get; }
-		Uri Path { get; }
 		Version Version { get; }
-		Assembly Assembly { get; }
+		Uri Path { get; }
 		bool Enabled { get; set; }
 		IDictionary<string, ITool> Tools { get; }
-		void Initialize();
-		void SaveSettings();
-		//IPluginSettings Settings { get; }
+		void Load();
+		void Save();
+		EventHandler<PluginEventArgs> OnLoad { get; set; }
+		EventHandler<PluginEventArgs> OnSave { get; set; }
+		EventHandler<PluginEventArgs> OnEnabledChanged { get; set; }
 	}
 }

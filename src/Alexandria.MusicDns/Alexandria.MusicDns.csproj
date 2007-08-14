@@ -35,7 +35,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="metadata.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

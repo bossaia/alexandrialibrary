@@ -42,7 +42,7 @@
     <Compile Include="CDEntry.cs" />
     <Compile Include="CDRomToc.cs" />
     <Compile Include="CDTableOfContents.cs" />
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="DeviceChangeNotificationWindow.cs" />

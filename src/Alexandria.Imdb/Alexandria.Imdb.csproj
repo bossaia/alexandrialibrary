@@ -36,7 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="IAsyncCallback.cs" />
     <Compile Include="AsyncCommand.cs" />
     <Compile Include="AsyncCommandFillMovie.cs" />

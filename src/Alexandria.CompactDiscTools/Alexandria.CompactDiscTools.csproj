@@ -37,7 +37,7 @@
   <ItemGroup>
     <Compile Include="CddaToWave.cs" />
     <Compile Include="CDRecord.cs" />
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="MediaPlugin.cs" />
     <Compile Include="ConsoleTool.cs" />
     <Compile Include="TableOfContents.cs" />
     <Compile Include="DeviceDump.cs" />

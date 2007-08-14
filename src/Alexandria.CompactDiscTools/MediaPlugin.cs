@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.MusicDns
+namespace Alexandria.CompactDiscTools
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class MediaPlugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public MediaPlugin()
 		{
 		}
 		#endregion

@@ -39,7 +39,7 @@
     <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="AuthenticationException.cs" />
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="LockerSynch.cs" />
     <Compile Include="MusicLocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

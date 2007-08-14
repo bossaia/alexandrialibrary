@@ -2,23 +2,21 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.LastFM
+namespace Alexandria.AlbumArtDownloader
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class MetadataPlugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public MetadataPlugin()
 		{
 		}
 		#endregion
-
+	
 		#region Private Fields
 		private bool enabled;
 		private ConfigurationMap configurationMap;
-		private string userName;
-		private string password;
 		#endregion
-
+	
 		#region IPluginSettings Members
 		public bool Enabled
 		{
@@ -42,22 +40,6 @@ namespace Alexandria.LastFM
 		{
 			if (ConfigurationMap != null)
 				ConfigurationMap.Save();
-		}
-		#endregion
-
-		#region Public Properties
-		[PluginSetting("The user name to access your Last.FM account")]
-		public string UserName
-		{
-			get { return userName; }
-			set { userName = value; }
-		}
-
-		[PluginSetting("The password to access your Last.FM account", PluginSettingType.PasswordText)]
-		public string Password
-		{
-			get { return password; }
-			set { password = value; }
 		}
 		#endregion
 	}

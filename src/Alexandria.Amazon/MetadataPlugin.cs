@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.Db4o
+namespace Alexandria.Amazon
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class MetadataPlugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public MetadataPlugin()
 		{
 		}
 		#endregion
