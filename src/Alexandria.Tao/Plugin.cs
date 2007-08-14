@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.Amazon
+namespace Alexandria.Tao
 {
-	public class MetadataPlugin : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public MetadataPlugin()
+		public Plugin()
 		{
 		}
 		#endregion

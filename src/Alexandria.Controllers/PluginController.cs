@@ -150,7 +150,7 @@ namespace Alexandria.Controllers
 			
 			foreach (IPlugin plugin in repository.Plugins.Values)
 			{
-				Assembly assembly = null; //plugin.Assembly;
+				Assembly assembly = plugin.Assembly;
 				bool enabled = plugin.Enabled;
 				
 				string title = "Unknown Plugin";

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.AsciiGenerator
+namespace Alexandria.CompactDiscTools
 {
-	public class ConversionPlugin : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public ConversionPlugin()
+		public Plugin()
 		{
 		}
 		#endregion

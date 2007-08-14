@@ -34,13 +34,14 @@ namespace Alexandria.Plugins
 	public abstract class BasePlugin : IPlugin
 	{
 		#region Constructors
-		public BasePlugin(Guid id, string name, string description, Version version, Uri path)
+		public BasePlugin(Guid id)
 		{
 			this.id = id;
-			this.name = name;
-			this.description = description;
-			this.version = version;
-			this.path = path;
+			//this.name = name;
+			//this.description = description;
+			//this.version = version;
+			this.assembly = Assembly.GetCallingAssembly();
+			
 		}
 		#endregion
 		
@@ -49,7 +50,7 @@ namespace Alexandria.Plugins
 		private string name;
 		private string description;
 		private Version version;
-		private Uri path;
+		private Assembly assembly;
 		private bool enabled;
 		private IDictionary<string, ITool> tools = new Dictionary<string,ITool>();
 		private EventHandler<PluginEventArgs> onLoad;
@@ -78,9 +79,10 @@ namespace Alexandria.Plugins
 			get { return version; }
 		}
 
-		public Uri Path
+		public Assembly Assembly
 		{
-			get { return path; }
+			get { return assembly; }
+			protected set { assembly = value; }
 		}
 
 		public bool Enabled

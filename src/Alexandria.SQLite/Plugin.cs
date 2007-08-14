@@ -5,10 +5,10 @@ using Alexandria.Plugins;
 
 namespace Alexandria.SQLite
 {
-	public class PersistencePlugin : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public PersistencePlugin()
+		public Plugin()
 		{
 		}
 		#endregion

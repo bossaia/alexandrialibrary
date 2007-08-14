@@ -57,7 +57,7 @@
     <Compile Include="ByteVectorCollection.cs" />
     <Compile Include="ChannelData.cs" />
     <Compile Include="CombinedTag.cs" />
-    <Compile Include="MetadataPlugin.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Id3v2\Id3v2UserTextIdentificationFrame.cs" />
     <Compile Include="IFileAbstraction.cs" />

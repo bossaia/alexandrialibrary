@@ -67,7 +67,6 @@ namespace Alexandria.Persistence
 			{
 				if (plugin.Enabled)
 				{
-					/*
 					Assembly assembly = plugin.Assembly;
 					foreach (Type type in assembly.GetTypes())
 					{
@@ -95,8 +94,7 @@ namespace Alexandria.Persistence
 								}
 							}
 						}
-					}
-					*/		
+					}		
 				}
 			}
 			
@@ -165,7 +163,6 @@ namespace Alexandria.Persistence
 					{
 						foreach (FieldAttribute attribute in interfaceProperty.GetCustomAttributes(typeof(FieldAttribute), true))
 						{
-							//FieldAttribute fieldAttribute = (FieldAttribute)attribute;
 							FieldMap fieldMap = new FieldMap(attribute, interfaceProperty);
 							
 							if (attribute.Location == FieldLocation.Local)
