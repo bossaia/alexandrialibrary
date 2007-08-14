@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.Amazon
+namespace Alexandria.AsciiGenerator
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class ConversionPlugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public ConversionPlugin()
 		{
 		}
 		#endregion

@@ -49,7 +49,7 @@
     <Compile Include="AsciiConversion\ValuesToFixedWidthTextConverter.cs" />
     <Compile Include="AsciiConversion\ValuesToTextConverter.cs" />
     <Compile Include="AsciiConversion\ValuesToVariableWidthTextConverter.cs" />
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="ConversionPlugin.cs" />
     <Compile Include="Functions\NativeMethods.cs" />
     <Compile Include="Variables.cs" />
     <Compile Include="Functions\ConvolutionMatrix.cs" />

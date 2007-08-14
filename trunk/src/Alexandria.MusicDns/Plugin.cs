@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.Imdb
+namespace Alexandria.MusicDns
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public Plugin()
 		{
 		}
 		#endregion

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Alexandria.Plugins;
 
-namespace Alexandria.AsciiGenerator
+namespace Alexandria.Google
 {
-	public class ConfigurationSettings : IPluginSettings
+	public class Plugin : IPluginSettings
 	{
 		#region Constructors
-		public ConfigurationSettings()
+		public Plugin()
 		{
 		}
 		#endregion
@@ -17,7 +17,7 @@ namespace Alexandria.AsciiGenerator
 		private ConfigurationMap configurationMap;
 		#endregion
 
-		#region IPluginSettings Members
+		#region IPluginSettings Members		
 		public bool Enabled
 		{
 			get { return enabled; }

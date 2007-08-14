@@ -27,67 +27,110 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Alexandria.Plugins
 {
 	public abstract class BasePlugin : IPlugin
 	{
+		#region Constructors
+		public BasePlugin(Guid id, string name, string description, Version version, Uri path)
+		{
+			this.id = id;
+			this.name = name;
+			this.description = description;
+			this.version = version;
+			this.path = path;
+		}
+		#endregion
+		
+		#region Private Fields
+		private Guid id;
+		private string name;
+		private string description;
+		private Version version;
+		private Uri path;
+		private bool enabled;
+		private IDictionary<string, ITool> tools = new Dictionary<string,ITool>();
+		private EventHandler<PluginEventArgs> onLoad;
+		private EventHandler<PluginEventArgs> onSave;
+		private EventHandler<PluginEventArgs> onEnabledChanged;
+		#endregion
+		
 		#region IPlugin Members
 		public Guid Id
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return id; }
 		}
 
 		public string Name
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return name; }
 		}
 
 		public string Description
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
-		public Uri Path
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return description; }
 		}
 
 		public Version Version
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return version; }
 		}
 
-		public System.Reflection.Assembly Assembly
+		public Uri Path
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return path; }
 		}
 
 		public bool Enabled
 		{
-			get
-			{
-				throw new Exception("The method or operation is not implemented.");
-			}
+			get { return enabled; }
 			set
 			{
-				throw new Exception("The method or operation is not implemented.");
+				if (enabled != value)
+				{
+					enabled = value;
+				
+					if (OnEnabledChanged != null)
+						OnEnabledChanged(this, new PluginEventArgs());
+				}
 			}
 		}
 
 		public IDictionary<string, ITool> Tools
 		{
-			get { throw new Exception("The method or operation is not implemented."); }
+			get { return tools; }
 		}
 
-		public void Initialize()
+		public EventHandler<PluginEventArgs> OnLoad
 		{
-			throw new Exception("The method or operation is not implemented.");
+			get { return onLoad; }
+			set { onLoad = value; }
 		}
 
-		public void SaveSettings()
+		public EventHandler<PluginEventArgs> OnSave
 		{
-			throw new Exception("The method or operation is not implemented.");
+			get { return onSave; }
+			set { onSave = value; }
+		}
+
+		public EventHandler<PluginEventArgs> OnEnabledChanged
+		{
+			get { return onEnabledChanged; }
+			set { onEnabledChanged = value; }
+		}
+
+		public virtual void Load()
+		{
+			if (OnLoad != null)
+				OnLoad(this, new PluginEventArgs());
+		}
+
+		public virtual void Save()
+		{
+			if (OnSave != null)
+				OnSave(this, new PluginEventArgs());
 		}
 		#endregion
 	}

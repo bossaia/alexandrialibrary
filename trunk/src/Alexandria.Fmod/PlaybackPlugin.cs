@@ -5,25 +5,19 @@ using Alexandria.Plugins;
 
 namespace Alexandria.Fmod
 {
-	public class PlaybackPlugin : IPlugin
+	public class PlaybackPlugin : BasePlugin
 	{
 		#region Constructors
-		public PlaybackPlugin()
-		{
-		}
+		public PlaybackPlugin() : base(
+			new Guid("5F1EAB96-2FFC-4cd6-9374-407F77A75FDF"), 
+			"FMOD Sound System",
+			"Supports playback of common digital audio formats (mp3, aac, wma, vorbis, flac, wav)",
+			new Version(1, 0, 0, 0),
+			new Uri("Alexandria.Fmod.dll", UriKind.Relative)			
+		) {}
 		#endregion
 
 		#region Private Fields
-		private Assembly assembly;
-		private string description;
-		private Guid id;
-		private string name;
-		private Uri path;
-		private IDictionary<string, ITool> tools = new Dictionary<string, ITool>();
-		private Version version;
-		
-		private bool enabled;
-		//private ConfigurationMap configurationMap;
 		private int numberOfChannels = 10;
 		private uint streamBufferSize = 65536;
 		private OutputType outputType = OutputType.AutoDetect;
@@ -61,54 +55,15 @@ namespace Alexandria.Fmod
 		}
 		#endregion
 
-		#region IPlugin Members
-		public Assembly Assembly
+		#region Public Methods
+		public override void Load()
 		{
-			get { return assembly; }
+			base.Load();
 		}
 
-		public string Description
+		public override void Save()
 		{
-			get { return description; }
-		}
-		
-		public bool Enabled
-		{
-			get { return enabled; }
-			set { enabled = value; }
-		}
-
-		public Guid Id
-		{
-			get { return id; }
-		}
-
-		public void Initialize()
-		{
-		}
-
-		public string Name
-		{
-			get { return name; }
-		}
-
-		public Uri Path
-		{
-			get { return path; }
-		}
-
-		public void SaveSettings()
-		{
-		}
-
-		public IDictionary<string, ITool> Tools
-		{
-			get { return tools; }
-		}
-
-		public Version Version
-		{
-			get { return version; }
+			base.Save();
 		}
 		#endregion
 	}

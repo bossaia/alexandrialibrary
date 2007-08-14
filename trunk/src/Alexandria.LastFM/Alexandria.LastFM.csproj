@@ -42,7 +42,7 @@
     <Compile Include="AudioscrobblerResponse.cs" />
     <Compile Include="AudioscrobblerResponseType.cs" />
     <Compile Include="AudioscrobblerTrack.cs" />
-    <Compile Include="ConfigurationSettings.cs" />
+    <Compile Include="Plugin.cs" />
     <Compile Include="IAudioscrobblerTrack.cs" />
     <Compile Include="LastRipper\IMetaMusic.cs" />
     <Compile Include="LastRipper\LastManager.Command.cs" />
