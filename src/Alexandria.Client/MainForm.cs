@@ -37,8 +37,8 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
+using Alexandria.Client.Controllers;
 using Alexandria.Client.Properties;
-using Alexandria.Controllers;
 
 namespace Alexandria.Client
 {
