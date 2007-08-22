@@ -30,7 +30,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -50,28 +49,30 @@ namespace Alexandria.Client
 		#region Private Fields
 		private PluginController pluginController;
 		#endregion
-
+		
 		#region Public Methods
-		[CLSCompliant(false)]
 		public void Initialize(PluginController pluginController)
 		{
 			this.pluginController = pluginController;
-
-			string license = Alexandria.Client.Properties.Resources.MIT_License;
-			license = license.Replace("\\n", "\r\n");
-
-			this.VersionTextBox.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-			this.LicenseTextBox.Text = license;
-			int i = 0;
-			foreach(PluginInfo plugin in pluginController.GetPluginInfo())
+			this.pluginController.LoadAboutForm(this);
+		}
+		
+		public void LoadForm(string version, string license, IList<ListViewItem> pluginItems, IList<Image> pluginImages)
+		{
+			VersionTextBox.Text = version;
+			LicenseTextBox.Text = license;
+			PluginListView.Items.Clear();
+			
+			if (pluginItems != null)
 			{
-				if (plugin.Bitmap != null)
-				ImageList.Images.Add(plugin.Bitmap);
-
-				ListViewItem item = new ListViewItem(new string[]{plugin.Title, plugin.Version.ToString()} , i);
-				item.ToolTipText = plugin.Description;
-				PluginListView.Items.Add(item);
-				i++;
+				foreach (ListViewItem item in pluginItems)
+					PluginListView.Items.Add(item);
+			}
+			
+			if (pluginImages != null)
+			{
+				foreach (Image image in pluginImages)
+					ImageList.Images.Add(image);
 			}
 		}
 		#endregion

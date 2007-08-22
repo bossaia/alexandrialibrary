@@ -31,7 +31,9 @@ using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
+using Alexandria.Client;
 using Alexandria.Plugins;
 
 namespace Alexandria.Client.Controllers
@@ -136,6 +138,32 @@ namespace Alexandria.Client.Controllers
 			repository = new PluginRepository(files);
 		}
 		
+		public void LoadAboutForm(About about)
+		{
+			IList<ListViewItem> pluginItems = new List<ListViewItem>();
+			IList<Image> pluginImages = new List<Image>();
+		
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+		
+			string license = Properties.Resources.MIT_License;
+			license = license.Replace("\\n", "\r\n");
+
+			int i = 0;
+			foreach (PluginInfo plugin in GetPluginInfo())
+			{
+				if (plugin.Bitmap != null)
+					pluginImages.Add(plugin.Bitmap);
+					//ImageList.Images.Add(plugin.Bitmap);
+
+				ListViewItem item = new ListViewItem(new string[] { plugin.Title, plugin.Version.ToString() } , i);
+				item.ToolTipText = plugin.Description;
+				pluginItems.Add(item);
+				i++;
+			}
+			
+			about.LoadForm(version, license, pluginItems, pluginImages);
+		}
+		
 		public void Load()
 		{
 		}
@@ -148,55 +176,58 @@ namespace Alexandria.Client.Controllers
 		{
 			IList<PluginInfo> plugins = new List<PluginInfo>();
 			
-			foreach (IPlugin plugin in repository.Plugins.Values)
+			if (repository != null)
 			{
-				Assembly assembly = plugin.Assembly;
-				bool enabled = plugin.Enabled;
-				
-				string title = "Unknown Plugin";
-				string description = "This plugin could not be identified";
-				Version version = new Version(1, 0, 0, 0);
-				FileInfo assemblyFile = new FileInfo(assembly.Location);
-				string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
-				Bitmap bitmap = null;
-
-				try
+				foreach (IPlugin plugin in repository.Plugins.Values)
 				{
-					bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
-				}
-				catch (Exception ex)
-				{
-					throw new AlexandriaException("There was an error loading the icon for plugin " + assembly.Location, ex);
-				}
-
-				foreach (Attribute attribute in assembly.GetCustomAttributes(false))
-				{
-					if (attribute is AssemblyTitleAttribute)
-					{
-						AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
-						title = titleAttribute.Title;
-					}
-					else if (attribute is AssemblyDescriptionAttribute)
-					{
-						AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
-						description = descriptionAttribute.Description;
-					}
-					else if (attribute is AssemblyVersionAttribute)
-					{
-						AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
-						version = new Version(versionAttribute.Version);
-					}
-				}
-
-				ConfigurationMap configMap = null;
-				//if (repository.ConfigurationMaps.ContainsKey(assembly))
-					//configMap = repository.ConfigurationMaps[assembly];
+					Assembly assembly = plugin.Assembly;
+					bool enabled = plugin.Enabled;
 					
-				PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
+					string title = "Unknown Plugin";
+					string description = "This plugin could not be identified";
+					Version version = new Version(1, 0, 0, 0);
+					FileInfo assemblyFile = new FileInfo(assembly.Location);
+					string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
+					Bitmap bitmap = null;
 
-				plugins.Add(info);
+					try
+					{
+						bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
+					}
+					catch (Exception ex)
+					{
+						throw new AlexandriaException("There was an error loading the icon for plugin " + assembly.Location, ex);
+					}
+
+					foreach (Attribute attribute in assembly.GetCustomAttributes(false))
+					{
+						if (attribute is AssemblyTitleAttribute)
+						{
+							AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
+							title = titleAttribute.Title;
+						}
+						else if (attribute is AssemblyDescriptionAttribute)
+						{
+							AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
+							description = descriptionAttribute.Description;
+						}
+						else if (attribute is AssemblyVersionAttribute)
+						{
+							AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
+							version = new Version(versionAttribute.Version);
+						}
+					}
+
+					ConfigurationMap configMap = null;
+					//if (repository.ConfigurationMaps.ContainsKey(assembly))
+						//configMap = repository.ConfigurationMaps[assembly];
+						
+					PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
+
+					plugins.Add(info);
+				}
 			}
-			
+						
 			return plugins;
 		}
 		#endregion

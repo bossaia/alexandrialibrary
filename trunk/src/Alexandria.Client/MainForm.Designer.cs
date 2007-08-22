@@ -45,6 +45,7 @@ namespace Alexandria.Client
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -78,7 +79,6 @@ namespace Alexandria.Client
 			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
 			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
-			this.toolManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -107,8 +107,8 @@ namespace Alexandria.Client
 			// 
 			// StopButton
 			// 
-			resources.ApplyResources(this.StopButton, "StopButton");
 			this.StopButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_stop_blue;
+			resources.ApplyResources(this.StopButton, "StopButton");
 			this.StopButton.Name = "StopButton";
 			this.StopButton.UseVisualStyleBackColor = true;
 			// 
@@ -188,6 +188,11 @@ namespace Alexandria.Client
 			this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
 			resources.ApplyResources(this.pluginsToolStripMenuItem, "pluginsToolStripMenuItem");
 			// 
+			// toolManagerToolStripMenuItem
+			// 
+			this.toolManagerToolStripMenuItem.Name = "toolManagerToolStripMenuItem";
+			resources.ApplyResources(this.toolManagerToolStripMenuItem, "toolManagerToolStripMenuItem");
+			// 
 			// HelpToolStripMenuItem
 			// 
 			this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -233,8 +238,8 @@ namespace Alexandria.Client
 			// 
 			// NextButton
 			// 
-			resources.ApplyResources(this.NextButton, "NextButton");
 			this.NextButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_end_blue;
+			resources.ApplyResources(this.NextButton, "NextButton");
 			this.NextButton.Name = "NextButton";
 			this.NextButton.UseVisualStyleBackColor = true;
 			// 
@@ -268,8 +273,8 @@ namespace Alexandria.Client
 			// 
 			// NowPlayingLabel
 			// 
-			this.NowPlayingLabel.BackColor = System.Drawing.SystemColors.ControlLight;
 			resources.ApplyResources(this.NowPlayingLabel, "NowPlayingLabel");
+			this.NowPlayingLabel.BackColor = System.Drawing.SystemColors.ControlLight;
 			this.NowPlayingLabel.Name = "NowPlayingLabel";
 			// 
 			// NowPlayingTitle
@@ -426,11 +431,6 @@ namespace Alexandria.Client
 			// TrackFormatColumn
 			// 
 			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
-			// 
-			// toolManagerToolStripMenuItem
-			// 
-			this.toolManagerToolStripMenuItem.Name = "toolManagerToolStripMenuItem";
-			resources.ApplyResources(this.toolManagerToolStripMenuItem, "toolManagerToolStripMenuItem");
 			// 
 			// MainForm
 			// 
