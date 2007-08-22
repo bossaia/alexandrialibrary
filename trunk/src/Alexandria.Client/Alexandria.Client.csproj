@@ -45,6 +45,17 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CompactDiscTrackSource.cs" />
+    <Compile Include="Controllers\ITrackSource.cs" />
+    <Compile Include="Controllers\PlaybackController.cs" />
+    <Compile Include="Controllers\PlaybackEventArgs.cs" />
+    <Compile Include="Controllers\PluginController.cs" />
+    <Compile Include="Controllers\PluginInfo.cs" />
+    <Compile Include="Controllers\QueueController.cs" />
+    <Compile Include="Controllers\QueueEventArgs.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\ToolController.cs" />
+    <Compile Include="Controllers\VolumeEventArgs.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1116,10 +1127,6 @@
     <ProjectReference Include="..\Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj">
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Controllers\Alexandria.Controllers.csproj">
-      <Project>{879B598E-DB14-4C02-9C58-0D5769CBE546}</Project>
-      <Name>Alexandria.Controllers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Db4o\Alexandria.Db4o.csproj">
       <Project>{B08B54A1-29EE-4321-B02C-87562C4B75D2}</Project>

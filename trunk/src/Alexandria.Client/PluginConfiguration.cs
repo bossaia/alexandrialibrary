@@ -33,7 +33,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-using Alexandria.Controllers;
+using Alexandria.Client.Controllers;
 
 namespace Alexandria.Client
 {
