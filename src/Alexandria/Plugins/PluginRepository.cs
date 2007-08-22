@@ -62,6 +62,8 @@ namespace Alexandria.Plugins
 				try
 				{
 					Assembly assembly = Assembly.LoadFrom(file.FullName);
+					
+					IPlugin plugin = null;
 					//bool enabled = false;
 					
 					string configName = file.FullName + ".config";
@@ -79,7 +81,13 @@ namespace Alexandria.Plugins
 								}
 								if (type.GetInterface("IPlugin") != null)
 								{
-								
+									ConstructorInfo ctor = type.GetConstructor(new Type[]{});
+									if (ctor != null)
+									{
+										plugin = (IPlugin)ctor.Invoke(null);
+										if (plugin != null)
+											plugins.Add(plugin.Id, plugin);
+									}
 								}
 								else if (type.GetInterface("ITool") != null)
 								{

@@ -37,11 +37,12 @@ namespace Alexandria.Plugins
 		public BasePlugin(Guid id)
 		{
 			this.id = id;
-			//this.name = name;
-			//this.description = description;
-			//this.version = version;
 			this.assembly = Assembly.GetCallingAssembly();
 			
+			//TODO: get this from the assembly's config file
+			this.name = string.Empty;
+			this.description = string.Empty;
+			this.version = default(Version);
 		}
 		#endregion
 		
