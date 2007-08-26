@@ -593,6 +593,18 @@ namespace Alexandria.Client
 		}
 		#endregion
 		
-		#endregion		
+		#endregion
+		
+		#region
+		public void ClearQueueItems()
+		{
+			QueueListView.Items.Clear();
+		}
+		
+		public void AddQueueItem(ListViewItem item)
+		{
+			QueueListView.Items.Add(item);
+		}
+		#endregion
 	}
 }

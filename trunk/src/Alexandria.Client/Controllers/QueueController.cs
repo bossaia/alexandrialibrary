@@ -261,7 +261,6 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadTrack(IAudioTrack track)
 		{
-			/*
 			string[] data = new string[8];
 			data[0] = track.TrackNumber.ToString();
 			data[1] = track.Name;
@@ -272,13 +271,12 @@ namespace Alexandria.Client.Controllers
 			data[6] = track.Path.LocalPath;
 			data[7] = track.Format.ToLowerInvariant();
 
-			ListViewItem item = new ListViewItem(data);
-			item.Tag = track;
+			//ListViewItem item = new ListViewItem(data);
+			//item.Tag = track;
 			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
 			//item.Tag = track.MetadataIdentifiers[0];
 
-			QueueListView.Items.Add(item);
-			*/
+			//QueueListView.Items.Add(item);
 		}
 		
 		public string CleanupFileName(string fileName)
@@ -382,10 +380,10 @@ namespace Alexandria.Client.Controllers
 					string[] formats = format.Split(',');
 					foreach (string subFormat in formats)
 						if (path.EndsWith(subFormat, StringComparison.InvariantCultureIgnoreCase)) return true;
+						
 					return false;
 				}
-				else
-					return path.EndsWith(format, StringComparison.InvariantCultureIgnoreCase);
+				else return path.EndsWith(format, StringComparison.InvariantCultureIgnoreCase);
 			}
 			return false;
 		}
