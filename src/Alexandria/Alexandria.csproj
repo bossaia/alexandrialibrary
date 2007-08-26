@@ -48,6 +48,9 @@
     <Compile Include="Catalog\ICatalogFile.cs" />
     <Compile Include="Catalog\ICatalogItem.cs" />
     <Compile Include="Catalog\IUser.cs" />
+    <Compile Include="IController.cs" />
+    <Compile Include="IMessage.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Media\BaseMediaFormat.cs" />
     <Compile Include="Media\BitRateType.cs" />
     <Compile Include="Media\CompressionType.cs" />
