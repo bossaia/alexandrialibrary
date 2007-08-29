@@ -33,7 +33,5 @@ namespace Alexandria
 	public interface IMessage
 	{
 		string MessageType { get; }
-		object Data { get; }
-		T GetData<T>();
 	}
 }

@@ -32,7 +32,17 @@ namespace Alexandria
 {
 	public interface IController
 	{
-		void ReceiveMessage(IMessage message);
-		IList<IController> ChildControllers { get; }
+		IModel Model { get; }
+		IView View { get; }
+		IController Parent { get; }
+		IList<IController> Children { get; }
+		void ReceiveMessage(object sender, IMessage message);
+		void ReceiveAsync(IAsyncResult result);
+	}
+	
+	public interface IController<M, V> : IController where M: IModel where V: IView
+	{
+		new M Model { get; }
+		new V View { get; }	
 	}
 }

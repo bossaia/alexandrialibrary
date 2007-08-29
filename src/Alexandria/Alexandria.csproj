@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlexandriaException.cs" />
+    <Compile Include="BaseController.cs" />
     <Compile Include="Catalog\BaseCatalog.cs" />
     <Compile Include="Catalog\BaseUser.cs" />
     <Compile Include="Catalog\ICatalog.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Catalog\IUser.cs" />
     <Compile Include="IController.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IRequest.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Media\BaseMediaFormat.cs" />
     <Compile Include="Media\BitRateType.cs" />
@@ -84,6 +87,8 @@
     <Compile Include="Metadata\IAudioTrackFactory.cs" />
     <Compile Include="Metadata\MetadataIdentifier.cs" />
     <Compile Include="Metadata\ProxyAudioTrack.cs" />
+    <Compile Include="ModelChangedEventArgs.cs" />
+    <Compile Include="ModelChangingEventArgs.cs" />
     <Compile Include="Persistence\FactoryMap.cs" />
     <Compile Include="Persistence\FieldAttribute.cs" />
     <Compile Include="Persistence\FieldCascades.cs" />
