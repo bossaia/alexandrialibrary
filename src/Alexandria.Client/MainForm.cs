@@ -595,7 +595,7 @@ namespace Alexandria.Client
 		
 		#endregion
 		
-		#region
+		#region Public Methods
 		public void ClearQueueItems()
 		{
 			QueueListView.Items.Clear();
