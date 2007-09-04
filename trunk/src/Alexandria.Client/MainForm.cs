@@ -59,6 +59,12 @@ namespace Alexandria.Client
 				this.PreviousButton.Click += new EventHandler(PreviousButton_Click);
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
 				this.QueueListView.SelectedIndexChanged += new EventHandler(QueueListView_SelectedIndexChanged);
+				
+				queueController.QueueListView = this.QueueListView;
+				queueController.PlaybackController = playbackController;
+				
+				playbackController.PlaybackTrackBar = PlaybackTrackBar;
+				playbackController.PlayPauseButton = PlayPauseButton;
 			}
 			catch (Exception ex)
 			{
@@ -86,7 +92,7 @@ namespace Alexandria.Client
 		private bool seekIsPending;
 		
 		//private ListViewItem selectedItem;
-		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
+		//private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		//private string dbPath;
 		private readonly string dbDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + System.IO.Path.DirectorySeparatorChar);
 		#endregion
@@ -433,31 +439,6 @@ namespace Alexandria.Client
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
 			playbackController.RefreshPlaybackStates();
-			
-			if (!seekIsPending)
-			{
-				PlaybackTrackBar.Value = (int)playbackController.GetPosition();
-			}
-			
-			/*
-			if (!isSeeking)
-			{
-				if (controller != null && AudioStream != null)
-				{
-					int value = Convert.ToInt32(AudioStream.Elapsed.TotalSeconds);
-					if (value <= PlaybackTrackBar.Maximum)
-						PlaybackTrackBar.Value = value;
-					else PlaybackTrackBar.Value = PlaybackTrackBar.Maximum;
-					
-					UpdateStatus();
-				}
-				else
-				{
-					PlaybackTrackBar.Enabled = false;
-					VolumeTrackBar.Enabled = false;
-				}
-			}
-			*/
 		}
 		
 		private void OnSelectedTrackStart(object sender, EventArgs e)
@@ -493,20 +474,13 @@ namespace Alexandria.Client
 
 		private void PlaybackTrackBar_MouseDown(object sender, MouseEventArgs e)
 		{
-			seekIsPending = true;
+			playbackController.IsSeekPending = true;
 		}
 
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
-			seekIsPending = false;
+			playbackController.IsSeekPending = false;
 			playbackController.Seek(PlaybackTrackBar.Value);
-			//if (AudioStream != null)
-			//{
-				//if (AudioStream.CanSetElapsed)
-				//{
-					//AudioStream.Elapsed = new TimeSpan(0, 0, PlaybackTrackBar.Value);
-				//}
-			//}
 		}
 
 		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
@@ -593,18 +567,6 @@ namespace Alexandria.Client
 		}
 		#endregion
 		
-		#endregion
-		
-		#region Public Methods
-		public void ClearQueueItems()
-		{
-			QueueListView.Items.Clear();
-		}
-		
-		public void AddQueueItem(ListViewItem item)
-		{
-			QueueListView.Items.Add(item);
-		}
-		#endregion
+		#endregion		
 	}
 }
