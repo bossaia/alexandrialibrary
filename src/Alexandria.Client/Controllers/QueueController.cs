@@ -29,7 +29,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
+using System.Windows.Forms;
+
 using Alexandria;
 using Alexandria.Media;
 using Alexandria.Media.IO;
@@ -69,7 +70,7 @@ namespace Alexandria.Client.Controllers
 		#region Private Fields
 		private IAudioTrack selectedTrack;
 		private IAudioTrack submittedTrack;
-		private IAudioStream audioStream;
+		//private IAudioStream audioStream;
 		private IList<IAudioTrack> tracks;
 
 		MusicLocker locker = new MusicLocker();
@@ -88,6 +89,12 @@ namespace Alexandria.Client.Controllers
 		//private IPersistenceMechanism mechanism;
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 		//private Alexandria.
+		private ListView queueListView;
+		
+		private ListViewItem selectedItem;
+		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
+		
+		private PlaybackController playbackController;
 		#endregion
 
 		#region Private Methods
@@ -116,27 +123,39 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Public Properties
+		public ListView QueueListView
+		{
+			get { return queueListView; }
+			set { queueListView = value; }
+		}
+		
+		public PlaybackController PlaybackController
+		{
+			get { return playbackController; }
+			set { playbackController = value; }
+		}
+		
 		public IList<IAudioTrack> Tracks
 		{
 			get { return tracks; }
 		}
 
-		public IAudioStream AudioStream
-		{
-			get { return audioStream; }
-		}
+		//public IAudioStream AudioStream
+		//{
+			//get { return audioStream; }
+		//}
 
-		public bool IsMuted
-		{
-			get
-			{
-				if (audioStream != null)
-				{
-					return audioStream.IsMuted;
-				}
-				else return false;
-			}
-		}
+		//public bool IsMuted
+		//{
+			//get
+			//{
+				//if (audioStream != null)
+				//{
+					//return audioStream.IsMuted;
+				//}
+				//else return false;
+			//}
+		//}
 
 		public EventHandler<EventArgs> OnTrackStart
 		{
@@ -150,20 +169,20 @@ namespace Alexandria.Client.Controllers
 			set { onTrackEnd = value; }
 		}
 
-		public float Volume
-		{
-			get
-			{
-				if (audioStream != null)
-					return audioStream.Volume;
-				else return -1;
-			}
-			set
-			{
-				if (audioStream != null)
-					audioStream.Volume = value;
-			}
-		}
+		//public float Volume
+		//{
+			//get
+			//{
+				//if (audioStream != null)
+					//return audioStream.Volume;
+				//else return -1;
+			//}
+			//set
+			//{
+				//if (audioStream != null)
+					//audioStream.Volume = value;
+			//}
+		//}
 
 		public IAudioTrack SelectedTrack
 		{
@@ -199,7 +218,8 @@ namespace Alexandria.Client.Controllers
 		
 		public void SelectTrack()
 		{
-			/*
+			IAudioStream audioStream = null;
+			
 			if (QueueListView.SelectedItems.Count > 0)
 			{
 				//# Name Artist Album Length Date Location Format
@@ -256,7 +276,8 @@ namespace Alexandria.Client.Controllers
 					else throw new ApplicationException("Could not load selected track: Id was undefined");
 				}
 			}
-			*/
+			
+			playbackController.SetCurrentAudioStream(audioStream);
 		}
 		
 		public void LoadTrack(IAudioTrack track)
@@ -271,12 +292,9 @@ namespace Alexandria.Client.Controllers
 			data[6] = track.Path.LocalPath;
 			data[7] = track.Format.ToLowerInvariant();
 
-			//ListViewItem item = new ListViewItem(data);
-			//item.Tag = track;
-			//if (track.MetadataIdentifiers != null && track.MetadataIdentifiers.Count > 0)
-			//item.Tag = track.MetadataIdentifiers[0];
-
-			//QueueListView.Items.Add(item);
+			ListViewItem item = new ListViewItem(data);
+			item.Tag = track;
+			QueueListView.Items.Add(item);
 		}
 		
 		public string CleanupFileName(string fileName)
@@ -413,6 +431,7 @@ namespace Alexandria.Client.Controllers
 
 		public void Play()
 		{
+			/*
 			if (audioStream != null)
 			{
 				if (audioStream.PlaybackState != PlaybackState.Playing)
@@ -455,10 +474,12 @@ namespace Alexandria.Client.Controllers
 				if (audioStream != null)
 					Play();
 			}
+			*/
 		}
 
 		public void Stop()
 		{
+			/*
 			if (audioStream != null)
 			{
 				isPlaying = false;
@@ -470,6 +491,7 @@ namespace Alexandria.Client.Controllers
 					audioStream = null;
 				}
 			}
+			*/
 		}
 
 		public void Previous()
@@ -518,6 +540,7 @@ namespace Alexandria.Client.Controllers
 			*/
 		}
 
+		/*
 		public void UpdateStatus()
 		{
 			if (audioStream != null && isPlaying)
@@ -538,6 +561,7 @@ namespace Alexandria.Client.Controllers
 				audioStream.IsMuted = !audioStream.IsMuted;
 			}
 		}
+		*/
 		#endregion
 	}
 }
