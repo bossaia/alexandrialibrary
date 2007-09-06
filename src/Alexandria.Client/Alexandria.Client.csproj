@@ -45,7 +45,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\CompactDiscTrackSource.cs" />
+    <Compile Include="Controllers\TrackSource.cs" />
     <Compile Include="Controllers\ITrackSource.cs" />
     <Compile Include="Controllers\PlaybackController.cs" />
     <Compile Include="Controllers\PlaybackEventArgs.cs" />

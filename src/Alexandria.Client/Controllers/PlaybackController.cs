@@ -35,7 +35,7 @@ using Alexandria.Fmod;
 
 namespace Alexandria.Client.Controllers
 {
-	public class PlaybackController
+	public class PlaybackController : IDisposable
 	{
 		#region Constructors
 		public PlaybackController()
@@ -44,6 +44,8 @@ namespace Alexandria.Client.Controllers
 		#endregion
 		
 		#region Private Fields
+		private bool disposed;
+		
 		private IAudioStream currentAudioStream;
 		private EventHandler<PlaybackEventArgs> onBufferStateChanged;
 		private EventHandler<PlaybackEventArgs> onNetworkStateChanged;
@@ -137,6 +139,11 @@ namespace Alexandria.Client.Controllers
 			get { return onVolumeChanged; }
 			set { onVolumeChanged = value; }
 		}
+		
+		public PlaybackState PlaybackState
+		{
+			get { return (currentAudioStream != null) ? currentAudioStream.PlaybackState : PlaybackState.None; }
+		}
 		#endregion
 		
 		#region Public Methods
@@ -173,6 +180,14 @@ namespace Alexandria.Client.Controllers
 		
 		public void SetCurrentAudioStream(IAudioStream currentAudioStream)
 		{
+			if (this.currentAudioStream != null)
+			{
+				if (this.currentAudioStream.PlaybackState == PlaybackState.Paused || this.currentAudioStream.PlaybackState == PlaybackState.Playing)
+					this.currentAudioStream.Stop();
+				this.currentAudioStream.Dispose();
+				this.currentAudioStream = null;
+			}
+		
 			this.currentAudioStream = currentAudioStream;
 			if (currentAudioStream != null)
 			{
@@ -184,7 +199,7 @@ namespace Alexandria.Client.Controllers
 		public void Play()
 		{
 			if (currentAudioStream != null)
-			{
+			{				
 				currentAudioStream.Play();
 				RefreshPlaybackStates();
 			}
@@ -288,6 +303,35 @@ namespace Alexandria.Client.Controllers
 			if (currentAudioStream != null)
 				return currentAudioStream.Position;
 			else return 0;
+		}
+		#endregion
+
+		#region IDisposable Members
+		~PlaybackController()
+		{
+			Dispose(false);
+		}
+
+		protected void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+					if (currentAudioStream != null)
+					{
+						currentAudioStream.Dispose();
+						currentAudioStream = null;
+					}
+				}
+			}
+			disposed = true;
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 		#endregion
 	}

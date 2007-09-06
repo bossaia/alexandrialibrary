@@ -398,6 +398,7 @@ namespace Alexandria.Client
 			this.QueueListView.UseCompatibleStateImageBehavior = false;
 			this.QueueListView.View = System.Windows.Forms.View.Details;
 			this.QueueListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragEnter);
+			this.QueueListView.ItemActivate += new System.EventHandler(this.QueueListView_ItemActivate);
 			this.QueueListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragDrop);
 			// 
 			// TrackNumberColumn
