@@ -265,16 +265,8 @@ namespace Alexandria.Client
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
+			queueController.SelectTrack();
 			playbackController.TogglePlay();
-			/*
-			if (controller != null && AudioStream != null)
-			{
-				Play();
-				if (AudioStream.PlaybackState == PlaybackState.Playing)
-					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_pause_blue;
-				else PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
-			}
-			*/
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
@@ -322,46 +314,16 @@ namespace Alexandria.Client
 
 		private void PreviousButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
 			queueController.Previous();
-		
-			/*
-			if (controller != null)
-			{
-				bool isPlaying = (AudioStream != null && AudioStream.PlaybackState == PlaybackState.Playing);
-				Previous();
-				if (isPlaying)
-					PlayPauseButton_Click(sender, EventArgs.Empty);
-			}
-			*/
 		}
 
 		private void NextButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
 			queueController.Next();
-			
-			/*
-			if (controller != null)
-			{
-				bool isPlaying = (AudioStream != null && AudioStream.PlaybackState == PlaybackState.Playing);
-				Next();
-				if (isPlaying)
-					PlayPauseButton_Click(sender, EventArgs.Empty);
-			}
-			*/
 		}
 
 		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			queueController.SelectTrack();
-		
-			/*
-			if (controller != null && QueueListView.SelectedItems.Count > 0)
-			{
-				SelectTrack();
-			}
-			*/
 		}
 
 		private void notifyIcon_Click(object sender, EventArgs e)
@@ -519,7 +481,7 @@ namespace Alexandria.Client
 			
 			if (e.Data != null)
 			{
-				object source = e.Data.GetData(typeof(CompactDiscTrackSource));
+				object source = e.Data.GetData(typeof(TrackSource));
 				if (source != null)
 					e.Effect = DragDropEffects.Copy;
 			}
@@ -527,16 +489,7 @@ namespace Alexandria.Client
 
 		private void QueueListView_DragDrop(object sender, DragEventArgs e)
 		{
-			if (e.Data != null)
-			{
-				object data = e.Data.GetData(typeof(CompactDiscTrackSource));
-				if (data != null)
-				{
-					//CompactDiscTrackSource trackSource = (CompactDiscTrackSource)data;
-					//IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
-					//LoadTracks(tracks);
-				}
-			}
+			queueController.LoadData(e.Data);
 		}
 
 		private void ToolBoxContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -545,6 +498,12 @@ namespace Alexandria.Client
 			{
 				InitializeToolbox();
 			}
+		}
+
+		private void QueueListView_ItemActivate(object sender, EventArgs e)
+		{
+			queueController.SelectTrack();
+			playbackController.Play();
 		}
 		#endregion
 		
@@ -564,6 +523,19 @@ namespace Alexandria.Client
 			
 			queueController.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
 			queueController.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+		}
+		#endregion
+
+		#region OnClosing
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			if (playbackController != null)
+			{
+				playbackController.Dispose();
+				playbackController = null;
+			}
+			
+			base.OnClosing(e);
 		}
 		#endregion
 		

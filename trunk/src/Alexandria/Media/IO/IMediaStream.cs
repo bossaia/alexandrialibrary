@@ -32,7 +32,7 @@ using System.Text;
 
 namespace Alexandria.Media.IO
 {
-	public interface IMediaStream
+	public interface IMediaStream : IDisposable
 	{
 		//Stream Members
 		bool CanRead { get; }

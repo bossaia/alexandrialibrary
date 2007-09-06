@@ -80,7 +80,7 @@ namespace Alexandria.Client.Controllers
 		private EventHandler<EventArgs> onTrackStart;
 		private EventHandler<EventArgs> onTrackEnd;
 
-		private bool isPlaying;
+		//private bool isPlaying;
 		
 		private EventHandler<QueueEventArgs> onSelectedTrackChanged;
 
@@ -272,12 +272,12 @@ namespace Alexandria.Client.Controllers
 								selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
 							}
 						}
+						
+						playbackController.SetCurrentAudioStream(audioStream);
 					}
 					else throw new ApplicationException("Could not load selected track: Id was undefined");
 				}
 			}
-			
-			playbackController.SetCurrentAudioStream(audioStream);
 		}
 		
 		public void LoadTrack(IAudioTrack track)
@@ -429,6 +429,20 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 
+		public void LoadData(IDataObject data)
+		{
+			if (data != null)
+			{
+				object sourceData = data.GetData(typeof(TrackSource));
+				if (sourceData != null)
+				{
+					TrackSource trackSource = (TrackSource)data;
+					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
+					LoadTracks(tracks);
+				}
+			}
+		}
+
 		public void Play()
 		{
 			/*
@@ -477,67 +491,65 @@ namespace Alexandria.Client.Controllers
 			*/
 		}
 
-		public void Stop()
-		{
-			/*
-			if (audioStream != null)
-			{
-				isPlaying = false;
-				audioStream.Stop();
-				if (audioStream is IDisposable)
-				{
-					IDisposable disposable = audioStream as IDisposable;
-					disposable.Dispose();
-					audioStream = null;
-				}
-			}
-			*/
-		}
 
 		public void Previous()
 		{
-			if (isPlaying)
-				Stop();
-
-			//TODO: implement this logic
-			//SelectedTrack = ChangeSelectedTrack(-1); //NOTE: use this to support "shuffle"
-			//if (OnSelectedTrackChanged != null)
-				//OnSelectedTrackChanged(this, new QueueEventArgs());
-
-			/*
-			if (QueueListView.SelectedItems[0] != null)
+			if (playbackController != null)
 			{
-				int previousIndex = QueueListView.Items.Count - 1;
-				if (QueueListView.SelectedIndices[0] > 0)
-					previousIndex = QueueListView.SelectedIndices[0] - 1;
+				bool isPlaying = (playbackController.PlaybackState == PlaybackState.Playing);
+				if (isPlaying)
+					playbackController.Stop();
 
-				QueueListView.SelectedItems[0].Selected = false;
-				QueueListView.Items[previousIndex].Selected = true;
+				//TODO: implement this logic
+				//SelectedTrack = ChangeSelectedTrack(-1); //NOTE: use this to support "shuffle"
+				//if (OnSelectedTrackChanged != null)
+					//OnSelectedTrackChanged(this, new QueueEventArgs());
+
+				if (QueueListView.SelectedItems[0] != null)
+				{
+					int previousIndex = QueueListView.Items.Count - 1;
+					if (QueueListView.SelectedIndices[0] > 0)
+						previousIndex = QueueListView.SelectedIndices[0] - 1;
+
+					QueueListView.SelectedItems[0].Selected = false;
+					QueueListView.Items[previousIndex].Selected = true;
+				}
+				
+				SelectTrack();
+				
+				if (isPlaying)
+					playbackController.Play();
 			}
-			*/
 		}
 
 		public void Next()
 		{
-			if (isPlaying)
-				Stop();
-
-			//TODO: implement this logic
-			//SelectedTrack = ChangeSelectedTrack(1);
-			//if (OnSelectedTrackChanged != null)
-			//OnSelectedTrackChanged(this, new QueueEventArgs());
-
-			/*
-			if (QueueListView.SelectedItems[0] != null)
+			if (playbackController != null)
 			{
-				int nextIndex = 0;
-				if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
-					nextIndex = QueueListView.SelectedIndices[0] + 1;
+				bool isPlaying = (playbackController.PlaybackState == PlaybackState.Playing);
+				if (isPlaying)
+					playbackController.Stop();
 
-				QueueListView.SelectedItems[0].Selected = false;
-				QueueListView.Items[nextIndex].Selected = true;
+				//TODO: implement this logic
+				//SelectedTrack = ChangeSelectedTrack(1);
+				//if (OnSelectedTrackChanged != null)
+				//OnSelectedTrackChanged(this, new QueueEventArgs());
+
+				if (QueueListView.SelectedItems[0] != null)
+				{
+					int nextIndex = 0;
+					if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
+						nextIndex = QueueListView.SelectedIndices[0] + 1;
+
+					QueueListView.SelectedItems[0].Selected = false;
+					QueueListView.Items[nextIndex].Selected = true;
+				}
+
+				SelectTrack();
+
+				if (isPlaying)
+					playbackController.Play();
 			}
-			*/
 		}
 
 		/*
