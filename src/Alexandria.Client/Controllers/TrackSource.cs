@@ -36,6 +36,12 @@ namespace Alexandria.Client.Controllers
 	public class TrackSource : ITrackSource
 	{
 		#region Constructors
+		public TrackSource(string fileName)
+		{
+			this.factory = new MusicBrainz.SimpleAlbumFactory();
+			this.path = new Uri(fileName);
+		}
+		
 		public TrackSource(IAlbumFactory factory, Uri path)
 		{
 			this.factory = factory;

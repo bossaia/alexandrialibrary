@@ -77,12 +77,12 @@ namespace Alexandria.Client.Controllers
 		PlaylistFactory playlistFactory = new PlaylistFactory();
 		TagLibEngine tagLibEngine = new TagLibEngine();
 
-		private EventHandler<EventArgs> onTrackStart;
-		private EventHandler<EventArgs> onTrackEnd;
+		private EventHandler<EventArgs> trackStart;
+		private EventHandler<EventArgs> trackEnd;
 
 		//private bool isPlaying;
 		
-		private EventHandler<QueueEventArgs> onSelectedTrackChanged;
+		private EventHandler<QueueEventArgs> selectedTrackChanged;
 
 		//private IPluginRepository repository;
 		//private IPersistenceBroker broker;
@@ -157,16 +157,16 @@ namespace Alexandria.Client.Controllers
 			//}
 		//}
 
-		public EventHandler<EventArgs> OnTrackStart
+		public EventHandler<EventArgs> TrackStart
 		{
-			get { return onTrackStart; }
-			set { onTrackStart = value; }
+			get { return trackStart; }
+			set { trackStart = value; }
 		}
 
-		public EventHandler<EventArgs> OnTrackEnd
+		public EventHandler<EventArgs> TrackEnd
 		{
-			get { return onTrackEnd; }
-			set { onTrackEnd = value; }
+			get { return trackEnd; }
+			set { trackEnd = value; }
 		}
 
 		//public float Volume
@@ -190,10 +190,10 @@ namespace Alexandria.Client.Controllers
 			set { selectedTrack = value; }
 		}
 		
-		public EventHandler<QueueEventArgs> OnSelectedTrackChanged
+		public EventHandler<QueueEventArgs> SelectedTrackChanged
 		{
-			get { return onSelectedTrackChanged; }
-			set { onSelectedTrackChanged = value; }
+			get { return selectedTrackChanged; }
+			set { selectedTrackChanged = value; }
 		}
 		#endregion
 
@@ -228,12 +228,13 @@ namespace Alexandria.Client.Controllers
 					selectedItem = QueueListView.SelectedItems[0];
 					if (selectedItem.Tag != null)
 					{
+						//TODO: move all of this logic into AudioPlayer
 						selectedTrack = (IAudioTrack)selectedItem.Tag;
 						if (selectedTrack.Format == "cdda")
 						{
 							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
 							audioStream = new Fmod.CompactDiscSound(discPath);
-							audioStream.StreamIndex = selectedTrack.TrackNumber;
+							audioStream.StreamIndex = selectedTrack.TrackNumber-1;
 						}
 						else
 						{
@@ -436,7 +437,7 @@ namespace Alexandria.Client.Controllers
 				object sourceData = data.GetData(typeof(TrackSource));
 				if (sourceData != null)
 				{
-					TrackSource trackSource = (TrackSource)data;
+					TrackSource trackSource = (TrackSource)sourceData;
 					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
 					LoadTracks(tracks);
 				}

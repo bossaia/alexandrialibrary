@@ -63,6 +63,8 @@ namespace Alexandria.Client
 				queueController.QueueListView = this.QueueListView;
 				queueController.PlaybackController = playbackController;
 				
+				playbackController.AudioPlayer.PlayToggles = true;
+				playbackController.AudioPlayer.MuteToggles = true;
 				playbackController.PlaybackTrackBar = PlaybackTrackBar;
 				playbackController.PlayPauseButton = PlayPauseButton;
 			}
@@ -231,7 +233,7 @@ namespace Alexandria.Client
 					
 					ListViewItem item = new ListViewItem(drive.Name, imageIndex);
 					item.ToolTipText = toolTipText;
-					//item.Tag = new CompactDiscTrackSource(albumFactory, new Uri(drive.Name));
+					item.Tag = new TrackSource(drive.Name);
 					ToolBoxListView.Items.Add(item);
 				}
 			}
@@ -422,6 +424,18 @@ namespace Alexandria.Client
 			*/
 		}
 		
+		private void OnCurrentAudioStreamEnded(object sender, EventArgs e)
+		{
+			//This is needed to avoid a momentary flicker
+			PlaybackTrackBar.SuspendLayout();
+			
+			playbackController.AudioPlayer.Stop();
+			queueController.Next();
+			playbackController.AudioPlayer.Play();
+			
+			PlaybackTrackBar.ResumeLayout();
+		}
+		
 		private void OnSelectedTrackEnd(object sender, EventArgs e)
 		{
 			queueController.Next();
@@ -520,8 +534,10 @@ namespace Alexandria.Client
 			
 			LoadDefaultUser();
 			
-			queueController.OnTrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			queueController.OnTrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+			playbackController.AudioPlayer.CurrentAudioStreamEnded += new EventHandler<EventArgs>(OnCurrentAudioStreamEnded);
+			
+			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 
