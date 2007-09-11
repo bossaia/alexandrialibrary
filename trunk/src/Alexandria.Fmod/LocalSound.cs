@@ -50,11 +50,11 @@ namespace Alexandria.Fmod
 		private BufferState bufferState = BufferState.None;
 		private PlaybackState playbackState = PlaybackState.None;
 		private SeekState seekState = SeekState.None;
-		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onSeekStateChanged;
-		private EventHandler<AudioStateChangedEventArgs> onVolumeChanged;
+		private EventHandler<MediaStateChangedEventArgs> bufferStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> networkStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> playbackStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> seekStateChanged;
+		private EventHandler<AudioStateChangedEventArgs> volumeChanged;
 		#endregion
 		
 		#region IAudioStream Members
@@ -64,8 +64,8 @@ namespace Alexandria.Fmod
 			set {
 				if (sound.Channel.Mute != value) {
 					sound.Channel.Mute = value;
-					if (OnVolumeChanged != null)
-						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+					if (VolumeChanged != null)
+						VolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
 				}
 			}
 		}
@@ -76,16 +76,16 @@ namespace Alexandria.Fmod
 			set {
 				if (sound.Channel.Volume != value) {
 					sound.Channel.Volume = value;
-					if (OnVolumeChanged != null)
-						OnVolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
+					if (VolumeChanged != null)
+						VolumeChanged(this, new AudioStateChangedEventArgs(Volume, IsMuted));
 				}
 			}
 		}
 
-		public EventHandler<AudioStateChangedEventArgs> OnVolumeChanged
+		public EventHandler<AudioStateChangedEventArgs> VolumeChanged
 		{
-			get { return onVolumeChanged; }
-			set { onVolumeChanged = value; }
+			get { return volumeChanged; }
+			set { volumeChanged = value; }
 		}
 		#endregion
 
@@ -166,28 +166,28 @@ namespace Alexandria.Fmod
 			get { return NetworkState.None; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
+		public EventHandler<MediaStateChangedEventArgs> BufferStateChanged
 		{
-			get { return onBufferStateChanged; }
-			set { onBufferStateChanged = value; }
+			get { return bufferStateChanged; }
+			set { bufferStateChanged = value; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged
+		public EventHandler<MediaStateChangedEventArgs> NetworkStateChanged
 		{
-			get { return onNetworkStateChanged; }
-			set { onNetworkStateChanged = value; }
+			get { return networkStateChanged; }
+			set { networkStateChanged = value; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged
+		public EventHandler<MediaStateChangedEventArgs> PlaybackStateChanged
 		{
-			get { return onPlaybackStateChanged; }
-			set { onPlaybackStateChanged = value; }
+			get { return playbackStateChanged; }
+			set { playbackStateChanged = value; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged
+		public EventHandler<MediaStateChangedEventArgs> SeekStateChanged
 		{
-			get { return onSeekStateChanged; }
-			set { onSeekStateChanged = value; }
+			get { return seekStateChanged; }
+			set { seekStateChanged = value; }
 		}
 
 		public string Path
@@ -264,8 +264,8 @@ namespace Alexandria.Fmod
 			{
 				//TODO: call before changed event handler here
 				bufferState = nextBufferState;
-				if (OnBufferStateChanged != null)
-					OnBufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
+				if (BufferStateChanged != null)
+					BufferStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
 		}
 
@@ -292,8 +292,8 @@ namespace Alexandria.Fmod
 			if (playbackState != nextPlaybackState)
 			{
 				playbackState = nextPlaybackState;
-				if (OnPlaybackStateChanged != null)
-					OnPlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
+				if (PlaybackStateChanged != null)
+					PlaybackStateChanged(this, new MediaStateChangedEventArgs(BufferState, NetworkState, PlaybackState, SeekState));
 			}
 		}
 		

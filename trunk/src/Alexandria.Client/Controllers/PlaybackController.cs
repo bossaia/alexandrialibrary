@@ -40,54 +40,56 @@ namespace Alexandria.Client.Controllers
 		#region Constructors
 		public PlaybackController()
 		{
+			audioPlayer = new AudioPlayer();
+			audioPlayer.CurrentAudioStreamChanged += new EventHandler<EventArgs>(OnCurrentAudioStreamChanged);
+		}
+		#endregion
+
+		#region IDisposable Members
+		~PlaybackController()
+		{
+			Dispose(false);
+		}
+
+		protected void Dispose(bool disposing)
+		{
+			if (!disposed)
+			{
+				if (disposing)
+				{
+					if (audioPlayer != null)
+					{
+						audioPlayer.Dispose();
+						audioPlayer = null;
+					}
+				}
+			}
+			disposed = true;
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
 		}
 		#endregion
 		
 		#region Private Fields
 		private bool disposed;
 		
-		private IAudioStream currentAudioStream;
-		private EventHandler<PlaybackEventArgs> onBufferStateChanged;
-		private EventHandler<PlaybackEventArgs> onNetworkStateChanged;
-		private EventHandler<PlaybackEventArgs> onPlaybackStateChanged;
-		private EventHandler<PlaybackEventArgs> onSeekStateChanged;
-		private EventHandler<VolumeEventArgs> onVolumeChanged;
-		private IAudioStreamFactory audioStreamFactory = new Fmod.AudioStreamFactory();
-		
-		private bool isSeekPending;
 		private TrackBar playbackTrackBar;
 		private Button playPauseButton;
+		private IAudioPlayer audioPlayer;
 		#endregion
-		
-		#region Private Methods
-		private void CurrentAudioStreamBufferStateChanged(object sender, MediaStateChangedEventArgs args)
-		{
-			if (currentAudioStream != null && OnBufferStateChanged != null)
-				OnBufferStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState, args.SeekState));
-		}
 
-		private void CurrentAudioStreamNetworkStateChanged(object sender, MediaStateChangedEventArgs args)
+		#region Private Event Methods
+		private void OnCurrentAudioStreamChanged(object sender, EventArgs e)
 		{
-			if (currentAudioStream != null && OnNetworkStateChanged != null)
-				OnNetworkStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState, args.SeekState));
-		}
-
-		private void CurrentAudioStreamPlaybackStateChanged(object sender, MediaStateChangedEventArgs args)
-		{
-			if (currentAudioStream != null && OnPlaybackStateChanged != null)
-				OnPlaybackStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState, args.SeekState));
-		}
-		
-		private void CurrentAudioStreamSeekStateChanged(object sender, MediaStateChangedEventArgs args)
-		{
-			if (currentAudioStream != null && OnSeekStateChanged != null)
-				OnSeekStateChanged(currentAudioStream, new PlaybackEventArgs(args.BufferState, args.NetworkState, args.PlaybackState, args.SeekState));
-		}
-		
-		private void CurrentAudioStreamVolumeChanged(object sender, AudioStateChangedEventArgs args)
-		{
-			if (currentAudioStream != null && OnVolumeChanged != null)
-				OnVolumeChanged(currentAudioStream, new VolumeEventArgs(args.Volume, args.IsMuted));
+			if (audioPlayer != null && audioPlayer.CurrentAudioStream != null)
+			{
+				playbackTrackBar.Minimum = 0;
+				playbackTrackBar.Maximum = Convert.ToInt32(audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds);
+			}
 		}
 		#endregion
 		
@@ -104,235 +106,46 @@ namespace Alexandria.Client.Controllers
 			set { playPauseButton = value; }
 		}
 		
-		public bool IsSeekPending
+		public IAudioPlayer AudioPlayer
 		{
-			get { return isSeekPending; }
-			set { isSeekPending = value; }
-		}
-		
-		public EventHandler<PlaybackEventArgs> OnBufferStateChanged
-		{
-			get { return onBufferStateChanged; }
-			set { onBufferStateChanged = value; }
-		}
-		
-		public EventHandler<PlaybackEventArgs> OnNetworkStateChanged
-		{
-			get { return onNetworkStateChanged; }
-			set { onNetworkStateChanged = value; }
-		}
-		
-		public EventHandler<PlaybackEventArgs> OnPlaybackStateChanged
-		{
-			get { return onPlaybackStateChanged; }
-			set { onPlaybackStateChanged = value; }
-		}
-		
-		public EventHandler<PlaybackEventArgs> OnSeekStateChanged
-		{
-			get { return onSeekStateChanged; }
-			set { onSeekStateChanged = value; }
-		}
-		
-		public EventHandler<VolumeEventArgs> OnVolumeChanged
-		{
-			get { return onVolumeChanged; }
-			set { onVolumeChanged = value; }
-		}
-		
-		public PlaybackState PlaybackState
-		{
-			get { return (currentAudioStream != null) ? currentAudioStream.PlaybackState : PlaybackState.None; }
+			get { return audioPlayer; }
 		}
 		#endregion
-		
+				
 		#region Public Methods
+		public void LoadAudioStream(Uri path)
+		{
+			if (audioPlayer != null)
+				audioPlayer.LoadAudioStream(path);
+		}
+		
+		public void LoadAudioStream(IAudioStream audioStream)
+		{
+			if (audioPlayer != null)
+				audioPlayer.LoadAudioStream(audioStream);
+		}
+		
 		public void RefreshPlaybackStates()
 		{
-			if (currentAudioStream != null)
+			if (audioPlayer != null && audioPlayer.CurrentAudioStream != null)
 			{
-				currentAudioStream.RefreshBufferState();
-				currentAudioStream.RefreshNetworkState();
-				currentAudioStream.RefreshPlaybackState();
-				currentAudioStream.RefreshSeekState();
-				
-				if (currentAudioStream.PlaybackState == PlaybackState.Playing && !IsSeekPending)
+				audioPlayer.RefreshPlayerStates();
+				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing && !audioPlayer.SeekIsPending)
 				{
-					int value = (int)currentAudioStream.Elapsed.TotalMilliseconds;
+					int value = (int)audioPlayer.CurrentAudioStream.Elapsed.TotalMilliseconds;
 					playbackTrackBar.Value = value;
 				}
-				
-				if (currentAudioStream.PlaybackState == PlaybackState.Playing)
+
+				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
 				{
 					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_pause_blue;
 				}
 				else
 				{
 					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
-				}	
-			}
-		}
-		
-		//public void LoadAudioFile(Uri path)
-		//{
-			//currentAudioStream = audioStreamFactory.CreateAudioStream(path);
-		//}
-		
-		public void SetCurrentAudioStream(IAudioStream currentAudioStream)
-		{
-			if (this.currentAudioStream != null)
-			{
-				if (this.currentAudioStream.PlaybackState == PlaybackState.Paused || this.currentAudioStream.PlaybackState == PlaybackState.Playing)
-					this.currentAudioStream.Stop();
-				this.currentAudioStream.Dispose();
-				this.currentAudioStream = null;
-			}
-		
-			this.currentAudioStream = currentAudioStream;
-			if (currentAudioStream != null)
-			{
-				playbackTrackBar.Minimum = 0;
-				playbackTrackBar.Maximum = Convert.ToInt32(currentAudioStream.Duration.TotalMilliseconds);
-			}
-		}
-		
-		public void Play()
-		{
-			if (currentAudioStream != null)
-			{				
-				currentAudioStream.Play();
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void Pause()
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.Pause();
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void TogglePlay()
-		{
-			if (currentAudioStream != null)
-			{
-				switch (currentAudioStream.PlaybackState)
-				{
-					case PlaybackState.Error:
-						throw new AlexandriaException("Audio playback error");
-					case PlaybackState.None:
-					case PlaybackState.Stopped:
-						currentAudioStream.Play();
-						break;
-					case PlaybackState.Paused:
-						currentAudioStream.Resume();
-						break;
-					case PlaybackState.Playing:
-						currentAudioStream.Pause();
-						break;
-					default:
-						break;
-				}
-				
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void Stop()
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.Stop();
-				RefreshPlaybackStates();
-				if (currentAudioStream.PlaybackState == PlaybackState.Stopped)
-				{
-					playbackTrackBar.Value = 0;
 				}
 			}
-		}
-		
-		public void Seek(int position)
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.Elapsed = new TimeSpan(0, 0, 0, 0, position);
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void SetVolume(float volume)
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.Volume = volume;
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void Mute()
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.IsMuted = true;
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void Unmute()
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.IsMuted = false;
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public void ToggleMute()
-		{
-			if (currentAudioStream != null)
-			{
-				currentAudioStream.IsMuted = !currentAudioStream.IsMuted;
-				RefreshPlaybackStates();
-			}
-		}
-		
-		public long GetPosition()
-		{
-			if (currentAudioStream != null)
-				return currentAudioStream.Position;
-			else return 0;
-		}
-		#endregion
-
-		#region IDisposable Members
-		~PlaybackController()
-		{
-			Dispose(false);
-		}
-
-		protected void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					if (currentAudioStream != null)
-					{
-						currentAudioStream.Dispose();
-						currentAudioStream = null;
-					}
-				}
-			}
-			disposed = true;
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+		}		
 		#endregion
 	}
 }

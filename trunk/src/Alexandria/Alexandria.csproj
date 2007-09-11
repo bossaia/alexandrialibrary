@@ -60,9 +60,11 @@
     <Compile Include="Media\Conversion\IConversionStrategy.cs" />
     <Compile Include="Media\Conversion\IMediaConverter.cs" />
     <Compile Include="Media\ICodec.cs" />
+    <Compile Include="Media\IO\AudioPlayer.cs" />
     <Compile Include="Media\IO\AudioStateChangedEventArgs.cs" />
     <Compile Include="Media\IO\AudioStream.cs" />
     <Compile Include="Media\IO\BufferState.cs" />
+    <Compile Include="Media\IO\IAudioPlayer.cs" />
     <Compile Include="Media\IO\IAudioStream.cs" />
     <Compile Include="Media\IO\IAudioStreamFactory.cs" />
     <Compile Include="Media\IO\IMediaStream.cs" />
