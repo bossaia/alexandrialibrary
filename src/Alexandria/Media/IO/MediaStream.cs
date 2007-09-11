@@ -61,10 +61,10 @@ namespace Alexandria.Media.IO
 		private TimeSpan elapsed = TimeSpan.Zero;
 		private float percentBuffered;
 		
-		private EventHandler<MediaStateChangedEventArgs> onBufferStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onNetworkStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onPlaybackStateChanged;
-		private EventHandler<MediaStateChangedEventArgs> onSeekStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> bufferStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> networkStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> playbackStateChanged;
+		private EventHandler<MediaStateChangedEventArgs> seekStateChanged;
 		#endregion
 
 		#region Stream Members
@@ -196,28 +196,28 @@ namespace Alexandria.Media.IO
 			}
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged
+		public EventHandler<MediaStateChangedEventArgs> BufferStateChanged
 		{
-			get { return onBufferStateChanged; }
-			set { onBufferStateChanged = value; }
+			get { return bufferStateChanged; }
+			set { bufferStateChanged = value; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged
+		public EventHandler<MediaStateChangedEventArgs> NetworkStateChanged
 		{
-			get { return onNetworkStateChanged; }
-			set { onNetworkStateChanged = value; }
+			get { return networkStateChanged; }
+			set { networkStateChanged = value; }
 		}
 
-		public EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged
+		public EventHandler<MediaStateChangedEventArgs> PlaybackStateChanged
 		{
-			get { return onPlaybackStateChanged; }
-			set { onPlaybackStateChanged = value; }
+			get { return playbackStateChanged; }
+			set { playbackStateChanged = value; }
 		}
 		
-		public EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged
+		public EventHandler<MediaStateChangedEventArgs> SeekStateChanged
 		{
-			get { return onSeekStateChanged; }
-			set { onSeekStateChanged = value; }
+			get { return seekStateChanged; }
+			set { seekStateChanged = value; }
 		}
 		
 		public float PercentBuffered

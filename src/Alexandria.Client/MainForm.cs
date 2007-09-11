@@ -266,12 +266,12 @@ namespace Alexandria.Client
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
 			queueController.SelectTrack();
-			playbackController.TogglePlay();
+			playbackController.AudioPlayer.Play();
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{
-			playbackController.Stop();
+			playbackController.AudioPlayer.Stop();
 			/*
 			if (controller != null)
 			{
@@ -285,7 +285,7 @@ namespace Alexandria.Client
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			playbackController.ToggleMute();
+			playbackController.AudioPlayer.Mute();
 			/*
 			if (controller != null)
 			{
@@ -306,7 +306,7 @@ namespace Alexandria.Client
 
 		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
 		{
-			playbackController.SetVolume(GetVolume());
+			playbackController.AudioPlayer.SetVolume(GetVolume());
 		
 			//if (controller != null)
 				//Volume = GetVolume();
@@ -425,7 +425,7 @@ namespace Alexandria.Client
 		private void OnSelectedTrackEnd(object sender, EventArgs e)
 		{
 			queueController.Next();
-			playbackController.Play();
+			playbackController.AudioPlayer.Play();
 			
 			//if (controller != null)
 			//{
@@ -436,13 +436,12 @@ namespace Alexandria.Client
 
 		private void PlaybackTrackBar_MouseDown(object sender, MouseEventArgs e)
 		{
-			playbackController.IsSeekPending = true;
+			playbackController.AudioPlayer.BeginSeek();
 		}
 
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
-			playbackController.IsSeekPending = false;
-			playbackController.Seek(PlaybackTrackBar.Value);
+			playbackController.AudioPlayer.Seek(PlaybackTrackBar.Value);
 		}
 
 		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
@@ -503,7 +502,7 @@ namespace Alexandria.Client
 		private void QueueListView_ItemActivate(object sender, EventArgs e)
 		{
 			queueController.SelectTrack();
-			playbackController.Play();
+			playbackController.AudioPlayer.Play();
 		}
 		#endregion
 		

@@ -273,7 +273,7 @@ namespace Alexandria.Client.Controllers
 							}
 						}
 						
-						playbackController.SetCurrentAudioStream(audioStream);
+						playbackController.LoadAudioStream(audioStream);
 					}
 					else throw new ApplicationException("Could not load selected track: Id was undefined");
 				}
@@ -496,9 +496,12 @@ namespace Alexandria.Client.Controllers
 		{
 			if (playbackController != null)
 			{
-				bool isPlaying = (playbackController.PlaybackState == PlaybackState.Playing);
+				bool isPlaying = false;
+				if (playbackController.AudioPlayer.CurrentAudioStream != null && playbackController.AudioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
+					isPlaying = true;
+				
 				if (isPlaying)
-					playbackController.Stop();
+					playbackController.AudioPlayer.Stop();
 
 				//TODO: implement this logic
 				//SelectedTrack = ChangeSelectedTrack(-1); //NOTE: use this to support "shuffle"
@@ -518,7 +521,7 @@ namespace Alexandria.Client.Controllers
 				SelectTrack();
 				
 				if (isPlaying)
-					playbackController.Play();
+					playbackController.AudioPlayer.Play();
 			}
 		}
 
@@ -526,9 +529,12 @@ namespace Alexandria.Client.Controllers
 		{
 			if (playbackController != null)
 			{
-				bool isPlaying = (playbackController.PlaybackState == PlaybackState.Playing);
+				bool isPlaying = false;
+				if (playbackController.AudioPlayer.CurrentAudioStream != null && playbackController.AudioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
+					isPlaying = true;
+				
 				if (isPlaying)
-					playbackController.Stop();
+					playbackController.AudioPlayer.Stop();
 
 				//TODO: implement this logic
 				//SelectedTrack = ChangeSelectedTrack(1);
@@ -548,7 +554,7 @@ namespace Alexandria.Client.Controllers
 				SelectTrack();
 
 				if (isPlaying)
-					playbackController.Play();
+					playbackController.AudioPlayer.Play();
 			}
 		}
 

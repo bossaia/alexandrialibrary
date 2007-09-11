@@ -67,9 +67,9 @@ namespace Alexandria.Media.IO
 		void RefreshNetworkState();
 		void RefreshPlaybackState();
 		void RefreshSeekState();
-		EventHandler<MediaStateChangedEventArgs> OnBufferStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> OnNetworkStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> OnPlaybackStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> OnSeekStateChanged { get; set; }
+		EventHandler<MediaStateChangedEventArgs> BufferStateChanged { get; set; }
+		EventHandler<MediaStateChangedEventArgs> NetworkStateChanged { get; set; }
+		EventHandler<MediaStateChangedEventArgs> PlaybackStateChanged { get; set; }
+		EventHandler<MediaStateChangedEventArgs> SeekStateChanged { get; set; }
 	}
 }
