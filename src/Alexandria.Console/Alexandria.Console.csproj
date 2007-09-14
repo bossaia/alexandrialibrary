@@ -1,0 +1,147 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3C535C0D-3151-4B59-B299-E53ED5F6942E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Alexandria.Console</RootNamespace>
+    <AssemblyName>Alexandria.Console</AssemblyName>
+    <ApplicationIcon>Alexandria.Console.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Alexandria.Console.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alexandria.Console.exe.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.AlbumArtDownloader\Alexandria.AlbumArtDownloader.csproj">
+      <Project>{846AB010-03EA-4B52-A6BE-281BD732AE7E}</Project>
+      <Name>Alexandria.AlbumArtDownloader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Amazon\Alexandria.Amazon.csproj">
+      <Project>{1C0A1DBB-45B1-4F0A-9A40-4176BCF4445E}</Project>
+      <Name>Alexandria.Amazon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.AsciiGenerator\Alexandria.AsciiGenerator.csproj">
+      <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
+      <Name>Alexandria.AsciiGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj">
+      <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
+      <Name>Alexandria.CompactDiscTools</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Db4o\Alexandria.Db4o.csproj">
+      <Project>{B08B54A1-29EE-4321-B02C-87562C4B75D2}</Project>
+      <Name>Alexandria.Db4o</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
+      <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
+      <Name>Alexandria.Fmod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.FreeDB\Alexandria.FreeDB.csproj">
+      <Project>{26BF108C-8B39-4C9E-A545-4AC01AA3C0E6}</Project>
+      <Name>Alexandria.FreeDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Google\Alexandria.Google.csproj">
+      <Project>{7D0B9EB8-AFFE-4898-9914-83D782FB6D29}</Project>
+      <Name>Alexandria.Google</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Imdb\Alexandria.Imdb.csproj">
+      <Project>{3D983C59-61F9-456D-8D0A-D0D982ED0A4F}</Project>
+      <Name>Alexandria.Imdb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.LastFM\Alexandria.LastFM.csproj">
+      <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
+      <Name>Alexandria.LastFM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MediaInfo\Alexandria.MediaInfo.csproj">
+      <Project>{61BC9FAF-CF0E-4BE9-BE14-F5A443FAA8AD}</Project>
+      <Name>Alexandria.MediaInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
+      <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>
+      <Name>Alexandria.Mp3Tunes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MusicBrainz\Alexandria.MusicBrainz.csproj">
+      <Project>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</Project>
+      <Name>Alexandria.MusicBrainz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.MusicDns\Alexandria.MusicDns.csproj">
+      <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
+      <Name>Alexandria.MusicDns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Playlist\Alexandria.Playlist.csproj">
+      <Project>{5373D021-353C-47FE-9BB0-7F6E22F06594}</Project>
+      <Name>Alexandria.Playlist</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
+      <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>
+      <Name>Alexandria.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.TagLib\Alexandria.TagLib.csproj">
+      <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>
+      <Name>Alexandria.TagLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Tao\Alexandria.Tao.csproj">
+      <Project>{FEDA0E34-F7C0-4E57-A0E3-32DEC541052E}</Project>
+      <Name>Alexandria.Tao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
+      <Name>Alexandria</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)..\Alexandria.Fmod\bin\Debug\AlexandriaFmod.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\FMOD\fmodex.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.Db4o\bin\Debug\AlexandriaDb4o.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\db4o\db4o.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.TagLib\bin\Debug\AlexandriaTagLib.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.MusicBrainz\bin\Debug\AlexandriaMusicBrainz.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\MusicBrainz\musicbrainz.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\Alexandria.MediaInfo\bin\Debug\AlexandriaMediaInfo.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\MediaInfo\mediainfo.dll" "$(TargetDir)"
+copy "$(ProjectDir)..\..\vendor\SQLite\sqlite3.dll" "$(TargetDir)"
+copy "$(SolutionDir)..\assets\Images\Icons\Plugins\*.bmp" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
+</Project>
