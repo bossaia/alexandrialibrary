@@ -6,10 +6,6 @@ namespace Alexandria.Console
 {
 	public class CommandRunner
 	{
-		public CommandRunner() : this(new Context())
-		{
-		}
-	
 		public CommandRunner(Context startingContext)
 		{
 			currentContext = startingContext;
@@ -20,8 +16,16 @@ namespace Alexandria.Console
 		private Context currentContext;
 		private List<Command> commands = new List<Command>();
 		private List<string> options = new List<string>();
-		private CommandFactory factory = new CommandFactory();
 		private int currentCommandIndex = -1;
+
+		private void AddCommand(string name, string option)
+		{
+			if (CommandFactory.IsCommand(name))
+			{
+				commands.Add(CommandFactory.Commands[name]);
+				options.Add(option);
+			}
+		}
 		
 		public Context CurrentContext
 		{
@@ -42,22 +46,8 @@ namespace Alexandria.Console
 		{
 			get { return options.AsReadOnly(); }
 		}
-		
-		public bool IsCommand(string name)
-		{
-			return factory.Commands.ContainsKey(name);
-		}
-		
-		public void AddCommand(string name, string option)
-		{
-			if (IsCommand(name))
-			{
-				commands.Add(factory.Commands[name]);
-				options.Add(option);
-			}
-		}
-		
-		public void Prompt()
+				
+		public void ShowPrompt()
 		{
 			System.Console.Write(currentContext.Prompt);
 		}
@@ -76,7 +66,7 @@ namespace Alexandria.Console
 				string option = null;
 
 				string[] parts = input.Split(new char[] { ' ' }, 2);
-				if (IsCommand(parts[0]))
+				if (CommandFactory.IsCommand(parts[0]))
 				{
 					name = parts[0];
 

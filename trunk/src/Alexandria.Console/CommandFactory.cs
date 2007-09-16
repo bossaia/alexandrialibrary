@@ -6,31 +6,42 @@ using Alexandria.Console.Commands;
 
 namespace Alexandria.Console
 {
-	public class CommandFactory
-	{
-		public CommandFactory()
-		{
-			AddCommand(new StatusCommand());
-			AddCommand(new CloseCommand());
-			
-			AddCommand(new PlayCommand());
-			AddCommand(new PauseCommand());
-			AddCommand(new StopCommand());
-			AddCommand(new SeekCommand());
-			AddCommand(new VolumeCommand());
-		}
+	public static class CommandFactory
+	{		
+		private static Dictionary<string, Command> commands = new Dictionary<string, Command>(StringComparer.InvariantCultureIgnoreCase);
 		
-		private IDictionary<string, Command> commands = new Dictionary<string, Command>(StringComparer.InvariantCultureIgnoreCase);
-		
-		private void AddCommand(Command command)
+		private static void AddCommand(Command command)
 		{
-			if (command != null && !commands.ContainsKey(command.Name))
+			if (!commands.ContainsKey(command.Name))
 				commands.Add(command.Name, command);
 		}
 		
-		public IDictionary<string, Command> Commands
+		public static bool IsCommand(string name)
 		{
-			get { return commands; }
+			return Commands.ContainsKey(name);
+		}
+		
+		public static IDictionary<string, Command> Commands
+		{
+			get
+			{
+				lock(commands)
+				{
+					if (commands.Count == 0)
+					{
+						AddCommand(new ContextCommand());
+						AddCommand(new StatusCommand());
+						AddCommand(new CloseCommand());
+						AddCommand(new PlayCommand());
+						AddCommand(new PauseCommand());
+						AddCommand(new StopCommand());
+						AddCommand(new SeekCommand());
+						AddCommand(new VolumeCommand());
+					}
+									
+					return commands;
+				}
+			}
 		}
 	}
 }

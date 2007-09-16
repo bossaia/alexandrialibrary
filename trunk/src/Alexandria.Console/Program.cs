@@ -38,14 +38,14 @@ namespace Alexandria.Console
 	{	
 		static void Main(string[] args)
 		{
-			CommandRunner runner = new CommandRunner();
+			CommandRunner runner = new CommandRunner(ContextFactory.PlaybackContext);
 			
 			WriteHeader();
 			
 			while(runner.CurrentContext.IsOpen)
 			{
 				runner.Reset();
-				runner.Prompt();
+				runner.ShowPrompt();
 				runner.ParseInput();
 				runner.Run();
 				
