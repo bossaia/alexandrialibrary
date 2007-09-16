@@ -20,9 +20,8 @@ namespace Alexandria.Console.Commands
 			}
 			else volume = 0.5f;
 
-			context.Player.SetVolume(volume);
-			context.WriteCurrentStreamStatus("Stream Volume", volume.ToString());
-		
+			ContextFactory.PlaybackContext.Player.SetVolume(volume);
+			ContextFactory.PlaybackContext.WriteStatus("Stream Volume", volume.ToString());
 			return context;
 		}
 	}

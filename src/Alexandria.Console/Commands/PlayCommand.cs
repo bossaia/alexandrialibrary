@@ -14,15 +14,15 @@ namespace Alexandria.Console.Commands
 			if (!string.IsNullOrEmpty(option))
 			{
 				Uri path = new Uri(option);
-				context.Player.LoadAudioStream(path);
-				context.Player.Play();
+				ContextFactory.PlaybackContext.Player.LoadAudioStream(path);
+				ContextFactory.PlaybackContext.Player.Play();
 			}
 			else
 			{
-				context.Player.Play();
+				ContextFactory.PlaybackContext.Player.Play();
 			}
-			
-			context.WriteCurrentStreamStatus();
+
+			ContextFactory.PlaybackContext.WriteStatus();
 			return context;
 		}
 	}

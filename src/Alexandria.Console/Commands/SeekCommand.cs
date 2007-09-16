@@ -35,8 +35,8 @@ namespace Alexandria.Console.Commands
 			}
 
 			TimeSpan position = new TimeSpan(hours, minutes, seconds);
-			context.Player.Seek((int)position.TotalMilliseconds);
-			context.WriteCurrentStreamStatus("Stream Position", position.ToString());
+			ContextFactory.PlaybackContext.Player.Seek((int)position.TotalMilliseconds);
+			ContextFactory.PlaybackContext.WriteStatus("Stream Position", position.ToString());
 			return context;
 		}
 	}

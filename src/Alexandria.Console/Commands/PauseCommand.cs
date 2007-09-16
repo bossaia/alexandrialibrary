@@ -12,8 +12,8 @@ namespace Alexandria.Console.Commands
 		
 		public override Context Execute(Context context, string option)
 		{
-			context.Player.Play();
-			context.WriteCurrentStreamStatus();
+			ContextFactory.PlaybackContext.Player.Play();
+			ContextFactory.PlaybackContext.WriteStatus();
 			return context;
 		}
 	}
