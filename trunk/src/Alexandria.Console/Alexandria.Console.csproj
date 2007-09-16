@@ -34,6 +34,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandFactory.cs" />
+    <Compile Include="CommandRunner.cs" />
+    <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Commands\PauseCommand.cs" />
+    <Compile Include="Commands\PlayCommand.cs" />
+    <Compile Include="Commands\SeekCommand.cs" />
+    <Compile Include="Commands\StatusCommand.cs" />
+    <Compile Include="Commands\StopCommand.cs" />
+    <Compile Include="Commands\VolumeCommand.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

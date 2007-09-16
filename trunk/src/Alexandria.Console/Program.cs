@@ -35,115 +35,41 @@ using Alexandria.Media.IO;
 namespace Alexandria.Console
 {
 	class Program
-	{
-		private static IAudioPlayer player;
-	
+	{	
 		static void Main(string[] args)
 		{
-			player = new AudioPlayer();
-			player.AudioStreamFactory = new Alexandria.Fmod.AudioStreamFactory();
-			player.PlayToggles = true;
-			player.MuteToggles = true;
-		
-			const string prompt = "[alx] ";
-			string cmd = string.Empty;
+			CommandRunner runner = new CommandRunner();
 			
-			while(cmd != "close")
+			WriteHeader();
+			
+			while(runner.CurrentContext.IsOpen)
 			{
-				System.Console.Write(prompt);
+				runner.Reset();
+				runner.Prompt();
+				runner.ParseInput();
+				runner.Run();
 				
-				string[] input = System.Console.ReadLine().Split(new char[]{'~'});
-				string option1 = string.Empty;
-				cmd = input[0];
-				if (input.Length > 1)
-					option1 = input[1];
-				
-				if (cmd == "status")
-				{
-					WriteCurrentStreamStatus();
-				}
-				else if (cmd == "play")
-				{
-					if (player.CurrentAudioStream != null && player.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
-					{
-						player.Play();
-					}
-					else if (!string.IsNullOrEmpty(option1))
-					{
-						Uri path = new Uri(option1);
-						player.LoadAudioStream(path);
-						player.Play();
-					}
-					WriteCurrentStreamStatus();
-				}
-				else if (player.CurrentAudioStream != null)
-				{
-					if (cmd == "pause")
-					{
-						player.Play();
-						WriteCurrentStreamStatus();
-					}
-					else if (cmd == "stop")
-					{
-						player.Stop();
-						WriteCurrentStreamStatus();
-					}
-					else if (cmd == "seek" && !string.IsNullOrEmpty(option1))
-					{
-						int hours = 0, minutes = 0, seconds = 0;
-						string[] parts = option1.Split(new char[]{':'}, 3);
-						if (parts.Length > 1)
-						{
-							if (parts.Length > 2)
-							{
-								hours = Convert.ToInt32(parts[0]);
-								minutes = Convert.ToInt32(parts[1]);
-								seconds = Convert.ToInt32(parts[2]);
-							}
-							else
-							{
-								minutes = Convert.ToInt32(parts[0]);
-								seconds = Convert.ToInt32(parts[1]);
-							}
-						}
-						else seconds = Convert.ToInt32(option1);
-						
-						TimeSpan position = new TimeSpan(hours, minutes, seconds);
-						player.Seek((int)position.TotalMilliseconds);
-						WriteCurrentStreamStatus("Stream Position", position.ToString());
-					}
-					else if (cmd == "volume" && !string.IsNullOrEmpty(option1))
-					{
-						float volume = 0f;
-						if (float.TryParse(option1, out volume))
-						{
-							if (volume < 0) volume = 0;
-							if (volume > 1) volume = 1;
-							player.SetVolume(volume);
-							WriteCurrentStreamStatus("Stream Volume", volume.ToString());
-						}
-					}
-				}
-				System.Console.WriteLine();
+				WriteBody();
 			}
+			
+			WriteFooter();
 		}
 		
-		private static void WriteCurrentStreamStatus()
+		private static void WriteHeader()
 		{
-			WriteCurrentStreamStatus(string.Empty, string.Empty);
+			System.Console.WriteLine("Alexandria Media Library - Command Line Client v. 1.0.0.0");
+			System.Console.WriteLine("© 2007 Dan Poage");
+			System.Console.WriteLine();
 		}
 		
-		private static void WriteCurrentStreamStatus(string command, string option)
+		private static void WriteBody()
 		{
-			if (string.IsNullOrEmpty(command))
-				command = "Stream";
+			System.Console.WriteLine();
+		}
 		
-			if (string.IsNullOrEmpty(option))
-				option = player.CurrentAudioStream.PlaybackState.ToString();
-		
-			if (player != null && player.CurrentAudioStream != null)
-				System.Console.WriteLine(string.Format("{0} {1}", command, option));
-			else System.Console.WriteLine("NO STREAM LOADED");
+		private static void WriteFooter()
+		{
+			System.Console.WriteLine("Closing...");
 		}
 	}
 }
