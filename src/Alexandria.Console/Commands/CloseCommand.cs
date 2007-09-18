@@ -6,14 +6,8 @@ namespace Alexandria.Console.Commands
 {
 	public class CloseCommand : Command
 	{
-		public CloseCommand() : base("Close")
+		public CloseCommand() : base(CommandConstants.Close)
 		{
-		}
-		
-		public override Context Execute(Context context, string option)
-		{
-			context.Close();
-			return context;
 		}
 	}
 }

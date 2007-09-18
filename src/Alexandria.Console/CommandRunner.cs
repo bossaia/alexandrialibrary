@@ -2,18 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Alexandria.Console.Contexts;
+
 namespace Alexandria.Console
 {
 	public class CommandRunner
 	{
-		public CommandRunner(Context startingContext)
+		public CommandRunner()
 		{
-			currentContext = startingContext;
+			ContextFactory.SetActiveContext(ContextConstants.Default);
+		}
+	
+		public CommandRunner(string activeContext)
+		{
+			ContextFactory.SetActiveContext(activeContext);
 		}
 		
 		private const string INVALID_INPUT = "INVALID INPUT";
-		
-		private Context currentContext;
 		private List<Command> commands = new List<Command>();
 		private List<string> options = new List<string>();
 		private int currentCommandIndex = -1;
@@ -25,11 +30,6 @@ namespace Alexandria.Console
 				commands.Add(CommandFactory.Commands[name]);
 				options.Add(option);
 			}
-		}
-		
-		public Context CurrentContext
-		{
-			get { return currentContext; }
 		}
 		
 		public int CurrentCommandIndex
@@ -49,7 +49,7 @@ namespace Alexandria.Console
 				
 		public void ShowPrompt()
 		{
-			System.Console.Write(currentContext.Prompt);
+			System.Console.Write(ContextFactory.ActiveContext.Prompt);
 		}
 		
 		public void ParseInput()
@@ -101,7 +101,10 @@ namespace Alexandria.Console
 				for(int i=0; i<commands.Count; i++)
 				{
 					currentCommandIndex = i;
-					currentContext = commands[i].Execute(currentContext, options[i]);
+					foreach(Context context in ContextFactory.Contexts.Values)
+					{
+						commands[i].Execute(context, options[i]);
+					}
 				}
 			}
 		}

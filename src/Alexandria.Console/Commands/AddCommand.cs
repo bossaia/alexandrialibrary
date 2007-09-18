@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Alexandria.Console.Commands
 {
-	public class StatusCommand : Command
+	public class AddCommand : Command
 	{
-		public StatusCommand() : base(CommandConstants.Status)
+		public AddCommand() : base(CommandConstants.Add)
 		{
 		}
 	}
