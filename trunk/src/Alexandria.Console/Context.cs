@@ -16,12 +16,19 @@ namespace Alexandria.Console
 		}
 
 		private string name;
+		private bool isActive;
 		private bool isOpen = true;
 		private string prompt = "alx> ";
 		
 		public string Name
 		{
 			get { return name; }
+		}
+		
+		public bool IsActive
+		{
+			get { return isActive; }
+			set { isActive = value; }
 		}
 		
 		public bool IsOpen
@@ -37,9 +44,12 @@ namespace Alexandria.Console
 		
 		public virtual void Close()
 		{
-			isOpen = false;
+			if (isActive)
+				isOpen = false;
 		}
 		
+		public abstract void HandleCommand(Command command, string option);
+				
 		public virtual void WriteStatus()
 		{
 		}

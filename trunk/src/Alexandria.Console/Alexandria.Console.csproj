@@ -37,7 +37,9 @@
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactory.cs" />
     <Compile Include="CommandRunner.cs" />
+    <Compile Include="Commands\AddCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
+    <Compile Include="Commands\CommandConstants.cs" />
     <Compile Include="Commands\ContextCommand.cs" />
     <Compile Include="Commands\PauseCommand.cs" />
     <Compile Include="Commands\PlayCommand.cs" />
@@ -47,7 +49,9 @@
     <Compile Include="Commands\VolumeCommand.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContextFactory.cs" />
-    <Compile Include="Contexts\PlaybackContext.cs" />
+    <Compile Include="Contexts\ContextConstants.cs" />
+    <Compile Include="Contexts\AudioContext.cs" />
+    <Compile Include="Contexts\DefaultContext.cs" />
     <Compile Include="Contexts\PlaylistContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

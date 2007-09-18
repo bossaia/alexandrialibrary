@@ -10,7 +10,7 @@ namespace Alexandria.Console
 	{		
 		private static Dictionary<string, Command> commands = new Dictionary<string, Command>(StringComparer.InvariantCultureIgnoreCase);
 		
-		private static void AddCommand(Command command)
+		private static void AddToDictionary(Command command)
 		{
 			if (!commands.ContainsKey(command.Name))
 				commands.Add(command.Name, command);
@@ -29,14 +29,15 @@ namespace Alexandria.Console
 				{
 					if (commands.Count == 0)
 					{
-						AddCommand(new ContextCommand());
-						AddCommand(new StatusCommand());
-						AddCommand(new CloseCommand());
-						AddCommand(new PlayCommand());
-						AddCommand(new PauseCommand());
-						AddCommand(new StopCommand());
-						AddCommand(new SeekCommand());
-						AddCommand(new VolumeCommand());
+						AddToDictionary(new AddCommand());
+						AddToDictionary(new ContextCommand());
+						AddToDictionary(new StatusCommand());
+						AddToDictionary(new CloseCommand());
+						AddToDictionary(new PlayCommand());
+						AddToDictionary(new PauseCommand());
+						AddToDictionary(new StopCommand());
+						AddToDictionary(new SeekCommand());
+						AddToDictionary(new VolumeCommand());
 					}
 									
 					return commands;

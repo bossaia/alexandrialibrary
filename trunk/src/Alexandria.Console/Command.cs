@@ -19,6 +19,9 @@ namespace Alexandria.Console
 			get { return name; }
 		}
 				
-		public abstract Context Execute(Context context, string option);
+		public virtual void Execute(Context context, string option)
+		{
+			context.HandleCommand(this, option);
+		}
 	}
 }

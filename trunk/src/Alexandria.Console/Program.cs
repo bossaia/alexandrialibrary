@@ -32,17 +32,20 @@ using Alexandria;
 using Alexandria.Media;
 using Alexandria.Media.IO;
 
+using Alexandria.Console.Commands;
+using Alexandria.Console.Contexts;
+
 namespace Alexandria.Console
 {
 	class Program
 	{	
 		static void Main(string[] args)
 		{
-			CommandRunner runner = new CommandRunner(ContextFactory.PlaybackContext);
+			CommandRunner runner = new CommandRunner();
 			
 			WriteHeader();
 			
-			while(runner.CurrentContext.IsOpen)
+			while(ContextFactory.ActiveContext.IsOpen)
 			{
 				runner.Reset();
 				runner.ShowPrompt();

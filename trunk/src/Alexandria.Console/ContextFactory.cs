@@ -8,6 +8,7 @@ namespace Alexandria.Console
 	public static class ContextFactory
 	{		
 		private static Dictionary<string, Context> contexts = new Dictionary<string,Context>(StringComparer.InvariantCultureIgnoreCase);
+		private static Context activeContext;
 		
 		private static void AddContext(Context context)
 		{
@@ -20,6 +21,22 @@ namespace Alexandria.Console
 			return Contexts.ContainsKey(name);
 		}
 		
+		public static void SetActiveContext(string name)
+		{
+			if (IsContext(name))
+			{
+				foreach(Context context in contexts.Values)
+					context.IsActive = (string.Compare(context.Name, name, true) == 0);
+				
+				activeContext = Contexts[name];
+			}
+		}
+		
+		public static Context ActiveContext
+		{
+			get { return activeContext; }
+		}
+		
 		public static IDictionary<string, Context> Contexts
 		{
 			get
@@ -28,18 +45,14 @@ namespace Alexandria.Console
 				{
 					if (contexts.Count == 0)
 					{
-						AddContext(new PlaybackContext());
+						AddContext(new DefaultContext());
+						AddContext(new AudioContext());
+						AddContext(new PlaylistContext());
 					}
 					
 					return contexts;
 				}
 			}
-		}
-		
-		public static PlaybackContext PlaybackContext
-		{
-			//TODO: refactor this
-			get { return Contexts["Playback"] as PlaybackContext; }
 		}
 	}
 }
