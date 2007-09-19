@@ -46,7 +46,7 @@ namespace Alexandria.Playlist
 			if (fileName.EndsWith(".m3u", StringComparison.InvariantCultureIgnoreCase))
 				return new M3uPlaylist(path);
 			else if (fileName.EndsWith(".xspf", StringComparison.InvariantCultureIgnoreCase))
-				return new XspPlaylist(path);
+				return new OldXspPlaylist(path);
 			else return null;
 		}
 		#endregion
