@@ -43,7 +43,15 @@
     <Compile Include="PlaylistItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XspfFormat.cs" />
-    <Compile Include="XspPlaylist.cs" />
+    <Compile Include="OldXspPlaylist.cs" />
+    <Compile Include="Xspf\Identifier.cs" />
+    <Compile Include="Xspf\Title.cs" />
+    <Compile Include="Xspf\XspfAttribution.cs" />
+    <Compile Include="Xspf\XspfExtension.cs" />
+    <Compile Include="Xspf\XspfLink.cs" />
+    <Compile Include="Xspf\XspfMeta.cs" />
+    <Compile Include="Xspf\XspfPlaylist.cs" />
+    <Compile Include="Xspf\XspfTrack.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">

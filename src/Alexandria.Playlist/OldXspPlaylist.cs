@@ -33,10 +33,10 @@ using Alexandria.Media;
 
 namespace Alexandria.Playlist
 {
-	public class XspPlaylist : BasePlaylist
+	public class OldXspPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public XspPlaylist(Uri path) : base(path, new XspfFormat())
+		public OldXspPlaylist(Uri path) : base(path, new XspfFormat())
 		{
 		}
 		#endregion
