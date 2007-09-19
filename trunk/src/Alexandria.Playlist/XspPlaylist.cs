@@ -49,8 +49,12 @@ namespace Alexandria.Playlist
 		private const string NODE_TRACK_LIST = "tracklist";
 		private const string NODE_TRACK = "track";
 		private const string NODE_LOCATION = "location";
+		private const string NODE_IDENTIFIER = "identifier";
+		private const string NODE_TITLE = "title";
 		private const string PREFIX_FILE = "file:///";
 		private const string PREFIX_HTTP = "http://";
+		private const string NAMESPACE_PLAYLIST = "http://xspf.org/ns/0/";
+		private const string XSPF_VERSION = "1";
 		#endregion
 
 		#region Private Fields
@@ -169,11 +173,33 @@ namespace Alexandria.Playlist
 			xml.Load(this.Path.ToString());
 			foreach (XmlNode node in xml.ChildNodes)
 			{
-				if (String.Compare(node.Name, NODE_PLAYLIST, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
+				if (string.Compare(node.Name, NODE_PLAYLIST, true, System.Globalization.CultureInfo.InvariantCulture) == 0)
 				{
 					ReadPlaylistNode(node);
 				}
 			}
+		}
+
+		public override void Save()
+		{
+			XmlTextWriter writer = new XmlTextWriter(Path.LocalPath, Encoding.UTF8);
+			writer.WriteStartDocument();
+			writer.WriteStartElement(NODE_PLAYLIST, NAMESPACE_PLAYLIST); //<playlist>
+			
+			//writer.WriteStartAttribute(ATTRIB_VERSION);
+			writer.WriteAttributeString(ATTRIB_VERSION, XSPF_VERSION); //version="1"
+			//writer.WriteEndAttribute();
+			
+			writer.WriteStartElement(NODE_TRACK_LIST); //<tracklist>
+			foreach(IPlaylistItem item in Items)
+			{
+				writer.WriteStartElement(NODE_TRACK); //<track>
+				writer.WriteElementString(NODE_LOCATION, item.Path.ToString()); //<location>
+				writer.WriteEndElement();
+			}
+			writer.WriteEndElement(); //</tracklist>
+			writer.WriteEndElement(); //</playlist>
+			writer.WriteEndDocument();
 		}
 		#endregion
 	}

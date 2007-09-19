@@ -35,5 +35,6 @@ namespace Alexandria.Media
 	{
 		IList<IPlaylistItem> Items { get; }
 		void Load();
+		void Save();
 	}
 }

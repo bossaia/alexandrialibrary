@@ -72,12 +72,6 @@ namespace Alexandria.Media
 		}
 		#endregion
 		
-		#region Public Methods
-		public virtual void Load()
-		{
-		}
-		#endregion
-
 		#region IMedia Members
 		public Guid Id
 		{
@@ -95,10 +89,18 @@ namespace Alexandria.Media
 		}
 		#endregion
 
-		#region IMediaPlaylist Members
+		#region IPlaylist Members
 		public IList<IPlaylistItem> Items
 		{
 			get { return items; }
+		}
+		
+		public virtual void Load()
+		{
+		}
+
+		public virtual void Save()
+		{
 		}
 		#endregion
 	}
