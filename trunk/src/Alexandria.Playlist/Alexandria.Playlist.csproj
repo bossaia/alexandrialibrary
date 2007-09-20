@@ -44,14 +44,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XspfFormat.cs" />
     <Compile Include="OldXspPlaylist.cs" />
+    <Compile Include="Xspf\Annotation.cs" />
+    <Compile Include="Xspf\Creator.cs" />
+    <Compile Include="Xspf\Date.cs" />
     <Compile Include="Xspf\Identifier.cs" />
+    <Compile Include="Xspf\Info.cs" />
+    <Compile Include="Xspf\License.cs" />
+    <Compile Include="Xspf\Location.cs" />
     <Compile Include="Xspf\Title.cs" />
-    <Compile Include="Xspf\XspfAttribution.cs" />
-    <Compile Include="Xspf\XspfExtension.cs" />
-    <Compile Include="Xspf\XspfLink.cs" />
-    <Compile Include="Xspf\XspfMeta.cs" />
+    <Compile Include="Xspf\Attribution.cs" />
+    <Compile Include="Xspf\Extension.cs" />
+    <Compile Include="Xspf\Link.cs" />
+    <Compile Include="Xspf\Metadata.cs" />
+    <Compile Include="Xspf\XspfImage.cs" />
     <Compile Include="Xspf\XspfPlaylist.cs" />
-    <Compile Include="Xspf\XspfTrack.cs" />
+    <Compile Include="Xspf\Track.cs" />
+    <Compile Include="Xspf\XspfVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
