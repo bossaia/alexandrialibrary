@@ -16,21 +16,21 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="location">The source URI for this playlist</param>
 		public XspfPlaylist(Uri location)
 		{
-			this.location = location;
+			//this.location = location;
 		}
 		#endregion
 
 		#region Private Fields
-		private Version version;
-		private string title;
-		private string creator;
-		private string annotation;
-		private Uri info;
-		private Uri location;
-		private Uri identifier;
-		private Uri image;
-		private DateTime date;
-		private Uri license;
+		private XspfVersion version;
+		private Title title;
+		private Creator creator;
+		private Annotation annotation;
+		private Info info;
+		private Location location;
+		private Identifier identifier;
+		private XspfImage image;
+		private Date date;
+		private License license;
 		private List<Attribution> attribution = new List<Attribution>();
 		private List<Link> link = new List<Link>();
 		private List<Metadata> meta = new List<Metadata>();
@@ -44,8 +44,8 @@ namespace Alexandria.Playlist.Xspf
 		{
 			if (playlistNode != null)
 			{
-				int major = Convert.ToInt32(playlistNode.Attributes["version"].Value);
-				version = new Version(major, 0);
+				//int major = Convert.ToInt32(playlistNode.Attributes["version"].Value);
+				//version = new Version(major, 0);
 			}
 		}
 		
@@ -53,7 +53,7 @@ namespace Alexandria.Playlist.Xspf
 		{
 			if (titleNode != null)
 			{
-				title = titleNode.Value;
+				//title = titleNode.Value;
 			}
 		}
 		
@@ -61,7 +61,7 @@ namespace Alexandria.Playlist.Xspf
 		{
 			if (creatorNode != null)
 			{
-				creator = creatorNode.Value;
+				//creator = creatorNode.Value;
 			}
 		}
 		//annotation, info, location, identifier, image, date, license
@@ -101,7 +101,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set the version of the XSPF specification that the playlist uses
 		/// </summary>
 		/// <see cref="http://www.xspf.org"/>
-		public Version Version
+		public XspfVersion Version
 		{
 			get { return version; }
 			set { version = value; }
@@ -110,7 +110,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable title for the playlist
 		/// </summary>
-		public string Title
+		public Title Title
 		{
 			get { return title; }
 			set { title = value; }
@@ -119,7 +119,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable name of the entity (author, authors, group, company, etc) that authored the playlist
 		/// </summary>
-		public string Creator
+		public Creator Creator
 		{
 			get { return creator; }
 			set { creator = value; }
@@ -128,7 +128,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable comment on the playlist
 		/// </summary>
-		public string Annotation
+		public Annotation Annotation
 		{
 			get { return annotation; }
 			set { annotation = value; }
@@ -138,7 +138,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set a URI of a web page to find out more about this playlist
 		/// </summary>
 		/// <remarks>Likely to be homepage of the author, and would be used to find out more about the author and to find more playlists by the author</remarks>
-		public Uri Info
+		public Info Info
 		{
 			get { return info; }
 			set { info = value; }
@@ -147,7 +147,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set the source URI for this playlist
 		/// </summary>
-		public Uri Location
+		public Location Location
 		{
 			get { return location; }
 			set { location = value; }
@@ -157,7 +157,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set the canonical ID for this playlist
 		/// </summary>
 		/// <remarks>Likely to be a hash or other location-independent name</remarks>
-		public Uri Identifier
+		public Identifier Identifier
 		{
 			get { return identifier; }
 			set { identifier = value; }
@@ -166,7 +166,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a URI of an image to display in the absence of a track-specific image
 		/// </summary>
-		public Uri Image
+		public XspfImage Image
 		{
 			get { return image; }
 			set { image = value; }
@@ -176,7 +176,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set the creation date of the playlist
 		/// </summary>
 		/// <remarks>Do not use the last-modified date of the playlist (that should be a Meta-item)</remarks>
-		public DateTime Date
+		public Date Date
 		{
 			get { return date; }
 			set { date = value; }
@@ -185,7 +185,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a URI of a resource that describes the license under which this playlist was released
 		/// </summary>
-		public Uri License
+		public License License
 		{
 			get { return license; }
 			set { license = value; }
@@ -235,10 +235,10 @@ namespace Alexandria.Playlist.Xspf
 		#region IPlaylist Members
 		public void Load()
 		{
-			if (location.IsFile)
+			if (location.Value.IsFile)
 			{
 				xml = new XmlDocument();
-				xml.Load(location.LocalPath);
+				xml.Load(location.Value.LocalPath);
 				
 				LoadPlaylist(xml.SelectSingleNode("/playlist"));
 				LoadTitle(xml.SelectSingleNode("/playlist/title"));
