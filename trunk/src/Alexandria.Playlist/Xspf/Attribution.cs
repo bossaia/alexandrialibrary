@@ -13,12 +13,10 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Instantiate an Attribution
 		/// </summary>
-		/// <param name="isIdentifier">A value indicating whether or not this attribution represents a canonical identifier</param>
-		/// <param name="content">A URI of the content of this attribution</param>
-		public Attribution(bool isIdentifier, Uri content)
+		/// <param name="value">The attributable data</param>
+		public Attribution(IAttributable value)
 		{
-			this.isIdentifier = isIdentifier;
-			this.content = content;
+			this.value = value;
 		}
 		
 		/// <summary>
@@ -27,44 +25,32 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">A XmlNode containing the attribution information</param>
 		public Attribution(XmlNode node)
 		{
-			isIdentifier = GetIsIdentifier(node);
-			content = GetContent(node);
+			value = LoadAttributable(node);
 		}
 		#endregion
 		
 		#region Private Fields
-		private bool isIdentifier;
-		private Uri content;
+		private IAttributable value;
 		#endregion
 		
 		#region Private Static Methods
-		private static bool GetIsIdentifier(XmlNode node)
+		private static IAttributable LoadAttributable(XmlNode node)
 		{
-			return (string.Compare(node.Name, "identifier", true) == 0);
-		}
-		
-		private static Uri GetContent(XmlNode node)
-		{
-			return new Uri(node.Value);
+			if (string.Compare(node.Name, "identifier", true) == 0)
+				return new Identifier(node);
+			else if (string.Compare(node.Name, "location", true) == 0)
+				return new Location(node);
+			else return null;
 		}
 		#endregion
 		
 		#region Public Properties
 		/// <summary>
-		/// Get a value indicating whether or not this attribution represents a canonical identifier
+		/// Get the value for this attribution
 		/// </summary>
-		public bool IsIdentifier
+		public IAttributable Value
 		{
-			get { return isIdentifier; }
-		}
-		
-		/// <summary>
-		/// Get a URI of the content of this attribution
-		/// </summary>
-		/// <remarks>If IsIdentifier is true then this Uri represents an identifier, otherwise it represents a location</remarks>
-		public Uri Content
-		{
-			get { return content; }
+			get { return value; }
 		}
 		#endregion
 	}

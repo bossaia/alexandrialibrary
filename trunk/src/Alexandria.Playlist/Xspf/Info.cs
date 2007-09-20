@@ -1,10 +1,26 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml;
 
 namespace Alexandria.Playlist.Xspf
 {
-	public class Info
+	public struct Info
 	{
+		public Info(XmlNode node)
+		{
+			this.value = new Uri(node.Value);
+		}
+		
+		public Info(Uri value)
+		{
+			this.value = value;
+		}
+		
+		private Uri value;
+		
+		public Uri Value
+		{
+			get { return value; }
+		}
 	}
 }

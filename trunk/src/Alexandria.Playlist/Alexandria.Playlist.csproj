@@ -44,9 +44,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XspfFormat.cs" />
     <Compile Include="OldXspPlaylist.cs" />
+    <Compile Include="Xspf\Album.cs" />
     <Compile Include="Xspf\Annotation.cs" />
     <Compile Include="Xspf\Creator.cs" />
     <Compile Include="Xspf\Date.cs" />
+    <Compile Include="Xspf\Duration.cs" />
+    <Compile Include="Xspf\IAttributable.cs" />
     <Compile Include="Xspf\Identifier.cs" />
     <Compile Include="Xspf\Info.cs" />
     <Compile Include="Xspf\License.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Xspf\Extension.cs" />
     <Compile Include="Xspf\Link.cs" />
     <Compile Include="Xspf\Metadata.cs" />
+    <Compile Include="Xspf\TrackNumber.cs" />
     <Compile Include="Xspf\XspfImage.cs" />
     <Compile Include="Xspf\XspfPlaylist.cs" />
     <Compile Include="Xspf\Track.cs" />

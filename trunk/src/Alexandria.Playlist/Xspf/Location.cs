@@ -1,13 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Xml;
 
 namespace Alexandria.Playlist.Xspf
 {
-	public class Location
+	public struct Location : IAttributable
 	{
-		public Location()
+		public Location(XmlNode node)
 		{
+			this.value = new Uri(node.Value);
+		}
+	
+		public Location(Uri value)
+		{
+			this.value = value;
 		}
 		
 		private Uri value;
