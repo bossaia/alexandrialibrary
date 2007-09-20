@@ -4,21 +4,21 @@ using System.Xml;
 
 namespace Alexandria.Playlist.Xspf
 {
-	public struct Date
+	public struct Album
 	{
-		public Date(XmlNode node)
+		public Album(XmlNode node)
 		{
-			this.value = DateTime.Parse(node.Value);
+			this.value = node.Value;
 		}
 		
-		public Date(DateTime value)
+		public Album(string value)
 		{
 			this.value = value;
 		}
 		
-		private DateTime value;
+		private string value;
 		
-		public DateTime Value
+		public string Value
 		{
 			get { return value; }
 		}

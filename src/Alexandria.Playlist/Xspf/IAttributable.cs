@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Alexandria.Playlist.Xspf
 {
-	public struct License
+	public interface IAttributable
 	{
+		Uri Value { get; }
 	}
 }

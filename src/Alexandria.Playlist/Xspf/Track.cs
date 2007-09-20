@@ -28,16 +28,16 @@ namespace Alexandria.Playlist.Xspf
 		#endregion
 		
 		#region Private Fields
-		private List<Uri> locations = new List<Uri>();
-		private List<Uri> identifiers = new List<Uri>();
-		private string title;
-		private string creator;
-		private string annotation;
-		private Uri info;
-		private Uri image;
-		private string album;
-		private int trackNum;
-		private TimeSpan duration;
+		private List<Location> locations = new List<Location>();
+		private List<Identifier> identifiers = new List<Identifier>();
+		private Title title;
+		private Creator creator;
+		private Annotation annotation;
+		private Info info;
+		private XspfImage image;
+		private Album album;
+		private TrackNumber trackNum;
+		private Duration duration;
 		private List<Link> link = new List<Link>();
 		private List<Metadata> meta = new List<Metadata>();
 		private List<Extension> extension = new List<Extension>();
@@ -91,7 +91,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get a list of URIs of the resource to be rendered
 		/// </summary>
-		public IList<Uri> Locations
+		public IList<Location> Locations
 		{
 			get { return locations; }
 		}
@@ -99,7 +99,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get a list of canonical IDs for this resource
 		/// </summary>
-		public IList<Uri> Identifiers
+		public IList<Identifier> Identifiers
 		{
 			get { return identifiers; }
 		}
@@ -107,7 +107,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable name of the track that authored the resource which defines the duration of track rendering
 		/// </summary>
-		public string Title
+		public Title Title
 		{
 			get { return title; }
 			set { title = value; }
@@ -116,7 +116,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable name of the entity (author, authors, group, company, etc) that authored the resource which defines the duration of track rendering.
 		/// </summary>
-		public string Creator
+		public Creator Creator
 		{
 			get { return creator; }
 			set { creator = value; }
@@ -125,7 +125,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a human-readable comment on the track
 		/// </summary>
-		public string Annotation
+		public Annotation Annotation
 		{
 			get { return annotation; }
 			set { annotation = value; }
@@ -134,7 +134,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a URI of a place where this resource can be bought or more info can be found
 		/// </summary>
-		public Uri Info
+		public Info Info
 		{
 			get { return info; }
 			set { info = value; }
@@ -143,7 +143,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set a URI of an image to display for the duration of the track
 		/// </summary>
-		public Uri Image
+		public XspfImage Image
 		{
 			get { return image; }
 			set { image = value; }
@@ -153,7 +153,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set the human-readable name of the collection from which the resource which defines the duration of track rendering comes
 		/// </summary>
 		/// <remarks>For a song originally published as a part of a CD or LP, this would be the title of the original release</remarks>
-		public string Album
+		public Album Album
 		{
 			get { return album; }
 			set { album = value; }
@@ -162,7 +162,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set the ordinal position of this track on its album
 		/// </summary>
-		public int TrackNum
+		public TrackNumber TrackNum
 		{
 			get { return trackNum; }
 			set { trackNum = value; }
@@ -171,7 +171,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set the time to render this resource
 		/// </summary>
-		public TimeSpan Duration
+		public Duration Duration
 		{
 			get { return duration; }
 			set { duration = value; }
