@@ -8,7 +8,7 @@ namespace Alexandria.Playlist.Xspf
 	{
 		public Date(XmlNode node)
 		{
-			this.value = DateTime.Parse(node.Value);
+			DateTime.TryParse(node.Value, out value);
 		}
 		
 		public Date(DateTime value)

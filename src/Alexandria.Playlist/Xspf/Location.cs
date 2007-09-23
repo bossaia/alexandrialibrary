@@ -8,7 +8,7 @@ namespace Alexandria.Playlist.Xspf
 	{
 		public Location(XmlNode node)
 		{
-			this.value = new Uri(node.Value);
+			Uri.TryCreate(node.Value, UriKind.RelativeOrAbsolute, out value);
 		}
 	
 		public Location(Uri value)

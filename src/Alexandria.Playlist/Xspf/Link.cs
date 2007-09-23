@@ -27,8 +27,8 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">The XML node to get the content from</param>
 		public Link(XmlNode node)
 		{
-			rel = GetRel(node);
-			content = GetContent(node);
+			Uri.TryCreate(node.Attributes["rel"].Value, UriKind.RelativeOrAbsolute, out rel);
+			Uri.TryCreate(node.Value, UriKind.RelativeOrAbsolute, out content);
 		}
 		#endregion
 	
@@ -36,19 +36,7 @@ namespace Alexandria.Playlist.Xspf
 		private Uri rel;
 		private Uri content;
 		#endregion
-		
-		#region Private Static Methods
-		private static Uri GetRel(XmlNode node)
-		{
-			return new Uri(node.Attributes["rel"].Value);
-		}
-		
-		private static Uri GetContent(XmlNode node)
-		{
-			return new Uri(node.Value);
-		}
-		#endregion
-		
+				
 		#region Public Properties
 		/// <summary>
 		/// Get the URI of the related resource type

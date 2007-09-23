@@ -28,7 +28,7 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">A node containing the application URI and the supplemental content</param>
 		public Extension(XmlNode node)
 		{
-			this.application = new Uri(node.Attributes["application"].Value);
+			Uri.TryCreate(node.Attributes["application"].Value, UriKind.RelativeOrAbsolute, out application);
 			this.content = node.ChildNodes;
 		}
 		#endregion
