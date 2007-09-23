@@ -27,8 +27,8 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">The XML node to get the content from</param>
 		public Metadata(XmlNode node)
 		{
-			rel = GetRel(node);
-			content = GetContent(node);
+			Uri.TryCreate(node.Attributes["rel"].Value, UriKind.RelativeOrAbsolute, out rel);
+			content = node.Value;
 		}
 		#endregion
 

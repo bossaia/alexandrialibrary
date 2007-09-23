@@ -21,7 +21,7 @@ namespace Alexandria.Playlist.Xspf
 		#endregion
 
 		#region Private Fields
-		private XspfVersion version;
+		private string version;
 		private Title title;
 		private Creator creator;
 		private Annotation annotation;
@@ -31,11 +31,11 @@ namespace Alexandria.Playlist.Xspf
 		private XspfImage image;
 		private Date date;
 		private License license;
-		private List<Attribution> attribution = new List<Attribution>();
-		private List<Link> link = new List<Link>();
-		private List<Metadata> meta = new List<Metadata>();
-		private List<Extension> extension = new List<Extension>();
-		private List<Track> trackList = new List<Track>();
+		private List<Attribution> attributions = new List<Attribution>();
+		private List<Link> links = new List<Link>();
+		private List<Metadata> metadata = new List<Metadata>();
+		private List<Extension> extensions = new List<Extension>();
+		private List<Track> tracks = new List<Track>();
 		private XmlDocument xml;
 		#endregion
 		
@@ -101,7 +101,7 @@ namespace Alexandria.Playlist.Xspf
 		/// Get or set the version of the XSPF specification that the playlist uses
 		/// </summary>
 		/// <see cref="http://www.xspf.org"/>
-		public XspfVersion Version
+		public string Version
 		{
 			get { return version; }
 			set { version = value; }
@@ -194,33 +194,33 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get an ordered list of URIs describing playlists that this playlist is derived from
 		/// </summary>
-		public IList<Attribution> Attribution
+		public IList<Attribution> Attributions
 		{
-			get { return attribution; }
+			get { return attributions; }
 		}
 		
 		/// <summary>
 		/// Get a list of links to resources related to this playlist
 		/// </summary>
-		public IList<Link> Link
+		public IList<Link> Links
 		{
-			get { return link; }
+			get { return links; }
 		}
 		
 		/// <summary>
 		/// Get a list of metadata for this playlist
 		/// </summary>
-		public IList<Metadata> Meta
+		public IList<Metadata> Metadata
 		{
-			get { return meta; }
+			get { return metadata; }
 		}
 		
 		/// <summary>
 		/// Get a list of XML extensions for this playlist
 		/// </summary>
-		public IList<Extension> Extension
+		public IList<Extension> Extensions
 		{
-			get { return extension; }
+			get { return extensions; }
 		}
 		
 		/// <summary>
@@ -252,19 +252,19 @@ namespace Alexandria.Playlist.Xspf
 				LoadLicense(xml.SelectSingleNode("/playlist/license"));
 				
 				foreach(XmlNode attributionNode in xml.SelectNodes("/playlist/attribution"))
-					attribution.Add(new Attribution(attributionNode));
+					attributions.Add(new Attribution(attributionNode));
 				
 				foreach(XmlNode linkNode in xml.SelectNodes("/playlist/link"))
-					link.Add(new Link(linkNode));
+					links.Add(new Link(linkNode));
 
 				foreach (XmlNode metaNode in xml.SelectNodes("/playlist/meta"))
-					meta.Add(new Metadata(metaNode));
+					metadata.Add(new Metadata(metaNode));
 
 				foreach (XmlNode extensionNode in xml.SelectNodes("/playlist/extension"))
-					extension.Add(new Extension(extensionNode));
+					extensions.Add(new Extension(extensionNode));
 				
 				foreach(XmlNode trackNode in xml.SelectNodes("/playlist/tracklist/track"))
-					trackList.Add(new Track(trackNode));
+					tracks.Add(new Track(trackNode));
 			}
 			else
 			{

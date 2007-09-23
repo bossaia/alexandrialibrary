@@ -63,7 +63,6 @@
     <Compile Include="Xspf\XspfImage.cs" />
     <Compile Include="Xspf\XspfPlaylist.cs" />
     <Compile Include="Xspf\Track.cs" />
-    <Compile Include="Xspf\XspfVersion.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">

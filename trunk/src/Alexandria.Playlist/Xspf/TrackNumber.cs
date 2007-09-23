@@ -6,14 +6,14 @@ namespace Alexandria.Playlist.Xspf
 {
 	public struct TrackNumber
 	{
-		public TrackNumber(XmlNode node)
-		{
-			this.value = Convert.ToInt32(node.Value);
-		}
-		
 		public TrackNumber(int value)
 		{
 			this.value = value;
+		}
+
+		public TrackNumber(XmlNode node)
+		{
+			this.value = Convert.ToInt32(node.Value);
 		}
 		
 		private int value;

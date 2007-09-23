@@ -6,15 +6,15 @@ namespace Alexandria.Playlist.Xspf
 {
 	public struct Annotation
 	{
-		public Annotation(XmlNode node)
-		{
-			this.value = node.Value;
-		}
-		
 		public Annotation(string value)
 		{
 			this.value = value;
 		}
+
+		public Annotation(XmlNode node)
+		{
+			this.value = node.Value;
+		}		
 		
 		private string value;
 		

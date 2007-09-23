@@ -36,11 +36,11 @@ namespace Alexandria.Playlist.Xspf
 		private Info info;
 		private XspfImage image;
 		private Album album;
-		private TrackNumber trackNum;
+		private TrackNumber trackNumber;
 		private Duration duration;
-		private List<Link> link = new List<Link>();
-		private List<Metadata> meta = new List<Metadata>();
-		private List<Extension> extension = new List<Extension>();
+		private List<Link> links = new List<Link>();
+		private List<Metadata> metadata = new List<Metadata>();
+		private List<Extension> extensions = new List<Extension>();
 		#endregion
 		
 		#region Private Methods
@@ -77,7 +77,7 @@ namespace Alexandria.Playlist.Xspf
 		{
 		}
 
-		private void LoadTrackNum(XmlNode trackNumNode)
+		private void LoadTrackNumber(XmlNode trackNumberNode)
 		{
 		
 		}
@@ -162,10 +162,10 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get or set the ordinal position of this track on its album
 		/// </summary>
-		public TrackNumber TrackNum
+		public TrackNumber TrackNumber
 		{
-			get { return trackNum; }
-			set { trackNum = value; }
+			get { return trackNumber; }
+			set { trackNumber = value; }
 		}
 		
 		/// <summary>
@@ -180,25 +180,25 @@ namespace Alexandria.Playlist.Xspf
 		/// <summary>
 		/// Get a list of links to resources related to this track
 		/// </summary>
-		public IList<Link> Link
+		public IList<Link> Links
 		{
-			get { return link; }
+			get { return links; }
 		}
 
 		/// <summary>
 		/// Get a list of metadata for this track
 		/// </summary>
-		public IList<Metadata> Meta
+		public IList<Metadata> Metadata
 		{
-			get { return meta; }
+			get { return metadata; }
 		}
 
 		/// <summary>
 		/// Get a list of XML extensions for this track
 		/// </summary>
-		public IList<Extension> Extension
+		public IList<Extension> Extensions
 		{
-			get { return extension; }
+			get { return extensions; }
 		}
 		#endregion
 	}
