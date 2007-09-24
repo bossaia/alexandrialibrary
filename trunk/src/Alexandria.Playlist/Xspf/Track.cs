@@ -23,7 +23,72 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">An XML node containing the track data</param>
 		public Track(XmlNode node)
 		{
-		
+			foreach(XmlNode childNode in node.ChildNodes)
+			{
+				try
+				{
+					if (childNode.Name.Equals("location", StringComparison.InvariantCultureIgnoreCase))
+					{
+						Location location = new Location(childNode);
+						locations.Add(location);
+					}
+					else if (childNode.Name.Equals("identifier", StringComparison.InvariantCultureIgnoreCase))
+					{
+						Identifier identifier = new Identifier(childNode);
+						identifiers.Add(identifier);
+					}
+					else if (childNode.Name.Equals("title", StringComparison.InvariantCultureIgnoreCase))
+					{
+						title = new Title(childNode);
+					}
+					else if (childNode.Name.Equals("creator", StringComparison.InvariantCultureIgnoreCase))
+					{
+						creator = new Creator(childNode);
+					}
+					else if (childNode.Name.Equals("annotation", StringComparison.InvariantCultureIgnoreCase))
+					{
+						annotation = new Annotation(childNode);
+					}
+					else if (childNode.Name.Equals("info", StringComparison.InvariantCultureIgnoreCase))
+					{
+						info = new Info(childNode);
+					}
+					else if (childNode.Name.Equals("image", StringComparison.InvariantCultureIgnoreCase))
+					{
+						image = new XspfImage(childNode);
+					}
+					else if (childNode.Name.Equals("album", StringComparison.InvariantCultureIgnoreCase))
+					{
+						album = new Album(childNode);
+					}
+					else if (childNode.Name.Equals("trackNum", StringComparison.InvariantCultureIgnoreCase))
+					{
+						trackNumber = new TrackNumber(childNode);
+					}
+					else if (childNode.Name.Equals("duration", StringComparison.InvariantCultureIgnoreCase))
+					{
+						duration = new Duration(childNode);
+					}
+					else if (childNode.Name.Equals("link", StringComparison.InvariantCultureIgnoreCase))
+					{
+						Link link = new Link(childNode);
+						links.Add(link);
+					}
+					else if (childNode.Name.Equals("meta", StringComparison.InvariantCultureIgnoreCase))
+					{
+						Metadata metadataItem = new Metadata(childNode);
+						metadata.Add(metadataItem);
+					}
+					else if (childNode.Name.Equals("extension", StringComparison.InvariantCultureIgnoreCase))
+					{
+						Extension extension = new Extension(childNode);
+						extensions.Add(extension);
+					}
+				}
+				catch
+				{
+				}
+			}
 		}
 		#endregion
 		
@@ -41,50 +106,6 @@ namespace Alexandria.Playlist.Xspf
 		private List<Link> links = new List<Link>();
 		private List<Metadata> metadata = new List<Metadata>();
 		private List<Extension> extensions = new List<Extension>();
-		#endregion
-		
-		#region Private Methods
-		private void LoadLocation(XmlNode locationNode)
-		{
-		}
-		
-		private void LoadIdentifier(XmlNode identifierNode)
-		{
-		
-		}
-		
-		private void LoadTitle(XmlNode titleNode)
-		{
-		}
-		
-		private void LoadCreator(XmlNode creatorNode)
-		{
-		}
-
-		private void LoadAnnotation(XmlNode annotationNode)
-		{
-		}
-
-		private void LoadInfo(XmlNode infoNode)
-		{
-		}
-
-		private void LoadImage(XmlNode imageNode)
-		{
-		}
-
-		private void LoadAlbum(XmlNode albumNode)
-		{
-		}
-
-		private void LoadTrackNumber(XmlNode trackNumberNode)
-		{
-		
-		}
-		
-		private void LoadDuration(XmlNode durationNode)
-		{
-		}
 		#endregion
 		
 		#region Public Properties
@@ -199,6 +220,13 @@ namespace Alexandria.Playlist.Xspf
 		public IList<Extension> Extensions
 		{
 			get { return extensions; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public override string ToString()
+		{
+			return string.Format("{0:00} {1} - {2} - {3} {4}", trackNumber, Creator, Album, Title, Duration);
 		}
 		#endregion
 	}

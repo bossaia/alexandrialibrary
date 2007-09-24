@@ -41,8 +41,11 @@
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandConstants.cs" />
     <Compile Include="Commands\ContextCommand.cs" />
+    <Compile Include="Commands\ListCommand.cs" />
+    <Compile Include="Commands\LoadCommand.cs" />
     <Compile Include="Commands\PauseCommand.cs" />
     <Compile Include="Commands\PlayCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\SeekCommand.cs" />
     <Compile Include="Commands\StatusCommand.cs" />
     <Compile Include="Commands\StopCommand.cs" />

@@ -13,7 +13,7 @@ namespace Alexandria.Playlist.Xspf
 
 		public TrackNumber(XmlNode node)
 		{
-			this.value = Convert.ToInt32(node.Value);
+			this.value = Convert.ToInt32(node.InnerText);
 		}
 		
 		private int value;
@@ -21,6 +21,11 @@ namespace Alexandria.Playlist.Xspf
 		public int Value
 		{
 			get { return value; }
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0:00}", Value);
 		}
 	}
 }

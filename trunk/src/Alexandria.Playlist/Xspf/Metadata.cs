@@ -27,8 +27,8 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">The XML node to get the content from</param>
 		public Metadata(XmlNode node)
 		{
-			Uri.TryCreate(node.Attributes["rel"].Value, UriKind.RelativeOrAbsolute, out rel);
-			content = node.Value;
+			rel = new Uri(node.Attributes["rel"].Value);
+			content = node.InnerText;
 		}
 		#endregion
 
@@ -45,7 +45,7 @@ namespace Alexandria.Playlist.Xspf
 
 		private static  string GetContent(XmlNode node)
 		{
-			return node.Value;
+			return node.InnerText;
 		}
 		#endregion
 		
@@ -66,5 +66,10 @@ namespace Alexandria.Playlist.Xspf
 			get { return content; }
 		}
 		#endregion
+
+		public override string ToString()
+		{
+			return (Content != null) ? Content : string.Empty;
+		}
 	}
 }
