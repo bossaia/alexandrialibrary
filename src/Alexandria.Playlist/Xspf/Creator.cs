@@ -13,7 +13,7 @@ namespace Alexandria.Playlist.Xspf
 
 		public Creator(XmlNode node)
 		{
-			this.value = node.Value;
+			this.value = node.InnerText;
 		}
 
 		private string value;
@@ -21,6 +21,11 @@ namespace Alexandria.Playlist.Xspf
 		public string Value
 		{
 			get { return value; }
+		}
+
+		public override string ToString()
+		{
+			return (Value != null) ? Value : string.Empty;
 		}
 	}
 }

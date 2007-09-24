@@ -16,10 +16,12 @@ namespace Alexandria.Playlist.Xspf
 		/// </summary>
 		/// <param name="application">The application URI</param>
 		/// <param name="content">The supplemental content</param>
-		public Extension(Uri application, XmlNodeList content)
+		/// <param name="contentNamespace">The namespace of the supplemental content</param>
+		public Extension(Uri application, XmlNodeList content, string contentNamespace)
 		{
 			this.application = application;
 			this.content = content;
+			this.contentNamespace = contentNamespace;
 		}
 			
 		/// <summary>
@@ -28,14 +30,16 @@ namespace Alexandria.Playlist.Xspf
 		/// <param name="node">A node containing the application URI and the supplemental content</param>
 		public Extension(XmlNode node)
 		{
-			Uri.TryCreate(node.Attributes["application"].Value, UriKind.RelativeOrAbsolute, out application);
+			application = new Uri(node.Attributes["application"].Value);
 			this.content = node.ChildNodes;
+			this.contentNamespace = node.NamespaceURI.ToString();
 		}
 		#endregion
 		
 		#region Private Fields
 		private Uri application;
 		private XmlNodeList content;
+		private string contentNamespace;
 		#endregion
 		
 		#region Public Properties
@@ -54,6 +58,19 @@ namespace Alexandria.Playlist.Xspf
 		{
 			get { return content; }
 		}
+		
+		/// <summary>
+		/// Get the namespace of the supplemental content
+		/// </summary>
+		public string ContentNamespace
+		{
+			get { return contentNamespace; }
+		}
 		#endregion
+
+		public override string ToString()
+		{
+			return (Content != null) ? Content.ToString() : string.Empty;
+		}
 	}
 }

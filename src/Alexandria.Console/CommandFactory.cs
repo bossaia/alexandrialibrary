@@ -30,13 +30,16 @@ namespace Alexandria.Console
 					if (commands.Count == 0)
 					{
 						AddToDictionary(new AddCommand());
-						AddToDictionary(new ContextCommand());
-						AddToDictionary(new StatusCommand());
 						AddToDictionary(new CloseCommand());
-						AddToDictionary(new PlayCommand());
+						AddToDictionary(new ContextCommand());
+						AddToDictionary(new ListCommand());
+						AddToDictionary(new LoadCommand());
 						AddToDictionary(new PauseCommand());
-						AddToDictionary(new StopCommand());
+						AddToDictionary(new PlayCommand());
+						AddToDictionary(new SaveCommand());
 						AddToDictionary(new SeekCommand());
+						AddToDictionary(new StatusCommand());
+						AddToDictionary(new StopCommand());
 						AddToDictionary(new VolumeCommand());
 					}
 									
