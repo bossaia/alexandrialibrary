@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Web;
 
 using Alexandria.Console.Commands;
 using Alexandria.Playlist;
@@ -18,7 +21,26 @@ namespace Alexandria.Console.Contexts
 
 		private void HandleAdd(string option)
 		{
-			System.Console.WriteLine("Playlist Add logic goes here");
+			if (xspfPlaylist != null)
+			{
+				try
+				{
+					Uri path;
+					if (Uri.TryCreate(option, UriKind.RelativeOrAbsolute, out path))
+					{
+						Track track = new Track();
+						track.Locations.Add(new Location(path));
+						xspfPlaylist.Tracks.Add(track);
+						Result = string.Format("Added track {0} to playlist", path.LocalPath);
+					}
+					else Result = "There was an error adding to playlist: invalid track location";
+				}
+				catch (Exception ex)
+				{
+					Result = "There was an error adding to playlist: " + ex.Message;
+				}
+			}
+			else Result = "Could not add to playlist: no playlist loaded";
 		}
 
 		private void HandleList(string option)
@@ -27,45 +49,70 @@ namespace Alexandria.Console.Contexts
 			{
 				if (xspfPlaylist.Tracks.Count > 0)
 				{
-					System.Console.WriteLine(string.Format("Playlist contents: {0} tracks", xspfPlaylist.Tracks.Count));
+					StringBuilder builder = new StringBuilder();
+					builder.AppendFormat("Playlist contents: {0} tracks\n", xspfPlaylist.Tracks.Count);
 					foreach(Track track in xspfPlaylist.Tracks)
-						System.Console.WriteLine(track.ToString());
+						builder.AppendFormat("{0}\n", track);
+					
+					Result = builder.ToString();
 				}
+				else Result = "Playlist is empty";
 			}
+			else Result = "Could not list playlist contents: no playlist loaded";
 		}
 
 		private void HandleLoad(string option)
 		{
-			Uri path;
-			if (Uri.TryCreate(option, UriKind.RelativeOrAbsolute, out path))
+			try
 			{
-				xspfPlaylist = new XspfPlaylist(path);
-				xspfPlaylist.Load();
-				System.Console.WriteLine("Playlist loaded");
+				Uri path;
+				if (Uri.TryCreate(option, UriKind.RelativeOrAbsolute, out path))
+				{
+					if (path.IsFile)
+					{
+						if (File.Exists(path.LocalPath))
+						{
+							xspfPlaylist = new XspfPlaylist(path);
+							xspfPlaylist.Load();
+							Result = "Playlist loaded";
+						}
+						else Result = "Could not load playlist: file does not exist";
+					}
+				}
 			}
-			else System.Console.WriteLine("Could not load playlist: invalid path");
+			catch(Exception ex)
+			{
+				Result = "There was an error loading this playlist: " + ex.Message;
+			}
 		}
 		
 		private void HandleSave(string option)
 		{
-			Uri path;
-			if (Uri.TryCreate(option, UriKind.RelativeOrAbsolute, out path))
+			try
 			{
-				if (xspfPlaylist != null)
+				Uri path;
+				if (Uri.TryCreate(option, UriKind.RelativeOrAbsolute, out path))
 				{
-					xspfPlaylist.Save(path);
-					System.Console.WriteLine("Playlist saved to: {0}", option);
+					if (xspfPlaylist != null)
+					{
+						xspfPlaylist.Save(path);
+						Result = "Playlist saved to: " + path.LocalPath;
+					}
+					else Result = "Could not save playlist: no playlist is currently loaded";
 				}
-				else System.Console.WriteLine("Could not save playlist: no playlist is currently loaded");
+				else Result = "Could not save playlist: invalid path";
 			}
-			else System.Console.WriteLine("Could not save playlist: invalid path");
+			catch(Exception ex)
+			{
+				Result = "There was an error saving the playlist: " + ex.Message;
+			}
 		}
 		
 		private void HandleStatus(string option)
 		{
 			if (xspfPlaylist != null)
-				System.Console.WriteLine(string.Format("Playlist loaded: {0}", xspfPlaylist.Title));
-			else System.Console.WriteLine("No playlist loaded");
+				Result = string.Format("Playlist loaded: {0}", xspfPlaylist.Title);
+			else Result = "No playlist loaded";
 		}
 
 		public override void HandleCommand(Command command, string option)
@@ -76,18 +123,23 @@ namespace Alexandria.Console.Contexts
 				{
 					case CommandConstants.Add:
 						HandleAdd(option);
+						WriteResult();
 						break;
 					case CommandConstants.List:
 						HandleList(option);
+						WriteResult();
 						break;
 					case CommandConstants.Load:
 						HandleLoad(option);
+						WriteResult();
 						break;
 					case CommandConstants.Save:
 						HandleSave(option);
+						WriteResult();
 						break;
 					case CommandConstants.Status:
 						HandleStatus(option);
+						WriteResult();
 						break;
 					default:
 						break;

@@ -19,6 +19,7 @@ namespace Alexandria.Console
 		private bool isActive;
 		private bool isOpen = true;
 		private string prompt = "alx> ";
+		private string result;
 		
 		public string Name
 		{
@@ -41,6 +42,12 @@ namespace Alexandria.Console
 			get { return prompt; }
 			set { prompt = value; }
 		}
+	
+		public string Result
+		{
+			get { return result; }
+			set { result = value; }
+		}
 		
 		public virtual void Close()
 		{
@@ -48,10 +55,11 @@ namespace Alexandria.Console
 				isOpen = false;
 		}
 		
-		public abstract void HandleCommand(Command command, string option);
-				
-		public virtual void WriteStatus()
+		public virtual void WriteResult()
 		{
+			System.Console.WriteLine(Result);
 		}
+				
+		public abstract void HandleCommand(Command command, string option);
 	}
 }
