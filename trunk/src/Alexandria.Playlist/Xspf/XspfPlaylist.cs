@@ -380,11 +380,12 @@ namespace Alexandria.Playlist.Xspf
 					writer.WriteAttributeString("application", extension.Application.ToString());
 					foreach(XmlNode extensionNode in extension.Content)
 					{
-						writer.WriteRaw(extensionNode.InnerXml);
+						writer.WriteRaw(extensionNode.OuterXml);
 					}
 					writer.WriteEndElement();
 				}
 				
+				writer.WriteStartElement("trackList");
 				
 				foreach(Track track in Tracks)
 				{
@@ -429,15 +430,16 @@ namespace Alexandria.Playlist.Xspf
 						writer.WriteAttributeString("application", trackExtension.Application.ToString());
 						foreach (XmlNode trackExtensionNode in trackExtension.Content)
 						{
-							writer.WriteRaw(trackExtensionNode.InnerXml);
+							writer.WriteRaw(trackExtensionNode.OuterXml);
 						}
 						writer.WriteEndElement();
 					}
 					
-					writer.WriteEndElement();
+					writer.WriteEndElement(); //</track>
 				}
+				writer.WriteEndElement(); //</trackList>
 				
-				writer.WriteEndElement();
+				writer.WriteEndElement(); //</playlist>
 				writer.WriteEndDocument();
 				writer.Close();
 			}

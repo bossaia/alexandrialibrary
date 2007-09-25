@@ -18,13 +18,19 @@ namespace Alexandria.Console.Contexts
 				if (ContextFactory.IsContext(option))
 				{
 					ContextFactory.SetActiveContext(option);
+					Result = string.Format("Context changed to: {0}", option);
 				}
-				else System.Console.WriteLine(string.Format("{0} is not a valid context", option));
+				else Result = string.Format("{0} is not a valid context", option);
 			}
 			else
 			{
-				System.Console.WriteLine(string.Format("Active Context: {0}", ContextFactory.ActiveContext.Name));
+				Result = string.Format("Active Context: {0}", ContextFactory.ActiveContext.Name);
 			}
+		}
+
+		private void HandleStatus(string option)
+		{
+			System.Console.WriteLine("Alexandria Client Ready");
 		}
 	
 		public override void HandleCommand(Command command, string option)
@@ -36,18 +42,14 @@ namespace Alexandria.Console.Contexts
 					break;
 				case CommandConstants.Context:
 					HandleContext(option);
+					WriteResult();
 					break;
 				case CommandConstants.Status:
-					if (IsActive) WriteStatus();
+					if (IsActive) HandleStatus(option);
 					break;
 				default:
 					break;
 			}
-		}
-
-		public override void WriteStatus()
-		{
-			System.Console.WriteLine("Default status message goes here");
 		}
 	}
 }

@@ -21,13 +21,12 @@ namespace Alexandria.Console.Contexts
 
 		private IAudioPlayer player;
 
-		private void Pause(string option)
+		private void HandlePause(string option)
 		{
 			player.Play();
-			WriteStatus();
 		}
 
-		private void Play(string option)
+		private void HandlePlay(string option)
 		{
 			if (!string.IsNullOrEmpty(option))
 			{
@@ -39,11 +38,9 @@ namespace Alexandria.Console.Contexts
 			{
 				player.Play();
 			}
-
-			WriteStatus();
 		}
 		
-		private void Seek(string option)
+		private void HandleSeek(string option)
 		{
 			int hours = 0, minutes = 0, seconds = 0;
 
@@ -69,10 +66,26 @@ namespace Alexandria.Console.Contexts
 
 			TimeSpan position = new TimeSpan(hours, minutes, seconds);
 			player.Seek((int)position.TotalMilliseconds);
-			WriteStatus("Stream Position", position.ToString());
+			Result = "Stream Position: " + position.ToString();
 		}
 
-		private void SetVolume(string option)
+		private void HandleStatus(string option)
+		{
+			if (player.CurrentAudioStream != null)
+			{
+				if (player.CurrentAudioStream.PlaybackState == PlaybackState.Playing || player.CurrentAudioStream.PlaybackState == PlaybackState.Paused)
+				{
+					System.Console.WriteLine(string.Format("Stream {0} is {1} at {2}", player.CurrentAudioStream.Path, player.CurrentAudioStream.PlaybackState.ToString(), player.CurrentAudioStream.Elapsed));
+				}
+				else
+				{
+					System.Console.WriteLine(string.Format("Stream {0} is {1}", player.CurrentAudioStream.Path, player.CurrentAudioStream.PlaybackState.ToString()));
+				}
+			}
+			else System.Console.WriteLine("No audio stream loaded");
+		}
+
+		private void HandleVolume(string option)
 		{
 			float volume = 0f;
 			if (float.TryParse(option, out volume))
@@ -83,33 +96,12 @@ namespace Alexandria.Console.Contexts
 			else volume = 0.5f;
 
 			player.SetVolume(volume);
-			WriteStatus("Stream Volume", volume.ToString());
+			Result = "Stream Volume: " + volume.ToString();
 		}
 
-		private void Stop(string option)
+		private void HandleStop(string option)
 		{
 			player.Stop();
-			WriteStatus();
-		}
-
-		public override void WriteStatus()
-		{
-			WriteStatus(string.Empty, string.Empty);
-		}
-
-		public void WriteStatus(string command, string option)
-		{
-			if (player != null && player.CurrentAudioStream != null)
-			{
-				if (string.IsNullOrEmpty(command))
-					command = "Stream";
-
-				if (string.IsNullOrEmpty(option))
-					option = player.CurrentAudioStream.PlaybackState.ToString();
-
-				System.Console.WriteLine(string.Format("{0} {1}", command, option));
-			}
-			else System.Console.WriteLine("NO STREAM LOADED");
 		}
 
 		public override void HandleCommand(Command command, string option)
@@ -117,22 +109,27 @@ namespace Alexandria.Console.Contexts
 			switch(command.Name)
 			{
 				case CommandConstants.Pause:
-					Pause(option);
+					HandlePause(option);
+					WriteResult();
 					break;
 				case CommandConstants.Play:
-					Play(option);
+					HandlePlay(option);
+					WriteResult();
 					break;
 				case CommandConstants.Seek:
-					Seek(option);
+					HandleSeek(option);
+					WriteResult();
 					break;
 				case CommandConstants.Status:
-					if (IsActive) WriteStatus();
+					HandleStatus(option);
 					break;
 				case CommandConstants.Stop:
-					Stop(option);
+					HandleStop(option);
+					WriteResult();
 					break;
 				case CommandConstants.Volume:
-					SetVolume(option);
+					HandleVolume(option);
+					WriteResult();
 					break;
 				default:
 					break;
