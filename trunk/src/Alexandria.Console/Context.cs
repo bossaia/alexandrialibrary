@@ -18,6 +18,7 @@ namespace Alexandria.Console
 		private string name;
 		private bool isActive;
 		private bool isOpen = true;
+		private Batch currentBatch;
 		private string prompt = "alx> ";
 		private string result;
 		
@@ -37,6 +38,16 @@ namespace Alexandria.Console
 			get { return isOpen; }
 		}
 		
+		public Batch CurrentBatch
+		{
+			get { return currentBatch; }
+		}
+		
+		public bool HasOpenBatch
+		{
+			get { return (currentBatch != null && currentBatch.IsOpen); }
+		}
+		
 		public string Prompt
 		{
 			get { return prompt; }
@@ -53,6 +64,11 @@ namespace Alexandria.Console
 		{
 			if (isActive)
 				isOpen = false;
+		}
+		
+		public virtual void LoadBatch(Batch batch)
+		{
+			currentBatch = batch;
 		}
 		
 		public virtual void WriteResult()
