@@ -35,6 +35,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batch.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFactory.cs" />
     <Compile Include="CommandRunner.cs" />
