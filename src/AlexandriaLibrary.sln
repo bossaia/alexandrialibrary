@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Db4o", "Alexandr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Console", "Alexandria.Console\Alexandria.Console.csproj", "{3C535C0D-3151-4B59-B299-E53ED5F6942E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.WpfClient", "Alexandria.WpfClient\Alexandria.WpfClient.csproj", "{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +134,10 @@ Global
 		{3C535C0D-3151-4B59-B299-E53ED5F6942E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C535C0D-3151-4B59-B299-E53ED5F6942E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C535C0D-3151-4B59-B299-E53ED5F6942E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
