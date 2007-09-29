@@ -1,8 +1,6 @@
 ﻿<Application x:Class="Alexandria.WpfClient.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    StartupUri="Window1.xaml"
-    >
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StartupUri="MainForm.xaml">
     <Application.Resources>
          
     </Application.Resources>
