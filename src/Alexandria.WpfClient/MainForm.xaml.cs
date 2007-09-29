@@ -17,10 +17,10 @@ namespace Alexandria.WpfClient
 	/// Interaction logic for Window1.xaml
 	/// </summary>
 
-	public partial class Window1 : System.Windows.Window
+	public partial class MainForm : System.Windows.Window
 	{
 
-		public Window1()
+		public MainForm()
 		{
 			InitializeComponent();
 		}
