@@ -26,7 +26,20 @@ namespace Alexandria.WpfClient
 
 		private void OnMouseEnter(object sender, RoutedEventArgs e)
 		{
-			//circle.Style = "{StaticResource SelectedStyle}";
+			GradientStopCollection stopCollection = new GradientStopCollection();
+			stopCollection.Add(new GradientStop(Colors.LightBlue, 0.05));
+			stopCollection.Add(new GradientStop(Colors.Blue, 0.95));
+			RadialGradientBrush brush = new RadialGradientBrush(stopCollection);
+			circle.Fill = brush;
+		}
+
+		private void OnMouseLeave(object sender, RoutedEventArgs e)
+		{
+			GradientStopCollection stopCollection = new GradientStopCollection();
+			stopCollection.Add(new GradientStop(Colors.Blue, 0.05));
+			stopCollection.Add(new GradientStop(Colors.LightBlue, 0.95));
+			RadialGradientBrush brush = new RadialGradientBrush(stopCollection);
+			circle.Fill = brush;		
 		}
 
 		private void OnMouseLeftButtonUp(object sender, RoutedEventArgs e)

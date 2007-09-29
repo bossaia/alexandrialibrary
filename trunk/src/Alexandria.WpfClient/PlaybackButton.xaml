@@ -18,24 +18,9 @@
 				</Setter.Value>
 			</Setter>
 		</Style>
-		<Style x:Key="SelectedStyle" TargetType="{x:Type Ellipse}">
-			<Setter Property="Width" Value="32" />
-			<Setter Property="Height" Value="32" />
-			<Setter Property="Stroke" Value="Black" />
-			<Setter Property="StrokeThickness" Value="0" />
-
-			<Setter Property="Fill">
-				<Setter.Value>
-					<LinearGradientBrush>
-						<GradientStop Color="LightBlue" Offset="0.05" />
-						<GradientStop Color="Blue" Offset="0.95" />
-					</LinearGradientBrush>
-				</Setter.Value>
-			</Setter>
-		</Style>
 	</UserControl.Resources>
 	<Grid>
-		<Ellipse Name="circle" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseEnter="OnMouseEnter" Style="{StaticResource UnselectedStyle}">
+		<Ellipse Name="circle" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" Style="{StaticResource UnselectedStyle}">
 		</Ellipse>
-    </Grid>
+	</Grid>
 </UserControl>
