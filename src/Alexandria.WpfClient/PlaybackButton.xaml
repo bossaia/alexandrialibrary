@@ -21,6 +21,27 @@
 	</UserControl.Resources>
 	<Grid>
 		<Ellipse Name="circle" MouseLeftButtonUp="OnMouseLeftButtonUp" MouseEnter="OnMouseEnter" MouseLeave="OnMouseLeave" Style="{StaticResource UnselectedStyle}">
+			<!--<Ellipse.Clip>
+				<GeometryGroup>
+					<PathGeometry>
+						<PathFigure IsClosed="True" IsFilled="True">
+							<PathFigure.StartPoint>
+								<Point X="1" Y="0"></Point>
+							</PathFigure.StartPoint>
+							<LineSegment>
+								<LineSegment.Point>
+									<Point X="5" Y="5"></Point>
+								</LineSegment.Point>
+							</LineSegment>
+							<LineSegment>
+								<LineSegment.Point>
+									<Point X="9" Y="0"></Point>
+								</LineSegment.Point>
+							</LineSegment>
+						</PathFigure>
+					</PathGeometry>
+				</GeometryGroup>
+			</Ellipse.Clip>-->
 		</Ellipse>
 	</Grid>
 </UserControl>
