@@ -5,7 +5,7 @@ namespace Alexandria.Metadata
 {
 	public interface IElement<T> : IEquatable<T>
 	{
-		Uri Identifier { get; }
+		IIdentifier Identifier { get; }
 		T Value { get; }
 	}
 }
