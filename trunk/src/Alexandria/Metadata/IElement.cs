@@ -3,9 +3,14 @@ using System.Collections.Generic;
 
 namespace Alexandria.Metadata
 {
-	public interface IElement<T> : IEquatable<T>
+	public interface IElement
 	{
 		IIdentifier Identifier { get; }
+		object Value { get; }
+	}
+
+	public interface IElement<T> : IElement, IEquatable<T>
+	{
 		T Value { get; }
 	}
 }

@@ -6,7 +6,6 @@ namespace Alexandria.Metadata
 {
 	public interface IEntity
 	{
-		Uri Identifier { get; }
 		string Name { get; }
 	}
 }

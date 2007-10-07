@@ -84,11 +84,14 @@
     <Compile Include="Media\IMediaContainer.cs" />
     <Compile Include="Media\MediaType.cs" />
     <Compile Include="Metadata\Coordinate.cs" />
+    <Compile Include="Metadata\Creator.cs" />
+    <Compile Include="Metadata\Duration.cs" />
     <Compile Include="Metadata\Element.cs" />
+    <Compile Include="Metadata\IAudioTrack.cs" />
     <Compile Include="Metadata\IElement.cs" />
     <Compile Include="Metadata\IEntity.cs" />
     <Compile Include="Metadata\ILanguage.cs" />
-    <Compile Include="Metadata\ILocation.cs" />
+    <Compile Include="Metadata\NumberInSet.cs" />
     <Compile Include="Metadata\Old\BaseAlbum.cs" />
     <Compile Include="Metadata\Old\BaseArtist.cs" />
     <Compile Include="Metadata\Old\BaseAudioTrack.cs" />
@@ -97,6 +100,8 @@
     <Compile Include="Metadata\Old\IAudioTrackFactory.cs" />
     <Compile Include="Metadata\Old\MetadataIdentifier.cs" />
     <Compile Include="Metadata\Old\ProxyAudioTrack.cs" />
+    <Compile Include="Metadata\Title.cs" />
+    <Compile Include="Metadata\TotalInSet.cs" />
     <Compile Include="ModelChangedEventArgs.cs" />
     <Compile Include="ModelChangingEventArgs.cs" />
     <Compile Include="Persistence\FactoryMap.cs" />
