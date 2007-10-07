@@ -7,7 +7,7 @@ namespace Alexandria.Metadata
 	public class Element<T> : IElement<T>
 	{
 		#region Constructors
-		public Element(Uri identifier, T value)
+		public Element(IIdentifier identifier, T value)
 		{
 			this.identifier = identifier;
 			this.value = value;
@@ -15,7 +15,7 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region Private Fields
-		private Uri identifier;
+		private IIdentifier identifier;
 		private T value;
 		#endregion
 
@@ -29,7 +29,7 @@ namespace Alexandria.Metadata
 			get
 			{
 				if (!unknownElements.ContainsKey(typeof(T)))
-					unknownElements[typeof(T)] = new Element<T>(null, default(T));
+					unknownElements[typeof(T)] = new Element<T>(Alexandria.Identifier.Undefined, default(T));
 
 				return unknownElements[typeof(T)];
 			}
@@ -81,7 +81,7 @@ namespace Alexandria.Metadata
 		#endregion
 
 		#region IElement<T> Members
-		public Uri Identifier
+		public IIdentifier Identifier
 		{
 			get { return identifier; }
 		}

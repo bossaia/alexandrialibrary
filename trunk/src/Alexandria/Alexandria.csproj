@@ -50,6 +50,8 @@
     <Compile Include="Catalog\ICatalogItem.cs" />
     <Compile Include="Catalog\IUser.cs" />
     <Compile Include="IController.cs" />
+    <Compile Include="Identifier.cs" />
+    <Compile Include="IIdentifier.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IRequest.cs" />
