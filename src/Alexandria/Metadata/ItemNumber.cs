@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Alexandria.Metadata
 {
-	public class NumberInSet : Element<int>
+	public class ItemNumber : Element<int>
 	{
-		public NumberInSet(IIdentifier identifier, int value) : base(identifier, value)
+		public ItemNumber(IIdentifier identifier, int value) : base(identifier, value)
 		{
 		}
 	}

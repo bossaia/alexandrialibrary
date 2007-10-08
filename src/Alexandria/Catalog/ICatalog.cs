@@ -42,8 +42,8 @@ namespace Alexandria.Catalog
 		[Field(FieldType.Child, FieldRelationship.ManyToMany, "UserCatalog", "UserId", "CatalogId", FieldCascades.Save)]
 		IUser User { get; set; }
 		
-		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.Save, ChildType=typeof(IAlbum))]
-        IList<IAlbum> Albums { get; }
+		[Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogAlbum", "CatalogId", "AlbumId", FieldCascades.Save, ChildType=typeof(IOldAlbum))]
+        IList<IOldAlbum> Albums { get; }
         
         [Field(FieldType.Parent, FieldRelationship.ManyToMany, "CatalogArtist", "CatalogId", "ArtistId", FieldCascades.Save, ChildType=typeof(IArtist))]
         IList<IArtist> Artists { get; }

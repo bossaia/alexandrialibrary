@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Alexandria.Metadata
 {
-	public class TotalInSet : Element<int>
+	public class Work : Element<string>
 	{
-		public TotalInSet(IIdentifier identifier, int value) : base(identifier, value)
+		public Work(IIdentifier identifier, string value) : base(identifier, value)
 		{
 		}
 	}

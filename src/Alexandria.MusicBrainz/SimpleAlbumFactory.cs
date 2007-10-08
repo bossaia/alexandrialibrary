@@ -373,19 +373,19 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public IAlbum CreateAlbum(Uri path)
+		public IOldAlbum CreateAlbum(Uri path)
 		{
 			return LookupAlbumByCompactDisc(path);
 		}
 		
 		//[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public IAlbum CreateAlbum(string musicBrainzId, Uri path)
+		public IOldAlbum CreateAlbum(string musicBrainzId, Uri path)
 		{
 			return LookupAlbumById(musicBrainzId, path);
 		}
 
 		[Factory("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-		public IAlbum CreateAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
+		public IOldAlbum CreateAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
 		{
 			return new SimpleAlbum(id, path, name, artist, releaseDate);
 		}

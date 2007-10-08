@@ -59,7 +59,7 @@ namespace Alexandria.Client.Controllers
 		{
 			try
 			{
-				IAlbum album = factory.CreateAlbum(path);
+				IOldAlbum album = factory.CreateAlbum(path);
 				return album.Tracks;
 			}
 			catch (Exception ex)

@@ -87,11 +87,13 @@
     <Compile Include="Metadata\Creator.cs" />
     <Compile Include="Metadata\Duration.cs" />
     <Compile Include="Metadata\Element.cs" />
-    <Compile Include="Metadata\IAudioTrack.cs" />
+    <Compile Include="Metadata\IAlbum.cs" />
+    <Compile Include="Metadata\IMetadataItem.cs" />
+    <Compile Include="Metadata\ITrack.cs" />
     <Compile Include="Metadata\IElement.cs" />
     <Compile Include="Metadata\IEntity.cs" />
     <Compile Include="Metadata\ILanguage.cs" />
-    <Compile Include="Metadata\NumberInSet.cs" />
+    <Compile Include="Metadata\ItemNumber.cs" />
     <Compile Include="Metadata\Old\BaseAlbum.cs" />
     <Compile Include="Metadata\Old\BaseArtist.cs" />
     <Compile Include="Metadata\Old\BaseAudioTrack.cs" />
@@ -100,8 +102,9 @@
     <Compile Include="Metadata\Old\IAudioTrackFactory.cs" />
     <Compile Include="Metadata\Old\MetadataIdentifier.cs" />
     <Compile Include="Metadata\Old\ProxyAudioTrack.cs" />
+    <Compile Include="Metadata\ReleaseDate.cs" />
     <Compile Include="Metadata\Title.cs" />
-    <Compile Include="Metadata\TotalInSet.cs" />
+    <Compile Include="Metadata\Work.cs" />
     <Compile Include="ModelChangedEventArgs.cs" />
     <Compile Include="ModelChangingEventArgs.cs" />
     <Compile Include="Persistence\FactoryMap.cs" />

@@ -34,6 +34,6 @@ namespace Alexandria.Metadata
 	[ToolCategory("Album Lookup", "Lookup the album information from a CD")]
 	public interface IAlbumFactory
 	{
-		IAlbum CreateAlbum(Uri path);
+		IOldAlbum CreateAlbum(Uri path);
 	}
 }

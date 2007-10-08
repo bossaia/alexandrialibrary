@@ -35,7 +35,7 @@ namespace Alexandria.Metadata
 {
 	[Record("Album")]
 	[RecordType("5204CB07-4030-4186-8AD7-A1EC93937AEA")]
-	public abstract class BaseAlbum : BaseMetadata, IAlbum
+	public abstract class BaseAlbum : BaseMetadata, IOldAlbum
 	{
 		#region Constructors
 		public BaseAlbum(string id, string path, string name, string artist, DateTime releaseDate) : this(new Guid(id), new Uri(path), name, artist, releaseDate)
