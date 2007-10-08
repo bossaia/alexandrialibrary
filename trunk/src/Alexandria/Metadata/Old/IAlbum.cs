@@ -34,7 +34,7 @@ using Alexandria.Persistence;
 namespace Alexandria.Metadata
 {
 	[Record("Album")]
-	public interface IAlbum : IMetadata
+	public interface IOldAlbum : IMetadata
 	{	
 		[Field(4, FieldConstraints.Required)]	
 		string Artist { get; }

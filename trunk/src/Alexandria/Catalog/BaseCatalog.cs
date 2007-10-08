@@ -51,7 +51,7 @@ namespace Alexandria.Catalog
 		private Guid id;
 		private string name;
 		private IUser user;
-		private List<IAlbum> albums = new List<IAlbum>();
+		private List<IOldAlbum> albums = new List<IOldAlbum>();
 		private List<IArtist> artists = new List<IArtist>();
 		private List<IAudioTrack> tracks = new List<IAudioTrack>();
 		
@@ -70,7 +70,7 @@ namespace Alexandria.Catalog
 			set { user = value; }
 		}
 
-		public IList<IAlbum> Albums
+		public IList<IOldAlbum> Albums
 		{
 			get { return albums; }
 		}

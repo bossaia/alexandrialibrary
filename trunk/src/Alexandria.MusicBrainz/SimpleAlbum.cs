@@ -40,7 +40,7 @@ namespace Alexandria.MusicBrainz
 {
 	[Record("Album")]
 	[RecordType("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-    internal class SimpleAlbum : IAlbum
+    internal class SimpleAlbum : IOldAlbum
     {
 		#region Constructors
 		public SimpleAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
@@ -143,12 +143,12 @@ namespace Alexandria.MusicBrainz
         #endregion
 
 		#region IAlbum Members
-		string IAlbum.Artist
+		string IOldAlbum.Artist
 		{
 			get { return artist; }
 		}
 
-		IList<IAudioTrack> IAlbum.Tracks
+		IList<IAudioTrack> IOldAlbum.Tracks
 		{
 			get { return tracks; }
 		}
