@@ -17,6 +17,8 @@ namespace Alexandria.Metadata
 		#region Private Fields
 		private IIdentifier identifier;
 		private T value;
+		private IElement parent;
+		private List<IElement> children = new List<IElement>();
 		#endregion
 
 		#region Public Methods
@@ -49,6 +51,18 @@ namespace Alexandria.Metadata
 		object IElement.Value
 		{
 			get { return value; }
+			set { this.value = (T)value; }
+		}
+		
+		public IElement Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
+		
+		public IList<IElement> Children
+		{
+			get { return children; }
 		}
 		#endregion
 
@@ -61,6 +75,7 @@ namespace Alexandria.Metadata
 		public T Value
 		{
 			get { return value; }
+			set { this.value = value; }
 		}
 		#endregion
 
