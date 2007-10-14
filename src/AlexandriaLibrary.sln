@@ -44,6 +44,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Console", "Alexa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.WpfClient", "Alexandria.WpfClient\Alexandria.WpfClient.csproj", "{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Metadata", "Alexandria.Metadata\Alexandria.Metadata.csproj", "{05433832-743F-4C81-8306-6273D7929371}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +140,10 @@ Global
 		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C3D6E82-53B2-4EDB-AB36-1E4A055D0925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05433832-743F-4C81-8306-6273D7929371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05433832-743F-4C81-8306-6273D7929371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05433832-743F-4C81-8306-6273D7929371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05433832-743F-4C81-8306-6273D7929371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
