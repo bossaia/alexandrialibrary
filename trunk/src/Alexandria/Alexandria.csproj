@@ -55,6 +55,7 @@
     <Compile Include="IMessage.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IRequest.cs" />
+    <Compile Include="IResource.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Media\BaseMediaFormat.cs" />
     <Compile Include="Media\BitRateType.cs" />
@@ -175,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

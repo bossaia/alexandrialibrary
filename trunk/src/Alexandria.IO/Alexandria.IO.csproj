@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{05433832-743F-4C81-8306-6273D7929371}</ProjectGuid>
+    <ProjectGuid>{97449DEA-C759-4E22-B287-305CA0023749}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Metadata</RootNamespace>
-    <AssemblyName>Alexandria.Metadata</AssemblyName>
+    <RootNamespace>Alexandria.IO</RootNamespace>
+    <AssemblyName>Alexandria.IO</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,18 +29,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMetadataIdentifier.cs" />
-    <Compile Include="IMetadataReader.cs" />
-    <Compile Include="IMetadataRecord.cs" />
-    <Compile Include="MetadataIdentifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.Metadata.dll.config" />
+    <None Include="Alexandria.IO.dll.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
