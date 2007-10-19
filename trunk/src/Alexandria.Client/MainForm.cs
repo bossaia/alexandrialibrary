@@ -58,9 +58,11 @@ namespace Alexandria.Client
 				this.NextButton.Click += new EventHandler(NextButton_Click);
 				this.PreviousButton.Click += new EventHandler(PreviousButton_Click);
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
-				this.QueueListView.SelectedIndexChanged += new EventHandler(QueueListView_SelectedIndexChanged);
+				this.queueDataGrid.SelectionChanged += new EventHandler(queueDataGrid_SelectionChanged);
+				//this.QueueListView.SelectedIndexChanged += new EventHandler(QueueListView_SelectedIndexChanged);
 				
-				queueController.QueueListView = this.QueueListView;
+				//queueController.QueueListView = this.QueueListView;
+				queueController.Grid = queueDataGrid;
 				queueController.PlaybackController = playbackController;
 				
 				playbackController.AudioPlayer.PlayToggles = true;
@@ -403,6 +405,11 @@ namespace Alexandria.Client
 		private void PlaybackTimer_Tick(object sender, EventArgs e)
 		{
 			playbackController.RefreshPlaybackStates();
+		}
+
+		void queueDataGrid_SelectionChanged(object sender, EventArgs e)
+		{
+			//throw new Exception("The method or operation is not implemented.");
 		}
 		
 		private void OnSelectedTrackStart(object sender, EventArgs e)

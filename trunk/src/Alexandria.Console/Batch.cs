@@ -33,6 +33,11 @@ namespace Alexandria.Console
 {
 	public abstract class Batch
 	{
+		public Batch(string name)
+		{
+			this.name = name;
+		}
+	
 		private string name;
 		private bool isOpen;
 		private string prompt = "  batch> ";

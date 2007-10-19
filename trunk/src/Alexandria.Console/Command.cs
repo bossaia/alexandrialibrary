@@ -39,7 +39,7 @@ namespace Alexandria.Console
 		}
 		
 		private string name;
-		private string option;
+		//private string option;
 		
 		public string Name
 		{

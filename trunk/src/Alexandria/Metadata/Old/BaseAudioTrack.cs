@@ -34,7 +34,7 @@ using Alexandria.Persistence;
 namespace Alexandria.Metadata
 {
 	[Record("Track")]
-	public abstract class BaseAudioTrack : BaseMetadata, IAudioTrack
+	public class BaseAudioTrack : BaseMetadata, IAudioTrack
 	{
 		#region Constructors
 		public BaseAudioTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name)

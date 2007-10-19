@@ -726,73 +726,127 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="QueueListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Bottom, Left, Right</value>
+  <metadata name="IdColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="IdColumn.HeaderText" xml:space="preserve">
+    <value>Id</value>
   </data>
-  <data name="TrackNumberColumn.Text" xml:space="preserve">
+  <data name="IdColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="TypeColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="TypeColumn.HeaderText" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="TypeColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="TypeColumn.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <metadata name="NumberColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="NumberColumn.HeaderText" xml:space="preserve">
     <value>#</value>
   </data>
-  <data name="TrackNumberColumn.Width" type="System.Int32, mscorlib">
-    <value>30</value>
+  <data name="NumberColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="TrackNameColumn.Text" xml:space="preserve">
+  <data name="NumberColumn.Width" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <metadata name="NameColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="NameColumn.HeaderText" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="TrackNameColumn.Width" type="System.Int32, mscorlib">
-    <value>140</value>
+  <data name="NameColumn.Width" type="System.Int32, mscorlib">
+    <value>150</value>
   </data>
-  <data name="TrackArtistColumn.DisplayIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+  <metadata name="CreatorColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="CreatorColumn.HeaderText" xml:space="preserve">
+    <value>Creator</value>
   </data>
-  <data name="TrackArtistColumn.Text" xml:space="preserve">
-    <value>Artist</value>
+  <data name="CreatorColumn.Width" type="System.Int32, mscorlib">
+    <value>150</value>
   </data>
-  <data name="TrackArtistColumn.Width" type="System.Int32, mscorlib">
-    <value>130</value>
+  <metadata name="SourceColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="SourceColumn.HeaderText" xml:space="preserve">
+    <value>Source</value>
   </data>
-  <data name="TrackAlbumColumn.DisplayIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="SourceColumn.Width" type="System.Int32, mscorlib">
+    <value>150</value>
   </data>
-  <data name="TrackAlbumColumn.Text" xml:space="preserve">
-    <value>Album</value>
-  </data>
-  <data name="TrackAlbumColumn.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <data name="TrackDurationColumn.Text" xml:space="preserve">
+  <metadata name="DurationColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DurationColumn.HeaderText" xml:space="preserve">
     <value>Duration</value>
   </data>
-  <data name="TrackReleaseDateColumn.Text" xml:space="preserve">
+  <data name="DurationColumn.Width" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <metadata name="DateColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="DateColumn.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="TrackFileColumn.Text" xml:space="preserve">
-    <value>File</value>
+  <data name="DateColumn.Width" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
-  <data name="TrackFileColumn.Width" type="System.Int32, mscorlib">
-    <value>120</value>
-  </data>
-  <data name="TrackFormatColumn.Text" xml:space="preserve">
+  <metadata name="FormatColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="FormatColumn.HeaderText" xml:space="preserve">
     <value>Format</value>
   </data>
-  <data name="QueueListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
+  <data name="FormatColumn.MinimumWidth" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="QueueListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>531, 323</value>
+  <data name="FormatColumn.Width" type="System.Int32, mscorlib">
+    <value>45</value>
   </data>
-  <data name="QueueListView.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <metadata name="PathColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="PathColumn.HeaderText" xml:space="preserve">
+    <value>Path</value>
   </data>
-  <data name="&gt;&gt;QueueListView.Name" xml:space="preserve">
-    <value>QueueListView</value>
+  <data name="PathColumn.Width" type="System.Int32, mscorlib">
+    <value>300</value>
   </data>
-  <data name="&gt;&gt;QueueListView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="queueDataGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="&gt;&gt;QueueListView.Parent" xml:space="preserve">
+  <data name="queueDataGrid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="queueDataGrid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>538, 330</value>
+  </data>
+  <data name="queueDataGrid.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;queueDataGrid.Name" xml:space="preserve">
+    <value>queueDataGrid</value>
+  </data>
+  <data name="&gt;&gt;queueDataGrid.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;queueDataGrid.Parent" xml:space="preserve">
     <value>QueueGroupBox</value>
   </data>
-  <data name="&gt;&gt;QueueListView.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;queueDataGrid.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
@@ -1165,53 +1219,65 @@
   <data name="&gt;&gt;ToolBoxSmallImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackNumberColumn.Name" xml:space="preserve">
-    <value>TrackNumberColumn</value>
+  <data name="&gt;&gt;IdColumn.Name" xml:space="preserve">
+    <value>IdColumn</value>
   </data>
-  <data name="&gt;&gt;TrackNumberColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;IdColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackNameColumn.Name" xml:space="preserve">
-    <value>TrackNameColumn</value>
+  <data name="&gt;&gt;TypeColumn.Name" xml:space="preserve">
+    <value>TypeColumn</value>
   </data>
-  <data name="&gt;&gt;TrackNameColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TypeColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackArtistColumn.Name" xml:space="preserve">
-    <value>TrackArtistColumn</value>
+  <data name="&gt;&gt;NumberColumn.Name" xml:space="preserve">
+    <value>NumberColumn</value>
   </data>
-  <data name="&gt;&gt;TrackArtistColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;NumberColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackAlbumColumn.Name" xml:space="preserve">
-    <value>TrackAlbumColumn</value>
+  <data name="&gt;&gt;NameColumn.Name" xml:space="preserve">
+    <value>NameColumn</value>
   </data>
-  <data name="&gt;&gt;TrackAlbumColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;NameColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackDurationColumn.Name" xml:space="preserve">
-    <value>TrackDurationColumn</value>
+  <data name="&gt;&gt;CreatorColumn.Name" xml:space="preserve">
+    <value>CreatorColumn</value>
   </data>
-  <data name="&gt;&gt;TrackDurationColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;CreatorColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackReleaseDateColumn.Name" xml:space="preserve">
-    <value>TrackReleaseDateColumn</value>
+  <data name="&gt;&gt;SourceColumn.Name" xml:space="preserve">
+    <value>SourceColumn</value>
   </data>
-  <data name="&gt;&gt;TrackReleaseDateColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;SourceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackFileColumn.Name" xml:space="preserve">
-    <value>TrackFileColumn</value>
+  <data name="&gt;&gt;DurationColumn.Name" xml:space="preserve">
+    <value>DurationColumn</value>
   </data>
-  <data name="&gt;&gt;TrackFileColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DurationColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;TrackFormatColumn.Name" xml:space="preserve">
-    <value>TrackFormatColumn</value>
+  <data name="&gt;&gt;DateColumn.Name" xml:space="preserve">
+    <value>DateColumn</value>
   </data>
-  <data name="&gt;&gt;TrackFormatColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;DateColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;FormatColumn.Name" xml:space="preserve">
+    <value>FormatColumn</value>
+  </data>
+  <data name="&gt;&gt;FormatColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PathColumn.Name" xml:space="preserve">
+    <value>PathColumn</value>
+  </data>
+  <data name="&gt;&gt;PathColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
