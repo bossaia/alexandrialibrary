@@ -42,6 +42,7 @@ namespace Alexandria.Client.Controllers
 		{
 			audioPlayer = new AudioPlayer();
 			audioPlayer.CurrentAudioStreamChanged += new EventHandler<EventArgs>(OnCurrentAudioStreamChanged);
+			audioPlayer.PlaybackStateChanged += new EventHandler<MediaStateChangedEventArgs>(OnPlaybackStateChanged);
 		}
 		#endregion
 
@@ -89,6 +90,14 @@ namespace Alexandria.Client.Controllers
 			{
 				playbackTrackBar.Minimum = 0;
 				playbackTrackBar.Maximum = Convert.ToInt32(audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds);
+			}
+		}
+		
+		private void OnPlaybackStateChanged(object sender, MediaStateChangedEventArgs args)
+		{
+			if (args.PlaybackState == PlaybackState.Stopped)
+			{
+				playbackTrackBar.Value = 0;
 			}
 		}
 		#endregion

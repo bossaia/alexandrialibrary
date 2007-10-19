@@ -70,15 +70,17 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
-			this.QueueListView = new System.Windows.Forms.ListView();
-			this.TrackNumberColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackNameColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackArtistColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackAlbumColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackDurationColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackReleaseDateColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackFileColumn = new System.Windows.Forms.ColumnHeader();
-			this.TrackFormatColumn = new System.Windows.Forms.ColumnHeader();
+			this.queueDataGrid = new System.Windows.Forms.DataGridView();
+			this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.TypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.NumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.CreatorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.SourceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.DurationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.FormatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.PathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -96,6 +98,7 @@ namespace Alexandria.Client
 			this.ToolBoxGroupBox.SuspendLayout();
 			this.ToolBoxContextMenuStrip.SuspendLayout();
 			this.QueueGroupBox.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -374,64 +377,83 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
-			this.QueueGroupBox.Controls.Add(this.QueueListView);
+			this.QueueGroupBox.Controls.Add(this.queueDataGrid);
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
 			// 
-			// QueueListView
+			// queueDataGrid
 			// 
-			this.QueueListView.AllowColumnReorder = true;
-			this.QueueListView.AllowDrop = true;
-			resources.ApplyResources(this.QueueListView, "QueueListView");
-			this.QueueListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.TrackNumberColumn,
-            this.TrackNameColumn,
-            this.TrackArtistColumn,
-            this.TrackAlbumColumn,
-            this.TrackDurationColumn,
-            this.TrackReleaseDateColumn,
-            this.TrackFileColumn,
-            this.TrackFormatColumn});
-			this.QueueListView.FullRowSelect = true;
-			this.QueueListView.HideSelection = false;
-			this.QueueListView.Name = "QueueListView";
-			this.QueueListView.UseCompatibleStateImageBehavior = false;
-			this.QueueListView.View = System.Windows.Forms.View.Details;
-			this.QueueListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragEnter);
-			this.QueueListView.ItemActivate += new System.EventHandler(this.QueueListView_ItemActivate);
-			this.QueueListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.QueueListView_DragDrop);
+			this.queueDataGrid.AllowUserToAddRows = false;
+			this.queueDataGrid.AllowUserToResizeRows = false;
+			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdColumn,
+            this.TypeColumn,
+            this.NumberColumn,
+            this.NameColumn,
+            this.CreatorColumn,
+            this.SourceColumn,
+            this.DurationColumn,
+            this.DateColumn,
+            this.FormatColumn,
+            this.PathColumn});
+			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
+			this.queueDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
+			this.queueDataGrid.Name = "queueDataGrid";
+			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			// 
-			// TrackNumberColumn
+			// IdColumn
 			// 
-			resources.ApplyResources(this.TrackNumberColumn, "TrackNumberColumn");
+			resources.ApplyResources(this.IdColumn, "IdColumn");
+			this.IdColumn.Name = "IdColumn";
 			// 
-			// TrackNameColumn
+			// TypeColumn
 			// 
-			resources.ApplyResources(this.TrackNameColumn, "TrackNameColumn");
+			resources.ApplyResources(this.TypeColumn, "TypeColumn");
+			this.TypeColumn.Name = "TypeColumn";
+			this.TypeColumn.ReadOnly = true;
+			this.TypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.TypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// TrackArtistColumn
+			// NumberColumn
 			// 
-			resources.ApplyResources(this.TrackArtistColumn, "TrackArtistColumn");
+			resources.ApplyResources(this.NumberColumn, "NumberColumn");
+			this.NumberColumn.Name = "NumberColumn";
 			// 
-			// TrackAlbumColumn
+			// NameColumn
 			// 
-			resources.ApplyResources(this.TrackAlbumColumn, "TrackAlbumColumn");
+			resources.ApplyResources(this.NameColumn, "NameColumn");
+			this.NameColumn.Name = "NameColumn";
 			// 
-			// TrackDurationColumn
+			// CreatorColumn
 			// 
-			resources.ApplyResources(this.TrackDurationColumn, "TrackDurationColumn");
+			resources.ApplyResources(this.CreatorColumn, "CreatorColumn");
+			this.CreatorColumn.Name = "CreatorColumn";
 			// 
-			// TrackReleaseDateColumn
+			// SourceColumn
 			// 
-			resources.ApplyResources(this.TrackReleaseDateColumn, "TrackReleaseDateColumn");
+			resources.ApplyResources(this.SourceColumn, "SourceColumn");
+			this.SourceColumn.Name = "SourceColumn";
 			// 
-			// TrackFileColumn
+			// DurationColumn
 			// 
-			resources.ApplyResources(this.TrackFileColumn, "TrackFileColumn");
+			resources.ApplyResources(this.DurationColumn, "DurationColumn");
+			this.DurationColumn.Name = "DurationColumn";
 			// 
-			// TrackFormatColumn
+			// DateColumn
 			// 
-			resources.ApplyResources(this.TrackFormatColumn, "TrackFormatColumn");
+			resources.ApplyResources(this.DateColumn, "DateColumn");
+			this.DateColumn.Name = "DateColumn";
+			// 
+			// FormatColumn
+			// 
+			resources.ApplyResources(this.FormatColumn, "FormatColumn");
+			this.FormatColumn.Name = "FormatColumn";
+			// 
+			// PathColumn
+			// 
+			resources.ApplyResources(this.PathColumn, "PathColumn");
+			this.PathColumn.Name = "PathColumn";
 			// 
 			// MainForm
 			// 
@@ -462,6 +484,7 @@ namespace Alexandria.Client
 			this.ToolBoxGroupBox.ResumeLayout(false);
 			this.ToolBoxContextMenuStrip.ResumeLayout(false);
 			this.QueueGroupBox.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -489,15 +512,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.GroupBox PlaybackGroupBox;
 		private System.Windows.Forms.SplitContainer OuterPlaybackQueueSplit;
 		private System.Windows.Forms.GroupBox QueueGroupBox;
-		private System.Windows.Forms.ListView QueueListView;
-		private System.Windows.Forms.ColumnHeader TrackNumberColumn;
-		private System.Windows.Forms.ColumnHeader TrackNameColumn;
-		private System.Windows.Forms.ColumnHeader TrackAlbumColumn;
-		private System.Windows.Forms.ColumnHeader TrackArtistColumn;
-		private System.Windows.Forms.ColumnHeader TrackDurationColumn;
-		private System.Windows.Forms.ColumnHeader TrackReleaseDateColumn;
-		private System.Windows.Forms.ColumnHeader TrackFileColumn;
-		private System.Windows.Forms.ColumnHeader TrackFormatColumn;
 		private System.Windows.Forms.SplitContainer UpperPlaybackStatusSplit;
 		private System.Windows.Forms.GroupBox TasksGroupBox;
 		private System.Windows.Forms.Label NowPlayingLabel;
@@ -516,6 +530,17 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ContextMenuStrip ToolBoxContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
+		private System.Windows.Forms.DataGridView queueDataGrid;
+		private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn TypeColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NumberColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn CreatorColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn SourceColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn DurationColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn DateColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FormatColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn PathColumn;
 	}
 }
 

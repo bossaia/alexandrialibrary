@@ -13,6 +13,6 @@ namespace Alexandria.Metadata
 
 	public interface IElement<T> : IElement, IEquatable<T>
 	{
-		T Value { get; set; }
+		new T Value { get; set; }
 	}
 }

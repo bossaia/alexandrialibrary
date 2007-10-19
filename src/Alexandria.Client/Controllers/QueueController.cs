@@ -28,6 +28,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Net;
 using System.Windows.Forms;
 
@@ -64,12 +65,39 @@ namespace Alexandria.Client.Controllers
 		#region Constructors
 		public QueueController()
 		{
+			queueTable = new DataTable("Queue");
+			queueTable.Columns.Add(new DataColumn("Id", typeof(Guid)));
+			queueTable.Columns.Add(new DataColumn("Type", typeof(string)));
+			queueTable.Columns.Add(new DataColumn("Number", typeof(int)));
+			queueTable.Columns.Add(new DataColumn("Name", typeof(string)));
+			queueTable.Columns.Add(new DataColumn("Creator", typeof(string)));
+			queueTable.Columns.Add(new DataColumn("Source", typeof(string)));
+			queueTable.Columns.Add(new DataColumn("Duration", typeof(TimeSpan)));
+			queueTable.Columns.Add(new DataColumn("Date", typeof(DateTime)));
+			queueTable.Columns.Add(new DataColumn("Format", typeof(string)));
+			queueTable.Columns.Add(new DataColumn("Path", typeof(Uri)));
+			
+			bindingSource = new BindingSource();
+			bindingSource.DataSource = queueTable;
 		}
+		#endregion
+
+		#region Private Constant Fields
+		private const string COL_ID = "IdColumn";
+		private const string COL_TYPE = "TypeColumn";
+		private const string COL_NUMBER = "NumberColumn";
+		private const string COL_NAME = "NameColumn";
+		private const string COL_CREATOR = "CreatorColumn";
+		private const string COL_SOURCE = "SourceColumn";
+		private const string COL_DURATION = "DurationColumn";
+		private const string COL_DATE = "DateColumn";
+		private const string COL_FORMAT = "FormatColumn";
+		private const string COL_PATH = "PathColumn";
 		#endregion
 
 		#region Private Fields
 		private IAudioTrack selectedTrack;
-		private IAudioTrack submittedTrack;
+		//private IAudioTrack submittedTrack;
 		//private IAudioStream audioStream;
 		private IList<IAudioTrack> tracks;
 
@@ -89,15 +117,66 @@ namespace Alexandria.Client.Controllers
 		//private IPersistenceMechanism mechanism;
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 		//private Alexandria.
-		private ListView queueListView;
+		//private ListView queueListView;
+		private DataTable queueTable;
+		private BindingSource bindingSource;
+		private DataGridView grid;
 		
-		private ListViewItem selectedItem;
+		//private ListViewItem selectedItem;
+		private DataGridViewRow selectedRow;
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
 		private PlaybackController playbackController;
 		#endregion
 
 		#region Private Methods
+		private Guid GetItemGuid(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? (Guid)cell.Value : Guid.NewGuid();
+		}
+		
+		private string GetItemString(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? cell.Value.ToString() : string.Empty; 
+		}
+		
+		private int GetItemInt(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? (int)cell.Value : 0;
+		}
+		
+		private TimeSpan GetItemTimeSpan(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? (TimeSpan)cell.Value : TimeSpan.Zero;
+		}
+		
+		private DateTime GetItemDateTime(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? (DateTime)cell.Value : DateTime.MinValue;
+		}
+		
+		private Uri GetItemUri(DataGridViewCell cell)
+		{
+			return (cell.Value != null) ? (Uri)cell.Value : null;
+		}
+		
+		private IAudioTrack GetSelectedAudioTrack(DataGridViewRow row)
+		{
+			Guid id = GetItemGuid(row.Cells[COL_ID]);
+			string type = GetItemString(row.Cells[COL_TYPE]);
+			int number = GetItemInt(row.Cells[COL_NUMBER]);
+			string name = GetItemString(row.Cells[COL_NAME]);
+			string creator = GetItemString(row.Cells[COL_CREATOR]);
+			string source = GetItemString(row.Cells[COL_SOURCE]);
+			TimeSpan duration = GetItemTimeSpan(row.Cells[COL_DURATION]);
+			DateTime date = GetItemDateTime(row.Cells[COL_DATE]);
+			string format = GetItemString(row.Cells[COL_FORMAT]);
+			Uri path = GetItemUri(row.Cells[COL_PATH]);
+			
+			IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, name, source, creator, duration, date, number, format); 
+			return track;
+		}
+		
 		private void LoadTrackFromPath(string path)
 		{
 			LoadTrackFromPath(new Uri(path));
@@ -123,11 +202,24 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Public Properties
-		public ListView QueueListView
+		public DataGridView Grid
 		{
-			get { return queueListView; }
-			set { queueListView = value; }
+			get { return grid; }
+			set {
+				grid = value;
+				if (grid != null)
+				{
+					grid.AutoGenerateColumns = false;
+					grid.DataSource = bindingSource;
+				}
+			}
 		}
+		
+		//public ListView QueueListView
+		//{
+			//get { return queueListView; }
+			//set { queueListView = value; }
+		//}
 		
 		public PlaybackController PlaybackController
 		{
@@ -220,16 +312,20 @@ namespace Alexandria.Client.Controllers
 		{
 			IAudioStream audioStream = null;
 			
-			if (QueueListView.SelectedItems.Count > 0)
+			if (grid.SelectedRows.Count > 0)
 			{
 				//# Name Artist Album Length Date Location Format
-				if (QueueListView.SelectedItems[0] != selectedItem)
+				//if (QueueListView.SelectedItems[0] != selectedItem)
+				if (grid.SelectedRows[0] != selectedRow)
 				{
-					selectedItem = QueueListView.SelectedItems[0];
-					if (selectedItem.Tag != null)
+					//selectedItem = QueueListView.SelectedItems[0];
+					selectedRow = grid.SelectedRows[0];
+					//selectedItem.Tag != null)
+					if (selectedRow.Cells.Count > 0)
 					{
 						//TODO: move all of this logic into AudioPlayer
-						selectedTrack = (IAudioTrack)selectedItem.Tag;
+						//selectedTrack = (IAudioTrack)selectedItem.Tag;
+						selectedTrack = GetSelectedAudioTrack(selectedRow);
 						if (selectedTrack.Format == "cdda")
 						{
 							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
@@ -270,7 +366,8 @@ namespace Alexandria.Client.Controllers
 
 							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 							{
-								selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+								//selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
+								selectedRow.Cells[6].Value = audioStream.Duration;
 							}
 						}
 						
@@ -283,19 +380,23 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadTrack(IAudioTrack track)
 		{
-			string[] data = new string[8];
-			data[0] = track.TrackNumber.ToString();
-			data[1] = track.Name;
-			data[2] = track.Artist;
-			data[3] = track.Album;
-			data[4] = GetDurationString(track.Duration);
-			data[5] = GetDateString(track.ReleaseDate);
-			data[6] = track.Path.LocalPath;
-			data[7] = track.Format.ToLowerInvariant();
+			object[] data = new object[10];
+			data[0] = track.Id;
+			data[1] = "audio";
+			data[2] = track.TrackNumber;
+			data[3] = track.Name;
+			data[4] = track.Artist;
+			data[5] = track.Album;
+			data[6] = track.Duration; //GetDurationString(track.Duration);
+			data[7] = track.ReleaseDate; //GetDateString(track.ReleaseDate);
+			data[8] = track.Format.ToLowerInvariant();
+			data[9] = track.Path; //track.Path.LocalPath;
 
-			ListViewItem item = new ListViewItem(data);
-			item.Tag = track;
-			QueueListView.Items.Add(item);
+			//ListViewItem item = new ListViewItem(data);
+			//item.Tag = track;
+			//QueueListView.Items.Add(item);
+			//grid.Rows.Add(data);
+			queueTable.Rows.Add(data);
 		}
 		
 		public string CleanupFileName(string fileName)
@@ -509,14 +610,22 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 					//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (QueueListView.SelectedItems[0] != null)
+				//if (QueueListView.SelectedItems[0] != null)
+				if (grid.SelectedRows[0] != null)
 				{
-					int previousIndex = QueueListView.Items.Count - 1;
-					if (QueueListView.SelectedIndices[0] > 0)
-						previousIndex = QueueListView.SelectedIndices[0] - 1;
+					int previousIndex = grid.Rows.Count - 1;
+					if (grid.SelectedRows[0].Index > 0)
+						previousIndex = grid.SelectedRows[0].Index - 1;
+						
+					grid.SelectedRows[0].Selected = false;
+					grid.Rows[previousIndex].Selected = true;
+					
+					//QueueListView.Items.Count - 1;
+					//if (QueueListView.SelectedIndices[0] > 0)
+						//previousIndex = QueueListView.SelectedIndices[0] - 1;
 
-					QueueListView.SelectedItems[0].Selected = false;
-					QueueListView.Items[previousIndex].Selected = true;
+					//QueueListView.SelectedItems[0].Selected = false;
+					//QueueListView.Items[previousIndex].Selected = true;
 				}
 				
 				SelectTrack();
@@ -542,14 +651,21 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 				//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (QueueListView.SelectedItems[0] != null)
+				//if (QueueListView.SelectedItems[0] != null)
+				if (grid.SelectedRows[0] != null)
 				{
 					int nextIndex = 0;
-					if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
-						nextIndex = QueueListView.SelectedIndices[0] + 1;
+					if (grid.SelectedRows[0].Index < grid.Rows.Count - 1)
+						nextIndex = grid.SelectedRows[0].Index + 1;
+						
+					grid.SelectedRows[0].Selected = false;
+					grid.Rows[nextIndex].Selected = true;	
+					
+					//if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
+						//nextIndex = QueueListView.SelectedIndices[0] + 1;
 
-					QueueListView.SelectedItems[0].Selected = false;
-					QueueListView.Items[nextIndex].Selected = true;
+					//QueueListView.SelectedItems[0].Selected = false;
+					//QueueListView.Items[nextIndex].Selected = true;
 				}
 
 				SelectTrack();
