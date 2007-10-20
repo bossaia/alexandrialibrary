@@ -58,12 +58,13 @@ namespace Alexandria.Client
 				this.NextButton.Click += new EventHandler(NextButton_Click);
 				this.PreviousButton.Click += new EventHandler(PreviousButton_Click);
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
-				this.queueDataGrid.SelectionChanged += new EventHandler(queueDataGrid_SelectionChanged);
+				//this.queueDataGrid.SelectionChanged += new EventHandler(queueDataGrid_SelectionChanged);
 				//this.QueueListView.SelectedIndexChanged += new EventHandler(QueueListView_SelectedIndexChanged);
 				
 				//queueController.QueueListView = this.QueueListView;
 				queueController.Grid = queueDataGrid;
 				queueController.PlaybackController = playbackController;
+				queueController.SmallImageList = queueSmallImageList;
 				
 				playbackController.AudioPlayer.PlayToggles = true;
 				playbackController.AudioPlayer.MuteToggles = true;

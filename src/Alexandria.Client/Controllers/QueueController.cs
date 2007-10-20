@@ -66,16 +66,16 @@ namespace Alexandria.Client.Controllers
 		public QueueController()
 		{
 			queueTable = new DataTable("Queue");
-			queueTable.Columns.Add(new DataColumn("Id", typeof(Guid)));
-			queueTable.Columns.Add(new DataColumn("Type", typeof(string)));
-			queueTable.Columns.Add(new DataColumn("Number", typeof(int)));
-			queueTable.Columns.Add(new DataColumn("Name", typeof(string)));
-			queueTable.Columns.Add(new DataColumn("Creator", typeof(string)));
-			queueTable.Columns.Add(new DataColumn("Source", typeof(string)));
-			queueTable.Columns.Add(new DataColumn("Duration", typeof(TimeSpan)));
-			queueTable.Columns.Add(new DataColumn("Date", typeof(DateTime)));
-			queueTable.Columns.Add(new DataColumn("Format", typeof(string)));
-			queueTable.Columns.Add(new DataColumn("Path", typeof(Uri)));
+			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
+			queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
+			queueTable.Columns.Add(new DataColumn(COL_NAME, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_CREATOR, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
+			queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
+			queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
 			
 			bindingSource = new BindingSource();
 			bindingSource.DataSource = queueTable;
@@ -93,6 +93,17 @@ namespace Alexandria.Client.Controllers
 		private const string COL_DATE = "DateColumn";
 		private const string COL_FORMAT = "FormatColumn";
 		private const string COL_PATH = "PathColumn";
+		
+		private const string TYPE_AUDIO = "Audio";
+		private const int INDEX_AUDIO = 0;
+		private const string TYPE_IMAGE = "Image";
+		private const int INDEX_IMAGE = 1;
+		private const string TYPE_BOOK = "Book";
+		private const int INDEX_BOOK = 2;
+		private const string TYPE_MOVIE = "Movie";
+		private const int INDEX_MOVIE = 3;
+		private const string TYPE_TELEVISION = "TV";
+		private const int INDEX_TELEVISION = 4;
 		#endregion
 
 		#region Private Fields
@@ -121,6 +132,7 @@ namespace Alexandria.Client.Controllers
 		private DataTable queueTable;
 		private BindingSource bindingSource;
 		private DataGridView grid;
+		private ImageList smallImageList;
 		
 		//private ListViewItem selectedItem;
 		private DataGridViewRow selectedRow;
@@ -201,6 +213,52 @@ namespace Alexandria.Client.Controllers
 		}
 		#endregion
 
+		#region Private Event Methods
+		void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
+			{
+				TimeSpan duration = (TimeSpan)e.Value;
+				if (duration.Hours > 0)
+				{
+					e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
+				}
+				else if (duration.Minutes > 0)
+				{
+					e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
+				}
+				else
+				{
+					e.Value = string.Format("0:{0:00}", duration.Seconds);
+				}
+			}
+			if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
+			{
+				switch(e.Value.ToString())
+				{
+					case TYPE_AUDIO:
+						e.Value = smallImageList.Images[INDEX_AUDIO];
+						break;
+					case TYPE_BOOK:
+						e.Value = smallImageList.Images[INDEX_BOOK];
+						break;
+					case TYPE_IMAGE:
+						e.Value = smallImageList.Images[INDEX_IMAGE];
+						break;
+					case TYPE_MOVIE:
+						e.Value = smallImageList.Images[INDEX_MOVIE];
+						break;
+					case TYPE_TELEVISION:
+						e.Value = smallImageList.Images[INDEX_TELEVISION];
+						break;
+					default:
+						e.Value = smallImageList.Images[INDEX_AUDIO];
+						break;
+				}
+			}
+		}
+		#endregion
+
 		#region Public Properties
 		public DataGridView Grid
 		{
@@ -211,6 +269,7 @@ namespace Alexandria.Client.Controllers
 				{
 					grid.AutoGenerateColumns = false;
 					grid.DataSource = bindingSource;
+					grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
 				}
 			}
 		}
@@ -286,6 +345,12 @@ namespace Alexandria.Client.Controllers
 		{
 			get { return selectedTrackChanged; }
 			set { selectedTrackChanged = value; }
+		}
+		
+		public ImageList SmallImageList
+		{
+			get { return smallImageList; }
+			set { smallImageList = value; }
 		}
 		#endregion
 
@@ -382,7 +447,7 @@ namespace Alexandria.Client.Controllers
 		{
 			object[] data = new object[10];
 			data[0] = track.Id;
-			data[1] = "audio";
+			data[1] = TYPE_AUDIO;
 			data[2] = track.TrackNumber;
 			data[3] = track.Name;
 			data[4] = track.Artist;
