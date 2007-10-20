@@ -32,6 +32,10 @@ namespace Alexandria.Client
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -71,8 +75,9 @@ namespace Alexandria.Client
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.queueDataGrid = new System.Windows.Forms.DataGridView();
+			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.TypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.TypeColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.NumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.CreatorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -385,6 +390,14 @@ namespace Alexandria.Client
 			// 
 			this.queueDataGrid.AllowUserToAddRows = false;
 			this.queueDataGrid.AllowUserToResizeRows = false;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdColumn,
@@ -397,61 +410,98 @@ namespace Alexandria.Client
             this.DateColumn,
             this.FormatColumn,
             this.PathColumn});
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
-			this.queueDataGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
 			this.queueDataGrid.Name = "queueDataGrid";
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			// 
+			// queueSmallImageList
+			// 
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
 			// 
 			// IdColumn
 			// 
+			this.IdColumn.DataPropertyName = "IdColumn";
 			resources.ApplyResources(this.IdColumn, "IdColumn");
 			this.IdColumn.Name = "IdColumn";
 			// 
 			// TypeColumn
 			// 
+			this.TypeColumn.DataPropertyName = "TypeColumn";
 			resources.ApplyResources(this.TypeColumn, "TypeColumn");
 			this.TypeColumn.Name = "TypeColumn";
 			this.TypeColumn.ReadOnly = true;
-			this.TypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.TypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.TypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.TypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
 			// NumberColumn
 			// 
+			this.NumberColumn.DataPropertyName = "NumberColumn";
 			resources.ApplyResources(this.NumberColumn, "NumberColumn");
 			this.NumberColumn.Name = "NumberColumn";
 			// 
 			// NameColumn
 			// 
+			this.NameColumn.DataPropertyName = "NameColumn";
 			resources.ApplyResources(this.NameColumn, "NameColumn");
 			this.NameColumn.Name = "NameColumn";
 			// 
 			// CreatorColumn
 			// 
+			this.CreatorColumn.DataPropertyName = "CreatorColumn";
 			resources.ApplyResources(this.CreatorColumn, "CreatorColumn");
 			this.CreatorColumn.Name = "CreatorColumn";
 			// 
 			// SourceColumn
 			// 
+			this.SourceColumn.DataPropertyName = "SourceColumn";
 			resources.ApplyResources(this.SourceColumn, "SourceColumn");
 			this.SourceColumn.Name = "SourceColumn";
 			// 
 			// DurationColumn
 			// 
+			this.DurationColumn.DataPropertyName = "DurationColumn";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.DurationColumn.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.DurationColumn, "DurationColumn");
 			this.DurationColumn.Name = "DurationColumn";
 			// 
 			// DateColumn
 			// 
+			this.DateColumn.DataPropertyName = "DateColumn";
 			resources.ApplyResources(this.DateColumn, "DateColumn");
 			this.DateColumn.Name = "DateColumn";
 			// 
 			// FormatColumn
 			// 
+			this.FormatColumn.DataPropertyName = "FormatColumn";
 			resources.ApplyResources(this.FormatColumn, "FormatColumn");
 			this.FormatColumn.Name = "FormatColumn";
 			// 
 			// PathColumn
 			// 
+			this.PathColumn.DataPropertyName = "PathColumn";
 			resources.ApplyResources(this.PathColumn, "PathColumn");
 			this.PathColumn.Name = "PathColumn";
 			// 
@@ -531,8 +581,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
 		private System.Windows.Forms.DataGridView queueDataGrid;
+		private System.Windows.Forms.ImageList queueSmallImageList;
 		private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn TypeColumn;
+		private System.Windows.Forms.DataGridViewImageColumn TypeColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn NumberColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn CreatorColumn;
