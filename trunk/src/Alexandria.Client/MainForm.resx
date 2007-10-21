@@ -337,7 +337,7 @@
     <value>3</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>197, 45</value>
+    <value>0, 573</value>
   </metadata>
   <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
@@ -664,7 +664,7 @@
     <value>7, 20</value>
   </data>
   <data name="ToolBoxListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 323</value>
+    <value>83, 323</value>
   </data>
   <metadata name="ToolBoxSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>404, 8</value>
@@ -744,7 +744,7 @@
     <value>9, 3</value>
   </data>
   <data name="ToolBoxGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 349</value>
+    <value>96, 349</value>
   </data>
   <data name="ToolBoxGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -785,6 +785,9 @@
   <data name="IdColumn.HeaderText" xml:space="preserve">
     <value>Id</value>
   </data>
+  <data name="IdColumn.ToolTipText" xml:space="preserve">
+    <value>The unique identifier for this piece</value>
+  </data>
   <data name="IdColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -794,8 +797,23 @@
   <data name="TypeColumn.HeaderText" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="TypeColumn.ToolTipText" xml:space="preserve">
+    <value>The type of media for this piece (Music, Movie, Photography, etc.)</value>
+  </data>
   <data name="TypeColumn.Width" type="System.Int32, mscorlib">
     <value>50</value>
+  </data>
+  <metadata name="SourceColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="SourceColumn.HeaderText" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="SourceColumn.ToolTipText" xml:space="preserve">
+    <value>The source of this piece (CD, playlist, file, library)</value>
+  </data>
+  <data name="SourceColumn.Width" type="System.Int32, mscorlib">
+    <value>60</value>
   </data>
   <metadata name="NumberColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -806,41 +824,53 @@
   <data name="NumberColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
+  <data name="NumberColumn.ToolTipText" xml:space="preserve">
+    <value>The number of this piece</value>
+  </data>
   <data name="NumberColumn.Width" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <metadata name="NameColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="TitleColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="NameColumn.HeaderText" xml:space="preserve">
-    <value>Name</value>
+  <data name="TitleColumn.HeaderText" xml:space="preserve">
+    <value>Title</value>
   </data>
-  <data name="NameColumn.Width" type="System.Int32, mscorlib">
+  <data name="TitleColumn.ToolTipText" xml:space="preserve">
+    <value>The title of this piece</value>
+  </data>
+  <data name="TitleColumn.Width" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
-  <metadata name="CreatorColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ArtistColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="CreatorColumn.HeaderText" xml:space="preserve">
-    <value>Creator</value>
+  <data name="ArtistColumn.HeaderText" xml:space="preserve">
+    <value>Artist</value>
   </data>
-  <data name="CreatorColumn.Width" type="System.Int32, mscorlib">
+  <data name="ArtistColumn.ToolTipText" xml:space="preserve">
+    <value>The artist that created this piece</value>
+  </data>
+  <data name="ArtistColumn.Width" type="System.Int32, mscorlib">
     <value>150</value>
   </data>
-  <metadata name="SourceColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="AlbumColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="SourceColumn.HeaderText" xml:space="preserve">
-    <value>Source</value>
+  <data name="AlbumColumn.HeaderText" xml:space="preserve">
+    <value>Album</value>
   </data>
-  <data name="SourceColumn.Width" type="System.Int32, mscorlib">
-    <value>150</value>
+  <data name="AlbumColumn.ToolTipText" xml:space="preserve">
+    <value>The album or collection that this piece belongs to</value>
   </data>
   <metadata name="DurationColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="DurationColumn.HeaderText" xml:space="preserve">
     <value>Duration</value>
+  </data>
+  <data name="DurationColumn.ToolTipText" xml:space="preserve">
+    <value>The duration of this piece</value>
   </data>
   <data name="DurationColumn.Width" type="System.Int32, mscorlib">
     <value>70</value>
@@ -850,6 +880,9 @@
   </metadata>
   <data name="DateColumn.HeaderText" xml:space="preserve">
     <value>Date</value>
+  </data>
+  <data name="DateColumn.ToolTipText" xml:space="preserve">
+    <value>The release date or created date of this piece</value>
   </data>
   <data name="DateColumn.Width" type="System.Int32, mscorlib">
     <value>70</value>
@@ -863,6 +896,9 @@
   <data name="FormatColumn.MinimumWidth" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
+  <data name="FormatColumn.ToolTipText" xml:space="preserve">
+    <value>The media format of this piece</value>
+  </data>
   <data name="FormatColumn.Width" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
@@ -871,6 +907,9 @@
   </metadata>
   <data name="PathColumn.HeaderText" xml:space="preserve">
     <value>Path</value>
+  </data>
+  <data name="PathColumn.ToolTipText" xml:space="preserve">
+    <value>The path of media file for this piece</value>
   </data>
   <data name="PathColumn.Width" type="System.Int32, mscorlib">
     <value>300</value>
@@ -882,7 +921,7 @@
     <value>3, 16</value>
   </data>
   <data name="queueDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>538, 330</value>
+    <value>707, 330</value>
   </data>
   <data name="queueDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -903,7 +942,7 @@
     <value>3, 3</value>
   </data>
   <data name="QueueGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>544, 349</value>
+    <value>713, 349</value>
   </data>
   <data name="QueueGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -939,7 +978,7 @@
     <value>831, 355</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>277</value>
+    <value>108</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -996,7 +1035,7 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAi
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAg
         DQAAAk1TRnQBSQFMAgEBBQEAAQkBAAEEAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
@@ -1026,34 +1065,34 @@
         AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
         AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
         AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/wIAARICFQVDBhEyAAFt
-        A/gD6wZtAUMyAAFtAewBbQFHAeoBEgHsARMB7AEUAewBFAFtAUMyAAFtBNwH2wHVAUMyAAFtBdwG2wHV
-        ARUyAAFtBdwG2wHVARUyAAHrAwkB3AfbAdUBFTIAAfgDCQLcBtsB1QEUMgAB+AIJBNwE2wLVARQyAAH4
+        A+wD6wZtAUMyAAFtAewBbQFHAeoBEgHsARMB7AEUAewBFAFtAUMyAAFtBNwH2wHVAUMyAAFtBdwG2wHV
+        ARUyAAFtBdwG2wHVARUyAAHrAwkB3AfbAdUBFTIAAewDCQLcBtsB1QEUMgAB7AIJBNwE2wLVARQyAAHs
         AQkG3ALbA9UBFDIAAesJ3AHbAtUBEzIAAYYE6wTsBG0BhjUAAaECrgKhAa4BiwGhNwABoQK0AaECAAGh
         Aa4BiwGhNQABoQG0AbUBoQQAAaECrgGhMwABoQG0AbUBoQYAAaECrgGhYwABQwIRBgABCgEAAQoDAAGh
         A2YBoQsAAc8BtAu1Ac8HAAKmAWUBhggAAUMBhQFDBhIBDwGFAwABhgHrAuwBbQEVAQQCAAGFAhEBXwGh
-        AwABtQL0AvUI9AG1AQAJiwdlAgABFQFmAUMGeAEOAV8BDgIAAYYB7QPvAewBEwGFAYYBEgFtAesBEwEQ
+        AwABtQL0Av8I9AG1AQAJiwdlAgABFQFmAUMGeAEOAV8BDgIAAYYB7QPvAewBEwGFAYYBEgFtAesBEwEQ
         AQQCAAG1AfQKCAHzAbUBAAGLBrQBbAFmBrQBZQIAAWYBhgFmAVYBlwFWAZcBugGzAQ8BBAEKAwABhgHs
         AZIC7wHrAWYBhgHrAe0BkgHtAesBQwGFAQABtQH0BAgBmQF0BAgB8wG1AQABswaLApEHZQIAARQCZgJV
         AboC2wG6AwoEAAGnAusB7AGSARMBAAGGAW0B7AGSAe0B6gFfAQABtQH0A1ABSwJ0AVEDUAHzAbUBAAG0
         AYsE/wH0AfIB9AP/AfMB/wJlAgABEwJmAXcBugLbAZgBegERAV8BDwcAAesB7wETAgABpwISAW0B7AER
         AQABtQH0AgkBuwFyAlEBcwO1AfMBtQEAAbQBiwH/AfQB8wHyAfAB9wHwAfQC8wHxAf8BZQFmAgABZgGG
         AWYE2wGZAZoBEQEEAQoHAAHrAQcBEwUAARMBkgERAQABtQH0AQkBuwGRA3gBcgGRAbQBtQHzAbUBAAG0
-        AbMB/wK8AQcB8AH3AfEB9AG8AgcB/wFlAWYCAAESAWYBbQYSAUMBEQEQBwAB+AEHARIFAAESAfcBQwEA
+        AbMB/wK8AQcB8AH3AfEB9AG8AgcB/wFlAWYCAAESAWYBbQYSAUMBEQEQBwAB7AEHARIFAAESAfcBQwEA
         AbUB9AEJAfcBmAJ4AVYClwGRAbUB8wG1AQACtAH/AfQC8wHwAfcB8QH0AvMB8QH/AWUBbAIAARIBhgFm
-        BngBQwEEAUMHAAH4AQcB6gUAARIB9wFDAQABtQH0AQkBnQR4AZcBeAGRAbUB8wG1AQACtAH/ArwBBwHw
+        BngBQwEEAUMHAAHsAQcB6gUAARIB9wFDAQABtQH0AQkBnQR4AZcBeAGRAbUB8wG1AQACtAH/ArwBBwHw
         AfcB8QH0AbwCBwH/AWYBiwIAAeoBhgFmAVYBlwFWAZcBugGzAmYBQwcAAewBBwHqBQAB6gHvARUBAAG1
         AfQBCQKYBXgBkQG0AfQBtQEAArQB/wH0AvMB8AHvAfEC9AHzAfEB/wFsAYsCAALqARICVQG6AtsBugJm
         AUMHAAHsAbwB6gUAAeoB7wEUAQABtQH0AQkBuwGYBHgBmAGRAbQB9AG1AQACtAH/ArwBBwH0AfAB8gH/
-        ArwBBwH/AosCAAHqAYYB6gF3AboC2wGYAXoBZgGGAWYHAAHtAbwB7AHqARICEwESAfgB7wEUAQABtQH0
+        ArwBBwH/AosCAAHqAYYB6gF3AboC2wGYAXoBZgGGAWYHAAHtAbwB7AHqARICEwESAewB7wEUAQABtQH0
         AQkBuwH3BJgBkQK0AfQBtQEAArQE/wEJAq0BuwT/AosCAANtAboD2wKZARQBZgEVBwAB7QHwA7wFBwET
-        AQABtQHzC/QBtQEAAccBtAK1A7QBxwGhA7QCkQGLAaECAAHrAYYBbQYSARMBhgFmBwACkgLtA+wC+AHr
-        AW0BAAHPDLUBzwIABscCAATHAqEDAAGuAesBbQYAAWYBEwFmQgABQgFNAT4HAAE+AwABKAMAAUADAAEg
-        AwABAQEAAQEGAAEBFgAD/wEAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYA
-        AYABAQYAAYABAQYAAYABAQYAAYABAQYAAYABAQYAAfABDwYAAeEBhwYAAsMGAAGHAeEGAAb/AccB4wGD
-        Af8BgAEBAfwBPwHAAQMBAQGDAYABAQIAAcABAwEAAQEBgAEBAgABwAEDAYABAAGAAQECAAHAAQMBwAKA
-        AQECAAHAAQMB+AHAAYABAQIAAcABAwL4AYABAQIAAcABAwL4AYABAQIAAcABAwL4AYABAQIAAcABAwL4
-        AYABAQIAAcABAwL4AYABAQIAAcABAwH4AQABgAEBAgABwAEDAfgBAAGAAQECAAHAAQMB+AEAAYABAQKB
-        AccB4wj/Cw==
+        AQABtQHzC/QBtQEAAccBtAK1A7QBxwGhA7QCkQGLAaECAAHrAYYBbQYSARMBhgFmBwACkgLtBewB6wFt
+        AQABzwy1Ac8CAAbHAgAExwKhAwABrgHrAW0GAAFmARMBZkIAAUIBTQE+BwABPgMAASgDAAFAAwABIAMA
+        AQEBAAEBBgABARYAA/8BAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGA
+        AQEGAAGAAQEGAAGAAQEGAAGAAQEGAAGAAQEGAAHwAQ8GAAHhAYcGAALDBgABhwHhBgAG/wHHAeMBgwH/
+        AYABAQH8AT8BwAEDAQEBgwGAAQECAAHAAQMBAAEBAYABAQIAAcABAwGAAQABgAEBAgABwAEDAcACgAEB
+        AgABwAEDAfgBwAGAAQECAAHAAQMC+AGAAQECAAHAAQMC+AGAAQECAAHAAQMC+AGAAQECAAHAAQMC+AGA
+        AQECAAHAAQMC+AGAAQECAAHAAQMB+AEAAYABAQIAAcABAwH4AQABgAEBAgABwAEDAfgBAAGAAQECgQHH
+        AeMI/ws=
 </value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1253,28 +1292,34 @@
   <data name="&gt;&gt;TypeColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;SourceColumn.Name" xml:space="preserve">
+    <value>SourceColumn</value>
+  </data>
+  <data name="&gt;&gt;SourceColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;NumberColumn.Name" xml:space="preserve">
     <value>NumberColumn</value>
   </data>
   <data name="&gt;&gt;NumberColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Name" xml:space="preserve">
-    <value>NameColumn</value>
+  <data name="&gt;&gt;TitleColumn.Name" xml:space="preserve">
+    <value>TitleColumn</value>
   </data>
-  <data name="&gt;&gt;NameColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;TitleColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;CreatorColumn.Name" xml:space="preserve">
-    <value>CreatorColumn</value>
+  <data name="&gt;&gt;ArtistColumn.Name" xml:space="preserve">
+    <value>ArtistColumn</value>
   </data>
-  <data name="&gt;&gt;CreatorColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;ArtistColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SourceColumn.Name" xml:space="preserve">
-    <value>SourceColumn</value>
+  <data name="&gt;&gt;AlbumColumn.Name" xml:space="preserve">
+    <value>AlbumColumn</value>
   </data>
-  <data name="&gt;&gt;SourceColumn.Type" xml:space="preserve">
+  <data name="&gt;&gt;AlbumColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;DurationColumn.Name" xml:space="preserve">

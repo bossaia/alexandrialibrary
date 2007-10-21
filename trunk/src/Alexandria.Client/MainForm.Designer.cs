@@ -78,10 +78,11 @@ namespace Alexandria.Client
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.TypeColumn = new System.Windows.Forms.DataGridViewImageColumn();
-			this.NumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.CreatorColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.SourceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.NumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.TitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ArtistColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.AlbumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.DurationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.FormatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -402,10 +403,11 @@ namespace Alexandria.Client
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdColumn,
             this.TypeColumn,
-            this.NumberColumn,
-            this.NameColumn,
-            this.CreatorColumn,
             this.SourceColumn,
+            this.NumberColumn,
+            this.TitleColumn,
+            this.ArtistColumn,
+            this.AlbumColumn,
             this.DurationColumn,
             this.DateColumn,
             this.FormatColumn,
@@ -445,6 +447,7 @@ namespace Alexandria.Client
 			this.IdColumn.DataPropertyName = "IdColumn";
 			resources.ApplyResources(this.IdColumn, "IdColumn");
 			this.IdColumn.Name = "IdColumn";
+			this.IdColumn.ReadOnly = true;
 			// 
 			// TypeColumn
 			// 
@@ -455,29 +458,36 @@ namespace Alexandria.Client
 			this.TypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.TypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
+			// SourceColumn
+			// 
+			this.SourceColumn.DataPropertyName = "SourceColumn";
+			resources.ApplyResources(this.SourceColumn, "SourceColumn");
+			this.SourceColumn.Name = "SourceColumn";
+			this.SourceColumn.ReadOnly = true;
+			// 
 			// NumberColumn
 			// 
 			this.NumberColumn.DataPropertyName = "NumberColumn";
 			resources.ApplyResources(this.NumberColumn, "NumberColumn");
 			this.NumberColumn.Name = "NumberColumn";
 			// 
-			// NameColumn
+			// TitleColumn
 			// 
-			this.NameColumn.DataPropertyName = "NameColumn";
-			resources.ApplyResources(this.NameColumn, "NameColumn");
-			this.NameColumn.Name = "NameColumn";
+			this.TitleColumn.DataPropertyName = "TitleColumn";
+			resources.ApplyResources(this.TitleColumn, "TitleColumn");
+			this.TitleColumn.Name = "TitleColumn";
 			// 
-			// CreatorColumn
+			// ArtistColumn
 			// 
-			this.CreatorColumn.DataPropertyName = "CreatorColumn";
-			resources.ApplyResources(this.CreatorColumn, "CreatorColumn");
-			this.CreatorColumn.Name = "CreatorColumn";
+			this.ArtistColumn.DataPropertyName = "ArtistColumn";
+			resources.ApplyResources(this.ArtistColumn, "ArtistColumn");
+			this.ArtistColumn.Name = "ArtistColumn";
 			// 
-			// SourceColumn
+			// AlbumColumn
 			// 
-			this.SourceColumn.DataPropertyName = "SourceColumn";
-			resources.ApplyResources(this.SourceColumn, "SourceColumn");
-			this.SourceColumn.Name = "SourceColumn";
+			this.AlbumColumn.DataPropertyName = "AlbumColumn";
+			resources.ApplyResources(this.AlbumColumn, "AlbumColumn");
+			this.AlbumColumn.Name = "AlbumColumn";
 			// 
 			// DurationColumn
 			// 
@@ -498,6 +508,7 @@ namespace Alexandria.Client
 			this.FormatColumn.DataPropertyName = "FormatColumn";
 			resources.ApplyResources(this.FormatColumn, "FormatColumn");
 			this.FormatColumn.Name = "FormatColumn";
+			this.FormatColumn.ReadOnly = true;
 			// 
 			// PathColumn
 			// 
@@ -584,10 +595,11 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ImageList queueSmallImageList;
 		private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
 		private System.Windows.Forms.DataGridViewImageColumn TypeColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn NumberColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn CreatorColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn SourceColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn NumberColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn TitleColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ArtistColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn AlbumColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn DurationColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn DateColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn FormatColumn;
