@@ -68,10 +68,11 @@ namespace Alexandria.Client.Controllers
 			queueTable = new DataTable("Queue");
 			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
 			queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
-			queueTable.Columns.Add(new DataColumn(COL_NAME, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_CREATOR, typeof(string)));
 			queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
+			queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
 			queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
 			queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
 			queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
@@ -85,10 +86,11 @@ namespace Alexandria.Client.Controllers
 		#region Private Constant Fields
 		private const string COL_ID = "IdColumn";
 		private const string COL_TYPE = "TypeColumn";
-		private const string COL_NUMBER = "NumberColumn";
-		private const string COL_NAME = "NameColumn";
-		private const string COL_CREATOR = "CreatorColumn";
 		private const string COL_SOURCE = "SourceColumn";
+		private const string COL_NUMBER = "NumberColumn";
+		private const string COL_TITLE = "TitleColumn";
+		private const string COL_ARTIST = "ArtistColumn";
+		private const string COL_ALBUM = "AlbumColumn";
 		private const string COL_DURATION = "DurationColumn";
 		private const string COL_DATE = "DateColumn";
 		private const string COL_FORMAT = "FormatColumn";
@@ -176,86 +178,83 @@ namespace Alexandria.Client.Controllers
 		{
 			Guid id = GetItemGuid(row.Cells[COL_ID]);
 			string type = GetItemString(row.Cells[COL_TYPE]);
-			int number = GetItemInt(row.Cells[COL_NUMBER]);
-			string name = GetItemString(row.Cells[COL_NAME]);
-			string creator = GetItemString(row.Cells[COL_CREATOR]);
 			string source = GetItemString(row.Cells[COL_SOURCE]);
+			int number = GetItemInt(row.Cells[COL_NUMBER]);
+			string title = GetItemString(row.Cells[COL_TITLE]);
+			string artist = GetItemString(row.Cells[COL_ARTIST]);
+			string album = GetItemString(row.Cells[COL_ALBUM]);
 			TimeSpan duration = GetItemTimeSpan(row.Cells[COL_DURATION]);
 			DateTime date = GetItemDateTime(row.Cells[COL_DATE]);
-			string format = GetItemString(row.Cells[COL_FORMAT]);
+			string format =  GetItemString(row.Cells[COL_FORMAT]);
 			Uri path = GetItemUri(row.Cells[COL_PATH]);
 			
-			IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, name, source, creator, duration, date, number, format); 
+			IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
 			return track;
 		}
 		
-		private void LoadTrackFromPath(string path)
+		private void LoadTrackFromPath(string path, string source)
 		{
-			LoadTrackFromPath(new Uri(path));
+			LoadTrackFromPath(new Uri(path), source);
 		}
 
-		private void LoadTrackFromPath(Uri path)
+		private void LoadTrackFromPath(Uri path, string source)
 		{
 			if (path != null)
 			{
-				//try
-				//{
-					IAudioTrack track = tagLibEngine.GetAudioTrack(path);
-					if (track != null)
-						LoadTrack(track);
-				//}
-				//catch (System.IO.FileNotFoundException)
-				//{
-					//MessageBox.Show(string.Format("The file does not exist: {0}", path.LocalPath), "Error Loading Track");
-				//}
+				IAudioTrack track = tagLibEngine.GetAudioTrack(path);
+				if (track != null)
+					LoadTrack(track, source);
 			}
-			//else MessageBox.Show("The file path is not defined", "Error Loading Track");
 		}
 		#endregion
 
 		#region Private Event Methods
 		void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
+			if (e.Value != null)
 			{
-				TimeSpan duration = (TimeSpan)e.Value;
-				if (duration.Hours > 0)
+				if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
 				{
-					e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
+					TimeSpan duration = (TimeSpan)e.Value;
+					if (duration.Hours > 0)
+					{
+						e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
+					}
+					else if (duration.Minutes > 0)
+					{
+						e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
+					}
+					else
+					{
+						e.Value = string.Format("0:{0:00}", duration.Seconds);
+					}
 				}
-				else if (duration.Minutes > 0)
+				if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
 				{
-					e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
-				}
-				else
-				{
-					e.Value = string.Format("0:{0:00}", duration.Seconds);
+					switch(e.Value.ToString())
+					{
+						case TYPE_AUDIO:
+							e.Value = smallImageList.Images[INDEX_AUDIO];
+							break;
+						case TYPE_BOOK:
+							e.Value = smallImageList.Images[INDEX_BOOK];
+							break;
+						case TYPE_IMAGE:
+							e.Value = smallImageList.Images[INDEX_IMAGE];
+							break;
+						case TYPE_MOVIE:
+							e.Value = smallImageList.Images[INDEX_MOVIE];
+							break;
+						case TYPE_TELEVISION:
+							e.Value = smallImageList.Images[INDEX_TELEVISION];
+							break;
+						default:
+							e.Value = smallImageList.Images[INDEX_AUDIO];
+							break;
+					}
 				}
 			}
-			if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
-			{
-				switch(e.Value.ToString())
-				{
-					case TYPE_AUDIO:
-						e.Value = smallImageList.Images[INDEX_AUDIO];
-						break;
-					case TYPE_BOOK:
-						e.Value = smallImageList.Images[INDEX_BOOK];
-						break;
-					case TYPE_IMAGE:
-						e.Value = smallImageList.Images[INDEX_IMAGE];
-						break;
-					case TYPE_MOVIE:
-						e.Value = smallImageList.Images[INDEX_MOVIE];
-						break;
-					case TYPE_TELEVISION:
-						e.Value = smallImageList.Images[INDEX_TELEVISION];
-						break;
-					default:
-						e.Value = smallImageList.Images[INDEX_AUDIO];
-						break;
-				}
-			}
+			else e.Value = string.Empty;
 		}
 		#endregion
 
@@ -273,13 +272,7 @@ namespace Alexandria.Client.Controllers
 				}
 			}
 		}
-		
-		//public ListView QueueListView
-		//{
-			//get { return queueListView; }
-			//set { queueListView = value; }
-		//}
-		
+				
 		public PlaybackController PlaybackController
 		{
 			get { return playbackController; }
@@ -290,23 +283,6 @@ namespace Alexandria.Client.Controllers
 		{
 			get { return tracks; }
 		}
-
-		//public IAudioStream AudioStream
-		//{
-			//get { return audioStream; }
-		//}
-
-		//public bool IsMuted
-		//{
-			//get
-			//{
-				//if (audioStream != null)
-				//{
-					//return audioStream.IsMuted;
-				//}
-				//else return false;
-			//}
-		//}
 
 		public EventHandler<EventArgs> TrackStart
 		{
@@ -319,21 +295,6 @@ namespace Alexandria.Client.Controllers
 			get { return trackEnd; }
 			set { trackEnd = value; }
 		}
-
-		//public float Volume
-		//{
-			//get
-			//{
-				//if (audioStream != null)
-					//return audioStream.Volume;
-				//else return -1;
-			//}
-			//set
-			//{
-				//if (audioStream != null)
-					//audioStream.Volume = value;
-			//}
-		//}
 
 		public IAudioTrack SelectedTrack
 		{
@@ -358,17 +319,17 @@ namespace Alexandria.Client.Controllers
 		public void LoadTracks()
 		{
 			IList<IAudioTrack> tracks = GetMp3TunesTracks(false);
-			LoadTracks(tracks);
+			LoadTracks(tracks, "MP3tunes");
 		}
 
-		public void LoadTracks(IList<IAudioTrack> tracks)
+		public void LoadTracks(IList<IAudioTrack> tracks, string source)
 		{
 			//QueueListView.Items.Clear();
 			if (tracks != null)
 			{
 				foreach (IAudioTrack track in tracks)
 				{
-					LoadTrack(track);
+					LoadTrack(track, source);
 				}
 			}
 		}
@@ -431,8 +392,7 @@ namespace Alexandria.Client.Controllers
 
 							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 							{
-								//selectedItem.SubItems[4].Text = GetDurationString(audioStream.Duration);
-								selectedRow.Cells[6].Value = audioStream.Duration;
+								selectedRow.Cells[7].Value = audioStream.Duration;
 							}
 						}
 						
@@ -443,24 +403,21 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		public void LoadTrack(IAudioTrack track)
+		public void LoadTrack(IAudioTrack track, string source)
 		{
-			object[] data = new object[10];
+			object[] data = new object[11];
 			data[0] = track.Id;
 			data[1] = TYPE_AUDIO;
-			data[2] = track.TrackNumber;
-			data[3] = track.Name;
-			data[4] = track.Artist;
-			data[5] = track.Album;
-			data[6] = track.Duration; //GetDurationString(track.Duration);
-			data[7] = track.ReleaseDate; //GetDateString(track.ReleaseDate);
-			data[8] = track.Format.ToLowerInvariant();
-			data[9] = track.Path; //track.Path.LocalPath;
+			data[2] = source;
+			data[3] = track.TrackNumber;
+			data[4] = track.Name;
+			data[5] = track.Artist;
+			data[6] = track.Album;
+			data[7] = track.Duration;
+			data[8] = track.ReleaseDate;
+			data[9] = track.Format.ToLowerInvariant();
+			data[10] = track.Path;
 
-			//ListViewItem item = new ListViewItem(data);
-			//item.Tag = track;
-			//QueueListView.Items.Add(item);
-			//grid.Rows.Add(data);
 			queueTable.Rows.Add(data);
 		}
 		
@@ -506,8 +463,6 @@ namespace Alexandria.Client.Controllers
 			catch (Exception ex)
 			{
 				throw new AlexandriaException("There was an error loading tracks from your MP3tunes locker", ex);
-				//MessageBox.Show(ex.Message, "Error loading MP3tunes tracks");
-				//return null;
 			}
 		}
 
@@ -539,7 +494,6 @@ namespace Alexandria.Client.Controllers
 			}
 			catch (Exception ex)
 			{
-				//MessageBox.Show(ex.Message, "LastFM error");
 				throw new AlexandriaException("There was an error submitting this track to Last.fm", ex);
 			}
 		}
@@ -587,11 +541,11 @@ namespace Alexandria.Client.Controllers
 					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
 					playlist.Load();
 					foreach (IPlaylistItem item in playlist.Items)
-						LoadTrackFromPath(item.Path);
+						LoadTrackFromPath(item.Path, "Playlist");
 				}
 				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
 				{
-					LoadTrackFromPath(path);
+					LoadTrackFromPath(path, "File");
 				}
 			}
 		}
@@ -605,59 +559,10 @@ namespace Alexandria.Client.Controllers
 				{
 					TrackSource trackSource = (TrackSource)sourceData;
 					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
-					LoadTracks(tracks);
+					LoadTracks(tracks, "CD");
 				}
 			}
 		}
-
-		public void Play()
-		{
-			/*
-			if (audioStream != null)
-			{
-				if (audioStream.PlaybackState != PlaybackState.Playing)
-				{
-					if (audioStream.PlaybackState == PlaybackState.Paused)
-					{
-						isPlaying = true;
-						audioStream.Resume();
-					}
-					else
-					{
-						if (audioStream.PlaybackState == PlaybackState.Stopped)
-						{
-							if (OnTrackStart != null)
-								OnTrackStart(audioStream, EventArgs.Empty);
-						}
-
-						if (submittedTrack != null && selectedTrack != null)
-						{
-							if (submittedTrack.Album != selectedTrack.Album && submittedTrack.Artist != selectedTrack.Artist && submittedTrack.Name != selectedTrack.Name)
-							{
-								SubmitTrackToLastFM(selectedTrack);
-								submittedTrack = selectedTrack;
-							}
-						}
-
-						isPlaying = true;
-						audioStream.Play();
-					}
-				}
-				else
-				{
-					isPlaying = false;
-					audioStream.Pause();
-				}
-			}
-			else
-			{
-				SelectTrack();
-				if (audioStream != null)
-					Play();
-			}
-			*/
-		}
-
 
 		public void Previous()
 		{
@@ -675,7 +580,6 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 					//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				//if (QueueListView.SelectedItems[0] != null)
 				if (grid.SelectedRows[0] != null)
 				{
 					int previousIndex = grid.Rows.Count - 1;
@@ -684,13 +588,6 @@ namespace Alexandria.Client.Controllers
 						
 					grid.SelectedRows[0].Selected = false;
 					grid.Rows[previousIndex].Selected = true;
-					
-					//QueueListView.Items.Count - 1;
-					//if (QueueListView.SelectedIndices[0] > 0)
-						//previousIndex = QueueListView.SelectedIndices[0] - 1;
-
-					//QueueListView.SelectedItems[0].Selected = false;
-					//QueueListView.Items[previousIndex].Selected = true;
 				}
 				
 				SelectTrack();
@@ -716,7 +613,6 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 				//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				//if (QueueListView.SelectedItems[0] != null)
 				if (grid.SelectedRows[0] != null)
 				{
 					int nextIndex = 0;
@@ -724,13 +620,7 @@ namespace Alexandria.Client.Controllers
 						nextIndex = grid.SelectedRows[0].Index + 1;
 						
 					grid.SelectedRows[0].Selected = false;
-					grid.Rows[nextIndex].Selected = true;	
-					
-					//if (QueueListView.SelectedIndices[0] < QueueListView.Items.Count - 1)
-						//nextIndex = QueueListView.SelectedIndices[0] + 1;
-
-					//QueueListView.SelectedItems[0].Selected = false;
-					//QueueListView.Items[nextIndex].Selected = true;
+					grid.Rows[nextIndex].Selected = true;					
 				}
 
 				SelectTrack();
@@ -739,29 +629,6 @@ namespace Alexandria.Client.Controllers
 					playbackController.AudioPlayer.Play();
 			}
 		}
-
-		/*
-		public void UpdateStatus()
-		{
-			if (audioStream != null && isPlaying)
-			{
-				if (audioStream.Elapsed >= audioStream.Duration)
-				{
-					Stop();
-					if (OnTrackEnd != null)
-						OnTrackEnd(audioStream, EventArgs.Empty);
-				}
-			}
-		}
-
-		public void Mute()
-		{
-			if (audioStream != null)
-			{
-				audioStream.IsMuted = !audioStream.IsMuted;
-			}
-		}
-		*/
 		#endregion
 	}
 }
