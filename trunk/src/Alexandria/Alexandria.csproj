@@ -90,11 +90,13 @@
     <Compile Include="Metadata\Duration.cs" />
     <Compile Include="Metadata\Element.cs" />
     <Compile Include="Metadata\IAlbum.cs" />
+    <Compile Include="Metadata\IMediaItem.cs" />
     <Compile Include="Metadata\IMetadataItem.cs" />
     <Compile Include="Metadata\ITrack.cs" />
     <Compile Include="Metadata\IElement.cs" />
     <Compile Include="Metadata\IEntity.cs" />
     <Compile Include="Metadata\ItemNumber.cs" />
+    <Compile Include="Metadata\MediaItemList.cs" />
     <Compile Include="Metadata\Old\BaseAlbum.cs" />
     <Compile Include="Metadata\Old\BaseArtist.cs" />
     <Compile Include="Metadata\Old\BaseAudioTrack.cs" />

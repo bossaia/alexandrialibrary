@@ -319,7 +319,7 @@
     <value>0, 0</value>
   </data>
   <data name="FileMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 24</value>
+    <value>1010, 24</value>
   </data>
   <data name="FileMenuStrip.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -367,7 +367,7 @@
     <value>0, 573</value>
   </data>
   <data name="StatusStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 22</value>
+    <value>1010, 22</value>
   </data>
   <data name="StatusStrip.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -565,7 +565,7 @@
     <value>4, 4</value>
   </data>
   <data name="TasksGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>509, 171</value>
+    <value>688, 171</value>
   </data>
   <data name="TasksGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -598,7 +598,7 @@
     <value>1</value>
   </data>
   <data name="UpperPlaybackStatusSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>828, 178</value>
+    <value>1007, 178</value>
   </data>
   <data name="UpperPlaybackStatusSplit.SplitterDistance" type="System.Int32, mscorlib">
     <value>307</value>
@@ -664,7 +664,7 @@
     <value>7, 20</value>
   </data>
   <data name="ToolBoxListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 323</value>
+    <value>106, 323</value>
   </data>
   <metadata name="ToolBoxSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>404, 8</value>
@@ -744,7 +744,7 @@
     <value>9, 3</value>
   </data>
   <data name="ToolBoxGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 349</value>
+    <value>119, 349</value>
   </data>
   <data name="ToolBoxGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -921,7 +921,7 @@
     <value>3, 16</value>
   </data>
   <data name="queueDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>707, 330</value>
+    <value>863, 330</value>
   </data>
   <data name="queueDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -942,7 +942,7 @@
     <value>3, 3</value>
   </data>
   <data name="QueueGroupBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>713, 349</value>
+    <value>869, 349</value>
   </data>
   <data name="QueueGroupBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -975,10 +975,10 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 355</value>
+    <value>1010, 355</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>108</value>
+    <value>131</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1008,7 +1008,7 @@
     <value>1</value>
   </data>
   <data name="OuterPlaybackQueueSplit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>831, 543</value>
+    <value>1010, 543</value>
   </data>
   <data name="OuterPlaybackQueueSplit.SplitterDistance" type="System.Int32, mscorlib">
     <value>184</value>
@@ -1102,7 +1102,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>831, 595</value>
+    <value>1010, 595</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
