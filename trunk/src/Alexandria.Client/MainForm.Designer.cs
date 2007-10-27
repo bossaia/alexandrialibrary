@@ -448,6 +448,7 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.Id, "Id");
 			this.Id.Name = "Id";
 			this.Id.ReadOnly = true;
+			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// Type
 			// 
@@ -456,7 +457,7 @@ namespace Alexandria.Client
 			this.Type.Name = "Type";
 			this.Type.ReadOnly = true;
 			this.Type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Source
 			// 
@@ -464,30 +465,35 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.Source, "Source");
 			this.Source.Name = "Source";
 			this.Source.ReadOnly = true;
+			this.Source.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Number
 			// 
 			this.Number.DataPropertyName = "Number";
 			resources.ApplyResources(this.Number, "Number");
 			this.Number.Name = "Number";
+			this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Title
 			// 
 			this.Title.DataPropertyName = "Title";
 			resources.ApplyResources(this.Title, "Title");
 			this.Title.Name = "Title";
+			this.Title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Artist
 			// 
 			this.Artist.DataPropertyName = "Artist";
 			resources.ApplyResources(this.Artist, "Artist");
 			this.Artist.Name = "Artist";
+			this.Artist.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Album
 			// 
 			this.Album.DataPropertyName = "Album";
 			resources.ApplyResources(this.Album, "Album");
 			this.Album.Name = "Album";
+			this.Album.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Duration
 			// 
@@ -497,12 +503,14 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
+			this.Duration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Date
 			// 
 			this.Date.DataPropertyName = "Date";
 			resources.ApplyResources(this.Date, "Date");
 			this.Date.Name = "Date";
+			this.Date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Format
 			// 
@@ -510,6 +518,7 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.Format, "Format");
 			this.Format.Name = "Format";
 			this.Format.ReadOnly = true;
+			this.Format.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Path
 			// 
@@ -517,6 +526,7 @@ namespace Alexandria.Client
 			this.Path.DataPropertyName = "Path";
 			resources.ApplyResources(this.Path, "Path");
 			this.Path.Name = "Path";
+			this.Path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// MainForm
 			// 
