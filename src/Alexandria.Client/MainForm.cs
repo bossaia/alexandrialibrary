@@ -94,7 +94,7 @@ namespace Alexandria.Client
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
-		private bool seekIsPending;
+		//private bool seekIsPending;
 		
 		//private ListViewItem selectedItem;
 		//private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);

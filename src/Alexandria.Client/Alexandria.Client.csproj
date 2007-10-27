@@ -45,6 +45,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="BindingListView.cs" />
     <Compile Include="Controllers\TrackSource.cs" />
     <Compile Include="Controllers\ITrackSource.cs" />
     <Compile Include="Controllers\PlaybackController.cs" />
@@ -104,6 +105,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SortComparer.cs" />
     <Compile Include="Views\IQueueView.cs" />
     <Compile Include="Views\QueueItem.cs" />
   </ItemGroup>
