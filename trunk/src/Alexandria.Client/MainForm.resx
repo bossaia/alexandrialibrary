@@ -334,10 +334,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 573</value>
+    <value>194, 46</value>
   </metadata>
   <data name="LoadStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
@@ -385,7 +385,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 5</value>
@@ -779,6 +779,72 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <metadata name="sortContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>299, 46</value>
+  </metadata>
+  <data name="contextCoolStripMenuItemClear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 22</value>
+  </data>
+  <data name="contextCoolStripMenuItemClear.Text" xml:space="preserve">
+    <value>Clear Sorting</value>
+  </data>
+  <data name="sortContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 26</value>
+  </data>
+  <data name="&gt;&gt;sortContextMenuStrip.Name" xml:space="preserve">
+    <value>sortContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;sortContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sortListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="sortListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>344, 27</value>
+  </data>
+  <data name="sortListView.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;sortListView.Name" xml:space="preserve">
+    <value>sortListView</value>
+  </data>
+  <data name="&gt;&gt;sortListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sortListView.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;sortListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="sortLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="sortLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 27</value>
+  </data>
+  <data name="sortLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 13</value>
+  </data>
+  <data name="sortLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="sortLabel.Text" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="&gt;&gt;sortLabel.Name" xml:space="preserve">
+    <value>sortLabel</value>
+  </data>
+  <data name="&gt;&gt;sortLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sortLabel.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;sortLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -819,16 +885,16 @@
     <value>True</value>
   </metadata>
   <data name="Number.HeaderText" xml:space="preserve">
-    <value>#</value>
+    <value>Number</value>
   </data>
   <data name="Number.MinimumWidth" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>50</value>
   </data>
   <data name="Number.ToolTipText" xml:space="preserve">
     <value>The number of this piece</value>
   </data>
   <data name="Number.Width" type="System.Int32, mscorlib">
-    <value>35</value>
+    <value>50</value>
   </data>
   <metadata name="Title.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -911,14 +977,11 @@
   <data name="Path.ToolTipText" xml:space="preserve">
     <value>The path of media file for this piece</value>
   </data>
-  <data name="queueDataGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
   <data name="queueDataGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>3, 63</value>
   </data>
   <data name="queueDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>863, 330</value>
+    <value>863, 283</value>
   </data>
   <data name="queueDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -933,7 +996,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1023,7 +1086,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;OuterPlaybackQueueSplit.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="queueSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>571, 8</value>
@@ -1276,6 +1339,12 @@
   </data>
   <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;contextCoolStripMenuItemClear.Name" xml:space="preserve">
+    <value>contextCoolStripMenuItemClear</value>
+  </data>
+  <data name="&gt;&gt;contextCoolStripMenuItemClear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Id.Name" xml:space="preserve">
     <value>Id</value>

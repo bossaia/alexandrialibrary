@@ -58,11 +58,9 @@ namespace Alexandria.Client
 				this.NextButton.Click += new EventHandler(NextButton_Click);
 				this.PreviousButton.Click += new EventHandler(PreviousButton_Click);
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
-				//this.queueDataGrid.SelectionChanged += new EventHandler(queueDataGrid_SelectionChanged);
-				//this.QueueListView.SelectedIndexChanged += new EventHandler(QueueListView_SelectedIndexChanged);
-				
-				//queueController.QueueListView = this.QueueListView;
+
 				queueController.Grid = queueDataGrid;
+				queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;
 				queueController.SmallImageList = queueSmallImageList;
 				
@@ -526,6 +524,29 @@ namespace Alexandria.Client
 			queueController.SelectTrack();
 			playbackController.AudioPlayer.Play();
 		}
+
+		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			string sortName = queueDataGrid.Columns[e.ColumnIndex].Name;
+			bool sortExists = false;
+			
+			if (sortListView.Items.Count > 0)
+			{
+				foreach(ListViewItem item in sortListView.Items)
+				{
+					if (item.Text == sortName)
+					{
+						sortExists = true;
+						sortListView.Items.Remove(item);
+					}
+				}
+			}
+			
+			if (!sortExists && sortListView.Items.Count < 3)
+			{
+				sortListView.Items.Add(sortName);
+			}
+		}
 		#endregion
 		
 		#region Protected Overrides
@@ -561,7 +582,7 @@ namespace Alexandria.Client
 			base.OnClosing(e);
 		}
 		#endregion
-		
+
 		#endregion		
 	}
 }
