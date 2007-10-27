@@ -65,36 +65,27 @@ namespace Alexandria.Client.Controllers
 		#region Constructors
 		public QueueController()
 		{
-			queueTable = new DataTable("Queue");
-			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
-			queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
-			queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
-			queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
-			queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
+			//queueTable = new DataTable("Queue");
+			
+			bindingList = new BindingListView<IMediaItem>();
 			
 			bindingSource = new BindingSource();
-			bindingSource.DataSource = queueTable;
+			bindingSource.DataSource = bindingList; //queueTable;
 		}
 		#endregion
 
 		#region Private Constant Fields
-		private const string COL_ID = "IdColumn";
-		private const string COL_TYPE = "TypeColumn";
-		private const string COL_SOURCE = "SourceColumn";
-		private const string COL_NUMBER = "NumberColumn";
-		private const string COL_TITLE = "TitleColumn";
-		private const string COL_ARTIST = "ArtistColumn";
-		private const string COL_ALBUM = "AlbumColumn";
-		private const string COL_DURATION = "DurationColumn";
-		private const string COL_DATE = "DateColumn";
-		private const string COL_FORMAT = "FormatColumn";
-		private const string COL_PATH = "PathColumn";
+		private const string COL_ID = "Id";
+		private const string COL_TYPE = "Type";
+		private const string COL_SOURCE = "Source";
+		private const string COL_NUMBER = "Number";
+		private const string COL_TITLE = "Title";
+		private const string COL_ARTIST = "Artist";
+		private const string COL_ALBUM = "Album";
+		private const string COL_DURATION = "Duration";
+		private const string COL_DATE = "Date";
+		private const string COL_FORMAT = "Format";
+		private const string COL_PATH = "Path";
 		
 		private const string TYPE_AUDIO = "Audio";
 		private const int INDEX_AUDIO = 0;
@@ -110,6 +101,8 @@ namespace Alexandria.Client.Controllers
 
 		#region Private Fields
 		private IAudioTrack selectedTrack;
+		private BindingListView<IMediaItem> bindingList; 
+		
 		//private IAudioTrack submittedTrack;
 		//private IAudioStream audioStream;
 		private IList<IAudioTrack> tracks;
@@ -131,7 +124,7 @@ namespace Alexandria.Client.Controllers
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 		//private Alexandria.
 		//private ListView queueListView;
-		private DataTable queueTable;
+		//private DataTable queueTable;
 		private BindingSource bindingSource;
 		private DataGridView grid;
 		private ImageList smallImageList;
@@ -144,6 +137,21 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Private Methods
+		private void InitDataTable(DataTable queueTable)
+		{
+			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
+			queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
+			queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
+			queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
+			queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
+			queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
+		}
+		
 		private Guid GetItemGuid(DataGridViewCell cell)
 		{
 			return (cell.Value != null) ? (Guid)cell.Value : Guid.NewGuid();
@@ -213,7 +221,8 @@ namespace Alexandria.Client.Controllers
 		{
 			if (e.Value != null)
 			{
-				if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
+				//queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
+				if (grid.Columns[e.ColumnIndex].Name == COL_DURATION)
 				{
 					TimeSpan duration = (TimeSpan)e.Value;
 					if (duration.Hours > 0)
@@ -229,7 +238,8 @@ namespace Alexandria.Client.Controllers
 						e.Value = string.Format("0:{0:00}", duration.Seconds);
 					}
 				}
-				if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
+				//if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
+				if (grid.Columns[e.ColumnIndex].Name == COL_TYPE)
 				{
 					switch(e.Value.ToString())
 					{
@@ -418,7 +428,9 @@ namespace Alexandria.Client.Controllers
 			data[9] = track.Format.ToLowerInvariant();
 			data[10] = track.Path;
 
-			queueTable.Rows.Add(data);
+			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
+			bindingList.Add(item);
+			//queueTable.Rows.Add(data);
 		}
 		
 		public string CleanupFileName(string fileName)

@@ -33,6 +33,7 @@ namespace Alexandria.Metadata
 {
 	public interface IMediaItem
 	{
+		Guid Id { get; set; }
 		string Source { get; set; }
 		string Type { get; set; }
 		int Number { get; set; }

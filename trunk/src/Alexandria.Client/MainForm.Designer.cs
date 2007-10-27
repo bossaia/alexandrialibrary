@@ -76,17 +76,17 @@ namespace Alexandria.Client
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.queueDataGrid = new System.Windows.Forms.DataGridView();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.IdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.TypeColumn = new System.Windows.Forms.DataGridViewImageColumn();
-			this.SourceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.NumberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.TitleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ArtistColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.AlbumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.DurationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.DateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.FormatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.PathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
+			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Album = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -401,17 +401,17 @@ namespace Alexandria.Client
 			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IdColumn,
-            this.TypeColumn,
-            this.SourceColumn,
-            this.NumberColumn,
-            this.TitleColumn,
-            this.ArtistColumn,
-            this.AlbumColumn,
-            this.DurationColumn,
-            this.DateColumn,
-            this.FormatColumn,
-            this.PathColumn});
+            this.Id,
+            this.Type,
+            this.Source,
+            this.Number,
+            this.Title,
+            this.Artist,
+            this.Album,
+            this.Duration,
+            this.Date,
+            this.Format,
+            this.Path});
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -442,79 +442,80 @@ namespace Alexandria.Client
 			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
 			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
 			// 
-			// IdColumn
+			// Id
 			// 
-			this.IdColumn.DataPropertyName = "IdColumn";
-			resources.ApplyResources(this.IdColumn, "IdColumn");
-			this.IdColumn.Name = "IdColumn";
-			this.IdColumn.ReadOnly = true;
+			this.Id.DataPropertyName = "Id";
+			resources.ApplyResources(this.Id, "Id");
+			this.Id.Name = "Id";
+			this.Id.ReadOnly = true;
 			// 
-			// TypeColumn
+			// Type
 			// 
-			this.TypeColumn.DataPropertyName = "TypeColumn";
-			resources.ApplyResources(this.TypeColumn, "TypeColumn");
-			this.TypeColumn.Name = "TypeColumn";
-			this.TypeColumn.ReadOnly = true;
-			this.TypeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.TypeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			this.Type.DataPropertyName = "Type";
+			resources.ApplyResources(this.Type, "Type");
+			this.Type.Name = "Type";
+			this.Type.ReadOnly = true;
+			this.Type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
 			// 
-			// SourceColumn
+			// Source
 			// 
-			this.SourceColumn.DataPropertyName = "SourceColumn";
-			resources.ApplyResources(this.SourceColumn, "SourceColumn");
-			this.SourceColumn.Name = "SourceColumn";
-			this.SourceColumn.ReadOnly = true;
+			this.Source.DataPropertyName = "Source";
+			resources.ApplyResources(this.Source, "Source");
+			this.Source.Name = "Source";
+			this.Source.ReadOnly = true;
 			// 
-			// NumberColumn
+			// Number
 			// 
-			this.NumberColumn.DataPropertyName = "NumberColumn";
-			resources.ApplyResources(this.NumberColumn, "NumberColumn");
-			this.NumberColumn.Name = "NumberColumn";
+			this.Number.DataPropertyName = "Number";
+			resources.ApplyResources(this.Number, "Number");
+			this.Number.Name = "Number";
 			// 
-			// TitleColumn
+			// Title
 			// 
-			this.TitleColumn.DataPropertyName = "TitleColumn";
-			resources.ApplyResources(this.TitleColumn, "TitleColumn");
-			this.TitleColumn.Name = "TitleColumn";
+			this.Title.DataPropertyName = "Title";
+			resources.ApplyResources(this.Title, "Title");
+			this.Title.Name = "Title";
 			// 
-			// ArtistColumn
+			// Artist
 			// 
-			this.ArtistColumn.DataPropertyName = "ArtistColumn";
-			resources.ApplyResources(this.ArtistColumn, "ArtistColumn");
-			this.ArtistColumn.Name = "ArtistColumn";
+			this.Artist.DataPropertyName = "Artist";
+			resources.ApplyResources(this.Artist, "Artist");
+			this.Artist.Name = "Artist";
 			// 
-			// AlbumColumn
+			// Album
 			// 
-			this.AlbumColumn.DataPropertyName = "AlbumColumn";
-			resources.ApplyResources(this.AlbumColumn, "AlbumColumn");
-			this.AlbumColumn.Name = "AlbumColumn";
+			this.Album.DataPropertyName = "Album";
+			resources.ApplyResources(this.Album, "Album");
+			this.Album.Name = "Album";
 			// 
-			// DurationColumn
+			// Duration
 			// 
-			this.DurationColumn.DataPropertyName = "DurationColumn";
+			this.Duration.DataPropertyName = "Duration";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.DurationColumn.DefaultCellStyle = dataGridViewCellStyle2;
-			resources.ApplyResources(this.DurationColumn, "DurationColumn");
-			this.DurationColumn.Name = "DurationColumn";
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
+			resources.ApplyResources(this.Duration, "Duration");
+			this.Duration.Name = "Duration";
+			this.Duration.ReadOnly = true;
 			// 
-			// DateColumn
+			// Date
 			// 
-			this.DateColumn.DataPropertyName = "DateColumn";
-			resources.ApplyResources(this.DateColumn, "DateColumn");
-			this.DateColumn.Name = "DateColumn";
+			this.Date.DataPropertyName = "Date";
+			resources.ApplyResources(this.Date, "Date");
+			this.Date.Name = "Date";
 			// 
-			// FormatColumn
+			// Format
 			// 
-			this.FormatColumn.DataPropertyName = "FormatColumn";
-			resources.ApplyResources(this.FormatColumn, "FormatColumn");
-			this.FormatColumn.Name = "FormatColumn";
-			this.FormatColumn.ReadOnly = true;
+			this.Format.DataPropertyName = "Format";
+			resources.ApplyResources(this.Format, "Format");
+			this.Format.Name = "Format";
+			this.Format.ReadOnly = true;
 			// 
-			// PathColumn
+			// Path
 			// 
-			this.PathColumn.DataPropertyName = "PathColumn";
-			resources.ApplyResources(this.PathColumn, "PathColumn");
-			this.PathColumn.Name = "PathColumn";
+			this.Path.DataPropertyName = "Path";
+			resources.ApplyResources(this.Path, "Path");
+			this.Path.Name = "Path";
 			// 
 			// MainForm
 			// 
@@ -593,17 +594,17 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
 		private System.Windows.Forms.DataGridView queueDataGrid;
 		private System.Windows.Forms.ImageList queueSmallImageList;
-		private System.Windows.Forms.DataGridViewTextBoxColumn IdColumn;
-		private System.Windows.Forms.DataGridViewImageColumn TypeColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn SourceColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn NumberColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn TitleColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ArtistColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn AlbumColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn DurationColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn DateColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn FormatColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn PathColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.DataGridViewImageColumn Type;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 	}
 }
 

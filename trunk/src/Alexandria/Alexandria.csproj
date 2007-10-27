@@ -96,6 +96,7 @@
     <Compile Include="Metadata\IElement.cs" />
     <Compile Include="Metadata\IEntity.cs" />
     <Compile Include="Metadata\ItemNumber.cs" />
+    <Compile Include="Metadata\MediaItem.cs" />
     <Compile Include="Metadata\MediaItemList.cs" />
     <Compile Include="Metadata\Old\BaseAlbum.cs" />
     <Compile Include="Metadata\Old\BaseArtist.cs" />
