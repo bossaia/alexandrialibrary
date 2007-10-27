@@ -128,6 +128,7 @@ namespace Alexandria.Client.Controllers
 		//private DataTable queueTable;
 		private BindingSource bindingSource;
 		private DataGridView grid;
+		private ListView sortListView;
 		private ImageList smallImageList;
 		
 		//private ListViewItem selectedItem;
@@ -296,7 +297,13 @@ namespace Alexandria.Client.Controllers
 				}
 			}
 		}
-				
+		
+		public ListView SortListView
+		{
+			get { return sortListView; }
+			set { sortListView = value; }
+		}
+		
 		public PlaybackController PlaybackController
 		{
 			get { return playbackController; }

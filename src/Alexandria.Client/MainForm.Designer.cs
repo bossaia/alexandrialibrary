@@ -74,8 +74,12 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
+			this.sortListView = new System.Windows.Forms.ListView();
+			this.sortLabel = new System.Windows.Forms.Label();
 			this.queueDataGrid = new System.Windows.Forms.DataGridView();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextCoolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -105,6 +109,7 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuStrip.SuspendLayout();
 			this.QueueGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
+			this.sortContextMenuStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -383,9 +388,25 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.sortListView);
+			this.QueueGroupBox.Controls.Add(this.sortLabel);
 			this.QueueGroupBox.Controls.Add(this.queueDataGrid);
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
+			// 
+			// sortListView
+			// 
+			this.sortListView.ContextMenuStrip = this.sortContextMenuStrip;
+			resources.ApplyResources(this.sortListView, "sortListView");
+			this.sortListView.MultiSelect = false;
+			this.sortListView.Name = "sortListView";
+			this.sortListView.UseCompatibleStateImageBehavior = false;
+			this.sortListView.View = System.Windows.Forms.View.List;
+			// 
+			// sortLabel
+			// 
+			resources.ApplyResources(this.sortLabel, "sortLabel");
+			this.sortLabel.Name = "sortLabel";
 			// 
 			// queueDataGrid
 			// 
@@ -431,6 +452,7 @@ namespace Alexandria.Client
 			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
 			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
 			// 
 			// queueSmallImageList
 			// 
@@ -441,6 +463,18 @@ namespace Alexandria.Client
 			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
 			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
 			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// sortContextMenuStrip
+			// 
+			this.sortContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextCoolStripMenuItemClear});
+			this.sortContextMenuStrip.Name = "sortContextMenuStrip";
+			resources.ApplyResources(this.sortContextMenuStrip, "sortContextMenuStrip");
+			// 
+			// contextCoolStripMenuItemClear
+			// 
+			this.contextCoolStripMenuItemClear.Name = "contextCoolStripMenuItemClear";
+			resources.ApplyResources(this.contextCoolStripMenuItemClear, "contextCoolStripMenuItemClear");
 			// 
 			// Id
 			// 
@@ -557,7 +591,9 @@ namespace Alexandria.Client
 			this.ToolBoxGroupBox.ResumeLayout(false);
 			this.ToolBoxContextMenuStrip.ResumeLayout(false);
 			this.QueueGroupBox.ResumeLayout(false);
+			this.QueueGroupBox.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
+			this.sortContextMenuStrip.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -605,6 +641,10 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
 		private System.Windows.Forms.DataGridView queueDataGrid;
 		private System.Windows.Forms.ImageList queueSmallImageList;
+		private System.Windows.Forms.ListView sortListView;
+		private System.Windows.Forms.Label sortLabel;
+		private System.Windows.Forms.ContextMenuStrip sortContextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem contextCoolStripMenuItemClear;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
