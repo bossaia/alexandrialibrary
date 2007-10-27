@@ -911,9 +911,6 @@
   <data name="Path.ToolTipText" xml:space="preserve">
     <value>The path of media file for this piece</value>
   </data>
-  <data name="Path.Width" type="System.Int32, mscorlib">
-    <value>300</value>
-  </data>
   <data name="queueDataGrid.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
