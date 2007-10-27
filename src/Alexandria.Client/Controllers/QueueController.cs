@@ -28,6 +28,7 @@
 #region Using
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Net;
 using System.Windows.Forms;
@@ -101,7 +102,7 @@ namespace Alexandria.Client.Controllers
 
 		#region Private Fields
 		private IAudioTrack selectedTrack;
-		private BindingListView<IMediaItem> bindingList; 
+		private IBindingListView bindingList; 
 		
 		//private IAudioTrack submittedTrack;
 		//private IAudioStream audioStream;
@@ -137,6 +138,16 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Private Methods
+		private void TestSort()
+		{
+			PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(IMediaItem));
+			ListSortDescription[] sortArray = new ListSortDescription[2];
+			sortArray[0] = new ListSortDescription(properties.Find("Format", true), ListSortDirection.Ascending);
+			sortArray[1] = new ListSortDescription(properties.Find("Title", true), ListSortDirection.Ascending);
+			ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
+			bindingList.ApplySort(sorts);
+		}
+		
 		private void InitDataTable(DataTable queueTable)
 		{
 			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
@@ -209,9 +220,12 @@ namespace Alexandria.Client.Controllers
 		{
 			if (path != null)
 			{
-				IAudioTrack track = tagLibEngine.GetAudioTrack(path);
-				if (track != null)
-					LoadTrack(track, source);
+				if (System.IO.File.Exists(path.LocalPath))
+				{
+					IAudioTrack track = tagLibEngine.GetAudioTrack(path);
+					if (track != null)
+						LoadTrack(track, source);
+				}
 			}
 		}
 		#endregion
@@ -413,6 +427,13 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
+		private string GetSafeString(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return string.Empty;
+			else return value;
+		}
+		
 		public void LoadTrack(IAudioTrack track, string source)
 		{
 			object[] data = new object[11];
@@ -420,15 +441,15 @@ namespace Alexandria.Client.Controllers
 			data[1] = TYPE_AUDIO;
 			data[2] = source;
 			data[3] = track.TrackNumber;
-			data[4] = track.Name;
-			data[5] = track.Artist;
-			data[6] = track.Album;
+			data[4] = GetSafeString(track.Name);
+			data[5] = GetSafeString(track.Artist);
+			data[6] = GetSafeString(track.Album);
 			data[7] = track.Duration;
 			data[8] = track.ReleaseDate;
 			data[9] = track.Format.ToLowerInvariant();
 			data[10] = track.Path;
 
-			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
+			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, GetSafeString(track.Name), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.ReleaseDate, track.Format, track.Path);
 			bindingList.Add(item);
 			//queueTable.Rows.Add(data);
 		}
@@ -554,6 +575,8 @@ namespace Alexandria.Client.Controllers
 					playlist.Load();
 					foreach (IPlaylistItem item in playlist.Items)
 						LoadTrackFromPath(item.Path, "Playlist");
+						
+					TestSort();
 				}
 				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
 				{
