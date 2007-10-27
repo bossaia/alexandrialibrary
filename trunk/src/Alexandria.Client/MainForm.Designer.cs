@@ -513,6 +513,7 @@ namespace Alexandria.Client
 			// 
 			// Path
 			// 
+			this.Path.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Path.DataPropertyName = "Path";
 			resources.ApplyResources(this.Path, "Path");
 			this.Path.Name = "Path";
