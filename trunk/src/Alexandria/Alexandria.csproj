@@ -57,6 +57,7 @@
     <Compile Include="IRequest.cs" />
     <Compile Include="IResource.cs" />
     <Compile Include="IView.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="Media\BaseMediaFormat.cs" />
     <Compile Include="Media\BitRateType.cs" />
     <Compile Include="Media\CompressionType.cs" />
@@ -172,7 +173,6 @@
     <Compile Include="Metadata\Tagging\ITagFormat.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.cd" />
     <None Include="Alexandria.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

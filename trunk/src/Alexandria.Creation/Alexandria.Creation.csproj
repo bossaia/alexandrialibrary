@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{97449DEA-C759-4E22-B287-305CA0023749}</ProjectGuid>
+    <ProjectGuid>{F16989DF-9013-4E34-99EB-D4750770B3F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.IO</RootNamespace>
-    <AssemblyName>Alexandria.IO</AssemblyName>
+    <RootNamespace>Alexandria.Creation</RootNamespace>
+    <AssemblyName>Alexandria.Creation</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,25 +33,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAudioPlayer.cs" />
-    <Compile Include="IMediaPlayer.cs" />
+    <Compile Include="Common\Group.cs" />
+    <Compile Include="Common\Person.cs" />
+    <Compile Include="IArtist.cs" />
+    <Compile Include="IGroup.cs" />
+    <Compile Include="IPiece.cs" />
+    <Compile Include="ISet.cs" />
+    <Compile Include="IStyle.cs" />
+    <Compile Include="ITheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.IO.dll.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alexandria.Resources\Alexandria.Resources.csproj">
-      <Project>{BAD0D48B-59FD-41A8-A62D-BF73BC33C9B0}</Project>
-      <Name>Alexandria.Resources</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alexandria\Alexandria.csproj">
       <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
       <Name>Alexandria</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
