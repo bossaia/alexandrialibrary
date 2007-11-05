@@ -27,39 +27,59 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 
-namespace Alexandria.IO
+namespace Alexandria.Resources
 {
-	public interface IAudioPlayer : IDisposable
+	public class UnknownResourceFormat : IResourceFormat
 	{
-		IAudioStreamFactory AudioStreamFactory { get; set; }
-		IAudioStream CurrentAudioStream { get; }
-		TimeSpan Duration { get; }
-		TimeSpan Elapsed { get; }
-		bool IsMuted { get; }
-		bool MuteToggles { get; set; }
-		bool PlayToggles { get; set; }
-		bool SeekIsPending { get; }
-		float Volume { get; }
-		EventHandler<MediaStateChangedEventArgs> BufferStateChanged { get; set; }
-		EventHandler<EventArgs> CurrentAudioStreamChanged { get; set; }
-		EventHandler<EventArgs> CurrentAudioStreamEnded { get; set; }
-		EventHandler<MediaStateChangedEventArgs> NetworkStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> PlaybackStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> SeekStateChanged { get; set; }
-		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
-		void BeginSeek();
-		void CancelSeek();
-		void LoadAudioStream(Uri path);
-		void LoadAudioStream(IAudioStream audioStream);
-		void Mute();
-		void Pause();
-		void Play();
-		void RefreshPlayerStates();
-		void Resume();
-		void Seek(int position);
-		void SetVolume(float volume);
-		void Stop();
-		void Unmute();
+		public UnknownResourceFormat()
+		{
+		}
+		
+		private string name = "Unknown";
+		private string description = "An unknown or invalid resource format";
+		private List<ContentType> contentTypes = new List<ContentType>();
+		private List<string> fileExtensions = new List<string>();
+		private List<ICodec> codecs = new List<ICodec>();
+		private List<IResourceFormat> supportedResourceFormats = new List<IResourceFormat>();
+		private List<IMetadataFormat> supportedMetadataFormats = new List<IMetadataFormat>();
+	
+		#region IResourceFormat Members
+		public string Name
+		{
+			get { return name; }
+		}
+
+		public string Description
+		{
+			get { return description; }
+		}
+
+		public IList<ContentType> ContentTypes
+		{
+			get { return contentTypes; }
+		}
+
+		public IList<string> FileExtensions
+		{
+			get { return fileExtensions; }
+		}
+
+		public IList<ICodec> Codecs
+		{
+			get { return codecs; }
+		}
+
+		public IList<IResourceFormat> SupportedResourceFormats
+		{
+			get { return supportedResourceFormats; }
+		}
+		
+		public IList<IMetadataFormat> SupportedMetadataFormats
+		{
+			get { return supportedMetadataFormats; }
+		}
+		#endregion
 	}
 }

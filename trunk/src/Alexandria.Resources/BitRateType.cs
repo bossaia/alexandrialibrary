@@ -28,38 +28,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alexandria.IO
+namespace Alexandria.Resources
 {
-	public interface IAudioPlayer : IDisposable
+	public enum BitRateType
 	{
-		IAudioStreamFactory AudioStreamFactory { get; set; }
-		IAudioStream CurrentAudioStream { get; }
-		TimeSpan Duration { get; }
-		TimeSpan Elapsed { get; }
-		bool IsMuted { get; }
-		bool MuteToggles { get; set; }
-		bool PlayToggles { get; set; }
-		bool SeekIsPending { get; }
-		float Volume { get; }
-		EventHandler<MediaStateChangedEventArgs> BufferStateChanged { get; set; }
-		EventHandler<EventArgs> CurrentAudioStreamChanged { get; set; }
-		EventHandler<EventArgs> CurrentAudioStreamEnded { get; set; }
-		EventHandler<MediaStateChangedEventArgs> NetworkStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> PlaybackStateChanged { get; set; }
-		EventHandler<MediaStateChangedEventArgs> SeekStateChanged { get; set; }
-		EventHandler<AudioStateChangedEventArgs> VolumeChanged { get; set; }
-		void BeginSeek();
-		void CancelSeek();
-		void LoadAudioStream(Uri path);
-		void LoadAudioStream(IAudioStream audioStream);
-		void Mute();
-		void Pause();
-		void Play();
-		void RefreshPlayerStates();
-		void Resume();
-		void Seek(int position);
-		void SetVolume(float volume);
-		void Stop();
-		void Unmute();
+		None = 0,
+		Average,
+		Constant,
+		Variable
 	}
 }

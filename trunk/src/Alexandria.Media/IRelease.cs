@@ -12,4 +12,9 @@ namespace Alexandria.Media
 		DateTime DateReleased { get; set; }
 		string Title { get; set; }
 	}
+	
+	public interface IRelease<T> : IRelease where T: IMediaRendering
+	{
+		new T Rendering { get; set; }
+	}
 }

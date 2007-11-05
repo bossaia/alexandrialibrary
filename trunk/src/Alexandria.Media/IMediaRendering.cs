@@ -9,5 +9,7 @@ namespace Alexandria.Media
 	{
 		IPiece Source { get; set; }
 		IMedium Medium { get; set; }
+		string Title { get; set; }
+		int Number { get; set; }
 	}
 }

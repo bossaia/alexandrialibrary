@@ -33,7 +33,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitRateType.cs" />
+    <Compile Include="CompressionType.cs" />
+    <Compile Include="ICodec.cs" />
+    <Compile Include="IMetadataElement.cs" />
+    <Compile Include="IMetadataFormat.cs" />
+    <Compile Include="IMetadataTag.cs" />
+    <Compile Include="IResource.cs" />
+    <Compile Include="IResourceFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnknownResourceFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Media\Alexandria.Media.csproj">
