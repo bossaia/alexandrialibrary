@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Telesophy.Alexandria.Media
 {
-	public interface IRelease
+	public interface IPiece
 	{
 		string Title { get; set; }
-		DateTime DateReleased { get; set; }
-		ILocation Location { get; set; }
-		IList<IWork> Works { get; }
+		DateTime DateCreated { get; set; }
+		IList<IArtist> Creators { get; }
 	}
 }

@@ -7,7 +7,7 @@
     <ProjectGuid>{ACFC43B8-F89E-4719-9E31-1D88ED4B6C3B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Media</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.Media</RootNamespace>
     <AssemblyName>Alexandria.Media</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -29,33 +29,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompactDisc.cs" />
-    <Compile Include="IAudioRendering.cs" />
-    <Compile Include="ICollectedRendering.cs" />
-    <Compile Include="IImageRendering.cs" />
-    <Compile Include="IManifest.cs" />
-    <Compile Include="IMediaRendering.cs" />
+    <Compile Include="IArtist.cs" />
+    <Compile Include="IGroup.cs" />
+    <Compile Include="ILocation.cs" />
     <Compile Include="IMedium.cs" />
+    <Compile Include="IPerformance.cs" />
+    <Compile Include="IPerson.cs" />
+    <Compile Include="IPiece.cs" />
+    <Compile Include="IRecording.cs" />
     <Compile Include="IRelease.cs" />
-    <Compile Include="ITextRendering.cs" />
-    <Compile Include="IVideoRendering.cs" />
-    <Compile Include="MediaTypes.cs" />
+    <Compile Include="IRole.cs" />
+    <Compile Include="IWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alexandria.Creation\Alexandria.Creation.csproj">
-      <Project>{F16989DF-9013-4E34-99EB-D4750770B3F7}</Project>
-      <Name>Alexandria.Creation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />

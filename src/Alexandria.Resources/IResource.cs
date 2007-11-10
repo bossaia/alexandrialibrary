@@ -28,15 +28,13 @@
 using System;
 using System.Collections.Generic;
 
-using Alexandria.Media;
-
-namespace Alexandria.Resources
+namespace Telesophy.Alexandria.Resources
 {
 	public interface IResource
 	{
 		Uri Path { get; set; }
 		IResourceFormat Format { get; set; }
-		IList<IMediaRendering> Renderings { get; }
-		IList<IMetadataTag> Tags { get; }
+		IList<IMediaContent> MediaContents { get; }
+		IList<IMetadataContent> MetadataContents { get; }
 	}
 }
