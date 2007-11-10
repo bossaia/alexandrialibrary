@@ -34,7 +34,7 @@ namespace Telesophy.Alexandria.Resources
 	{
 		Uri Path { get; set; }
 		IResourceFormat Format { get; set; }
-		IList<IMediaContent> MediaContents { get; }
-		IList<IMetadataContent> MetadataContents { get; }
+		IList<IMediaStream> Streams { get; }
+		IList<IMetadataTag> Tags { get; }
 	}
 }

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public interface IMetadataContent
+	public interface IMetadataTag
 	{
+		IMetadataFormat Format { get; }
 	}
 }
