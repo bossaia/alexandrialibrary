@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Telesophy.Alexandria.Media
+namespace Telesophy.Alexandria.Catalog
 {
-	public interface IMedium
+	public interface ICatalog
 	{
 		string Name { get; set; }
-		string Type { get; set; }
 		string Description { get; set; }
-		bool IsDigital { get; set; }
+		IUser User { get; set; }
 	}
 }

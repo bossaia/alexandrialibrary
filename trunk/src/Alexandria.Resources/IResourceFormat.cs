@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
-using System.Text;
 
-namespace Alexandria.Resources
+namespace Telesophy.Alexandria.Resources
 {
 	public interface IResourceFormat
 	{
