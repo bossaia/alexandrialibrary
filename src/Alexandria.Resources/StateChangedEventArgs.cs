@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public class MediaStateChangedEventArgs : EventArgs
+	public class StateChangedEventArgs : EventArgs
 	{
 		#region Constructors
-		public MediaStateChangedEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
+		public StateChangedEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
 		{
 			this.bufferState = bufferState;
 			this.networkState = networkState;

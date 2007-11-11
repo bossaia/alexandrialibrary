@@ -30,11 +30,36 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public enum BitRateType
+	public interface IAudioPlayer : IDisposable
 	{
-		None = 0,
-		Average,
-		Constant,
-		Variable
+		IMediaStreamFactory<IAudioStream> AudioStreamFactory { get; set; }
+		IAudioStream CurrentAudioStream { get; }
+		TimeSpan Duration { get; }
+		TimeSpan Elapsed { get; }
+		bool IsMuted { get; }
+		bool MuteToggles { get; set; }
+		bool PlayToggles { get; set; }
+		bool SeekIsPending { get; }
+		float Volume { get; }
+		EventHandler<StateChangedEventArgs> BufferStateChanged { get; set; }
+		EventHandler<EventArgs> CurrentAudioStreamChanged { get; set; }
+		EventHandler<EventArgs> CurrentAudioStreamEnded { get; set; }
+		EventHandler<StateChangedEventArgs> NetworkStateChanged { get; set; }
+		EventHandler<StateChangedEventArgs> PlaybackStateChanged { get; set; }
+		EventHandler<StateChangedEventArgs> SeekStateChanged { get; set; }
+		EventHandler<StateChangedEventArgs> VolumeChanged { get; set; }
+		void BeginSeek();
+		void CancelSeek();
+		void LoadAudioStream(Uri path);
+		void LoadAudioStream(IAudioStream audioStream);
+		void Mute();
+		void Pause();
+		void Play();
+		void RefreshPlayerStates();
+		void Resume();
+		void Seek(int position);
+		void SetVolume(float volume);
+		void Stop();
+		void Unmute();
 	}
 }

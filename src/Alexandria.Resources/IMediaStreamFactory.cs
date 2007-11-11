@@ -26,50 +26,17 @@
 #endregion
 
 using System;
-using System.Net.Mime;
-using System.IO;
+using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public interface IMediaStream : IDisposable
+	public interface IMediaStreamFactory
 	{
-		//Stream Members
-		bool CanRead { get; }
-		bool CanSeek { get; }
-		bool CanWrite { get; }
-		bool CanTimeout { get; }
-		void Flush();
-		long Length { get; }
-		long Position { get; set; }
-		int StreamIndex { get; set; }
-		int Read(byte[] buffer, int offset, int count);
-		long Seek(long offset, SeekOrigin origin);
-		void SetLength(long value);
-		void Write(byte[] buffer, int offset, int count);
-
-		string Path { get; }
-		ContentType Format { get; }
-		bool CanSetPosition { get; }
-		bool CanSetElapsed { get; }
-		bool CanPlay { get; }
-		BufferState BufferState { get; }
-		PlaybackState PlaybackState { get; }
-		NetworkState NetworkState { get; }
-		SeekState SeekState { get; }
-		TimeSpan Duration { get; }
-		TimeSpan Elapsed { get; set; }
-		float PercentBuffered { get; }
-		void Play();
-		void Pause();
-		void Resume();
-		void Stop();
-		void RefreshBufferState();
-		void RefreshNetworkState();
-		void RefreshPlaybackState();
-		void RefreshSeekState();
-		EventHandler<StateChangedEventArgs> BufferStateChanged { get; set; }
-		EventHandler<StateChangedEventArgs> NetworkStateChanged { get; set; }
-		EventHandler<StateChangedEventArgs> PlaybackStateChanged { get; set; }
-		EventHandler<StateChangedEventArgs> SeekStateChanged { get; set; }
+		IMediaStream CreateStream(Uri path);
+	}
+	
+	public interface IMediaStreamFactory<T> : IMediaStreamFactory where T: IMediaStream
+	{
+		new T CreateStream(Uri path);
 	}
 }
