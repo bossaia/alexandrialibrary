@@ -33,16 +33,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitRateType.cs" />
     <Compile Include="BufferState.cs" />
-    <Compile Include="CompressionType.cs" />
-    <Compile Include="ICodec.cs" />
+    <Compile Include="IAudioPlayer.cs" />
+    <Compile Include="IAudioStream.cs" />
     <Compile Include="IMediaStream.cs" />
+    <Compile Include="IMediaStreamFactory.cs" />
+    <Compile Include="IMetadataElement.cs" />
     <Compile Include="IMetadataTag.cs" />
-    <Compile Include="IMetadataFormat.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="IResourceFormat.cs" />
-    <Compile Include="MediaStateChangedEventArgs.cs" />
+    <Compile Include="StateChangedEventArgs.cs" />
     <Compile Include="NetworkState.cs" />
     <Compile Include="PlaybackState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

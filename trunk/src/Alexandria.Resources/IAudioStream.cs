@@ -25,15 +25,12 @@
  */
 #endregion
 
-using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public enum CompressionType
+	public interface IAudioStream : IMediaStream
 	{
-		None = 0,
-		Lossless,
-		Lossy
 	}
 }

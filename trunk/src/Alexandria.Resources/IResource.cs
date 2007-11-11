@@ -27,13 +27,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 
 namespace Telesophy.Alexandria.Resources
 {
 	public interface IResource
 	{
-		Uri Path { get; set; }
-		IResourceFormat Format { get; set; }
+		Uri Path { get; }
+		ContentType Format { get; }
 		IList<IMediaStream> Streams { get; }
 		IList<IMetadataTag> Tags { get; }
 	}

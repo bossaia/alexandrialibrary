@@ -30,9 +30,15 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Resources
 {
-	public interface IMetadataFormat
+	public interface IMetadataElement
 	{
 		string Name { get; }
-		string Description { get; }
+		string Type { get; }
+		string Value { get; }
+	}
+	
+	public interface IMetadataElement<T> : IMetadataElement
+	{
+		new T Value { get; set; }
 	}
 }
