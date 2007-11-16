@@ -31,11 +31,10 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Media
 {
-	public interface IWork : IComposition
+	public interface IComposition
 	{
-		IMedium Medium { get; set; }
-		IList<IRecording> Recordings { get; }
-		IList<IRelease> Releases { get; }
-		IList<IWork> CompositeWorks { get; }
+		string Title { get; set; }
+		DateTime DateCreated { get; set; }
+		IList<IArtist> Creators { get; }
 	}
 }

@@ -37,8 +37,8 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Resource Layer")]
-[assembly: AssemblyDescription("Provides support for digital resources in the Alexandria Media Library application suite")]
+[assembly: AssemblyTitle("Persistence Layer")]
+[assembly: AssemblyDescription("Provides support for object persistence in the Alexandria Media Library application suite")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telesophy Foundation")]
 [assembly: AssemblyProduct("Alexandria Media Library")]
@@ -52,7 +52,7 @@ using System.Security.Permissions;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("98e48043-9949-4c5a-b203-a19b3dde9464")]
+[assembly: Guid("1a09f007-ee53-4d65-813c-93179faf98a0")]
 
 // Version information for an assembly consists of the following four values:
 //

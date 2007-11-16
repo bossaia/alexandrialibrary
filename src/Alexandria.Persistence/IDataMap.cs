@@ -29,14 +29,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Telesophy.Alexandria.Catalog
+namespace Telesophy.Alexandria.Persistence
 {
-	public interface IRecord<T> : IDisposable
+	public interface IDataMap<T>
 	{
-		Guid Id { get; set; }
-		T Data { get; }
-		void Initialize();
-		void Save();
-		void Delete();
+		T Lookup(Uri id);
+		void Save(T record);
+		void Delete(T record);
 	}
 }
