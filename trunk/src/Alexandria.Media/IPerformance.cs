@@ -37,7 +37,7 @@ namespace Telesophy.Alexandria.Media
 		string Type { get; set; }
 		DateTime DatePerformed { get; set; }
 		ILocation Location { get; set; }
-		IPiece Piece { get; set; }
+		IComposition Piece { get; set; }
 		IList<IRole> Roles { get; }
 		IList<IRecording> Recordings { get; }
 	}

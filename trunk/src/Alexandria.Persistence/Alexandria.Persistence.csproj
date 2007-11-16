@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{ACFC43B8-F89E-4719-9E31-1D88ED4B6C3B}</ProjectGuid>
+    <ProjectGuid>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.Media</RootNamespace>
-    <AssemblyName>Alexandria.Media</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Persistence</RootNamespace>
+    <AssemblyName>Alexandria.Persistence</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,23 +29,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IArtist.cs" />
-    <Compile Include="IGroup.cs" />
-    <Compile Include="ILocation.cs" />
-    <Compile Include="IMedium.cs" />
-    <Compile Include="IPerformance.cs" />
-    <Compile Include="IPerson.cs" />
-    <Compile Include="IComposition.cs" />
-    <Compile Include="IRecording.cs" />
-    <Compile Include="IRelease.cs" />
-    <Compile Include="IRole.cs" />
-    <Compile Include="IWork.cs" />
+    <Compile Include="Common\SqlDataMap.cs" />
+    <Compile Include="IDataMap.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

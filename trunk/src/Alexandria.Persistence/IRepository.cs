@@ -29,12 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Telesophy.Alexandria.Media
+namespace Telesophy.Alexandria.Persistence
 {
-	public interface IPiece
+	public interface IRepository
 	{
-		string Title { get; set; }
-		DateTime DateCreated { get; set; }
-		IList<IArtist> Creators { get; }
 	}
 }
