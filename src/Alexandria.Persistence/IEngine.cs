@@ -27,14 +27,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
 
-namespace Telesophy.Alexandria.Catalog
+namespace Telesophy.Alexandria.Persistence
 {
-	public interface IUser
+	public interface IEngine
 	{
-		string Name { get; set; }
-		Uri ImagePath { get; set; }
-		IList<ICatalog> Catalogs { get; }
+		IDbConnection GetConnection();
+		IDbConnection GetConnection(string connectionString);
+		IDbCommand GetCommand();
+		IDbCommand GetLoadCommand(string recordName, string idField, string idValue);
+		IDbCommand GetSaveCommand(string recordName, string idField, string idValue, IDictionary<string, string> fieldValuePairs);
+		IDbCommand GetDeleteCommand(string recordName, string idField, string idValue);
+		IDbTransaction GetTransaction();
 	}
 }

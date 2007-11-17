@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</ProjectGuid>
+    <ProjectGuid>{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.Persistence</RootNamespace>
-    <AssemblyName>Alexandria.Persistence</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Catalog.Data</RootNamespace>
+    <AssemblyName>Alexandria.Catalog.Data</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,14 +33,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataMap.cs" />
-    <Compile Include="IDataMap.cs" />
-    <Compile Include="IEngine.cs" />
-    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\" />
+    <ProjectReference Include="..\Alexandria.Catalog\Alexandria.Catalog.csproj">
+      <Project>{D6F45C40-8DE9-443D-A380-C92AED3B7A49}</Project>
+      <Name>Alexandria.Catalog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
+      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
+      <Name>Alexandria.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
+      <Name>Alexandria</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

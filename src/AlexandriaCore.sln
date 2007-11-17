@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Catalog", "Alexa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence", "Alexandria.Persistence\Alexandria.Persistence.csproj", "{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence.SQLite", "Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj", "{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Catalog.Data", "Alexandria.Catalog.Data\Alexandria.Catalog.Data.csproj", "{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D73A0D-B338-4D59-8BBB-98B23975C3F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

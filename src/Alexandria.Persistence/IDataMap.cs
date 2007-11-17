@@ -27,14 +27,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
 	public interface IDataMap<T>
 	{
-		T Lookup(Uri id);
-		void Save(T record);
-		void Delete(T record);
+		DataTable Table { get; }
+		void Load(IEngine engine, T record, Uri id);
+		void Save(IEngine engine, T record, Uri id);
+		void Delete(IEngine engine, T record, Uri id);
 	}
 }
