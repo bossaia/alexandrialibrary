@@ -33,6 +33,7 @@ namespace Telesophy.Alexandria.Catalog
 {
 	public interface ICatalog
 	{
+		Uri Id { get; set; }
 		string Name { get; set; }
 		string Description { get; set; }
 		IUser User { get; set; }
