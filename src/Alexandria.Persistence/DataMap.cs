@@ -49,7 +49,6 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			using (IDbCommand command = engine.GetLoadCommand(Table.TableName, Table.PrimaryKey[0].ColumnName, id.ToString()))
 			{
-				//command.CommandText = string.Format("SELECT * FROM {0} WHERE {1} = '{2}'", Table.TableName, Table.PrimaryKey[0].ColumnName, id);
 				using (IDataReader reader = command.ExecuteReader())
 				{
 					if (reader.Read())
@@ -78,15 +77,8 @@ namespace Telesophy.Alexandria.Persistence
 				PropertyInfo property = GetPropertyByName(record, Table.Columns[i].ColumnName);
 				if (property != null)
 				{
-					object value = property.GetValue(record, null);
-					string valueName = "''";
-					if (property.PropertyType == typeof(string) || property.PropertyType == typeof(DateTime))
-					{
-						if (value != null) valueName = string.Format("'{0}'", value);
-					}
-					else valueName = value.ToString();
-					
-					fieldValuePairs.Add(Table.Columns[i].ColumnName, value.ToString());
+					string value = engine.GetFieldValue(property.PropertyType, property.GetValue(record, null));					
+					fieldValuePairs.Add(Table.Columns[i].ColumnName, value);
 				}
 			}
 			

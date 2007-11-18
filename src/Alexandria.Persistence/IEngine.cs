@@ -40,5 +40,6 @@ namespace Telesophy.Alexandria.Persistence
 		IDbCommand GetSaveCommand(string recordName, string idField, string idValue, IDictionary<string, string> fieldValuePairs);
 		IDbCommand GetDeleteCommand(string recordName, string idField, string idValue);
 		IDbTransaction GetTransaction();
+		string GetFieldValue(Type type, object value);
 	}
 }
