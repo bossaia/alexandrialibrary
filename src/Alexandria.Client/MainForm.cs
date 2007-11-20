@@ -266,6 +266,15 @@ namespace Alexandria.Client
 			}
 		}
 
+		private void OpenDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DialogResult result = DirectoryOpenDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				queueController.OpenDirectory(DirectoryOpenDialog.SelectedPath);
+			}
+		}
+
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
 			queueController.SelectTrack();
@@ -546,6 +555,12 @@ namespace Alexandria.Client
 			{
 				sortListView.Items.Add(sortName);
 			}
+		}
+
+		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			playbackController.AudioPlayer.Stop();
+			queueController.Clear();
 		}
 		#endregion
 		
