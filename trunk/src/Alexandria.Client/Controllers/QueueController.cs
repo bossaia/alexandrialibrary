@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Net;
 using System.Windows.Forms;
 
@@ -69,6 +70,7 @@ namespace Alexandria.Client.Controllers
 			//queueTable = new DataTable("Queue");
 			
 			bindingList = new BindingListView<IMediaItem>();
+			bindingList.AllowRemove = true;
 			
 			bindingSource = new BindingSource();
 			bindingSource.DataSource = bindingList; //queueTable;
@@ -102,7 +104,7 @@ namespace Alexandria.Client.Controllers
 
 		#region Private Fields
 		private IAudioTrack selectedTrack;
-		private IBindingListView bindingList; 
+		private BindingListView<IMediaItem> bindingList; 
 		
 		//private IAudioTrack submittedTrack;
 		//private IAudioStream audioStream;
@@ -146,7 +148,7 @@ namespace Alexandria.Client.Controllers
 			sortArray[0] = new ListSortDescription(properties.Find("Format", true), ListSortDirection.Ascending);
 			sortArray[1] = new ListSortDescription(properties.Find("Title", true), ListSortDirection.Ascending);
 			ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
-			bindingList.ApplySort(sorts);
+			((IBindingListView)bindingList).ApplySort(sorts);
 		}
 		
 		private void InitDataTable(DataTable queueTable)
@@ -572,6 +574,22 @@ namespace Alexandria.Client.Controllers
 			return string.Format("{0}:{1:00}", Convert.ToInt32(Math.Truncate(duration.TotalMinutes)), Convert.ToInt32(Math.Truncate(duration.TotalSeconds % 60)));
 		}
 
+		public void OpenDirectory(string path)
+		{
+			if (Directory.Exists(path))
+			{
+				DirectoryInfo dir = new DirectoryInfo(path);
+				foreach(FileInfo file in dir.GetFiles())
+				{
+					OpenFile(file.FullName);
+				}
+				foreach(DirectoryInfo subDirectory in dir.GetDirectories())
+				{
+					OpenDirectory(subDirectory.FullName);
+				}
+			}
+		}
+
 		public void OpenFile(string path)
 		{
 			if (!string.IsNullOrEmpty(path))
@@ -670,6 +688,11 @@ namespace Alexandria.Client.Controllers
 				if (isPlaying)
 					playbackController.AudioPlayer.Play();
 			}
+		}
+		
+		public void Clear()
+		{
+			bindingList.Clear();
 		}
 		#endregion
 	}

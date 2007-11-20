@@ -45,6 +45,7 @@ namespace Alexandria.Client
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.OpenDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,11 +76,10 @@ namespace Alexandria.Client
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.sortListView = new System.Windows.Forms.ListView();
-			this.sortLabel = new System.Windows.Forms.Label();
-			this.queueDataGrid = new System.Windows.Forms.DataGridView();
-			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextCoolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
+			this.sortLabel = new System.Windows.Forms.Label();
+			this.queueDataGrid = new System.Windows.Forms.DataGridView();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +91,10 @@ namespace Alexandria.Client
 			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -108,8 +112,8 @@ namespace Alexandria.Client
 			this.ToolBoxGroupBox.SuspendLayout();
 			this.ToolBoxContextMenuStrip.SuspendLayout();
 			this.QueueGroupBox.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
 			this.sortContextMenuStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// PlayPauseButton
@@ -154,6 +158,7 @@ namespace Alexandria.Client
 			// 
 			this.FileMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FileToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.catalogToolStripMenuItem,
             this.userToolStripMenuItem,
             this.ToolsToolStripMenuItem,
@@ -165,6 +170,7 @@ namespace Alexandria.Client
 			// 
 			this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
+            this.OpenDirectoryToolStripMenuItem,
             this.ExitToolStripMenuItem});
 			this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
 			resources.ApplyResources(this.FileToolStripMenuItem, "FileToolStripMenuItem");
@@ -178,6 +184,12 @@ namespace Alexandria.Client
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
 			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
+			// 
+			// OpenDirectoryToolStripMenuItem
+			// 
+			this.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem";
+			resources.ApplyResources(this.OpenDirectoryToolStripMenuItem, "OpenDirectoryToolStripMenuItem");
+			this.OpenDirectoryToolStripMenuItem.Click += new System.EventHandler(this.OpenDirectoryToolStripMenuItem_Click);
 			// 
 			// catalogToolStripMenuItem
 			// 
@@ -403,6 +415,18 @@ namespace Alexandria.Client
 			this.sortListView.UseCompatibleStateImageBehavior = false;
 			this.sortListView.View = System.Windows.Forms.View.List;
 			// 
+			// sortContextMenuStrip
+			// 
+			this.sortContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextCoolStripMenuItemClear});
+			this.sortContextMenuStrip.Name = "sortContextMenuStrip";
+			resources.ApplyResources(this.sortContextMenuStrip, "sortContextMenuStrip");
+			// 
+			// contextCoolStripMenuItemClear
+			// 
+			this.contextCoolStripMenuItemClear.Name = "contextCoolStripMenuItemClear";
+			resources.ApplyResources(this.contextCoolStripMenuItemClear, "contextCoolStripMenuItemClear");
+			// 
 			// sortLabel
 			// 
 			resources.ApplyResources(this.sortLabel, "sortLabel");
@@ -412,6 +436,7 @@ namespace Alexandria.Client
 			// 
 			this.queueDataGrid.AllowUserToAddRows = false;
 			this.queueDataGrid.AllowUserToResizeRows = false;
+			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -441,7 +466,6 @@ namespace Alexandria.Client
 			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
-			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.Name = "queueDataGrid";
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
@@ -453,28 +477,6 @@ namespace Alexandria.Client
 			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
-			// 
-			// queueSmallImageList
-			// 
-			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-			// 
-			// sortContextMenuStrip
-			// 
-			this.sortContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextCoolStripMenuItemClear});
-			this.sortContextMenuStrip.Name = "sortContextMenuStrip";
-			resources.ApplyResources(this.sortContextMenuStrip, "sortContextMenuStrip");
-			// 
-			// contextCoolStripMenuItemClear
-			// 
-			this.contextCoolStripMenuItemClear.Name = "contextCoolStripMenuItemClear";
-			resources.ApplyResources(this.contextCoolStripMenuItemClear, "contextCoolStripMenuItemClear");
 			// 
 			// Id
 			// 
@@ -562,6 +564,33 @@ namespace Alexandria.Client
 			this.Path.Name = "Path";
 			this.Path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
+			// queueSmallImageList
+			// 
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// DirectoryOpenDialog
+			// 
+			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
+			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			resources.ApplyResources(this.clearToolStripMenuItem, "clearToolStripMenuItem");
+			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -592,8 +621,8 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuStrip.ResumeLayout(false);
 			this.QueueGroupBox.ResumeLayout(false);
 			this.QueueGroupBox.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
 			this.sortContextMenuStrip.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -656,6 +685,10 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
+		private System.Windows.Forms.ToolStripMenuItem OpenDirectoryToolStripMenuItem;
+		private System.Windows.Forms.FolderBrowserDialog DirectoryOpenDialog;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 	}
 }
 
