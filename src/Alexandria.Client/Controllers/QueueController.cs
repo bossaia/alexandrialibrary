@@ -66,14 +66,12 @@ namespace Alexandria.Client.Controllers
 	{
 		#region Constructors
 		public QueueController()
-		{
-			//queueTable = new DataTable("Queue");
-			
+		{			
 			bindingList = new BindingListView<IMediaItem>();
 			bindingList.AllowRemove = true;
 			
 			bindingSource = new BindingSource();
-			bindingSource.DataSource = bindingList; //queueTable;
+			bindingSource.DataSource = bindingList;
 		}
 		#endregion
 
@@ -105,35 +103,21 @@ namespace Alexandria.Client.Controllers
 		#region Private Fields
 		private IAudioTrack selectedTrack;
 		private BindingListView<IMediaItem> bindingList; 
-		
-		//private IAudioTrack submittedTrack;
-		//private IAudioStream audioStream;
 		private IList<IAudioTrack> tracks;
 
 		MusicLocker locker = new MusicLocker();
 		PlaylistFactory playlistFactory = new PlaylistFactory();
 		TagLibEngine tagLibEngine = new TagLibEngine();
-
-		private EventHandler<EventArgs> trackStart;
-		private EventHandler<EventArgs> trackEnd;
-
-		//private bool isPlaying;
 		
 		private EventHandler<QueueEventArgs> selectedTrackChanged;
 
-		//private IPluginRepository repository;
-		//private IPersistenceBroker broker;
-		//private IPersistenceMechanism mechanism;
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
-		//private Alexandria.
-		//private ListView queueListView;
-		//private DataTable queueTable;
+
 		private BindingSource bindingSource;
 		private DataGridView grid;
 		private ListView sortListView;
 		private ImageList smallImageList;
 		
-		//private ListViewItem selectedItem;
 		private DataGridViewRow selectedRow;
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
@@ -317,34 +301,28 @@ namespace Alexandria.Client.Controllers
 			get { return tracks; }
 		}
 
-		public EventHandler<EventArgs> TrackStart
-		{
-			get { return trackStart; }
-			set { trackStart = value; }
-		}
-
-		public EventHandler<EventArgs> TrackEnd
-		{
-			get { return trackEnd; }
-			set { trackEnd = value; }
-		}
-
 		public IAudioTrack SelectedTrack
 		{
 			get { return selectedTrack; }
-			set { selectedTrack = value; }
+			set
+			{
+				selectedTrack = value;
+			
+				if (SelectedTrackChanged != null)
+					SelectedTrackChanged(this, new QueueEventArgs());
+			}
+		}
+				
+		public ImageList SmallImageList
+		{
+			get { return smallImageList; }
+			set { smallImageList = value; }
 		}
 		
 		public EventHandler<QueueEventArgs> SelectedTrackChanged
 		{
 			get { return selectedTrackChanged; }
 			set { selectedTrackChanged = value; }
-		}
-		
-		public ImageList SmallImageList
-		{
-			get { return smallImageList; }
-			set { smallImageList = value; }
 		}
 		#endregion
 
@@ -357,7 +335,6 @@ namespace Alexandria.Client.Controllers
 
 		public void LoadTracks(IList<IAudioTrack> tracks, string source)
 		{
-			//QueueListView.Items.Clear();
 			if (tracks != null)
 			{
 				foreach (IAudioTrack track in tracks)
@@ -374,17 +351,14 @@ namespace Alexandria.Client.Controllers
 			if (grid.SelectedRows.Count > 0)
 			{
 				//# Name Artist Album Length Date Location Format
-				//if (QueueListView.SelectedItems[0] != selectedItem)
 				if (grid.SelectedRows[0] != selectedRow)
 				{
-					//selectedItem = QueueListView.SelectedItems[0];
 					selectedRow = grid.SelectedRows[0];
-					//selectedItem.Tag != null)
+					
 					if (selectedRow.Cells.Count > 0)
 					{
 						//TODO: move all of this logic into AudioPlayer
-						//selectedTrack = (IAudioTrack)selectedItem.Tag;
-						selectedTrack = GetSelectedAudioTrack(selectedRow);
+						SelectedTrack = GetSelectedAudioTrack(selectedRow);
 						if (selectedTrack.Format == "cdda")
 						{
 							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);

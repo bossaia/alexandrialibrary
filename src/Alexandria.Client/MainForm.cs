@@ -559,6 +559,20 @@ namespace Alexandria.Client
 			playbackController.AudioPlayer.Stop();
 			queueController.Clear();
 		}
+
+		private void queueDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+			playbackController.AudioPlayer.Stop();
+			queueController.SelectTrack();
+			playbackController.AudioPlayer.Play();
+		}
+		
+		private void OnSelectedTrackChanged(object sender, QueueEventArgs e)
+		{
+			if (queueController.SelectedTrack != null)
+				NowPlayingLabel.Text = string.Format("{0} - {1}", queueController.SelectedTrack.Artist, queueController.SelectedTrack.Name);
+			else NowPlayingLabel.Text = string.Empty;
+		}
 		#endregion
 		
 		#region Protected Overrides
@@ -576,6 +590,7 @@ namespace Alexandria.Client
 			LoadDefaultUser();
 			
 			playbackController.AudioPlayer.CurrentAudioStreamEnded += new EventHandler<EventArgs>(OnCurrentAudioStreamEnded);
+			queueController.SelectedTrackChanged += new EventHandler<QueueEventArgs>(OnSelectedTrackChanged);
 			
 			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
 			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
