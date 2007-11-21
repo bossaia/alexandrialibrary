@@ -124,6 +124,14 @@ namespace Alexandria.Client.Controllers
 		private PlaybackController playbackController;
 		#endregion
 
+		#region Private Properties
+		private DataGridViewRow SelectedRow
+		{
+			get { return selectedRow;  }
+			set { selectedRow = value; }
+		}
+		#endregion
+
 		#region Private Methods
 		private void TestSort()
 		{
@@ -214,6 +222,24 @@ namespace Alexandria.Client.Controllers
 						LoadTrack(track, source);
 				}
 			}
+		}
+		
+		private bool ValuesAreEquivalent(object value1, object value2)
+		{
+			if (value1 != null && value2 != null)
+			{
+				return (value1.ToString() == value2.ToString());
+			}
+			else return (value1 == null && value2 == null);
+		}
+		
+		private bool RowsAreEquivalent(DataGridViewRow row1, DataGridViewRow row2)
+		{
+			for(int i=0; i<row1.Cells.Count; i++)
+				if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
+					return false;
+		
+			return true;
 		}
 		#endregion
 
@@ -348,17 +374,17 @@ namespace Alexandria.Client.Controllers
 		{
 			IAudioStream audioStream = null;
 			
-			if (grid.SelectedRows.Count > 0)
+			if (grid.Rows.Count > 0 && grid.SelectedRows.Count > 0)
 			{
 				//# Name Artist Album Length Date Location Format
-				if (grid.SelectedRows[0] != selectedRow)
+				if (grid.SelectedRows[0] != SelectedRow)
 				{
-					selectedRow = grid.SelectedRows[0];
+					SelectedRow = grid.SelectedRows[0];
 					
-					if (selectedRow.Cells.Count > 0)
+					if (SelectedRow.Cells.Count > 0)
 					{
 						//TODO: move all of this logic into AudioPlayer
-						SelectedTrack = GetSelectedAudioTrack(selectedRow);
+						SelectedTrack = GetSelectedAudioTrack(SelectedRow);
 						if (selectedTrack.Format == "cdda")
 						{
 							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
@@ -399,7 +425,7 @@ namespace Alexandria.Client.Controllers
 
 							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 							{
-								selectedRow.Cells[7].Value = audioStream.Duration;
+								SelectedRow.Cells[7].Value = audioStream.Duration;
 							}
 						}
 						
@@ -614,10 +640,10 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 					//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (grid.SelectedRows[0] != null)
+				if (selectedRow != null)
 				{
 					int previousIndex = grid.Rows.Count - 1;
-					if (grid.SelectedRows[0].Index > 0)
+					if (selectedRow.Index > 0)
 						previousIndex = grid.SelectedRows[0].Index - 1;
 						
 					grid.SelectedRows[0].Selected = false;
@@ -647,14 +673,14 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 				//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (grid.SelectedRows[0] != null)
+				if (selectedRow != null)
 				{
 					int nextIndex = 0;
-					if (grid.SelectedRows[0].Index < grid.Rows.Count - 1)
-						nextIndex = grid.SelectedRows[0].Index + 1;
+					if (selectedRow.Index < grid.Rows.Count - 1)
+						nextIndex = selectedRow.Index + 1;
 						
 					grid.SelectedRows[0].Selected = false;
-					grid.Rows[nextIndex].Selected = true;					
+					grid.Rows[nextIndex].Selected = true;
 				}
 
 				SelectTrack();
@@ -667,6 +693,32 @@ namespace Alexandria.Client.Controllers
 		public void Clear()
 		{
 			bindingList.Clear();
+			bindingList.ResetBindings();
+		}
+		
+		public void DeleteSelectedRow()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+			{
+				int currentIndex = grid.SelectedRows[0].Index;
+				
+				//IMediaItem selectedItem = grid.SelectedRows[0].DataBoundItem as IMediaItem;
+				
+				if (RowsAreEquivalent(grid.SelectedRows[0], selectedRow))
+				{
+					if (grid.Rows.Count > 1)
+					{
+						Next();
+					}
+					else
+					{
+						playbackController.AudioPlayer.Stop();
+					}
+				}
+
+				bindingList.RemoveAt(currentIndex);
+				bindingList.ResetBindings();
+			}
 		}
 		#endregion
 	}
