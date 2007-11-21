@@ -570,8 +570,21 @@ namespace Alexandria.Client
 		private void OnSelectedTrackChanged(object sender, QueueEventArgs e)
 		{
 			if (queueController.SelectedTrack != null)
-				NowPlayingLabel.Text = string.Format("{0} - {1}", queueController.SelectedTrack.Artist, queueController.SelectedTrack.Name);
+			{
+				string artist = (!string.IsNullOrEmpty(queueController.SelectedTrack.Artist)) ? queueController.SelectedTrack.Artist : "Unknown Artist";
+				string title = (!string.IsNullOrEmpty(queueController.SelectedTrack.Name)) ? queueController.SelectedTrack.Name : "Untitled";
+				NowPlayingLabel.Text = string.Format("{0} - {1}", artist, title);
+			}
 			else NowPlayingLabel.Text = string.Empty;
+		}
+
+		private void queueDataGrid_KeyUp(object sender, KeyEventArgs e)
+		{
+			//46 is the DEL key
+			if (e.KeyValue == 46)
+			{
+				queueController.DeleteSelectedRow();
+			}
 		}
 		#endregion
 		
@@ -610,6 +623,6 @@ namespace Alexandria.Client
 		}
 		#endregion
 
-		#endregion		
+		#endregion
 	}
 }
