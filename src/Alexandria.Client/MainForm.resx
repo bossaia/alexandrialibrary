@@ -280,7 +280,7 @@
     <value>&amp;File</value>
   </data>
   <data name="clearToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>110, 22</value>
   </data>
   <data name="clearToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Clear</value>
@@ -864,7 +864,7 @@
     <value>1</value>
   </data>
   <data name="queueDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
+    <value>Top, Bottom, Left, Right</value>
   </data>
   <metadata name="Id.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1265,16 +1265,28 @@
   <data name="&gt;&gt;OpenToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;OpenDirectoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>OpenDirectoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;OpenDirectoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ExitToolStripMenuItem.Name" xml:space="preserve">
     <value>ExitToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;ExitToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;OpenDirectoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>OpenDirectoryToolStripMenuItem</value>
+  <data name="&gt;&gt;viewToolStripMenuItem.Name" xml:space="preserve">
+    <value>viewToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;OpenDirectoryToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;viewToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;clearToolStripMenuItem.Name" xml:space="preserve">
+    <value>clearToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;clearToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;catalogToolStripMenuItem.Name" xml:space="preserve">
@@ -1450,18 +1462,6 @@
   </data>
   <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;viewToolStripMenuItem.Name" xml:space="preserve">
-    <value>viewToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;viewToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;clearToolStripMenuItem.Name" xml:space="preserve">
-    <value>clearToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;clearToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
