@@ -67,6 +67,13 @@ namespace Alexandria.Client.Properties {
             }
         }
         
+        internal static System.Drawing.Icon AnkhIcon {
+            get {
+                object obj = ResourceManager.GetObject("AnkhIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Alexandria - .
         /// </summary>

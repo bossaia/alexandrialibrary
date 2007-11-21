@@ -128,10 +128,11 @@ namespace Alexandria.Client
 		#region InitializeNotifyIcon
 		private void InitializeNotifyIcon()
 		{
-			Icon icon = new Icon(@"..\..\Alexandria.Client.ico");
+			//Icon icon = new Icon
+			//@"..\..\Alexandria.Client.ico");
 			//Icon icon = Alexandria.Client.Properties.Resources.
 			//Alexandria.Client.Properties.Resources.ic
-			notifyIcon.Icon = icon;
+			notifyIcon.Icon = Resources.AnkhIcon;
 			notifyIcon.Text = "Alexandria";
 			notifyIcon.ContextMenu = notifyMenu;
 			notifyIcon.Visible = true;
