@@ -44,8 +44,10 @@ namespace Alexandria.Client
 			this.FileMenuStrip = new System.Windows.Forms.MenuStrip();
 			this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.OpenDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,8 +95,6 @@ namespace Alexandria.Client
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -180,16 +180,29 @@ namespace Alexandria.Client
 			this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
 			resources.ApplyResources(this.OpenToolStripMenuItem, "OpenToolStripMenuItem");
 			// 
-			// ExitToolStripMenuItem
-			// 
-			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
-			// 
 			// OpenDirectoryToolStripMenuItem
 			// 
 			this.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem";
 			resources.ApplyResources(this.OpenDirectoryToolStripMenuItem, "OpenDirectoryToolStripMenuItem");
 			this.OpenDirectoryToolStripMenuItem.Click += new System.EventHandler(this.OpenDirectoryToolStripMenuItem_Click);
+			// 
+			// ExitToolStripMenuItem
+			// 
+			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
+			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
+			// 
+			// clearToolStripMenuItem
+			// 
+			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+			resources.ApplyResources(this.clearToolStripMenuItem, "clearToolStripMenuItem");
+			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
 			// 
 			// catalogToolStripMenuItem
 			// 
@@ -577,19 +590,6 @@ namespace Alexandria.Client
 			// DirectoryOpenDialog
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-			// 
-			// viewToolStripMenuItem
-			// 
-			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.clearToolStripMenuItem});
-			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
-			// 
-			// clearToolStripMenuItem
-			// 
-			this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-			resources.ApplyResources(this.clearToolStripMenuItem, "clearToolStripMenuItem");
-			this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 

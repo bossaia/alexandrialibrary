@@ -114,7 +114,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Client.ico" />
     <None Include="Resources\AnkhIcon.ico" />
-    <Content Include="Resources\Icons\Ankh.ico" />
     <Content Include="Resources\Icons\Silk\accept.png" />
     <Content Include="Resources\Icons\Silk\add.png" />
     <Content Include="Resources\Icons\Silk\anchor.png" />

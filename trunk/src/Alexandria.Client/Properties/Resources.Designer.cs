@@ -75,7 +75,7 @@ namespace Alexandria.Client.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alexandria - .
+        ///   Looks up a localized string similar to Alexandria.
         /// </summary>
         internal static string ApplicationTitle {
             get {
