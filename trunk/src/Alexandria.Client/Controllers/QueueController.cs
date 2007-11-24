@@ -235,11 +235,15 @@ namespace Alexandria.Client.Controllers
 		
 		private bool RowsAreEquivalent(DataGridViewRow row1, DataGridViewRow row2)
 		{
-			for(int i=0; i<row1.Cells.Count; i++)
-				if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
-					return false;
-		
-			return true;
+			if (row1 != null && row2 != null)
+			{
+				for(int i=0; i<row1.Cells.Count; i++)
+					if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
+						return false;
+
+				return true;
+			}
+			else return false;
 		}
 		#endregion
 
