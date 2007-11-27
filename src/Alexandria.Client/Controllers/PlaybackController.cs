@@ -29,8 +29,10 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using Alexandria.LastFM;
 using Alexandria.Media;
 using Alexandria.Media.IO;
+using Alexandria.Metadata;
 using Alexandria.Fmod;
 
 namespace Alexandria.Client.Controllers
@@ -76,11 +78,32 @@ namespace Alexandria.Client.Controllers
 		#endregion
 		
 		#region Private Fields
+		private const int SUBMIT_ELAPSED_TIME = 30000;
+		
 		private bool disposed;
 		
+		private QueueController queueController;
 		private TrackBar playbackTrackBar;
 		private Button playPauseButton;
 		private IAudioPlayer audioPlayer;
+		private bool currentTrackSubmitted;
+		#endregion
+
+		#region Private Methods
+		public void SubmitTrackToLastFM(IAudioTrack track)
+		{
+			try
+			{
+				LastFM.AudioscrobblerRequest request = new Alexandria.LastFM.AudioscrobblerRequest();
+				request.Username = "uberweasel";
+				request.Password = "automatic";
+				request.SubmitTrack(track);
+			}
+			catch (Exception ex)
+			{
+				throw new AlexandriaException("There was an error submitting this track to Last.fm", ex);
+			}
+		}
 		#endregion
 
 		#region Private Event Methods
@@ -103,6 +126,12 @@ namespace Alexandria.Client.Controllers
 		#endregion
 		
 		#region Public Properties
+		public QueueController QueueController
+		{
+			get { return queueController; }
+			set { queueController = value; }
+		}
+		
 		public TrackBar PlaybackTrackBar
 		{
 			get { return playbackTrackBar; }
@@ -125,13 +154,19 @@ namespace Alexandria.Client.Controllers
 		public void LoadAudioStream(Uri path)
 		{
 			if (audioPlayer != null)
+			{
+				currentTrackSubmitted = false;
 				audioPlayer.LoadAudioStream(path);
+			}
 		}
 		
 		public void LoadAudioStream(IAudioStream audioStream)
 		{
 			if (audioPlayer != null)
+			{
+				currentTrackSubmitted = false;
 				audioPlayer.LoadAudioStream(audioStream);
+			}
 		}
 		
 		public void RefreshPlaybackStates()
@@ -143,6 +178,15 @@ namespace Alexandria.Client.Controllers
 				{
 					int value = (int)audioPlayer.CurrentAudioStream.Elapsed.TotalMilliseconds;
 					playbackTrackBar.Value = value;
+					
+					if (!currentTrackSubmitted)
+					{
+						if (value >= SUBMIT_ELAPSED_TIME || audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds < SUBMIT_ELAPSED_TIME)
+						{
+							SubmitTrackToLastFM(QueueController.SelectedTrack);
+							currentTrackSubmitted = true;
+						}
+					}
 				}
 
 				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)

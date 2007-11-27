@@ -68,6 +68,7 @@ namespace Alexandria.Client
 				playbackController.AudioPlayer.MuteToggles = true;
 				playbackController.PlaybackTrackBar = PlaybackTrackBar;
 				playbackController.PlayPauseButton = PlayPauseButton;
+				playbackController.QueueController = queueController;
 			}
 			catch (Exception ex)
 			{
