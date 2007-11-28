@@ -280,7 +280,7 @@ namespace Alexandria.Client
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
-		{
+		{		
 			playbackController.AudioPlayer.Stop();
 			/*
 			if (controller != null)
@@ -561,6 +561,14 @@ namespace Alexandria.Client
 			queueController.Clear();
 		}
 
+		private void clearSelectedToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
+			{
+				queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
+			}
+		}
+
 		private void queueDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			playbackController.AudioPlayer.Stop();
@@ -586,6 +594,38 @@ namespace Alexandria.Client
 			{
 				queueController.DeleteSelectedRow();
 			}
+		}
+
+		private void sortButton_Click(object sender, EventArgs e)
+		{
+			if (sortListView.Items.Count > 0)
+			{
+				IList<string> columns = new List<string>();
+				foreach(ListViewItem item in sortListView.Items)
+					columns.Add(item.Text);
+				
+				queueController.Sort(columns);
+			}
+			else
+			{
+				queueController.RemoveSort();
+			}
+		}
+
+		private void contextToolStripMenuItemClear_Click(object sender, EventArgs e)
+		{
+			sortListView.Items.Clear();
+			sortButton_Click(this, EventArgs.Empty);
+		}
+
+		private void moveRowUpButton_Click(object sender, EventArgs e)
+		{
+			queueController.MoveSelectedRowUp();
+		}
+
+		private void moveRowDownButton_Click(object sender, EventArgs e)
+		{
+			queueController.MoveSelectedRowDown();
 		}
 		#endregion
 		
