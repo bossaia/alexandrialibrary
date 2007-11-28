@@ -245,6 +245,29 @@ namespace Alexandria.Client.Controllers
 			}
 			else return false;
 		}
+		
+		private void SwitchRows(int index1, int index2)
+		{
+			if (index1 >= 0 && index1 < grid.Rows.Count && index2 >= 0 && index2 < grid.Rows.Count && index1 != index2)
+			{	
+				for(int i=0; i<grid.Rows[index1].Cells.Count; i++)
+				{
+					object value1 = grid.Rows[index1].Cells[i].Value;
+					object value2 = grid.Rows[index2].Cells[i].Value;
+					
+					grid.Rows[index1].Cells[i].Value = value2;
+					grid.Rows[index2].Cells[i].Value = value1;
+				}
+				
+				object tag1 = grid.Rows[index1].Tag;
+				object tag2 = grid.Rows[index2].Tag;
+				
+				grid.Rows[index1].Tag = tag2;
+				grid.Rows[index2].Tag = tag1;
+				
+				bindingList.ResetBindings();
+			}
+		}
 		#endregion
 
 		#region Private Event Methods
@@ -668,6 +691,15 @@ namespace Alexandria.Client.Controllers
 			bindingList.ResetBindings();
 		}
 		
+		public void ClearRow(int index)
+		{
+			if (index >= 0 && index < bindingList.Count)
+			{
+				bindingList.RemoveAt(index);
+				bindingList.ResetBindings();
+			}
+		}
+		
 		public void DeleteSelectedRow()
 		{
 			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
@@ -690,6 +722,50 @@ namespace Alexandria.Client.Controllers
 
 				bindingList.RemoveAt(currentIndex);
 				bindingList.ResetBindings();
+			}
+		}
+		
+		public void Sort(IList<string> columns)
+		{
+			if (columns != null && columns.Count > 0)
+			{
+				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
+				
+				for(int i=0; i<columns.Count; i++)
+				{
+					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[columns[i]];
+					sortArray[i] = new ListSortDescription(property, ListSortDirection.Ascending);
+				}
+				
+				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
+				((IBindingListView)bindingList).ApplySort(sorts);
+			}
+		}
+		
+		public void RemoveSort()
+		{
+			((IBindingListView)bindingList).RemoveSort();
+		}
+		
+		public void MoveSelectedRowUp()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index > 0)
+			{
+				int selectedIndex = grid.SelectedRows[0].Index;
+				SwitchRows(selectedIndex, selectedIndex-1);
+				grid.SelectedRows[0].Selected = false;
+				grid.Rows[selectedIndex-1].Selected = true;
+			}
+		}
+		
+		public void MoveSelectedRowDown()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index < grid.Rows.Count-1)
+			{
+				int selectedIndex = grid.SelectedRows[0].Index;
+				SwitchRows(selectedIndex, selectedIndex+1);
+				grid.SelectedRows[0].Selected = false;
+				grid.Rows[selectedIndex+1].Selected = true;
 			}
 		}
 		#endregion

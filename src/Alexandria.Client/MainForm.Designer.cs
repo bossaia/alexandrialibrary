@@ -32,10 +32,10 @@ namespace Alexandria.Client
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -77,9 +77,12 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
+			this.sortButton = new System.Windows.Forms.Button();
+			this.moveRowDownButton = new System.Windows.Forms.Button();
+			this.moveRowUpButton = new System.Windows.Forms.Button();
 			this.sortListView = new System.Windows.Forms.ListView();
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.contextCoolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextToolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.sortLabel = new System.Windows.Forms.Label();
 			this.queueDataGrid = new System.Windows.Forms.DataGridView();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +98,7 @@ namespace Alexandria.Client
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -194,6 +198,7 @@ namespace Alexandria.Client
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearSelectedToolStripMenuItem,
             this.clearToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
@@ -413,11 +418,35 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.sortButton);
+			this.QueueGroupBox.Controls.Add(this.moveRowDownButton);
+			this.QueueGroupBox.Controls.Add(this.moveRowUpButton);
 			this.QueueGroupBox.Controls.Add(this.sortListView);
 			this.QueueGroupBox.Controls.Add(this.sortLabel);
 			this.QueueGroupBox.Controls.Add(this.queueDataGrid);
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
+			// 
+			// sortButton
+			// 
+			resources.ApplyResources(this.sortButton, "sortButton");
+			this.sortButton.Name = "sortButton";
+			this.sortButton.UseVisualStyleBackColor = true;
+			this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
+			// 
+			// moveRowDownButton
+			// 
+			resources.ApplyResources(this.moveRowDownButton, "moveRowDownButton");
+			this.moveRowDownButton.Name = "moveRowDownButton";
+			this.moveRowDownButton.UseVisualStyleBackColor = true;
+			this.moveRowDownButton.Click += new System.EventHandler(this.moveRowDownButton_Click);
+			// 
+			// moveRowUpButton
+			// 
+			resources.ApplyResources(this.moveRowUpButton, "moveRowUpButton");
+			this.moveRowUpButton.Name = "moveRowUpButton";
+			this.moveRowUpButton.UseVisualStyleBackColor = true;
+			this.moveRowUpButton.Click += new System.EventHandler(this.moveRowUpButton_Click);
 			// 
 			// sortListView
 			// 
@@ -431,14 +460,15 @@ namespace Alexandria.Client
 			// sortContextMenuStrip
 			// 
 			this.sortContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextCoolStripMenuItemClear});
+            this.contextToolStripMenuItemClear});
 			this.sortContextMenuStrip.Name = "sortContextMenuStrip";
 			resources.ApplyResources(this.sortContextMenuStrip, "sortContextMenuStrip");
 			// 
-			// contextCoolStripMenuItemClear
+			// contextToolStripMenuItemClear
 			// 
-			this.contextCoolStripMenuItemClear.Name = "contextCoolStripMenuItemClear";
-			resources.ApplyResources(this.contextCoolStripMenuItemClear, "contextCoolStripMenuItemClear");
+			this.contextToolStripMenuItemClear.Name = "contextToolStripMenuItemClear";
+			resources.ApplyResources(this.contextToolStripMenuItemClear, "contextToolStripMenuItemClear");
+			this.contextToolStripMenuItemClear.Click += new System.EventHandler(this.contextToolStripMenuItemClear_Click);
 			// 
 			// sortLabel
 			// 
@@ -450,14 +480,14 @@ namespace Alexandria.Client
 			this.queueDataGrid.AllowUserToAddRows = false;
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Id,
@@ -471,24 +501,24 @@ namespace Alexandria.Client
             this.Date,
             this.Format,
             this.Path});
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle11;
 			this.queueDataGrid.MultiSelect = false;
 			this.queueDataGrid.Name = "queueDataGrid";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
 			this.queueDataGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_CellMouseDoubleClick);
@@ -550,8 +580,8 @@ namespace Alexandria.Client
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle10;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -593,6 +623,12 @@ namespace Alexandria.Client
 			// DirectoryOpenDialog
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
+			// 
+			// clearSelectedToolStripMenuItem
+			// 
+			this.clearSelectedToolStripMenuItem.Name = "clearSelectedToolStripMenuItem";
+			resources.ApplyResources(this.clearSelectedToolStripMenuItem, "clearSelectedToolStripMenuItem");
+			this.clearSelectedToolStripMenuItem.Click += new System.EventHandler(this.clearSelectedToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -676,7 +712,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ListView sortListView;
 		private System.Windows.Forms.Label sortLabel;
 		private System.Windows.Forms.ContextMenuStrip sortContextMenuStrip;
-		private System.Windows.Forms.ToolStripMenuItem contextCoolStripMenuItemClear;
+		private System.Windows.Forms.ToolStripMenuItem contextToolStripMenuItemClear;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
@@ -692,6 +728,10 @@ namespace Alexandria.Client
 		private System.Windows.Forms.FolderBrowserDialog DirectoryOpenDialog;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+		private System.Windows.Forms.Button moveRowUpButton;
+		private System.Windows.Forms.Button sortButton;
+		private System.Windows.Forms.Button moveRowDownButton;
+		private System.Windows.Forms.ToolStripMenuItem clearSelectedToolStripMenuItem;
 	}
 }
 
