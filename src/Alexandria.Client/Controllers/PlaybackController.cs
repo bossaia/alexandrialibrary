@@ -87,6 +87,7 @@ namespace Alexandria.Client.Controllers
 		private Button playPauseButton;
 		private IAudioPlayer audioPlayer;
 		private bool currentTrackSubmitted;
+		private EventHandler<UpdateStatusEventArgs> statusUpdated;
 		#endregion
 
 		#region Private Methods
@@ -98,10 +99,14 @@ namespace Alexandria.Client.Controllers
 				request.Username = "uberweasel";
 				request.Password = "automatic";
 				request.SubmitTrack(track);
+				
+				if (StatusUpdated != null)
+					StatusUpdated(this, new UpdateStatusEventArgs("Track submitted to Last.fm", string.Format("{0} - {1} - {2}", track.Artist, track.Album, track.Name)));
 			}
 			catch (Exception ex)
 			{
-				throw new AlexandriaException("There was an error submitting this track to Last.fm", ex);
+				if (StatusUpdated != null)
+					StatusUpdated(this, new UpdateStatusEventArgs("Error submitting track to Last.fm", ex.Message));
 			}
 		}
 		#endregion
@@ -147,6 +152,12 @@ namespace Alexandria.Client.Controllers
 		public IAudioPlayer AudioPlayer
 		{
 			get { return audioPlayer; }
+		}
+		
+		public EventHandler<UpdateStatusEventArgs> StatusUpdated
+		{
+			get { return statusUpdated; }
+			set { statusUpdated = value; }
 		}
 		#endregion
 				

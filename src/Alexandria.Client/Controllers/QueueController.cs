@@ -35,6 +35,7 @@ using System.Net;
 using System.Windows.Forms;
 
 using Alexandria;
+using Alexandria.Client.Views;
 using Alexandria.Media;
 using Alexandria.Media.IO;
 using Alexandria.Metadata;
@@ -114,7 +115,7 @@ namespace Alexandria.Client.Controllers
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 
 		private BindingSource bindingSource;
-		private DataGridView grid;
+		private AdvancedDataGridView grid;
 		private ListView sortListView;
 		private ImageList smallImageList;
 		
@@ -133,15 +134,15 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Private Methods
-		private void TestSort()
-		{
-			PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(IMediaItem));
-			ListSortDescription[] sortArray = new ListSortDescription[2];
-			sortArray[0] = new ListSortDescription(properties.Find("Format", true), ListSortDirection.Ascending);
-			sortArray[1] = new ListSortDescription(properties.Find("Title", true), ListSortDirection.Ascending);
-			ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
-			((IBindingListView)bindingList).ApplySort(sorts);
-		}
+		//private void TestSort()
+		//{
+		//    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(IMediaItem));
+		//    ListSortDescription[] sortArray = new ListSortDescription[2];
+		//    sortArray[0] = new ListSortDescription(properties.Find("Format", true), ListSortDirection.Ascending);
+		//    sortArray[1] = new ListSortDescription(properties.Find("Title", true), ListSortDirection.Ascending);
+		//    ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
+		//    ((IBindingListView)bindingList).ApplySort(sorts);
+		//}
 		
 		private void InitDataTable(DataTable queueTable)
 		{
@@ -268,6 +269,18 @@ namespace Alexandria.Client.Controllers
 				bindingList.ResetBindings();
 			}
 		}
+		
+		private void OnRowDragDrop(object sender, AdvancedDataGridRowDragDropEventArgs e)
+		{		
+			bindingList.RemoveAt(e.SourceIndex);
+			bindingList.Insert(e.TargetIndex, e.MediaItem);
+			grid.Rows[e.TargetIndex].Selected = true;
+		}
+		
+		private void OnColumnDragDrop(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
+		{
+		
+		}
 		#endregion
 
 		#region Private Event Methods
@@ -323,7 +336,7 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Public Properties
-		public DataGridView Grid
+		public AdvancedDataGridView Grid
 		{
 			get { return grid; }
 			set {
@@ -333,6 +346,8 @@ namespace Alexandria.Client.Controllers
 					grid.AutoGenerateColumns = false;
 					grid.DataSource = bindingSource;
 					grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
+					grid.RowDragDrop += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDrop);
+					grid.ColumnDragDrop += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDrop);
 				}
 			}
 		}
@@ -596,7 +611,7 @@ namespace Alexandria.Client.Controllers
 					foreach (IPlaylistItem item in playlist.Items)
 						LoadTrackFromPath(item.Path, "Playlist");
 						
-					TestSort();
+					//TestSort();
 				}
 				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
 				{

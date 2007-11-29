@@ -69,6 +69,7 @@ namespace Alexandria.Client
 				playbackController.PlaybackTrackBar = PlaybackTrackBar;
 				playbackController.PlayPauseButton = PlayPauseButton;
 				playbackController.QueueController = queueController;
+				playbackController.StatusUpdated += new EventHandler<UpdateStatusEventArgs>(OnStatusUpdated);
 			}
 			catch (Exception ex)
 			{
@@ -626,6 +627,12 @@ namespace Alexandria.Client
 		private void moveRowDownButton_Click(object sender, EventArgs e)
 		{
 			queueController.MoveSelectedRowDown();
+		}
+		
+		private void OnStatusUpdated(object sender, UpdateStatusEventArgs e)
+		{
+			currentStatusToolStripLabel.Text = e.Status;
+			currentStatusToolStripLabel.ToolTipText = e.Description;
 		}
 		#endregion
 		

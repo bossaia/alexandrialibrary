@@ -129,7 +129,9 @@ namespace Alexandria.Client
 		protected override void RemoveSortCore()
 		{
 			if (!m_Sorted)
-				return; Clear();
+				return;
+				
+			Clear();
 			foreach (T item in m_OriginalCollection)
 			{
 				Add(item);
@@ -230,7 +232,8 @@ namespace Alexandria.Client
 
 		bool IBindingList.AllowRemove
 		{
-			get { return CheckReadOnly(); }
+			get { return true; }
+			//CheckReadOnly(); }
 		}
 
 		private bool CheckReadOnly()
