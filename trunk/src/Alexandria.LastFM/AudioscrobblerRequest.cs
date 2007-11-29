@@ -94,6 +94,8 @@ namespace Alexandria.LastFM
 
 			// create the request
 			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+			request.Proxy = new WebProxy("proxy.inside.us.dell.com");
+			request.Proxy.Credentials = new NetworkCredential("Daniel_Poage", "Ahascsi2940u2w1");
 
 			// set the method to POST
 			request.Method = "POST";
