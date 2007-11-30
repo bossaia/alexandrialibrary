@@ -144,20 +144,20 @@ namespace Alexandria.Client.Controllers
 		//    ((IBindingListView)bindingList).ApplySort(sorts);
 		//}
 		
-		private void InitDataTable(DataTable queueTable)
-		{
-			queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
-			queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
-			queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
-			queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
-			queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
-			queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
-		}
+		//private void InitDataTable(DataTable queueTable)
+		//{
+		//    queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
+		//    queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
+		//    queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
+		//    queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
+		//    queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
+		//    queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
+		//}
 		
 		private Guid GetItemGuid(DataGridViewCell cell)
 		{
@@ -467,7 +467,7 @@ namespace Alexandria.Client.Controllers
 
 							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 							{
-								SelectedRow.Cells[7].Value = audioStream.Duration;
+								SelectedRow.Cells[COL_DURATION].Value = audioStream.Duration;
 							}
 						}
 						
@@ -487,6 +487,7 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadTrack(IAudioTrack track, string source)
 		{
+			/*
 			object[] data = new object[11];
 			data[0] = track.Id;
 			data[1] = TYPE_AUDIO;
@@ -499,6 +500,7 @@ namespace Alexandria.Client.Controllers
 			data[8] = track.ReleaseDate;
 			data[9] = track.Format.ToLowerInvariant();
 			data[10] = track.Path;
+			*/
 
 			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, GetSafeString(track.Name), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.ReleaseDate, track.Format, track.Path);
 			bindingList.Add(item);

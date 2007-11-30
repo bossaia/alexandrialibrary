@@ -634,6 +634,11 @@ namespace Alexandria.Client
 			currentStatusToolStripLabel.Text = e.Status;
 			currentStatusToolStripLabel.ToolTipText = e.Description;
 		}
+
+		private void queueDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+		{
+			string x = e.Exception.Message;
+		}
 		#endregion
 		
 		#region Protected Overrides
