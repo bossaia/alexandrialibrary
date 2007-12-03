@@ -276,7 +276,7 @@ namespace Alexandria.Client
 
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
-			queueController.SelectTrack();
+			queueController.LoadSelectedRow();
 			playbackController.AudioPlayer.Play();
 		}
 
@@ -529,7 +529,7 @@ namespace Alexandria.Client
 
 		private void QueueListView_ItemActivate(object sender, EventArgs e)
 		{
-			queueController.SelectTrack();
+			queueController.LoadSelectedRow();
 			playbackController.AudioPlayer.Play();
 		}
 
@@ -573,7 +573,7 @@ namespace Alexandria.Client
 		private void queueDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			playbackController.AudioPlayer.Stop();
-			queueController.SelectTrack();
+			queueController.LoadSelectedRow();
 			playbackController.AudioPlayer.Play();
 		}
 		
