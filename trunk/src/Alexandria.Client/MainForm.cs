@@ -527,11 +527,12 @@ namespace Alexandria.Client
 			}
 		}
 
-		private void QueueListView_ItemActivate(object sender, EventArgs e)
-		{
-			queueController.LoadSelectedRow();
-			playbackController.AudioPlayer.Play();
-		}
+		//private void QueueListView_ItemActivate(object sender, EventArgs e)
+		//{
+			//queueDataGrid.Rows[e].Selected = true;
+			//queueController.LoadSelectedRow();
+			//playbackController.AudioPlayer.Play();
+		//}
 
 		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
@@ -564,15 +565,18 @@ namespace Alexandria.Client
 
 		private void clearSelectedToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
-			{
-				queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
-			}
+			queueController.ClearSelectedRows();
+			//if (queueDataGrid.Rows != null && queueDataGrid.Rows.Count > 0)
+			//{
+				//foreach(DataGridViewRow row in queueDataGrid.
+				//queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
+			//}
 		}
 
 		private void queueDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
 			playbackController.AudioPlayer.Stop();
+			queueDataGrid.Rows[e.RowIndex].Selected = true;
 			queueController.LoadSelectedRow();
 			playbackController.AudioPlayer.Play();
 		}
@@ -591,9 +595,9 @@ namespace Alexandria.Client
 		private void queueDataGrid_KeyUp(object sender, KeyEventArgs e)
 		{
 			//46 is the DEL key
-			if (e.KeyValue == 46)
+			if (e.KeyValue == 46 && queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
 			{
-				queueController.DeleteSelectedRow();
+				queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
 			}
 		}
 
@@ -619,25 +623,29 @@ namespace Alexandria.Client
 			sortButton_Click(this, EventArgs.Empty);
 		}
 
-		private void moveRowUpButton_Click(object sender, EventArgs e)
-		{
-			queueController.MoveSelectedRowUp();
-		}
+		//private void moveRowUpButton_Click(object sender, EventArgs e)
+		//{
+		//	  queueController.MoveSelectedRowUp();
+		//}
 
-		private void moveRowDownButton_Click(object sender, EventArgs e)
-		{
-			queueController.MoveSelectedRowDown();
-		}
+		//private void moveRowDownButton_Click(object sender, EventArgs e)
+		//{
+		//	  queueController.MoveSelectedRowDown();
+		//}
 		
 		private void OnStatusUpdated(object sender, UpdateStatusEventArgs e)
 		{
-			currentStatusToolStripLabel.Text = e.Status;
-			currentStatusToolStripLabel.ToolTipText = e.Description;
+			currentStatusToolStripLabel.Text = string.Format("{0} ({1})", e.Status, e.Description);
 		}
 
 		private void queueDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			string x = e.Exception.Message;
+		}
+
+		private void submitCheckBox_CheckedChanged(object sender, EventArgs e)
+		{
+			playbackController.EnableSubmitTracksToLastFM = submitCheckBox.Checked;
 		}
 		#endregion
 		

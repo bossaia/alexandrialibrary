@@ -88,6 +88,7 @@ namespace Alexandria.Client.Controllers
 		private IAudioPlayer audioPlayer;
 		private bool currentTrackSubmitted;
 		private EventHandler<UpdateStatusEventArgs> statusUpdated;
+		private bool enableSubmitTracksToLastFM;
 		#endregion
 
 		#region Private Methods
@@ -159,6 +160,12 @@ namespace Alexandria.Client.Controllers
 			get { return statusUpdated; }
 			set { statusUpdated = value; }
 		}
+		
+		public bool EnableSubmitTracksToLastFM
+		{
+			get { return enableSubmitTracksToLastFM; }
+			set { enableSubmitTracksToLastFM = value; }
+		}
 		#endregion
 				
 		#region Public Methods
@@ -190,7 +197,7 @@ namespace Alexandria.Client.Controllers
 					int value = (int)audioPlayer.CurrentAudioStream.Elapsed.TotalMilliseconds;
 					playbackTrackBar.Value = value;
 					
-					if (!currentTrackSubmitted)
+					if (EnableSubmitTracksToLastFM && !currentTrackSubmitted)
 					{
 						if (value >= SUBMIT_ELAPSED_TIME || audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds < SUBMIT_ELAPSED_TIME)
 						{

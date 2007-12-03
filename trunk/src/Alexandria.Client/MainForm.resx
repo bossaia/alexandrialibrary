@@ -812,6 +812,39 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="submitCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="submitCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="submitCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="submitCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>468, 26</value>
+  </data>
+  <data name="submitCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 17</value>
+  </data>
+  <data name="submitCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="submitCheckBox.Text" xml:space="preserve">
+    <value>Submit Tracks To Last.fm</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Name" xml:space="preserve">
+    <value>submitCheckBox</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="sortButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -837,7 +870,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortButton.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="sortContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>522, 43</value>
@@ -876,7 +909,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortListView.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="sortLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -906,10 +939,22 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="queueDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <metadata name="Status.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Status.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Status.ToolTipText" xml:space="preserve">
+    <value>The current status of this media item</value>
+  </data>
+  <data name="Status.Width" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
   <metadata name="Type.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -921,7 +966,7 @@
     <value>The type of media for this piece (Music, Movie, Photography, etc.)</value>
   </data>
   <data name="Type.Width" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>60</value>
   </data>
   <metadata name="Source.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1062,7 +1107,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1432,6 +1477,12 @@
   </data>
   <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Status.Name" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="&gt;&gt;Status.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Type.Name" xml:space="preserve">
     <value>Type</value>
