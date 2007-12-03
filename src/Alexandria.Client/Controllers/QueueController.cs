@@ -412,69 +412,73 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		public void SelectTrack()
+		public void LoadSelectedRow()
 		{
 			IAudioStream audioStream = null;
 			
-			if (grid.Rows.Count > 0 && grid.SelectedRows.Count > 0)
+			//if (grid.Rows.Count > 0 && grid.SelectedRows.Count > 0)
+			if (grid.Rows.Count > 0)
 			{
-				//# Name Artist Album Length Date Location Format
-				if (grid.SelectedRows[0] != SelectedRow)
+				if (SelectedRow == null)
 				{
-					SelectedRow = grid.SelectedRows[0];
-					
-					if (SelectedRow.Cells.Count > 0)
+					if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+						SelectedRow = grid.SelectedRows[0];
+					else SelectedRow = grid.Rows[0];
+				}
+				
+				//# Name Artist Album Length Date Location Format
+									
+				if (SelectedRow.Cells.Count > 0)
+				{
+					//TODO: move all of this logic into AudioPlayer
+					SelectedTrack = GetSelectedAudioTrack(SelectedRow);
+					if (selectedTrack.Format == "cdda")
 					{
-						//TODO: move all of this logic into AudioPlayer
-						SelectedTrack = GetSelectedAudioTrack(SelectedRow);
-						if (selectedTrack.Format == "cdda")
+						string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
+						audioStream = new Fmod.CompactDiscSound(discPath);
+						audioStream.StreamIndex = selectedTrack.TrackNumber-1;
+					}
+					else
+					{
+						if (selectedTrack.Path.IsFile)
 						{
-							string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
-							audioStream = new Fmod.CompactDiscSound(discPath);
-							audioStream.StreamIndex = selectedTrack.TrackNumber-1;
+							audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
+							audioStream.StreamIndex = 0;
 						}
 						else
 						{
-							if (selectedTrack.Path.IsFile)
+							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+							fileName = CleanupFileName(fileName);
+							if (!System.IO.File.Exists(fileName))
 							{
-								audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
-								audioStream.StreamIndex = 0;
-							}
-							else
-							{
-								string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
-								fileName = CleanupFileName(fileName);
-								if (!System.IO.File.Exists(fileName))
+								if (!System.IO.Directory.Exists(tempPath))
+									System.IO.Directory.CreateDirectory(tempPath);
+
+								WebClient client = new WebClient();
+								Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+								try
 								{
-									if (!System.IO.Directory.Exists(tempPath))
-										System.IO.Directory.CreateDirectory(tempPath);
-
-									WebClient client = new WebClient();
-									Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
-									try
-									{
-										client.DownloadFile(address, fileName);
-									}
-									catch (WebException ex)
-									{
-										throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
-									}
+									client.DownloadFile(address, fileName);
 								}
-
-								audioStream = new Fmod.LocalSound(fileName);
-								audioStream.StreamIndex = 0;
+								catch (WebException ex)
+								{
+									throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+								}
 							}
 
-							if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
-							{
-								SelectedRow.Cells[COL_DURATION].Value = audioStream.Duration;
-							}
+							audioStream = new Fmod.LocalSound(fileName);
+							audioStream.StreamIndex = 0;
 						}
-						
-						playbackController.LoadAudioStream(audioStream);
+
+						if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
+						{
+							SelectedRow.Cells[7].Value = audioStream.Duration;
+						}
 					}
-					else throw new ApplicationException("Could not load selected track: Id was undefined");
+					
+					playbackController.LoadAudioStream(audioStream);
 				}
+				else throw new ApplicationException("Could not load selected track: Id was undefined");
 			}
 		}
 		
@@ -652,17 +656,12 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 					//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (selectedRow != null)
+				if (SelectedRow != null && grid.Rows.Count > 1)
 				{
-					int previousIndex = grid.Rows.Count - 1;
-					if (selectedRow.Index > 0)
-						previousIndex = grid.SelectedRows[0].Index - 1;
-						
-					grid.SelectedRows[0].Selected = false;
-					grid.Rows[previousIndex].Selected = true;
+					SelectedRow = (SelectedRow.Index > 0) ? grid.Rows[SelectedRow.Index-1] : grid.Rows[grid.Rows.Count-1];
 				}
 				
-				SelectTrack();
+				LoadSelectedRow();
 				
 				if (isPlaying)
 					playbackController.AudioPlayer.Play();
@@ -685,17 +684,12 @@ namespace Alexandria.Client.Controllers
 				//if (OnSelectedTrackChanged != null)
 				//OnSelectedTrackChanged(this, new QueueEventArgs());
 
-				if (selectedRow != null)
+				if (SelectedRow != null && grid.Rows.Count > 1)
 				{
-					int nextIndex = 0;
-					if (selectedRow.Index < grid.Rows.Count - 1)
-						nextIndex = selectedRow.Index + 1;
-						
-					grid.SelectedRows[0].Selected = false;
-					grid.Rows[nextIndex].Selected = true;
+					SelectedRow = (SelectedRow.Index < grid.Rows.Count-1) ? grid.Rows[SelectedRow.Index+1] : grid.Rows[0];
 				}
 
-				SelectTrack();
+				LoadSelectedRow();
 
 				if (isPlaying)
 					playbackController.AudioPlayer.Play();

@@ -46,6 +46,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="BindingListView.cs" />
+    <Compile Include="Controllers\PersistenceController.cs" />
     <Compile Include="Controllers\TrackSource.cs" />
     <Compile Include="Controllers\ITrackSource.cs" />
     <Compile Include="Controllers\PlaybackController.cs" />
