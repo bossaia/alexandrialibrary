@@ -472,7 +472,7 @@ namespace Alexandria.Client.Controllers
 
 						if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
-							SelectedRow.Cells[7].Value = audioStream.Duration;
+							SelectedRow.Cells[COL_DURATION].Value = audioStream.Duration;
 						}
 					}
 					
