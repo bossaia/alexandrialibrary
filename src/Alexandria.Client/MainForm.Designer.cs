@@ -82,7 +82,9 @@ namespace Alexandria.Client
 			this.sortLabel = new System.Windows.Forms.Label();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.submitCheckBox = new System.Windows.Forms.CheckBox();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
+			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -260,7 +262,6 @@ namespace Alexandria.Client
 			// 
 			// currentStatusToolStripLabel
 			// 
-			this.currentStatusToolStripLabel.AutoToolTip = true;
 			this.currentStatusToolStripLabel.Name = "currentStatusToolStripLabel";
 			resources.ApplyResources(this.currentStatusToolStripLabel, "currentStatusToolStripLabel");
 			// 
@@ -402,6 +403,7 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.submitCheckBox);
 			this.QueueGroupBox.Controls.Add(this.sortButton);
 			this.QueueGroupBox.Controls.Add(this.sortListView);
 			this.QueueGroupBox.Controls.Add(this.sortLabel);
@@ -457,6 +459,13 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
+			// submitCheckBox
+			// 
+			resources.ApplyResources(this.submitCheckBox, "submitCheckBox");
+			this.submitCheckBox.Name = "submitCheckBox";
+			this.submitCheckBox.UseVisualStyleBackColor = true;
+			this.submitCheckBox.CheckedChanged += new System.EventHandler(this.submitCheckBox_CheckedChanged);
+			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -474,6 +483,7 @@ namespace Alexandria.Client
 			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Status,
             this.Type,
             this.Source,
             this.Number,
@@ -493,7 +503,6 @@ namespace Alexandria.Client
 			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
 			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
-			this.queueDataGrid.MultiSelect = false;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDrop = null;
 			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -510,6 +519,15 @@ namespace Alexandria.Client
 			this.queueDataGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_CellMouseDoubleClick);
 			this.queueDataGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.queueDataGrid_DataError);
 			this.queueDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.queueDataGrid_KeyUp);
+			// 
+			// Status
+			// 
+			this.Status.DataPropertyName = "Status";
+			resources.ApplyResources(this.Status, "Status");
+			this.Status.Name = "Status";
+			this.Status.ReadOnly = true;
+			this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// Type
 			// 
@@ -595,7 +613,8 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.Id, "Id");
 			this.Id.Name = "Id";
 			this.Id.ReadOnly = true;
-			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// MainForm
 			// 
@@ -682,6 +701,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
 		private System.Windows.Forms.Button sortButton;
 		private System.Windows.Forms.ToolStripMenuItem clearSelectedToolStripMenuItem;
+		private System.Windows.Forms.ToolStripStatusLabel currentStatusToolStripLabel;
+		private System.Windows.Forms.CheckBox submitCheckBox;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
@@ -693,7 +715,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-		private System.Windows.Forms.ToolStripStatusLabel currentStatusToolStripLabel;
 	}
 }
 

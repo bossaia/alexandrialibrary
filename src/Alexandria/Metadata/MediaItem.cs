@@ -25,6 +25,7 @@ namespace Alexandria.Metadata
 	
 		#region Private Fields
 		private Guid id;
+		private string status = string.Empty;
 		private string source;
 		private string type;
 		private int number;
@@ -42,6 +43,12 @@ namespace Alexandria.Metadata
 		{
 			get { return id; }
 			set { id = value; }
+		}
+		
+		public string Status
+		{
+			get { return status; }
+			set { status = value; }
 		}
 		
 		public string Source

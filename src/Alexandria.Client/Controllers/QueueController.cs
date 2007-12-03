@@ -78,6 +78,7 @@ namespace Alexandria.Client.Controllers
 
 		#region Private Constant Fields
 		private const string COL_ID = "Id";
+		private const string COL_STATUS = "Status";
 		private const string COL_TYPE = "Type";
 		private const string COL_SOURCE = "Source";
 		private const string COL_NUMBER = "Number";
@@ -129,7 +130,17 @@ namespace Alexandria.Client.Controllers
 		private DataGridViewRow SelectedRow
 		{
 			get { return selectedRow;  }
-			set { selectedRow = value; }
+			set {
+				if (selectedRow != null && selectedRow != value)
+				{
+					//bindingList[selectedRow.Index].Status = string.Empty;
+					//bindingList.ResetBindings();
+					//selectedRow.Cells[COL_STATUS].Value = string.Empty;
+					grid.Rows[selectedRow.Index].Cells[COL_STATUS].Value = string.Empty;
+				}
+				 
+				selectedRow = value;
+			}
 		}
 		#endregion
 
@@ -477,6 +488,7 @@ namespace Alexandria.Client.Controllers
 					}
 					
 					playbackController.LoadAudioStream(audioStream);
+					SelectedRow.Cells[COL_STATUS].Value = "Loaded";
 				}
 				else throw new ApplicationException("Could not load selected track: Id was undefined");
 			}
@@ -507,6 +519,7 @@ namespace Alexandria.Client.Controllers
 			*/
 
 			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, GetSafeString(track.Name), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.ReleaseDate, track.Format, track.Path);
+			if (item.Id == default(Guid)) item.Id = Guid.NewGuid();
 			bindingList.Add(item);
 			//queueTable.Rows.Add(data);
 		}
@@ -702,6 +715,56 @@ namespace Alexandria.Client.Controllers
 			bindingList.ResetBindings();
 		}
 		
+		public void ClearSelectedRows()
+		{
+			//if (grid.SelectedRows.Count > 0)
+			//{
+				//foreach(DataGridViewRow row in grid.SelectedRows)
+				//{
+					//bindingList.RemoveAt(row.Index);
+				//}
+				//bindingList.ResetBindings();
+			//}
+		
+			if (grid.Rows != null && grid.Rows.Count > 0)
+			{
+				IList<Guid> idList = new List<Guid>();
+				foreach(DataGridViewRow row in grid.SelectedRows)
+				{
+					//bool selected = Convert.ToBoolean(row.Cells[COL_SELECTED].Value);
+					//if (selected)
+					//{
+						idList.Add((Guid)row.Cells[COL_ID].Value);
+					//}
+				}
+				
+				if (idList.Count > 0)
+				{
+					int count = bindingList.Count;
+					for(int i=0;idList.Count>0;i++)
+					{
+						if (bindingList.Count > 0)
+						{
+							if (i > bindingList.Count - 1) i = 0;
+							
+							foreach(Guid id in idList)
+							{
+								if (id == bindingList[i].Id)
+								{
+									bindingList.RemoveAt(i);
+									i = 0;
+									idList.Remove(id);
+									break;
+								}
+							}
+						}
+						else break;
+					}
+					bindingList.ResetBindings();
+				}
+			}
+		}
+		
 		public void ClearRow(int index)
 		{
 			if (index >= 0 && index < bindingList.Count)
@@ -711,30 +774,30 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		public void DeleteSelectedRow()
-		{
-			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
-			{
-				int currentIndex = grid.SelectedRows[0].Index;
+		//public void DeleteSelectedRow()
+		//{
+		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+		//    {
+		//        int currentIndex = grid.SelectedRows[0].Index;
 				
-				//IMediaItem selectedItem = grid.SelectedRows[0].DataBoundItem as IMediaItem;
+		//        //IMediaItem selectedItem = grid.SelectedRows[0].DataBoundItem as IMediaItem;
 				
-				if (RowsAreEquivalent(grid.SelectedRows[0], selectedRow))
-				{
-					if (grid.Rows.Count > 1)
-					{
-						Next();
-					}
-					else
-					{
-						playbackController.AudioPlayer.Stop();
-					}
-				}
+		//        if (RowsAreEquivalent(grid.SelectedRows[0], selectedRow))
+		//        {
+		//            if (grid.Rows.Count > 1)
+		//            {
+		//                Next();
+		//            }
+		//            else
+		//            {
+		//                playbackController.AudioPlayer.Stop();
+		//            }
+		//        }
 
-				bindingList.RemoveAt(currentIndex);
-				bindingList.ResetBindings();
-			}
-		}
+		//        bindingList.RemoveAt(currentIndex);
+		//        bindingList.ResetBindings();
+		//    }
+		//}
 		
 		public void Sort(IList<string> columns)
 		{
@@ -758,27 +821,27 @@ namespace Alexandria.Client.Controllers
 			((IBindingListView)bindingList).RemoveSort();
 		}
 		
-		public void MoveSelectedRowUp()
-		{
-			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index > 0)
-			{
-				int selectedIndex = grid.SelectedRows[0].Index;
-				SwitchRows(selectedIndex, selectedIndex-1);
-				grid.SelectedRows[0].Selected = false;
-				grid.Rows[selectedIndex-1].Selected = true;
-			}
-		}
+		//public void MoveSelectedRowUp()
+		//{
+		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index > 0)
+		//    {
+		//        int selectedIndex = grid.SelectedRows[0].Index;
+		//        SwitchRows(selectedIndex, selectedIndex-1);
+		//        grid.SelectedRows[0].Selected = false;
+		//        grid.Rows[selectedIndex-1].Selected = true;
+		//    }
+		//}
 		
-		public void MoveSelectedRowDown()
-		{
-			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index < grid.Rows.Count-1)
-			{
-				int selectedIndex = grid.SelectedRows[0].Index;
-				SwitchRows(selectedIndex, selectedIndex+1);
-				grid.SelectedRows[0].Selected = false;
-				grid.Rows[selectedIndex+1].Selected = true;
-			}
-		}
+		//public void MoveSelectedRowDown()
+		//{
+		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index < grid.Rows.Count-1)
+		//    {
+		//        int selectedIndex = grid.SelectedRows[0].Index;
+		//        SwitchRows(selectedIndex, selectedIndex+1);
+		//        grid.SelectedRows[0].Selected = false;
+		//        grid.Rows[selectedIndex+1].Selected = true;
+		//    }
+		//}
 		#endregion
 	}
 }
