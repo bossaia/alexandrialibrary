@@ -134,11 +134,8 @@ namespace Alexandria.Client.Controllers
 		{
 			get { return selectedRow;  }
 			set {
-				if (selectedRow != null && selectedRow != value)
+				if (selectedRow != null && selectedRow != value && selectedRow.Index > -1)
 				{
-					//bindingList[selectedRow.Index].Status = string.Empty;
-					//bindingList.ResetBindings();
-					//selectedRow.Cells[COL_STATUS].Value = string.Empty;
 					grid.Rows[selectedRow.Index].Cells[COL_STATUS].Value = string.Empty;
 				}
 				 
@@ -288,7 +285,12 @@ namespace Alexandria.Client.Controllers
 		//    }
 		//}
 		
-		private void OnRowDragDrop(object sender, AdvancedDataGridRowDragDropEventArgs e)
+		private void OnRowDragDropping(object sender, AdvancedDataGridRowDragDropEventArgs e)
+		{
+		
+		}
+		
+		private void OnRowDragDropped(object sender, AdvancedDataGridRowDragDropEventArgs e)
 		{		
 			bindingList.RemoveAt(e.SourceIndex);
 			bindingList.Insert(e.TargetIndex, e.MediaItem);
@@ -304,29 +306,30 @@ namespace Alexandria.Client.Controllers
 		{
 			SelectedRow = grid.Rows[selectedRowSaveIndex];
 		}
-			////remove the source column
-			//this.Columns.RemoveAt(DragDropSourceIndex);
+		
+		////remove the source column
+		//this.Columns.RemoveAt(DragDropSourceIndex);
 
-			////insert a new column at the target index using the source column as a template
-			//this.Columns.Insert(DragDropTargetIndex, new DataGridViewColumn(DragDropColumn.CellTemplate));
+		////insert a new column at the target index using the source column as a template
+		//this.Columns.Insert(DragDropTargetIndex, new DataGridViewColumn(DragDropColumn.CellTemplate));
 
-			////copy the source column's header cell to the new column
-			//this.Columns[DragDropTargetIndex].HeaderCell = DragDropColumn.HeaderCell;
+		////copy the source column's header cell to the new column
+		//this.Columns[DragDropTargetIndex].HeaderCell = DragDropColumn.HeaderCell;
 
-			////select the newly-inserted column
-			//this.Columns[DragDropTargetIndex].Selected = true;
+		////select the newly-inserted column
+		//this.Columns[DragDropTargetIndex].Selected = true;
 
-			////update the position of the cuurent cell in the DGV
-			//this.CurrentCell = this[DragDropTargetIndex, 0];
-			//for (int i = 0; i < this.RowCount; i++)
-			//{
-			//    //for each cell in the new column
-			//    if (DragDropColumnCellValue[i] != null)
-			//    {
-			//        //set the cell's value equal to that of the corresponding cell in the source column
-			//        this.Rows[i].Cells[DragDropTargetIndex].Value = DragDropColumnCellValue[i];
-			//    }
-			//}
+		////update the position of the cuurent cell in the DGV
+		//this.CurrentCell = this[DragDropTargetIndex, 0];
+		//for (int i = 0; i < this.RowCount; i++)
+		//{
+		//    //for each cell in the new column
+		//    if (DragDropColumnCellValue[i] != null)
+		//    {
+		//        //set the cell's value equal to that of the corresponding cell in the source column
+		//        this.Rows[i].Cells[DragDropTargetIndex].Value = DragDropColumnCellValue[i];
+		//    }
+		//}
 		#endregion
 
 		#region Private Event Methods
@@ -392,7 +395,8 @@ namespace Alexandria.Client.Controllers
 					grid.AutoGenerateColumns = false;
 					grid.DataSource = bindingSource;
 					grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
-					grid.RowDragDrop += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDrop);
+					grid.RowDragDropping += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDropping);
+					grid.RowDragDropped += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDropped);
 					grid.ColumnDragDropping += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropping);
 					grid.ColumnDragDropped += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropped);
 				}
@@ -826,37 +830,16 @@ namespace Alexandria.Client.Controllers
 				bindingList.RemoveAt(index);
 				bindingList.ResetBindings();
 			}
-		}
-		
-		//public void DeleteSelectedRow()
-		//{
-		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
-		//    {
-		//        int currentIndex = grid.SelectedRows[0].Index;
-				
-		//        //IMediaItem selectedItem = grid.SelectedRows[0].DataBoundItem as IMediaItem;
-				
-		//        if (RowsAreEquivalent(grid.SelectedRows[0], selectedRow))
-		//        {
-		//            if (grid.Rows.Count > 1)
-		//            {
-		//                Next();
-		//            }
-		//            else
-		//            {
-		//                playbackController.AudioPlayer.Stop();
-		//            }
-		//        }
-
-		//        bindingList.RemoveAt(currentIndex);
-		//        bindingList.ResetBindings();
-		//    }
-		//}
+		}		
 		
 		public void Sort(IList<string> columns)
 		{
 			if (columns != null && columns.Count > 0)
 			{
+				Guid selectedId = default(Guid);
+				if (SelectedRow != null)
+					selectedId = (Guid)SelectedRow.Cells[COL_ID].Value;
+			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				
 				for(int i=0; i<columns.Count; i++)
@@ -867,6 +850,18 @@ namespace Alexandria.Client.Controllers
 				
 				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
 				((IBindingListView)bindingList).ApplySort(sorts);
+				
+				if (selectedId != default(Guid))
+				{
+					for(int i=0; i<bindingList.Count;i++)
+					{
+						if (bindingList[i].Id == selectedId)
+						{
+							SelectedRow = grid.Rows[i];
+							break;
+						}
+					}
+				}
 			}
 		}
 		

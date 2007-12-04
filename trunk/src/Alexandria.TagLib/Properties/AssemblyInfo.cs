@@ -11,7 +11,7 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("TagLib#")]
-[assembly: AssemblyDescription("Supports reading and editing the metadata of several popular audio formats (ID3, vorbiscomment, ape, asf)")]
+[assembly: AssemblyDescription("Supports reading and writing tags in several popular metadata formats (APE, ASF, ID3, vorbiscomment)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telesophy Foundation")]
 [assembly: AssemblyProduct("Alexandria Media Library")]
