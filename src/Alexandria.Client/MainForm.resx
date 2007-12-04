@@ -1340,9 +1340,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Alexandria</value>
   </data>
@@ -1466,18 +1463,6 @@
   <data name="&gt;&gt;contextToolStripMenuItemClear.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
-    <value>queueSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
-    <value>DirectoryOpenDialog</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Status.Name" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -1549,6 +1534,18 @@
   </data>
   <data name="&gt;&gt;Id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
+    <value>queueSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
+    <value>DirectoryOpenDialog</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

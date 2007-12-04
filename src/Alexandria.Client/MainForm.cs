@@ -64,12 +64,12 @@ namespace Alexandria.Client
 				queueController.PlaybackController = playbackController;
 				queueController.SmallImageList = queueSmallImageList;
 				
-				playbackController.AudioPlayer.PlayToggles = true;
-				playbackController.AudioPlayer.MuteToggles = true;
+				playbackController.PlayToggles = true;
+				playbackController.MuteToggles = true;
 				playbackController.PlaybackTrackBar = PlaybackTrackBar;
 				playbackController.PlayPauseButton = PlayPauseButton;
 				playbackController.QueueController = queueController;
-				playbackController.StatusUpdated += new EventHandler<UpdateStatusEventArgs>(OnStatusUpdated);
+				playbackController.WireStatusUpdated(new EventHandler<PlaybackEventArgs>(OnStatusUpdated));
 			}
 			catch (Exception ex)
 			{
@@ -277,50 +277,22 @@ namespace Alexandria.Client
 		private void PlayPauseButton_Click(object sender, EventArgs e)
 		{
 			queueController.LoadSelectedRow();
-			playbackController.AudioPlayer.Play();
+			playbackController.Play();
 		}
 
 		private void StopButton_Click(object sender, EventArgs e)
 		{		
-			playbackController.AudioPlayer.Stop();
-			/*
-			if (controller != null)
-			{
-				Stop();
-				PlaybackTrackBar.Value = 0;
-				PlaybackTrackBar.Enabled = false;
-				PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
-			}
-			*/
+			playbackController.Stop();
 		}
 
 		private void MuteButton_Click(object sender, EventArgs e)
 		{
-			playbackController.AudioPlayer.Mute();
-			/*
-			if (controller != null)
-			{
-				Mute();
-				if (IsMuted)
-				{
-					VolumeTrackBar.Enabled = false;
-					MuteButton.BackgroundImage = Alexandria.Client.Properties.Resources.sound;
-				}
-				else
-				{
-					VolumeTrackBar.Enabled = true;
-					MuteButton.BackgroundImage = Alexandria.Client.Properties.Resources.sound_mute;
-				}
-			}
-			*/
+			playbackController.Mute();
 		}
 
 		private void VolumeTrackBar_ValueChanged(object sender, EventArgs e)
 		{
-			playbackController.AudioPlayer.SetVolume(GetVolume());
-		
-			//if (controller != null)
-				//Volume = GetVolume();
+			playbackController.SetVolume(GetVolume());
 		}
 
 		private void PreviousButton_Click(object sender, EventArgs e)
@@ -443,9 +415,9 @@ namespace Alexandria.Client
 			//This is needed to avoid a momentary flicker
 			PlaybackTrackBar.SuspendLayout();
 			
-			playbackController.AudioPlayer.Stop();
+			playbackController.Stop();
 			queueController.Next();
-			playbackController.AudioPlayer.Play();
+			playbackController.Play();
 			
 			PlaybackTrackBar.ResumeLayout();
 		}
@@ -453,23 +425,17 @@ namespace Alexandria.Client
 		private void OnSelectedTrackEnd(object sender, EventArgs e)
 		{
 			queueController.Next();
-			playbackController.AudioPlayer.Play();
-			
-			//if (controller != null)
-			//{
-				//Next();
-				//Play();
-			//}
+			playbackController.Play();
 		}
 
 		private void PlaybackTrackBar_MouseDown(object sender, MouseEventArgs e)
 		{
-			playbackController.AudioPlayer.BeginSeek();
+			playbackController.BeginSeek();
 		}
 
 		private void PlaybackTrackBar_MouseUp(object sender, MouseEventArgs e)
 		{
-			playbackController.AudioPlayer.Seek(PlaybackTrackBar.Value);
+			playbackController.Seek(PlaybackTrackBar.Value);
 		}
 
 		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
@@ -559,7 +525,7 @@ namespace Alexandria.Client
 
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			playbackController.AudioPlayer.Stop();
+			playbackController.Stop();
 			queueController.Clear();
 		}
 
@@ -575,10 +541,7 @@ namespace Alexandria.Client
 
 		private void queueDataGrid_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			playbackController.AudioPlayer.Stop();
-			queueDataGrid.Rows[e.RowIndex].Selected = true;
-			queueController.LoadSelectedRow();
-			playbackController.AudioPlayer.Play();
+			queueController.SelectRow(e.RowIndex);
 		}
 		
 		private void OnSelectedTrackChanged(object sender, QueueEventArgs e)
@@ -633,9 +596,11 @@ namespace Alexandria.Client
 		//	  queueController.MoveSelectedRowDown();
 		//}
 		
-		private void OnStatusUpdated(object sender, UpdateStatusEventArgs e)
+		private void OnStatusUpdated(object sender, PlaybackEventArgs e)
 		{
-			currentStatusToolStripLabel.Text = string.Format("{0} ({1})", e.Status, e.Description);
+			//currentStatusToolStripLabel.Text = string.Format("{0} ({1})", e.Status, e.Description);
+			
+			queueController.SelectedRowStatus = e.PlaybackState.ToString();
 		}
 
 		private void queueDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -663,8 +628,8 @@ namespace Alexandria.Client
 			
 			LoadDefaultUser();
 			
-			playbackController.AudioPlayer.CurrentAudioStreamEnded += new EventHandler<EventArgs>(OnCurrentAudioStreamEnded);
-			queueController.SelectedTrackChanged += new EventHandler<QueueEventArgs>(OnSelectedTrackChanged);
+			playbackController.WireCurrentAudioSteamEnded(new EventHandler<EventArgs>(OnCurrentAudioStreamEnded));
+			queueController.WireSelectedTrackChanged(new EventHandler<QueueEventArgs>(OnSelectedTrackChanged));
 			
 			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
 			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
