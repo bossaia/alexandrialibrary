@@ -121,6 +121,9 @@ namespace Alexandria.Client.Controllers
 		private ImageList smallImageList;
 		
 		private DataGridViewRow selectedRow;
+		private int selectedRowSaveIndex;
+		//private Guid selectedGuid;
+		
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
 		private PlaybackController playbackController;
@@ -202,20 +205,24 @@ namespace Alexandria.Client.Controllers
 		
 		private IAudioTrack GetSelectedAudioTrack(DataGridViewRow row)
 		{
-			Guid id = GetItemGuid(row.Cells[COL_ID]);
-			string type = GetItemString(row.Cells[COL_TYPE]);
-			string source = GetItemString(row.Cells[COL_SOURCE]);
-			int number = GetItemInt(row.Cells[COL_NUMBER]);
-			string title = GetItemString(row.Cells[COL_TITLE]);
-			string artist = GetItemString(row.Cells[COL_ARTIST]);
-			string album = GetItemString(row.Cells[COL_ALBUM]);
-			TimeSpan duration = GetItemTimeSpan(row.Cells[COL_DURATION]);
-			DateTime date = GetItemDateTime(row.Cells[COL_DATE]);
-			string format =  GetItemString(row.Cells[COL_FORMAT]);
-			Uri path = GetItemUri(row.Cells[COL_PATH]);
-			
-			IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
-			return track;
+			if (row.Index > -1)
+			{			
+				Guid id = GetItemGuid(row.Cells[COL_ID]);
+				string type = GetItemString(row.Cells[COL_TYPE]);
+				string source = GetItemString(row.Cells[COL_SOURCE]);
+				int number = GetItemInt(row.Cells[COL_NUMBER]);
+				string title = GetItemString(row.Cells[COL_TITLE]);
+				string artist = GetItemString(row.Cells[COL_ARTIST]);
+				string album = GetItemString(row.Cells[COL_ALBUM]);
+				TimeSpan duration = GetItemTimeSpan(row.Cells[COL_DURATION]);
+				DateTime date = GetItemDateTime(row.Cells[COL_DATE]);
+				string format =  GetItemString(row.Cells[COL_FORMAT]);
+				Uri path = GetItemUri(row.Cells[COL_PATH]);
+				
+				IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
+				return track;
+			}
+			else throw new ApplicationException("The row currently selected in the queue is invalid");
 		}
 		
 		private void LoadTrackFromPath(string path, string source)
@@ -236,50 +243,50 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		private bool ValuesAreEquivalent(object value1, object value2)
-		{
-			if (value1 != null && value2 != null)
-			{
-				return (value1.ToString() == value2.ToString());
-			}
-			else return (value1 == null && value2 == null);
-		}
+		//private bool ValuesAreEquivalent(object value1, object value2)
+		//{
+		//    if (value1 != null && value2 != null)
+		//    {
+		//        return (value1.ToString() == value2.ToString());
+		//    }
+		//    else return (value1 == null && value2 == null);
+		//}
 		
-		private bool RowsAreEquivalent(DataGridViewRow row1, DataGridViewRow row2)
-		{
-			if (row1 != null && row2 != null)
-			{
-				for(int i=0; i<row1.Cells.Count; i++)
-					if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
-						return false;
+		//private bool RowsAreEquivalent(DataGridViewRow row1, DataGridViewRow row2)
+		//{
+		//    if (row1 != null && row2 != null)
+		//    {
+		//        for(int i=0; i<row1.Cells.Count; i++)
+		//            if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
+		//                return false;
 
-				return true;
-			}
-			else return false;
-		}
+		//        return true;
+		//    }
+		//    else return false;
+		//}
 		
-		private void SwitchRows(int index1, int index2)
-		{
-			if (index1 >= 0 && index1 < grid.Rows.Count && index2 >= 0 && index2 < grid.Rows.Count && index1 != index2)
-			{	
-				for(int i=0; i<grid.Rows[index1].Cells.Count; i++)
-				{
-					object value1 = grid.Rows[index1].Cells[i].Value;
-					object value2 = grid.Rows[index2].Cells[i].Value;
+		//private void SwitchRows(int index1, int index2)
+		//{
+		//    if (index1 >= 0 && index1 < grid.Rows.Count && index2 >= 0 && index2 < grid.Rows.Count && index1 != index2)
+		//    {	
+		//        for(int i=0; i<grid.Rows[index1].Cells.Count; i++)
+		//        {
+		//            object value1 = grid.Rows[index1].Cells[i].Value;
+		//            object value2 = grid.Rows[index2].Cells[i].Value;
 					
-					grid.Rows[index1].Cells[i].Value = value2;
-					grid.Rows[index2].Cells[i].Value = value1;
-				}
+		//            grid.Rows[index1].Cells[i].Value = value2;
+		//            grid.Rows[index2].Cells[i].Value = value1;
+		//        }
 				
-				object tag1 = grid.Rows[index1].Tag;
-				object tag2 = grid.Rows[index2].Tag;
+		//        object tag1 = grid.Rows[index1].Tag;
+		//        object tag2 = grid.Rows[index2].Tag;
 				
-				grid.Rows[index1].Tag = tag2;
-				grid.Rows[index2].Tag = tag1;
+		//        grid.Rows[index1].Tag = tag2;
+		//        grid.Rows[index2].Tag = tag1;
 				
-				bindingList.ResetBindings();
-			}
-		}
+		//        bindingList.ResetBindings();
+		//    }
+		//}
 		
 		private void OnRowDragDrop(object sender, AdvancedDataGridRowDragDropEventArgs e)
 		{		
@@ -288,10 +295,38 @@ namespace Alexandria.Client.Controllers
 			grid.Rows[e.TargetIndex].Selected = true;
 		}
 		
-		private void OnColumnDragDrop(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
+		private void OnColumnDragDropping(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
 		{
-		
+			selectedRowSaveIndex = SelectedRow.Index;
 		}
+		
+		private void OnColumnDragDropped(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
+		{
+			SelectedRow = grid.Rows[selectedRowSaveIndex];
+		}
+			////remove the source column
+			//this.Columns.RemoveAt(DragDropSourceIndex);
+
+			////insert a new column at the target index using the source column as a template
+			//this.Columns.Insert(DragDropTargetIndex, new DataGridViewColumn(DragDropColumn.CellTemplate));
+
+			////copy the source column's header cell to the new column
+			//this.Columns[DragDropTargetIndex].HeaderCell = DragDropColumn.HeaderCell;
+
+			////select the newly-inserted column
+			//this.Columns[DragDropTargetIndex].Selected = true;
+
+			////update the position of the cuurent cell in the DGV
+			//this.CurrentCell = this[DragDropTargetIndex, 0];
+			//for (int i = 0; i < this.RowCount; i++)
+			//{
+			//    //for each cell in the new column
+			//    if (DragDropColumnCellValue[i] != null)
+			//    {
+			//        //set the cell's value equal to that of the corresponding cell in the source column
+			//        this.Rows[i].Cells[DragDropTargetIndex].Value = DragDropColumnCellValue[i];
+			//    }
+			//}
 		#endregion
 
 		#region Private Event Methods
@@ -358,7 +393,8 @@ namespace Alexandria.Client.Controllers
 					grid.DataSource = bindingSource;
 					grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
 					grid.RowDragDrop += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDrop);
-					grid.ColumnDragDrop += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDrop);
+					grid.ColumnDragDropping += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropping);
+					grid.ColumnDragDropped += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropped);
 				}
 			}
 		}
@@ -387,8 +423,8 @@ namespace Alexandria.Client.Controllers
 			{
 				selectedTrack = value;
 			
-				if (SelectedTrackChanged != null)
-					SelectedTrackChanged(this, new QueueEventArgs());
+				if (selectedTrackChanged != null)
+					selectedTrackChanged(this, new QueueEventArgs());
 			}
 		}
 				
@@ -398,10 +434,19 @@ namespace Alexandria.Client.Controllers
 			set { smallImageList = value; }
 		}
 		
-		public EventHandler<QueueEventArgs> SelectedTrackChanged
+		//public EventHandler<QueueEventArgs> SelectedTrackChanged
+		//{
+			//get { return selectedTrackChanged; }
+			//set { selectedTrackChanged = value; }
+		//}
+		
+		public string SelectedRowStatus
 		{
-			get { return selectedTrackChanged; }
-			set { selectedTrackChanged = value; }
+			get { return (SelectedRow != null) ? SelectedRow.Cells[COL_STATUS].Value.ToString() : null; }
+			set { 
+				if (SelectedRow != null)
+					SelectedRow.Cells[COL_STATUS].Value = value;
+			}
 		}
 		#endregion
 
@@ -427,7 +472,6 @@ namespace Alexandria.Client.Controllers
 		{
 			IAudioStream audioStream = null;
 			
-			//if (grid.Rows.Count > 0 && grid.SelectedRows.Count > 0)
 			if (grid.Rows.Count > 0)
 			{
 				if (SelectedRow == null)
@@ -437,28 +481,27 @@ namespace Alexandria.Client.Controllers
 					else SelectedRow = grid.Rows[0];
 				}
 				
-				//# Name Artist Album Length Date Location Format
-									
-				if (SelectedRow.Cells.Count > 0)
+				IAudioTrack track = GetSelectedAudioTrack(SelectedRow);
+				if (SelectedTrack == null || SelectedTrack.Id != track.Id)
 				{
-					//TODO: move all of this logic into AudioPlayer
-					SelectedTrack = GetSelectedAudioTrack(SelectedRow);
-					if (selectedTrack.Format == "cdda")
+					SelectedTrack = track;
+					
+					if (SelectedTrack.Format == "cdda")
 					{
-						string discPath = selectedTrack.Path.LocalPath.Substring(0, 2);
+						string discPath = SelectedTrack.Path.LocalPath.Substring(0, 2);
 						audioStream = new Fmod.CompactDiscSound(discPath);
-						audioStream.StreamIndex = selectedTrack.TrackNumber-1;
+						audioStream.StreamIndex = SelectedTrack.TrackNumber-1;
 					}
 					else
 					{
-						if (selectedTrack.Path.IsFile)
+						if (SelectedTrack.Path.IsFile)
 						{
-							audioStream = new Fmod.LocalSound(selectedTrack.Path.LocalPath);
+							audioStream = new Fmod.LocalSound(SelectedTrack.Path.LocalPath);
 							audioStream.StreamIndex = 0;
 						}
 						else
 						{
-							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, selectedTrack.TrackNumber, selectedTrack.Name, selectedTrack.Artist, selectedTrack.Album, selectedTrack.Format);
+							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, SelectedTrack.TrackNumber, SelectedTrack.Name, SelectedTrack.Artist, SelectedTrack.Album, SelectedTrack.Format);
 							fileName = CleanupFileName(fileName);
 							if (!System.IO.File.Exists(fileName))
 							{
@@ -466,7 +509,7 @@ namespace Alexandria.Client.Controllers
 									System.IO.Directory.CreateDirectory(tempPath);
 
 								WebClient client = new WebClient();
-								Uri address = locker.GetLockerPath(selectedTrack.Path.ToString());
+								Uri address = locker.GetLockerPath(SelectedTrack.Path.ToString());
 								try
 								{
 									client.DownloadFile(address, fileName);
@@ -481,16 +524,20 @@ namespace Alexandria.Client.Controllers
 							audioStream.StreamIndex = 0;
 						}
 
-						if (audioStream != null && audioStream.Duration != selectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
+						if (audioStream != null && audioStream.Duration != SelectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
 							SelectedRow.Cells[COL_DURATION].Value = audioStream.Duration;
 						}
 					}
 					
 					playbackController.LoadAudioStream(audioStream);
-					SelectedRow.Cells[COL_STATUS].Value = "Loaded";
+					SelectedRowStatus = "Loaded";
 				}
-				else throw new ApplicationException("Could not load selected track: Id was undefined");
+			}
+			else
+			{
+				SelectedRow = null;
+				SelectedTrack = null;
 			}
 		}
 		
@@ -499,6 +546,17 @@ namespace Alexandria.Client.Controllers
 			if (string.IsNullOrEmpty(value))
 				return string.Empty;
 			else return value;
+		}
+		
+		public void SelectRow(int rowIndex)
+		{
+			if (rowIndex >= 0 && rowIndex <= grid.Rows.Count-1)
+			{
+				playbackController.Stop();
+				SelectedRow = grid.Rows[rowIndex];
+				LoadSelectedRow();
+				playbackController.Play();
+			}
 		}
 		
 		public void LoadTrack(IAudioTrack track, string source)
@@ -657,12 +715,10 @@ namespace Alexandria.Client.Controllers
 		{
 			if (playbackController != null)
 			{
-				bool isPlaying = false;
-				if (playbackController.AudioPlayer.CurrentAudioStream != null && playbackController.AudioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
-					isPlaying = true;
+				bool isPlaying = playbackController.IsPlaying();
 				
 				if (isPlaying)
-					playbackController.AudioPlayer.Stop();
+					playbackController.Stop();
 
 				//TODO: implement this logic
 				//SelectedTrack = ChangeSelectedTrack(-1); //NOTE: use this to support "shuffle"
@@ -677,7 +733,7 @@ namespace Alexandria.Client.Controllers
 				LoadSelectedRow();
 				
 				if (isPlaying)
-					playbackController.AudioPlayer.Play();
+					playbackController.Play();
 			}
 		}
 
@@ -685,12 +741,10 @@ namespace Alexandria.Client.Controllers
 		{
 			if (playbackController != null)
 			{
-				bool isPlaying = false;
-				if (playbackController.AudioPlayer.CurrentAudioStream != null && playbackController.AudioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
-					isPlaying = true;
+				bool isPlaying = playbackController.IsPlaying();
 				
 				if (isPlaying)
-					playbackController.AudioPlayer.Stop();
+					playbackController.Stop();
 
 				//TODO: implement this logic
 				//SelectedTrack = ChangeSelectedTrack(1);
@@ -705,7 +759,7 @@ namespace Alexandria.Client.Controllers
 				LoadSelectedRow();
 
 				if (isPlaying)
-					playbackController.AudioPlayer.Play();
+					playbackController.Play();
 			}
 		}
 		
@@ -842,6 +896,12 @@ namespace Alexandria.Client.Controllers
 		//        grid.Rows[selectedIndex+1].Selected = true;
 		//    }
 		//}
+		
+		public void WireSelectedTrackChanged(EventHandler<QueueEventArgs> handler)
+		{
+			if (handler != null)
+				selectedTrackChanged += handler;
+		}
 		#endregion
 	}
 }

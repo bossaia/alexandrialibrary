@@ -127,7 +127,8 @@ namespace Alexandria.Client.Views
 		private DataGridViewColumn DragDropColumn;
 		private object[] DragDropColumnCellValue;
 		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDrop;
-		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDrop;
+		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropping;
+		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropped;
 
 		public AdvancedDataGridView()
 		{
@@ -395,19 +396,22 @@ namespace Alexandria.Client.Views
 									DragDropColumnCellValue[i] = this.Rows[i].Cells[DragDropSourceIndex].Value;
 								}
 							}
-							
+
+							if (ColumnDragDropping != null)
+								ColumnDragDropping(this, new AdvancedDataGridViewColumnDragDropEventArgs());
+
 							//remove the source column
 							this.Columns.RemoveAt(DragDropSourceIndex);
-							
+
 							//insert a new column at the target index using the source column as a template
 							this.Columns.Insert(DragDropTargetIndex, new DataGridViewColumn(DragDropColumn.CellTemplate));
-							
+
 							//copy the source column's header cell to the new column
 							this.Columns[DragDropTargetIndex].HeaderCell = DragDropColumn.HeaderCell;
-							
+
 							//select the newly-inserted column
 							this.Columns[DragDropTargetIndex].Selected = true;
-							
+
 							//update the position of the cuurent cell in the DGV
 							this.CurrentCell = this[DragDropTargetIndex, 0];
 							for (int i = 0; i < this.RowCount; i++)
@@ -419,6 +423,9 @@ namespace Alexandria.Client.Views
 									this.Rows[i].Cells[DragDropTargetIndex].Value = DragDropColumnCellValue[i];
 								}
 							}
+							
+							if (ColumnDragDropped != null)
+								ColumnDragDropped(this, new AdvancedDataGridViewColumnDragDropEventArgs());
 							
 							//release resources
 							DragDropColumnCellValue = null;
@@ -483,10 +490,16 @@ namespace Alexandria.Client.Views
 			set { rowDragDrop = value; }
 		}
 		
-		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDrop
+		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropping
 		{
-			get { return columnDragDrop; }
-			set { columnDragDrop = value; }
+			get { return columnDragDropping; }
+			set { columnDragDropping = value; }
+		}
+		
+		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropped
+		{
+			get { return columnDragDropped; }
+			set { columnDragDropped = value; }
 		}
 	}
 }

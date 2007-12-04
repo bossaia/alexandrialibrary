@@ -107,7 +107,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SortComparer.cs" />
-    <Compile Include="UpdateStatusEventArgs.cs" />
     <Compile Include="Views\AdvancedDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>

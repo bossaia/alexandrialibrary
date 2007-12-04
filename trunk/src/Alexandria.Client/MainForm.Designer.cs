@@ -75,14 +75,12 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
+			this.submitCheckBox = new System.Windows.Forms.CheckBox();
 			this.sortButton = new System.Windows.Forms.Button();
 			this.sortListView = new System.Windows.Forms.ListView();
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextToolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.sortLabel = new System.Windows.Forms.Label();
-			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.submitCheckBox = new System.Windows.Forms.CheckBox();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -96,6 +94,8 @@ namespace Alexandria.Client
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -411,6 +411,13 @@ namespace Alexandria.Client
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
 			// 
+			// submitCheckBox
+			// 
+			resources.ApplyResources(this.submitCheckBox, "submitCheckBox");
+			this.submitCheckBox.Name = "submitCheckBox";
+			this.submitCheckBox.UseVisualStyleBackColor = true;
+			this.submitCheckBox.CheckedChanged += new System.EventHandler(this.submitCheckBox_CheckedChanged);
+			// 
 			// sortButton
 			// 
 			resources.ApplyResources(this.sortButton, "sortButton");
@@ -445,34 +452,15 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.sortLabel, "sortLabel");
 			this.sortLabel.Name = "sortLabel";
 			// 
-			// queueSmallImageList
-			// 
-			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-			// 
-			// DirectoryOpenDialog
-			// 
-			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-			// 
-			// submitCheckBox
-			// 
-			resources.ApplyResources(this.submitCheckBox, "submitCheckBox");
-			this.submitCheckBox.Name = "submitCheckBox";
-			this.submitCheckBox.UseVisualStyleBackColor = true;
-			this.submitCheckBox.CheckedChanged += new System.EventHandler(this.submitCheckBox_CheckedChanged);
-			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
 			this.queueDataGrid.AllowUserToAddRows = false;
+			this.queueDataGrid.AllowUserToOrderColumns = true;
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
-			this.queueDataGrid.ColumnDragDrop = null;
+			this.queueDataGrid.ColumnDragDropping = null;
+			this.queueDataGrid.ColumnDragDropped = null;
 			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -615,6 +603,20 @@ namespace Alexandria.Client
 			this.Id.ReadOnly = true;
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			// 
+			// queueSmallImageList
+			// 
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// DirectoryOpenDialog
+			// 
+			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
 			// MainForm
 			// 
