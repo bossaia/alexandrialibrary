@@ -126,7 +126,8 @@ namespace Alexandria.Client.Views
 		private int DragDropType; //0=column, 1=row
 		private DataGridViewColumn DragDropColumn;
 		private object[] DragDropColumnCellValue;
-		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDrop;
+		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropping;
+		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropped;
 		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropping;
 		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropped;
 
@@ -157,8 +158,8 @@ namespace Alexandria.Client.Views
 					//single-click left mouse button
 					if (this.SelectionMode != DataGridViewSelectionMode.ColumnHeaderSelect)
 					{
-						this.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
-						this.Columns[e.ColumnIndex].Selected = true;
+						//this.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+						//this.Columns[e.ColumnIndex].Selected = true;
 					}
 				}
 				else if (e.Button == MouseButtons.Right)
@@ -166,7 +167,7 @@ namespace Alexandria.Client.Views
 					//single-click right mouse button
 					if (this.SelectionMode != DataGridViewSelectionMode.ColumnHeaderSelect)
 					{
-						this.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+						//this.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
 					}
 					if (this.SelectedColumns.Count <= 1)
 					{
@@ -438,14 +439,19 @@ namespace Alexandria.Client.Views
 						DragDropTargetIndex = this.HitTest(ClientPoint.X, ClientPoint.Y).RowIndex;
 						if (DragDropTargetIndex > -1 && DragDropCurrentIndex < this.RowCount - 1)
 						{
+						
 							DragDropCurrentIndex = -1;
 							DataGridViewRow SourceRow = drgevent.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
+
+							if (RowDragDropping != null)
+								RowDragDropping(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
+							
 							//this.Rows.RemoveAt(DragDropSourceIndex);
 							//this.Rows.Insert(DragDropTargetIndex, SourceRow);
 							//this.Rows[DragDropTargetIndex].Selected = true;
 							
-							if (RowDragDrop != null)
-								RowDragDrop(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
+							if (RowDragDropped != null)
+								RowDragDropped(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
 
 							this.CurrentCell = this[0, DragDropTargetIndex];
 						}
@@ -484,10 +490,16 @@ namespace Alexandria.Client.Views
 			base.OnCellPainting(e);
 		}
 
-		public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDrop
+		public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropping
 		{
-			get { return rowDragDrop; }
-			set { rowDragDrop = value; }
+			get { return rowDragDropping; }
+			set { rowDragDropping = value; }
+		}
+		
+		public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropped
+		{
+			get { return rowDragDropped; }
+			set { rowDragDropped = value; }
 		}
 		
 		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropping
