@@ -5,6 +5,7 @@ using System.Text;
 
 using Alexandria;
 using Alexandria.Persistence;
+using Alexandria.SQLite;
 
 namespace Alexandria.Client.Controllers
 {
@@ -12,11 +13,9 @@ namespace Alexandria.Client.Controllers
 	{
 		public PersistenceController()
 		{
-			//databasePath = ConfigurationManager.AppSettings[
-			//mechanism = new SQLitePersistenceMechanism(
+			engine = new SQLiteEngine();
 		}
 		
-		//private string databasePath;
-		//private SQLitePersistenceMechanism mechanism;
+		private SQLiteEngine engine;
 	}
 }

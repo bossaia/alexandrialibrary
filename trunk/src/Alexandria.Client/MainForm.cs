@@ -62,6 +62,7 @@ namespace Alexandria.Client
 				queueController.Grid = queueDataGrid;
 				queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;
+				queueController.PersistenceController = persistenceController;
 				queueController.SmallImageList = queueSmallImageList;
 				
 				playbackController.PlayToggles = true;
@@ -77,10 +78,15 @@ namespace Alexandria.Client
 			}
 		}
 		#endregion
-				
+		
+		#region Private Constants
+		private string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
+		#endregion
+		
 		#region Private Fields
 		private PlaybackController playbackController = new PlaybackController();
 		private QueueController queueController = new QueueController();
+		private PersistenceController persistenceController = new PersistenceController();
 		private PluginController pluginController = new PluginController();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
@@ -267,6 +273,13 @@ namespace Alexandria.Client
 
 		private void OpenDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT] != null)
+			{
+				string rootFolder = ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT].ToString();
+				if (System.IO.Directory.Exists(rootFolder))
+					DirectoryOpenDialog.SelectedPath = rootFolder;
+			}
+		
 			DialogResult result = DirectoryOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{

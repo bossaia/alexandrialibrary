@@ -127,6 +127,7 @@ namespace Alexandria.Client.Controllers
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
 		private PlaybackController playbackController;
+		private PersistenceController persistenceController;
 		#endregion
 
 		#region Private Properties
@@ -144,32 +145,7 @@ namespace Alexandria.Client.Controllers
 		}
 		#endregion
 
-		#region Private Methods
-		//private void TestSort()
-		//{
-		//    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(IMediaItem));
-		//    ListSortDescription[] sortArray = new ListSortDescription[2];
-		//    sortArray[0] = new ListSortDescription(properties.Find("Format", true), ListSortDirection.Ascending);
-		//    sortArray[1] = new ListSortDescription(properties.Find("Title", true), ListSortDirection.Ascending);
-		//    ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
-		//    ((IBindingListView)bindingList).ApplySort(sorts);
-		//}
-		
-		//private void InitDataTable(DataTable queueTable)
-		//{
-		//    queueTable.Columns.Add(new DataColumn(COL_ID, typeof(Guid)));
-		//    queueTable.Columns.Add(new DataColumn(COL_TYPE, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_SOURCE, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_NUMBER, typeof(int)));
-		//    queueTable.Columns.Add(new DataColumn(COL_TITLE, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_ARTIST, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_ALBUM, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_DURATION, typeof(TimeSpan)));
-		//    queueTable.Columns.Add(new DataColumn(COL_DATE, typeof(DateTime)));
-		//    queueTable.Columns.Add(new DataColumn(COL_FORMAT, typeof(string)));
-		//    queueTable.Columns.Add(new DataColumn(COL_PATH, typeof(Uri)));
-		//}
-		
+		#region Private Methods		
 		private Guid GetItemGuid(DataGridViewCell cell)
 		{
 			return (cell.Value != null) ? (Guid)cell.Value : Guid.NewGuid();
@@ -239,51 +215,6 @@ namespace Alexandria.Client.Controllers
 				}
 			}
 		}
-		
-		//private bool ValuesAreEquivalent(object value1, object value2)
-		//{
-		//    if (value1 != null && value2 != null)
-		//    {
-		//        return (value1.ToString() == value2.ToString());
-		//    }
-		//    else return (value1 == null && value2 == null);
-		//}
-		
-		//private bool RowsAreEquivalent(DataGridViewRow row1, DataGridViewRow row2)
-		//{
-		//    if (row1 != null && row2 != null)
-		//    {
-		//        for(int i=0; i<row1.Cells.Count; i++)
-		//            if (!ValuesAreEquivalent(row1.Cells[i].Value, row2.Cells[i].Value))
-		//                return false;
-
-		//        return true;
-		//    }
-		//    else return false;
-		//}
-		
-		//private void SwitchRows(int index1, int index2)
-		//{
-		//    if (index1 >= 0 && index1 < grid.Rows.Count && index2 >= 0 && index2 < grid.Rows.Count && index1 != index2)
-		//    {	
-		//        for(int i=0; i<grid.Rows[index1].Cells.Count; i++)
-		//        {
-		//            object value1 = grid.Rows[index1].Cells[i].Value;
-		//            object value2 = grid.Rows[index2].Cells[i].Value;
-					
-		//            grid.Rows[index1].Cells[i].Value = value2;
-		//            grid.Rows[index2].Cells[i].Value = value1;
-		//        }
-				
-		//        object tag1 = grid.Rows[index1].Tag;
-		//        object tag2 = grid.Rows[index2].Tag;
-				
-		//        grid.Rows[index1].Tag = tag2;
-		//        grid.Rows[index2].Tag = tag1;
-				
-		//        bindingList.ResetBindings();
-		//    }
-		//}
 		
 		private void OnRowDragDropping(object sender, AdvancedDataGridRowDragDropEventArgs e)
 		{
@@ -413,6 +344,12 @@ namespace Alexandria.Client.Controllers
 		{
 			get { return playbackController; }
 			set { playbackController = value; }
+		}
+		
+		public PersistenceController PersistenceController
+		{
+			get { return persistenceController; }
+			set { persistenceController = value; }
 		}
 		
 		public IList<IAudioTrack> Tracks
