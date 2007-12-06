@@ -6,9 +6,11 @@ using System.Data.SQLite;
 using System.IO;
 using System.Text;
 
+using Alexandria.Persistence;
+
 namespace Alexandria.SQLite
 {
-	public class SQLiteEngine
+	public class SQLiteEngine : IPersistenceEngine
 	{
 		#region Constructors
 		public SQLiteEngine()
@@ -67,9 +69,37 @@ namespace Alexandria.SQLite
 		{
 			return new System.Data.SQLite.SQLiteConnection(GetConnectionString());
 		}
+		
+		private string GetColumnType(Type type)
+		{
+			if (type != null)
+			{
+				switch(type.Name)
+				{
+					case "String":
+						return "TEXT";
+					case "Short":
+					case "Int":
+					case "Long":
+						return "INT";
+					case "Decimal":
+					case "Float":
+					case "Double":
+						return "NUMBER";
+					case "TimeSpan":
+						return "INT";
+					case "DateTime":
+						return "INT";
+					default:
+						return "TEXT";
+				}
+			}
+			
+			return string.Empty;
+		}
 		#endregion
 
-		#region Public Methods
+		#region IPersistenceEngine Members
 		public IDbConnection GetConnection()
 		{
 			return GetSQLiteConnection();
@@ -79,6 +109,28 @@ namespace Alexandria.SQLite
 		{
 			SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
 			return command.ExecuteReader(CommandBehavior.CloseConnection);
+		}
+		
+		public void CreateTable(DataTable table)
+		{
+			if (table != null)
+			{
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat("CREATE TABLE {0} (", table.TableName);
+				
+			}
+		}
+		
+		public void FillRow(DataRow row, Guid id)
+		{
+		}
+		
+		public void SaveRow(DataRow row)
+		{
+		}
+		
+		public void DeleteRow(DataRow row)
+		{
 		}
 		#endregion
 	}	
