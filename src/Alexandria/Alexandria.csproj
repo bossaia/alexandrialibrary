@@ -98,6 +98,7 @@
     <Compile Include="Metadata\IEntity.cs" />
     <Compile Include="Metadata\ItemNumber.cs" />
     <Compile Include="Metadata\MediaItem.cs" />
+    <Compile Include="Metadata\MediaItemDataMap.cs" />
     <Compile Include="Metadata\MediaItemList.cs" />
     <Compile Include="Metadata\Old\BaseAlbum.cs" />
     <Compile Include="Metadata\Old\BaseArtist.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Persistence\IndexAttribute.cs" />
     <Compile Include="Persistence\IndexMap.cs" />
     <Compile Include="Persistence\IPersistenceBroker.cs" />
+    <Compile Include="Persistence\IPersistenceEngine.cs" />
     <Compile Include="Persistence\IPersistenceMechanism.cs" />
     <Compile Include="Media\IPlaylistItem.cs" />
     <Compile Include="Media\BasePlaylist.cs" />

@@ -7,6 +7,10 @@ namespace Alexandria.Metadata
 	public class MediaItem : IMediaItem
 	{
 		#region Constructors
+		public MediaItem()
+		{
+		}
+		
 		public MediaItem(Guid id, string source, string type, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
 		{
 			this.id = id;
