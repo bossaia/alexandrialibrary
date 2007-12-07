@@ -69,33 +69,97 @@ namespace Alexandria.SQLite
 		{
 			return new System.Data.SQLite.SQLiteConnection(GetConnectionString());
 		}
+
+		private string GetColumnTypeName(Type type)
+		{
+			string name = "TEXT";
+
+			if (type == typeof(bool) ||
+				type == typeof(sbyte) ||
+				type == typeof(byte) ||
+				type == typeof(short) ||
+				type == typeof(ushort) ||
+				type == typeof(int) ||
+				type == typeof(uint) ||
+				type == typeof(long) ||
+				type == typeof(ulong) ||
+				type == typeof(DateTime) ||
+				type == typeof(TimeSpan))
+				name = "INTEGER";
+
+			if (type == typeof(float) ||
+				type == typeof(double) ||
+				type == typeof(decimal))
+				name = "REAL";
+
+			return name;
+		}
 		
 		private string GetColumnType(Type type)
 		{
 			if (type != null)
 			{
-				switch(type.Name)
+				switch(GetColumnTypeName(type))
 				{
 					case "String":
 						return "TEXT";
 					case "Short":
 					case "Int":
 					case "Long":
-						return "INT";
+						return "INTEGER";
 					case "Decimal":
 					case "Float":
 					case "Double":
-						return "NUMBER";
+						return "REAL";
 					case "TimeSpan":
-						return "INT";
+						return "INTEGER";
 					case "DateTime":
-						return "INT";
+						return "INTEGER";
 					default:
 						return "TEXT";
 				}
 			}
 			
 			return string.Empty;
+		}
+		
+		private string GetValueName(DataRow row, int index)
+		{
+			if (row != null && index >= 0 && index < row.Table.Columns.Count-1)
+			{
+				DataColumn col = row.Table.Columns[index];
+				string typeName = GetColumnTypeName(col.DataType);
+				
+				switch(typeName)
+				{
+					case "TEXT":
+						return string.Format("'{0}'", row[index]);
+					case "INTEGER":
+						if (col.DataType == typeof(DateTime))
+							return string.Format("{0}", ((DateTime)row[index]).ToFileTime());
+						else if (col.DataType == typeof(TimeSpan))
+							return string.Format("{0}", ((TimeSpan)row[index]).Ticks);
+						else return string.Format("{0}", row[index]);
+					case "REAL":
+						return string.Format("{0}", row[index]);
+					default:
+						break;
+				}
+			}
+			return "''";
+		}
+		
+		private SQLiteCommand GetSelectCommand(DataTable table, Guid id)
+		{
+			if (table != null && table.PrimaryKey.Length > 0)
+			{
+				string idField = table.PrimaryKey[0].ColumnName;
+				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = @Id", table.TableName, idField);
+				SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
+				command.Parameters.Add(new SQLiteParameter("@Id", id.ToString()));
+				return command;
+			}
+			return null;
 		}
 		#endregion
 
@@ -104,29 +168,90 @@ namespace Alexandria.SQLite
 		{
 			return GetSQLiteConnection();
 		}
-		
-		public IDataReader GetDataReader(string commandText)
+
+		public IDataReader GetDataReader(DataTable table, Guid id)
 		{
-			SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
-			return command.ExecuteReader(CommandBehavior.CloseConnection);
+			SQLiteCommand command = GetSelectCommand(table, id);
+			if (command != null)
+			{
+				
+				return command.ExecuteReader(CommandBehavior.CloseConnection);
+			}
+			return null;
 		}
+		
+		//public IDataReader GetDataReader(string commandText)
+		//{
+		//	SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
+		//	return command.ExecuteReader(CommandBehavior.CloseConnection);
+		//}
 		
 		public void CreateTable(DataTable table)
 		{
-			if (table != null)
+			if (table != null && table.PrimaryKey.Length > 0)
 			{
-				StringBuilder sql = new StringBuilder();
-				sql.AppendFormat("CREATE TABLE {0} (", table.TableName);
+				const string tableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+				const string columnFormat = "{0} {1} NOT NULL";
+				StringBuilder columns = new StringBuilder();
+				for(int i=0; i<table.Columns.Count; i++)
+				{
+					if (i > 0) columns.Append(", ");
+					columns.AppendFormat(columnFormat, table.Columns[i].ColumnName, GetColumnTypeName(table.Columns[i].DataType));
+					if (table.PrimaryKey[0] == table.Columns[i]) columns.Append(" PRIMARY KEY");
+				}				
+				string commandText = string.Format(tableFormat, table.TableName, columns);
 				
+				using(SQLiteConnection connection = GetSQLiteConnection())
+				{
+					SQLiteCommand cmd = new SQLiteCommand(commandText, connection);
+					connection.Open();
+					cmd.ExecuteNonQuery();
+				}
 			}
 		}
 		
-		public void FillRow(DataRow row, Guid id)
+		public void FillTable(DataTable dataTable, Guid id)
 		{
+			if (dataTable != null)
+			{
+				dataTable.Rows.Clear();
+				SQLiteCommand cmd = GetSelectCommand(dataTable, id);
+				if (cmd != null)
+				{
+					SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+					adapter.Fill(dataTable);
+				}
+			}
 		}
 		
 		public void SaveRow(DataRow row)
 		{
+			string format = "REPLACE INTO {0} ({1}) VALUES ({2})";
+						
+			StringBuilder columns = new StringBuilder();
+			StringBuilder values = new StringBuilder();
+			
+			for(int i=0; i<row.Table.Columns.Count; i++)
+			{
+				if (i > 0)
+				{
+					columns.Append(", ");
+					values.Append(", ");
+				}
+			
+				DataColumn col = row.Table.Columns[i];
+				columns.Append(col.ColumnName);
+				values.Append(GetValueName(row, i));
+			}
+			
+			string commandText = string.Format(format, row.Table.TableName, columns, values);
+			
+			using(SQLiteConnection connection = GetSQLiteConnection())
+			{
+				connection.Open();
+				SQLiteCommand cmd = new SQLiteCommand(commandText, connection);
+				cmd.ExecuteNonQuery();
+			}
 		}
 		
 		public void DeleteRow(DataRow row)

@@ -103,9 +103,9 @@ namespace Alexandria.Metadata
 			
 			if (engine != null)
 			{
-				DataRow row = table.NewRow();
-				engine.FillRow(row, id);
-				item = GetItemFromRow(row);
+				engine.FillTable(table, id);
+				if (table.Rows.Count > 0)
+					item = GetItemFromRow(table.Rows[0]);
 			}
 			
 			return item;
