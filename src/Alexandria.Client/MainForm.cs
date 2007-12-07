@@ -71,6 +71,8 @@ namespace Alexandria.Client
 				playbackController.PlayPauseButton = PlayPauseButton;
 				playbackController.QueueController = queueController;
 				playbackController.WireStatusUpdated(new EventHandler<PlaybackEventArgs>(OnStatusUpdated));
+				
+				persistenceController.Initialize();
 			}
 			catch (Exception ex)
 			{
@@ -624,6 +626,26 @@ namespace Alexandria.Client
 		private void submitCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			playbackController.EnableSubmitTracksToLastFM = submitCheckBox.Checked;
+		}
+
+		private void saveSelectedCatalogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
+				{
+					queueController.SaveRow(queueDataGrid.SelectedRows[0].Index);
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ERROR: Could not save catalog entry");
+			}
+		}
+
+		private void saveAllCatalogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			queueController.SaveAllRows();
 		}
 		#endregion
 		

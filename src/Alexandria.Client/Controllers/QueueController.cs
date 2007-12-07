@@ -807,6 +807,24 @@ namespace Alexandria.Client.Controllers
 			((IBindingListView)bindingList).RemoveSort();
 		}
 		
+		public void SaveRow(int index)
+		{
+			if (persistenceController != null && index >= 0 && index < bindingList.Count-1)
+			{
+				IMediaItem item = bindingList[index];
+				persistenceController.SaveMediaItem(item);
+			}
+		}
+		
+		public void SaveAllRows()
+		{
+			if (persistenceController != null)
+			{
+				for(int i=0; i<bindingList.Count; i++)
+					SaveRow(i);
+			}
+		}
+		
 		//public void MoveSelectedRowUp()
 		//{
 		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index > 0)

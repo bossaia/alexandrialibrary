@@ -8,10 +8,10 @@ namespace Alexandria.Persistence
 	public interface IPersistenceEngine
 	{
 		IDbConnection GetConnection();
-		IDataReader GetDataReader(string commandText);
-		void CreateTable(DataTable table);
-		void FillRow(DataRow row, Guid id);
-		void SaveRow(DataRow row);
-		void DeleteRow(DataRow row);
+		IDataReader GetDataReader(DataTable dataTable, Guid id);
+		void CreateTable(DataTable dataTable);
+		void FillTable(DataTable dataTable, Guid id);
+		void SaveRow(DataRow dataRow);
+		void DeleteRow(DataRow dataRow);
 	}
 }

@@ -309,6 +309,18 @@
   <data name="viewToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;View</value>
   </data>
+  <data name="saveSelectedCatalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="saveSelectedCatalogToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save &amp;Selected</value>
+  </data>
+  <data name="saveAllCatalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 22</value>
+  </data>
+  <data name="saveAllCatalogToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save &amp;All</value>
+  </data>
   <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
   </data>
@@ -1101,7 +1113,7 @@
     <value>queueDataGrid</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.Type" xml:space="preserve">
-    <value>Alexandria.Client.Views.AdvancedDataGridView, Alexandria.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>Alexandria.Client.Views.AdvancedDataGridView, Alexandria.Client, Version=1.0.0.7, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.Parent" xml:space="preserve">
     <value>QueueGroupBox</value>
@@ -1463,6 +1475,24 @@
   <data name="&gt;&gt;contextToolStripMenuItemClear.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
+    <value>queueSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
+    <value>DirectoryOpenDialog</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveSelectedCatalogToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Status.Name" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -1535,17 +1565,11 @@
   <data name="&gt;&gt;Id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
-    <value>queueSmallImageList</value>
+  <data name="&gt;&gt;saveAllCatalogToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveAllCatalogToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
-    <value>DirectoryOpenDialog</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;saveAllCatalogToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
