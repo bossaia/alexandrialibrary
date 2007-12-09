@@ -50,6 +50,7 @@ namespace Alexandria.Client
 			this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,7 +84,6 @@ namespace Alexandria.Client
 			this.sortLabel = new System.Windows.Forms.Label();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.saveSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -97,7 +97,7 @@ namespace Alexandria.Client
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.saveAllCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -218,9 +218,15 @@ namespace Alexandria.Client
 			// 
 			this.catalogToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveSelectedCatalogToolStripMenuItem,
-            this.saveAllCatalogToolStripMenuItem});
+            this.deleteSelectedCatalogToolStripMenuItem});
 			this.catalogToolStripMenuItem.Name = "catalogToolStripMenuItem";
 			resources.ApplyResources(this.catalogToolStripMenuItem, "catalogToolStripMenuItem");
+			// 
+			// saveSelectedCatalogToolStripMenuItem
+			// 
+			this.saveSelectedCatalogToolStripMenuItem.Name = "saveSelectedCatalogToolStripMenuItem";
+			resources.ApplyResources(this.saveSelectedCatalogToolStripMenuItem, "saveSelectedCatalogToolStripMenuItem");
+			this.saveSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedCatalogToolStripMenuItem_Click);
 			// 
 			// userToolStripMenuItem
 			// 
@@ -471,12 +477,6 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
-			// saveSelectedCatalogToolStripMenuItem
-			// 
-			this.saveSelectedCatalogToolStripMenuItem.Name = "saveSelectedCatalogToolStripMenuItem";
-			resources.ApplyResources(this.saveSelectedCatalogToolStripMenuItem, "saveSelectedCatalogToolStripMenuItem");
-			this.saveSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedCatalogToolStripMenuItem_Click);
-			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -630,11 +630,11 @@ namespace Alexandria.Client
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// saveAllCatalogToolStripMenuItem
+			// deleteSelectedCatalogToolStripMenuItem
 			// 
-			this.saveAllCatalogToolStripMenuItem.Name = "saveAllCatalogToolStripMenuItem";
-			resources.ApplyResources(this.saveAllCatalogToolStripMenuItem, "saveAllCatalogToolStripMenuItem");
-			this.saveAllCatalogToolStripMenuItem.Click += new System.EventHandler(this.saveAllCatalogToolStripMenuItem_Click);
+			this.deleteSelectedCatalogToolStripMenuItem.Name = "deleteSelectedCatalogToolStripMenuItem";
+			resources.ApplyResources(this.deleteSelectedCatalogToolStripMenuItem, "deleteSelectedCatalogToolStripMenuItem");
+			this.deleteSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedCatalogToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -736,7 +736,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ToolStripMenuItem saveSelectedCatalogToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem saveAllCatalogToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteSelectedCatalogToolStripMenuItem;
 	}
 }
 

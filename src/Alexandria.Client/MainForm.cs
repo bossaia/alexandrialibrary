@@ -643,9 +643,19 @@ namespace Alexandria.Client
 			}
 		}
 
-		private void saveAllCatalogToolStripMenuItem_Click(object sender, EventArgs e)
+		private void deleteSelectedCatalogToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			queueController.SaveAllRows();
+			try
+			{
+				if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
+				{
+					queueController.DeleteRow(queueDataGrid.SelectedRows[0].Index);
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message, "ERROR: Could not delete catalog entry");
+			}
 		}
 		#endregion
 		

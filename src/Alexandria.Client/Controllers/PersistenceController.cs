@@ -28,9 +28,19 @@ namespace Alexandria.Client.Controllers
 			engine.CreateTable(mediaItemDataMap.Table);
 		}
 		
+		public bool CatalogExists
+		{
+			get { return true; }
+		}
+		
 		public void SaveMediaItem(IMediaItem item)
 		{
 			mediaItemDataMap.SaveMediaItem(item);
+		}
+		
+		public void DeleteMediaItem(IMediaItem item)
+		{
+			mediaItemDataMap.DeleteMediaItem(item);
 		}
 	}
 }

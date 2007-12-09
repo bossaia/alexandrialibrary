@@ -13,7 +13,6 @@ namespace Alexandria.Metadata
 		{
 			table = new DataTable("MediaItem");
 			table.Columns.Add("Id", typeof(Guid));
-			table.Columns.Add("Status", typeof(string));
 			table.Columns.Add("Source", typeof(string));
 			table.Columns.Add("Type", typeof(string));
 			table.Columns.Add("Number", typeof(int));
@@ -24,7 +23,8 @@ namespace Alexandria.Metadata
 			table.Columns.Add("Date", typeof(DateTime));
 			table.Columns.Add("Format", typeof(string));
 			table.Columns.Add("Path", typeof(Uri));
-			table.Constraints.Add("pk_Id", table.Columns["Id"], true);
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Id"], true));
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Path"]));
 		}
 		
 		private IPersistenceEngine engine;
@@ -47,17 +47,16 @@ namespace Alexandria.Metadata
 			if (row != null)
 			{
 				item.Id = GetValue<Guid>(row[0]);
-				item.Status = GetValue<string>(row[1]);
-				item.Source = GetValue<string>(row[2]);
-				item.Type = GetValue<string>(row[3]);
-				item.Number = GetValue<int>(row[4]);
-				item.Title = GetValue<string>(row[5]);
-				item.Artist = GetValue<string>(row[6]);
-				item.Album = GetValue<string>(row[7]);
-				item.Duration = GetValue<TimeSpan>(row[8]);
-				item.Date = GetValue<DateTime>(row[9]);
-				item.Format = GetValue<string>(row[10]);
-				item.Path = GetValue<Uri>(row[11]);
+				item.Source = GetValue<string>(row[1]);
+				item.Type = GetValue<string>(row[2]);
+				item.Number = GetValue<int>(row[3]);
+				item.Title = GetValue<string>(row[4]);
+				item.Artist = GetValue<string>(row[5]);
+				item.Album = GetValue<string>(row[6]);
+				item.Duration = GetValue<TimeSpan>(row[7]);
+				item.Date = GetValue<DateTime>(row[8]);
+				item.Format = GetValue<string>(row[9]);
+				item.Path = GetValue<Uri>(row[10]);
 			}
 			
 			return item;
@@ -70,17 +69,16 @@ namespace Alexandria.Metadata
 			if (item != null)
 			{
 				row[0] = item.Id;
-				row[1] = item.Status;
-				row[2] = item.Source;
-				row[3] = item.Type;
-				row[4] = item.Number;
-				row[5] = item.Title;
-				row[6] = item.Artist;
-				row[7] = item.Album;
-				row[8] = item.Duration;
-				row[9] = item.Date;
-				row[10] = item.Format;
-				row[11] = item.Path;
+				row[1] = item.Source;
+				row[2] = item.Type;
+				row[3] = item.Number;
+				row[4] = item.Title;
+				row[5] = item.Artist;
+				row[6] = item.Album;
+				row[7] = item.Duration;
+				row[8] = item.Date;
+				row[9] = item.Format;
+				row[10] = item.Path;
 			}
 			
 			return row;
@@ -105,7 +103,10 @@ namespace Alexandria.Metadata
 			{
 				engine.FillTable(table, id);
 				if (table.Rows.Count > 0)
+				{
 					item = GetItemFromRow(table.Rows[0]);
+					table.Rows[0].Delete();
+				}
 			}
 			
 			return item;
@@ -117,6 +118,7 @@ namespace Alexandria.Metadata
 			{
 				DataRow row = GetRowFromItem(item);
 				engine.SaveRow(row);
+				row.Delete();
 			}
 		}
 		
@@ -126,6 +128,7 @@ namespace Alexandria.Metadata
 			{
 				DataRow row = GetRowFromItem(item);
 				engine.DeleteRow(row);
+				row.Delete();
 			}
 		}
 	}

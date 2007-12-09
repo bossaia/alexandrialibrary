@@ -310,16 +310,16 @@
     <value>&amp;View</value>
   </data>
   <data name="saveSelectedCatalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="saveSelectedCatalogToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save &amp;Selected</value>
+    <value>&amp;Save Selected</value>
   </data>
-  <data name="saveAllCatalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+  <data name="deleteSelectedCatalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
   </data>
-  <data name="saveAllCatalogToolStripMenuItem.Text" xml:space="preserve">
-    <value>Save &amp;All</value>
+  <data name="deleteSelectedCatalogToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Delete Selected</value>
   </data>
   <data name="catalogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -1403,6 +1403,12 @@
   <data name="&gt;&gt;catalogToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveSelectedCatalogToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;userToolStripMenuItem.Name" xml:space="preserve">
     <value>userToolStripMenuItem</value>
   </data>
@@ -1487,12 +1493,6 @@
   <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Name" xml:space="preserve">
-    <value>saveSelectedCatalogToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;saveSelectedCatalogToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;Status.Name" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -1565,10 +1565,10 @@
   <data name="&gt;&gt;Id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;saveAllCatalogToolStripMenuItem.Name" xml:space="preserve">
-    <value>saveAllCatalogToolStripMenuItem</value>
+  <data name="&gt;&gt;deleteSelectedCatalogToolStripMenuItem.Name" xml:space="preserve">
+    <value>deleteSelectedCatalogToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;saveAllCatalogToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;deleteSelectedCatalogToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

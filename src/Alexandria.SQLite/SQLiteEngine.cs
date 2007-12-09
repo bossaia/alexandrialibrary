@@ -94,38 +94,10 @@ namespace Alexandria.SQLite
 
 			return name;
 		}
-		
-		private string GetColumnType(Type type)
-		{
-			if (type != null)
-			{
-				switch(GetColumnTypeName(type))
-				{
-					case "String":
-						return "TEXT";
-					case "Short":
-					case "Int":
-					case "Long":
-						return "INTEGER";
-					case "Decimal":
-					case "Float":
-					case "Double":
-						return "REAL";
-					case "TimeSpan":
-						return "INTEGER";
-					case "DateTime":
-						return "INTEGER";
-					default:
-						return "TEXT";
-				}
-			}
-			
-			return string.Empty;
-		}
-		
+				
 		private string GetValueName(DataRow row, int index)
 		{
-			if (row != null && index >= 0 && index < row.Table.Columns.Count-1)
+			if (row != null && index >= 0 && index < row.Table.Columns.Count)
 			{
 				DataColumn col = row.Table.Columns[index];
 				string typeName = GetColumnTypeName(col.DataType);
@@ -133,7 +105,7 @@ namespace Alexandria.SQLite
 				switch(typeName)
 				{
 					case "TEXT":
-						return string.Format("'{0}'", row[index]);
+						return string.Format("'{0}'", row[index].ToString());
 					case "INTEGER":
 						if (col.DataType == typeof(DateTime))
 							return string.Format("{0}", ((DateTime)row[index]).ToFileTime());
@@ -197,7 +169,10 @@ namespace Alexandria.SQLite
 				{
 					if (i > 0) columns.Append(", ");
 					columns.AppendFormat(columnFormat, table.Columns[i].ColumnName, GetColumnTypeName(table.Columns[i].DataType));
-					if (table.PrimaryKey[0] == table.Columns[i]) columns.Append(" PRIMARY KEY");
+					if (table.PrimaryKey[0] == table.Columns[i])
+						columns.Append(" PRIMARY KEY");
+					else if (table.Columns[i].Unique)
+						columns.Append(" UNIQUE");
 				}				
 				string commandText = string.Format(tableFormat, table.TableName, columns);
 				
@@ -256,6 +231,16 @@ namespace Alexandria.SQLite
 		
 		public void DeleteRow(DataRow row)
 		{
+			string format = "DELETE FROM {0} WHERE {1} = '{2}'";
+			string idColumn = row.Table.PrimaryKey[0].ColumnName;
+			string commandText = string.Format(format, row.Table.TableName, idColumn, row[idColumn]);
+			
+			using(SQLiteConnection connection = GetSQLiteConnection())
+			{
+				connection.Open();
+				SQLiteCommand cmd = new SQLiteCommand(commandText, connection);
+				cmd.ExecuteNonQuery();
+			}
 		}
 		#endregion
 	}	
