@@ -100,6 +100,8 @@ namespace Alexandria.Client.Controllers
 		private const int INDEX_MOVIE = 3;
 		private const string TYPE_TELEVISION = "TV";
 		private const int INDEX_TELEVISION = 4;
+		
+		private const string SOURCE_CATALOG = "Catalog";
 		#endregion
 
 		#region Private Fields
@@ -145,7 +147,7 @@ namespace Alexandria.Client.Controllers
 		}
 		#endregion
 
-		#region Private Methods		
+		#region Private Methods
 		private Guid GetItemGuid(DataGridViewCell cell)
 		{
 			return (cell.Value != null) ? (Guid)cell.Value : Guid.NewGuid();
@@ -809,9 +811,10 @@ namespace Alexandria.Client.Controllers
 		
 		public void SaveRow(int index)
 		{
-			if (persistenceController != null && index >= 0 && index < bindingList.Count-1)
+			if (persistenceController != null && index >= 0 && index < bindingList.Count)
 			{
 				IMediaItem item = bindingList[index];
+				item.Source = SOURCE_CATALOG;
 				persistenceController.SaveMediaItem(item);
 			}
 		}
@@ -822,6 +825,15 @@ namespace Alexandria.Client.Controllers
 			{
 				for(int i=0; i<bindingList.Count; i++)
 					SaveRow(i);
+			}
+		}
+		
+		public void DeleteRow(int index)
+		{
+			if (persistenceController != null && index >= 0 && index < bindingList.Count)
+			{
+				IMediaItem item = bindingList[index];
+				persistenceController.DeleteMediaItem(item);
 			}
 		}
 		
