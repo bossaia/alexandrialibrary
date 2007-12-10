@@ -112,6 +112,28 @@ namespace Alexandria.Metadata
 			return item;
 		}
 		
+		public IList<IMediaItem> ListAll()
+		{
+			IList<IMediaItem> items = new List<IMediaItem>();
+			
+			if (engine != null)
+			{
+				engine.FillTable(Table, default(Guid));
+				if (Table.Rows.Count > 0)
+				{
+					foreach(DataRow row in Table.Rows)
+					{
+						IMediaItem item = GetItemFromRow(row);
+						items.Add(item);
+					}
+				
+					Table.Rows.Clear();
+				}
+			}
+			
+			return items;
+		}
+		
 		public void SaveMediaItem(IMediaItem item)
 		{
 			if (engine != null && item != null)
