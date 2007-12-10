@@ -102,6 +102,9 @@ namespace Alexandria.Client.Controllers
 		private const int INDEX_TELEVISION = 4;
 		
 		private const string SOURCE_CATALOG = "Catalog";
+		
+		private const string FORMAT_PLAYLIST = "xspf,m3u";
+		private const string FORMAT_AUDIO = "ogg,flac,mp3,wma,aac";
 		#endregion
 
 		#region Private Fields
@@ -504,25 +507,9 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadTrack(IAudioTrack track, string source)
 		{
-			/*
-			object[] data = new object[11];
-			data[0] = track.Id;
-			data[1] = TYPE_AUDIO;
-			data[2] = source;
-			data[3] = track.TrackNumber;
-			data[4] = GetSafeString(track.Name);
-			data[5] = GetSafeString(track.Artist);
-			data[6] = GetSafeString(track.Album);
-			data[7] = track.Duration;
-			data[8] = track.ReleaseDate;
-			data[9] = track.Format.ToLowerInvariant();
-			data[10] = track.Path;
-			*/
-
 			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, GetSafeString(track.Name), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.ReleaseDate, track.Format, track.Path);
 			if (item.Id == default(Guid)) item.Id = Guid.NewGuid();
 			bindingList.Add(item);
-			//queueTable.Rows.Add(data);
 		}
 		
 		public string CleanupFileName(string fileName)
@@ -619,12 +606,44 @@ namespace Alexandria.Client.Controllers
 				}
 			}
 		}
+		
+		public void ImportDirectory(string path)
+		{
+			if (Directory.Exists(path))
+			{
+				DirectoryInfo dir = new DirectoryInfo(path);
+				foreach(FileInfo file in dir.GetFiles())
+				{
+					ImportFile(file.FullName);
+				}
+				foreach(DirectoryInfo subDirectory in dir.GetDirectories())
+				{
+					ImportDirectory(subDirectory.FullName);
+				}
+			}
+		}
+
+		public void ImportFile(string path)
+		{
+			if (!string.IsNullOrEmpty(path) && IsFormat(path, FORMAT_AUDIO))
+			{
+				if (System.IO.File.Exists(path))
+				{
+					IAudioTrack track = tagLibEngine.GetAudioTrack(new Uri(path));
+					if (track != null)
+					{
+						IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
+						persistenceController.SaveMediaItem(item);
+					}
+				}
+			}
+		}
 
 		public void OpenFile(string path)
 		{
 			if (!string.IsNullOrEmpty(path))
 			{
-				if (IsFormat(path, "xspf,m3u"))
+				if (IsFormat(path, FORMAT_PLAYLIST))
 				{
 					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
 					playlist.Load();
@@ -633,7 +652,7 @@ namespace Alexandria.Client.Controllers
 						
 					//TestSort();
 				}
-				else if (IsFormat(path, "ogg,flac,mp3,wma,aac"))
+				else if (IsFormat(path, FORMAT_AUDIO))
 				{
 					LoadTrackFromPath(path, "File");
 				}
@@ -835,29 +854,14 @@ namespace Alexandria.Client.Controllers
 				IMediaItem item = bindingList[index];
 				persistenceController.DeleteMediaItem(item);
 			}
+		}		
+		
+		public void LoadDefaultCatalog()
+		{
+			IList<IMediaItem> items = persistenceController.ListAllMediaItems();
+			foreach(IMediaItem item in items)
+				bindingList.Add(item);
 		}
-		
-		//public void MoveSelectedRowUp()
-		//{
-		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index > 0)
-		//    {
-		//        int selectedIndex = grid.SelectedRows[0].Index;
-		//        SwitchRows(selectedIndex, selectedIndex-1);
-		//        grid.SelectedRows[0].Selected = false;
-		//        grid.Rows[selectedIndex-1].Selected = true;
-		//    }
-		//}
-		
-		//public void MoveSelectedRowDown()
-		//{
-		//    if (grid.SelectedRows != null && grid.SelectedRows.Count > 0 && grid.SelectedRows[0].Index < grid.Rows.Count-1)
-		//    {
-		//        int selectedIndex = grid.SelectedRows[0].Index;
-		//        SwitchRows(selectedIndex, selectedIndex+1);
-		//        grid.SelectedRows[0].Selected = false;
-		//        grid.Rows[selectedIndex+1].Selected = true;
-		//    }
-		//}
 		
 		public void WireSelectedTrackChanged(EventHandler<QueueEventArgs> handler)
 		{

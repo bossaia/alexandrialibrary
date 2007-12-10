@@ -73,6 +73,8 @@ namespace Alexandria.Client
 				playbackController.WireStatusUpdated(new EventHandler<PlaybackEventArgs>(OnStatusUpdated));
 				
 				persistenceController.Initialize();
+				
+				queueController.LoadDefaultCatalog();
 			}
 			catch (Exception ex)
 			{
@@ -655,6 +657,27 @@ namespace Alexandria.Client
 			catch(Exception ex)
 			{
 				MessageBox.Show(ex.Message, "ERROR: Could not delete catalog entry");
+			}
+		}
+
+		private void loadCatalogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			queueController.LoadDefaultCatalog();
+		}
+
+		private void importCatalogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT] != null)
+			{
+				string rootFolder = ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT].ToString();
+				if (System.IO.Directory.Exists(rootFolder))
+					DirectoryOpenDialog.SelectedPath = rootFolder;
+			}
+
+			DialogResult result = DirectoryOpenDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				queueController.ImportDirectory(DirectoryOpenDialog.SelectedPath);
 			}
 		}
 		#endregion

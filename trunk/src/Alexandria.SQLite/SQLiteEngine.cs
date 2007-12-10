@@ -125,13 +125,57 @@ namespace Alexandria.SQLite
 		{
 			if (table != null && table.PrimaryKey.Length > 0)
 			{
-				string idField = table.PrimaryKey[0].ColumnName;
-				string commandText = string.Format("SELECT * FROM {0} WHERE {1} = @Id", table.TableName, idField);
-				SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
-				command.Parameters.Add(new SQLiteParameter("@Id", id.ToString()));
+				SQLiteCommand command = new SQLiteCommand(GetSQLiteConnection());
+			
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat("SELECT * FROM {0}", table.TableName);
+				if (id != default(Guid))
+				{
+					sql.AppendFormat(" WHERE {1} = @Id", table.PrimaryKey[0].ColumnName);
+					command.Parameters.Add(new SQLiteParameter("@Id", id.ToString()));
+				}
+				
+				command.CommandText = sql.ToString();
+				
 				return command;
 			}
 			return null;
+		}
+
+		private DateTime GetDateTime(object data)
+		{
+			try
+			{
+				return DateTime.FromFileTime(Convert.ToInt64(data));
+			}
+			catch
+			{
+				return default(DateTime);
+			}
+		}
+
+		private TimeSpan GetTimeSpan(object data)
+		{
+			try
+			{
+				return TimeSpan.FromTicks(Convert.ToInt64(data));
+			}
+			catch
+			{
+				return default(TimeSpan);
+			}
+		}
+		
+		private Uri GetUri(object data)
+		{
+			try
+			{
+				return new Uri(data.ToString());
+			}
+			catch
+			{
+				return null;
+			}
 		}
 		#endregion
 
@@ -151,13 +195,7 @@ namespace Alexandria.SQLite
 			}
 			return null;
 		}
-		
-		//public IDataReader GetDataReader(string commandText)
-		//{
-		//	SQLiteCommand command = new SQLiteCommand(commandText, GetSQLiteConnection());
-		//	return command.ExecuteReader(CommandBehavior.CloseConnection);
-		//}
-		
+				
 		public void CreateTable(DataTable table)
 		{
 			if (table != null && table.PrimaryKey.Length > 0)
@@ -193,8 +231,36 @@ namespace Alexandria.SQLite
 				SQLiteCommand cmd = GetSelectCommand(dataTable, id);
 				if (cmd != null)
 				{
-					SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
-					adapter.Fill(dataTable);
+					using (cmd.Connection)
+					{
+						cmd.Connection.Open();
+						
+						using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+						{
+							if (reader != null && reader.HasRows)
+							{
+								while(reader.Read())
+								{
+									DataRow row = dataTable.NewRow();
+								
+									for(int i=0;i<dataTable.Columns.Count;i++)
+									{
+										object data = reader[i];
+										if (dataTable.Columns[i].DataType == typeof(DateTime))
+											data = GetDateTime(data);
+										else if (dataTable.Columns[i].DataType == typeof(TimeSpan))
+											data = GetTimeSpan(data);
+										else if (dataTable.Columns[i].DataType == typeof(Uri))
+											data = GetUri(data);
+										
+										row[i] = data;
+									}
+									
+									dataTable.Rows.Add(row);
+								}
+							}
+						}
+					}
 				}
 			}
 		}

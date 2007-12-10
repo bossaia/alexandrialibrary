@@ -33,6 +33,11 @@ namespace Alexandria.Client.Controllers
 			get { return true; }
 		}
 		
+		public IList<IMediaItem> ListAllMediaItems()
+		{
+			return mediaItemDataMap.ListAll();
+		}
+		
 		public void SaveMediaItem(IMediaItem item)
 		{
 			mediaItemDataMap.SaveMediaItem(item);
