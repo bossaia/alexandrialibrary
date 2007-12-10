@@ -629,11 +629,18 @@ namespace Alexandria.Client.Controllers
 			{
 				if (System.IO.File.Exists(path))
 				{
-					IAudioTrack track = tagLibEngine.GetAudioTrack(new Uri(path));
-					if (track != null)
+					try
 					{
-						IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
-						persistenceController.SaveMediaItem(item);
+						IAudioTrack track = tagLibEngine.GetAudioTrack(new Uri(path));
+						if (track != null)
+						{
+							IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
+							persistenceController.SaveMediaItem(item);
+						}
+					}
+					catch(Exception ex)
+					{
+						MessageBox.Show(path + "\n" + ex.Message, "ERROR IMPORTING FILE");
 					}
 				}
 			}
