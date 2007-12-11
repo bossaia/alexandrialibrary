@@ -32,10 +32,10 @@ namespace Alexandria.Client
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -50,7 +50,10 @@ namespace Alexandria.Client
 			this.clearSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.catalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.importCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,10 +85,6 @@ namespace Alexandria.Client
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextToolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.sortLabel = new System.Windows.Forms.Label();
-			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.deleteSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.loadCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -99,7 +98,8 @@ namespace Alexandria.Client
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.importCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -226,11 +226,29 @@ namespace Alexandria.Client
 			this.catalogToolStripMenuItem.Name = "catalogToolStripMenuItem";
 			resources.ApplyResources(this.catalogToolStripMenuItem, "catalogToolStripMenuItem");
 			// 
+			// loadCatalogToolStripMenuItem
+			// 
+			this.loadCatalogToolStripMenuItem.Name = "loadCatalogToolStripMenuItem";
+			resources.ApplyResources(this.loadCatalogToolStripMenuItem, "loadCatalogToolStripMenuItem");
+			this.loadCatalogToolStripMenuItem.Click += new System.EventHandler(this.loadCatalogToolStripMenuItem_Click);
+			// 
 			// saveSelectedCatalogToolStripMenuItem
 			// 
 			this.saveSelectedCatalogToolStripMenuItem.Name = "saveSelectedCatalogToolStripMenuItem";
 			resources.ApplyResources(this.saveSelectedCatalogToolStripMenuItem, "saveSelectedCatalogToolStripMenuItem");
 			this.saveSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.saveSelectedCatalogToolStripMenuItem_Click);
+			// 
+			// deleteSelectedCatalogToolStripMenuItem
+			// 
+			this.deleteSelectedCatalogToolStripMenuItem.Name = "deleteSelectedCatalogToolStripMenuItem";
+			resources.ApplyResources(this.deleteSelectedCatalogToolStripMenuItem, "deleteSelectedCatalogToolStripMenuItem");
+			this.deleteSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedCatalogToolStripMenuItem_Click);
+			// 
+			// importCatalogToolStripMenuItem
+			// 
+			this.importCatalogToolStripMenuItem.Name = "importCatalogToolStripMenuItem";
+			resources.ApplyResources(this.importCatalogToolStripMenuItem, "importCatalogToolStripMenuItem");
+			this.importCatalogToolStripMenuItem.Click += new System.EventHandler(this.importCatalogToolStripMenuItem_Click);
 			// 
 			// userToolStripMenuItem
 			// 
@@ -467,32 +485,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.sortLabel, "sortLabel");
 			this.sortLabel.Name = "sortLabel";
 			// 
-			// queueSmallImageList
-			// 
-			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-			// 
-			// DirectoryOpenDialog
-			// 
-			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-			// 
-			// deleteSelectedCatalogToolStripMenuItem
-			// 
-			this.deleteSelectedCatalogToolStripMenuItem.Name = "deleteSelectedCatalogToolStripMenuItem";
-			resources.ApplyResources(this.deleteSelectedCatalogToolStripMenuItem, "deleteSelectedCatalogToolStripMenuItem");
-			this.deleteSelectedCatalogToolStripMenuItem.Click += new System.EventHandler(this.deleteSelectedCatalogToolStripMenuItem_Click);
-			// 
-			// loadCatalogToolStripMenuItem
-			// 
-			this.loadCatalogToolStripMenuItem.Name = "loadCatalogToolStripMenuItem";
-			resources.ApplyResources(this.loadCatalogToolStripMenuItem, "loadCatalogToolStripMenuItem");
-			this.loadCatalogToolStripMenuItem.Click += new System.EventHandler(this.loadCatalogToolStripMenuItem_Click);
-			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -502,14 +494,14 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.ColumnDragDropped = null;
 			this.queueDataGrid.ColumnDragDropping = null;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -524,25 +516,25 @@ namespace Alexandria.Client
             this.Format,
             this.Path,
             this.Id});
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDropped = null;
 			this.queueDataGrid.RowDragDropping = null;
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
@@ -607,8 +599,8 @@ namespace Alexandria.Client
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -646,11 +638,19 @@ namespace Alexandria.Client
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// importCatalogToolStripMenuItem
+			// queueSmallImageList
 			// 
-			this.importCatalogToolStripMenuItem.Name = "importCatalogToolStripMenuItem";
-			resources.ApplyResources(this.importCatalogToolStripMenuItem, "importCatalogToolStripMenuItem");
-			this.importCatalogToolStripMenuItem.Click += new System.EventHandler(this.importCatalogToolStripMenuItem_Click);
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// DirectoryOpenDialog
+			// 
+			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
 			// MainForm
 			// 

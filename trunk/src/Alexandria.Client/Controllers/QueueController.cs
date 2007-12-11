@@ -133,6 +133,13 @@ namespace Alexandria.Client.Controllers
 		
 		private PlaybackController playbackController;
 		private PersistenceController persistenceController;
+		
+		private DateTime importStart;
+		private string importPath;
+		private int scanCount;
+		private int importCount;
+		private int errorCount;
+		private ImportStatusUpdateDelegate importStatusUpdateCallback;
 		#endregion
 
 		#region Private Properties
@@ -607,9 +614,38 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		public void ImportDirectory(string path)
+		public void BeginImportDirectory(string path, ImportStatusUpdateDelegate importStatusUpdateCallback)
 		{
-			if (Directory.Exists(path))
+			this.importPath = path;
+			this.scanCount = 0;
+			this.importCount = 0;
+			this.errorCount = 0;
+			this.importStatusUpdateCallback = importStatusUpdateCallback;
+			this.importStart = DateTime.Now;
+			
+			MethodInvoker invoker = new MethodInvoker(ImportDirectory);
+			AsyncCallback callback = new AsyncCallback(EndImportDirectory);
+			invoker.BeginInvoke(callback, null);
+		}
+		
+		public void EndImportDirectory(IAsyncResult result)
+		{
+			if (importStatusUpdateCallback != null)
+			{
+				TimeSpan completedTime = DateTime.Now.Subtract(importStart);
+				ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, completedTime);
+				importStatusUpdateCallback(this, args);
+			}
+		}
+		
+		private void ImportDirectory()
+		{
+			ImportDirectory(importPath);
+		}
+		
+		private void ImportDirectory(string path)
+		{
+			if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
 			{
 				DirectoryInfo dir = new DirectoryInfo(path);
 				foreach(FileInfo file in dir.GetFiles())
@@ -625,9 +661,9 @@ namespace Alexandria.Client.Controllers
 
 		public void ImportFile(string path)
 		{
-			if (!string.IsNullOrEmpty(path) && IsFormat(path, FORMAT_AUDIO))
+			if (System.IO.File.Exists(path))
 			{
-				if (System.IO.File.Exists(path))
+				if (!string.IsNullOrEmpty(path) && IsFormat(path, FORMAT_AUDIO))
 				{
 					try
 					{
@@ -636,11 +672,37 @@ namespace Alexandria.Client.Controllers
 						{
 							IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
 							persistenceController.SaveMediaItem(item);
+							
+							if (importStatusUpdateCallback != null)
+							{
+								scanCount++;
+								importCount++;
+								ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
+								importStatusUpdateCallback(this, args);
+							}
 						}
 					}
 					catch(Exception ex)
 					{
-						MessageBox.Show(path + "\n" + ex.Message, "ERROR IMPORTING FILE");
+						if (importStatusUpdateCallback != null)
+						{
+							errorCount++;
+							ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
+							importStatusUpdateCallback(this, args);
+						}
+						//else
+						//{
+							MessageBox.Show(string.Format("The following file could not be imported: \n{0}\n\n{1}", path, ex.Message), "IMPORT ERROR");
+						//}
+					}
+				}
+				else
+				{
+					if (importStatusUpdateCallback != null)
+					{
+						scanCount++;
+						ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
+						importStatusUpdateCallback(this, args);
 					}
 				}
 			}
