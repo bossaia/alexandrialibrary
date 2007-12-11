@@ -105,7 +105,9 @@ namespace Alexandria.SQLite
 				switch(typeName)
 				{
 					case "TEXT":
-						return string.Format("'{0}'", row[index].ToString()); //.Replace("'", "''");
+						if (row[index] != null && row[index] != DBNull.Value)
+							return row[index].ToString();
+						else return string.Empty;
 					case "INTEGER":
 						if (col.DataType == typeof(DateTime))
 							return ((DateTime)row[index]).ToFileTimeUtc();
@@ -118,7 +120,7 @@ namespace Alexandria.SQLite
 						break;
 				}
 			}
-			return "''";
+			return string.Empty;
 		}
 		
 		private SQLiteCommand GetSelectCommand(DataTable table, Guid id)
@@ -175,6 +177,18 @@ namespace Alexandria.SQLite
 			catch
 			{
 				return null;
+			}
+		}
+		
+		private Guid GetGuid(object data)
+		{
+			try
+			{
+				return new Guid(data.ToString());
+			}
+			catch
+			{
+				return default(Guid);
 			}
 		}
 		#endregion
@@ -252,6 +266,8 @@ namespace Alexandria.SQLite
 											data = GetTimeSpan(data);
 										else if (dataTable.Columns[i].DataType == typeof(Uri))
 											data = GetUri(data);
+										else if (dataTable.Columns[i].DataType == typeof(Guid))
+											data = GetGuid(data);
 										
 										row[i] = data;
 									}
