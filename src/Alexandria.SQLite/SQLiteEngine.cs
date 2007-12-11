@@ -95,7 +95,7 @@ namespace Alexandria.SQLite
 			return name;
 		}
 				
-		private string GetValueName(DataRow row, int index)
+		private object GetValue(DataRow row, int index)
 		{
 			if (row != null && index >= 0 && index < row.Table.Columns.Count)
 			{
@@ -105,15 +105,15 @@ namespace Alexandria.SQLite
 				switch(typeName)
 				{
 					case "TEXT":
-						return string.Format("'{0}'", row[index].ToString());
+						return string.Format("'{0}'", row[index].ToString()); //.Replace("'", "''");
 					case "INTEGER":
 						if (col.DataType == typeof(DateTime))
-							return string.Format("{0}", ((DateTime)row[index]).ToFileTime());
+							return ((DateTime)row[index]).ToFileTimeUtc();
 						else if (col.DataType == typeof(TimeSpan))
-							return string.Format("{0}", ((TimeSpan)row[index]).Ticks);
-						else return string.Format("{0}", row[index]);
+							return ((TimeSpan)row[index]).Ticks;
+						else return Convert.ToInt32(row[index]);
 					case "REAL":
-						return string.Format("{0}", row[index]);
+						return Convert.ToDecimal(row[index]);
 					default:
 						break;
 				}
@@ -146,7 +146,7 @@ namespace Alexandria.SQLite
 		{
 			try
 			{
-				return DateTime.FromFileTime(Convert.ToInt64(data));
+				return DateTime.FromFileTimeUtc(Convert.ToInt64(data));
 			}
 			catch
 			{
@@ -267,6 +267,8 @@ namespace Alexandria.SQLite
 		
 		public void SaveRow(DataRow row)
 		{
+			SQLiteCommand cmd = new SQLiteCommand();
+			
 			string format = "REPLACE INTO {0} ({1}) VALUES ({2})";
 						
 			StringBuilder columns = new StringBuilder();
@@ -280,17 +282,20 @@ namespace Alexandria.SQLite
 					values.Append(", ");
 				}
 			
+				string paramName = string.Format("@{0}", i);
 				DataColumn col = row.Table.Columns[i];
 				columns.Append(col.ColumnName);
-				values.Append(GetValueName(row, i));
+				values.Append(paramName);
+				
+				cmd.Parameters.Add(new SQLiteParameter(paramName, GetValue(row, i)));
 			}
 			
-			string commandText = string.Format(format, row.Table.TableName, columns, values);
+			cmd.CommandText = string.Format(format, row.Table.TableName, columns, values);
 			
 			using(SQLiteConnection connection = GetSQLiteConnection())
 			{
-				connection.Open();
-				SQLiteCommand cmd = new SQLiteCommand(commandText, connection);
+				connection.Open();				
+				cmd.Connection = connection;
 				cmd.ExecuteNonQuery();
 			}
 		}
