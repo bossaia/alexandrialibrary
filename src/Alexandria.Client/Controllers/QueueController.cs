@@ -864,7 +864,7 @@ namespace Alexandria.Client.Controllers
 			if (columns != null && columns.Count > 0)
 			{
 				Guid selectedId = default(Guid);
-				if (SelectedRow != null)
+				if (SelectedRow != null && SelectedRow.Index > -1)
 					selectedId = (Guid)SelectedRow.Cells[COL_ID].Value;
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
