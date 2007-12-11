@@ -257,6 +257,10 @@ namespace Alexandria.Client
 		}
 		#endregion
 
+		#region ImportUpdate
+		private
+		#endregion
+
 		#endregion
 
 		#region Private Event Methods
@@ -677,7 +681,25 @@ namespace Alexandria.Client
 			DialogResult result = DirectoryOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
-				queueController.ImportDirectory(DirectoryOpenDialog.SelectedPath);
+				ImportStatusUpdateDelegate updateCallback = new ImportStatusUpdateDelegate(importStatusUpdated);
+				queueController.BeginImportDirectory(DirectoryOpenDialog.SelectedPath, updateCallback);
+			}
+		}
+		
+		private void importStatusUpdated(object sender, ImportStatusUpdateEventArgs args)
+		{
+			if (InvokeRequired)
+			{
+				ImportStatusUpdateDelegate updateDelegate = new ImportStatusUpdateDelegate(importStatusUpdated);
+				Invoke(updateDelegate, new object[]{sender, args});
+			}
+			else
+			{
+				currentStatusToolStripLabel.Text = string.Format("Importing: [{0}/{1}/{2}] {3}", args.ImportCount, args.ScanCount, args.ErrorCount, args.Path);
+				if (args.Completed)
+				{
+					MessageBox.Show(string.Format("Files Imported: {0}\nFiles Scanned: {1}\nErrors: {2}\nTime Elapsed: {3}", args.ImportCount, args.ScanCount, args.ErrorCount, args.CompletedTime), "IMPORT COMPLETED");
+				}
 			}
 		}
 		#endregion
