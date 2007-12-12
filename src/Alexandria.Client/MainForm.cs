@@ -60,7 +60,7 @@ namespace Alexandria.Client
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
 
 				queueController.Grid = queueDataGrid;
-				//queueController.SortListView = sortListView;
+				queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;
 				queueController.PersistenceController = persistenceController;
 				queueController.SmallImageList = queueSmallImageList;
@@ -523,7 +523,6 @@ namespace Alexandria.Client
 
 		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			/*
 			string sortName = queueDataGrid.Columns[e.ColumnIndex].Name;
 			bool sortExists = false;
 			
@@ -543,7 +542,6 @@ namespace Alexandria.Client
 			{
 				sortListView.Items.Add(sortName);
 			}
-			*/
 		}
 
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -587,39 +585,11 @@ namespace Alexandria.Client
 			}
 		}
 
-		private void sortButton_Click(object sender, EventArgs e)
-		{
-			/*
-			if (sortListView.Items.Count > 0)
-			{
-				IList<string> columns = new List<string>();
-				foreach(ListViewItem item in sortListView.Items)
-					columns.Add(item.Text);
-				
-				queueController.Sort(columns);
-			}
-			else
-			{
-				queueController.RemoveSort();
-			}
-			*/
-		}
-
 		private void contextToolStripMenuItemClear_Click(object sender, EventArgs e)
 		{
-			//sortListView.Items.Clear();
-			//sortButton_Click(this, EventArgs.Empty);
+			sortListView.Items.Clear();
+			sortButton_Click(this, EventArgs.Empty);
 		}
-
-		//private void moveRowUpButton_Click(object sender, EventArgs e)
-		//{
-		//	  queueController.MoveSelectedRowUp();
-		//}
-
-		//private void moveRowDownButton_Click(object sender, EventArgs e)
-		//{
-		//	  queueController.MoveSelectedRowDown();
-		//}
 		
 		private void OnStatusUpdated(object sender, PlaybackEventArgs e)
 		{
@@ -706,6 +676,87 @@ namespace Alexandria.Client
 				}
 			}
 		}
+		
+		#region Sort Methods
+		private void sortButton_Click(object sender, EventArgs e)
+		{
+			if (sortListView.Items.Count > 0)
+			{
+				IList<string> columns = new List<string>();
+				foreach(ListViewItem item in sortListView.Items)
+					columns.Add(item.Text);
+				
+				queueController.Sort(columns);
+			}
+			else
+			{
+				queueController.RemoveSort();
+			}
+		}
+
+		private void DoSort(int changedColumn)
+		{
+			if (changedColumn > -1 && changedColumn < 11)
+			{
+			
+			}
+		}
+
+		private void sortBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+		}
+
+		private void sortBox2_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox3_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox4_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox5_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox6_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox7_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox8_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox9_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox10_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void sortBox11_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+		#endregion
+		
 		#endregion
 		
 		#region Protected Overrides
@@ -743,6 +794,6 @@ namespace Alexandria.Client
 		}
 		#endregion
 
-		#endregion
+		#endregion		
 	}
 }

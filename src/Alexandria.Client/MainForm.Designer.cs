@@ -32,10 +32,10 @@ namespace Alexandria.Client
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -86,28 +86,18 @@ namespace Alexandria.Client
 			this.filterBox5 = new System.Windows.Forms.ComboBox();
 			this.filterBox4 = new System.Windows.Forms.ComboBox();
 			this.filterBox3 = new System.Windows.Forms.ComboBox();
-			this.sortBox7 = new System.Windows.Forms.ComboBox();
-			this.sortBox6 = new System.Windows.Forms.ComboBox();
-			this.sortBox5 = new System.Windows.Forms.ComboBox();
-			this.sortBox4 = new System.Windows.Forms.ComboBox();
-			this.sortBox3 = new System.Windows.Forms.ComboBox();
-			this.sortBox2 = new System.Windows.Forms.ComboBox();
 			this.filterBox2 = new System.Windows.Forms.ComboBox();
 			this.filterBox1 = new System.Windows.Forms.ComboBox();
-			this.sortBox1 = new System.Windows.Forms.ComboBox();
 			this.filterButton = new System.Windows.Forms.Button();
 			this.sortButton = new System.Windows.Forms.Button();
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextToolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.sortBox8 = new System.Windows.Forms.ComboBox();
 			this.filterBox9 = new System.Windows.Forms.ComboBox();
-			this.sortBox9 = new System.Windows.Forms.ComboBox();
 			this.filterBox10 = new System.Windows.Forms.ComboBox();
-			this.sortBox10 = new System.Windows.Forms.ComboBox();
-			this.sortBox11 = new System.Windows.Forms.ComboBox();
 			this.filterBox11 = new System.Windows.Forms.ComboBox();
+			this.sortListView = new System.Windows.Forms.ListView();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -466,28 +456,18 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.sortListView);
 			this.QueueGroupBox.Controls.Add(this.filterBox11);
-			this.QueueGroupBox.Controls.Add(this.sortBox11);
-			this.QueueGroupBox.Controls.Add(this.sortBox10);
 			this.QueueGroupBox.Controls.Add(this.filterBox10);
-			this.QueueGroupBox.Controls.Add(this.sortBox9);
 			this.QueueGroupBox.Controls.Add(this.filterBox9);
-			this.QueueGroupBox.Controls.Add(this.sortBox8);
 			this.QueueGroupBox.Controls.Add(this.filterBox8);
 			this.QueueGroupBox.Controls.Add(this.filterBox7);
 			this.QueueGroupBox.Controls.Add(this.filterBox6);
 			this.QueueGroupBox.Controls.Add(this.filterBox5);
 			this.QueueGroupBox.Controls.Add(this.filterBox4);
 			this.QueueGroupBox.Controls.Add(this.filterBox3);
-			this.QueueGroupBox.Controls.Add(this.sortBox7);
-			this.QueueGroupBox.Controls.Add(this.sortBox6);
-			this.QueueGroupBox.Controls.Add(this.sortBox5);
-			this.QueueGroupBox.Controls.Add(this.sortBox4);
-			this.QueueGroupBox.Controls.Add(this.sortBox3);
-			this.QueueGroupBox.Controls.Add(this.sortBox2);
 			this.QueueGroupBox.Controls.Add(this.filterBox2);
 			this.QueueGroupBox.Controls.Add(this.filterBox1);
-			this.QueueGroupBox.Controls.Add(this.sortBox1);
 			this.QueueGroupBox.Controls.Add(this.filterButton);
 			this.QueueGroupBox.Controls.Add(this.sortButton);
 			this.QueueGroupBox.Controls.Add(this.queueDataGrid);
@@ -530,120 +510,6 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.filterBox3, "filterBox3");
 			this.filterBox3.Name = "filterBox3";
 			// 
-			// sortBox7
-			// 
-			this.sortBox7.FormattingEnabled = true;
-			this.sortBox7.Items.AddRange(new object[] {
-            resources.GetString("sortBox7.Items"),
-            resources.GetString("sortBox7.Items1"),
-            resources.GetString("sortBox7.Items2"),
-            resources.GetString("sortBox7.Items3"),
-            resources.GetString("sortBox7.Items4"),
-            resources.GetString("sortBox7.Items5"),
-            resources.GetString("sortBox7.Items6"),
-            resources.GetString("sortBox7.Items7"),
-            resources.GetString("sortBox7.Items8"),
-            resources.GetString("sortBox7.Items9"),
-            resources.GetString("sortBox7.Items10"),
-            resources.GetString("sortBox7.Items11")});
-			resources.ApplyResources(this.sortBox7, "sortBox7");
-			this.sortBox7.Name = "sortBox7";
-			// 
-			// sortBox6
-			// 
-			this.sortBox6.FormattingEnabled = true;
-			this.sortBox6.Items.AddRange(new object[] {
-            resources.GetString("sortBox6.Items"),
-            resources.GetString("sortBox6.Items1"),
-            resources.GetString("sortBox6.Items2"),
-            resources.GetString("sortBox6.Items3"),
-            resources.GetString("sortBox6.Items4"),
-            resources.GetString("sortBox6.Items5"),
-            resources.GetString("sortBox6.Items6"),
-            resources.GetString("sortBox6.Items7"),
-            resources.GetString("sortBox6.Items8"),
-            resources.GetString("sortBox6.Items9"),
-            resources.GetString("sortBox6.Items10"),
-            resources.GetString("sortBox6.Items11")});
-			resources.ApplyResources(this.sortBox6, "sortBox6");
-			this.sortBox6.Name = "sortBox6";
-			// 
-			// sortBox5
-			// 
-			this.sortBox5.FormattingEnabled = true;
-			this.sortBox5.Items.AddRange(new object[] {
-            resources.GetString("sortBox5.Items"),
-            resources.GetString("sortBox5.Items1"),
-            resources.GetString("sortBox5.Items2"),
-            resources.GetString("sortBox5.Items3"),
-            resources.GetString("sortBox5.Items4"),
-            resources.GetString("sortBox5.Items5"),
-            resources.GetString("sortBox5.Items6"),
-            resources.GetString("sortBox5.Items7"),
-            resources.GetString("sortBox5.Items8"),
-            resources.GetString("sortBox5.Items9"),
-            resources.GetString("sortBox5.Items10"),
-            resources.GetString("sortBox5.Items11")});
-			resources.ApplyResources(this.sortBox5, "sortBox5");
-			this.sortBox5.Name = "sortBox5";
-			// 
-			// sortBox4
-			// 
-			this.sortBox4.FormattingEnabled = true;
-			this.sortBox4.Items.AddRange(new object[] {
-            resources.GetString("sortBox4.Items"),
-            resources.GetString("sortBox4.Items1"),
-            resources.GetString("sortBox4.Items2"),
-            resources.GetString("sortBox4.Items3"),
-            resources.GetString("sortBox4.Items4"),
-            resources.GetString("sortBox4.Items5"),
-            resources.GetString("sortBox4.Items6"),
-            resources.GetString("sortBox4.Items7"),
-            resources.GetString("sortBox4.Items8"),
-            resources.GetString("sortBox4.Items9"),
-            resources.GetString("sortBox4.Items10"),
-            resources.GetString("sortBox4.Items11")});
-			resources.ApplyResources(this.sortBox4, "sortBox4");
-			this.sortBox4.Name = "sortBox4";
-			// 
-			// sortBox3
-			// 
-			this.sortBox3.FormattingEnabled = true;
-			this.sortBox3.Items.AddRange(new object[] {
-            resources.GetString("sortBox3.Items"),
-            resources.GetString("sortBox3.Items1"),
-            resources.GetString("sortBox3.Items2"),
-            resources.GetString("sortBox3.Items3"),
-            resources.GetString("sortBox3.Items4"),
-            resources.GetString("sortBox3.Items5"),
-            resources.GetString("sortBox3.Items6"),
-            resources.GetString("sortBox3.Items7"),
-            resources.GetString("sortBox3.Items8"),
-            resources.GetString("sortBox3.Items9"),
-            resources.GetString("sortBox3.Items10"),
-            resources.GetString("sortBox3.Items11")});
-			resources.ApplyResources(this.sortBox3, "sortBox3");
-			this.sortBox3.Name = "sortBox3";
-			// 
-			// sortBox2
-			// 
-			this.sortBox2.FormattingEnabled = true;
-			this.sortBox2.Items.AddRange(new object[] {
-            resources.GetString("sortBox2.Items"),
-            resources.GetString("sortBox2.Items1"),
-            resources.GetString("sortBox2.Items2"),
-            resources.GetString("sortBox2.Items3"),
-            resources.GetString("sortBox2.Items4"),
-            resources.GetString("sortBox2.Items5"),
-            resources.GetString("sortBox2.Items6"),
-            resources.GetString("sortBox2.Items7"),
-            resources.GetString("sortBox2.Items8"),
-            resources.GetString("sortBox2.Items9"),
-            resources.GetString("sortBox2.Items10"),
-            resources.GetString("sortBox2.Items11")});
-			resources.ApplyResources(this.sortBox2, "sortBox2");
-			this.sortBox2.Name = "sortBox2";
-			// 
 			// filterBox2
 			// 
 			this.filterBox2.FormattingEnabled = true;
@@ -656,25 +522,6 @@ namespace Alexandria.Client
 			this.filterBox1.FormattingEnabled = true;
 			resources.ApplyResources(this.filterBox1, "filterBox1");
 			this.filterBox1.Name = "filterBox1";
-			// 
-			// sortBox1
-			// 
-			this.sortBox1.FormattingEnabled = true;
-			this.sortBox1.Items.AddRange(new object[] {
-            resources.GetString("sortBox1.Items"),
-            resources.GetString("sortBox1.Items1"),
-            resources.GetString("sortBox1.Items2"),
-            resources.GetString("sortBox1.Items3"),
-            resources.GetString("sortBox1.Items4"),
-            resources.GetString("sortBox1.Items5"),
-            resources.GetString("sortBox1.Items6"),
-            resources.GetString("sortBox1.Items7"),
-            resources.GetString("sortBox1.Items8"),
-            resources.GetString("sortBox1.Items9"),
-            resources.GetString("sortBox1.Items10"),
-            resources.GetString("sortBox1.Items11")});
-			resources.ApplyResources(this.sortBox1, "sortBox1");
-			this.sortBox1.Name = "sortBox1";
 			// 
 			// filterButton
 			// 
@@ -716,49 +563,11 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
-			// sortBox8
-			// 
-			this.sortBox8.FormattingEnabled = true;
-			this.sortBox8.Items.AddRange(new object[] {
-            resources.GetString("sortBox8.Items"),
-            resources.GetString("sortBox8.Items1"),
-            resources.GetString("sortBox8.Items2"),
-            resources.GetString("sortBox8.Items3"),
-            resources.GetString("sortBox8.Items4"),
-            resources.GetString("sortBox8.Items5"),
-            resources.GetString("sortBox8.Items6"),
-            resources.GetString("sortBox8.Items7"),
-            resources.GetString("sortBox8.Items8"),
-            resources.GetString("sortBox8.Items9"),
-            resources.GetString("sortBox8.Items10"),
-            resources.GetString("sortBox8.Items11")});
-			resources.ApplyResources(this.sortBox8, "sortBox8");
-			this.sortBox8.Name = "sortBox8";
-			// 
 			// filterBox9
 			// 
 			this.filterBox9.FormattingEnabled = true;
 			resources.ApplyResources(this.filterBox9, "filterBox9");
 			this.filterBox9.Name = "filterBox9";
-			// 
-			// sortBox9
-			// 
-			this.sortBox9.FormattingEnabled = true;
-			this.sortBox9.Items.AddRange(new object[] {
-            resources.GetString("sortBox9.Items"),
-            resources.GetString("sortBox9.Items1"),
-            resources.GetString("sortBox9.Items2"),
-            resources.GetString("sortBox9.Items3"),
-            resources.GetString("sortBox9.Items4"),
-            resources.GetString("sortBox9.Items5"),
-            resources.GetString("sortBox9.Items6"),
-            resources.GetString("sortBox9.Items7"),
-            resources.GetString("sortBox9.Items8"),
-            resources.GetString("sortBox9.Items9"),
-            resources.GetString("sortBox9.Items10"),
-            resources.GetString("sortBox9.Items11")});
-			resources.ApplyResources(this.sortBox9, "sortBox9");
-			this.sortBox9.Name = "sortBox9";
 			// 
 			// filterBox10
 			// 
@@ -766,49 +575,17 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.filterBox10, "filterBox10");
 			this.filterBox10.Name = "filterBox10";
 			// 
-			// sortBox10
-			// 
-			this.sortBox10.FormattingEnabled = true;
-			this.sortBox10.Items.AddRange(new object[] {
-            resources.GetString("sortBox10.Items"),
-            resources.GetString("sortBox10.Items1"),
-            resources.GetString("sortBox10.Items2"),
-            resources.GetString("sortBox10.Items3"),
-            resources.GetString("sortBox10.Items4"),
-            resources.GetString("sortBox10.Items5"),
-            resources.GetString("sortBox10.Items6"),
-            resources.GetString("sortBox10.Items7"),
-            resources.GetString("sortBox10.Items8"),
-            resources.GetString("sortBox10.Items9"),
-            resources.GetString("sortBox10.Items10"),
-            resources.GetString("sortBox10.Items11")});
-			resources.ApplyResources(this.sortBox10, "sortBox10");
-			this.sortBox10.Name = "sortBox10";
-			// 
-			// sortBox11
-			// 
-			this.sortBox11.FormattingEnabled = true;
-			this.sortBox11.Items.AddRange(new object[] {
-            resources.GetString("sortBox11.Items"),
-            resources.GetString("sortBox11.Items1"),
-            resources.GetString("sortBox11.Items2"),
-            resources.GetString("sortBox11.Items3"),
-            resources.GetString("sortBox11.Items4"),
-            resources.GetString("sortBox11.Items5"),
-            resources.GetString("sortBox11.Items6"),
-            resources.GetString("sortBox11.Items7"),
-            resources.GetString("sortBox11.Items8"),
-            resources.GetString("sortBox11.Items9"),
-            resources.GetString("sortBox11.Items10"),
-            resources.GetString("sortBox11.Items11")});
-			resources.ApplyResources(this.sortBox11, "sortBox11");
-			this.sortBox11.Name = "sortBox11";
-			// 
 			// filterBox11
 			// 
 			this.filterBox11.FormattingEnabled = true;
 			resources.ApplyResources(this.filterBox11, "filterBox11");
 			this.filterBox11.Name = "filterBox11";
+			// 
+			// sortListView
+			// 
+			resources.ApplyResources(this.sortListView, "sortListView");
+			this.sortListView.Name = "sortListView";
+			this.sortListView.UseCompatibleStateImageBehavior = false;
 			// 
 			// queueDataGrid
 			// 
@@ -819,14 +596,14 @@ namespace Alexandria.Client
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.ColumnDragDropped = null;
 			this.queueDataGrid.ColumnDragDropping = null;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -841,25 +618,25 @@ namespace Alexandria.Client
             this.Format,
             this.Path,
             this.Id});
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDropped = null;
 			this.queueDataGrid.RowDragDropping = null;
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
@@ -924,8 +701,8 @@ namespace Alexandria.Client
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -1055,14 +832,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem importCatalogToolStripMenuItem;
 		private System.Windows.Forms.Button filterButton;
 		private System.Windows.Forms.ComboBox filterBox1;
-		private System.Windows.Forms.ComboBox sortBox1;
-		private System.Windows.Forms.ComboBox sortBox2;
 		private System.Windows.Forms.ComboBox filterBox2;
-		private System.Windows.Forms.ComboBox sortBox4;
-		private System.Windows.Forms.ComboBox sortBox3;
-		private System.Windows.Forms.ComboBox sortBox7;
-		private System.Windows.Forms.ComboBox sortBox6;
-		private System.Windows.Forms.ComboBox sortBox5;
 		private System.Windows.Forms.ComboBox filterBox3;
 		private System.Windows.Forms.ComboBox filterBox8;
 		private System.Windows.Forms.ComboBox filterBox7;
@@ -1070,12 +840,8 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ComboBox filterBox5;
 		private System.Windows.Forms.ComboBox filterBox4;
 		private System.Windows.Forms.ComboBox filterBox10;
-		private System.Windows.Forms.ComboBox sortBox9;
 		private System.Windows.Forms.ComboBox filterBox9;
-		private System.Windows.Forms.ComboBox sortBox8;
 		private System.Windows.Forms.ComboBox filterBox11;
-		private System.Windows.Forms.ComboBox sortBox11;
-		private System.Windows.Forms.ComboBox sortBox10;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
@@ -1088,6 +854,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.ListView sortListView;
 	}
 }
 
