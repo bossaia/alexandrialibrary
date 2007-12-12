@@ -70,14 +70,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria.AlbumArtDownloader\Alexandria.AlbumArtDownloader.csproj">
-      <Project>{846AB010-03EA-4B52-A6BE-281BD732AE7E}</Project>
-      <Name>Alexandria.AlbumArtDownloader</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Amazon\Alexandria.Amazon.csproj">
-      <Project>{1C0A1DBB-45B1-4F0A-9A40-4176BCF4445E}</Project>
-      <Name>Alexandria.Amazon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alexandria.AsciiGenerator\Alexandria.AsciiGenerator.csproj">
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
