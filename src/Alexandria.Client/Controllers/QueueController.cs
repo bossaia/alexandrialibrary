@@ -42,8 +42,6 @@ using Alexandria.Metadata;
 using Alexandria.Persistence;
 using Alexandria.Plugins;
 
-using Alexandria.AlbumArtDownloader;
-using Alexandria.Amazon;
 using Alexandria.AsciiGenerator;
 using Alexandria.CompactDiscTools;
 using Alexandria.Fmod;
