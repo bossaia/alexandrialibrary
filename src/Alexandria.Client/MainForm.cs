@@ -60,7 +60,7 @@ namespace Alexandria.Client
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
 
 				queueController.Grid = queueDataGrid;
-				queueController.SortListView = sortListView;
+				//queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;
 				queueController.PersistenceController = persistenceController;
 				queueController.SmallImageList = queueSmallImageList;
@@ -523,6 +523,7 @@ namespace Alexandria.Client
 
 		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			/*
 			string sortName = queueDataGrid.Columns[e.ColumnIndex].Name;
 			bool sortExists = false;
 			
@@ -542,6 +543,7 @@ namespace Alexandria.Client
 			{
 				sortListView.Items.Add(sortName);
 			}
+			*/
 		}
 
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -587,6 +589,7 @@ namespace Alexandria.Client
 
 		private void sortButton_Click(object sender, EventArgs e)
 		{
+			/*
 			if (sortListView.Items.Count > 0)
 			{
 				IList<string> columns = new List<string>();
@@ -599,12 +602,13 @@ namespace Alexandria.Client
 			{
 				queueController.RemoveSort();
 			}
+			*/
 		}
 
 		private void contextToolStripMenuItemClear_Click(object sender, EventArgs e)
 		{
-			sortListView.Items.Clear();
-			sortButton_Click(this, EventArgs.Empty);
+			//sortListView.Items.Clear();
+			//sortButton_Click(this, EventArgs.Empty);
 		}
 
 		//private void moveRowUpButton_Click(object sender, EventArgs e)
