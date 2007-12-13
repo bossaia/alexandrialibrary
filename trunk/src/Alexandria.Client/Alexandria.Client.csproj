@@ -114,6 +114,7 @@
     </Compile>
     <Compile Include="Views\IQueueView.cs" />
     <Compile Include="Views\QueueItem.cs" />
+    <Compile Include="Views\SortDragDropData.cs" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

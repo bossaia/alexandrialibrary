@@ -80,24 +80,15 @@ namespace Alexandria.Client
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
-			this.filterBox8 = new System.Windows.Forms.ComboBox();
-			this.filterBox7 = new System.Windows.Forms.ComboBox();
-			this.filterBox6 = new System.Windows.Forms.ComboBox();
-			this.filterBox5 = new System.Windows.Forms.ComboBox();
-			this.filterBox4 = new System.Windows.Forms.ComboBox();
-			this.filterBox3 = new System.Windows.Forms.ComboBox();
-			this.filterBox2 = new System.Windows.Forms.ComboBox();
-			this.filterBox1 = new System.Windows.Forms.ComboBox();
+			this.sortListView = new System.Windows.Forms.ListView();
+			this.sortSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.filterButton = new System.Windows.Forms.Button();
 			this.sortButton = new System.Windows.Forms.Button();
 			this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.contextToolStripMenuItemClear = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.filterBox9 = new System.Windows.Forms.ComboBox();
-			this.filterBox10 = new System.Windows.Forms.ComboBox();
-			this.filterBox11 = new System.Windows.Forms.ComboBox();
-			this.sortListView = new System.Windows.Forms.ListView();
+			this.filterListView = new System.Windows.Forms.ListView();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -456,72 +447,34 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.filterListView);
 			this.QueueGroupBox.Controls.Add(this.sortListView);
-			this.QueueGroupBox.Controls.Add(this.filterBox11);
-			this.QueueGroupBox.Controls.Add(this.filterBox10);
-			this.QueueGroupBox.Controls.Add(this.filterBox9);
-			this.QueueGroupBox.Controls.Add(this.filterBox8);
-			this.QueueGroupBox.Controls.Add(this.filterBox7);
-			this.QueueGroupBox.Controls.Add(this.filterBox6);
-			this.QueueGroupBox.Controls.Add(this.filterBox5);
-			this.QueueGroupBox.Controls.Add(this.filterBox4);
-			this.QueueGroupBox.Controls.Add(this.filterBox3);
-			this.QueueGroupBox.Controls.Add(this.filterBox2);
-			this.QueueGroupBox.Controls.Add(this.filterBox1);
 			this.QueueGroupBox.Controls.Add(this.filterButton);
 			this.QueueGroupBox.Controls.Add(this.sortButton);
 			this.QueueGroupBox.Controls.Add(this.queueDataGrid);
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
 			// 
-			// filterBox8
+			// sortListView
 			// 
-			this.filterBox8.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox8, "filterBox8");
-			this.filterBox8.Name = "filterBox8";
+			this.sortListView.AllowDrop = true;
+			resources.ApplyResources(this.sortListView, "sortListView");
+			this.sortListView.MultiSelect = false;
+			this.sortListView.Name = "sortListView";
+			this.sortListView.SmallImageList = this.sortSmallImageList;
+			this.sortListView.UseCompatibleStateImageBehavior = false;
+			this.sortListView.View = System.Windows.Forms.View.List;
+			this.sortListView.DragEnter += new System.Windows.Forms.DragEventHandler(this.sortListView_DragEnter);
+			this.sortListView.ItemActivate += new System.EventHandler(this.sortListView_ItemActivate);
+			this.sortListView.DragDrop += new System.Windows.Forms.DragEventHandler(this.sortListView_DragDrop);
+			this.sortListView.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.sortListView_ItemDrag);
 			// 
-			// filterBox7
+			// sortSmallImageList
 			// 
-			this.filterBox7.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox7, "filterBox7");
-			this.filterBox7.Name = "filterBox7";
-			// 
-			// filterBox6
-			// 
-			this.filterBox6.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox6, "filterBox6");
-			this.filterBox6.Name = "filterBox6";
-			// 
-			// filterBox5
-			// 
-			this.filterBox5.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox5, "filterBox5");
-			this.filterBox5.Name = "filterBox5";
-			// 
-			// filterBox4
-			// 
-			this.filterBox4.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox4, "filterBox4");
-			this.filterBox4.Name = "filterBox4";
-			// 
-			// filterBox3
-			// 
-			this.filterBox3.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox3, "filterBox3");
-			this.filterBox3.Name = "filterBox3";
-			// 
-			// filterBox2
-			// 
-			this.filterBox2.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox2, "filterBox2");
-			this.filterBox2.Name = "filterBox2";
-			// 
-			// filterBox1
-			// 
-			this.filterBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.filterBox1.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox1, "filterBox1");
-			this.filterBox1.Name = "filterBox1";
+			this.sortSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("sortSmallImageList.ImageStream")));
+			this.sortSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.sortSmallImageList.Images.SetKeyName(0, "arrow_up.png");
+			this.sortSmallImageList.Images.SetKeyName(1, "arrow_down.png");
 			// 
 			// filterButton
 			// 
@@ -563,29 +516,11 @@ namespace Alexandria.Client
 			// 
 			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
 			// 
-			// filterBox9
+			// filterListView
 			// 
-			this.filterBox9.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox9, "filterBox9");
-			this.filterBox9.Name = "filterBox9";
-			// 
-			// filterBox10
-			// 
-			this.filterBox10.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox10, "filterBox10");
-			this.filterBox10.Name = "filterBox10";
-			// 
-			// filterBox11
-			// 
-			this.filterBox11.FormattingEnabled = true;
-			resources.ApplyResources(this.filterBox11, "filterBox11");
-			this.filterBox11.Name = "filterBox11";
-			// 
-			// sortListView
-			// 
-			resources.ApplyResources(this.sortListView, "sortListView");
-			this.sortListView.Name = "sortListView";
-			this.sortListView.UseCompatibleStateImageBehavior = false;
+			resources.ApplyResources(this.filterListView, "filterListView");
+			this.filterListView.Name = "filterListView";
+			this.filterListView.UseCompatibleStateImageBehavior = false;
 			// 
 			// queueDataGrid
 			// 
@@ -831,17 +766,6 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ToolStripMenuItem loadCatalogToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem importCatalogToolStripMenuItem;
 		private System.Windows.Forms.Button filterButton;
-		private System.Windows.Forms.ComboBox filterBox1;
-		private System.Windows.Forms.ComboBox filterBox2;
-		private System.Windows.Forms.ComboBox filterBox3;
-		private System.Windows.Forms.ComboBox filterBox8;
-		private System.Windows.Forms.ComboBox filterBox7;
-		private System.Windows.Forms.ComboBox filterBox6;
-		private System.Windows.Forms.ComboBox filterBox5;
-		private System.Windows.Forms.ComboBox filterBox4;
-		private System.Windows.Forms.ComboBox filterBox10;
-		private System.Windows.Forms.ComboBox filterBox9;
-		private System.Windows.Forms.ComboBox filterBox11;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
@@ -855,6 +779,8 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ListView sortListView;
+		private System.Windows.Forms.ImageList sortSmallImageList;
+		private System.Windows.Forms.ListView filterListView;
 	}
 }
 
