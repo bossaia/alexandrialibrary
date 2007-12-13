@@ -397,7 +397,7 @@
     <value>4</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 573</value>
+    <value>17, 79</value>
   </metadata>
   <data name="currentStatusToolStripLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 17</value>
@@ -869,11 +869,79 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="filterListView.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 17</value>
+  </data>
+  <data name="filterListView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 28</value>
+  </data>
+  <data name="filterListView.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;filterListView.Name" xml:space="preserve">
+    <value>filterListView</value>
+  </data>
+  <data name="&gt;&gt;filterListView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterListView.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;filterListView.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="sortListView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 56</value>
+    <value>52, 60</value>
   </data>
   <data name="sortListView.Size" type="System.Drawing.Size, System.Drawing">
     <value>388, 28</value>
+  </data>
+  <metadata name="sortSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>683, 42</value>
+  </metadata>
+  <data name="sortSmallImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABy
+        CAAAAk1TRnQBSQFMAgEBAgEAAQQBAAEEAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
+        AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
+        AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
+        AWYDAAGZAwABzAIAATMDAAIzAgABMwFmAgABMwGZAgABMwHMAgABMwH/AgABZgMAAWYBMwIAAmYCAAFm
+        AZkCAAFmAcwCAAFmAf8CAAGZAwABmQEzAgABmQFmAgACmQIAAZkBzAIAAZkB/wIAAcwDAAHMATMCAAHM
+        AWYCAAHMAZkCAALMAgABzAH/AgAB/wFmAgAB/wGZAgAB/wHMAQABMwH/AgAB/wEAATMBAAEzAQABZgEA
+        ATMBAAGZAQABMwEAAcwBAAEzAQAB/wEAAf8BMwIAAzMBAAIzAWYBAAIzAZkBAAIzAcwBAAIzAf8BAAEz
+        AWYCAAEzAWYBMwEAATMCZgEAATMBZgGZAQABMwFmAcwBAAEzAWYB/wEAATMBmQIAATMBmQEzAQABMwGZ
+        AWYBAAEzApkBAAEzAZkBzAEAATMBmQH/AQABMwHMAgABMwHMATMBAAEzAcwBZgEAATMBzAGZAQABMwLM
+        AQABMwHMAf8BAAEzAf8BMwEAATMB/wFmAQABMwH/AZkBAAEzAf8BzAEAATMC/wEAAWYDAAFmAQABMwEA
+        AWYBAAFmAQABZgEAAZkBAAFmAQABzAEAAWYBAAH/AQABZgEzAgABZgIzAQABZgEzAWYBAAFmATMBmQEA
+        AWYBMwHMAQABZgEzAf8BAAJmAgACZgEzAQADZgEAAmYBmQEAAmYBzAEAAWYBmQIAAWYBmQEzAQABZgGZ
+        AWYBAAFmApkBAAFmAZkBzAEAAWYBmQH/AQABZgHMAgABZgHMATMBAAFmAcwBmQEAAWYCzAEAAWYBzAH/
+        AQABZgH/AgABZgH/ATMBAAFmAf8BmQEAAWYB/wHMAQABzAEAAf8BAAH/AQABzAEAApkCAAGZATMBmQEA
+        AZkBAAGZAQABmQEAAcwBAAGZAwABmQIzAQABmQEAAWYBAAGZATMBzAEAAZkBAAH/AQABmQFmAgABmQFm
+        ATMBAAGZATMBZgEAAZkBZgGZAQABmQFmAcwBAAGZATMB/wEAApkBMwEAApkBZgEAA5kBAAKZAcwBAAKZ
+        Af8BAAGZAcwCAAGZAcwBMwEAAWYBzAFmAQABmQHMAZkBAAGZAswBAAGZAcwB/wEAAZkB/wIAAZkB/wEz
+        AQABmQHMAWYBAAGZAf8BmQEAAZkB/wHMAQABmQL/AQABzAMAAZkBAAEzAQABzAEAAWYBAAHMAQABmQEA
+        AcwBAAHMAQABmQEzAgABzAIzAQABzAEzAWYBAAHMATMBmQEAAcwBMwHMAQABzAEzAf8BAAHMAWYCAAHM
+        AWYBMwEAAZkCZgEAAcwBZgGZAQABzAFmAcwBAAGZAWYB/wEAAcwBmQIAAcwBmQEzAQABzAGZAWYBAAHM
+        ApkBAAHMAZkBzAEAAcwBmQH/AQACzAIAAswBMwEAAswBZgEAAswBmQEAA8wBAALMAf8BAAHMAf8CAAHM
+        Af8BMwEAAZkB/wFmAQABzAH/AZkBAAHMAf8BzAEAAcwC/wEAAcwBAAEzAQAB/wEAAWYBAAH/AQABmQEA
+        AcwBMwIAAf8CMwEAAf8BMwFmAQAB/wEzAZkBAAH/ATMBzAEAAf8BMwH/AQAB/wFmAgAB/wFmATMBAAHM
+        AmYBAAH/AWYBmQEAAf8BZgHMAQABzAFmAf8BAAH/AZkCAAH/AZkBMwEAAf8BmQFmAQAB/wKZAQAB/wGZ
+        AcwBAAH/AZkB/wEAAf8BzAIAAf8BzAEzAQAB/wHMAWYBAAH/AcwBmQEAAf8CzAEAAf8BzAH/AQAC/wEz
+        AQABzAH/AWYBAAL/AZkBAAL/AcwBAAJmAf8BAAFmAf8BZgEAAWYC/wEAAf8CZgEAAf8BZgH/AQAC/wFm
+        AQABIQEAAaUBAANfAQADdwEAA4YBAAOWAQADywEAA7IBAAPXAQAD3QEAA+MBAAPqAQAD8QEAA/gBAAHw
+        AfsB/wEAAaQCoAEAA4ADAAH/AgAB/wMAAv8BAAH/AwAB/wEAAf8BAAL/AgAD/0cABEkNAAFJARUtAAFJ
+        ApcBSQwAAUkCTwFJLAABSQKXAUkKAAGhAUkBcgKXAU8BSQGhKgABTwJ4AUkKAAFsAU8BcgJ4AVABSQFm
+        KgABTwGYAXgBSQsAAccBUAGYAXgBSSwAAU8CmAFPDAABTwKYAU8sAAFQApgBTwwAAVACmAFPLAABcgKY
+        AU8MAAFyApgBTywAAXICmAFQDAABcgKYAVAsAAGXApgBcgHHCwABlwKYAVAqAAGRAZcBeAKYAXgBcgFs
+        CgABlwKYAXIqAAGhAXIBeAKYAZcBcgGhCgABlwKYAZcsAAFyAngBcgwAAZcCmAGXLQACcg0ABJdmAAFC
+        AU0BPgcAAT4DAAEoAwABQAMAARADAAEBAQABAQUAAYAXAAP/AQAE/wQAAfwBPwH+AX8EAAH8AT8B/AE/
+        BAAB/AE/AfABDwQAAfwBPwHwAQ8EAAH8AT8B+AE/BAAB/AE/AfwBPwQAAfwBPwH8AT8EAAH8AT8B/AE/
+        BAAB/AE/AfwBPwQAAfwBHwH8AT8EAAHwAQ8B/AE/BAAB8AEPAfwBPwQAAfwBPwH8AT8EAAH+AX8B/AE/
+        BAAE/wQACw==
+</value>
   </data>
   <data name="sortListView.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
@@ -888,244 +956,13 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortListView.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="filterBox11.Location" type="System.Drawing.Point, System.Drawing">
-    <value>898, 22</value>
-  </data>
-  <data name="filterBox11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 21</value>
-  </data>
-  <data name="filterBox11.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;filterBox11.Name" xml:space="preserve">
-    <value>filterBox11</value>
-  </data>
-  <data name="&gt;&gt;filterBox11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox11.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox11.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="filterBox10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>840, 21</value>
-  </data>
-  <data name="filterBox10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
-  </data>
-  <data name="filterBox10.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="&gt;&gt;filterBox10.Name" xml:space="preserve">
-    <value>filterBox10</value>
-  </data>
-  <data name="&gt;&gt;filterBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox10.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox10.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="filterBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>771, 21</value>
-  </data>
-  <data name="filterBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 21</value>
-  </data>
-  <data name="filterBox9.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;filterBox9.Name" xml:space="preserve">
-    <value>filterBox9</value>
-  </data>
-  <data name="&gt;&gt;filterBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox9.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox9.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="filterBox8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>703, 22</value>
-  </data>
-  <data name="filterBox8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 21</value>
-  </data>
-  <data name="filterBox8.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;filterBox8.Name" xml:space="preserve">
-    <value>filterBox8</value>
-  </data>
-  <data name="&gt;&gt;filterBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox8.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox8.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="filterBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>602, 22</value>
-  </data>
-  <data name="filterBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 21</value>
-  </data>
-  <data name="filterBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;filterBox7.Name" xml:space="preserve">
-    <value>filterBox7</value>
-  </data>
-  <data name="&gt;&gt;filterBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox7.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox7.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="filterBox6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>447, 22</value>
-  </data>
-  <data name="filterBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 21</value>
-  </data>
-  <data name="filterBox6.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;filterBox6.Name" xml:space="preserve">
-    <value>filterBox6</value>
-  </data>
-  <data name="&gt;&gt;filterBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox6.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox6.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="filterBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 21</value>
-  </data>
-  <data name="filterBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>139, 21</value>
-  </data>
-  <data name="filterBox5.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;filterBox5.Name" xml:space="preserve">
-    <value>filterBox5</value>
-  </data>
-  <data name="&gt;&gt;filterBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox5.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox5.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="filterBox4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 20</value>
-  </data>
-  <data name="filterBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 21</value>
-  </data>
-  <data name="filterBox4.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;filterBox4.Name" xml:space="preserve">
-    <value>filterBox4</value>
-  </data>
-  <data name="&gt;&gt;filterBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox4.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox4.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="filterBox3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 21</value>
-  </data>
-  <data name="filterBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 21</value>
-  </data>
-  <data name="filterBox3.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;filterBox3.Name" xml:space="preserve">
-    <value>filterBox3</value>
-  </data>
-  <data name="&gt;&gt;filterBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox3.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox3.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="filterBox2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 21</value>
-  </data>
-  <data name="filterBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
-  </data>
-  <data name="filterBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;filterBox2.Name" xml:space="preserve">
-    <value>filterBox2</value>
-  </data>
-  <data name="&gt;&gt;filterBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox2.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox2.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="filterBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 21</value>
-  </data>
-  <data name="filterBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
-  </data>
-  <data name="filterBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;filterBox1.Name" xml:space="preserve">
-    <value>filterBox1</value>
-  </data>
-  <data name="&gt;&gt;filterBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterBox1.Parent" xml:space="preserve">
-    <value>QueueGroupBox</value>
-  </data>
-  <data name="&gt;&gt;filterBox1.ZOrder" xml:space="preserve">
-    <value>11</value>
   </data>
   <data name="filterButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="filterButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
+    <value>7, 19</value>
   </data>
   <data name="filterButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
@@ -1146,13 +983,13 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;filterButton.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>2</value>
   </data>
   <data name="sortButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="sortButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 56</value>
+    <value>6, 62</value>
   </data>
   <data name="sortButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 23</value>
@@ -1173,7 +1010,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortButton.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="queueDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1350,10 +1187,10 @@
     <value>False</value>
   </data>
   <data name="queueDataGrid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 93</value>
+    <value>7, 102</value>
   </data>
   <data name="queueDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1063, 250</value>
+    <value>1062, 241</value>
   </data>
   <data name="queueDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1368,7 +1205,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>4</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1461,7 +1298,7 @@
     <value>2</value>
   </data>
   <metadata name="sortContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>522, 43</value>
+    <value>524, 42</value>
   </metadata>
   <data name="contextToolStripMenuItemClear.Size" type="System.Drawing.Size, System.Drawing">
     <value>147, 22</value>
@@ -1619,9 +1456,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Alexandria</value>
   </data>
@@ -1761,6 +1595,12 @@
     <value>ToolBoxSmallImageList</value>
   </data>
   <data name="&gt;&gt;ToolBoxSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;sortSmallImageList.Name" xml:space="preserve">
+    <value>sortSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;sortSmallImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;contextToolStripMenuItemClear.Name" xml:space="preserve">

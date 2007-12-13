@@ -39,6 +39,7 @@ using System.Windows.Forms;
 
 using Alexandria.Client.Controllers;
 using Alexandria.Client.Properties;
+using Alexandria.Client.Views;
 
 namespace Alexandria.Client
 {
@@ -110,6 +111,43 @@ namespace Alexandria.Client
 		//private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		//private string dbPath;
 		private readonly string dbDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + System.IO.Path.DirectorySeparatorChar);
+		#endregion
+
+		#region Protected Overrides
+
+		#region OnLoad
+		protected override void OnLoad(EventArgs e)
+		{
+			base.OnLoad(e);
+
+			PlaybackTimer.Start();
+
+			InitializePlugins();
+			InitializeInterface();
+
+			LoadDefaultUser();
+
+			playbackController.WireCurrentAudioSteamEnded(new EventHandler<EventArgs>(OnCurrentAudioStreamEnded));
+			queueController.WireSelectedTrackChanged(new EventHandler<QueueEventArgs>(OnSelectedTrackChanged));
+
+			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
+			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
+		}
+		#endregion
+
+		#region OnClosing
+		protected override void OnClosing(CancelEventArgs e)
+		{
+			if (playbackController != null)
+			{
+				playbackController.Dispose();
+				playbackController = null;
+			}
+
+			base.OnClosing(e);
+		}
+		#endregion
+
 		#endregion
 		
 		#region Private Methods
@@ -540,7 +578,7 @@ namespace Alexandria.Client
 			
 			if (!sortExists && sortListView.Items.Count < 3)
 			{
-				sortListView.Items.Add(sortName);
+				sortListView.Items.Add(sortName, 0);
 			}
 		}
 
@@ -682,9 +720,12 @@ namespace Alexandria.Client
 		{
 			if (sortListView.Items.Count > 0)
 			{
-				IList<string> columns = new List<string>();
+				IDictionary<string, bool> columns = new Dictionary<string, bool>();
 				foreach(ListViewItem item in sortListView.Items)
-					columns.Add(item.Text);
+				{
+					bool ascending = (item.ImageIndex == 0);
+					columns.Add(item.Text, ascending);
+				}
 				
 				queueController.Sort(columns);
 			}
@@ -694,106 +735,66 @@ namespace Alexandria.Client
 			}
 		}
 
-		private void DoSort(int changedColumn)
+		private void sortListView_ItemActivate(object sender, EventArgs e)
 		{
-			if (changedColumn > -1 && changedColumn < 11)
+			if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
 			{
-			
+				int currentIndex = sortListView.SelectedItems[0].ImageIndex;
+				int newIndex = (currentIndex == 0) ? 1 : 0;
+				sortListView.SelectedItems[0].ImageIndex = newIndex;
 			}
 		}
 
-		private void sortBox1_SelectedIndexChanged(object sender, EventArgs e)
+		private void sortListView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
+			ListViewItem item = e.Item as ListViewItem;
+			if (item != null)
+				DoDragDrop(new SortDragDropData(item), DragDropEffects.Move);
 		}
 
-		private void sortBox2_SelectedIndexChanged(object sender, EventArgs e)
+		private void sortListView_DragEnter(object sender, DragEventArgs e)
 		{
-
+			if (e.Data.GetDataPresent(typeof(SortDragDropData)))
+				e.Effect = DragDropEffects.Move;
+			else e.Effect = DragDropEffects.None;
 		}
 
-		private void sortBox3_SelectedIndexChanged(object sender, EventArgs e)
+		private void sortListView_DragDrop(object sender, DragEventArgs e)
 		{
-
-		}
-
-		private void sortBox4_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox5_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox6_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox7_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox8_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox9_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox10_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void sortBox11_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
-		#endregion
-		
-		#endregion
-		
-		#region Protected Overrides
-		
-		#region OnLoad
-		protected override void OnLoad(EventArgs e)
-		{			
-			base.OnLoad(e);
-			
-			PlaybackTimer.Start();
-			
-			InitializePlugins();
-			InitializeInterface();
-			
-			LoadDefaultUser();
-			
-			playbackController.WireCurrentAudioSteamEnded(new EventHandler<EventArgs>(OnCurrentAudioStreamEnded));
-			queueController.WireSelectedTrackChanged(new EventHandler<QueueEventArgs>(OnSelectedTrackChanged));
-			
-			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
-		}
-		#endregion
-
-		#region OnClosing
-		protected override void OnClosing(CancelEventArgs e)
-		{
-			if (playbackController != null)
+			SortDragDropData sortData = e.Data.GetData(typeof(SortDragDropData)) as SortDragDropData;
+			if (sortData != null)
 			{
-				playbackController.Dispose();
-				playbackController = null;
+				int index = 0;
+				
+				if (sortListView.Items.Count > 0)
+				{
+					Point dropPoint = sortListView.PointToClient(new Point(e.X, e.Y));
+					
+					for(int i=0;i<sortListView.Items.Count;i++)
+					{
+						Point itemPoint = sortListView.Items[i].Position; //sortListView.PointToClient(item.Position);
+						if (itemPoint.X < dropPoint.X)
+						{
+							index = sortListView.Items[i].Index+1;
+						}
+						else break;
+					}
+				}
+								
+				int imageIndex = (sortData.Direction == ListSortDirection.Ascending) ? 0 : 1;
+				sortListView.Items.Insert(index, sortData.ColumnName, imageIndex);
+				sortListView.Items[index].Selected = true;
+
+				if (sortData.Item != null)
+				{
+					sortListView.Items.Remove(sortData.Item);
+				}
+				
+				sortButton_Click(this, EventArgs.Empty);
 			}
-			
-			base.OnClosing(e);
 		}
 		#endregion
-
+		
 		#endregion		
 	}
 }

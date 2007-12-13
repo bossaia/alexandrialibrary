@@ -852,7 +852,7 @@ namespace Alexandria.Client.Controllers
 			}
 		}		
 		
-		public void Sort(IList<string> columns)
+		public void Sort(IDictionary<string, bool> columns)
 		{
 			if (columns != null && columns.Count > 0)
 			{
@@ -862,10 +862,13 @@ namespace Alexandria.Client.Controllers
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				
-				for(int i=0; i<columns.Count; i++)
+				int columnIndex = 0;
+				foreach (KeyValuePair<string, bool> column in columns)
 				{
-					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[columns[i]];
-					sortArray[i] = new ListSortDescription(property, ListSortDirection.Ascending);
+					ListSortDirection direction = (column.Value) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[column.Key];
+					sortArray[columnIndex] = new ListSortDescription(property, direction);
+					columnIndex++;
 				}
 				
 				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
