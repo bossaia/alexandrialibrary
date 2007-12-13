@@ -622,12 +622,6 @@ namespace Alexandria.Client
 				queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
 			}
 		}
-
-		private void contextToolStripMenuItemClear_Click(object sender, EventArgs e)
-		{
-			sortListView.Items.Clear();
-			sortButton_Click(this, EventArgs.Empty);
-		}
 		
 		private void OnStatusUpdated(object sender, PlaybackEventArgs e)
 		{
@@ -793,8 +787,58 @@ namespace Alexandria.Client
 				sortButton_Click(this, EventArgs.Empty);
 			}
 		}
-		#endregion
+
+		private void sortListView_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
+			{
+				if (e.KeyCode == Keys.Delete)
+				{
+					sortListView.Items.Remove(sortListView.SelectedItems[0]);
+					sortButton_Click(this, EventArgs.Empty);		
+				}
+			}
+		}
+
+		private void sortContextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			bool enableClear = false;
+			bool enableClearAll = false;
+			
+			if (sortListView.Items.Count > 0)
+			{
+				enableClearAll = true;
+				if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
+					enableClear = true;
+			}
+			
+			sortContextMenuStrip.Items[0].Enabled = enableClear;
+			sortContextMenuStrip.Items[1].Enabled = enableClearAll;
+			
+		}
+
+		private void sortContextMenuStripItemClearSelected_Click(object sender, EventArgs e)
+		{
+			if (sortListView.Items.Count > 0)
+			{
+				if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
+				{
+					sortListView.Items.Remove(sortListView.SelectedItems[0]);
+					sortButton_Click(this, EventArgs.Empty);
+				}
+			}
+		}
 		
-		#endregion		
+		private void sortContextMenuStripItemClearAll_Click(object sender, EventArgs e)
+		{
+			if (sortListView.Items.Count > 0)
+			{
+				sortListView.Items.Clear();
+				sortButton_Click(this, EventArgs.Empty);
+			}
+		}
+		#endregion
+
+		#endregion
 	}
 }
