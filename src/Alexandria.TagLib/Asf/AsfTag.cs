@@ -56,7 +56,7 @@ namespace Alexandria.TagLib
 		{
 			foreach (string name in names)
 			{
-				foreach (AsfContentDescriptor descriptor in this.GetDescriptors(name))
+				foreach (AsfContentDescriptor descriptor in this.GetDescriptorsByName(name))
 					if (descriptor != null && descriptor.Type == AsfDataType.Unicode && descriptor.ToString() != null)
 						return descriptor.ToString();
 			}
@@ -169,7 +169,7 @@ namespace Alexandria.TagLib
 			get
 			{
 				string value = GetDescriptorString("WM/Year");
-				if (value != null)
+				if (!string.IsNullOrEmpty(value) && value.Length > 3)
 				{
 					uint year = 0;
 					if (uint.TryParse(value.Substring(0, 4), out year))
@@ -190,7 +190,7 @@ namespace Alexandria.TagLib
 		{
 			get
 			{
-				foreach (AsfContentDescriptor desc in GetDescriptors("WM/TrackNumber"))
+				foreach (AsfContentDescriptor desc in GetDescriptorsByName("WM/TrackNumber"))
 					if (desc.ToDWord() != 0)
 						return desc.ToDWord();
 
@@ -208,7 +208,7 @@ namespace Alexandria.TagLib
 		{
 			get
 			{
-				foreach (AsfContentDescriptor desc in GetDescriptors("TrackTotal"))
+				foreach (AsfContentDescriptor desc in GetDescriptorsByName("TrackTotal"))
 					if (desc.ToDWord() != 0)
 						return desc.ToDWord();
 
@@ -288,7 +288,7 @@ namespace Alexandria.TagLib
 			{
 				IList<IImageContainer> list = new List<IImageContainer>();
 
-				foreach (AsfContentDescriptor descriptor in GetDescriptors("WM/Picture"))
+				foreach (AsfContentDescriptor descriptor in GetDescriptorsByName("WM/Picture"))
 				{
 					ByteVector data = descriptor.ToByteVector();
 					Picture picture = new Picture();
@@ -358,7 +358,7 @@ namespace Alexandria.TagLib
 			extDescription.RemoveDescriptors(name);
 		}
 
-		public IList<AsfContentDescriptor> GetDescriptors(string name)
+		public IList<AsfContentDescriptor> GetDescriptorsByName(string name)
 		{
 			return extDescription.GetDescriptorsByName(name);
 		}
@@ -379,21 +379,21 @@ namespace Alexandria.TagLib
 			//AddDescriptor(descriptor);
 		}		
 
-		public string GetDescriptionString(IList<string> names)
-		{
-			return GetDescriptorString(names);
-		}
+		//public string GetDescriptionString(IList<string> names)
+		//{
+			//return GetDescriptorString(names);
+		//}
 
 		public string GetDescriptorString(params string[] names)
 		{
-			return GetDescriptorString(names);
-			//foreach (string name in names)
-			//{
-				//foreach (AsfContentDescriptor descriptor in GetDescriptorsByName(name))
-					//if (descriptor != null && descriptor.Type == AsfDataType.Unicode && descriptor.ToString() != null)
-						//return descriptor.ToString();
-			//}
-			//return null;
+			//return GetDescriptorString(names);
+			foreach (string name in names)
+			{
+				foreach (AsfContentDescriptor descriptor in GetDescriptorsByName(name))
+					if (descriptor != null && descriptor.Type == AsfDataType.Unicode && descriptor.ToString() != null)
+						return descriptor.ToString();
+			}
+			return null;
 		}
 
 		public void SetDescriptorString(string value, IList<string> names)
