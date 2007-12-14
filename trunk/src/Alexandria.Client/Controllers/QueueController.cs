@@ -95,9 +95,9 @@ namespace Alexandria.Client.Controllers
 		private const int INDEX_TELEVISION = 4;
 		
 		private const string SOURCE_CATALOG = "Catalog";
-		
-		private const string FORMAT_PLAYLIST = "xspf,m3u";
-		private const string FORMAT_AUDIO = "ogg,flac,mp3,wma,aac";
+
+		private const string FORMAT_PLAYLIST = "asx,m3u,pls,xspf";
+		private const string FORMAT_AUDIO = "aac,flac,m4a,mp3,ogg,wav,wma";
 		#endregion
 
 		#region Private Fields
