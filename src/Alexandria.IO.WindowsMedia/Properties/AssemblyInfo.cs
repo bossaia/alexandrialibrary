@@ -10,8 +10,8 @@ using System.Security.Permissions;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FMOD Sound System")]
-[assembly: AssemblyDescription("Supports playback of common digital audio formats (flac, mp3, vorbis, wav)")]
+[assembly: AssemblyTitle("Windows Media Plugin")]
+[assembly: AssemblyDescription("Supports playback of Windows media formats (asf, wma)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telesophy Foundation")]
 [assembly: AssemblyProduct("Alexandria Media Library")]
@@ -25,7 +25,7 @@ using System.Security.Permissions;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("116f2ddf-6dfd-4a3c-a778-c9949ee31215")]
+[assembly: Guid("ab2f4751-ea9f-43f4-89e6-d26e3cbb4c07")]
 
 // Version information for an assembly consists of the following four values:
 //
