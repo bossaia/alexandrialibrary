@@ -82,8 +82,6 @@ namespace Telesophy.Alexandria.IO.WindowsMedia
 		
 		private WindowsMediaPlayer player;
 		
-		private float volume;
-		private bool isMuted;
 		private EventHandler<AudioStateChangedEventArgs> volumeChanged;
 		private int streamIndex;
 		private BufferState bufferState = BufferState.None;
@@ -116,16 +114,34 @@ namespace Telesophy.Alexandria.IO.WindowsMedia
 		#endregion
 	
 		#region IAudioStream Members
+		private float GetVolume(int value)
+		{
+			if (value >= 0 && value <= 100)
+			{
+				return Convert.ToSingle(value / 100);
+			}
+			else return 0.5f;
+		}
+		
+		private int GetVolume(float value)
+		{
+			if (value >= 0f && value <= 1.0f)
+			{
+				return Convert.ToInt32(Math.Truncate(value * 100));
+			}
+			else return 50;
+		}
+		
 		public float Volume
 		{
-			get { return volume; }
-			set { volume = value; }
+			get { return GetVolume(player.settings.volume); }
+			set { player.settings.volume = GetVolume(value); }
 		}
 
 		public bool IsMuted
 		{
-			get { return isMuted; }
-			set { isMuted = value; }
+			get { return player.settings.mute; }
+			set { player.settings.mute = value; }
 		}
 
 		public EventHandler<AudioStateChangedEventArgs> VolumeChanged
