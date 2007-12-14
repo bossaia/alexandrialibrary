@@ -39,6 +39,7 @@ namespace Alexandria.Media.IO
 		None = 0,
 		Connecting,
 		Error,
+		Reconnecting,
 		Streaming,
 	}
 }
