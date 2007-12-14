@@ -85,7 +85,8 @@ namespace Alexandria.Client
 		#endregion
 		
 		#region Private Constants
-		private string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
+		private const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
+		private const int MAX_SORT_COLUMNS = 5;
 		#endregion
 		
 		#region Private Fields
@@ -571,15 +572,20 @@ namespace Alexandria.Client
 					if (item.Text == sortName)
 					{
 						sortExists = true;
-						sortListView.Items.Remove(item);
+						item.ImageIndex = (item.ImageIndex == 0) ? 1 : 0;
 					}
 				}
 			}
 			
-			if (!sortExists && sortListView.Items.Count < 3)
+			if (!sortExists)
 			{
+				if (sortListView.Items.Count == MAX_SORT_COLUMNS)
+					sortListView.Items[0].Remove();
+				
 				sortListView.Items.Add(sortName, 0);
 			}
+			
+			sortButton_Click(this, EventArgs.Empty);
 		}
 
 		private void clearToolStripMenuItem_Click(object sender, EventArgs e)
@@ -736,6 +742,7 @@ namespace Alexandria.Client
 				int currentIndex = sortListView.SelectedItems[0].ImageIndex;
 				int newIndex = (currentIndex == 0) ? 1 : 0;
 				sortListView.SelectedItems[0].ImageIndex = newIndex;
+				sortButton_Click(this, EventArgs.Empty);
 			}
 		}
 
@@ -766,8 +773,8 @@ namespace Alexandria.Client
 					
 					for(int i=0;i<sortListView.Items.Count;i++)
 					{
-						Point itemPoint = sortListView.Items[i].Position; //sortListView.PointToClient(item.Position);
-						if (itemPoint.X < dropPoint.X)
+						Point itemPoint = sortListView.Items[i].Position;
+						if (itemPoint.X + 15 < dropPoint.X)
 						{
 							index = sortListView.Items[i].Index+1;
 						}

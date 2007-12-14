@@ -868,7 +868,7 @@ namespace Alexandria.Client.Controllers
 					ListSortDirection direction = (column.Value) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[column.Key];
 					sortArray[columnIndex] = new ListSortDescription(property, direction);
-					columnIndex++;
+					columnIndex++;					
 				}
 				
 				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
@@ -884,6 +884,15 @@ namespace Alexandria.Client.Controllers
 							break;
 						}
 					}
+				}
+				
+				foreach(DataGridViewColumn column in grid.Columns)
+				{
+					SortOrder direction = SortOrder.None;
+					if (columns.ContainsKey(column.Name))
+						direction = (columns[column.Name]) ? SortOrder.Ascending : SortOrder.Descending;
+						
+					column.HeaderCell.SortGlyphDirection = direction;
 				}
 			}
 		}
