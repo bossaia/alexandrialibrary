@@ -11,7 +11,7 @@ using System.Security.Permissions;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FMOD Sound System")]
-[assembly: AssemblyDescription("Supports playback of common digital audio formats (flac, mp3, vorbis, wav)")]
+[assembly: AssemblyDescription("Supports playback of common digital audio formats (flac, mp3, vorbis, wav, wma)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telesophy Foundation")]
 [assembly: AssemblyProduct("Alexandria Media Library")]
