@@ -900,6 +900,9 @@ namespace Alexandria.Client.Controllers
 		public void RemoveSort()
 		{
 			((IBindingListView)bindingList).RemoveSort();
+			
+			foreach(DataGridViewColumn column in grid.Columns)
+				column.HeaderCell.SortGlyphDirection = SortOrder.None;
 		}
 		
 		public void SaveRow(int index)

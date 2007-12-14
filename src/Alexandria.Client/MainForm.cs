@@ -572,7 +572,10 @@ namespace Alexandria.Client
 					if (item.Text == sortName)
 					{
 						sortExists = true;
-						item.ImageIndex = (item.ImageIndex == 0) ? 1 : 0;
+						if (item.ImageIndex == 0)
+							item.ImageIndex = 1;
+						else if (item.ImageIndex == 1)
+							item.Remove();
 					}
 				}
 			}
