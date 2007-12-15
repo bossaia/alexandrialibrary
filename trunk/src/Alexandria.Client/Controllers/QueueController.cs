@@ -905,6 +905,11 @@ namespace Alexandria.Client.Controllers
 				column.HeaderCell.SortGlyphDirection = SortOrder.None;
 		}
 		
+		public void Filter(string value)
+		{
+			bindingSource.Filter = value;
+		}
+				
 		public void SaveRow(int index)
 		{
 			if (persistenceController != null && index >= 0 && index < bindingList.Count)

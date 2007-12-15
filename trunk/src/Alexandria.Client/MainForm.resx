@@ -394,10 +394,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;FileMenuStrip.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <metadata name="StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>0, 573</value>
+    <value>17, 80</value>
   </metadata>
   <data name="currentStatusToolStripLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 17</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;StatusStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="FileOpenDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>123, 5</value>
@@ -869,6 +869,21 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <metadata name="filterContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>543, 6</value>
+  </metadata>
+  <data name="filterContextMenuItemAddFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 21</value>
+  </data>
+  <data name="filterContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>182, 51</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuStrip.Name" xml:space="preserve">
+    <value>filterContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="filterListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>53, 17</value>
   </data>
@@ -891,7 +906,7 @@
     <value>0</value>
   </data>
   <metadata name="sortContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>524, 42</value>
+    <value>522, 43</value>
   </metadata>
   <data name="sortContextMenuStripItemClearSelected.Size" type="System.Drawing.Size, System.Drawing">
     <value>154, 22</value>
@@ -921,7 +936,7 @@
     <value>511, 28</value>
   </data>
   <metadata name="sortSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>683, 42</value>
+    <value>681, 43</value>
   </metadata>
   <data name="sortSmallImageList.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
@@ -1319,7 +1334,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;OuterPlaybackQueueSplit.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <metadata name="queueSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>184, 43</value>
@@ -1635,6 +1650,12 @@
   </data>
   <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemAddFilter.Name" xml:space="preserve">
+    <value>filterContextMenuItemAddFilter</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemAddFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Status.Name" xml:space="preserve">
     <value>Status</value>

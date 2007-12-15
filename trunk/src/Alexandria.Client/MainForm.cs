@@ -87,6 +87,7 @@ namespace Alexandria.Client
 		#region Private Constants
 		private const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
 		private const int MAX_SORT_COLUMNS = 5;
+		private const string DEFAULT_COLUMN_FILTER = "Any";
 		#endregion
 		
 		#region Private Fields
@@ -845,6 +846,64 @@ namespace Alexandria.Client
 			{
 				sortListView.Items.Clear();
 				sortButton_Click(this, EventArgs.Empty);
+			}
+		}
+		#endregion
+
+		#region Filter Methods
+		private void filterButton_Click(object sender, EventArgs e)
+		{
+			if (filterListView.Items.Count > 0)
+			{
+				StringBuilder filter = new StringBuilder();
+			
+				for(int i=0; i<filterListView.Items.Count; i++)
+				{
+					if (filterListView.Items[i].Tag != null)
+					{
+						string value = filterListView.Items[i].Text;
+						string column = filterListView.Items[i].Tag.ToString();
+						if (column != DEFAULT_COLUMN_FILTER)
+						{
+							if (i > 0) filter.Append(" OR ");
+							filter.AppendFormat("{0} = '{1}'", column, value);
+						}
+					}
+				}
+
+				queueController.Filter(filter.ToString());
+			}
+		}
+
+		private void filterContextMenuItemAddFilter_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				string value = filterContextMenuItemAddFilter.Text;
+
+				string column = DEFAULT_COLUMN_FILTER;
+				if (value.Contains("="))
+				{
+					int index = value.IndexOf('=');
+					column = value.Substring(0, index);
+					value = value.Substring(index + 1, value.Length - index - 1);
+				}
+
+				ListViewItem item = new ListViewItem(value);
+				item.Tag = column;
+				filterListView.Items.Add(item);
+
+				filterButton_Click(this, EventArgs.Empty);
+			}
+		}
+
+		private void filterListView_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Delete && filterListView.SelectedItems.Count > 0)
+			{
+				filterListView.Items.Remove(filterListView.SelectedItems[0]);
+				
+				filterButton_Click(this, EventArgs.Empty);
 			}
 		}
 		#endregion
