@@ -835,6 +835,16 @@ namespace Alexandria.Client
 
 		private void sortContextMenuStripItemClearSelected_Click(object sender, EventArgs e)
 		{
+			clearSelectedSortButton_Click(this, EventArgs.Empty);
+		}
+		
+		private void sortContextMenuStripItemClearAll_Click(object sender, EventArgs e)
+		{
+			clearAllSortButton_Click(this, EventArgs.Empty);
+		}
+
+		private void clearSelectedSortButton_Click(object sender, EventArgs e)
+		{
 			if (sortListView.Items.Count > 0)
 			{
 				if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
@@ -844,14 +854,14 @@ namespace Alexandria.Client
 				}
 			}
 		}
-		
-		private void sortContextMenuStripItemClearAll_Click(object sender, EventArgs e)
+
+		private void clearAllSortButton_Click(object sender, EventArgs e)
 		{
 			if (sortListView.Items.Count > 0)
 			{
 				sortListView.Items.Clear();
 				sortButton_Click(this, EventArgs.Empty);
-			}
+			}	
 		}
 		#endregion
 
