@@ -907,7 +907,10 @@ namespace Alexandria.Client.Controllers
 		
 		public void Filter(string value)
 		{
-			bindingSource.Filter = value;
+			bindingList.Clear();
+			IList<IMediaItem> items = persistenceController.ListMediaItems(value);
+			foreach (IMediaItem item in items)
+				bindingList.Add(item);
 		}
 				
 		public void SaveRow(int index)
@@ -940,6 +943,7 @@ namespace Alexandria.Client.Controllers
 		
 		public void LoadDefaultCatalog()
 		{
+			bindingList.Clear();
 			IList<IMediaItem> items = persistenceController.ListAllMediaItems();
 			foreach(IMediaItem item in items)
 				bindingList.Add(item);

@@ -144,6 +144,27 @@ namespace Alexandria.SQLite
 			return null;
 		}
 
+		private SQLiteCommand GetSelectCommand(DataTable table, string filter)
+		{
+			if (table != null)
+			{
+				SQLiteCommand command = new SQLiteCommand(GetSQLiteConnection());
+
+				StringBuilder sql = new StringBuilder();
+				sql.AppendFormat("SELECT * FROM {0}", table.TableName);
+				if (!string.IsNullOrEmpty(filter))
+				{
+					sql.AppendFormat(" WHERE {0}", filter);
+					//command.Parameters.Add(new SQLiteParameter("@Id", id.ToString()));
+				}
+
+				command.CommandText = sql.ToString();
+
+				return command;
+			}
+			return null;
+		}
+
 		private DateTime GetDateTime(object data)
 		{
 			try
@@ -189,6 +210,55 @@ namespace Alexandria.SQLite
 			catch
 			{
 				return default(Guid);
+			}
+		}
+
+		private void FillTable(DataTable dataTable, Guid id, string filter)
+		{
+			if (dataTable != null)
+			{
+				dataTable.Rows.Clear();
+				SQLiteCommand cmd = null;
+				
+				if (!string.IsNullOrEmpty(filter))
+					cmd = GetSelectCommand(dataTable, filter);
+				else cmd = GetSelectCommand(dataTable, id);
+				
+				if (cmd != null)
+				{
+					using (cmd.Connection)
+					{
+						cmd.Connection.Open();
+
+						using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
+						{
+							if (reader != null && reader.HasRows)
+							{
+								while (reader.Read())
+								{
+									DataRow row = dataTable.NewRow();
+
+									for (int i = 0; i < dataTable.Columns.Count; i++)
+									{
+										object data = reader[i];
+										if (dataTable.Columns[i].DataType == typeof(DateTime))
+											data = GetDateTime(data);
+										else if (dataTable.Columns[i].DataType == typeof(TimeSpan))
+											data = GetTimeSpan(data);
+										else if (dataTable.Columns[i].DataType == typeof(Uri))
+											data = GetUri(data);
+										else if (dataTable.Columns[i].DataType == typeof(Guid))
+											data = GetGuid(data);
+
+										row[i] = data;
+									}
+
+									dataTable.Rows.Add(row);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		#endregion
@@ -239,46 +309,12 @@ namespace Alexandria.SQLite
 		
 		public void FillTable(DataTable dataTable, Guid id)
 		{
-			if (dataTable != null)
-			{
-				dataTable.Rows.Clear();
-				SQLiteCommand cmd = GetSelectCommand(dataTable, id);
-				if (cmd != null)
-				{
-					using (cmd.Connection)
-					{
-						cmd.Connection.Open();
-						
-						using (SQLiteDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection))
-						{
-							if (reader != null && reader.HasRows)
-							{
-								while(reader.Read())
-								{
-									DataRow row = dataTable.NewRow();
-								
-									for(int i=0;i<dataTable.Columns.Count;i++)
-									{
-										object data = reader[i];
-										if (dataTable.Columns[i].DataType == typeof(DateTime))
-											data = GetDateTime(data);
-										else if (dataTable.Columns[i].DataType == typeof(TimeSpan))
-											data = GetTimeSpan(data);
-										else if (dataTable.Columns[i].DataType == typeof(Uri))
-											data = GetUri(data);
-										else if (dataTable.Columns[i].DataType == typeof(Guid))
-											data = GetGuid(data);
-										
-										row[i] = data;
-									}
-									
-									dataTable.Rows.Add(row);
-								}
-							}
-						}
-					}
-				}
-			}
+			FillTable(dataTable, id, null);
+		}
+		
+		public void FillTable(DataTable dataTable, string filter)
+		{
+			FillTable(dataTable, default(Guid), filter);
 		}
 		
 		public void SaveRow(DataRow row)

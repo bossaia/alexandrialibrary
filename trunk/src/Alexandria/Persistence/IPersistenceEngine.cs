@@ -11,6 +11,7 @@ namespace Alexandria.Persistence
 		IDataReader GetDataReader(DataTable dataTable, Guid id);
 		void CreateTable(DataTable dataTable);
 		void FillTable(DataTable dataTable, Guid id);
+		void FillTable(DataTable dataTable, string filter);
 		void SaveRow(DataRow dataRow);
 		void DeleteRow(DataRow dataRow);
 	}
