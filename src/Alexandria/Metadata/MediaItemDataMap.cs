@@ -9,6 +9,7 @@ namespace Alexandria.Metadata
 {
 	public class MediaItemDataMap
 	{
+		#region Constructors
 		public MediaItemDataMap()
 		{
 			table = new DataTable("MediaItem");
@@ -26,10 +27,14 @@ namespace Alexandria.Metadata
 			table.Constraints.Add(new UniqueConstraint(table.Columns["Id"], true));
 			table.Constraints.Add(new UniqueConstraint(table.Columns["Path"]));
 		}
+		#endregion
 		
+		#region Private Fields
 		private IPersistenceEngine engine;
 		private DataTable table;
+		#endregion
 		
+		#region Private Methods
 		private T GetValue<T>(object data)
 		{
 			if (data != null && data != DBNull.Value)
@@ -84,6 +89,34 @@ namespace Alexandria.Metadata
 			return row;
 		}
 		
+		private IList<IMediaItem> DoList(string filter)
+		{
+			IList<IMediaItem> items = new List<IMediaItem>();
+
+			if (engine != null)
+			{
+				if (!string.IsNullOrEmpty(filter))
+					engine.FillTable(Table, filter);
+				else engine.FillTable(Table, default(Guid));
+				
+				
+				if (Table.Rows.Count > 0)
+				{
+					foreach (DataRow row in Table.Rows)
+					{
+						IMediaItem item = GetItemFromRow(row);
+						items.Add(item);
+					}
+
+					Table.Rows.Clear();
+				}
+			}
+
+			return items;
+		}
+		#endregion
+		
+		#region Public Methods
 		public IPersistenceEngine Engine
 		{
 			get { return engine; }
@@ -112,26 +145,14 @@ namespace Alexandria.Metadata
 			return item;
 		}
 		
+		public IList<IMediaItem> List(string filter)
+		{
+			return DoList(filter);
+		}
+		
 		public IList<IMediaItem> ListAll()
 		{
-			IList<IMediaItem> items = new List<IMediaItem>();
-			
-			if (engine != null)
-			{
-				engine.FillTable(Table, default(Guid));
-				if (Table.Rows.Count > 0)
-				{
-					foreach(DataRow row in Table.Rows)
-					{
-						IMediaItem item = GetItemFromRow(row);
-						items.Add(item);
-					}
-				
-					Table.Rows.Clear();
-				}
-			}
-			
-			return items;
+			return DoList(null);
 		}
 		
 		public void SaveMediaItem(IMediaItem item)
@@ -153,5 +174,6 @@ namespace Alexandria.Metadata
 				row.Delete();
 			}
 		}
+		#endregion
 	}
 }

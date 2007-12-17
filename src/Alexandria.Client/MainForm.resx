@@ -869,6 +869,87 @@
   <data name="QueueGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="orFilterButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="orFilterButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>668, 20</value>
+  </data>
+  <data name="orFilterButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="orFilterButton.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="orFilterButton.Text" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="&gt;&gt;orFilterButton.Name" xml:space="preserve">
+    <value>orFilterButton</value>
+  </data>
+  <data name="&gt;&gt;orFilterButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;orFilterButton.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;orFilterButton.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="andFilterButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="andFilterButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>619, 20</value>
+  </data>
+  <data name="andFilterButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="andFilterButton.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="andFilterButton.Text" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="&gt;&gt;andFilterButton.Name" xml:space="preserve">
+    <value>andFilterButton</value>
+  </data>
+  <data name="&gt;&gt;andFilterButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;andFilterButton.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;andFilterButton.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="notFilterButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="notFilterButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 20</value>
+  </data>
+  <data name="notFilterButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 23</value>
+  </data>
+  <data name="notFilterButton.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="notFilterButton.Text" xml:space="preserve">
+    <value>Not</value>
+  </data>
+  <data name="&gt;&gt;notFilterButton.Name" xml:space="preserve">
+    <value>notFilterButton</value>
+  </data>
+  <data name="&gt;&gt;notFilterButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;notFilterButton.Parent" xml:space="preserve">
+    <value>QueueGroupBox</value>
+  </data>
+  <data name="&gt;&gt;notFilterButton.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <metadata name="filterContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>543, 6</value>
   </metadata>
@@ -876,7 +957,7 @@
     <value>121, 21</value>
   </data>
   <data name="filterContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 51</value>
+    <value>182, 29</value>
   </data>
   <data name="&gt;&gt;filterContextMenuStrip.Name" xml:space="preserve">
     <value>filterContextMenuStrip</value>
@@ -903,7 +984,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;filterListView.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <metadata name="sortContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>522, 43</value>
@@ -995,7 +1076,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortListView.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="filterButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1022,7 +1103,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;filterButton.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="sortButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1049,7 +1130,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;sortButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="queueDataGrid.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -1244,7 +1325,7 @@
     <value>QueueGroupBox</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="QueueGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -1476,9 +1557,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Alexandria</value>

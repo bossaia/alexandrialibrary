@@ -92,6 +92,9 @@ namespace Alexandria.Client
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.filterContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripComboBox();
+			this.notFilterButton = new System.Windows.Forms.Button();
+			this.andFilterButton = new System.Windows.Forms.Button();
+			this.orFilterButton = new System.Windows.Forms.Button();
 			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -202,6 +205,7 @@ namespace Alexandria.Client
 			// 
 			this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
 			resources.ApplyResources(this.ExitToolStripMenuItem, "ExitToolStripMenuItem");
+			this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
@@ -451,6 +455,9 @@ namespace Alexandria.Client
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.orFilterButton);
+			this.QueueGroupBox.Controls.Add(this.andFilterButton);
+			this.QueueGroupBox.Controls.Add(this.notFilterButton);
 			this.QueueGroupBox.Controls.Add(this.filterListView);
 			this.QueueGroupBox.Controls.Add(this.sortListView);
 			this.QueueGroupBox.Controls.Add(this.filterButton);
@@ -552,6 +559,27 @@ namespace Alexandria.Client
 			this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
 			resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
 			this.filterContextMenuItemAddFilter.KeyUp += new System.Windows.Forms.KeyEventHandler(this.filterContextMenuItemAddFilter_KeyUp);
+			// 
+			// notFilterButton
+			// 
+			resources.ApplyResources(this.notFilterButton, "notFilterButton");
+			this.notFilterButton.Name = "notFilterButton";
+			this.notFilterButton.UseVisualStyleBackColor = true;
+			this.notFilterButton.Click += new System.EventHandler(this.notFilterButton_Click);
+			// 
+			// andFilterButton
+			// 
+			resources.ApplyResources(this.andFilterButton, "andFilterButton");
+			this.andFilterButton.Name = "andFilterButton";
+			this.andFilterButton.UseVisualStyleBackColor = true;
+			this.andFilterButton.Click += new System.EventHandler(this.andFilterButton_Click);
+			// 
+			// orFilterButton
+			// 
+			resources.ApplyResources(this.orFilterButton, "orFilterButton");
+			this.orFilterButton.Name = "orFilterButton";
+			this.orFilterButton.UseVisualStyleBackColor = true;
+			this.orFilterButton.Click += new System.EventHandler(this.orFilterButton_Click);
 			// 
 			// queueDataGrid
 			// 
@@ -816,6 +844,9 @@ namespace Alexandria.Client
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ContextMenuStrip filterContextMenuStrip;
 		private System.Windows.Forms.ToolStripComboBox filterContextMenuItemAddFilter;
+		private System.Windows.Forms.Button notFilterButton;
+		private System.Windows.Forms.Button orFilterButton;
+		private System.Windows.Forms.Button andFilterButton;
 	}
 }
 

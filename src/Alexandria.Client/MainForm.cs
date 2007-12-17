@@ -718,6 +718,11 @@ namespace Alexandria.Client
 				}
 			}
 		}
+
+		private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
 		
 		#region Sort Methods
 		private void sortButton_Click(object sender, EventArgs e)
@@ -853,26 +858,92 @@ namespace Alexandria.Client
 		#region Filter Methods
 		private void filterButton_Click(object sender, EventArgs e)
 		{
-			if (filterListView.Items.Count > 0)
+			try
 			{
-				StringBuilder filter = new StringBuilder();
-			
-				for(int i=0; i<filterListView.Items.Count; i++)
+				if (filterListView.Items.Count > 0)
 				{
-					if (filterListView.Items[i].Tag != null)
+					StringBuilder filter = new StringBuilder();
+					
+					bool negateNextFilter = false;
+					bool andNextFilter = false;
+					bool orNextFilter = false;
+				
+					for(int i=0; i<filterListView.Items.Count; i++)
 					{
-						string value = filterListView.Items[i].Text;
-						string column = filterListView.Items[i].Tag.ToString();
-						if (column != DEFAULT_COLUMN_FILTER)
+						if (filterListView.Items[i].Tag != null)
 						{
-							if (i > 0) filter.Append(" OR ");
-							filter.AppendFormat("{0} = '{1}'", column, value);
+							string value = filterListView.Items[i].Text;
+							string column = filterListView.Items[i].Tag.ToString();
+							if (column != DEFAULT_COLUMN_FILTER)
+							{
+								string op = "=";
+								if (negateNextFilter)
+								{
+									op = "<>";
+									negateNextFilter = false;
+								}
+								if (orNextFilter)
+								{
+									filter.Append(" OR ");
+									orNextFilter = false;
+								}
+								if (andNextFilter)
+								{
+									filter.Append(" AND ");
+									andNextFilter = false;
+								}							
+							
+								//if (queueDataGrid.Columns[column].ValueType == typeof(string))
+								//{
+									//filter.AppendFormat("{0} {1} '{2}'", column, op, value);
+								//}
+								//else
+								//{
+									filter.AppendFormat("{0} {1} {2}", column, op, value);
+								//}								
+							}
+						}
+						else
+						{
+							switch (filterListView.Items[i].Text)
+							{
+								case "Not":
+									negateNextFilter = true;
+									break;
+								case "And":
+									andNextFilter = true;
+									break;
+								case "Or":
+									orNextFilter = true;
+									break;
+								default:
+									break;
+							}
 						}
 					}
-				}
 
-				queueController.Filter(filter.ToString());
+					queueController.Filter(filter.ToString());
+				}
 			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(string.Format("There was an error trying to apply this filter:\n{0}", ex.Message), "FILTER ERROR");
+			}
+		}
+
+		private void notFilterButton_Click(object sender, EventArgs e)
+		{
+			filterListView.Items.Add("Not");
+		}
+
+		private void andFilterButton_Click(object sender, EventArgs e)
+		{
+			filterListView.Items.Add("And");
+		}
+
+		private void orFilterButton_Click(object sender, EventArgs e)
+		{
+			filterListView.Items.Add("Or");
 		}
 
 		private void filterContextMenuItemAddFilter_KeyUp(object sender, KeyEventArgs e)
