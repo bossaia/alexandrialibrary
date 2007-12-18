@@ -50,7 +50,6 @@ using Alexandria.Mp3Tunes;
 using Alexandria.MusicBrainz;
 using Alexandria.MusicDns;
 using Alexandria.Playlist;
-using Alexandria.SQLite;
 using Alexandria.TagLib;
 #endregion
 

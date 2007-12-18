@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
+using Alexandria.Metadata;
 using Alexandria.Persistence;
 
-namespace Alexandria.Metadata
+namespace Alexandria.DataMapping
 {
-	/*
 	public class MediaItemDataMap
 	{
 		#region Constructors
@@ -29,12 +29,12 @@ namespace Alexandria.Metadata
 			table.Constraints.Add(new UniqueConstraint(table.Columns["Path"]));
 		}
 		#endregion
-		
+
 		#region Private Fields
 		private IPersistenceEngine engine;
 		private DataTable table;
 		#endregion
-		
+
 		#region Private Methods
 		private T GetValue<T>(object data)
 		{
@@ -42,14 +42,14 @@ namespace Alexandria.Metadata
 			{
 				return (T)data;
 			}
-			
+
 			return default(T);
 		}
-		
+
 		private IMediaItem GetItemFromRow(DataRow row)
 		{
 			IMediaItem item = new MediaItem();
-		
+
 			if (row != null)
 			{
 				item.Id = GetValue<Guid>(row[0]);
@@ -64,14 +64,14 @@ namespace Alexandria.Metadata
 				item.Format = GetValue<string>(row[9]);
 				item.Path = GetValue<Uri>(row[10]);
 			}
-			
+
 			return item;
 		}
-		
+
 		private DataRow GetRowFromItem(IMediaItem item)
 		{
 			DataRow row = table.NewRow();
-			
+
 			if (item != null)
 			{
 				row[0] = item.Id;
@@ -86,10 +86,10 @@ namespace Alexandria.Metadata
 				row[9] = item.Format;
 				row[10] = item.Path;
 			}
-			
+
 			return row;
 		}
-		
+
 		private IList<IMediaItem> DoList(string filter)
 		{
 			IList<IMediaItem> items = new List<IMediaItem>();
@@ -99,8 +99,8 @@ namespace Alexandria.Metadata
 				if (!string.IsNullOrEmpty(filter))
 					engine.FillTable(Table, filter);
 				else engine.FillTable(Table, default(Guid));
-				
-				
+
+
 				if (Table.Rows.Count > 0)
 				{
 					foreach (DataRow row in Table.Rows)
@@ -116,23 +116,23 @@ namespace Alexandria.Metadata
 			return items;
 		}
 		#endregion
-		
+
 		#region Public Methods
 		public IPersistenceEngine Engine
 		{
 			get { return engine; }
 			set { engine = value; }
 		}
-		
+
 		public DataTable Table
 		{
 			get { return table; }
 		}
-		
+
 		public IMediaItem LookupMediaItem(Guid id)
 		{
 			IMediaItem item = null;
-			
+
 			if (engine != null)
 			{
 				engine.FillTable(table, id);
@@ -142,20 +142,20 @@ namespace Alexandria.Metadata
 					table.Rows[0].Delete();
 				}
 			}
-			
+
 			return item;
 		}
-		
+
 		public IList<IMediaItem> List(string filter)
 		{
 			return DoList(filter);
 		}
-		
+
 		public IList<IMediaItem> ListAll()
 		{
 			return DoList(null);
 		}
-		
+
 		public void SaveMediaItem(IMediaItem item)
 		{
 			if (engine != null && item != null)
@@ -165,7 +165,7 @@ namespace Alexandria.Metadata
 				row.Delete();
 			}
 		}
-		
+
 		public void DeleteMediaItem(IMediaItem item)
 		{
 			if (engine != null && item != null)
@@ -177,5 +177,4 @@ namespace Alexandria.Metadata
 		}
 		#endregion
 	}
-	*/
 }

@@ -1131,6 +1131,10 @@
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.DataMapping\Alexandria.DataMapping.csproj">
+      <Project>{990880C8-F72C-45F8-8B9B-A59238ABAB42}</Project>
+      <Name>Alexandria.DataMapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
       <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
       <Name>Alexandria.Fmod</Name>
@@ -1151,13 +1155,17 @@
       <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
       <Name>Alexandria.MusicDns</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj">
+      <Project>{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}</Project>
+      <Name>Alexandria.Persistence.SQLite</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
+      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
+      <Name>Alexandria.Persistence</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Playlist\Alexandria.Playlist.csproj">
       <Project>{5373D021-353C-47FE-9BB0-7F6E22F06594}</Project>
       <Name>Alexandria.Playlist</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.SQLite\Alexandria.SQLite.csproj">
-      <Project>{03594E0E-E91F-4697-ABBE-DC879C95ABB1}</Project>
-      <Name>Alexandria.SQLite</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.TagLib\Alexandria.TagLib.csproj">
       <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>

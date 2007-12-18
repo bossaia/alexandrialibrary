@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SQLite Database Plugin")]
-[assembly: AssemblyDescription("Store your catalogs and media metadata in a local SQLite database")]
+[assembly: AssemblyTitle("Alexandria.DataMapping")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Telesophy Foundation")]
-[assembly: AssemblyProduct("Alexandria Media Library")]
-[assembly: AssemblyCopyright("Copyright © 2007")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Alexandria.DataMapping")]
+[assembly: AssemblyCopyright("Copyright ©  2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cf6a30e8-e3ad-4d87-9d24-3348eacf3ccf")]
+[assembly: Guid("f5d5e06e-f9c1-4ca8-b508-43a649dd9364")]
 
 // Version information for an assembly consists of the following four values:
 //

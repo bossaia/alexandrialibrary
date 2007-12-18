@@ -36,6 +36,7 @@
     <Compile Include="DataMap.cs" />
     <Compile Include="IDataMap.cs" />
     <Compile Include="IEngine.cs" />
+    <Compile Include="IPersistenceEngine.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
