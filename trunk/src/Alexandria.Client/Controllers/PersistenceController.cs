@@ -4,9 +4,10 @@ using System.Configuration;
 using System.Text;
 
 using Alexandria;
+using Alexandria.DataMapping;
 using Alexandria.Metadata;
 using Alexandria.Persistence;
-using Alexandria.SQLite;
+using Alexandria.Persistence.SQLite;
 
 namespace Alexandria.Client.Controllers
 {

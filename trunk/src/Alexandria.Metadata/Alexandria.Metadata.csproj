@@ -33,6 +33,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMediaItem.cs" />
     <Compile Include="IMetadataIdentifier.cs" />
     <Compile Include="IMetadataReader.cs" />
     <Compile Include="IMetadataRecord.cs" />
