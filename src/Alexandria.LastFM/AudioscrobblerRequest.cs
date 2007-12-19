@@ -32,7 +32,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Alexandria;
-using Alexandria.Metadata;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.LastFM
 {
@@ -390,11 +391,11 @@ namespace Alexandria.LastFM
 		/// <summary>
 		/// Submit a single track to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IAudioTrack track)
+		public void SubmitTrack(IMediaItem track)
 		{
 			// Create an IList containing a single track
 			// and send it to the overload of SubmitTrack below (which takes an IList).
-			IList<IAudioTrack> tracks = new List<IAudioTrack>();
+			IList<IMediaItem> tracks = new List<IMediaItem>();
 			tracks.Add(track);
 			this.SubmitTrack(tracks);
 		}
@@ -402,7 +403,7 @@ namespace Alexandria.LastFM
 		/// <summary>
 		/// Submits a list of tracks to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IList<IAudioTrack> tracks)
+		public void SubmitTrack(IList<IMediaItem> tracks)
 		{
 			// if there are no tracks in this request, return
 			if (tracks.Count == 0)
@@ -447,18 +448,18 @@ namespace Alexandria.LastFM
 			lastRequest = DateTime.Now;
 		}
 
-		private string ProcessTrack(IAudioTrack track, DateTime timePlayed, int i)
+		private string ProcessTrack(IMediaItem track, DateTime timePlayed, int i)
 		{
 			string urlTrack = "&a[{0}]={1}&t[{0}]={2}&b[{0}]={3}&m[{0}]={4}&l[{0}]={5}&i[{0}]={6}";
 			
 			string id = string.Empty;
-			foreach(IMetadataIdentifier metadataId in track.MetadataIdentifiers)
-			{
-				if (metadataId.Type.Contains("MusicBrainz"))
-					id = metadataId.Value;
-			}
+			//foreach(IMetadataIdentifier metadataId in track.MetadataIdentifiers)
+			//{
+				//if (metadataId.Type.Contains("MusicBrainz"))
+					//id = metadataId.Value;
+			//}
 
-			return string.Format(urlTrack, i, HttpUtility.UrlEncode(track.Artist), HttpUtility.UrlEncode(track.Name), HttpUtility.UrlEncode(track.Album), HttpUtility.UrlEncode(id), (int)track.Duration.TotalMilliseconds, HttpUtility.UrlEncode(timePlayed.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")));
+			return string.Format(urlTrack, i, HttpUtility.UrlEncode(track.Artist), HttpUtility.UrlEncode(track.Title), HttpUtility.UrlEncode(track.Album), HttpUtility.UrlEncode(id), (int)track.Duration.TotalMilliseconds, HttpUtility.UrlEncode(timePlayed.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 		}
 
 		private string ProcessTrack(IAudioscrobblerTrack track, int i)

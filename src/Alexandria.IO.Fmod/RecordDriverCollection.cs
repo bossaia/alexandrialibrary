@@ -37,7 +37,7 @@ namespace Alexandria.Fmod
 				catch (Exception ex)
 				{
 					//throw new InvalidOperationException("Could not find record driver " + i.ToString(Sy ) + " in this FMOD SoundSystem", ex);
-					throw new AlexandriaException(ex);
+					throw new ApplicationException("Could not find audio recording driver", ex);
 				}
 				driver = new Driver(SoundSystem.Handle, i, nameBuilder.ToString());
 				

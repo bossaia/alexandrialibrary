@@ -1,3 +1,4 @@
+#region License (LGPL)
 /***************************************************************************
     copyright            : (C) 2005 by Brian Nickel
     email                : brian.nickel@gmail.com
@@ -19,17 +20,19 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
  *   USA                                                                   *
  ***************************************************************************/
+ #endregion
 
 using System;
 using System.Collections.Generic;
 using Alexandria;
 using Alexandria.Media;
-using Alexandria.Metadata;
 using Alexandria.Persistence;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.TagLib
 {
-	public class Tag : IAudioTrack
+	public class Tag : IMediaItem
 	{
 		#region Constructors
 		public Tag()
@@ -120,12 +123,6 @@ namespace Alexandria.TagLib
 		#endregion
 		
 		#region Public Properties
-		public virtual string Title
-		{
-			get { return name; }
-			set { name = value; }
-		}
-		
 		public virtual IList<string> Artists
 		{
 			get { return artists; }
@@ -287,7 +284,19 @@ namespace Alexandria.TagLib
 		}
 		#endregion
 
-		#region IAudioTrack Members
+		#region IMediaItem Members
+		public virtual Guid Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
+		
+		public virtual string Title
+		{
+			get { return name; }
+			set { name = value; }
+		}
+		
 		public virtual string Album
 		{
 			get { return album; }
@@ -297,6 +306,7 @@ namespace Alexandria.TagLib
 		public virtual string Artist
 		{
 			get { return FirstArtist; }
+			set { }
 		}
 
 		public virtual TimeSpan Duration
@@ -305,7 +315,7 @@ namespace Alexandria.TagLib
 			set { duration = value; }
 		}
 
-		public virtual DateTime ReleaseDate
+		public virtual DateTime Date
 		{
 			get
 			{
@@ -317,7 +327,7 @@ namespace Alexandria.TagLib
 			set { releaseDate = value; }
 		}
 
-		public virtual int TrackNumber
+		public virtual int Number
 		{
 			get { return (int)Track; }
 			set { Track = (uint)value; }
@@ -326,7 +336,25 @@ namespace Alexandria.TagLib
 		public virtual string Format
 		{
 			get { return format; }
-			internal set { format = value; }
+			set { format = value; }
+		}
+		
+		public virtual string Source
+		{
+			get { return null; }
+			set { }
+		}
+		
+		public virtual string Type
+		{
+			get { return null; }
+			set { }
+		}
+		
+		public virtual string Status
+		{
+			get { return null; }
+			set { }
 		}
 		#endregion
 
@@ -339,50 +367,13 @@ namespace Alexandria.TagLib
 		public Uri Path
 		{
 			get { return path; }
-			internal set { path = value; }
+			set { path = value; }
 		}
 
 		public virtual string Name
 		{
 			get { return Title; }
 			protected set { Title = value; }
-		}
-		#endregion
-
-		#region IRecord Members
-		public Guid Id
-		{
-			get { return id; }
-			protected set { id = value; }
-		}
-
-		public IRecord Parent
-		{
-			get { return parent; }
-			set { parent = value; }
-		}
-
-		public IPersistenceBroker PersistenceBroker
-		{
-			get { return broker; }
-			set { broker = value; }
-		}
-
-		public bool IsProxy
-		{
-			get { return false; }
-		}
-
-		void IRecord.Save()
-		{
-			if (broker != null)
-				broker.SaveRecord(this);
-		}
-
-		void IRecord.Delete()
-		{
-			if (broker != null)
-				broker.DeleteRecord(this);
 		}
 		#endregion
   }

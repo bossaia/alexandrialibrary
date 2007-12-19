@@ -85,7 +85,7 @@ namespace Alexandria.Fmod
 				catch (Exception ex)
 				{
 					// Failed to read tag
-					throw new AlexandriaException(ex);
+					throw new ApplicationException("Failed to read metadata tag", ex);
 				}
 
 				tags.Add(tag);

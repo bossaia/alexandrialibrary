@@ -6,13 +6,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.AsciiGenerator",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Client", "Alexandria.Client\Alexandria.Client.csproj", "{3095580F-8714-4D19-B88E-DB51162D112B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO.Fmod", "Alexandria.Fmod\Alexandria.Fmod.csproj", "{AF78BF83-2D82-49D4-BEF3-F492E33E2316}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO.Fmod", "Alexandria.IO.Fmod\Alexandria.IO.Fmod.csproj", "{AF78BF83-2D82-49D4-BEF3-F492E33E2316}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.LastFM", "Alexandria.LastFM\Alexandria.LastFM.csproj", "{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.MusicBrainz", "Alexandria.MusicBrainz\Alexandria.MusicBrainz.csproj", "{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.SQLite", "Alexandria.SQLite\Alexandria.SQLite.csproj", "{03594E0E-E91F-4697-ABBE-DC879C95ABB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TagLib", "Alexandria.TagLib\Alexandria.TagLib.csproj", "{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}"
 EndProject
@@ -31,6 +29,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence.SQLite", "Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj", "{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.DataMapping", "Alexandria.DataMapping\Alexandria.DataMapping.csproj", "{990880C8-F72C-45F8-8B9B-A59238ABAB42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services", "Alexandria.Services\Alexandria.Services.csproj", "{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model", "Alexandria.Model\Alexandria.Model.csproj", "{E5F218B8-FD8A-42C3-9409-8539D128F294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model.Data", "Alexandria.Model.Data\Alexandria.Model.Data.csproj", "{72E74E72-336B-4E98-ABA7-334B594636FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +66,6 @@ Global
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}.Release|Any CPU.Build.0 = elease|Any CPU
-		{03594E0E-E91F-4697-ABBE-DC879C95ABB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03594E0E-E91F-4697-ABBE-DC879C95ABB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03594E0E-E91F-4697-ABBE-DC879C95ABB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03594E0E-E91F-4697-ABBE-DC879C95ABB1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,6 +102,18 @@ Global
 		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5F218B8-FD8A-42C3-9409-8539D128F294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5F218B8-FD8A-42C3-9409-8539D128F294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5F218B8-FD8A-42C3-9409-8539D128F294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5F218B8-FD8A-42C3-9409-8539D128F294}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72E74E72-336B-4E98-ABA7-334B594636FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72E74E72-336B-4E98-ABA7-334B594636FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72E74E72-336B-4E98-ABA7-334B594636FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72E74E72-336B-4E98-ABA7-334B594636FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1131,17 +1131,25 @@
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.DataMapping\Alexandria.DataMapping.csproj">
-      <Project>{990880C8-F72C-45F8-8B9B-A59238ABAB42}</Project>
-      <Name>Alexandria.DataMapping</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Fmod\Alexandria.Fmod.csproj">
+    <ProjectReference Include="..\Alexandria.IO.Fmod\Alexandria.IO.Fmod.csproj">
       <Project>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</Project>
-      <Name>Alexandria.Fmod</Name>
+      <Name>Alexandria.IO.Fmod</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.IO\Alexandria.IO.csproj">
+      <Project>{97449DEA-C759-4E22-B287-305CA0023749}</Project>
+      <Name>Alexandria.IO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.LastFM\Alexandria.LastFM.csproj">
       <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
       <Name>Alexandria.LastFM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Model.Data\Alexandria.Model.Data.csproj">
+      <Project>{72E74E72-336B-4E98-ABA7-334B594636FA}</Project>
+      <Name>Alexandria.Model.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
+      <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
+      <Name>Alexandria.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
       <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>

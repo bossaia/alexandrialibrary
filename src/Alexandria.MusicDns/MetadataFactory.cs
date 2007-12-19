@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
@@ -29,7 +29,8 @@ using System;
 using System.IO;
 using System.Net;
 using System.Xml;
-using Alexandria.Metadata;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.MusicDns
 {
@@ -335,7 +336,7 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Public Methods
-		public IAudioTrack CreateAudioTrack(Uri path)
+		public IMediaItem CreateAudioTrack(Uri path)
 		{
 			TrackInfo info = InitializeTrackInfo(path);
 			FillTrackInfo(info, true, true);			

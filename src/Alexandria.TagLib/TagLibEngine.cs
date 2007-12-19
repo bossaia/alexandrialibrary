@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Alexandria;
 using Alexandria.Media;
-using Alexandria.Metadata;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.TagLib
 {
@@ -17,7 +18,7 @@ namespace Alexandria.TagLib
 		
 		#region Public Methods
 		[System.CLSCompliant(false)]
-		public IAudioTrack GetAudioTrack(Uri path)
+		public IMediaItem GetAudioTrack(Uri path)
 		{
 			Tag tag = null;
 			File tagFile = null;

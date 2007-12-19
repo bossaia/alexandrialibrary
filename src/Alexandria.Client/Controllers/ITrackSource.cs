@@ -27,13 +27,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alexandria.Metadata;
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.Client.Controllers
 {
 	public interface ITrackSource
 	{
-		IList<IAudioTrack> GetAudioTracks();
+		IList<IMediaItem> GetAudioTracks();
 	}
 }

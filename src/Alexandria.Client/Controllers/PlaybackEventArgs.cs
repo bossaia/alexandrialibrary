@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 using Alexandria.Media;
-using Alexandria.Media.IO;
+using Alexandria.IO;
 
 namespace Alexandria.Client.Controllers
 {

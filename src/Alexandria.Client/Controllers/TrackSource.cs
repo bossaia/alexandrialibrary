@@ -28,8 +28,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
 using Alexandria.MusicBrainz;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.Client.Controllers
 {
@@ -38,29 +39,30 @@ namespace Alexandria.Client.Controllers
 		#region Constructors
 		public TrackSource(string fileName)
 		{
-			this.factory = new MusicBrainz.SimpleAlbumFactory();
+			//this.factory = new MusicBrainz.SimpleAlbumFactory();
 			this.path = new Uri(fileName);
 		}
 		
-		public TrackSource(IAlbumFactory factory, Uri path)
-		{
-			this.factory = factory;
-			this.path = path;
-		}
+		//public TrackSource(IAlbumFactory factory, Uri path)
+		//{
+		//	this.factory = factory;
+		//	this.path = path;
+		//}
 		#endregion
 	
 		#region Private Fields
-		private IAlbumFactory factory;
+		//private IAlbumFactory factory;
 		private Uri path;
 		#endregion
 	
 		#region ITrackSource Members
-		public IList<Alexandria.Metadata.IAudioTrack> GetAudioTracks()
+		public IList<IMediaItem> GetAudioTracks()
 		{
 			try
 			{
-				IOldAlbum album = factory.CreateAlbum(path);
-				return album.Tracks;
+				//IOldAlbum album = factory.CreateAlbum(path);
+				//return album.Tracks;
+				return new List<IMediaItem>();
 			}
 			catch (Exception ex)
 			{

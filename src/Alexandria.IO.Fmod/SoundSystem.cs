@@ -1335,7 +1335,7 @@ namespace Alexandria.Fmod
 					sound.Handle = soundHandle;
 					sound.SoundSystem = this;
 				}
-				else throw new AlexandriaException("could not create sound: " + currentResult.ToString());
+				else throw new ApplicationException("could not create sound: " + currentResult.ToString());
 			}
 			else throw new ArgumentNullException("sound");
 		}
@@ -1411,7 +1411,7 @@ namespace Alexandria.Fmod
 					sound.Handle = soundHandle;
 					sound.SoundSystem = this;
 				}
-				else throw new AlexandriaException("could not create sound: " + currentResult.ToString());
+				else throw new ApplicationException("could not create sound: " + currentResult.ToString());
 			}
 			else throw new ArgumentNullException("sound");
 		}
@@ -1439,7 +1439,7 @@ namespace Alexandria.Fmod
 					sound = new Sound(this, path);
 					sound.Handle = soundHandle;
 				}
-				else throw new AlexandriaException("could not create compact disc sound: " + currentResult.ToString());
+				else throw new ApplicationException("could not create compact disc sound: " + currentResult.ToString());
 
 				return sound;
 			}
@@ -1475,7 +1475,7 @@ namespace Alexandria.Fmod
 				sound.Handle = soundHandle;
 				sound.SoundSystem = this;
 			}
-			else throw new AlexandriaException("could not create stream: " + currentResult.ToString());
+			else throw new ApplicationException("could not create stream: " + currentResult.ToString());
 
 			return sound;
 		}
@@ -1501,7 +1501,7 @@ namespace Alexandria.Fmod
 					sound.Handle = soundHandle;				
 					sound.SoundSystem = this;
 				}
-				else throw new AlexandriaException("could not create stream: " + currentResult.ToString());
+				else throw new ApplicationException("could not create stream: " + currentResult.ToString());
 
 				return sound;
 			}
@@ -1529,7 +1529,7 @@ namespace Alexandria.Fmod
 				sound.Handle = soundHandle;
 				sound.SoundSystem = this;
 			}
-			else throw new AlexandriaException("could not create stream: " + currentResult.ToString());
+			else throw new ApplicationException("could not create stream: " + currentResult.ToString());
 
 			return sound;
 		}
@@ -1555,7 +1555,7 @@ namespace Alexandria.Fmod
 					sound.Handle = soundHandle;
 					sound.SoundSystem = this;
 				}
-				else throw new AlexandriaException("could not create stream: " + currentResult.ToString());
+				else throw new ApplicationException("could not create stream: " + currentResult.ToString());
 			}
 			else throw new ArgumentNullException("sound");
 		}

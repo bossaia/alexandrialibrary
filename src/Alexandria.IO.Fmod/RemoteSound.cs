@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
-using Alexandria;
-using Alexandria.Media;
-using Alexandria.Media.IO;
+using Alexandria.IO;
 
 namespace Alexandria.Fmod
 {

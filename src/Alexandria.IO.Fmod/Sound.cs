@@ -733,7 +733,7 @@ namespace Alexandria.Fmod
 			}
 			catch (Exception ex)
 			{
-				throw new AlexandriaException("There was an error saving this sound to " + filePath + " : " + currentResult.ToString() + ":" + ex.Message, ex);
+				throw new ApplicationException("There was an error saving this sound to " + filePath + " : " + currentResult.ToString() + ":" + ex.Message, ex);
 			}
 			finally
 			{
