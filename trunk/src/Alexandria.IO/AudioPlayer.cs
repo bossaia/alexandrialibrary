@@ -82,6 +82,8 @@ namespace Alexandria.IO
 		private bool playToggles;
 		private bool seekIsPending;
 		private bool isPlaying;
+		private bool isMuted;
+		private float volume = 1.0f;
 		#endregion
 
 		#region Private Event Methods
@@ -140,7 +142,8 @@ namespace Alexandria.IO
 
 		public bool IsMuted
 		{
-			get { return (currentAudioStream != null) ? currentAudioStream.IsMuted : false; }
+			get { return isMuted; }
+			//return (currentAudioStream != null) ? currentAudioStream.IsMuted : false; }
 		}
 
 		public bool MuteToggles
@@ -162,7 +165,8 @@ namespace Alexandria.IO
 
 		public float Volume
 		{
-			get { return (currentAudioStream != null) ? currentAudioStream.Volume : 0f; }
+			get { return volume; }
+			//return (currentAudioStream != null) ? currentAudioStream.Volume : 0f; }
 		}
 
 		public EventHandler<MediaStateChangedEventArgs> BufferStateChanged
@@ -232,6 +236,8 @@ namespace Alexandria.IO
 
 			if (currentAudioStream != null)
 			{
+				currentAudioStream.Volume = volume;
+				currentAudioStream.IsMuted = isMuted;
 				currentAudioStream.BufferStateChanged += new EventHandler<MediaStateChangedEventArgs>(OnBufferStateChanged);
 				currentAudioStream.NetworkStateChanged += new EventHandler<MediaStateChangedEventArgs>(OnNetworkStateChanged);
 				currentAudioStream.PlaybackStateChanged += new EventHandler<MediaStateChangedEventArgs>(OnPlaybackStateChanged);
@@ -254,7 +260,8 @@ namespace Alexandria.IO
 		{
 			if (currentAudioStream != null)
 			{
-				currentAudioStream.IsMuted = (MuteToggles) ? !currentAudioStream.IsMuted : true;
+				isMuted = (MuteToggles) ? !isMuted : true;
+				currentAudioStream.IsMuted = isMuted;
 				RefreshPlayerStates();
 			}
 		}
@@ -316,6 +323,7 @@ namespace Alexandria.IO
 				currentAudioStream.RefreshPlaybackState();
 				currentAudioStream.RefreshSeekState();
 				isPlaying = (currentAudioStream.PlaybackState == PlaybackState.Playing);
+				//isMuted = (currentAudioStream.IsMuted);
 			}
 			else
 			{
@@ -347,6 +355,7 @@ namespace Alexandria.IO
 		{
 			if (currentAudioStream != null)
 			{
+				this.volume = volume;
 				currentAudioStream.Volume = volume;
 				RefreshPlayerStates();
 			}
@@ -365,7 +374,8 @@ namespace Alexandria.IO
 		{
 			if (currentAudioStream != null)
 			{
-				currentAudioStream.IsMuted = false;
+				isMuted = false;
+				currentAudioStream.IsMuted = isMuted;
 				RefreshPlayerStates();
 			}
 		}
