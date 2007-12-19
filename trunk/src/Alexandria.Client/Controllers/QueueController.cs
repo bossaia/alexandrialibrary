@@ -37,8 +37,7 @@ using System.Windows.Forms;
 using Alexandria;
 using Alexandria.Client.Views;
 using Alexandria.Media;
-using Alexandria.Media.IO;
-using Alexandria.Metadata;
+using Alexandria.IO;
 using Alexandria.Persistence;
 using Alexandria.Plugins;
 
@@ -51,6 +50,8 @@ using Alexandria.MusicBrainz;
 using Alexandria.MusicDns;
 using Alexandria.Playlist;
 using Alexandria.TagLib;
+
+using Telesophy.Alexandria.Model;
 #endregion
 
 namespace Alexandria.Client.Controllers
@@ -100,9 +101,9 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Private Fields
-		private IAudioTrack selectedTrack;
+		private IMediaItem selectedTrack;
 		private BindingListView<IMediaItem> bindingList; 
-		private IList<IAudioTrack> tracks;
+		private IList<IMediaItem> tracks;
 
 		MusicLocker locker = new MusicLocker();
 		PlaylistFactory playlistFactory = new PlaylistFactory();
@@ -180,7 +181,7 @@ namespace Alexandria.Client.Controllers
 			return (cell.Value != null) ? (Uri)cell.Value : null;
 		}
 		
-		private IAudioTrack GetSelectedAudioTrack(DataGridViewRow row)
+		private IMediaItem GetSelectedAudioTrack(DataGridViewRow row)
 		{
 			if (row.Index > -1)
 			{			
@@ -196,7 +197,8 @@ namespace Alexandria.Client.Controllers
 				string format =  GetItemString(row.Cells[COL_FORMAT]);
 				Uri path = GetItemUri(row.Cells[COL_PATH]);
 				
-				IAudioTrack track = new Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
+				IMediaItem track = new MediaItem(id, source, type, number, title, artist, album, duration, date, format, path);
+				//Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
 				return track;
 			}
 			else throw new ApplicationException("The row currently selected in the queue is invalid");
@@ -213,7 +215,7 @@ namespace Alexandria.Client.Controllers
 			{
 				if (System.IO.File.Exists(path.LocalPath))
 				{
-					IAudioTrack track = tagLibEngine.GetAudioTrack(path);
+					IMediaItem track = tagLibEngine.GetAudioTrack(path);
 					if (track != null)
 						LoadTrack(track, source);
 				}
@@ -356,12 +358,12 @@ namespace Alexandria.Client.Controllers
 			set { persistenceController = value; }
 		}
 		
-		public IList<IAudioTrack> Tracks
+		public IList<IMediaItem> Tracks
 		{
 			get { return tracks; }
 		}
 
-		public IAudioTrack SelectedTrack
+		public IMediaItem SelectedTrack
 		{
 			get { return selectedTrack; }
 			set
@@ -387,9 +389,13 @@ namespace Alexandria.Client.Controllers
 		
 		public string SelectedRowStatus
 		{
-			get { return (SelectedRow != null) ? SelectedRow.Cells[COL_STATUS].Value.ToString() : null; }
+			get { 
+				return (SelectedRow != null && SelectedRow.Index > -1)
+					? SelectedRow.Cells[COL_STATUS].Value.ToString()
+					: null;
+			}
 			set { 
-				if (SelectedRow != null)
+				if (SelectedRow != null && SelectedRow.Index > -1)
 					SelectedRow.Cells[COL_STATUS].Value = value;
 			}
 		}
@@ -398,15 +404,15 @@ namespace Alexandria.Client.Controllers
 		#region Public Methods
 		public void LoadTracks()
 		{
-			IList<IAudioTrack> tracks = GetMp3TunesTracks(false);
+			IList<IMediaItem> tracks = GetMp3TunesTracks(false);
 			LoadTracks(tracks, "MP3tunes");
 		}
 
-		public void LoadTracks(IList<IAudioTrack> tracks, string source)
+		public void LoadTracks(IList<IMediaItem> tracks, string source)
 		{
 			if (tracks != null)
 			{
-				foreach (IAudioTrack track in tracks)
+				foreach (IMediaItem track in tracks)
 				{
 					LoadTrack(track, source);
 				}
@@ -426,7 +432,7 @@ namespace Alexandria.Client.Controllers
 					else SelectedRow = grid.Rows[0];
 				}
 				
-				IAudioTrack track = GetSelectedAudioTrack(SelectedRow);
+				IMediaItem track = GetSelectedAudioTrack(SelectedRow);
 				if (SelectedTrack == null || SelectedTrack.Id != track.Id)
 				{
 					SelectedTrack = track;
@@ -435,7 +441,7 @@ namespace Alexandria.Client.Controllers
 					{
 						string discPath = SelectedTrack.Path.LocalPath.Substring(0, 2);
 						audioStream = new Fmod.CompactDiscSound(discPath);
-						audioStream.StreamIndex = SelectedTrack.TrackNumber-1;
+						audioStream.StreamIndex = SelectedTrack.Number-1;
 					}
 					else
 					{
@@ -446,7 +452,7 @@ namespace Alexandria.Client.Controllers
 						}
 						else
 						{
-							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, SelectedTrack.TrackNumber, SelectedTrack.Name, SelectedTrack.Artist, SelectedTrack.Album, SelectedTrack.Format);
+							string fileName = string.Format("{0}{1:00,2} {2} - {3} - {4}.{5}", tempPath, SelectedTrack.Number, SelectedTrack.Title, SelectedTrack.Artist, SelectedTrack.Album, SelectedTrack.Format);
 							fileName = CleanupFileName(fileName);
 							if (!System.IO.File.Exists(fileName))
 							{
@@ -461,7 +467,7 @@ namespace Alexandria.Client.Controllers
 								}
 								catch (WebException ex)
 								{
-									throw new ApplicationException("There was an error downloading track : " + selectedTrack.Name, ex);
+									throw new ApplicationException("There was an error downloading track : " + selectedTrack.Title, ex);
 								}
 							}
 
@@ -504,10 +510,13 @@ namespace Alexandria.Client.Controllers
 			}
 		}
 		
-		public void LoadTrack(IAudioTrack track, string source)
+		[CLSCompliant(false)]
+		public void LoadTrack(IMediaItem track, string source)
 		{
-			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.TrackNumber, GetSafeString(track.Name), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.ReleaseDate, track.Format, track.Path);
-			if (item.Id == default(Guid)) item.Id = Guid.NewGuid();
+			//TODO: fix this so that I don't have to wrap the input track
+			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.Number, GetSafeString(track.Title), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.Date, track.Format.ToLower(), track.Path);
+			//if (item.Id == default(Guid)) item.Id = Guid.NewGuid();
+			//track.Source = source;
 			bindingList.Add(item);
 		}
 		
@@ -541,13 +550,13 @@ namespace Alexandria.Client.Controllers
 			else return string.Format("{0:d}", date);
 		}
 
-		public IList<IAudioTrack> GetMp3TunesTracks(bool ignoreCache)
+		public IList<IMediaItem> GetMp3TunesTracks(bool ignoreCache)
 		{
 			try
 			{
 				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
 				musicLocker.Login("dan.poage@gmail.com", "automatic");
-				tracks = musicLocker.GetTracks(ignoreCache);
+				tracks = null; //musicLocker.GetTracks(ignoreCache);
 				return tracks;
 			}
 			catch (Exception ex)
@@ -555,16 +564,19 @@ namespace Alexandria.Client.Controllers
 				throw new AlexandriaException("There was an error loading tracks from your MP3tunes locker", ex);
 			}
 		}
-		
+
+		[CLSCompliant(false)]
 		public IMetadataIdentifier LookupPuid(Uri path)
 		{
 			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
-			IAudioTrack track = factory.CreateAudioTrack(path);
-			foreach (IMetadataIdentifier metadataId in track.MetadataIdentifiers)
-			{
-				if (metadataId.Type.Contains("MusicDnsId"))
-					return metadataId;
-			}
+			IMediaItem track = factory.CreateAudioTrack(path);
+			
+			//TODO: Implement a replacement for track.MetadataIdentifiers
+			//foreach (IMetadataIdentifier metadataId in track.MetadataIdentifiers)
+			//{
+				//if (metadataId.Type.Contains("MusicDnsId"))
+					//return metadataId;
+			//}
 			return null;
 		}
 
@@ -659,11 +671,11 @@ namespace Alexandria.Client.Controllers
 				{
 					try
 					{
-						IAudioTrack track = tagLibEngine.GetAudioTrack(new Uri(path));
+						IMediaItem track = tagLibEngine.GetAudioTrack(new Uri(path));
 						if (track != null)
 						{
-							IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
-							persistenceController.SaveMediaItem(item);
+							//IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
+							persistenceController.SaveMediaItem(track);
 							
 							if (importStatusUpdateCallback != null)
 							{
@@ -728,7 +740,7 @@ namespace Alexandria.Client.Controllers
 				if (sourceData != null)
 				{
 					TrackSource trackSource = (TrackSource)sourceData;
-					IList<IAudioTrack> tracks = trackSource.GetAudioTracks();
+					IList<IMediaItem> tracks = trackSource.GetAudioTracks();
 					LoadTracks(tracks, "CD");
 				}
 			}

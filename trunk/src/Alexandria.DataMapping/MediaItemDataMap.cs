@@ -4,10 +4,11 @@ using System.Data;
 using System.Text;
 
 using Alexandria.Metadata;
-using Alexandria.Persistence;
+using Telesophy.Alexandria.Persistence;
 
-namespace Alexandria.DataMapping
+namespace Telesophy.Alexandria.DataMapping
 {
+	/*
 	public class MediaItemDataMap
 	{
 		#region Constructors
@@ -177,4 +178,5 @@ namespace Alexandria.DataMapping
 		}
 		#endregion
 	}
+	*/
 }

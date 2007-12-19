@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
@@ -28,12 +28,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
 using Alexandria.Persistence;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.MusicDns
 {
-	internal class TrackInfo : IAudioTrack
+	internal class TrackInfo : IMediaItem
 	{
 		#region Constructors
 		internal TrackInfo()
@@ -180,7 +181,7 @@ namespace Alexandria.MusicDns
 				puid = value;
 				
 				if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
-					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid, this));
+					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid));
 			}
 		}
 		
@@ -191,23 +192,32 @@ namespace Alexandria.MusicDns
 		}
 		#endregion
 
-		#region IAudioTrack Members
-		string IAudioTrack.Album
+		#region IMediaItem Members
+		string IMediaItem.Title
+		{
+			get { return Track; }
+			set { }
+		}
+		
+		string IMediaItem.Album
 		{
 			get { return album; }
+			set { }
 		}
 
-		string IAudioTrack.Artist
+		string IMediaItem.Artist
 		{
 			get { return artist; }
+			set { }
 		}
 
 		public TimeSpan Duration
 		{
 			get { return new TimeSpan(0, 0, 0, 0, (int)LengthInMS); }
+			set { }
 		}
 
-		public DateTime ReleaseDate
+		public DateTime Date
 		{
 			get
 			{
@@ -220,16 +230,37 @@ namespace Alexandria.MusicDns
 					return DateTime.MinValue;
 				}
 			}
+			set { }
 		}
 
-		public int TrackNumber
+		public int Number
 		{
 			get { return TrackNum; }
+			set { }
 		}
-		
-		string IAudioTrack.Format
+
+		string IMediaItem.Format
 		{
 			get { return Format; }
+			set { }
+		}
+		
+		string IMediaItem.Source
+		{
+			get { return null; }
+			set { }
+		}
+		
+		string IMediaItem.Status
+		{
+			get { return null; }
+			set { }
+		}
+		
+		string IMediaItem.Type
+		{
+			get { return null; }
+			set { }
 		}
 		#endregion
 
@@ -237,6 +268,7 @@ namespace Alexandria.MusicDns
 		public Guid Id
 		{
 			get { return id; }
+			set { }
 		}
 				
 		public IList<IMetadataIdentifier> MetadataIdentifiers
@@ -247,40 +279,12 @@ namespace Alexandria.MusicDns
 		public Uri Path
 		{
 			get { return path; }
+			set { }
 		}
 
 		public string Name
 		{
 			get { return Track; }
-		}
-		#endregion
-		
-		#region IRecord Members
-		public IRecord Parent
-		{
-			get { return parent; }
-			set { parent = value; }
-		}
-		
-		public IPersistenceBroker PersistenceBroker
-		{
-			get { return persistenceBroker; }
-			set { persistenceBroker = value; }
-		}
-		
-		public bool IsProxy
-		{
-			get { return false; }
-		}
-		
-		public void Save()
-		{
-			persistenceBroker.SaveRecord(this);
-		}
-		
-		public void Delete()
-		{
-			persistenceBroker.DeleteRecord(this);
 		}
 		#endregion
 	}

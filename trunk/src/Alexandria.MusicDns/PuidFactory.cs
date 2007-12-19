@@ -28,8 +28,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
 using Alexandria.Persistence;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.MusicDns
 {
@@ -44,10 +45,9 @@ namespace Alexandria.MusicDns
 		#endregion
 	
 		#region Public Static Methods
-		internal static IMetadataIdentifier CreatePuid(string value, IMetadata parent)
+		internal static IMetadataIdentifier CreatePuid(string value)
 		{
-			IMetadataIdentifier identifier = new MetadataIdentifier(Guid.NewGuid(), value, ID_TYPE, version);
-			identifier.MetadataParent = parent;
+			IMetadataIdentifier identifier = new MetadataIdentifier(value, ID_TYPE, version);
 			return identifier;
 		}
 		#endregion

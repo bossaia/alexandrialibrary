@@ -7,7 +7,7 @@
     <ProjectGuid>{990880C8-F72C-45F8-8B9B-A59238ABAB42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.DataMapping</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.DataMapping</RootNamespace>
     <AssemblyName>Alexandria.DataMapping</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

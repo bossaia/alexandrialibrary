@@ -31,7 +31,7 @@ using System.Text;
 
 namespace Alexandria.IO
 {
-	public interface IAudioStream
+	public interface IAudioStream : IMediaStream
 	{
 		float Volume { get; set; }
 		bool IsMuted { get; set; }

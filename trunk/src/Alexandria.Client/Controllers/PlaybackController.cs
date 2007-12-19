@@ -31,9 +31,10 @@ using System.Windows.Forms;
 
 using Alexandria.LastFM;
 using Alexandria.Media;
-using Alexandria.Media.IO;
-using Alexandria.Metadata;
+using Alexandria.IO;
 using Alexandria.Fmod;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.Client.Controllers
 {
@@ -193,7 +194,7 @@ namespace Alexandria.Client.Controllers
 				
 		#region Public Methods
 		//TODO: move this method into its own controller
-		public void SubmitTrackToLastFM(IAudioTrack track)
+		public void SubmitTrackToLastFM(IMediaItem track)
 		{
 			try
 			{

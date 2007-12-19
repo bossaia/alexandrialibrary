@@ -618,7 +618,7 @@ namespace Alexandria.Client
 			if (queueController.SelectedTrack != null)
 			{
 				string artist = (!string.IsNullOrEmpty(queueController.SelectedTrack.Artist)) ? queueController.SelectedTrack.Artist : "Unknown Artist";
-				string title = (!string.IsNullOrEmpty(queueController.SelectedTrack.Name)) ? queueController.SelectedTrack.Name : "Untitled";
+				string title = (!string.IsNullOrEmpty(queueController.SelectedTrack.Title)) ? queueController.SelectedTrack.Title : "Untitled";
 				NowPlayingLabel.Text = string.Format("{0} - {1}", artist, title);
 			}
 			else NowPlayingLabel.Text = string.Empty;
@@ -960,6 +960,9 @@ namespace Alexandria.Client
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
+				//TODO: only close on valid input - otherwise prompt with an in invalid filter error message
+				filterContextMenuStrip.Close();
+				
 				string value = filterContextMenuItemAddFilter.Text;
 
 				string column = DEFAULT_COLUMN_FILTER;
@@ -974,6 +977,15 @@ namespace Alexandria.Client
 				item.Tag = column;
 				filterListView.Items.Add(item);
 
+				filterButton_Click(this, EventArgs.Empty);
+			}
+		}
+
+		private void filterContextMenuItemClearAll_Click(object sender, EventArgs e)
+		{
+			if (filterListView.Items.Count > 0)
+			{
+				filterListView.Items.Clear();
 				filterButton_Click(this, EventArgs.Empty);
 			}
 		}

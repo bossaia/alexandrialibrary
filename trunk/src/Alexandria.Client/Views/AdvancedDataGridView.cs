@@ -31,7 +31,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-using Alexandria.Metadata;
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.Client.Views
 {

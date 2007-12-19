@@ -33,7 +33,7 @@ using System.Data.SQLite;
 using System.IO;
 using System.Text;
 
-using Alexandria.Persistence;
+using Telesophy.Alexandria.Persistence;
 
 namespace Alexandria.Persistence.SQLite
 {

@@ -4,10 +4,11 @@ using System.Configuration;
 using System.Text;
 
 using Alexandria;
-using Alexandria.DataMapping;
-using Alexandria.Metadata;
 using Alexandria.Persistence;
 using Alexandria.Persistence.SQLite;
+
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Model.Data;
 
 namespace Alexandria.Client.Controllers
 {

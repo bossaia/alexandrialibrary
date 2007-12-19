@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace Alexandria.Persistence
+namespace Telesophy.Alexandria.Persistence
 {
 	public interface IPersistenceEngine
 	{

@@ -31,14 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Alexandria, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Alexandria\bin\Debug\Alexandria.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioStreamFactory.cs" />
@@ -68,7 +62,6 @@
     <Compile Include="LocalSound.cs" />
     <Compile Include="LocalSoundLoaded.cs" />
     <Compile Include="LocalSoundNotLoaded.cs" />
-    <Compile Include="AlexandriaPlugin.cs" />
     <Compile Include="ProxyCompactDiscTrack.cs" />
     <Compile Include="RemoteSound.cs" />
     <Compile Include="SoundFormat.cs" />
@@ -107,12 +100,18 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.Fmod.bmp" />
+    <EmbeddedResource Include="Alexandria.IO.Fmod.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.Fmod.dll.config">
+    <None Include="Alexandria.IO.Fmod.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.IO\Alexandria.IO.csproj">
+      <Project>{97449DEA-C759-4E22-B287-305CA0023749}</Project>
+      <Name>Alexandria.IO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
