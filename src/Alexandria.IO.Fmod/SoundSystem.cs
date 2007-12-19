@@ -1679,9 +1679,12 @@ namespace Alexandria.Fmod
 				currentResult = Result.Ok;
 				IntPtr channelHandle;			
 
+				bool wasMuted = false;
+
 				if (channel != null)
 				{
 					channelHandle = channel.Handle;
+					wasMuted = channel.Mute;
 				}
 				else
 				{
@@ -1700,7 +1703,12 @@ namespace Alexandria.Fmod
 				
 				if (currentResult == Result.Ok)
 				{
-					channel.Handle = channelHandle;				
+					channel.Handle = channelHandle;
+					
+					if (wasMuted)
+					{
+						channel.Mute = true;
+					}
 				}
 				else
 				{
