@@ -28,14 +28,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Alexandria.Media;
 
-namespace Alexandria.Playlist
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
 	public class M3uPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public M3uPlaylist(Uri path) : base(path, new M3uFormat())
+		public M3uPlaylist(Uri path) : base(path) //, new M3uFormat())
 		{
 
 		}

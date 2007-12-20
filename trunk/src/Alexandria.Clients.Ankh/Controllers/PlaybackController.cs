@@ -29,9 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-using Alexandria.LastFM;
-using Alexandria.Media;
 using Alexandria.IO;
+using Alexandria.LastFM;
 using Alexandria.Fmod;
 
 using Telesophy.Alexandria.Model;

@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,8 +7,8 @@
     <ProjectGuid>{846AB010-03EA-4B52-A6BE-281BD732AE7E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.AlbumArtDownloader</RootNamespace>
-    <AssemblyName>Alexandria.AlbumArtDownloader</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Services.AlbumArtDownloader</RootNamespace>
+    <AssemblyName>Alexandria.Services.AlbumArtDownloader</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -54,7 +54,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.AlbumArtDownloader.dll.config">
+    <None Include="Alexandria.Services.AlbumArtDownloader.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
@@ -63,7 +63,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.AlbumArtDownloader.bmp" />
+    <EmbeddedResource Include="Alexandria.Services.AlbumArtDownloader.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

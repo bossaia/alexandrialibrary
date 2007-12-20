@@ -27,49 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using Alexandria.IO;
+using System.Text;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
-	public class PlaybackEventArgs : EventArgs
+	public interface IPlaylist
 	{
-		#region Constructors
-		public PlaybackEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
-		{
-			this.bufferState = bufferState;
-			this.networkState = networkState;
-			this.playbackState = playbackState;
-			this.seekState = seekState;
-		}
-		#endregion
-		
-		#region Private Fields
-		private BufferState bufferState = BufferState.None;
-		private NetworkState networkState = NetworkState.None;
-		private PlaybackState playbackState = PlaybackState.None;
-		private SeekState seekState = SeekState.None;
-		#endregion
-		
-		#region Public Properties
-		public BufferState BufferState
-		{
-			get { return bufferState; }
-		}
-		
-		public NetworkState NetworkState
-		{
-			get { return networkState; }
-		}
-		
-		public PlaybackState PlaybackState
-		{
-			get { return playbackState; }
-		}
-		
-		private SeekState SeekState
-		{
-			get { return seekState; }
-		}
-		#endregion
+		IList<IPlaylistItem> Items { get; }
+		void Load();
+		void Save();
 	}
 }

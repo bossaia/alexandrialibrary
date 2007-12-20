@@ -7,8 +7,8 @@
     <ProjectGuid>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.CompactDiscTools</RootNamespace>
-    <AssemblyName>Alexandria.CompactDiscTools</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Extensions.CompactDisc</RootNamespace>
+    <AssemblyName>Alexandria.Extensions.CompactDisc</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="CddaToWave.cs" />
     <Compile Include="CDRecord.cs" />
-    <Compile Include="Plugin.cs" />
     <Compile Include="ConsoleTool.cs" />
     <Compile Include="TableOfContents.cs" />
     <Compile Include="DeviceDump.cs" />
@@ -51,16 +50,10 @@
     <Compile Include="ReadCD.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Alexandria.Extensions.CompactDisc.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.CompactDiscTools.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Alexandria.CompactDiscTools.dll.config">
+    <None Include="Alexandria.Extensions.CompactDisc.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

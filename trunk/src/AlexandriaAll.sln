@@ -1,26 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria", "Alexandria\Alexandria.csproj", "{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.AsciiGenerator", "Alexandria.Extensions.AsciiGenerator\Alexandria.Extensions.AsciiGenerator.csproj", "{12384EBE-18DD-4C4C-AFE3-10D84B06E718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.AsciiGenerator", "Alexandria.Extensions.AsciiGenerator\Alexandria.AsciiGenerator.csproj", "{12384EBE-18DD-4C4C-AFE3-10D84B06E718}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Client", "Alexandria.Clients.Ankh\Alexandria.Client.csproj", "{3095580F-8714-4D19-B88E-DB51162D112B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Clients.Ankh", "Alexandria.Clients.Ankh\Alexandria.Clients.Ankh.csproj", "{3095580F-8714-4D19-B88E-DB51162D112B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO.Fmod", "Alexandria.IO.Fmod\Alexandria.IO.Fmod.csproj", "{AF78BF83-2D82-49D4-BEF3-F492E33E2316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.LastFM", "Alexandria.Services.LastFM\Alexandria.LastFM.csproj", "{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services.LastFM", "Alexandria.Services.LastFM\Alexandria.Services.LastFM.csproj", "{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.MusicBrainz", "Alexandria.Services.MusicBrainz\Alexandria.MusicBrainz.csproj", "{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services.MusicBrainz", "Alexandria.Services.MusicBrainz\Alexandria.Services.MusicBrainz.csproj", "{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TagLib", "Alexandria.Extensions.TagLib\Alexandria.TagLib.csproj", "{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.TagLib", "Alexandria.Extensions.TagLib\Alexandria.Extensions.TagLib.csproj", "{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.CompactDiscTools", "Alexandria.Extensions.CompactDisc\Alexandria.CompactDiscTools.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.CompactDisc", "Alexandria.Extensions.CompactDisc\Alexandria.Extensions.CompactDisc.csproj", "{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Mp3Tunes", "Alexandria.Services.Mp3Tunes\Alexandria.Mp3Tunes.csproj", "{E2B3A41A-4F81-40D1-933C-A792AC523F52}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services.Mp3Tunes", "Alexandria.Services.Mp3Tunes\Alexandria.Services.Mp3Tunes.csproj", "{E2B3A41A-4F81-40D1-933C-A792AC523F52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.MusicDns", "Alexandria.Services.MusicDns\Alexandria.MusicDns.csproj", "{45EADD97-2719-4805-86BE-D95719932895}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services.MusicDns", "Alexandria.Services.MusicDns\Alexandria.Services.MusicDns.csproj", "{45EADD97-2719-4805-86BE-D95719932895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Playlist", "Alexandria.Extensions.Playlist\Alexandria.Playlist.csproj", "{5373D021-353C-47FE-9BB0-7F6E22F06594}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.Playlist", "Alexandria.Extensions.Playlist\Alexandria.Extensions.Playlist.csproj", "{5373D021-353C-47FE-9BB0-7F6E22F06594}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO", "Alexandria.IO\Alexandria.IO.csproj", "{97449DEA-C759-4E22-B287-305CA0023749}"
 EndProject
@@ -42,10 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}.Release|Any CPU.Build.0 = Release|Any CPU
 		{12384EBE-18DD-4C4C-AFE3-10D84B06E718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{12384EBE-18DD-4C4C-AFE3-10D84B06E718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12384EBE-18DD-4C4C-AFE3-10D84B06E718}.Release|Any CPU.ActiveCfg = Release|Any CPU

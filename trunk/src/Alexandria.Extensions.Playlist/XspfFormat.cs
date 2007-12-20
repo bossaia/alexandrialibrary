@@ -28,17 +28,16 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Mime;
-using Alexandria.Media;
 
-namespace Alexandria.Playlist
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
-	public class XspfFormat : BaseMediaFormat
+	public class XspfFormat //: BaseMediaFormat
 	{
 		#region Constructors
-		public XspfFormat() : base("XML Shareable Playlist Format", "")
+		public XspfFormat() //: base("XML Shareable Playlist Format", "")
 		{
-			this.ContentTypes.Add(new ContentType("application/xspf+xml"));
-			this.FileExtensions.Add("xspf");
+			//this.ContentTypes.Add(new ContentType("application/xspf+xml"));
+			//this.FileExtensions.Add("xspf");
 		}
 		#endregion		
 	}

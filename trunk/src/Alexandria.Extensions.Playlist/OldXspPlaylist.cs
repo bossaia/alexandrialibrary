@@ -29,14 +29,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using Alexandria.Media;
 
-namespace Alexandria.Playlist
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
 	public class OldXspPlaylist : BasePlaylist
 	{
 		#region Constructors
-		public OldXspPlaylist(Uri path) : base(path, new XspfFormat())
+		public OldXspPlaylist(Uri path) : base(path) //, new XspfFormat())
 		{
 		}
 		#endregion

@@ -53,11 +53,11 @@ namespace Alexandria.Client
 		#region Private Methods
 		public void RefreshData()
 		{
-			Text =  pluginController.PluginInfo.Title;
-			Version.Text = pluginController.PluginInfo.Version.ToString();
-			if (pluginController.PluginInfo.Bitmap != null)
-				this.Icon = Icon.FromHandle(pluginController.PluginInfo.Bitmap.GetHicon());
-			PluginDescription.Text = pluginController.PluginInfo.Description;
+			//Text =  pluginController.PluginInfo.Title;
+			//Version.Text = pluginController.PluginInfo.Version.ToString();
+			//if (pluginController.PluginInfo.Bitmap != null)
+				//this.Icon = Icon.FromHandle(pluginController.PluginInfo.Bitmap.GetHicon());
+			//PluginDescription.Text = pluginController.PluginInfo.Description;
 
 			/*
 			if (configurationMap != null && configurationMap.Settings != null)

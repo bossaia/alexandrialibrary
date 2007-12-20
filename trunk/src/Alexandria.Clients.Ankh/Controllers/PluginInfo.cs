@@ -30,10 +30,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 
-using Alexandria.Plugins;
-
 namespace Alexandria.Client.Controllers
 {
+	/*
 	public class PluginInfo
 	{
 		#region Constructors
@@ -97,4 +96,5 @@ namespace Alexandria.Client.Controllers
 		}
 		#endregion
 	}
+	*/
 }

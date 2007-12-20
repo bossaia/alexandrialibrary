@@ -36,22 +36,21 @@ using System.Windows.Forms;
 
 using Alexandria;
 using Alexandria.Client.Views;
-using Alexandria.Media;
 using Alexandria.IO;
 using Alexandria.Persistence;
-using Alexandria.Plugins;
 
 using Alexandria.AsciiGenerator;
 using Alexandria.CompactDiscTools;
 using Alexandria.Fmod;
 using Alexandria.LastFM;
 using Alexandria.MusicDns;
-using Alexandria.Playlist;
 using Alexandria.TagLib;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Mp3Tunes;
 using Telesophy.Alexandria.MusicBrainz;
+
+using Telesophy.Alexandria.Extensions.Playlist;
 #endregion
 
 namespace Alexandria.Client.Controllers
@@ -560,7 +559,7 @@ namespace Alexandria.Client.Controllers
 			}
 			catch (Exception ex)
 			{
-				throw new AlexandriaException("There was an error loading tracks from your MP3tunes locker", ex);
+				throw new ApplicationException("There was an error loading tracks from your MP3tunes locker", ex);
 			}
 		}
 
