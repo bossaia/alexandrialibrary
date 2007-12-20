@@ -1,14 +1,14 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{45EADD97-2719-4805-86BE-D95719932895}</ProjectGuid>
+    <ProjectGuid>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.MusicDns</RootNamespace>
-    <AssemblyName>Alexandria.MusicDns</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Services.MusicBrainz</RootNamespace>
+    <AssemblyName>Alexandria.Services.MusicBrainz</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -35,44 +35,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="metadata.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>metadata.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="MetadataFactory.cs" />
+    <Compile Include="MusicBrainzConstants.cs" />
+    <Compile Include="MusicBrainzIdFactory.cs" />
+    <Compile Include="Utility.cs" />
+    <Compile Include="IWindowsNetworkControl.cs" />
+    <Compile Include="MusicBrainzClient.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Rdf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PuidFactory.cs" />
-    <Compile Include="TrackInfo.cs" />
+    <Compile Include="SimpleAlbum.cs" />
+    <Compile Include="SimpleAlbumFactory.cs" />
+    <Compile Include="SimpleArtist.cs" />
+    <Compile Include="SimpleDisc.cs" />
+    <Compile Include="SimpleDiscTest.cs" />
+    <Compile Include="SimpleLookupTest.cs" />
+    <Compile Include="SimpleQuery.cs" />
+    <Compile Include="SimpleTrack.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="Trm.cs" />
+    <Compile Include="Utf8NativeWrapper.cs" />
+    <Compile Include="WindowsNetworkControl.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alexandria.Services.MusicBrainz.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alexandria.Services.MusicBrainz.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Alexandria.MusicDns.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="metadata.xsc">
-      <DependentUpon>metadata.xsd</DependentUpon>
-    </None>
-    <None Include="metadata.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>metadata.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="metadata.xss">
-      <DependentUpon>metadata.xsd</DependentUpon>
-    </None>
-    <None Include="metadata.xsx">
-      <DependentUpon>metadata.xsd</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.MusicDns.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

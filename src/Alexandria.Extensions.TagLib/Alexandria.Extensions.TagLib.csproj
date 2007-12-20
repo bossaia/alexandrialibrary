@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,8 +7,8 @@
     <ProjectGuid>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.TagLib</RootNamespace>
-    <AssemblyName>Alexandria.TagLib</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Extensions.TagLib</RootNamespace>
+    <AssemblyName>Alexandria.Extensions.TagLib</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -146,10 +146,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.TagLib.bmp" />
+    <EmbeddedResource Include="Alexandria.Extensions.TagLib.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.TagLib.dll.config">
+    <None Include="Alexandria.Extensions.TagLib.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

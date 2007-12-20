@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -7,8 +7,8 @@
     <ProjectGuid>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.Mp3Tunes</RootNamespace>
-    <AssemblyName>Alexandria.Mp3Tunes</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Services.Mp3Tunes</RootNamespace>
+    <AssemblyName>Alexandria.Services.Mp3Tunes</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -48,10 +48,10 @@
     <Compile Include="TrackIdFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.Mp3Tunes.bmp" />
+    <EmbeddedResource Include="Alexandria.Services.Mp3Tunes.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Alexandria.Mp3Tunes.dll.config">
+    <None Include="Alexandria.Services.Mp3Tunes.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

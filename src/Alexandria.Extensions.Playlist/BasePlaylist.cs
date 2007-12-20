@@ -27,48 +27,79 @@
 
 using System;
 using System.Collections.Generic;
-using Alexandria.IO;
+using System.Text;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
-	public class PlaybackEventArgs : EventArgs
+	public class BasePlaylist : IPlaylist
 	{
 		#region Constructors
-		public PlaybackEventArgs(BufferState bufferState, NetworkState networkState, PlaybackState playbackState, SeekState seekState)
+		protected BasePlaylist(Uri path) //, IMediaFormat format)
 		{
-			this.bufferState = bufferState;
-			this.networkState = networkState;
-			this.playbackState = playbackState;
-			this.seekState = seekState;
+			this.path = path;
+			//this.format = format;
 		}
+
+		//protected BasePlaylist(Uri path, IMediaFormat format, string name, Version version)
+		//    : this(path, format)
+		//{
+		//    this.name = name;
+		//    this.version = version;
+		//}
 		#endregion
-		
+
 		#region Private Fields
-		private BufferState bufferState = BufferState.None;
-		private NetworkState networkState = NetworkState.None;
-		private PlaybackState playbackState = PlaybackState.None;
-		private SeekState seekState = SeekState.None;
+		private Uri path;
+		//private IMediaFormat format;
+		private string name;
+		private Version version;
+		private IList<IPlaylistItem> items = new List<IPlaylistItem>();
+		private Guid id = Guid.NewGuid();
 		#endregion
-		
+
 		#region Public Properties
-		public BufferState BufferState
+		public string Name
 		{
-			get { return bufferState; }
+			get { return name; }
+			protected set { name = value; }
 		}
-		
-		public NetworkState NetworkState
+
+		public Version Version
 		{
-			get { return networkState; }
+			get { return version; }
+			protected set { version = value; }
 		}
-		
-		public PlaybackState PlaybackState
+		#endregion
+
+		#region IMedia Members
+		public Guid Id
 		{
-			get { return playbackState; }
+			get { return id; }
 		}
-		
-		private SeekState SeekState
+
+		public Uri Path
 		{
-			get { return seekState; }
+			get { return path; }
+		}
+
+		//public IMediaFormat Format
+		//{
+			//get { return format; }
+		//}
+		#endregion
+
+		#region IPlaylist Members
+		public IList<IPlaylistItem> Items
+		{
+			get { return items; }
+		}
+
+		public virtual void Load()
+		{
+		}
+
+		public virtual void Save()
+		{
 		}
 		#endregion
 	}

@@ -34,7 +34,6 @@ using System.Reflection;
 using System.Windows.Forms;
 
 using Alexandria.Client;
-using Alexandria.Plugins;
 
 namespace Alexandria.Client.Controllers
 {
@@ -47,9 +46,9 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Private Fields
-		private IPluginRepository repository;
-		private PluginInfo pluginInfo;
-		private ConfigurationMap configurationMap;
+		//private IPluginRepository repository;
+		//private PluginInfo pluginInfo;
+		//private ConfigurationMap configurationMap;
 		#endregion
 
 		#region Private Methods
@@ -110,19 +109,19 @@ namespace Alexandria.Client.Controllers
 		#endregion
 
 		#region Public Properties
-		public PluginInfo PluginInfo
-		{
-			get { return pluginInfo; }
-			set
-			{
-				pluginInfo = value;
-				if (value != null)
-				{
-					configurationMap = pluginInfo.ConfigurationMap;
-					//RefreshData();
-				}
-			}
-		}
+		//public PluginInfo PluginInfo
+		//{
+		//    get { return pluginInfo; }
+		//    set
+		//    {
+		//        pluginInfo = value;
+		//        if (value != null)
+		//        {
+		//            configurationMap = pluginInfo.ConfigurationMap;
+		//            //RefreshData();
+		//        }
+		//    }
+		//}
 		#endregion
 
 		#region Public Methods
@@ -135,7 +134,7 @@ namespace Alexandria.Client.Controllers
 					files.Add(new FileInfo(path));
 			}
 			
-			repository = new PluginRepository(files);
+			//repository = new PluginRepository(files);
 		}
 		
 		public void LoadAboutForm(About about)
@@ -149,19 +148,18 @@ namespace Alexandria.Client.Controllers
 			license = license.Replace("\\n", "\r\n");
 
 			int i = 0;
-			foreach (PluginInfo plugin in GetPluginInfo())
-			{
-				if (plugin.Bitmap != null)
-					pluginImages.Add(plugin.Bitmap);
-					//ImageList.Images.Add(plugin.Bitmap);
+			//foreach (PluginInfo plugin in GetPluginInfo())
+			//{
+			//    if (plugin.Bitmap != null)
+			//        pluginImages.Add(plugin.Bitmap);
 
-				ListViewItem item = new ListViewItem(new string[] { plugin.Title, plugin.Version.ToString() } , i);
-				item.ToolTipText = plugin.Description;
-				pluginItems.Add(item);
-				i++;
-			}
+			//    ListViewItem item = new ListViewItem(new string[] { plugin.Title, plugin.Version.ToString() } , i);
+			//    item.ToolTipText = plugin.Description;
+			//    pluginItems.Add(item);
+			//    i++;
+			//}
 			
-			about.LoadForm(version, license, pluginItems, pluginImages);
+			//about.LoadForm(version, license, pluginItems, pluginImages);
 		}
 		
 		public void Load()
@@ -172,64 +170,61 @@ namespace Alexandria.Client.Controllers
 		{
 		}
 
-		public IList<PluginInfo> GetPluginInfo()
-		{
-			IList<PluginInfo> plugins = new List<PluginInfo>();
+		//public IList<PluginInfo> GetPluginInfo()
+		//{
+		//    IList<PluginInfo> plugins = new List<PluginInfo>();
 			
-			if (repository != null)
-			{
-				foreach (IPlugin plugin in repository.Plugins.Values)
-				{
-					Assembly assembly = plugin.Assembly;
-					bool enabled = plugin.Enabled;
+		//    if (repository != null)
+		//    {
+		//        foreach (IPlugin plugin in repository.Plugins.Values)
+		//        {
+		//            Assembly assembly = plugin.Assembly;
+		//            bool enabled = plugin.Enabled;
 					
-					string title = "Unknown Plugin";
-					string description = "This plugin could not be identified";
-					Version version = new Version(1, 0, 0, 0);
-					FileInfo assemblyFile = new FileInfo(assembly.Location);
-					string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
-					Bitmap bitmap = null;
+		//            string title = "Unknown Plugin";
+		//            string description = "This plugin could not be identified";
+		//            Version version = new Version(1, 0, 0, 0);
+		//            FileInfo assemblyFile = new FileInfo(assembly.Location);
+		//            string imageFileName = assemblyFile.Name.Replace(".dll", string.Empty) + "." + assemblyFile.Name.Replace(".dll", ".bmp");
+		//            Bitmap bitmap = null;
 
-					try
-					{
-						bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
-					}
-					catch (Exception ex)
-					{
-						throw new AlexandriaException("There was an error loading the icon for plugin " + assembly.Location, ex);
-					}
+		//            try
+		//            {
+		//                bitmap = new Bitmap(assembly.GetManifestResourceStream(imageFileName));
+		//            }
+		//            catch (Exception ex)
+		//            {
+		//                throw new AlexandriaException("There was an error loading the icon for plugin " + assembly.Location, ex);
+		//            }
 
-					foreach (Attribute attribute in assembly.GetCustomAttributes(false))
-					{
-						if (attribute is AssemblyTitleAttribute)
-						{
-							AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
-							title = titleAttribute.Title;
-						}
-						else if (attribute is AssemblyDescriptionAttribute)
-						{
-							AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
-							description = descriptionAttribute.Description;
-						}
-						else if (attribute is AssemblyVersionAttribute)
-						{
-							AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
-							version = new Version(versionAttribute.Version);
-						}
-					}
+		//            foreach (Attribute attribute in assembly.GetCustomAttributes(false))
+		//            {
+		//                if (attribute is AssemblyTitleAttribute)
+		//                {
+		//                    AssemblyTitleAttribute titleAttribute = attribute as AssemblyTitleAttribute;
+		//                    title = titleAttribute.Title;
+		//                }
+		//                else if (attribute is AssemblyDescriptionAttribute)
+		//                {
+		//                    AssemblyDescriptionAttribute descriptionAttribute = attribute as AssemblyDescriptionAttribute;
+		//                    description = descriptionAttribute.Description;
+		//                }
+		//                else if (attribute is AssemblyVersionAttribute)
+		//                {
+		//                    AssemblyVersionAttribute versionAttribute = attribute as AssemblyVersionAttribute;
+		//                    version = new Version(versionAttribute.Version);
+		//                }
+		//            }
 
-					ConfigurationMap configMap = null;
-					//if (repository.ConfigurationMaps.ContainsKey(assembly))
-						//configMap = repository.ConfigurationMaps[assembly];
+		//            ConfigurationMap configMap = null;						
+		//            PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
+
+		//            plugins.Add(info);
+		//        }
+		//    }
 						
-					PluginInfo info = new PluginInfo(assembly, configMap, enabled, title, description, version, bitmap);
-
-					plugins.Add(info);
-				}
-			}
-						
-			return plugins;
-		}
+		//    return plugins;
+		//}
 		#endregion
 	}
 }

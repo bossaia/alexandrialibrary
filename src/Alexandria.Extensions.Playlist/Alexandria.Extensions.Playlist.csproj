@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</ProjectGuid>
+    <ProjectGuid>{5373D021-353C-47FE-9BB0-7F6E22F06594}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.LastFM</RootNamespace>
-    <AssemblyName>Alexandria.LastFM</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Extensions.Playlist</RootNamespace>
+    <AssemblyName>Alexandria.Extensions.Playlist</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -32,45 +32,45 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioscrobblerException.cs" />
-    <Compile Include="AudioscrobblerRequest.cs" />
-    <Compile Include="AudioscrobblerResponse.cs" />
-    <Compile Include="AudioscrobblerResponseType.cs" />
-    <Compile Include="AudioscrobblerTrack.cs" />
-    <Compile Include="Plugin.cs" />
-    <Compile Include="IAudioscrobblerTrack.cs" />
-    <Compile Include="LastRipper\IMetaMusic.cs" />
-    <Compile Include="LastRipper\LastManager.Command.cs" />
-    <Compile Include="LastRipper\LastManager.cs" />
-    <Compile Include="LastRipper\LastManager.MetaInfo.cs" />
-    <Compile Include="LastRipper\LastManager.Stream.cs" />
-    <Compile Include="LastRipper\MetaInfo.cs" />
-    <Compile Include="LastRipper\MetaMusic.cs" />
-    <Compile Include="LastRipper\PathSettings.cs" />
-    <Compile Include="LastRipper\Playlist.cs" />
-    <Compile Include="LastRipper\PlaylistFactory.cs" />
+    <Compile Include="BasePlaylist.cs" />
+    <Compile Include="IPlaylist.cs" />
+    <Compile Include="IPlaylistItem.cs" />
+    <Compile Include="M3uFormat.cs" />
+    <Compile Include="M3uPlaylist.cs" />
+    <Compile Include="PlaylistFactory.cs" />
+    <Compile Include="PlaylistFormat.cs" />
+    <Compile Include="PlaylistItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XspfFormat.cs" />
+    <Compile Include="OldXspPlaylist.cs" />
+    <Compile Include="Xspf\Album.cs" />
+    <Compile Include="Xspf\Annotation.cs" />
+    <Compile Include="Xspf\Creator.cs" />
+    <Compile Include="Xspf\Date.cs" />
+    <Compile Include="Xspf\Duration.cs" />
+    <Compile Include="Xspf\IAttributable.cs" />
+    <Compile Include="Xspf\Identifier.cs" />
+    <Compile Include="Xspf\Info.cs" />
+    <Compile Include="Xspf\License.cs" />
+    <Compile Include="Xspf\Location.cs" />
+    <Compile Include="Xspf\Title.cs" />
+    <Compile Include="Xspf\Attribution.cs" />
+    <Compile Include="Xspf\Extension.cs" />
+    <Compile Include="Xspf\Link.cs" />
+    <Compile Include="Xspf\Metadata.cs" />
+    <Compile Include="Xspf\TrackNumber.cs" />
+    <Compile Include="Xspf\XspfImage.cs" />
+    <Compile Include="Xspf\XspfPlaylist.cs" />
+    <Compile Include="Xspf\Track.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
-      <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
-      <Name>Alexandria.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Alexandria.Extensions.Playlist.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Alexandria.LastFM.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Alexandria.LastFM.dll.config">
+    <None Include="Alexandria.Extensions.Playlist.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

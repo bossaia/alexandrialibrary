@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</ProjectGuid>
+    <ProjectGuid>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.MusicBrainz</RootNamespace>
-    <AssemblyName>Alexandria.MusicBrainz</AssemblyName>
+    <RootNamespace>Alexandria.Services.LastFM</RootNamespace>
+    <AssemblyName>Alexandria.Services.LastFM</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
@@ -32,43 +32,42 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MusicBrainzConstants.cs" />
-    <Compile Include="MusicBrainzIdFactory.cs" />
-    <Compile Include="Utility.cs" />
-    <Compile Include="IWindowsNetworkControl.cs" />
-    <Compile Include="MusicBrainzClient.cs" />
-    <Compile Include="NativeMethods.cs" />
-    <Compile Include="Rdf.cs" />
+    <Compile Include="AudioscrobblerException.cs" />
+    <Compile Include="AudioscrobblerRequest.cs" />
+    <Compile Include="AudioscrobblerResponse.cs" />
+    <Compile Include="AudioscrobblerResponseType.cs" />
+    <Compile Include="AudioscrobblerTrack.cs" />
+    <Compile Include="IAudioscrobblerTrack.cs" />
+    <Compile Include="LastRipper\IMetaMusic.cs" />
+    <Compile Include="LastRipper\LastManager.Command.cs" />
+    <Compile Include="LastRipper\LastManager.cs" />
+    <Compile Include="LastRipper\LastManager.MetaInfo.cs" />
+    <Compile Include="LastRipper\LastManager.Stream.cs" />
+    <Compile Include="LastRipper\MetaInfo.cs" />
+    <Compile Include="LastRipper\MetaMusic.cs" />
+    <Compile Include="LastRipper\PathSettings.cs" />
+    <Compile Include="LastRipper\Playlist.cs" />
+    <Compile Include="LastRipper\PlaylistFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleAlbum.cs" />
-    <Compile Include="SimpleAlbumFactory.cs" />
-    <Compile Include="SimpleArtist.cs" />
-    <Compile Include="SimpleDisc.cs" />
-    <Compile Include="SimpleDiscTest.cs" />
-    <Compile Include="SimpleLookupTest.cs" />
-    <Compile Include="SimpleQuery.cs" />
-    <Compile Include="SimpleTrack.cs" />
-    <Compile Include="Structs.cs" />
-    <Compile Include="Trm.cs" />
-    <Compile Include="Utf8NativeWrapper.cs" />
-    <Compile Include="WindowsNetworkControl.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Alexandria.MusicBrainz.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Alexandria.MusicBrainz.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Alexandria.Services.LastFM.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Alexandria.Services.LastFM.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

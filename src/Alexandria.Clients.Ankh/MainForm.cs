@@ -246,16 +246,16 @@ namespace Alexandria.Client
 		#region InitializePluginMenu
 		private void InitializePluginMenu()
 		{
-			pluginsToolStripMenuItem.DropDown.Items.Clear();
+			//pluginsToolStripMenuItem.DropDown.Items.Clear();
 
-			IList<PluginInfo> plugins = pluginController.GetPluginInfo();
-			foreach (PluginInfo plugin in plugins)
-			{
-				ToolStripMenuItem item = new ToolStripMenuItem(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
-				item.ToolTipText = plugin.Description;
-				item.Tag = plugin;
-				pluginsToolStripMenuItem.DropDown.Items.Add(item);				
-			}
+			//IList<PluginInfo> plugins = pluginController.GetPluginInfo();
+			//foreach (PluginInfo plugin in plugins)
+			//{
+			//    ToolStripMenuItem item = new ToolStripMenuItem(plugin.Title, (Image)plugin.Bitmap, new EventHandler(pluginConfigItem_Click));
+			//    item.ToolTipText = plugin.Description;
+			//    item.Tag = plugin;
+			//    pluginsToolStripMenuItem.DropDown.Items.Add(item);				
+			//}
 		}		
 		#endregion
 		

@@ -27,9 +27,8 @@
 
 using System;
 using System.Collections.Generic;
-using Alexandria.Media;
 
-namespace Alexandria.Playlist
+namespace Telesophy.Alexandria.Extensions.Playlist
 {
 	public class PlaylistFactory
 	{
