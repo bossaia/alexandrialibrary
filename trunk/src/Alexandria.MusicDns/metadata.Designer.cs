@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace Alexandria.MusicDns {
+namespace Telesophy.Alexandria.MusicDns {
     using System;
     
     
