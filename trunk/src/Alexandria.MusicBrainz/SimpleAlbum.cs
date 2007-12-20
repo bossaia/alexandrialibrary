@@ -32,79 +32,33 @@ using System;
 using System.Collections.Generic;
 using System.Security.Permissions;
 using System.Text;
-using Alexandria;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
+using Telesophy.Alexandria.Model;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
-	[Record("Album")]
-	[RecordType("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-    internal class SimpleAlbum : IOldAlbum
+    internal class SimpleAlbum : Album
     {
 		#region Constructors
-		public SimpleAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
+		public SimpleAlbum(Guid id, string title, string artist, DateTime date, Uri path)
+			: base(id, MusicBrainzConstants.SOURCE, 0, title, artist, date, path, null)
 		{
-			this.id = id;
-			this.path = path;
-			this.name = name;
-			this.artist = artist;
-			this.releaseDate = releaseDate;
 		}
 		#endregion
     
 		#region Private Fields
-		private Guid id;
-		private IRecord parent;
-		private IPersistenceBroker broker;
-		
-		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
-		private Uri path;
-		private string name;
-				
-		private string artist;
-		private DateTime releaseDate;
-		
         private string musicBrainzId;
         private string title;
         private string asin;
         private Uri coverArtUrl;
         private bool variousArtists;
         private SimpleArtist albumArtist;
-        private IList<IAudioTrack> tracks = new List<IAudioTrack>();
         #endregion
                 
-        #region Public Methods
-        public override string ToString()
-        {
-			StringBuilder builder = new StringBuilder();
-
-			builder.AppendFormat("ID:              {0}\n", MusicBrainzId);
-            builder.AppendFormat("Album Title:     {0}\n", Title);
-            builder.AppendFormat("Amazon ASIN:     {0}\n", Asin);
-            builder.AppendFormat("Cover Art:       {0}\n", CoverArtUrl);
-            builder.AppendFormat("Various Artists: {0}\n", VariousArtists);
-			builder.AppendFormat("Release Date:    {0}\n", ReleaseDate);
-            builder.Append("Tracks:\n");
-            
-            foreach(SimpleTrack track in tracks)
-                builder.AppendFormat("{0}\n", track);
-            
-            return builder.ToString();
-        }
-        #endregion
-        
         #region Public Properties
         public string MusicBrainzId
         {
             get {return musicBrainzId;}
             internal set { musicBrainzId = value; }
-        }
-        
-        public string Title
-        {
-            get {return title;}
-            internal set { title = value; }
         }
         
         public SimpleArtist AlbumArtist
@@ -130,81 +84,26 @@ namespace Alexandria.MusicBrainz
             get { return variousArtists; }
             set { variousArtists = value; }
         }
+        #endregion
         
-        public DateTime ReleaseDate
+        #region Public Methods
+        public override string ToString()
         {
-            get {return releaseDate;}
-        }
-        
-        public IList<IAudioTrack> Tracks
-        {
-            get {return tracks;}
+			StringBuilder builder = new StringBuilder();
+
+			builder.AppendFormat("ID:              {0}\n", MusicBrainzId);
+            builder.AppendFormat("Album Title:     {0}\n", Title);
+            builder.AppendFormat("Amazon ASIN:     {0}\n", Asin);
+            builder.AppendFormat("Cover Art:       {0}\n", CoverArtUrl);
+            builder.AppendFormat("Various Artists: {0}\n", VariousArtists);
+			builder.AppendFormat("Release Date:    {0}\n", Date);
+            builder.Append("Tracks:\n");
+            
+            //foreach(SimpleTrack track in tracks)
+                //builder.AppendFormat("{0}\n", track);
+            
+            return builder.ToString();
         }
         #endregion
-
-		#region IAlbum Members
-		string IOldAlbum.Artist
-		{
-			get { return artist; }
-		}
-
-		IList<IAudioTrack> IOldAlbum.Tracks
-		{
-			get { return tracks; }
-		}
-		#endregion
-
-		#region IMetadata Members
-		public IList<IMetadataIdentifier> MetadataIdentifiers
-		{
-			get { return metadataIdentifiers; }
-		}
-
-		public Uri Path
-		{
-			get { return path; }
-		}
-
-		public string Name
-		{
-			get { return name; }
-		}
-		#endregion
-
-		#region IRecord Members
-		Guid Alexandria.Persistence.IRecord.Id
-		{
-			get { return id; }
-		}
-
-		public Alexandria.Persistence.IRecord Parent
-		{
-			get { return parent; }
-			set { parent = value; }
-		}
-
-		public Alexandria.Persistence.IPersistenceBroker PersistenceBroker
-		{
-			get { return broker; }
-			set { broker = value; }
-		}
-
-		public bool IsProxy
-		{
-			get { return false; }
-		}
-
-		public void Save()
-		{
-			if (broker != null)
-				broker.SaveRecord(this);
-		}
-
-		public void Delete()
-		{
-			if (broker != null)
-				broker.DeleteRecord(this);
-		}
-		#endregion
 	}
 }

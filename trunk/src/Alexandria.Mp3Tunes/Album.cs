@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
@@ -27,27 +27,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alexandria.Metadata;
+
+using Telesophy.Alexandria.Model;
 
 namespace Alexandria.Mp3Tunes
 {
-	public class Album : BaseAlbum
-	{
-		public Album(string name) : base(Guid.NewGuid(), null, name, null, DateTime.MinValue)
-		{
-		}
-
-		public Album(string name, string artist) : base(Guid.NewGuid(), null, name, artist, DateTime.MinValue)
-		{
-		}
-
-		public Album(Uri path, string name, string artist, DateTime releaseDate) : base(Guid.NewGuid(), path, name, artist, releaseDate)
-		{
-		}
-		
-		public Album(Guid id, Uri path, string name, string artist, DateTime releaseDate) : base(id, path, name, artist, releaseDate)
-		{
-		}
-	}
 }

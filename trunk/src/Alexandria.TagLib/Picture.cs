@@ -1,3 +1,4 @@
+#region License (LGPL)
 /***************************************************************************
     copyright            : (C) 2005 Novell, Inc.
     email                : Aaron Bockover <abockover@novell.com>
@@ -18,20 +19,19 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
  *   USA                                                                   *
  ***************************************************************************/
+#endregion
 
 using System;
 using System.Collections.Generic;
-using Alexandria;
-using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {
-    public class Picture : IPicture, IImageContainer
+    public class Picture : IPicture
     {
 		#region Constructors
 		public Picture()
 		{
-			this.resourceFormat = null;
+			//this.resourceFormat = null;
 		}
 		#endregion
     
@@ -42,7 +42,7 @@ namespace Alexandria.TagLib
         private ByteVector data;
         private Guid guid = Guid.NewGuid();
         //private Uri uri;
-        private IMediaFormat resourceFormat;
+        //private IMediaFormat resourceFormat;
         
         private Guid id = Guid.NewGuid();
         #endregion
@@ -113,67 +113,6 @@ namespace Alexandria.TagLib
 			}
 			else throw new ArgumentNullException("uri");
 		}
-		#endregion
-
-		#region IImage Members
-		public void Load()
-		{
-		}
-		
-		public System.Drawing.Image Image
-		{
-			//TODO: finish implementing this
-			get { return null; }
-		}
-		#endregion
-
-		#region IVisible
-		public float Hue
-		{
-			get { return 0f; }
-		}
-
-		public float Saturation
-		{
-			get { return 0f; }
-		}
-
-		public float Brightness
-		{
-			get { return 0f; }
-		}
-
-		public float Contrast
-		{
-			get { return 0f; }
-		}
-		#endregion
-
-		#region IMedia Members
-		public Guid Id
-		{
-			get { return id; }
-		}
-
-		public Uri Path
-		{
-			get { return null; }
-		}
-
-		public IMediaFormat Format
-		{
-			get { return resourceFormat; }
-		}
-		#endregion
-
-		#region IEntity Members
-
-
-		public string Name
-		{
-			get { throw new Exception("The method or operation is not implemented."); }
-		}
-
 		#endregion
 	}
 }

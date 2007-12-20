@@ -1,3 +1,4 @@
+#region License (LGPL)
 /***************************************************************************
     copyright            : (C) 2005 by Brian Nickel
     email                : brian.nickel@gmail.com
@@ -18,12 +19,11 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
  *   USA                                                                   *
  ***************************************************************************/
+#endregion
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Alexandria;
-using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {
@@ -282,11 +282,11 @@ namespace Alexandria.TagLib
 			get { return extDescription; }
 		}
 
-		public override IList<IImageContainer> Pictures
+		public override IList<IPicture> Pictures
 		{
 			get
 			{
-				IList<IImageContainer> list = new List<IImageContainer>();
+				IList<IPicture> pictures = new List<IPicture>();
 
 				foreach (AsfContentDescriptor descriptor in GetDescriptorsByName("WM/Picture"))
 				{
@@ -316,10 +316,10 @@ namespace Alexandria.TagLib
 
 					picture.Data = data.Mid(offset, size);
 
-					list.Add(picture);
+					pictures.Add(picture);
 				}
 
-				return list;
+				return pictures;
 			}
 
 			set

@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
@@ -27,34 +27,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alexandria;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
+using Telesophy.Alexandria.Model;
 
-namespace Alexandria.Mp3Tunes
+namespace Telesophy.Alexandria.Mp3Tunes
 {
-	[Record("Track")]
-	[RecordType("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
-	internal class Track : BaseAudioTrack
+	public class Mp3TunesArtist : Artist
 	{
-		#region Constructors
-		internal Track(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber, string format) : base(id, path, name, album, artist, duration, releaseDate, trackNumber, format)
+		public Mp3TunesArtist(Guid id, string name, DateTime beginDate, DateTime endDate)
+			: base(id, Mp3TunesConstants.ARTIST_TYPE, name, beginDate, endDate)
 		{
 		}
-		#endregion
-		
-		#region Private Fields
-		private TrackAdditionalInfo additionalInfo;
-		#endregion
-		
-		#region Public Properties
-		[Field(FieldType.Parent, FieldRelationship.OneToOne, "AudioTrackId", FieldCascades.All)]
-		public TrackAdditionalInfo AdditionalInfo
-		{
-			get { return additionalInfo; }
-			set { additionalInfo = value; }
-		}
-		#endregion
 	}
 }

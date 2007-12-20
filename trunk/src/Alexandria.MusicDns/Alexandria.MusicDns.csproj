@@ -7,7 +7,7 @@
     <ProjectGuid>{45EADD97-2719-4805-86BE-D95719932895}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.MusicDns</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.MusicDns</RootNamespace>
     <AssemblyName>Alexandria.MusicDns</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
@@ -35,7 +35,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plugin.cs" />
     <Compile Include="metadata.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -51,10 +50,6 @@
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

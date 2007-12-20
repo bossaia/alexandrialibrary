@@ -28,14 +28,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Metadata;
+//using Alexandria.Metadata;
 
 namespace Alexandria.Mp3Tunes
 {
-	internal class Artist : BaseArtist
-	{
-		public Artist(Guid id, Uri path, string name, DateTime beginDate, DateTime endDate) : base(id, path, name, beginDate, endDate)
-		{
-		}
-	}
+	//internal class Artist : BaseArtist
+	//{
+		//public Artist(Guid id, Uri path, string name, DateTime beginDate, DateTime endDate) : base(id, path, name, beginDate, endDate)
+		//{
+		//}
+	//}
 }

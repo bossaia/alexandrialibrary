@@ -26,25 +26,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
 using System;
+using System.Collections.Generic;
 using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.Mp3Tunes
 {
-	public static class TrackIdFactory
+	public class Mp3TunesAlbum : Album
 	{
-		#region Private Constants
-		private const string ID_TYPE = "MP3tunes TrackID";
-		#endregion
-		
-		#region Private Static Fields
-		private static readonly Version version = new Version(1, 0, 0, 0);
-		#endregion
-		
-		#region Public Static Methods
-		public static IMetadataIdentifier CreateTrackId(string value)
+		public Mp3TunesAlbum(Guid id, int number, string title, string artist, DateTime date, Uri path)
+			: base(id, Mp3TunesConstants.SOURCE, number, title, artist, date, path, null)
 		{
-			return new MetadataIdentifier(value, ID_TYPE, version);
 		}
-		#endregion
 	}
 }

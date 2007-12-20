@@ -28,7 +28,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Persistence;
@@ -75,7 +74,7 @@ namespace Telesophy.Alexandria.Model.Data
 
 		private IMediaItem GetItemFromRow(DataRow row)
 		{
-			IMediaItem item = new MediaItem();
+			IMediaItem item = new AudioTrack();
 
 			if (row != null)
 			{

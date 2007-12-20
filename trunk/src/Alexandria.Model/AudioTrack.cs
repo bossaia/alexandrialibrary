@@ -27,22 +27,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class MediaItem : IMediaItem
+	public class AudioTrack : IMediaItem
 	{
 		#region Constructors
-		public MediaItem()
+		public AudioTrack()
 		{
 		}
 
-		public MediaItem(Guid id, string source, string type, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
+		public AudioTrack(Guid id, string source, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
 		{
 			this.id = id;
 			this.source = source;
-			this.type = type;
 			this.number = number;
 			this.title = title;
 			this.artist = artist;
@@ -58,7 +56,7 @@ namespace Telesophy.Alexandria.Model
 		private Guid id;
 		private string status = string.Empty;
 		private string source;
-		private string type;
+		private string type = Constants.TYPE_AUDIO;
 		private int number;
 		private string title;
 		private string artist;

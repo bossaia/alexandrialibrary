@@ -29,10 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using System.Text;
-using Alexandria;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	#region BitPrintInfo
 	/*

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria;
-using Alexandria.Media;
 
 using Telesophy.Alexandria.Model;
 

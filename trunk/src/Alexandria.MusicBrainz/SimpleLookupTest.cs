@@ -31,7 +31,7 @@
 using System;
 using System.Security.Permissions;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	public static class SimpleLookupTest
 	{
@@ -79,7 +79,7 @@ namespace Alexandria.MusicBrainz
 				Console.WriteLine("Album: {0}", track.Album);
 				Console.WriteLine("Track: {0}", track.Title);
 				Console.WriteLine("Duration: {0}", track.Length);
-				Console.WriteLine("Number: {0}", track.TrackNumber);
+				Console.WriteLine("Number: {0}", track.Number);
 				Console.WriteLine("Count: {0}", track.TrackCount);
 				Console.WriteLine("ASIN: {0}", track.Asin);
 			}

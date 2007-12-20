@@ -45,13 +45,13 @@ using Alexandria.AsciiGenerator;
 using Alexandria.CompactDiscTools;
 using Alexandria.Fmod;
 using Alexandria.LastFM;
-using Alexandria.Mp3Tunes;
-using Alexandria.MusicBrainz;
 using Alexandria.MusicDns;
 using Alexandria.Playlist;
 using Alexandria.TagLib;
 
 using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Mp3Tunes;
+using Telesophy.Alexandria.MusicBrainz;
 #endregion
 
 namespace Alexandria.Client.Controllers
@@ -197,8 +197,7 @@ namespace Alexandria.Client.Controllers
 				string format =  GetItemString(row.Cells[COL_FORMAT]);
 				Uri path = GetItemUri(row.Cells[COL_PATH]);
 				
-				IMediaItem track = new MediaItem(id, source, type, number, title, artist, album, duration, date, format, path);
-				//Alexandria.Metadata.BaseAudioTrack(id, path, title, album, artist, duration, date, number, format);
+				IMediaItem track = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 				return track;
 			}
 			else throw new ApplicationException("The row currently selected in the queue is invalid");
@@ -514,7 +513,7 @@ namespace Alexandria.Client.Controllers
 		public void LoadTrack(IMediaItem track, string source)
 		{
 			//TODO: fix this so that I don't have to wrap the input track
-			MediaItem item = new MediaItem(track.Id, source, TYPE_AUDIO, track.Number, GetSafeString(track.Title), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.Date, track.Format.ToLower(), track.Path);
+			AudioTrack item = new AudioTrack(track.Id, source, track.Number, GetSafeString(track.Title), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.Date, track.Format.ToLower(), track.Path);
 			//if (item.Id == default(Guid)) item.Id = Guid.NewGuid();
 			//track.Source = source;
 			bindingList.Add(item);
@@ -554,7 +553,7 @@ namespace Alexandria.Client.Controllers
 		{
 			try
 			{
-				Mp3Tunes.MusicLocker musicLocker = new Alexandria.Mp3Tunes.MusicLocker();
+				MusicLocker musicLocker = new MusicLocker();
 				musicLocker.Login("dan.poage@gmail.com", "automatic");
 				tracks = null; //musicLocker.GetTracks(ignoreCache);
 				return tracks;

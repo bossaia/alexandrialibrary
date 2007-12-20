@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E5F218B8-FD8A-42C3-9409-8539D128F294}</ProjectGuid>
+    <ProjectGuid>{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telesophy.Alexandria.Model</RootNamespace>
-    <AssemblyName>Alexandria.Model</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.Extensions</RootNamespace>
+    <AssemblyName>Alexandria.Extensions</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,15 +33,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
-    <Compile Include="Artist.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="IArtist.cs" />
-    <Compile Include="IMediaItem.cs" />
-    <Compile Include="IMediaSet.cs" />
-    <Compile Include="IMetadataIdentifier.cs" />
-    <Compile Include="AudioTrack.cs" />
-    <Compile Include="MetadataIdentifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

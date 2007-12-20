@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MP3tunes Music Locker")]
-[assembly: AssemblyDescription("Access your MP3tunes online music locker")]
+[assembly: AssemblyTitle("Alexandria.Extensions")]
+[assembly: AssemblyDescription("Provides support for extending the core functions of Alexandria")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Telesophy Foundation")]
 [assembly: AssemblyProduct("Alexandria Media Library")]
-[assembly: AssemblyCopyright("Copyright © 2007 (LGPL)")]
+[assembly: AssemblyCopyright("Copyright ©  2007")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("50693713-1880-4753-90ab-741ea09fcc84")]
+[assembly: Guid("0c6c4b29-9090-44b0-bd95-c424170c45b4")]
 
 // Version information for an assembly consists of the following four values:
 //

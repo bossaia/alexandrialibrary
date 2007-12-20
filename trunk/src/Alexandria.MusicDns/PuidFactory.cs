@@ -1,4 +1,4 @@
-#region License
+#region License (MIT)
 /*
 Copyright (c) 2007 Dan Poage
 
@@ -27,9 +27,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Alexandria.Persistence;
-
 using Telesophy.Alexandria.Model;
 
 namespace Alexandria.MusicDns

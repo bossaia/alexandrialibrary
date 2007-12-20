@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	public static class Utility
 	{

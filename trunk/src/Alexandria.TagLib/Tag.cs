@@ -24,9 +24,6 @@
 
 using System;
 using System.Collections.Generic;
-using Alexandria;
-using Alexandria.Media;
-using Alexandria.Persistence;
 
 using Telesophy.Alexandria.Model;
 
@@ -43,8 +40,6 @@ namespace Alexandria.TagLib
 		#region Private Fields
 		private Guid id;
 		private string name;
-		private IRecord parent;
-		private IPersistenceBroker broker;
 		private Uri path;
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		
@@ -64,7 +59,7 @@ namespace Alexandria.TagLib
 		private uint disc;
 		private uint discCount;
 		
-		private IList<IImageContainer> pictures = new List<IImageContainer>();		
+		private IList<IPicture> pictures = new List<IPicture>();
 		#endregion
 		
 		#region Private Static Methods
@@ -147,7 +142,7 @@ namespace Alexandria.TagLib
 			set { genres = value; }
 		}
 
-		public virtual IList<IImageContainer> Pictures
+		public virtual IList<IPicture> Pictures
 		{
 			get { return pictures; }
 			set { pictures = value; }

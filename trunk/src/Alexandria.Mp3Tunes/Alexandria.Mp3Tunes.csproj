@@ -7,7 +7,7 @@
     <ProjectGuid>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Mp3Tunes</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.Mp3Tunes</RootNamespace>
     <AssemblyName>Alexandria.Mp3Tunes</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
@@ -38,20 +38,14 @@
   <ItemGroup>
     <Compile Include="Album.cs" />
     <Compile Include="Artist.cs" />
-    <Compile Include="AuthenticationException.cs" />
-    <Compile Include="Plugin.cs" />
     <Compile Include="LockerSynch.cs" />
+    <Compile Include="Mp3TunesAlbum.cs" />
+    <Compile Include="Mp3TunesArtist.cs" />
+    <Compile Include="Mp3TunesConstants.cs" />
+    <Compile Include="Mp3TunesTrack.cs" />
     <Compile Include="MusicLocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Track.cs" />
-    <Compile Include="TrackAdditionalInfo.cs" />
     <Compile Include="TrackIdFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Mp3Tunes.bmp" />
@@ -60,6 +54,12 @@
     <None Include="Alexandria.Mp3Tunes.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
+      <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
+      <Name>Alexandria.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

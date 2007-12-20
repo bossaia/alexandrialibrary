@@ -28,9 +28,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	internal static class NativeMethods
 	{
