@@ -28,8 +28,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Alexandria.Persistence;
 
+//using Telesophy.Alexandria.Persistence;
 using Telesophy.Alexandria.Model;
 
 namespace Alexandria.MusicDns
@@ -62,12 +62,13 @@ namespace Alexandria.MusicDns
 		private string puid = string.Empty;		
 		
 		private Guid id = Guid.NewGuid();
-		private IRecord parent;
-		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
-		Uri path = null;
-		private Version version = new Version(1, 0, 0, 0);
+		private string status;
+		private string source;
+		private string type;
 		
-		private IPersistenceBroker persistenceBroker;
+		//private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
+		private Uri path;
+		private Version version = new Version(1, 0, 0, 0);
 		#endregion
 	
 		#region Internal Properties
@@ -180,8 +181,8 @@ namespace Alexandria.MusicDns
 			{
 				puid = value;
 				
-				if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
-					metadataIdentifiers.Add(PuidFactory.CreatePuid(puid));
+				//if (!string.IsNullOrEmpty(puid) && metadataIdentifiers.Count == 0)
+					//metadataIdentifiers.Add(PuidFactory.CreatePuid(puid));
 			}
 		}
 		
@@ -192,6 +193,7 @@ namespace Alexandria.MusicDns
 		}
 		#endregion
 
+		/*
 		#region IMediaItem Members
 		string IMediaItem.Title
 		{
@@ -286,6 +288,148 @@ namespace Alexandria.MusicDns
 		{
 			get { return Track; }
 		}
+		#endregion
+		*/
+
+		#region IMediaItem Members
+		public Guid Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
+
+		public string Status
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public string Source
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public string Type
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public int Number
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public string Title
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		string IMediaItem.Artist
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		string IMediaItem.Album
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public TimeSpan Duration
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public DateTime Date
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		string IMediaItem.Format
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
+		public Uri Path
+		{
+			get
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+			set
+			{
+				throw new Exception("The method or operation is not implemented.");
+			}
+		}
+
 		#endregion
 	}
 }

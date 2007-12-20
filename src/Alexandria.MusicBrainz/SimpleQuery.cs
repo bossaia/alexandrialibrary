@@ -30,9 +30,9 @@
 
 using System;
 using System.Security.Permissions;
-using Alexandria;
+using Telesophy.Alexandria.Model;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
     public static class SimpleQuery
     {
@@ -61,7 +61,7 @@ namespace Alexandria.MusicBrainz
 					}))
 				{
 					//"File Lookup Query unsuccessful"
-					throw new AlexandriaException("File Lookup Query unsuccessful");
+					throw new ApplicationException("File Lookup Query unsuccessful");
 				}
 
 				client.Select(rdf.SelectRewind);
@@ -69,7 +69,7 @@ namespace Alexandria.MusicBrainz
 				if (!client.Select(rdf.SelectLookupResult, 1))
 				{
 					// "Selection failed"
-					throw new AlexandriaException("Selection failed");
+					throw new ApplicationException("Selection failed");
 				}
 				
 				track = new SimpleTrack();
@@ -80,7 +80,7 @@ namespace Alexandria.MusicBrainz
 					case "AlbumTrackResult":
 						client.Select(rdf.SelectLookupResultTrack);
 						//track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
-						track.Name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+						track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 						track.Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
 						int length = (client.GetResultInt(rdf.ExpressionTrackGetTrackDuration) / 1000);
 						track.Duration = new TimeSpan(0, 0, 0, 0, length);
@@ -90,7 +90,7 @@ namespace Alexandria.MusicBrainz
 						client.Select(rdf.SelectLookupResultAlbum, 1);
 						track.Album = client.GetResultData(rdf.ExpressionAlbumGetAlbumName);
 						track.TrackCount = client.GetResultInt(rdf.ExpressionAlbumGetNumberTracks);
-						track.TrackNumber = client.GetResultInt(rdf.ExpressionAlbumGetTrackNumber);
+						track.Number = client.GetResultInt(rdf.ExpressionAlbumGetTrackNumber);
 						track.Asin = client.GetResultData(rdf.ExpressionAlbumGetAmazonAsin);
 						client.Select(rdf.SelectBack);
 						break;
@@ -106,9 +106,9 @@ namespace Alexandria.MusicBrainz
 						{
 							client.Select(rdf.SelectTrack, 1);
 							//track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
-							track.Name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+							track.Title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 							track.Artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-							track.TrackNumber = client.GetResultInt(rdf.ExpressionTrackGetTrackNumber);
+							track.Number = client.GetResultInt(rdf.ExpressionTrackGetTrackNumber);
 							track.Length = client.GetResultInt(rdf.ExpressionTrackGetTrackDuration);
 							client.Select(rdf.SelectBack);
 						}
@@ -117,7 +117,7 @@ namespace Alexandria.MusicBrainz
 						break;
 					default:
 						//"Invalid result type: " + result_type
-						throw new AlexandriaException("Invalid result type: " + result_type);
+						throw new ApplicationException("Invalid result type: " + result_type);
 				}
             }
             return track;

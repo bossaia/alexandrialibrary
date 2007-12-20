@@ -28,7 +28,7 @@
  */
  #endregion
  
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
     public class Rdf
     {

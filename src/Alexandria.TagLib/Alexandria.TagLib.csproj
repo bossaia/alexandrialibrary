@@ -7,7 +7,7 @@
     <ProjectGuid>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.TagLib</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.TagLib</RootNamespace>
     <AssemblyName>Alexandria.TagLib</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
@@ -57,7 +57,6 @@
     <Compile Include="ByteVectorCollection.cs" />
     <Compile Include="ChannelData.cs" />
     <Compile Include="CombinedTag.cs" />
-    <Compile Include="Plugin.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="Id3v2\Id3v2UserTextIdentificationFrame.cs" />
     <Compile Include="IFileAbstraction.cs" />
@@ -144,10 +143,6 @@
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
-      <Project>{393CD31D-C8FD-448E-8AFD-F6E6E8F59F82}</Project>
-      <Name>Alexandria</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

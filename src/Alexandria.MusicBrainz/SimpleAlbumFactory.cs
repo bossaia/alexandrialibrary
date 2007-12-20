@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Permissions;
 using System.Text;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
 
-namespace Alexandria.MusicBrainz
+using Telesophy.Alexandria.Model;
+
+namespace Telesophy.Alexandria.MusicBrainz
 {
-	public class SimpleAlbumFactory : IAlbumFactory
+	public class SimpleAlbumFactory //: IAlbumFactory
 	{
 		#region Constructors
 		public SimpleAlbumFactory()
@@ -22,7 +22,7 @@ namespace Alexandria.MusicBrainz
 		#endregion
 
 		#region Private Constant Fields
-		private const int CDINDEX_ID_LEN = 28;
+		
 		#endregion
 
 		#region Private Methods
@@ -62,7 +62,7 @@ namespace Alexandria.MusicBrainz
 			// Set up the args for the find album query
 			string[] args = new string[] { id };
 
-			if (id.Length != CDINDEX_ID_LEN)
+			if (id.Length != MusicBrainzConstants.CDINDEX_ID_LEN)
 				// Execute the MBQ_GetAlbumById query
 				ret = client.Query(rdf.QueryGetAlbumById, args);
 			else
@@ -221,7 +221,7 @@ namespace Alexandria.MusicBrainz
 				string error = client.QueryError;
 				System.Diagnostics.Debug.WriteLine("query=" + query.ToString() + " select=" + select.ToString() + " error=" + error);
 				// could not fetch album
-				throw new AlexandriaException("Could not fetch album");
+				throw new ApplicationException("Could not fetch album");
 			}
 
 			//NOTE: does this need to be a different variable?
@@ -233,7 +233,7 @@ namespace Alexandria.MusicBrainz
 			string artistSortName = client.GetResultData(rdf.ExpressionAlbumGetArtistSortName);
 			string artistId = client.GetResultData(rdf.ExpressionAlbumGetAlbumArtistId);
 			bool isVariousArtists = (artistId == rdf.IdVariousArtist);
-			SimpleArtist albumArtist = new SimpleArtist(artistId, artistName, artistSortName);
+			SimpleArtist albumArtist = new SimpleArtist(new Guid(artistId), artistName, DateTime.MinValue, DateTime.MinValue, artistSortName);
 
 			Console.WriteLine(artistName);
 			string albumName = client.GetResultData(rdf.ExpressionAlbumGetAlbumName);
@@ -243,7 +243,7 @@ namespace Alexandria.MusicBrainz
 			if (trackCount <= 0)
 			{
 				// Invalid track count from album query            
-				throw new AlexandriaException("Invalid track count from album query");
+				throw new ApplicationException("Invalid track count from album query");
 			}
 
 			DateTime releaseDate = new DateTime(1900, 1, 1);
@@ -254,19 +254,19 @@ namespace Alexandria.MusicBrainz
 				client.Select(rdf.SelectBack);
 			}
 			
-			SimpleAlbum album = new SimpleAlbum(Guid.NewGuid(), path, albumName, artistName, releaseDate);
+			SimpleAlbum album = new SimpleAlbum(Guid.NewGuid(), albumName, artistName, releaseDate, path);
 			album.VariousArtists = isVariousArtists;
 
-			for (int i = 1; i <= trackCount; i++)
+			for (int number = 1; number <= trackCount; number++)
 			{
-				client.Select(rdf.SelectTrack, i);
+				client.Select(rdf.SelectTrack, number);
 				string artist = client.GetResultData(rdf.ExpressionTrackGetArtistName);
-				string name = client.GetResultData(rdf.ExpressionTrackGetTrackName);
+				string title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 				int milliseconds = (client.GetResultInt(rdf.ExpressionTrackGetTrackDuration) / 1000);
 				TimeSpan duration = new TimeSpan(0, 0, 0, 0, milliseconds);
-				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), path, name, albumName, artist, duration, releaseDate, i);
-				track.Parent = album;
-				album.Tracks.Add(track);
+				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), number, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
+				album.Items.Add(track);
+				
 				client.Select(rdf.SelectBack);
 			}
 
@@ -316,11 +316,11 @@ namespace Alexandria.MusicBrainz
 						Debug.WriteLine("Release Date  : " + simpleDisc.ReleaseDate);
 						Debug.WriteLine("");
 
-						album = new SimpleAlbum(Guid.NewGuid(), path, simpleDisc.AlbumName, simpleDisc.ArtistName, simpleDisc.ReleaseDate);
+						album = new SimpleAlbum(Guid.NewGuid(), simpleDisc.AlbumName, simpleDisc.ArtistName, simpleDisc.ReleaseDate, path);
 						foreach (SimpleTrack track in simpleDisc.Tracks)
 						{
-							track.Parent = album;
-							album.Tracks.Add(track);
+							//track.Parent = album;
+							album.Items.Add(track);
 						}
 
 						/*
@@ -361,7 +361,7 @@ namespace Alexandria.MusicBrainz
 				catch (Exception ex)
 				{
 					//Debug.WriteLine("Error reading from CD: " + ex.Message);
-					throw new AlexandriaException("Error reading from CD", ex);
+					throw new ApplicationException("Error reading from CD", ex);
 				}
 			}
 			else throw new ArgumentNullException("drive");
@@ -373,21 +373,20 @@ namespace Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public IOldAlbum CreateAlbum(Uri path)
+		public IMediaSet CreateAlbum(Uri path)
 		{
 			return LookupAlbumByCompactDisc(path);
 		}
 		
 		//[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
-		public IOldAlbum CreateAlbum(string musicBrainzId, Uri path)
+		public IMediaSet CreateAlbum(string musicBrainzId, Uri path)
 		{
 			return LookupAlbumById(musicBrainzId, path);
 		}
 
-		[Factory("B0B28FDF-B65E-4d9f-8C53-6EFE6C087C4E")]
-		public IOldAlbum CreateAlbum(Guid id, Uri path, string name, string artist, DateTime releaseDate)
+		public IMediaSet CreateAlbum(Guid id, string title, string artist, DateTime date, Uri path)
 		{
-			return new SimpleAlbum(id, path, name, artist, releaseDate);
+			return new SimpleAlbum(id, title, artist, date, path);
 		}
 		#endregion
 	}

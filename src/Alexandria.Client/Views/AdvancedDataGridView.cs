@@ -57,14 +57,14 @@ namespace Alexandria.Client.Views
 				string format = (string)SourceRow.Cells["Format"].Value;
 				Uri path = (Uri)SourceRow.Cells["Path"].Value;
 				
-				mediaItem = new MediaItem(id, source, type, number, title, artist, album, duration, date, format, path);
+				mediaItem = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 			}
 		}
 	
 		private int sourceIndex;
 		private int targetIndex;
 		private DataGridViewRow sourceRow;
-		private MediaItem mediaItem;
+		private AudioTrack mediaItem;
 		
 		public int SourceIndex
 		{

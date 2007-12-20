@@ -1,3 +1,4 @@
+#region License (LGPL)
 /***************************************************************************
     copyright            : (C) 2005 by Brian Nickel
     email                : brian.nickel@gmail.com
@@ -19,11 +20,10 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
  *   USA                                                                   *
  ***************************************************************************/
+#endregion
 
 using System;
 using System.Collections.Generic;
-using Alexandria;
-using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {
@@ -267,7 +267,7 @@ namespace Alexandria.TagLib
 			}
 		}
 
-		public override IList<IImageContainer> Pictures
+		public override IList<IPicture> Pictures
 		{
 			get
 			{

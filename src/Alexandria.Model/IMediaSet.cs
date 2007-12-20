@@ -27,11 +27,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Model
 {
-	public interface IRepository
+	public interface IMediaSet
 	{
+		Guid Id { get; set; }
+		string Source { get; set; }
+		string Type { get; set; }
+		int Number { get; set; }
+		string Title { get; set; }
+		string Artist { get; set; }
+		DateTime Date { get; set; }
+		Uri Path { get; set; }
+		IList<IMediaItem> Items { get; }
 	}
 }

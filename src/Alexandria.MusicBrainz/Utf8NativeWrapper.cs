@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	internal static class Utf8NativeWrapper //: IDisposable
 	{

@@ -1,3 +1,4 @@
+#region License (LGPL)
 /***************************************************************************
     copyright            : (C) 2005 by Brian Nickel
     email                : brian.nickel@gmail.com
@@ -19,12 +20,11 @@
  *   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  *
  *   USA                                                                   *
  ***************************************************************************/
+#endregion
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Alexandria;
-using Alexandria.Media;
 
 namespace Alexandria.TagLib
 {
@@ -520,7 +520,7 @@ namespace Alexandria.TagLib
 			}
 		}
 
-		public override IList<IImageContainer> Pictures
+		public override IList<IPicture> Pictures
 		{
 			get
 			{
@@ -530,7 +530,7 @@ namespace Alexandria.TagLib
 					return base.Pictures;
 				}
 
-				IList<IImageContainer> frames = new List<IImageContainer>(rawFrames.Length);
+				IList<IPicture> frames = new List<IPicture>(rawFrames.Length);
 				//[rawFrames.Length];
 				for (int i = 0; i < rawFrames.Length; i++)
 				{

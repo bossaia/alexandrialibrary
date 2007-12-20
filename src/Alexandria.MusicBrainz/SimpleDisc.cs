@@ -31,9 +31,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Alexandria;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
     public class SimpleDisc : IEnumerable<SimpleTrack>, IDisposable
     {
@@ -134,7 +133,7 @@ namespace Alexandria.MusicBrainz
             if(track_count <= 0)
             {
 				// "Reading audio CD Table of Contents returned an invalid track count."
-                throw new AlexandriaException("Reading audio CD Table of Contents returned an invalid track count.");
+                throw new ApplicationException("Reading audio CD Table of Contents returned an invalid track count.");
             }
             
             lengths = new int[track_count];
@@ -153,7 +152,7 @@ namespace Alexandria.MusicBrainz
 			{
 				// "Could not query CD"
 				Debug.WriteLine("Could not query CD");
-                throw new AlexandriaException("Could not query CD");
+                throw new ApplicationException("Could not query CD");
             }
 
 			int disc_count = client.GetResultInt(rdf.ExpressionGetNumberAlbums);
@@ -162,7 +161,7 @@ namespace Alexandria.MusicBrainz
             {
 				// "No Discs Found"
 				Debug.WriteLine("No Discs Found");
-                throw new AlexandriaException("No Discs Found");
+                throw new ApplicationException("No Discs Found");
             }
             
             // handle more than 1 disc? not sure how this works? for multi-disc sets? 
@@ -172,7 +171,7 @@ namespace Alexandria.MusicBrainz
 			{
 				// "Could not select disc"
 				Debug.WriteLine("Could not select disc");
-                throw new AlexandriaException("Could not select disc");
+                throw new ApplicationException("Could not select disc");
             }
 
 			amazonAsin = client.GetResultData(rdf.ExpressionAlbumGetAmazonAsin, 1);
@@ -209,7 +208,7 @@ namespace Alexandria.MusicBrainz
 			{
 				// "Invalid track count from album query"
 				Debug.WriteLine("Invalid track count from album query");
-				throw new AlexandriaException("Invalid track count from album query");
+				throw new ApplicationException("Invalid track count from album query");
 			}
 
 			tracks = new List<SimpleTrack>(trackCount);
@@ -234,7 +233,7 @@ namespace Alexandria.MusicBrainz
 					duration = new TimeSpan(0, 0, 0, 0, milliseconds);
 				}
 
-				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), path, title, albumName, artist, duration, releaseDate, trackNumber);
+				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), trackNumber, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
 				tracks.Add(track);
 
 				client.Select(rdf.SelectBack);
@@ -305,7 +304,6 @@ namespace Alexandria.MusicBrainz
 		#endregion
 
 		#region IEnumerable<SimpleTrack> Members
-
 		public IEnumerator<SimpleTrack> GetEnumerator()
 		{
 			foreach (SimpleTrack track in Tracks)
@@ -313,11 +311,9 @@ namespace Alexandria.MusicBrainz
 				yield return track;
 			}
 		}
-
 		#endregion
 
 		#region IEnumerable Members
-
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
 			foreach (SimpleTrack track in Tracks)
@@ -325,7 +321,6 @@ namespace Alexandria.MusicBrainz
 				yield return track;
 			}
 		}
-
 		#endregion
 	}
 }

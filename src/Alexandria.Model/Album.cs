@@ -27,48 +27,98 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-using Telesophy.Alexandria.Model;
-using Telesophy.Alexandria.MusicBrainz;
-
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Model
 {
-	public class TrackSource : ITrackSource
+	public class Album : IMediaSet
 	{
 		#region Constructors
-		public TrackSource(string fileName)
+		public Album()
 		{
-			//this.factory = new MusicBrainz.SimpleAlbumFactory();
-			this.path = new Uri(fileName);
 		}
 		
-		//public TrackSource(IAlbumFactory factory, Uri path)
-		//{
-		//	this.factory = factory;
-		//	this.path = path;
-		//}
-		#endregion
-	
-		#region Private Fields
-		//private IAlbumFactory factory;
-		private Uri path;
-		#endregion
-	
-		#region ITrackSource Members
-		public IList<IMediaItem> GetAudioTracks()
+		public Album(Guid id, string source, int number, string title, string artist, DateTime date, Uri path, IEnumerable<IMediaItem> items)
 		{
-			try
+			this.id = id;
+			this.source = source;
+			this.number = number;
+			this.title = title;
+			this.artist = artist;
+			this.date = date;
+			this.path = path;
+			
+			if (items != null)
 			{
-				//IOldAlbum album = factory.CreateAlbum(path);
-				//return album.Tracks;
-				return new List<IMediaItem>();
+				foreach(IMediaItem item in items)
+					this.items.Add(item);
 			}
-			catch (Exception ex)
-			{
-				string x = ex.Message;
-			}
-			return null;
+		}
+		#endregion
+		
+		#region Private Fields
+		private Guid id;
+		private string source;
+		private string type = Constants.TYPE_AUDIO;
+		private int number;
+		private string title;
+		private string artist;
+		private DateTime date;
+		private Uri path;
+		private List<IMediaItem> items = new List<IMediaItem>();
+		#endregion
+	
+		#region IMediaSet Members
+		public Guid Id
+		{
+			get { return id; }
+			set { id = value; }
+		}
+
+		public string Source
+		{
+			get { return source; }
+			set { source = value; }
+		}
+
+		public string Type
+		{
+			get { return type; }
+			set { }
+		}
+
+		public int Number
+		{
+			get { return number; }
+			set { number = value; }
+		}
+
+		public string Title
+		{
+			get { return title; }
+			set { title = value; }
+		}
+
+		public string Artist
+		{
+			get { return artist; }
+			set { artist = value; }
+		}
+
+		public DateTime Date
+		{
+			get { return date; }
+			set { date = value; }
+		}
+
+		public Uri Path
+		{
+			get { return path; }
+			set { path = value; }
+		}
+
+		public IList<IMediaItem> Items
+		{
+			get { return items; }
 		}
 		#endregion
 	}

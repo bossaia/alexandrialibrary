@@ -31,61 +31,25 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Alexandria;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
+using Telesophy.Alexandria.Model;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
-	[Record("Track")]
-	[RecordType("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
-    public class SimpleTrack : IAudioTrack
+    public class SimpleTrack : AudioTrack
     {
 		#region Constructors
-		internal SimpleTrack()
+		public SimpleTrack() : base()
 		{
-			id = Guid.NewGuid();
 		}
 		
-		//public SimpleTrack(int index, int length)
-		//{
-			//this.index = index;
-			//this.length = length;
-		//}
-
-		[Factory("E7915153-E5BE-47f7-855A-446FB7AF1DB8")]
-		public SimpleTrack(Guid id, Uri path, string name, string album, string artist, TimeSpan duration, DateTime releaseDate, int trackNumber)
+		public SimpleTrack(Guid id, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
+			: base(id, MusicBrainzConstants.SOURCE, number, title, artist, album, duration, date, format, path)
 		{
-			this.id = id;
-			this.path = path;
-			this.name = name;
-			this.album = album;
-			this.artist = artist;
-			this.duration = duration;
-			this.releaseDate = releaseDate;
-			this.trackNumber = trackNumber;
-			this.format = "cdda";
 		}
 		#endregion
     
 		#region Private Fields
-		private Guid id;
-		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
-		private IRecord parent;
-		private IPersistenceBroker broker;
-		
-		private Uri path;
-		private string name;
-		private string album;
-        private string artist;
-        private TimeSpan duration;
-        private DateTime releaseDate;
-        private int trackNumber;
-        private string format;
-        
-        private string title;        
         private string asin;
-        //private int track_num;
         private int track_count;
         private int index;
         private int length;
@@ -97,23 +61,11 @@ namespace Alexandria.MusicBrainz
 			get {return asin;}
             internal set {asin = value;}
         }
-        
-        public string Title
-        {
-			get {return title;}
-            internal set {title = value;}
-        }
-        
+                
         public int Index
         {
 			get {return index;}
             internal set {index = value;}
-        }
-                
-        public int TrackNumber
-        {
-            get {return trackNumber;}
-            internal set {trackNumber = value;}
         }
                 
         public int TrackCount
@@ -144,92 +96,6 @@ namespace Alexandria.MusicBrainz
 		{
 			return String.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}: {1} - {2} ({3:00}:{4:00})",
 				Index, Artist, Title, Minutes, Seconds);
-		}
-		#endregion
-
-		#region IAudioTrack Members
-		public string Artist
-		{
-			get { return artist; }
-			internal set { artist = value; }
-		}
-
-		public string Album
-		{
-			get { return album; }
-			internal set { album = value; }
-		}
-		
-		public TimeSpan Duration
-		{
-			get { return duration; }
-			internal set { duration = value; }
-		}
-
-		public DateTime ReleaseDate
-		{
-			get { return releaseDate; }
-			internal set { releaseDate = value; }
-		}
-
-		public string Format
-		{
-			get { return format; }
-			internal set { format = value; }
-		}
-		#endregion
-
-		#region IMetadata Members
-		public System.Collections.Generic.IList<IMetadataIdentifier> MetadataIdentifiers
-		{
-			get { return metadataIdentifiers; }
-		}
-
-		public Uri Path
-		{
-			get { return path; }
-		}
-
-		public string Name
-		{
-			get { return name; }
-			internal set { name = value; }
-		}
-		#endregion
-
-		#region IRecord Members
-		public Guid Id
-		{
-			get { return id; }
-		}
-
-		public IRecord Parent
-		{
-			get { return parent; }
-			set { parent = value; }
-		}
-
-		public IPersistenceBroker PersistenceBroker
-		{
-			get { return broker; }
-			set { broker = value; }
-		}
-
-		public bool IsProxy
-		{
-			get { return false; }
-		}
-
-		public void Save()
-		{
-			if (broker != null)
-				broker.SaveRecord(this);
-		}
-
-		public void Delete()
-		{
-			if (broker != null)
-				broker.DeleteRecord(this);
 		}
 		#endregion
 	}

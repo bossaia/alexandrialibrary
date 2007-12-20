@@ -27,10 +27,10 @@ using System.Xml.XPath;
 using System.Text;
 using System.Collections.Generic;
 using System.Globalization;
-using Alexandria.Metadata;
-using Alexandria.Persistence;
 
-namespace Alexandria.Mp3Tunes
+using Telesophy.Alexandria.Model;
+
+namespace Telesophy.Alexandria.Mp3Tunes
 {
 	public class MusicLocker
 	{
@@ -121,8 +121,8 @@ namespace Alexandria.Mp3Tunes
 				if (status != null && status.InnerXml == "1" && sessionIdNode != null && sessionIdNode.InnerXml != "null")				
 					this.sessionId = sessionIdNode.InnerXml;
 				else if (errorMessage != null && errorMessage.InnerXml != "null")			
-					throw new AuthenticationException(errorMessage.InnerXml.ToString());			
-				else throw new AuthenticationException("Wrong username or password.");
+					throw new ApplicationException(errorMessage.InnerXml.ToString());
+				else throw new ApplicationException("Wrong username or password.");
 				
 				isLoggedIn = true;
 			}
@@ -134,9 +134,9 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 
 		#region GetTracks
-		public List<IAudioTrack> GetTracks(bool ignoreCache)
+		public List<IMediaItem> GetTracks(bool ignoreCache)
 		{
-			List<IAudioTrack> tracks = new List<IAudioTrack>();
+			List<IMediaItem> tracks = new List<IMediaItem>();
 			XmlDocument doc = new XmlDocument();
 			
 			string dirPath = string.Format("{0}Alexandria{1}MP3tunes{1}", Path.GetTempPath(), Path.DirectorySeparatorChar);
@@ -190,6 +190,7 @@ namespace Alexandria.Mp3Tunes
 					
 					//HACK: fix this later
 					url = url.Replace("&amp;", "&");
+					Uri path = new Uri(url);
 					
 					//string.Format("{0}{1}?sid={2}&partner_token={3}", get_url, downloadUrl.InnerXml, session_id, partner_token);
 					//Uri uri = new Uri(url);
@@ -227,23 +228,28 @@ namespace Alexandria.Mp3Tunes
 					//TODO: cleanup this mess
 					long releaseDateFileTime = 0;					
 					DateTime releaseDate = new DateTime(1900, 1, 1);
-					long defaultReleaseDateTime = releaseDate.ToFileTime();
+					//long defaultReleaseDateTime = releaseDate.ToFileTime();
 					if (albumYear != null && !string.IsNullOrEmpty(albumYear.InnerXml))
 					{
 						try
 						{
 							releaseDate = new DateTime(Convert.ToInt32(albumYear.InnerXml), 1, 1);
-							releaseDateFileTime = releaseDate.ToFileTime();
+							//releaseDateFileTime = releaseDate.ToFileTime();
 						}
-						catch (FormatException)
+						catch
 						{
+							releaseDate = DateTime.MinValue;
+						}
+						
+						//catch (FormatException)
+						//{
 							//releaseDate = new DateTime(1900, 1, 1);
-							releaseDateFileTime = defaultReleaseDateTime;
-						}
-						catch(ArgumentOutOfRangeException)
-						{
-							releaseDateFileTime = defaultReleaseDateTime;
-						}
+							//releaseDateFileTime = defaultReleaseDateTime;
+						//}
+						//catch(ArgumentOutOfRangeException)
+						//{
+							//releaseDateFileTime = defaultReleaseDateTime;
+						//}
 					}						
 						
 					string format = string.Empty;
@@ -257,14 +263,15 @@ namespace Alexandria.Mp3Tunes
 					//Album album = new Album(location, albumTitle.InnerXml, artistName.InnerXml, releaseDate);
 					
 					Guid id = Guid.NewGuid();
-					IAudioTrack track = GetTrack(id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, Convert.ToInt32(duration.TotalMilliseconds), releaseDateFileTime, trackNumber, format);
-					Track realTrack = (Track)track;
-					realTrack.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), trackFileName.InnerXml);
-					realTrack.AdditionalInfo.Parent = track;
+					IMediaItem track = GetTrack(id, trackNumber, trackTitle.InnerXml, artistName.InnerXml, albumTitle.InnerXml, duration, releaseDate, format, path);
+					//id, url, trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDateFileTime, trackNumber, format);
+					//Track realTrack = (Track)track;
+					//realTrack.AdditionalInfo = new TrackAdditionalInfo(Guid.NewGuid(), trackFileName.InnerXml);
+					//realTrack.AdditionalInfo.Parent = track;
 
 					//Track track = new Track(id, new Uri(url), trackTitle.InnerXml, albumTitle.InnerXml, artistName.InnerXml, duration, releaseDate, trackNumber, format, originalPath);
-					trackId = TrackIdFactory.CreateTrackId(track, trackIdValue);
-					track.MetadataIdentifiers.Add(trackId);
+					trackId = TrackIdFactory.CreateTrackId(trackIdValue);
+					//track.MetadataIdentifiers.Add(trackId);
 
 					tracks.Add(track);
 				}
@@ -279,10 +286,9 @@ namespace Alexandria.Mp3Tunes
 		#endregion
 		
 		#region GetTrack
-		[Factory("F8EECFC3-B4E8-4e59-9EA9-7792CA5F988C")]
-		public IAudioTrack GetTrack(Guid id, string path, string name, string album, string artist, int duration, long releaseDate, int trackNumber, string format)
+		public IMediaItem GetTrack(Guid id, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
 		{
-			return new Track(id, new Uri(path), name, album, artist, new TimeSpan(0, 0, 0, 0, duration), DateTime.FromFileTime(releaseDate), trackNumber, format);
+			return new Mp3TunesTrack(id, number, title, artist, album, duration, date, format, path);
 		}
 		#endregion
 

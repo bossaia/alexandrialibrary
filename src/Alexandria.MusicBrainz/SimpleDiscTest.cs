@@ -30,9 +30,8 @@
  
 using System;
 using System.Diagnostics;
-using Alexandria;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	public static class SimpleDiscTest
 	{
@@ -73,7 +72,7 @@ namespace Alexandria.MusicBrainz
 			catch (Exception ex)
 			{
 				Debug.WriteLine("Error reading from CD: " + ex.Message);
-				throw new AlexandriaException("Error reading from CD", ex);
+				throw new ApplicationException("Error reading from CD", ex);
 			}
 		}
 	}

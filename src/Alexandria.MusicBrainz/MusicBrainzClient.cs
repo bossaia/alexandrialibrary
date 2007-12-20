@@ -28,9 +28,8 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
-using Alexandria;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
 	public class MusicBrainzClient : IDisposable
 	{
@@ -68,10 +67,6 @@ namespace Alexandria.MusicBrainz
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
-		#endregion
-	
-		#region Private Contant Fields
-		private const int MAX_STRING_LEN = 8192;
 		#endregion
 	
 		#region Private Fields
@@ -225,8 +220,8 @@ namespace Alexandria.MusicBrainz
 		{
 			get
 			{
-				byte[] errorBytes = new byte[MAX_STRING_LEN];
-				currentResult = NativeMethods.mb_GetQueryError(handle, errorBytes, MAX_STRING_LEN);
+				byte[] errorBytes = new byte[MusicBrainzConstants.MAX_STRING_LEN];
+				currentResult = NativeMethods.mb_GetQueryError(handle, errorBytes, MusicBrainzConstants.MAX_STRING_LEN);
 				queryError = Utility.FromUtf8(errorBytes);
 				return queryError;
 			}
@@ -240,8 +235,8 @@ namespace Alexandria.MusicBrainz
 			{
 				if (webSubmitUrl == null)
 				{
-					byte[] urlBytes = new byte[MAX_STRING_LEN];
-					currentResult = NativeMethods.mb_GetWebSubmitURL(handle, urlBytes, MAX_STRING_LEN);
+					byte[] urlBytes = new byte[MusicBrainzConstants.MAX_STRING_LEN];
+					currentResult = NativeMethods.mb_GetWebSubmitURL(handle, urlBytes, MusicBrainzConstants.MAX_STRING_LEN);
 					webSubmitUrl = new Uri(Utility.FromUtf8(urlBytes));
 				}
 				return webSubmitUrl;
@@ -507,8 +502,8 @@ namespace Alexandria.MusicBrainz
 		public string GetResultData(string resultName, int index)
 		{
 			string data;
-			byte[] dataNative = new byte[MAX_STRING_LEN];
-			currentResult = NativeMethods.mb_GetResultData1(handle, Utility.ToUtf8(resultName), dataNative, MAX_STRING_LEN, index);
+			byte[] dataNative = new byte[MusicBrainzConstants.MAX_STRING_LEN];
+			currentResult = NativeMethods.mb_GetResultData1(handle, Utility.ToUtf8(resultName), dataNative, MusicBrainzConstants.MAX_STRING_LEN, index);
 			data = (currentResult == 0) ? null : Utility.FromUtf8(dataNative);
 			return data;
 		}
@@ -577,8 +572,8 @@ namespace Alexandria.MusicBrainz
 		{
 			if (url != null)
 			{
-				byte[] idNative = new byte[MAX_STRING_LEN];
-				NativeMethods.mb_GetIDFromURL(handle, Utility.ToUtf8(url.AbsoluteUri), idNative, MAX_STRING_LEN);
+				byte[] idNative = new byte[MusicBrainzConstants.MAX_STRING_LEN];
+				NativeMethods.mb_GetIDFromURL(handle, Utility.ToUtf8(url.AbsoluteUri), idNative, MusicBrainzConstants.MAX_STRING_LEN);
 				string id = Utility.FromUtf8(idNative);
 				int offset = id.IndexOf('#') + 1;
 				return (offset >= 0) ? id.Substring(offset) : id;
@@ -612,9 +607,9 @@ namespace Alexandria.MusicBrainz
 			if (url != null)
 			{
 				string fragment;
-				byte[] fragmentNative = new byte[MAX_STRING_LEN];
+				byte[] fragmentNative = new byte[MusicBrainzConstants.MAX_STRING_LEN];
 
-				NativeMethods.mb_GetFragmentFromURL(handle, Utility.ToUtf8(url.AbsoluteUri), fragmentNative, MAX_STRING_LEN);
+				NativeMethods.mb_GetFragmentFromURL(handle, Utility.ToUtf8(url.AbsoluteUri), fragmentNative, MusicBrainzConstants.MAX_STRING_LEN);
 				fragment = Utility.FromUtf8(fragmentNative);
 
 				return fragment;

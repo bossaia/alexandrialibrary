@@ -28,13 +28,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence.SQLite", "Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj", "{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.DataMapping", "Alexandria.DataMapping\Alexandria.DataMapping.csproj", "{990880C8-F72C-45F8-8B9B-A59238ABAB42}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services", "Alexandria.Services\Alexandria.Services.csproj", "{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model", "Alexandria.Model\Alexandria.Model.csproj", "{E5F218B8-FD8A-42C3-9409-8539D128F294}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model.Data", "Alexandria.Model.Data\Alexandria.Model.Data.csproj", "{72E74E72-336B-4E98-ABA7-334B594636FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions", "Alexandria.Extensions\Alexandria.Extensions.csproj", "{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,10 +98,6 @@ Global
 		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{990880C8-F72C-45F8-8B9B-A59238ABAB42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -114,6 +110,10 @@ Global
 		{72E74E72-336B-4E98-ABA7-334B594636FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72E74E72-336B-4E98-ABA7-334B594636FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72E74E72-336B-4E98-ABA7-334B594636FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

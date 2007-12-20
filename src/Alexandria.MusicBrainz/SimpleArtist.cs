@@ -29,41 +29,29 @@
 #endregion
 
 using System;
-using Alexandria;
+using Telesophy.Alexandria.Model;
 
-namespace Alexandria.MusicBrainz
+namespace Telesophy.Alexandria.MusicBrainz
 {
-    public class SimpleArtist
+    public class SimpleArtist : Artist
     {
+		#region Constructors
+		public SimpleArtist(Guid id, string name, DateTime beginDate, DateTime endDate, string sortName)
+			: base(id, MusicBrainzConstants.ARTIST_TYPE, name, beginDate, endDate)
+		{
+			this.sortName = sortName;
+		}
+		#endregion
+    
 		#region Private Fields
-        private string id;
-        private string name;
-        private string sort_name;
-        #endregion
-        
-        #region Constructors
-        public SimpleArtist(string id, string name, string sortName)
-        {
-            this.id = id;
-            this.name = name;
-            this.sort_name = sortName;
-        }
+        private string sortName;
         #endregion
         
         #region Public Properties
-        public string Id
-        {
-            get {return id;}
-        }
-        
-        public string Name
-        {
-            get {return name;}
-        }
-        
         public string SortName
         {
-			get {return sort_name;}
+			get {return sortName;}
+			set { sortName = value; }
         }
         #endregion
     }
