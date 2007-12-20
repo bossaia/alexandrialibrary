@@ -1123,11 +1123,11 @@
     <Content Include="Resources\Icons\Silk\zoom_out.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria.AsciiGenerator\Alexandria.AsciiGenerator.csproj">
+    <ProjectReference Include="..\Alexandria.Extensions.AsciiGenerator\Alexandria.AsciiGenerator.csproj">
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.CompactDiscTools\Alexandria.CompactDiscTools.csproj">
+    <ProjectReference Include="..\Alexandria.Extensions.CompactDisc\Alexandria.CompactDiscTools.csproj">
       <Project>{26D784C3-58A1-47C1-BC0C-FECD7CB0A4D0}</Project>
       <Name>Alexandria.CompactDiscTools</Name>
     </ProjectReference>
@@ -1139,7 +1139,7 @@
       <Project>{97449DEA-C759-4E22-B287-305CA0023749}</Project>
       <Name>Alexandria.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.LastFM\Alexandria.LastFM.csproj">
+    <ProjectReference Include="..\Alexandria.Services.LastFM\Alexandria.LastFM.csproj">
       <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>
       <Name>Alexandria.LastFM</Name>
     </ProjectReference>
@@ -1151,15 +1151,15 @@
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
+    <ProjectReference Include="..\Alexandria.Services.Mp3Tunes\Alexandria.Mp3Tunes.csproj">
       <Project>{E2B3A41A-4F81-40D1-933C-A792AC523F52}</Project>
       <Name>Alexandria.Mp3Tunes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.MusicBrainz\Alexandria.MusicBrainz.csproj">
+    <ProjectReference Include="..\Alexandria.Services.MusicBrainz\Alexandria.MusicBrainz.csproj">
       <Project>{06EBB86C-E71B-4EF1-8EB7-9B1D6434E6F6}</Project>
       <Name>Alexandria.MusicBrainz</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.MusicDns\Alexandria.MusicDns.csproj">
+    <ProjectReference Include="..\Alexandria.Services.MusicDns\Alexandria.MusicDns.csproj">
       <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
       <Name>Alexandria.MusicDns</Name>
     </ProjectReference>
@@ -1171,11 +1171,11 @@
       <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
       <Name>Alexandria.Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Playlist\Alexandria.Playlist.csproj">
+    <ProjectReference Include="..\Alexandria.Extensions.Playlist\Alexandria.Playlist.csproj">
       <Project>{5373D021-353C-47FE-9BB0-7F6E22F06594}</Project>
       <Name>Alexandria.Playlist</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.TagLib\Alexandria.TagLib.csproj">
+    <ProjectReference Include="..\Alexandria.Extensions.TagLib\Alexandria.TagLib.csproj">
       <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>
       <Name>Alexandria.TagLib</Name>
     </ProjectReference>
