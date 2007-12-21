@@ -7,7 +7,7 @@
     <ProjectGuid>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Services.LastFM</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.Services.LastFM</RootNamespace>
     <AssemblyName>Alexandria.Services.LastFM</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>

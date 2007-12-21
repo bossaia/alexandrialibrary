@@ -7,7 +7,7 @@
     <ProjectGuid>{97449DEA-C759-4E22-B287-305CA0023749}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.IO</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.IO</RootNamespace>
     <AssemblyName>Alexandria.IO</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

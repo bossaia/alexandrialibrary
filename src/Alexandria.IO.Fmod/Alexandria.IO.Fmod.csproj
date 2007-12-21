@@ -7,8 +7,8 @@
     <ProjectGuid>{AF78BF83-2D82-49D4-BEF3-F492E33E2316}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Fmod</RootNamespace>
-    <AssemblyName>Alexandria.Fmod</AssemblyName>
+    <RootNamespace>Telesophy.Alexandria.IO.Fmod</RootNamespace>
+    <AssemblyName>Alexandria.IO.Fmod</AssemblyName>
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>

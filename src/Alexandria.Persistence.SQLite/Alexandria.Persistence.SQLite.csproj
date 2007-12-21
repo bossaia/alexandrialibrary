@@ -7,7 +7,7 @@
     <ProjectGuid>{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Persistence.SQLite</RootNamespace>
+    <RootNamespace>Telesophy.Alexandria.Persistence.SQLite</RootNamespace>
     <AssemblyName>Alexandria.Persistence.SQLite</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
