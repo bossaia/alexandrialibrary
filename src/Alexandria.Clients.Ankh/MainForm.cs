@@ -37,11 +37,11 @@ using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
-using Alexandria.Client.Controllers;
-using Alexandria.Client.Properties;
-using Alexandria.Client.Views;
+using Telesophy.Alexandria.Clients.Ankh.Controllers;
+using Telesophy.Alexandria.Clients.Ankh.Properties;
+using Telesophy.Alexandria.Clients.Ankh.Views;
 
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	public partial class MainForm : Form
 	{

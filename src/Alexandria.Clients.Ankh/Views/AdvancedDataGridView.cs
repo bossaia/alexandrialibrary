@@ -33,7 +33,7 @@ using System.Drawing;
 
 using Telesophy.Alexandria.Model;
 
-namespace Alexandria.Client.Views
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	public class AdvancedDataGridRowDragDropEventArgs : EventArgs
 	{
@@ -81,6 +81,7 @@ namespace Alexandria.Client.Views
 			get { return sourceRow; }
 		}
 		
+		[CLSCompliant(false)]
 		public IMediaItem MediaItem
 		{
 			get { return mediaItem; }

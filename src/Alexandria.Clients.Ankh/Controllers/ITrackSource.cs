@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using Telesophy.Alexandria.Model;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public interface ITrackSource
 	{

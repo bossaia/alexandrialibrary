@@ -29,7 +29,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace Alexandria.Client.Views
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	public class SortDragDropData
 	{

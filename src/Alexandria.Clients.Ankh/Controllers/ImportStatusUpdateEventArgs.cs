@@ -27,7 +27,7 @@
 
 using System;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class ImportStatusUpdateEventArgs : EventArgs
 	{

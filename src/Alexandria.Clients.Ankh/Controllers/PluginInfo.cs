@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	/*
 	public class PluginInfo

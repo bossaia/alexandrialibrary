@@ -1,4 +1,4 @@
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	partial class About
 	{
