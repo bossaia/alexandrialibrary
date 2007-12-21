@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Client.Views
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	//public interface IQueueView : IView
 	//{

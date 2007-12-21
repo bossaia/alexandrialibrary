@@ -33,9 +33,9 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
-using Alexandria.Client;
+using Telesophy.Alexandria.Clients.Ankh;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class PluginController
 	{
@@ -147,7 +147,7 @@ namespace Alexandria.Client.Controllers
 			string license = Properties.Resources.MIT_License;
 			license = license.Replace("\\n", "\r\n");
 
-			int i = 0;
+			//int i = 0;
 			//foreach (PluginInfo plugin in GetPluginInfo())
 			//{
 			//    if (plugin.Bitmap != null)

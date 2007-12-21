@@ -35,7 +35,7 @@ using Alexandria.Fmod;
 
 using Telesophy.Alexandria.Model;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class PlaybackController : IDisposable
 	{
@@ -197,7 +197,7 @@ namespace Alexandria.Client.Controllers
 		{
 			try
 			{
-				LastFM.AudioscrobblerRequest request = new Alexandria.LastFM.AudioscrobblerRequest();
+				AudioscrobblerRequest request = new AudioscrobblerRequest();
 				request.Username = "uberweasel";
 				request.Password = "automatic";
 				request.SubmitTrack(track);
@@ -301,11 +301,11 @@ namespace Alexandria.Client.Controllers
 
 				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
 				{
-					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_pause_blue;
+					PlayPauseButton.BackgroundImage = Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_pause_blue;
 				}
 				else
 				{
-					PlayPauseButton.BackgroundImage = Alexandria.Client.Properties.Resources.control_play_blue;
+					PlayPauseButton.BackgroundImage = Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_play_blue;
 				}
 			}
 		}

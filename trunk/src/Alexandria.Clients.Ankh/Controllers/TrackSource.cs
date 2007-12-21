@@ -32,7 +32,7 @@ using System.Text;
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.MusicBrainz;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class TrackSource : ITrackSource
 	{

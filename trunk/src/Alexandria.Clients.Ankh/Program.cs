@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	static class Program
 	{

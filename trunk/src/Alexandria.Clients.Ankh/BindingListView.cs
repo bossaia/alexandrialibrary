@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	public class BindingListView<T> : BindingList<T>, IBindingListView, IRaiseItemChangedEvents
 	{

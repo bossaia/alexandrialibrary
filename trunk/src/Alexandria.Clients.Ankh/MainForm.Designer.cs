@@ -1,4 +1,4 @@
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	partial class MainForm
 	{
@@ -98,7 +98,7 @@ namespace Alexandria.Client
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.filterContextMenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.queueDataGrid = new Alexandria.Client.Views.AdvancedDataGridView();
+			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -136,14 +136,14 @@ namespace Alexandria.Client
 			// 
 			// PlayPauseButton
 			// 
-			this.PlayPauseButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_play_blue;
+			this.PlayPauseButton.BackgroundImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_play_blue;
 			resources.ApplyResources(this.PlayPauseButton, "PlayPauseButton");
 			this.PlayPauseButton.Name = "PlayPauseButton";
 			this.PlayPauseButton.UseVisualStyleBackColor = true;
 			// 
 			// StopButton
 			// 
-			this.StopButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_stop_blue;
+			this.StopButton.BackgroundImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_stop_blue;
 			resources.ApplyResources(this.StopButton, "StopButton");
 			this.StopButton.Name = "StopButton";
 			this.StopButton.UseVisualStyleBackColor = true;
@@ -167,7 +167,7 @@ namespace Alexandria.Client
 			// MuteButton
 			// 
 			resources.ApplyResources(this.MuteButton, "MuteButton");
-			this.MuteButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.sound_mute;
+			this.MuteButton.BackgroundImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.sound_mute;
 			this.MuteButton.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.MuteButton.Name = "MuteButton";
 			this.MuteButton.UseVisualStyleBackColor = true;
@@ -314,7 +314,7 @@ namespace Alexandria.Client
 			// 
 			// NextButton
 			// 
-			this.NextButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_end_blue;
+			this.NextButton.BackgroundImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_end_blue;
 			resources.ApplyResources(this.NextButton, "NextButton");
 			this.NextButton.Name = "NextButton";
 			this.NextButton.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@ namespace Alexandria.Client
 			// 
 			// PreviousButton
 			// 
-			this.PreviousButton.BackgroundImage = global::Alexandria.Client.Properties.Resources.control_start_blue;
+			this.PreviousButton.BackgroundImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_start_blue;
 			resources.ApplyResources(this.PreviousButton, "PreviousButton");
 			this.PreviousButton.Name = "PreviousButton";
 			this.PreviousButton.UseVisualStyleBackColor = true;
@@ -835,7 +835,7 @@ namespace Alexandria.Client
 		private System.Windows.Forms.ContextMenuStrip ToolBoxContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
-		private Alexandria.Client.Views.AdvancedDataGridView queueDataGrid;
+		private Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView queueDataGrid;
 		private System.Windows.Forms.ImageList queueSmallImageList;
 		private System.Windows.Forms.ContextMenuStrip sortContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem sortContextMenuStripItemClearSelected;

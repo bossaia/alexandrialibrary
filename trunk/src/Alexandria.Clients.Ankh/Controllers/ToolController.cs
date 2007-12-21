@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class ToolController
 	{

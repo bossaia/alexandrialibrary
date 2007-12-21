@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Alexandria.Client.Properties {
+namespace Telesophy.Alexandria.Clients.Ankh.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

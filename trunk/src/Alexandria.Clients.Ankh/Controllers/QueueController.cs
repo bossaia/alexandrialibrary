@@ -35,7 +35,6 @@ using System.Net;
 using System.Windows.Forms;
 
 using Alexandria;
-using Alexandria.Client.Views;
 using Alexandria.IO;
 using Alexandria.Persistence;
 
@@ -50,10 +49,11 @@ using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Mp3Tunes;
 using Telesophy.Alexandria.MusicBrainz;
 
+using Telesophy.Alexandria.Clients.Ankh.Views;
 using Telesophy.Alexandria.Extensions.Playlist;
 #endregion
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class QueueController
 	{
@@ -361,6 +361,7 @@ namespace Alexandria.Client.Controllers
 			get { return tracks; }
 		}
 
+		[CLSCompliant(false)]
 		public IMediaItem SelectedTrack
 		{
 			get { return selectedTrack; }
@@ -438,14 +439,14 @@ namespace Alexandria.Client.Controllers
 					if (SelectedTrack.Format == "cdda")
 					{
 						string discPath = SelectedTrack.Path.LocalPath.Substring(0, 2);
-						audioStream = new Fmod.CompactDiscSound(discPath);
+						audioStream = new CompactDiscSound(discPath);
 						audioStream.StreamIndex = SelectedTrack.Number-1;
 					}
 					else
 					{
 						if (SelectedTrack.Path.IsFile)
 						{
-							audioStream = new Fmod.LocalSound(SelectedTrack.Path.LocalPath);
+							audioStream = new LocalSound(SelectedTrack.Path.LocalPath);
 							audioStream.StreamIndex = 0;
 						}
 						else
@@ -469,7 +470,7 @@ namespace Alexandria.Client.Controllers
 								}
 							}
 
-							audioStream = new Fmod.LocalSound(fileName);
+							audioStream = new LocalSound(fileName);
 							audioStream.StreamIndex = 0;
 						}
 
@@ -566,7 +567,7 @@ namespace Alexandria.Client.Controllers
 		[CLSCompliant(false)]
 		public IMetadataIdentifier LookupPuid(Uri path)
 		{
-			MusicDns.MetadataFactory factory = new Alexandria.MusicDns.MetadataFactory();
+			MetadataFactory factory = new MetadataFactory();
 			IMediaItem track = factory.CreateAudioTrack(path);
 			
 			//TODO: Implement a replacement for track.MetadataIdentifiers

@@ -10,7 +10,7 @@ using Alexandria.Persistence.SQLite;
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Model.Data;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class PersistenceController
 	{
@@ -45,11 +45,13 @@ namespace Alexandria.Client.Controllers
 			return mediaItemDataMap.List(filter);
 		}
 		
+		[CLSCompliant(false)]
 		public void SaveMediaItem(IMediaItem item)
 		{
 			mediaItemDataMap.SaveMediaItem(item);
 		}
 		
+		[CLSCompliant(false)]
 		public void DeleteMediaItem(IMediaItem item)
 		{
 			mediaItemDataMap.DeleteMediaItem(item);

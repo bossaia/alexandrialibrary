@@ -33,9 +33,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-using Alexandria.Client.Controllers;
+using Telesophy.Alexandria.Clients.Ankh.Controllers;
 
-namespace Alexandria.Client
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	public partial class About : Form
 	{

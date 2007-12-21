@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using Alexandria.IO;
 
-namespace Alexandria.Client.Controllers
+namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class PlaybackEventArgs : EventArgs
 	{
