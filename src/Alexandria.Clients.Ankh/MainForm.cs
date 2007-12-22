@@ -975,6 +975,14 @@ namespace Telesophy.Alexandria.Clients.Ankh
 
 				ListViewItem item = new ListViewItem(value);
 				item.Tag = column;
+				item.ImageIndex = 0;
+				if (column != DEFAULT_COLUMN_FILTER)
+				{
+					//TODO: fix this to not be dependent on column order
+					item.ImageIndex = queueDataGrid.Columns[column].Index+1;
+				}
+				item.ToolTipText = string.Format("{0}: {1}", column, value);
+				
 				filterListView.Items.Add(item);
 
 				filterButton_Click(this, EventArgs.Empty);
