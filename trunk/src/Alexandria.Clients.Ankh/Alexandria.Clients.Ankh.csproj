@@ -46,6 +46,7 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="BindingListView.cs" />
+    <Compile Include="Controllers\ControllerConstants.cs" />
     <Compile Include="Controllers\ImportStatusUpdateDelegate.cs" />
     <Compile Include="Controllers\ImportStatusUpdateEventArgs.cs" />
     <Compile Include="Controllers\PersistenceController.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Controllers\VolumeEventArgs.cs" />
+    <Compile Include="FilterInfo.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +114,7 @@
     <Compile Include="Views\AdvancedDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\FilterDragDropData.cs" />
     <Compile Include="Views\IQueueView.cs" />
     <Compile Include="Views\QueueItem.cs" />
     <Compile Include="Views\SortDragDropData.cs" />
