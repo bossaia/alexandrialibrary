@@ -68,20 +68,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		}
 		#endregion
 
-		#region Private Constant Fields
-		private const string COL_ID = "Id";
-		private const string COL_STATUS = "Status";
-		private const string COL_TYPE = "Type";
-		private const string COL_SOURCE = "Source";
-		private const string COL_NUMBER = "Number";
-		private const string COL_TITLE = "Title";
-		private const string COL_ARTIST = "Artist";
-		private const string COL_ALBUM = "Album";
-		private const string COL_DURATION = "Duration";
-		private const string COL_DATE = "Date";
-		private const string COL_FORMAT = "Format";
-		private const string COL_PATH = "Path";
-		
+		#region Private Constant Fields		
 		private const string TYPE_AUDIO = "Audio";
 		private const int INDEX_AUDIO = 0;
 		private const string TYPE_IMAGE = "Image";
@@ -141,7 +128,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set {
 				if (selectedRow != null && selectedRow != value && selectedRow.Index > -1)
 				{
-					grid.Rows[selectedRow.Index].Cells[COL_STATUS].Value = string.Empty;
+					grid.Rows[selectedRow.Index].Cells[ControllerConstants.COL_STATUS].Value = string.Empty;
 				}
 				 
 				selectedRow = value;
@@ -184,17 +171,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			if (row.Index > -1)
 			{			
-				Guid id = GetItemGuid(row.Cells[COL_ID]);
-				string type = GetItemString(row.Cells[COL_TYPE]);
-				string source = GetItemString(row.Cells[COL_SOURCE]);
-				int number = GetItemInt(row.Cells[COL_NUMBER]);
-				string title = GetItemString(row.Cells[COL_TITLE]);
-				string artist = GetItemString(row.Cells[COL_ARTIST]);
-				string album = GetItemString(row.Cells[COL_ALBUM]);
-				TimeSpan duration = GetItemTimeSpan(row.Cells[COL_DURATION]);
-				DateTime date = GetItemDateTime(row.Cells[COL_DATE]);
-				string format =  GetItemString(row.Cells[COL_FORMAT]);
-				Uri path = GetItemUri(row.Cells[COL_PATH]);
+				Guid id = GetItemGuid(row.Cells[ControllerConstants.COL_ID]);
+				string type = GetItemString(row.Cells[ControllerConstants.COL_TYPE]);
+				string source = GetItemString(row.Cells[ControllerConstants.COL_SOURCE]);
+				int number = GetItemInt(row.Cells[ControllerConstants.COL_NUMBER]);
+				string title = GetItemString(row.Cells[ControllerConstants.COL_TITLE]);
+				string artist = GetItemString(row.Cells[ControllerConstants.COL_ARTIST]);
+				string album = GetItemString(row.Cells[ControllerConstants.COL_ALBUM]);
+				TimeSpan duration = GetItemTimeSpan(row.Cells[ControllerConstants.COL_DURATION]);
+				DateTime date = GetItemDateTime(row.Cells[ControllerConstants.COL_DATE]);
+				string format = GetItemString(row.Cells[ControllerConstants.COL_FORMAT]);
+				Uri path = GetItemUri(row.Cells[ControllerConstants.COL_PATH]);
 				
 				IMediaItem track = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 				return track;
@@ -273,7 +260,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (e.Value != null)
 			{
 				//queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
-				if (grid.Columns[e.ColumnIndex].Name == COL_DURATION)
+				if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_DURATION)
 				{
 					TimeSpan duration = (TimeSpan)e.Value;
 					if (duration.Hours > 0)
@@ -290,7 +277,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					}
 				}
 				//if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
-				if (grid.Columns[e.ColumnIndex].Name == COL_TYPE)
+				if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_TYPE)
 				{
 					switch(e.Value.ToString())
 					{
@@ -390,12 +377,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			get { 
 				return (SelectedRow != null && SelectedRow.Index > -1)
-					? SelectedRow.Cells[COL_STATUS].Value.ToString()
+					? SelectedRow.Cells[ControllerConstants.COL_STATUS].Value.ToString()
 					: null;
 			}
 			set { 
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					SelectedRow.Cells[COL_STATUS].Value = value;
+					SelectedRow.Cells[ControllerConstants.COL_STATUS].Value = value;
 			}
 		}
 		#endregion
@@ -476,7 +463,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 						if (audioStream != null && audioStream.Duration != SelectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
-							SelectedRow.Cells[COL_DURATION].Value = audioStream.Duration;
+							SelectedRow.Cells[ControllerConstants.COL_DURATION].Value = audioStream.Duration;
 						}
 					}
 					
@@ -822,7 +809,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					//bool selected = Convert.ToBoolean(row.Cells[COL_SELECTED].Value);
 					//if (selected)
 					//{
-						idList.Add((Guid)row.Cells[COL_ID].Value);
+					idList.Add((Guid)row.Cells[ControllerConstants.COL_ID].Value);
 					//}
 				}
 				
@@ -868,7 +855,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
 				Guid selectedId = default(Guid);
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					selectedId = (Guid)SelectedRow.Cells[COL_ID].Value;
+					selectedId = (Guid)SelectedRow.Cells[ControllerConstants.COL_ID].Value;
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				

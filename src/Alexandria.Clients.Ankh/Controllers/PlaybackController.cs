@@ -193,6 +193,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				
 		#region Public Methods
 		//TODO: move this method into its own controller
+		[CLSCompliant(false)]
 		public void SubmitTrackToLastFM(IMediaItem track)
 		{
 			try
