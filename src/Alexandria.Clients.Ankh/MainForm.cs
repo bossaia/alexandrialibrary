@@ -64,6 +64,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 				queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;
 				queueController.PersistenceController = persistenceController;
+				queueController.TaskController = taskController;
 				queueController.SmallImageList = queueSmallImageList;
 				
 				playbackController.PlayToggles = true;
@@ -74,6 +75,10 @@ namespace Telesophy.Alexandria.Clients.Ankh
 				playbackController.WireStatusUpdated(new EventHandler<PlaybackEventArgs>(OnStatusUpdated));
 				
 				persistenceController.Initialize();
+				
+				taskController.Grid = taskDataGrid;
+				taskController.QueueController = queueController;
+				taskController.PersistenceController = persistenceController;
 				
 				queueController.LoadDefaultCatalog();
 			}
@@ -107,6 +112,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private QueueController queueController = new QueueController();
 		private PersistenceController persistenceController = new PersistenceController();
 		private PluginController pluginController = new PluginController();
+		private TaskController taskController = new TaskController();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
@@ -710,7 +716,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			if (result == DialogResult.OK)
 			{
 				ImportStatusUpdateDelegate updateCallback = new ImportStatusUpdateDelegate(importStatusUpdated);
-				queueController.BeginImportDirectory(DirectoryOpenDialog.SelectedPath, updateCallback);
+				taskController.BeginImportDirectory(DirectoryOpenDialog.SelectedPath, updateCallback);
 			}
 		}
 		

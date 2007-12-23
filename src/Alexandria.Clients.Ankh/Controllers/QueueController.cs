@@ -68,7 +68,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		}
 		#endregion
 
-		#region Private Constant Fields		
+		#region Private Constants
 		private const string TYPE_AUDIO = "Audio";
 		private const int INDEX_AUDIO = 0;
 		private const string TYPE_IMAGE = "Image";
@@ -79,11 +79,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private const int INDEX_MOVIE = 3;
 		private const string TYPE_TELEVISION = "TV";
 		private const int INDEX_TELEVISION = 4;
-		
 		private const string SOURCE_CATALOG = "Catalog";
-
-		private const string FORMAT_PLAYLIST = "asx,m3u,pls,xspf";
-		private const string FORMAT_AUDIO = "aac,flac,m4a,mp3,ogg,wav,wma";
 		#endregion
 
 		#region Private Fields
@@ -106,19 +102,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		private DataGridViewRow selectedRow;
 		private int selectedRowSaveIndex;
-		//private Guid selectedGuid;
 		
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
 		private PlaybackController playbackController;
 		private PersistenceController persistenceController;
-		
-		private DateTime importStart;
-		private string importPath;
-		private int scanCount;
-		private int importCount;
-		private int errorCount;
-		private ImportStatusUpdateDelegate importStatusUpdateCallback;
+		private TaskController taskController;		
 		#endregion
 
 		#region Private Properties
@@ -343,6 +332,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set { persistenceController = value; }
 		}
 		
+		public TaskController TaskController
+		{
+			get { return taskController; }
+			set { taskController = value; }
+		}
+		
 		public IList<IMediaItem> Tracks
 		{
 			get { return tracks; }
@@ -536,6 +531,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			else return string.Format("{0:d}", date);
 		}
 
+		[CLSCompliant(false)]
+		public IMediaItem GetMediaItem(Uri path)
+		{
+			return tagLibEngine.GetAudioTrack(path);
+		}
+
 		public IList<IMediaItem> GetMp3TunesTracks(bool ignoreCache)
 		{
 			try
@@ -602,107 +603,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					OpenDirectory(subDirectory.FullName);
 				}
 			}
-		}
-		
-		public void BeginImportDirectory(string path, ImportStatusUpdateDelegate importStatusUpdateCallback)
-		{
-			this.importPath = path;
-			this.scanCount = 0;
-			this.importCount = 0;
-			this.errorCount = 0;
-			this.importStatusUpdateCallback = importStatusUpdateCallback;
-			this.importStart = DateTime.Now;
-			
-			MethodInvoker invoker = new MethodInvoker(ImportDirectory);
-			AsyncCallback callback = new AsyncCallback(EndImportDirectory);
-			invoker.BeginInvoke(callback, null);
-		}
-		
-		public void EndImportDirectory(IAsyncResult result)
-		{
-			if (importStatusUpdateCallback != null)
-			{
-				TimeSpan completedTime = DateTime.Now.Subtract(importStart);
-				ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, completedTime);
-				importStatusUpdateCallback(this, args);
-			}
-		}
-		
-		private void ImportDirectory()
-		{
-			ImportDirectory(importPath);
-		}
-		
-		private void ImportDirectory(string path)
-		{
-			if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-			{
-				DirectoryInfo dir = new DirectoryInfo(path);
-				foreach(FileInfo file in dir.GetFiles())
-				{
-					ImportFile(file.FullName);
-				}
-				foreach(DirectoryInfo subDirectory in dir.GetDirectories())
-				{
-					ImportDirectory(subDirectory.FullName);
-				}
-			}
-		}
-
-		public void ImportFile(string path)
-		{
-			if (System.IO.File.Exists(path))
-			{
-				if (!string.IsNullOrEmpty(path) && IsFormat(path, FORMAT_AUDIO))
-				{
-					try
-					{
-						IMediaItem track = tagLibEngine.GetAudioTrack(new Uri(path));
-						if (track != null)
-						{
-							//IMediaItem item = new MediaItem(Guid.NewGuid(), SOURCE_CATALOG, TYPE_AUDIO, track.TrackNumber, track.Name, track.Artist, track.Album, track.Duration, track.ReleaseDate, track.Format, track.Path);
-							persistenceController.SaveMediaItem(track);
-							
-							if (importStatusUpdateCallback != null)
-							{
-								scanCount++;
-								importCount++;
-								ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
-								importStatusUpdateCallback(this, args);
-							}
-						}
-					}
-					catch(Exception ex)
-					{
-						if (importStatusUpdateCallback != null)
-						{
-							errorCount++;
-							ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
-							importStatusUpdateCallback(this, args);
-						}
-						//else
-						//{
-							MessageBox.Show(string.Format("The following file could not be imported: \n{0}\n\n{1}", path, ex.Message), "IMPORT ERROR");
-						//}
-					}
-				}
-				else
-				{
-					if (importStatusUpdateCallback != null)
-					{
-						scanCount++;
-						ImportStatusUpdateEventArgs args = new ImportStatusUpdateEventArgs(scanCount, importCount, errorCount, path);
-						importStatusUpdateCallback(this, args);
-					}
-				}
-			}
-		}
+		}		
 
 		public void OpenFile(string path)
 		{
 			if (!string.IsNullOrEmpty(path))
 			{
-				if (IsFormat(path, FORMAT_PLAYLIST))
+				if (IsFormat(path, ControllerConstants.FORMAT_PLAYLIST))
 				{
 					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
 					playlist.Load();
@@ -711,7 +618,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 						
 					//TestSort();
 				}
-				else if (IsFormat(path, FORMAT_AUDIO))
+				else if (IsFormat(path, ControllerConstants.FORMAT_AUDIO))
 				{
 					LoadTrackFromPath(path, "File");
 				}
