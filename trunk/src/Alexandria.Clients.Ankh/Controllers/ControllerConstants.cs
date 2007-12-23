@@ -18,5 +18,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		internal const string COL_DATE = "Date";
 		internal const string COL_FORMAT = "Format";
 		internal const string COL_PATH = "Path";
+		internal const string FORMAT_PLAYLIST = "asx,m3u,pls,xspf";
+		internal const string FORMAT_AUDIO = "aac,flac,m4a,mp3,ogg,wav,wma";
 	}
 }

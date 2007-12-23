@@ -101,6 +101,7 @@ namespace Alexandria.TagLib
 					
 					if (tag != null)
 					{
+						tag.Id = Guid.NewGuid();
 						tag.Path = new Uri(localPath);
 						tag.Duration = duration;
 					}
