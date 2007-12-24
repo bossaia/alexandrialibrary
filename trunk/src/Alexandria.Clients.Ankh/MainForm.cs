@@ -51,6 +51,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			try
 			{
 				InitializeComponent();
+				CustomInitialize();
 				
 				this.Resize += new EventHandler(MainForm_Resize);
 				this.OpenToolStripMenuItem.Click += new EventHandler(OpenToolStripMenuItem_Click);				
@@ -142,6 +143,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 
 			PlaybackTimer.Start();
 
+			//InitializeTaskMenu();
 			InitializePlugins();
 			InitializeInterface();
 
@@ -149,9 +151,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 
 			playbackController.WireCurrentAudioSteamEnded(new EventHandler<EventArgs>(OnCurrentAudioStreamEnded));
 			queueController.WireSelectedTrackChanged(new EventHandler<QueueEventArgs>(OnSelectedTrackChanged));
-
-			//queueController.TrackStart += new EventHandler<EventArgs>(OnSelectedTrackStart);
-			//queueController.TrackEnd += new EventHandler<EventArgs>(OnSelectedTrackEnd);
 		}
 		#endregion
 
@@ -171,6 +170,13 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		#endregion
 		
 		#region Private Methods
+		
+		#region CustomInitialize
+		private void CustomInitialize()
+		{
+			InitializeTaskMenu();
+		}
+		#endregion
 		
 		#region InitializePlugins
 		private void InitializePlugins()
@@ -258,6 +264,14 @@ namespace Telesophy.Alexandria.Clients.Ankh
 				}
 			}
 			*/
+		}
+		#endregion
+
+		#region InitializeTaskMenu
+		private void InitializeTaskMenu()
+		{
+			//for(int i=0; i<taskContextMenuStrip.Items.Count; i++)
+				//tasksToolStripMenuItem.DropDownItems.Add(taskContextMenuStrip.Items[i]);
 		}
 		#endregion
 				
@@ -1112,6 +1126,97 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			{
 				MessageBox.Show(string.Format("There was an error trying to apply this filter:\n{0}", ex.Message), "Filter Error");
 			}		
+		}
+		#endregion
+
+		#region Task Methods
+		private void RunTask()
+		{
+			taskController.RunSelectedTask();
+		}
+				
+		private void PauseTask()
+		{
+			taskController.PauseSelectedTask();
+		}
+
+		private void CancelTask()
+		{
+			if (taskDataGrid.SelectedRows != null && taskDataGrid.SelectedRows.Count > 0)
+			{
+				string taskName = taskDataGrid.SelectedRows[0].Cells[0].Value.ToString();
+				if (MessageBox.Show(string.Format("Are you sure that you want to cancel the '{0}' task?", taskName), "Cancel Task", MessageBoxButtons.YesNo) == DialogResult.Yes)
+				{
+					taskController.CancelSelectedTask();
+				}
+			}
+		}
+		
+		private void CancelAllTasks()
+		{
+			taskController.CancelAllTasks();
+		}
+	
+		private void taskContextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			bool cancelAllEnabled = false;
+			bool cancelEnabled = false;
+			bool pauseEnabled = false;
+		
+			if (taskDataGrid.Rows != null && taskDataGrid.Rows.Count > 0)
+			{
+				cancelAllEnabled = true;
+			}
+		
+			if (taskDataGrid.SelectedRows != null && taskDataGrid.SelectedRows.Count > 0)
+			{
+				cancelEnabled = true;
+				pauseEnabled = true;
+			}
+			
+			taskCancelMenuItem.Enabled = cancelEnabled;
+			taskCancelAllMenuItem.Enabled = cancelAllEnabled;
+			taskPauseMenuItem.Enabled = pauseEnabled;
+		}
+
+		private void taskRunMenuItem_Click(object sender, EventArgs e)
+		{
+			RunTask();
+		}
+				
+		private void taskPauseMenuItem_Click(object sender, EventArgs e)
+		{
+			PauseTask();
+		}
+
+		private void taskCancelMenuItem_Click(object sender, EventArgs e)
+		{
+			CancelTask();
+		}
+
+		private void taskCancelAllMenuItem_Click(object sender, EventArgs e)
+		{
+			CancelAllTasks();
+		}
+
+		private void runTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RunTask();
+		}
+
+		private void pauseTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PauseTask();
+		}
+
+		private void cancelTaskToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CancelTask();
+		}
+
+		private void cancelAllTasksToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CancelAllTasks();
 		}
 		#endregion
 

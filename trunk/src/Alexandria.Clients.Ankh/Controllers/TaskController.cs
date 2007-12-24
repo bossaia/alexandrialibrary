@@ -41,7 +41,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		}
 		#endregion
 		
-		#region Private Constants		
+		#region Private Constants
 		private const int TASK_COL_NAME = 0; //"taskNameColumn";
 		private const int TASK_COL_STATUS = 1; //"taskStatusColumn";
 		private const int TASK_COL_PROGRESS = 2; //"taskProgressColumn";
@@ -57,12 +57,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private QueueController queueController;
 		private PersistenceController persistenceController;
 		private DataGridView grid;
-		private object importLock = new object();
 
 		#region Private Import Fields
-		private bool importInProgress;
+		private object importLock = new object();
+		private TaskStatus importStatus = TaskStatus.Unknown;
 		private DateTime importStart;
 		private string importPath;
+		private string importFileName;
 		private int importScanCount;
 		private int importHitCount;
 		private int importErrorCount;
@@ -73,9 +74,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 		
 		#region Private Methods
+		
+		#region Private Import Methods
 		private string GetImportProgess()
 		{
-			return importHitCount.ToString();
+			return (!string.IsNullOrEmpty(importFileName)) ? importFileName : "Scanning...";
 		}
 		
 		private string GetImportDetails()
@@ -83,19 +86,29 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return string.Format(IMPORT_DETAILS_FORMAT, importScanCount, importHitCount, importErrorCount);
 		}
 		
-		private void InitializeImportRow()
+		private void SetImportStatus(TaskStatus status)
 		{
-			//if (importRow != null)
-			//{
-				//grid.Rows.Remove(importRow);
-			//}
+			lock(importLock)
+			{
+				importStatus = status;
+			}
+		}
+		
+		private void InitializeImport(string path)
+		{
+			SetImportStatus(TaskStatus.Running);
+			
+			importPath = path;
+			importScanCount = 0;
+			importHitCount = 0;
+			importErrorCount = 0;
+			importStart = DateTime.Now;
+			importFileName = string.Empty;
 		
 			importRow = new DataGridViewRow();
 			importRow.CreateCells(grid);
 			importRow.Cells[TASK_COL_NAME].Value = IMPORT_TASK_NAME;
-			importRow.Cells[TASK_COL_STATUS].Value = IMPORT_TASK_STATUS_DEFAULT;
-			importRow.Cells[TASK_COL_PROGRESS].Value = GetImportProgess();
-			importRow.Cells[TASK_COL_DETAILS].Value = GetImportDetails();
+			RefreshImportRow();
 			
 			grid.Rows.Add(importRow);
 		}
@@ -104,6 +117,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			return new ImportStatusUpdateEventArgs(importScanCount, importHitCount, importErrorCount, path);
 		}
+		
+		private void RefreshImportRow()
+		{
+			if (importRow != null)
+			{
+				importRow.Cells[TASK_COL_STATUS].Value = importStatus.ToString();
+				importRow.Cells[TASK_COL_PROGRESS].Value = GetImportProgess();
+				importRow.Cells[TASK_COL_DETAILS].Value = GetImportDetails();
+			}
+		}
+		#endregion
+		
 		#endregion
 		
 		#region Public Properties
@@ -127,23 +152,65 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 		
 		#region Public Methods
+		public void RunSelectedTask()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+			{
+				if (grid.SelectedRows[0] == importRow)
+				{
+					if (importStatus == TaskStatus.Paused || importStatus == TaskStatus.Pending)
+						SetImportStatus(TaskStatus.Running);
+					
+					RefreshImportRow();
+				}
+			}			
+		}
+		
+		public void PauseSelectedTask()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+			{
+				if (grid.SelectedRows[0] == importRow)
+				{
+					if (importStatus == TaskStatus.Running)
+						SetImportStatus(TaskStatus.Paused);
+					else if (importStatus == TaskStatus.Paused)
+						SetImportStatus(TaskStatus.Running);
+					
+					RefreshImportRow();
+				}			
+			}
+		}
+		
+		public void CancelSelectedTask()
+		{
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+			{
+				if (grid.SelectedRows[0] == importRow)
+				{
+					SetImportStatus(TaskStatus.Cancelled);
+					
+					RefreshImportRow();
+				}
+			}
+		}
+		
+		public void CancelAllTasks()
+		{
+			if (grid.Rows.Count > 0)
+			{
+				SetImportStatus(TaskStatus.Cancelled);
+				
+				RefreshImportRow();
+			}
+		}
 		
 		#region Public Import Methods
 		public void BeginImportDirectory(string path, ImportStatusUpdateDelegate importStatusUpdateCallback)
-		{
-			lock(importLock)
-			{
-				importInProgress = true;
-			}
-			
-			this.importPath = path;
-			this.importScanCount = 0;
-			this.importHitCount = 0;
-			this.importErrorCount = 0;
+		{			
 			this.importStatusUpdateCallback = importStatusUpdateCallback;
-			this.importStart = DateTime.Now;
 			
-			InitializeImportRow();
+			InitializeImport(path);
 
 			MethodInvoker invoker = new MethodInvoker(ImportDirectory);
 			AsyncCallback callback = new AsyncCallback(EndImportDirectory);
@@ -154,7 +221,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			lock(importLock)
 			{
-				importInProgress = false;
+				importStatus = TaskStatus.Completed;
 			}
 		
 			if (importRow != null)
@@ -170,6 +237,26 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 		}
 
+		private bool ContinueImport()
+		{
+			//if (importStatus == TaskStatus.Running)
+				//System.Threading.Thread.Sleep(8000);
+		
+			switch (importStatus)
+			{
+				case TaskStatus.Cancelled:
+					return false;
+				case TaskStatus.Paused:
+					while(importStatus == TaskStatus.Paused)
+					{
+						System.Threading.Thread.Sleep(3000);
+					}
+					return (importStatus != TaskStatus.Cancelled);
+				default:
+					return true;
+			}
+		}
+
 		private void ImportDirectory()
 		{
 			ImportDirectory(importPath);
@@ -177,26 +264,38 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 		private void ImportDirectory(string path)
 		{
-			if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+			if (ContinueImport())	
 			{
-				DirectoryInfo dir = new DirectoryInfo(path);
-				foreach (FileInfo file in dir.GetFiles())
+				if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
 				{
-					ImportFile(file.FullName);
-				}
-				foreach (DirectoryInfo subDirectory in dir.GetDirectories())
-				{
-					ImportDirectory(subDirectory.FullName);
+					DirectoryInfo dir = new DirectoryInfo(path);
+					foreach (FileInfo file in dir.GetFiles())
+					{
+						if (ContinueImport())
+						{
+							ImportFile(file.FullName);
+						}
+						else break;
+					}
+					foreach (DirectoryInfo subDirectory in dir.GetDirectories())
+					{
+						if (ContinueImport())
+						{
+							ImportDirectory(subDirectory.FullName);
+						}
+						else break;
+					}
 				}
 			}
 		}
 
 		public void ImportFile(string path)
-		{
+		{	
 			if (System.IO.File.Exists(path) && !System.IO.Directory.Exists(path))
 			{
 				if (!string.IsNullOrEmpty(path) && QueueController.IsFormat(path, ControllerConstants.FORMAT_AUDIO))
 				{
+					importFileName = new FileInfo(path).Name;
 					importScanCount++;
 				
 					try
@@ -239,7 +338,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				importRow.Cells[TASK_COL_PROGRESS].Value = GetImportProgess();
 				importRow.Cells[TASK_COL_DETAILS].Value = GetImportDetails();
 			}
-		}
+		}		
 		#endregion
 		
 		#endregion

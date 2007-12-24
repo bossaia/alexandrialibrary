@@ -32,10 +32,10 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -54,10 +54,10 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.saveSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteSelectedCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.importCatalogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -74,6 +74,14 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.UpperPlaybackStatusSplit = new System.Windows.Forms.SplitContainer();
 			this.TasksGroupBox = new System.Windows.Forms.GroupBox();
 			this.taskDataGrid = new System.Windows.Forms.DataGridView();
+			this.taskNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.taskStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.taskProgressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.taskDetailsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.taskContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.taskPauseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.taskCancelMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.taskCancelAllMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.ToolBoxGroupBox = new System.Windows.Forms.GroupBox();
 			this.ToolBoxListView = new System.Windows.Forms.ListView();
@@ -101,6 +109,9 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.pauseTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cancelTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cancelAllTasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -114,10 +125,8 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.taskNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.taskStatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.taskProgressColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.taskDetailsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.runTaskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.taskRunMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -131,6 +140,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.UpperPlaybackStatusSplit.SuspendLayout();
 			this.TasksGroupBox.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.taskDataGrid)).BeginInit();
+			this.taskContextMenuStrip.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
@@ -186,8 +196,8 @@ namespace Telesophy.Alexandria.Clients.Ankh
             this.FileToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.catalogToolStripMenuItem,
-            this.userToolStripMenuItem,
             this.ToolsToolStripMenuItem,
+            this.tasksToolStripMenuItem,
             this.HelpToolStripMenuItem});
 			resources.ApplyResources(this.FileMenuStrip, "FileMenuStrip");
 			this.FileMenuStrip.Name = "FileMenuStrip";
@@ -272,11 +282,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			resources.ApplyResources(this.importCatalogToolStripMenuItem, "importCatalogToolStripMenuItem");
 			this.importCatalogToolStripMenuItem.Click += new System.EventHandler(this.importCatalogToolStripMenuItem_Click);
 			// 
-			// userToolStripMenuItem
-			// 
-			this.userToolStripMenuItem.Name = "userToolStripMenuItem";
-			resources.ApplyResources(this.userToolStripMenuItem, "userToolStripMenuItem");
-			// 
 			// ToolsToolStripMenuItem
 			// 
 			this.ToolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -294,6 +299,16 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			// 
 			this.toolManagerToolStripMenuItem.Name = "toolManagerToolStripMenuItem";
 			resources.ApplyResources(this.toolManagerToolStripMenuItem, "toolManagerToolStripMenuItem");
+			// 
+			// tasksToolStripMenuItem
+			// 
+			this.tasksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runTaskToolStripMenuItem,
+            this.pauseTaskToolStripMenuItem,
+            this.cancelTaskToolStripMenuItem,
+            this.cancelAllTasksToolStripMenuItem});
+			this.tasksToolStripMenuItem.Name = "tasksToolStripMenuItem";
+			resources.ApplyResources(this.tasksToolStripMenuItem, "tasksToolStripMenuItem");
 			// 
 			// HelpToolStripMenuItem
 			// 
@@ -419,7 +434,64 @@ namespace Telesophy.Alexandria.Clients.Ankh
             this.taskStatusColumn,
             this.taskProgressColumn,
             this.taskDetailsColumn});
+			this.taskDataGrid.ContextMenuStrip = this.taskContextMenuStrip;
+			this.taskDataGrid.MultiSelect = false;
 			this.taskDataGrid.Name = "taskDataGrid";
+			this.taskDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			// 
+			// taskNameColumn
+			// 
+			resources.ApplyResources(this.taskNameColumn, "taskNameColumn");
+			this.taskNameColumn.Name = "taskNameColumn";
+			// 
+			// taskStatusColumn
+			// 
+			resources.ApplyResources(this.taskStatusColumn, "taskStatusColumn");
+			this.taskStatusColumn.Name = "taskStatusColumn";
+			// 
+			// taskProgressColumn
+			// 
+			resources.ApplyResources(this.taskProgressColumn, "taskProgressColumn");
+			this.taskProgressColumn.Name = "taskProgressColumn";
+			this.taskProgressColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			// 
+			// taskDetailsColumn
+			// 
+			this.taskDetailsColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			resources.ApplyResources(this.taskDetailsColumn, "taskDetailsColumn");
+			this.taskDetailsColumn.Name = "taskDetailsColumn";
+			// 
+			// taskContextMenuStrip
+			// 
+			this.taskContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.taskRunMenuItem,
+            this.taskPauseMenuItem,
+            this.taskCancelMenuItem,
+            this.taskCancelAllMenuItem});
+			this.taskContextMenuStrip.Name = "taskContextMenuStrip";
+			resources.ApplyResources(this.taskContextMenuStrip, "taskContextMenuStrip");
+			this.taskContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.taskContextMenuStrip_Opening);
+			// 
+			// taskPauseMenuItem
+			// 
+			this.taskPauseMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_pause;
+			this.taskPauseMenuItem.Name = "taskPauseMenuItem";
+			resources.ApplyResources(this.taskPauseMenuItem, "taskPauseMenuItem");
+			this.taskPauseMenuItem.Click += new System.EventHandler(this.taskPauseMenuItem_Click);
+			// 
+			// taskCancelMenuItem
+			// 
+			this.taskCancelMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_stop;
+			this.taskCancelMenuItem.Name = "taskCancelMenuItem";
+			resources.ApplyResources(this.taskCancelMenuItem, "taskCancelMenuItem");
+			this.taskCancelMenuItem.Click += new System.EventHandler(this.taskCancelMenuItem_Click);
+			// 
+			// taskCancelAllMenuItem
+			// 
+			this.taskCancelAllMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.cancel;
+			this.taskCancelAllMenuItem.Name = "taskCancelAllMenuItem";
+			resources.ApplyResources(this.taskCancelAllMenuItem, "taskCancelAllMenuItem");
+			this.taskCancelAllMenuItem.Click += new System.EventHandler(this.taskCancelAllMenuItem_Click);
 			// 
 			// splitContainer1
 			// 
@@ -658,6 +730,27 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
 			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
+			// pauseTaskToolStripMenuItem
+			// 
+			this.pauseTaskToolStripMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_pause;
+			this.pauseTaskToolStripMenuItem.Name = "pauseTaskToolStripMenuItem";
+			resources.ApplyResources(this.pauseTaskToolStripMenuItem, "pauseTaskToolStripMenuItem");
+			this.pauseTaskToolStripMenuItem.Click += new System.EventHandler(this.pauseTaskToolStripMenuItem_Click);
+			// 
+			// cancelTaskToolStripMenuItem
+			// 
+			this.cancelTaskToolStripMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_stop;
+			this.cancelTaskToolStripMenuItem.Name = "cancelTaskToolStripMenuItem";
+			resources.ApplyResources(this.cancelTaskToolStripMenuItem, "cancelTaskToolStripMenuItem");
+			this.cancelTaskToolStripMenuItem.Click += new System.EventHandler(this.cancelTaskToolStripMenuItem_Click);
+			// 
+			// cancelAllTasksToolStripMenuItem
+			// 
+			this.cancelAllTasksToolStripMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.cancel;
+			this.cancelAllTasksToolStripMenuItem.Name = "cancelAllTasksToolStripMenuItem";
+			resources.ApplyResources(this.cancelAllTasksToolStripMenuItem, "cancelAllTasksToolStripMenuItem");
+			this.cancelAllTasksToolStripMenuItem.Click += new System.EventHandler(this.cancelAllTasksToolStripMenuItem_Click);
+			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -667,14 +760,14 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.ColumnDragDropped = null;
 			this.queueDataGrid.ColumnDragDropping = null;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -689,25 +782,25 @@ namespace Telesophy.Alexandria.Clients.Ankh
             this.Format,
             this.Path,
             this.Id});
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDropped = null;
 			this.queueDataGrid.RowDragDropping = null;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
@@ -772,8 +865,8 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -811,27 +904,19 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// taskNameColumn
+			// runTaskToolStripMenuItem
 			// 
-			resources.ApplyResources(this.taskNameColumn, "taskNameColumn");
-			this.taskNameColumn.Name = "taskNameColumn";
+			this.runTaskToolStripMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_play;
+			this.runTaskToolStripMenuItem.Name = "runTaskToolStripMenuItem";
+			resources.ApplyResources(this.runTaskToolStripMenuItem, "runTaskToolStripMenuItem");
+			this.runTaskToolStripMenuItem.Click += new System.EventHandler(this.runTaskToolStripMenuItem_Click);
 			// 
-			// taskStatusColumn
+			// taskRunMenuItem
 			// 
-			resources.ApplyResources(this.taskStatusColumn, "taskStatusColumn");
-			this.taskStatusColumn.Name = "taskStatusColumn";
-			// 
-			// taskProgressColumn
-			// 
-			resources.ApplyResources(this.taskProgressColumn, "taskProgressColumn");
-			this.taskProgressColumn.Name = "taskProgressColumn";
-			this.taskProgressColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
-			// taskDetailsColumn
-			// 
-			this.taskDetailsColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			resources.ApplyResources(this.taskDetailsColumn, "taskDetailsColumn");
-			this.taskDetailsColumn.Name = "taskDetailsColumn";
+			this.taskRunMenuItem.Image = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.clock_play;
+			this.taskRunMenuItem.Name = "taskRunMenuItem";
+			resources.ApplyResources(this.taskRunMenuItem, "taskRunMenuItem");
+			this.taskRunMenuItem.Click += new System.EventHandler(this.taskRunMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -858,6 +943,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.UpperPlaybackStatusSplit.ResumeLayout(false);
 			this.TasksGroupBox.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.taskDataGrid)).EndInit();
+			this.taskContextMenuStrip.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
@@ -899,7 +985,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem catalogToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.GroupBox ToolBoxGroupBox;
@@ -956,6 +1041,16 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private System.Windows.Forms.DataGridViewTextBoxColumn taskStatusColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn taskProgressColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn taskDetailsColumn;
+		private System.Windows.Forms.ContextMenuStrip taskContextMenuStrip;
+		private System.Windows.Forms.ToolStripMenuItem taskPauseMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem taskCancelMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem taskCancelAllMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tasksToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem pauseTaskToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem cancelTaskToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem cancelAllTasksToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem runTaskToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem taskRunMenuItem;
 	}
 }
 

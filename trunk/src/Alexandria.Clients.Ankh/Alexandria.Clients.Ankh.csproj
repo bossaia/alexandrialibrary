@@ -50,6 +50,7 @@
     <Compile Include="Controllers\ImportStatusUpdateDelegate.cs" />
     <Compile Include="Controllers\ImportStatusUpdateEventArgs.cs" />
     <Compile Include="Controllers\PersistenceController.cs" />
+    <Compile Include="Controllers\TaskStatus.cs" />
     <Compile Include="Controllers\TrackSource.cs" />
     <Compile Include="Controllers\ITrackSource.cs" />
     <Compile Include="Controllers\PlaybackController.cs" />
@@ -124,6 +125,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Clients.Ankh.ico" />
     <None Include="Resources\AnkhIcon.ico" />
+    <None Include="Resources\cancel.png" />
+    <None Include="Resources\clock_pause.png" />
+    <None Include="Resources\clock_stop.png" />
+    <None Include="Resources\clock_play.png" />
+    <None Include="Resources\clock_error.png" />
+    <None Include="Resources\clock_edit.png" />
     <Content Include="Resources\Icons\Silk\accept.png" />
     <Content Include="Resources\Icons\Silk\add.png" />
     <Content Include="Resources\Icons\Silk\anchor.png" />
@@ -1124,6 +1131,7 @@
     <Content Include="Resources\Icons\Silk\zoom.png" />
     <Content Include="Resources\Icons\Silk\zoom_in.png" />
     <Content Include="Resources\Icons\Silk\zoom_out.png" />
+    <None Include="Resources\task_cancel.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Alexandria.Extensions.AsciiGenerator\Alexandria.Extensions.AsciiGenerator.csproj">
