@@ -39,6 +39,7 @@
     <Compile Include="IArtist.cs" />
     <Compile Include="IMediaItem.cs" />
     <Compile Include="IMediaSet.cs" />
+    <Compile Include="IMediaSetFactory.cs" />
     <Compile Include="IMetadataIdentifier.cs" />
     <Compile Include="AudioTrack.cs" />
     <Compile Include="MetadataIdentifier.cs" />

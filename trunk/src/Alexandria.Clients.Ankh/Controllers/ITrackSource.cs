@@ -29,10 +29,14 @@ using System;
 using System.Collections.Generic;
 using Telesophy.Alexandria.Model;
 
+using Telesophy.Alexandria.Extensions.CompactDisc;
+
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public interface ITrackSource
 	{
+		Uri Path { get; }
+		AspiDeviceInfo DeviceInfo { get; }
 		IList<IMediaItem> GetAudioTracks();
 	}
 }

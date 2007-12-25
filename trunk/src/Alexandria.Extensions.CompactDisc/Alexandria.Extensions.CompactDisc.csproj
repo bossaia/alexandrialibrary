@@ -35,7 +35,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CddaToWave.cs" />
+    <Compile Include="AspiDeviceInfo.cs" />
+    <Compile Include="AspiScanner.cs" />
+    <Compile Include="CddaToWav.cs" />
+    <Compile Include="CddaToWavOptions.cs" />
     <Compile Include="CDRecord.cs" />
     <Compile Include="ConsoleTool.cs" />
     <Compile Include="TableOfContents.cs" />
