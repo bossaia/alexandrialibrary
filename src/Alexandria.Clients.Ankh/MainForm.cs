@@ -41,6 +41,9 @@ using Telesophy.Alexandria.Clients.Ankh.Controllers;
 using Telesophy.Alexandria.Clients.Ankh.Properties;
 using Telesophy.Alexandria.Clients.Ankh.Views;
 
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Extensions.CompactDisc;
+
 namespace Telesophy.Alexandria.Clients.Ankh
 {
 	public partial class MainForm : Form
@@ -294,13 +297,16 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		#region InitializeToolbox
 		private void InitializeToolbox()
 		{
+			IList<AspiDeviceInfo> devices = AspiScanner.GetDevices();
+			int cdDriveCount = 0;
+		
 			ToolBoxListView.Items.Clear();
 			foreach(DriveInfo drive in DriveInfo.GetDrives())
 			{
 				if (drive.DriveType == System.IO.DriveType.Fixed)
 				{
 					ListViewItem item = new ListViewItem(drive.Name, 0);
-					item.ToolTipText = string.Format("{0}/{1}", drive.TotalFreeSpace / 1024, drive.TotalSize / 1024);
+					item.ToolTipText = string.Format("{0} / {1}", drive.TotalFreeSpace / 1024, drive.TotalSize / 1024);
 					ToolBoxListView.Items.Add(item);
 				}
 				else if (drive.DriveType == System.IO.DriveType.CDRom)
@@ -315,7 +321,16 @@ namespace Telesophy.Alexandria.Clients.Ankh
 					
 					ListViewItem item = new ListViewItem(drive.Name, imageIndex);
 					item.ToolTipText = toolTipText;
-					item.Tag = new TrackSource(drive.Name);
+					
+					Uri path = new Uri(drive.Name);
+					AspiDeviceInfo deviceInfo = null;
+					if (devices != null && devices.Count > cdDriveCount)
+					{
+						deviceInfo = devices[cdDriveCount];
+						cdDriveCount++;
+					}
+					
+					item.Tag = new TrackSource(path, deviceInfo);
 					ToolBoxListView.Items.Add(item);
 				}
 			}
@@ -531,61 +546,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			playbackController.Seek(PlaybackTrackBar.Value);
 		}
 
-		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
-		{
-			//if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
-			//{
-				//if (ToolBoxListView.SelectedItems[0].Tag != null && ToolBoxListView.SelectedItems[0].Tag is ITrackSource)
-				//{
-					//ToolBoxListView.DoDragDrop(ToolBoxListView.SelectedItems[0].Tag, DragDropEffects.Copy);
-				//}
-			//}
-			//else
-			//{
-				//select the item based on e.X, e.Y then use the above logic
-				ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
-				if (item != null && item.Tag != null && item.Tag is ITrackSource)
-				{
-					item.Selected = true;
-					ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
-				}
-			//}
-		}
-
-		private void ToolBoxListView_ItemDrag(object sender, ItemDragEventArgs e)
-		{
-			//object x = e.Item;
-		}
-
-		private void ToolBoxListView_DragLeave(object sender, EventArgs e)
-		{
-		}
-
-		private void QueueListView_DragEnter(object sender, DragEventArgs e)
-		{
-			e.Effect = DragDropEffects.None;
-			
-			if (e.Data != null)
-			{
-				object source = e.Data.GetData(typeof(TrackSource));
-				if (source != null)
-					e.Effect = DragDropEffects.Copy;
-			}
-		}
-
-		private void QueueListView_DragDrop(object sender, DragEventArgs e)
-		{
-			queueController.LoadData(e.Data);
-		}
-
-		private void ToolBoxContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-			if (e.ClickedItem.Text == "Refresh")
-			{
-				InitializeToolbox();
-			}
-		}
-
 		//private void QueueListView_ItemActivate(object sender, EventArgs e)
 		//{
 			//queueDataGrid.Rows[e].Selected = true;
@@ -755,6 +715,109 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		{
 			Close();
 		}
+		
+		#region DragDrop Methods
+		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Left)
+			{
+				ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
+				if (item != null && item.Tag != null && item.Tag is ITrackSource)
+				{
+					item.Selected = true;
+					ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
+				}
+			}
+		}
+
+		private void ToolBoxListView_ItemDrag(object sender, ItemDragEventArgs e)
+		{
+		}
+
+		private void ToolBoxListView_DragOver(object sender, DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.Copy;
+		}
+
+		private void ToolBoxListView_DragLeave(object sender, EventArgs e)
+		{
+		}
+
+		//private void QueueListView_DragEnter(object sender, DragEventArgs e)
+		//{
+		//    e.Effect = DragDropEffects.None;
+
+		//    if (e.Data != null)
+		//    {
+		//        object source = e.Data.GetData(typeof(TrackSource));
+		//        if (source != null)
+		//            e.Effect = DragDropEffects.Copy;
+		//    }
+		//}
+
+		//private void QueueListView_DragDrop(object sender, DragEventArgs e)
+		//{
+		//    queueController.LoadData(e.Data);
+		//}
+
+		private void ToolBoxContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
+			if (e.ClickedItem.Text == "Refresh")
+			{
+				InitializeToolbox();
+			}
+		}
+
+		private void CheckForValidQueueDrag(DragEventArgs e)
+		{
+			e.Effect = DragDropEffects.None;
+
+			if (e.Data != null)
+			{
+				object source = e.Data.GetData(typeof(TrackSource));
+				if (source != null)
+					e.Effect = DragDropEffects.Copy;
+			}
+		}
+
+		private void queueDataGrid_DragOver(object sender, DragEventArgs e)
+		{
+			CheckForValidQueueDrag(e);
+		}
+
+		private void queueDataGrid_DragEnter(object sender, DragEventArgs e)
+		{
+			CheckForValidQueueDrag(e);
+		}
+
+		private void queueDataGrid_DragDrop(object sender, DragEventArgs e)
+		{
+			queueController.LoadData(e.Data);
+		}
+		#endregion
+		
+		#region ToolBox Methods
+		//TODO: move this into its own controller
+		private void toolRipDiscMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
+			{
+				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
+				if (source != null && source.DeviceInfo != null)
+				{
+					IList<IMediaItem> tracks = source.GetAudioTracks();
+					foreach(IMediaItem track in tracks)
+					{
+						//TODO: Use a callback to prevent the next track from starting
+						//      until the previous track finishes 
+						//      otherwise we thrash the disk and create fragmentation
+						
+						//CddaToWave.RipTrack(source.DeviceInfo, track.Number);
+					}
+				}
+			}
+		}
+		#endregion
 		
 		#region Sort Methods
 		private void sortButton_Click(object sender, EventArgs e)

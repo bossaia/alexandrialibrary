@@ -32,37 +32,48 @@ using System.Text;
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.MusicBrainz;
 
+using Telesophy.Alexandria.Extensions.CompactDisc;
+
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	public class TrackSource : ITrackSource
 	{
 		#region Constructors
-		public TrackSource(string fileName)
+		public TrackSource(Uri path)
 		{
-			//this.factory = new MusicBrainz.SimpleAlbumFactory();
-			this.path = new Uri(fileName);
+			this.path = path;
 		}
 		
-		//public TrackSource(IAlbumFactory factory, Uri path)
-		//{
-		//	this.factory = factory;
-		//	this.path = path;
-		//}
+		public TrackSource(Uri path, AspiDeviceInfo deviceInfo) : this(path)
+		{
+			this.deviceInfo = deviceInfo;
+		}
 		#endregion
 	
 		#region Private Fields
-		//private IAlbumFactory factory;
+		private IMediaSetFactory factory = new SimpleAlbumFactory();
 		private Uri path;
+		private AspiDeviceInfo deviceInfo;
 		#endregion
-	
+			
 		#region ITrackSource Members
+		public Uri Path
+		{
+			get { return path; }
+		}
+		
+		[CLSCompliant(false)]
+		public AspiDeviceInfo DeviceInfo
+		{
+			get { return deviceInfo; }
+		}
+		
 		public IList<IMediaItem> GetAudioTracks()
 		{
 			try
 			{
-				//IOldAlbum album = factory.CreateAlbum(path);
-				//return album.Tracks;
-				return new List<IMediaItem>();
+				IMediaSet album = factory.GetMediaSet(path);
+				return album.Items; 
 			}
 			catch (Exception ex)
 			{

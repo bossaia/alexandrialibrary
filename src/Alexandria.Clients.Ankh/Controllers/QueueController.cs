@@ -50,6 +50,7 @@ using Telesophy.Alexandria.Mp3Tunes;
 using Telesophy.Alexandria.MusicBrainz;
 
 using Telesophy.Alexandria.Clients.Ankh.Views;
+using Telesophy.Alexandria.Extensions.CompactDisc;
 using Telesophy.Alexandria.Extensions.Playlist;
 #endregion
 
@@ -107,7 +108,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		private PlaybackController playbackController;
 		private PersistenceController persistenceController;
-		private TaskController taskController;		
+		private TaskController taskController;
+		
+		private Dictionary<Uri, AspiDeviceInfo> deviceMaps = new Dictionary<Uri,AspiDeviceInfo>();
 		#endregion
 
 		#region Private Properties
@@ -632,9 +635,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				object sourceData = data.GetData(typeof(TrackSource));
 				if (sourceData != null)
 				{
-					TrackSource trackSource = (TrackSource)sourceData;
-					IList<IMediaItem> tracks = trackSource.GetAudioTracks();
-					LoadTracks(tracks, "CD");
+					TrackSource trackSource = sourceData as TrackSource;
+					if (trackSource != null && trackSource.Path != null)
+					{
+						IList<IMediaItem> tracks = trackSource.GetAudioTracks();
+						LoadTracks(tracks, string.Format("CD [{0} Drive]", trackSource.Path.ToString().Substring(8, 1)));
+					
+						if (trackSource.DeviceInfo != null)
+						{
+							deviceMaps[trackSource.Path] = trackSource.DeviceInfo;
+						}
+					}
 				}
 			}
 		}

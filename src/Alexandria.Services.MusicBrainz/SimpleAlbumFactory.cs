@@ -8,7 +8,7 @@ using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.MusicBrainz
 {
-	public class SimpleAlbumFactory //: IAlbumFactory
+	public class SimpleAlbumFactory : IMediaSetFactory
 	{
 		#region Constructors
 		public SimpleAlbumFactory()
@@ -373,11 +373,6 @@ namespace Telesophy.Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Methods
-		public IMediaSet CreateAlbum(Uri path)
-		{
-			return LookupAlbumByCompactDisc(path);
-		}
-		
 		//[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
 		public IMediaSet CreateAlbum(string musicBrainzId, Uri path)
 		{
@@ -387,6 +382,14 @@ namespace Telesophy.Alexandria.MusicBrainz
 		public IMediaSet CreateAlbum(Guid id, string title, string artist, DateTime date, Uri path)
 		{
 			return new SimpleAlbum(id, title, artist, date, path);
+		}
+		#endregion
+		
+		#region IMediaSetFactory Members
+		[CLSCompliant(false)]
+		public IMediaSet GetMediaSet(Uri path)
+		{
+			return LookupAlbumByCompactDisc(path);
 		}
 		#endregion
 	}
