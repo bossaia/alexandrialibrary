@@ -33,9 +33,11 @@ using Telesophy.Alexandria.Extensions.CompactDisc;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
+	[CLSCompliant(false)]
 	public interface ITrackSource
 	{
 		Uri Path { get; }
+		[CLSCompliant(false)]
 		AspiDeviceInfo DeviceInfo { get; }
 		IList<IMediaItem> GetAudioTracks();
 	}

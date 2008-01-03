@@ -9,19 +9,40 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		#region Constructors
 		public FilterInfo(string column, string @operator, string value)
 		{
-			this.column = column;
-			this.@operator = @operator;
-			this.value = value;
+			if (!string.IsNullOrEmpty(column))
+			{
+				isStandAloneOperator = false;
+				this.column = column;
+				this.@operator = @operator;
+				this.value = value;
+			}
+			else
+			{
+				isStandAloneOperator = true;
+				this.column = null;
+				this.@operator = @operator;
+				this.value = null;
+			}
+		}
+		
+		public FilterInfo(string @operator) : this(null, @operator, null)
+		{
 		}
 		#endregion
 		
 		#region Private Fields
+		private bool isStandAloneOperator;
 		private string column;
 		private string @operator;
 		private string value;
 		#endregion
 		
 		#region Public Properties
+		public bool IsStandAloneOperator
+		{
+			get { return isStandAloneOperator; }
+		}
+		
 		public string Column
 		{
 			get { return column; }
@@ -41,7 +62,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		#region Public Methods
 		public FilterInfo Negate()
 		{
-			string newOperator = "=";
+			string newOperator = Operator;
 			
 			switch(Operator)
 			{
@@ -63,6 +84,18 @@ namespace Telesophy.Alexandria.Clients.Ankh
 				case "<=":
 					newOperator = ">";
 					break;
+				case "Is":
+					newOperator = "Not";
+					break;
+				case "Not":
+					newOperator = "Is";
+					break;
+				case "Or":
+					newOperator = "And";
+					break;
+				case "And":
+					newOperator = "Or";
+					break;
 				default:
 					break;
 			}
@@ -72,12 +105,16 @@ namespace Telesophy.Alexandria.Clients.Ankh
 
 		public string GetDescription()
 		{
-			return string.Format("{0} {1}", Operator, Value);
+			if (IsStandAloneOperator)
+				return Operator;
+			else return string.Format("{0} {1}", Operator, Value);
 		}
 
 		public override string ToString()
 		{
-			return string.Format("{0} {1} {2}", Column, Operator, Value);
+			if (IsStandAloneOperator)
+				return Operator;
+			else return string.Format("{0} {1} {2}", Column, Operator, Value);
 		}
 		#endregion
 	}
