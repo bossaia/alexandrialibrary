@@ -97,10 +97,10 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
 		private const int MAX_SORT_COLUMNS = 5;
 		private const string DEFAULT_COLUMN_FILTER = "Any";
-		private const string FILTER_LINK_AND = "And";
-		private const string FILTER_LINK_OR = "Or";
-		private const string FILTER_LINK_NOT = "Not";
 		
+		private const string FILTER_OP_AND = "And";
+		private const string FILTER_OP_OR = "Or";
+		private const string FILTER_OP_NOT = "Not";
 		private const string FILTER_OP_LI = "~";
 		private const string FILTER_OP_NE = "<>";
 		private const string FILTER_OP_GE = ">=";
@@ -974,25 +974,46 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		}
 		#endregion
 
-		#region Filter Methods
+		#region Filter Methods		
+		private ListViewItem GetAndFilterItem()
+		{
+			ListViewItem item = new ListViewItem(FILTER_OP_AND);
+			item.Tag = new FilterInfo(FILTER_OP_AND);
+			return item;
+		}
+
+		private ListViewItem GetNotFilterItem()
+		{
+			ListViewItem item = new ListViewItem(FILTER_OP_NOT);
+			item.Tag = new FilterInfo(FILTER_OP_NOT);
+			return item;
+		}
+
+		private ListViewItem GetOrFilterItem()
+		{
+			ListViewItem item = new ListViewItem(FILTER_OP_OR);
+			item.Tag = new FilterInfo(FILTER_OP_OR);
+			return item;
+		}
+
 		private void filterButton_Click(object sender, EventArgs e)
 		{
 			DoFilter();
 		}
 
-		private void notFilterButton_Click(object sender, EventArgs e)
-		{
-			filterListView.Items.Add("Not");
-		}
-
 		private void andFilterButton_Click(object sender, EventArgs e)
 		{
-			filterListView.Items.Add("And");
+			filterListView.Items.Add(GetAndFilterItem());
+		}
+
+		private void notFilterButton_Click(object sender, EventArgs e)
+		{
+			filterListView.Items.Add(GetNotFilterItem());
 		}
 
 		private void orFilterButton_Click(object sender, EventArgs e)
 		{
-			filterListView.Items.Add("Or");
+			filterListView.Items.Add(GetOrFilterItem());
 		}
 
 		private void filterContextMenuItemAddFilter_KeyUp(object sender, KeyEventArgs e)
@@ -1105,7 +1126,12 @@ namespace Telesophy.Alexandria.Clients.Ankh
 				//int imageIndex = filterData.Item.ImageIndex;
 				
 				FilterInfo filterInfo = new FilterInfo(filterData.Column, filterData.Operator, filterData.Value);
-				ListViewItem item = new ListViewItem(filterInfo.GetDescription(), filterData.ImageIndex);
+				
+				ListViewItem item =  null;
+				if (filterInfo.IsStandAloneOperator)
+					item = new ListViewItem(filterInfo.GetDescription());
+				else item =	new ListViewItem(filterInfo.GetDescription(), filterData.ImageIndex);
+				
 				item.Tag = filterInfo;
 				item.ToolTipText = filterInfo.ToString();
 				
@@ -1138,42 +1164,49 @@ namespace Telesophy.Alexandria.Clients.Ankh
 						if (filterListView.Items[i].Tag != null)
 						{
 							FilterInfo filterInfo = (FilterInfo)filterListView.Items[i].Tag;
-							if (filterInfo.Column != DEFAULT_COLUMN_FILTER)
+							if (filterInfo.IsStandAloneOperator)
 							{
-								if (negateNextFilter)
+								switch (filterListView.Items[i].Text)
 								{
-									filterInfo = filterInfo.Negate();
-									negateNextFilter = false;
-								}
-								if (orNextFilter)
-								{
-									filter.AppendFormat(" {0} ", FILTER_LINK_OR);
-									orNextFilter = false;
-								}
-								if (andNextFilter)
-								{
-									filter.AppendFormat(" {0} ", FILTER_LINK_AND);
-									andNextFilter = false;
-								}
-
-								filter.Append(filterInfo.ToString());
+									case FILTER_OP_NOT:
+										negateNextFilter = true;
+										break;
+									case FILTER_OP_AND:
+										andNextFilter = true;
+										break;
+									case FILTER_OP_OR:
+										orNextFilter = true;
+										break;
+									default:
+										break;
+								}							
 							}
-						}
-						else
-						{
-							switch (filterListView.Items[i].Text)
+							else
 							{
-								case FILTER_LINK_NOT:
-									negateNextFilter = true;
-									break;
-								case FILTER_LINK_AND:
-									andNextFilter = true;
-									break;
-								case FILTER_LINK_OR:
-									orNextFilter = true;
-									break;
-								default:
-									break;
+								if (filterInfo.Column != DEFAULT_COLUMN_FILTER)
+								{
+									if (negateNextFilter)
+									{
+										filterInfo = filterInfo.Negate();
+										negateNextFilter = false;
+									}
+									if (orNextFilter)
+									{
+										filter.AppendFormat(" {0} ", FILTER_OP_OR);
+										orNextFilter = false;
+									}
+									if (andNextFilter)
+									{
+										filter.AppendFormat(" {0} ", FILTER_OP_AND);
+										andNextFilter = false;
+									}
+
+									filter.Append(filterInfo.ToString());
+								}
+								else
+								{
+									//TODO: Add logic to handle abstract filters
+								}
 							}
 						}
 					}
