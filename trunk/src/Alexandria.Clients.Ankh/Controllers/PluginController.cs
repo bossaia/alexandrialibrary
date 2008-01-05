@@ -33,7 +33,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
-using Telesophy.Alexandria.Clients.Ankh;
+using Telesophy.Alexandria.Clients.Ankh.Views;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {

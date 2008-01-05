@@ -39,13 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="About.cs">
+    <Compile Include="Views\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="About.Designer.cs">
+    <Compile Include="Views\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="BindingListView.cs" />
+    <Compile Include="Views\BindingListView.cs" />
     <Compile Include="Controllers\ControllerConstants.cs" />
     <Compile Include="Controllers\ImportStatusUpdateDelegate.cs" />
     <Compile Include="Controllers\ImportStatusUpdateEventArgs.cs" />
@@ -62,30 +62,30 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Controllers\VolumeEventArgs.cs" />
-    <Compile Include="FilterInfo.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Views\FilterInfo.cs" />
+    <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="PluginConfiguration.cs">
+    <Compile Include="Views\PluginConfiguration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PluginConfiguration.Designer.cs">
+    <Compile Include="Views\PluginConfiguration.Designer.cs">
       <DependentUpon>PluginConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Views\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="About.resx">
+    <EmbeddedResource Include="Views\About.resx">
       <SubType>Designer</SubType>
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Views\MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PluginConfiguration.resx">
+    <EmbeddedResource Include="Views\PluginConfiguration.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PluginConfiguration.cs</DependentUpon>
     </EmbeddedResource>
@@ -111,7 +111,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SortComparer.cs" />
+    <Compile Include="Views\SortComparer.cs" />
     <Compile Include="Views\AdvancedDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
