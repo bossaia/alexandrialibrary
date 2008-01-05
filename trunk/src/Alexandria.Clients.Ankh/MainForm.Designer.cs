@@ -32,10 +32,10 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -92,6 +92,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.ToolBoxListView = new System.Windows.Forms.ListView();
 			this.ToolBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.ToolBoxContextMenuItemRefresh = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolRipDiscMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
 			this.clearAllSortButton = new System.Windows.Forms.Button();
@@ -127,7 +128,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.toolRipDiscMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -579,6 +579,12 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.ToolBoxContextMenuItemRefresh.Name = "ToolBoxContextMenuItemRefresh";
 			resources.ApplyResources(this.ToolBoxContextMenuItemRefresh, "ToolBoxContextMenuItemRefresh");
 			// 
+			// toolRipDiscMenuItem
+			// 
+			this.toolRipDiscMenuItem.Name = "toolRipDiscMenuItem";
+			resources.ApplyResources(this.toolRipDiscMenuItem, "toolRipDiscMenuItem");
+			this.toolRipDiscMenuItem.Click += new System.EventHandler(this.toolRipDiscMenuItem_Click);
+			// 
 			// ToolBoxSmallImageList
 			// 
 			this.ToolBoxSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ToolBoxSmallImageList.ImageStream")));
@@ -773,19 +779,20 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			// 
 			this.queueDataGrid.AllowDrop = true;
 			this.queueDataGrid.AllowUserToAddRows = false;
+			this.queueDataGrid.AllowUserToDeleteRows = false;
 			this.queueDataGrid.AllowUserToOrderColumns = true;
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.ColumnDragDropped = null;
 			this.queueDataGrid.ColumnDragDropping = null;
-			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -800,29 +807,30 @@ namespace Telesophy.Alexandria.Clients.Ankh
             this.Format,
             this.Path,
             this.Id});
-			dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle11;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDropped = null;
 			this.queueDataGrid.RowDragDropping = null;
-			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.queueDataGrid_DragOver);
 			this.queueDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_ColumnHeaderMouseClick);
+			this.queueDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.queueDataGrid_CellValueChanged);
 			this.queueDataGrid.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.queueDataGrid_CellMouseDoubleClick);
 			this.queueDataGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.queueDataGrid_DragEnter);
 			this.queueDataGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.queueDataGrid_DataError);
@@ -886,8 +894,8 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle10;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -924,12 +932,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			this.Id.ReadOnly = true;
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			// 
-			// toolRipDiscMenuItem
-			// 
-			this.toolRipDiscMenuItem.Name = "toolRipDiscMenuItem";
-			resources.ApplyResources(this.toolRipDiscMenuItem, "toolRipDiscMenuItem");
-			this.toolRipDiscMenuItem.Click += new System.EventHandler(this.toolRipDiscMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -1027,18 +1029,6 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private System.Windows.Forms.ImageList sortSmallImageList;
 		private System.Windows.Forms.ListView filterListView;
 		private System.Windows.Forms.ToolStripMenuItem sortContextMenuStripItemClearAll;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-		private System.Windows.Forms.DataGridViewImageColumn Type;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ContextMenuStrip filterContextMenuStrip;
 		private System.Windows.Forms.ToolStripComboBox filterContextMenuItemAddFilter;
 		private System.Windows.Forms.Button notFilterButton;
@@ -1065,6 +1055,18 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private System.Windows.Forms.ToolStripMenuItem runTaskToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem taskRunMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolRipDiscMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+		private System.Windows.Forms.DataGridViewImageColumn Type;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 	}
 }
 
