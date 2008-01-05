@@ -27,61 +27,21 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-using Telesophy.Alexandria.Clients.Ankh.Controllers;
-
-namespace Telesophy.Alexandria.Clients.Ankh
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
-	public partial class About : Form
+	static class Program
 	{
-		#region Constructors
-		public About()
+		/// <summary>
+		/// The main entry point for the application.
+		/// </summary>
+		[STAThread]
+		static void Main()
 		{
-			InitializeComponent();
+			Application.EnableVisualStyles();
+			Application.SetCompatibleTextRenderingDefault(false);
+			Application.Run(new MainForm());
 		}
-		#endregion
-		
-		#region Private Fields
-		private PluginController pluginController;
-		#endregion
-		
-		#region Public Methods
-		public void Initialize(PluginController pluginController)
-		{
-			this.pluginController = pluginController;
-			this.pluginController.LoadAboutForm(this);
-		}
-		
-		public void LoadForm(string version, string license, IList<ListViewItem> pluginItems, IList<Image> pluginImages)
-		{
-			VersionTextBox.Text = version;
-			LicenseTextBox.Text = license;
-			PluginListView.Items.Clear();
-			
-			if (pluginItems != null)
-			{
-				foreach (ListViewItem item in pluginItems)
-					PluginListView.Items.Add(item);
-			}
-			
-			if (pluginImages != null)
-			{
-				foreach (Image image in pluginImages)
-					ImageList.Images.Add(image);
-			}
-		}
-		#endregion
-
-		#region Private Event Methods
-		private void OKButton_Click(object sender, EventArgs e)
-		{
-			Close();
-		}
-		#endregion
 	}
 }

@@ -39,12 +39,11 @@ using System.Windows.Forms;
 
 using Telesophy.Alexandria.Clients.Ankh.Controllers;
 using Telesophy.Alexandria.Clients.Ankh.Properties;
-using Telesophy.Alexandria.Clients.Ankh.Views;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Extensions.CompactDisc;
 
-namespace Telesophy.Alexandria.Clients.Ankh
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	public partial class MainForm : Form
 	{

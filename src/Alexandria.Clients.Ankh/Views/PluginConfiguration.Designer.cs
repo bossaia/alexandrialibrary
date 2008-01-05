@@ -1,4 +1,4 @@
-namespace Telesophy.Alexandria.Clients.Ankh
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	partial class PluginConfiguration
 	{

@@ -35,7 +35,7 @@ using System.Windows.Forms;
 
 using Telesophy.Alexandria.Clients.Ankh.Controllers;
 
-namespace Telesophy.Alexandria.Clients.Ankh
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	public partial class PluginConfiguration : Form
 	{

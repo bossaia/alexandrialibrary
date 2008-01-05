@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Telesophy.Alexandria.Clients.Ankh
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	public class SortComparer<T> : IComparer<T>
 	{
