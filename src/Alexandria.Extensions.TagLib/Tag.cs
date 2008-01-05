@@ -39,6 +39,9 @@ namespace Alexandria.TagLib
 		
 		#region Private Fields
 		private Guid id;
+		private string source;
+		private string type;
+		
 		private string name;
 		private Uri path;
 		private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
@@ -336,14 +339,14 @@ namespace Alexandria.TagLib
 		
 		public virtual string Source
 		{
-			get { return null; }
-			set { }
+			get { return source; }
+			set { source = value; }
 		}
 		
 		public virtual string Type
 		{
-			get { return null; }
-			set { }
+			get { return type; }
+			set { type = value; }
 		}
 		
 		public virtual string Status

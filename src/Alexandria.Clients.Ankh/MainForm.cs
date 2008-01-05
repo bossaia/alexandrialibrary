@@ -618,10 +618,13 @@ namespace Telesophy.Alexandria.Clients.Ankh
 
 		private void queueDataGrid_KeyUp(object sender, KeyEventArgs e)
 		{
-			//46 is the DEL key
-			if (e.KeyValue == 46 && queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
+			if (e.KeyCode == Keys.Delete && queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
 			{
-				queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
+				//for(int i=0;i<queueDataGrid.SelectedRows.Count;i++)
+				//{
+					//queueController.DeleteRow(queueDataGrid.SelectedRows[0].Index);
+					queueController.ClearRow(queueDataGrid.SelectedRows[0].Index);
+				//}
 			}
 		}
 		
@@ -635,6 +638,14 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		private void queueDataGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
 		{
 			string x = e.Exception.Message;
+		}
+
+		private void queueDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != ControllerConstants.COL_STATUS)
+			{
+				queueController.SaveRow(e.RowIndex);
+			}
 		}
 
 		private void submitCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -663,7 +674,9 @@ namespace Telesophy.Alexandria.Clients.Ankh
 			{
 				if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
 				{
-					queueController.DeleteRow(queueDataGrid.SelectedRows[0].Index);
+					int index = queueDataGrid.SelectedRows[0].Index;
+					queueController.DeleteRow(index);
+					queueController.ClearRow(index);
 				}
 			}
 			catch(Exception ex)
@@ -974,7 +987,7 @@ namespace Telesophy.Alexandria.Clients.Ankh
 		}
 		#endregion
 
-		#region Filter Methods		
+		#region Filter Methods
 		private ListViewItem GetAndFilterItem()
 		{
 			ListViewItem item = new ListViewItem(FILTER_OP_AND);

@@ -80,7 +80,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private const int INDEX_MOVIE = 3;
 		private const string TYPE_TELEVISION = "TV";
 		private const int INDEX_TELEVISION = 4;
-		private const string SOURCE_CATALOG = "Catalog";
 		#endregion
 
 		#region Private Fields
@@ -833,7 +832,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (persistenceController != null && index >= 0 && index < bindingList.Count)
 			{
 				IMediaItem item = bindingList[index];
-				item.Source = SOURCE_CATALOG;
+				item.Source = ControllerConstants.SOURCE_CATALOG;
 				persistenceController.SaveMediaItem(item);
 			}
 		}
