@@ -45,6 +45,12 @@
     <Compile Include="Views\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\AddFilter.Designer.cs">
+      <DependentUpon>AddFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\BindingListView.cs" />
     <Compile Include="Controllers\ControllerConstants.cs" />
     <Compile Include="Controllers\ImportStatusUpdateDelegate.cs" />
@@ -62,6 +68,7 @@
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\ToolController.cs" />
     <Compile Include="Controllers\VolumeEventArgs.cs" />
+    <Compile Include="Views\Delegates.cs" />
     <Compile Include="Views\FilterInfo.cs" />
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
@@ -124,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Clients.Ankh.ico" />
+    <EmbeddedResource Include="Views\AddFilter.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AddFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Resources\AnkhIcon.ico" />
     <None Include="Resources\cancel.png" />
     <None Include="Resources\clock_pause.png" />
