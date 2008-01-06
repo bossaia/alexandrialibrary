@@ -842,8 +842,21 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
 			{
 				int currentIndex = sortListView.SelectedItems[0].ImageIndex;
-				int newIndex = (currentIndex == 0) ? 1 : 0;
-				sortListView.SelectedItems[0].ImageIndex = newIndex;
+				switch (currentIndex)
+				{
+					//ascending
+					case 0:
+						sortListView.SelectedItems[0].ImageIndex = 1;
+						break;
+						
+					//descending
+					case 1:
+						sortListView.SelectedItems[0].Remove();
+						break;
+					
+					default:
+						break;
+				}
 				DoSort();
 			}
 		}
@@ -982,6 +995,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			else
 			{
 				queueController.RemoveSort();
+				DoFilter();
 			}		
 		}
 		#endregion
