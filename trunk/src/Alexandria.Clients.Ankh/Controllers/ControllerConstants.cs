@@ -21,5 +21,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		internal const string FORMAT_PLAYLIST = "asx,m3u,pls,xspf";
 		internal const string FORMAT_AUDIO = "aac,flac,m4a,mp3,ogg,wav,wma";
 		internal const string SOURCE_CATALOG = "Catalog";
+		internal const string TYPE_AUDIO = "Audio";
 	}
 }
