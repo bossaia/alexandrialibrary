@@ -36,6 +36,7 @@ using Telesophy.Alexandria.Extensions.CompactDisc;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
+	[CLSCompliant(false)]
 	public class TrackSource : ITrackSource
 	{
 		#region Constructors
@@ -44,6 +45,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			this.path = path;
 		}
 		
+		[CLSCompliant(false)]
 		public TrackSource(Uri path, AspiDeviceInfo deviceInfo) : this(path)
 		{
 			this.deviceInfo = deviceInfo;

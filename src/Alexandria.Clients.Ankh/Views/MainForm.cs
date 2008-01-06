@@ -101,13 +101,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private const string FILTER_OP_OR = "Or";
 		private const string FILTER_OP_NOT = "Not";
 		private const string FILTER_OP_LI = "~";
+		private const string FILTER_OP_LIKE = "Like";
 		private const string FILTER_OP_NE = "<>";
 		private const string FILTER_OP_GE = ">=";
 		private const string FILTER_OP_GT = ">";
 		private const string FILTER_OP_LE = "<=";
 		private const string FILTER_OP_LT = "<";
 		private const string FILTER_OP_EQ = "=";
-		private readonly string[] FILTER_OPERATORS = new string[]{FILTER_OP_LI, FILTER_OP_NE, FILTER_OP_GE, FILTER_OP_GT, FILTER_OP_LE, FILTER_OP_LT, FILTER_OP_EQ};
+		private readonly string[] FILTER_OPERATORS = new string[]{FILTER_OP_LI, FILTER_OP_LIKE, FILTER_OP_NE, FILTER_OP_GE, FILTER_OP_GT, FILTER_OP_LE, FILTER_OP_LT, FILTER_OP_EQ};
 		#endregion
 		
 		#region Private Fields
@@ -1055,13 +1056,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				
 				for(int i=0; i<FILTER_OPERATORS.Length; i++)
 				{
-					if (value.Contains(FILTER_OPERATORS[i]))
+					if (value.ToUpper().Contains(FILTER_OPERATORS[i].ToUpper()))
 					{
 						op = FILTER_OPERATORS[i];
-						opIndex = value.IndexOf(FILTER_OPERATORS[i]);
+						opIndex = value.ToUpper().IndexOf(FILTER_OPERATORS[i].ToUpper());
 						opLength = FILTER_OPERATORS[i].Length;
-						column = value.Substring(0, opIndex);
-						value = value.Substring(opIndex + opLength, value.Length - opIndex - opLength);
+						column = value.Substring(0, opIndex).Trim();
+						value = value.Substring(opIndex + opLength, value.Length - opIndex - opLength).Trim();
 						
 						if (queueDataGrid.Columns.Contains(column))
 						{
@@ -1075,7 +1076,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 				if (filterIsValid)
 				{
-					FilterDragDropData filterData = new FilterDragDropData(column, op, value);
+					Type columnType = queueDataGrid.Columns[column].ValueType;
+					FilterDragDropData filterData = new FilterDragDropData(column, columnType, op, value);
 					FilterInfo filterInfo = filterData.GetFilterInfo();
 					
 					ListViewItem item = new ListViewItem(filterInfo.GetDescription());
@@ -1151,7 +1153,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				//int imageIndex = (sortData.Direction == ListSortDirection.Ascending) ? 0 : 1;
 				//int imageIndex = filterData.Item.ImageIndex;
 				
-				FilterInfo filterInfo = new FilterInfo(filterData.Column, filterData.Operator, filterData.Value);
+				FilterInfo filterInfo = new FilterInfo(filterData.Column, filterData.ColumnType, filterData.Operator, filterData.Value);
 				
 				ListViewItem item =  null;
 				if (filterInfo.IsStandAloneOperator)
