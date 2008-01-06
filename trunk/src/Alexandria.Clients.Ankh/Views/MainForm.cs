@@ -1043,13 +1043,35 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			filterListView.Items.Add(GetOrFilterItem());
 		}
 
-		private void filterContextMenuItemAddFilter_KeyUp(object sender, KeyEventArgs e)
+		private void filterContextMenuItemAddFilter_Click(object sender, EventArgs e)
 		{
-			if (e.KeyCode == Keys.Enter)
-			{
+			AddFilter addFilterForm = new AddFilter(this.filterSmallImageList, new FilterUpdateCallback(AddFilterItem));
+			addFilterForm.Show();
+		}
+
+		private void AddFilterItem(string column, string op, string value)
+		{
+			Type columnType = queueDataGrid.Columns[column].ValueType;
+			FilterDragDropData filterData = new FilterDragDropData(column, columnType, op, value);
+			FilterInfo filterInfo = filterData.GetFilterInfo();
+			
+			ListViewItem item = new ListViewItem(filterInfo.GetDescription());
+			item.Tag = filterInfo;
+			item.ImageIndex = filterData.ImageIndex;
+			item.ToolTipText = filterInfo.ToString();
+			
+			filterListView.Items.Add(item);
+
+			DoFilter();
+		}
+
+		private void OldHandleFilterValue(string value)
+		{
+			//if (e.KeyCode == Keys.Enter)
+			//{
 				bool filterIsValid = false;				
 				string column = DEFAULT_COLUMN_FILTER;
-				string value = filterContextMenuItemAddFilter.Text;
+				//string value = " "; //filterContextMenuItemAddFilter.Text;
 				string op = string.Empty;
 				int opIndex = 0;
 				int opLength = 1;
@@ -1089,7 +1111,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 					DoFilter();
 				}
-			}
+			//}
 		}
 
 		private void filterContextMenuItemClearAll_Click(object sender, EventArgs e)
@@ -1343,7 +1365,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			CancelAllTasks();
 		}
 		#endregion
-
+		
 		#endregion
 	}
 }

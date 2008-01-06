@@ -102,7 +102,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.notFilterButton = new System.Windows.Forms.Button();
 			this.filterListView = new System.Windows.Forms.ListView();
 			this.filterContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripComboBox();
 			this.filterContextMenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
 			this.filterSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.sortListView = new System.Windows.Forms.ListView();
@@ -128,6 +127,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -668,12 +668,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.filterContextMenuStrip.Name = "filterContextMenuStrip";
 			resources.ApplyResources(this.filterContextMenuStrip, "filterContextMenuStrip");
 			// 
-			// filterContextMenuItemAddFilter
-			// 
-			this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
-			resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
-			this.filterContextMenuItemAddFilter.KeyUp += new System.Windows.Forms.KeyEventHandler(this.filterContextMenuItemAddFilter_KeyUp);
-			// 
 			// filterContextMenuItemClearAll
 			// 
 			this.filterContextMenuItemClearAll.Name = "filterContextMenuItemClearAll";
@@ -686,7 +680,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.filterSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
 			this.filterSmallImageList.Images.SetKeyName(0, "asterisk_yellow.png");
 			this.filterSmallImageList.Images.SetKeyName(1, "chart_bar.png");
-			this.filterSmallImageList.Images.SetKeyName(2, "music.png");
+			this.filterSmallImageList.Images.SetKeyName(2, "brick.png");
 			this.filterSmallImageList.Images.SetKeyName(3, "database_connect.png");
 			this.filterSmallImageList.Images.SetKeyName(4, "text_list_numbers.png");
 			this.filterSmallImageList.Images.SetKeyName(5, "award_star_bronze_3.png");
@@ -933,6 +927,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
+			// filterContextMenuItemAddFilter
+			// 
+			this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
+			resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
+			this.filterContextMenuItemAddFilter.Click += new System.EventHandler(this.filterContextMenuItemAddFilter_Click);
+			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -1030,7 +1030,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ListView filterListView;
 		private System.Windows.Forms.ToolStripMenuItem sortContextMenuStripItemClearAll;
 		private System.Windows.Forms.ContextMenuStrip filterContextMenuStrip;
-		private System.Windows.Forms.ToolStripComboBox filterContextMenuItemAddFilter;
 		private System.Windows.Forms.Button notFilterButton;
 		private System.Windows.Forms.Button orFilterButton;
 		private System.Windows.Forms.Button andFilterButton;
@@ -1067,6 +1066,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemAddFilter;
 	}
 }
 
