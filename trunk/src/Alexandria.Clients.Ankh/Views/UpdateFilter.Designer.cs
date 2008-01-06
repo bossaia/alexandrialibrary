@@ -1,6 +1,6 @@
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
-	partial class AddFilter
+	partial class UpdateFilter
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -38,6 +38,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.columnTextBox = new System.Windows.Forms.TextBox();
 			this.operatorComboBox = new System.Windows.Forms.ComboBox();
 			this.sourceButton = new System.Windows.Forms.Button();
+			this.columnImageList = new System.Windows.Forms.ImageList(this.components);
 			this.typeButton = new System.Windows.Forms.Button();
 			this.statusButton = new System.Windows.Forms.Button();
 			this.numberButton = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.formatButton = new System.Windows.Forms.Button();
 			this.pathButton = new System.Windows.Forms.Button();
 			this.anyButton = new System.Windows.Forms.Button();
-			this.columnImageList = new System.Windows.Forms.ImageList(this.components);
 			this.SuspendLayout();
 			// 
 			// okButton
@@ -142,6 +142,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sourceButton.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.sourceButton.UseVisualStyleBackColor = true;
 			this.sourceButton.Click += new System.EventHandler(this.sourceButton_Click);
+			// 
+			// columnImageList
+			// 
+			this.columnImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+			this.columnImageList.ImageSize = new System.Drawing.Size(16, 16);
+			this.columnImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// typeButton
 			// 
@@ -275,16 +281,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.anyButton.UseVisualStyleBackColor = true;
 			this.anyButton.Click += new System.EventHandler(this.anyButton_Click);
 			// 
-			// columnImageList
+			// UpdateFilter
 			// 
-			this.columnImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-			this.columnImageList.ImageSize = new System.Drawing.Size(16, 16);
-			this.columnImageList.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// AddFilter
-			// 
+			this.AcceptButton = this.okButton;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(500, 272);
 			this.Controls.Add(this.formatButton);
 			this.Controls.Add(this.anyButton);
@@ -309,10 +311,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
-			this.Name = "AddFilter";
+			this.Name = "UpdateFilter";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
-			this.Text = "Add Filter";
+			this.Text = "Filter";
 			this.TopMost = true;
 			this.ResumeLayout(false);
 			this.PerformLayout();
