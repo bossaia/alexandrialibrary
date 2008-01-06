@@ -1,6 +1,6 @@
 #region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -35,9 +35,9 @@ using System.Windows.Forms;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
-	public partial class AddFilter : Form
+	public partial class UpdateFilter : Form
 	{
-		internal AddFilter(ImageList columnImageList, FilterUpdateCallback updateCallback)
+		internal UpdateFilter(ImageList columnImageList, FilterUpdateCallback updateCallback)
 		{
 			InitializeComponent();
 			
@@ -56,6 +56,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.dateButton.Image = columnImageList.Images[9];
 			this.formatButton.Image = columnImageList.Images[10];
 			this.pathButton.Image = columnImageList.Images[11];
+		}
+		
+		internal UpdateFilter(ImageList columnImageList, FilterUpdateCallback updateCallback, string column, string op, string value) : this(columnImageList, updateCallback)
+		{
+			this.columnTextBox.Text = column;
+			this.operatorComboBox.Text = op;
+			this.valueTextBox.Text = value;
 		}
 		
 		private FilterUpdateCallback updateCallback;

@@ -109,6 +109,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private const string FILTER_OP_LT = "<";
 		private const string FILTER_OP_EQ = "=";
 		private readonly string[] FILTER_OPERATORS = new string[]{FILTER_OP_LI, FILTER_OP_LIKE, FILTER_OP_NE, FILTER_OP_GE, FILTER_OP_GT, FILTER_OP_LE, FILTER_OP_LT, FILTER_OP_EQ};
+		
+		private const string OP_TEXT_ADD = "Add Operator";
+		private const string OP_TEXT_EDIT = "Edit Operator";
 		#endregion
 		
 		#region Private Fields
@@ -135,6 +138,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		//private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		//private string dbPath;
 		private readonly string dbDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + System.IO.Path.DirectorySeparatorChar);
+		private bool filterInProgress = false;
 		#endregion
 
 		#region Protected Overrides
@@ -840,26 +844,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void sortListView_ItemActivate(object sender, EventArgs e)
 		{
-			if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
-			{
-				int currentIndex = sortListView.SelectedItems[0].ImageIndex;
-				switch (currentIndex)
-				{
-					//ascending
-					case 0:
-						sortListView.SelectedItems[0].ImageIndex = 1;
-						break;
-						
-					//descending
-					case 1:
-						sortListView.SelectedItems[0].Remove();
-						break;
-					
-					default:
-						break;
-				}
-				DoSort();
-			}
+			DoReverseSelectedSort();
 		}
 
 		private void sortListView_ItemDrag(object sender, ItemDragEventArgs e)
@@ -925,41 +910,95 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void sortContextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
-			bool enableClear = false;
-			bool enableClearAll = false;
-			
+			bool hasItems = false;
+			bool hasSelectedItems = false;
+
 			if (sortListView.Items.Count > 0)
 			{
-				enableClearAll = true;
+				hasItems = true;
 				if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
-					enableClear = true;
+				{
+					hasSelectedItems = true;
+				}
 			}
-			
-			sortContextMenuStrip.Items[0].Enabled = enableClear;
-			sortContextMenuStrip.Items[1].Enabled = enableClearAll;
+
+			sortContextMenuStripItemClearAll.Enabled = hasItems;
+			sortContextMenuStripItemClearSelected.Enabled = hasSelectedItems;
 		}
 
 		private void sortContextMenuStripItemClearSelected_Click(object sender, EventArgs e)
 		{
-			ClearSelectedSort();
+			DoClearSelectedSort();
 		}
 		
 		private void sortContextMenuStripItemClearAll_Click(object sender, EventArgs e)
 		{
-			ClearAllSorts();
+			DoClearAllSorts();
 		}
 
 		private void clearSelectedSortButton_Click(object sender, EventArgs e)
 		{
-			ClearSelectedSort();
+			DoClearSelectedSort();
 		}
 
 		private void clearAllSortButton_Click(object sender, EventArgs e)
 		{
-			ClearAllSorts();
+			DoClearAllSorts();
+		}
+
+		private void sortToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+		{
+			bool hasItems = false;
+			bool hasSelectedItems = false;
+			
+			if (sortListView.Items.Count > 0)
+			{
+				hasItems = true;
+				if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
+				{
+					hasSelectedItems = true;
+				}
+			}
+			
+			clearAllSortsToolStripMenuItem.Enabled = hasItems;
+			clearSortToolStripMenuItem.Enabled = hasSelectedItems;
+		}
+
+		private void clearSortToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoClearSelectedSort();
+		}
+
+		private void clearAllSortsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoClearAllSorts();
 		}
 		
-		private void ClearSelectedSort()
+		private void DoReverseSelectedSort()
+		{
+			if (sortListView.SelectedItems != null && sortListView.SelectedItems.Count > 0)
+			{
+				int currentIndex = sortListView.SelectedItems[0].ImageIndex;
+				switch (currentIndex)
+				{
+					//ascending
+					case 0:
+						sortListView.SelectedItems[0].ImageIndex = 1;
+						DoSort();
+						break;
+
+					//descending
+					case 1:
+						DoClearSelectedSort();
+						break;
+
+					default:
+						break;
+				}
+			}
+		}
+		
+		private void DoClearSelectedSort()
 		{
 			if (sortListView.Items.Count > 0)
 			{
@@ -971,7 +1010,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			}
 		}
 		
-		private void ClearAllSorts()
+		private void DoClearAllSorts()
 		{
 			if (sortListView.Items.Count > 0)
 			{
@@ -1002,25 +1041,157 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 
 		#region Filter Methods
-		private ListViewItem GetAndFilterItem()
+		private void DoUpdateOperator(string op)
 		{
-			ListViewItem item = new ListViewItem(FILTER_OP_AND);
-			item.Tag = new FilterInfo(FILTER_OP_AND);
-			return item;
+			bool addItem = false;
+			ListViewItem item = null;
+
+			if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+			{
+				FilterInfo filterInfo = (FilterInfo)filterListView.SelectedItems[0].Tag;
+				if (filterInfo.IsStandAloneOperator)
+				{
+					item = filterListView.SelectedItems[0];
+				}
+			}
+			
+			if (item == null)
+			{
+				item = new ListViewItem();
+				addItem = true;
+			}
+
+			if (item != null)
+			{
+				item.Text = op;
+				item.Tag = new FilterInfo(op);
+				
+				if (addItem)
+				{
+					filterListView.Items.Add(item);
+				}
+			}
 		}
 
-		private ListViewItem GetNotFilterItem()
+		private void DoAddFilter()
 		{
-			ListViewItem item = new ListViewItem(FILTER_OP_NOT);
-			item.Tag = new FilterInfo(FILTER_OP_NOT);
-			return item;
+			UpdateFilter addFilter = new UpdateFilter(this.filterSmallImageList, new FilterUpdateCallback(AddFilterItemCompleted));
+			addFilter.Show();
+		}
+		
+		private void DoEditFilter()
+		{
+			if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+			{
+				FilterInfo filterInfo = (FilterInfo)filterListView.SelectedItems[0].Tag;
+				UpdateFilter editFilter = new UpdateFilter(this.filterSmallImageList, new FilterUpdateCallback(EditFilterItemCompleted), filterInfo.Column, filterInfo.Operator, filterInfo.Value);
+				editFilter.Show();
+			}
+		}		
+
+		private void DoClearSelectedFilter()
+		{
+			if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+			{
+				filterListView.SelectedItems[0].Remove();
+			}
 		}
 
-		private ListViewItem GetOrFilterItem()
+		private void DoClearAllFilters()
 		{
-			ListViewItem item = new ListViewItem(FILTER_OP_OR);
-			item.Tag = new FilterInfo(FILTER_OP_OR);
-			return item;
+			if (filterListView.Items.Count > 0)
+			{
+				filterListView.Items.Clear();
+				DoFilter();
+			}
+		}
+
+		private void DoFilter()
+		{
+			if (!filterInProgress)
+			{
+				try
+				{
+					filterInProgress = true;
+					
+					if (filterListView.Items.Count > 0)
+					{
+						StringBuilder filter = new StringBuilder();
+
+						bool negateNextFilter = false;
+						bool andNextFilter = false;
+						bool orNextFilter = false;
+
+						for (int i = 0; i < filterListView.Items.Count; i++)
+						{
+							if (filterListView.Items[i].Tag != null)
+							{
+								FilterInfo filterInfo = (FilterInfo)filterListView.Items[i].Tag;
+								if (filterInfo.IsStandAloneOperator)
+								{
+									switch (filterListView.Items[i].Text)
+									{
+										case FILTER_OP_NOT:
+											negateNextFilter = true;
+											break;
+										case FILTER_OP_AND:
+											andNextFilter = true;
+											break;
+										case FILTER_OP_OR:
+											orNextFilter = true;
+											break;
+										default:
+											break;
+									}
+								}
+								else
+								{
+									if (filterInfo.Column != DEFAULT_COLUMN_FILTER)
+									{
+										if (negateNextFilter)
+										{
+											filterInfo = filterInfo.Negate();
+											negateNextFilter = false;
+										}
+										if (orNextFilter)
+										{
+											filter.AppendFormat(" {0} ", FILTER_OP_OR);
+											orNextFilter = false;
+										}
+										if (andNextFilter)
+										{
+											filter.AppendFormat(" {0} ", FILTER_OP_AND);
+											andNextFilter = false;
+										}
+
+										filter.Append(filterInfo.ToString());
+									}
+									else
+									{
+										//TODO: Add logic to handle abstract filters
+									}
+								}
+							}
+						}
+
+						queueController.Filter(filter.ToString());
+					}
+					else
+					{
+						queueController.LoadDefaultCatalog();
+					}
+					
+					DoSort();
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(string.Format("There was an error trying to apply this filter:\n{0}", ex.Message), "Filter Error");
+				}
+				finally
+				{
+					filterInProgress = false;
+				}
+			}
 		}
 
 		private void filterButton_Click(object sender, EventArgs e)
@@ -1030,107 +1201,249 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void andFilterButton_Click(object sender, EventArgs e)
 		{
-			filterListView.Items.Add(GetAndFilterItem());
+			DoUpdateOperator(FILTER_OP_AND);
 		}
 
 		private void notFilterButton_Click(object sender, EventArgs e)
 		{
-			filterListView.Items.Add(GetNotFilterItem());
+			DoUpdateOperator(FILTER_OP_NOT);
 		}
 
 		private void orFilterButton_Click(object sender, EventArgs e)
 		{
-			filterListView.Items.Add(GetOrFilterItem());
+			DoUpdateOperator(FILTER_OP_OR);
+		}
+
+		private void filterContextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			bool hasItems = false;
+			bool hasSelectedItems = false;
+			bool hasOperatorSelected = false;
+			if (filterListView.Items.Count > 0)
+			{
+				hasItems = true;
+				if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+				{
+					hasSelectedItems = true;
+					FilterInfo filterInfo = (FilterInfo)filterListView.SelectedItems[0].Tag;
+					hasOperatorSelected = filterInfo.IsStandAloneOperator;
+				}
+			}
+			
+			filterContextMenuItemClearAll.Enabled = hasItems;
+			filterContextMenuItemEditFilter.Enabled = hasSelectedItems;
+			filterContextMenuItemClearSelected.Enabled = hasSelectedItems;
+			filterContextMenuItemUpdateOperator.Text = (hasOperatorSelected)? OP_TEXT_EDIT : OP_TEXT_ADD;
 		}
 
 		private void filterContextMenuItemAddFilter_Click(object sender, EventArgs e)
 		{
-			AddFilter addFilterForm = new AddFilter(this.filterSmallImageList, new FilterUpdateCallback(AddFilterItem));
-			addFilterForm.Show();
+			DoAddFilter();
 		}
 
-		private void AddFilterItem(string column, string op, string value)
+		private void filterContextMenuItemEditFilter_Click(object sender, EventArgs e)
+		{
+			DoEditFilter();
+		}
+		
+		private ListViewItem GetFilterItem(string column, string op, string value)
+		{
+			ListViewItem item = new ListViewItem();
+			return GetFilterItem(column, op, value, item);
+		}
+				
+		private ListViewItem GetFilterItem(string column, string op, string value, ListViewItem item)
 		{
 			Type columnType = queueDataGrid.Columns[column].ValueType;
 			FilterDragDropData filterData = new FilterDragDropData(column, columnType, op, value);
 			FilterInfo filterInfo = filterData.GetFilterInfo();
-			
-			ListViewItem item = new ListViewItem(filterInfo.GetDescription());
+
+			item.Text = filterInfo.GetDescription();
 			item.Tag = filterInfo;
 			item.ImageIndex = filterData.ImageIndex;
 			item.ToolTipText = filterInfo.ToString();
+			
+			return item;
+		}
+
+		private void AddFilterItemCompleted(string column, string op, string value)
+		{
+			ListViewItem item = GetFilterItem(column, op, value);
 			
 			filterListView.Items.Add(item);
 
 			DoFilter();
 		}
-
-		private void OldHandleFilterValue(string value)
+		
+		private void EditFilterItemCompleted(string column, string op, string value)
 		{
-			//if (e.KeyCode == Keys.Enter)
-			//{
-				bool filterIsValid = false;				
-				string column = DEFAULT_COLUMN_FILTER;
-				//string value = " "; //filterContextMenuItemAddFilter.Text;
-				string op = string.Empty;
-				int opIndex = 0;
-				int opLength = 1;
+			if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+			{
+				ListViewItem item = GetFilterItem(column, op, value, filterListView.SelectedItems[0]);
 				
-				for(int i=0; i<FILTER_OPERATORS.Length; i++)
+				DoFilter();
+			}
+		}
+
+		private void filterOperatorItemAnd_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_AND);
+		}
+
+		private void filterOperatorItemNot_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_NOT);
+		}
+
+		private void filterOperatorItemOr_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_OR);
+		}
+
+		private void addFilterButton_Click(object sender, EventArgs e)
+		{
+			DoAddFilter();
+		}
+
+		private void editFilterButton_Click(object sender, EventArgs e)
+		{
+			DoEditFilter();
+		}
+
+		private void clearFilterButton_Click(object sender, EventArgs e)
+		{
+			DoClearSelectedFilter();
+		}
+
+		private void clearAllFiltersButton_Click(object sender, EventArgs e)
+		{
+			DoClearAllFilters();
+		}
+
+		private void ParseFilterValue(string value)
+		{
+			bool filterIsValid = false;	
+			string column = DEFAULT_COLUMN_FILTER;
+			string op = string.Empty;
+			int opIndex = 0;
+			int opLength = 1;
+			
+			for(int i=0; i<FILTER_OPERATORS.Length; i++)
+			{
+				if (value.ToUpper().Contains(FILTER_OPERATORS[i].ToUpper()))
 				{
-					if (value.ToUpper().Contains(FILTER_OPERATORS[i].ToUpper()))
+					op = FILTER_OPERATORS[i];
+					opIndex = value.ToUpper().IndexOf(FILTER_OPERATORS[i].ToUpper());
+					opLength = FILTER_OPERATORS[i].Length;
+					column = value.Substring(0, opIndex).Trim();
+					value = value.Substring(opIndex + opLength, value.Length - opIndex - opLength).Trim();
+					
+					if (queueDataGrid.Columns.Contains(column))
 					{
-						op = FILTER_OPERATORS[i];
-						opIndex = value.ToUpper().IndexOf(FILTER_OPERATORS[i].ToUpper());
-						opLength = FILTER_OPERATORS[i].Length;
-						column = value.Substring(0, opIndex).Trim();
-						value = value.Substring(opIndex + opLength, value.Length - opIndex - opLength).Trim();
-						
-						if (queueDataGrid.Columns.Contains(column))
-						{
-							filterIsValid = true;
-							filterContextMenuStrip.Close();
-						}
-						else MessageBox.Show(string.Format("{0} is not a valid column", column), "Invalid Filter");
-						break;
+						filterIsValid = true;
+						filterContextMenuStrip.Close();
 					}
-				} 
-
-				if (filterIsValid)
-				{
-					Type columnType = queueDataGrid.Columns[column].ValueType;
-					FilterDragDropData filterData = new FilterDragDropData(column, columnType, op, value);
-					FilterInfo filterInfo = filterData.GetFilterInfo();
-					
-					ListViewItem item = new ListViewItem(filterInfo.GetDescription());
-					item.Tag = filterInfo;
-					item.ImageIndex = filterData.ImageIndex;
-					item.ToolTipText = filterInfo.ToString();
-					
-					filterListView.Items.Add(item);
-
-					DoFilter();
+					else MessageBox.Show(string.Format("{0} is not a valid column", column), "Invalid Filter");
+					break;
 				}
-			//}
+			} 
+
+			if (filterIsValid)
+			{
+				Type columnType = queueDataGrid.Columns[column].ValueType;
+				FilterDragDropData filterData = new FilterDragDropData(column, columnType, op, value);
+				FilterInfo filterInfo = filterData.GetFilterInfo();
+				
+				ListViewItem item = new ListViewItem(filterInfo.GetDescription());
+				item.Tag = filterInfo;
+				item.ImageIndex = filterData.ImageIndex;
+				item.ToolTipText = filterInfo.ToString();
+				
+				filterListView.Items.Add(item);
+
+				DoFilter();
+			}
+		}
+
+		private void filterContextMenuItemClearSelected_Click(object sender, EventArgs e)
+		{
+			DoClearSelectedFilter();
 		}
 
 		private void filterContextMenuItemClearAll_Click(object sender, EventArgs e)
 		{
+			DoClearAllFilters();
+		}
+
+		private void filterToolStripMenuItem_DropDownOpening(object sender, EventArgs e)
+		{
+			bool hasItems = false;
+			bool hasSelectedItems = false;
+			bool hasOperatorSelected = false;
 			if (filterListView.Items.Count > 0)
 			{
-				filterListView.Items.Clear();
-				
-				//DoFilter();
+				hasItems = true;
+				if (filterListView.SelectedItems != null && filterListView.SelectedItems.Count > 0)
+				{
+					hasSelectedItems = true;
+					FilterInfo filterInfo = (FilterInfo)filterListView.SelectedItems[0].Tag;
+					hasOperatorSelected = filterInfo.IsStandAloneOperator;
+				}
 			}
+
+			clearAllFiltersToolStripMenuItem.Enabled = hasItems;
+			editFilterToolStripMenuItem.Enabled = hasSelectedItems;
+			clearFilterToolStripMenuItem.Enabled = hasSelectedItems;
+			updateOperatorToolStripMenuItem.Text = (hasOperatorSelected) ? OP_TEXT_EDIT : OP_TEXT_ADD;
+		}
+
+		private void addFilterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoAddFilter();
+		}
+
+		private void editFilterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoEditFilter();
+		}
+
+		private void clearFilterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoClearSelectedFilter();
+		}
+
+		private void clearAllFiltersToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoClearAllFilters();
+		}
+
+		private void andOperatorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_AND);
+		}
+
+		private void orOperatorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_OR);
+		}
+
+		private void notOperatorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DoUpdateOperator(FILTER_OP_NOT);
 		}
 
 		private void filterListView_KeyUp(object sender, KeyEventArgs e)
 		{
-			if (e.KeyCode == Keys.Delete && filterListView.SelectedItems.Count > 0)
+			if (e != null)
 			{
-				filterListView.Items.Remove(filterListView.SelectedItems[0]);
-				
-				//DoFilter();
+				switch (e.KeyCode)
+				{
+					case Keys.Delete:
+						DoClearSelectedFilter();
+						break;
+					default:
+						break;
+				}
 			}
 		}
 
@@ -1172,9 +1485,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					}
 				}
 
-				//int imageIndex = (sortData.Direction == ListSortDirection.Ascending) ? 0 : 1;
-				//int imageIndex = filterData.Item.ImageIndex;
-				
 				FilterInfo filterInfo = new FilterInfo(filterData.Column, filterData.ColumnType, filterData.Operator, filterData.Value);
 				
 				ListViewItem item =  null;
@@ -1195,84 +1505,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 				//DoFilter();
 			}
-		}
-		
-		private void DoFilter()
-		{
-			try
-			{
-				if (filterListView.Items.Count > 0)
-				{
-					StringBuilder filter = new StringBuilder();
-
-					bool negateNextFilter = false;
-					bool andNextFilter = false;
-					bool orNextFilter = false;
-
-					for (int i = 0; i < filterListView.Items.Count; i++)
-					{
-						if (filterListView.Items[i].Tag != null)
-						{
-							FilterInfo filterInfo = (FilterInfo)filterListView.Items[i].Tag;
-							if (filterInfo.IsStandAloneOperator)
-							{
-								switch (filterListView.Items[i].Text)
-								{
-									case FILTER_OP_NOT:
-										negateNextFilter = true;
-										break;
-									case FILTER_OP_AND:
-										andNextFilter = true;
-										break;
-									case FILTER_OP_OR:
-										orNextFilter = true;
-										break;
-									default:
-										break;
-								}							
-							}
-							else
-							{
-								if (filterInfo.Column != DEFAULT_COLUMN_FILTER)
-								{
-									if (negateNextFilter)
-									{
-										filterInfo = filterInfo.Negate();
-										negateNextFilter = false;
-									}
-									if (orNextFilter)
-									{
-										filter.AppendFormat(" {0} ", FILTER_OP_OR);
-										orNextFilter = false;
-									}
-									if (andNextFilter)
-									{
-										filter.AppendFormat(" {0} ", FILTER_OP_AND);
-										andNextFilter = false;
-									}
-
-									filter.Append(filterInfo.ToString());
-								}
-								else
-								{
-									//TODO: Add logic to handle abstract filters
-								}
-							}
-						}
-					}
-
-					queueController.Filter(filter.ToString());
-				}
-				else
-				{
-					queueController.LoadDefaultCatalog();
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(string.Format("There was an error trying to apply this filter:\n{0}", ex.Message), "Filter Error");
-			}		
-		}
+		}		
 		#endregion
 
 		#region Task Methods

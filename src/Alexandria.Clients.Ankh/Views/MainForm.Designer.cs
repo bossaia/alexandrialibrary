@@ -32,10 +32,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -114,6 +114,29 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterContextMenuItemEditFilter = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterContextMenuItemUpdateOperator = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterOperatorItemAnd = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterOperatorItemOr = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterOperatorItemNot = new System.Windows.Forms.ToolStripMenuItem();
+			this.filterContextMenuItemClearSelected = new System.Windows.Forms.ToolStripMenuItem();
+			this.addFilterButton = new System.Windows.Forms.Button();
+			this.editFilterButton = new System.Windows.Forms.Button();
+			this.clearFilterButton = new System.Windows.Forms.Button();
+			this.clearAllFiltersButton = new System.Windows.Forms.Button();
+			this.filterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.editFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.updateOperatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.andOperatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.orOperatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.notOperatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearAllFiltersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearSortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.clearAllSortsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -127,7 +150,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -233,7 +255,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.clearSelectedToolStripMenuItem,
-            this.clearToolStripMenuItem});
+            this.clearToolStripMenuItem,
+            this.filterToolStripMenuItem,
+            this.sortToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			resources.ApplyResources(this.viewToolStripMenuItem, "viewToolStripMenuItem");
 			// 
@@ -597,6 +621,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.clearAllFiltersButton);
+			this.QueueGroupBox.Controls.Add(this.clearFilterButton);
+			this.QueueGroupBox.Controls.Add(this.editFilterButton);
+			this.QueueGroupBox.Controls.Add(this.addFilterButton);
 			this.QueueGroupBox.Controls.Add(this.clearAllSortButton);
 			this.QueueGroupBox.Controls.Add(this.clearSelectedSortButton);
 			this.QueueGroupBox.Controls.Add(this.orFilterButton);
@@ -664,9 +692,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// 
 			this.filterContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.filterContextMenuItemAddFilter,
+            this.filterContextMenuItemUpdateOperator,
+            this.filterContextMenuItemEditFilter,
+            this.filterContextMenuItemClearSelected,
             this.filterContextMenuItemClearAll});
 			this.filterContextMenuStrip.Name = "filterContextMenuStrip";
 			resources.ApplyResources(this.filterContextMenuStrip, "filterContextMenuStrip");
+			this.filterContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.filterContextMenuStrip_Opening);
 			// 
 			// filterContextMenuItemClearAll
 			// 
@@ -769,6 +801,163 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
 			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
+			// filterContextMenuItemAddFilter
+			// 
+			this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
+			resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
+			this.filterContextMenuItemAddFilter.Click += new System.EventHandler(this.filterContextMenuItemAddFilter_Click);
+			// 
+			// filterContextMenuItemEditFilter
+			// 
+			this.filterContextMenuItemEditFilter.Name = "filterContextMenuItemEditFilter";
+			resources.ApplyResources(this.filterContextMenuItemEditFilter, "filterContextMenuItemEditFilter");
+			this.filterContextMenuItemEditFilter.Click += new System.EventHandler(this.filterContextMenuItemEditFilter_Click);
+			// 
+			// filterContextMenuItemUpdateOperator
+			// 
+			this.filterContextMenuItemUpdateOperator.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterOperatorItemAnd,
+            this.filterOperatorItemOr,
+            this.filterOperatorItemNot});
+			this.filterContextMenuItemUpdateOperator.Name = "filterContextMenuItemUpdateOperator";
+			resources.ApplyResources(this.filterContextMenuItemUpdateOperator, "filterContextMenuItemUpdateOperator");
+			// 
+			// filterOperatorItemAnd
+			// 
+			this.filterOperatorItemAnd.Name = "filterOperatorItemAnd";
+			resources.ApplyResources(this.filterOperatorItemAnd, "filterOperatorItemAnd");
+			this.filterOperatorItemAnd.Click += new System.EventHandler(this.filterOperatorItemAnd_Click);
+			// 
+			// filterOperatorItemOr
+			// 
+			this.filterOperatorItemOr.Name = "filterOperatorItemOr";
+			resources.ApplyResources(this.filterOperatorItemOr, "filterOperatorItemOr");
+			this.filterOperatorItemOr.Click += new System.EventHandler(this.filterOperatorItemOr_Click);
+			// 
+			// filterOperatorItemNot
+			// 
+			this.filterOperatorItemNot.Name = "filterOperatorItemNot";
+			resources.ApplyResources(this.filterOperatorItemNot, "filterOperatorItemNot");
+			this.filterOperatorItemNot.Click += new System.EventHandler(this.filterOperatorItemNot_Click);
+			// 
+			// filterContextMenuItemClearSelected
+			// 
+			this.filterContextMenuItemClearSelected.Name = "filterContextMenuItemClearSelected";
+			resources.ApplyResources(this.filterContextMenuItemClearSelected, "filterContextMenuItemClearSelected");
+			this.filterContextMenuItemClearSelected.Click += new System.EventHandler(this.filterContextMenuItemClearSelected_Click);
+			// 
+			// addFilterButton
+			// 
+			resources.ApplyResources(this.addFilterButton, "addFilterButton");
+			this.addFilterButton.Name = "addFilterButton";
+			this.addFilterButton.UseVisualStyleBackColor = true;
+			this.addFilterButton.Click += new System.EventHandler(this.addFilterButton_Click);
+			// 
+			// editFilterButton
+			// 
+			resources.ApplyResources(this.editFilterButton, "editFilterButton");
+			this.editFilterButton.Name = "editFilterButton";
+			this.editFilterButton.UseVisualStyleBackColor = true;
+			this.editFilterButton.Click += new System.EventHandler(this.editFilterButton_Click);
+			// 
+			// clearFilterButton
+			// 
+			resources.ApplyResources(this.clearFilterButton, "clearFilterButton");
+			this.clearFilterButton.Name = "clearFilterButton";
+			this.clearFilterButton.UseVisualStyleBackColor = true;
+			this.clearFilterButton.Click += new System.EventHandler(this.clearFilterButton_Click);
+			// 
+			// clearAllFiltersButton
+			// 
+			resources.ApplyResources(this.clearAllFiltersButton, "clearAllFiltersButton");
+			this.clearAllFiltersButton.Name = "clearAllFiltersButton";
+			this.clearAllFiltersButton.UseVisualStyleBackColor = true;
+			this.clearAllFiltersButton.Click += new System.EventHandler(this.clearAllFiltersButton_Click);
+			// 
+			// filterToolStripMenuItem
+			// 
+			this.filterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFilterToolStripMenuItem,
+            this.updateOperatorToolStripMenuItem,
+            this.editFilterToolStripMenuItem,
+            this.clearFilterToolStripMenuItem,
+            this.clearAllFiltersToolStripMenuItem});
+			this.filterToolStripMenuItem.Name = "filterToolStripMenuItem";
+			resources.ApplyResources(this.filterToolStripMenuItem, "filterToolStripMenuItem");
+			this.filterToolStripMenuItem.DropDownOpening += new System.EventHandler(this.filterToolStripMenuItem_DropDownOpening);
+			// 
+			// addFilterToolStripMenuItem
+			// 
+			this.addFilterToolStripMenuItem.Name = "addFilterToolStripMenuItem";
+			resources.ApplyResources(this.addFilterToolStripMenuItem, "addFilterToolStripMenuItem");
+			this.addFilterToolStripMenuItem.Click += new System.EventHandler(this.addFilterToolStripMenuItem_Click);
+			// 
+			// editFilterToolStripMenuItem
+			// 
+			this.editFilterToolStripMenuItem.Name = "editFilterToolStripMenuItem";
+			resources.ApplyResources(this.editFilterToolStripMenuItem, "editFilterToolStripMenuItem");
+			this.editFilterToolStripMenuItem.Click += new System.EventHandler(this.editFilterToolStripMenuItem_Click);
+			// 
+			// updateOperatorToolStripMenuItem
+			// 
+			this.updateOperatorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.andOperatorToolStripMenuItem,
+            this.orOperatorToolStripMenuItem,
+            this.notOperatorToolStripMenuItem});
+			this.updateOperatorToolStripMenuItem.Name = "updateOperatorToolStripMenuItem";
+			resources.ApplyResources(this.updateOperatorToolStripMenuItem, "updateOperatorToolStripMenuItem");
+			// 
+			// andOperatorToolStripMenuItem
+			// 
+			this.andOperatorToolStripMenuItem.Name = "andOperatorToolStripMenuItem";
+			resources.ApplyResources(this.andOperatorToolStripMenuItem, "andOperatorToolStripMenuItem");
+			this.andOperatorToolStripMenuItem.Click += new System.EventHandler(this.andOperatorToolStripMenuItem_Click);
+			// 
+			// orOperatorToolStripMenuItem
+			// 
+			this.orOperatorToolStripMenuItem.Name = "orOperatorToolStripMenuItem";
+			resources.ApplyResources(this.orOperatorToolStripMenuItem, "orOperatorToolStripMenuItem");
+			this.orOperatorToolStripMenuItem.Click += new System.EventHandler(this.orOperatorToolStripMenuItem_Click);
+			// 
+			// notOperatorToolStripMenuItem
+			// 
+			this.notOperatorToolStripMenuItem.Name = "notOperatorToolStripMenuItem";
+			resources.ApplyResources(this.notOperatorToolStripMenuItem, "notOperatorToolStripMenuItem");
+			this.notOperatorToolStripMenuItem.Click += new System.EventHandler(this.notOperatorToolStripMenuItem_Click);
+			// 
+			// clearFilterToolStripMenuItem
+			// 
+			this.clearFilterToolStripMenuItem.Name = "clearFilterToolStripMenuItem";
+			resources.ApplyResources(this.clearFilterToolStripMenuItem, "clearFilterToolStripMenuItem");
+			this.clearFilterToolStripMenuItem.Click += new System.EventHandler(this.clearFilterToolStripMenuItem_Click);
+			// 
+			// clearAllFiltersToolStripMenuItem
+			// 
+			this.clearAllFiltersToolStripMenuItem.Name = "clearAllFiltersToolStripMenuItem";
+			resources.ApplyResources(this.clearAllFiltersToolStripMenuItem, "clearAllFiltersToolStripMenuItem");
+			this.clearAllFiltersToolStripMenuItem.Click += new System.EventHandler(this.clearAllFiltersToolStripMenuItem_Click);
+			// 
+			// sortToolStripMenuItem
+			// 
+			this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearSortToolStripMenuItem,
+            this.clearAllSortsToolStripMenuItem});
+			this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+			resources.ApplyResources(this.sortToolStripMenuItem, "sortToolStripMenuItem");
+			this.sortToolStripMenuItem.DropDownOpening += new System.EventHandler(this.sortToolStripMenuItem_DropDownOpening);
+			// 
+			// clearSortToolStripMenuItem
+			// 
+			this.clearSortToolStripMenuItem.Name = "clearSortToolStripMenuItem";
+			resources.ApplyResources(this.clearSortToolStripMenuItem, "clearSortToolStripMenuItem");
+			this.clearSortToolStripMenuItem.Click += new System.EventHandler(this.clearSortToolStripMenuItem_Click);
+			// 
+			// clearAllSortsToolStripMenuItem
+			// 
+			this.clearAllSortsToolStripMenuItem.Name = "clearAllSortsToolStripMenuItem";
+			resources.ApplyResources(this.clearAllSortsToolStripMenuItem, "clearAllSortsToolStripMenuItem");
+			this.clearAllSortsToolStripMenuItem.Click += new System.EventHandler(this.clearAllSortsToolStripMenuItem_Click);
+			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -779,14 +968,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.ColumnDragDropped = null;
 			this.queueDataGrid.ColumnDragDropping = null;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -801,25 +990,25 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.Format,
             this.Path,
             this.Id});
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
 			this.queueDataGrid.Name = "queueDataGrid";
 			this.queueDataGrid.RowDragDropped = null;
 			this.queueDataGrid.RowDragDropping = null;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.queueDataGrid_DragOver);
@@ -888,8 +1077,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -926,12 +1115,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Id.ReadOnly = true;
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			// 
-			// filterContextMenuItemAddFilter
-			// 
-			this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
-			resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
-			this.filterContextMenuItemAddFilter.Click += new System.EventHandler(this.filterContextMenuItemAddFilter_Click);
 			// 
 			// MainForm
 			// 
@@ -1067,6 +1250,28 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemAddFilter;
+		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemEditFilter;
+		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemUpdateOperator;
+		private System.Windows.Forms.ToolStripMenuItem filterOperatorItemAnd;
+		private System.Windows.Forms.ToolStripMenuItem filterOperatorItemOr;
+		private System.Windows.Forms.ToolStripMenuItem filterOperatorItemNot;
+		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemClearSelected;
+		private System.Windows.Forms.Button addFilterButton;
+		private System.Windows.Forms.Button editFilterButton;
+		private System.Windows.Forms.Button clearFilterButton;
+		private System.Windows.Forms.Button clearAllFiltersButton;
+		private System.Windows.Forms.ToolStripMenuItem filterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addFilterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem editFilterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem updateOperatorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem andOperatorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem orOperatorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem notOperatorToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearFilterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearAllFiltersToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearSortToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem clearAllSortsToolStripMenuItem;
 	}
 }
 
