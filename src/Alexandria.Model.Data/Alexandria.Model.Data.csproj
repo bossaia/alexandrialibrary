@@ -33,7 +33,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseDataMap.cs" />
+    <Compile Include="BaseLinkDataMap.cs" />
+    <Compile Include="BaseSimpleDataMap.cs" />
     <Compile Include="MediaItemDataMap.cs" />
+    <Compile Include="MediaSetContentDataMap.cs" />
+    <Compile Include="MediaSetDataMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

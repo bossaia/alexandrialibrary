@@ -27,22 +27,44 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
-namespace Telesophy.Alexandria.Model
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMediaItem : IModel
+	public class MediaSetDataMap : BaseSimpleDataMap<IMediaSet>
 	{
-		string Status { get; set; }
-		string Source { get; set; }
-		string Type { get; set; }
-		int Number { get; set; }
-		string Title { get; set; }
-		string Artist { get; set; }
-		string Album { get; set; }
-		TimeSpan Duration { get; set; }
-		DateTime Date { get; set; }
-		string Format { get; set; }
-		Uri Path { get; set; }
+		#region Constructors
+		public MediaSetDataMap()
+		{
+			Table = new DataTable("MediaSet");
+
+			Table.Columns.Add("Id", typeof(Guid));
+			Table.Columns.Add("Source", typeof(string));
+			Table.Columns.Add("Type", typeof(string));
+			Table.Columns.Add("Number", typeof(int));
+			Table.Columns.Add("Title", typeof(string));
+			Table.Columns.Add("Artist", typeof(string));
+			Table.Columns.Add("Date", typeof(DateTime));
+			Table.Columns.Add("Path", typeof(Uri));
+			Table.Constraints.Add(new UniqueConstraint(Table.Columns["Id"], true));
+			Table.Constraints.Add(new UniqueConstraint(Table.Columns["Path"]));
+		}
+		#endregion
+		
+		#region Protected Methods
+		protected override IMediaSet GetModelFromRow(DataRow row)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		protected override DataRow GetRowFromModel(IMediaSet model)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+		#endregion
 	}
 }
