@@ -27,22 +27,51 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
-namespace Telesophy.Alexandria.Model
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMediaItem : IModel
+	public abstract class BaseDataMap
 	{
-		string Status { get; set; }
-		string Source { get; set; }
-		string Type { get; set; }
-		int Number { get; set; }
-		string Title { get; set; }
-		string Artist { get; set; }
-		string Album { get; set; }
-		TimeSpan Duration { get; set; }
-		DateTime Date { get; set; }
-		string Format { get; set; }
-		Uri Path { get; set; }
+		#region Constructors
+		public BaseDataMap()
+		{
+		}
+		#endregion
+		
+		#region Private Fields
+		private IPersistenceEngine engine;
+		private DataTable table;
+		#endregion
+		
+		#region Protected Methods
+		protected virtual V GetValue<V>(object data)
+		{
+			if (data != null && data != DBNull.Value)
+			{
+				return (V)data;
+			}
+
+			return default(V);
+		}
+		#endregion
+		
+		#region Public Properties
+		public IPersistenceEngine Engine
+		{
+			get { return engine; }
+			set { engine = value; }
+		}
+
+		public DataTable Table
+		{
+			get { return table; }
+			protected set { table = value; }
+		}
+		#endregion		
 	}
 }

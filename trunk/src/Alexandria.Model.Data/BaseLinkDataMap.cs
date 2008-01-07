@@ -27,22 +27,43 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
-namespace Telesophy.Alexandria.Model
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMediaItem : IModel
+	public abstract class BaseLinkDataMap<Parent, Child> : BaseDataMap
+		where Parent: IModel
+		where Child: IModel
 	{
-		string Status { get; set; }
-		string Source { get; set; }
-		string Type { get; set; }
-		int Number { get; set; }
-		string Title { get; set; }
-		string Artist { get; set; }
-		string Album { get; set; }
-		TimeSpan Duration { get; set; }
-		DateTime Date { get; set; }
-		string Format { get; set; }
-		Uri Path { get; set; }
+		#region Constructors
+		public BaseLinkDataMap()
+		{
+		}
+		#endregion
+
+		#region Private Fields
+		private IPersistenceEngine engine;
+		private DataTable table;
+		#endregion
+		
+		#region Protected Methods
+		protected virtual IList<Child> GetChildList(string filter)
+		{
+			//TODO: finish implementing
+			return null;
+		}
+		
+		protected abstract Parent GetParentFromRow(DataRow row);
+		
+		protected abstract Child GetChildFromRow(DataRow row);
+		
+		protected abstract void FillRowForParent(DataRow row, Parent parent);
+		
+		protected abstract void FillRowForChild(DataRow row, Child child);
+		#endregion
 	}
 }

@@ -31,18 +31,8 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Model
 {
-	public interface IMediaItem : IModel
+	public interface IModel
 	{
-		string Status { get; set; }
-		string Source { get; set; }
-		string Type { get; set; }
-		int Number { get; set; }
-		string Title { get; set; }
-		string Artist { get; set; }
-		string Album { get; set; }
-		TimeSpan Duration { get; set; }
-		DateTime Date { get; set; }
-		string Format { get; set; }
-		Uri Path { get; set; }
+		Guid Id { get; set; }
 	}
 }

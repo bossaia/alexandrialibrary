@@ -37,24 +37,24 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IList<IMediaItem> ListAllMediaItems()
 		{
-			return mediaItemDataMap.ListAll();
+			return mediaItemDataMap.ListModels();
 		}
 		
 		public IList<IMediaItem> ListMediaItems(string filter)
 		{
-			return mediaItemDataMap.List(filter);
+			return mediaItemDataMap.ListModels(filter);
 		}
 		
 		[CLSCompliant(false)]
 		public void SaveMediaItem(IMediaItem item)
 		{
-			mediaItemDataMap.SaveMediaItem(item);
+			mediaItemDataMap.SaveModel(item);
 		}
 		
 		[CLSCompliant(false)]
 		public void DeleteMediaItem(IMediaItem item)
 		{
-			mediaItemDataMap.DeleteMediaItem(item);
+			mediaItemDataMap.DeleteModel(item);
 		}
 	}
 }
