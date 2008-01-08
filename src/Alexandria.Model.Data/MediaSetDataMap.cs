@@ -58,12 +58,40 @@ namespace Telesophy.Alexandria.Model.Data
 		#region Protected Methods
 		protected override IMediaSet GetModelFromRow(DataRow row)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			IMediaSet model = new Album();
+			
+			if (row != null)
+			{
+				model.Id = GetValue<Guid>(row[0]);
+				model.Source = GetValue<string>(row[1]);
+				model.Type = GetValue<string>(row[2]);
+				model.Number = GetValue<int>(row[3]);
+				model.Title = GetValue<string>(row[4]);
+				model.Artist = GetValue<string>(row[5]);
+				model.Date = GetValue<DateTime>(row[6]);
+				model.Path = GetValue<Uri>(row[7]);
+			}
+			
+			return model;
 		}
 
 		protected override DataRow GetRowFromModel(IMediaSet model)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			DataRow row = Table.NewRow();
+			
+			if (model != null)
+			{
+				row[0] = model.Id;
+				row[1] = model.Source;
+				row[2] = model.Type;
+				row[3] = model.Number;
+				row[4] = model.Title;
+				row[5] = model.Artist;
+				row[6] = model.Date;
+				row[7] = model.Path;
+			}
+			
+			return row;
 		}
 		#endregion
 	}

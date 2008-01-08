@@ -313,17 +313,35 @@ namespace Alexandria.Persistence.SQLite
 			{
 				const string tableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 				const string columnFormat = "{0} {1} NOT NULL";
-				StringBuilder columns = new StringBuilder();
-				for (int i = 0; i < table.Columns.Count; i++)
+				StringBuilder createTableText = new StringBuilder();
+				for (int columnNumber = 0; columnNumber < table.Columns.Count; columnNumber++)
 				{
-					if (i > 0) columns.Append(", ");
-					columns.AppendFormat(columnFormat, table.Columns[i].ColumnName, GetColumnTypeName(table.Columns[i].DataType));
-					if (table.PrimaryKey[0] == table.Columns[i])
-						columns.Append(" PRIMARY KEY");
-					else if (table.Columns[i].Unique)
-						columns.Append(" UNIQUE");
+					if (columnNumber > 0) createTableText.Append(", ");
+					createTableText.AppendFormat(columnFormat, table.Columns[columnNumber].ColumnName, GetColumnTypeName(table.Columns[columnNumber].DataType));
 				}
-				string commandText = string.Format(tableFormat, table.TableName, columns);
+				
+				foreach(Constraint constraint in table.Constraints)
+				{
+					if (constraint is UniqueConstraint)
+					{
+						UniqueConstraint uniqueConstraint = constraint as UniqueConstraint;
+						if (uniqueConstraint.IsPrimaryKey)
+							createTableText.Append(", PRIMARY KEY (");
+						else createTableText.Append(", UNIQUE (");
+						
+						for(int constraintColumnNumber=0; constraintColumnNumber < uniqueConstraint.Columns.Length; constraintColumnNumber++)
+						{
+							if (constraintColumnNumber > 0)
+								createTableText.Append(", ");
+							
+							createTableText.Append(uniqueConstraint.Columns[constraintColumnNumber].ColumnName);
+						}
+						
+						createTableText.Append(")");
+					}
+				}
+				
+				string commandText = string.Format(tableFormat, table.TableName, createTableText);
 
 				using (SQLiteConnection connection = GetSQLiteConnection())
 				{
