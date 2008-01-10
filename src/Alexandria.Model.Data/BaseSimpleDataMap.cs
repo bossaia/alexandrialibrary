@@ -42,10 +42,18 @@ namespace Telesophy.Alexandria.Model.Data
 		public BaseSimpleDataMap()
 		{
 		}
+		
+		public BaseSimpleDataMap(IPersistenceEngine engine) : base(engine)
+		{
+		}
 		#endregion
 		
 		#region Protected Methods
-		protected virtual IList<Model> GetList(string filter)
+		protected internal virtual void LoadChildren<T>(Model parent, IList<T> children) where T: IModel
+		{
+		}
+		
+		protected internal virtual IList<Model> GetList(string filter)
 		{
 			IList<Model> list = new List<Model>();
 
@@ -71,9 +79,9 @@ namespace Telesophy.Alexandria.Model.Data
 			return list;
 		}
 
-		protected abstract Model GetModelFromRow(DataRow row);
+		protected internal abstract Model GetModelFromRow(DataRow row);
 
-		protected abstract DataRow GetRowFromModel(Model model);
+		protected internal abstract DataRow GetRowFromModel(Model model);
 		#endregion
 		
 		#region Public Methods

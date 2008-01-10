@@ -38,10 +38,15 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetDataMap : BaseSimpleDataMap<IMediaSet>
 	{
 		#region Constructors
-		public MediaSetDataMap()
+		public MediaSetDataMap() : this(null, new MediaItemDataMap())
 		{
+		}
+		
+		public MediaSetDataMap(IPersistenceEngine engine, MediaItemDataMap mediaItemDataMap) : base(engine)
+		{
+			this.mediaItemDataMap = mediaItemDataMap;
+		
 			Table = new DataTable("MediaSet");
-
 			Table.Columns.Add("Id", typeof(Guid));
 			Table.Columns.Add("Source", typeof(string));
 			Table.Columns.Add("Type", typeof(string));
@@ -55,8 +60,42 @@ namespace Telesophy.Alexandria.Model.Data
 		}
 		#endregion
 		
+		#region Private Fields
+		private MediaSetContentDataMap mediaSetContentDataMap;
+		private MediaItemDataMap mediaItemDataMap;
+		#endregion
+
+		#region Private Properties
+		private MediaSetContentDataMap LinkMap
+		{
+			get
+			{
+				if (mediaSetContentDataMap == null)
+					mediaSetContentDataMap = new MediaSetContentDataMap(Engine, this, mediaItemDataMap);
+					
+				return mediaSetContentDataMap;
+			}
+		}
+		#endregion
+		
 		#region Protected Methods
-		protected override IMediaSet GetModelFromRow(DataRow row)
+		protected internal override void LoadChildren<T>(IMediaSet parent, IList<T> children)
+		{
+			if (parent != null && children != null)
+			{
+				if (typeof(T) == typeof(IMediaItem))
+				{
+					IList<IMediaItem> items = children as IList<IMediaItem>;
+					if (items != null)
+					{
+						foreach (IMediaItem item in items)
+							parent.Items.Add(item);
+					}
+				}
+			}
+		}
+		
+		protected internal override IMediaSet GetModelFromRow(DataRow row)
 		{
 			IMediaSet model = new Album();
 			
@@ -75,7 +114,7 @@ namespace Telesophy.Alexandria.Model.Data
 			return model;
 		}
 
-		protected override DataRow GetRowFromModel(IMediaSet model)
+		protected internal override DataRow GetRowFromModel(IMediaSet model)
 		{
 			DataRow row = Table.NewRow();
 			
@@ -92,6 +131,43 @@ namespace Telesophy.Alexandria.Model.Data
 			}
 			
 			return row;
+		}
+		#endregion		
+		
+		#region Public Methods
+		public override IMediaSet LookupModel(Guid id)
+		{
+			return LinkMap.LookupParentAndChildren(id);
+		}
+		
+		public override IList<IMediaSet> ListModels()
+		{
+			return LinkMap.ListParents();	
+		}
+
+		public override IList<IMediaSet> ListModels(string filter)
+		{
+			return LinkMap.ListParents(filter);
+		}
+		
+		public override void SaveModel(IMediaSet model)
+		{
+ 			SaveModel(model, false);
+		}
+		
+		public void SaveModel(IMediaSet model, bool cascade)
+		{
+			LinkMap.SaveParentAndChildren(model, cascade);
+		}
+
+		public override void DeleteModel(IMediaSet model)
+		{
+			DeleteModel(model, false);
+		}
+		
+		public void DeleteModel(IMediaSet model, bool cascade)
+		{
+			LinkMap.DeleteParentAndChildren(model, cascade);
 		}
 		#endregion
 	}

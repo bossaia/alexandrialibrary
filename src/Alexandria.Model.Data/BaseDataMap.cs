@@ -41,6 +41,11 @@ namespace Telesophy.Alexandria.Model.Data
 		public BaseDataMap()
 		{
 		}
+		
+		public BaseDataMap(IPersistenceEngine engine)
+		{
+			this.engine = engine;
+		}
 		#endregion
 		
 		#region Private Fields

@@ -11,10 +11,14 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetContentDataMap : BaseLinkDataMap<IMediaSet, IMediaItem>
 	{
 		#region Constructors
-		public MediaSetContentDataMap()
-			: base("MediaSetContent", new MediaSetDataMap(), "MediaSetId", new MediaItemDataMap(), "MediaItemId")
+		public MediaSetContentDataMap() : this(null, new MediaSetDataMap(), new MediaItemDataMap())
 		{
 		}
-		#endregion		
+		
+		public MediaSetContentDataMap(IPersistenceEngine engine, MediaSetDataMap mediaSetDataMap, MediaItemDataMap mediaItemDataMap)
+			: base(engine, "MediaSetContent", mediaSetDataMap, "MediaSetId", mediaItemDataMap, "MediaItemId")
+		{
+		}
+		#endregion
 	}
 }
