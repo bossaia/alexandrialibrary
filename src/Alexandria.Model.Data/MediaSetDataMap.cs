@@ -135,9 +135,9 @@ namespace Telesophy.Alexandria.Model.Data
 		#endregion		
 		
 		#region Public Methods
-		public override IMediaSet LookupModel(Guid id)
+		public IMediaSet LookupModel(Guid id, bool cascade)
 		{
-			return LinkMap.LookupParentAndChildren(id);
+			return LinkMap.LookupParentAndChildren(id, cascade);
 		}
 		
 		public override IList<IMediaSet> ListModels()
@@ -149,20 +149,10 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			return LinkMap.ListParents(filter);
 		}
-		
-		public override void SaveModel(IMediaSet model)
-		{
- 			SaveModel(model, false);
-		}
-		
+				
 		public void SaveModel(IMediaSet model, bool cascade)
 		{
 			LinkMap.SaveParentAndChildren(model, cascade);
-		}
-
-		public override void DeleteModel(IMediaSet model)
-		{
-			DeleteModel(model, false);
 		}
 		
 		public void DeleteModel(IMediaSet model, bool cascade)

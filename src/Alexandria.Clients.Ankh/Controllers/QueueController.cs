@@ -867,6 +867,21 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (handler != null)
 				selectedTrackChanged += handler;
 		}
+		
+		public IList<IMediaItem> GetSelectedItems()
+		{
+			IList<IMediaItem> list = new List<IMediaItem>();
+			
+			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
+			{
+				foreach(DataGridViewRow row in grid.SelectedRows)
+				{
+					list.Add(bindingList[row.Index]);
+				}
+			}
+			
+			return list;
+		}
 		#endregion
 	}
 }

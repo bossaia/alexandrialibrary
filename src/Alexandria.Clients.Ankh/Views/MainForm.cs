@@ -1598,6 +1598,44 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			CancelAllTasks();
 		}
 		#endregion
+
+		#region Tool Methods
+		private void toolManagerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			bool testAdd = false;
+			bool testDelete = false;
+			
+			if (testAdd)
+			{
+				if (queueDataGrid.Rows.Count > 0)
+				{
+					Album playlist = new Album();
+					playlist.Id = Guid.NewGuid();
+					playlist.Artist = "Various Artists";
+					playlist.Date = DateTime.Now;
+					playlist.Number = 1;
+					playlist.Path = new Uri(@"playlist:///Sample%20Playlist");
+					playlist.Source = ControllerConstants.SOURCE_CATALOG;
+					playlist.Title = "Sample Playlist";
+					playlist.Type = "Playlist";
+					
+					IList<IMediaItem> items = queueController.GetSelectedItems();
+					foreach(IMediaItem item in items)
+						playlist.Items.Add(item);
+						
+					persistenceController.SaveMediaSet(playlist, false);
+				}
+			}
+			
+			if (testDelete)
+			{
+				Guid id = new Guid("6159e428-4713-4133-b1dd-7b28fd835e94");
+				IMediaSet set = persistenceController.LookupMediaSet(id);
+				if (set != null && set.Items.Count > 0)
+					persistenceController.DeleteMediaSet(set);
+			}
+		}
+		#endregion
 		
 		#endregion
 	}
