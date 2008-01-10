@@ -26,18 +26,22 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
 	public interface IPersistenceEngine
 	{
-		IDbConnection GetConnection();
 		IDataReader GetDataReader(DataTable dataTable, Guid id);
 		void CreateTable(DataTable dataTable);
 		void FillTable(DataTable dataTable, Guid id);
 		void FillTable(DataTable dataTable, string filter);
 		void SaveRow(DataRow dataRow);
+		void SaveRows(DataTable dataTable, Guid id);
+		void SaveRows(DataTable dataTable, Guid id, IList<DataRow> childRows);
 		void DeleteRow(DataRow dataRow);
+		void DeleteRows(DataTable dataTable);
+		void DeleteRows(DataTable dataTable, IList<DataRow> childRows);
 	}
 }

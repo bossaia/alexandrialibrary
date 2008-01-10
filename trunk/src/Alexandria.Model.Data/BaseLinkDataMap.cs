@@ -40,7 +40,11 @@ namespace Telesophy.Alexandria.Model.Data
 		where Child: IModel
 	{
 		#region Constructors
-		public BaseLinkDataMap(string tableName, BaseSimpleDataMap<Parent> parentMap, string parentIdColumn, BaseSimpleDataMap<Child> childMap, string childIdColumn)
+		public BaseLinkDataMap(string tableName, BaseSimpleDataMap<Parent> parentMap, string parentIdColumn, BaseSimpleDataMap<Child> childMap, string childIdColumn) : this(null, tableName, parentMap, parentIdColumn, childMap, childIdColumn)
+		{
+		}
+		
+		public BaseLinkDataMap(IPersistenceEngine engine, string tableName, BaseSimpleDataMap<Parent> parentMap, string parentIdColumn, BaseSimpleDataMap<Child> childMap, string childIdColumn) : base(engine)
 		{
 			Table = new DataTable(tableName);
 			Table.Columns.Add(parentIdColumn, typeof(Guid));
@@ -75,31 +79,21 @@ namespace Telesophy.Alexandria.Model.Data
 		}
 		#endregion
 		
-		#region Protected Methods		
-		protected virtual IList<Child> GetChildList(Parent parent)
+		#region Protected Methods
+		protected virtual void LoadChildren(Parent parent)
 		{
-			IList<Child> list = new List<Child>();
-		
-			if (parent != null)
-			{
-				Engine.FillTable(Table, parent.Id);
-				foreach(DataRow row in Table.Rows)
-				{
-					Guid childId = GetValue<Guid>(row[childIdColumn]);
-					if (childId != default(Guid))
-					{
-						Child child = ChildMap.LookupModel(childId);
-						if (child != null)
-						{
-							list.Add(child);
-						}
-					}
-				}
-			}
-			
-			return list;
+			IList<Child> children = ListChildren(parent);
+			ParentMap.LoadChildren<Child>(parent, children);
 		}
-
+		
+		protected virtual void LoadChildren(IList<Parent> parents)
+		{
+			foreach (Parent parent in parents)
+			{
+				LoadChildren(parent);
+			}
+		}
+		
 		protected virtual Parent GetParentFromRow(DataRow row)
 		{
 			if (row != null)
@@ -141,6 +135,119 @@ namespace Telesophy.Alexandria.Model.Data
 			if (row != null && child != null)
 			{
 				row[childIdColumn] = child.Id;
+			}
+		}
+		#endregion
+		
+		#region Public Methods
+		public virtual Parent LookupParentAndChildren(Guid id)
+		{
+			Parent parent = ParentMap.LookupModel(id);
+			
+			if (parent != null)
+			{
+				LoadChildren(parent);
+			}
+			
+			return parent;
+		}
+		
+		public virtual IList<Parent> ListParents()
+		{
+			IList<Parent> parents = ParentMap.ListModels();
+			
+			LoadChildren(parents);
+			
+			return parents;
+		}
+		
+		public virtual IList<Parent> ListParents(string filter)
+		{
+			IList<Parent> parents = ParentMap.ListModels(filter);
+			
+			LoadChildren(parents);
+			
+			return parents;
+		}
+		
+		public virtual IList<Child> ListChildren(Parent parent)
+		{
+			IList<Child> list = new List<Child>();
+
+			if (parent != null)
+			{
+				Engine.FillTable(Table, parent.Id);
+				foreach (DataRow row in Table.Rows)
+				{
+					Guid childId = GetValue<Guid>(row[childIdColumn]);
+					if (childId != default(Guid))
+					{
+						Child child = ChildMap.LookupModel(childId);
+						if (child != null)
+						{
+							list.Add(child);
+						}
+					}
+				}
+			}
+
+			return list;
+		}
+		
+		public void SaveParentAndChildren(Parent parent, bool cascade)
+		{
+			if (parent != null)
+			{
+				ParentMap.SaveModel(parent);
+				SaveChildren(parent, cascade);
+			}
+		}
+		
+		public void SaveChildren(Parent parent, bool cascade)
+		{
+			if (parent != null)
+			{
+				IList<DataRow> childRows = null;
+				if (cascade)
+				{
+					IList<Child> children = ListChildren(parent);
+					foreach(Child child in children)
+					{
+						DataRow childRow = ChildMap.GetRowFromModel(child);
+						childRows.Add(childRow);
+					}	
+				}
+			
+				Engine.FillTable(Table, parent.Id);
+				Engine.SaveRows(Table, parent.Id, childRows);
+			}
+		}
+		
+		public void DeleteParentAndChildren(Parent parent, bool cascade)
+		{
+			if (parent != null)
+			{
+				ParentMap.DeleteModel(parent);
+				DeleteChildren(parent, cascade);
+			}
+		}
+		
+		public void DeleteChildren(Parent parent, bool cascade)
+		{
+			if (parent != null)
+			{
+				IList<DataRow> childRows = null;
+				if (cascade)
+				{
+					IList<Child> children = ListChildren(parent);
+					foreach (Child child in children)
+					{
+						DataRow childRow = ChildMap.GetRowFromModel(child);
+						childRows.Add(childRow);
+					}				
+				}
+			
+				Engine.DeleteRows(Table, childRows);
 			}
 		}
 		#endregion

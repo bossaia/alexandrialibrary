@@ -35,7 +35,7 @@ using System.Text;
 
 using Telesophy.Alexandria.Persistence;
 
-namespace Alexandria.Persistence.SQLite
+namespace Telesophy.Alexandria.Persistence.SQLite
 {
 	public class SQLiteEngine : IPersistenceEngine
 	{
@@ -96,7 +96,7 @@ namespace Alexandria.Persistence.SQLite
 		{
 			return new System.Data.SQLite.SQLiteConnection(GetConnectionString());
 		}
-
+		
 		private string GetColumnTypeName(Type type)
 		{
 			string name = "TEXT";
@@ -288,6 +288,58 @@ namespace Alexandria.Persistence.SQLite
 				}
 			}
 		}
+
+		private void SaveRow(DataRow row, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			SQLiteCommand cmd = new SQLiteCommand();
+
+			string format = "REPLACE INTO {0} ({1}) VALUES ({2})";
+
+			StringBuilder columns = new StringBuilder();
+			StringBuilder values = new StringBuilder();
+
+			for (int i = 0; i < row.Table.Columns.Count; i++)
+			{
+				if (i > 0)
+				{
+					columns.Append(", ");
+					values.Append(", ");
+				}
+
+				string paramName = string.Format("@{0}", i);
+				DataColumn col = row.Table.Columns[i];
+				columns.Append(col.ColumnName);
+				values.Append(paramName);
+
+				cmd.Parameters.Add(new SQLiteParameter(paramName, GetValue(row, i)));
+			}
+
+			cmd.CommandText = string.Format(format, row.Table.TableName, columns, values);
+			cmd.Connection = connection;
+			cmd.Transaction = transaction;
+			cmd.ExecuteNonQuery();
+		}
+		
+		private void DeleteRow(DataRow row, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			if (row != null)
+			{
+				string format = "DELETE FROM {0} WHERE {1} = '{2}'";
+				string idColumn = row.Table.PrimaryKey[0].ColumnName;
+				string commandText = string.Format(format, row.Table.TableName, idColumn, row[idColumn]);
+
+				SQLiteCommand cmd = new SQLiteCommand(commandText, connection, transaction);
+				cmd.ExecuteNonQuery();
+			}
+		}
+		
+		private void DeleteExistingRows(DataTable dataTable, Guid id, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			string columnName = dataTable.Columns[0].ColumnName;
+			string commandText = string.Format("DELETE FROM {0} WHERE {1} = '{2}'", dataTable.TableName, columnName, id);
+			SQLiteCommand cmd = new SQLiteCommand(commandText, connection, transaction);
+			cmd.ExecuteNonQuery();
+		}
 		#endregion
 
 		#region IPersistenceEngine Members
@@ -364,51 +416,120 @@ namespace Alexandria.Persistence.SQLite
 
 		public void SaveRow(DataRow row)
 		{
-			SQLiteCommand cmd = new SQLiteCommand();
-
-			string format = "REPLACE INTO {0} ({1}) VALUES ({2})";
-
-			StringBuilder columns = new StringBuilder();
-			StringBuilder values = new StringBuilder();
-
-			for (int i = 0; i < row.Table.Columns.Count; i++)
+			if (row != null)
 			{
-				if (i > 0)
+				using (SQLiteConnection connection = GetSQLiteConnection())
 				{
-					columns.Append(", ");
-					values.Append(", ");
+					connection.Open();
+					SaveRow(row, connection, null);
 				}
-
-				string paramName = string.Format("@{0}", i);
-				DataColumn col = row.Table.Columns[i];
-				columns.Append(col.ColumnName);
-				values.Append(paramName);
-
-				cmd.Parameters.Add(new SQLiteParameter(paramName, GetValue(row, i)));
 			}
+		}
 
-			cmd.CommandText = string.Format(format, row.Table.TableName, columns, values);
+		public void SaveRows(DataTable dataTable, Guid id)
+		{
+			SaveRows(dataTable, id, null);
+		}
 
-			using (SQLiteConnection connection = GetSQLiteConnection())
+		public void SaveRows(DataTable dataTable, Guid id, IList<DataRow> childRows)
+		{
+			if (dataTable != null)
 			{
-				connection.Open();
-				cmd.Connection = connection;
-				cmd.ExecuteNonQuery();
+				using (SQLiteConnection connection = GetSQLiteConnection())
+				{
+					SQLiteTransaction transaction = null;
+					
+					try
+					{
+						connection.Open();
+						transaction = connection.BeginTransaction();
+						
+						DeleteExistingRows(dataTable, id, connection, transaction);
+						
+						foreach (DataRow row in dataTable.Rows)
+						{
+							SaveRow(row, connection, transaction);
+						}
+						
+						if (childRows != null && childRows.Count > 0)
+						{
+							foreach (DataRow childRow in childRows)
+							{
+								SaveRow(childRow, connection, transaction);
+							}
+						}
+						
+						transaction.Commit();
+					}
+					catch
+					{
+						if (transaction != null)
+						{
+							transaction.Rollback();
+						}
+						
+						throw;
+					}
+				}
 			}
 		}
 
 		public void DeleteRow(DataRow row)
 		{
-			string format = "DELETE FROM {0} WHERE {1} = '{2}'";
-			string idColumn = row.Table.PrimaryKey[0].ColumnName;
-			string commandText = string.Format(format, row.Table.TableName, idColumn, row[idColumn]);
-
-			using (SQLiteConnection connection = GetSQLiteConnection())
+			if (row != null)
 			{
-				connection.Open();
-				SQLiteCommand cmd = new SQLiteCommand(commandText, connection);
-				cmd.ExecuteNonQuery();
+				using (SQLiteConnection connection = GetSQLiteConnection())
+				{
+					connection.Open();
+					DeleteRow(row, connection, null);
+				}
 			}
+		}
+		
+		public void DeleteRows(DataTable dataTable)
+		{
+			DeleteRows(dataTable, null);
+		}
+		
+		public void DeleteRows(DataTable dataTable, IList<DataRow> childRows)
+		{
+			if (dataTable != null)
+			{
+				using (SQLiteConnection connection = GetSQLiteConnection())
+				{
+					SQLiteTransaction transaction = null;
+
+					try
+					{
+						connection.Open();
+						transaction = connection.BeginTransaction();
+							
+						foreach (DataRow row in dataTable.Rows)
+						{
+							DeleteRow(row, connection, transaction);
+						}
+						
+						if (childRows != null && childRows.Count > 0)
+						{
+							foreach(DataRow childRow in childRows)
+							{
+								DeleteRow(childRow, connection, transaction);
+							}
+						}
+						
+						transaction.Commit();
+					}
+					catch
+					{
+						if (transaction != null)
+						{
+							transaction.Rollback();
+						}
+
+						throw;
+					}
+				}
+			}			
 		}
 		#endregion
 	}

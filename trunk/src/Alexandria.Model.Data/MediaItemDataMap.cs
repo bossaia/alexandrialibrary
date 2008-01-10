@@ -37,7 +37,11 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaItemDataMap : BaseSimpleDataMap<IMediaItem>
 	{
 		#region Constructors
-		public MediaItemDataMap()
+		public MediaItemDataMap() : this(null)
+		{
+		}
+		
+		public MediaItemDataMap(IPersistenceEngine engine) : base(engine)
 		{
 			Table = new DataTable("MediaItem");
 			Table.Columns.Add("Id", typeof(Guid));
@@ -57,7 +61,7 @@ namespace Telesophy.Alexandria.Model.Data
 		#endregion
 
 		#region Protected Methods
-		protected override IMediaItem GetModelFromRow(DataRow row)
+		protected internal override IMediaItem GetModelFromRow(DataRow row)
 		{
 			IMediaItem model = new AudioTrack();
 
@@ -79,7 +83,7 @@ namespace Telesophy.Alexandria.Model.Data
 			return model;
 		}
 
-		protected override DataRow GetRowFromModel(IMediaItem model)
+		protected internal override DataRow GetRowFromModel(IMediaItem model)
 		{
 			DataRow row = Table.NewRow();
 
