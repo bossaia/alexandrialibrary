@@ -137,14 +137,45 @@ namespace Telesophy.Alexandria.Model.Data
 				row[childIdColumn] = child.Id;
 			}
 		}
+		
+		protected virtual void SaveLinks(Parent parent)
+		{
+			IList<Child> children = GetCurrentChildren(parent);
+		
+			if (parent != null && children != null && children.Count > 0)
+			{
+				foreach(Child child in children)
+				{
+					DataRow row = Table.NewRow();
+					
+					FillRowForParent(row, parent);
+					FillRowForChild(row, child);
+					
+					Engine.SaveRow(row);
+					
+					row.Delete();
+				}
+			}
+		}
+
+		protected virtual void DeleteLinks(Parent parent)
+		{
+			if (parent != null)
+			{
+				Engine.FillTable(Table, parent.Id);
+				Engine.DeleteRows(Table);
+			}
+		}
+		
+		protected abstract IList<Child> GetCurrentChildren(Parent parent);
 		#endregion
 		
 		#region Public Methods
-		public virtual Parent LookupParentAndChildren(Guid id)
+		public virtual Parent LookupParentAndChildren(Guid id, bool cascade)
 		{
 			Parent parent = ParentMap.LookupModel(id);
 			
-			if (parent != null)
+			if (parent != null && cascade)
 			{
 				LoadChildren(parent);
 			}
@@ -199,6 +230,7 @@ namespace Telesophy.Alexandria.Model.Data
 			if (parent != null)
 			{
 				ParentMap.SaveModel(parent);
+				SaveLinks(parent);
 				SaveChildren(parent, cascade);
 			}
 		}
@@ -228,6 +260,7 @@ namespace Telesophy.Alexandria.Model.Data
 			if (parent != null)
 			{
 				ParentMap.DeleteModel(parent);
+				DeleteLinks(parent);
 				DeleteChildren(parent, cascade);
 			}
 		}

@@ -20,5 +20,14 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 		}
 		#endregion
+		
+		#region Protected Methods
+		protected override IList<IMediaItem> GetCurrentChildren(IMediaSet parent)
+		{
+			if (parent != null)
+				return parent.Items;
+			else return null;
+		}
+		#endregion
 	}
 }

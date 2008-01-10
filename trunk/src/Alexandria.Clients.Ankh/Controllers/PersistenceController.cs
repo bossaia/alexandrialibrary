@@ -51,7 +51,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
-			return mediaSetDataMap.LookupModel(id);
+			return mediaSetDataMap.LookupModel(id, true);
 		}
 		
 		public void SaveMediaSet(IMediaSet model, bool cascade)

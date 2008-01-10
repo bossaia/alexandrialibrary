@@ -160,7 +160,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 				sql.AppendFormat("SELECT * FROM {0}", table.TableName);
 				if (id != default(Guid))
 				{
-					sql.AppendFormat(" WHERE {1} = @Id", table.PrimaryKey[0].ColumnName);
+					sql.AppendFormat(" WHERE {0} = @Id", table.PrimaryKey[0].ColumnName);
 					command.Parameters.Add(new SQLiteParameter("@Id", id.ToString()));
 				}
 
