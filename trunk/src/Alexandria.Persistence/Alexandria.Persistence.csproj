@@ -33,7 +33,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandType.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IEngine.cs" />
+    <Compile Include="IMap.cs" />
     <Compile Include="IPersistenceEngine.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="IResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
