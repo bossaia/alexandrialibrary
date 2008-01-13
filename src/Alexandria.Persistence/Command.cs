@@ -27,19 +27,49 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ICommand
+	public class Command<Model> : ICommand<Model>
 	{
-		string Text { get; }
-		CommandType Type { get; }
-	}
+		#region Constructors
+		public Command(IMap<Model> map, CommandType type, string text)
+		{
+			this.map = map;
+			this.type = type;
+			this.text = text;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string text;
+		private CommandType type;
+		private IMap<Model> map;
+		private List<ICommand> additionalCommands = new List<ICommand>();
+		#endregion
 	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		#region ICommand Members
+		public string Text
+		{
+			get { return text; }
+		}
+
+		public CommandType Type
+		{
+			get { return type; }
+		}
+		#endregion
+	
+		#region ICommand<Model> Members
+		public IList<ICommand> AdditionalCommands
+		{
+			get { return additionalCommands; }
+		}
+
+		public IMap<Model> Map
+		{
+			get { return map; }
+		}
+		#endregion
 	}
 }

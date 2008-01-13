@@ -27,19 +27,41 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ICommand
+	public class Option : IOption
 	{
-		string Text { get; }
-		CommandType Type { get; }
-	}
-	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		#region Constructor
+		public Option()
+		{
+			this.values = new Dictionary<Field, object>();
+		}
+		
+		public Option(IDictionary<Field, object> values)
+		{
+			this.values = values;
+		}
+		#endregion
+
+		#region Private Fields
+		private IDictionary<Field, object> values;
+		#endregion
+
+		#region IOption Members
+		public IDictionary<Field, object> Values
+		{
+			get { return values; }
+		}
+		#endregion
+		
+		#region Static Members
+		private static Option empty = new Option();
+		
+		public static Option Empty
+		{
+			get { return empty; }
+		}
+		#endregion
 	}
 }
