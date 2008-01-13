@@ -33,14 +33,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cardinality.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="CommandType.cs" />
+    <Compile Include="ConstraintType.cs" />
+    <Compile Include="Field.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IConstraint.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="IMap.cs" />
+    <Compile Include="IOption.cs" />
     <Compile Include="IPersistenceEngine.cs" />
+    <Compile Include="IRelationship.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IResult.cs" />
+    <Compile Include="ISchema.cs" />
+    <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relationship.cs" />
+    <Compile Include="ResultData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

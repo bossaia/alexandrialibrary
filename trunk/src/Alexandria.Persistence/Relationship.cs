@@ -27,19 +27,41 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ICommand
+	public class Relationship : IRelationship
 	{
-		string Text { get; }
-		CommandType Type { get; }
-	}
+		#region Constructors
+		public Relationship(string name, Type type, Cardinality cardinality)
+		{
+			this.name = name;
+			this.type = type;
+			this.cardinality = cardinality;
+		}
+		#endregion
 	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		#region Private Fields
+		private string name;
+		private Type type;
+		private Cardinality cardinality;
+		#endregion
+	
+		#region IRelationship Members
+		public string Name
+		{
+			get { return name; }
+		}
+
+		public Type Type
+		{
+			get { return type; }
+		}
+
+		public Cardinality Cardinality
+		{
+			get { return cardinality; }
+		}
+		#endregion
 	}
 }

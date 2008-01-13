@@ -27,19 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ICommand
+	public interface ISchema
 	{
-		string Text { get; }
-		CommandType Type { get; }
-	}
-	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		string Name { get; }
+		IDictionary<string, Field> Fields { get; }
+		IDictionary<string, IConstraint> Constraints { get; }
+		IDictionary<string, IRelationship> Relationships { get; }
 	}
 }

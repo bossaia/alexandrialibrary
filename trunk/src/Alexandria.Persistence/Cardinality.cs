@@ -27,19 +27,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ICommand
+	public enum Cardinality
 	{
-		string Text { get; }
-		CommandType Type { get; }
-	}
-	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		OneToOne,
+		OneToMany,
+		ManyToMany
 	}
 }
