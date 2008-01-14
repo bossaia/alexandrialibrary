@@ -32,6 +32,7 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IEngine
 	{
+		ICommand CreateCommand(IMap map, IList<Filter> filters, CommandType type);
 		ICommand<Model> CreateCommand<Model>(IMap<Model> map, IList<Filter> filters, CommandType type);
 		IResult<Model> ExecuteCommand<Model>(ICommand<Model> command);
 	}
