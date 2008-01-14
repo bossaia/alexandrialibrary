@@ -33,11 +33,13 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Relationship
 	{
 		#region Constructors
-		public Relationship(string name, Type dataType, RelationshipType type)
+		public Relationship(string name, Type dataType, RelationshipType type, string parentFieldName, string childFieldName)
 		{
 			this.name = name;
 			this.dataType = dataType;
 			this.type = type;
+			this.parentFieldName = parentFieldName;
+			this.childFieldName = childFieldName;
 		}
 		#endregion
 	
@@ -45,6 +47,8 @@ namespace Telesophy.Alexandria.Persistence
 		private string name;
 		private Type dataType;
 		private RelationshipType type;
+		private string parentFieldName;
+		private string childFieldName;
 		#endregion
 	
 		#region Public Properties
@@ -61,6 +65,16 @@ namespace Telesophy.Alexandria.Persistence
 		public RelationshipType Type
 		{
 			get { return type; }
+		}
+		
+		public string ParentFieldName
+		{
+			get { return parentFieldName; }
+		}
+		
+		public string ChildFieldName
+		{
+			get { return childFieldName; }
 		}
 		#endregion
 	}

@@ -56,5 +56,23 @@ namespace Telesophy.Alexandria.Persistence
 			get { return values; }
 		}
 		#endregion
+		
+		#region Public Methods
+		public void AddField(Field field)
+		{
+			if (!fields.ContainsKey(field.Name))
+			{
+				fields.Add(field.Name, field);
+			}
+		}
+		
+		public void AddValueRow(IList<object> valueRow)
+		{
+			if (valueRow != null)
+			{
+				values.Add(valueRow);
+			}
+		}
+		#endregion
 	}
 }
