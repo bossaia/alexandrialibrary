@@ -30,10 +30,53 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public enum Cardinality
+	public struct Constraint
 	{
-		OneToOne,
-		OneToMany,
-		ManyToMany
+		#region Constructors
+		public Constraint(string name, ConstraintType type, params Field[] fields) : this(name, type, null, fields)
+		{
+		}
+		
+		public Constraint(string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
+		{
+			this.name = name;
+			this.type = type;
+
+			this.fields = new List<Field>();
+			foreach (Field field in fields)
+				this.fields.Add(field);
+
+			this.predicate = predicate;
+		}
+		#endregion
+	
+		#region Private Fields
+		private string name;
+		private ConstraintType type;
+		private IList<Field> fields;
+		private Predicate<object> predicate;
+		#endregion
+	
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+
+		public ConstraintType Type
+		{
+			get { return type; }
+		}
+
+		public IList<Field> Fields
+		{
+			get { return fields; }
+		}
+
+		public Predicate<object> Predicate
+		{
+			get { return predicate; }
+		}
+		#endregion
 	}
 }

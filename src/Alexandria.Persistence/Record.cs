@@ -30,17 +30,67 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IResult
+	public class Record : IRecord
 	{
-		IList<IResult> AdditionalResults { get; }
-		Exception Error { get; }
-		bool IsSuccessful { get; }
-		int RecordsAffected { get; }
-		MappedData Data { get; }
-	}
+		#region Constructors
+		public Record(string name, ISchema schema)
+		{
+			this.name = name;
+			this.schema = schema;
+		}
+		#endregion
 	
-	public interface IResult<Model> : IResult
-	{
-		IMap<Model> Map { get; }
+		#region Private Fields
+		private string name;
+		private ISchema schema;
+		private Dictionary<string, Field> fields = new Dictionary<string,Field>();
+		private Dictionary<string, Constraint> constraints = new Dictionary<string, Constraint>();
+		private Dictionary<string, Relationship> relationships = new Dictionary<string, Relationship>();
+		#endregion
+	
+		#region IRecord Members
+		public string Name
+		{
+			get { return name; }
+		}
+
+		public ISchema Schema
+		{
+			get { return schema; }
+		}
+
+		public IDictionary<string, Field> Fields
+		{
+			get { return fields; }
+		}
+
+		public IDictionary<string, Constraint> Constraints
+		{
+			get { return constraints; }
+		}
+
+		public IDictionary<string, Relationship> Relationships
+		{
+			get { return relationships; }
+		}
+
+		public void AddField(Field field)
+		{
+			if (!fields.ContainsKey(field.Name))
+				fields.Add(field.Name, field);
+		}
+
+		public void AddConstraint(Constraint constraint)
+		{
+			if (!constraints.ContainsKey(constraint.Name))
+				constraints.Add(constraint.Name, constraint);
+		}
+
+		public void AddRelationship(Relationship relationship)
+		{
+			if (!relationships.ContainsKey(relationship.Name))
+				relationships.Add(relationship.Name, relationship);
+		}
+		#endregion
 	}
 }

@@ -30,17 +30,15 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IResult
+	public interface IRecord
 	{
-		IList<IResult> AdditionalResults { get; }
-		Exception Error { get; }
-		bool IsSuccessful { get; }
-		int RecordsAffected { get; }
-		MappedData Data { get; }
-	}
-	
-	public interface IResult<Model> : IResult
-	{
-		IMap<Model> Map { get; }
+		string Name { get; }
+		ISchema Schema { get; }
+		IDictionary<string, Field> Fields { get; }
+		IDictionary<string, Constraint> Constraints { get; }
+		IDictionary<string, Relationship> Relationships { get; }
+		void AddField(Field field);
+		void AddConstraint(Constraint constraint);
+		void AddRelationship(Relationship relationship);
 	}
 }

@@ -33,8 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public interface ISchema
 	{
 		string Name { get; }
-		IDictionary<string, Field> Fields { get; }
-		IDictionary<string, IConstraint> Constraints { get; }
-		IDictionary<string, IRelationship> Relationships { get; }
+		IDictionary<string, IRecord> Records { get; }
+		void AddRecord(IRecord record);
 	}
 }

@@ -27,14 +27,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IRelationship
+	public enum RelationshipType
 	{
-		string Name { get; }
-		Type Type { get; }
-		Cardinality Cardinality { get; }
+		OneToOne,
+		OneToMany,
+		ManyToMany
 	}
 }

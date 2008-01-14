@@ -32,14 +32,15 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IMap
 	{
-		ISchema Schema { get; }
-		Type Type { get; }
+		IRecord Record { get; }
+		Type DataType { get; }
 	}
 
 	public interface IMap<Model> : IMap
 	{
-		IOption GetOption(Model model);
-		Model GetModel(IResult result);
-		IList<Model> GetModels(IResult result);
+		MappedData GetData(Model model);
+		Model GetModel(MappedData data);
+		IList<Model> GetModels(MappedData data);
+		void LoadRelationship(Relationship relationship, MappedData data);
 	}
 }

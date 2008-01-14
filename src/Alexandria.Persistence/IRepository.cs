@@ -35,8 +35,8 @@ namespace Telesophy.Alexandria.Persistence
 		IEngine Engine { get; set; }
 		void Initialize();
 		Model Lookup<Model>(Guid id);
-		Model Lookup<Model>(IOption option);
-		IList<Model> List<Model>(IOption option);
+		Model Lookup<Model>(IList<Filter> filters);
+		IList<Model> List<Model>(IList<Filter> filters);
 		void Save<Model>(Model model);
 		void Delete<Model>(Model model);
 	}
