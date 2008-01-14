@@ -372,7 +372,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 					createTableText.AppendFormat(columnFormat, table.Columns[columnNumber].ColumnName, GetColumnTypeName(table.Columns[columnNumber].DataType));
 				}
 				
-				foreach(Constraint constraint in table.Constraints)
+				foreach(System.Data.Constraint constraint in table.Constraints)
 				{
 					if (constraint is UniqueConstraint)
 					{
