@@ -30,37 +30,37 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Relationship : IRelationship
+	public struct Relationship
 	{
 		#region Constructors
-		public Relationship(string name, Type type, Cardinality cardinality)
+		public Relationship(string name, Type dataType, RelationshipType type)
 		{
 			this.name = name;
+			this.dataType = dataType;
 			this.type = type;
-			this.cardinality = cardinality;
 		}
 		#endregion
 	
 		#region Private Fields
 		private string name;
-		private Type type;
-		private Cardinality cardinality;
+		private Type dataType;
+		private RelationshipType type;
 		#endregion
 	
-		#region IRelationship Members
+		#region Public Properties
 		public string Name
 		{
 			get { return name; }
 		}
 
-		public Type Type
+		public Type DataType
 		{
-			get { return type; }
+			get { return dataType; }
 		}
 
-		public Cardinality Cardinality
+		public RelationshipType Type
 		{
-			get { return cardinality; }
+			get { return type; }
 		}
 		#endregion
 	}

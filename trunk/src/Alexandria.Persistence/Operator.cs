@@ -30,31 +30,16 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct ResultData
+	public enum Operator
 	{
-		#region Constructors
-		public ResultData(IDictionary<string, Field> fields, IList<IList<object>> values)
-		{
-			this.fields = fields;
-			this.values = values;
-		}
-		#endregion
-		
-		#region Private Fields
-		private IDictionary<string, Field> fields;
-		private IList<IList<object>> values;
-		#endregion
-		
-		#region Public Properties
-		public IDictionary<string, Field> Fields
-		{
-			get { return fields; }
-		}
-		
-		public IList<IList<object>> Values
-		{
-			get { return values; }
-		}
-		#endregion
+		EqualTo,
+		NotEqualTo,
+		Like,
+		MatchesRegex,
+		GreaterThan,
+		GreaterThanOrEqualTo,
+		LessThan,
+		LessThanOrEqualTo,
+		ContainedIn
 	}
 }

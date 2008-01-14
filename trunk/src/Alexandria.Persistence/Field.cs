@@ -33,24 +33,24 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Field
 	{
 		#region Constructors
-		public Field(ISchema schema, string name, Type type)
+		public Field(IRecord record, string name, Type dataType)
 		{
-			this.schema = schema;
+			this.record = record;
 			this.name = name;
-			this.type = type;
+			this.dataType = dataType;
 		}
 		#endregion
 	
 		#region Private Fields
-		private ISchema schema;
+		private IRecord record;
 		private string name;
-		private Type type;
+		private Type dataType;
 		#endregion
 		
 		#region Public Properties
-		public ISchema Schema
+		public IRecord Record
 		{
-			get { return schema; }
+			get { return record; }
 		}
 		
 		public string Name
@@ -58,9 +58,9 @@ namespace Telesophy.Alexandria.Persistence
 			get { return name; }
 		}
 		
-		public Type Type
+		public Type DataType
 		{
-			get { return type; }
+			get { return dataType; }
 		}
 		#endregion
 	}

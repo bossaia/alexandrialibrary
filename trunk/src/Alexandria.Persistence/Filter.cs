@@ -30,38 +30,38 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Option : IOption
+	public class Filter
 	{
 		#region Constructor
-		public Option()
+		public Filter(Field field, Operator op, object value)
 		{
-			this.values = new Dictionary<Field, object>();
-		}
-		
-		public Option(IDictionary<Field, object> values)
-		{
-			this.values = values;
-		}
+			this.field = field;
+			this.op = op;
+			this.value = value;
+		}		
 		#endregion
 
 		#region Private Fields
-		private IDictionary<Field, object> values;
+		private Field field;
+		private Operator op;
+		private object value;
 		#endregion
 
-		#region IOption Members
-		public IDictionary<Field, object> Values
+		#region Public Properties
+		public Field Field
 		{
-			get { return values; }
+			get { return field; }
 		}
-		#endregion
 		
-		#region Static Members
-		private static Option empty = new Option();
-		
-		public static Option Empty
+		public Operator Operator
 		{
-			get { return empty; }
+			get { return op; }
 		}
-		#endregion
+		
+		public object Value
+		{
+			get { return value; }
+		}
+		#endregion		
 	}
 }
