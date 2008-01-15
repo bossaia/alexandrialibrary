@@ -30,66 +30,87 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Record : IRecord
+	public struct Record
 	{
 		#region Constructors
-		public Record(string name, ISchema schema)
+		public Record(string name, Schema schema, IList<Field> fields, IList<Constraint> constraints)
 		{
 			this.name = name;
 			this.schema = schema;
+			this.fields = new Dictionary<string, Field>();
+			this.constraints = new Dictionary<string, Constraint>();
+			
+			if (fields != null)
+			{
+				foreach (Field field in fields)
+				{
+					if (!this.fields.ContainsKey(field.Name))
+						this.fields.Add(field.Name, field);
+				}
+			}
+			
+			if (constraints != null)
+			{
+				foreach (Constraint constraint in constraints)
+				{
+					if (!this.constraints.ContainsKey(constraint.Name))
+						this.constraints.Add(constraint.Name, constraint);
+				}
+			}
 		}
 		#endregion
 	
 		#region Private Fields
 		private string name;
-		private ISchema schema;
-		private Dictionary<string, Field> fields = new Dictionary<string,Field>();
-		private Dictionary<string, Constraint> constraints = new Dictionary<string, Constraint>();
-		private Dictionary<string, Relationship> relationships = new Dictionary<string, Relationship>();
+		private Schema schema;
+		private Dictionary<string, Field> fields;
+		private Dictionary<string, Constraint> constraints;
 		#endregion
 	
-		#region IRecord Members
+		#region Public Properties
 		public string Name
 		{
 			get { return name; }
 		}
 
-		public ISchema Schema
+		public Schema Schema
 		{
 			get { return schema; }
 		}
 
-		public IDictionary<string, Field> Fields
+		public ICollection<Field> Fields
 		{
-			get { return fields; }
+			get { return (ICollection<Field>)fields.Values; }
 		}
 
-		public IDictionary<string, Constraint> Constraints
+		public ICollection<Constraint> Constraints
 		{
-			get { return constraints; }
+			get { return (ICollection<Constraint>)constraints.Values; }
+		}
+		#endregion
+
+		#region Public Methods
+		public Field GetField(string name)
+		{
+			if (fields.ContainsKey(name))
+				return fields[name];
+			else return Field.Empty;
 		}
 
-		public IDictionary<string, Relationship> Relationships
+		public Constraint GetConstraint(string name)
 		{
-			get { return relationships; }
+			if (constraints.ContainsKey(name))
+				return constraints[name];
+			else return Constraint.Empty;
 		}
-
-		public void AddField(Field field)
+		#endregion
+		
+		#region Static Members
+		private static Record empty = new Record();
+		
+		public static Record Empty
 		{
-			if (!fields.ContainsKey(field.Name))
-				fields.Add(field.Name, field);
-		}
-
-		public void AddConstraint(Constraint constraint)
-		{
-			if (!constraints.ContainsKey(constraint.Name))
-				constraints.Add(constraint.Name, constraint);
-		}
-
-		public void AddRelationship(Relationship relationship)
-		{
-			if (!relationships.ContainsKey(relationship.Name))
-				relationships.Add(relationship.Name, relationship);
+			get { return empty; }
 		}
 		#endregion
 	}
