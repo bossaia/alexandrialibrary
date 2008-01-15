@@ -33,7 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Field
 	{
 		#region Constructors
-		public Field(IRecord record, string name, Type dataType)
+		public Field(Record record, string name, Type dataType)
 		{
 			this.record = record;
 			this.name = name;
@@ -42,13 +42,13 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 	
 		#region Private Fields
-		private IRecord record;
+		private Record record;
 		private string name;
 		private Type dataType;
 		#endregion
 		
 		#region Public Properties
-		public IRecord Record
+		public Record Record
 		{
 			get { return record; }
 		}
@@ -61,6 +61,15 @@ namespace Telesophy.Alexandria.Persistence
 		public Type DataType
 		{
 			get { return dataType; }
+		}
+		#endregion
+		
+		#region Static Members
+		private static Field empty = new Field();
+		
+		public static Field Empty
+		{
+			get { return empty; }
 		}
 		#endregion
 	}

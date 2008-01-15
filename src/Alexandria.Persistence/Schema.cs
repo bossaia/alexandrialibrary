@@ -30,7 +30,7 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Schema : ISchema
+	public class Schema
 	{
 		#region Constructors
 		public Schema(string name)
@@ -41,23 +41,23 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private string name;
-		private Dictionary<string, IRecord> records = new Dictionary<string, IRecord>();
+		private Dictionary<string, Record> records = new Dictionary<string, Record>();
 		#endregion
 		
-		#region ISchema Members
+		#region Public Properties
 		public string Name
 		{
 			get { return name; }
 		}
 
-		public IDictionary<string, IRecord> Records
+		public IDictionary<string, Record> Records
 		{
 			get { return records; }
 		}
 
-		public void AddRecord(IRecord record)
+		public void AddRecord(Record record)
 		{
-			if (record != null)
+			if (record.Name != null)
 			{
 				if (!records.ContainsKey(record.Name))
 					records.Add(record.Name, record);

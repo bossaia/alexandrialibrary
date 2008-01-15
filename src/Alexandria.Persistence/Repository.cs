@@ -49,11 +49,11 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 	
 		#region Private Methods
-		private Constraint GetIdentifierConstraint(IRecord record)
+		private Constraint GetIdentifierConstraint(Record record)
 		{
-			if (record != null)
+			if (record.Name != null)
 			{
-				foreach(Constraint constraint in record.Constraints.Values)
+				foreach(Constraint constraint in record.Constraints)
 				{
 					if (constraint.Type == ConstraintType.Identifier)
 						return constraint;
@@ -70,20 +70,20 @@ namespace Telesophy.Alexandria.Persistence
 				ICommand<Model> command = engine.CreateCommand<Model>(map, filters, CommandType.Lookup);
 				if (command != null)
 				{
-					foreach(Relationship relationship in map.Record.Relationships.Values)
-					{
-						if (Maps.ContainsKey(relationship.DataType))
-						{
-							IMap additionalMap = Maps[relationship.DataType];
-							if (additionalMap != null)
-							{
+					//foreach(Relationship relationship in map.Record.Relationships.Values)
+					//{
+						//if (Maps.ContainsKey(relationship.DataType))
+						//{
+							//IMap additionalMap = Maps[relationship.DataType];
+							//if (additionalMap != null)
+							//{
 								//Field additionalField = new Field(null, relationship.ParentFieldName, typeof(Guid));
 								//IList<Filter> additionalFilters = new List<Filter>();
 								//additionalFilters.Add(new Filter(additionalField, Operator.EqualTo, filters[0].Value));
 								//Command additionalCommand = Engine.CreateCommand(additionalMap, 
-							}
-						}
-					}
+							//}
+						//}
+					//}
 				}
 			}
 			

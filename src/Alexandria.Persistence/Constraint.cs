@@ -78,5 +78,14 @@ namespace Telesophy.Alexandria.Persistence
 			get { return predicate; }
 		}
 		#endregion
+		
+		#region Static Members
+		private static Constraint empty = new Constraint();
+		
+		public static Constraint Empty
+		{
+			get { return empty; }
+		}
+		#endregion
 	}
 }
