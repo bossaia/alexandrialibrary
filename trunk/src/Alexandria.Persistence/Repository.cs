@@ -47,51 +47,7 @@ namespace Telesophy.Alexandria.Persistence
 		private IEngine engine;
 		private IList<Schema> schemas = new List<Schema>();
 		private IDictionary<Type, IMap> maps = new Dictionary<Type, IMap>();
-		#endregion
-	
-		#region Private Methods
-		private Constraint GetIdentifierConstraint(Record record)
-		{
-			if (record.Name != null)
-			{
-				foreach(Constraint constraint in record.Constraints)
-				{
-					if (constraint.Type == ConstraintType.Identifier)
-						return constraint;
-				}
-			}
-			
-			return default(Constraint);
-		}
-		
-		private Model Lookup<Model>(IMap map, Query query)
-		{
-			if (map != null)
-			{
-				ICommand command = engine.GetLookupCommand(query);
-				//CreateCommand<Model>(map, filters, CommandFunction.Lookup);
-				if (command != null)
-				{
-					//foreach(Relationship relationship in map.Record.Relationships.Values)
-					//{
-						//if (Maps.ContainsKey(relationship.DataType))
-						//{
-							//IMap additionalMap = Maps[relationship.DataType];
-							//if (additionalMap != null)
-							//{
-								//Field additionalField = new Field(null, relationship.ParentFieldName, typeof(Guid));
-								//IList<Filter> additionalFilters = new List<Filter>();
-								//additionalFilters.Add(new Filter(additionalField, Operator.EqualTo, filters[0].Value));
-								//Command additionalCommand = Engine.CreateCommand(additionalMap, 
-							//}
-						//}
-					//}
-				}
-			}
-			
-			return default(Model);
-		}
-		#endregion
+		#endregion	
 	
 		#region IRepository Members
 		public IEngine Engine
@@ -112,6 +68,30 @@ namespace Telesophy.Alexandria.Persistence
 
 		public void Initialize()
 		{
+			if (Engine != null)
+			{
+				foreach (Schema schema in Schemas)
+				{
+					Batch batch = new Batch("initialize records");
+					
+					batch.Commands.Add(Engine.GetInitializeSchemaCommand(schema));
+				
+					foreach (Record record in schema.Records)
+					{
+						batch.Commands.Add(Engine.GetInitializeRecordCommand(record));
+					}
+					
+					IResult result = Engine.Run(batch);
+					
+					if (!result.Successful)
+					{
+						Exception error = result.GetError();
+						if (error != null)
+							throw error;
+					}
+				}
+			}
+			else throw new InvalidOperationException("Cannot initialize repository: engine is undefined");
 		}
 
 		public Model Lookup<Model>(Guid id)
@@ -125,7 +105,7 @@ namespace Telesophy.Alexandria.Persistence
 					{
 						Query query = new Query("lookup " + typeof(Model).Name);
 						query.Filters.Add(new Filter(map.Record.PrimaryKeyFields[0], Operator.EqualTo, id));
-						Model model = Lookup<Model>(map, query);
+						return Lookup<Model>(query);
 					}
 				}
 			}
@@ -135,20 +115,54 @@ namespace Telesophy.Alexandria.Persistence
 
 		public Model Lookup<Model>(Query query)
 		{
+			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			{
+				IMap map = Maps[typeof(Model)];
+				if (map != null)
+				{
+					return map.Lookup<Model>(query);
+				}
+			}
+
 			return default(Model);
 		}
 
 		public IList<Model> List<Model>(Query query)
 		{
-			return null;
+			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			{
+				IMap map = Maps[typeof(Model)];
+				if (map != null)
+				{
+					return map.List<Model>(query);
+				}
+			}
+			
+			return new List<Model>();
 		}
 
 		public void Save<Model>(Model model)
 		{
+			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			{
+				IMap map = Maps[typeof(Model)];
+				if (map != null)
+				{
+					map.Save<Model>(model);
+				}
+			}
 		}
 
 		public void Delete<Model>(Model model)
 		{
+			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			{
+				IMap map = Maps[typeof(Model)];
+				if (map != null)
+				{
+					map.Delete<Model>(model);
+				}
+			}
 		}
 		#endregion
 	}

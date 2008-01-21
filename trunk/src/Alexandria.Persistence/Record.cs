@@ -37,25 +37,31 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			this.name = name;
 			this.schema = schema;
-			this.fields = new Dictionary<string, Field>();
-			this.constraints = new Dictionary<string, Constraint>();
+			this.fields = new List<Field>();
+			this.fieldsByName = new Dictionary<string, Field>();
+			this.constraints = new List<Constraint>();
+			this.constraintsByName = new Dictionary<string, Constraint>();
 			this.primaryKeyFields = new List<Field>();
 			
 			if (fields != null)
 			{
+				this.fields = fields;
+			
 				foreach (Field field in fields)
 				{
-					if (!this.fields.ContainsKey(field.Name))
-						this.fields.Add(field.Name, field);
+					if (!this.fieldsByName.ContainsKey(field.Name))
+						this.fieldsByName.Add(field.Name, field);
 				}
 			}
 			
 			if (constraints != null)
 			{
+				this.constraints = constraints;
+			
 				foreach (Constraint constraint in constraints)
 				{
-					if (!this.constraints.ContainsKey(constraint.Name))
-						this.constraints.Add(constraint.Name, constraint);
+					if (!this.constraintsByName.ContainsKey(constraint.Name))
+						this.constraintsByName.Add(constraint.Name, constraint);
 
 					if (constraint.Type == ConstraintType.Identifier)
 						this.primaryKeyFields = constraint.Fields;
@@ -67,8 +73,10 @@ namespace Telesophy.Alexandria.Persistence
 		#region Private Fields
 		private string name;
 		private Schema schema;
-		private Dictionary<string, Field> fields;
-		private Dictionary<string, Constraint> constraints;
+		private IList<Field> fields;
+		private Dictionary<string, Field> fieldsByName;
+		private IList<Constraint> constraints;
+		private Dictionary<string, Constraint> constraintsByName;
 		private IList<Field> primaryKeyFields;
 		#endregion
 	
@@ -83,14 +91,14 @@ namespace Telesophy.Alexandria.Persistence
 			get { return schema; }
 		}
 
-		public ICollection<Field> Fields
+		public IList<Field> Fields
 		{
-			get { return (ICollection<Field>)fields.Values; }
+			get { return fields; }
 		}
 
-		public ICollection<Constraint> Constraints
+		public IList<Constraint> Constraints
 		{
-			get { return (ICollection<Constraint>)constraints.Values; }
+			get { return constraints; }
 		}
 		
 		public IList<Field> PrimaryKeyFields
@@ -102,15 +110,15 @@ namespace Telesophy.Alexandria.Persistence
 		#region Public Methods
 		public Field GetField(string name)
 		{
-			if (fields.ContainsKey(name))
-				return fields[name];
+			if (fieldsByName.ContainsKey(name))
+				return fieldsByName[name];
 			else return Field.Empty;
 		}
 
 		public Constraint GetConstraint(string name)
 		{
-			if (constraints.ContainsKey(name))
-				return constraints[name];
+			if (constraintsByName.ContainsKey(name))
+				return constraintsByName[name];
 			else return Constraint.Empty;
 		}
 		#endregion

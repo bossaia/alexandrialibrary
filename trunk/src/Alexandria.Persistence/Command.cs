@@ -38,11 +38,18 @@ namespace Telesophy.Alexandria.Persistence
 			this.text = text;
 			this.function = function;
 		}
+		
+		public Command(string text, CommandFunction function, IDictionary<string, object> parameters) : this(text, function)
+		{
+			if (parameters != null)
+				this.parameters = parameters;
+		}
 		#endregion
 		
 		#region Private Fields
 		private string text;
 		private CommandFunction function;
+		private IDictionary<string, object> parameters = new Dictionary<string, object>();
 		#endregion
 		
 		#region ICommand Members
@@ -54,6 +61,11 @@ namespace Telesophy.Alexandria.Persistence
 		public CommandFunction Function
 		{
 			get { return function; }
+		}
+		
+		public IDictionary<string, object> Parameters
+		{
+			get { return parameters; }
 		}
 		#endregion
 	}

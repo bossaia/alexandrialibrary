@@ -32,12 +32,13 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IEngine
 	{
-		ICommand GetInitializeCommand(Record record);
+		ICommand GetInitializeSchemaCommand(Schema schema);
+		ICommand GetInitializeRecordCommand(Record record);
 		ICommand GetLookupCommand(Query query);
 		ICommand GetSaveCommand(Query query);
 		ICommand GetSaveCommand(Tuple tuple);
 		ICommand GetDeleteCommand(Query query);
 		ICommand GetDeleteCommand(Tuple tuple);
-		IResult Execute(Batch batch);
+		IResult Run(Batch batch);
 	}
 }

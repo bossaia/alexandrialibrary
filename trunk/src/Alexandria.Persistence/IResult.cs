@@ -34,5 +34,6 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		IDictionary<ICommand, TupleSet> CommandResults { get; }
 		bool Successful { get; }
+		Exception GetError();
 	}
 }
