@@ -34,12 +34,6 @@ namespace Telesophy.Alexandria.Persistence
 	public interface ICommand
 	{
 		string Text { get; }
-		CommandType Type { get; }
-	}
-	
-	public interface ICommand<Model> : ICommand
-	{
-		IList<ICommand> AdditionalCommands { get; }
-		IMap<Model> Map { get; }
+		CommandFunction Function { get; }
 	}
 }

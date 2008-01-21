@@ -27,16 +27,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public enum CommandType
+	public class Tuple
 	{
-		Initialize,
-		Lookup,
-		List,
-		Save,
-		Delete
+		#region Constructors
+		public Tuple()
+		{
+		}
+		
+		public Tuple(IDictionary<Field, object> data)
+		{
+			if (data != null)
+				this.data = data;
+		}
+		#endregion
+		
+		#region Private Fields
+		private IDictionary<Field, object> data = new Dictionary<Field,object>();
+		#endregion
+		
+		#region Public Properties
+		public IDictionary<Field, object> Data
+		{
+			get { return data; }
+		}
+		#endregion
 	}
 }

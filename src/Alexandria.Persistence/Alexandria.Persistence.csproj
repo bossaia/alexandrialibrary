@@ -33,11 +33,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batch.cs" />
     <Compile Include="Operator.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Record.cs" />
     <Compile Include="RelationshipType.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="CommandType.cs" />
+    <Compile Include="CommandFunction.cs" />
     <Compile Include="Constraint.cs" />
     <Compile Include="ConstraintType.cs" />
     <Compile Include="Field.cs" />
@@ -50,9 +52,10 @@
     <Compile Include="Filter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relationship.cs" />
-    <Compile Include="MappedData.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Schema.cs" />
+    <Compile Include="Tuple.cs" />
+    <Compile Include="TupleSet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

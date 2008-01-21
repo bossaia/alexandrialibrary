@@ -27,18 +27,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IMap
+	public enum CommandFunction
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		void Initialize();
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		Initialize,
+		Lookup,
+		List,
+		Save,
+		Delete
 	}
 }
