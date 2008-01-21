@@ -41,7 +41,7 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private string name;
-		private Dictionary<string, Record> records = new Dictionary<string, Record>();
+		private IList<Record> records = new List<Record>();
 		#endregion
 		
 		#region Public Properties
@@ -50,18 +50,9 @@ namespace Telesophy.Alexandria.Persistence
 			get { return name; }
 		}
 
-		public IDictionary<string, Record> Records
+		public IList<Record> Records
 		{
 			get { return records; }
-		}
-
-		public void AddRecord(Record record)
-		{
-			if (record.Name != null)
-			{
-				if (!records.ContainsKey(record.Name))
-					records.Add(record.Name, record);
-			}
 		}
 		#endregion
 	}

@@ -35,5 +35,6 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		string Text { get; }
 		CommandFunction Function { get; }
+		IDictionary<string, object> Parameters { get; }
 	}
 }
