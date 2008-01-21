@@ -30,15 +30,51 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IMap
+	public class TupleSet
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		void Initialize();
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		#region Constructors
+		public TupleSet()
+		{
+		}
+		
+		public TupleSet(IList<Tuple> tuples)
+		{
+			if (tuples != null)
+				this.tuples = tuples;
+		}
+		
+		public TupleSet(int recordsAffected)
+		{
+			this.recordsAffected = recordsAffected;
+		}
+		
+		public TupleSet(IList<Tuple> tuples, int recordsAffected) : this(tuples)
+		{
+			this.recordsAffected = recordsAffected;
+		}
+		
+		public TupleSet(Exception error)
+		{
+			this.error = error;
+		}
+		#endregion
+		
+		#region Private Fields
+		private IList<Tuple> tuples = new List<Tuple>();
+		private int recordsAffected;
+		private Exception error;
+		#endregion
+		
+		#region Public Properties
+		public IList<Tuple> Tuples
+		{
+			get { return tuples; }
+		}
+		
+		public int RecordsAffected
+		{
+			get { return recordsAffected; }
+		}
+		#endregion
 	}
 }

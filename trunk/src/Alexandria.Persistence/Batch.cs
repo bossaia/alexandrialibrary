@@ -30,15 +30,40 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IMap
+	public class Batch
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		void Initialize();
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		#region Constructors
+		public Batch()
+		{
+		}
+		
+		public Batch(string name)
+		{
+			this.name = name;
+		}
+		
+		public Batch(string name, IList<ICommand> commands) : this(name)
+		{
+			if (commands != null)
+				this.commands = commands;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private IList<ICommand> commands = new List<ICommand>();
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public IList<ICommand> Commands
+		{
+			get { return commands; }
+		}
+		#endregion
 	}
 }

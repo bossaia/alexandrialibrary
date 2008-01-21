@@ -32,15 +32,7 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IResult
 	{
-		IList<IResult> AdditionalResults { get; }
-		Exception Error { get; }
-		bool IsSuccessful { get; }
-		int RecordsAffected { get; }
-		MappedData Data { get; }
-	}
-	
-	public interface IResult<Model> : IResult
-	{
-		IMap<Model> Map { get; }
+		IDictionary<ICommand, TupleSet> CommandResults { get; }
+		bool Successful { get; }
 	}
 }

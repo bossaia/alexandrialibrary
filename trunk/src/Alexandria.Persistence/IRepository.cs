@@ -33,13 +33,12 @@ namespace Telesophy.Alexandria.Persistence
 	public interface IRepository
 	{
 		IEngine Engine { get; set; }
+		IList<Schema> Schemas { get; }
 		IDictionary<Type, IMap> Maps { get; }
-		void AddMap(IMap map);
-		IMap<Model> GetMap<Model>();
 		void Initialize();
 		Model Lookup<Model>(Guid id);
-		Model Lookup<Model>(IList<Filter> filters);
-		IList<Model> List<Model>(IList<Filter> filters);
+		Model Lookup<Model>(Query query);
+		IList<Model> List<Model>(Query query);
 		void Save<Model>(Model model);
 		void Delete<Model>(Model model);
 	}

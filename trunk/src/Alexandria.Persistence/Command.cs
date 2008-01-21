@@ -30,45 +30,30 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Command<Model> : ICommand<Model>
+	public class Command : ICommand
 	{
 		#region Constructors
-		public Command(IMap<Model> map, CommandType type, string text)
+		public Command(string text, CommandFunction function)
 		{
-			this.map = map;
-			this.type = type;
 			this.text = text;
+			this.function = function;
 		}
 		#endregion
 		
 		#region Private Fields
 		private string text;
-		private CommandType type;
-		private IMap<Model> map;
-		private List<ICommand> additionalCommands = new List<ICommand>();
+		private CommandFunction function;
 		#endregion
-	
+		
 		#region ICommand Members
 		public string Text
 		{
 			get { return text; }
 		}
 
-		public CommandType Type
+		public CommandFunction Function
 		{
-			get { return type; }
-		}
-		#endregion
-	
-		#region ICommand<Model> Members
-		public IList<ICommand> AdditionalCommands
-		{
-			get { return additionalCommands; }
-		}
-
-		public IMap<Model> Map
-		{
-			get { return map; }
+			get { return function; }
 		}
 		#endregion
 	}

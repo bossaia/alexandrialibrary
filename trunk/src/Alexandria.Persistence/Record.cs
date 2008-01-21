@@ -39,6 +39,7 @@ namespace Telesophy.Alexandria.Persistence
 			this.schema = schema;
 			this.fields = new Dictionary<string, Field>();
 			this.constraints = new Dictionary<string, Constraint>();
+			this.primaryKeyFields = new List<Field>();
 			
 			if (fields != null)
 			{
@@ -55,6 +56,9 @@ namespace Telesophy.Alexandria.Persistence
 				{
 					if (!this.constraints.ContainsKey(constraint.Name))
 						this.constraints.Add(constraint.Name, constraint);
+
+					if (constraint.Type == ConstraintType.Identifier)
+						this.primaryKeyFields = constraint.Fields;
 				}
 			}
 		}
@@ -65,6 +69,7 @@ namespace Telesophy.Alexandria.Persistence
 		private Schema schema;
 		private Dictionary<string, Field> fields;
 		private Dictionary<string, Constraint> constraints;
+		private IList<Field> primaryKeyFields;
 		#endregion
 	
 		#region Public Properties
@@ -86,6 +91,11 @@ namespace Telesophy.Alexandria.Persistence
 		public ICollection<Constraint> Constraints
 		{
 			get { return (ICollection<Constraint>)constraints.Values; }
+		}
+		
+		public IList<Field> PrimaryKeyFields
+		{
+			get	{ return primaryKeyFields; }
 		}
 		#endregion
 

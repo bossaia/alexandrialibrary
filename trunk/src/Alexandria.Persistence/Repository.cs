@@ -45,6 +45,7 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private IEngine engine;
+		private IList<Schema> schemas = new List<Schema>();
 		private IDictionary<Type, IMap> maps = new Dictionary<Type, IMap>();
 		#endregion
 	
@@ -63,11 +64,12 @@ namespace Telesophy.Alexandria.Persistence
 			return default(Constraint);
 		}
 		
-		private Model Lookup<Model>(IMap<Model> map, IList<Filter> filters)
+		private Model Lookup<Model>(IMap map, Query query)
 		{
 			if (map != null)
 			{
-				ICommand<Model> command = engine.CreateCommand<Model>(map, filters, CommandType.Lookup);
+				ICommand command = engine.GetLookupCommand(query);
+				//CreateCommand<Model>(map, filters, CommandFunction.Lookup);
 				if (command != null)
 				{
 					//foreach(Relationship relationship in map.Record.Relationships.Values)
@@ -98,26 +100,14 @@ namespace Telesophy.Alexandria.Persistence
 			set { engine = value; }
 		}
 
+		public IList<Schema> Schemas
+		{
+			get { return schemas; }
+		}
+
 		public IDictionary<Type, IMap> Maps
 		{
 			get { return maps; }
-		}
-
-		public void AddMap(IMap map)
-		{
-			if (map != null && !Maps.ContainsKey(map.DataType))
-			{
-				Maps.Add(map.DataType, map);
-			}
-		}
-
-		public IMap<Model> GetMap<Model>()
-		{
-			if (Maps.ContainsKey(typeof(Model)))
-			{
-				return Maps[typeof(Model)] as IMap<Model>; 
-			}
-			else return null;
 		}
 
 		public void Initialize()
@@ -128,15 +118,14 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			if (Engine != null && Maps.ContainsKey(typeof(Model)))
 			{
-				IMap<Model> map = GetMap<Model>();
+				IMap map = Maps[typeof(Model)];
 				if (map != null)
 				{
-					Constraint idConstraint = GetIdentifierConstraint(map.Record);
-					if (idConstraint.Fields != null && idConstraint.Fields.Count > 0)
+					if (map.Record.PrimaryKeyFields.Count > 0)
 					{
-						IList<Filter> filters = new List<Filter>();
-						filters.Add(new Filter(idConstraint.Fields[0], Operator.EqualTo, id));
-						Model model = Lookup(map, filters);
+						Query query = new Query("lookup " + typeof(Model).Name);
+						query.Filters.Add(new Filter(map.Record.PrimaryKeyFields[0], Operator.EqualTo, id));
+						Model model = Lookup<Model>(map, query);
 					}
 				}
 			}
@@ -144,12 +133,12 @@ namespace Telesophy.Alexandria.Persistence
 			return default(Model);
 		}
 
-		public Model Lookup<Model>(IList<Filter> filters)
+		public Model Lookup<Model>(Query query)
 		{
 			return default(Model);
 		}
 
-		public IList<Model> List<Model>(IList<Filter> filters)
+		public IList<Model> List<Model>(Query query)
 		{
 			return null;
 		}

@@ -30,15 +30,30 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IMap
+	public class Query
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		void Initialize();
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		#region Constructors
+		public Query(string name)
+		{
+			this.name = name;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private IList<Filter> filters = new List<Filter>();
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public IList<Filter> Filters
+		{
+			get { return filters; }
+		}
+		#endregion
 	}
 }
