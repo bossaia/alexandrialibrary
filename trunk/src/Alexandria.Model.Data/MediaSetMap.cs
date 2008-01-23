@@ -27,17 +27,46 @@
 
 using System;
 using System.Collections.Generic;
+using Telesophy.Alexandria.Persistence;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMap
+	public class MediaSetMap : MapBase
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		#region Constructors
+		public MediaSetMap(Schema schema) : base(schema, "MediaSet", typeof(IMediaSet))
+		{
+			Record.AddField("Id", typeof(Guid), ConstraintType.Identifier);
+			Record.AddField("Source", typeof(string));
+			Record.AddField("Type", typeof(string));
+			Record.AddField("Number", typeof(int));
+			Record.AddField("Title", typeof(string));
+			Record.AddField("Artist", typeof(string));
+			Record.AddField("Date", typeof(string));
+			Record.AddField("Path", typeof(Uri), ConstraintType.Unique);
+		}
+		#endregion
+
+		#region IMap Members
+		public override Model Lookup<Model>(Query query)
+		{
+ 			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public override IList<Model> List<Model>(Query query)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public override void Save<Model>(Model model)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+
+		public override void Delete<Model>(Model model)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+		#endregion
 	}
 }
