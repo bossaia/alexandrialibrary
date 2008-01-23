@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
@@ -41,7 +42,19 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private string name;
-		private IList<Record> records = new List<Record>();
+		private List<Record> records = new List<Record>();
+		private Dictionary<string, Record> recordsByName = new Dictionary<string,Record>();
+		#endregion
+		
+		#region Private Methods
+		private void SynchronizeRecords()
+		{
+			foreach (Record record in records)
+			{
+				if (!recordsByName.ContainsKey(record.Name))
+					recordsByName.Add(record.Name, record);
+			}
+		}
 		#endregion
 		
 		#region Public Properties
@@ -50,9 +63,34 @@ namespace Telesophy.Alexandria.Persistence
 			get { return name; }
 		}
 
-		public IList<Record> Records
+		public ReadOnlyCollection<Record> Records
 		{
-			get { return records; }
+			get { return records.AsReadOnly(); }
+		}
+		#endregion
+		
+		#region Public Methods
+		public Record AddRecord(string name)
+		{
+			if (!string.IsNullOrEmpty(name))
+			{
+				if (!recordsByName.ContainsKey(name))
+				{
+					Record record = new Record(name, this);
+					records.Add(record);
+					SynchronizeRecords();
+					return record;
+				}
+			}
+			
+			return Record.Empty;
+		}
+		
+		public Record GetRecord(string name)
+		{
+			if (recordsByName.ContainsKey(name))
+				return recordsByName[name];
+			else return Record.Empty;
 		}
 		#endregion
 	}

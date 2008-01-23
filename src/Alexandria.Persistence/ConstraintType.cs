@@ -32,7 +32,9 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public enum ConstraintType
 	{
+		None = 0,
 		Identifier,
+		Required,
 		Unique,
 		Validation
 	}

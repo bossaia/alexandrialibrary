@@ -30,14 +30,49 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IMap
+	public abstract class MapBase : IMap
 	{
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-		Model Lookup<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		#region Constructors
+		public MapBase(Schema schema, string recordName, Type type)
+		{
+			if (schema != null && type != null)
+			{
+				record = schema.AddRecord(recordName);
+				this.type = type;
+			}
+			else throw new ArgumentNullException("Could not instantiate this map - the schema and/or type were undefined");
+		}
+		#endregion
+		
+		#region Private Fields
+		private Record record;
+		private IList<Relationship> relationships = new List<Relationship>();
+		private Type type;
+		#endregion
+	
+		#region IMap Members
+		public Record Record
+		{
+			get { return record; }
+		}
+
+		public IList<Relationship> Relationships
+		{
+			get { return relationships; }
+		}
+
+		public Type Type
+		{
+			get { return type; }
+		}
+
+		public abstract Model Lookup<Model>(Query query);
+
+		public abstract IList<Model> List<Model>(Query query);
+
+		public abstract void Save<Model>(Model model);
+
+		public abstract void Delete<Model>(Model model);
+		#endregion
 	}
 }

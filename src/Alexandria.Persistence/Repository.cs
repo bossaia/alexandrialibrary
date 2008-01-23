@@ -101,10 +101,11 @@ namespace Telesophy.Alexandria.Persistence
 				IMap map = Maps[typeof(Model)];
 				if (map != null)
 				{
-					if (map.Record.PrimaryKeyFields.Count > 0)
+					IList<Field> primaryKeyFields = map.Record.GetPrimaryKeyFields();
+					if (primaryKeyFields.Count > 0)
 					{
 						Query query = new Query("lookup " + typeof(Model).Name);
-						query.Filters.Add(new Filter(map.Record.PrimaryKeyFields[0], Operator.EqualTo, id));
+						query.Filters.Add(new Filter(primaryKeyFields[0], Operator.EqualTo, id));
 						return Lookup<Model>(query);
 					}
 				}

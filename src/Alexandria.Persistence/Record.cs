@@ -27,45 +27,32 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Record
+	public class Record
 	{
 		#region Constructors
-		public Record(string name, Schema schema, IList<Field> fields, IList<Constraint> constraints)
+		public Record(string name, Schema schema) : this(name, schema, null, null)
+		{
+		}
+		
+		public Record(string name, Schema schema, List<Field> fields, List<Constraint> constraints)
 		{
 			this.name = name;
 			this.schema = schema;
-			this.fields = new List<Field>();
-			this.fieldsByName = new Dictionary<string, Field>();
-			this.constraints = new List<Constraint>();
-			this.constraintsByName = new Dictionary<string, Constraint>();
-			this.primaryKeyFields = new List<Field>();
 			
 			if (fields != null)
 			{
 				this.fields = fields;
-			
-				foreach (Field field in fields)
-				{
-					if (!this.fieldsByName.ContainsKey(field.Name))
-						this.fieldsByName.Add(field.Name, field);
-				}
+				SynchronizeFields();
 			}
 			
 			if (constraints != null)
 			{
 				this.constraints = constraints;
-			
-				foreach (Constraint constraint in constraints)
-				{
-					if (!this.constraintsByName.ContainsKey(constraint.Name))
-						this.constraintsByName.Add(constraint.Name, constraint);
-
-					if (constraint.Type == ConstraintType.Identifier)
-						this.primaryKeyFields = constraint.Fields;
-				}
+				SynchronizeConstraints();
 			}
 		}
 		#endregion
@@ -73,11 +60,30 @@ namespace Telesophy.Alexandria.Persistence
 		#region Private Fields
 		private string name;
 		private Schema schema;
-		private IList<Field> fields;
-		private Dictionary<string, Field> fieldsByName;
-		private IList<Constraint> constraints;
-		private Dictionary<string, Constraint> constraintsByName;
-		private IList<Field> primaryKeyFields;
+		private List<Field> fields = new List<Field>();
+		private Dictionary<string, Field> fieldsByName = new Dictionary<string,Field>();
+		private List<Constraint> constraints = new List<Constraint>();
+		private Dictionary<string, Constraint> constraintsByName = new Dictionary<string,Constraint>();
+		#endregion
+	
+		#region Private Methods
+		private void SynchronizeFields()
+		{
+			foreach (Field field in fields)
+			{
+				if (!this.fieldsByName.ContainsKey(field.Name))
+					this.fieldsByName.Add(field.Name, field);
+			}
+		}
+		
+		private void SynchronizeConstraints()
+		{
+			foreach (Constraint constraint in constraints)
+			{
+				if (!this.constraintsByName.ContainsKey(constraint.Name))
+					this.constraintsByName.Add(constraint.Name, constraint);
+			}
+		}
 		#endregion
 	
 		#region Public Properties
@@ -91,28 +97,102 @@ namespace Telesophy.Alexandria.Persistence
 			get { return schema; }
 		}
 
-		public IList<Field> Fields
+		public ReadOnlyCollection<Field> Fields
 		{
-			get { return fields; }
+			get { return fields.AsReadOnly(); }
 		}
 
-		public IList<Constraint> Constraints
+		public ReadOnlyCollection<Constraint> Constraints
 		{
-			get { return constraints; }
-		}
-		
-		public IList<Field> PrimaryKeyFields
-		{
-			get	{ return primaryKeyFields; }
+			get { return constraints.AsReadOnly(); }
 		}
 		#endregion
 
 		#region Public Methods
+		public Field AddField(string name, Type dataType)
+		{
+			return AddField(name, dataType, ConstraintType.None, null);
+		}
+		
+		public Field AddField(string name, Type dataType, ConstraintType constraintType)
+		{
+			return AddField(name, dataType, constraintType);
+		}
+		
+		public Field AddField(string name, Type dataType, ConstraintType constraintType, Predicate<object> predicate)
+		{
+			if (!string.IsNullOrEmpty(name) && dataType != null)
+			{
+				if (!fieldsByName.ContainsKey(name))
+				{
+					Field field = new Field(this, name, dataType);
+					fields.Add(field);
+					SynchronizeFields();
+					
+					switch (constraintType)
+					{
+						case ConstraintType.Identifier:
+							AddConstraint(name + "_pk", ConstraintType.Identifier, field);
+							break;
+						case ConstraintType.Unique:
+							AddConstraint(name + "_uq", ConstraintType.Unique, field);
+							break;
+						case ConstraintType.Validation:
+							AddConstraint(name + "_ck", ConstraintType.Validation, predicate, field);
+							break;
+						default:
+							break;
+					}
+					
+					return field;
+				}
+			}
+			
+			return Field.Empty;
+		}
+		
 		public Field GetField(string name)
 		{
 			if (fieldsByName.ContainsKey(name))
 				return fieldsByName[name];
 			else return Field.Empty;
+		}
+
+		public IList<Field> GetPrimaryKeyFields()
+		{
+			List<Field> primaryKeyFields = new List<Field>();
+			
+			foreach (Constraint constraint in Constraints)
+			{
+				if (constraint.Type == ConstraintType.Identifier)
+				{
+					foreach (Field field in constraint.Fields)
+						primaryKeyFields.Add(field);
+				}
+			}
+			
+			return primaryKeyFields;
+		}
+
+		public Constraint AddConstraint(string name, ConstraintType type, params Field[] fields)
+		{
+			return AddConstraint(name, type, null, fields);
+		}
+
+		public Constraint AddConstraint(string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
+		{
+			if (!string.IsNullOrEmpty(name) && fields.Length > 0)
+			{
+				if (!constraintsByName.ContainsKey(name))
+				{
+					Constraint constraint = new Constraint(this, name, type, predicate, fields);
+					constraints.Add(constraint);
+					SynchronizeConstraints();
+					return constraint;
+				}
+			}
+			
+			return Constraint.Empty;
 		}
 
 		public Constraint GetConstraint(string name)
@@ -124,7 +204,7 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region Static Members
-		private static Record empty = new Record();
+		private static Record empty = new Record(null, null);
 		
 		public static Record Empty
 		{

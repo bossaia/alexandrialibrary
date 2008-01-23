@@ -33,12 +33,13 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Constraint
 	{
 		#region Constructors
-		public Constraint(string name, ConstraintType type, params Field[] fields) : this(name, type, null, fields)
+		public Constraint(Record record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
 		{
 		}
 		
-		public Constraint(string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
+		public Constraint(Record record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
 		{
+			this.record = record;
 			this.name = name;
 			this.type = type;
 
@@ -51,6 +52,7 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 	
 		#region Private Fields
+		private Record record;
 		private string name;
 		private ConstraintType type;
 		private IList<Field> fields;
@@ -58,6 +60,11 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 	
 		#region Public Properties
+		public Record Record
+		{
+			get { return record; }
+		}
+		
 		public string Name
 		{
 			get { return name; }
