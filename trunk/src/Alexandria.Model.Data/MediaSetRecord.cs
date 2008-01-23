@@ -28,21 +28,22 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMap
+	public class MediaSetRecord : Record
 	{
-		IEngine Engine { get; }
-		Record Record { get; }
-		IList<Relationship> Relationships { get; }
-		Type Type { get; }
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		Model Lookup(Query query);
-		IList<Model> List(Query query);
-		void Save(Model model);
-		void Delete(Model model);
+		public MediaSetRecord(Schema schema) : base("MediaSet", schema)
+		{
+			AddField("Id", typeof(Guid), ConstraintType.Identifier);
+			AddField("Source", typeof(string));
+			AddField("Type", typeof(string));
+			AddField("Number", typeof(int));
+			AddField("Title", typeof(string));
+			AddField("Artist", typeof(string));
+			AddField("Date", typeof(string));
+			AddField("Path", typeof(Uri), ConstraintType.Unique);
+		}
 	}
 }

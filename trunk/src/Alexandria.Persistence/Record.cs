@@ -31,7 +31,7 @@ using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Record
+	public abstract class Record
 	{
 		#region Constructors
 		public Record(string name, Schema schema) : this(name, schema, null, null)
@@ -54,6 +54,8 @@ namespace Telesophy.Alexandria.Persistence
 				this.constraints = constraints;
 				SynchronizeConstraints();
 			}
+
+			Schema.AddRecord(this);
 		}
 		#endregion
 	
@@ -201,15 +203,6 @@ namespace Telesophy.Alexandria.Persistence
 				return constraintsByName[name];
 			else return Constraint.Empty;
 		}
-		#endregion
-		
-		#region Static Members
-		private static Record empty = new Record(null, null);
-		
-		public static Record Empty
-		{
-			get { return empty; }
-		}
-		#endregion
+		#endregion		
 	}
 }

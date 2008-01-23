@@ -70,27 +70,23 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region Public Methods
-		public Record AddRecord(string name)
+		public void AddRecord(Record record)
 		{
-			if (!string.IsNullOrEmpty(name))
+			if (record != null)
 			{
-				if (!recordsByName.ContainsKey(name))
+				if (!recordsByName.ContainsKey(record.Name))
 				{
-					Record record = new Record(name, this);
 					records.Add(record);
 					SynchronizeRecords();
-					return record;
 				}
 			}
-			
-			return Record.Empty;
 		}
 		
 		public Record GetRecord(string name)
 		{
 			if (recordsByName.ContainsKey(name))
 				return recordsByName[name];
-			else return Record.Empty;
+			else return null;
 		}
 		#endregion
 	}

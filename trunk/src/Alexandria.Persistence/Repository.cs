@@ -47,7 +47,18 @@ namespace Telesophy.Alexandria.Persistence
 		private IEngine engine;
 		private IList<Schema> schemas = new List<Schema>();
 		private IDictionary<Type, IMap> maps = new Dictionary<Type, IMap>();
-		#endregion	
+		#endregion
+	
+		#region Private Methods
+		private IMap<Model> GetMap<Model>()
+		{
+			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			{
+				return Maps[typeof(Model)] as IMap<Model>;
+			}
+			else return null;
+		}
+		#endregion
 	
 		#region IRepository Members
 		public IEngine Engine
@@ -96,18 +107,15 @@ namespace Telesophy.Alexandria.Persistence
 
 		public Model Lookup<Model>(Guid id)
 		{
-			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
 			{
-				IMap map = Maps[typeof(Model)];
-				if (map != null)
+				IList<Field> primaryKeyFields = map.Record.GetPrimaryKeyFields();
+				if (primaryKeyFields.Count > 0)
 				{
-					IList<Field> primaryKeyFields = map.Record.GetPrimaryKeyFields();
-					if (primaryKeyFields.Count > 0)
-					{
-						Query query = new Query("lookup " + typeof(Model).Name);
-						query.Filters.Add(new Filter(primaryKeyFields[0], Operator.EqualTo, id));
-						return Lookup<Model>(query);
-					}
+					Query query = new Query("lookup " + typeof(Model).Name);
+					query.Filters.Add(new Filter(primaryKeyFields[0], Operator.EqualTo, id));
+					return Lookup<Model>(query);
 				}
 			}
 			
@@ -116,13 +124,10 @@ namespace Telesophy.Alexandria.Persistence
 
 		public Model Lookup<Model>(Query query)
 		{
-			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
 			{
-				IMap map = Maps[typeof(Model)];
-				if (map != null)
-				{
-					return map.Lookup<Model>(query);
-				}
+				return map.Lookup(query);
 			}
 
 			return default(Model);
@@ -130,13 +135,10 @@ namespace Telesophy.Alexandria.Persistence
 
 		public IList<Model> List<Model>(Query query)
 		{
-			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
 			{
-				IMap map = Maps[typeof(Model)];
-				if (map != null)
-				{
-					return map.List<Model>(query);
-				}
+				return map.List(query);
 			}
 			
 			return new List<Model>();
@@ -144,25 +146,19 @@ namespace Telesophy.Alexandria.Persistence
 
 		public void Save<Model>(Model model)
 		{
-			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
 			{
-				IMap map = Maps[typeof(Model)];
-				if (map != null)
-				{
-					map.Save<Model>(model);
-				}
+				map.Save(model);
 			}
 		}
 
 		public void Delete<Model>(Model model)
 		{
-			if (Engine != null && Maps.ContainsKey(typeof(Model)))
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
 			{
-				IMap map = Maps[typeof(Model)];
-				if (map != null)
-				{
-					map.Delete<Model>(model);
-				}
+				map.Delete(model);
 			}
 		}
 		#endregion
