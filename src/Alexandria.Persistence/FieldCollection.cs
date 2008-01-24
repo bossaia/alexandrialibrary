@@ -30,70 +30,54 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Constraint : INamedItem
+	public class FieldCollection : NamedItemCollectionBase<Field>
 	{
 		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
-		{
-		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
+		public FieldCollection(IRecord record)
 		{
 			this.record = record;
-			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
 		}
 		#endregion
-	
+		
 		#region Private Fields
 		private IRecord record;
-		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
 		#endregion
-	
+
 		#region Public Properties
 		public IRecord Record
 		{
 			get { return record; }
 		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
-		}
-
-		public IList<Field> Fields
-		{
-			get { return fields; }
-		}
-
-		public Predicate<object> Predicate
-		{
-			get { return predicate; }
-		}
 		#endregion
-		
-		#region INamedItem Members
-		public string Name
+
+		#region Public Methods
+		public void Add(string name, Type dataType)
 		{
-			get { return name; }
+			Add(name, dataType, ConstraintType.None);
 		}
-		#endregion
 		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
+		public void Add(string name, Type dataType, ConstraintType constraintType)
 		{
-			get { return empty; }
+			if (!string.IsNullOrEmpty(name) && dataType != null)
+			{
+				if (!base.Contains(name))
+				{
+					Field field = new Field(record, name, dataType);
+					base.InsertItem(base.Count, field);
+					
+					switch (constraintType)
+					{
+						case ConstraintType.Identifier:
+							record.Constraints.Add(name + "_pk", constraintType, field);
+							break;
+						case ConstraintType.Unique:
+							record.Constraints.Add(name + "_uq", constraintType, field);
+							break;
+						default:
+							break;
+					}
+				}
+			}
 		}
 		#endregion
 	}

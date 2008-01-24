@@ -31,7 +31,7 @@ using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Schema
+	public class Schema : ISchema
 	{
 		#region Constructors
 		public Schema(string name)
@@ -42,52 +42,21 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private string name;
-		private List<Record> records = new List<Record>();
-		private Dictionary<string, Record> recordsByName = new Dictionary<string,Record>();
+		private RecordCollection records = new RecordCollection();
 		#endregion
 		
-		#region Private Methods
-		private void SynchronizeRecords()
-		{
-			foreach (Record record in records)
-			{
-				if (!recordsByName.ContainsKey(record.Name))
-					recordsByName.Add(record.Name, record);
-			}
-		}
-		#endregion
-		
-		#region Public Properties
+		#region INamedItem Members
 		public string Name
 		{
 			get { return name; }
 		}
-
-		public ReadOnlyCollection<Record> Records
-		{
-			get { return records.AsReadOnly(); }
-		}
 		#endregion
 		
-		#region Public Methods
-		public void AddRecord(Record record)
+		#region ISchema Members
+		public RecordCollection Records
 		{
-			if (record != null)
-			{
-				if (!recordsByName.ContainsKey(record.Name))
-				{
-					records.Add(record);
-					SynchronizeRecords();
-				}
-			}
+			get { return records; }
 		}
-		
-		public Record GetRecord(string name)
-		{
-			if (recordsByName.ContainsKey(name))
-				return recordsByName[name];
-			else return null;
-		}
-		#endregion
+		#endregion		
 	}
 }

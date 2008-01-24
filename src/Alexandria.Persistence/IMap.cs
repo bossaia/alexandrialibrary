@@ -33,7 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public interface IMap
 	{
 		IEngine Engine { get; }
-		Record Record { get; }
+		IRecord Record { get; }
 		IList<Relationship> Relationships { get; }
 		Type Type { get; }
 	}

@@ -28,73 +28,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public struct Constraint : INamedItem
+	public class MediaSetMediaItemRecord : RecordBase
 	{
-		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
+		public MediaSetMediaItemRecord(ISchema schema) : base("MediaSetMediaItem", schema)
 		{
+			Fields.Add("MediaSetId", typeof(Guid));
+			Fields.Add("MediaItemId", typeof(Guid));
+			Constraints.Add("MediaSetMediaItem_pk", ConstraintType.Identifier, Fields[0], Fields[1]);
 		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
-		{
-			this.record = record;
-			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
-		}
-		#endregion
-	
-		#region Private Fields
-		private IRecord record;
-		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
-		#endregion
-	
-		#region Public Properties
-		public IRecord Record
-		{
-			get { return record; }
-		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
-		}
-
-		public IList<Field> Fields
-		{
-			get { return fields; }
-		}
-
-		public Predicate<object> Predicate
-		{
-			get { return predicate; }
-		}
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
-		{
-			get { return name; }
-		}
-		#endregion
-		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
-		{
-			get { return empty; }
-		}
-		#endregion
 	}
 }

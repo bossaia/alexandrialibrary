@@ -27,73 +27,64 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Constraint : INamedItem
+	public abstract class RecordBase : IRecord
 	{
 		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
+		public RecordBase(string name, ISchema schema)
 		{
-		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
-		{
-			this.record = record;
 			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
+			this.schema = schema;
+			this.fields = new FieldCollection(this);
+			this.constraints = new ConstraintCollection(this);
 		}
 		#endregion
-	
+
 		#region Private Fields
-		private IRecord record;
 		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
+		private ISchema schema;
+		private FieldCollection fields;
+		private ConstraintCollection constraints;
 		#endregion
-	
-		#region Public Properties
-		public IRecord Record
-		{
-			get { return record; }
-		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
-		}
 
-		public IList<Field> Fields
-		{
-			get { return fields; }
-		}
-
-		public Predicate<object> Predicate
-		{
-			get { return predicate; }
-		}
-		#endregion
-		
-		#region INamedItem Members
+		#region IRecord Members
 		public string Name
 		{
 			get { return name; }
 		}
-		#endregion
-		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
+
+		public ISchema Schema
 		{
-			get { return empty; }
+			get { return schema; }
+		}
+
+		public FieldCollection Fields
+		{
+			get { return fields; }
+		}
+
+		public ConstraintCollection Constraints
+		{
+			get { return constraints; }
+		}
+		
+		public FieldCollection GetIdentifierFields()
+		{
+			FieldCollection identifierFields = new FieldCollection(this);
+
+			foreach (Constraint constraint in Constraints)
+			{
+				if (constraint.Type == ConstraintType.Identifier)
+				{
+					foreach (Field field in constraint.Fields)
+						identifierFields.Add(field);
+				}
+			}
+
+			return identifierFields;
 		}
 		#endregion
 	}

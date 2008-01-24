@@ -217,7 +217,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 			}
 		}
 			
-		private void AppendFields(StringBuilder text, Record record)
+		private void AppendFields(StringBuilder text, IRecord record)
 		{
 			const string columnFormat = "{0} {1} NOT NULL";
 			
@@ -228,7 +228,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 			}
 		}
 		
-		private void AppendConstraints(StringBuilder text, Record record)
+		private void AppendConstraints(StringBuilder text, IRecord record)
 		{
 			bool appendFields = false;
 		
@@ -266,7 +266,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 			}		
 		}
 		
-		private void AppendLookupFields(StringBuilder text, Record record)
+		private void AppendLookupFields(StringBuilder text, IRecord record)
 		{
 			if (text != null)
 			{
@@ -306,12 +306,12 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 		#endregion
 	
 		#region IEngine Members
-		public ICommand GetInitializeSchemaCommand(Schema schema)
+		public ICommand GetInitializeSchemaCommand(ISchema schema)
 		{
 			return null;
 		}
 
-		public ICommand GetInitializeRecordCommand(Record record)
+		public ICommand GetInitializeRecordCommand(IRecord record)
 		{
 			if (!string.IsNullOrEmpty(record.Name) && record.Fields != null && record.Fields.Count > 0)
 			{
