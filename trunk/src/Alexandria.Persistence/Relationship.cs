@@ -33,7 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Relationship
 	{
 		#region Constructors
-		public Relationship(string name, Schema schema, RelationshipType type, Field parentId, Field childId)
+		public Relationship(string name, ISchema schema, RelationshipType type, Field parentId, Field childId)
 		{
 			this.name = name;
 			this.schema = schema;
@@ -45,7 +45,7 @@ namespace Telesophy.Alexandria.Persistence
 	
 		#region Private Fields
 		private string name;
-		private Schema schema;
+		private ISchema schema;
 		private RelationshipType type;
 		private Field parentId;
 		private Field childId;
@@ -57,7 +57,7 @@ namespace Telesophy.Alexandria.Persistence
 			get { return name; }
 		}
 
-		public Schema Schema
+		public ISchema Schema
 		{
 			get { return schema; }
 		}

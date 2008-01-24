@@ -30,10 +30,10 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Field
+	public struct Field : INamedItem
 	{
 		#region Constructors
-		public Field(Record record, string name, Type dataType)
+		public Field(IRecord record, string name, Type dataType)
 		{
 			this.record = record;
 			this.name = name;
@@ -42,25 +42,27 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 	
 		#region Private Fields
-		private Record record;
+		private IRecord record;
 		private string name;
 		private Type dataType;
 		#endregion
 		
 		#region Public Properties
-		public Record Record
+		public IRecord Record
 		{
 			get { return record; }
 		}
-		
-		public string Name
-		{
-			get { return name; }
-		}
-		
+				
 		public Type DataType
 		{
 			get { return dataType; }
+		}
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
 		}
 		#endregion
 		

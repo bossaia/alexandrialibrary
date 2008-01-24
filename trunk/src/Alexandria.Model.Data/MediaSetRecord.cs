@@ -32,18 +32,18 @@ using Telesophy.Alexandria.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class MediaSetRecord : Record
+	public class MediaSetRecord : RecordBase
 	{
-		public MediaSetRecord(Schema schema) : base("MediaSet", schema)
+		public MediaSetRecord(ISchema schema) : base("MediaSet", schema)
 		{
-			AddField("Id", typeof(Guid), ConstraintType.Identifier);
-			AddField("Source", typeof(string));
-			AddField("Type", typeof(string));
-			AddField("Number", typeof(int));
-			AddField("Title", typeof(string));
-			AddField("Artist", typeof(string));
-			AddField("Date", typeof(string));
-			AddField("Path", typeof(Uri), ConstraintType.Unique);
+			Fields.Add("Id", typeof(Guid), ConstraintType.Identifier);
+			Fields.Add("Source", typeof(string));
+			Fields.Add("Type", typeof(string));
+			Fields.Add("Number", typeof(int));
+			Fields.Add("Title", typeof(string));
+			Fields.Add("Artist", typeof(string));
+			Fields.Add("Date", typeof(string));
+			Fields.Add("Path", typeof(Uri), ConstraintType.Unique);
 		}
 	}
 }

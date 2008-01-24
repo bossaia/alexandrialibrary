@@ -34,10 +34,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batch.cs" />
+    <Compile Include="ConstraintCollection.cs" />
+    <Compile Include="FieldCollection.cs" />
+    <Compile Include="INamedItem.cs" />
+    <Compile Include="IRecord.cs" />
+    <Compile Include="ISchema.cs" />
     <Compile Include="MapBase.cs" />
+    <Compile Include="NamedItemCollectionBase.cs" />
     <Compile Include="Operator.cs" />
     <Compile Include="Query.cs" />
-    <Compile Include="Record.cs" />
+    <Compile Include="RecordBase.cs" />
+    <Compile Include="RecordCollection.cs" />
     <Compile Include="RelationshipType.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFunction.cs" />

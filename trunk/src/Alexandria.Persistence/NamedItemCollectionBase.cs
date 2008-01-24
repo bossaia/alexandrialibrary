@@ -27,74 +27,45 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Constraint : INamedItem
+	public abstract class NamedItemCollectionBase<T> : KeyedCollection<string, T> where T : INamedItem
 	{
-		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
+		public NamedItemCollectionBase()
 		{
-		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
-		{
-			this.record = record;
-			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
-		}
-		#endregion
-	
-		#region Private Fields
-		private IRecord record;
-		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
-		#endregion
-	
-		#region Public Properties
-		public IRecord Record
-		{
-			get { return record; }
-		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
 		}
 
-		public IList<Field> Fields
+		protected override string GetKeyForItem(T item)
 		{
-			get { return fields; }
+			if (item != null)
+				return item.Name;
+			else return null;
 		}
 
-		public Predicate<object> Predicate
+		public new T this[string name]
 		{
-			get { return predicate; }
+			get
+			{
+				if (base.Contains(name))
+				{
+					return base[name];
+				}
+				else throw new KeyNotFoundException();
+			}
 		}
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
+
+		public new T this[int index]
 		{
-			get { return name; }
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
 		}
-		#endregion
-		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
-		{
-			get { return empty; }
-		}
-		#endregion
 	}
 }

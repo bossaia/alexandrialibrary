@@ -28,73 +28,26 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public struct Constraint : INamedItem
+	public class MediaItemRecord : RecordBase
 	{
-		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
+		public MediaItemRecord(ISchema schema) : base("MediaItem", schema)
 		{
+			Fields.Add("Id", typeof(Guid), ConstraintType.Identifier);
+			Fields.Add("Status", typeof(string));
+			Fields.Add("Source", typeof(string));
+			Fields.Add("Type", typeof(string));
+			Fields.Add("Number", typeof(int));
+			Fields.Add("Title", typeof(string));
+			Fields.Add("Artist", typeof(string));
+			Fields.Add("Album", typeof(string));
+			Fields.Add("Duration", typeof(TimeSpan));
+			Fields.Add("Date", typeof(DateTime));
+			Fields.Add("Format", typeof(string));
+			Fields.Add("Path", typeof(Uri), ConstraintType.Unique);
 		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
-		{
-			this.record = record;
-			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
-		}
-		#endregion
-	
-		#region Private Fields
-		private IRecord record;
-		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
-		#endregion
-	
-		#region Public Properties
-		public IRecord Record
-		{
-			get { return record; }
-		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
-		}
-
-		public IList<Field> Fields
-		{
-			get { return fields; }
-		}
-
-		public Predicate<object> Predicate
-		{
-			get { return predicate; }
-		}
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
-		{
-			get { return name; }
-		}
-		#endregion
-		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
-		{
-			get { return empty; }
-		}
-		#endregion
 	}
 }

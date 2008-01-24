@@ -37,9 +37,11 @@
     <Compile Include="BaseLinkDataMap.cs" />
     <Compile Include="BaseSimpleDataMap.cs" />
     <Compile Include="MediaItemDataMap.cs" />
+    <Compile Include="MediaItemRecord.cs" />
     <Compile Include="MediaSetContentDataMap.cs" />
     <Compile Include="MediaSetDataMap.cs" />
     <Compile Include="MediaSetMap.cs" />
+    <Compile Include="MediaSetMediaItemRecord.cs" />
     <Compile Include="MediaSetRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

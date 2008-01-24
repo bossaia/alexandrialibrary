@@ -138,6 +138,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set { queueController = value; }
 		}
 		
+		[CLSCompliant(false)]
 		public PersistenceController PersistenceController
 		{
 			get { return persistenceController; }

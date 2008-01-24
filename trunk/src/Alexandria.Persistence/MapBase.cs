@@ -33,16 +33,17 @@ namespace Telesophy.Alexandria.Persistence
 	public abstract class MapBase<Model> : IMap<Model>
 	{
 		#region Constructors
-		public MapBase(IEngine engine, Record record)
+		public MapBase(IEngine engine, IRecord record)
 		{
 			this.engine = engine;
 			this.record = record;
+			this.type = typeof(Model);
 		}
 		#endregion
 		
 		#region Private Fields
 		private IEngine engine;
-		private Record record;
+		private IRecord record;
 		private IList<Relationship> relationships = new List<Relationship>();
 		private Type type;
 		#endregion
@@ -53,7 +54,7 @@ namespace Telesophy.Alexandria.Persistence
 			get { return engine; }
 		}
 		
-		public Record Record
+		public IRecord Record
 		{
 			get { return record; }
 		}

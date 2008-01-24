@@ -87,7 +87,7 @@ namespace Telesophy.Alexandria.Persistence
 					
 					batch.Commands.Add(Engine.GetInitializeSchemaCommand(schema));
 				
-					foreach (Record record in schema.Records)
+					foreach (IRecord record in schema.Records)
 					{
 						batch.Commands.Add(Engine.GetInitializeRecordCommand(record));
 					}
@@ -110,11 +110,11 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				IList<Field> primaryKeyFields = map.Record.GetPrimaryKeyFields();
-				if (primaryKeyFields.Count > 0)
+				FieldCollection identifierFields = map.Record.GetIdentifierFields();
+				if (identifierFields.Count > 0)
 				{
 					Query query = new Query("lookup " + typeof(Model).Name);
-					query.Filters.Add(new Filter(primaryKeyFields[0], Operator.EqualTo, id));
+					query.Filters.Add(new Filter(identifierFields[0], Operator.EqualTo, id));
 					return Lookup<Model>(query);
 				}
 			}

@@ -327,6 +327,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set { playbackController = value; }
 		}
 		
+		[CLSCompliant(false)]
 		public PersistenceController PersistenceController
 		{
 			get { return persistenceController; }

@@ -27,73 +27,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Constraint : INamedItem
+	public class RecordCollection : NamedItemCollectionBase<IRecord>
 	{
 		#region Constructors
-		public Constraint(IRecord record, string name, ConstraintType type, params Field[] fields) : this(record, name, type, null, fields)
+		public RecordCollection()
 		{
-		}
-		
-		public Constraint(IRecord record, string name, ConstraintType type, Predicate<object> predicate, params Field[] fields)
-		{
-			this.record = record;
-			this.name = name;
-			this.type = type;
-
-			this.fields = new List<Field>();
-			foreach (Field field in fields)
-				this.fields.Add(field);
-
-			this.predicate = predicate;
-		}
-		#endregion
-	
-		#region Private Fields
-		private IRecord record;
-		private string name;
-		private ConstraintType type;
-		private IList<Field> fields;
-		private Predicate<object> predicate;
-		#endregion
-	
-		#region Public Properties
-		public IRecord Record
-		{
-			get { return record; }
-		}
-		
-		public ConstraintType Type
-		{
-			get { return type; }
-		}
-
-		public IList<Field> Fields
-		{
-			get { return fields; }
-		}
-
-		public Predicate<object> Predicate
-		{
-			get { return predicate; }
-		}
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
-		{
-			get { return name; }
-		}
-		#endregion
-		
-		#region Static Members
-		private static Constraint empty = new Constraint();
-		
-		public static Constraint Empty
-		{
-			get { return empty; }
 		}
 		#endregion
 	}

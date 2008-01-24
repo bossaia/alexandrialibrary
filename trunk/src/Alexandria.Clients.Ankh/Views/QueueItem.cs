@@ -31,6 +31,7 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
+	/*
 	public class QueueItem
 	{
 		private string name;
@@ -42,4 +43,5 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private int trackNumber;
 		private string format;
 	}
+	*/
 }
