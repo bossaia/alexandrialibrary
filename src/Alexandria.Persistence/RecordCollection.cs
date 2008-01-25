@@ -34,8 +34,20 @@ namespace Telesophy.Alexandria.Persistence
 	public class RecordCollection : NamedItemCollectionBase<IRecord>
 	{
 		#region Constructors
-		public RecordCollection()
+		public RecordCollection(ISchema schema)
 		{
+			this.schema = schema;
+		}
+		#endregion
+		
+		#region Private Fields
+		private ISchema schema;
+		#endregion
+		
+		#region Public Properties
+		public ISchema Schema
+		{
+			get { return schema; }
 		}
 		#endregion
 	}

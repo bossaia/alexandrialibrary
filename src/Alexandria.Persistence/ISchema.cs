@@ -33,5 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public interface ISchema : INamedItem
 	{
 		RecordCollection Records { get; }
+		RelationshipCollection Relationships { get; }
+		RelationshipCollection GetRelationshipsByParentRecord(IRecord parentRecord);
 	}
 }

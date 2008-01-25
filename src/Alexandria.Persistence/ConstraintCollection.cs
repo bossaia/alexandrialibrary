@@ -62,8 +62,8 @@ namespace Telesophy.Alexandria.Persistence
 			{
 				if (!base.Contains(name))
 				{
-					Constraint constraint = new Constraint(record, name, type, predicate, fields);
-					base.InsertItem(base.Count, constraint);
+					Constraint item = new Constraint(record, name, type, predicate, fields);
+					base.Add(item);
 				}
 			}
 		}

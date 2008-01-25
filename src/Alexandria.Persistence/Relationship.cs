@@ -30,33 +30,35 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Relationship
+	public struct Relationship : IRelationship
 	{
 		#region Constructors
-		public Relationship(string name, ISchema schema, RelationshipType type, Field parentId, Field childId)
+		public Relationship(string name, ISchema schema, RelationshipType type, Field parentField, Field childField)
 		{
 			this.name = name;
 			this.schema = schema;
 			this.type = type;
-			this.parentId = parentId;
-			this.childId = childId;
+			this.parentField = parentField;
+			this.childField = childField;
 		}
 		#endregion
 	
 		#region Private Fields
-		private string name;
 		private ISchema schema;
+		private string name;
 		private RelationshipType type;
-		private Field parentId;
-		private Field childId;
+		private Field parentField;
+		private Field childField;
 		#endregion
 	
-		#region Public Properties
+		#region INamedItem Members
 		public string Name
 		{
 			get { return name; }
 		}
-
+		#endregion
+	
+		#region IRelationship Members
 		public ISchema Schema
 		{
 			get { return schema; }
@@ -67,14 +69,14 @@ namespace Telesophy.Alexandria.Persistence
 			get { return type; }
 		}
 		
-		public Field ParentId
+		public Field ParentField
 		{
-			get { return parentId; }
+			get { return parentField; }
 		}
 		
-		public Field ChildId
+		public Field ChildField
 		{
-			get { return childId; }
+			get { return childField; }
 		}
 		#endregion
 		

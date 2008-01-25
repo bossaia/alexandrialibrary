@@ -65,6 +65,29 @@ namespace Telesophy.Alexandria.Persistence
 			get { return name; }
 		}
 		#endregion
+
+		#region Public Methods
+		public override bool Equals(object obj)
+		{
+			if (obj != null && obj is Field)
+			{
+				Field other = (Field)obj;
+				return (other.ToString() == this.ToString());
+			}
+			
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return ToString().GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0}.{1}.{2}", record.Schema.Name, record.Name, name);
+		}
+		#endregion
 		
 		#region Static Members
 		private static Field empty = new Field();
@@ -72,6 +95,16 @@ namespace Telesophy.Alexandria.Persistence
 		public static Field Empty
 		{
 			get { return empty; }
+		}
+		
+		public static bool operator ==(Field f1, Field f2)
+		{
+			return f1.Equals(f2);
+		}
+		
+		public static bool operator !=(Field f1, Field f2)
+		{
+			return !f1.Equals(f2);
 		}
 		#endregion
 	}

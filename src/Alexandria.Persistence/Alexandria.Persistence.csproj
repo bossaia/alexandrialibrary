@@ -38,6 +38,7 @@
     <Compile Include="FieldCollection.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="IRecord.cs" />
+    <Compile Include="IRelationship.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="MapBase.cs" />
     <Compile Include="NamedItemCollectionBase.cs" />
@@ -45,6 +46,7 @@
     <Compile Include="Query.cs" />
     <Compile Include="RecordBase.cs" />
     <Compile Include="RecordCollection.cs" />
+    <Compile Include="RelationshipCollection.cs" />
     <Compile Include="RelationshipType.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="CommandFunction.cs" />
