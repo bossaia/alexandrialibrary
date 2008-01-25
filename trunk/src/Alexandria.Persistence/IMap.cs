@@ -36,6 +36,7 @@ namespace Telesophy.Alexandria.Persistence
 		IRecord Record { get; }
 		IList<Relationship> Relationships { get; }
 		Type Type { get; }
+		Query GetRelationshipQuery(IRelationship relationship);
 	}
 	
 	public interface IMap<Model> : IMap

@@ -30,59 +30,11 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public abstract class MapBase<Model> : IMap<Model>
+	public interface IRelationship : INamedItem
 	{
-		#region Constructors
-		public MapBase(IEngine engine, IRecord record)
-		{
-			this.engine = engine;
-			this.record = record;
-			this.type = typeof(Model);
-		}
-		#endregion
-		
-		#region Private Fields
-		private IEngine engine;
-		private IRecord record;
-		private IList<Relationship> relationships = new List<Relationship>();
-		private Type type;
-		#endregion
-	
-		#region IMap Members
-		public IEngine Engine
-		{
-			get { return engine; }
-		}
-		
-		public IRecord Record
-		{
-			get { return record; }
-		}
-
-		public IList<Relationship> Relationships
-		{
-			get { return relationships; }
-		}
-
-		public Type Type
-		{
-			get { return type; }
-		}
-		
-		public virtual Query GetRelationshipQuery(IRelationship relationship)
-		{
-			return null;
-		}
-		#endregion
-		
-		#region IMap<Model> Members
-		public abstract Model Lookup(Query query);
-
-		public abstract IList<Model> List(Query query);
-
-		public abstract void Save(Model model);
-
-		public abstract void Delete(Model model);
-		#endregion
+		ISchema Schema { get; }
+		RelationshipType Type { get; }
+		Field ParentField { get; }
+		Field ChildField { get; }
 	}
 }

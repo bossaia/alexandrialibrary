@@ -37,12 +37,15 @@ namespace Telesophy.Alexandria.Persistence
 		public Schema(string name)
 		{
 			this.name = name;
+			this.records = new RecordCollection(this);
+			this.relationships = new RelationshipCollection(this);
 		}
 		#endregion
 		
 		#region Private Fields
 		private string name;
-		private RecordCollection records = new RecordCollection();
+		private RecordCollection records;
+		private RelationshipCollection relationships;
 		#endregion
 		
 		#region INamedItem Members
@@ -56,6 +59,27 @@ namespace Telesophy.Alexandria.Persistence
 		public RecordCollection Records
 		{
 			get { return records; }
+		}
+		
+		public RelationshipCollection Relationships
+		{
+			get { return relationships; }
+		}
+		
+		public RelationshipCollection GetRelationshipsByParentRecord(IRecord parentRecord)
+		{
+			RelationshipCollection collection = new RelationshipCollection(this);
+			
+			if (parentRecord != null)
+			{
+				foreach(Relationship item in relationships)
+				{
+					if (item.ParentField.Record == parentRecord)
+						collection.Add(item);
+				}
+			}
+						
+			return collection;
 		}
 		#endregion		
 	}

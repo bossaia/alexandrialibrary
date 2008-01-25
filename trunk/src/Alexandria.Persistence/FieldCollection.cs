@@ -62,16 +62,16 @@ namespace Telesophy.Alexandria.Persistence
 			{
 				if (!base.Contains(name))
 				{
-					Field field = new Field(record, name, dataType);
-					base.InsertItem(base.Count, field);
+					Field item = new Field(record, name, dataType);
+					base.Add(item);
 					
 					switch (constraintType)
 					{
 						case ConstraintType.Identifier:
-							record.Constraints.Add(name + "_pk", constraintType, field);
+							record.Constraints.Add(name + "_pk", constraintType, item);
 							break;
 						case ConstraintType.Unique:
-							record.Constraints.Add(name + "_uq", constraintType, field);
+							record.Constraints.Add(name + "_uq", constraintType, item);
 							break;
 						default:
 							break;
