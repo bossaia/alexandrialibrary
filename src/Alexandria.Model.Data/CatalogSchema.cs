@@ -28,13 +28,27 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface ISchema : INamedItem
+	public class CatalogSchema : Schema
 	{
-		RecordCollection Records { get; }
-		RelationshipCollection Relationships { get; }
-		RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord);
-		RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord);
+		#region Constructors
+		public CatalogSchema() : base("Catalog")
+		{
+			MediaSetRecord mediaSet = new MediaSetRecord(this);
+			MediaItemRecord mediaItem = new MediaItemRecord(this);
+			MediaSetMediaItemRecord mediaSetMediaItem = new MediaSetMediaItemRecord(this);
+			Relationship mediaSetParent = new Relationship("MediaSetParent", this, RelationshipType.OneToMany, mediaSet.GetIdentifierFields()[0], mediaSetMediaItem.GetIdentifierFields()[0], "MediaItemChild");
+			Relationship mediaItemChild = new Relationship("MediaItemChild", this, RelationshipType.ManyToOne, mediaSetMediaItem.GetIdentifierFields()[1], mediaItem.GetIdentifierFields()[0], "MediaSetParent");
+		
+			Records.Add(mediaSet);
+			Records.Add(mediaItem);
+			Records.Add(mediaSetMediaItem);
+			Relationships.Add(mediaSetParent);
+			Relationships.Add(mediaItemChild);
+		}
+		#endregion
 	}
 }

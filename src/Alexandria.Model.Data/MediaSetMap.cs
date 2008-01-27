@@ -27,6 +27,8 @@
 
 using System;
 using System.Collections.Generic;
+
+using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
@@ -34,7 +36,7 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetMap : MapBase<IMediaSet>
 	{
 		#region Constructors
-		public MediaSetMap(IEngine engine, MediaSetRecord record) : base(engine, record)
+		public MediaSetMap(IEngine engine, IRecord record) : base(engine, record)
 		{
 		}
 		#endregion
@@ -42,7 +44,43 @@ namespace Telesophy.Alexandria.Model.Data
 		#region IMap Members
 		public override IMediaSet Lookup(Query query)
 		{
-			//Engine.GetLookupCommand(query);
+			Batch batch = new Batch("Lookup MediaSet");
+			
+			ICommand setLookupCommand = Engine.GetLookupCommand(query);
+			Query childQuery = Record.Schema.Relationships["MediaSetParent"].GetListChildrenQuery(query);
+			ICommand itemLookupCommand = Engine.GetLookupCommand(childQuery);
+			
+			batch.Commands.Add(setLookupCommand);
+			batch.Commands.Add(itemLookupCommand);
+			
+			IResult result = Engine.Run(batch);
+			if (result.Successful)
+			{
+				IMediaSet album = new Album();
+				
+				Tuple t1 = result.CommandResults[setLookupCommand].Tuples[0];
+				album.Id = (Guid)t1.Data[Record.Fields["Id"]];
+				album.Type = (string)t1.Data[Record.Fields["Type"]];
+				album.Source = (string)t1.Data[Record.Fields["Source"]];
+				album.Title = (string)t1.Data[Record.Fields["Title"]];
+				//TODO: Finish setting album properties
+				
+				foreach (Tuple t2 in result.CommandResults[itemLookupCommand].Tuples)
+				{
+					IMediaItem track = new AudioTrack();
+					
+					//NOTE: Create a link between the Record and Command 
+					//      so that the result can do this more generically
+					track.Id = (Guid)t2.Data[Record.Schema.Records["MediaItem"].Fields["Id"]];
+					track.Type = (string)t2.Data[Record.Schema.Records["MediaItem"].Fields["Type"]];
+					//TODO: Finish setting the track properties
+					
+					album.Items.Add(track);
+				}
+				
+				return album;
+			}
+			
 			return null;
 		}
 

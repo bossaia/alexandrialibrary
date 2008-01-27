@@ -45,7 +45,7 @@ namespace Telesophy.Alexandria.Persistence
 		
 		#region Private Fields
 		private IEngine engine;
-		private IList<Schema> schemas = new List<Schema>();
+		private IList<ISchema> schemas = new List<ISchema>();
 		private IDictionary<Type, IMap> maps = new Dictionary<Type, IMap>();
 		#endregion
 	
@@ -67,7 +67,7 @@ namespace Telesophy.Alexandria.Persistence
 			set { engine = value; }
 		}
 
-		public IList<Schema> Schemas
+		public IList<ISchema> Schemas
 		{
 			get { return schemas; }
 		}

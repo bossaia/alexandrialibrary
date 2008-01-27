@@ -33,13 +33,14 @@ namespace Telesophy.Alexandria.Persistence
 	public struct Relationship : IRelationship
 	{
 		#region Constructors
-		public Relationship(string name, ISchema schema, RelationshipType type, Field parentField, Field childField)
+		public Relationship(string name, ISchema schema, RelationshipType type, Field parentField, Field childField, string reciprocalRelationshipName)
 		{
 			this.name = name;
 			this.schema = schema;
 			this.type = type;
 			this.parentField = parentField;
 			this.childField = childField;
+			this.reciprocalRelationshipName = reciprocalRelationshipName;
 		}
 		#endregion
 	
@@ -49,6 +50,7 @@ namespace Telesophy.Alexandria.Persistence
 		private RelationshipType type;
 		private Field parentField;
 		private Field childField;
+		private string reciprocalRelationshipName;
 		#endregion
 	
 		#region INamedItem Members
@@ -77,6 +79,17 @@ namespace Telesophy.Alexandria.Persistence
 		public Field ChildField
 		{
 			get { return childField; }
+		}
+		
+		public string ReciprocalRelationshipName
+		{
+			get { return reciprocalRelationshipName; }
+		}
+		
+		public Query GetListChildrenQuery(Query parentQuery)
+		{
+			//TODO: Include support for reciprocal relationships (e.g. many-to-many link tables)
+			return null;
 		}
 		#endregion
 		
