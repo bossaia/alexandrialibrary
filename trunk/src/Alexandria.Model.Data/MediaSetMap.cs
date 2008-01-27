@@ -36,7 +36,7 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetMap : MapBase<IMediaSet>
 	{
 		#region Constructors
-		public MediaSetMap(IEngine engine, IRecord record) : base(engine, record)
+		public MediaSetMap(IEngine engine, IRecord<IMediaSet> record) : base(engine, record)
 		{
 		}
 		#endregion
@@ -54,27 +54,17 @@ namespace Telesophy.Alexandria.Model.Data
 			batch.Commands.Add(itemLookupCommand);
 			
 			IResult result = Engine.Run(batch);
+			
 			if (result.Successful)
 			{
-				IMediaSet album = new Album();
+				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
+				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
 				
-				Tuple t1 = result.CommandResults[setLookupCommand].Tuples[0];
-				album.Id = (Guid)t1.Data[Record.Fields["Id"]];
-				album.Type = (string)t1.Data[Record.Fields["Type"]];
-				album.Source = (string)t1.Data[Record.Fields["Source"]];
-				album.Title = (string)t1.Data[Record.Fields["Title"]];
-				//TODO: Finish setting album properties
+				IMediaSet album = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
 				
 				foreach (Tuple t2 in result.CommandResults[itemLookupCommand].Tuples)
 				{
-					IMediaItem track = new AudioTrack();
-					
-					//NOTE: Create a link between the Record and Command 
-					//      so that the result can do this more generically
-					track.Id = (Guid)t2.Data[Record.Schema.Records["MediaItem"].Fields["Id"]];
-					track.Type = (string)t2.Data[Record.Schema.Records["MediaItem"].Fields["Type"]];
-					//TODO: Finish setting the track properties
-					
+					IMediaItem track = itemRecord.GetModel(t2);				
 					album.Items.Add(track);
 				}
 				

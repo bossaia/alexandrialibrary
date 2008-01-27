@@ -66,6 +66,16 @@ namespace Telesophy.Alexandria.Persistence
 			get { return relationships; }
 		}
 		
+		public IRecord<Model> GetRecord<Model>(string name)
+		{
+			if (Records.Contains(name))
+			{
+				return (IRecord<Model>)Records[name];
+			}
+			
+			return null;
+		}
+		
 		public RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord)
 		{
 			RelationshipCollection list = new RelationshipCollection(this);

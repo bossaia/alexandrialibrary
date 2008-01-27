@@ -34,6 +34,7 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		RecordCollection Records { get; }
 		RelationshipCollection Relationships { get; }
+		IRecord<Model> GetRecord<Model>(string name);
 		RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord);
 		RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord);
 	}
