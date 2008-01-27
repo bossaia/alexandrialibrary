@@ -41,6 +41,7 @@ namespace Telesophy.Alexandria.Persistence
 	
 	public interface IMap<Model> : IMap
 	{
+		new IRecord<Model> Record { get; }
 		Model Lookup(Query query);
 		IList<Model> List(Query query);
 		void Save(Model model);
