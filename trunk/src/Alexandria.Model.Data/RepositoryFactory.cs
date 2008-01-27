@@ -28,13 +28,30 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface ISchema : INamedItem
-	{
-		RecordCollection Records { get; }
-		RelationshipCollection Relationships { get; }
-		RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord);
-		RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord);
+	public static class RepositoryFactory
+	{		
+		public static IRepository GetRepository(IEngine engine)
+		{
+			if (engine != null)
+			{
+				Repository repository = new Repository(engine);
+				
+				ISchema catalog = new CatalogSchema();
+				
+				IMap mediaSetMap = new MediaSetMap(engine, catalog.Records["MediaSet"]);
+				IMap mediaItemMap = new MediaItemMap(engine, catalog.Records["MediaItem"]);
+				
+				repository.Schemas.Add(catalog);
+				repository.Maps.Add(typeof(IMediaSet), mediaSetMap);
+				repository.Maps.Add(typeof(IMediaItem), mediaItemMap);
+				
+				return repository;
+			}
+			else throw new ArgumentNullException("Could not create a repository: persistence engine is undefined");
+		}
 	}
 }

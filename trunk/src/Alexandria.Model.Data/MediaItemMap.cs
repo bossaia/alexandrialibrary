@@ -28,13 +28,37 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+using Telesophy.Alexandria.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface ISchema : INamedItem
+	public class MediaItemMap : MapBase<IMediaItem>
 	{
-		RecordCollection Records { get; }
-		RelationshipCollection Relationships { get; }
-		RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord);
-		RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord);
+		#region Constructors
+		public MediaItemMap(IEngine engine, IRecord record) : base(engine, record)
+		{
+		}
+		#endregion
+
+		#region IMap Members
+		public override IMediaItem Lookup(Query query)
+		{
+			//Engine.GetLookupCommand(query);
+			return null;
+		}
+
+		public override IList<IMediaItem> List(Query query)
+		{
+			return null;
+		}
+
+		public override void Save(IMediaItem model)
+		{
+		}
+
+		public override void Delete(IMediaItem model)
+		{
+		}
+		#endregion
 	}
 }

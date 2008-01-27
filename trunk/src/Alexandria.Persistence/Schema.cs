@@ -66,20 +66,32 @@ namespace Telesophy.Alexandria.Persistence
 			get { return relationships; }
 		}
 		
-		public RelationshipCollection GetRelationshipsByParentRecord(IRecord parentRecord)
+		public RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord)
 		{
-			RelationshipCollection collection = new RelationshipCollection(this);
+			RelationshipCollection list = new RelationshipCollection(this);
 			
 			if (parentRecord != null)
 			{
-				foreach(Relationship item in relationships)
-				{
-					if (item.ParentField.Record == parentRecord)
-						collection.Add(item);
-				}
+				foreach(Relationship rel in Relationships)
+					if (rel.ParentField.Record == parentRecord)
+						list.Add(rel);
 			}
-						
-			return collection;
+			
+			return list;
+		}
+		
+		public RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord)
+		{
+			RelationshipCollection list = new RelationshipCollection(this);
+
+			if (childRecord != null)
+			{
+				foreach (Relationship rel in Relationships)
+					if (rel.ChildField.Record == childRecord)
+						list.Add(rel);
+			}
+			
+			return list;
 		}
 		#endregion		
 	}

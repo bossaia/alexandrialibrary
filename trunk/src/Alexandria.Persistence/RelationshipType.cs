@@ -34,6 +34,6 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		OneToOne,
 		OneToMany,
-		ManyToMany
+		ManyToOne
 	}
 }

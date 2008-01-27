@@ -36,5 +36,7 @@ namespace Telesophy.Alexandria.Persistence
 		RelationshipType Type { get; }
 		Field ParentField { get; }
 		Field ChildField { get; }
+		string ReciprocalRelationshipName { get; }
+		Query GetListChildrenQuery(Query parentQuery);
 	}
 }

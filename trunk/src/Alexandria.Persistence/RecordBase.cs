@@ -87,5 +87,50 @@ namespace Telesophy.Alexandria.Persistence
 			return identifierFields;
 		}
 		#endregion
+		
+		#region Overrides
+		public override bool Equals(object obj)
+		{
+			if (obj != null && obj is RecordBase)
+			{
+				RecordBase other = (RecordBase)obj;
+				return (this.ToString() == other.ToString());
+			}
+			
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return ToString().GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return string.Format("{0}.{1}", schema.Name, name);
+		}
+		#endregion
+		
+		#region Static Members
+		public static bool operator ==(RecordBase r1, RecordBase r2)
+		{
+			if (r1 != null && r2 != null)
+			{
+				return r1.Equals(r2);
+			}
+			
+			return false;
+		}
+		
+		public static bool operator !=(RecordBase r1, RecordBase r2)
+		{
+			if (r1 != null && r2 != null)
+			{
+				return !r1.Equals(r2);
+			}
+			
+			return false;
+		}
+		#endregion
 	}
 }
