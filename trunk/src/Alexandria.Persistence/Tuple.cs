@@ -54,5 +54,17 @@ namespace Telesophy.Alexandria.Persistence
 			get { return data; }
 		}
 		#endregion
+		
+		#region Public Methods
+		public DataType GetValue<DataType>(Field field)
+		{
+			if (data.ContainsKey(field))
+			{
+				return (DataType)data[field];
+			}
+			
+			return default(DataType);
+		}
+		#endregion
 	}
 }

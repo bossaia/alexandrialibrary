@@ -11,4 +11,10 @@ namespace Telesophy.Alexandria.Persistence
 		ConstraintCollection Constraints { get; }
 		FieldCollection GetIdentifierFields();
 	}
+	
+	public interface IRecord<Model> : IRecord
+	{
+		Model GetModel(Tuple tuple);
+		Tuple GetTuple(Model model);
+	}
 }

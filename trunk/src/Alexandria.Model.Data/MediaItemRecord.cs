@@ -32,7 +32,7 @@ using Telesophy.Alexandria.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class MediaItemRecord : RecordBase
+	public class MediaItemRecord : RecordBase<IMediaItem>
 	{
 		public MediaItemRecord(ISchema schema) : base("MediaItem", schema)
 		{
@@ -48,6 +48,32 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add("Date", typeof(DateTime));
 			Fields.Add("Format", typeof(string));
 			Fields.Add("Path", typeof(Uri), ConstraintType.Unique);
+		}
+
+		public override IMediaItem GetModel(Tuple tuple)
+		{
+			IMediaItem model = new AudioTrack();
+
+			if (tuple != null)
+			{
+				model.Id = tuple.GetValue<Guid>(Fields["Id"]);
+				model.Type = tuple.GetValue<string>(Fields["Type"]);
+			}
+
+			return model;
+		}
+
+		public override Tuple GetTuple(IMediaItem model)
+		{
+			Tuple tuple = new Tuple();
+
+			if (model != null)
+			{
+				tuple.Data[Fields["Id"]] = model.Id;
+				tuple.Data[Fields["Type"]] = model.Type;
+			}
+
+			return tuple;
 		}
 	}
 }
