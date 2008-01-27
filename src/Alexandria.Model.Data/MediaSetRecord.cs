@@ -32,7 +32,7 @@ using Telesophy.Alexandria.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class MediaSetRecord : RecordBase
+	public class MediaSetRecord : RecordBase<IMediaSet>
 	{
 		public MediaSetRecord(ISchema schema) : base("MediaSet", schema)
 		{
@@ -44,6 +44,32 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add("Artist", typeof(string));
 			Fields.Add("Date", typeof(string));
 			Fields.Add("Path", typeof(Uri), ConstraintType.Unique);
+		}
+
+		public override IMediaSet GetModel(Tuple tuple)
+		{
+			IMediaSet model = new Album();
+			
+			if (tuple != null)
+			{
+				model.Id = tuple.GetValue<Guid>(Fields["Id"]);
+				model.Type = tuple.GetValue<string>(Fields["Type"]);
+			}
+			
+			return model;
+		}
+
+		public override Tuple GetTuple(IMediaSet model)
+		{
+			Tuple tuple = new Tuple();
+			
+			if (model != null)
+			{
+				tuple.Data[Fields["Id"]] = model.Id;
+				tuple.Data[Fields["Type"]] = model.Type;
+			}
+			
+			return tuple;
 		}
 	}
 }

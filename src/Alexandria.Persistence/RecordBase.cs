@@ -70,7 +70,7 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			get { return constraints; }
 		}
-		
+
 		public FieldCollection GetIdentifierFields()
 		{
 			FieldCollection identifierFields = new FieldCollection(this);
@@ -96,7 +96,7 @@ namespace Telesophy.Alexandria.Persistence
 				RecordBase other = (RecordBase)obj;
 				return (this.ToString() == other.ToString());
 			}
-			
+
 			return false;
 		}
 
@@ -110,7 +110,7 @@ namespace Telesophy.Alexandria.Persistence
 			return string.Format("{0}.{1}", schema.Name, name);
 		}
 		#endregion
-		
+
 		#region Static Members
 		public static bool operator ==(RecordBase r1, RecordBase r2)
 		{
@@ -118,19 +118,34 @@ namespace Telesophy.Alexandria.Persistence
 			{
 				return r1.Equals(r2);
 			}
-			
+
 			return false;
 		}
-		
+
 		public static bool operator !=(RecordBase r1, RecordBase r2)
 		{
 			if (r1 != null && r2 != null)
 			{
 				return !r1.Equals(r2);
 			}
-			
+
 			return false;
 		}
+		#endregion
+	}
+
+	public abstract class RecordBase<Model> : RecordBase, IRecord<Model>
+	{
+		#region Constructors
+		public RecordBase(string name, ISchema schema) : base(name, schema)
+		{
+		}
+		#endregion
+		
+		#region IRecord<Model> Members
+		public abstract Model GetModel(Tuple tuple);
+		
+		public abstract Tuple GetTuple(Model model);
 		#endregion
 	}
 }
