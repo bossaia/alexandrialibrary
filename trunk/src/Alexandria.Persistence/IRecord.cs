@@ -7,6 +7,7 @@ namespace Telesophy.Alexandria.Persistence
 	public interface IRecord : INamedItem
 	{
 		ISchema Schema { get; }
+		Type DataType { get; }
 		FieldCollection Fields { get; }
 		ConstraintCollection Constraints { get; }
 		FieldCollection GetIdentifierFields();

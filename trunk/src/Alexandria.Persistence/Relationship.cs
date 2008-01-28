@@ -30,17 +30,26 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public struct Relationship : IRelationship
+	public class Relationship<Parent, Child> : IRelationship<Parent, Child>
 	{
 		#region Constructors
-		public Relationship(string name, ISchema schema, RelationshipType type, Field parentField, Field childField, string reciprocalRelationshipName)
+		public Relationship(string name, ISchema schema, RelationshipType type, IRecord<Parent> parentRecord, IRecord<Child> childRecord, Field parentField, Field childField) : this(name, schema, type, parentRecord, childRecord, null, parentField, childField, Field.Empty, Field.Empty)
+		{
+		
+		}
+		
+		public Relationship(string name, ISchema schema, RelationshipType type, IRecord<Parent> parentRecord, IRecord<Child> childRecord, IRecord linkRecord, Field parentField, Field childField, Field linkParentField, Field linkChildField)
 		{
 			this.name = name;
 			this.schema = schema;
 			this.type = type;
+			this.parentRecord = parentRecord;
+			this.childRecord = childRecord;
+			this.linkRecord = linkRecord;
 			this.parentField = parentField;
 			this.childField = childField;
-			this.reciprocalRelationshipName = reciprocalRelationshipName;
+			this.linkParentField = linkParentField;
+			this.linkChildField = linkChildField;
 		}
 		#endregion
 	
@@ -48,9 +57,13 @@ namespace Telesophy.Alexandria.Persistence
 		private ISchema schema;
 		private string name;
 		private RelationshipType type;
+		private IRecord<Parent> parentRecord;
+		private IRecord<Child> childRecord;
+		private IRecord linkRecord;
 		private Field parentField;
 		private Field childField;
-		private string reciprocalRelationshipName;
+		private Field linkParentField;
+		private Field linkChildField;
 		#endregion
 	
 		#region INamedItem Members
@@ -70,6 +83,11 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			get { return type; }
 		}
+
+		public IRecord LinkRecord
+		{
+			get { return linkRecord; }
+		}
 		
 		public Field ParentField
 		{
@@ -81,24 +99,26 @@ namespace Telesophy.Alexandria.Persistence
 			get { return childField; }
 		}
 		
-		public string ReciprocalRelationshipName
+		public Field LinkParentField
 		{
-			get { return reciprocalRelationshipName; }
+			get { return linkParentField; }
 		}
 		
-		public Query GetListChildrenQuery(Query parentQuery)
+		public Field LinkChildField
 		{
-			//TODO: Include support for reciprocal relationships (e.g. many-to-many link tables)
-			return null;
+			get { return linkChildField; }
 		}
 		#endregion
 		
-		#region Static Members
-		private static Relationship empty = new Relationship();
-		
-		public static Relationship Empty
+		#region IRelationship<Parent, Child> Members
+		public IRecord<Parent> ParentRecord
 		{
-			get { return empty; }
+			get { return parentRecord; }
+		}
+		
+		public IRecord<Child> ChildRecord
+		{
+			get { return childRecord; }
 		}
 		#endregion
 	}

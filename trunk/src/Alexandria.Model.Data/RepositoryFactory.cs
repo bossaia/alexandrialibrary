@@ -42,8 +42,8 @@ namespace Telesophy.Alexandria.Model.Data
 				
 				ISchema catalog = new CatalogSchema();
 				
-				IMap mediaSetMap = new MediaSetMap(engine, catalog.GetRecord<IMediaSet>("MediaSet"));
-				IMap mediaItemMap = new MediaItemMap(engine, catalog.GetRecord<IMediaItem>("MediaItem"));
+				IMap mediaSetMap = new MediaSetMap(repository, catalog.GetRecord<IMediaSet>("MediaSet"));
+				IMap mediaItemMap = new MediaItemMap(repository, catalog.GetRecord<IMediaItem>("MediaItem"));
 				
 				repository.Schemas.Add(catalog);
 				repository.Maps.Add(typeof(IMediaSet), mediaSetMap);

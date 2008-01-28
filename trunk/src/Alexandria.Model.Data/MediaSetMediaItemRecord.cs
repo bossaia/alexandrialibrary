@@ -34,7 +34,7 @@ namespace Telesophy.Alexandria.Model.Data
 {
 	public class MediaSetMediaItemRecord : RecordBase
 	{
-		public MediaSetMediaItemRecord(ISchema schema) : base("MediaSetMediaItem", schema)
+		public MediaSetMediaItemRecord(ISchema schema) : base("MediaSetMediaItem", schema, null)
 		{
 			Fields.Add("MediaSetId", typeof(Guid));
 			Fields.Add("MediaItemId", typeof(Guid));

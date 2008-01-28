@@ -32,9 +32,9 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IMap
 	{
-		IEngine Engine { get; }
+		IRepository Repository { get; }
 		IRecord Record { get; }
-		IList<Relationship> Relationships { get; }
+		IList<IRelationship> Relationships { get; }
 		Type Type { get; }
 		Query GetRelationshipQuery(IRelationship relationship);
 	}

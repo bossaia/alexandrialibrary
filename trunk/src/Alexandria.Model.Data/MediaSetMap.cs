@@ -36,7 +36,7 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetMap : MapBase<IMediaSet>
 	{
 		#region Constructors
-		public MediaSetMap(IEngine engine, IRecord<IMediaSet> record) : base(engine, record)
+		public MediaSetMap(IRepository repository, IRecord<IMediaSet> record) : base(repository, record)
 		{
 		}
 		#endregion
@@ -46,14 +46,14 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			Batch batch = new Batch("Lookup MediaSet");
 			
-			ICommand setLookupCommand = Engine.GetLookupCommand(query);
-			Query childQuery = Record.Schema.Relationships["MediaSetParent"].GetListChildrenQuery(query);
-			ICommand itemLookupCommand = Engine.GetLookupCommand(childQuery);
+			ICommand setLookupCommand = Repository.Engine.GetLookupCommand(query);
+			Query childQuery = null; //Record.Schema.Relationships["MediaSetParent"].GetListChildrenQuery(query);
+			ICommand itemLookupCommand = Repository.Engine.GetLookupCommand(childQuery);
 			
 			batch.Commands.Add(setLookupCommand);
 			batch.Commands.Add(itemLookupCommand);
 			
-			IResult result = Engine.Run(batch);
+			IResult result = Repository.Engine.Run(batch);
 			
 			if (result.Successful)
 			{

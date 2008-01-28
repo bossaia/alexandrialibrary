@@ -35,7 +35,7 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaItemMap : MapBase<IMediaItem>
 	{
 		#region Constructors
-		public MediaItemMap(IEngine engine, IRecord<IMediaItem> record) : base(engine, record)
+		public MediaItemMap(IRepository repository, IRecord<IMediaItem> record) : base(repository, record)
 		{
 		}
 		#endregion

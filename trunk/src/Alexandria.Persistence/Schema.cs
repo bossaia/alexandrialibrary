@@ -82,7 +82,7 @@ namespace Telesophy.Alexandria.Persistence
 			
 			if (parentRecord != null)
 			{
-				foreach(Relationship rel in Relationships)
+				foreach(IRelationship rel in Relationships)
 					if (rel.ParentField.Record == parentRecord)
 						list.Add(rel);
 			}
@@ -96,7 +96,7 @@ namespace Telesophy.Alexandria.Persistence
 
 			if (childRecord != null)
 			{
-				foreach (Relationship rel in Relationships)
+				foreach (IRelationship rel in Relationships)
 					if (rel.ChildField.Record == childRecord)
 						list.Add(rel);
 			}
