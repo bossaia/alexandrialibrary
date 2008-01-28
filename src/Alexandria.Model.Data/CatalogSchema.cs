@@ -40,14 +40,15 @@ namespace Telesophy.Alexandria.Model.Data
 			MediaSetRecord mediaSet = new MediaSetRecord(this);
 			MediaItemRecord mediaItem = new MediaItemRecord(this);
 			MediaSetMediaItemRecord mediaSetMediaItem = new MediaSetMediaItemRecord(this);
-			Relationship mediaSetParent = new Relationship("MediaSetParent", this, RelationshipType.OneToMany, mediaSet.GetIdentifierFields()[0], mediaSetMediaItem.GetIdentifierFields()[0], "MediaItemChild");
-			Relationship mediaItemChild = new Relationship("MediaItemChild", this, RelationshipType.ManyToOne, mediaSetMediaItem.GetIdentifierFields()[1], mediaItem.GetIdentifierFields()[0], "MediaSetParent");
+			IRelationship mediaSetItems = new Relationship<IMediaSet, IMediaItem>("MediaSetItems", this, RelationshipType.ManyToMany, mediaSet, mediaItem, mediaSetMediaItem, mediaSet.Fields[0], mediaItem.Fields[0], mediaSetMediaItem.Fields[0], mediaSetMediaItem.Fields[1]);
+			//IRelationship mediaSetParent = new Relationship("MediaSetParent", this, RelationshipType.OneToMany, mediaSet.GetIdentifierFields()[0], mediaSetMediaItem.GetIdentifierFields()[0], "MediaItemChild");
+			//IRelationship mediaItemChild = new Relationship("MediaItemChild", this, RelationshipType.ManyToOne, mediaSetMediaItem.GetIdentifierFields()[1], mediaItem.GetIdentifierFields()[0], "MediaSetParent");
 		
 			Records.Add(mediaSet);
 			Records.Add(mediaItem);
 			Records.Add(mediaSetMediaItem);
-			Relationships.Add(mediaSetParent);
-			Relationships.Add(mediaItemChild);
+			Relationships.Add(mediaSetItems);
+			//Relationships.Add(mediaItemChild);
 		}
 		#endregion
 	}

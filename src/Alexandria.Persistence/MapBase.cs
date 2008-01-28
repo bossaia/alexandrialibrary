@@ -33,33 +33,33 @@ namespace Telesophy.Alexandria.Persistence
 	public abstract class MapBase<Model> : IMap<Model>
 	{
 		#region Constructors
-		public MapBase(IEngine engine, IRecord<Model> record)
+		public MapBase(IRepository repository, IRecord<Model> record)
 		{
-			this.engine = engine;
+			this.repository = repository;
 			this.record = record;
 			this.type = typeof(Model);
 		}
 		#endregion
 		
 		#region Private Fields
-		private IEngine engine;
+		private IRepository repository;
 		private IRecord<Model> record;
-		private IList<Relationship> relationships = new List<Relationship>();
+		private IList<IRelationship> relationships = new List<IRelationship>();
 		private Type type;
 		#endregion
 	
 		#region IMap Members
-		public IEngine Engine
+		public IRepository Repository
 		{
-			get { return engine; }
+			get { return repository; }
 		}
-		
+				
 		public IRecord Record
 		{
 			get { return record; }
 		}
 
-		public IList<Relationship> Relationships
+		public IList<IRelationship> Relationships
 		{
 			get { return relationships; }
 		}

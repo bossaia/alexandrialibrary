@@ -34,10 +34,11 @@ namespace Telesophy.Alexandria.Persistence
 	public abstract class RecordBase : IRecord
 	{
 		#region Constructors
-		public RecordBase(string name, ISchema schema)
+		public RecordBase(string name, ISchema schema, Type dataType)
 		{
 			this.name = name;
 			this.schema = schema;
+			this.dataType = dataType;
 			this.fields = new FieldCollection(this);
 			this.constraints = new ConstraintCollection(this);
 		}
@@ -46,6 +47,7 @@ namespace Telesophy.Alexandria.Persistence
 		#region Private Fields
 		private string name;
 		private ISchema schema;
+		private Type dataType;
 		private FieldCollection fields;
 		private ConstraintCollection constraints;
 		#endregion
@@ -59,6 +61,11 @@ namespace Telesophy.Alexandria.Persistence
 		public ISchema Schema
 		{
 			get { return schema; }
+		}
+
+		public Type DataType
+		{
+			get { return dataType; }
 		}
 
 		public FieldCollection Fields
@@ -137,7 +144,7 @@ namespace Telesophy.Alexandria.Persistence
 	public abstract class RecordBase<Model> : RecordBase, IRecord<Model>
 	{
 		#region Constructors
-		public RecordBase(string name, ISchema schema) : base(name, schema)
+		public RecordBase(string name, ISchema schema) : base(name, schema, typeof(Model))
 		{
 		}
 		#endregion

@@ -34,9 +34,16 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		ISchema Schema { get; }
 		RelationshipType Type { get; }
+		IRecord LinkRecord { get; }
 		Field ParentField { get; }
 		Field ChildField { get; }
-		string ReciprocalRelationshipName { get; }
-		Query GetListChildrenQuery(Query parentQuery);
+		Field LinkParentField { get; }
+		Field LinkChildField { get; }
+	}
+
+	public interface IRelationship<Parent, Child> : IRelationship
+	{
+		IRecord<Parent> ParentRecord { get; }
+		IRecord<Child> ChildRecord { get; }
 	}
 }

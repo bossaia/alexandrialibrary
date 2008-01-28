@@ -51,27 +51,27 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region Public Methods
-		public void Add(string name, RelationshipType type, Field parentField, Field childField, string reciprocalRelationshipName)
+		public void Add<Parent, Child>(string name, RelationshipType type, IRecord<Parent> parentRecord, IRecord<Child> childRecord, IRecord linkRecord, Field parentField, Field childField, Field linkParentField, Field linkChildField)
 		{
 			if (!string.IsNullOrEmpty(name))
 			{
 				if (!base.Contains(name))
 				{
-					Relationship item = new Relationship(name, schema, type, parentField, childField, reciprocalRelationshipName);
+					Relationship<Parent, Child> item = new Relationship<Parent, Child>(name, schema, type, parentRecord, childRecord, linkRecord, parentField, childField, linkParentField, linkChildField);
 					base.Add(item);
 				}
 			}
 		}
 		
-		public Relationship GetRelationshipByParentField(Field parentField)
+		public IRelationship GetRelationshipByParentField(Field parentField)
 		{
-			foreach (Relationship relationship in Items)
+			foreach (IRelationship relationship in Items)
 			{
 				if (relationship.ParentField == parentField)
 					return relationship;
 			}
 			
-			return Relationship.Empty;
+			return null;
 		}
 		#endregion
 	}

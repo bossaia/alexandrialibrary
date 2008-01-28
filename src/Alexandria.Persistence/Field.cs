@@ -85,7 +85,9 @@ namespace Telesophy.Alexandria.Persistence
 
 		public override string ToString()
 		{
-			return string.Format("{0}.{1}.{2}", record.Schema.Name, record.Name, name);
+			if (this != Field.Empty)
+				return string.Format("{0}.{1}.{2}", record.Schema.Name, record.Name, name);
+			else return string.Empty;
 		}
 		#endregion
 		
