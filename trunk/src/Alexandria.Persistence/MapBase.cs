@@ -37,6 +37,7 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			this.repository = repository;
 			this.record = record;
+			this.relationships = new RelationshipCollection(record.Schema);
 			this.type = typeof(Model);
 		}
 		#endregion
@@ -44,7 +45,7 @@ namespace Telesophy.Alexandria.Persistence
 		#region Private Fields
 		private IRepository repository;
 		private IRecord<Model> record;
-		private IList<IRelationship> relationships = new List<IRelationship>();
+		private RelationshipCollection relationships;
 		private Type type;
 		#endregion
 	
@@ -59,7 +60,7 @@ namespace Telesophy.Alexandria.Persistence
 			get { return record; }
 		}
 
-		public IList<IRelationship> Relationships
+		public RelationshipCollection Relationships
 		{
 			get { return relationships; }
 		}

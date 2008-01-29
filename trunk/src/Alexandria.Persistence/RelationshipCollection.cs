@@ -73,6 +73,22 @@ namespace Telesophy.Alexandria.Persistence
 			
 			return null;
 		}
+		
+		public IRelationship<Parent, Child> GetRelationship<Parent, Child>()
+		{
+			foreach (IRelationship relationship in Items)
+			{
+				if (relationship.ParentField.Record.DataType == typeof(Parent))
+				{
+					if (relationship.ChildField.Record.DataType == typeof(Child))
+					{
+						return relationship as IRelationship<Parent, Child>;
+					}
+				}
+			}
+			
+			return null;
+		}
 		#endregion
 	}
 }

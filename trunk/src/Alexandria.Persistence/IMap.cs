@@ -34,9 +34,15 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		IRepository Repository { get; }
 		IRecord Record { get; }
-		IList<IRelationship> Relationships { get; }
+		RelationshipCollection Relationships { get; }
 		Type Type { get; }
 		Query GetRelationshipQuery(IRelationship relationship);
+		
+		//NOTE: New recursive members (where IMessage = command and IResponse = result)
+		//void LoadLookupMessages(Query query, IDictionary<string, IMessage> messages);
+		//IList<Model> ProcessLookupResponses(IDictionary<string, IResponse> responses);
+		//void LoadSaveMessages(Model model, IDictionary<string, IMessage> messages);
+		//void LoadDeleteMessages(Model model, IDictionary<string, IMessage> messages);
 	}
 	
 	public interface IMap<Model> : IMap

@@ -108,6 +108,29 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			get { return linkChildField; }
 		}
+		
+		public Query GetListChildrenQuery(Query parentQuery)
+		{
+			if (parentQuery != null && parentQuery.Filters.Count > 0)
+			{
+				Query listChildrenQuery = new Query("List children for " + Name);
+				listChildrenQuery.Filters.Add(parentQuery.Filters[0]);
+			
+				if (LinkRecord != null)
+				{
+					listChildrenQuery.Filters.Add(new Filter(LinkParentField, Operator.OnInnerJoin, ParentField));
+					listChildrenQuery.Filters.Add(new Filter(ChildField, Operator.OnInnerJoin, LinkChildField));
+				}
+				else
+				{
+					listChildrenQuery.Filters.Add(new Filter(ChildField, Operator.OnInnerJoin, ParentField));
+				}
+				
+				return listChildrenQuery;
+			}
+			
+			return null;
+		}
 		#endregion
 		
 		#region IRelationship<Parent, Child> Members
