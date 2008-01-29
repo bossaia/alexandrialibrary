@@ -47,8 +47,11 @@ namespace Telesophy.Alexandria.Model.Data
 			Batch batch = new Batch("Lookup MediaSet");
 			
 			ICommand setLookupCommand = Repository.Engine.GetLookupCommand(query);
-			Query childQuery = null; //Record.Schema.Relationships["MediaSetParent"].GetListChildrenQuery(query);
+			Query childQuery = Relationships.GetRelationship<IMediaSet, IMediaItem>().GetListChildrenQuery(query);
 			ICommand itemLookupCommand = Repository.Engine.GetLookupCommand(childQuery);
+			
+			//TODO: Figure out how to use the IMediaItem map here instead of just a command
+			//      e.g. Maps could return commands so that we can recursively add commands to the batch
 			
 			batch.Commands.Add(setLookupCommand);
 			batch.Commands.Add(itemLookupCommand);
@@ -60,15 +63,15 @@ namespace Telesophy.Alexandria.Model.Data
 				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
 				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
 				
-				IMediaSet album = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
+				IMediaSet mediaSet = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
 				
-				foreach (Tuple t2 in result.CommandResults[itemLookupCommand].Tuples)
+				foreach (Tuple tuple in result.CommandResults[itemLookupCommand].Tuples)
 				{
-					IMediaItem track = itemRecord.GetModel(t2);				
-					album.Items.Add(track);
+					IMediaItem mediaItem = itemRecord.GetModel(tuple);				
+					mediaSet.Items.Add(mediaItem);
 				}
 				
-				return album;
+				return mediaSet;
 			}
 			
 			return null;

@@ -39,6 +39,7 @@ namespace Telesophy.Alexandria.Persistence
 		Field ChildField { get; }
 		Field LinkParentField { get; }
 		Field LinkChildField { get; }
+		Query GetListChildrenQuery(Query parentQuery);
 	}
 
 	public interface IRelationship<Parent, Child> : IRelationship

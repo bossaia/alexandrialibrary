@@ -40,6 +40,9 @@ namespace Telesophy.Alexandria.Persistence
 		GreaterThanOrEqualTo,
 		LessThan,
 		LessThanOrEqualTo,
-		ContainedIn
+		ContainedIn,
+		OnInnerJoin,
+		OnLeftOuterJoin,
+		OnRightOuterJoin
 	}
 }
