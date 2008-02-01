@@ -63,15 +63,15 @@ namespace Telesophy.Alexandria.Model.Data
 				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
 				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
 				
-				IMediaSet mediaSet = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
+				//IMediaSet mediaSet = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
 				
-				foreach (Tuple tuple in result.CommandResults[itemLookupCommand].Tuples)
-				{
-					IMediaItem mediaItem = itemRecord.GetModel(tuple);				
-					mediaSet.Items.Add(mediaItem);
-				}
+				//foreach (Tuple tuple in result.CommandResults[itemLookupCommand].Tuples)
+				//{
+				//	IMediaItem mediaItem = itemRecord.GetModel(tuple);				
+				//	mediaSet.Items.Add(mediaItem);
+				//}
 				
-				return mediaSet;
+				//return mediaSet;
 			}
 			
 			return null;

@@ -27,13 +27,14 @@
 
 using System;
 using System.Collections.Generic;
+using Telesophy.Alexandria.Messaging;
 
 namespace Telesophy.Alexandria.Persistence
 {
 	public interface IResult
 	{
-		IDictionary<ICommand, TupleSet> CommandResults { get; }
+		IDictionary<IMessage, TupleSet> Details { get; }
 		bool Successful { get; }
-		Exception GetError();
+		Exception Error { get; }
 	}
 }

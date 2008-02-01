@@ -67,6 +67,12 @@
     <Compile Include="Tuple.cs" />
     <Compile Include="TupleSet.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.Messaging\Alexandria.Messaging.csproj">
+      <Project>{D9B3AAB3-F491-4D01-A69F-13519BAADA69}</Project>
+      <Name>Alexandria.Messaging</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

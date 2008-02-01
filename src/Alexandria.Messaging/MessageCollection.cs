@@ -27,30 +27,51 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Messaging
 {
-	public interface IMap
+	public class MessageCollection : KeyedCollection<Guid, IMessage>
 	{
-		IRepository Repository { get; }
-		IRecord Record { get; }
-		RelationshipCollection Relationships { get; }
-		Type Type { get; }
-		Query GetRelationshipQuery(IRelationship relationship);
-		
-		//NOTE: New recursive members
-		//void LoadBatchForLookup(Batch batch, Query query);
-		//void LoadBatchForSave(Batch batch, Model model);
-		//void LoadBatchForDelete(Batch batch, Model model);
-		//ReceiveMessage(IMessage message);
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		new IRecord<Model> Record { get; }
-		Model Lookup(Query query);
-		IList<Model> List(Query query);
-		void Save(Model model);
-		void Delete(Model model);
+		#region Constructors
+		public MessageCollection()
+		{
+		}
+		#endregion
+
+		#region Protected Methods
+		protected override Guid GetKeyForItem(IMessage item)
+		{
+			if (item != null)
+				return item.Id;
+			else return Guid.Empty;
+		}
+		#endregion
+
+		#region Public Properties
+		public new IMessage this[Guid id]
+		{
+			get
+			{
+				if (base.Contains(id))
+				{
+					return base[id];
+				}
+				else throw new KeyNotFoundException();
+			}
+		}
+
+		public new IMessage this[int index]
+		{
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
+		}
+		#endregion		
 	}
 }
