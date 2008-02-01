@@ -28,29 +28,53 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Messaging
 {
-	public interface IMap
+	public abstract class MessageBase : IMessage
 	{
-		IRepository Repository { get; }
-		IRecord Record { get; }
-		RelationshipCollection Relationships { get; }
-		Type Type { get; }
-		Query GetRelationshipQuery(IRelationship relationship);
+		#region Constructors
+		protected MessageBase(string type, object content) : this(Guid.NewGuid(), type, content)
+		{
+		}
 		
-		//NOTE: New recursive members
-		//void LoadBatchForLookup(Batch batch, Query query);
-		//void LoadBatchForSave(Batch batch, Model model);
-		//void LoadBatchForDelete(Batch batch, Model model);
-		//ReceiveMessage(IMessage message);
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		new IRecord<Model> Record { get; }
-		Model Lookup(Query query);
-		IList<Model> List(Query query);
-		void Save(Model model);
-		void Delete(Model model);
+		protected MessageBase(Guid id, string type, object content)
+		{
+			this.id = id;
+			this.type = type;
+			this.content = content;
+		}
+		#endregion
+		
+		#region Private Fields
+		private Guid id;
+		private string type;
+		private object content;
+		#endregion
+		
+		#region IMessage Members
+		public Guid Id
+		{
+			get { return id; }
+		}
+
+		public string Type
+		{
+			get { return type; }
+		}
+
+		public object Content
+		{
+			get { return content; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public override string ToString()
+		{
+			if (content != null)
+				return content.ToString();
+			else return string.Empty;
+		}
+		#endregion
 	}
 }

@@ -28,29 +28,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Messaging
 {
-	public interface IMap
+	public interface IMessage
 	{
-		IRepository Repository { get; }
-		IRecord Record { get; }
-		RelationshipCollection Relationships { get; }
-		Type Type { get; }
-		Query GetRelationshipQuery(IRelationship relationship);
-		
-		//NOTE: New recursive members
-		//void LoadBatchForLookup(Batch batch, Query query);
-		//void LoadBatchForSave(Batch batch, Model model);
-		//void LoadBatchForDelete(Batch batch, Model model);
-		//ReceiveMessage(IMessage message);
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		new IRecord<Model> Record { get; }
-		Model Lookup(Query query);
-		IList<Model> List(Query query);
-		void Save(Model model);
-		void Delete(Model model);
+		Guid Id { get; }
+		string Type { get; }
+		object Content { get; }
 	}
 }

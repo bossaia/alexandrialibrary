@@ -96,7 +96,7 @@ namespace Telesophy.Alexandria.Persistence
 					
 					if (!result.Successful)
 					{
-						Exception error = result.GetError();
+						Exception error = result.Error;
 						if (error != null)
 							throw error;
 					}
