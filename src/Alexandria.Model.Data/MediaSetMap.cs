@@ -42,6 +42,27 @@ namespace Telesophy.Alexandria.Model.Data
 		#endregion
 
 		#region IMap Members
+		public override IMediaSet Lookup(IResult result)
+		{
+			IMediaSet mediaSet = Record.GetModel(result.Contents[CommandTypes.LOOKUP_MEDIASET].Tuples[0]);
+
+			IList<IMediaItem> items = Repository.List<IMediaItem>(result);
+			foreach(IMediaItem item in items)
+			{
+				mediaSet.Items.Add(item);
+			}
+
+			return mediaSet;	
+		}
+
+		public override IList<IMediaSet> List(IResult result)
+		{
+			throw new Exception("The method or operation is not implemented.");
+		}
+		#endregion
+
+		#region Old IMap Members
+		/*
 		public override IMediaSet Lookup(Query query)
 		{
 			Batch batch = new Batch("Lookup MediaSet");
@@ -166,6 +187,7 @@ namespace Telesophy.Alexandria.Model.Data
 					throw result.Error;
 			}
 		}
+		*/
 		#endregion
 	}
 }

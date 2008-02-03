@@ -38,7 +38,9 @@ namespace Telesophy.Alexandria.Persistence
 		void Initialize();
 		Model Lookup<Model>(Guid id);
 		Model Lookup<Model>(Query query);
+		Model Lookup<Model>(IResult result);
 		IList<Model> List<Model>(Query query);
+		IList<Model> List<Model>(IResult result);
 		void Save<Model>(Model model);
 		void Delete<Model>(Model model);
 	}
