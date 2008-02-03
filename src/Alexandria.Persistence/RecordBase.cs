@@ -40,6 +40,7 @@ namespace Telesophy.Alexandria.Persistence
 			this.schema = schema;
 			this.dataType = dataType;
 			this.fields = new FieldCollection(this);
+			this.linkFields = new Dictionary<Type, Field>();
 			this.constraints = new ConstraintCollection(this);
 		}
 		#endregion
@@ -49,6 +50,7 @@ namespace Telesophy.Alexandria.Persistence
 		private ISchema schema;
 		private Type dataType;
 		private FieldCollection fields;
+		private IDictionary<Type, Field> linkFields;
 		private ConstraintCollection constraints;
 		#endregion
 
@@ -71,6 +73,11 @@ namespace Telesophy.Alexandria.Persistence
 		public FieldCollection Fields
 		{
 			get { return fields; }
+		}
+
+		public IDictionary<Type, Field> LinkFields
+		{
+			get { return linkFields; }
 		}
 
 		public ConstraintCollection Constraints

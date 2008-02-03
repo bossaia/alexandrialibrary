@@ -296,12 +296,17 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 		
 		private ICommand GetCommand(string text, CommandFunction function)
 		{
-			return GetCommand(text, function, null);
+			return GetCommand(null, text, function);
 		}
 		
-		private ICommand GetCommand(string text, CommandFunction function, IDictionary<string, object> parameters)
+		private ICommand GetCommand(string type, string text, CommandFunction function)
 		{
-			return new Command(text, function, parameters);			
+			return GetCommand(type, text, function, null);
+		}
+		
+		private ICommand GetCommand(string type, string text, CommandFunction function, IDictionary<string, object> parameters)
+		{
+			return new Command(type, text, function, parameters);			
 		}
 		#endregion
 	
@@ -330,7 +335,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 			return null;
 		}
 
-		public ICommand GetLookupCommand(Query query)
+		public ICommand GetLookupCommand(string type, Query query)
 		{
 			if (query != null && query.Filters != null && query.Filters.Count > 0)
 			{
@@ -345,7 +350,7 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 				AppendFilterFields(filters, query, parameters);
 				
 				string text = string.Format(format, columns, recordName, filters);
-				return GetCommand(text, CommandFunction.Lookup, parameters);
+				return GetCommand(type, text, CommandFunction.Lookup, parameters);
 			}
 			
 			return null;

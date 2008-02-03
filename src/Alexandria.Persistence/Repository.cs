@@ -113,7 +113,7 @@ namespace Telesophy.Alexandria.Persistence
 				FieldCollection identifierFields = map.Record.GetIdentifierFields();
 				if (identifierFields.Count > 0)
 				{
-					Query query = new Query("lookup " + typeof(Model).Name);
+					Query query = new Query("Lookup " + typeof(Model).Name);
 					query.Filters.Add(new Filter(identifierFields[0], Operator.EqualTo, id));
 					return Lookup<Model>(query);
 				}

@@ -74,6 +74,18 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			return null;
 		}
+		
+		public virtual void AddLookupCommand(Batch batch, Query query)
+		{
+		}
+		
+		public virtual void AddSaveCommand(Batch batch, Query query)
+		{
+		}
+		
+		public virtual void AddDeleteCommand(Batch batch, Query query)
+		{
+		}
 		#endregion
 		
 		#region IMap<Model> Members

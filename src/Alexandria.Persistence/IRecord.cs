@@ -9,6 +9,7 @@ namespace Telesophy.Alexandria.Persistence
 		ISchema Schema { get; }
 		Type DataType { get; }
 		FieldCollection Fields { get; }
+		IDictionary<Type, Field> LinkFields { get; }
 		ConstraintCollection Constraints { get; }
 		FieldCollection GetIdentifierFields();
 	}

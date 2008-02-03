@@ -33,7 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IResult
 	{
-		IDictionary<IMessage, TupleSet> Details { get; }
+		IDictionary<string, TupleSet> Contents { get; }
 		bool Successful { get; }
 		Exception Error { get; }
 	}

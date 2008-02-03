@@ -46,13 +46,10 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			Batch batch = new Batch("Lookup MediaSet");
 			
-			ICommand setLookupCommand = Repository.Engine.GetLookupCommand(query);
+			ICommand setLookupCommand = Repository.Engine.GetLookupCommand(CommandTypes.LOOKUP_MEDIASET, query);
 			Query childQuery = Relationships.GetRelationship<IMediaSet, IMediaItem>().GetListChildrenQuery(query);
-			ICommand itemLookupCommand = Repository.Engine.GetLookupCommand(childQuery);
-			
-			//TODO: Figure out how to use the IMediaItem map here instead of just a command
-			//      e.g. Maps could return commands so that we can recursively add commands to the batch
-			
+			ICommand itemLookupCommand = Repository.Engine.GetLookupCommand(CommandTypes.LOOKUP_MEDIASET_ITEMS, childQuery);
+						
 			batch.Commands.Add(setLookupCommand);
 			batch.Commands.Add(itemLookupCommand);
 			
@@ -63,15 +60,15 @@ namespace Telesophy.Alexandria.Model.Data
 				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
 				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
 				
-				//IMediaSet mediaSet = setRecord.GetModel(result.CommandResults[setLookupCommand].Tuples[0]);
+				IMediaSet mediaSet = setRecord.GetModel(result.Contents[CommandTypes.LOOKUP_MEDIASET].Tuples[0]);
 				
-				//foreach (Tuple tuple in result.CommandResults[itemLookupCommand].Tuples)
-				//{
-				//	IMediaItem mediaItem = itemRecord.GetModel(tuple);				
-				//	mediaSet.Items.Add(mediaItem);
-				//}
+				foreach (Tuple tuple in result.Contents[CommandTypes.LOOKUP_MEDIASET_ITEMS].Tuples)
+				{
+					IMediaItem mediaItem = itemRecord.GetModel(tuple);				
+					mediaSet.Items.Add(mediaItem);
+				}
 				
-				//return mediaSet;
+				return mediaSet;
 			}
 			
 			return null;
@@ -79,15 +76,95 @@ namespace Telesophy.Alexandria.Model.Data
 
 		public override IList<IMediaSet> List(Query query)
 		{
-			return null;
+			IList<IMediaSet> list = new List<IMediaSet>();
+
+			Batch batch = new Batch("Lookup MediaSet");
+
+			ICommand setLookupCommand = Repository.Engine.GetLookupCommand(CommandTypes.LOOKUP_MEDIASET, query);
+			Query childQuery = Relationships.GetRelationship<IMediaSet, IMediaItem>().GetListChildrenQuery(query);
+			ICommand itemLookupCommand = Repository.Engine.GetLookupCommand(CommandTypes.LOOKUP_MEDIASET_ITEMS, childQuery);
+
+			batch.Commands.Add(setLookupCommand);
+			batch.Commands.Add(itemLookupCommand);
+
+			IResult result = Repository.Engine.Run(batch);
+
+			if (result.Successful)
+			{
+				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
+				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
+
+				foreach (Tuple tuple in result.Contents[CommandTypes.LOOKUP_MEDIASET].Tuples)
+				{
+					IMediaSet item = setRecord.GetModel(tuple);
+					list.Add(item);
+				}
+
+				foreach (Tuple tuple in result.Contents[CommandTypes.LOOKUP_MEDIASET_ITEMS].Tuples)
+				{
+					IMediaItem mediaItem = itemRecord.GetModel(tuple);
+					if (mediaItem != null && list.Count > 0)
+					{
+						foreach (IMediaSet mediaSet in list)
+						{
+							if (mediaSet.Id == tuple.GetValue<Guid>(itemRecord.LinkFields[typeof(IMediaSet)]))
+							{
+								mediaSet.Items.Add(mediaItem);
+							}
+						}
+					}
+				}
+			}
+			
+			return list;
 		}
 
 		public override void Save(IMediaSet model)
 		{
+			if (model != null)
+			{
+				Batch batch = new Batch("Save MediaSet");
+				
+				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
+				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
+				
+				ICommand setSaveCommand = Repository.Engine.GetSaveCommand(setRecord.GetTuple(model));
+				batch.Commands.Add(setSaveCommand);
+				
+				foreach(IMediaItem item in model.Items)
+				{
+					ICommand itemSaveCommand = Repository.Engine.GetSaveCommand(itemRecord.GetTuple(item));
+					batch.Commands.Add(itemSaveCommand);
+				}
+				
+				IResult result = Repository.Engine.Run(batch);
+				if (!result.Successful && result.Error != null)
+					throw result.Error;
+			}
 		}
 
 		public override void Delete(IMediaSet model)
 		{
+			if (model != null)
+			{
+				Batch batch = new Batch("Delete MediaSet");
+
+				IRecord<IMediaSet> setRecord = (IRecord<IMediaSet>)Record;
+				IRecord<IMediaItem> itemRecord = (IRecord<IMediaItem>)Record.Schema.Records["MediaItem"];
+
+				ICommand setDeleteCommand = Repository.Engine.GetDeleteCommand(setRecord.GetTuple(model));
+				batch.Commands.Add(setDeleteCommand);
+
+				foreach (IMediaItem item in model.Items)
+				{
+					ICommand itemDeleteCommand = Repository.Engine.GetDeleteCommand(itemRecord.GetTuple(item));
+					batch.Commands.Add(itemDeleteCommand);
+				}
+
+				IResult result = Repository.Engine.Run(batch);
+				if (!result.Successful && result.Error != null)
+					throw result.Error;
+			}
 		}
 		#endregion
 	}

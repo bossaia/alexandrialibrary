@@ -37,12 +37,9 @@ namespace Telesophy.Alexandria.Persistence
 		RelationshipCollection Relationships { get; }
 		Type Type { get; }
 		Query GetRelationshipQuery(IRelationship relationship);
-		
-		//NOTE: New recursive members
-		//void LoadBatchForLookup(Batch batch, Query query);
-		//void LoadBatchForSave(Batch batch, Model model);
-		//void LoadBatchForDelete(Batch batch, Model model);
-		//ReceiveMessage(IMessage message);
+		void AddLookupCommand(Batch batch, Query query);
+		void AddSaveCommand(Batch batch, Query query);
+		void AddDeleteCommand(Batch batch, Query query);
 	}
 	
 	public interface IMap<Model> : IMap

@@ -34,6 +34,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Batch.cs" />
+    <Compile Include="CommandTypes.cs" />
     <Compile Include="ConstraintCollection.cs" />
     <Compile Include="FieldCollection.cs" />
     <Compile Include="INamedItem.cs" />

@@ -33,13 +33,14 @@ namespace Telesophy.Alexandria.Persistence
 	public class Command : ICommand
 	{
 		#region Constructors
-		public Command(string text, CommandFunction function)
+		public Command(string type, string text, CommandFunction function)
 		{
+			this.type = type;
 			this.text = text;
 			this.function = function;
 		}
 		
-		public Command(string text, CommandFunction function, IDictionary<string, object> parameters) : this(text, function)
+		public Command(string type, string text, CommandFunction function, IDictionary<string, object> parameters) : this(type, text, function)
 		{
 			if (parameters != null)
 				this.parameters = parameters;
@@ -47,12 +48,18 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region Private Fields
+		private string type;
 		private string text;
 		private CommandFunction function;
 		private IDictionary<string, object> parameters = new Dictionary<string, object>();
 		#endregion
 		
 		#region ICommand Members
+		public string Type
+		{
+			get { return type; }
+		}
+		
 		public string Text
 		{
 			get { return text; }
