@@ -69,17 +69,32 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			return null;
 		}
-		
-		public virtual void AddLookupCommand(Batch batch, Query query)
+
+		public virtual void AddLookupCommand(Batch batch, string type, Query query)
 		{
+			if (batch != null)
+			{
+				ICommand command = Repository.Engine.GetLookupCommand(type, query);
+				batch.Commands.Add(command);
+			}
 		}
 		
-		public virtual void AddSaveCommand(Batch batch, Query query)
+		public virtual void AddSaveCommand(Batch batch, Tuple tuple)
 		{
+			if (batch != null)
+			{
+				ICommand command = Repository.Engine.GetSaveCommand(tuple);
+				batch.Commands.Add(command);
+			}
 		}
 		
 		public virtual void AddDeleteCommand(Batch batch, Query query)
 		{
+			if (batch != null)
+			{
+				ICommand command = Repository.Engine.GetDeleteCommand(query);
+				batch.Commands.Add(command);
+			}
 		}
 		#endregion
 		

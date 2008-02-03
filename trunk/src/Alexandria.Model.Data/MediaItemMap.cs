@@ -40,7 +40,7 @@ namespace Telesophy.Alexandria.Model.Data
 		}
 		#endregion
 
-		#region IMap Members
+		#region IMap Members		
 		public override IMediaItem Lookup(IResult result)
 		{
 			//Engine.GetLookupCommand(query);

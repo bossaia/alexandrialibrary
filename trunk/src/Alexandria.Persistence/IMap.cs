@@ -37,8 +37,8 @@ namespace Telesophy.Alexandria.Persistence
 		RelationshipCollection Relationships { get; }
 		Type Type { get; }
 		Query GetRelationshipQuery(IRelationship relationship);
-		void AddLookupCommand(Batch batch, Query query);
-		void AddSaveCommand(Batch batch, Query query);
+		void AddLookupCommand(Batch batch, string type, Query query);
+		void AddSaveCommand(Batch batch, Tuple tuple);
 		void AddDeleteCommand(Batch batch, Query query);
 	}
 	
