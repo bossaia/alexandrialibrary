@@ -34,7 +34,7 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		ICommand GetInitializeSchemaCommand(ISchema schema);
 		ICommand GetInitializeRecordCommand(IRecord record);
-		ICommand GetLookupCommand(Query query);
+		ICommand GetLookupCommand(string type, Query query);
 		ICommand GetSaveCommand(Query query);
 		ICommand GetSaveCommand(Tuple tuple);
 		ICommand GetDeleteCommand(Query query);

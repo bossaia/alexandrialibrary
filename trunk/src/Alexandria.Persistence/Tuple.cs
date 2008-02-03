@@ -45,7 +45,7 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region Private Fields
-		private IDictionary<Field, object> data = new Dictionary<Field,object>();
+		private IDictionary<Field, object> data = new Dictionary<Field, object>();
 		#endregion
 		
 		#region Public Properties
@@ -62,7 +62,7 @@ namespace Telesophy.Alexandria.Persistence
 			{
 				return (DataType)data[field];
 			}
-			
+
 			return default(DataType);
 		}
 		#endregion

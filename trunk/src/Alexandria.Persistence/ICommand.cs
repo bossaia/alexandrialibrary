@@ -33,6 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface ICommand
 	{
+		string Type { get; }
 		string Text { get; }
 		CommandFunction Function { get; }
 		IDictionary<string, object> Parameters { get; }
