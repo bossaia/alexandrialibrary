@@ -33,7 +33,7 @@ namespace Telesophy.Alexandria.Persistence
 	public interface IMap
 	{
 		IRepository Repository { get; }
-		IRecord Record { get; }
+		//IRecord Record { get; }
 		RelationshipCollection Relationships { get; }
 		Type Type { get; }
 		Query GetRelationshipQuery(IRelationship relationship);
@@ -44,10 +44,12 @@ namespace Telesophy.Alexandria.Persistence
 	
 	public interface IMap<Model> : IMap
 	{
-		new IRecord<Model> Record { get; }
-		Model Lookup(Query query);
-		IList<Model> List(Query query);
-		void Save(Model model);
-		void Delete(Model model);
+		IRecord<Model> Record { get; }
+		//Model Lookup(Query query);
+		Model Lookup(IResult result);
+		//IList<Model> List(Query query);
+		IList<Model> List(IResult result);
+		//void Save(Model model);
+		//void Delete(Model model);
 	}
 }

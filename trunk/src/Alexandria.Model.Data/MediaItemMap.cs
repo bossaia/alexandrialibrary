@@ -41,23 +41,15 @@ namespace Telesophy.Alexandria.Model.Data
 		#endregion
 
 		#region IMap Members
-		public override IMediaItem Lookup(Query query)
+		public override IMediaItem Lookup(IResult result)
 		{
 			//Engine.GetLookupCommand(query);
 			return null;
 		}
 
-		public override IList<IMediaItem> List(Query query)
+		public override IList<IMediaItem> List(IResult result)
 		{
 			return null;
-		}
-
-		public override void Save(IMediaItem model)
-		{
-		}
-
-		public override void Delete(IMediaItem model)
-		{
 		}
 		#endregion
 	}

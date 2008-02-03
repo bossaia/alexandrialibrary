@@ -127,9 +127,32 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				return map.Lookup(query);
+				//return map.Lookup(query);
+				
+				Batch batch = new Batch("Lookup " + map.Type.Name);
+				map.AddLookupCommand(batch, query);
+				IResult result = Engine.Run(batch);
+				if (result.Successful)
+				{
+					return Lookup<Model>(result);
+				}
+				else if (result.Error != null)
+				{
+					throw result.Error;
+				}
 			}
 
+			return default(Model);
+		}
+		
+		public Model Lookup<Model>(IResult result)
+		{
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
+			{
+				return map.Lookup(result);
+			}
+			
 			return default(Model);
 		}
 
@@ -138,9 +161,20 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				return map.List(query);
+				//return map.List(query);
 			}
 			
+			return new List<Model>();
+		}
+
+		public IList<Model> List<Model>(IResult result)
+		{
+			IMap<Model> map = GetMap<Model>();
+			if (map != null)
+			{
+				return map.List(result);
+			}
+
 			return new List<Model>();
 		}
 
@@ -149,7 +183,7 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				map.Save(model);
+				//map.Save(model);
 			}
 		}
 
@@ -158,7 +192,7 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				map.Delete(model);
+				//map.Delete(model);
 			}
 		}
 		#endregion

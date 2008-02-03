@@ -54,11 +54,6 @@ namespace Telesophy.Alexandria.Persistence
 		{
 			get { return repository; }
 		}
-				
-		public IRecord Record
-		{
-			get { return record; }
-		}
 
 		public RelationshipCollection Relationships
 		{
@@ -89,18 +84,22 @@ namespace Telesophy.Alexandria.Persistence
 		#endregion
 		
 		#region IMap<Model> Members
-		IRecord<Model> IMap<Model>.Record
+		public IRecord<Model> Record
 		{
 			get { return record; }
 		}
 		
-		public abstract Model Lookup(Query query);
+		//public abstract Model Lookup(Query query);
+		
+		public abstract Model Lookup(IResult result);
 
-		public abstract IList<Model> List(Query query);
+		//public abstract IList<Model> List(Query query);
 
-		public abstract void Save(Model model);
+		public abstract IList<Model> List(IResult result);
 
-		public abstract void Delete(Model model);
+		//public abstract void Save(Model model);
+
+		//public abstract void Delete(Model model);
 		#endregion
 	}
 }
