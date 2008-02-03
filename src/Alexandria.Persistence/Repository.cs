@@ -130,7 +130,7 @@ namespace Telesophy.Alexandria.Persistence
 				//return map.Lookup(query);
 				
 				Batch batch = new Batch("Lookup " + map.Type.Name);
-				map.AddLookupCommand(batch, query);
+				map.AddLookupCommand(batch, string.Empty, query);
 				IResult result = Engine.Run(batch);
 				if (result.Successful)
 				{
