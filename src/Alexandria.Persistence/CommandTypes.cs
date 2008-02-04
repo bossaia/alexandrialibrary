@@ -34,6 +34,7 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		public const string INIT_SCHEMA = "INIT_SCHEMA";
 		public const string INIT_RECORD = "INIT_RECORD";
+		public const string LOOKUP_ROOT = "LOOKUP_ROOT";
 		public const string LOOKUP_MEDIASET = "LOOKUP_MEDIASET";
 		public const string LOOKUP_MEDIASET_ITEMS = "LOOKUP_MEDIASET_ITEMS";
 		public const string LOOKUP_MEDIAITEM = "LOOKUP_MEDIAITEM";

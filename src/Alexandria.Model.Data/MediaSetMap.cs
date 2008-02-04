@@ -44,20 +44,37 @@ namespace Telesophy.Alexandria.Model.Data
 		#region IMap Members
 		public override IMediaSet Lookup(IResult result)
 		{
-			IMediaSet mediaSet = Record.GetModel(result.Contents[CommandTypes.LOOKUP_MEDIASET].Tuples[0]);
+			Tuple tuple;
+			if (result.Contents.ContainsKey(CommandTypes.LOOKUP_MEDIASET))
+				tuple = result.Contents[CommandTypes.LOOKUP_MEDIASET].Tuples[0];
+			else tuple = result.Contents[CommandTypes.LOOKUP_ROOT].Tuples[0];
+			
+			IMediaSet mediaSet = Record.GetModel(tuple);
 
 			IList<IMediaItem> items = Repository.List<IMediaItem>(result);
-			foreach(IMediaItem item in items)
+			foreach (IMediaItem item in items)
 			{
 				mediaSet.Items.Add(item);
 			}
 
-			return mediaSet;	
+			return mediaSet;
 		}
 
 		public override IList<IMediaSet> List(IResult result)
 		{
-			throw new Exception("The method or operation is not implemented.");
+			TupleSet tupleSet;
+			if (result.Contents.ContainsKey(CommandTypes.LOOKUP_MEDIASET))
+				tupleSet = result.Contents[CommandTypes.LOOKUP_MEDIASET];
+			else tupleSet = result.Contents[CommandTypes.LOOKUP_ROOT];
+			
+			IList<IMediaSet> list = new List<IMediaSet>();
+			foreach (Tuple tuple in tupleSet.Tuples)
+			{
+				IMediaSet item = Record.GetModel(tuple);
+				list.Add(item);
+			}
+			
+			return list;
 		}
 		#endregion
 

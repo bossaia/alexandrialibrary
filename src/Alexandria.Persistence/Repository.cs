@@ -127,10 +127,8 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				//return map.Lookup(query);
-				
 				Batch batch = new Batch("Lookup " + map.Type.Name);
-				map.AddLookupCommand(batch, string.Empty, query);
+				map.AddLookupCommand(batch, CommandTypes.LOOKUP_ROOT, query);
 				IResult result = Engine.Run(batch);
 				if (result.Successful)
 				{
@@ -161,7 +159,17 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				//return map.List(query);
+				Batch batch = new Batch("List " + map.Type.Name);
+				map.AddLookupCommand(batch, CommandTypes.LOOKUP_ROOT, query);
+				IResult result = Engine.Run(batch);
+				if (result.Successful)
+				{
+					return List<Model>(result);
+				}
+				else if (result.Error != null)
+				{
+					throw result.Error;
+				}
 			}
 			
 			return new List<Model>();
@@ -183,7 +191,13 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				//map.Save(model);
+				Batch batch = new Batch("Save " + map.Type.Name);
+				map.AddSaveCommand(batch, map.Record.GetTuple(model));
+				IResult result = Engine.Run(batch);
+				if (!result.Successful && result.Error != null)
+				{
+					throw result.Error;
+				}
 			}
 		}
 
@@ -192,7 +206,20 @@ namespace Telesophy.Alexandria.Persistence
 			IMap<Model> map = GetMap<Model>();
 			if (map != null)
 			{
-				//map.Delete(model);
+				Batch batch = new Batch("Delete " + map.Type.Name);
+				Query query = new Query("Delete by Id");
+				Tuple tuple = map.Record.GetTuple(model);
+				foreach (Field field in map.Record.GetIdentifierFields())
+				{
+					query.Filters.Add(new Filter(field, Operator.EqualTo, tuple.Data[field]));
+				}
+				
+				map.AddDeleteCommand(batch, query);
+				IResult result = Engine.Run(batch);
+				if (!result.Successful && result.Error != null)
+				{
+					throw result.Error;
+				}
 			}
 		}
 		#endregion
