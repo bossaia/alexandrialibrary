@@ -30,10 +30,8 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ITable : ISchemaItem
+	public interface IColumn : INamedItem
 	{
-		TableType Type { get; }
-		IColumn PrimaryIdentifier { get; }
-		IColumn SecondaryIdentifier { get; }
+		ISchemaItem Parent { get; }
 	}
 }

@@ -30,10 +30,15 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ITable : ISchemaItem
+	public enum ConstraintType
 	{
-		TableType Type { get; }
-		IColumn PrimaryIdentifier { get; }
-		IColumn SecondaryIdentifier { get; }
+		PrimaryKey,
+		ForeignKey,
+		NotNull,
+		Unique,
+		Check,
+		Default,
+		Collation,
+		CharacterSet
 	}
 }

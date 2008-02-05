@@ -33,11 +33,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstraintType.cs" />
+    <Compile Include="ExpressionType.cs" />
+    <Compile Include="IColumn.cs" />
     <Compile Include="IConstraint.cs" />
     <Compile Include="IDomain.cs" />
+    <Compile Include="IExpression.cs" />
     <Compile Include="IIndex.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
+    <Compile Include="IOperator.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="ISchemaItem.cs" />
     <Compile Include="ITable.cs" />

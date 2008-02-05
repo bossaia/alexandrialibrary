@@ -32,6 +32,8 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface IConstraint : INamedItem
 	{
-		//ConstraintType Type { get; }
+		ConstraintType Type { get; }
+		INamedItemCollection<IColumn> Columns { get; }
+		IExpression Expression { get; }
 	}
 }

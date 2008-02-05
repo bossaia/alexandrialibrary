@@ -30,10 +30,11 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface ITable : ISchemaItem
+	public interface IExpression
 	{
-		TableType Type { get; }
-		IColumn PrimaryIdentifier { get; }
-		IColumn SecondaryIdentifier { get; }
+		ExpressionType Type { get; }
+		IOperator Operator { get; }
+		IList<IExpression> Operands { get; }
+		object Value { get; }
 	}
 }
