@@ -68,9 +68,9 @@ namespace Alexandria.Fmod
 		
 		ChannelStolenError,             /* The specified channel has been reused to play another sound. */
 		
-		ComError,                        /* A Win32 COM related error occured. COM failed to initialize or a QueryInterface failed meaning a Windows codec or driver was not installed properly. */
+		ComError,                       /* A Win32 COM related error occured. COM failed to initialize or a QueryInterface failed meaning a Windows codec or driver was not installed properly. */
 		
-		DmaError,                        /* DMA Failure.  See debug output for more information. */
+		DmaError,                       /* DMA Failure.  See debug output for more information. */
 		
 		DspConnectionError,             /* DSP connection error.  Either the connection caused a cyclic dependancy or the unit issues variable sized reads and tried to connect to a node that was already connected to. */
 		DspFormatError,                 /* DSP Format error.  A DSP unit may have attempted to connect to this network with the wrong format.  IE a floating point unit on a PocketPC system. */
@@ -79,28 +79,28 @@ namespace Alexandria.Fmod
 		DspTooManyConnectionsError,     /* DSP connection error.  The unit being connected to or disconnected should only have 1 input or output. */
 		FileBadError,                   /* Error loading file. */
 		FileCouldNotSeekError,          /* Couldn't perform seek operation.  This is a limitation of the medium (ie netstreams) or the file format. */
-		FileEndOfFileError,                   /* End of file unexpectedly reached while trying to read essential data (truncated data?). */
+		FileEndOfFileError,             /* End of file unexpectedly reached while trying to read essential data (truncated data?). */
 		FileNotFoundError,              /* File not found. */
-		FormatError,                     /* Unsupported file or audio format. */
-		HttpError,                       /* A HTTP error occurred. This is a catch-all for HTTP errors not listed elsewhere. */
+		FormatError,                    /* Unsupported file or audio format. */
+		HttpError,                      /* A HTTP error occurred. This is a catch-all for HTTP errors not listed elsewhere. */
 		HttpAccessError,                /* The specified resource requires authentication or is forbidden. */
 		HttpProxyAuthenticationError,   /* Proxy authentication is required to access the specified resource. */
-		HttpServerError,          /* A HTTP server error occurred. */
+		HttpServerError,                /* A HTTP server error occurred. */
 		HttpTimeoutError,               /* The HTTP request timed out. */
-		InitializationError,             /* FMOD was not initialized correctly to support this function. */
-		InitializedError,                /* Cannot call this command after System_Init. */
-		InternalError,                   /* An error occured that wasnt supposed to.  Contact support. */
+		InitializationError,            /* FMOD was not initialized correctly to support this function. */
+		InitializedError,               /* Cannot call this command after System_Init. */
+		InternalError,                  /* An error occured that wasnt supposed to.  Contact support. */
 		InvalidHandleError,             /* An invalid object handle was used. */
-		InvalidParameterError,              /* An invalid parameter was passed to this function. */
-		IrxError,                        /* PS2 only.  fModex.irx failed to initialize.  This is most likely because you forgot to load it. */
-		MemoryError,                     /* Not enough memory or resources. */
+		InvalidParameterError,          /* An invalid parameter was passed to this function. */
+		IrxError,                       /* PS2 only.  fModex.irx failed to initialize.  This is most likely because you forgot to load it. */
+		MemoryError,                    /* Not enough memory or resources. */
 		MemoryIopError,                 /* PS2 only.  Not enough memory or resources on PlayStation 2 IOP ram. */
-		MemorySoundRamError,                /* Not enough memory or resources on console sound ram. */
-		NeedSoftwareError,               /* Tried to use a feature that requires the software engine but the software engine has been turned off. */
-		NetworkConnectError,                /* Couldn't connect to the specified host. */
-		NetworkSocketError,           /* A socket error occurred.  This is a catch-all for socket-related errors not listed elsewhere. */
-		NetworkUrlError,                    /* The specified URL couldn't be resolved. */
-		NotReadyError,                   /* Operation could not be performed because specified sound is not ready. */
+		MemorySoundRamError,            /* Not enough memory or resources on console sound ram. */
+		NeedSoftwareError,              /* Tried to use a feature that requires the software engine but the software engine has been turned off. */
+		NetworkConnectError,            /* Couldn't connect to the specified host. */
+		NetworkSocketError,             /* A socket error occurred.  This is a catch-all for socket-related errors not listed elsewhere. */
+		NetworkUrlError,                /* The specified URL couldn't be resolved. */
+		NotReadyError,                  /* Operation could not be performed because specified sound is not ready. */
 		OutputAllocatedError,           /* Error initializing output device, but more specifically, the output device is already in use and cannot be reused. */
 		OutputCreateBufferError,        /* Error creating hardware sound buffer. */
 		OutputDriverCallError,          /* A call to a standard soundcard driver failed, which could possibly mean a bug in the driver or resources were missing or exhausted. */
@@ -108,19 +108,29 @@ namespace Alexandria.Fmod
 		OutputInitError,                /* Error initializing output device. */
 		OutputNoHardwareError,          /* HARDWARE was specified but the sound card does not have the resources nescessary to play it. */
 		OutputNoSoftwareError,          /* Attempted to create a software sound but no software channels were specified in System::init. */
-		PanError,                        /* Panning only works with mono or stereo sound sources. */
-		PluginError,                     /* An unspecified error has been returned from a 3rd party plugin. */
+		PanError,                       /* Panning only works with mono or stereo sound sources. */
+		PluginError,                    /* An unspecified error has been returned from a 3rd party plugin. */
 		PluginMissingError,             /* A requested output, dsp unit type or codec was not available. */
 		PluginResourceError,            /* A resource that the plugin requires cannot be found. */
-		RecordError,                     /* An error occured trying to initialize the recording device. */
+		RecordError,                    /* An error occured trying to initialize the recording device. */
 		ReverbInstanceError,            /* Specified Instance in FMOD_ReverbProperties couldn't be set. Most likely because another application has locked the EAX4 FX slot.*/
 		SubSoundAllocatedError,         /* This subsound is already being used by another sound, you cannot have more than one parent to a sound.  Null out the other parent's entry first. */
-		TagNotFoundError,                /* The specified Tag could not be found or there are no Tags. */
-		TooManyChannelsError,            /* The sound created exceeds the allowable input channel count.  This can be increased with System::setMaxInputChannels */
-		UnimplementedError,              /* Something in FMOD hasn't been implemented when it should be! contact support! */
-		UninitializedError,              /* This command failed because System_Init or System_SetDriver was not called. */
-		UnsupportedError,                /* A commmand issued was not supported by this object.  Possibly a plugin without certain callbacks specified. */
-		VersionError                     /* The Version number of this file format is not supported. */
+		TagNotFoundError,               /* The specified Tag could not be found or there are no Tags. */
+		TooManyChannelsError,           /* The sound created exceeds the allowable input channel count.  This can be increased with System::setMaxInputChannels */
+		UnimplementedError,             /* Something in FMOD hasn't been implemented when it should be! contact support! */
+		UninitializedError,             /* This command failed because System_Init or System_SetDriver was not called. */
+		UnsupportedError,               /* A commmand issued was not supported by this object.  Possibly a plugin without certain callbacks specified. */
+		UpdateError,                    /* An error caused by System::update occured. */
+		VersionError,                   /* The Version number of this file format is not supported. */
+       
+		//NOTE: New values for version 0.4.12.0
+		EventFailedError,               /* An Event failed to be retrieved, most likely due to 'just fail' being specified as the max playbacks behavior. */
+        EventInternalError,             /* An error occured that wasn't supposed to.  See debug log for reason. */
+        EventInfoOnlyError,             /* Can't execute this command on an EVENT_INFOONLY event. */
+        EventMaxStreamsError,           /* Event failed because 'Max streams' was hit when FMOD_INIT_FAIL_ON_MAXSTREAMS was specified. */
+        EventMismatchError,             /* FSB mis-matches the FEV it was compiled with. */
+        EventNameConflictError,         /* A category with the same name already exists. */
+        EventNotFoundError,             /* The requested event, event group, event category or event property could not be found. */		
 	}
 	#endregion
 
