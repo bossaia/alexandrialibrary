@@ -30,41 +30,7 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Tuple
+	public interface IIndex : ISchemaItem
 	{
-		#region Constructors
-		public Tuple()
-		{
-		}
-		
-		public Tuple(IDictionary<Field, object> data)
-		{
-			if (data != null)
-				this.data = data;
-		}
-		#endregion
-		
-		#region Private Fields
-		private IDictionary<Field, object> data = new Dictionary<Field, object>();
-		#endregion
-		
-		#region Public Properties
-		public IDictionary<Field, object> Data
-		{
-			get { return data; }
-		}
-		#endregion
-		
-		#region Public Methods
-		public DataType GetValue<DataType>(Field field)
-		{
-			if (data.ContainsKey(field))
-			{
-				return (DataType)data[field];
-			}
-
-			return default(DataType);
-		}
-		#endregion
 	}
 }

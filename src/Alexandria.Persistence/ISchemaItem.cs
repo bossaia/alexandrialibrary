@@ -28,53 +28,10 @@
 using System;
 using System.Collections.Generic;
 
-using Telesophy.Alexandria.Persistence;
-
-namespace Telesophy.Alexandria.Model.Data
+namespace Telesophy.Alexandria.Persistence
 {
-	public class MediaItemRecord : RecordBase<IMediaItem>
+	public interface ISchemaItem : INamedItem
 	{
-		public MediaItemRecord(ISchema schema) : base("MediaItem", schema)
-		{
-			Fields.Add("Id", typeof(Guid), ConstraintType.Identifier);
-			Fields.Add("Status", typeof(string));
-			Fields.Add("Source", typeof(string));
-			Fields.Add("Type", typeof(string));
-			Fields.Add("Number", typeof(int));
-			Fields.Add("Title", typeof(string));
-			Fields.Add("Artist", typeof(string));
-			Fields.Add("Album", typeof(string));
-			Fields.Add("Duration", typeof(TimeSpan));
-			Fields.Add("Date", typeof(DateTime));
-			Fields.Add("Format", typeof(string));
-			Fields.Add("Path", typeof(Uri), ConstraintType.Unique);
-			LinkFields[typeof(IMediaSet)] = new Field(this, "MediaSetId", typeof(Guid));
-		}
-
-		public override IMediaItem GetModel(Tuple tuple)
-		{
-			IMediaItem model = new AudioTrack();
-
-			if (tuple != null)
-			{
-				model.Id = tuple.GetValue<Guid>(Fields["Id"]);
-				model.Type = tuple.GetValue<string>(Fields["Type"]);
-			}
-
-			return model;
-		}
-
-		public override Tuple GetTuple(IMediaItem model)
-		{
-			Tuple tuple = new Tuple();
-
-			if (model != null)
-			{
-				tuple.Data[Fields["Id"]] = model.Id;
-				tuple.Data[Fields["Type"]] = model.Type;
-			}
-
-			return tuple;
-		}
+		ISchema Schema { get; }
 	}
 }

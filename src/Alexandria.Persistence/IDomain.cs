@@ -30,30 +30,7 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Query
+	public interface IDomain : ISchemaItem
 	{
-		#region Constructors
-		public Query(string name)
-		{
-			this.name = name;
-		}
-		#endregion
-		
-		#region Private Fields
-		private string name;
-		private IList<Filter> filters = new List<Filter>();
-		#endregion
-		
-		#region Public Properties
-		public string Name
-		{
-			get { return name; }
-		}
-		
-		public IList<Filter> Filters
-		{
-			get { return filters; }
-		}
-		#endregion
 	}
 }

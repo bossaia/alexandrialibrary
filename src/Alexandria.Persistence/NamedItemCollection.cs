@@ -27,18 +27,53 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-using Telesophy.Alexandria.Persistence;
-
-namespace Telesophy.Alexandria.Model.Data
+namespace Telesophy.Alexandria.Persistence
 {
-	public class MediaSetMediaItemRecord : RecordBase
+	public class NamedItemCollection<NamedItem> :
+		KeyedCollection<string, NamedItem>,
+		INamedItemCollection<NamedItem> where NamedItem : INamedItem
 	{
-		public MediaSetMediaItemRecord(ISchema schema) : base("MediaSetMediaItem", schema, null)
+		#region Constructors
+		public NamedItemCollection()
 		{
-			Fields.Add("MediaSetId", typeof(Guid));
-			Fields.Add("MediaItemId", typeof(Guid));
-			Constraints.Add("MediaSetMediaItem_pk", ConstraintType.Identifier, Fields[0], Fields[1]);
 		}
+		#endregion
+
+		#region Protected Methods
+		protected override string GetKeyForItem(NamedItem item)
+		{
+			if (item != null)
+				return item.Name;
+			else return null;
+		}
+		#endregion
+
+		#region Public Methods
+		public new NamedItem this[string name]
+		{
+			get
+			{
+				if (base.Contains(name))
+				{
+					return base[name];
+				}
+				else throw new KeyNotFoundException();
+			}
+		}
+
+		public new NamedItem this[int index]
+		{
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
+		}
+		#endregion
 	}
 }

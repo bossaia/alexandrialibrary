@@ -32,10 +32,10 @@ namespace Telesophy.Alexandria.Persistence
 {
 	public interface ISchema : INamedItem
 	{
-		RecordCollection Records { get; }
-		RelationshipCollection Relationships { get; }
-		IRecord<Model> GetRecord<Model>(string name);
-		RelationshipCollection GetRelationshipsForParentRecord(IRecord parentRecord);
-		RelationshipCollection GetRelationshipsForChildRecord(IRecord childRecord);
+		INamedItemCollection<ITable> Tables { get; }
+		INamedItemCollection<IView> Views { get; }
+		INamedItemCollection<IIndex> Indices { get; }
+		INamedItemCollection<IDomain> Domains { get; }
+		INamedItemCollection<IUser> Users { get; }
 	}
 }
