@@ -33,7 +33,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConstraintType.cs" />
     <Compile Include="IConstraint.cs" />
     <Compile Include="IDomain.cs" />
     <Compile Include="IIndex.cs" />
