@@ -37,6 +37,7 @@ using Telesophy.Alexandria.Persistence;
 
 namespace Telesophy.Alexandria.Persistence.SQLite
 {
+	/*
 	public class Engine : IEngine
 	{
 		#region Constructors
@@ -68,21 +69,21 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 		#endregion
 
 		#region Private Methods
-		private string GetDatabasePath(Schema schema)
+		private string GetDatabasePath(ISchema schema)
 		{
 			if (schema != null && !string.IsNullOrEmpty(schema.Name))
 				return databaseDirectory + Path.DirectorySeparatorChar + schema.Name + databaseExtension;
 			else throw new ArgumentException("Could not determine database path: schema is undefined");
 		}
 		
-		private string GetConnectionString(Schema schema)
+		private string GetConnectionString(ISchema schema)
 		{
 			string databasePath = GetDatabasePath(schema);
 			bool databaseIsNew = (!File.Exists(databasePath));
 			return string.Format(CON_STRING_FORMAT, databasePath, databaseIsNew);
 		}
 
-		private SQLiteConnection GetSQLiteConnection(Schema schema)
+		private SQLiteConnection GetSQLiteConnection(ISchema schema)
 		{
 			return new System.Data.SQLite.SQLiteConnection(GetConnectionString(schema));
 		}
@@ -382,4 +383,5 @@ namespace Telesophy.Alexandria.Persistence.SQLite
 		}
 		#endregion
 	}
+	*/
 }

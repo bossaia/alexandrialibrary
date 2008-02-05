@@ -30,38 +30,10 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public class Filter
+	public enum TableType
 	{
-		#region Constructor
-		public Filter(Field field, Operator op, object value)
-		{
-			this.field = field;
-			this.op = op;
-			this.value = value;
-		}		
-		#endregion
-
-		#region Private Fields
-		private Field field;
-		private Operator op;
-		private object value;
-		#endregion
-
-		#region Public Properties
-		public Field Field
-		{
-			get { return field; }
-		}
-		
-		public Operator Operator
-		{
-			get { return op; }
-		}
-		
-		public object Value
-		{
-			get { return value; }
-		}
-		#endregion		
+		Entity,
+		Lookup,
+		Associative
 	}
 }

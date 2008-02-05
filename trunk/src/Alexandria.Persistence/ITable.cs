@@ -30,21 +30,8 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public interface IRelationship : INamedItem
+	public interface ITable : ISchemaItem
 	{
-		ISchema Schema { get; }
-		RelationshipType Type { get; }
-		IRecord LinkRecord { get; }
-		Field ParentField { get; }
-		Field ChildField { get; }
-		Field LinkParentField { get; }
-		Field LinkChildField { get; }
-		Query GetListChildrenQuery(Query parentQuery);
-	}
-
-	public interface IRelationship<Parent, Child> : IRelationship
-	{
-		IRecord<Parent> ParentRecord { get; }
-		IRecord<Child> ChildRecord { get; }
+		TableType Type { get; }
 	}
 }

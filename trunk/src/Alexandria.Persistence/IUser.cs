@@ -27,45 +27,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Telesophy.Alexandria.Persistence
 {
-	public abstract class NamedItemCollectionBase<T> : KeyedCollection<string, T> where T : INamedItem
+	public interface IUser : ISchemaItem
 	{
-		public NamedItemCollectionBase()
-		{
-		}
-
-		protected override string GetKeyForItem(T item)
-		{
-			if (item != null)
-				return item.Name;
-			else return null;
-		}
-
-		public new T this[string name]
-		{
-			get
-			{
-				if (base.Contains(name))
-				{
-					return base[name];
-				}
-				else throw new KeyNotFoundException();
-			}
-		}
-
-		public new T this[int index]
-		{
-			get
-			{
-				if (index >= 0 && index < base.Count)
-				{
-					return base[index];
-				}
-				else throw new IndexOutOfRangeException();
-			}
-		}
+		string Password { get; }
 	}
 }
