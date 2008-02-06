@@ -36,8 +36,8 @@ using Telesophy.Alexandria.Persistence;
 namespace Telesophy.Alexandria.Model.Data
 {
 	public abstract class BaseLinkDataMap<Parent, Child> : BaseDataMap
-		where Parent: IModel
-		where Child: IModel
+		//where Parent: IModel
+		//where Child: IModel
 	{
 		#region Constructors
 		public BaseLinkDataMap(string tableName, BaseSimpleDataMap<Parent> parentMap, string parentIdColumn, BaseSimpleDataMap<Child> childMap, string childIdColumn) : this(null, tableName, parentMap, parentIdColumn, childMap, childIdColumn)
@@ -126,7 +126,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			if (row != null && parent != null)
 			{
-				row[parentIdColumn] = parent.Id;
+				//row[parentIdColumn] = parent.Id;
 			}
 		}
 
@@ -134,7 +134,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			if (row != null && child != null)
 			{
-				row[childIdColumn] = child.Id;
+				//row[childIdColumn] = child.Id;
 			}
 		}
 		
@@ -162,7 +162,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			if (parent != null)
 			{
-				Engine.FillTable(Table, parent.Id);
+				Engine.FillTable(Table, Guid.NewGuid()); //parent.Id);
 				Engine.DeleteRows(Table);
 			}
 		}
@@ -207,7 +207,7 @@ namespace Telesophy.Alexandria.Model.Data
 
 			if (parent != null)
 			{
-				Engine.FillTable(Table, parent.Id);
+				Engine.FillTable(Table, Guid.NewGuid()); //parent.Id);
 				foreach (DataRow row in Table.Rows)
 				{
 					Guid childId = GetValue<Guid>(row[childIdColumn]);
@@ -250,8 +250,9 @@ namespace Telesophy.Alexandria.Model.Data
 					}	
 				}
 			
-				Engine.FillTable(Table, parent.Id);
-				Engine.SaveRows(Table, parent.Id, childRows);
+				Guid parentId = Guid.NewGuid();
+				Engine.FillTable(Table, parentId);
+				Engine.SaveRows(Table, parentId, childRows);
 			}
 		}
 		

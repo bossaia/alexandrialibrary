@@ -412,13 +412,13 @@
     <value>&amp;Catalog</value>
   </data>
   <data name="pluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="pluginsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Plugins</value>
   </data>
   <data name="toolManagerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>150, 22</value>
   </data>
   <data name="toolManagerToolStripMenuItem.Text" xml:space="preserve">
     <value>Tool &amp;Manager</value>
@@ -2065,6 +2065,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Alexandria</value>
   </data>
@@ -2428,6 +2431,24 @@
   <data name="&gt;&gt;sortSmallImageList.Type" xml:space="preserve">
     <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
+    <value>queueSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
+    <value>DirectoryOpenDialog</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskSmallImageList.Name" xml:space="preserve">
+    <value>taskSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;taskSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;Status.Name" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -2499,24 +2520,6 @@
   </data>
   <data name="&gt;&gt;Id.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
-    <value>queueSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
-    <value>DirectoryOpenDialog</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskSmallImageList.Name" xml:space="preserve">
-    <value>taskSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;taskSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
