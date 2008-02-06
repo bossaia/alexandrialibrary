@@ -28,6 +28,8 @@
 using System;
 using System.Collections.Generic;
 
+using Telesophy.Alexandria.Query;
+
 namespace Telesophy.Alexandria.Persistence
 {
 	public interface IConstraint : INamedItem
