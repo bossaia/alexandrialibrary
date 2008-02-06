@@ -42,7 +42,6 @@
     <Compile Include="IMediaSetFactory.cs" />
     <Compile Include="IMetadataIdentifier.cs" />
     <Compile Include="AudioTrack.cs" />
-    <Compile Include="IModel.cs" />
     <Compile Include="MetadataIdentifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

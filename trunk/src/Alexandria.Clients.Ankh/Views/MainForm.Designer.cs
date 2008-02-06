@@ -134,6 +134,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sortSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.filterButton = new System.Windows.Forms.Button();
 			this.sortButton = new System.Windows.Forms.Button();
+			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
@@ -147,9 +150,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -939,6 +939,26 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sortButton.UseVisualStyleBackColor = true;
 			this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
 			// 
+			// queueSmallImageList
+			// 
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// DirectoryOpenDialog
+			// 
+			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
+			// 
+			// taskSmallImageList
+			// 
+			this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
+			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -1097,26 +1117,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
-			// queueSmallImageList
-			// 
-			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-			// 
-			// DirectoryOpenDialog
-			// 
-			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-			// 
-			// taskSmallImageList
-			// 
-			this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
-			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			// 
 			// MainForm
 			// 
 			resources.ApplyResources(this, "$this");
@@ -1238,18 +1238,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ToolStripMenuItem runTaskToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem taskRunMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolRipDiscMenuItem;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-		private System.Windows.Forms.DataGridViewImageColumn Type;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemAddFilter;
 		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemEditFilter;
 		private System.Windows.Forms.ToolStripMenuItem filterContextMenuItemUpdateOperator;
@@ -1273,6 +1261,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearSortToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearAllSortsToolStripMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+		private System.Windows.Forms.DataGridViewImageColumn Type;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
 	}
 }
 

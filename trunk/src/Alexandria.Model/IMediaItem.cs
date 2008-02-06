@@ -30,8 +30,9 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Model
 {
-	public interface IMediaItem : IModel
+	public interface IMediaItem
 	{
+		Guid Id { get; set; }
 		string Status { get; set; }
 		string Source { get; set; }
 		string Type { get; set; }

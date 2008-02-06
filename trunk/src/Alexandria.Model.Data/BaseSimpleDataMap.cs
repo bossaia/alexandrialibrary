@@ -36,7 +36,7 @@ using Telesophy.Alexandria.Persistence;
 namespace Telesophy.Alexandria.Model.Data
 {
 	public abstract class BaseSimpleDataMap<Model> : BaseDataMap
-		where Model: IModel
+		//where Model: IModel
 	{
 		#region Constructors
 		public BaseSimpleDataMap()
@@ -49,7 +49,7 @@ namespace Telesophy.Alexandria.Model.Data
 		#endregion
 		
 		#region Protected Methods
-		protected internal virtual void LoadChildren<T>(Model parent, IList<T> children) where T: IModel
+		protected internal virtual void LoadChildren<T>(Model parent, IList<T> children) //where T: IModel
 		{
 		}
 		
