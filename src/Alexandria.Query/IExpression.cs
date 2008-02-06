@@ -28,9 +28,13 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Query
 {
-	public interface IOperator : INamedItem
+	public interface IExpression
 	{
+		ExpressionType Type { get; }
+		IOperator Operator { get; }
+		IList<IExpression> Operands { get; }
+		object Value { get; }
 	}
 }

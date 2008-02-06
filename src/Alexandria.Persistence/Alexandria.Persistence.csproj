@@ -34,15 +34,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConstraintType.cs" />
-    <Compile Include="ExpressionType.cs" />
     <Compile Include="IColumn.cs" />
     <Compile Include="IConstraint.cs" />
     <Compile Include="IDomain.cs" />
-    <Compile Include="IExpression.cs" />
     <Compile Include="IIndex.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
-    <Compile Include="IOperator.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="ISchemaItem.cs" />
     <Compile Include="ITable.cs" />
@@ -54,9 +51,9 @@
     <Compile Include="TableType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria.Messaging\Alexandria.Messaging.csproj">
-      <Project>{D9B3AAB3-F491-4D01-A69F-13519BAADA69}</Project>
-      <Name>Alexandria.Messaging</Name>
+    <ProjectReference Include="..\Alexandria.Query\Alexandria.Query.csproj">
+      <Project>{220B0DAE-55E8-4157-A923-EC47223CFD23}</Project>
+      <Name>Alexandria.Query</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

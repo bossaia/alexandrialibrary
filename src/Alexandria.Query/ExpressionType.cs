@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Telesophy.Alexandria.Persistence
+namespace Telesophy.Alexandria.Query
 {
 	public enum ExpressionType
 	{
