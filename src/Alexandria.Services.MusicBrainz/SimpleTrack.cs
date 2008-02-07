@@ -35,6 +35,7 @@ using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.MusicBrainz
 {
+	[CLSCompliant(false)]
     public class SimpleTrack : AudioTrack
     {
 		#region Constructors

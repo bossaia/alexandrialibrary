@@ -242,6 +242,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 			client.Select(rdf.SelectBack);
         }
         
+        [CLSCompliant(false)]
         public SimpleTrack this[int index]
         {
             get {return tracks[index];}

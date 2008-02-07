@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.AsciiGenerator", "Alexandria.Extensions.AsciiGenerator\Alexandria.Extensions.AsciiGenerator.csproj", "{12384EBE-18DD-4C4C-AFE3-10D84B06E718}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Clients.Ankh", "Alexandria.Clients.Ankh\Alexandria.Clients.Ankh.csproj", "{3095580F-8714-4D19-B88E-DB51162D112B}"
