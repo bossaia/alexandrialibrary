@@ -42,6 +42,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 		#endregion
 		
 		#region Public Static Methods
+		[CLSCompliant(false)]
 		public static IMetadataIdentifier CreateMusicBrainzId(Guid musicBrainzId)
 		{
 			return new MetadataIdentifier(musicBrainzId.ToString(), ID_TYPE, version);

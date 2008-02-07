@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions", "Alexandria.Extensions\Alexandria.Extensions.csproj", "{5E33B2C5-1D13-4AB1-9827-2B24D89313CA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO", "Alexandria.IO\Alexandria.IO.csproj", "{97449DEA-C759-4E22-B287-305CA0023749}"

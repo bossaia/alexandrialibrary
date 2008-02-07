@@ -36,6 +36,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 {
     public static class SimpleQuery
     {
+		[CLSCompliant(false)]
 		[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         public static SimpleTrack FileLookup(MusicBrainzClient client, string artistName, string albumName, string trackName, int trackNumber, int duration)
         {

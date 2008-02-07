@@ -62,9 +62,9 @@ namespace Alexandria.MusicDns
 		private string puid = string.Empty;		
 		
 		private Guid id = Guid.NewGuid();
-		private string status;
-		private string source;
-		private string type;
+		//private string status;
+		//private string source;
+		//private string type;
 		
 		//private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		private Uri path;

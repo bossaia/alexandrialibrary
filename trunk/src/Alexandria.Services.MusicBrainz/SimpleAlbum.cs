@@ -47,7 +47,7 @@ namespace Telesophy.Alexandria.MusicBrainz
     
 		#region Private Fields
         private string musicBrainzId;
-        private string title;
+        //private string title;
         private string asin;
         private Uri coverArtUrl;
         private bool variousArtists;

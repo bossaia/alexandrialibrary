@@ -226,7 +226,7 @@ namespace Telesophy.Alexandria.Mp3Tunes
 					}
 					
 					//TODO: cleanup this mess
-					long releaseDateFileTime = 0;					
+					//long releaseDateFileTime = 0;					
 					DateTime releaseDate = new DateTime(1900, 1, 1);
 					//long defaultReleaseDateTime = releaseDate.ToFileTime();
 					if (albumYear != null && !string.IsNullOrEmpty(albumYear.InnerXml))

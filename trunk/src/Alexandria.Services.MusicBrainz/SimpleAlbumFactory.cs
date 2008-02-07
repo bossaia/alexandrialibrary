@@ -374,11 +374,13 @@ namespace Telesophy.Alexandria.MusicBrainz
 		
 		#region Public Methods
 		//[EnvironmentPermission(SecurityAction.LinkDemand, Unrestricted = true)]
+		[CLSCompliant(false)]
 		public IMediaSet CreateAlbum(string musicBrainzId, Uri path)
 		{
 			return LookupAlbumById(musicBrainzId, path);
 		}
 
+		[CLSCompliant(false)]
 		public IMediaSet CreateAlbum(Guid id, string title, string artist, DateTime date, Uri path)
 		{
 			return new SimpleAlbum(id, title, artist, date, path);
