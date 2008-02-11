@@ -34,5 +34,6 @@ namespace Telesophy.Babel.Persistence
 	public interface ISchema : INamedItem
 	{
 		INamedItemCollection<IMap> Maps { get; }
+		IMap GetMap(Type type);
 	}
 }

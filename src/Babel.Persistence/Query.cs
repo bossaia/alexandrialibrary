@@ -31,8 +31,23 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IQuery : INamedItem
+	public class Query
 	{
-		IDictionary<string, object> Filters { get; }
+		public Query()
+		{
+			this.filters = new Dictionary<string, object>();
+		}
+		
+		public Query(IDictionary<string, object> filters)
+		{
+			this.filters = filters;
+		}
+		
+		private IDictionary<string, object> filters;
+		
+		public IDictionary<string, object> Filters
+		{
+			get { return filters; }
+		}
 	}
 }

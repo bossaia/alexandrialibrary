@@ -33,8 +33,9 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IEngine
 	{
-		void Initialize(IMap map);
-		Result Lookup(IMap map, IQuery query);
+		void InitializeSchema(ISchema schema);
+		void InitializeMap(IMap map);
+		Result Lookup(IMap map, Query query);
 		Result Save(IMap map, object model);
 		Result Delete(IMap map, object model);
 	}
