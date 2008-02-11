@@ -31,17 +31,32 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IMap : INamedItem
+	public class Result
 	{
-		ISchema Schema { get; }
-		Type Type { get; }
-		MapFunction Function { get; }
-		INamedItemCollection<Field> Fields { get; }
-		INamedItemCollection<Association> Associations { get; }
-		Field GetIdentifierField();
-		object GetIdentifierValue(object model);
-		Tuple GetTuple(object model);
-		object GetModel(Result result);
-		void LoadAssociation(object model, Association association, Result result);
+		public Result(bool successful, Exception error, IDictionary<string, TupleSet> data)
+		{
+			this.successful = successful;
+			this.error = error;
+			this.data = data;
+		}
+	
+		private bool successful;
+		private Exception error;
+		private IDictionary<string, TupleSet> data;
+		
+		public bool Successful
+		{
+			get { return successful; }
+		}
+		
+		public Exception Error
+		{
+			get { return error; }
+		}
+		
+		public IDictionary<string, TupleSet> Data
+		{
+			get { return data; }
+		}
 	}
 }
