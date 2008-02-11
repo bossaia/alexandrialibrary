@@ -27,13 +27,58 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	public struct Field : INamedItem
 	{
+		#region Constructors
+		public Field(IMap map, string name, Type type, FieldFunction function, FieldProperties properties)
+		{
+			this.map = map;
+			this.name = name;
+			this.type = type;
+			this.function = function;
+			this.properties = properties;
+		}
+		#endregion
+		
+		#region Private Fields
+		private IMap map;
+		private string name;
+		private Type type;
+		private FieldFunction function;
+		private FieldProperties properties;
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
+		
+		#region Public Properties
+		public IMap Map
+		{
+			get { return map; }
+		}
+				
+		public Type Type
+		{
+			get { return type; }
+		}
+		
+		public FieldFunction Function
+		{
+			get { return function; }
+		}
+		
+		public FieldProperties Properties
+		{
+			get { return properties; }
+		}
+		#endregion
 	}
 }

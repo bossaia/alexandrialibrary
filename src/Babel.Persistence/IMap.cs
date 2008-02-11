@@ -27,13 +27,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	public interface IMap : INamedItem
 	{
+		ISchema Schema { get; }
+		Type Type { get; }
+		MapFunction Function { get; }
+		INamedItemCollection<Field> Fields { get; }
+		INamedItemCollection<Association> Associations { get; }
+		object GetObject(Tuple tuple);
+		Tuple GetTuple(object model);
+		void LoadAssociation(object model, Association association, Tuple tuple);
 	}
 }

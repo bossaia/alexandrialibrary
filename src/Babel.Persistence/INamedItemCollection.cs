@@ -27,13 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.Linq;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	public interface INamedItemCollection<NamedItem> : ICollection<NamedItem> where NamedItem : INamedItem
 	{
+		IEqualityComparer<string> Comparer { get; }
+		NamedItem this[string key] { get; }
+		bool Contains(string key);
+		bool Remove(string key);
 	}
 }

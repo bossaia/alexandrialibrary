@@ -27,13 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	public enum AssociationType
 	{
+		OneToOne,
+		OneToMany,
+		ManyToMany
 	}
 }
