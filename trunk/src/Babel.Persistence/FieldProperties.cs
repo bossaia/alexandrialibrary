@@ -27,13 +27,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	[Flags]
+	public enum FieldProperties
 	{
+		None = 0,
+		Required = 1,
+		Unique = 2,
+		RequiredAndUnique = 3
 	}
 }

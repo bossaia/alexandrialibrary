@@ -27,13 +27,53 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
-using System.Linq;
+using System.Collections.ObjectModel;
 
-namespace Telesophy.Babel.Persistence.SQLite
+namespace Telesophy.Babel.Persistence
 {
-	public class SQLiteEngine //: IEngine
+	public class NamedItemCollection<NamedItem> :
+		KeyedCollection<string, NamedItem>,
+		INamedItemCollection<NamedItem> where NamedItem : INamedItem
 	{
+		#region Constructors
+		public NamedItemCollection()
+		{
+		}
+		#endregion
+
+		#region Protected Methods
+		protected override string GetKeyForItem(NamedItem item)
+		{
+			if (item != null)
+				return item.Name;
+			else return null;
+		}
+		#endregion
+
+		#region Public Methods
+		public new NamedItem this[string name]
+		{
+			get
+			{
+				if (base.Contains(name))
+				{
+					return base[name];
+				}
+				else throw new KeyNotFoundException();
+			}
+		}
+
+		public new NamedItem this[int index]
+		{
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
+		}
+		#endregion
 	}
 }
