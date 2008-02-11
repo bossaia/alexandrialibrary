@@ -80,5 +80,14 @@ namespace Telesophy.Babel.Persistence
 			get { return properties; }
 		}
 		#endregion
+		
+		#region Static Members
+		private static Field empty = default(Field);
+		
+		public static Field Empty
+		{
+			get { return empty; }
+		}
+		#endregion
 	}
 }

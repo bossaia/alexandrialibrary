@@ -54,11 +54,12 @@
     <Compile Include="IMap.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
-    <Compile Include="IQuery.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="MapFunction.cs" />
     <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Tuple.cs" />
     <Compile Include="TupleSet.cs" />
