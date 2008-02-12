@@ -35,6 +35,7 @@ namespace Telesophy.Babel.Persistence
 	{
 		IDatabase Database { get; }
 		IndexType Type { get; }
+		bool IsClustered { get; }
 		INamedItemCollection<IColumn> Columns { get; }
 	}
 }

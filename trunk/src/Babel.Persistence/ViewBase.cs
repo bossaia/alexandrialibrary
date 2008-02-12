@@ -31,12 +31,40 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface ITable : INamedItem
+	public abstract class ViewBase : IView
 	{
-		IDatabase Database { get; }
-		TableType Type { get; }
-		bool IsTemporary { get; }
-		INamedItemCollection<IColumn> Columns { get; }
-		INamedItemCollection<IConstraint> Constraints { get; }
+		#region Constructors
+		protected ViewBase(string name, IDatabase database)
+		{
+			this.name = name;
+			this.database = database;
+			this.columns = new NamedItemCollection<IColumn>();
+		}
+		#endregion
+	
+		#region Private Fields
+		private string name;
+		private IDatabase database;
+		private INamedItemCollection<IColumn> columns;
+		#endregion
+	
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
+	
+		#region IView Members
+		public IDatabase Database
+		{
+			get { return database; }
+		}
+
+		public INamedItemCollection<IColumn> Columns
+		{
+			get { return columns; }
+		}
+		#endregion
 	}
 }

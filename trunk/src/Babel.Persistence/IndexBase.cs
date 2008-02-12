@@ -31,12 +31,54 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface ITable : INamedItem
+	public abstract class IndexBase : IIndex
 	{
-		IDatabase Database { get; }
-		TableType Type { get; }
-		bool IsTemporary { get; }
-		INamedItemCollection<IColumn> Columns { get; }
-		INamedItemCollection<IConstraint> Constraints { get; }
+		#region Constructors
+		protected IndexBase(string name, IDatabase database, IndexType type, bool isClustered)
+		{
+			this.name = name;
+			this.database = database;
+			this.type = type;
+			this.isClustered = isClustered;
+			this.columns = new NamedItemCollection<IColumn>();
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private IDatabase database;
+		private IndexType type;
+		private bool isClustered;
+		private INamedItemCollection<IColumn> columns;
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { throw new NotImplementedException(); }
+		}
+		#endregion
+
+		#region IIndex Members
+		public IDatabase Database
+		{
+			get { return database; }
+		}
+
+		public IndexType Type
+		{
+			get { return type; }
+		}
+
+		public bool IsClustered
+		{
+			get { return isClustered; }
+		}
+
+		public INamedItemCollection<IColumn> Columns
+		{
+			get { return columns; }
+		}
+		#endregion
 	}
 }
