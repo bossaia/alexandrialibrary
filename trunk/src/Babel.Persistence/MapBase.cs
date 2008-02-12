@@ -31,98 +31,88 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public struct Association : INamedItem
+	public abstract class MapBase<Model> : IMap<Model>
 	{
 		#region Constructors
-		public Association(IMap map, string name, AssociationType type, Field parentField, Field childField)
+		protected MapBase(string name, ISchema schema, Type type, MapFunction function)
 		{
-			this.map = map;
 			this.name = name;
+			this.schema = schema;
 			this.type = type;
-			this.parentField = parentField;
-			this.childField = childField;
+			this.function = function;
 		}
 		#endregion
-		
+	
 		#region Private Fields
-		private IMap map;
 		private string name;
-		private AssociationType type;
-		private Field parentField;
-		private Field childField;
+		private ISchema schema;
+		private Type type;
+		private MapFunction function;
+		private INamedItemCollection<Field> fields;
+		private INamedItemCollection<Association> associations;
+		private Field identifierField = Field.Empty;
 		#endregion
-		
+	
 		#region INamedItem Members
 		public string Name
 		{
 			get { return name; }
 		}
 		#endregion
-		
-		#region Public Properties
-		public IMap Map
+
+		#region IMap Members
+		public ISchema Schema
 		{
-			get { return map; }
+			get { return schema; }
 		}
-		
-		public AssociationType Type
+
+		public Type Type
 		{
 			get { return type; }
 		}
-		
-		public Field ParentField
-		{
-			get { return parentField; }
-		}
-		
-		public Field ChildField
-		{
-			get { return childField; }
-		}
-		#endregion
 
-		#region Public Overrides
-		public override bool Equals(object obj)
+		public MapFunction Function
 		{
-			if (obj != null && obj is Association)
+			get { return function; }
+		}
+
+		public INamedItemCollection<Field> Fields
+		{
+			get { return fields; }
+		}
+
+		public INamedItemCollection<Association> Associations
+		{
+			get { return associations; }
+		}
+
+		public virtual Field IdentifierField
+		{
+			get
 			{
-				Association other = (Association)obj;
-				return (this.ToString() == other.ToString());
+				if (identifierField == Field.Empty && fields != null)
+				{
+					foreach (Field field in fields)
+					{
+						if (field.Function == FieldFunction.Identifier)
+						{
+							identifierField = field;
+							break;
+						}
+					}
+				}
+				
+				return identifierField;
 			}
-
-			return false;
-		}
-
-		public override int GetHashCode()
-		{
-			return ToString().GetHashCode();
-		}
-
-		public override string ToString()
-		{
-			if (map != null && map.Schema != null && name != null)
-				return string.Format("{0}.{1}.{2}", map.Schema.Name, map.Name, name);
-			else return string.Empty;
 		}
 		#endregion
-		
-		#region Static Members
-		private static Association empty = default(Association);
-		
-		public static Association Empty
-		{
-			get { return empty; }
-		}
-		
-		public static bool operator ==(Association a1, Association a2)
-		{
-			return a1.Equals(a2);
-		}
-		
-		public static bool operator !=(Association a1, Association a2)
-		{
-			return !a1.Equals(a2);
-		}
+
+		#region IMap<Model> Members
+		public abstract Tuple GetTuple(Model model);
+
+		public abstract Model GetModel(Tuple tuple);
+
+		public abstract void LoadAssociation(Model model, Association association, TupleSet tupleSet);
 		#endregion
 	}
 }

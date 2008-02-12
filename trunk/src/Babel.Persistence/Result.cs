@@ -33,16 +33,20 @@ namespace Telesophy.Babel.Persistence
 {
 	public class Result
 	{
-		public Result(bool successful, Exception error, IDictionary<string, TupleSet> data)
+		public Result(bool successful, Exception error, int count, TupleSet rootData, IDictionary<string, AssociationResult> associationResults)
 		{
 			this.successful = successful;
 			this.error = error;
-			this.data = data;
+			this.count = count;
+			this.rootData = rootData;
+			this.associationResults = associationResults;
 		}
 	
 		private bool successful;
 		private Exception error;
-		private IDictionary<string, TupleSet> data;
+		private int count;
+		private TupleSet rootData;
+		private IDictionary<string, AssociationResult> associationResults;
 		
 		public bool Successful
 		{
@@ -54,9 +58,19 @@ namespace Telesophy.Babel.Persistence
 			get { return error; }
 		}
 		
-		public IDictionary<string, TupleSet> Data
+		public int Count
 		{
-			get { return data; }
+			get { return count; }
+		}
+		
+		public TupleSet RootData
+		{
+			get { return rootData; }
+		}
+		
+		public IDictionary<string, AssociationResult> AssociationResults
+		{
+			get { return associationResults; }
 		}
 	}
 }

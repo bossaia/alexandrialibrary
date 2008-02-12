@@ -81,12 +81,47 @@ namespace Telesophy.Babel.Persistence
 		}
 		#endregion
 		
+		#region Public Overrides
+		public override bool Equals(object obj)
+		{
+			if (obj != null && obj is Field)
+			{
+				Field other = (Field)obj;
+				return (this.ToString() == other.ToString());
+			}
+			
+			return false;
+		}
+
+		public override int GetHashCode()
+		{
+			return ToString().GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			if (map != null && map.Schema != null && name != null)
+				return string.Format("{0}.{1}.{2}", map.Schema.Name, map.Name, name);
+			else return string.Empty;
+		}
+		#endregion
+		
 		#region Static Members
 		private static Field empty = default(Field);
 		
 		public static Field Empty
 		{
 			get { return empty; }
+		}
+		
+		public static bool operator ==(Field f1, Field f2)
+		{
+			return f1.Equals(f2);
+		}
+		
+		public static bool operator !=(Field f1, Field f2)
+		{
+			return !f1.Equals(f2);
 		}
 		#endregion
 	}

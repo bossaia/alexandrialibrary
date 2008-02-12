@@ -31,20 +31,10 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IMap : INamedItem
+	public interface IIndex : INamedItem
 	{
-		ISchema Schema { get; }
-		Type Type { get; }
-		MapFunction Function { get; }
-		INamedItemCollection<Field> Fields { get; }
-		INamedItemCollection<Association> Associations { get; }
-		Field IdentifierField { get; }
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		Tuple GetTuple(Model model);
-		Model GetModel(Tuple tuple);
-		void LoadAssociation(Model model, Association association, TupleSet tupleSet);
+		IDatabase Database { get; }
+		IndexType Type { get; }
+		INamedItemCollection<IColumn> Columns { get; }
 	}
 }
