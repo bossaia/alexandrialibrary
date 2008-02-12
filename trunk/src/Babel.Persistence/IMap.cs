@@ -39,7 +39,11 @@ namespace Telesophy.Babel.Persistence
 		INamedItemCollection<Field> Fields { get; }
 		INamedItemCollection<Association> Associations { get; }
 		Field IdentifierField { get; }
-		Tuple GetTuple(object model);
-		object GetModel(Result result);
+	}
+	
+	public interface IMap<Model> : IMap
+	{
+		Tuple GetTuple(Model model);
+		Model GetModel(Result result);
 	}
 }
