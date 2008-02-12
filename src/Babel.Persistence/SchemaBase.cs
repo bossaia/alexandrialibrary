@@ -31,20 +31,43 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IMap : INamedItem
+	public abstract class SchemaBase : ISchema
 	{
-		ISchema Schema { get; }
-		Type Type { get; }
-		MapFunction Function { get; }
-		INamedItemCollection<Field> Fields { get; }
-		INamedItemCollection<Association> Associations { get; }
-		Field IdentifierField { get; }
-	}
+		#region Constructors
+		protected SchemaBase(string name)
+		{
+			this.name = name;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private INamedItemCollection<IMap> maps = new NamedItemCollection<IMap>();
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
 	
-	public interface IMap<Model> : IMap
-	{
-		Tuple GetTuple(Model model);
-		Model GetModel(Tuple tuple);
-		void LoadAssociation(Model model, Association association, TupleSet tupleSet);
+		#region ISchema Members
+		public INamedItemCollection<IMap> Maps
+		{
+			get { return maps; }
+		}
+
+		public virtual IMap<Model> GetMap<Model>()
+		{
+			foreach (IMap map in maps)
+			{
+				if (map.Type == typeof(Model))
+					return map as IMap<Model>;
+			}
+			
+			return null;
+		}
+		#endregion
 	}
 }

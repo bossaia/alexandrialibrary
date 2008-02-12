@@ -46,21 +46,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Association.cs" />
+    <Compile Include="AssociationResult.cs" />
     <Compile Include="AssociationType.cs" />
+    <Compile Include="ConstraintType.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldFunction.cs" />
     <Compile Include="FieldProperties.cs" />
+    <Compile Include="IColumn.cs" />
+    <Compile Include="IConstraint.cs" />
+    <Compile Include="IDatabase.cs" />
     <Compile Include="IEngine.cs" />
+    <Compile Include="IIndex.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
+    <Compile Include="IndexType.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchema.cs" />
+    <Compile Include="ITable.cs" />
+    <Compile Include="IView.cs" />
+    <Compile Include="MapBase.cs" />
     <Compile Include="MapFunction.cs" />
     <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="Result.cs" />
+    <Compile Include="SchemaBase.cs" />
     <Compile Include="Tuple.cs" />
     <Compile Include="TupleSet.cs" />
   </ItemGroup>
