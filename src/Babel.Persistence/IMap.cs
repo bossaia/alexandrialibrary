@@ -45,6 +45,6 @@ namespace Telesophy.Babel.Persistence
 	{
 		Tuple GetTuple(Model model);
 		Model GetModel(Tuple tuple);
-		void LoadAssociation(Model model, Association association, TupleSet tupleSet);
+		void LoadAssociations(Model model, Result result);
 	}
 }
