@@ -48,7 +48,10 @@
     <Compile Include="Association.cs" />
     <Compile Include="AssociationResult.cs" />
     <Compile Include="AssociationType.cs" />
+    <Compile Include="ColumnBase.cs" />
+    <Compile Include="ConstraintBase.cs" />
     <Compile Include="ConstraintType.cs" />
+    <Compile Include="DatabaseBase.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldFunction.cs" />
     <Compile Include="FieldProperties.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="IMap.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
+    <Compile Include="IndexBase.cs" />
     <Compile Include="IndexType.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchema.cs" />
@@ -72,8 +76,11 @@
     <Compile Include="Query.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="SchemaBase.cs" />
+    <Compile Include="TableBase.cs" />
+    <Compile Include="TableType.cs" />
     <Compile Include="Tuple.cs" />
     <Compile Include="TupleSet.cs" />
+    <Compile Include="ViewBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
