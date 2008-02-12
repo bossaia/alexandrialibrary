@@ -112,7 +112,7 @@ namespace Telesophy.Babel.Persistence
 
 		public abstract Model GetModel(Tuple tuple);
 
-		public abstract void LoadAssociation(Model model, Association association, TupleSet tupleSet);
+		public abstract void LoadAssociations(Model model, Result result);
 		#endregion
 	}
 }
