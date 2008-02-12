@@ -41,6 +41,5 @@ namespace Telesophy.Babel.Persistence
 		Field IdentifierField { get; }
 		Tuple GetTuple(object model);
 		object GetModel(Result result);
-		void LoadAssociation(object model, Association association, Result result);
 	}
 }
