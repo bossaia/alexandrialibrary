@@ -36,7 +36,11 @@ namespace Telesophy.Babel.Persistence
 		None = 0,
 		Identifier,
 		Name,
-		Value,
+		EnumeratedValue,
+		ComparableValue,
+		FormattedValue,
+		OpenEndedValue,
+		TypeDescriminator,
 		ChildItem,
 		ChildList
 	}

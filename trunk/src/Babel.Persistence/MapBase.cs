@@ -109,6 +109,8 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region IMap<Model> Members
+		public abstract DataTable GetTable();
+		
 		public abstract DataTable GetTable(IEnumerable<Model> models);
 
 		public abstract IEnumerable<Model> GetModels(DataTable table);

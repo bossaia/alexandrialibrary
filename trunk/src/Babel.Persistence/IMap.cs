@@ -44,6 +44,7 @@ namespace Telesophy.Babel.Persistence
 	
 	public interface IMap<Model> : IMap
 	{
+		DataTable GetTable();
 		DataTable GetTable(IEnumerable<Model> models);
 		IEnumerable<Model> GetModels(DataTable table);
 		void LoadChildren(IEnumerable<Model> models, IResult result);

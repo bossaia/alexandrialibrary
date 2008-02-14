@@ -29,7 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mime;
 
+using Telesophy.Alexandria.Model;
 using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
@@ -40,7 +42,16 @@ namespace Telesophy.Alexandria.Model.Data
 		public MediaItemMap(ISchema schema) : base("IMediaItem", schema, MapFunction.Entity)
 		{
 			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier, FieldProperties.RequiredAndUnique));
-			Fields.Add(new Field(this, "Name", typeof(string), FieldFunction.Name, FieldProperties.Required));
+			Fields.Add(new Field(this, "Source", typeof(string), FieldFunction.OpenEndedValue, FieldProperties.Required));
+			Fields.Add(new Field(this, "Type", typeof(string), FieldFunction.RecordType, FieldProperties.Required));
+			Fields.Add(new Field(this, "Number", typeof(int), FieldFunction.ComparableValue, FieldProperties.Required));
+			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Name, FieldProperties.Required));
+			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Name, FieldProperties.Required));
+			Fields.Add(new Field(this, "Album", typeof(string), FieldFunction.Name, FieldProperties.Required));
+			Fields.Add(new Field(this, "Duration", typeof(TimeSpan), FieldFunction.ComparableValue, FieldProperties.Required));
+			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.ComparableValue, FieldProperties.Required));
+			Fields.Add(new Field(this, "Format", typeof(string), FieldFunction.FormattedValue, FieldProperties.Required));
+			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.FormattedValue, FieldProperties.RequiredAndUnique));
 		}
 		#endregion
 		
@@ -49,15 +60,78 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			get { return Fields["Id"]; }
 		}
+
+		public override DataTable GetTable()
+		{
+			DataTable table = new DataTable("MediaItem");
+			table.Columns.Add("Id", typeof(Guid));
+			table.Columns.Add("Source", typeof(string));
+			table.Columns.Add("Type", typeof(string));
+			table.Columns.Add("Number", typeof(int));
+			table.Columns.Add("Title", typeof(string));
+			table.Columns.Add("Artist", typeof(string));
+			table.Columns.Add("Album", typeof(string));
+			table.Columns.Add("Duration", typeof(TimeSpan));
+			table.Columns.Add("Date", typeof(DateTime));
+			table.Columns.Add("Format", typeof(string));
+			table.Columns.Add("Path", typeof(Uri));
+			return table;
+		}
 		
 		public override DataTable GetTable(IEnumerable<IMediaItem> models)
 		{
-			return null;
+			DataTable table = GetTable();
+			
+			foreach (IMediaItem item in models)
+			{
+				if (item != null)
+				{
+					table.Rows.Add(item.Id, item.Source, item.Type, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+				}
+			}
+			
+			return table;
 		}
 
 		public override IEnumerable<IMediaItem> GetModels(DataTable table)
 		{
-			return null;
+			IList<IMediaItem> list = new List<IMediaItem>();
+		
+			if (table != null && table.Rows.Count > 0)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					IMediaItem item = null;
+					string type = row.Field<string>("Type");
+					switch (type)
+					{
+						case Constants.TYPE_AUDIO:
+							item = new AudioTrack();
+							break;
+						default:
+							break;
+					}
+					
+					if (item != null)
+					{
+						item.Id = row.Field<Guid>("Id");
+						item.Source = row.Field<string>("Source");
+						item.Type = type;
+						item.Number = row.Field<int>("Number");
+						item.Title = row.Field<string>("Title");
+						item.Artist = row.Field<string>("Artist");
+						item.Album = row.Field<string>("Album");
+						item.Duration = row.Field<TimeSpan>("Duration");
+						item.Date = row.Field<DateTime>("Date");
+						item.Format = row.Field<string>("Format");
+						item.Path = row.Field<Uri>("Path");
+						
+						list.Add(item);	
+					}
+				}
+			}
+		
+			return list;
 		}
 
 		public override void LoadChildren(IEnumerable<IMediaItem> models, IResult result)
