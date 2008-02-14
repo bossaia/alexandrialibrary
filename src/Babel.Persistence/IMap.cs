@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -43,8 +44,8 @@ namespace Telesophy.Babel.Persistence
 	
 	public interface IMap<Model> : IMap
 	{
-		Tuple GetTuple(Model model);
-		Model GetModel(Tuple tuple);
-		void LoadAssociations(Model model, Result result);
+		DataTable GetTable(IEnumerable<Model> models);
+		IEnumerable<Model> GetModels(DataTable table);
+		void LoadChildren(IEnumerable<Model> models, IResult result);
 	}
 }

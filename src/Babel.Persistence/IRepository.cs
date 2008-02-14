@@ -36,9 +36,9 @@ namespace Telesophy.Babel.Persistence
 		IEngine Engine { get; set; }
 		INamedItemCollection<ISchema> Schemas { get; }
 		void Initialize();
-		Model Get<Model>(Query query);
-		IList<Model> List<Model>(Query query);
-		void Save<Model>(Model model);
-		void Delete<Model>(Model model);
+		Model Lookup<Model>(Query query);
+		IEnumerable<Model> List<Model>(Query query);
+		void Save<Model>(IEnumerable<Model> models);
+		void Delete<Model>(IEnumerable<Model> models);
 	}
 }

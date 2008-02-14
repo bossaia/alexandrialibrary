@@ -33,15 +33,21 @@ namespace Telesophy.Babel.Persistence
 {
 	public class Tuple
 	{
+		#region Constructors
 		public Tuple()
 		{
 		}
+		#endregion
 	
+		#region Private Fields
 		private IDictionary<string, object> values = new Dictionary<string, object>();
+		#endregion
 		
+		#region Public Properties
 		public IDictionary<string, object> Values
 		{
 			get { return values; }
 		}
+		#endregion
 	}
 }

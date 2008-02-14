@@ -31,23 +31,34 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class AssociationResult
+	public abstract class EngineBase : IEngine
 	{
-		public AssociationResult()
+		#region Constructors
+		protected EngineBase(string name)
 		{
-			this.data = new Dictionary<string, TupleSet>();
+			this.name = name;
 		}
-
-		public AssociationResult(IDictionary<string, TupleSet> data)
+		#endregion
+	
+		#region Private Fields
+		private string name;
+		#endregion
+	
+		#region INamedItem Members
+		public string Name
 		{
-			this.data = data;
+			get { return name; }
 		}
+		#endregion
 
-		private IDictionary<string, TupleSet> data;
+		#region IEngine Members
+		public abstract void Initialize(ISchema schema);
 
-		public IDictionary<string, TupleSet> Data
-		{
-			get { return data; }
-		}
+		public abstract IResult Lookup(IMap map, Query query);
+
+		public abstract void Save(IMap map, object model);
+
+		public abstract void Delete(IMap map, object model);
+		#endregion
 	}
 }

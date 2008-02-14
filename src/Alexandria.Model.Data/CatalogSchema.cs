@@ -27,55 +27,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Babel.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public class Result : IResult
+	public class CatalogSchema : SchemaBase
 	{
 		#region Constructors
-		public Result(string name, DataTable table, IDictionary<string, DataTable> childTables, IDictionary<string, IResult> childResults)
+		public CatalogSchema() : base("Catalog")
 		{
-			this.name = name;
-			this.table = table;
-			
-			if (childTables != null)
-				this.childTables = childTables;
-			
-			if (childResults != null)
-				this.childResults = childResults;
-		}
-		#endregion
-		
-		#region Private Fields
-		private string name;
-		private DataTable table;
-		private IDictionary<string, DataTable> childTables = new Dictionary<string, DataTable>();
-		private IDictionary<string, IResult> childResults = new Dictionary<string, IResult>();
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
-		{
-			get { return name; }
-		}
-		#endregion
-		
-		#region IResult Members
-		public DataTable Table
-		{
-			get { return table; }
-		}
-		
-		public IDictionary<string, DataTable> ChildTables
-		{
-			get { return childTables; }
-		}
-		
-		public IDictionary<string, IResult> ChildResults
-		{
-			get { return childResults; }
 		}
 		#endregion
 	}
