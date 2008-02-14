@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -34,11 +35,11 @@ namespace Telesophy.Babel.Persistence
 	public abstract class MapBase<Model> : IMap<Model>
 	{
 		#region Constructors
-		protected MapBase(string name, ISchema schema, Type type, MapFunction function)
+		protected MapBase(string name, ISchema schema, MapFunction function)
 		{
 			this.name = name;
 			this.schema = schema;
-			this.type = type;
+			this.type = typeof(Model);
 			this.function = function;
 		}
 		#endregion
@@ -108,11 +109,11 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region IMap<Model> Members
-		public abstract Tuple GetTuple(Model model);
+		public abstract DataTable GetTable(IEnumerable<Model> models);
 
-		public abstract Model GetModel(Tuple tuple);
+		public abstract IEnumerable<Model> GetModels(DataTable table);
 
-		public abstract void LoadAssociations(Model model, Result result);
+		public abstract void LoadChildren(IEnumerable<Model> models, IResult result);
 		#endregion
 	}
 }

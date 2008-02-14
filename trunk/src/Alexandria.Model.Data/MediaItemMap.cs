@@ -30,52 +30,38 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Babel.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public class Result : IResult
+	public class MediaItemMap : MapBase<IMediaItem>
 	{
 		#region Constructors
-		public Result(string name, DataTable table, IDictionary<string, DataTable> childTables, IDictionary<string, IResult> childResults)
+		public MediaItemMap(ISchema schema) : base("IMediaItem", schema, MapFunction.Entity)
 		{
-			this.name = name;
-			this.table = table;
-			
-			if (childTables != null)
-				this.childTables = childTables;
-			
-			if (childResults != null)
-				this.childResults = childResults;
+			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier, FieldProperties.RequiredAndUnique));
+			Fields.Add(new Field(this, "Name", typeof(string), FieldFunction.Name, FieldProperties.Required));
 		}
 		#endregion
 		
-		#region Private Fields
-		private string name;
-		private DataTable table;
-		private IDictionary<string, DataTable> childTables = new Dictionary<string, DataTable>();
-		private IDictionary<string, IResult> childResults = new Dictionary<string, IResult>();
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
+		#region Public Overrides
+		public override Field IdentifierField
 		{
-			get { return name; }
-		}
-		#endregion
-		
-		#region IResult Members
-		public DataTable Table
-		{
-			get { return table; }
+			get { return Fields["Id"]; }
 		}
 		
-		public IDictionary<string, DataTable> ChildTables
+		public override DataTable GetTable(IEnumerable<IMediaItem> models)
 		{
-			get { return childTables; }
+			return null;
 		}
-		
-		public IDictionary<string, IResult> ChildResults
+
+		public override IEnumerable<IMediaItem> GetModels(DataTable table)
 		{
-			get { return childResults; }
+			return null;
+		}
+
+		public override void LoadChildren(IEnumerable<IMediaItem> models, IResult result)
+		{
 		}
 		#endregion
 	}

@@ -31,12 +31,11 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IEngine
+	public interface IEngine : INamedItem
 	{
-		void InitializeSchema(ISchema schema);
-		void InitializeMap(IMap map);
-		Result Lookup(IMap map, Query query);
-		Result Save(IMap map, object model);
-		Result Delete(IMap map, object model);
+		void Initialize(ISchema schema);
+		IResult Lookup(IMap map, Query query);
+		void Save(IMap map, object model);
+		void Delete(IMap map, object model);
 	}
 }
