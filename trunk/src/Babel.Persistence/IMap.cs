@@ -38,7 +38,6 @@ namespace Telesophy.Babel.Persistence
 		Type Type { get; }
 		MapFunction Function { get; }
 		INamedItemCollection<Field> Fields { get; }
-		INamedItemCollection<Association> Associations { get; }
 		Field IdentifierField { get; }
 	}
 	

@@ -53,6 +53,7 @@
     <Compile Include="MediaItemMap.cs" />
     <Compile Include="MediaSetContentDataMap.cs" />
     <Compile Include="MediaSetDataMap.cs" />
+    <Compile Include="MediaSetMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
