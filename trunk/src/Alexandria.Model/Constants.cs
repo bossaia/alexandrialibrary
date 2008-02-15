@@ -8,8 +8,8 @@ namespace Telesophy.Alexandria.Model
 	{
 		//public static readonly string ARTIST_TYPE_INDIVIDUAL = "Individual";
 		//public static readonly string ARTIST_TYPE_GROUP = "Group";
-		public static readonly string TYPE_AUDIO = "Audio";
-		public static readonly string TYPE_VIDEO = "Video";
-		public static readonly string TYPE_IMAGE = "Image";
+		public const string TYPE_AUDIO = "Audio";
+		public const string TYPE_VIDEO = "Video";
+		public const string TYPE_IMAGE = "Image";
 	}
 }
