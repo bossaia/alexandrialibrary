@@ -45,8 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Association.cs" />
-    <Compile Include="AssociationType.cs" />
     <Compile Include="ColumnBase.cs" />
     <Compile Include="ConstraintBase.cs" />
     <Compile Include="ConstraintType.cs" />

@@ -50,7 +50,6 @@ namespace Telesophy.Babel.Persistence
 		private Type type;
 		private MapFunction function;
 		private INamedItemCollection<Field> fields;
-		private INamedItemCollection<Association> associations;
 		private Field identifierField = Field.Empty;
 		#endregion
 	
@@ -80,11 +79,6 @@ namespace Telesophy.Babel.Persistence
 		public INamedItemCollection<Field> Fields
 		{
 			get { return fields; }
-		}
-
-		public INamedItemCollection<Association> Associations
-		{
-			get { return associations; }
 		}
 
 		public virtual Field IdentifierField

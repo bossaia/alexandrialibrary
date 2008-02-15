@@ -41,7 +41,8 @@ namespace Telesophy.Babel.Persistence
 		FormattedValue,
 		OpenEndedValue,
 		TypeDescriminator,
-		ChildItem,
-		ChildList
+		OneToOneChild,
+		OneToManyChildren,
+		ManyToManyChildren
 	}
 }
