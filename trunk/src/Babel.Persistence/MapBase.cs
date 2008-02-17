@@ -49,7 +49,7 @@ namespace Telesophy.Babel.Persistence
 		private ISchema schema;
 		private Type type;
 		private MapFunction function;
-		private INamedItemCollection<Field> fields;
+		private INamedItemCollection<Field> fields = new NamedItemCollection<Field>();
 		private Field identifierField = Field.Empty;
 		private Field parentIdentifierField = Field.Empty;
 		#endregion

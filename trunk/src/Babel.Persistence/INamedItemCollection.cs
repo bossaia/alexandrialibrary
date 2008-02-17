@@ -34,6 +34,7 @@ namespace Telesophy.Babel.Persistence
 	{
 		IEqualityComparer<string> Comparer { get; }
 		NamedItem this[string key] { get; }
+		NamedItem this[int index] { get; }
 		bool Contains(string key);
 		bool Remove(string key);
 	}
