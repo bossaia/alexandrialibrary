@@ -51,6 +51,7 @@ namespace Telesophy.Babel.Persistence
 		private MapFunction function;
 		private INamedItemCollection<Field> fields;
 		private Field identifierField = Field.Empty;
+		private Field parentIdentifierField = Field.Empty;
 		#endregion
 	
 		#region INamedItem Members
@@ -98,6 +99,26 @@ namespace Telesophy.Babel.Persistence
 				}
 				
 				return identifierField;
+			}
+		}
+
+		public virtual Field ParentIdentifierField
+		{
+			get
+			{
+				if (parentIdentifierField == Field.Empty && fields != null)
+				{
+					foreach (Field field in fields)
+					{
+						if (field.Function == FieldFunction.ParentIdentifier)
+						{
+							parentIdentifierField = field;
+							break;
+						}
+					}
+				}
+
+				return parentIdentifierField;
 			}
 		}
 		#endregion
