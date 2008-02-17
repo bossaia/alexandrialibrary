@@ -42,7 +42,7 @@ namespace Telesophy.Babel.Persistence
 		
 		#region Private Fields
 		private string name;
-		private INamedItemCollection<IMap> maps = new NamedItemCollection<IMap>();
+		private IMapCollection maps = new MapCollection();
 		#endregion
 		
 		#region INamedItem Members
@@ -53,7 +53,7 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 	
 		#region ISchema Members
-		public INamedItemCollection<IMap> Maps
+		public IMapCollection Maps
 		{
 			get { return maps; }
 		}

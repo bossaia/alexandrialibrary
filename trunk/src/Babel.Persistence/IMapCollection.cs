@@ -31,12 +31,13 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	[Flags]
-	public enum FieldProperties
+	public interface IMapCollection : ICollection<IMap>
 	{
-		None = 0,
-		Required = 1,
-		Unique = 2,
-		RequiredAndUnique = 3
+		IEqualityComparer<Type> Comparer { get; }
+		IMap this[Type key] { get; }
+		IMap this[int index] { get; }
+		bool Contains(Type key);
+		bool Remove(Type key);
+
 	}
 }

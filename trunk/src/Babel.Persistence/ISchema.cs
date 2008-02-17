@@ -33,7 +33,7 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface ISchema : INamedItem
 	{
-		INamedItemCollection<IMap> Maps { get; }
+		IMapCollection Maps { get; }
 		IMap<Model> GetMap<Model>();
 	}
 }

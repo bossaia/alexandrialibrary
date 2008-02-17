@@ -34,6 +34,14 @@ namespace Telesophy.Babel.Persistence
 	public abstract class RepositoryBase : IRepository
 	{
 		#region Constructors
+		protected RepositoryBase()
+		{
+		}
+		
+		protected RepositoryBase(IEngine engine)
+		{
+			this.engine = engine;
+		}
 		#endregion
 		
 		#region Private Fields
@@ -44,16 +52,12 @@ namespace Telesophy.Babel.Persistence
 		#region Protected Methods
 		protected virtual IMap<Model> GetMap<Model>()
 		{
-			return GetMap<Model>(typeof(Model).Name);
-		}
-		
-		protected virtual IMap<Model> GetMap<Model>(string name)
-		{
+			Type key = typeof(Model);
 			foreach (ISchema schema in schemas)
 			{
-				if (schema.Maps.Contains(name))
+				if (schema.Maps.Contains(key))
 				{
-					return (IMap<Model>)schema.Maps[name];
+					return (IMap<Model>)schema.Maps[key];
 				}
 			}
 			

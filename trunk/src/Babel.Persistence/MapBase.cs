@@ -50,8 +50,9 @@ namespace Telesophy.Babel.Persistence
 		private Type type;
 		private MapFunction function;
 		private INamedItemCollection<Field> fields = new NamedItemCollection<Field>();
-		private Field identifierField = Field.Empty;
-		private Field parentIdentifierField = Field.Empty;
+		private INamedItemCollection<Association> associations = new NamedItemCollection<Association>();
+		private Field identifier = Field.Empty;
+		private Association parentIdentifier = Association.Empty;
 		#endregion
 	
 		#region INamedItem Members
@@ -82,43 +83,48 @@ namespace Telesophy.Babel.Persistence
 			get { return fields; }
 		}
 
-		public virtual Field IdentifierField
+		public INamedItemCollection<Association> Associations
+		{
+			get { return associations; }
+		}
+
+		public virtual Field Identifier
 		{
 			get
 			{
-				if (identifierField == Field.Empty && fields != null)
+				if (identifier == Field.Empty && fields != null)
 				{
 					foreach (Field field in fields)
 					{
 						if (field.Function == FieldFunction.Identifier)
 						{
-							identifierField = field;
+							identifier = field;
 							break;
 						}
 					}
 				}
 				
-				return identifierField;
+				return identifier;
 			}
 		}
 
-		public virtual Field ParentIdentifierField
+		public virtual Association ParentIdentifier
 		{
 			get
 			{
-				if (parentIdentifierField == Field.Empty && fields != null)
+				if (parentIdentifier == Association.Empty && associations != null)
 				{
-					foreach (Field field in fields)
+					foreach (Association association in associations)
 					{
-						if (field.Function == FieldFunction.ParentIdentifier)
+						if (association.Function == AssociationFunction.ParentIdentifier)
 						{
-							parentIdentifierField = field;
+							parentIdentifier = association;
 							break;
 						}
 					}
 				}
 
-				return parentIdentifierField;
+				return parentIdentifier;
 			}
 		}
 		#endregion

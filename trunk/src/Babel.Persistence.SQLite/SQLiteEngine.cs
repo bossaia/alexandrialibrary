@@ -57,6 +57,8 @@ namespace Telesophy.Babel.Persistence.SQLite
 		private const string TABLE_FORMAT = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 		private const string COLUMN_FORMAT = "{0} {1} {2}";
 		private const string LIST_SEPARATOR = ", ";
+		private const string ASSOCIATIVE_TABLE = "ParentId NOT NULL, ChildId NOT NULL, PRIMARY KEY(ParentId, ChildId)";
+		private const string INDEX_FORMAT = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
 		#endregion
 			
 		#region Private Fields
@@ -64,6 +66,8 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 		
 		#region Private Methods
+		
+		#region System.Data Methods
 		private string GetConnectionString(ISchema schema)
 		{
 			if (schema != null)
@@ -83,55 +87,106 @@ namespace Telesophy.Babel.Persistence.SQLite
 			return new SQLiteConnection(GetConnectionString(schema));
 		}
 
-		private void InitializeMap(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
-		{
-			if (map != null)
-			{
-				StringBuilder builder = new StringBuilder();
-				for (int count = 0; count < map.Fields.Count; count++)
-				{
-					if (count > 0) builder.Append(LIST_SEPARATOR);
-					string name = map.Fields[count].Name;
-					string type = GetColumnTypeName(map.Fields[count].Type);
-					string constraints = GetColumnConstraints(map.Fields[count]);
-					builder.AppendFormat(COLUMN_FORMAT, name, type, constraints);
-				}
-
-				//foreach (System.Data.Constraint constraint in table.Constraints)
-				//{
-				//    if (constraint is UniqueConstraint)
-				//    {
-				//        UniqueConstraint uniqueConstraint = constraint as UniqueConstraint;
-				//        if (uniqueConstraint.IsPrimaryKey)
-				//            createTableText.Append(", PRIMARY KEY (");
-				//        else createTableText.Append(", UNIQUE (");
-
-				//        for (int constraintColumnNumber = 0; constraintColumnNumber < uniqueConstraint.Columns.Length; constraintColumnNumber++)
-				//        {
-				//            if (constraintColumnNumber > 0)
-				//                createTableText.Append(", ");
-
-				//            createTableText.Append(uniqueConstraint.Columns[constraintColumnNumber].ColumnName);
-				//        }
-
-				//        createTableText.Append(")");
-				//    }
-				//}
-
-				string commandText = string.Format(TABLE_FORMAT, map.Name, builder);
-				SQLiteCommand command = GetCommand(commandText, connection, transaction);
-				command.ExecuteNonQuery();
-			}
-		}
-
 		private SQLiteCommand GetCommand(string commandText, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
 			SQLiteCommand command = new SQLiteCommand(commandText, connection, transaction);
 			command.CommandType = CommandType.Text;
 			return command;
 		}
+		#endregion
 
-		private string GetColumnTypeName(Type type)
+		#region Initialization Methods
+		private void InitializeMap(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			if (map != null)
+			{
+				CreateEntityTable(map, connection, transaction);
+				
+				CreateAssociativeTables(map, connection, transaction);
+				
+				CreateIndices(map, connection, transaction);
+			}
+		}
+
+		private void CreateEntityTable(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			StringBuilder builder = new StringBuilder();
+			
+			Field field;
+			for (int count = 0; count < map.Fields.Count; count++)
+			{
+				if (count > 0)
+					builder.Append(LIST_SEPARATOR);
+
+				field = map.Fields[count];
+				builder.Append(GetColumnString(field));				
+			}
+
+			string commandText = string.Format(TABLE_FORMAT, map.Name, builder);
+			SQLiteCommand command = GetCommand(commandText, connection, transaction);
+			command.ExecuteNonQuery();
+		}
+
+		private void CreateAssociativeTables(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			if (map != null)
+			{
+				foreach (Association association in map.Associations)
+				{
+					if (association != Association.Empty)
+					{
+						switch (association.Function)
+						{
+							case AssociationFunction.OneToManyChildren:
+							case AssociationFunction.ManyToManyChildren:
+								string commandText = string.Format(TABLE_FORMAT, association.Name, ASSOCIATIVE_TABLE);
+								SQLiteCommand command = GetCommand(commandText, connection, transaction);
+								command.ExecuteNonQuery();
+								break;
+							default:
+								break;
+						}
+					}
+				}
+			}
+		}
+		
+		private void CreateIndices(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			if (map != null)
+			{
+				foreach (Field field in map.Fields)
+				{
+					switch (field.Function)
+					{
+						case FieldFunction.ChildIdentifier:
+						case FieldFunction.TypeDescriminator:
+						case FieldFunction.Value:
+							string commandText = string.Format(INDEX_FORMAT, field.Name, map.Name);
+							SQLiteCommand command = GetCommand(commandText, connection, transaction);
+							command.ExecuteNonQuery();
+							break;
+						default:
+							break;
+					}
+				}
+			}		
+		}
+
+		private string GetColumnString(Field field)
+		{
+			if (field != Field.Empty)
+			{
+				string name = field.Name;
+				string affinity = GetColumnAffinity(field.Type);
+				string constraints = GetColumnConstraints(field);
+				return string.Format(COLUMN_FORMAT, name, affinity, constraints);
+			}
+
+			return string.Empty;
+		}
+
+		private string GetColumnAffinity(Type type)
 		{
 			string name = "TEXT";
 
@@ -160,20 +215,35 @@ namespace Telesophy.Babel.Persistence.SQLite
 		{
 			if (field != Field.Empty)
 			{
-			
+				switch (field.Function)
+				{
+					case FieldFunction.Identifier:
+						return "PRIMARY KEY NOT NULL";
+					case FieldFunction.TypeDescriminator:
+					case FieldFunction.ChildIdentifier:
+					case FieldFunction.Value:
+					case FieldFunction.NonIndexedValue:
+						return "NOT NULL";
+					case FieldFunction.UniqueValue:
+						return "UNIQUE NOT NULL";
+					default:
+						break;
+				}
 			}
-			
+
 			return string.Empty;
 		}
+		#endregion
 
+		#region Conversion Methods
 		private object GetValue(DataRow row, int index)
 		{
 			if (row != null && index >= 0 && index < row.Table.Columns.Count)
 			{
 				DataColumn col = row.Table.Columns[index];
-				string typeName = GetColumnTypeName(col.DataType);
+				string affinity = GetColumnAffinity(col.DataType);
 
-				switch (typeName)
+				switch (affinity)
 				{
 					case "TEXT":
 						if (row[index] != null && row[index] != DBNull.Value)
@@ -195,7 +265,9 @@ namespace Telesophy.Babel.Persistence.SQLite
 				}
 			}
 			return string.Empty;
-		}		
+		}
+		#endregion
+		
 		#endregion
 		
 		#region INamedItem Members

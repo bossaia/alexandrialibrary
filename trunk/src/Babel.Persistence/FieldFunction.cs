@@ -35,15 +35,10 @@ namespace Telesophy.Babel.Persistence
 	{
 		None = 0,
 		Identifier,
-		ParentIdentifier,
-		Name,
-		EnumeratedValue,
-		ComparableValue,
-		FormattedValue,
-		OpenEndedValue,
 		TypeDescriminator,
-		OneToOneChild,
-		OneToManyChildren,
-		ManyToManyChildren
+		Value,
+		NonIndexedValue,
+		UniqueValue,
+		ChildIdentifier
 	}
 }

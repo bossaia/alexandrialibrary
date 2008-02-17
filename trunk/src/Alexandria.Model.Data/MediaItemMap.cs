@@ -39,37 +39,37 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaItemMap : MapBase<IMediaItem>
 	{
 		#region Constructors
-		public MediaItemMap(ISchema schema) : base("IMediaItem", schema, MapFunction.Entity)
+		public MediaItemMap(ISchema schema) : base("MediaItem", schema, MapFunction.Entity)
 		{
-			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier, FieldProperties.RequiredAndUnique));
-			Fields.Add(new Field(this, "Source", typeof(string), FieldFunction.OpenEndedValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Type", typeof(string), FieldFunction.TypeDescriminator, FieldProperties.Required));
-			Fields.Add(new Field(this, "Number", typeof(int), FieldFunction.ComparableValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Name, FieldProperties.Required));
-			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Name, FieldProperties.Required));
-			Fields.Add(new Field(this, "Album", typeof(string), FieldFunction.Name, FieldProperties.Required));
-			Fields.Add(new Field(this, "Duration", typeof(TimeSpan), FieldFunction.ComparableValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.ComparableValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Format", typeof(string), FieldFunction.FormattedValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.FormattedValue, FieldProperties.RequiredAndUnique));
-			Fields.Add(new Field(this, "MediaItemParentId", typeof(Guid), FieldFunction.ParentIdentifier, FieldProperties.None));
+			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier));
+			Fields.Add(new Field(this, "Source", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Type", typeof(string), FieldFunction.TypeDescriminator));
+			Fields.Add(new Field(this, "Number", typeof(int), FieldFunction.Value));
+			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Album", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Duration", typeof(TimeSpan), FieldFunction.Value));
+			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.Value));
+			Fields.Add(new Field(this, "Format", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.UniqueValue));
+			Associations.Add(new Association(this, "MediaItemParentId", typeof(Guid), AssociationFunction.ParentIdentifier));
 		}
 		#endregion
 		
 		#region Public Overrides
-		public override Field IdentifierField
+		public override Field Identifier
 		{
 			get { return Fields["Id"]; }
 		}
 
-		public override Field ParentIdentifierField
+		public override Association ParentIdentifier
 		{
-			get { return Fields["MediaItemParentId"]; }
+			get { return Associations["MediaItemParentId"]; }
 		}
 
 		public override DataTable GetTable()
 		{
-			DataTable table = new DataTable("MediaItem");
+			DataTable table = new DataTable(Name);
 			table.Columns.Add("Id", typeof(Guid));
 			table.Columns.Add("Source", typeof(string));
 			table.Columns.Add("Type", typeof(string));

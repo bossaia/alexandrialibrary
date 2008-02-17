@@ -39,28 +39,28 @@ namespace Telesophy.Alexandria.Model.Data
 		#region Constructors
 		public MediaSetMap(ISchema schema) : base("MediaSet", schema, MapFunction.Entity)
 		{
-			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier, FieldProperties.RequiredAndUnique));
-			Fields.Add(new Field(this, "Source", typeof(string), FieldFunction.OpenEndedValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Type", typeof(string), FieldFunction.TypeDescriminator, FieldProperties.Required));
-			Fields.Add(new Field(this, "Number", typeof(int), FieldFunction.ComparableValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Name, FieldProperties.Required));
-			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Name, FieldProperties.Required));
-			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.ComparableValue, FieldProperties.Required));
-			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.FormattedValue, FieldProperties.RequiredAndUnique));
-			Fields.Add(new Field(this, "Items", typeof(IMediaItem), FieldFunction.ManyToManyChildren, FieldProperties.None));
-			Fields.Add(new Field(this, "MediaSetParentId", typeof(Guid), FieldFunction.ParentIdentifier, FieldProperties.None));
+			Fields.Add(new Field(this, "Id", typeof(Guid), FieldFunction.Identifier));
+			Fields.Add(new Field(this, "Source", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Type", typeof(string), FieldFunction.TypeDescriminator));
+			Fields.Add(new Field(this, "Number", typeof(int), FieldFunction.Value));
+			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Value));
+			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.Value));
+			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.UniqueValue));
+			Associations.Add(new Association(this, "MediaSetItems", typeof(IMediaItem), AssociationFunction.ManyToManyChildren));
+			Associations.Add(new Association(this, "MediaSetParentId", typeof(Guid), AssociationFunction.ParentIdentifier));
 		}
 		#endregion
 	
 		#region Public Overrides
-		public override Field IdentifierField
+		public override Field Identifier
 		{
 			get { return Fields["Id"]; }
 		}
 
-		public override Field ParentIdentifierField
+		public override Association ParentIdentifier
 		{
-			get { return Fields["MediaSetParentId"]; }
+			get { return Associations["MediaSetParentId"]; }
 		}
 		
 		public override DataTable GetTable()
