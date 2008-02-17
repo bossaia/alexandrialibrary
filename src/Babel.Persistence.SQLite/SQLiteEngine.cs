@@ -33,7 +33,44 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence.SQLite
 {
-	public class SQLiteEngine //: IEngine
+	public class SQLiteEngine : IEngine
 	{
+		#region Constructors
+		public SQLiteEngine()
+		{
+		}
+		#endregion
+			
+		#region Private Fields
+		#endregion
+	
+		#region INamedItem Members
+		public string Name
+		{
+			get { return "SQLite Database Engine"; }
+		}
+		#endregion
+	
+		#region IEngine Members
+		public void Initialize(ISchema schema)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IResult Lookup(IMap map, Query query)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Save(IMap map, object model)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Delete(IMap map, object model)
+		{
+			throw new NotImplementedException();
+		}
+		#endregion
 	}
 }
