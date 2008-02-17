@@ -27,27 +27,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Babel.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IMap : INamedItem
+	public class Repository : RepositoryBase
 	{
-		ISchema Schema { get; }
-		Type Type { get; }
-		MapFunction Function { get; }
-		INamedItemCollection<Field> Fields { get; }
-		INamedItemCollection<Association> Associations { get; }
-		Field Identifier { get; }
-		Association ParentIdentifier { get; }
-	}
-	
-	public interface IMap<Model> : IMap
-	{
-		DataTable GetTable();
-		DataTable GetTable(IEnumerable<Model> models);
-		IEnumerable<Model> GetModels(DataTable table);
-		void LoadChildren(IEnumerable<Model> models, IResult result);
+		#region Constructors
+		public Repository() : this(null)
+		{
+		}
+		
+		public Repository(IEngine engine) : base(engine)
+		{
+			Schemas.Add(new CatalogSchema());
+		}
+		#endregion
 	}
 }

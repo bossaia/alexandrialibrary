@@ -31,10 +31,10 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public struct Field : INamedItem
+	public struct Association : INamedItem
 	{
 		#region Constructors
-		public Field(IMap map, string name, Type type, FieldFunction function)
+		public Association(IMap map, string name, Type type, AssociationFunction function)
 		{
 			this.map = map;
 			this.name = name;
@@ -47,7 +47,7 @@ namespace Telesophy.Babel.Persistence
 		private IMap map;
 		private string name;
 		private Type type;
-		private FieldFunction function;
+		private AssociationFunction function;
 		#endregion
 		
 		#region INamedItem Members
@@ -62,27 +62,27 @@ namespace Telesophy.Babel.Persistence
 		{
 			get { return map; }
 		}
-				
+		
 		public Type Type
 		{
 			get { return type; }
 		}
 		
-		public FieldFunction Function
+		public AssociationFunction Function
 		{
 			get { return function; }
 		}
 		#endregion
-		
+
 		#region Public Overrides
 		public override bool Equals(object obj)
 		{
-			if (obj != null && obj is Field)
+			if (obj != null && obj is Association)
 			{
-				Field other = (Field)obj;
+				Association other = (Association)obj;
 				return (this.ToString() == other.ToString());
 			}
-			
+
 			return false;
 		}
 
@@ -98,24 +98,25 @@ namespace Telesophy.Babel.Persistence
 			else return string.Empty;
 		}
 		#endregion
-		
+
 		#region Static Members
-		private static Field empty = default(Field);
-		
-		public static Field Empty
+		private static Association empty = default(Association);
+
+		public static Association Empty
 		{
 			get { return empty; }
 		}
-		
-		public static bool operator ==(Field f1, Field f2)
+
+		public static bool operator ==(Association a1, Association a2)
 		{
-			return f1.Equals(f2);
+			return a1.Equals(a2);
 		}
-		
-		public static bool operator !=(Field f1, Field f2)
+
+		public static bool operator !=(Association a1, Association a2)
 		{
-			return !f1.Equals(f2);
+			return !a1.Equals(a2);
 		}
 		#endregion
+
 	}
 }

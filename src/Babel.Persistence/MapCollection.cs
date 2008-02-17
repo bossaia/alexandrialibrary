@@ -27,94 +27,52 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Babel.Persistence
 {
-	public struct Field : INamedItem
+	public class MapCollection : 
+		KeyedCollection<Type, IMap>,
+		IMapCollection
 	{
 		#region Constructors
-		public Field(IMap map, string name, Type type, FieldFunction function)
+		public MapCollection()
 		{
-			this.map = map;
-			this.name = name;
-			this.type = type;
-			this.function = function;
 		}
 		#endregion
-		
-		#region Private Fields
-		private IMap map;
-		private string name;
-		private Type type;
-		private FieldFunction function;
-		#endregion
-		
-		#region INamedItem Members
-		public string Name
+
+		#region Protected Methods
+		protected override Type GetKeyForItem(IMap item)
 		{
-			get { return name; }
+			if (item != null)
+				return item.Type;
+			else return null;
 		}
 		#endregion
-		
-		#region Public Properties
-		public IMap Map
+
+		#region Public Methods
+		public new IMap this[Type key]
 		{
-			get { return map; }
-		}
-				
-		public Type Type
-		{
-			get { return type; }
-		}
-		
-		public FieldFunction Function
-		{
-			get { return function; }
-		}
-		#endregion
-		
-		#region Public Overrides
-		public override bool Equals(object obj)
-		{
-			if (obj != null && obj is Field)
+			get
 			{
-				Field other = (Field)obj;
-				return (this.ToString() == other.ToString());
+				if (base.Contains(key))
+				{
+					return base[key];
+				}
+				else throw new KeyNotFoundException();
 			}
-			
-			return false;
 		}
 
-		public override int GetHashCode()
+		public new IMap this[int index]
 		{
-			return ToString().GetHashCode();
-		}
-
-		public override string ToString()
-		{
-			if (map != null && map.Schema != null && name != null)
-				return string.Format("{0}.{1}.{2}", map.Schema.Name, map.Name, name);
-			else return string.Empty;
-		}
-		#endregion
-		
-		#region Static Members
-		private static Field empty = default(Field);
-		
-		public static Field Empty
-		{
-			get { return empty; }
-		}
-		
-		public static bool operator ==(Field f1, Field f2)
-		{
-			return f1.Equals(f2);
-		}
-		
-		public static bool operator !=(Field f1, Field f2)
-		{
-			return !f1.Equals(f2);
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
 		}
 		#endregion
 	}

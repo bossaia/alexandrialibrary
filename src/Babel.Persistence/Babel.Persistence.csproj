@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Association.cs" />
+    <Compile Include="AssociationFunction.cs" />
     <Compile Include="ColumnBase.cs" />
     <Compile Include="ConstraintBase.cs" />
     <Compile Include="ConstraintType.cs" />
@@ -52,13 +54,13 @@
     <Compile Include="EngineBase.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldFunction.cs" />
-    <Compile Include="FieldProperties.cs" />
     <Compile Include="IColumn.cs" />
     <Compile Include="IConstraint.cs" />
     <Compile Include="IDatabase.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="IIndex.cs" />
     <Compile Include="IMap.cs" />
+    <Compile Include="IMapCollection.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="INamedItemCollection.cs" />
     <Compile Include="IndexBase.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="ITable.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="MapBase.cs" />
+    <Compile Include="MapCollection.cs" />
     <Compile Include="MapFunction.cs" />
     <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
