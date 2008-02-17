@@ -35,6 +35,7 @@ namespace Telesophy.Babel.Persistence
 	{
 		None = 0,
 		Identifier,
+		ParentIdentifier,
 		Name,
 		EnumeratedValue,
 		ComparableValue,

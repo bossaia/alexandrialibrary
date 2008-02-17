@@ -39,6 +39,7 @@ namespace Telesophy.Babel.Persistence
 		MapFunction Function { get; }
 		INamedItemCollection<Field> Fields { get; }
 		Field IdentifierField { get; }
+		Field ParentIdentifierField { get; }
 	}
 	
 	public interface IMap<Model> : IMap

@@ -38,6 +38,8 @@ namespace Telesophy.Alexandria.Model.Data
 		#region Constructors
 		public CatalogSchema() : base("Catalog")
 		{
+			Maps.Add(new MediaSetMap(this));
+			Maps.Add(new MediaItemMap(this));
 		}
 		#endregion
 	}
