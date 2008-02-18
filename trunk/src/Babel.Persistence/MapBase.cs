@@ -52,7 +52,6 @@ namespace Telesophy.Babel.Persistence
 		private INamedItemCollection<Field> fields = new NamedItemCollection<Field>();
 		private INamedItemCollection<Association> associations = new NamedItemCollection<Association>();
 		private Field identifier = Field.Empty;
-		private Association parentIdentifier = Association.Empty;
 		#endregion
 	
 		#region INamedItem Members
@@ -105,26 +104,6 @@ namespace Telesophy.Babel.Persistence
 				}
 				
 				return identifier;
-			}
-		}
-
-		public virtual Association ParentIdentifier
-		{
-			get
-			{
-				if (parentIdentifier == Association.Empty && associations != null)
-				{
-					foreach (Association association in associations)
-					{
-						if (association.Function == AssociationFunction.ParentIdentifier)
-						{
-							parentIdentifier = association;
-							break;
-						}
-					}
-				}
-
-				return parentIdentifier;
 			}
 		}
 		#endregion
