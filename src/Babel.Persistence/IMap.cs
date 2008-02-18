@@ -40,7 +40,6 @@ namespace Telesophy.Babel.Persistence
 		INamedItemCollection<Field> Fields { get; }
 		INamedItemCollection<Association> Associations { get; }
 		Field Identifier { get; }
-		Association ParentIdentifier { get; }
 	}
 	
 	public interface IMap<Model> : IMap

@@ -53,12 +53,13 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#region Private Constants
 		private const string KEY_DB_DIR = "DatabaseDirectory";
 		private const string DATABASE_EXT = ".db";
+		private const string LIST_SEPARATOR = ", ";
 		private const string CON_STRING_FORMAT = "Data Source={0};New={1};UTF8Encoding=True;Version=3";
 		private const string TABLE_FORMAT = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 		private const string COLUMN_FORMAT = "{0} {1} {2}";
-		private const string LIST_SEPARATOR = ", ";
-		private const string ASSOCIATIVE_TABLE = "ParentId NOT NULL, ChildId NOT NULL, PRIMARY KEY(ParentId, ChildId)";
 		private const string INDEX_FORMAT = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
+		private const string VIEW_FORMAT = "CREATE VIEW IF NOT EXISTS view_{0} AS SELECT {1}";
+		private const string ASSOCIATIVE_TABLE_TEXT = "ParentId NOT NULL, ChildId NOT NULL, PRIMARY KEY(ParentId, ChildId)";
 		#endregion
 			
 		#region Private Fields
@@ -102,7 +103,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 			{
 				CreateEntityTable(map, connection, transaction);
 				
-				CreateAssociativeTables(map, connection, transaction);
+				InitializeAssociations(map, connection, transaction);
 				
 				CreateIndices(map, connection, transaction);
 			}
@@ -127,7 +128,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 			command.ExecuteNonQuery();
 		}
 
-		private void CreateAssociativeTables(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
+		private void InitializeAssociations(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
 			if (map != null)
 			{
@@ -139,9 +140,8 @@ namespace Telesophy.Babel.Persistence.SQLite
 						{
 							case AssociationFunction.OneToManyChildren:
 							case AssociationFunction.ManyToManyChildren:
-								string commandText = string.Format(TABLE_FORMAT, association.Name, ASSOCIATIVE_TABLE);
-								SQLiteCommand command = GetCommand(commandText, connection, transaction);
-								command.ExecuteNonQuery();
+								CreateAssociativeTable(association, connection, transaction); 
+								CreateAssociativeView(association, connection, transaction);
 								break;
 							default:
 								break;
@@ -149,6 +149,33 @@ namespace Telesophy.Babel.Persistence.SQLite
 					}
 				}
 			}
+		}
+		
+		private void CreateAssociativeTable(Association association, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			string commandText = string.Format(TABLE_FORMAT, association.Name, ASSOCIATIVE_TABLE_TEXT);
+			SQLiteCommand command = GetCommand(commandText, connection, transaction);
+			command.ExecuteNonQuery();
+		}
+		
+		private void CreateAssociativeView(Association association, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+			StringBuilder builder = new StringBuilder();
+			
+			builder.AppendFormat("{0}.ParentId {0}ParentId", association.Name);
+			
+			IMap childMap = association.Map.Schema.Maps[association.Type];
+			foreach (Field field in childMap.Fields)
+			{
+				builder.AppendFormat(", {0}.{1} {1}", childMap.Name, field.Name);
+			}
+			
+			builder.AppendFormat(" FROM {0} INNER JOIN {1} ON {0}.{2} = {1}.ParentId", association.Map.Name, association.Name, association.Map.Identifier.Name);
+			builder.AppendFormat(" INNER JOIN {0} ON {1}.ChildId = {0}.{2}", childMap.Name, association.Name, childMap.Identifier.Name);
+			
+			string commandText = string.Format(VIEW_FORMAT, association.Name, builder);
+			SQLiteCommand command = GetCommand(commandText, connection, transaction);
+			command.ExecuteNonQuery();
 		}
 		
 		private void CreateIndices(IMap map, SQLiteConnection connection, SQLiteTransaction transaction)

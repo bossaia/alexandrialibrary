@@ -52,7 +52,6 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.Value));
 			Fields.Add(new Field(this, "Format", typeof(string), FieldFunction.Value));
 			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.UniqueValue));
-			Associations.Add(new Association(this, "MediaItemParentId", typeof(Guid), AssociationFunction.ParentIdentifier));
 		}
 		#endregion
 		
@@ -61,12 +60,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			get { return Fields["Id"]; }
 		}
-
-		public override Association ParentIdentifier
-		{
-			get { return Associations["MediaItemParentId"]; }
-		}
-
+		
 		public override DataTable GetTable()
 		{
 			DataTable table = new DataTable(Name);
