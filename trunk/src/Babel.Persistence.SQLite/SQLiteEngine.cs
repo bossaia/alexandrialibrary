@@ -57,9 +57,14 @@ namespace Telesophy.Babel.Persistence.SQLite
 		private const string CON_STRING_FORMAT = "Data Source={0};New={1};UTF8Encoding=True;Version=3";
 		private const string TABLE_FORMAT = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 		private const string COLUMN_FORMAT = "{0} {1} {2}";
+		private const string SYSTEM_COLUMN_TEXT = LIST_SEPARATOR + USER_COLUMN_TEXT + LIST_SEPARATOR + DATE_COLUMN_TEXT;
 		private const string INDEX_FORMAT = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
 		private const string VIEW_FORMAT = "CREATE VIEW IF NOT EXISTS view_{0} AS SELECT {1}";
-		private const string ASSOCIATIVE_TABLE_TEXT = "ParentId NOT NULL, ChildId NOT NULL, PRIMARY KEY(ParentId, ChildId)";
+		private const string ASSOCIATIVE_TABLE_TEXT = "ParentId NOT NULL, ChildId NOT NULL" + SYSTEM_COLUMN_TEXT + ", PRIMARY KEY(ParentId, ChildId)";
+		private const string DATE_COLUMN_NAME = "_Date";
+		private const string DATE_COLUMN_TEXT = DATE_COLUMN_NAME + " INTEGER NOT NULL";
+		private const string USER_COLUMN_NAME = "_User";
+		private const string USER_COLUMN_TEXT = USER_COLUMN_NAME + " TEXT NOT NULL";
 		#endregion
 			
 		#region Private Fields
@@ -103,8 +108,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 			{
 				CreateEntityTable(map, connection, transaction);
 				
-				InitializeAssociations(map, connection, transaction);
-				
 				CreateIndices(map, connection, transaction);
 			}
 		}
@@ -122,7 +125,9 @@ namespace Telesophy.Babel.Persistence.SQLite
 				field = map.Fields[count];
 				builder.Append(GetColumnString(field));				
 			}
-
+			
+			builder.Append(SYSTEM_COLUMN_TEXT);
+			
 			string commandText = string.Format(TABLE_FORMAT, map.Name, builder);
 			SQLiteCommand command = GetCommand(commandText, connection, transaction);
 			command.ExecuteNonQuery();
@@ -322,13 +327,19 @@ namespace Telesophy.Babel.Persistence.SQLite
 						InitializeMap(map, connection, transaction);
 					}
 					
+					//NOTE: this has to be a second pass because associations depend on maps being initialized first
+					foreach (IMap map in schema.Maps)
+					{
+						InitializeAssociations(map, connection, transaction);
+					}
+					
 					transaction.Commit();
 				}
 				catch (Exception ex)
 				{
 					if (transaction != null)
 						transaction.Rollback();
-						
+					
 					throw ex;
 				}
 				finally
@@ -344,14 +355,20 @@ namespace Telesophy.Babel.Persistence.SQLite
 			throw new NotImplementedException();
 		}
 
-		public void Save(IMap map, object model)
+		public void Save<Model>(IMap<Model> map, IEnumerable<Model> models)
 		{
-			throw new NotImplementedException();
+			if (map != null && models != null)
+			{
+				//DataSet dataSet = map.GetDataSet(models);
+			}
 		}
 
-		public void Delete(IMap map, object model)
+		public void Delete<Model>(IMap<Model> map, IEnumerable<Model> models)
 		{
-			throw new NotImplementedException();
+			if (map != null && models != null)
+			{
+				//DataSet dataSet = map.GetDataSet(models);
+			}
 		}
 		#endregion
 	}
