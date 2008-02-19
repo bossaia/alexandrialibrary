@@ -35,7 +35,7 @@ namespace Telesophy.Babel.Persistence
 	{
 		void Initialize(ISchema schema);
 		IResult Lookup(IMap map, Query query);
-		void Save(IMap map, object model);
-		void Delete(IMap map, object model);
+		void Save<Model>(IMap<Model> map, IEnumerable<Model> models);
+		void Delete<Model>(IMap<Model> map, IEnumerable<Model> models);
 	}
 }

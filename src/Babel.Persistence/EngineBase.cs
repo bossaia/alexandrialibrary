@@ -56,9 +56,9 @@ namespace Telesophy.Babel.Persistence
 
 		public abstract IResult Lookup(IMap map, Query query);
 
-		public abstract void Save(IMap map, object model);
+		public abstract void Save<Model>(IMap<Model> map, IEnumerable<Model> models);
 
-		public abstract void Delete(IMap map, object model);
+		public abstract void Delete<Model>(IMap<Model> map, IEnumerable<Model> models);
 		#endregion
 	}
 }

@@ -82,8 +82,9 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			DataTable table = GetTable();
 			
-			foreach (IMediaItem item in models)
+			foreach (object obj in models)
 			{
+				IMediaItem item = obj as IMediaItem;
 				if (item != null)
 				{
 					table.Rows.Add(item.Id, item.Source, item.Type, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);

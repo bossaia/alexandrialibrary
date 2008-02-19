@@ -106,13 +106,13 @@ namespace Telesophy.Babel.Persistence
 				return identifier;
 			}
 		}
+
+		public abstract DataTable GetTable();
+
+		public abstract DataTable GetTable(IEnumerable<Model> models);
 		#endregion
 
 		#region IMap<Model> Members
-		public abstract DataTable GetTable();
-		
-		public abstract DataTable GetTable(IEnumerable<Model> models);
-
 		public abstract IEnumerable<Model> GetModels(DataTable table);
 
 		public abstract void LoadChildren(IEnumerable<Model> models, IResult result);
