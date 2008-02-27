@@ -31,23 +31,44 @@ using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class Query
+	public class Query : IQuery
 	{
-		public Query()
+		#region Constructors
+		public Query(string name)
 		{
-			this.filters = new Dictionary<string, object>();
+			this.name = name;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private IList<Field> fields = new List<Field>();
+		private IList<Association> associations = new List<Association>();
+		private IList<IExpression> filters = new List<IExpression>();
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
+		
+		#region IQuery Members
+		public IList<Field> Fields
+		{
+			get { return fields; }
 		}
 		
-		public Query(IDictionary<string, object> filters)
+		public IList<Association> Associations
 		{
-			this.filters = filters;
+			get { return associations; }
 		}
 		
-		private IDictionary<string, object> filters;
-		
-		public IDictionary<string, object> Filters
+		public IList<IExpression> Filters
 		{
 			get { return filters; }
 		}
+		#endregion
 	}
 }

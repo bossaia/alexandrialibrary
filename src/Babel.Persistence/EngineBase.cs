@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -54,11 +55,11 @@ namespace Telesophy.Babel.Persistence
 		#region IEngine Members
 		public abstract void Initialize(ISchema schema);
 
-		public abstract IResult Lookup(IMap map, Query query);
+		public abstract IEnumerable<Model> Lookup<Model>(IMap<Model> map, IQuery query);
 
-		public abstract void Save<Model>(IMap<Model> map, IEnumerable<Model> models);
+		public abstract void Save<Model>(IMap<Model> map, DataSet dataSet);
 
-		public abstract void Delete<Model>(IMap<Model> map, IEnumerable<Model> models);
+		public abstract void Delete<Model>(IMap<Model> map, DataSet dataSet);
 		#endregion
 	}
 }

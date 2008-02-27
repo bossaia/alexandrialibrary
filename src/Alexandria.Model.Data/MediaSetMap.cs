@@ -47,7 +47,7 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Value));
 			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.Value));
 			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.UniqueValue));
-			Associations.Add(new Association(this, "MediaSetItems", typeof(IMediaItem), AssociationFunction.ManyToManyChildren));
+			Associations.Add(new Association(this, "MediaSetItems", typeof(IMediaItem), AssociationFunction.ZeroOrMore));
 		}
 		#endregion
 	
@@ -56,23 +56,23 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			get { return Fields["Id"]; }
 		}
+
+		public override void BuildQuery(IQuery query, int currentDepth, int totalDepth)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override DataTable GetDataTable()
+		{
+			throw new NotImplementedException();
+		}
 		
-		public override DataTable GetTable()
-		{
-			throw new NotImplementedException();
-		}
-
-		public override DataTable GetTable(IEnumerable<IMediaSet> models)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override IEnumerable<IMediaSet> GetModels(DataTable table)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void LoadChildren(IEnumerable<IMediaSet> models, IResult result)
+		public override IEnumerable<IMediaSet> GetModels(DataSet dataSet, int currentDepth, int totalDepth)
 		{
 			throw new NotImplementedException();
 		}

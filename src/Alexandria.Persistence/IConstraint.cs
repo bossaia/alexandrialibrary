@@ -28,7 +28,7 @@
 using System;
 using System.Collections.Generic;
 
-using Telesophy.Alexandria.Query;
+//using Telesophy.Alexandria.Query;
 
 namespace Telesophy.Alexandria.Persistence
 {
@@ -36,6 +36,6 @@ namespace Telesophy.Alexandria.Persistence
 	{
 		ConstraintType Type { get; }
 		INamedItemCollection<IColumn> Columns { get; }
-		IExpression Expression { get; }
+		//IExpression Expression { get; }
 	}
 }

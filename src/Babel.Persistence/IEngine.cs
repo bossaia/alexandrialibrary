@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -34,8 +35,8 @@ namespace Telesophy.Babel.Persistence
 	public interface IEngine : INamedItem
 	{
 		void Initialize(ISchema schema);
-		IResult Lookup(IMap map, Query query);
-		void Save<Model>(IMap<Model> map, IEnumerable<Model> models);
-		void Delete<Model>(IMap<Model> map, IEnumerable<Model> models);
+		IEnumerable<Model> Lookup<Model>(IMap<Model> map, IQuery query);
+		void Save<Model>(IMap<Model> map, DataSet dataSet);
+		void Delete<Model>(IMap<Model> map, DataSet dataSet);
 	}
 }

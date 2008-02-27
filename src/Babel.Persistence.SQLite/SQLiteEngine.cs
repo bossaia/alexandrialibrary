@@ -141,16 +141,19 @@ namespace Telesophy.Babel.Persistence.SQLite
 				{
 					if (association != Association.Empty)
 					{
-						switch (association.Function)
-						{
-							case AssociationFunction.OneToManyChildren:
-							case AssociationFunction.ManyToManyChildren:
+						//switch (association.Function)
+						//{
+							//case AssociationFunction.ZeroOrOne:
+							//case AssociationFunction.ZeroOrMore:
+							//case AssociationFunction.One:
+							//case AssociationFunction.OneOrMore:
+							//case AssociationFunction.MoreThanOne:
 								CreateAssociativeTable(association, connection, transaction); 
 								CreateAssociativeView(association, connection, transaction);
-								break;
-							default:
-								break;
-						}
+								//break;
+							//default:
+								//break;
+						//}
 					}
 				}
 			}
@@ -191,7 +194,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 				{
 					switch (field.Function)
 					{
-						case FieldFunction.ChildIdentifier:
 						case FieldFunction.TypeDescriminator:
 						case FieldFunction.Value:
 							string commandText = string.Format(INDEX_FORMAT, field.Name, map.Name);
@@ -252,7 +254,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 					case FieldFunction.Identifier:
 						return "PRIMARY KEY NOT NULL";
 					case FieldFunction.TypeDescriminator:
-					case FieldFunction.ChildIdentifier:
 					case FieldFunction.Value:
 					case FieldFunction.NonIndexedValue:
 						return "NOT NULL";
@@ -350,22 +351,22 @@ namespace Telesophy.Babel.Persistence.SQLite
 			}
 		}
 
-		public IResult Lookup(IMap map, Query query)
+		public IEnumerable<Model> Lookup<Model>(IMap<Model> map, IQuery query)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void Save<Model>(IMap<Model> map, IEnumerable<Model> models)
+		public void Save<Model>(IMap<Model> map, DataSet dataSet)
 		{
-			if (map != null && models != null)
+			if (map != null && dataSet != null)
 			{
 				//DataSet dataSet = map.GetDataSet(models);
 			}
 		}
 
-		public void Delete<Model>(IMap<Model> map, IEnumerable<Model> models)
+		public void Delete<Model>(IMap<Model> map, DataSet dataSet)
 		{
-			if (map != null && models != null)
+			if (map != null && dataSet != null)
 			{
 				//DataSet dataSet = map.GetDataSet(models);
 			}

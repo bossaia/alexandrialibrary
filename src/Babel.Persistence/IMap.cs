@@ -40,14 +40,13 @@ namespace Telesophy.Babel.Persistence
 		INamedItemCollection<Field> Fields { get; }
 		INamedItemCollection<Association> Associations { get; }
 		Field Identifier { get; }
-		DataTable GetTable();
+		void BuildQuery(IQuery query, int currentDepth, int totalDepth);
+		void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth);
+		DataTable GetDataTable();
 	}
 	
 	public interface IMap<Model> : IMap
-	{
-		DataTable GetTable(IEnumerable<Model> models);
-		//DataSet GetDataSet(IEnumerable<Model> models);
-		IEnumerable<Model> GetModels(DataTable table);
-		void LoadChildren(IEnumerable<Model> models, IResult result);
+	{		
+		IEnumerable<Model> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
 	}
 }

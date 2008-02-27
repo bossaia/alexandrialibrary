@@ -27,21 +27,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IRepository
+	public interface IOperator
 	{
-		IEngine Engine { get; }
-		ISchema Schema { get; }
-		int DefaultDepth { get; set; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		string Name { get; }
+		string Symbol { get; }
 	}
 }
