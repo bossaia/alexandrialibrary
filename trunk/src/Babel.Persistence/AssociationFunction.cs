@@ -34,7 +34,10 @@ namespace Telesophy.Babel.Persistence
 	public enum AssociationFunction
 	{
 		None = 0,
-		OneToManyChildren,
-		ManyToManyChildren
+		ZeroOrOne,
+		ZeroOrMore,
+		One,
+		OneOrMore,
+		MoreThanOne
 	}
 }

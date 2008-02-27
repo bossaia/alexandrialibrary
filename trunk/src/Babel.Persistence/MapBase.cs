@@ -106,16 +106,16 @@ namespace Telesophy.Babel.Persistence
 				return identifier;
 			}
 		}
+		
+		public abstract void BuildQuery(IQuery query, int currentDepth, int totalDepth);
+		
+		public abstract void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth);
 
-		public abstract DataTable GetTable();
-
-		public abstract DataTable GetTable(IEnumerable<Model> models);
+		public abstract DataTable GetDataTable();
 		#endregion
 
 		#region IMap<Model> Members
-		public abstract IEnumerable<Model> GetModels(DataTable table);
-
-		public abstract void LoadChildren(IEnumerable<Model> models, IResult result);
+		public abstract IEnumerable<Model> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
 		#endregion
 	}
 }

@@ -33,5 +33,8 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IQuery : INamedItem
 	{
+		IList<Field> Fields { get; }
+		IList<Association> Associations { get; }
+		IList<IExpression> Filters { get; }
 	}
 }

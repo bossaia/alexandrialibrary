@@ -60,8 +60,18 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			get { return Fields["Id"]; }
 		}
+
+		public override void BuildQuery(IQuery query, int currentDepth, int totalDepth)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth)
+		{
+			throw new NotImplementedException();
+		}
 		
-		public override DataTable GetTable()
+		public override DataTable GetDataTable()
 		{
 			DataTable table = new DataTable(Name);
 			table.Columns.Add("Id", typeof(Guid));
@@ -78,26 +88,14 @@ namespace Telesophy.Alexandria.Model.Data
 			return table;
 		}
 		
-		public override DataTable GetTable(IEnumerable<IMediaItem> models)
-		{
-			DataTable table = GetTable();
-			
-			foreach (object obj in models)
-			{
-				IMediaItem item = obj as IMediaItem;
-				if (item != null)
-				{
-					table.Rows.Add(item.Id, item.Source, item.Type, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
-				}
-			}
-			
-			return table;
-		}
-
-		public override IEnumerable<IMediaItem> GetModels(DataTable table)
+		public override IEnumerable<IMediaItem> GetModels(DataSet dataSet, int currentDepth, int totalDepth)
 		{
 			IList<IMediaItem> list = new List<IMediaItem>();
 		
+			//TODO: change this to use the correct table
+			DataTable table = dataSet.Tables[0];
+			
+			
 			if (table != null && table.Rows.Count > 0)
 			{
 				foreach (DataRow row in table.Rows)
@@ -133,10 +131,6 @@ namespace Telesophy.Alexandria.Model.Data
 			}
 		
 			return list;
-		}
-
-		public override void LoadChildren(IEnumerable<IMediaItem> models, IResult result)
-		{
 		}
 		#endregion
 	}

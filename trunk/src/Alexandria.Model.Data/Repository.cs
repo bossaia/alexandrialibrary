@@ -36,13 +36,8 @@ namespace Telesophy.Alexandria.Model.Data
 	public class Repository : RepositoryBase
 	{
 		#region Constructors
-		public Repository() : this(null)
+		public Repository(IEngine engine) : base(engine, new CatalogSchema())
 		{
-		}
-		
-		public Repository(IEngine engine) : base(engine)
-		{
-			Schemas.Add(new CatalogSchema());
 		}
 		#endregion
 	}

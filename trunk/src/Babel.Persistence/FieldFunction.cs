@@ -38,7 +38,6 @@ namespace Telesophy.Babel.Persistence
 		TypeDescriminator,
 		Value,
 		NonIndexedValue,
-		UniqueValue,
-		ChildIdentifier
+		UniqueValue
 	}
 }

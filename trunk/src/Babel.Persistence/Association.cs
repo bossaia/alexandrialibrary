@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -71,6 +72,13 @@ namespace Telesophy.Babel.Persistence
 		public AssociationFunction Function
 		{
 			get { return function; }
+		}
+		#endregion
+
+		#region Public Methods
+		public DataTable GetDataTable()
+		{
+			return new DataTable();
 		}
 		#endregion
 
