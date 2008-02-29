@@ -51,6 +51,7 @@ namespace Alexandria.TagLib
 		private TimeSpan duration;
 		private DateTime releaseDate;
 		private string format;
+		private IMediaSet parent;
 
 		private IList<string> performers = new List<string>();
 		private IList<string> composers = new List<string>();
@@ -353,6 +354,13 @@ namespace Alexandria.TagLib
 		{
 			get { return null; }
 			set { }
+		}
+		
+		[CLSCompliant(false)]
+		public IMediaSet Parent
+		{
+			get { return parent; }
+			set { parent = value; }
 		}
 		#endregion
 

@@ -40,7 +40,7 @@ namespace Telesophy.Alexandria.MusicBrainz
     {
 		#region Constructors
 		public SimpleAlbum(Guid id, string title, string artist, DateTime date, Uri path)
-			: base(id, MusicBrainzConstants.SOURCE, 0, title, artist, date, path, null)
+			: base(id, MusicBrainzConstants.SOURCE, 0, title, artist, date, "audio/cdda", path, null)
 		{
 		}
 		#endregion
