@@ -111,7 +111,7 @@ namespace Telesophy.Alexandria.Model.Data
 						model = new Album(id, source, number, title, artist, date, format, path, null);
 						break;
 					case Constants.TYPE_VIDEO:
-						model = new Clip(id, source, number, title, artist, date, format, path, null);
+						model = new Movie(id, source, number, title, artist, date, format, path, null);
 						break;
 					default:
 						break;
