@@ -68,6 +68,7 @@ namespace Alexandria.MusicDns
 		
 		//private IList<IMetadataIdentifier> metadataIdentifiers = new List<IMetadataIdentifier>();
 		private Uri path;
+		private IMediaSet parent;
 		private Version version = new Version(1, 0, 0, 0);
 		#endregion
 	
@@ -430,6 +431,11 @@ namespace Alexandria.MusicDns
 			}
 		}
 
+		public IMediaSet Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		}
 		#endregion
 	}
 }
