@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -30,50 +30,55 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class Album : IMediaSet
+	public class VideoClip : IMediaItem
 	{
 		#region Constructors
-		public Album()
+		public VideoClip()
 		{
 		}
-		
-		public Album(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
+
+		public VideoClip(Guid id, string source, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
 		{
 			this.id = id;
 			this.source = source;
 			this.number = number;
 			this.title = title;
 			this.artist = artist;
+			this.album = album;
+			this.duration = duration;
 			this.date = date;
 			this.format = format;
 			this.path = path;
-			
-			if (items != null)
-			{
-				foreach(IMediaItem item in items)
-					this.items.Add(item);
-			}
 		}
 		#endregion
-		
+
 		#region Private Fields
 		private Guid id;
+		private string status = string.Empty;
 		private string source;
-		private string type = Constants.TYPE_AUDIO;
+		private string type = Constants.TYPE_VIDEO;
 		private int number;
 		private string title;
 		private string artist;
+		private string album;
+		private TimeSpan duration;
 		private DateTime date;
 		private string format;
 		private Uri path;
-		private List<IMediaItem> items = new List<IMediaItem>();
+		private IMediaSet parent;
 		#endregion
-	
-		#region IMediaSet Members
+
+		#region IMediaItem Members
 		public Guid Id
 		{
 			get { return id; }
 			set { id = value; }
+		}
+
+		public string Status
+		{
+			get { return status; }
+			set { status = value; }
 		}
 
 		public string Source
@@ -106,6 +111,18 @@ namespace Telesophy.Alexandria.Model
 			set { artist = value; }
 		}
 
+		public string Album
+		{
+			get { return album; }
+			set { album = value; }
+		}
+
+		public TimeSpan Duration
+		{
+			get { return duration; }
+			set { duration = value; }
+		}
+
 		public DateTime Date
 		{
 			get { return date; }
@@ -123,10 +140,11 @@ namespace Telesophy.Alexandria.Model
 			get { return path; }
 			set { path = value; }
 		}
-
-		public IList<IMediaItem> Items
+		
+		public IMediaSet Parent
 		{
-			get { return items; }
+			get { return parent; }
+			set { parent = value; }
 		}
 		#endregion
 	}

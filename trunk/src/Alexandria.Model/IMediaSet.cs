@@ -39,6 +39,7 @@ namespace Telesophy.Alexandria.Model
 		string Title { get; set; }
 		string Artist { get; set; }
 		DateTime Date { get; set; }
+		string Format { get; set; }
 		Uri Path { get; set; }
 		IList<IMediaItem> Items { get; }
 	}

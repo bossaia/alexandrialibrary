@@ -42,11 +42,12 @@ namespace Telesophy.Babel.Persistence
 		Field Identifier { get; }
 		void BuildQuery(IQuery query, int currentDepth, int totalDepth);
 		void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth);
-		DataTable GetDataTable();
+		DataTable ToDataTable();
 	}
 	
 	public interface IMap<Model> : IMap
-	{		
+	{
+		Model GetModel(DataRow row);		
 		IEnumerable<Model> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
 	}
 }

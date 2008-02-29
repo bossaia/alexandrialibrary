@@ -65,6 +65,7 @@ namespace Telesophy.Alexandria.Model
 		private DateTime date;
 		private string format;
 		private Uri path;
+		private IMediaSet parent;
 		#endregion
 
 		#region IMediaItem Members
@@ -139,6 +140,12 @@ namespace Telesophy.Alexandria.Model
 			get { return path; }
 			set { path = value; }
 		}
+		
+		public IMediaSet Parent
+		{
+			get { return parent; }
+			set { parent = value; }
+		} 
 		#endregion
 	}
 }

@@ -71,7 +71,7 @@ namespace Telesophy.Alexandria.Model.Data
 			throw new NotImplementedException();
 		}
 		
-		public override DataTable GetDataTable()
+		public override DataTable ToDataTable()
 		{
 			DataTable table = new DataTable(Name);
 			table.Columns.Add("Id", typeof(Guid));
@@ -85,52 +85,66 @@ namespace Telesophy.Alexandria.Model.Data
 			table.Columns.Add("Date", typeof(DateTime));
 			table.Columns.Add("Format", typeof(string));
 			table.Columns.Add("Path", typeof(Uri));
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Id"], true));
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Path"]));
 			return table;
+		}
+
+		public override IMediaItem GetModel(DataRow row)
+		{
+			IMediaItem model = null;
+			
+			if (row != null)
+			{
+				Guid id = row.Field<Guid>("Id");
+				string source = row.Field<string>("Source");
+				string type = row.Field<string>("Type");
+				int number = row.Field<int>("Number");
+				string title = row.Field<string>("Title");
+				string artist = row.Field<string>("Artist");
+				string album = row.Field<string>("Album");
+				TimeSpan duration = row.Field<TimeSpan>("Duration");
+				DateTime date = row.Field<DateTime>("Date");
+				string format = row.Field<string>("Format");
+				Uri path = row.Field<Uri>("Path");
+				
+				switch (type)
+				{
+					case Constants.TYPE_AUDIO:
+						model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
+						break;
+					case Constants.TYPE_VIDEO:
+						model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
+						break;
+					default:
+						break;
+				}
+			}
+			
+			return model;
+		}
+		
+		public override IDictionary<Guid, IMediaItem> GetModelsById(DataSet dataSet, int currentDepth, int totalDepth)
+		{
+			currentDepth++;
+		
+			IDictionary<Guid, IMediaItem> models = new Dictionary<Guid, IMediaItem>();
+			foreach (DataRow row in dataSet.Tables[Name].Rows)
+			{
+				IMediaItem item = GetModel(row);
+				models.Add(item.Id, item);
+			}
+		
+			//if (currentDepth < totalDepth)
+			//{
+			//}
+		
+			return models;
 		}
 		
 		public override IEnumerable<IMediaItem> GetModels(DataSet dataSet, int currentDepth, int totalDepth)
 		{
-			IList<IMediaItem> list = new List<IMediaItem>();
-		
-			//TODO: change this to use the correct table
-			DataTable table = dataSet.Tables[0];
-			
-			
-			if (table != null && table.Rows.Count > 0)
-			{
-				foreach (DataRow row in table.Rows)
-				{
-					IMediaItem item = null;
-					string type = row.Field<string>("Type");
-					switch (type)
-					{
-						case Constants.TYPE_AUDIO:
-							item = new AudioTrack();
-							break;
-						default:
-							break;
-					}
-					
-					if (item != null)
-					{
-						item.Id = row.Field<Guid>("Id");
-						item.Source = row.Field<string>("Source");
-						item.Type = type;
-						item.Number = row.Field<int>("Number");
-						item.Title = row.Field<string>("Title");
-						item.Artist = row.Field<string>("Artist");
-						item.Album = row.Field<string>("Album");
-						item.Duration = row.Field<TimeSpan>("Duration");
-						item.Date = row.Field<DateTime>("Date");
-						item.Format = row.Field<string>("Format");
-						item.Path = row.Field<Uri>("Path");
-						
-						list.Add(item);	
-					}
-				}
-			}
-		
-			return list;
+			return GetModelsById(dataSet, currentDepth, totalDepth).Values;
 		}
 		#endregion
 	}
