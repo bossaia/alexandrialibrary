@@ -46,9 +46,14 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add(new Field(this, "Title", typeof(string), FieldFunction.Value));
 			Fields.Add(new Field(this, "Artist", typeof(string), FieldFunction.Value));
 			Fields.Add(new Field(this, "Date", typeof(DateTime), FieldFunction.Value));
+			Fields.Add(new Field(this, "Format", typeof(string), FieldFunction.Value));
 			Fields.Add(new Field(this, "Path", typeof(Uri), FieldFunction.UniqueValue));
-			Associations.Add(new Association(this, "MediaSetItems", typeof(IMediaItem), AssociationFunction.ZeroOrMore));
+			Associations.Add(new Association(this, ITEM_ASSOCIATION_NAME, typeof(IMediaItem), AssociationFunction.ZeroOrMore));
 		}
+		#endregion
+	
+		#region Private Constants
+		private string ITEM_ASSOCIATION_NAME = "MediaSetItems";
 		#endregion
 	
 		#region Public Overrides
@@ -67,14 +72,92 @@ namespace Telesophy.Alexandria.Model.Data
 			throw new NotImplementedException();
 		}
 
-		public override DataTable GetDataTable()
+		public override DataTable ToDataTable()
 		{
-			throw new NotImplementedException();
+			DataTable table = new DataTable(Name);
+			table.Columns.Add("Id", typeof(Guid));
+			table.Columns.Add("Source", typeof(string));
+			table.Columns.Add("Type", typeof(string));
+			table.Columns.Add("Number", typeof(int));
+			table.Columns.Add("Title", typeof(string));
+			table.Columns.Add("Artist", typeof(string));
+			table.Columns.Add("Date", typeof(DateTime));
+			table.Columns.Add("Format", typeof(string));
+			table.Columns.Add("Path", typeof(Uri));
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Id"], true));
+			table.Constraints.Add(new UniqueConstraint(table.Columns["Path"]));
+			return table;
+		}
+
+		public override IMediaSet GetModel(DataRow row)
+		{
+			IMediaSet model = null;
+		
+			if (row != null)
+			{
+				Guid id = row.Field<Guid>("Id");
+				string source = row.Field<string>("Source");
+				string type = row.Field<string>("Type");
+				int number = row.Field<int>("Number");
+				string title = row.Field<string>("Title");
+				string artist = row.Field<string>("Artist");
+				DateTime date = row.Field<DateTime>("Date");
+				string format = row.Field<string>("Format");
+				Uri path = row.Field<Uri>("Path");
+				
+				switch (type)
+				{
+					case Constants.TYPE_AUDIO:
+						model = new Album(id, source, number, title, artist, date, format, path, null);
+						break;
+					case Constants.TYPE_VIDEO:
+						model = new Clip(id, source, number, title, artist, date, format, path, null);
+						break;
+					default:
+						break;
+				}
+			}
+			
+			return model;
+		}
+		
+		public override IDictionary<Guid, IMediaSet> GetModelsById(DataSet dataSet, int currentDepth, int totalDepth)
+		{
+			currentDepth++;
+			
+			IDictionary<Guid, IMediaSet> models = new Dictionary<Guid, IMediaSet>();
+			foreach (DataRow row in dataSet.Tables[Name].Rows)
+			{
+				IMediaSet item = GetModel(row);
+				models.Add(item.Id, item);	
+			}
+			
+			if (currentDepth < totalDepth)
+			{
+				MediaItemMap mediaItemMap = Schema.Maps[typeof(IMediaItem)] as MediaItemMap;
+				IDictionary<Guid, IMediaItem> itemChildren = mediaItemMap.GetModelsById(dataSet, currentDepth, totalDepth);
+				
+				foreach (DataRow row in dataSet.Tables[ITEM_ASSOCIATION_NAME].Rows)
+				{
+					Guid parentId = row.Field<Guid>(Association.ParentFieldName);
+					Guid childId = row.Field<Guid>(Association.ChildFieldName);
+					
+					if (models.ContainsKey(parentId) && itemChildren.ContainsKey(childId))
+					{
+						IMediaSet parent = models[parentId];
+						IMediaItem child = itemChildren[childId];
+						parent.Items.Add(child);
+						child.Parent = parent;
+					}
+				}
+			}
+			
+			return models;
 		}
 		
 		public override IEnumerable<IMediaSet> GetModels(DataSet dataSet, int currentDepth, int totalDepth)
 		{
-			throw new NotImplementedException();
+			return GetModelsById(dataSet, currentDepth, totalDepth).Values;
 		}
 		#endregion
 	}

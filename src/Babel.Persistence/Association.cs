@@ -43,7 +43,7 @@ namespace Telesophy.Babel.Persistence
 			this.function = function;
 		}
 		#endregion
-		
+				
 		#region Private Fields
 		private IMap map;
 		private string name;
@@ -76,9 +76,21 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region Public Methods
-		public DataTable GetDataTable()
+		public DataTable ToDataTable()
 		{
-			return new DataTable();
+			DataTable table = null;
+		
+			if (Map.Schema.Maps.Contains(Type))
+			{
+				IMap childMap = Map.Schema.Maps[Type];
+			
+				table = new DataTable(Name);
+				table.Columns.Add(ParentFieldName, Map.Identifier.Type);
+				table.Columns.Add(ChildFieldName, childMap.Identifier.Type);
+				table.Constraints.Add(new UniqueConstraint(new DataColumn[]{ table.Columns[0], table.Columns[1] }, true));
+			}
+			
+			return table;
 		}
 		#endregion
 
@@ -124,6 +136,10 @@ namespace Telesophy.Babel.Persistence
 		{
 			return !a1.Equals(a2);
 		}
+		
+		public static readonly string ParentFieldName = "ParentId";
+		
+		public static readonly string ChildFieldName = "ChildId";
 		#endregion
 
 	}

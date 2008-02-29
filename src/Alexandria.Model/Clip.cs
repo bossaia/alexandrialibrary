@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -30,14 +30,14 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class Album : IMediaSet
+	public class Clip : IMediaSet
 	{
 		#region Constructors
-		public Album()
+		public Clip()
 		{
 		}
-		
-		public Album(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
+
+		public Clip(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
 		{
 			this.id = id;
 			this.source = source;
@@ -47,19 +47,19 @@ namespace Telesophy.Alexandria.Model
 			this.date = date;
 			this.format = format;
 			this.path = path;
-			
+
 			if (items != null)
 			{
-				foreach(IMediaItem item in items)
+				foreach (IMediaItem item in items)
 					this.items.Add(item);
 			}
 		}
 		#endregion
-		
+
 		#region Private Fields
 		private Guid id;
 		private string source;
-		private string type = Constants.TYPE_AUDIO;
+		private string type = Constants.TYPE_VIDEO;
 		private int number;
 		private string title;
 		private string artist;
@@ -68,7 +68,7 @@ namespace Telesophy.Alexandria.Model
 		private Uri path;
 		private List<IMediaItem> items = new List<IMediaItem>();
 		#endregion
-	
+
 		#region IMediaSet Members
 		public Guid Id
 		{

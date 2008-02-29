@@ -44,5 +44,6 @@ namespace Telesophy.Alexandria.Model
 		DateTime Date { get; set; }
 		string Format { get; set; }
 		Uri Path { get; set; }
+		IMediaSet Parent { get; set; }
 	}
 }

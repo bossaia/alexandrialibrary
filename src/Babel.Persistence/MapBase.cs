@@ -53,6 +53,10 @@ namespace Telesophy.Babel.Persistence
 		private INamedItemCollection<Association> associations = new NamedItemCollection<Association>();
 		private Field identifier = Field.Empty;
 		#endregion
+
+		#region Public Methods
+		public abstract IDictionary<Guid, Model> GetModelsById(DataSet dataSet, int currentDepth, int totalDepth);
+		#endregion
 	
 		#region INamedItem Members
 		public string Name
@@ -111,10 +115,12 @@ namespace Telesophy.Babel.Persistence
 		
 		public abstract void BuildDataSet(DataSet dataSet, int currentDepth, int totalDepth);
 
-		public abstract DataTable GetDataTable();
+		public abstract DataTable ToDataTable();
 		#endregion
 
 		#region IMap<Model> Members
+		public abstract Model GetModel(DataRow row);
+		
 		public abstract IEnumerable<Model> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
 		#endregion
 	}
