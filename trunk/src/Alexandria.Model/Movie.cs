@@ -30,14 +30,14 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class Clip : IMediaSet
+	public class Movie : IMediaSet
 	{
 		#region Constructors
-		public Clip()
+		public Movie()
 		{
 		}
 
-		public Clip(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
+		public Movie(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
 		{
 			this.id = id;
 			this.source = source;
