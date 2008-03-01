@@ -309,8 +309,8 @@ namespace Telesophy.Babel.Persistence.SQLite
 			get { return "SQLite Database Engine"; }
 		}
 		#endregion
-	
-		#region IEngine Members
+		
+		#region Old IEngine Members
 		public void Initialize(ISchema schema)
 		{
 			if (schema != null)
@@ -370,6 +370,25 @@ namespace Telesophy.Babel.Persistence.SQLite
 			{
 				//DataSet dataSet = map.GetDataSet(models);
 			}
+		}
+		#endregion
+		
+		#region IEngine Members
+		public void Initialize(DataSet dataSet)
+		{
+		}
+		
+		public DataSet Lookup(DataSet dataSet, IQuery query)
+		{
+			return null;
+		}
+		
+		public void Save(DataSet dataSet)
+		{
+		}
+		
+		public void Delete(DataSet dataSet)
+		{
 		}
 		#endregion
 	}
