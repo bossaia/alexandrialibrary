@@ -79,7 +79,7 @@ namespace Telesophy.Babel.Persistence
 		public DataTable ToDataTable()
 		{
 			DataTable table = null;
-		
+			
 			if (Map.Schema.Maps.Contains(Type))
 			{
 				IMap childMap = Map.Schema.Maps[Type];
@@ -91,6 +91,22 @@ namespace Telesophy.Babel.Persistence
 			}
 			
 			return table;
+		}
+		
+		public DataRelation ToDataRelation(DataSet dataSet)
+		{
+			DataRelation relation = null;
+			
+			if (dataSet != null && Map.Schema.Maps.Contains(Type))
+			{
+				IMap childMap = Map.Schema.Maps[Type];
+				DataTable parentTable = dataSet.Tables[Map.Name];
+				DataTable childTable = dataSet.Tables[childMap.Name];
+				
+				//relation = new DataRelation(Name, dataSet
+			}
+			
+			return relation;
 		}
 		#endregion
 
@@ -141,6 +157,5 @@ namespace Telesophy.Babel.Persistence
 		
 		public static readonly string ChildFieldName = "ChildId";
 		#endregion
-
 	}
 }

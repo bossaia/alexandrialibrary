@@ -89,7 +89,7 @@ namespace Telesophy.Babel.Persistence
 		{
 			if (engine != null)
 			{
-				engine.Initialize(schema);
+				//engine.Initialize(schema);
 			}
 			else throw new InvalidOperationException("Could not initialize the Schema because the Engine is not defined");
 		}
@@ -110,7 +110,7 @@ namespace Telesophy.Babel.Persistence
 				{
 					IQuery query = GetQuery(typeof(Model), filter);
 					map.BuildQuery(query, 0, depth);
-					models = engine.Lookup(map, query);
+					//models = engine.Lookup(map, query);
 				}
 			}
 			
@@ -131,7 +131,7 @@ namespace Telesophy.Babel.Persistence
 				{
 					DataSet dataSet = new DataSet("Save " + typeof(Model).Name);
 					map.BuildDataSet(dataSet, 0, depth);
-					engine.Save(map, dataSet);
+					//engine.Save(map, dataSet);
 				}
 			}
 		}
@@ -150,7 +150,7 @@ namespace Telesophy.Babel.Persistence
 				{
 					DataSet dataSet = new DataSet("Delete " + typeof(Model).Name);
 					map.BuildDataSet(dataSet, 0, depth);
-					engine.Delete(map, dataSet);
+					//engine.Delete(map, dataSet);
 				}
 			}
 		}

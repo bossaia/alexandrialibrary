@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Association.cs" />
+    <Compile Include="Association.cs">
+    </Compile>
     <Compile Include="AssociationFunction.cs" />
     <Compile Include="ColumnBase.cs" />
     <Compile Include="ConstraintBase.cs" />
