@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -67,6 +68,26 @@ namespace Telesophy.Babel.Persistence
 			}
 			
 			return null;
+		}
+		
+		public virtual DataSet ToDataSet()
+		{
+			DataSet dataSet = new DataSet(Name);
+			
+			foreach (IMap map in Maps)
+			{
+				DataTable table = map.ToDataTable();
+				dataSet.Tables.Add(table);
+				
+				foreach (Association association in map.Associations)
+				{
+					DataTable associativeTable = association.ToDataTable();
+					dataSet.Tables.Add(associativeTable);
+					DataRelation relation = association.ToDataRelation(dataSet);
+				}
+			}
+			
+			return dataSet;
 		}
 		#endregion
 	}

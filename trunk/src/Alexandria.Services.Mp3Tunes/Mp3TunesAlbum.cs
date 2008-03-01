@@ -34,7 +34,7 @@ namespace Telesophy.Alexandria.Mp3Tunes
 	public class Mp3TunesAlbum : Album
 	{
 		public Mp3TunesAlbum(Guid id, int number, string title, string artist, DateTime date, Uri path)
-			: base(id, Mp3TunesConstants.SOURCE, number, title, artist, date, "audio/unknown", path, null)
+			: base(id, Mp3TunesConstants.SOURCE, number, title, artist, date, "audio/album", path, null)
 		{
 		}
 	}

@@ -53,13 +53,13 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region IEngine Members
-		public abstract void Initialize(ISchema schema);
+		public abstract void Initialize(DataSet dataSet);
 
-		public abstract IEnumerable<Model> Lookup<Model>(IMap<Model> map, IQuery query);
+		public abstract DataSet Lookup(DataSet dataSet, IQuery query);
 
-		public abstract void Save<Model>(IMap<Model> map, DataSet dataSet);
+		public abstract void Save(DataSet dataSet);
 
-		public abstract void Delete<Model>(IMap<Model> map, DataSet dataSet);
+		public abstract void Delete(DataSet dataSet);
 		#endregion
 	}
 }

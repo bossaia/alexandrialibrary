@@ -34,9 +34,9 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IEngine : INamedItem
 	{
-		void Initialize(ISchema schema);
-		IEnumerable<Model> Lookup<Model>(IMap<Model> map, IQuery query);
-		void Save<Model>(IMap<Model> map, DataSet dataSet);
-		void Delete<Model>(IMap<Model> map, DataSet dataSet);
+		void Initialize(DataSet dataSet);
+		DataSet Lookup(DataSet dataSet, IQuery query);
+		void Save(DataSet dataSet);
+		void Delete(DataSet dataSet);
 	}
 }

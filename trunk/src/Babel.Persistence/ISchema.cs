@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
@@ -35,5 +36,6 @@ namespace Telesophy.Babel.Persistence
 	{
 		IMapCollection Maps { get; }
 		IMap<Model> GetMap<Model>();
+		DataSet ToDataSet();
 	}
 }
