@@ -53,8 +53,11 @@
     <Compile Include="ConstraintType.cs" />
     <Compile Include="DatabaseBase.cs" />
     <Compile Include="DataRowExtensions.cs" />
+    <Compile Include="DataSetExtensions.cs" />
     <Compile Include="DataTableExtensions.cs" />
     <Compile Include="EngineBase.cs" />
+    <Compile Include="FactoryBase.cs" />
+    <Compile Include="FactoryCollection.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="FieldFunction.cs" />
     <Compile Include="IColumn.cs" />

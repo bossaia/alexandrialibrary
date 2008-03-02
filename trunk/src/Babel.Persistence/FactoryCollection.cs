@@ -27,13 +27,53 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Telesophy.Babel.Persistence
 {
-	public static class DataTableExtensions
+	public class FactoryCollection :
+		KeyedCollection<Type, IFactory>,
+		IFactoryCollection
 	{
+		#region Constructors
+		public FactoryCollection()
+		{
+		}
+		#endregion
+
+		#region Protected Methods
+		protected override Type GetKeyForItem(IFactory item)
+		{
+			if (item != null)
+				return item.Type;
+			else return null;
+		}
+		#endregion
+
+		#region Public Methods
+		public new IFactory this[Type key]
+		{
+			get
+			{
+				if (base.Contains(key))
+				{
+					return base[key];
+				}
+				else throw new KeyNotFoundException();
+			}
+		}
+
+		public new IFactory this[int index]
+		{
+			get
+			{
+				if (index >= 0 && index < base.Count)
+				{
+					return base[index];
+				}
+				else throw new IndexOutOfRangeException();
+			}
+		}
+		#endregion
 	}
 }

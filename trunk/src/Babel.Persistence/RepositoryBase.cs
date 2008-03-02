@@ -40,6 +40,12 @@ namespace Telesophy.Babel.Persistence
 			this.engine = engine;
 			this.schema = schema;
 		}
+		
+		protected RepositoryBase(IEngine engine, DataSet dataSet)
+		{
+			this.engine = engine;
+			this.dataSet = dataSet;
+		}
 		#endregion
 		
 		#region Private Fields
@@ -47,7 +53,7 @@ namespace Telesophy.Babel.Persistence
 		private ISchema schema;
 		private DataSet dataSet;
 		private int defaultDepth = 1;
-		private IFactoryCollection factories;
+		private IFactoryCollection factories = new FactoryCollection();
 		#endregion
 	
 		#region Protected Methods
@@ -85,7 +91,6 @@ namespace Telesophy.Babel.Persistence
 		public DataSet DataSet
 		{
 			get { return dataSet; }
-			protected set { dataSet = value; }
 		}
 
 		public int DefaultDepth
@@ -99,14 +104,7 @@ namespace Telesophy.Babel.Persistence
 			get { return factories; }
 		}
 
-		public virtual void Initialize()
-		{
-			if (engine != null)
-			{
-				//engine.Initialize(schema);
-			}
-			else throw new InvalidOperationException("Could not initialize the Schema because the Engine is not defined");
-		}
+		public abstract void Initialize();
 		
 		public virtual IEnumerable<Model> Lookup<Model>(IExpression filter)
 		{

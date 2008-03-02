@@ -40,5 +40,11 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 		}
 		#endregion
+		
+		#region Public Overrides
+		public override void Initialize()
+		{
+		}
+		#endregion
 	}
 }
