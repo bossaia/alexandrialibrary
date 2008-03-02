@@ -48,11 +48,14 @@
     <Compile Include="BaseDataMap.cs" />
     <Compile Include="BaseLinkDataMap.cs" />
     <Compile Include="BaseSimpleDataMap.cs" />
+    <Compile Include="CatalogRepository.cs" />
     <Compile Include="CatalogSchema.cs" />
     <Compile Include="MediaItemDataMap.cs" />
+    <Compile Include="MediaItemFactory.cs" />
     <Compile Include="MediaItemMap.cs" />
     <Compile Include="MediaSetContentDataMap.cs" />
     <Compile Include="MediaSetDataMap.cs" />
+    <Compile Include="MediaSetFactory.cs" />
     <Compile Include="MediaSetMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

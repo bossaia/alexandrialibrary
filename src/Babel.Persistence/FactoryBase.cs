@@ -33,7 +33,50 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public static class DataTableExtensions
+	public abstract class FactoryBase<T>
 	{
+		#region Constructors
+		protected FactoryBase(string name, IRepository repository)
+		{
+			this.name = name;
+			this.repository = repository;
+			this.type = typeof(T);
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private IRepository repository;
+		private Type type;
+		#endregion
+		
+		#region INamedItem Members
+		public string Name
+		{
+			get { return name; }
+		}
+		#endregion
+		
+		#region IFactory Members
+		public IRepository Repository
+		{
+			get { return repository; }
+		}
+		
+		public Type Type
+		{
+			get { return type; }
+		}
+		#endregion
+		
+		#region IFactory<T> Members
+		public abstract T GetModel(DataRow row);
+		
+		public abstract void AddDataRows(DataSet dataSet, IEnumerable<T> models);
+		
+		public abstract IDictionary<string, T> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
+		
+		public abstract void FillDataSet(DataSet dataSet, IEnumerable<T> models, int currentDepth, int totalDepth);
+		#endregion
 	}
 }

@@ -36,6 +36,15 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IFactory : INamedItem
 	{
-		IList<T> GetModels<T>(IFactoryCollection factories, DataTable table, int currentDepth, int totalDepth);
+		IRepository Repository { get; }
+		Type Type { get; }
+	}
+	
+	public interface IFactory<T> : IFactory
+	{
+		T GetModel(DataRow row);
+		void AddDataRows(DataSet dataSet, IEnumerable<T> models);
+		IDictionary<string, T> GetModels(DataSet dataSet, int currentDepth, int totalDepth);
+		void FillDataSet(DataSet dataSet, IEnumerable<T> models, int currentDepth, int totalDepth);
 	}
 }
