@@ -53,6 +53,8 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region IEngine Members
+		public abstract IDataConverter DataConverter { get; }
+		
 		public abstract void Initialize(DataSet dataSet);
 
 		public abstract DataSet Lookup(DataSet dataSet, IQuery query);

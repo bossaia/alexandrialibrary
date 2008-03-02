@@ -68,6 +68,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 			
 		#region Private Fields
+		private IDataConverter dataConverter = new DataConverter();
 		private string databaseDirectory;
 		#endregion
 		
@@ -374,6 +375,11 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 		
 		#region IEngine Members
+		public IDataConverter DataConverter
+		{
+			get { return dataConverter; }
+		}
+		
 		public void Initialize(DataSet dataSet)
 		{
 		}

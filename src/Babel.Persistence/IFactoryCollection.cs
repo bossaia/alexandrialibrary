@@ -27,24 +27,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IRepository
+	public interface IFactoryCollection : ICollection<IFactory>
 	{
-		ISchema Schema { get; }
-		IEngine Engine { get; set; }
-		DataSet DataSet { get; }
-		int DefaultDepth { get; set; }
-		IFactoryCollection Factories { get; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		IEqualityComparer<Type> Comparer { get; }
+		IFactory this[Type key] { get; }
+		IFactory this[int index] { get; }
+		bool Contains(Type key);
+		bool Remove(Type key);
+
 	}
 }

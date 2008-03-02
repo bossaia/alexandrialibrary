@@ -27,24 +27,63 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Text;
 
-namespace Telesophy.Babel.Persistence
+namespace Telesophy.Babel.Persistence.SQLite
 {
-	public interface IRepository
+	public class DataConverter : IDataConverter
 	{
-		ISchema Schema { get; }
-		IEngine Engine { get; set; }
-		DataSet DataSet { get; }
-		int DefaultDepth { get; set; }
-		IFactoryCollection Factories { get; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		#region IDataConverter Members
+		public object GetValue(object value, Type outputType)
+		{
+			Type inputType = value.GetType();
+			
+			switch (inputType.Name)
+			{
+				case "DateTime":
+					if (outputType == typeof(long))
+						return ((DateTime)value).ToFileTimeUtc();
+					break;
+				case "Int64":
+					if (outputType == typeof(DateTime))
+						return DateTime.FromFileTimeUtc((long)value);
+					else if (outputType == typeof(TimeSpan))
+						return TimeSpan.FromTicks((long)value);
+					break;
+				case "String":
+					if (outputType == typeof(Uri))
+						return new Uri((string)value);
+					break;
+				case "TimeSpan":
+					if (outputType == typeof(long))
+						return ((TimeSpan)value).Ticks;
+					break;
+				case "Uri":
+					if (outputType == typeof(string))
+						return ((Uri)value).ToString();
+					break;
+				default:
+					break;
+			}
+			
+			return value;
+		}
+		
+		public Type GetEngineType(Type type)
+		{
+			switch (type.Name)
+			{
+				case "DateTime":
+					return typeof(long);
+				case "TimeSpan":
+					return typeof(long);
+				case "Uri":
+					return typeof(string);
+				default:
+					return type;
+			}
+		}
+		#endregion
 	}
 }

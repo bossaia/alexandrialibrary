@@ -29,22 +29,22 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IRepository
+	public static class DataTableExtensions
 	{
-		ISchema Schema { get; }
-		IEngine Engine { get; set; }
-		DataSet DataSet { get; }
-		int DefaultDepth { get; set; }
-		IFactoryCollection Factories { get; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		public static IList<T> GetModels<T>(this DataTable table, IFactoryCollection factories, int depth)
+		{
+			IList<T> list = new List<T>();
+		
+			if (factories != null && factories.Contains(typeof(T)))
+			{
+				return factories[typeof(T)].GetModels<T>(factories, table, 0, depth);
+			}
+			
+			return list;
+		}
 	}
 }
