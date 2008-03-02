@@ -34,6 +34,7 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IEngine : INamedItem
 	{
+		IDataConverter DataConverter { get; }
 		void Initialize(DataSet dataSet);
 		DataSet Lookup(DataSet dataSet, IQuery query);
 		void Save(DataSet dataSet);

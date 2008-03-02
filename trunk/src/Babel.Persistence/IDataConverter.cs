@@ -27,24 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IRepository
+	public interface IDataConverter
 	{
-		ISchema Schema { get; }
-		IEngine Engine { get; set; }
-		DataSet DataSet { get; }
-		int DefaultDepth { get; set; }
-		IFactoryCollection Factories { get; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		object GetValue(object value, Type ouputType);
+		Type GetEngineType(Type type);
 	}
 }

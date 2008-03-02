@@ -45,7 +45,9 @@ namespace Telesophy.Babel.Persistence
 		#region Private Fields
 		private IEngine engine;
 		private ISchema schema;
+		private DataSet dataSet;
 		private int defaultDepth = 1;
+		private IFactoryCollection factories;
 		#endregion
 	
 		#region Protected Methods
@@ -72,6 +74,7 @@ namespace Telesophy.Babel.Persistence
 		public IEngine Engine
 		{
 			get { return engine; }
+			set { engine = value; }
 		}
 
 		public ISchema Schema
@@ -79,10 +82,21 @@ namespace Telesophy.Babel.Persistence
 			get { return schema; }
 		}
 
+		public DataSet DataSet
+		{
+			get { return dataSet; }
+			protected set { dataSet = value; }
+		}
+
 		public int DefaultDepth
 		{
 			get { return defaultDepth; }
 			set { defaultDepth = value; }
+		}
+
+		public IFactoryCollection Factories
+		{
+			get { return factories; }
 		}
 
 		public virtual void Initialize()

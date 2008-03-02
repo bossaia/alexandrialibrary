@@ -29,22 +29,45 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IRepository
+	public static class DataRowExtensions
 	{
-		ISchema Schema { get; }
-		IEngine Engine { get; set; }
-		DataSet DataSet { get; }
-		int DefaultDepth { get; set; }
-		IFactoryCollection Factories { get; }
-		void Initialize();
-		IEnumerable<Model> Lookup<Model>(IExpression filter);
-		IEnumerable<Model> Lookup<Model>(IExpression filter, int depth);
-		void Save<Model>(IEnumerable<Model> models);
-		void Save<Model>(IEnumerable<Model> models, int depth);
-		void Delete<Model>(IEnumerable<Model> models);
-		void Delete<Model>(IEnumerable<Model> models, int depth);
+		public static T Identifier<T>(this DataRow row)
+		{
+			return row.Field<T>(row.Table.PrimaryKey[0]);
+		}
+	
+		public static T Field<T>(this DataRow row, DataColumn column, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[column], typeof(T));
+		}
+		
+		public static T Field<T>(this DataRow row, int columnIndex, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[columnIndex], typeof(T));
+		}
+		
+		public static T Field<T>(this DataRow row, string columnName, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[columnName], typeof(T));
+		}
+
+		public static T Field<T>(this DataRow row, DataColumn column, DataRowVersion version, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[column, version], typeof(T));
+		}
+
+		public static T Field<T>(this DataRow row, int columnIndex, DataRowVersion version, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[columnIndex, version], typeof(T));
+		}
+
+		public static T Field<T>(this DataRow row, string columnName, DataRowVersion version, IDataConverter converter)
+		{
+			return (T)converter.GetValue(row[columnName, version], typeof(T));
+		}
 	}
 }
