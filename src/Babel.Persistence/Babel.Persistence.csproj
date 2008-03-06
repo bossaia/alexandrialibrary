@@ -45,56 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Association.cs">
-    </Compile>
-    <Compile Include="AssociationFunction.cs" />
-    <Compile Include="ColumnBase.cs" />
-    <Compile Include="ConstraintBase.cs" />
-    <Compile Include="ConstraintType.cs" />
-    <Compile Include="DatabaseBase.cs" />
-    <Compile Include="DataRowExtensions.cs" />
-    <Compile Include="DataSetExtensions.cs" />
-    <Compile Include="DataTableExtensions.cs" />
-    <Compile Include="EngineBase.cs" />
-    <Compile Include="FactoryBase.cs" />
-    <Compile Include="FactoryCollection.cs" />
-    <Compile Include="Field.cs" />
-    <Compile Include="FieldFunction.cs" />
-    <Compile Include="IColumn.cs" />
-    <Compile Include="IConstraint.cs" />
-    <Compile Include="IDatabase.cs" />
-    <Compile Include="IDataConverter.cs" />
-    <Compile Include="IEngine.cs" />
-    <Compile Include="IExpression.cs" />
-    <Compile Include="IFactory.cs" />
-    <Compile Include="IFactoryCollection.cs" />
-    <Compile Include="IIndex.cs" />
-    <Compile Include="IMap.cs" />
-    <Compile Include="IMapCollection.cs" />
-    <Compile Include="INamedItem.cs" />
-    <Compile Include="INamedItemCollection.cs" />
-    <Compile Include="IndexBase.cs" />
-    <Compile Include="IndexType.cs" />
-    <Compile Include="IOperator.cs" />
-    <Compile Include="IQuery.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IResult.cs" />
-    <Compile Include="ISchema.cs" />
-    <Compile Include="ITable.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="MapBase.cs" />
-    <Compile Include="MapCollection.cs" />
-    <Compile Include="MapFunction.cs" />
-    <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query.cs" />
-    <Compile Include="RepositoryBase.cs" />
-    <Compile Include="Result.cs" />
-    <Compile Include="SchemaBase.cs" />
-    <Compile Include="TableBase.cs" />
-    <Compile Include="TableType.cs" />
-    <Compile Include="Tuple.cs" />
-    <Compile Include="ViewBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
