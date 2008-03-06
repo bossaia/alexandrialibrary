@@ -1210,14 +1210,6 @@
       <Project>{8FE87950-53AD-4CAF-915C-AF4FD9D57FC4}</Project>
       <Name>Alexandria.TagLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Babel.Persistence.SQLite\Babel.Persistence.SQLite.csproj">
-      <Project>{A6E60DCF-15D9-4608-A86C-3F9A1929CA3F}</Project>
-      <Name>Babel.Persistence.SQLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Babel.Persistence\Babel.Persistence.csproj">
-      <Project>{F824EFE1-595D-40D0-8494-8CB27FE9E603}</Project>
-      <Name>Babel.Persistence</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
