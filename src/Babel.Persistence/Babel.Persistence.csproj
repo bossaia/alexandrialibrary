@@ -45,7 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregate.cs" />
+    <Compile Include="Association.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="IEngine.cs" />
+    <Compile Include="IExpression.cs" />
+    <Compile Include="IOperator.cs" />
+    <Compile Include="NamedItem.cs" />
+    <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relationship.cs" />
+    <Compile Include="Schema.cs" />
+    <Compile Include="SchemaItemCollection.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
