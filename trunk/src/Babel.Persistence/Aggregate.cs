@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -84,6 +85,20 @@ namespace Telesophy.Babel.Persistence
 		public new Entity<T> Root
 		{
 			get { return root; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public DataSet GetDataSet()
+		{
+			DataSet dataSet = new DataSet();
+			
+			return dataSet;
+		}
+		
+		public IList<T> Load(DataSet dataSet)
+		{
+			return null;
 		}
 		#endregion
 	}

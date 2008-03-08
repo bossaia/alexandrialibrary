@@ -60,6 +60,8 @@ namespace Telesophy.Babel.Persistence
 			get { return type; }
 		}
 
+		public abstract Field Identifier { get; }
+
 		public NamedItemCollection<Field> Fields
 		{
 			get { return fields; }

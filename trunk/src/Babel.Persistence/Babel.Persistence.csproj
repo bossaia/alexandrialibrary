@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Aggregate.cs" />
     <Compile Include="Association.cs" />
+    <Compile Include="EngineBase.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="IEngine.cs" />
