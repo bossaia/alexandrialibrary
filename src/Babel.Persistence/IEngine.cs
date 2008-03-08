@@ -39,5 +39,7 @@ namespace Telesophy.Babel.Persistence
 		IList<T> Load<T>(Aggregate<T> aggregate, IExpression filter);
 		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		object GetValueForEngine<EntityType>(EntityType entityValue);
+		EntityValue GetValueForEntity<EntityValue>(object engineValue);
 	}
 }
