@@ -173,7 +173,7 @@ namespace Telesophy.Babel.Persistence
 						IDataReader rootReader = rootSelect.ExecuteReader();
 						while (rootReader.Read())
 						{
-							aggregate.Root.AddDataRow(rootTable, rootReader, DataConverter);
+							aggregate.Root.AddDataRow(rootTable, rootReader, DataConverter, null);
 						}
 						
 						foreach (Map map in aggregate.Maps)

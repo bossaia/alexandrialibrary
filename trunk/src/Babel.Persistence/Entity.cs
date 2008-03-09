@@ -45,6 +45,7 @@ namespace Telesophy.Babel.Persistence
 		
 		#region Private Constants
 		private const string PARENT_LINK_FIELD_NAME = "Parent_Id";
+		private const string DATE_MODIFIED_FIELD_NAME = "Date_Modified";
 		#endregion
 			
 		#region Private Fields
@@ -81,10 +82,27 @@ namespace Telesophy.Babel.Persistence
 		{
 			get { return PARENT_LINK_FIELD_NAME; }
 		}
+		
+		public virtual string DateModifiedFieldName
+		{
+			get { return DATE_MODIFIED_FIELD_NAME; }
+		}
 		#endregion
 		
 		#region Public Methods
-		public abstract DataTable GetDataTable(string name);
+		public virtual DataTable GetDataTable(string name)
+		{
+			DataTable table = new DataTable(name);
+			
+			foreach (Field field in Fields)
+			{
+				table.Columns.Add(field.Name, field.Type);
+			}
+			
+			table.Columns.Add(DateModifiedFieldName, typeof(DateTime));
+			
+			return table;
+		}
 		
 		public virtual DataTable GetDataTable(Map map)
 		{
@@ -97,10 +115,19 @@ namespace Telesophy.Babel.Persistence
 		{
 			StringBuilder list = new StringBuilder();
 			
+			const string COMMA = ", ";
+			const string FORMAT_FIELD = "{0}.{1}";
+			
+			int i = 0;
 			foreach (Field field in Fields)
 			{
-				list.AppendFormat(", {0}.{1}", Name, field.Name);
+				i++;
+				if (i > 1) list.Append(COMMA);
+				list.AppendFormat(FORMAT_FIELD, Name, field.Name);
 			}
+			
+			list.Append(COMMA);
+			list.AppendFormat(FORMAT_FIELD, Name, DateModifiedFieldName);
 			
 			return list.ToString();
 		}
@@ -116,9 +143,28 @@ namespace Telesophy.Babel.Persistence
 			return list;
 		}
 
-		public abstract void AddDataRow(DataTable table, IDataRecord record, IDataConverter dataConverter);
-		
-		public abstract void AddDataRow(DataTable table, IDataRecord record, IDataConverter dataConverter, Map map);
+		public virtual void AddDataRow(DataTable table, IDataRecord record, IDataConverter dataConverter, Map map)
+		{
+			if (table != null && record != null)
+			{
+				DataRow row = table.NewRow();
+			
+				foreach (Field field in Fields)
+				{
+					row[field.Name] = dataConverter.GetEntityValue(record[field.Name], field.Type);
+				}
+				
+				if (record.GetOrdinal(DateModifiedFieldName) > -1)
+				{
+					row[DateModifiedFieldName] = dataConverter.GetEntityValue(record[DateModifiedFieldName], typeof(DateTime));
+				}
+				
+				if (map != null && record.GetOrdinal(ParentLinkFieldName) > -1)
+				{
+					row[ParentLinkFieldName] = dataConverter.GetEntityValue(record[ParentLinkFieldName], map.Root.Identifier.Type);
+				}
+			}
+		}
 		#endregion
 		
 		#region Public Overrides
