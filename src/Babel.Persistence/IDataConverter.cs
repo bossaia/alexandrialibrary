@@ -36,5 +36,6 @@ namespace Telesophy.Babel.Persistence
 	public interface IDataConverter
 	{
 		EntityType GetEntityValue<EntityType>(object engineValue);
+		object GetEntityValue(object engineValue, Type entityType);
 	}
 }
