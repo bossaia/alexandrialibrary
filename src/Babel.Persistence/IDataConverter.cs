@@ -27,18 +27,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IEngine
+	public interface IDataConverter
 	{
-		string Name { get; }
-		IDataConverter DataConverter { get; set; }
-		void Initialize(Schema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IExpression filter);
-		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		EntityType GetEntityValue<EntityType>(object engineValue);
 	}
 }

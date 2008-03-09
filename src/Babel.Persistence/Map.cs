@@ -32,13 +32,65 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IEngine
+	public class Map : NamedItem
 	{
-		string Name { get; }
-		IDataConverter DataConverter { get; set; }
-		void Initialize(Schema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IExpression filter);
-		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		#region Constructors
+		public Map(string name, Entity root, Entity leaf) : base(name)
+		{
+			this.root = root;
+			this.leaf = leaf;
+		}
+		#endregion
+
+		#region Private Fields
+		private Entity root;
+		private Entity leaf;
+		private IList<Association> branches = new List<Association>();
+		#endregion
+		
+		#region Public Properties
+		public Entity Root
+		{
+			get { return root; }
+		}
+		
+		public Entity Leaf
+		{
+			get { return leaf; }
+		}
+		
+		public IList<Association> Branches
+		{
+			get { return branches; }
+		}
+		#endregion
+	}
+	
+	public class Map<RootType, LeafType> : Map
+	{
+		#region Constructors
+		public Map(string name, Entity<RootType> root, Entity<LeafType> leaf) : base(name, root, leaf)
+		{
+			this.root = root;
+			this.leaf = leaf;
+		}
+		#endregion
+		
+		#region Private Fields
+		private Entity<RootType> root;
+		private Entity<LeafType> leaf;
+		#endregion
+		
+		#region Public Properties
+		public new Entity<RootType> Root
+		{
+			get { return root; }
+		}
+		
+		public new Entity<LeafType> Leaf
+		{
+			get { return leaf; }
+		}
+		#endregion
 	}
 }

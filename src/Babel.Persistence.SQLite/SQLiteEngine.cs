@@ -103,7 +103,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 			return null;
 		}
 
-		protected override SQLiteCommand GetCommand(string commandText, SQLiteConnection connection, SQLiteTransaction transaction)
+		protected override SQLiteCommand GetCommand(SQLiteConnection connection, SQLiteTransaction transaction, string commandText)
 		{
 			return new SQLiteCommand(commandText, connection, transaction);
 		}
@@ -111,9 +111,24 @@ namespace Telesophy.Babel.Persistence.SQLite
 		protected override void CreateEntityTables(Entity entity, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
 			StringBuilder sql = new StringBuilder();
-			
-			SQLiteCommand command = GetCommand(sql.ToString(), connection, transaction);
+
+			SQLiteCommand command = GetCommand(connection, transaction, sql.ToString());
 			command.ExecuteNonQuery();
+		}
+
+		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Entity entity, IExpression filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Map map, IExpression filter)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override string GetWhereClause(IExpression filter)
+		{
+			throw new NotImplementedException();
 		}
 		#endregion
 
@@ -124,6 +139,11 @@ namespace Telesophy.Babel.Persistence.SQLite
 		}
 
 		public override void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override Type GetTypeForEngine<EntityType>()
 		{
 			throw new NotImplementedException();
 		}

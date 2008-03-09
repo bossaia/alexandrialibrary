@@ -33,20 +33,19 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class SchemaItemCollection<T> :
-		KeyedCollection<string, T>,
-		ICollection<T>
+	public class EntityCollection :
+		KeyedCollection<Type, Entity>
 	{
 		#region Constructors
-		public SchemaItemCollection()
+		public EntityCollection()
 		{
 		}
 		#endregion
-
+		
 		#region Protected Overrides
-		protected override string GetKeyForItem(T item)
+		protected override Type GetKeyForItem(Entity item)
 		{
-			return item.ToString();
+			return item.Type;
 		}
 		#endregion
 	}

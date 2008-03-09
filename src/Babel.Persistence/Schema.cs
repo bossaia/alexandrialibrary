@@ -43,7 +43,7 @@ namespace Telesophy.Babel.Persistence
 		
 		#region Private Fields
 		private string ns;
-		private NamedItemCollection<Entity> entities = new NamedItemCollection<Entity>();
+		private EntityCollection entities = new EntityCollection();
 		#endregion
 		
 		#region Public Properties
@@ -52,7 +52,7 @@ namespace Telesophy.Babel.Persistence
 			get { return ns; }
 		}
 		
-		public NamedItemCollection<Entity> Entities
+		public EntityCollection Entities
 		{
 			get { return entities; }
 		}
