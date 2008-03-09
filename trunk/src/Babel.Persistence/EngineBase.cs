@@ -48,6 +48,7 @@ namespace Telesophy.Babel.Persistence
 		
 		#region Private Fields
 		private string name;
+		private IDataConverter dataConverter;
 		#endregion
 	
 		#region Protected Properties
@@ -71,15 +72,51 @@ namespace Telesophy.Babel.Persistence
 		
 		protected abstract TransactionType GetTransaction(ConnectionType connection);
 		
-		protected abstract CommandType GetCommand(string commandText, ConnectionType connection, TransactionType transaction);
+		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText);
+		
+		protected abstract CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, IExpression filter);
+
+		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, IExpression filter)
+		{
+			StringBuilder sql = new StringBuilder("SELECT ");
+
+			sql.Append(map.Leaf.GetFieldList(map));
+			
+			sql.AppendFormat(" FROM {0}" + map.Leaf.Name);
+			
+			const string JOIN_FORMAT = " {0} JOIN {1} ON {2}.{3} = {1}.{4}";
+			
+			foreach (Association branch in map.Branches)
+			{
+				string joinType = (branch.IsRequired) ? "INNER" : "LEFT OUTER";
+			
+				// LEFT INNER JOIN MediaSetItems ON MediaSet.Id = MediaSetItems.ParentId
+				// LEFT INNER JOIN MediaItem ON MediaSetItems.ChildId = MediaItem.Id
+				
+				sql.AppendFormat(JOIN_FORMAT, joinType, branch.Name, branch.Parent.Name, branch.Parent.Identifier.Name, branch.ParentFieldName);
+				sql.AppendFormat(JOIN_FORMAT, joinType, branch.Child.Name, branch.Name, branch.ChildFieldName, branch.Child.Identifier.Name);
+			}
+			
+			sql.AppendFormat(GetWhereClause(filter));
+			
+			return GetCommand(connection, transaction, sql.ToString());
+		}
 		
 		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
+		
+		protected abstract string GetWhereClause(IExpression filter);
 		#endregion
 	
 		#region IEngine Members
 		public string Name
 		{
 			get { return name; }
+		}
+
+		public IDataConverter DataConverter
+		{
+			get { return dataConverter; }
+			set { dataConverter = value; }
 		}
 
 		public virtual void Initialize(Schema schema)
@@ -119,12 +156,56 @@ namespace Telesophy.Babel.Persistence
 			
 			if (aggregate != null)
 			{
-				DataSet dataSet = aggregate.GetDataSet();
-			
-				Dictionary<string, CommandType> commands = new Dictionary<string,CommandType>();
-				//commands.Add
-			 
-				list = aggregate.Load(dataSet);
+				using (ConnectionType connection = GetConnection(aggregate.Schema))
+				{
+					TransactionType transaction = default(TransactionType);
+				
+					try
+					{
+						transaction = GetTransaction(connection);
+						
+						DataSet dataSet = new DataSet(aggregate.Name);
+						
+						DataTable rootTable = aggregate.Root.GetDataTable(aggregate.Name);
+						
+						dataSet.Tables.Add(rootTable);
+						CommandType rootSelect = GetSelectCommand(connection, transaction, aggregate.Root, filter);
+						IDataReader rootReader = rootSelect.ExecuteReader();
+						while (rootReader.Read())
+						{
+							aggregate.Root.AddDataRow(rootTable, rootReader, DataConverter);
+						}
+						
+						foreach (Map map in aggregate.Maps)
+						{
+							DataTable table = null;
+							if (!dataSet.Tables.Contains(map.Name))
+							{
+								table = map.Leaf.GetDataTable(map);
+								dataSet.Tables.Add(table);
+							}
+							else table = dataSet.Tables[map.Name];
+							
+							CommandType entitySelect = GetSelectCommand(connection, transaction, map, filter);
+							IDataReader entityReader = entitySelect.ExecuteReader();
+							while (entityReader.Read())
+							{
+								map.Leaf.AddDataRow(table, entityReader, DataConverter, map);
+							}							
+						}
+						
+						transaction.Commit();
+						
+						list = aggregate.Load(dataSet);
+					}
+					catch (Exception ex)
+					{
+						if (transaction != null)
+							transaction.Rollback();
+							
+						throw ex;
+					}
+				}
 			}
 			
 			return list;
@@ -133,6 +214,8 @@ namespace Telesophy.Babel.Persistence
 		public abstract void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 
 		public abstract void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+
+		public abstract Type GetTypeForEngine<EntityType>();
 
 		public abstract object GetValueForEngine<EntityValue>(EntityValue entityValue);
 

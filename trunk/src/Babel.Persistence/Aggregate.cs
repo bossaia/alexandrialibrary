@@ -47,7 +47,7 @@ namespace Telesophy.Babel.Persistence
 		#region Private Fields
 		private Schema schema;
 		private Entity root;
-		private SchemaItemCollection<Association> associations = new SchemaItemCollection<Association>();
+		private NamedItemCollection<Map> maps = new NamedItemCollection<Map>();
 		#endregion
 		
 		#region Public Properties
@@ -61,9 +61,9 @@ namespace Telesophy.Babel.Persistence
 			get { return root; }
 		}
 		
-		public SchemaItemCollection<Association> Associations
+		public NamedItemCollection<Map> Maps
 		{
-			get { return associations; }
+			get { return maps; }
 		}
 		#endregion
 	}

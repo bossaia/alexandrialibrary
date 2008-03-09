@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -42,6 +43,10 @@ namespace Telesophy.Babel.Persistence
 		}
 		#endregion
 		
+		#region Private Constants
+		private const string PARENT_LINK_FIELD_NAME = "Parent_Id";
+		#endregion
+			
 		#region Private Fields
 		private Schema schema;
 		private Type type;
@@ -70,7 +75,50 @@ namespace Telesophy.Babel.Persistence
 		public NamedItemCollection<Association> Associations
 		{
 			get { return associations; }
-		}		
+		}
+		
+		public virtual string ParentLinkFieldName
+		{
+			get { return PARENT_LINK_FIELD_NAME; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public abstract DataTable GetDataTable(string name);
+		
+		public virtual DataTable GetDataTable(Map map)
+		{
+			DataTable table = GetDataTable(map.Name);
+			table.Columns.Add(ParentLinkFieldName, map.Root.Identifier.Type);
+			return table;
+		}
+
+		public virtual string GetFieldList()
+		{
+			StringBuilder list = new StringBuilder();
+			
+			foreach (Field field in Fields)
+			{
+				list.AppendFormat(", {0}.{1}", Name, field.Name);
+			}
+			
+			return list.ToString();
+		}
+		
+		public virtual string GetFieldList(Map map)
+		{
+			string list = GetFieldList();
+			if (!string.IsNullOrEmpty(list))
+			{
+				list += string.Format(", {0}", ParentLinkFieldName);
+			}
+			
+			return list;
+		}
+
+		public abstract void AddDataRow(DataTable table, IDataRecord record, IDataConverter dataConverter);
+		
+		public abstract void AddDataRow(DataTable table, IDataRecord record, IDataConverter dataConverter, Map map);
 		#endregion
 		
 		#region Public Overrides

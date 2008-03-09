@@ -35,42 +35,57 @@ namespace Telesophy.Babel.Persistence
 	public class Association : NamedItem
 	{
 		#region Constructors
-		public Association(string name, Type type, Relationship relationship, Entity parent, bool isRequired)
+		public Association(string name, Entity parent, Entity child, Relationship relationship, bool isRequired)
 			: base(name)
 		{
-			this.type = type;
-			this.relationship = relationship;
 			this.parent = parent;
+			this.child = child;
+			this.relationship = relationship;
 			this.isRequired = isRequired;
 		}
 		#endregion
+
+		#region Private Constants
+		private const string PARENT_IDENTIFIER_NAME = "ParentId";
+		private const string CHILD_IDENTIFIER_NAME = "ChildId";
+		#endregion
 		
 		#region Private Fields
-		private Type type;
-		private Relationship relationship;
 		private Entity parent;
+		private Entity child;
+		private Relationship relationship;
 		private bool isRequired;
 		#endregion
 		
 		#region Public Properties
-		public Type Type
+		public Entity Parent
 		{
-			get { return type; }
+			get { return parent; }
+		}
+		
+		public Entity Child
+		{
+			get { return child; }
 		}
 		
 		public Relationship Relationship
 		{
 			get { return relationship; }
 		}
-		
-		public Entity Parent
-		{
-			get { return parent; }
-		}
-		
+				
 		public bool IsRequired
 		{
 			get { return isRequired; }
+		}
+
+		public string ParentFieldName
+		{
+			get { return PARENT_IDENTIFIER_NAME; }
+		}
+
+		public string ChildFieldName
+		{
+			get { return CHILD_IDENTIFIER_NAME; }
 		}
 		#endregion
 		
