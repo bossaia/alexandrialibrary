@@ -33,11 +33,13 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public abstract class EngineBase<ConnectionType, TransactionType, CommandType>
+	public abstract class EngineBase
+		<ConnectionType, TransactionType, CommandType, ParameterType>
 		: IEngine
 		where ConnectionType: IDbConnection
 		where TransactionType : IDbTransaction
 		where CommandType : IDbCommand
+		where ParameterType : IDataParameter
 	{
 		#region Constructors
 		protected EngineBase(string name)
@@ -73,6 +75,8 @@ namespace Telesophy.Babel.Persistence
 		protected abstract TransactionType GetTransaction(ConnectionType connection);
 		
 		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText);
+
+		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText, IList<ParameterType> parameters);
 		
 		protected abstract CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, IExpression filter);
 
@@ -97,14 +101,38 @@ namespace Telesophy.Babel.Persistence
 				sql.AppendFormat(JOIN_FORMAT, joinType, branch.Child.Name, branch.Name, branch.ChildFieldName, branch.Child.Identifier.Name);
 			}
 			
-			sql.AppendFormat(GetWhereClause(filter));
+			IList<ParameterType> parameters;
+			sql.Append(GetWhereClause(filter, out parameters));
 			
-			return GetCommand(connection, transaction, sql.ToString());
+			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
 		
-		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
+		protected abstract ParameterType GetParameter(string name, object value);
 		
-		protected abstract string GetWhereClause(IExpression filter);
+		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
+				
+		protected virtual string GetWhereClause(IExpression filter, out IList<ParameterType> parameters)
+		{
+			parameters = new List<ParameterType>();
+		
+			if (filter != null)
+			{
+				StringBuilder clause = new StringBuilder(" WHERE ");
+
+				string name = "@1";
+
+				clause.Append(filter.LeftOperand);
+				clause.AppendFormat(" {0} {1}", filter.Operator, name);
+
+				object value = filter.RightOperand.Value;
+				if (filter.Operator.Name.Equals("LIKE", StringComparison.InvariantCultureIgnoreCase))
+					value = string.Format("%{0}%", filter.RightOperand);
+				
+				parameters.Add(GetParameter(name, value));
+			}
+			
+			return string.Empty;
+		}
 		#endregion
 	
 		#region IEngine Members
@@ -214,12 +242,6 @@ namespace Telesophy.Babel.Persistence
 		public abstract void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 
 		public abstract void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-
-		public abstract Type GetTypeForEngine<EntityType>();
-
-		public abstract object GetValueForEngine<EntityValue>(EntityValue entityValue);
-
-		public abstract EntityValue GetValueForEntity<EntityValue>(object engineValue);
 		#endregion
 	}
 }
