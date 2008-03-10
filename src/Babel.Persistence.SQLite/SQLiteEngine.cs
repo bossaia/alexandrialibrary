@@ -38,7 +38,8 @@ using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Babel.Persistence.SQLite
 {
-	public class SQLiteEngine : EngineBase<SQLiteConnection, SQLiteTransaction, SQLiteCommand>
+	public class SQLiteEngine : EngineBase
+		<SQLiteConnection, SQLiteTransaction, SQLiteCommand, SQLiteParameter>
 	{
 		#region Constructors
 		public SQLiteEngine() : base("SQLite Database Engine")
@@ -108,6 +109,18 @@ namespace Telesophy.Babel.Persistence.SQLite
 			return new SQLiteCommand(commandText, connection, transaction);
 		}
 
+		protected override SQLiteCommand GetCommand(SQLiteConnection connection, SQLiteTransaction transaction, string commandText, IList<SQLiteParameter> parameters)
+		{
+			SQLiteCommand command = GetCommand(connection, transaction, commandText);
+			if (parameters != null && parameters.Count > 0)
+			{
+				foreach (SQLiteParameter parameter in parameters)
+					command.Parameters.Add(parameter);
+			}
+			
+			return command;
+		}
+
 		protected override void CreateEntityTables(Entity entity, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
 			StringBuilder sql = new StringBuilder();
@@ -126,9 +139,9 @@ namespace Telesophy.Babel.Persistence.SQLite
 			throw new NotImplementedException();
 		}
 
-		protected override string GetWhereClause(IExpression filter)
+		protected override SQLiteParameter GetParameter(string name, object value)
 		{
-			throw new NotImplementedException();
+			return new SQLiteParameter(name, value);
 		}
 		#endregion
 
@@ -139,21 +152,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 		}
 
 		public override void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override Type GetTypeForEngine<EntityType>()
-		{
-			throw new NotImplementedException();
-		}
-
-		public override object GetValueForEngine<EntityValue>(EntityValue entityValue)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override EntityValue GetValueForEntity<EntityValue>(object engineValue)
 		{
 			throw new NotImplementedException();
 		}
