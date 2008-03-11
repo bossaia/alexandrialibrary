@@ -129,12 +129,12 @@ namespace Telesophy.Babel.Persistence.SQLite
 			command.ExecuteNonQuery();
 		}
 
-		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Entity entity, IExpression filter)
+		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Entity entity, Query query)
 		{
 			throw new NotImplementedException();
 		}
 
-		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Map map, IExpression filter)
+		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Map map, Query query)
 		{
 			throw new NotImplementedException();
 		}

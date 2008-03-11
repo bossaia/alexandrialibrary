@@ -78,9 +78,9 @@ namespace Telesophy.Babel.Persistence
 
 		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText, IList<ParameterType> parameters);
 		
-		protected abstract CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, IExpression filter);
+		protected abstract CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, Query query);
 
-		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, IExpression filter)
+		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, Query query)
 		{
 			StringBuilder sql = new StringBuilder("SELECT ");
 
@@ -102,7 +102,7 @@ namespace Telesophy.Babel.Persistence
 			}
 			
 			IList<ParameterType> parameters;
-			sql.Append(GetWhereClause(filter, out parameters));
+			sql.Append(GetWhereClause(query, out parameters));
 			
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
@@ -111,24 +111,33 @@ namespace Telesophy.Babel.Persistence
 		
 		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
 				
-		protected virtual string GetWhereClause(IExpression filter, out IList<ParameterType> parameters)
+		protected virtual string GetWhereClause(Query query, out IList<ParameterType> parameters)
 		{
 			parameters = new List<ParameterType>();
 		
-			if (filter != null)
+			if (query != null && query.Filters.Count > 0)
 			{
-				StringBuilder clause = new StringBuilder(" WHERE ");
+				StringBuilder clause = new StringBuilder(" WHERE");
 
-				string name = "@1";
+				int i = 0;
+				foreach (IExpression filter in query.Filters)
+				{
+					i++;
+					string name = string.Format("@{0}", i);
 
-				clause.Append(filter.LeftOperand);
-				clause.AppendFormat(" {0} {1}", filter.Operator, name);
+					if (filter.LinkingOperator != null)
+					{
+						clause.AppendFormat(" {0}", filter.LinkingOperator);
+					}
 
-				object value = filter.RightOperand.Value;
-				if (filter.Operator.Name.Equals("LIKE", StringComparison.InvariantCultureIgnoreCase))
-					value = string.Format("%{0}%", filter.RightOperand);
-				
-				parameters.Add(GetParameter(name, value));
+					clause.AppendFormat(" {0} {1} {2}", filter.LeftOperand, filter.ComparisonOperator, name);
+
+					object value = filter.RightOperand;
+					if (filter.ComparisonOperator.Name.Equals("LIKE", StringComparison.InvariantCultureIgnoreCase))
+						value = string.Format("%{0}%", filter.RightOperand);
+					
+					parameters.Add(GetParameter(name, value));
+				}
 			}
 			
 			return string.Empty;
@@ -178,7 +187,7 @@ namespace Telesophy.Babel.Persistence
 			}
 		}
 
-		public virtual IList<T> Load<T>(Aggregate<T> aggregate, IExpression filter)
+		public virtual IList<T> Load<T>(Aggregate<T> aggregate, Query query)
 		{
 			IList<T> list = new List<T>();
 			
@@ -197,7 +206,7 @@ namespace Telesophy.Babel.Persistence
 						DataTable rootTable = aggregate.Root.GetDataTable(aggregate.Name);
 						
 						dataSet.Tables.Add(rootTable);
-						CommandType rootSelect = GetSelectCommand(connection, transaction, aggregate.Root, filter);
+						CommandType rootSelect = GetSelectCommand(connection, transaction, aggregate.Root, query);
 						IDataReader rootReader = rootSelect.ExecuteReader();
 						while (rootReader.Read())
 						{
@@ -214,7 +223,7 @@ namespace Telesophy.Babel.Persistence
 							}
 							else table = dataSet.Tables[map.Name];
 							
-							CommandType entitySelect = GetSelectCommand(connection, transaction, map, filter);
+							CommandType entitySelect = GetSelectCommand(connection, transaction, map, query);
 							IDataReader entityReader = entitySelect.ExecuteReader();
 							while (entityReader.Read())
 							{
