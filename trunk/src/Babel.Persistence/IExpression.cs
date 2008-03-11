@@ -34,9 +34,9 @@ namespace Telesophy.Babel.Persistence
 {
 	public interface IExpression
 	{
-		IExpression LeftOperand { get; }
-		IOperator Operator { get; }
-		IExpression RightOperand { get; }
-		object Value { get; }
+		IOperator LinkingOperator { get; }
+		object LeftOperand { get; }
+		IOperator ComparisonOperator { get; }
+		object RightOperand { get; }
 	}
 }

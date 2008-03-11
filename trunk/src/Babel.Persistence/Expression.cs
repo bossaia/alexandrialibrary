@@ -32,90 +32,48 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class Field : NamedItem
+	public class Expression : IExpression
 	{
 		#region Constructors
-		public Field(string name, Entity parent, Type type)
-			: base(name)
+		public Expression(IOperator linkingOperator, object leftOperand, IOperator comparisonOperator, object rightOperand)
 		{
-			this.parent = parent;
-			this.type = type;
+			this.linkingOperator = linkingOperator;
+			this.leftOperand = leftOperand;
+			this.comparisonOperator = comparisonOperator;
+			this.rightOperand = rightOperand;
 		}
-
-		public Field(string name, Entity parent, Type type, bool isRequired)
-			: this(name, parent, type)
+		
+		public Expression(object leftOperand, IOperator comparisonOperator, object rightOperand) : this(null, leftOperand, comparisonOperator, rightOperand)
 		{
-			this.isRequired = isRequired;
-		}
-
-		public Field(string name, Entity parent, Type type, bool isRequired, bool isUnique)
-			: this(name, parent, type, isRequired)
-		{
-			this.isUnique = isUnique;
-		}
-
-		public Field(string name, Entity parent, Type type, bool isRequired, bool isUnique, bool isHidden)
-			: this(name, parent, type, isRequired, isUnique)
-		{
-			this.isHidden = isHidden;
 		}
 		#endregion
-		
+	
 		#region Private Fields
-		private Entity parent;
-		private Type type;
-		private bool isRequired = false;
-		private bool isUnique = false;
-		private bool isHidden = false;
+		private IOperator linkingOperator;
+		private object leftOperand;
+		private IOperator comparisonOperator;
+		private object rightOperand;
 		#endregion
-		
-		#region Public Properties
-		public Entity Parent
+	
+		#region IExpression Members
+		public IOperator LinkingOperator
 		{
-			get { return parent; }
-		}
-		
-		public Type Type
-		{
-			get { return type; }
-		}
-		
-		public bool IsRequired
-		{
-			get { return isRequired; }
-		}
-		
-		public bool IsUnique
-		{
-			get { return isUnique; }
-		}
-		
-		public bool IsHidden
-		{
-			get { return isHidden; }
-		}
-		#endregion
-		
-		#region Public Overrides
-		public override bool Equals(object obj)
-		{
-			if (obj != null && obj is Field)
-			{
-				Field other = (Field)obj;
-				return this.ToString().Equals(other.ToString());
-			}
-			
-			return false;
-		}
-		
-		public override int GetHashCode()
-		{
-			return this.ToString().GetHashCode();
+			get { throw new NotImplementedException(); }
 		}
 
-		public override string ToString()
+		public object LeftOperand
 		{
-			return string.Format("{0}.{1}", Parent.Name, Name);
+			get { throw new NotImplementedException(); }
+		}
+
+		public IOperator ComparisonOperator
+		{
+			get { throw new NotImplementedException(); }
+		}
+
+		public object RightOperand
+		{
+			get { throw new NotImplementedException(); }
 		}
 		#endregion
 	}
