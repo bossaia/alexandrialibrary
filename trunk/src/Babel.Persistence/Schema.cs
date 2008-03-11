@@ -57,5 +57,16 @@ namespace Telesophy.Babel.Persistence
 			get { return entities; }
 		}
 		#endregion
+		
+		#region Public Methods
+		public Entity<T> GetEntity<T>()
+		{
+			Type key = typeof(T);
+			
+			if (Entities.Contains(key))
+				return (Entity<T>)Entities[key];
+			else return null;
+		}
+		#endregion
 	}
 }

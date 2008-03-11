@@ -48,9 +48,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			mediaSetDataMap = new MediaSetDataMap(engine, mediaItemDataMap);
 			mediaSetContentDataMap = new MediaSetContentDataMap(engine, mediaSetDataMap, mediaItemDataMap);
 			
-			//Telesophy.Babel.Persistence.IEngine babelEngine = new Telesophy.Babel.Persistence.SQLite.SQLiteEngine();
-			//Repository repo = new Repository(babelEngine);
-			//repo.Initialize();
+			Telesophy.Babel.Persistence.IEngine sqliteEngine = new Telesophy.Babel.Persistence.SQLite.SQLiteEngine();
+			
+			CatalogSchema catalogSchema = new CatalogSchema();
+			catalogSchema.Initialize(sqliteEngine);
 		}
 		
 		private SQLiteEngine engine;

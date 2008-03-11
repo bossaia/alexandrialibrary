@@ -39,7 +39,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
-    <Compile Include="Artist.cs" />
+    <Compile Include="Group.cs" />
+    <Compile Include="IGroup.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="IArtist.cs" />
@@ -49,6 +50,7 @@
     <Compile Include="IMetadataIdentifier.cs" />
     <Compile Include="AudioTrack.cs" />
     <Compile Include="MetadataIdentifier.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VideoClip.cs" />
   </ItemGroup>

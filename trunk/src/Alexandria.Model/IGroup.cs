@@ -27,26 +27,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
 
-namespace Telesophy.Babel.Persistence
+namespace Telesophy.Alexandria.Model
 {
-	public class EntityCollection :
-		KeyedCollection<Type, Entity>
+	public interface IGroup : IArtist
 	{
-		#region Constructors
-		public EntityCollection()
-		{
-		}
-		#endregion
-		
-		#region Protected Overrides
-		protected override Type GetKeyForItem(Entity item)
-		{
-			return item.Type;
-		}
-		#endregion		
+		IList<IArtist> Members { get; }
 	}
 }

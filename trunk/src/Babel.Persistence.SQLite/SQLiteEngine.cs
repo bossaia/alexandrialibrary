@@ -66,7 +66,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 					databaseDirectory = ConfigurationManager.AppSettings[CONFIG_DATABASE_DIR];
 					if (string.IsNullOrEmpty(databaseDirectory))
 					{
-						databaseDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+						databaseDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Alexandria");
 					}
 				}
 				
@@ -121,11 +121,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 			return command;
 		}
 
-		private void CreateAssociativeTable(Association association, SQLiteConnection connection, SQLiteTransaction transaction)
-		{
-		
-		}
-
 		private string GetAffinity(Type type)
 		{
 			if (type != null)
@@ -158,8 +153,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 
 		protected override void CreateEntityTables(Entity entity, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
-			//StringBuilder sql = new StringBuilder();
-
 			const string tableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
 			const string columnFormat = "{0} {1}";
 			const string comma = ", ";
@@ -180,13 +173,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 						createTableText.Append(" UNIQUE");
 					if (field.IsRequired)
 						createTableText.Append(" NOT NULL");
-					if (!field.IsUnique && !field.IsHidden)
-					{
-						const string indexFormat = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
-						string createIndexText = string.Format(indexFormat, field.Name, entity.Name);
-						SQLiteCommand createIndex = GetCommand(connection, transaction, createIndexText);
-						createIndex.ExecuteNonQuery();
-					}
 				}
 			}
 
@@ -201,6 +187,17 @@ namespace Telesophy.Babel.Persistence.SQLite
 			string commandText = string.Format(tableFormat, entity.Name, createTableText);
 			SQLiteCommand command = GetCommand(connection, transaction, commandText);
 			command.ExecuteNonQuery();
+			
+			foreach (Field field in entity.Fields)
+			{
+				if (!field.IsUnique && !field.IsHidden)
+				{
+					const string indexFormat = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
+					string createIndexText = string.Format(indexFormat, field.Name, entity.Name);
+					SQLiteCommand createIndex = GetCommand(connection, transaction, createIndexText);
+					createIndex.ExecuteNonQuery();
+				}
+			}
 		}
 
 		protected override SQLiteParameter GetParameter(string name, object value)
