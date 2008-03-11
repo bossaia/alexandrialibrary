@@ -44,8 +44,8 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 		
 		#region Private Constants
-		private const string PARENT_LINK_FIELD_NAME = "Parent_Id";
-		private const string DATE_MODIFIED_FIELD_NAME = "Date_Modified";
+		private const string PARENT_LINK_FIELD_NAME = "_ParentId";
+		private const string DATE_MODIFIED_FIELD_NAME = "_DateModified";
 		#endregion
 			
 		#region Private Fields
@@ -194,13 +194,13 @@ namespace Telesophy.Babel.Persistence
 	public abstract class Entity<T> : Entity
 	{
 		#region Constructors
-		protected Entity(string name, Schema schema, Type type) : base(name, schema, type)
+		protected Entity(string name, Schema schema) : base(name, schema, typeof(T))
 		{
 		}
 		#endregion
 	
 		#region Public Methods
-		public abstract T GetModel(IDictionary<string, object> data);
+		public abstract T GetModel(IDictionary<string, object> tuple);
 		
 		public abstract IDictionary<string, object> GetTuple(T model);
 		#endregion

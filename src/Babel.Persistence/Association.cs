@@ -46,8 +46,9 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 
 		#region Private Constants
-		private const string PARENT_IDENTIFIER_NAME = "ParentId";
-		private const string CHILD_IDENTIFIER_NAME = "ChildId";
+		private const string PARENT_IDENTIFIER_NAME = "_ParentId";
+		private const string CHILD_IDENTIFIER_NAME = "_ChildId";
+		private const string DATE_MODIFIED_FIELD_NAME = "_DateModified";
 		#endregion
 		
 		#region Private Fields
@@ -86,6 +87,11 @@ namespace Telesophy.Babel.Persistence
 		public string ChildFieldName
 		{
 			get { return CHILD_IDENTIFIER_NAME; }
+		}
+
+		public virtual string DateModifiedFieldName
+		{
+			get { return DATE_MODIFIED_FIELD_NAME; }
 		}
 		#endregion
 		

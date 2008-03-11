@@ -121,22 +121,86 @@ namespace Telesophy.Babel.Persistence.SQLite
 			return command;
 		}
 
+		private void CreateAssociativeTable(Association association, SQLiteConnection connection, SQLiteTransaction transaction)
+		{
+		
+		}
+
+		private string GetAffinity(Type type)
+		{
+			if (type != null)
+			{
+				string affinity = "TEXT";
+
+				if (type == typeof(bool) ||
+					type == typeof(sbyte) ||
+					type == typeof(byte) ||
+					type == typeof(short) ||
+					type == typeof(ushort) ||
+					type == typeof(int) ||
+					type == typeof(uint) ||
+					type == typeof(long) ||
+					type == typeof(ulong) ||
+					type == typeof(DateTime) ||
+					type == typeof(TimeSpan))
+					affinity = "INTEGER";
+
+				if (type == typeof(float) ||
+					type == typeof(double) ||
+					type == typeof(decimal))
+					affinity = "REAL";
+
+				return affinity;
+			}
+			
+			return null;
+		}
+
 		protected override void CreateEntityTables(Entity entity, SQLiteConnection connection, SQLiteTransaction transaction)
 		{
-			StringBuilder sql = new StringBuilder();
+			//StringBuilder sql = new StringBuilder();
 
-			SQLiteCommand command = GetCommand(connection, transaction, sql.ToString());
+			const string tableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1})";
+			const string columnFormat = "{0} {1}";
+			const string comma = ", ";
+			
+			StringBuilder createTableText = new StringBuilder();
+			for (int count = 0; count < entity.Fields.Count; count++)
+			{
+				Field field = entity.Fields[count];
+				if (count > 0) createTableText.Append(comma);
+				createTableText.AppendFormat(columnFormat, field.Name, GetAffinity(field.Type));
+				if (field == entity.Identifier)
+				{
+					createTableText.Append(" PRIMARY KEY NOT NULL");
+				}
+				else
+				{
+					if (field.IsUnique)
+						createTableText.Append(" UNIQUE");
+					if (field.IsRequired)
+						createTableText.Append(" NOT NULL");
+					if (!field.IsUnique && !field.IsHidden)
+					{
+						const string indexFormat = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
+						string createIndexText = string.Format(indexFormat, field.Name, entity.Name);
+						SQLiteCommand createIndex = GetCommand(connection, transaction, createIndexText);
+						createIndex.ExecuteNonQuery();
+					}
+				}
+			}
+
+			foreach (Association association in entity.Associations)
+			{
+				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL, PRIMARY KEY({1}, {3}))";
+				string assocCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)));
+				SQLiteCommand assocCommand = GetCommand(connection, transaction, assocCommandText);
+				assocCommand.ExecuteNonQuery();
+			}
+
+			string commandText = string.Format(tableFormat, entity.Name, createTableText);
+			SQLiteCommand command = GetCommand(connection, transaction, commandText);
 			command.ExecuteNonQuery();
-		}
-
-		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Entity entity, Query query)
-		{
-			throw new NotImplementedException();
-		}
-
-		protected override SQLiteCommand GetSelectCommand(SQLiteConnection connection, SQLiteTransaction transaction, Map map, Query query)
-		{
-			throw new NotImplementedException();
 		}
 
 		protected override SQLiteParameter GetParameter(string name, object value)
