@@ -30,31 +30,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Babel.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public class Schema : NamedItem
+	public class CatalogSchema : Schema
 	{
-		#region Constructor
-		public Schema(string name, string ns) : base(name)
+		#region Constructors
+		public CatalogSchema() : base("Catalog", "Telesophy.Alexandria.Model")
 		{
-			this.ns = ns;
-		}
-		#endregion
-		
-		#region Private Fields
-		private string ns;
-		private EntityCollection entities = new EntityCollection();
-		#endregion
-		
-		#region Public Properties
-		public string Namespace
-		{
-			get { return ns; }
-		}
-		
-		public EntityCollection Entities
-		{
-			get { return entities; }
 		}
 		#endregion
 	}

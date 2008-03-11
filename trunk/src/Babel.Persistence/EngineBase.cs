@@ -78,7 +78,19 @@ namespace Telesophy.Babel.Persistence
 
 		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText, IList<ParameterType> parameters);
 		
-		protected abstract CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, Query query);
+		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, Query query)
+		{
+			StringBuilder sql = new StringBuilder("SELECT ");
+
+			sql.Append(entity.GetFieldList());
+			
+			sql.AppendFormat(" FROM {0}" + entity.Name);
+
+			IList<ParameterType> parameters;
+			sql.Append(GetWhereClause(query, out parameters));
+
+			return GetCommand(connection, transaction, sql.ToString(), parameters);
+		}
 
 		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, Query query)
 		{
