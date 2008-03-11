@@ -34,10 +34,10 @@ using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class MediaSetEntity : Entity<IMediaSet>
+	public class MediaItemEntity : Entity<IMediaItem>
 	{
 		#region Constructors
-		public MediaSetEntity() : base("MediaSet")
+		public MediaItemEntity() : base("MediaItem")
 		{
 			id = new Field("Id", this, typeof(Guid), true, true);
 			type = new Field("Type", this, typeof(string), true);
@@ -45,28 +45,30 @@ namespace Telesophy.Alexandria.Model.Data
 			number = new Field("Number", this, typeof(int), true);
 			title = new Field("Title", this, typeof(string), true);
 			artist = new Field("Artist", this, typeof(string), true);
+			album = new Field("Album", this, typeof(string), true);
+			duration = new Field("Duration", this, typeof(TimeSpan), true);
 			date = new Field("Date", this, typeof(DateTime), true);
 			format = new Field("Format", this, typeof(string), true);
 			path = new Field("Path", this, typeof(Uri), true, true);
-		
+
 			Fields.Add(id);
 			Fields.Add(type);
 			Fields.Add(source);
 			Fields.Add(number);
 			Fields.Add(title);
 			Fields.Add(artist);
+			Fields.Add(album);
+			Fields.Add(duration);
 			Fields.Add(date);
 			Fields.Add(format);
 			Fields.Add(path);
 		}
 		#endregion
-	
+		
 		#region Private Constants
-		private const string ASSOCIATION_ITEMS = "MediaSetItems";
-		private const string ASSOCIATION_CREATORS = "MediaSetCreators";
-		private const string ASSOCIATION_CONTRIBUTORS = "MediaSetContributors";
+		private const string ASSOCIATION_CREATORS = "MediaItemCreators";
 		#endregion
-	
+		
 		#region Private Fields
 		Field id;
 		Field type;
@@ -74,30 +76,28 @@ namespace Telesophy.Alexandria.Model.Data
 		Field number;
 		Field title;
 		Field artist;
+		Field album;
+		Field duration;
 		Field date;
 		Field format;
 		Field path;
 		
-		Entity<IMediaItem> mediaItemEntity;
-		Entity<IArtist> artistEntity;
+		private Entity<IArtist> artistEntity;
 		#endregion
-	
+		
 		#region Overrides
 		public override void Initialize(Schema schema)
 		{
 			base.Initialize(schema);
 
-			mediaItemEntity = schema.GetEntity<IMediaItem>();
-			artistEntity = schema.GetEntity<IArtist>(); 
-
-			Associations.Add(new Association(ASSOCIATION_ITEMS, this, mediaItemEntity, Relationship.ManyToMany, false));
+			artistEntity = schema.GetEntity<IArtist>();
+			
 			Associations.Add(new Association(ASSOCIATION_CREATORS, this, artistEntity, Relationship.ManyToMany, false));
-			Associations.Add(new Association(ASSOCIATION_CONTRIBUTORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
 		
-		public override IMediaSet GetModel(IDictionary<string, object> tuple)
+		public override IMediaItem GetModel(IDictionary<string, object> tuple)
 		{
-			IMediaSet model = null;
+			IMediaItem model = null;
 			
 			if (tuple != null)
 			{
@@ -107,6 +107,8 @@ namespace Telesophy.Alexandria.Model.Data
 				int number = (int)tuple["Number"];
 				string title = (string)tuple["Title"];
 				string artist = (string)tuple["Artist"];
+				string album = (string)tuple["Album"];
+				TimeSpan duration = (TimeSpan)tuple["Duration"];
 				DateTime date = (DateTime)tuple["Date"];
 				string format = (string)tuple["Format"];
 				Uri path = (Uri)tuple["Path"];
@@ -114,23 +116,23 @@ namespace Telesophy.Alexandria.Model.Data
 				switch (type)
 				{
 					case Constants.MEDIA_TYPE_AUDIO:
-						model = new Album(id, source, number, title, artist, date, format, path, null);
+						model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 						break;
 					case Constants.MEDIA_TYPE_VIDEO:
-						model = new Movie(id, source, number, title, artist, date, format, path, null);
+						model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
 						break;
 					default:
 						break;
 				}
 			}
-			
+
 			return model;
 		}
 
-		public override IDictionary<string, object> GetTuple(IMediaSet model)
+		public override IDictionary<string, object> GetTuple(IMediaItem model)
 		{
 			IDictionary<string, object> tuple = new Dictionary<string, object>();
-			
+
 			if (model != null)
 			{
 				tuple["Id"] = model.Id;
@@ -139,11 +141,13 @@ namespace Telesophy.Alexandria.Model.Data
 				tuple["Number"] = model.Number;
 				tuple["Title"] = model.Title;
 				tuple["Artist"] = model.Artist;
+				tuple["Album"] = model.Album;
+				tuple["Duration"] = model.Duration;
 				tuple["Date"] = model.Date;
 				tuple["Format"] = model.Format;
 				tuple["Path"] = model.Path;
 			}
-			
+
 			return tuple;
 		}
 

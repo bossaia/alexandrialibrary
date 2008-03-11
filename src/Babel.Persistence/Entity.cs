@@ -36,9 +36,8 @@ namespace Telesophy.Babel.Persistence
 	public abstract class Entity : NamedItem
 	{
 		#region Constructors
-		protected Entity(string name, Schema schema, Type type) : base(name)
+		protected Entity(string name, Type type) : base(name)
 		{
-			this.schema = schema;
 			this.type = type;
 		}
 		#endregion
@@ -90,6 +89,11 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 		
 		#region Public Methods
+		public virtual void Initialize(Schema schema)
+		{
+			this.schema = schema;
+		}
+		
 		public virtual DataTable GetDataTable(string name)
 		{
 			DataTable table = new DataTable(name);
@@ -194,7 +198,7 @@ namespace Telesophy.Babel.Persistence
 	public abstract class Entity<T> : Entity
 	{
 		#region Constructors
-		protected Entity(string name, Schema schema) : base(name, schema, typeof(T))
+		protected Entity(string name) : base(name, typeof(T))
 		{
 		}
 		#endregion

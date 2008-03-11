@@ -27,64 +27,39 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class VideoClip : IMediaItem
+	public class Person : IArtist
 	{
 		#region Constructors
-		public VideoClip()
+		public Person()
 		{
 		}
-
-		public VideoClip(Guid id, string source, int number, string title, string artist, string album, TimeSpan duration, DateTime date, string format, Uri path)
+		
+		public Person(Guid id, string name, DateTime beginDate, DateTime endDate)
 		{
 			this.id = id;
-			this.source = source;
-			this.number = number;
-			this.title = title;
-			this.artist = artist;
-			this.album = album;
-			this.duration = duration;
-			this.date = date;
-			this.format = format;
-			this.path = path;
+			this.name = name;
+			this.beginDate = beginDate;
+			this.endDate = endDate;
 		}
 		#endregion
-
+		
 		#region Private Fields
 		private Guid id;
-		private string status = string.Empty;
-		private string source;
-		private string type = Constants.MEDIA_TYPE_VIDEO;
-		private int number;
-		private string title;
-		private string artist;
-		private string album;
-		private TimeSpan duration;
-		private DateTime date;
-		private string format;
-		private Uri path;
-		private IMediaSet parent;
+		private string type = Constants.ARTIST_TYPE_PERSON;
+		private string name;
+		private DateTime beginDate;
+		private DateTime endDate;
 		#endregion
 
-		#region IMediaItem Members
+		#region IArtist Members
 		public Guid Id
 		{
 			get { return id; }
 			set { id = value; }
-		}
-
-		public string Status
-		{
-			get { return status; }
-			set { status = value; }
-		}
-
-		public string Source
-		{
-			get { return source; }
-			set { source = value; }
 		}
 
 		public string Type
@@ -93,58 +68,22 @@ namespace Telesophy.Alexandria.Model
 			set { }
 		}
 
-		public int Number
+		public string Name
 		{
-			get { return number; }
-			set { number = value; }
+			get { return name; }
+			set { name = value; }
 		}
 
-		public string Title
+		public DateTime BeginDate
 		{
-			get { return title; }
-			set { title = value; }
+			get { return beginDate; }
+			set { beginDate = value; }
 		}
 
-		public string Artist
+		public DateTime EndDate
 		{
-			get { return artist; }
-			set { artist = value; }
-		}
-
-		public string Album
-		{
-			get { return album; }
-			set { album = value; }
-		}
-
-		public TimeSpan Duration
-		{
-			get { return duration; }
-			set { duration = value; }
-		}
-
-		public DateTime Date
-		{
-			get { return date; }
-			set { date = value; }
-		}
-
-		public string Format
-		{
-			get { return format; }
-			set { format = value; }
-		}
-
-		public Uri Path
-		{
-			get { return path; }
-			set { path = value; }
-		}
-		
-		public IMediaSet Parent
-		{
-			get { return parent; }
-			set { parent = value; }
+			get { return endDate; }
+			set { endDate = value; }
 		}
 		#endregion
 	}

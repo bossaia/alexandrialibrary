@@ -38,7 +38,28 @@ namespace Telesophy.Alexandria.Model.Data
 	{
 		#region Constructors
 		public CatalogSchema() : base("Catalog", "Telesophy.Alexandria.Model")
+		{		
+			Entities.Add(mediaSetEntity);
+			Entities.Add(mediaItemEntity);
+			Entities.Add(artistEntity);
+			
+			foreach (Entity entity in Entities)
+			{
+				entity.Initialize(this);
+			}
+		}
+		#endregion
+		
+		#region Private Fields
+		private MediaSetEntity mediaSetEntity = new MediaSetEntity();
+		private MediaItemEntity mediaItemEntity = new MediaItemEntity();
+		private ArtistEntity artistEntity = new ArtistEntity();
+		#endregion
+		
+		#region Public Methods
+		public void Initialize(IEngine engine)
 		{
+			engine.Initialize(this);			
 		}
 		#endregion
 	}
