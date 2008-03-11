@@ -31,10 +31,11 @@ using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.Mp3Tunes
 {
-	public class Mp3TunesArtist : Artist
+	public class Mp3TunesArtist : Person
 	{
 		public Mp3TunesArtist(Guid id, string name, DateTime beginDate, DateTime endDate)
-			: base(id, Mp3TunesConstants.ARTIST_TYPE, name, beginDate, endDate)
+			: base(id, name, beginDate, endDate)
+			//base(id, Mp3TunesConstants.ARTIST_TYPE, name, beginDate, endDate)
 		{
 		}
 	}

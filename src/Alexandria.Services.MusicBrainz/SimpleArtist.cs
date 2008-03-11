@@ -34,11 +34,12 @@ using Telesophy.Alexandria.Model;
 namespace Telesophy.Alexandria.MusicBrainz
 {
 	[CLSCompliant(false)]
-    public class SimpleArtist : Artist
+    public class SimpleArtist : Person
     {
 		#region Constructors
 		public SimpleArtist(Guid id, string name, DateTime beginDate, DateTime endDate, string sortName)
-			: base(id, MusicBrainzConstants.ARTIST_TYPE, name, beginDate, endDate)
+			: base(id, name, beginDate, endDate)
+			//MusicBrainzConstants.ARTIST_TYPE, name, beginDate, endDate)
 		{
 			this.sortName = sortName;
 		}
