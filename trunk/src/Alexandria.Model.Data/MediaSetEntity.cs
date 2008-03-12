@@ -101,15 +101,15 @@ namespace Telesophy.Alexandria.Model.Data
 			
 			if (tuple != null)
 			{
-				Guid id = (Guid)tuple["Id"];
-				string type = (string)tuple["Type"];
-				string source = (string)tuple["Source"];
-				int number = (int)tuple["Number"];
-				string title = (string)tuple["Title"];
-				string artist = (string)tuple["Artist"];
-				DateTime date = (DateTime)tuple["Date"];
-				string format = (string)tuple["Format"];
-				Uri path = (Uri)tuple["Path"];
+				Guid id = new Guid(tuple["Id"].ToString());
+				string type = tuple["Type"].ToString();
+				string source = tuple["Source"].ToString();
+				int number = Convert.ToInt32(tuple["Number"].ToString());
+				string title = tuple["Title"].ToString();
+				string artist = tuple["Artist"].ToString();
+				DateTime date = DateTime.Parse(tuple["Date"].ToString());
+				string format = tuple["Format"].ToString();
+				Uri path = new Uri(tuple["Path"].ToString());
 				
 				switch (type)
 				{

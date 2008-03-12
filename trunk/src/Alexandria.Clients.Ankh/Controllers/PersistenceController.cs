@@ -35,6 +35,8 @@ using Telesophy.Alexandria.Model.Data;
 using Telesophy.Alexandria.Persistence;
 using Telesophy.Alexandria.Persistence.SQLite;
 
+using BabelLib=Telesophy.Babel.Persistence;
+
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
 	[CLSCompliant(false)]
@@ -43,27 +45,27 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public PersistenceController()
 		{
 			//TODO: abstract this further
-			engine = new SQLiteEngine();
-			mediaItemDataMap = new MediaItemDataMap(engine);
-			mediaSetDataMap = new MediaSetDataMap(engine, mediaItemDataMap);
-			mediaSetContentDataMap = new MediaSetContentDataMap(engine, mediaSetDataMap, mediaItemDataMap);
+			sqlEngine = new SQLiteEngine();
+			mediaItemDataMap = new MediaItemDataMap(sqlEngine);
+			mediaSetDataMap = new MediaSetDataMap(sqlEngine, mediaItemDataMap);
+			mediaSetContentDataMap = new MediaSetContentDataMap(sqlEngine, mediaSetDataMap, mediaItemDataMap);
 			
-			Telesophy.Babel.Persistence.IEngine sqliteEngine = new Telesophy.Babel.Persistence.SQLite.SQLiteEngine();
-			
-			CatalogSchema catalogSchema = new CatalogSchema();
-			catalogSchema.Initialize(sqliteEngine);
+			BabelLib.ISchema schema = new CatalogSchema();
+			BabelLib.IEngine engine = new BabelLib.SQLite.SQLiteEngine();
+			BabelLib.IRepository repo = new BabelLib.Repository(schema, engine);
+			repo.Initialize();
 		}
 		
-		private SQLiteEngine engine;
+		private SQLiteEngine sqlEngine;
 		private MediaSetDataMap mediaSetDataMap;
 		private MediaItemDataMap mediaItemDataMap;
 		private MediaSetContentDataMap mediaSetContentDataMap;
 		
 		public void Initialize()
 		{
-			engine.CreateTable(mediaSetDataMap.Table);
-			engine.CreateTable(mediaItemDataMap.Table);
-			engine.CreateTable(mediaSetContentDataMap.Table);
+			sqlEngine.CreateTable(mediaSetDataMap.Table);
+			sqlEngine.CreateTable(mediaItemDataMap.Table);
+			sqlEngine.CreateTable(mediaSetContentDataMap.Table);
 		}
 		
 		public bool CatalogExists
@@ -104,6 +106,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public void DeleteMediaItem(IMediaItem model)
 		{
 			mediaItemDataMap.DeleteModel(model);
-		}		
+		}
 	}
 }

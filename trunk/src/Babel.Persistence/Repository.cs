@@ -32,13 +32,52 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IEngine
+	public class Repository : IRepository
 	{
-		string Name { get; }
-		IDataConverter DataConverter { get; set; }
-		void Initialize(ISchema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IQuery query);
-		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		#region Constructors
+		public Repository(ISchema schema, IEngine engine)
+		{
+			this.schema = schema;
+			this.engine = engine;
+		}
+		#endregion
+		
+		#region Private Fields
+		private ISchema schema;
+		private IEngine engine;
+		#endregion
+		
+		#region IRepository Members
+		public ISchema Schema
+		{
+			get { return schema; }
+		}
+		
+		public IEngine Engine
+		{
+			get { return engine; }
+		}
+
+		public void Initialize()
+		{
+			Schema.Initialize();
+			Engine.Initialize(Schema);
+		}
+		
+		public IList<T> Load<T>(Aggregate<T> aggregate, IQuery query)
+		{
+			return Engine.Load<T>(aggregate, query);	
+		}
+		
+		public void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models)
+		{
+			Engine.Save<T>(aggregate, models);
+		}
+		
+		public void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
+		{
+			Engine.Delete<T>(aggregate, models);
+		}
+		#endregion
 	}
 }

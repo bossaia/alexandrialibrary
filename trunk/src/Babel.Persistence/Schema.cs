@@ -32,7 +32,7 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class Schema : NamedItem
+	public class Schema : NamedItem, ISchema
 	{
 		#region Constructor
 		public Schema(string name, string ns) : base(name)
@@ -46,7 +46,7 @@ namespace Telesophy.Babel.Persistence
 		private EntityCollection entities = new EntityCollection();
 		#endregion
 		
-		#region Public Properties
+		#region ISchema Members
 		public string Namespace
 		{
 			get { return ns; }
@@ -56,9 +56,15 @@ namespace Telesophy.Babel.Persistence
 		{
 			get { return entities; }
 		}
-		#endregion
 		
-		#region Public Methods
+		public virtual void Initialize()
+		{
+			foreach (Entity entity in Entities)
+			{
+				entity.Initialize(this);
+			}
+		}
+		
 		public Entity<T> GetEntity<T>()
 		{
 			Type key = typeof(T);

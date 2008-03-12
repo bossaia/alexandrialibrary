@@ -32,19 +32,26 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class Query
+	public class Query : NamedItem, IQuery
 	{
 		#region Constructors
-		public Query()
+		public Query(string name) : base(name)
 		{
+			id = Guid.NewGuid();
 		}
 		#endregion
 		
 		#region Private Fields
+		private Guid id;
 		private IList<IExpression> filters = new List<IExpression>();
 		#endregion
 		
-		#region Public Properties
+		#region IQuery Members
+		public Guid Id
+		{
+			get { return id; }
+		}
+		
 		public IList<IExpression> Filters
 		{
 			get { return filters; }

@@ -30,15 +30,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Babel.Persistence;
+
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IEngine
+	public class MediaSetWithAllChildren : Aggregate<IMediaSet>
 	{
-		string Name { get; }
-		IDataConverter DataConverter { get; set; }
-		void Initialize(ISchema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IQuery query);
-		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		#region Constructors
+		public MediaSetWithAllChildren(ISchema schema) : base("MediaSetWithAllChildren", schema)
+		{
+			Map<IMediaSet, IMediaItem> itemsMap = new Map<IMediaSet, IMediaItem>("MediaSetItems", schema);
+			itemsMap.Branches.Add(Root.Associations["MediaSetItems"]);
+			
+			Map<IMediaSet, IArtist> creatorsMap = new Map<IMediaSet, IArtist>("MediaSetCreators", schema);
+			creatorsMap.Branches.Add(Root.Associations["MediaSetCreators"]);
+			
+			Map<IMediaSet, IArtist> itemsArtistMap = new Map<IMediaSet, IArtist>("MediaItemArtist", schema);
+			itemsArtistMap.Branches.Add(Root.Associations["MediaSetItems"]);
+			itemsArtistMap.Branches.Add(Schema.Entities[typeof(IMediaItem)].Associations["MediaItemArtist"]);
+			
+			Maps.Add(itemsMap);
+			Maps.Add(creatorsMap);
+			Maps.Add(itemsArtistMap);
+		}
+		#endregion		
 	}
 }

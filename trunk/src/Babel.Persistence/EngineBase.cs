@@ -58,9 +58,9 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 	
 		#region Protected Methods
-		protected abstract string GetConnectionString(Schema schema);
+		protected abstract string GetConnectionString(ISchema schema);
 		
-		protected virtual ConnectionType GetConnection(Schema schema)
+		protected virtual ConnectionType GetConnection(ISchema schema)
 		{
 			if (schema != null)
 			{
@@ -78,7 +78,7 @@ namespace Telesophy.Babel.Persistence
 
 		protected abstract CommandType GetCommand(ConnectionType connection, TransactionType transaction, string commandText, IList<ParameterType> parameters);
 		
-		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, Query query)
+		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Entity entity, IQuery query)
 		{
 			StringBuilder sql = new StringBuilder("SELECT ");
 
@@ -92,7 +92,7 @@ namespace Telesophy.Babel.Persistence
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
 
-		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, Query query)
+		protected virtual CommandType GetSelectCommand(ConnectionType connection, TransactionType transaction, Map map, IQuery query)
 		{
 			StringBuilder sql = new StringBuilder("SELECT ");
 
@@ -123,7 +123,7 @@ namespace Telesophy.Babel.Persistence
 		
 		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
 				
-		protected virtual string GetWhereClause(Query query, out IList<ParameterType> parameters)
+		protected virtual string GetWhereClause(IQuery query, out IList<ParameterType> parameters)
 		{
 			parameters = new List<ParameterType>();
 		
@@ -168,7 +168,7 @@ namespace Telesophy.Babel.Persistence
 			set { dataConverter = value; }
 		}
 
-		public virtual void Initialize(Schema schema)
+		public virtual void Initialize(ISchema schema)
 		{
 			if (schema != null)
 			{
@@ -199,7 +199,7 @@ namespace Telesophy.Babel.Persistence
 			}
 		}
 
-		public virtual IList<T> Load<T>(Aggregate<T> aggregate, Query query)
+		public virtual IList<T> Load<T>(Aggregate<T> aggregate, IQuery query)
 		{
 			IList<T> list = new List<T>();
 			

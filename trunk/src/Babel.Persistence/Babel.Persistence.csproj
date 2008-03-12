@@ -55,13 +55,18 @@
     <Compile Include="IDataConverter.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="IExpression.cs" />
+    <Compile Include="INamedItem.cs" />
     <Compile Include="IOperator.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ISchema.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="NamedItem.cs" />
     <Compile Include="NamedItemCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="Relationship.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Schema.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
