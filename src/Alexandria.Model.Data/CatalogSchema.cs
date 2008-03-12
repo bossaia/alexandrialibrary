@@ -41,12 +41,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{		
 			Entities.Add(mediaSetEntity);
 			Entities.Add(mediaItemEntity);
-			Entities.Add(artistEntity);
-			
-			foreach (Entity entity in Entities)
-			{
-				entity.Initialize(this);
-			}
+			Entities.Add(artistEntity);			
 		}
 		#endregion
 		
@@ -54,13 +49,6 @@ namespace Telesophy.Alexandria.Model.Data
 		private MediaSetEntity mediaSetEntity = new MediaSetEntity();
 		private MediaItemEntity mediaItemEntity = new MediaItemEntity();
 		private ArtistEntity artistEntity = new ArtistEntity();
-		#endregion
-		
-		#region Public Methods
-		public void Initialize(IEngine engine)
-		{
-			engine.Initialize(this);			
-		}
 		#endregion
 	}
 }

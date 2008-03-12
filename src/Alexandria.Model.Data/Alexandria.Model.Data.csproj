@@ -55,6 +55,7 @@
     <Compile Include="MediaSetContentDataMap.cs" />
     <Compile Include="MediaSetDataMap.cs" />
     <Compile Include="MediaSetEntity.cs" />
+    <Compile Include="MediaSetWithAllChildren.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

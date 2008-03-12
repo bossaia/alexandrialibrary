@@ -32,13 +32,11 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IEngine
+	public interface ISchema : INamedItem
 	{
-		string Name { get; }
-		IDataConverter DataConverter { get; set; }
-		void Initialize(ISchema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IQuery query);
-		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
-		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		string Namespace { get; }
+		EntityCollection Entities { get; }
+		void Initialize();
+		Entity<T> GetEntity<T>();
 	}
 }

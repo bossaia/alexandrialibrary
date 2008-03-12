@@ -73,11 +73,11 @@ namespace Telesophy.Alexandria.Model.Data
 
 			if (tuple != null)
 			{
-				Guid id = (Guid)tuple["Id"];
-				string type = (string)tuple["Type"];
-				string name = (string)tuple["Name"];
-				DateTime beginDate = (DateTime)tuple["BeginDate"];
-				DateTime endDate = (DateTime)tuple["EndDate"];
+				Guid id = new Guid(tuple["Id"].ToString());
+				string type = tuple["Type"].ToString();
+				string name = tuple["Name"].ToString();
+				DateTime beginDate = DateTime.Parse(tuple["BeginDate"].ToString());
+				DateTime endDate = DateTime.Parse(tuple["EndDate"].ToString());
 				
 				switch (type)
 				{

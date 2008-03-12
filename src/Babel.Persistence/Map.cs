@@ -69,10 +69,10 @@ namespace Telesophy.Babel.Persistence
 	public class Map<RootType, LeafType> : Map
 	{
 		#region Constructors
-		public Map(string name, Entity<RootType> root, Entity<LeafType> leaf) : base(name, root, leaf)
+		public Map(string name, ISchema schema) : base(name, schema.GetEntity<RootType>(), schema.GetEntity<LeafType>())
 		{
-			this.root = root;
-			this.leaf = leaf;
+			this.root = schema.GetEntity<RootType>();
+			this.leaf = schema.GetEntity<LeafType>();
 		}
 		#endregion
 		

@@ -76,7 +76,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 	
 		#region Protected Methods
-		protected override string GetConnectionString(Schema schema)
+		protected override string GetConnectionString(ISchema schema)
 		{
 			if (schema != null)
 			{
@@ -135,9 +135,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 					type == typeof(int) ||
 					type == typeof(uint) ||
 					type == typeof(long) ||
-					type == typeof(ulong) ||
-					type == typeof(DateTime) ||
-					type == typeof(TimeSpan))
+					type == typeof(ulong))
 					affinity = "INTEGER";
 
 				if (type == typeof(float) ||
@@ -163,25 +161,21 @@ namespace Telesophy.Babel.Persistence.SQLite
 				Field field = entity.Fields[count];
 				if (count > 0) createTableText.Append(comma);
 				createTableText.AppendFormat(columnFormat, field.Name, GetAffinity(field.Type));
-				if (field == entity.Identifier)
-				{
-					createTableText.Append(" PRIMARY KEY NOT NULL");
-				}
-				else
-				{
-					if (field.IsUnique)
-						createTableText.Append(" UNIQUE");
-					if (field.IsRequired)
-						createTableText.Append(" NOT NULL");
-				}
+				if (field.IsRequired)
+					createTableText.Append(" NOT NULL");
 			}
 
 			foreach (Association association in entity.Associations)
 			{
-				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL, PRIMARY KEY({1}, {3}))";
-				string assocCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)));
-				SQLiteCommand assocCommand = GetCommand(connection, transaction, assocCommandText);
-				assocCommand.ExecuteNonQuery();
+				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL)";
+				string assocTableCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)));
+				SQLiteCommand assocTableCommand = GetCommand(connection, transaction, assocTableCommandText);
+				assocTableCommand.ExecuteNonQuery();
+				
+				const string assocIndexFormat = "CREATE UNIQUE INDEX IF NOT EXISTS pk_{0} ON {0} ({1}, {2})";
+				string assocIndexText = string.Format(assocIndexFormat, association.Name, association.ParentFieldName, association.ChildFieldName);
+				SQLiteCommand assocIndexCommand = GetCommand(connection, transaction, assocIndexText);
+				assocIndexCommand.ExecuteNonQuery();
 			}
 
 			string commandText = string.Format(tableFormat, entity.Name, createTableText);
@@ -190,10 +184,13 @@ namespace Telesophy.Babel.Persistence.SQLite
 			
 			foreach (Field field in entity.Fields)
 			{
-				if (!field.IsUnique && !field.IsHidden)
+				if (!field.IsHidden)
 				{
-					const string indexFormat = "CREATE INDEX IF NOT EXISTS index_{0} ON {1} ({0})";
-					string createIndexText = string.Format(indexFormat, field.Name, entity.Name);
+					string indexType = (field.IsUnique) ? "UNIQUE INDEX" : "INDEX";
+					string indexName = (field == entity.Identifier) ? "pk_" + entity.Name : "index_" + field.Name;
+				
+					const string indexFormat = "CREATE {0} IF NOT EXISTS {1} ON {2} ({3})";
+					string createIndexText = string.Format(indexFormat, indexType, indexName, entity.Name, field.Name);
 					SQLiteCommand createIndex = GetCommand(connection, transaction, createIndexText);
 					createIndex.ExecuteNonQuery();
 				}
