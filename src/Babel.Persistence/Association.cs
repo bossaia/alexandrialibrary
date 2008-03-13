@@ -97,18 +97,31 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 		
 		#region Public Methods
-		public void AddDataRows<ParentIdType, ChildIdType>(DataTable table, ParentIdType parentId, IEnumerable<ChildIdType> childrenIds, DateTime timeStamp)
+		//public void AddDataRows<ParentIdType, ChildIdType>(DataTable table, ParentIdType parentId, IEnumerable<ChildIdType> childrenIds, DateTime timeStamp)
+		//{
+		//    if (table != null && parentId != null && childrenIds != null)
+		//    {
+		//        foreach (ChildIdType childId in childrenIds)
+		//        {
+		//            DataRow row = table.NewRow();
+					
+		//            row[ParentFieldName] = parentId;
+		//            row[ChildFieldName] = childId;
+		//            row[DateModifiedFieldName] = timeStamp;
+					
+		//            table.Rows.Add(row);
+		//        }
+		//    }
+		//}
+		
+		public Tuple GetTuple(object parentId, object childId, DateTime timeStamp)
 		{
-			if (table != null && parentId != null && childrenIds != null)
-			{
-				foreach (ChildIdType childId in childrenIds)
-				{
-					DataRow row = table.NewRow();
-					row[ParentFieldName] = parentId;
-					row[ChildFieldName] = childId;
-					row[DateModifiedFieldName] = timeStamp;
-				}
-			}
+			Tuple tuple = new Tuple(Name, this);
+			tuple[ParentFieldName] = parentId;
+			tuple[ChildFieldName] = childId;
+			tuple[DateModifiedFieldName] = timeStamp;
+			
+			return tuple;
 		}
 		
 		public DataTable GetDataTable()

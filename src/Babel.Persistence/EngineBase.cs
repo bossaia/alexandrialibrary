@@ -119,6 +119,66 @@ namespace Telesophy.Babel.Persistence
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
 		
+		protected virtual CommandType GetSaveCommand(ConnectionType connection, TransactionType transaction, Tuple tuple)
+		{
+			string saveFormat = "REPLACE INTO {0} ({1}) VALUES ({2})";
+			
+			StringBuilder fields = new StringBuilder();
+			StringBuilder values = new StringBuilder();
+			IList<ParameterType> parameters = new List<ParameterType>();
+			
+			
+			const string COMMA = ", ";									
+			int i = 0;
+			
+			foreach (KeyValuePair<string, object> pair in tuple)
+			{
+				i++;
+				
+				if (i > 1)
+				{
+					fields.Append(COMMA);
+					values.Append(COMMA);
+				}
+				
+				fields.Append(pair.Key);
+				
+				string parameterName = string.Format("@{0}", pair.Key);
+				ParameterType parameter = GetParameter(parameterName, DataConverter.GetEngineValue(pair.Value));
+				parameters.Add(parameter);
+				
+				values.Append(parameterName);
+			}
+			
+			string commandText = string.Format(saveFormat, tuple.Name, fields, values);
+			return GetCommand(connection, transaction, commandText, parameters);
+		}
+		
+		protected virtual CommandType GetDeleteCommand(ConnectionType connection, TransactionType transaction, Association association, object parentId, DateTime timeStamp)
+		{
+			string deleteFormat = "DELETE FROM {0} WHERE {1} = {2} AND {3} <> {4}";
+			
+			IList<ParameterType> parameters = new List<ParameterType>();
+			
+			string parameter1Name = string.Format("@{0}", association.ParentFieldName);
+			object parameter1Value = DataConverter.GetEngineValue(parentId);
+			ParameterType parameter1 = GetParameter(parameter1Name, parameter1Value);
+			parameters.Add(parameter1);
+			
+			string parameter2Name = string.Format("@{0}", association.DateModifiedFieldName);
+			object parameter2Value = DataConverter.GetEngineValue(timeStamp);
+			ParameterType parameter2 = GetParameter(parameter2Name, parameter2Value);
+			parameters.Add(parameter2);
+			
+			string commandText = string.Format(deleteFormat, association.Name, association.ParentFieldName, parameter1Name, association.DateModifiedFieldName, parameter2Name);
+			return GetCommand(connection, transaction, commandText, parameters);
+		}
+		
+		protected virtual CommandType GetDeleteCommand(ConnectionType connection, TransactionType transaction, string name, Query query)
+		{
+			return default(CommandType);
+		}
+		
 		protected abstract ParameterType GetParameter(string name, object value);
 		
 		protected abstract void CreateEntityTables(Entity entity, ConnectionType connection, TransactionType transaction);
@@ -207,6 +267,7 @@ namespace Telesophy.Babel.Persistence
 			{
 				using (ConnectionType connection = GetConnection(aggregate.Schema))
 				{
+					connection.Open();
 					TransactionType transaction = default(TransactionType);
 				
 					try
@@ -266,6 +327,7 @@ namespace Telesophy.Babel.Persistence
 			{
 				using (ConnectionType connection = GetConnection(aggregate.Schema))
 				{
+					connection.Open();
 					TransactionType transaction = default(TransactionType);
 				
 					try
@@ -273,7 +335,21 @@ namespace Telesophy.Babel.Persistence
 						transaction = GetTransaction(connection);
 						DateTime timeStamp = DateTime.Now;
 						
-						DataSet dataSet = aggregate.GetDataSet(models, timeStamp);
+						IList<Tuple> tuples = aggregate.GetTuples(models, timeStamp);
+						foreach (Tuple tuple in tuples)
+						{
+							CommandType saveCommand = GetSaveCommand(connection, transaction, tuple);
+							saveCommand.ExecuteNonQuery();
+						
+							if (tuple.Association != null)
+							{
+								object parentId = tuple.GetAssociatedParentId();
+								CommandType deleteCommand = GetDeleteCommand(connection, transaction, tuple.Association, parentId, timeStamp);
+								deleteCommand.ExecuteNonQuery();
+							}
+						}
+						
+						transaction.Commit();
 					}
 					catch (Exception ex)
 					{
@@ -286,7 +362,9 @@ namespace Telesophy.Babel.Persistence
 			}
 		}
 
-		public abstract void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		public virtual void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
+		{
+		}
 		#endregion
 	}
 }

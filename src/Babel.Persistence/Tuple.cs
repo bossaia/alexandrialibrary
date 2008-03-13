@@ -27,16 +27,52 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IDataConverter
+	public class Tuple : Dictionary<string, object>, INamedItem
 	{
-		//EntityType GetEntityValue<EntityType>(object engineValue);
-		object GetEntityValue(object engineValue, Type entityType);
-		object GetEngineValue(object entityValue);
+		#region Constructors
+		public Tuple(string name)
+		{
+			this.name = name;
+		}
+		
+		public Tuple(string name, Association association) : this(name)
+		{
+			this.association = association;
+		}
+		#endregion
+		
+		#region Private Fields
+		private string name;
+		private Association association;
+		#endregion
+		
+		#region Public Properties
+		public string Name
+		{
+			get { return name; }
+		}
+		
+		public Association Association
+		{
+			get { return association; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public object GetAssociatedParentId()
+		{
+			if (Association != null)
+			{
+				return this[Association.ParentFieldName];
+			}
+			else throw new InvalidOperationException("Cannnot get associated ParentId - this tuple does not have an association");
+		}
+		#endregion
 	}
 }

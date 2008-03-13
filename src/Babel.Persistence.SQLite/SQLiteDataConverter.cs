@@ -27,16 +27,34 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Telesophy.Babel.Persistence
+namespace Telesophy.Babel.Persistence.SQLite
 {
-	public interface IDataConverter
+	public class SQLiteDataConverter : IDataConverter
 	{
-		//EntityType GetEntityValue<EntityType>(object engineValue);
-		object GetEntityValue(object engineValue, Type entityType);
-		object GetEngineValue(object entityValue);
+		#region Constructors
+		public SQLiteDataConverter()
+		{
+		}
+		#endregion
+	
+		#region IDataConverter Members
+		//public EntityType GetEntityValue<EntityType>(object engineValue)
+		//{
+		//	throw new NotImplementedException();
+		//}
+
+		public object GetEntityValue(object engineValue, Type entityType)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object GetEngineValue(object entityValue)
+		{
+			throw new NotImplementedException();
+		}
+		#endregion
 	}
 }
