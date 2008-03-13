@@ -260,7 +260,31 @@ namespace Telesophy.Babel.Persistence
 			return list;
 		}
 
-		public abstract void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
+		public virtual void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models)
+		{
+			if (aggregate != null)
+			{
+				using (ConnectionType connection = GetConnection(aggregate.Schema))
+				{
+					TransactionType transaction = default(TransactionType);
+				
+					try
+					{
+						transaction = GetTransaction(connection);
+						DateTime timeStamp = DateTime.Now;
+						
+						DataSet dataSet = aggregate.GetDataSet(models, timeStamp);
+					}
+					catch (Exception ex)
+					{
+						if (transaction != null)
+							transaction.Rollback();
+							
+						throw ex;
+					}
+				}
+			}
+		}
 
 		public abstract void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 		#endregion

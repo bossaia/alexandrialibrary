@@ -72,7 +72,7 @@ namespace Telesophy.Babel.Persistence
 		{
 			get { return maps; }
 		}
-		#endregion
+		#endregion		
 	}
 	
 	public abstract class Aggregate<T> : Aggregate
@@ -96,6 +96,8 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 		
 		#region Public Methods
+		public abstract DataSet GetDataSet(IEnumerable<T> models, DateTime timeStamp);
+		
 		public abstract IList<T> Load(DataSet dataSet);
 		#endregion
 	}

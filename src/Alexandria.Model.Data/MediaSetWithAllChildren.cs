@@ -43,20 +43,55 @@ namespace Telesophy.Alexandria.Model.Data
 			Map<IMediaSet, IMediaItem> itemsMap = new Map<IMediaSet, IMediaItem>("MediaSetItems", schema);
 			itemsMap.Branches.Add(Root.Associations["MediaSetItems"]);
 			
-			Map<IMediaSet, IArtist> creatorsMap = new Map<IMediaSet, IArtist>("MediaSetCreators", schema);
-			creatorsMap.Branches.Add(Root.Associations["MediaSetCreators"]);
+			//Map<IMediaSet, IArtist> creatorsMap = new Map<IMediaSet, IArtist>("MediaSetCreators", schema);
+			//creatorsMap.Branches.Add(Root.Associations["MediaSetCreators"]);
 			
-			Map<IMediaSet, IArtist> itemsArtistMap = new Map<IMediaSet, IArtist>("MediaItemArtist", schema);
-			itemsArtistMap.Branches.Add(Root.Associations["MediaSetItems"]);
-			itemsArtistMap.Branches.Add(Schema.Entities[typeof(IMediaItem)].Associations["MediaItemArtist"]);
+			//Map<IMediaSet, IArtist> itemsArtistMap = new Map<IMediaSet, IArtist>("MediaItemArtist", schema);
+			//itemsArtistMap.Branches.Add(Root.Associations["MediaSetItems"]);
+			//itemsArtistMap.Branches.Add(Schema.Entities[typeof(IMediaItem)].Associations["MediaItemArtist"]);
 			
 			Maps.Add(itemsMap);
-			Maps.Add(creatorsMap);
-			Maps.Add(itemsArtistMap);
+			//Maps.Add(creatorsMap);
+			//Maps.Add(itemsArtistMap);
 		}
 		#endregion		
 		
 		#region Overrides
+		public override DataSet GetDataSet(IEnumerable<IMediaSet> models, DateTime timeStamp)
+		{
+			DataSet dataSet = new DataSet(Name);
+			
+			DataTable rootTable = Root.GetDataTable(Root.Name);			
+			dataSet.Tables.Add(rootTable);
+			
+			foreach (Map map in Maps)
+			{
+				foreach (Association branch in map.Branches)
+				{
+					if (!dataSet.Tables.Contains(branch.Name))
+					{
+						DataTable table = branch.GetDataTable();
+						dataSet.Tables.Add(table);
+					}
+				}
+			}
+			
+			foreach (IMediaSet model in models)
+			{
+				Root.AddDataRow(dataSet.Tables[Root.Name], model);
+				
+				IList<Guid> childrenIds = new List<Guid>();
+				foreach (IMediaItem item in model.Items)
+				{
+					 childrenIds.Add(item.Id);
+				}
+				
+				Maps["MediaSetItems"].Branches[0].AddDataRows<Guid, Guid>(dataSet.Tables["MediaSetItems"], model.Id, childrenIds, timeStamp);
+			}
+			
+			return dataSet;
+		}
+				
 		public override IList<IMediaSet> Load(DataSet dataSet)
 		{
 			IList<IMediaSet> list = new List<IMediaSet>();
