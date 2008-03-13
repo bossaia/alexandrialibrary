@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -92,6 +93,33 @@ namespace Telesophy.Babel.Persistence
 		public virtual string DateModifiedFieldName
 		{
 			get { return DATE_MODIFIED_FIELD_NAME; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public void AddDataRows<ParentIdType, ChildIdType>(DataTable table, ParentIdType parentId, IEnumerable<ChildIdType> childrenIds, DateTime timeStamp)
+		{
+			if (table != null && parentId != null && childrenIds != null)
+			{
+				foreach (ChildIdType childId in childrenIds)
+				{
+					DataRow row = table.NewRow();
+					row[ParentFieldName] = parentId;
+					row[ChildFieldName] = childId;
+					row[DateModifiedFieldName] = timeStamp;
+				}
+			}
+		}
+		
+		public DataTable GetDataTable()
+		{
+			DataTable table = new DataTable(Name);
+			
+			table.Columns.Add(ParentFieldName, Parent.Identifier.Type);
+			table.Columns.Add(ChildFieldName, Child.Identifier.Type);
+			table.Columns.Add(DateModifiedFieldName, typeof(DateTime));
+			
+			return table;
 		}
 		#endregion
 		
