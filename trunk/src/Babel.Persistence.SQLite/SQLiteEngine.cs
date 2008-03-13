@@ -44,6 +44,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#region Constructors
 		public SQLiteEngine() : base("SQLite Database Engine")
 		{
+			DataConverter = new SQLiteDataConverter();
 		}
 		#endregion
 	
@@ -200,18 +201,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 		protected override SQLiteParameter GetParameter(string name, object value)
 		{
 			return new SQLiteParameter(name, value);
-		}
-		#endregion
-
-		#region Public Methods
-		public override void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
-		{
-			throw new NotImplementedException();
 		}
 		#endregion
 	}

@@ -138,6 +138,11 @@ namespace Telesophy.Alexandria.Model.Data
 			return list;
 		}
 
+		public override Tuple GetTuple(IMediaItem model)
+		{
+			throw new NotImplementedException();
+		}
+
 		public override void AddDataRow(DataTable table, IMediaItem model)
 		{
 			if (table != null && model != null)

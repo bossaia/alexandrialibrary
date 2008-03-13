@@ -104,6 +104,11 @@ namespace Telesophy.Alexandria.Model.Data
 			return list;
 		}
 
+		public override Tuple GetTuple(IArtist model)
+		{
+			throw new NotImplementedException();
+		}
+
 		public override void AddDataRow(DataTable table, IArtist model)
 		{
 			if (table != null && model != null)
