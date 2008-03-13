@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -67,48 +68,56 @@ namespace Telesophy.Alexandria.Model.Data
 			base.Initialize(schema);
 		}
 		
-		public override IArtist GetModel(IDictionary<string, object> tuple)
+		public override IDictionary<string, IArtist> GetModels(DataTable table)
 		{
-			IArtist model = null;
+			IDictionary<string, IArtist> list = new Dictionary<string, IArtist>();
 
-			if (tuple != null)
+			if (table != null && table.Rows.Count > 0)
 			{
-				Guid id = new Guid(tuple["Id"].ToString());
-				string type = tuple["Type"].ToString();
-				string name = tuple["Name"].ToString();
-				DateTime beginDate = DateTime.Parse(tuple["BeginDate"].ToString());
-				DateTime endDate = DateTime.Parse(tuple["EndDate"].ToString());
-				
-				switch (type)
+				foreach (DataRow row in table.Rows)
 				{
-					case Constants.ARTIST_TYPE_PERSON:
-						model = new Person(id, name, beginDate, endDate);
-						break;
-					case Constants.ARTIST_TYPE_GROUP:
-						model = new Group(id, name, beginDate, endDate);
-						break;
-					default:
-						break;
+					IArtist model = null;
+				
+					Guid id = new Guid(row["Id"].ToString());
+					string type = row["Type"].ToString();
+					string name = row["Name"].ToString();
+					DateTime beginDate = DateTime.Parse(row["BeginDate"].ToString());
+					DateTime endDate = DateTime.Parse(row["EndDate"].ToString());
+					
+					switch (type)
+					{
+						case Constants.ARTIST_TYPE_PERSON:
+							model = new Person(id, name, beginDate, endDate);
+							break;
+						case Constants.ARTIST_TYPE_GROUP:
+							model = new Group(id, name, beginDate, endDate);
+							break;
+						default:
+							break;
+					}
+					
+					if (model != null)
+						list.Add(model.Id.ToString(), model);
 				}
 			}
 
-			return model;
+			return list;
 		}
 
-		public override IDictionary<string, object> GetTuple(IArtist model)
+		public override void AddDataRow(DataTable table, IArtist model)
 		{
-			IDictionary<string, object> tuple = new Dictionary<string, object>();
-
-			if (model != null)
+			if (table != null && model != null)
 			{
-				tuple["Id"] = model.Id;
-				tuple["Type"] = model.Type;
-				tuple["Name"] = model.Name;
-				tuple["BeginDate"] = model.BeginDate;
-				tuple["EndDate"] = model.EndDate;
+				DataRow row = table.NewRow();
+				
+				row["Id"] = model.Id;
+				row["Type"] = model.Type;
+				row["Name"] = model.Name;
+				row["BeginDate"] = model.BeginDate;
+				row["EndDate"] = model.EndDate;
+				
+				table.Rows.Add(row);
 			}
-
-			return tuple;	
 		}
 
 		public override Field Identifier
