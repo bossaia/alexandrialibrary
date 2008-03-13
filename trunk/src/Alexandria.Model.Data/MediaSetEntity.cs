@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -95,56 +96,63 @@ namespace Telesophy.Alexandria.Model.Data
 			Associations.Add(new Association(ASSOCIATION_CONTRIBUTORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
 		
-		public override IMediaSet GetModel(IDictionary<string, object> tuple)
+		public override IDictionary<string, IMediaSet> GetModels(DataTable table)
 		{
-			IMediaSet model = null;
+			IDictionary<string, IMediaSet> list = new Dictionary<string, IMediaSet>();
 			
-			if (tuple != null)
+			if (table != null && table.Rows.Count > 0)
 			{
-				Guid id = new Guid(tuple["Id"].ToString());
-				string type = tuple["Type"].ToString();
-				string source = tuple["Source"].ToString();
-				int number = Convert.ToInt32(tuple["Number"].ToString());
-				string title = tuple["Title"].ToString();
-				string artist = tuple["Artist"].ToString();
-				DateTime date = DateTime.Parse(tuple["Date"].ToString());
-				string format = tuple["Format"].ToString();
-				Uri path = new Uri(tuple["Path"].ToString());
-				
-				switch (type)
+				foreach (DataRow row in table.Rows)
 				{
-					case Constants.MEDIA_TYPE_AUDIO:
-						model = new Album(id, source, number, title, artist, date, format, path, null);
-						break;
-					case Constants.MEDIA_TYPE_VIDEO:
-						model = new Movie(id, source, number, title, artist, date, format, path, null);
-						break;
-					default:
-						break;
+					IMediaSet model = null;
+				
+					Guid id = new Guid(row["Id"].ToString());
+					string type = row["Type"].ToString();
+					string source = row["Source"].ToString();
+					int number = Convert.ToInt32(row["Number"].ToString());
+					string title = row["Title"].ToString();
+					string artist = row["Artist"].ToString();
+					DateTime date = DateTime.Parse(row["Date"].ToString());
+					string format = row["Format"].ToString();
+					Uri path = new Uri(row["Path"].ToString());
+					
+					switch (type)
+					{
+						case Constants.MEDIA_TYPE_AUDIO:
+							model = new Album(id, source, number, title, artist, date, format, path, null);
+							break;
+						case Constants.MEDIA_TYPE_VIDEO:
+							model = new Movie(id, source, number, title, artist, date, format, path, null);
+							break;
+						default:
+							break;
+					}
+					
+					if (model != null)
+						list.Add(model.Id.ToString(), model);
 				}
 			}
 			
-			return model;
+			return list;
 		}
 
-		public override IDictionary<string, object> GetTuple(IMediaSet model)
+		public override void AddDataRow(DataTable table, IMediaSet model)
 		{
-			IDictionary<string, object> tuple = new Dictionary<string, object>();
-			
-			if (model != null)
+			if (table != null && model != null)
 			{
-				tuple["Id"] = model.Id;
-				tuple["Type"] = model.Type;
-				tuple["Source"] = model.Source;
-				tuple["Number"] = model.Number;
-				tuple["Title"] = model.Title;
-				tuple["Artist"] = model.Artist;
-				tuple["Date"] = model.Date;
-				tuple["Format"] = model.Format;
-				tuple["Path"] = model.Path;
+				DataRow row = table.NewRow();
+				row["Id"] = model.Id;
+				row["Type"] = model.Type;
+				row["Source"] = model.Source;
+				row["Number"] = model.Number;
+				row["Title"] = model.Title;
+				row["Artist"] = model.Artist;
+				row["Date"] = model.Date;
+				row["Format"] = model.Format;
+				row["Path"] = model.Path;
+				
+				table.Rows.Add(row);
 			}
-			
-			return tuple;
 		}
 
 		public override Field Identifier

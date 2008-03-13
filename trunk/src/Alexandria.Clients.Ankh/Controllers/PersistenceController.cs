@@ -45,27 +45,31 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public PersistenceController()
 		{
 			//TODO: abstract this further
-			sqlEngine = new SQLiteEngine();
-			mediaItemDataMap = new MediaItemDataMap(sqlEngine);
-			mediaSetDataMap = new MediaSetDataMap(sqlEngine, mediaItemDataMap);
-			mediaSetContentDataMap = new MediaSetContentDataMap(sqlEngine, mediaSetDataMap, mediaItemDataMap);
+			//sqlEngine = new SQLiteEngine();
+			//mediaItemDataMap = new MediaItemDataMap(sqlEngine);
+			//mediaSetDataMap = new MediaSetDataMap(sqlEngine, mediaItemDataMap);
+			//mediaSetContentDataMap = new MediaSetContentDataMap(sqlEngine, mediaSetDataMap, mediaItemDataMap);
 			
-			BabelLib.ISchema schema = new CatalogSchema();
-			BabelLib.IEngine engine = new BabelLib.SQLite.SQLiteEngine();
-			BabelLib.IRepository repo = new BabelLib.Repository(schema, engine);
-			repo.Initialize();
+			schema = new CatalogSchema();
+			engine = new BabelLib.SQLite.SQLiteEngine();
+			repo = new BabelLib.Repository(schema, engine);
 		}
+
+		private BabelLib.ISchema schema;
+		private BabelLib.IEngine engine;
+		private BabelLib.IRepository repo;
 		
-		private SQLiteEngine sqlEngine;
-		private MediaSetDataMap mediaSetDataMap;
-		private MediaItemDataMap mediaItemDataMap;
-		private MediaSetContentDataMap mediaSetContentDataMap;
+		//private SQLiteEngine sqlEngine;
+		//private MediaSetDataMap mediaSetDataMap;
+		//private MediaItemDataMap mediaItemDataMap;
+		//private MediaSetContentDataMap mediaSetContentDataMap;
 		
 		public void Initialize()
 		{
-			sqlEngine.CreateTable(mediaSetDataMap.Table);
-			sqlEngine.CreateTable(mediaItemDataMap.Table);
-			sqlEngine.CreateTable(mediaSetContentDataMap.Table);
+			repo.Initialize();
+			//sqlEngine.CreateTable(mediaSetDataMap.Table);
+			//sqlEngine.CreateTable(mediaItemDataMap.Table);
+			//sqlEngine.CreateTable(mediaSetContentDataMap.Table);
 		}
 		
 		public bool CatalogExists
@@ -75,37 +79,40 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IList<IMediaItem> ListAllMediaItems()
 		{
-			return mediaItemDataMap.ListModels();
+			//return mediaItemDataMap.ListModels();
+			return new List<IMediaItem>();
 		}
 		
 		public IList<IMediaItem> ListMediaItems(string filter)
 		{
-			return mediaItemDataMap.ListModels(filter);
+			//return mediaItemDataMap.ListModels(filter);
+			return new List<IMediaItem>();
 		}
 		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
-			return mediaSetDataMap.LookupModel(id, true);
+			//return mediaSetDataMap.LookupModel(id, true);
+			return null;
 		}
 		
 		public void SaveMediaSet(IMediaSet model, bool cascade)
 		{
-			mediaSetDataMap.SaveModel(model, cascade);
+			//mediaSetDataMap.SaveModel(model, cascade);
 		}
 		
 		public void DeleteMediaSet(IMediaSet model)
 		{
-			mediaSetDataMap.DeleteModel(model, false);
+			//mediaSetDataMap.DeleteModel(model, false);
 		}
 		
 		public void SaveMediaItem(IMediaItem model)
 		{
-			mediaItemDataMap.SaveModel(model);
+			//mediaItemDataMap.SaveModel(model);
 		}
 		
 		public void DeleteMediaItem(IMediaItem model)
 		{
-			mediaItemDataMap.DeleteModel(model);
+			//mediaItemDataMap.DeleteModel(model);
 		}
 	}
 }

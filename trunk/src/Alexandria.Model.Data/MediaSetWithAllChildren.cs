@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -54,5 +55,14 @@ namespace Telesophy.Alexandria.Model.Data
 			Maps.Add(itemsArtistMap);
 		}
 		#endregion		
+		
+		#region Overrides
+		public override IList<IMediaSet> Load(DataSet dataSet)
+		{
+			IList<IMediaSet> list = new List<IMediaSet>();
+			
+			return list;
+		}
+		#endregion
 	}
 }

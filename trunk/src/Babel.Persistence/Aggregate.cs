@@ -33,7 +33,7 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class Aggregate : NamedItem
+	public abstract class Aggregate : NamedItem
 	{
 		#region Constructors
 		public Aggregate(string name, ISchema schema, Type type)
@@ -75,7 +75,7 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 	}
 	
-	public class Aggregate<T> : Aggregate
+	public abstract class Aggregate<T> : Aggregate
 	{
 		#region Constructors
 		public Aggregate(string name, ISchema schema) : base(name, schema, typeof(T))
@@ -96,17 +96,7 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 		
 		#region Public Methods
-		public DataSet GetDataSet()
-		{
-			DataSet dataSet = new DataSet();
-			
-			return dataSet;
-		}
-		
-		public IList<T> Load(DataSet dataSet)
-		{
-			return null;
-		}
+		public abstract IList<T> Load(DataSet dataSet);
 		#endregion
 	}
 }

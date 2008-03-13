@@ -204,9 +204,9 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 	
 		#region Public Methods
-		public abstract T GetModel(IDictionary<string, object> tuple);
+		public abstract IDictionary<string, T> GetModels(DataTable table);
 		
-		public abstract IDictionary<string, object> GetTuple(T model);
+		public abstract void AddDataRow(DataTable table, T model);
 		#endregion
 	}
 }
