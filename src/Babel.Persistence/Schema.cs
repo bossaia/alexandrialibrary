@@ -73,6 +73,23 @@ namespace Telesophy.Babel.Persistence
 				return (Entity<T>)Entities[key];
 			else return null;
 		}
+		
+		public Field GetField<T>(string name)
+		{
+			Entity<T> entity = GetEntity<T>();
+			if (entity != null)
+			{
+				if (entity.Fields.Contains(name))
+					return entity.Fields[name];
+			}
+			
+			return null;
+		}
+		
+		public IExpression GetFilter<T>(string fieldName, string operatorName, string value)
+		{
+			return new Expression(GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
+		}
 		#endregion
 	}
 }

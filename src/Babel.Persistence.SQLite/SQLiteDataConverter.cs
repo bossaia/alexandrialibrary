@@ -43,7 +43,30 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#region IDataConverter Members
 		public object GetEntityValue(object engineValue, Type entityType)
 		{
-			throw new NotImplementedException();
+			if (engineValue != null && engineValue != DBNull.Value)
+			{
+				switch (entityType.Name)
+				{
+					case "Guid":
+						return new Guid(engineValue.ToString());
+					case "Uri":
+						return new Uri(engineValue.ToString());
+					case "DateTime":
+						return DateTime.Parse(engineValue.ToString());
+					case "TimeSpan":
+						return TimeSpan.Parse(engineValue.ToString());
+					case "Boolean":
+						return bool.Parse(engineValue.ToString());
+					case "Int32":
+						return int.Parse(engineValue.ToString());
+					case "Decimal":
+						return decimal.Parse(engineValue.ToString());
+					default:
+						return engineValue.ToString();
+				}
+			}
+			
+			return null;
 		}
 
 		public object GetEngineValue(object entityValue)

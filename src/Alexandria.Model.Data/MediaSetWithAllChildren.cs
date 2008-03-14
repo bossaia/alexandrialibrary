@@ -126,11 +126,27 @@ namespace Telesophy.Alexandria.Model.Data
 			return tuples;
 		}
 		
-		public override IList<IMediaSet> Load(DataSet dataSet)
+		public override ICollection<IMediaSet> List(DataSet dataSet)
 		{
-			IList<IMediaSet> list = new List<IMediaSet>();
+			IDictionary<string, ICollection<IMediaSet>> dict = Root.GetModels(dataSet.Tables[Root.Name], null);
 			
-			return list;
+			Entity<IMediaItem> itemEntity = Schema.GetEntity<IMediaItem>();
+			IDictionary<string, ICollection<IMediaItem>> childrenById = itemEntity.GetModels(dataSet.Tables["MediaSetItems"], Root.Associations["MediaSetItems"]);
+			
+			foreach (IMediaSet model in dict[Root.Name])
+			{
+				string key = model.Id.ToString();
+				if (childrenById.ContainsKey(key))
+				{
+					foreach (IMediaItem child in childrenById[key])
+					{
+						child.Parent = model;
+						model.Items.Add(child);
+					}
+				}
+			}
+			
+			return dict[Root.Name];
 		}
 		#endregion
 	}

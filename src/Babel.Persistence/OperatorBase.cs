@@ -27,28 +27,23 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class NamedItemCollection<T> : 
-		KeyedCollection<string, T>, 
-		ICollection<T> 
-		where T: INamedItem
+	public abstract class OperatorBase : NamedItem, IOperator
 	{
 		#region Constructors
-		public NamedItemCollection()
+		protected OperatorBase(string name) : base(name)
 		{
 		}
 		#endregion
-		
-		#region Protected Overrides
-		protected override string GetKeyForItem(T item)
-		{
-			return item.Name;
-		}
+	
+		#region Private Fields
+		#endregion
+	
+		#region IOperator Members
 		#endregion
 	}
 }

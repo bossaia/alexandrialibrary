@@ -84,7 +84,7 @@ namespace Telesophy.Babel.Persistence
 
 			sql.Append(entity.GetFieldList());
 			
-			sql.AppendFormat(" FROM {0}" + entity.Name);
+			sql.AppendFormat(" FROM {0}", entity.Name);
 
 			IList<ParameterType> parameters;
 			sql.Append(GetWhereClause(query, out parameters));
@@ -259,9 +259,9 @@ namespace Telesophy.Babel.Persistence
 			}
 		}
 
-		public virtual IList<T> Load<T>(Aggregate<T> aggregate, IQuery query)
+		public virtual ICollection<T> List<T>(Aggregate<T> aggregate, IQuery query)
 		{
-			IList<T> list = new List<T>();
+			ICollection<T> list = new List<T>();
 			
 			if (aggregate != null)
 			{
@@ -306,7 +306,7 @@ namespace Telesophy.Babel.Persistence
 						
 						transaction.Commit();
 						
-						list = aggregate.Load(dataSet);
+						list = aggregate.List(dataSet);
 					}
 					catch (Exception ex)
 					{

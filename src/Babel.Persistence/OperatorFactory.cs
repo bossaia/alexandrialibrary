@@ -27,28 +27,32 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public class NamedItemCollection<T> : 
-		KeyedCollection<string, T>, 
-		ICollection<T> 
-		where T: INamedItem
+	public static class OperatorFactory
 	{
-		#region Constructors
-		public NamedItemCollection()
+		static OperatorFactory()
 		{
+			operators.Add(like);
+			operators.Add(equalTo);
 		}
-		#endregion
 		
-		#region Protected Overrides
-		protected override string GetKeyForItem(T item)
+		private static NamedItemCollection<IOperator> operators = new NamedItemCollection<IOperator>();
+	
+		private static LikeOperator like = new LikeOperator();
+		private static EqualToOperator equalTo = new EqualToOperator();
+		
+		public static LikeOperator Like { get { return like; } }
+		public static EqualToOperator EqualTo { get {return equalTo; } }
+		
+		public static IOperator GetOperator(string name)
 		{
-			return item.Name;
+			if (operators.Contains(name))
+				return operators[name];
+			else throw new KeyNotFoundException(name);
 		}
-		#endregion
 	}
 }

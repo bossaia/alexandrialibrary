@@ -98,7 +98,7 @@ namespace Telesophy.Babel.Persistence
 		#region Public Methods
 		public abstract IList<Tuple> GetTuples(IEnumerable<T> models, DateTime timeStamp);
 		
-		public abstract IList<T> Load(DataSet dataSet);
+		public abstract ICollection<T> List(DataSet dataSet);
 		#endregion
 	}
 }

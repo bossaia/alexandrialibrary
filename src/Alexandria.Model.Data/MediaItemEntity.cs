@@ -96,9 +96,9 @@ namespace Telesophy.Alexandria.Model.Data
 			Associations.Add(new Association(ASSOCIATION_CREATORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
 		
-		public override IDictionary<string, IMediaItem> GetModels(DataTable table)
+		public override IDictionary<string, ICollection<IMediaItem>> GetModels(DataTable table, Association association)
 		{
-			IDictionary<string, IMediaItem> list = new Dictionary<string, IMediaItem>();
+			IDictionary<string, ICollection<IMediaItem>> list = new Dictionary<string, ICollection<IMediaItem>>();
 			
 			if (table != null && table.Rows.Count > 0)
 			{
@@ -130,8 +130,7 @@ namespace Telesophy.Alexandria.Model.Data
 							break;
 					}
 					
-					if (model != null)
-						list.Add(model.Id.ToString(), model);
+					AddModelToList(model, row, association, list);
 				}	
 			}
 
