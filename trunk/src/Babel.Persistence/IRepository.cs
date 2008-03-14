@@ -37,7 +37,7 @@ namespace Telesophy.Babel.Persistence
 		ISchema Schema { get; }
 		IEngine Engine { get; }
 		void Initialize();
-		IList<T> Load<T>(Aggregate<T> aggregate, IQuery query);
+		ICollection<T> List<T>(Aggregate<T> aggregate, IQuery query);
 		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 	}

@@ -58,22 +58,22 @@ namespace Telesophy.Babel.Persistence
 		#region IExpression Members
 		public IOperator LinkingOperator
 		{
-			get { throw new NotImplementedException(); }
+			get { return linkingOperator; }
 		}
 
 		public object LeftOperand
 		{
-			get { throw new NotImplementedException(); }
+			get { return leftOperand; }
 		}
 
 		public IOperator ComparisonOperator
 		{
-			get { throw new NotImplementedException(); }
+			get { return comparisonOperator; }
 		}
 
 		public object RightOperand
 		{
-			get { throw new NotImplementedException(); }
+			get { return rightOperand; }
 		}
 		#endregion
 	}

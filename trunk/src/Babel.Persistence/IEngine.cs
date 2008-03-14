@@ -37,7 +37,7 @@ namespace Telesophy.Babel.Persistence
 		string Name { get; }
 		IDataConverter DataConverter { get; set; }
 		void Initialize(ISchema schema);
-		IList<T> Load<T>(Aggregate<T> aggregate, IQuery query);
+		ICollection<T> List<T>(Aggregate<T> aggregate, IQuery query);
 		void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 		void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models);
 	}

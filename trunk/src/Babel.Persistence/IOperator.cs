@@ -32,9 +32,7 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface IOperator
+	public interface IOperator : INamedItem
 	{
-		string Name { get; }
-		string Symbol { get; }
 	}
 }

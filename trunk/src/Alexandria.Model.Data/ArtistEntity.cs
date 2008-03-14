@@ -68,9 +68,9 @@ namespace Telesophy.Alexandria.Model.Data
 			base.Initialize(schema);
 		}
 		
-		public override IDictionary<string, IArtist> GetModels(DataTable table)
+		public override IDictionary<string, ICollection<IArtist>> GetModels(DataTable table, Association association)
 		{
-			IDictionary<string, IArtist> list = new Dictionary<string, IArtist>();
+			IDictionary<string, ICollection<IArtist>> list = new Dictionary<string, ICollection<IArtist>>();
 
 			if (table != null && table.Rows.Count > 0)
 			{
@@ -96,8 +96,7 @@ namespace Telesophy.Alexandria.Model.Data
 							break;
 					}
 					
-					if (model != null)
-						list.Add(model.Id.ToString(), model);
+					AddModelToList(model, row, association, list);
 				}
 			}
 

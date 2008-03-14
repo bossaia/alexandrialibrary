@@ -32,7 +32,7 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public abstract class NamedItem
+	public abstract class NamedItem : INamedItem
 	{
 		#region Constructors
 		protected NamedItem(string name)
@@ -45,7 +45,7 @@ namespace Telesophy.Babel.Persistence
 		private string name;
 		#endregion
 	
-		#region Public Properties
+		#region INamedItem Members
 		public string Name
 		{
 			get { return name; }

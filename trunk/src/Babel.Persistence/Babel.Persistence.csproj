@@ -50,6 +50,7 @@
     <Compile Include="EngineBase.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityCollection.cs" />
+    <Compile Include="EqualToOperator.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="IDataConverter.cs" />
@@ -60,9 +61,12 @@
     <Compile Include="IQuery.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchema.cs" />
+    <Compile Include="LikeOperator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="NamedItem.cs" />
     <Compile Include="NamedItemCollection.cs" />
+    <Compile Include="OperatorBase.cs" />
+    <Compile Include="OperatorFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="Relationship.cs" />

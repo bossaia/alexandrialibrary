@@ -96,9 +96,9 @@ namespace Telesophy.Alexandria.Model.Data
 			Associations.Add(new Association(ASSOCIATION_CONTRIBUTORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
 		
-		public override IDictionary<string, IMediaSet> GetModels(DataTable table)
+		public override IDictionary<string, ICollection<IMediaSet>> GetModels(DataTable table, Association association)
 		{
-			IDictionary<string, IMediaSet> list = new Dictionary<string, IMediaSet>();
+			IDictionary<string, ICollection<IMediaSet>> list = new Dictionary<string, ICollection<IMediaSet>>();
 			
 			if (table != null && table.Rows.Count > 0)
 			{
@@ -115,7 +115,7 @@ namespace Telesophy.Alexandria.Model.Data
 					DateTime date = DateTime.Parse(row["Date"].ToString());
 					string format = row["Format"].ToString();
 					Uri path = new Uri(row["Path"].ToString());
-					
+										
 					switch (type)
 					{
 						case Constants.MEDIA_TYPE_AUDIO:
@@ -128,8 +128,7 @@ namespace Telesophy.Alexandria.Model.Data
 							break;
 					}
 					
-					if (model != null)
-						list.Add(model.Id.ToString(), model);
+					AddModelToList(model, row, association, list);
 				}
 			}
 			

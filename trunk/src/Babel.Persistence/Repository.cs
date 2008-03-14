@@ -64,9 +64,9 @@ namespace Telesophy.Babel.Persistence
 			Engine.Initialize(Schema);
 		}
 		
-		public IList<T> Load<T>(Aggregate<T> aggregate, IQuery query)
+		public ICollection<T> List<T>(Aggregate<T> aggregate, IQuery query)
 		{
-			return Engine.Load<T>(aggregate, query);	
+			return Engine.List<T>(aggregate, query);	
 		}
 		
 		public void Save<T>(Aggregate<T> aggregate, IEnumerable<T> models)

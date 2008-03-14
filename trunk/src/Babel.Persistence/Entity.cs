@@ -203,8 +203,34 @@ namespace Telesophy.Babel.Persistence
 		}
 		#endregion
 	
+		#region Protected Methods
+		protected void AddModelToList(T model, DataRow row, Association association, IDictionary<string, ICollection<T>> list)
+		{
+			if (model != null)
+			{
+				string key = null;
+				
+				if (association != null)
+				{
+					key = row[association.ParentFieldName].ToString();
+				}
+				else
+				{
+					key = row.Table.TableName;
+				}
+
+				if (!list.ContainsKey(key) || list[key] == null)
+				{
+					list[key] = new List<T>();
+				}
+
+				list[key].Add(model);
+			}
+		}
+		#endregion
+	
 		#region Public Methods
-		public abstract IDictionary<string, T> GetModels(DataTable table);
+		public abstract IDictionary<string, ICollection<T>> GetModels(DataTable table, Association association);
 		
 		public abstract Tuple GetTuple(T model);
 		
