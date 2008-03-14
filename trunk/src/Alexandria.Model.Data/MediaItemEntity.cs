@@ -140,7 +140,21 @@ namespace Telesophy.Alexandria.Model.Data
 
 		public override Tuple GetTuple(IMediaItem model)
 		{
-			throw new NotImplementedException();
+			Tuple tuple = new Tuple(Name);
+			
+			tuple["Id"] = model.Id;
+			tuple["Type"] = model.Type;
+			tuple["Source"] = model.Source;
+			tuple["Number"] = model.Number;
+			tuple["Title"] = model.Title;
+			tuple["Artist"] = model.Artist;
+			tuple["Album"] = model.Album;
+			tuple["Duration"] = model.Duration;
+			tuple["Date"] = model.Date;
+			tuple["Format"] = model.Format;
+			tuple["Path"] = model.Path;
+			
+			return tuple;
 		}
 
 		public override void AddDataRow(DataTable table, IMediaItem model)

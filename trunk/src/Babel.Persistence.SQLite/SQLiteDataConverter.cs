@@ -41,11 +41,6 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 	
 		#region IDataConverter Members
-		//public EntityType GetEntityValue<EntityType>(object engineValue)
-		//{
-		//	throw new NotImplementedException();
-		//}
-
 		public object GetEntityValue(object engineValue, Type entityType)
 		{
 			throw new NotImplementedException();
@@ -53,7 +48,24 @@ namespace Telesophy.Babel.Persistence.SQLite
 
 		public object GetEngineValue(object entityValue)
 		{
-			throw new NotImplementedException();
+			if (entityValue != null)
+			{
+				switch (entityValue.GetType().Name)
+				{
+					case "String":
+					case "Guid":
+					case "Uri":
+						return entityValue.ToString();
+					case "DateTime":
+						return ((DateTime)entityValue).ToString("s");
+					case "TimeSpan":
+						TimeSpan span = (TimeSpan)entityValue;
+						return string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", span.Hours, span.Minutes, span.Seconds, span.Milliseconds);
+					default:
+						return entityValue;
+				}
+			}
+			else return null;
 		}
 		#endregion
 	}
