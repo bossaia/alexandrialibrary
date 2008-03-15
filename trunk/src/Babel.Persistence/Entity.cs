@@ -52,6 +52,7 @@ namespace Telesophy.Babel.Persistence
 		private Type type;
 		private NamedItemCollection<Field> fields = new NamedItemCollection<Field>();
 		private NamedItemCollection<Association> associations = new NamedItemCollection<Association>();
+		private Dictionary<Field, bool> defaultSortOrder = new Dictionary<Field, bool>();		
 		#endregion
 		
 		#region Public Properties
@@ -66,7 +67,7 @@ namespace Telesophy.Babel.Persistence
 		}
 
 		public abstract Field Identifier { get; }
-
+		
 		public NamedItemCollection<Field> Fields
 		{
 			get { return fields; }
@@ -75,6 +76,11 @@ namespace Telesophy.Babel.Persistence
 		public NamedItemCollection<Association> Associations
 		{
 			get { return associations; }
+		}
+
+		public Dictionary<Field, bool> DefaultSortOrder
+		{
+			get { return defaultSortOrder; }
 		}
 		
 		public virtual string ParentLinkFieldName
@@ -130,8 +136,8 @@ namespace Telesophy.Babel.Persistence
 				list.AppendFormat(FORMAT_FIELD, Name, field.Name);
 			}
 			
-			list.Append(COMMA);
-			list.AppendFormat(FORMAT_FIELD, Name, DateModifiedFieldName);
+			//list.Append(COMMA);
+			//list.AppendFormat(FORMAT_FIELD, Name, DateModifiedFieldName);
 			
 			return list.ToString();
 		}
@@ -167,6 +173,8 @@ namespace Telesophy.Babel.Persistence
 				{
 					row[ParentLinkFieldName] = dataConverter.GetEntityValue(record[ParentLinkFieldName], map.Root.Identifier.Type);
 				}
+				
+				table.Rows.Add(row);
 			}
 		}
 		#endregion
