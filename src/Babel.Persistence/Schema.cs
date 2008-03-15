@@ -44,6 +44,7 @@ namespace Telesophy.Babel.Persistence
 		#region Private Fields
 		private string ns;
 		private EntityCollection entities = new EntityCollection();
+		private NamedItemCollection<Aggregate> aggregates = new NamedItemCollection<Aggregate>();
 		#endregion
 		
 		#region ISchema Members
@@ -57,11 +58,21 @@ namespace Telesophy.Babel.Persistence
 			get { return entities; }
 		}
 		
+		public NamedItemCollection<Aggregate> Aggregates
+		{
+			get { return aggregates; }
+		}
+		
 		public virtual void Initialize()
 		{
 			foreach (Entity entity in Entities)
 			{
 				entity.Initialize(this);
+			}
+			
+			foreach (Aggregate aggregate in Aggregates)
+			{
+				aggregate.Initialize(this);
 			}
 		}
 		
@@ -72,6 +83,16 @@ namespace Telesophy.Babel.Persistence
 			if (Entities.Contains(key))
 				return (Entity<T>)Entities[key];
 			else return null;
+		}
+		
+		public Aggregate<T> GetAggregate<T>(string name)
+		{
+			if (Aggregates.Contains(name))
+			{
+				return Aggregates[name] as Aggregate<T>;
+			}
+			
+			return null;
 		}
 		
 		public Field GetField<T>(string name)

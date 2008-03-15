@@ -27,6 +27,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -34,27 +35,38 @@ using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class CatalogSchema : Schema
+	public class MediaItemSingleton : Aggregate<IMediaItem>
 	{
 		#region Constructors
-		public CatalogSchema() : base("Catalog", "Telesophy.Alexandria.Model")
-		{		
-			Entities.Add(mediaSetEntity);
-			Entities.Add(mediaItemEntity);
-			Entities.Add(artistEntity);
-						
-			Aggregates.Add(mediaSetWithAllChildren);
-			Aggregates.Add(mediaItemSingleton);
+		public MediaItemSingleton() : base("MediaItemSingleton")
+		{
 		}
 		#endregion
+
+		#region Overrides
+		public override IList<Tuple> GetTuples(IEnumerable<IMediaItem> models, DateTime timeStamp)
+		{
+			IList<Tuple> tuples = new List<Tuple>();
 		
-		#region Private Fields
-		private MediaSetEntity mediaSetEntity = new MediaSetEntity();
-		private MediaItemEntity mediaItemEntity = new MediaItemEntity();
-		private ArtistEntity artistEntity = new ArtistEntity();
-		
-		private MediaSetWithAllChildren mediaSetWithAllChildren = new MediaSetWithAllChildren();
-		private MediaItemSingleton mediaItemSingleton = new MediaItemSingleton();
+			foreach (IMediaItem model in models)
+			{
+				Tuple rootTuple = Root.GetTuple(model);
+				tuples.Add(rootTuple);
+			}
+			
+			return tuples;
+		}
+
+		public override ICollection<IMediaItem> List(DataSet dataSet)
+		{
+			IDictionary<string, ICollection<IMediaItem>> dict = Root.GetModels(dataSet.Tables[Root.Name], null);
+			
+			if (dict.Count > 0)
+			{
+				return dict[Root.Name];
+			}
+			else return new List<IMediaItem>();
+		}
 		#endregion
 	}
 }

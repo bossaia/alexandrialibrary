@@ -36,8 +36,10 @@ namespace Telesophy.Babel.Persistence
 	{
 		string Namespace { get; }
 		EntityCollection Entities { get; }
+		NamedItemCollection<Aggregate> Aggregates { get; }
 		void Initialize();
 		Entity<T> GetEntity<T>();
+		Aggregate<T> GetAggregate<T>(string name);
 		Field GetField<T>(string name);
 		IExpression GetFilter<T>(string fieldName, string operatorName, string value);
 	}

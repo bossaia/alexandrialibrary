@@ -38,70 +38,21 @@ namespace Telesophy.Alexandria.Model.Data
 	public class MediaSetWithAllChildren : Aggregate<IMediaSet>
 	{
 		#region Constructors
-		public MediaSetWithAllChildren(ISchema schema) : base("MediaSetWithAllChildren", schema)
+		public MediaSetWithAllChildren() : base("MediaSetWithAllChildren")
 		{
-			Map<IMediaSet, IMediaItem> itemsMap = new Map<IMediaSet, IMediaItem>("MediaSetItems", schema);
-			itemsMap.Branches.Add(Root.Associations["MediaSetItems"]);
-			
-			//Map<IMediaSet, IArtist> creatorsMap = new Map<IMediaSet, IArtist>("MediaSetCreators", schema);
-			//creatorsMap.Branches.Add(Root.Associations["MediaSetCreators"]);
-			
-			//Map<IMediaSet, IArtist> itemsArtistMap = new Map<IMediaSet, IArtist>("MediaItemArtist", schema);
-			//itemsArtistMap.Branches.Add(Root.Associations["MediaSetItems"]);
-			//itemsArtistMap.Branches.Add(Schema.Entities[typeof(IMediaItem)].Associations["MediaItemArtist"]);
-			
-			Maps.Add(itemsMap);
-			//Maps.Add(creatorsMap);
-			//Maps.Add(itemsArtistMap);
 		}
 		#endregion		
 		
 		#region Overrides
-		//public override DataSet GetDataSet(IEnumerable<IMediaSet> models, DateTime timeStamp)
-		//{
-		//    DataSet dataSet = new DataSet(Name);
-			
-		//    DataTable rootTable = Root.GetDataTable(Root.Name);			
-		//    dataSet.Tables.Add(rootTable);
-			
-		//    foreach (Map map in Maps)
-		//    {
-		//        foreach (Association branch in map.Branches)
-		//        {
-		//            if (!dataSet.Tables.Contains(branch.Name))
-		//            {
-		//                DataTable assocTable = branch.GetDataTable();
-		//                dataSet.Tables.Add(assocTable);
-		//            }
-					
-		//            if (!dataSet.Tables.Contains(branch.Child.Name))
-		//            {
-		//                DataTable childTable = branch.Child.GetDataTable(branch.Child.Name);
-		//                dataSet.Tables.Add(childTable);
-		//            }
-		//        }
-		//    }
-			
-		//    Entity<IMediaItem> itemEntity = Maps["MediaSetItems"].Branches[0].Child as Entity<IMediaItem>;
-			
-		//    foreach (IMediaSet model in models)
-		//    {
-		//        Root.AddDataRow(dataSet.Tables[Root.Name], model);
-				
-		//        IList<Guid> childrenIds = new List<Guid>();
-		//        foreach (IMediaItem item in model.Items)
-		//        {
-		//             childrenIds.Add(item.Id);
-					 
-		//             itemEntity.AddDataRow(dataSet.Tables[itemEntity.Name], item);
-		//        }
-				
-		//        Maps["MediaSetItems"].Branches[0].AddDataRows<Guid, Guid>(dataSet.Tables["MediaSetItems"], model.Id, childrenIds, timeStamp);
-		//    }
-			
-		//    return dataSet;
-		//}
+		public override void Initialize(ISchema schema)
+		{
+			base.Initialize(schema);
 
+			Map<IMediaSet, IMediaItem> itemsMap = new Map<IMediaSet, IMediaItem>("MediaSetItems", schema);
+			itemsMap.Branches.Add(Root.Associations["MediaSetItems"]);
+			Maps.Add(itemsMap);
+		}
+		
 		public override IList<Tuple> GetTuples(IEnumerable<IMediaSet> models, DateTime timeStamp)
 		{
 			IList<Tuple> tuples = new List<Tuple>();
@@ -146,7 +97,11 @@ namespace Telesophy.Alexandria.Model.Data
 				}
 			}
 			
-			return dict[Root.Name];
+			if (dict.Count > 0)
+			{
+				return dict[Root.Name];
+			}
+			else return new List<IMediaSet>();
 		}
 		#endregion
 	}
