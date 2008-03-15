@@ -36,19 +36,22 @@ namespace Telesophy.Babel.Persistence
 	public class Tuple : Dictionary<string, object>, INamedItem
 	{
 		#region Constructors
-		public Tuple(string name)
+		public Tuple(string name, string identifierName)
 		{
 			this.name = name;
+			this.identifierName = identifierName;
 		}
 		
-		public Tuple(string name, Association association) : this(name)
+		public Tuple(string name, Association association)
 		{
+			this.name = name;
 			this.association = association;
 		}
 		#endregion
 		
 		#region Private Fields
 		private string name;
+		private string identifierName;
 		private Association association;
 		#endregion
 		
@@ -56,6 +59,21 @@ namespace Telesophy.Babel.Persistence
 		public string Name
 		{
 			get { return name; }
+		}
+		
+		public string IdentifierName
+		{
+			get { return identifierName; }
+		}
+		
+		public object IdentifierValue
+		{
+			get
+			{
+				if (!string.IsNullOrEmpty(identifierName))
+					return this[identifierName];
+				else return null;
+			}
 		}
 		
 		public Association Association
