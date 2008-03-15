@@ -337,10 +337,7 @@ namespace Telesophy.Babel.Persistence
 						list = aggregate.List(dataSet);
 					}
 					catch (Exception ex)
-					{
-						if (transaction != null)
-							transaction.Rollback();
-							
+					{							
 						throw ex;
 					}
 				}

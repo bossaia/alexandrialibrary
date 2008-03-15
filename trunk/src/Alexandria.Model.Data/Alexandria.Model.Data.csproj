@@ -52,6 +52,7 @@
     <Compile Include="CatalogSchema.cs" />
     <Compile Include="MediaItemDataMap.cs" />
     <Compile Include="MediaItemEntity.cs" />
+    <Compile Include="MediaItemSingleton.cs" />
     <Compile Include="MediaSetContentDataMap.cs" />
     <Compile Include="MediaSetDataMap.cs" />
     <Compile Include="MediaSetEntity.cs" />

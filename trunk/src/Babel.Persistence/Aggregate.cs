@@ -36,12 +36,10 @@ namespace Telesophy.Babel.Persistence
 	public abstract class Aggregate : NamedItem
 	{
 		#region Constructors
-		public Aggregate(string name, ISchema schema, Type type)
+		public Aggregate(string name, Type type)
 			: base(name)
 		{
-			this.schema = schema;
 			this.type = type;
-			this.root = schema.Entities[type];
 		}
 		#endregion
 		
@@ -73,25 +71,28 @@ namespace Telesophy.Babel.Persistence
 			get { return maps; }
 		}
 		#endregion		
+		
+		#region Public Methods
+		public virtual void Initialize(ISchema schema)
+		{
+			this.schema = schema;
+			this.root = schema.Entities[type];
+		}
+		#endregion
 	}
 	
 	public abstract class Aggregate<T> : Aggregate
 	{
 		#region Constructors
-		public Aggregate(string name, ISchema schema) : base(name, schema, typeof(T))
+		public Aggregate(string name) : base(name, typeof(T))
 		{
-			this.root = schema.GetEntity<T>();
 		}
 		#endregion
-		
-		#region Private
-		private Entity<T> root;
-		#endregion
-		
+				
 		#region Public Properties
 		public new Entity<T> Root
 		{
-			get { return root; }
+			get { return base.Root as Entity<T>; }
 		}
 		#endregion
 		
