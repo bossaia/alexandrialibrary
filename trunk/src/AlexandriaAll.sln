@@ -22,10 +22,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.Playl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.IO", "Alexandria.IO\Alexandria.IO.csproj", "{97449DEA-C759-4E22-B287-305CA0023749}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence", "Alexandria.Persistence\Alexandria.Persistence.csproj", "{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence.SQLite", "Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj", "{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Services", "Alexandria.Services\Alexandria.Services.csproj", "{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model", "Alexandria.Model\Alexandria.Model.csproj", "{E5F218B8-FD8A-42C3-9409-8539D128F294}"
@@ -90,14 +86,6 @@ Global
 		{97449DEA-C759-4E22-B287-305CA0023749}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97449DEA-C759-4E22-B287-305CA0023749}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97449DEA-C759-4E22-B287-305CA0023749}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D41B7E6-7428-4A20-A8FB-20A052FD2B02}.Release|Any CPU.ActiveCfg = Release|Any CPU

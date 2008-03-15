@@ -46,15 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArtistEntity.cs" />
-    <Compile Include="BaseDataMap.cs" />
-    <Compile Include="BaseLinkDataMap.cs" />
-    <Compile Include="BaseSimpleDataMap.cs" />
     <Compile Include="CatalogSchema.cs" />
-    <Compile Include="MediaItemDataMap.cs" />
     <Compile Include="MediaItemEntity.cs" />
     <Compile Include="MediaItemSingleton.cs" />
-    <Compile Include="MediaSetContentDataMap.cs" />
-    <Compile Include="MediaSetDataMap.cs" />
     <Compile Include="MediaSetEntity.cs" />
     <Compile Include="MediaSetWithAllChildren.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,10 +57,6 @@
     <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
       <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
       <Name>Alexandria.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
-      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
-      <Name>Alexandria.Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\Babel.Persistence\Babel.Persistence.csproj">
       <Project>{F824EFE1-595D-40D0-8494-8CB27FE9E603}</Project>
