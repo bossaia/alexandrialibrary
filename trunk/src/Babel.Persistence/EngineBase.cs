@@ -156,6 +156,21 @@ namespace Telesophy.Babel.Persistence
 			return GetCommand(connection, transaction, commandText, parameters);
 		}
 		
+		protected virtual CommandType GetDeleteCommand(ConnectionType connection, TransactionType transaction, Tuple tuple)
+		{
+			string deleteFormat = "DELETE FROM {0} WHERE {1} = {2}";
+
+			IList<ParameterType> parameters = new List<ParameterType>();
+
+			string parameter1Name = string.Format("@{0}", tuple.IdentifierName);
+			object parameter1Value = DataConverter.GetEngineValue(tuple.IdentifierValue);
+			ParameterType parameter1 = GetParameter(parameter1Name, parameter1Value);
+			parameters.Add(parameter1);
+
+			string commandText = string.Format(deleteFormat, tuple.Name, tuple.IdentifierName, parameter1Name);
+			return GetCommand(connection, transaction, commandText, parameters);
+		}
+		
 		protected virtual CommandType GetDeleteCommand(ConnectionType connection, TransactionType transaction, Association association, object parentId, DateTime timeStamp)
 		{
 			string deleteFormat = "DELETE FROM {0} WHERE {1} = {2} AND {3} <> {4}";
@@ -389,6 +404,43 @@ namespace Telesophy.Babel.Persistence
 
 		public virtual void Delete<T>(Aggregate<T> aggregate, IEnumerable<T> models)
 		{
+			if (aggregate != null)
+			{
+				using (ConnectionType connection = GetConnection(aggregate.Schema))
+				{
+					connection.Open();
+					TransactionType transaction = default(TransactionType);
+
+					try
+					{
+						transaction = GetTransaction(connection);
+						DateTime timeStamp = DateTime.MinValue;
+
+						IList<Tuple> tuples = aggregate.GetTuples(models, timeStamp);
+						foreach (Tuple tuple in tuples)
+						{
+							CommandType deleteCommand = GetDeleteCommand(connection, transaction, tuple);
+							deleteCommand.ExecuteNonQuery();
+
+							if (tuple.Association != null)
+							{
+								object parentId = tuple.GetAssociatedParentId();
+								CommandType subDeleteCommand = GetDeleteCommand(connection, transaction, tuple.Association, parentId, timeStamp);
+								subDeleteCommand.ExecuteNonQuery();
+							}
+						}
+
+						transaction.Commit();
+					}
+					catch (Exception ex)
+					{
+						if (transaction != null)
+							transaction.Rollback();
+
+						throw ex;
+					}
+				}
+			}
 		}
 		#endregion
 	}

@@ -141,7 +141,7 @@ namespace Telesophy.Alexandria.Model.Data
 
 		public override Tuple GetTuple(IMediaSet model)
 		{
-			Tuple tuple = new Tuple(Name);
+			Tuple tuple = new Tuple(Name, "Id");
 
 			tuple["Id"] = model.Id;
 			tuple["Type"] = model.Type;

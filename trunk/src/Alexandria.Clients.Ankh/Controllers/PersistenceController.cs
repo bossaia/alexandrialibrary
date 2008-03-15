@@ -118,6 +118,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public void DeleteMediaItem(IMediaItem model)
 		{
 			IList<IMediaItem> models = new List<IMediaItem>() { model };
+			DeleteMediaItems(models);
+		}
+		
+		public void DeleteMediaItems(IEnumerable<IMediaItem> models)
+		{
 			repo.Delete<IMediaItem>(mediaItemSingleton, models);
 		}
 	}

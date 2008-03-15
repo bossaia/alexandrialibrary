@@ -858,7 +858,22 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				IMediaItem item = bindingList[index];
 				persistenceController.DeleteMediaItem(item);
 			}
-		}		
+		}
+		
+		public void DeleteSelectedRows()
+		{
+			if (persistenceController != null && grid.SelectedRows.Count > 0)
+			{
+				IList<IMediaItem> items = new List<IMediaItem>();
+				foreach (DataGridViewRow row in grid.SelectedRows)
+				{
+					items.Add(bindingList[row.Index]);
+					bindingList.RemoveAt(row.Index);
+				}
+				
+				persistenceController.DeleteMediaItems(items);
+			}	
+		}
 		
 		public void LoadDefaultCatalog()
 		{

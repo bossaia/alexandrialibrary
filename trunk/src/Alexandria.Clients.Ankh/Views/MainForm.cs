@@ -678,9 +678,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			{
 				if (queueDataGrid.SelectedRows != null && queueDataGrid.SelectedRows.Count > 0)
 				{
-					int index = queueDataGrid.SelectedRows[0].Index;
-					queueController.DeleteRow(index);
-					queueController.ClearRow(index);
+					queueController.DeleteSelectedRows();
 				}
 			}
 			catch(Exception ex)
