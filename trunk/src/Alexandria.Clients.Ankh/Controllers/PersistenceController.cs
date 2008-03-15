@@ -32,10 +32,11 @@ using System.Text;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Model.Data;
-using Telesophy.Alexandria.Persistence;
-using Telesophy.Alexandria.Persistence.SQLite;
+//using Telesophy.Alexandria.Persistence;
+//using Telesophy.Alexandria.Persistence.SQLite;
 
-using BabelLib=Telesophy.Babel.Persistence;
+using Telesophy.Babel.Persistence;
+using Telesophy.Babel.Persistence.SQLite;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
@@ -44,101 +45,80 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 	{
 		public PersistenceController()
 		{
-			//TODO: abstract this further
-			//sqlEngine = new SQLiteEngine();
-			//mediaItemDataMap = new MediaItemDataMap(sqlEngine);
-			//mediaSetDataMap = new MediaSetDataMap(sqlEngine, mediaItemDataMap);
-			//mediaSetContentDataMap = new MediaSetContentDataMap(sqlEngine, mediaSetDataMap, mediaItemDataMap);
-			
 			schema = new CatalogSchema();
-			engine = new BabelLib.SQLite.SQLiteEngine();
-			repo = new BabelLib.Repository(schema, engine);
+			engine = new SQLiteEngine();
+			repo = new Repository(schema, engine);
+			
+			mediaItemSingleton = schema.GetAggregate<IMediaItem>("MediaItemSingleton");
+			mediaSetWithAllChildren = schema.GetAggregate<IMediaSet>("MediaSetWithAllChildren");
 		}
 
-		private BabelLib.ISchema schema;
-		private BabelLib.IEngine engine;
-		private BabelLib.IRepository repo;
+		private CatalogSchema schema;
+		private IEngine engine;
+		private IRepository repo;
 		
-		//private SQLiteEngine sqlEngine;
-		//private MediaSetDataMap mediaSetDataMap;
-		//private MediaItemDataMap mediaItemDataMap;
-		//private MediaSetContentDataMap mediaSetContentDataMap;
+		private Aggregate<IMediaItem> mediaItemSingleton;
+		private Aggregate<IMediaSet> mediaSetWithAllChildren;
 		
 		public void Initialize()
 		{
 			repo.Initialize();
-			//sqlEngine.CreateTable(mediaSetDataMap.Table);
-			//sqlEngine.CreateTable(mediaItemDataMap.Table);
-			//sqlEngine.CreateTable(mediaSetContentDataMap.Table);
-			
-			//Guid albumId1 = new Guid("5F116994-1490-496a-81BD-5BC3796AD006");
-			//DateTime date = new DateTime(1979, 11, 30);
-			//string format = "audio/flac";
-			//string rootPath1 = "file:///M:/audio/flac/Pink Floyd/The%20Wall%20pt.%201";
-			//Guid albumId2 = new Guid("7A300079-6750-4409-9A02-1B788A23D9F2");
-			//string rootPath2 = "file:///M:/audio/flac/Pink Floyd/The%20Wall%20pt.%202";
-			
-			//Album album1 = new Album(albumId1, "Catalog", 1, "The Wall pt. 1", "Pink Floyd", date, format, new Uri(rootPath1), null);
-			//album1.Items.Add(new AudioTrack(new Guid("1EDF60AA-3C60-473b-99B0-69A2B1BA002D"), "Catalog", 1, "In The Flesh?", "Pink Floyd", "The Wall pt. 1", new TimeSpan(0, 3, 19), date, format, new Uri(rootPath1 + "/01%20In%20The%20Flesh.flac")));
-			//album1.Items.Add(new AudioTrack(new Guid("455314B8-39A1-4b74-95A6-E94B94EEE840"), "Catalog", 2, "The Thin Ice", "Pink Floyd", "The Wall pt. 1", new TimeSpan(0, 2, 27), date, format, new Uri(rootPath1 + "/02%20The%20Thin%20Ice.flac")));
-			//album1.Items.Add(new AudioTrack(new Guid("67B1341C-8E7D-4672-946B-36A99DC9DAD2"), "Catalog", 3, "Another Brick in the Wall (Part 1)", "Pink Floyd", "The Wall pt. 1", new TimeSpan(0, 3, 21), date, format, new Uri(rootPath1 + "/03%20Another%20Brick%20in%20the%20Wall%20(Part%201).flac")));
-
-			//Album album2 = new Album(albumId2, "Catalog", 2, "The Wall pt. 2", "Pink Floyd", date, format, new Uri(rootPath2), null);
-			//album2.Items.Add(new AudioTrack(new Guid("DC9FF6C0-AD03-4332-9D12-6F3C0883CC94"), "Catalog", 1, "Hey You", "Pink Floyd", "The Wall pt. 2", new TimeSpan(0, 4, 40), date, format, new Uri(rootPath2 + "/01%20Hey%20You.flac")));
-			//album2.Items.Add(new AudioTrack(new Guid("E3BBEAF1-D1D9-4a72-AF9D-7E5DABA2CB0B"), "Catalog", 2, "Is There Anybody Out There?", "Pink Floyd", "The Wall pt. 2", new TimeSpan(0, 2, 44), date, format, new Uri(rootPath2 + "/02Is%20There%20Anybody%20Out%20There.flac")));
-			//album2.Items.Add(new AudioTrack(new Guid("1AEEC93B-438B-4a9a-A611-2444CD88CBDE"), "Catalog", 3, "Nobody Home", "Pink Floyd", "The Wall pt. 2", new TimeSpan(0, 3, 26), date, format, new Uri(rootPath2 + "/03Nobody%20Home.flac")));
-						
-			BabelLib.Aggregate<IMediaSet> agg = new Alexandria.Model.Data.MediaSetWithAllChildren(schema);
-			//IList<IMediaSet> albums = new List<IMediaSet> { album1, album2 };
-			//repo.Save<IMediaSet>(agg, albums);
-			BabelLib.Query query = new BabelLib.Query("Search: 'The Wall'");
-			query.Filters.Add(schema.GetFilter<IMediaSet>("Title", "LIKE", "The Wall"));
-			
-			ICollection<IMediaSet> albums = repo.List<IMediaSet>(agg, query);
-			int x = albums.Count;
+		}
+				
+		public ICollection<IMediaItem> ListAllMediaItems()
+		{
+			return repo.List<IMediaItem>(mediaItemSingleton, null);
 		}
 		
-		public bool CatalogExists
+		public ICollection<IMediaItem> ListMediaItems(string filter)
 		{
-			get { return true; }
-		}
-		
-		public IList<IMediaItem> ListAllMediaItems()
-		{
-			//return mediaItemDataMap.ListModels();
-			return new List<IMediaItem>();
-		}
-		
-		public IList<IMediaItem> ListMediaItems(string filter)
-		{
-			//return mediaItemDataMap.ListModels(filter);
-			return new List<IMediaItem>();
+			//TODO: turn the filter string into a query
+			Query query = new Query("Search MediaItem: " + filter);
+			
+			return repo.List<IMediaItem>(mediaItemSingleton, null);
 		}
 		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
-			//return mediaSetDataMap.LookupModel(id, true);
+			Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
+			query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
+			
+			ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+			if (sets != null && sets.Count > 0)
+			{
+				using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+				{
+					iter.Reset();
+					iter.MoveNext();
+					return iter.Current;
+				}
+			}
+			
 			return null;
 		}
 		
-		public void SaveMediaSet(IMediaSet model, bool cascade)
+		public void SaveMediaSet(IMediaSet model)
 		{
-			//mediaSetDataMap.SaveModel(model, cascade);
+			IList<IMediaSet> models = new List<IMediaSet>() { model };
+			repo.Save<IMediaSet>(mediaSetWithAllChildren, models);
 		}
 		
 		public void DeleteMediaSet(IMediaSet model)
 		{
-			//mediaSetDataMap.DeleteModel(model, false);
+			IList<IMediaSet> models = new List<IMediaSet>() { model };
+			repo.Delete<IMediaSet>(mediaSetWithAllChildren, models);
 		}
 		
 		public void SaveMediaItem(IMediaItem model)
 		{
-			//mediaItemDataMap.SaveModel(model);
+			IList<IMediaItem> models = new List<IMediaItem>() { model };
+			repo.Save<IMediaItem>(mediaItemSingleton, models);
 		}
 		
 		public void DeleteMediaItem(IMediaItem model)
 		{
-			//mediaItemDataMap.DeleteModel(model);
+			IList<IMediaItem> models = new List<IMediaItem>() { model };
+			repo.Delete<IMediaItem>(mediaItemSingleton, models);
 		}
 	}
 }
