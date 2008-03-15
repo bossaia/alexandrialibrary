@@ -1194,14 +1194,6 @@
       <Project>{45EADD97-2719-4805-86BE-D95719932895}</Project>
       <Name>Alexandria.MusicDns</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Persistence.SQLite\Alexandria.Persistence.SQLite.csproj">
-      <Project>{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}</Project>
-      <Name>Alexandria.Persistence.SQLite</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
-      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
-      <Name>Alexandria.Persistence</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Extensions.Playlist\Alexandria.Extensions.Playlist.csproj">
       <Project>{5373D021-353C-47FE-9BB0-7F6E22F06594}</Project>
       <Name>Alexandria.Playlist</Name>

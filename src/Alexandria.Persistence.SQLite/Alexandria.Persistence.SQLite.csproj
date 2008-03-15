@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{90E2FD21-9E67-40C2-A375-6F9918F7FCD2}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,12 +46,6 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLiteEngine.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
-      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
-      <Name>Alexandria.Persistence</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Alexandria.Persistence.SQLite.bmp" />
