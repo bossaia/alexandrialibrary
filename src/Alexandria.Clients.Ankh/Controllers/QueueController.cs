@@ -822,9 +822,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public void Filter(string value)
 		{
 			bindingList.Clear();
-			IList<IMediaItem> items = persistenceController.ListMediaItems(value);
-			foreach (IMediaItem item in items)
-				bindingList.Add(item);
+			ICollection<IMediaItem> items = persistenceController.ListMediaItems(value);
+			
+			using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+			{
+				iter.Reset();
+				while (iter.MoveNext())			
+					bindingList.Add(iter.Current);
+			}
 		}
 				
 		public void SaveRow(int index)
@@ -858,9 +863,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public void LoadDefaultCatalog()
 		{
 			bindingList.Clear();
-			IList<IMediaItem> items = persistenceController.ListAllMediaItems();
-			foreach(IMediaItem item in items)
-				bindingList.Add(item);
+			ICollection<IMediaItem> items = persistenceController.ListAllMediaItems();
+			
+			using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+			{
+				iter.Reset();
+				while (iter.MoveNext())
+					bindingList.Add(iter.Current);
+			}
 		}
 		
 		public void WireSelectedTrackChanged(EventHandler<QueueEventArgs> handler)

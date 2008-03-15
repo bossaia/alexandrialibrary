@@ -1623,7 +1623,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					foreach(IMediaItem item in items)
 						playlist.Items.Add(item);
 						
-					persistenceController.SaveMediaSet(playlist, false);
+					persistenceController.SaveMediaSet(playlist);
 				}
 			}
 			

@@ -84,13 +84,21 @@ namespace Telesophy.Alexandria.Model
 		public string Source
 		{
 			get { return source; }
-			set { source = value; }
+			set
+			{
+				source = value;
+				if (source == null) source = string.Empty;
+			}
 		}
 
 		public string Type
 		{
 			get { return type; }
-			set { type = value; }
+			set
+			{
+				type = value;
+				if (type == null) type = string.Empty;
+			}
 		}
 
 		public int Number
@@ -102,19 +110,31 @@ namespace Telesophy.Alexandria.Model
 		public string Title
 		{
 			get { return title; }
-			set { title = value; }
+			set
+			{
+				title = value;
+				if (title == null) title = string.Empty;
+			}
 		}
 
 		public string Artist
 		{
 			get { return artist; }
-			set { artist = value; }
+			set
+			{
+				artist = value;
+				if (artist == null) artist = string.Empty;
+			}
 		}
 
 		public string Album
 		{
 			get { return album; }
-			set { album = value; }
+			set
+			{
+				album = value;
+				if (album == null) album = string.Empty;
+			}
 		}
 
 		public TimeSpan Duration
@@ -132,7 +152,11 @@ namespace Telesophy.Alexandria.Model
 		public string Format
 		{
 			get { return format; }
-			set { format = value; }
+			set
+			{
+				format = value;
+				if (format == null) format = string.Empty;
+			}
 		}
 
 		public Uri Path
