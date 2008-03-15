@@ -45,5 +45,12 @@ namespace Telesophy.Babel.Persistence
 	
 		#region IOperator Members
 		#endregion
+		
+		#region Overrides
+		public override string ToString()
+		{
+			return Name;
+		}
+		#endregion
 	}
 }

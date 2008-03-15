@@ -63,6 +63,10 @@ namespace Telesophy.Alexandria.Model.Data
 			Fields.Add(date);
 			Fields.Add(format);
 			Fields.Add(path);
+			
+			DefaultSortOrder.Add(artist, true);
+			DefaultSortOrder.Add(album, true);
+			DefaultSortOrder.Add(number, true);
 		}
 		#endregion
 		

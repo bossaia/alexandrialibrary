@@ -88,6 +88,7 @@ namespace Telesophy.Babel.Persistence
 
 			IList<ParameterType> parameters;
 			sql.Append(GetWhereClause(query, out parameters));
+			sql.Append(GetOrderByClause(entity));
 
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
@@ -98,7 +99,7 @@ namespace Telesophy.Babel.Persistence
 
 			sql.Append(map.Leaf.GetFieldList(map));
 			
-			sql.AppendFormat(" FROM {0}" + map.Leaf.Name);
+			sql.AppendFormat(" FROM {0}", map.Root.Name);
 			
 			const string JOIN_FORMAT = " {0} JOIN {1} ON {2}.{3} = {1}.{4}";
 			
@@ -115,6 +116,7 @@ namespace Telesophy.Babel.Persistence
 			
 			IList<ParameterType> parameters;
 			sql.Append(GetWhereClause(query, out parameters));
+			sql.Append(GetOrderByClause(map.Leaf));
 			
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
@@ -210,6 +212,36 @@ namespace Telesophy.Babel.Persistence
 					
 					parameters.Add(GetParameter(name, value));
 				}
+				
+				return clause.ToString();
+			}
+			
+			return string.Empty;
+		}
+		
+		private string GetSortDirection(bool isAscending)
+		{
+			return (isAscending) ? "ASC" : "DESC";
+		}
+		
+		protected virtual string GetOrderByClause(Entity entity)
+		{
+			if (entity != null && entity.DefaultSortOrder != null && entity.DefaultSortOrder.Count > 0)
+			{
+				StringBuilder clause = new StringBuilder(" ORDER BY");
+				
+				const string COMMA = ",";
+				int i = 0;
+				foreach (KeyValuePair<Field, bool> pair in entity.DefaultSortOrder)
+				{
+					i++;
+					if (i > 1)
+						clause.Append(COMMA);
+					
+					clause.AppendFormat(" {0}.{1} {2}", entity.Name, pair.Key.Name, GetSortDirection(pair.Value));
+				}
+				
+				return clause.ToString();
 			}
 			
 			return string.Empty;
@@ -271,12 +303,10 @@ namespace Telesophy.Babel.Persistence
 					TransactionType transaction = default(TransactionType);
 				
 					try
-					{
-						transaction = GetTransaction(connection);
-						
+					{						
 						DataSet dataSet = new DataSet(aggregate.Name);
 						
-						DataTable rootTable = aggregate.Root.GetDataTable(aggregate.Name);
+						DataTable rootTable = aggregate.Root.GetDataTable(aggregate.Root.Name);
 						
 						dataSet.Tables.Add(rootTable);
 						CommandType rootSelect = GetSelectCommand(connection, transaction, aggregate.Root, query);
@@ -303,8 +333,6 @@ namespace Telesophy.Babel.Persistence
 								map.Leaf.AddDataRow(table, entityReader, DataConverter, map);
 							}							
 						}
-						
-						transaction.Commit();
 						
 						list = aggregate.List(dataSet);
 					}
