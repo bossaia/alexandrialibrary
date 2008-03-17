@@ -42,11 +42,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				this.column = column;
 				this.columnType = columnType;
 				this.@operator = @operator;
-				this.value = null;
-				this.delimitedValue = null;
 				
-				this.value = GetValue(value);
-				this.delimitedValue = GetDelimitedValue(this.value);
+				this.value = value;
+				this.formattedValue = null;
+				
+				this.formattedValue = GetFormattedValue(value);
 			}
 			else
 			{
@@ -55,7 +55,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				this.columnType = null;
 				this.@operator = @operator;
 				this.value = null;
-				this.delimitedValue = null;
+				this.formattedValue = null;
 			}
 		}
 		
@@ -70,11 +70,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private Type columnType;
 		private string @operator;
 		private string value;
-		private string delimitedValue;
+		private string formattedValue;
 		#endregion
 		
 		#region Private Methods
-		private string GetValue(string value)
+		private string GetFormattedValue(string value)
 		{
 			if (!string.IsNullOrEmpty(column) && columnType != null)
 			{
@@ -84,50 +84,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					{
 						DateTime result;
 						if (DateTime.TryParse(value, out result))
-							return result.ToShortDateString();
-						else return DateTime.MinValue.ToShortDateString();
+							return result.ToString("s");
+						else return DateTime.MinValue.ToString("s");
 					}
 					case "TimeSpan":
 					{
 						TimeSpan result;
-						if (TimeSpan.TryParse(value, out result))
-							return result.ToString();
-						else return TimeSpan.Zero.ToString();
-					}
-					default:
-						return value;
-				}
-			}
-			else return value;
-		}
-		
-		private string GetDelimitedValue(string value)
-		{
-			if (!string.IsNullOrEmpty(column) && columnType != null)
-			{
-				switch (columnType.Name)
-				{
-					case "String":
-						if (Operator.ToUpper() == "LIKE")
-							return string.Format("'%{0}%'", value);
-						else return string.Format("'{0}'", value);
-					case "DateTime":
-					{
-						DateTime result = DateTime.MinValue;
-						if (DateTime.TryParse(value, out result))
-						{
-							return result.ToFileTimeUtc().ToString();
-						}
-						else return DateTime.MinValue.ToFileTimeUtc().ToString();
-					}
-					case "TimeSpan":
-					{
-						TimeSpan result = TimeSpan.Zero;
-						if (TimeSpan.TryParse(value, out result))
-						{
-							return result.Ticks.ToString();
-						}
-						else return TimeSpan.MinValue.Ticks.ToString();
+						if (!TimeSpan.TryParse(value, out result))
+							result = TimeSpan.Zero;
+						
+						return string.Format("{0:D2}:{1:D2}:{2:D2}:{3:D3}", result.Hours, result.Minutes, result.Seconds, result.Milliseconds);						
 					}
 					default:
 						return value;
@@ -163,9 +129,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			get { return value; }
 		}
 		
-		public string DelimitedValue
+		public string FormattedValue
 		{
-			get { return delimitedValue; }
+		    get { return formattedValue; }
 		}
 		#endregion
 		
@@ -194,17 +160,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				case "<=":
 					newOperator = ">";
 					break;
-				case "Is":
-					newOperator = "Not";
+				case "IS":
+					newOperator = "NOT";
 					break;
-				case "Not":
-					newOperator = "Is";
+				case "NOT":
+					newOperator = "IS";
 					break;
-				case "Or":
-					newOperator = "And";
+				case "OR":
+					newOperator = "AND";
 					break;
-				case "And":
-					newOperator = "Or";
+				case "AND":
+					newOperator = "OR";
 					break;
 				default:
 					break;
@@ -224,7 +190,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			if (IsStandAloneOperator)
 				return Operator;
-			else return string.Format("{0} {1} {2}", Column, Operator, DelimitedValue);
+			else return string.Format("{0} {1} {2}", Column, Operator, FormattedValue);
 		}
 		#endregion
 	}

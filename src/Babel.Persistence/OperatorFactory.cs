@@ -38,15 +38,36 @@ namespace Telesophy.Babel.Persistence
 		{
 			operators.Add(like);
 			operators.Add(equalTo);
+			operators.Add(notEqualTo);
+			operators.Add(greaterThan);
+			operators.Add(greaterThanOrEqualTo);
+			operators.Add(lessThan);
+			operators.Add(lessThanOrEqualTo);
+			operators.Add(and);
+			operators.Add(or);			
 		}
 		
 		private static NamedItemCollection<IOperator> operators = new NamedItemCollection<IOperator>();
 	
 		private static LikeOperator like = new LikeOperator();
 		private static EqualToOperator equalTo = new EqualToOperator();
+		private static NotEqualToOperator notEqualTo = new NotEqualToOperator();
+		private static GreaterThanOperator greaterThan = new GreaterThanOperator();
+		private static GreaterThanOrEqualToOperator greaterThanOrEqualTo = new GreaterThanOrEqualToOperator();
+		private static LessThanOperator lessThan = new LessThanOperator();
+		private static LessThanOrEqualToOperator lessThanOrEqualTo = new LessThanOrEqualToOperator();
+		private static AndOperator and = new AndOperator();
+		private static OrOperator or = new OrOperator();
 		
 		public static LikeOperator Like { get { return like; } }
 		public static EqualToOperator EqualTo { get {return equalTo; } }
+		public static NotEqualToOperator NotEqualTo { get { return notEqualTo; } }
+		public static GreaterThanOperator GreaterThan { get { return greaterThan; } }
+		public static GreaterThanOrEqualToOperator GreaterThanOrEqualTo { get { return greaterThanOrEqualTo; } }
+		public static LessThanOperator LessThan { get { return lessThan; } }
+		public static LessThanOrEqualToOperator LessThanOrEqualTo { get { return lessThanOrEqualTo; } }
+		public static AndOperator And { get { return and; } }
+		public static OrOperator Or { get { return or; } }
 		
 		public static IOperator GetOperator(string name)
 		{

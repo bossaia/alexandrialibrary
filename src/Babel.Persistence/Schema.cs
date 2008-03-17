@@ -111,6 +111,31 @@ namespace Telesophy.Babel.Persistence
 		{
 			return new Expression(GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
 		}
+
+		public IExpression GetAndFilter<T>(string fieldName, string operatorName, string value)
+		{
+			return new Expression(OperatorFactory.GetOperator(Schema.FILTER_OP_AND), GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
+		}
+		
+		public IExpression GetOrFilter<T>(string fieldName, string operatorName, string value)
+		{
+			return new Expression(OperatorFactory.GetOperator(Schema.FILTER_OP_OR), GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
+		}
+		#endregion
+
+		#region Public Constants
+		public const string FILTER_OP_AND = "AND";
+		public const string FILTER_OP_OR = "OR";
+		public const string FILTER_OP_NOT = "NOT";
+		public const string FILTER_OP_LI = "~";
+		public const string FILTER_OP_LIKE = "LIKE";
+		public const string FILTER_OP_NE = "<>";
+		public const string FILTER_OP_GE = ">=";
+		public const string FILTER_OP_GT = ">";
+		public const string FILTER_OP_LE = "<=";
+		public const string FILTER_OP_LT = "<";
+		public const string FILTER_OP_EQ = "=";
+		public static readonly string[] FILTER_OPERATORS = { FILTER_OP_LI, FILTER_OP_LIKE, FILTER_OP_NE, FILTER_OP_GE, FILTER_OP_GT, FILTER_OP_LE, FILTER_OP_LT, FILTER_OP_EQ };
 		#endregion
 	}
 }

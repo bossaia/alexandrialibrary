@@ -60,22 +60,24 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Aggregate<IMediaItem> mediaItemSingleton;
 		private Aggregate<IMediaSet> mediaSetWithAllChildren;
 		
+		public ISchema Schema
+		{
+			get { return schema; }
+		}
+		
 		public void Initialize()
 		{
 			repo.Initialize();
 		}
-				
+		
 		public ICollection<IMediaItem> ListAllMediaItems()
 		{
 			return repo.List<IMediaItem>(mediaItemSingleton, null);
 		}
 		
-		public ICollection<IMediaItem> ListMediaItems(string filter)
-		{
-			//TODO: turn the filter string into a query
-			Query query = new Query("Search MediaItem: " + filter);
-			
-			return repo.List<IMediaItem>(mediaItemSingleton, null);
+		public ICollection<IMediaItem> ListMediaItems(Query query)
+		{			
+			return repo.List<IMediaItem>(mediaItemSingleton, query);
 		}
 		
 		public IMediaSet LookupMediaSet(Guid id)
