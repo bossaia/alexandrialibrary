@@ -42,6 +42,7 @@ using Telesophy.Alexandria.Clients.Ankh.Properties;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Extensions.CompactDisc;
+using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
@@ -96,20 +97,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
 		private const int MAX_SORT_COLUMNS = 5;
 		private const string DEFAULT_COLUMN_FILTER = "Any";
-		
-		private const string FILTER_OP_AND = "And";
-		private const string FILTER_OP_OR = "Or";
-		private const string FILTER_OP_NOT = "Not";
-		private const string FILTER_OP_LI = "~";
-		private const string FILTER_OP_LIKE = "Like";
-		private const string FILTER_OP_NE = "<>";
-		private const string FILTER_OP_GE = ">=";
-		private const string FILTER_OP_GT = ">";
-		private const string FILTER_OP_LE = "<=";
-		private const string FILTER_OP_LT = "<";
-		private const string FILTER_OP_EQ = "=";
-		private readonly string[] FILTER_OPERATORS = new string[]{FILTER_OP_LI, FILTER_OP_LIKE, FILTER_OP_NE, FILTER_OP_GE, FILTER_OP_GT, FILTER_OP_LE, FILTER_OP_LT, FILTER_OP_EQ};
-		
+				
 		private const string OP_TEXT_ADD = "Add Operator";
 		private const string OP_TEXT_EDIT = "Edit Operator";
 		#endregion
@@ -132,12 +120,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
-		//private bool seekIsPending;
-		
-		//private ListViewItem selectedItem;
-		//private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
-		//private string dbPath;
-		private readonly string dbDir = System.IO.Path.Combine(System.Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Alexandria" + System.IO.Path.DirectorySeparatorChar);
 		private bool filterInProgress = false;
 		#endregion
 
@@ -1114,7 +1096,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					
 					if (filterListView.Items.Count > 0)
 					{
-						StringBuilder filter = new StringBuilder();
+						Query query = new Query("MediaItem Search");
+						
+						//StringBuilder filter = new StringBuilder();
 
 						bool negateNextFilter = false;
 						bool andNextFilter = false;
@@ -1129,13 +1113,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 								{
 									switch (filterListView.Items[i].Text)
 									{
-										case FILTER_OP_NOT:
+										case Schema.FILTER_OP_NOT:
 											negateNextFilter = true;
 											break;
-										case FILTER_OP_AND:
+										case Schema.FILTER_OP_AND:
 											andNextFilter = true;
 											break;
-										case FILTER_OP_OR:
+										case Schema.FILTER_OP_OR:
 											orNextFilter = true;
 											break;
 										default:
@@ -1145,24 +1129,34 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 								else
 								{
 									if (filterInfo.Column != DEFAULT_COLUMN_FILTER)
-									{
+									{									
 										if (negateNextFilter)
 										{
 											filterInfo = filterInfo.Negate();
 											negateNextFilter = false;
 										}
+
+										IExpression filter = null;
+										
 										if (orNextFilter)
 										{
-											filter.AppendFormat(" {0} ", FILTER_OP_OR);
+											filter = persistenceController.Schema.GetOrFilter<IMediaItem>(filterInfo.Column, filterInfo.Operator, filterInfo.FormattedValue);
+											//filter.AppendFormat(" {0} ", FILTER_OP_OR);
 											orNextFilter = false;
 										}
-										if (andNextFilter)
+										else if (andNextFilter)
 										{
-											filter.AppendFormat(" {0} ", FILTER_OP_AND);
+											filter = persistenceController.Schema.GetAndFilter<IMediaItem>(filterInfo.Column, filterInfo.Operator, filterInfo.FormattedValue);
+											//filter.AppendFormat(" {0} ", FILTER_OP_AND);
 											andNextFilter = false;
 										}
+										else
+										{
+											filter = persistenceController.Schema.GetFilter<IMediaItem>(filterInfo.Column, filterInfo.Operator, filterInfo.FormattedValue);
+										}
 
-										filter.Append(filterInfo.ToString());
+										//filter.Append(filterInfo.ToString());
+										query.Filters.Add(filter);
 									}
 									else
 									{
@@ -1172,7 +1166,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 							}
 						}
 
-						queueController.Filter(filter.ToString());
+						queueController.Filter(query);
 					}
 					else
 					{
@@ -1199,17 +1193,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void andFilterButton_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_AND);
+			DoUpdateOperator(Schema.FILTER_OP_AND);
 		}
 
 		private void notFilterButton_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_NOT);
+			DoUpdateOperator(Schema.FILTER_OP_NOT);
 		}
 
 		private void orFilterButton_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_OR);
+			DoUpdateOperator(Schema.FILTER_OP_OR);
 		}
 
 		private void filterContextMenuStrip_Opening(object sender, CancelEventArgs e)
@@ -1285,17 +1279,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void filterOperatorItemAnd_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_AND);
+			DoUpdateOperator(Schema.FILTER_OP_AND);
 		}
 
 		private void filterOperatorItemNot_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_NOT);
+			DoUpdateOperator(Schema.FILTER_OP_NOT);
 		}
 
 		private void filterOperatorItemOr_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_OR);
+			DoUpdateOperator(Schema.FILTER_OP_OR);
 		}
 
 		private void addFilterButton_Click(object sender, EventArgs e)
@@ -1325,14 +1319,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			string op = string.Empty;
 			int opIndex = 0;
 			int opLength = 1;
-			
-			for(int i=0; i<FILTER_OPERATORS.Length; i++)
+
+			for (int i = 0; i < Schema.FILTER_OPERATORS.Length; i++)
 			{
-				if (value.ToUpper().Contains(FILTER_OPERATORS[i].ToUpper()))
+				if (value.ToUpper().Contains(Schema.FILTER_OPERATORS[i].ToUpper()))
 				{
-					op = FILTER_OPERATORS[i];
-					opIndex = value.ToUpper().IndexOf(FILTER_OPERATORS[i].ToUpper());
-					opLength = FILTER_OPERATORS[i].Length;
+					op = Schema.FILTER_OPERATORS[i];
+					opIndex = value.ToUpper().IndexOf(Schema.FILTER_OPERATORS[i].ToUpper());
+					opLength = Schema.FILTER_OPERATORS[i].Length;
 					column = value.Substring(0, opIndex).Trim();
 					value = value.Substring(opIndex + opLength, value.Length - opIndex - opLength).Trim();
 					
@@ -1417,17 +1411,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void andOperatorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_AND);
+			DoUpdateOperator(Schema.FILTER_OP_AND);
 		}
 
 		private void orOperatorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_OR);
+			DoUpdateOperator(Schema.FILTER_OP_OR);
 		}
 
 		private void notOperatorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			DoUpdateOperator(FILTER_OP_NOT);
+			DoUpdateOperator(Schema.FILTER_OP_NOT);
 		}
 
 		private void filterListView_KeyUp(object sender, KeyEventArgs e)

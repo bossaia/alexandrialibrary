@@ -51,6 +51,8 @@ using Telesophy.Alexandria.MusicBrainz;
 using Telesophy.Alexandria.Clients.Ankh.Views;
 using Telesophy.Alexandria.Extensions.CompactDisc;
 using Telesophy.Alexandria.Extensions.Playlist;
+
+using Telesophy.Babel.Persistence;
 #endregion
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
@@ -819,17 +821,23 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				column.HeaderCell.SortGlyphDirection = SortOrder.None;
 		}
 		
-		public void Filter(string value)
+		[CLSCompliant(false)]
+		public void Filter(Query query)
 		{
 			bindingList.Clear();
-			ICollection<IMediaItem> items = persistenceController.ListMediaItems(value);
+			ICollection<IMediaItem> items = persistenceController.ListMediaItems(query);
 			
-			using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+			foreach (IMediaItem item in (IEnumerable<IMediaItem>)items)
 			{
-				iter.Reset();
-				while (iter.MoveNext())			
-					bindingList.Add(iter.Current);
+				bindingList.Add(item);
 			}
+			
+			//using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+			//{
+			//    iter.Reset();
+			//    while (iter.MoveNext())			
+			//        bindingList.Add(iter.Current);
+			//}
 		}
 				
 		public void SaveRow(int index)

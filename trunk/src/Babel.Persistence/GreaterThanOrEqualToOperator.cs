@@ -32,17 +32,10 @@ using System.Text;
 
 namespace Telesophy.Babel.Persistence
 {
-	public interface ISchema : INamedItem
+	public class GreaterThanOrEqualToOperator : OperatorBase
 	{
-		string Namespace { get; }
-		EntityCollection Entities { get; }
-		NamedItemCollection<Aggregate> Aggregates { get; }
-		void Initialize();
-		Entity<T> GetEntity<T>();
-		Aggregate<T> GetAggregate<T>(string name);
-		Field GetField<T>(string name);
-		IExpression GetFilter<T>(string fieldName, string operatorName, string value);
-		IExpression GetAndFilter<T>(string fieldName, string operatorName, string value);
-		IExpression GetOrFilter<T>(string fieldName, string operatorName, string value);
+		public GreaterThanOrEqualToOperator() : base(">=")
+		{
+		}
 	}
 }
