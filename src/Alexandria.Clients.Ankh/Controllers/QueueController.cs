@@ -615,12 +615,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
 				if (IsFormat(path, ControllerConstants.FORMAT_PLAYLIST))
 				{
-					IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
-					playlist.Load();
-					foreach (IPlaylistItem item in playlist.Items)
-						LoadTrackFromPath(item.Path, "Playlist");
-						
-					//TestSort();
+					//TODO: Change this to use the new Alexandria.Extensions.Playlist project
+					//IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
+					//playlist.Load();
+					//foreach (IPlaylistItem item in playlist.Items)
+						//LoadTrackFromPath(item.Path, "Playlist");
 				}
 				else if (IsFormat(path, ControllerConstants.FORMAT_AUDIO))
 				{

@@ -39,15 +39,15 @@ namespace Telesophy.Alexandria.Extensions.Playlist
 		#endregion
 		
 		#region Public Methods
-		public IPlaylist CreatePlaylist(Uri path)
-		{
-			string fileName = path.ToString();
-			if (fileName.EndsWith(".m3u", StringComparison.InvariantCultureIgnoreCase))
-				return new M3uPlaylist(path);
-			else if (fileName.EndsWith(".xspf", StringComparison.InvariantCultureIgnoreCase))
-				return new OldXspPlaylist(path);
-			else return null;
-		}
+		//public IPlaylist CreatePlaylist(Uri path)
+		//{
+		//    string fileName = path.ToString();
+		//    if (fileName.EndsWith(".m3u", StringComparison.InvariantCultureIgnoreCase))
+		//        return new M3uPlaylist(path);
+		//    else if (fileName.EndsWith(".xspf", StringComparison.InvariantCultureIgnoreCase))
+		//        return new OldXspPlaylist(path);
+		//    else return null;
+		//}
 		#endregion
 	}
 }

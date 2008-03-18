@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -29,14 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Playlist
+namespace Telesophy.Alexandria.Model
 {
-	public enum PlaylistFormat
+	public interface IPlaylist : IMediaSet
 	{
-		None,		
-		M3u,
-		Pls,
-		Wax,
-		Xspf		
 	}
 }

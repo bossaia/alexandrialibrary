@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -27,13 +27,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
-namespace Telesophy.Alexandria.Extensions.Playlist
+namespace Telesophy.Alexandria.Model.Data
 {
-	public interface IPlaylistItem
+	public class MediaSetFactory
 	{
-		Uri Path { get;  }
-		TimeSpan Duration { get; }
-		string Name { get; }
 	}
 }

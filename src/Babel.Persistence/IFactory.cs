@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -27,18 +27,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Mime;
+using System.Data;
+using System.Linq;
+using System.Text;
 
-namespace Telesophy.Alexandria.Extensions.Playlist
+namespace Telesophy.Babel.Persistence
 {
-	public class XspfFormat //: BaseMediaFormat
+	public interface IFactory<T>
 	{
-		#region Constructors
-		public XspfFormat() //: base("XML Shareable Playlist Format", "")
-		{
-			//this.ContentTypes.Add(new ContentType("application/xspf+xml"));
-			//this.FileExtensions.Add("xspf");
-		}
-		#endregion		
+		T GetModel(DataRow row);
 	}
 }
