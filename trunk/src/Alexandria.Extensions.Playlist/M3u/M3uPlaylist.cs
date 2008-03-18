@@ -1,6 +1,6 @@
 #region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -29,19 +29,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+using Telesophy.Alexandria.Model;
+
 namespace Telesophy.Alexandria.Extensions.Playlist
 {
-	public class M3uPlaylist : BasePlaylist
+	public class M3uPlaylist : Telesophy.Alexandria.Model.Playlist
 	{
 		#region Constructors
-		public M3uPlaylist(Uri path) : base(path) //, new M3uFormat())
+		public M3uPlaylist(Uri path) : base()
 		{
 
 		}
 		#endregion
 
 		#region Public Methods
-		public override void Load()
+		public void Load()
 		{
 			FileInfo playlistInfo = new FileInfo(Path.LocalPath);
 			StreamReader reader = playlistInfo.OpenText();
@@ -50,8 +52,8 @@ namespace Telesophy.Alexandria.Extensions.Playlist
 				string fileName = reader.ReadLine();
 				if (!string.IsNullOrEmpty(fileName))
 				{
-					IPlaylistItem item = new PlaylistItem(new Uri(fileName));
-					Items.Add(item);
+					//IPlaylistItem item = new PlaylistItem(new Uri(fileName));
+					//Items.Add(item);
 				}
 			}
 		}

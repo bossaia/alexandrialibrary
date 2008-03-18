@@ -1,6 +1,6 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
- *  Copyright (C) 2007 Dan Poage
+ *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
 
 /*  THIS FILE IS LICENSED UNDER THE MIT LICENSE AS OUTLINED IMMEDIATELY BELOW: 
@@ -29,77 +29,105 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Telesophy.Alexandria.Extensions.Playlist
+namespace Telesophy.Alexandria.Model
 {
-	public class BasePlaylist : IPlaylist
+	public class Playlist : IMediaSet
 	{
 		#region Constructors
-		protected BasePlaylist(Uri path) //, IMediaFormat format)
+		public Playlist()
 		{
+		}
+		
+		public Playlist(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
+		{
+			this.id = id;
+			this.source = source;
+			this.number = number;
+			this.title = title;
+			this.artist = artist;
+			this.date = date;
+			this.format = format;
 			this.path = path;
-			//this.format = format;
+			
+			if (items != null)
+			{
+				foreach(IMediaItem item in items)
+					this.items.Add(item);
+			}
 		}
-
-		//protected BasePlaylist(Uri path, IMediaFormat format, string name, Version version)
-		//    : this(path, format)
-		//{
-		//    this.name = name;
-		//    this.version = version;
-		//}
 		#endregion
-
+		
 		#region Private Fields
+		private Guid id;
+		private string source;
+		private string type = Constants.MEDIA_TYPE_PLAYLIST;
+		private int number;
+		private string title;
+		private string artist;
+		private DateTime date;
+		private string format;
 		private Uri path;
-		//private IMediaFormat format;
-		private string name;
-		private Version version;
-		private IList<IPlaylistItem> items = new List<IPlaylistItem>();
-		private Guid id = Guid.NewGuid();
+		private List<IMediaItem> items = new List<IMediaItem>();
 		#endregion
-
-		#region Public Properties
-		public string Name
-		{
-			get { return name; }
-			protected set { name = value; }
-		}
-
-		public Version Version
-		{
-			get { return version; }
-			protected set { version = value; }
-		}
-		#endregion
-
-		#region IMedia Members
+	
+		#region IMediaSet Members
 		public Guid Id
 		{
 			get { return id; }
+			set { id = value; }
+		}
+
+		public string Source
+		{
+			get { return source; }
+			set { source = value; }
+		}
+
+		public string Type
+		{
+			get { return type; }
+			set { }
+		}
+
+		public int Number
+		{
+			get { return number; }
+			set { number = value; }
+		}
+
+		public string Title
+		{
+			get { return title; }
+			set { title = value; }
+		}
+
+		public string Artist
+		{
+			get { return artist; }
+			set { artist = value; }
+		}
+
+		public DateTime Date
+		{
+			get { return date; }
+			set { date = value; }
+		}
+
+		public string Format
+		{
+			get { return format; }
+			set { format = value; }
 		}
 
 		public Uri Path
 		{
 			get { return path; }
+			set { path = value; }
 		}
 
-		//public IMediaFormat Format
-		//{
-			//get { return format; }
-		//}
-		#endregion
-
-		#region IPlaylist Members
-		public IList<IPlaylistItem> Items
+		public IList<IMediaItem> Items
 		{
 			get { return items; }
-		}
-
-		public virtual void Load()
-		{
-		}
-
-		public virtual void Save()
-		{
 		}
 		#endregion
 	}

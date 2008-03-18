@@ -59,6 +59,7 @@
     <Compile Include="IDataConverter.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="IExpression.cs" />
+    <Compile Include="IFactory.cs" />
     <Compile Include="INamedItem.cs" />
     <Compile Include="IOperator.cs" />
     <Compile Include="IQuery.cs" />

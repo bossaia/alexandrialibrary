@@ -50,6 +50,7 @@
     <Compile Include="MediaItemEntity.cs" />
     <Compile Include="MediaItemSingleton.cs" />
     <Compile Include="MediaSetEntity.cs" />
+    <Compile Include="MediaSetFactory.cs" />
     <Compile Include="MediaSetWithAllChildren.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
