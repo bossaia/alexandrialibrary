@@ -124,10 +124,10 @@ namespace Telesophy.Alexandria.Model.Data
 					
 					switch (type)
 					{
-						case Constants.MEDIA_TYPE_AUDIO:
+						case ModelConstants.MEDIA_TYPE_AUDIO:
 							model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 							break;
-						case Constants.MEDIA_TYPE_VIDEO:
+						case ModelConstants.MEDIA_TYPE_VIDEO:
 							model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
 							break;
 						default:

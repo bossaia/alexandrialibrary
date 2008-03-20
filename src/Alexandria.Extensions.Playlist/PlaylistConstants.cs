@@ -33,9 +33,13 @@ namespace Telesophy.Alexandria.Extensions.Playlist
 {
 	public static class PlaylistConstants
 	{
-		public const string PLAYLIST_FORMAT_M3U = "M3u";
-		public const string PLAYLIST_FORMAT_PLS = "Pls";
-		public const string PLAYLIST_FORMAT_WAX = "Wax";
-		public const string PLAYLIST_FORMAT_XSPF = "Xspf";
+		public const string PLAYLIST_FORMAT_M3U = "audio/x-mpegurl";
+		public const string PLAYLIST_EXT_M3U = "m3u";
+		public const string PLAYLIST_FORMAT_PLS = "audio/x-scpls";
+		public const string PLAYLIST_EXT_PLS = "pls";
+		public const string PLAYLIST_FORMAT_WAX = "audio/x-ms-wax";
+		public const string PLAYLIST_EXT_WAX = "wax";
+		public const string PLAYLIST_FORMAT_XSPF = "application/xspf+xml";
+		public const string PLAYLIST_EXT_XSPF = "xspf";
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Alexandria.Playlist.Xspf
+namespace Alexandria.Extensions.Playlist.Xspf
 {
 	/// <summary>
 	/// Extends XSPF playlist and track instances with supplemental content

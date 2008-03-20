@@ -1,4 +1,4 @@
-#region License (MIT)
+﻿#region License (MIT)
 /***************************************************************************
  *  Copyright (C) 2008 Dan Poage
  ****************************************************************************/
@@ -29,15 +29,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Telesophy.Alexandria.Model
+namespace Telesophy.Alexandria.Extensions.Playlist.Pls
 {
-	public static class Constants
+	public class PlsPlaylistFactory
 	{
-		public const string MEDIA_TYPE_AUDIO = "Audio";
-		public const string MEDIA_TYPE_VIDEO = "Video";
-		public const string MEDIA_TYPE_IMAGE = "Image";
-		public const string MEDIA_TYPE_PLAYLIST = "Playlist";
-		public const string ARTIST_TYPE_PERSON = "Person";
-		public const string ARTIST_TYPE_GROUP = "Group";
 	}
 }

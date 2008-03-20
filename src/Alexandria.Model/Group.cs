@@ -49,7 +49,7 @@ namespace Telesophy.Alexandria.Model
 
 		#region Private Fields
 		private Guid id;
-		private string type = Constants.ARTIST_TYPE_GROUP;
+		private string type = ModelConstants.ARTIST_TYPE_GROUP;
 		private string name;
 		private DateTime beginDate;
 		private DateTime endDate;

@@ -56,7 +56,7 @@ namespace Telesophy.Alexandria.Model
 		private Guid id;
 		private string status = string.Empty;
 		private string source;
-		private string type = Constants.MEDIA_TYPE_VIDEO;
+		private string type = ModelConstants.MEDIA_TYPE_VIDEO;
 		private int number;
 		private string title;
 		private string artist;

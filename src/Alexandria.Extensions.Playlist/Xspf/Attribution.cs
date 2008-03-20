@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Alexandria.Playlist.Xspf
+namespace Alexandria.Extensions.Playlist.Xspf
 {
 	/// <summary>
 	/// Represents and attribution to a previous playlist that this playlist is derived from

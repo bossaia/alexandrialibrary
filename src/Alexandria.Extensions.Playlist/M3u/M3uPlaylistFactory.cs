@@ -27,64 +27,61 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
-namespace Telesophy.Alexandria.Model
+using Telesophy.Alexandria.Model;
+
+namespace Telesophy.Alexandria.Extensions.Playlist.M3u
 {
-	public class Person : IArtist
+	public class M3uPlaylistFactory
 	{
-		#region Constructors
-		public Person()
+		public IMediaSet LoadPlaylistFile(Uri path)
 		{
+			IMediaSet playlist = null;
+		
+			if (path != null && File.Exists(path.LocalPath))
+			{
+			    FileInfo file = new FileInfo(path.LocalPath);
+			    if (file.Extension.Equals(PlaylistConstants.PLAYLIST_EXT_M3U, StringComparison.OrdinalIgnoreCase))
+			    {
+					Guid id = Guid.NewGuid();
+					string source = ModelConstants.SOURCE_FILE;
+					int number = 0;
+					string title = file.Name;
+					string artist = ModelConstants.UNKNOWN_ARTIST;
+					DateTime date = DateTime.MinValue;
+					string format = PlaylistConstants.PLAYLIST_FORMAT_M3U;
+					
+					playlist = new Telesophy.Alexandria.Model.Playlist(id, source, number, title, artist, date, format, path, null);
+			    
+					UriBuilder uriBuilder = new UriBuilder();
+			    
+					StreamReader reader = file.OpenText();
+					while (!reader.EndOfStream)
+					{
+						string trackName = reader.ReadLine();
+						if (!string.IsNullOrEmpty(trackName))
+						{
+							
+							Guid trackId = Guid.NewGuid();
+							
+							IMediaItem track = null;
+							//IPlaylistItem item = new PlaylistItem(new Uri(fileName));
+							//Items.Add(item);
+							
+							playlist.Items.Add(track);
+						}
+					}
+				}
+			}
+			
+			return playlist;
 		}
 		
-		public Person(Guid id, string name, DateTime beginDate, DateTime endDate)
+		public void SavePlaylist(IMediaSet playlist)
 		{
-			this.id = id;
-			this.name = name;
-			this.beginDate = beginDate;
-			this.endDate = endDate;
-		}
-		#endregion
 		
-		#region Private Fields
-		private Guid id;
-		private string type = ModelConstants.ARTIST_TYPE_PERSON;
-		private string name;
-		private DateTime beginDate;
-		private DateTime endDate;
-		#endregion
-
-		#region IArtist Members
-		public Guid Id
-		{
-			get { return id; }
-			set { id = value; }
 		}
-
-		public string Type
-		{
-			get { return type; }
-			set { }
-		}
-
-		public string Name
-		{
-			get { return name; }
-			set { name = value; }
-		}
-
-		public DateTime BeginDate
-		{
-			get { return beginDate; }
-			set { beginDate = value; }
-		}
-
-		public DateTime EndDate
-		{
-			get { return endDate; }
-			set { endDate = value; }
-		}
-		#endregion
 	}
 }

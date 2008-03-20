@@ -60,7 +60,7 @@ namespace Telesophy.Alexandria.Model
 		#region Private Fields
 		private Guid id;
 		private string source;
-		private string type = Constants.MEDIA_TYPE_PLAYLIST;
+		private string type = ModelConstants.MEDIA_TYPE_PLAYLIST;
 		private int number;
 		private string title;
 		private string artist;

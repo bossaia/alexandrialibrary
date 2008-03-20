@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alexandria.Playlist.Xspf
+namespace Alexandria.Extensions.Playlist.Xspf
 {
 	public interface IAttributable
 	{

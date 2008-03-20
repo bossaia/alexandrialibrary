@@ -86,10 +86,10 @@ namespace Telesophy.Alexandria.Model.Data
 					
 					switch (type)
 					{
-						case Constants.ARTIST_TYPE_PERSON:
+						case ModelConstants.ARTIST_TYPE_PERSON:
 							model = new Person(id, name, beginDate, endDate);
 							break;
-						case Constants.ARTIST_TYPE_GROUP:
+						case ModelConstants.ARTIST_TYPE_GROUP:
 							model = new Group(id, name, beginDate, endDate);
 							break;
 						default:

@@ -54,6 +54,12 @@
     <Compile Include="Views\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\PlaylistSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\PlaylistSave.Designer.cs">
+      <DependentUpon>PlaylistSave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\UpdateFilter.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,6 +146,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Clients.Ankh.ico" />
+    <EmbeddedResource Include="Views\PlaylistSave.resx">
+      <DependentUpon>PlaylistSave.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\UpdateFilter.resx">
       <SubType>Designer</SubType>
       <DependentUpon>UpdateFilter.cs</DependentUpon>
