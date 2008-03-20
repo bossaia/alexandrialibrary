@@ -27,36 +27,28 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Text;
 
-using Telesophy.Alexandria.Model;
-
-namespace Telesophy.Alexandria.Extensions.Playlist
+namespace Telesophy.Alexandria.Model
 {
-	public class M3uPlaylist : Telesophy.Alexandria.Model.Playlist
+	public static class ModelConstants
 	{
-		#region Constructors
-		public M3uPlaylist(Uri path) : base()
-		{
-
-		}
-		#endregion
-
-		#region Public Methods
-		public void Load()
-		{
-			FileInfo playlistInfo = new FileInfo(Path.LocalPath);
-			StreamReader reader = playlistInfo.OpenText();
-			while (!reader.EndOfStream)
-			{
-				string fileName = reader.ReadLine();
-				if (!string.IsNullOrEmpty(fileName))
-				{
-					//IPlaylistItem item = new PlaylistItem(new Uri(fileName));
-					//Items.Add(item);
-				}
-			}
-		}
-		#endregion
+		// Media Type Constants
+		public const string MEDIA_TYPE_AUDIO = "Audio";
+		public const string MEDIA_TYPE_VIDEO = "Video";
+		public const string MEDIA_TYPE_IMAGE = "Image";
+		public const string MEDIA_TYPE_PLAYLIST = "Playlist";
+		
+		// Artist Type Constants
+		public const string ARTIST_TYPE_PERSON = "Person";
+		public const string ARTIST_TYPE_GROUP = "Group";
+		
+		// Source Constants
+		public const string SOURCE_CATALOG = "Catalog";
+		public const string SOURCE_FILE = "File";
+		public const string SOURCE_WEB = "Web";
+		
+		// Unknown Constants
+		public const string UNKNOWN_ARTIST = "Unknown Artist";
 	}
 }
