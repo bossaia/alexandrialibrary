@@ -43,7 +43,7 @@
     <Compile Include="IGroup.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="Movie.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="ModelConstants.cs" />
     <Compile Include="IArtist.cs" />
     <Compile Include="IMediaItem.cs" />
     <Compile Include="IMediaSet.cs" />

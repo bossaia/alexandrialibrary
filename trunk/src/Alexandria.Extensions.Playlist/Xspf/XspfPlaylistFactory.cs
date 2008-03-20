@@ -4,19 +4,19 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace Alexandria.Playlist.Xspf
+namespace Alexandria.Extensions.Playlist.Xspf
 {
 	/// <summary>
 	/// Represents an XML Shareable Playlist Format ("spiff") file
 	/// </summary>
-	public class XspfPlaylist
+	public class XspfPlaylistFactory
 	{
 		#region Constructors
 		/// <summary>
 		/// Instantiate an XspfPlaylist
 		/// </summary>
 		/// <param name="path">The source URI for this playlist</param>
-		public XspfPlaylist(Uri path)
+		public XspfPlaylistFactory(Uri path)
 		{
 			this.path = path;
 		}
