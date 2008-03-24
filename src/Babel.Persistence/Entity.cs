@@ -238,8 +238,25 @@ namespace Telesophy.Babel.Persistence
 		#endregion
 	
 		#region Public Methods
-		public abstract IDictionary<string, ICollection<T>> GetModels(DataTable table, Association association);
+		public virtual IDictionary<string, ICollection<T>> GetModels(DataTable table, Association association)
+		{
+			IDictionary<string, ICollection<T>> list = new Dictionary<string, ICollection<T>>();
+
+			if (table != null && table.Rows.Count > 0)
+			{
+				foreach (DataRow row in table.Rows)
+				{
+					T model = GetModel(row);
+
+					AddModelToList(model, row, association, list);
+				}
+			}
+
+			return list;
+		}
 		
+		public abstract T GetModel(DataRow row);
+
 		public abstract Tuple GetTuple(T model);
 		
 		public abstract void AddDataRow(DataTable table, T model);

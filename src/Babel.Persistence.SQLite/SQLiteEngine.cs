@@ -168,8 +168,8 @@ namespace Telesophy.Babel.Persistence.SQLite
 
 			foreach (Association association in entity.Associations)
 			{
-				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL)";
-				string assocTableCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)));
+				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL, {7} {8} NOT NULL)";
+				string assocTableCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)), association.SequenceFieldName, GetAffinity(typeof(int)));
 				SQLiteCommand assocTableCommand = GetCommand(connection, transaction, assocTableCommandText);
 				assocTableCommand.ExecuteNonQuery();
 				
