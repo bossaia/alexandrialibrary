@@ -99,44 +99,37 @@ namespace Telesophy.Alexandria.Model.Data
 			Associations.Add(new Association(ASSOCIATION_CREATORS, this, artistEntity, Relationship.ManyToMany, false));
 			Associations.Add(new Association(ASSOCIATION_CONTRIBUTORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
-		
-		public override IDictionary<string, ICollection<IMediaSet>> GetModels(DataTable table, Association association)
+
+		public override IMediaSet GetModel(DataRow row)
 		{
-			IDictionary<string, ICollection<IMediaSet>> list = new Dictionary<string, ICollection<IMediaSet>>();
-			
-			if (table != null && table.Rows.Count > 0)
+			IMediaSet model = null;
+
+			Guid id = new Guid(row["Id"].ToString());
+			string type = row["Type"].ToString();
+			string source = row["Source"].ToString();
+			int number = Convert.ToInt32(row["Number"].ToString());
+			string title = row["Title"].ToString();
+			string artist = row["Artist"].ToString();
+			DateTime date = DateTime.Parse(row["Date"].ToString());
+			string format = row["Format"].ToString();
+			Uri path = new Uri(row["Path"].ToString());
+
+			switch (type)
 			{
-				foreach (DataRow row in table.Rows)
-				{
-					IMediaSet model = null;
-				
-					Guid id = new Guid(row["Id"].ToString());
-					string type = row["Type"].ToString();
-					string source = row["Source"].ToString();
-					int number = Convert.ToInt32(row["Number"].ToString());
-					string title = row["Title"].ToString();
-					string artist = row["Artist"].ToString();
-					DateTime date = DateTime.Parse(row["Date"].ToString());
-					string format = row["Format"].ToString();
-					Uri path = new Uri(row["Path"].ToString());
-										
-					switch (type)
-					{
-						case ModelConstants.MEDIA_TYPE_AUDIO:
-							model = new Album(id, source, number, title, artist, date, format, path, null);
-							break;
-						case ModelConstants.MEDIA_TYPE_VIDEO:
-							model = new Movie(id, source, number, title, artist, date, format, path, null);
-							break;
-						default:
-							break;
-					}
-					
-					AddModelToList(model, row, association, list);
-				}
+				case ModelConstants.MEDIA_TYPE_AUDIO:
+					model = new Album(id, source, number, title, artist, date, format, path, null);
+					break;
+				case ModelConstants.MEDIA_TYPE_VIDEO:
+					model = new Movie(id, source, number, title, artist, date, format, path, null);
+					break;
+				case ModelConstants.MEDIA_TYPE_PLAYLIST:
+					model = new Playlist(id, source, number, title, artist, date, format, path, null);
+					break;
+				default:
+					break;
 			}
-			
-			return list;
+
+			return model;
 		}
 
 		public override Tuple GetTuple(IMediaSet model)

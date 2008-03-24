@@ -85,6 +85,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				taskController.PersistenceController = persistenceController;
 				
 				queueController.LoadDefaultCatalog();
+				
+				toolController.PersistenceController = persistenceController;
 			}
 			catch (Exception ex)
 			{
@@ -108,6 +110,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private PersistenceController persistenceController = new PersistenceController();
 		private PluginController pluginController = new PluginController();
 		private TaskController taskController = new TaskController();
+		private ToolController toolController = new ToolController();
 		
 		private NotifyIcon notifyIcon = new NotifyIcon();
 		private ContextMenu notifyMenu = new ContextMenu();
@@ -286,7 +289,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			IList<AspiDeviceInfo> devices = AspiScanner.GetDevices();
 			int cdDriveCount = 0;
 		
+			ToolBoxListView.BeginUpdate();
 			ToolBoxListView.Items.Clear();
+			
 			foreach(DriveInfo drive in DriveInfo.GetDrives())
 			{
 				if (drive.DriveType == System.IO.DriveType.Fixed)
@@ -320,6 +325,19 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					ToolBoxListView.Items.Add(item);
 				}
 			}
+			
+			const int playlistIndex = 4;
+			ICollection<IMediaSet> playlists = persistenceController.ListPlaylists();
+			foreach (IMediaSet playlist in playlists)
+			{				
+				ListViewItem playlistItem = new ListViewItem(playlist.Title, playlistIndex);
+				playlistItem.ToolTipText = playlist.Path.ToString();
+				
+				playlistItem.Tag = new TrackSource(playlist.Path);
+				ToolBoxListView.Items.Add(playlistItem);
+			}
+			
+			ToolBoxListView.EndUpdate();
 		}
 		#endregion
 		
@@ -330,14 +348,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		}
 		#endregion
 
-		#region ImportUpdate
-		private
-		#endregion
-
 		#endregion
 
 		#region Private Event Methods
-		void MainForm_Resize(object sender, EventArgs e)
+		private void MainForm_Resize(object sender, EventArgs e)
 		{
 			if (WindowState == FormWindowState.Minimized)
 				Hide();
@@ -719,10 +733,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			if (e.Button == MouseButtons.Left)
 			{
 				ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
-				if (item != null && item.Tag != null && item.Tag is ITrackSource)
+				if (item != null && item.Selected)
 				{
-					item.Selected = true;
-					ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
+					if (item.Tag != null && item.Tag is ITrackSource)
+					{
+						ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
+					}
 				}
 			}
 		}
@@ -756,14 +772,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		//{
 		//    queueController.LoadData(e.Data);
 		//}
-
-		private void ToolBoxContextMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-			if (e.ClickedItem.Text == "Refresh")
-			{
-				InitializeToolbox();
-			}
-		}
 
 		private void CheckForValidQueueDrag(DragEventArgs e)
 		{
@@ -1625,6 +1633,56 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				IMediaSet set = persistenceController.LookupMediaSet(id);
 				if (set != null && set.Items.Count > 0)
 					persistenceController.DeleteMediaSet(set);
+			}
+		}
+
+		private void toolCreatePlaylistMenuItem_Click(object sender, EventArgs e)
+		{
+			PlaylistSave control = toolController.CreatePlaylist();
+			control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+			control.Show();
+		}
+
+		private void toolEditPlaylistMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
+			{
+				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
+				if (source != null)
+				{
+					IMediaSet playlist = persistenceController.LookupMediaSet(source.Path);
+					if (playlist != null)
+					{
+						PlaylistSave control = toolController.EditPlaylist(playlist);
+						control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+						control.Show();
+					}
+				}
+			}
+		}
+
+		private void toolAddSelectedItemsToPlaylistMenuItem_Click(object sender, EventArgs e)
+		{
+			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
+			{
+				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
+				if (source != null)
+				{
+					IMediaSet playlist = persistenceController.LookupMediaSet(source.Path);
+					if (playlist != null)
+					{
+						IList<IMediaItem> items = queueController.GetSelectedItems();
+						if (items != null && items.Count > 0)
+						{
+							foreach (IMediaItem item in items)
+							{
+								playlist.Items.Add(item);
+							}
+							
+							persistenceController.SaveMediaSet(playlist);
+						}	
+					}
+				}
 			}
 		}
 		#endregion

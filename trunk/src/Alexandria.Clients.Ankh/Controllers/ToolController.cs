@@ -27,6 +27,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+
+using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Clients.Ankh.Views;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
@@ -35,6 +39,101 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#region Constructors
 		public ToolController()
 		{
+		}
+		#endregion
+				
+		#region Private Fields
+		private PersistenceController persistenceController;
+		#endregion
+		
+		#region Private Methods
+		private IMediaSet GetNewPlaylist()
+		{
+			Guid id = Guid.NewGuid();
+			string source = ModelConstants.SOURCE_CATALOG;
+			int number = 0;
+			string title = ModelConstants.PLAYLIST_TITLE_DEFAULT;
+			string artist = ModelConstants.ARTIST_NAME_VARIOUS;
+			DateTime date = DateTime.Now;
+			string format = ModelConstants.PLAYLIST_FORMAT_DEFAULT;
+			Uri path = new Uri(ModelConstants.PLAYLIST_PATH_DEFAULT + id.ToString());
+
+			return new Playlist(id, source, number, title, artist, date, format, path, null);
+		}
+		#endregion
+		
+		#region Public Properties
+		[CLSCompliant(false)]
+		public PersistenceController PersistenceController
+		{
+			get { return persistenceController; }
+			set { persistenceController = value; }
+		}
+		#endregion
+		
+		#region Public Methods
+		public PlaylistSave CreatePlaylist()
+		{
+			IMediaSet playlist = GetNewPlaylist();
+			return EditPlaylist(playlist);
+		}
+		
+		[CLSCompliant(false)]
+		public PlaylistSave EditPlaylist(IMediaSet playlist)
+		{
+			PlaylistSave control = null;
+		
+			if (playlist != null)
+			{
+				control = new PlaylistSave();
+				control.Identifier = playlist.Id;
+				control.Title = playlist.Title;
+				control.Artist = playlist.Artist;
+				control.Number = playlist.Number;
+				control.Source = playlist.Source;
+				control.Date = playlist.Date;
+				control.Format = playlist.Format;
+				control.Path = playlist.Path;
+				
+				foreach (IMediaItem item in playlist.Items)
+				{
+					control.AddItem(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+				}
+			}
+			
+			control.ToolController = this;
+			
+			return control;
+		}
+		
+		public void SavePlaylist(PlaylistSave control)
+		{
+			if (control != null)
+			{
+				Guid id = control.Identifier;
+				if (id != default(Guid))
+				{
+					IMediaSet playlist = new Playlist();
+					playlist.Id = id;
+					playlist.Title = control.Title;
+					playlist.Artist = control.Artist;
+					playlist.Number = control.Number;
+					playlist.Source = control.Source;
+					playlist.Date = control.Date;
+					playlist.Format = control.Format;
+					playlist.Path = control.Path;
+					
+					DataTable itemTable = control.GetItemDataTable();
+					IList<IMediaItem> items = persistenceController.CreateMediaItems(itemTable);
+					
+					foreach (IMediaItem item in items)
+					{
+						playlist.Items.Add(item);
+					}
+					
+					PersistenceController.SaveMediaSet(playlist);
+				}
+			}
 		}
 		#endregion
 	}

@@ -67,42 +67,32 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			base.Initialize(schema);
 		}
-		
-		public override IDictionary<string, ICollection<IArtist>> GetModels(DataTable table, Association association)
+
+		public override IArtist GetModel(DataRow row)
 		{
-			IDictionary<string, ICollection<IArtist>> list = new Dictionary<string, ICollection<IArtist>>();
+			IArtist model = null;
 
-			if (table != null && table.Rows.Count > 0)
+			Guid id = new Guid(row["Id"].ToString());
+			string type = row["Type"].ToString();
+			string name = row["Name"].ToString();
+			DateTime beginDate = DateTime.Parse(row["BeginDate"].ToString());
+			DateTime endDate = DateTime.Parse(row["EndDate"].ToString());
+
+			switch (type)
 			{
-				foreach (DataRow row in table.Rows)
-				{
-					IArtist model = null;
-				
-					Guid id = new Guid(row["Id"].ToString());
-					string type = row["Type"].ToString();
-					string name = row["Name"].ToString();
-					DateTime beginDate = DateTime.Parse(row["BeginDate"].ToString());
-					DateTime endDate = DateTime.Parse(row["EndDate"].ToString());
-					
-					switch (type)
-					{
-						case ModelConstants.ARTIST_TYPE_PERSON:
-							model = new Person(id, name, beginDate, endDate);
-							break;
-						case ModelConstants.ARTIST_TYPE_GROUP:
-							model = new Group(id, name, beginDate, endDate);
-							break;
-						default:
-							break;
-					}
-					
-					AddModelToList(model, row, association, list);
-				}
+				case ModelConstants.ARTIST_TYPE_PERSON:
+					model = new Person(id, name, beginDate, endDate);
+					break;
+				case ModelConstants.ARTIST_TYPE_GROUP:
+					model = new Group(id, name, beginDate, endDate);
+					break;
+				default:
+					break;
 			}
-
-			return list;
+			
+			return model;
 		}
-
+		
 		public override Tuple GetTuple(IArtist model)
 		{
 			throw new NotImplementedException();

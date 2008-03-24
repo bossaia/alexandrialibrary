@@ -638,8 +638,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					TrackSource trackSource = sourceData as TrackSource;
 					if (trackSource != null && trackSource.Path != null)
 					{
-						IList<IMediaItem> tracks = trackSource.GetAudioTracks();
-						LoadTracks(tracks, string.Format("CD [{0} Drive]", trackSource.Path.ToString().Substring(8, 1)));
+						IList<IMediaItem> tracks;
+						IMediaSet set = persistenceController.LookupMediaSet(trackSource.Path);
+						if (set != null)
+						{
+							tracks = set.Items;
+							LoadTracks(tracks, set.Source);
+						}
+						else
+						{
+							tracks = trackSource.GetAudioTracks();
+							LoadTracks(tracks, string.Format("CD [{0} Drive]", trackSource.Path.ToString().Substring(8, 1)));
+						}
 					
 						if (trackSource.DeviceInfo != null)
 						{

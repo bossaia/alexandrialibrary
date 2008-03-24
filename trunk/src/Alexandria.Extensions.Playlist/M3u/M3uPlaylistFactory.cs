@@ -49,7 +49,7 @@ namespace Telesophy.Alexandria.Extensions.Playlist.M3u
 					string source = ModelConstants.SOURCE_FILE;
 					int number = 0;
 					string title = file.Name;
-					string artist = ModelConstants.UNKNOWN_ARTIST;
+					string artist = ModelConstants.ARTIST_NAME_UNKNOWN;
 					DateTime date = DateTime.MinValue;
 					string format = PlaylistConstants.PLAYLIST_FORMAT_M3U;
 					
