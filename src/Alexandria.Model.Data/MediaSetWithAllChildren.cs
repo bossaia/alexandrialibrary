@@ -64,9 +64,11 @@ namespace Telesophy.Alexandria.Model.Data
 				Tuple rootTuple = Root.GetTuple(model);
 				tuples.Add(rootTuple);
 				
+				int sequence = 0;
 				foreach (IMediaItem item in model.Items)
 				{
-					Tuple assocTuple = Root.Associations["MediaSetItems"].GetTuple(model.Id, item.Id, timeStamp);
+					sequence++;
+					Tuple assocTuple = Root.Associations["MediaSetItems"].GetTuple(model.Id, item.Id, timeStamp, sequence);
 					tuples.Add(assocTuple);
 					
 					Tuple itemTuple = itemEntity.GetTuple(item);
@@ -84,24 +86,31 @@ namespace Telesophy.Alexandria.Model.Data
 			Entity<IMediaItem> itemEntity = Schema.GetEntity<IMediaItem>();
 			IDictionary<string, ICollection<IMediaItem>> childrenById = itemEntity.GetModels(dataSet.Tables["MediaSetItems"], Root.Associations["MediaSetItems"]);
 			
-			foreach (IMediaSet model in dict[Root.Name])
+			if (dict != null)
 			{
-				string key = model.Id.ToString();
-				if (childrenById.ContainsKey(key))
+				if (dict.ContainsKey(Root.Name))
 				{
-					foreach (IMediaItem child in childrenById[key])
+					foreach (IMediaSet model in dict[Root.Name])
 					{
-						child.Parent = model;
-						model.Items.Add(child);
+						string key = model.Id.ToString();
+						if (childrenById.ContainsKey(key))
+						{
+							foreach (IMediaItem child in childrenById[key])
+							{
+								child.Parent = model;
+								model.Items.Add(child);
+							}
+						}
 					}
+				}
+
+				if (dict.Count > 0)
+				{
+					return dict[Root.Name];
 				}
 			}
 			
-			if (dict.Count > 0)
-			{
-				return dict[Root.Name];
-			}
-			else return new List<IMediaSet>();
+			return new List<IMediaSet>();
 		}
 		#endregion
 	}

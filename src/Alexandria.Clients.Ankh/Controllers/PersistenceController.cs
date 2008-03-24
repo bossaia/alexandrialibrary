@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Text;
 
 using Telesophy.Alexandria.Model;
@@ -80,6 +81,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return repo.List<IMediaItem>(mediaItemSingleton, query);
 		}
 		
+		public ICollection<IMediaSet> ListPlaylists()
+		{
+			Query query = new Query("List Playlists");
+			query.Filters.Add(schema.GetFilter<IMediaSet>("Type", "=", ModelConstants.MEDIA_TYPE_PLAYLIST));
+			
+			return repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+		}
+		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
 			Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
@@ -97,6 +106,59 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 			
 			return null;
+		}
+		
+		public IMediaSet LookupMediaSet(Uri path)
+		{
+			Query query = new Query(string.Format("Search MediaSet: Path={0}", path));
+			query.Filters.Add(schema.GetFilter<IMediaSet>("Path", "=", path.ToString()));
+
+			ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+			if (sets != null && sets.Count > 0)
+			{
+				using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+				{
+					iter.Reset();
+					iter.MoveNext();
+					return iter.Current;
+				}
+			}
+
+			return null;
+		}
+		
+		public IMediaItem LookupMediaItem(Guid id)
+		{
+			Query query = new Query(string.Format("Search MediaItem: Id={0}", id));
+			query.Filters.Add(schema.GetFilter<IMediaItem>("Id", "=", id.ToString()));
+
+			ICollection<IMediaItem> items = repo.List<IMediaItem>(mediaItemSingleton, query);
+			if (items != null && items.Count > 0)
+			{
+				using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+				{
+					iter.Reset();
+					iter.MoveNext();
+					return iter.Current;
+				}
+			}
+
+			return null;
+		}
+		
+		public IList<IMediaItem> CreateMediaItems(DataTable table)
+		{
+			IList<IMediaItem> items = new List<IMediaItem>();
+			if (table != null)
+			{
+				Entity<IMediaItem> entity = schema.GetEntity<IMediaItem>();
+				foreach (DataRow row in table.Rows)
+				{
+					IMediaItem item = entity.GetModel(row);
+					items.Add(item);
+				}
+			}
+			return items;
 		}
 		
 		public void SaveMediaSet(IMediaSet model)

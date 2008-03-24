@@ -99,48 +99,38 @@ namespace Telesophy.Alexandria.Model.Data
 			
 			Associations.Add(new Association(ASSOCIATION_CREATORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
-		
-		public override IDictionary<string, ICollection<IMediaItem>> GetModels(DataTable table, Association association)
+
+		public override IMediaItem GetModel(DataRow row)
 		{
-			IDictionary<string, ICollection<IMediaItem>> list = new Dictionary<string, ICollection<IMediaItem>>();
-			
-			if (table != null && table.Rows.Count > 0)
+			IMediaItem model = null;
+		
+			Guid id = new Guid(row["Id"].ToString());
+			string type = row["Type"].ToString();
+			string source = row["Source"].ToString();
+			int number = Convert.ToInt32(row["Number"]);
+			string title = row["Title"].ToString();
+			string artist = row["Artist"].ToString();
+			string album = row["Album"].ToString();
+			TimeSpan duration = TimeSpan.Parse(row["Duration"].ToString());
+			DateTime date = DateTime.Parse(row["Date"].ToString());
+			string format = row["Format"].ToString();
+			Uri path = new Uri(row["Path"].ToString());
+
+			switch (type)
 			{
-				foreach (DataRow row in table.Rows)
-				{
-					IMediaItem model = null; 
-				
-					Guid id = new Guid(row["Id"].ToString());
-					string type = row["Type"].ToString();
-					string source = row["Source"].ToString();
-					int number = Convert.ToInt32(row["Number"]);
-					string title = row["Title"].ToString();
-					string artist = row["Artist"].ToString();
-					string album = row["Album"].ToString();
-					TimeSpan duration = TimeSpan.Parse(row["Duration"].ToString());
-					DateTime date = DateTime.Parse(row["Date"].ToString());
-					string format = row["Format"].ToString();
-					Uri path = new Uri(row["Path"].ToString());
-					
-					switch (type)
-					{
-						case ModelConstants.MEDIA_TYPE_AUDIO:
-							model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
-							break;
-						case ModelConstants.MEDIA_TYPE_VIDEO:
-							model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
-							break;
-						default:
-							break;
-					}
-					
-					AddModelToList(model, row, association, list);
-				}	
+				case ModelConstants.MEDIA_TYPE_AUDIO:
+					model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
+					break;
+				case ModelConstants.MEDIA_TYPE_VIDEO:
+					model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
+					break;
+				default:
+					break;
 			}
-
-			return list;
+			
+			return model;
 		}
-
+		
 		public override Tuple GetTuple(IMediaItem model)
 		{
 			Tuple tuple = new Tuple(Name, "Id");
