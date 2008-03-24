@@ -50,6 +50,7 @@ namespace Telesophy.Babel.Persistence
 		private const string PARENT_IDENTIFIER_NAME = "_ParentId";
 		private const string CHILD_IDENTIFIER_NAME = "_ChildId";
 		private const string DATE_MODIFIED_FIELD_NAME = "_DateModified";
+		private const string SEQUENCE_FIELD_NAME = "_Sequence";
 		#endregion
 		
 		#region Private Fields
@@ -94,6 +95,11 @@ namespace Telesophy.Babel.Persistence
 		{
 			get { return DATE_MODIFIED_FIELD_NAME; }
 		}
+		
+		public virtual string SequenceFieldName
+		{
+			get { return SEQUENCE_FIELD_NAME; }
+		}
 		#endregion
 		
 		#region Public Methods
@@ -114,12 +120,13 @@ namespace Telesophy.Babel.Persistence
 		//    }
 		//}
 		
-		public Tuple GetTuple(object parentId, object childId, DateTime timeStamp)
+		public Tuple GetTuple(object parentId, object childId, DateTime timeStamp, int sequence)
 		{
 			Tuple tuple = new Tuple(Name, this);
 			tuple[ParentFieldName] = parentId;
 			tuple[ChildFieldName] = childId;
 			tuple[DateModifiedFieldName] = timeStamp;
+			tuple[SequenceFieldName] = sequence;
 			
 			return tuple;
 		}

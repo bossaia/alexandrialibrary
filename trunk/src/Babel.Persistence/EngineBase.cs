@@ -48,6 +48,11 @@ namespace Telesophy.Babel.Persistence
 		}
 		#endregion
 		
+		#region Private Constants
+		private const string SORT_ORDER_ASCENDING = "ASC";
+		private const string SORT_ORDER_DESCENDING = "DESC";
+		#endregion
+		
 		#region Private Fields
 		private string name;
 		private IDataConverter dataConverter;
@@ -97,14 +102,21 @@ namespace Telesophy.Babel.Persistence
 		{
 			StringBuilder sql = new StringBuilder("SELECT ");
 
+			StringBuilder orderBy = new StringBuilder(string.Empty);
+			if (map.Branches.Count > 0)
+				orderBy.Append(" ORDER BY ");
+
 			sql.Append(map.Leaf.GetFieldList(map));
 			
 			sql.AppendFormat(" FROM {0}", map.Root.Name);
 			
 			const string JOIN_FORMAT = " {0} JOIN {1} ON {2}.{3} = {1}.{4}";
 			
+			int i=0;
+			const string COMMA = ", ";
 			foreach (Association branch in map.Branches)
 			{
+				i++;
 				string joinType = (branch.IsRequired) ? "INNER" : "LEFT OUTER";
 			
 				// LEFT INNER JOIN MediaSetItems ON MediaSet.Id = MediaSetItems.ParentId
@@ -112,11 +124,14 @@ namespace Telesophy.Babel.Persistence
 				
 				sql.AppendFormat(JOIN_FORMAT, joinType, branch.Name, branch.Parent.Name, branch.Parent.Identifier.Name, branch.ParentFieldName);
 				sql.AppendFormat(JOIN_FORMAT, joinType, branch.Child.Name, branch.Name, branch.ChildFieldName, branch.Child.Identifier.Name);
+				
+				if (i > 1) orderBy.Append(COMMA);
+				orderBy.AppendFormat("{0}.{1} {2}", branch.Name, branch.SequenceFieldName, SORT_ORDER_ASCENDING);
 			}
 			
 			IList<ParameterType> parameters;
 			sql.Append(GetWhereClause(query, out parameters));
-			sql.Append(GetOrderByClause(map.Leaf));
+			sql.Append(orderBy.ToString());
 			
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
@@ -236,7 +251,7 @@ namespace Telesophy.Babel.Persistence
 		
 		private string GetSortDirection(bool isAscending)
 		{
-			return (isAscending) ? "ASC" : "DESC";
+			return (isAscending) ? SORT_ORDER_ASCENDING : SORT_ORDER_DESCENDING;
 		}
 		
 		protected virtual string GetOrderByClause(Entity entity)
@@ -345,7 +360,12 @@ namespace Telesophy.Babel.Persistence
 							IDataReader entityReader = entitySelect.ExecuteReader();
 							while (entityReader.Read())
 							{
-								map.Leaf.AddDataRow(table, entityReader, DataConverter, map);
+								object id = entityReader[map.Root.Identifier.Name];
+							
+								if (id != null && id != DBNull.Value)
+								{
+									map.Leaf.AddDataRow(table, entityReader, DataConverter, map);
+								}
 							}							
 						}
 						
