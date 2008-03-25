@@ -27,71 +27,80 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
 using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Clients.Ankh.Views.Data;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
-	public class AdvancedDataGridRowDragDropEventArgs : EventArgs
-	{
-		public AdvancedDataGridRowDragDropEventArgs(int sourceIndex, int targetIndex, DataGridViewRow sourceRow)
-		{
-			this.sourceIndex = sourceIndex;
-			this.targetIndex = targetIndex;
-			this.sourceRow = sourceRow;
+	//public class AdvancedDataGridRowDragDropEventArgs : EventArgs
+	//{
+	//    public AdvancedDataGridRowDragDropEventArgs(int sourceIndex, int targetIndex, DataGridViewRow sourceRow)
+	//    {
+	//        this.sourceIndex = sourceIndex;
+	//        this.targetIndex = targetIndex;
+	//        this.sourceRow = sourceRow;
 			
-			if (SourceRow != null)
-			{
-				Guid id = (Guid)SourceRow.Cells["Id"].Value;
-				string source = (string)SourceRow.Cells["Source"].Value;
-				string type = (string)SourceRow.Cells["Type"].Value;
-				int number = Convert.ToInt32(SourceRow.Cells["Number"].Value);
-				string title = (string)SourceRow.Cells["Title"].Value;
-				string artist = (string)SourceRow.Cells["Artist"].Value;
-				string album = (string)SourceRow.Cells["Album"].Value;
-				TimeSpan duration = (TimeSpan)SourceRow.Cells["Duration"].Value;
-				DateTime date = (DateTime)SourceRow.Cells["Date"].Value;
-				string format = (string)SourceRow.Cells["Format"].Value;
-				Uri path = (Uri)SourceRow.Cells["Path"].Value;
+	//        if (SourceRow != null)
+	//        {
+	//            Guid id = (Guid)SourceRow.Cells["Id"].Value;
+	//            string source = (string)SourceRow.Cells["Source"].Value;
+	//            string type = (string)SourceRow.Cells["Type"].Value;
+	//            int number = Convert.ToInt32(SourceRow.Cells["Number"].Value);
+	//            string title = (string)SourceRow.Cells["Title"].Value;
+	//            string artist = (string)SourceRow.Cells["Artist"].Value;
+	//            string album = (string)SourceRow.Cells["Album"].Value;
+	//            TimeSpan duration = (TimeSpan)SourceRow.Cells["Duration"].Value;
+	//            DateTime date = (DateTime)SourceRow.Cells["Date"].Value;
+	//            string format = (string)SourceRow.Cells["Format"].Value;
+	//            Uri path = (Uri)SourceRow.Cells["Path"].Value;
 				
-				mediaItem = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
-			}
-		}
+	//            mediaItem = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
+	//            mediaItemData = new MediaItemData(id, type, source, number, title, artist, album, duration, date, format, path);
+	//        }
+	//    }
 	
-		private int sourceIndex;
-		private int targetIndex;
-		private DataGridViewRow sourceRow;
-		private AudioTrack mediaItem;
+	//    private int sourceIndex;
+	//    private int targetIndex;
+	//    private DataGridViewRow sourceRow;
+	//    private AudioTrack mediaItem;
+	//    private MediaItemData mediaItemData;
 		
-		public int SourceIndex
-		{
-			get { return sourceIndex; }
-		}
+	//    public int SourceIndex
+	//    {
+	//        get { return sourceIndex; }
+	//    }
 		
-		public int TargetIndex
-		{
-			get { return targetIndex; }
-		}
+	//    public int TargetIndex
+	//    {
+	//        get { return targetIndex; }
+	//    }
 		
-		public DataGridViewRow SourceRow
-		{
-			get { return sourceRow; }
-		}
+	//    public DataGridViewRow SourceRow
+	//    {
+	//        get { return sourceRow; }
+	//    }
 		
-		[CLSCompliant(false)]
-		public IMediaItem MediaItem
-		{
-			get { return mediaItem; }
-		}
-	}
+	//    [CLSCompliant(false)]
+	//    public IMediaItem MediaItem
+	//    {
+	//        get { return mediaItem; }
+	//    }
+		
+	//    public MediaItemData MediaItemData
+	//    {
+	//        get { return mediaItemData; }
+	//    }
+	//}
 	
-	public class AdvancedDataGridViewColumnDragDropEventArgs: EventArgs
-	{
+	//public class AdvancedDataGridViewColumnDragDropEventArgs: EventArgs
+	//{
 	
-	}
+	//}
 
 	/// This class extends the DataGridView to allow for custom
 	/// drag and drop reordering operations on both columns and rows.  
@@ -116,8 +125,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 	///    DATE: 02 February 2007
 	/// LICENSE: Public Domain. Enjoy!   :-)
 	/// ******************************************************************
-	/// 
-	public class AdvancedDataGridView : DataGridView
+	///	
+	public class AdvancedDataGridView<T> : DataGridView
 	{
 		//vars for custom column/row drag/drop operations
 		private Rectangle DragDropRectangle;
@@ -127,10 +136,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private int DragDropType; //0=column, 1=row
 		private DataGridViewColumn DragDropColumn;
 		private object[] DragDropColumnCellValue;
-		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropping;
-		private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropped;
-		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropping;
-		private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropped;
+		//private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropping;
+		//private EventHandler<AdvancedDataGridRowDragDropEventArgs> rowDragDropped;
+		//private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropping;
+		//private EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> columnDragDropped;
+
+		private BindingListView<T> bindingList;
+		private BindingSource bindingSource;
+
+		//private DataGridViewRow selectedRow;
+		//private int selectedRowSaveIndex;
 
 		public AdvancedDataGridView()
 		{
@@ -138,9 +153,15 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.SelectionMode = DataGridViewSelectionMode.CellSelect;
 			this.AllowUserToOrderColumns = false;
 			this.AllowDrop = true;
-			//this.ColumnCount = 20;
-			//this.RowCount = 40;
-			//this.Size = new Size(600, 400);
+			this.AutoGenerateColumns = false;
+
+			bindingList = new BindingListView<T>();
+			bindingList.AllowRemove = true;
+
+			bindingSource = new BindingSource();
+			bindingSource.DataSource = bindingList;
+
+			DataSource = bindingSource;
 		}
 
 		protected override void OnColumnAdded(DataGridViewColumnEventArgs e)
@@ -399,8 +420,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 								}
 							}
 
-							if (ColumnDragDropping != null)
-								ColumnDragDropping(this, new AdvancedDataGridViewColumnDragDropEventArgs());
+							//if (ColumnDragDropping != null)
+								//ColumnDragDropping(this, new AdvancedDataGridViewColumnDragDropEventArgs());
 
 							//remove the source column
 							this.Columns.RemoveAt(DragDropSourceIndex);
@@ -426,8 +447,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 								}
 							}
 							
-							if (ColumnDragDropped != null)
-								ColumnDragDropped(this, new AdvancedDataGridViewColumnDragDropEventArgs());
+							//if (ColumnDragDropped != null)
+								//ColumnDragDropped(this, new AdvancedDataGridViewColumnDragDropEventArgs());
 							
 							//release resources
 							DragDropColumnCellValue = null;
@@ -444,15 +465,21 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 							DragDropCurrentIndex = -1;
 							DataGridViewRow SourceRow = drgevent.Data.GetData(typeof(DataGridViewRow)) as DataGridViewRow;
 
-							if (RowDragDropping != null)
-								RowDragDropping(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
+							//if (RowDragDropping != null)
+								//RowDragDropping(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
 							
 							//this.Rows.RemoveAt(DragDropSourceIndex);
 							//this.Rows.Insert(DragDropTargetIndex, SourceRow);
 							//this.Rows[DragDropTargetIndex].Selected = true;
+
+							T item = bindingList[DragDropSourceIndex];
+
+							bindingList.RemoveAt(DragDropSourceIndex); //e.SourceIndex);
+							bindingList.Insert(DragDropTargetIndex, item); //e.TargetIndex, e.MediaItem);
+							this.Rows[DragDropTargetIndex].Selected = true;
 							
-							if (RowDragDropped != null)
-								RowDragDropped(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
+							//if (RowDragDropped != null)
+								//RowDragDropped(this, new AdvancedDataGridRowDragDropEventArgs(DragDropSourceIndex, DragDropTargetIndex, SourceRow));
 
 							this.CurrentCell = this[0, DragDropTargetIndex];
 						}
@@ -491,28 +518,117 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			base.OnCellPainting(e);
 		}
 
-		public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropping
+		//public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropping
+		//{
+		//    get { return rowDragDropping; }
+		//    set { rowDragDropping = value; }
+		//}
+		
+		//public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropped
+		//{
+		//    get { return rowDragDropped; }
+		//    set { rowDragDropped = value; }
+		//}
+		
+		//public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropping
+		//{
+		//    get { return columnDragDropping; }
+		//    set { columnDragDropping = value; }
+		//}
+		
+		//public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropped
+		//{
+		//    get { return columnDragDropped; }
+		//    set { columnDragDropped = value; }
+		//}
+				
+		public void AddItem(T item)
 		{
-			get { return rowDragDropping; }
-			set { rowDragDropping = value; }
+			bindingList.Add(item);
 		}
 		
-		public EventHandler<AdvancedDataGridRowDragDropEventArgs> RowDragDropped
+		public IList<T> GetItems()
 		{
-			get { return rowDragDropped; }
-			set { rowDragDropped = value; }
+			return bindingList;
 		}
 		
-		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropping
+		public void Clear()
 		{
-			get { return columnDragDropping; }
-			set { columnDragDropping = value; }
+			bindingList.Clear();
+			bindingList.ResetBindings();
 		}
 		
-		public EventHandler<AdvancedDataGridViewColumnDragDropEventArgs> ColumnDragDropped
+		public void ClearSelectedRows()
 		{
-			get { return columnDragDropped; }
-			set { columnDragDropped = value; }
+			//if (grid.Rows != null && grid.Rows.Count > 0)
+			//{
+			//    IList<Guid> idList = new List<Guid>();
+			//    foreach (DataGridViewRow row in grid.SelectedRows)
+			//    {
+			//        //bool selected = Convert.ToBoolean(row.Cells[COL_SELECTED].Value);
+			//        //if (selected)
+			//        //{
+			//        idList.Add((Guid)row.Cells[ControllerConstants.COL_ID].Value);
+			//        //}
+			//    }
+
+			//    if (idList.Count > 0)
+			//    {
+			//        int count = bindingList.Count;
+			//        for (int i = 0; idList.Count > 0; i++)
+			//        {
+			//            if (bindingList.Count > 0)
+			//            {
+			//                if (i > bindingList.Count - 1) i = 0;
+
+			//                foreach (Guid id in idList)
+			//                {
+			//                    if (id == bindingList[i].Id)
+			//                    {
+			//                        bindingList.RemoveAt(i);
+			//                        i = 0;
+			//                        idList.Remove(id);
+			//                        break;
+			//                    }
+			//                }
+			//            }
+			//            else break;
+			//        }
+			//        bindingList.ResetBindings();
+			//    }
+			//}
+		}
+
+		public void ClearRow(int index)
+		{
+			if (index >= 0 && index < bindingList.Count)
+			{
+			    bindingList.RemoveAt(index);
+			    bindingList.ResetBindings();
+			}
+		}
+		
+		public void Sort(ListSortDescriptionCollection sorts)
+		{
+			((IBindingListView)bindingList).ApplySort(sorts);
+		}
+		
+		public void RemoveSort()
+		{
+			((IBindingListView)bindingList).RemoveSort();
+
+			foreach (DataGridViewColumn column in Columns)
+				column.HeaderCell.SortGlyphDirection = SortOrder.None;
+		}
+		
+		public T GetItem(int index)
+		{
+			return bindingList[index];
+		}
+		
+		public void RemoveAt(int index)
+		{
+			bindingList.RemoveAt(index);
 		}
 	}
 }

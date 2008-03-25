@@ -20,7 +20,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		internal const string COL_PATH = "Path";
 		internal const string FORMAT_PLAYLIST = "asx,m3u,pls,xspf";
 		internal const string FORMAT_AUDIO = "aac,flac,m4a,mp3,ogg,wav,wma";
-		internal const string SOURCE_CATALOG = "Catalog";
+
 		internal const string TYPE_AUDIO = "Audio";
+		internal const int INDEX_AUDIO = 0;
+		internal const string TYPE_IMAGE = "Image";
+		internal const int INDEX_IMAGE = 1;
+		internal const string TYPE_BOOK = "Book";
+		internal const int INDEX_BOOK = 2;
+		internal const string TYPE_MOVIE = "Movie";
+		internal const int INDEX_MOVIE = 3;
+		internal const string TYPE_TELEVISION = "TV";
+		internal const int INDEX_TELEVISION = 4;
 	}
 }

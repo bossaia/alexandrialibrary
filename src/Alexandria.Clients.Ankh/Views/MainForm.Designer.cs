@@ -1,3 +1,5 @@
+using Telesophy.Alexandria.Clients.Ankh.Views.Data;
+
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	partial class MainForm
@@ -137,7 +139,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sortSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.filterButton = new System.Windows.Forms.Button();
 			this.sortButton = new System.Windows.Forms.Button();
-			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
+			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -971,8 +973,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueDataGrid.AllowUserToOrderColumns = true;
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
-			this.queueDataGrid.ColumnDragDropped = null;
-			this.queueDataGrid.ColumnDragDropping = null;
+			//this.queueDataGrid.ColumnDragDropped = null;
+			//this.queueDataGrid.ColumnDragDropping = null;
 			dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1004,8 +1006,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle11;
 			this.queueDataGrid.Name = "queueDataGrid";
-			this.queueDataGrid.RowDragDropped = null;
-			this.queueDataGrid.RowDragDropping = null;
+			//this.queueDataGrid.RowDragDropped = null;
+			//this.queueDataGrid.RowDragDropping = null;
 			dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
 			dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1216,7 +1218,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ContextMenuStrip ToolBoxContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem ToolBoxContextMenuItemRefresh;
 		private System.Windows.Forms.ToolStripMenuItem toolManagerToolStripMenuItem;
-		private Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView queueDataGrid;
+		private Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView queueDataGrid;
 		private System.Windows.Forms.ImageList queueSmallImageList;
 		private System.Windows.Forms.ContextMenuStrip sortContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem sortContextMenuStripItemClearSelected;

@@ -58,16 +58,16 @@ namespace Telesophy.Alexandria.Model
 		public const string PLAYLIST_PATH_DEFAULT = "http://www.telesophy.org/schema/1.0/playlist/";
 		
 		// MediaItem Column Constants
-		public const string MEDIA_ITEM_COLUMN_ID = "idColumn";
-		public const string MEDIA_ITEM_COLUMN_TYPE = "typeColumn";
-		public const string MEDIA_ITEM_COLUMN_SOURCE = "sourceCoumn";
-		public const string MEDIA_ITEM_COLUMN_NUMBER = "numberColumn";
-		public const string MEDIA_ITEM_COLUMN_TITLE = "titleColumn";
-		public const string MEDIA_ITEM_COLUMN_ARTIST = "artistColumn";
-		public const string MEDIA_ITEM_COLUMN_ALBUM = "albumColumn";
-		public const string MEDIA_ITEM_COLUMN_DURATION = "durationColumn";
-		public const string MEDIA_ITEM_COLUMN_DATE = "dateColumn";
-		public const string MEDIA_ITEM_COLUMN_FORMAT = "formatColumn";
-		public const string MEDIA_ITEM_COLUMN_PATH = "pathColumn";
+		public const string MEDIA_ITEM_COLUMN_ID = "Id";
+		public const string MEDIA_ITEM_COLUMN_TYPE = "Type";
+		public const string MEDIA_ITEM_COLUMN_SOURCE = "Source";
+		public const string MEDIA_ITEM_COLUMN_NUMBER = "Number";
+		public const string MEDIA_ITEM_COLUMN_TITLE = "Title";
+		public const string MEDIA_ITEM_COLUMN_ARTIST = "Artist";
+		public const string MEDIA_ITEM_COLUMN_ALBUM = "Album";
+		public const string MEDIA_ITEM_COLUMN_DURATION = "Duration";
+		public const string MEDIA_ITEM_COLUMN_DATE = "Date";
+		public const string MEDIA_ITEM_COLUMN_FORMAT = "Format";
+		public const string MEDIA_ITEM_COLUMN_PATH = "Path";
 	}
 }

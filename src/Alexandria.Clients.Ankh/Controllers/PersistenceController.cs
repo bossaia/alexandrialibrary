@@ -31,10 +31,10 @@ using System.Configuration;
 using System.Data;
 using System.Text;
 
+using Telesophy.Alexandria.Clients.Ankh.Views.Data;
+
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Model.Data;
-//using Telesophy.Alexandria.Persistence;
-//using Telesophy.Alexandria.Persistence.SQLite;
 
 using Telesophy.Babel.Persistence;
 using Telesophy.Babel.Persistence.SQLite;
@@ -144,6 +144,41 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 
 			return null;
+		}
+		
+		public IMediaItem CreateMediaItem(MediaItemData data)
+		{
+			IList<MediaItemData> list = new List<MediaItemData>() { data };
+			IList<IMediaItem> items = CreateMediaItems(list);
+			if (items != null && items.Count > 0)
+				return items[0];
+			else return null;
+		}
+		
+		public IList<IMediaItem> CreateMediaItems(IList<MediaItemData> data)
+		{
+			Entity<IMediaItem> entity = schema.GetEntity<IMediaItem>();
+			DataTable table = entity.GetDataTable(entity.Name);
+			
+			foreach (MediaItemData dataItem in data)
+			{
+				DataRow row = table.NewRow();
+				row[ModelConstants.MEDIA_ITEM_COLUMN_ID] = dataItem.Id;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_TYPE] = dataItem.Type;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_SOURCE] = dataItem.Source;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_NUMBER] = dataItem.Number;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_TITLE] = dataItem.Title;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_ARTIST] = dataItem.Artist;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_ALBUM] = dataItem.Album;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_DURATION] = dataItem.Duration;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_DATE] = dataItem.Date;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_FORMAT] = dataItem.Format;
+				row[ModelConstants.MEDIA_ITEM_COLUMN_PATH] = dataItem.Path;
+				
+				table.Rows.Add(row);
+			}
+			
+			return CreateMediaItems(table);
 		}
 		
 		public IList<IMediaItem> CreateMediaItems(DataTable table)

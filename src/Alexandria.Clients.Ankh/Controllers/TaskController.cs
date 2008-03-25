@@ -304,7 +304,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 						IMediaItem track = QueueController.GetMediaItem(new Uri(path));
 						if (track != null)
 						{
-							track.Source = ControllerConstants.SOURCE_CATALOG;
+							track.Source = ModelConstants.SOURCE_CATALOG;
 							track.Type = ControllerConstants.TYPE_AUDIO;
 							PersistenceController.SaveMediaItem(track);
 							importHitCount++;
