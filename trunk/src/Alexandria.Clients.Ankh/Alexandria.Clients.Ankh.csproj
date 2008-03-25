@@ -55,7 +55,9 @@
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Data\MediaItemData.cs" />
-    <Compile Include="Views\MediaItemDataGridView.cs" />
+    <Compile Include="Views\MediaItemDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Views\PlaylistSave.cs">
       <SubType>Form</SubType>
     </Compile>
