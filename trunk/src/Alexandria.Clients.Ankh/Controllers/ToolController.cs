@@ -31,6 +31,7 @@ using System.Data;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Clients.Ankh.Views;
+using Telesophy.Alexandria.Clients.Ankh.Views.Data;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
@@ -59,6 +60,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			Uri path = new Uri(ModelConstants.PLAYLIST_PATH_DEFAULT + id.ToString());
 
 			return new Playlist(id, source, number, title, artist, date, format, path, null);
+		}
+		
+		private MediaItemData GetMediaItemData(IMediaItem item)
+		{
+			if (item != null)
+			{
+				return new MediaItemData(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+			}
+			
+			return null;
 		}
 		#endregion
 		
@@ -97,7 +108,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				
 				foreach (IMediaItem item in playlist.Items)
 				{
-					control.AddItem(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+					control.AddItem(GetMediaItemData(item));
 				}
 			}
 			
@@ -123,8 +134,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					playlist.Format = control.Format;
 					playlist.Path = control.Path;
 					
-					DataTable itemTable = control.GetItemDataTable();
-					IList<IMediaItem> items = persistenceController.CreateMediaItems(itemTable);
+					IList<MediaItemData> itemData = control.GetItemData();
+					IList<IMediaItem> items = persistenceController.CreateMediaItems(itemData);
 					
 					foreach (IMediaItem item in items)
 					{

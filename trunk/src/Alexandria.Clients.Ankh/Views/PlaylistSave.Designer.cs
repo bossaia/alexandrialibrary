@@ -1,4 +1,6 @@
-﻿namespace Telesophy.Alexandria.Clients.Ankh.Views
+﻿using Telesophy.Alexandria.Clients.Ankh.Views.Data;
+
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
 	partial class PlaylistSave
 	{
@@ -47,8 +49,8 @@
 			this.identifierTextBox = new System.Windows.Forms.TextBox();
 			this.formatLabel = new System.Windows.Forms.Label();
 			this.formatTextBox = new System.Windows.Forms.TextBox();
-			this.itemGrid = new Telesophy.Alexandria.Clients.Ankh.Views.AdvancedDataGridView();
-			this.typeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.itemGrid = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView();
+			this.typeColumn = new System.Windows.Forms.DataGridViewImageColumn();
 			this.sourceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.numberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +60,7 @@
 			this.dateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.formatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.numberPicker)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.itemGrid)).BeginInit();
 			this.SuspendLayout();
@@ -159,7 +162,7 @@
 			// pathLabel
 			// 
 			this.pathLabel.AutoSize = true;
-			this.pathLabel.Location = new System.Drawing.Point(282, 143);
+			this.pathLabel.Location = new System.Drawing.Point(258, 143);
 			this.pathLabel.Name = "pathLabel";
 			this.pathLabel.Size = new System.Drawing.Size(29, 13);
 			this.pathLabel.TabIndex = 12;
@@ -167,10 +170,10 @@
 			// 
 			// pathTextBox
 			// 
-			this.pathTextBox.Location = new System.Drawing.Point(315, 140);
+			this.pathTextBox.Location = new System.Drawing.Point(291, 140);
 			this.pathTextBox.Name = "pathTextBox";
 			this.pathTextBox.ReadOnly = true;
-			this.pathTextBox.Size = new System.Drawing.Size(428, 20);
+			this.pathTextBox.Size = new System.Drawing.Size(452, 20);
 			this.pathTextBox.TabIndex = 8;
 			// 
 			// datePicker
@@ -213,16 +216,15 @@
 			this.formatTextBox.Location = new System.Drawing.Point(67, 140);
 			this.formatTextBox.Name = "formatTextBox";
 			this.formatTextBox.ReadOnly = true;
-			this.formatTextBox.Size = new System.Drawing.Size(178, 20);
+			this.formatTextBox.Size = new System.Drawing.Size(163, 20);
 			this.formatTextBox.TabIndex = 7;
 			// 
 			// itemGrid
 			// 
 			this.itemGrid.AllowDrop = true;
 			this.itemGrid.AllowUserToAddRows = false;
+			this.itemGrid.AllowUserToOrderColumns = true;
 			this.itemGrid.AllowUserToResizeRows = false;
-			this.itemGrid.ColumnDragDropped = null;
-			this.itemGrid.ColumnDragDropping = null;
 			this.itemGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.itemGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.typeColumn,
@@ -234,75 +236,107 @@
             this.durationColumn,
             this.dateColumn,
             this.formatColumn,
-            this.pathColumn});
+            this.pathColumn,
+            this.idColumn});
 			this.itemGrid.Location = new System.Drawing.Point(25, 197);
 			this.itemGrid.MultiSelect = false;
 			this.itemGrid.Name = "itemGrid";
-			this.itemGrid.RowDragDropped = null;
-			this.itemGrid.RowDragDropping = null;
-			this.itemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.itemGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.itemGrid.Size = new System.Drawing.Size(718, 260);
 			this.itemGrid.TabIndex = 18;
+			this.itemGrid.DragOver += new System.Windows.Forms.DragEventHandler(this.itemGrid_DragOver);
+			this.itemGrid.DragEnter += new System.Windows.Forms.DragEventHandler(this.itemGrid_DragEnter);
+			this.itemGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.itemGrid_DragDrop);
 			// 
 			// typeColumn
 			// 
+			this.typeColumn.DataPropertyName = "Type";
 			this.typeColumn.HeaderText = "Type";
 			this.typeColumn.Name = "typeColumn";
 			this.typeColumn.ReadOnly = true;
+			this.typeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.typeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// sourceColumn
 			// 
+			this.sourceColumn.DataPropertyName = "Source";
 			this.sourceColumn.HeaderText = "Source";
 			this.sourceColumn.Name = "sourceColumn";
 			this.sourceColumn.ReadOnly = true;
+			this.sourceColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// numberColumn
 			// 
+			this.numberColumn.DataPropertyName = "Number";
 			this.numberColumn.HeaderText = "Number";
 			this.numberColumn.Name = "numberColumn";
 			this.numberColumn.ReadOnly = true;
+			this.numberColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// titleColumn
 			// 
+			this.titleColumn.DataPropertyName = "Title";
 			this.titleColumn.HeaderText = "Title";
 			this.titleColumn.Name = "titleColumn";
 			this.titleColumn.ReadOnly = true;
+			this.titleColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// artistColumn
 			// 
+			this.artistColumn.DataPropertyName = "Artist";
 			this.artistColumn.HeaderText = "Artist";
 			this.artistColumn.Name = "artistColumn";
 			this.artistColumn.ReadOnly = true;
+			this.artistColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// albumColumn
 			// 
+			this.albumColumn.DataPropertyName = "Album";
 			this.albumColumn.HeaderText = "Album";
 			this.albumColumn.Name = "albumColumn";
 			this.albumColumn.ReadOnly = true;
+			this.albumColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// durationColumn
 			// 
+			this.durationColumn.DataPropertyName = "Duration";
 			this.durationColumn.HeaderText = "Duration";
 			this.durationColumn.Name = "durationColumn";
 			this.durationColumn.ReadOnly = true;
+			this.durationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// dateColumn
 			// 
+			this.dateColumn.DataPropertyName = "Date";
 			this.dateColumn.HeaderText = "Date";
 			this.dateColumn.Name = "dateColumn";
 			this.dateColumn.ReadOnly = true;
+			this.dateColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// formatColumn
 			// 
+			this.formatColumn.DataPropertyName = "Format";
 			this.formatColumn.HeaderText = "Format";
 			this.formatColumn.Name = "formatColumn";
 			this.formatColumn.ReadOnly = true;
+			this.formatColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
 			// pathColumn
 			// 
+			this.pathColumn.DataPropertyName = "Path";
 			this.pathColumn.HeaderText = "Path";
 			this.pathColumn.Name = "pathColumn";
 			this.pathColumn.ReadOnly = true;
+			this.pathColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			// 
+			// idColumn
+			// 
+			this.idColumn.DataPropertyName = "Id";
+			this.idColumn.HeaderText = "Id";
+			this.idColumn.Name = "idColumn";
+			this.idColumn.ReadOnly = true;
+			this.idColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.idColumn.Visible = false;
 			// 
 			// PlaylistSave
 			// 
@@ -360,8 +394,8 @@
 		private System.Windows.Forms.TextBox identifierTextBox;
 		private System.Windows.Forms.Label formatLabel;
 		private System.Windows.Forms.TextBox formatTextBox;
-		private AdvancedDataGridView itemGrid;
-		private System.Windows.Forms.DataGridViewTextBoxColumn typeColumn;
+		private MediaItemDataGridView itemGrid;
+		private System.Windows.Forms.DataGridViewImageColumn typeColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn sourceColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn numberColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn;
@@ -371,5 +405,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn formatColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn pathColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
 	}
 }

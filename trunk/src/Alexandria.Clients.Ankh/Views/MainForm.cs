@@ -781,7 +781,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			{
 				object source = e.Data.GetData(typeof(TrackSource));
 				if (source != null)
+				{
 					e.Effect = DragDropEffects.Copy;
+				}
+				else
+				{
+					object row = e.Data.GetData(typeof(DataGridViewRow));
+					if (row != null)
+					{
+						e.Effect = DragDropEffects.Move;
+					}
+				}
 			}
 		}
 
@@ -797,6 +807,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_DragDrop(object sender, DragEventArgs e)
 		{
+			queueController.Clear();
 			queueController.LoadData(e.Data);
 		}
 		#endregion
@@ -1615,7 +1626,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					playlist.Date = DateTime.Now;
 					playlist.Number = 1;
 					playlist.Path = new Uri(@"playlist:///Sample%20Playlist");
-					playlist.Source = ControllerConstants.SOURCE_CATALOG;
+					playlist.Source = ModelConstants.SOURCE_CATALOG;
 					playlist.Title = "Sample Playlist";
 					playlist.Type = "Playlist";
 					
@@ -1640,6 +1651,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			PlaylistSave control = toolController.CreatePlaylist();
 			control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+			control.SmallImageList = queueSmallImageList;
 			control.Show();
 		}
 
@@ -1655,6 +1667,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					{
 						PlaylistSave control = toolController.EditPlaylist(playlist);
 						control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+						control.SmallImageList = queueSmallImageList;
 						control.Show();
 					}
 				}
