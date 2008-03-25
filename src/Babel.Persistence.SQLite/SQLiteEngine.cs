@@ -166,33 +166,43 @@ namespace Telesophy.Babel.Persistence.SQLite
 					createTableText.Append(" NOT NULL");
 			}
 
+			const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL, {7} {8} NOT NULL)";
+			const string assocIndexFormat = "CREATE UNIQUE INDEX IF NOT EXISTS pk_{0} ON {0} ({1}, {2})";
+			string assocTableCommandText;
+			string assocIndexText;
+			SQLiteCommand assocTableCommand;
+			SQLiteCommand assocIndexCommand;
 			foreach (Association association in entity.Associations)
 			{
-				const string assocTableFormat = "CREATE TABLE IF NOT EXISTS {0} ({1} {2} NOT NULL, {3} {4} NOT NULL, {5} {6} NOT NULL, {7} {8} NOT NULL)";
-				string assocTableCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)), association.SequenceFieldName, GetAffinity(typeof(int)));
-				SQLiteCommand assocTableCommand = GetCommand(connection, transaction, assocTableCommandText);
-				assocTableCommand.ExecuteNonQuery();
 				
-				const string assocIndexFormat = "CREATE UNIQUE INDEX IF NOT EXISTS pk_{0} ON {0} ({1}, {2})";
-				string assocIndexText = string.Format(assocIndexFormat, association.Name, association.ParentFieldName, association.ChildFieldName);
-				SQLiteCommand assocIndexCommand = GetCommand(connection, transaction, assocIndexText);
+				assocTableCommandText = string.Format(assocTableFormat, association.Name, association.ParentFieldName, GetAffinity(association.Parent.Identifier.Type), association.ChildFieldName, GetAffinity(association.Child.Identifier.Type), association.DateModifiedFieldName, GetAffinity(typeof(DateTime)), association.SequenceFieldName, GetAffinity(typeof(int)));
+				assocTableCommand = GetCommand(connection, transaction, assocTableCommandText);
+				assocTableCommand.ExecuteNonQuery();	
+				
+				assocIndexText = string.Format(assocIndexFormat, association.Name, association.ParentFieldName, association.ChildFieldName);
+				assocIndexCommand = GetCommand(connection, transaction, assocIndexText);
 				assocIndexCommand.ExecuteNonQuery();
 			}
 
 			string commandText = string.Format(tableFormat, entity.Name, createTableText);
 			SQLiteCommand command = GetCommand(connection, transaction, commandText);
 			command.ExecuteNonQuery();
-			
+
+			const string indexFormat = "CREATE {0} IF NOT EXISTS {1} ON {2} ({3})";
+			const string indexNameFormat = "index_{0}_{1}";
+			string indexType;
+			string indexName;
+			string createIndexText;
+			SQLiteCommand createIndex;
 			foreach (Field field in entity.Fields)
 			{
 				if (!field.IsHidden)
 				{
-					string indexType = (field.IsUnique) ? "UNIQUE INDEX" : "INDEX";
-					string indexName = (field == entity.Identifier) ? "pk_" + entity.Name : "index_" + field.Name;
-				
-					const string indexFormat = "CREATE {0} IF NOT EXISTS {1} ON {2} ({3})";
-					string createIndexText = string.Format(indexFormat, indexType, indexName, entity.Name, field.Name);
-					SQLiteCommand createIndex = GetCommand(connection, transaction, createIndexText);
+					indexType = (field.IsUnique) ? "UNIQUE INDEX" : "INDEX";
+					indexName = string.Format(indexNameFormat, entity.Name, field.Name);
+					
+					createIndexText = string.Format(indexFormat, indexType, indexName, entity.Name, field.Name);
+					createIndex = GetCommand(connection, transaction, createIndexText);
 					createIndex.ExecuteNonQuery();
 				}
 			}
