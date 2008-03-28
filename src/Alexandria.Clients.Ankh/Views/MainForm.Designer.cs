@@ -34,10 +34,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -112,6 +112,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.toolAddSelectedItemsToPlaylistMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.QueueGroupBox = new System.Windows.Forms.GroupBox();
+			this.mediaItemSearchBox = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox();
 			this.clearAllFiltersButton = new System.Windows.Forms.Button();
 			this.clearFilterButton = new System.Windows.Forms.Button();
 			this.editFilterButton = new System.Windows.Forms.Button();
@@ -139,10 +140,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sortSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.filterButton = new System.Windows.Forms.Button();
 			this.sortButton = new System.Windows.Forms.Button();
+			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView();
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView();
 			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
 			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,8 +167,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.formatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.mediaItemSearchBox = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -763,6 +762,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.QueueGroupBox.Name = "QueueGroupBox";
 			this.QueueGroupBox.TabStop = false;
 			// 
+			// mediaItemSearchBox
+			// 
+			resources.ApplyResources(this.mediaItemSearchBox, "mediaItemSearchBox");
+			this.mediaItemSearchBox.Name = "mediaItemSearchBox";
+			this.mediaItemSearchBox.PersistenceController = null;
+			this.mediaItemSearchBox.SearchCompleted = null;
+			// 
 			// clearAllFiltersButton
 			// 
 			resources.ApplyResources(this.clearAllFiltersButton, "clearAllFiltersButton");
@@ -979,26 +985,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.sortButton.UseVisualStyleBackColor = true;
 			this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
 			// 
-			// queueSmallImageList
-			// 
-			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-			// 
-			// DirectoryOpenDialog
-			// 
-			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-			// 
-			// taskSmallImageList
-			// 
-			this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
-			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-			// 
 			// queueDataGrid
 			// 
 			this.queueDataGrid.AllowDrop = true;
@@ -1008,14 +994,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.AutoGenerateColumns = false;
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -1040,25 +1026,24 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.durationDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn,
             this.formatDataGridViewTextBoxColumn,
-            this.pathDataGridViewTextBoxColumn,
-            this.statusDataGridViewTextBoxColumn});
-			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
+            this.pathDataGridViewTextBoxColumn});
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
 			this.queueDataGrid.Name = "queueDataGrid";
-			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.queueDataGrid_CellValueChanged);
@@ -1069,6 +1054,26 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueDataGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.queueDataGrid_DataError);
 			this.queueDataGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.queueDataGrid_KeyUp);
 			this.queueDataGrid.DragDrop += new System.Windows.Forms.DragEventHandler(this.queueDataGrid_DragDrop);
+			// 
+			// queueSmallImageList
+			// 
+			this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+			this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+			this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+			this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+			this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+			this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+			// 
+			// DirectoryOpenDialog
+			// 
+			resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
+			// 
+			// taskSmallImageList
+			// 
+			this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
+			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
 			// Status
 			// 
@@ -1127,8 +1132,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -1231,19 +1236,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.pathDataGridViewTextBoxColumn.DataPropertyName = "Path";
 			resources.ApplyResources(this.pathDataGridViewTextBoxColumn, "pathDataGridViewTextBoxColumn");
 			this.pathDataGridViewTextBoxColumn.Name = "pathDataGridViewTextBoxColumn";
-			// 
-			// statusDataGridViewTextBoxColumn
-			// 
-			this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
-			resources.ApplyResources(this.statusDataGridViewTextBoxColumn, "statusDataGridViewTextBoxColumn");
-			this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-			// 
-			// mediaItemSearchBox
-			// 
-			resources.ApplyResources(this.mediaItemSearchBox, "mediaItemSearchBox");
-			this.mediaItemSearchBox.Name = "mediaItemSearchBox";
-			this.mediaItemSearchBox.PersistenceController = null;
-			this.mediaItemSearchBox.SearchCompleted = null;
 			// 
 			// MainForm
 			// 
@@ -1389,6 +1381,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearSortToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clearAllSortsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolCreatePlaylistMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolEditPlaylistMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolAddSelectedItemsToPlaylistMenuItem;
+		private MediaItemSearchBox mediaItemSearchBox;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
 		private System.Windows.Forms.DataGridViewImageColumn Type;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
@@ -1401,9 +1397,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-		private System.Windows.Forms.ToolStripMenuItem toolCreatePlaylistMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolEditPlaylistMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem toolAddSelectedItemsToPlaylistMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn sourceDataGridViewTextBoxColumn;
@@ -1415,8 +1408,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn formatDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
-		private MediaItemSearchBox mediaItemSearchBox;
 	}
 }
 
