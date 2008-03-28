@@ -210,9 +210,14 @@ namespace Telesophy.Babel.Persistence.SQLite
 
 		protected override SQLiteParameter GetParameter(string name, object value)
 		{
-			if (value == null) value = string.Empty;
+			object paramValue = string.Empty;
+		
+			if (value != null)
+			{
+				paramValue = DataConverter.GetEngineValue(value);
+			}
 			
-			return new SQLiteParameter(name, value);
+			return new SQLiteParameter(name, paramValue);
 		}
 		#endregion
 	}
