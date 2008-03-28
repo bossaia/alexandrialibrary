@@ -231,6 +231,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// 
 			// searchLabel
 			// 
+			this.searchLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.searchLabel.AutoSize = true;
 			this.searchLabel.Location = new System.Drawing.Point(26, 480);
 			this.searchLabel.Name = "searchLabel";
