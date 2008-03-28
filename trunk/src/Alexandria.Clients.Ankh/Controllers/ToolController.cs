@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 
 using Telesophy.Alexandria.Model;
 using Telesophy.Alexandria.Clients.Ankh.Views;
@@ -116,8 +117,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			
 			return control;
 		}
-		
-		public void SavePlaylist(PlaylistSave control)
+
+		private void ProcessSavePlaylistResult(IAsyncResult result)
+		{
+		}
+
+		private void SavePlaylistInternal(PlaylistSave control)
 		{
 			if (control != null)
 			{
@@ -133,19 +138,30 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					playlist.Date = control.Date;
 					playlist.Format = control.Format;
 					playlist.Path = control.Path;
-					
+
 					IList<MediaItemData> itemData = control.GetItemData();
 					IList<IMediaItem> items = persistenceController.CreateMediaItems(itemData);
-					
+
 					foreach (IMediaItem item in items)
 					{
 						playlist.Items.Add(item);
 					}
-					
+
 					PersistenceController.SaveMediaSet(playlist);
 				}
 			}
 		}
+		
+		public void SavePlaylist(PlaylistSave control)
+		{
+			SavePlaylistInternal(control);
+			//Thread thread = new Thread(new ParameterizedThreadStart(SavePlaylistInternal));
+			//thread.IsBackground = true;
+			//SavePlaylistAsync handle = new SavePlaylistAsync(SavePlaylistInternal);
+			//handle.BeginInvoke(control, new AsyncCallback(ProcessSavePlaylistResult), null);
+		}
+		
+		private delegate void SavePlaylistAsync(PlaylistSave control);
 		#endregion
 	}
 }
