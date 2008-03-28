@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
@@ -97,8 +98,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				return 0; // termination condition
 
 			ListSortDescription listSortDesc = m_SortCollection[index];
-			object xValue = listSortDesc.PropertyDescriptor.GetValue(x);
-			object yValue = listSortDesc.PropertyDescriptor.GetValue(y);
+			
+			object xValue = null;
+			object yValue = null;
+
+			//HACK: PropertyDescriptor.GetValue() is throwing an 'Object Does Not Match Target Type'
+			//      exception so I'm using the PropertyInfo instead. I can't figure out the cause.
+			PropertyInfo prop = typeof(T).GetProperty(listSortDesc.PropertyDescriptor.Name);
+			if (prop != null)
+			{
+				xValue = prop.GetValue(x, null);
+				yValue = prop.GetValue(y, null);
+				//object xValue = listSortDesc.PropertyDescriptor.GetValue(x);
+				//object yValue = listSortDesc.PropertyDescriptor.GetValue(y);
+			}
 
 			int retValue = CompareValues(xValue,
 			   yValue, listSortDesc.SortDirection);

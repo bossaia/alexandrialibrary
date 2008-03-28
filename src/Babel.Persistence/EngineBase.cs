@@ -93,7 +93,7 @@ namespace Telesophy.Babel.Persistence
 
 			IList<ParameterType> parameters;
 			sql.Append(GetWhereClause(query, out parameters));
-			sql.Append(GetOrderByClause(entity));
+			sql.Append(GetOrderByClause(entity, query));
 
 			return GetCommand(connection, transaction, sql.ToString(), parameters);
 		}
@@ -254,8 +254,10 @@ namespace Telesophy.Babel.Persistence
 			return (isAscending) ? SORT_ORDER_ASCENDING : SORT_ORDER_DESCENDING;
 		}
 		
-		protected virtual string GetOrderByClause(Entity entity)
+		protected virtual string GetOrderByClause(Entity entity, IQuery query)
 		{
+			//if (query != null && query.
+			
 			if (entity != null && entity.DefaultSortOrder != null && entity.DefaultSortOrder.Count > 0)
 			{
 				StringBuilder clause = new StringBuilder(" ORDER BY");

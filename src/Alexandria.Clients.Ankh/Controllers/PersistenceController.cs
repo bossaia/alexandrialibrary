@@ -61,6 +61,53 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Aggregate<IMediaItem> mediaItemSingleton;
 		private Aggregate<IMediaSet> mediaSetWithAllChildren;
 		
+		private IExpression GetMediaItemFilter(string fieldName, string operatorName, string value)
+		{
+			return schema.GetFilter<IMediaItem>(fieldName, operatorName, value);
+		}
+
+		private IExpression GetMediaItemOrFilter(string fieldName, string operatorName, string value)
+		{
+			return schema.GetOrFilter<IMediaItem>(fieldName, operatorName, value);
+		}
+
+		private IExpression GetMediaItemAndFilter(string fieldName, string operatorName, string value)
+		{
+			return schema.GetAndFilter<IMediaItem>(fieldName, operatorName, value);
+		}
+
+		private IQuery GetMediaItemQuery(string search)
+		{
+			IQuery query = null;
+		
+			if (!string.IsNullOrEmpty(search))
+			{
+				query = new Query("MediaItem Search");
+				
+				int number;
+				bool isNumber = int.TryParse(search, out number);
+				
+				DateTime date;
+				bool isDate = DateTime.TryParse(search, out date);
+				
+				TimeSpan duration;
+				bool isDuration = TimeSpan.TryParse(search, out duration);
+				
+				Uri path;
+				bool isPath = Uri.TryCreate(search, UriKind.Absolute, out path);
+				
+				query.Filters.Add(GetMediaItemFilter("Title", "LIKE", search));
+				query.Filters.Add(GetMediaItemOrFilter("Artist", "LIKE", search));
+				query.Filters.Add(GetMediaItemOrFilter("Album", "LIKE", search));
+				if (isNumber) query.Filters.Add(GetMediaItemOrFilter("Number", "=", search));
+				if (isDate) query.Filters.Add(GetMediaItemOrFilter("Date", "=", search));
+				if (isDuration) query.Filters.Add(GetMediaItemOrFilter("Duration", "=", search));
+				if (isPath) query.Filters.Add(GetMediaItemOrFilter("Path", "=", search));
+			}
+			
+			return query;
+		}
+		
 		public ISchema Schema
 		{
 			get { return schema; }
@@ -71,12 +118,30 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			repo.Initialize();
 		}
 		
+		public IList<MediaItemData> ListMediaItemData()
+		{
+			ICollection<IMediaItem> items = ListAllMediaItems();
+			return CreateMediaItemDataList(items);
+		}
+		
+		public IList<MediaItemData> ListMediaItemData(string search)
+		{
+			IQuery query = GetMediaItemQuery(search);
+			return ListMediaItemData(query);
+		}
+		
+		public IList<MediaItemData> ListMediaItemData(IQuery query)
+		{
+			ICollection<IMediaItem> items = ListMediaItems(query);
+			return CreateMediaItemDataList(items);
+		}
+		
 		public ICollection<IMediaItem> ListAllMediaItems()
 		{
 			return repo.List<IMediaItem>(mediaItemSingleton, null);
 		}
 		
-		public ICollection<IMediaItem> ListMediaItems(Query query)
+		public ICollection<IMediaItem> ListMediaItems(IQuery query)
 		{			
 			return repo.List<IMediaItem>(mediaItemSingleton, query);
 		}
@@ -153,6 +218,26 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (items != null && items.Count > 0)
 				return items[0];
 			else return null;
+		}
+		
+		public MediaItemData CreateMediaItemData(IMediaItem item)
+		{
+			if (item != null)
+				return new MediaItemData(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+			else return null;
+		}
+		
+		public IList<MediaItemData> CreateMediaItemDataList(IEnumerable<IMediaItem> items)
+		{
+			IList<MediaItemData> list = new List<MediaItemData>();
+			
+			if (items != null)
+			{
+				foreach (IMediaItem item in items)
+					list.Add(CreateMediaItemData(item));
+			}
+			
+			return list;
 		}
 		
 		public IList<IMediaItem> CreateMediaItems(IList<MediaItemData> data)
