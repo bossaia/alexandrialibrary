@@ -141,21 +141,28 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		
 		private void mediaItemSearchBox_SearchCompleted(object sender, MediaItemSearchEventArgs e)
 		{
-			if (e != null && e.Data != null && e.Data.Count > 0)
+			if (e != null && e.Data != null)
 			{
-				if (e.Data.Count == 1 || e.AllowMultiple)
+				if (e.Data.Count > 0)
 				{
-					foreach (MediaItemData item in e.Data)
-						itemGrid.AddItem(item);
+					if (e.Data.Count == 1 || e.AllowMultiple)
+					{
+						foreach (MediaItemData item in e.Data)
+							itemGrid.AddItem(item);
+					}
+					else
+					{
+						MediaItemSearchResults results = new MediaItemSearchResults();
+						results.LoadData(e.Data);
+						results.Instructions = "Multiple items matched your search criteria. Please select which item(s) you want to add to the playlist and click OK.";
+						results.SmallImageList = smallImageList;
+						results.ChoiceAccepted += new EventHandler<MediaItemSearchEventArgs>(mediaItemSearchBox_SearchCompleted);
+						results.Show();
+					}
 				}
 				else
 				{
-					MediaItemSearchResults results = new MediaItemSearchResults();
-					results.LoadData(e.Data);
-					results.Instructions = "Multiple items matched your search criteria. Please select which item(s) you want to add to the playlist and click OK.";
-					results.SmallImageList = smallImageList;
-					results.ChoiceAccepted += new EventHandler<MediaItemSearchEventArgs>(mediaItemSearchBox_SearchCompleted);
-					results.Show();
+					MessageBox.Show("No media items where found that matched your search criteria.\nYou may want to widen your search.", "NO MATCHING ITEMS FOUND");
 				}
 			}
 		}
