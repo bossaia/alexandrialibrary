@@ -62,6 +62,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Aggregate<IMediaItem> mediaItemSingleton;
 		private Aggregate<IMediaSet> mediaSetWithAllChildren;
 		
+		private IMediaSet lastSavedMediaSet;
+		
 		private IExpression GetMediaItemFilter(string fieldName, string operatorName, object value)
 		{
 			return schema.GetFilter<IMediaItem>(fieldName, operatorName, value);
@@ -157,40 +159,58 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
-			Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
-			query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
+			IMediaSet model = null;
 			
-			ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
-			if (sets != null && sets.Count > 0)
+			if (lastSavedMediaSet != null && lastSavedMediaSet.Id == id)
 			{
-				using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+				model = lastSavedMediaSet;
+			}
+			else
+			{
+				Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
+				query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
+				
+				ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+				if (sets != null && sets.Count > 0)
 				{
-					iter.Reset();
-					iter.MoveNext();
-					return iter.Current;
+					using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+					{
+						iter.Reset();
+						iter.MoveNext();
+						model = iter.Current;
+					}
 				}
 			}
 			
-			return null;
+			return model;
 		}
 		
 		public IMediaSet LookupMediaSet(Uri path)
 		{
-			Query query = new Query(string.Format("Search MediaSet: Path={0}", path));
-			query.Filters.Add(schema.GetFilter<IMediaSet>("Path", "=", path.ToString()));
-
-			ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
-			if (sets != null && sets.Count > 0)
+			IMediaSet model = null;
+		
+			if (lastSavedMediaSet != null && lastSavedMediaSet.Path == path)
 			{
-				using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+				model = lastSavedMediaSet;
+			}
+			else
+			{
+				Query query = new Query(string.Format("Search MediaSet: Path={0}", path));
+				query.Filters.Add(schema.GetFilter<IMediaSet>("Path", "=", path.ToString()));
+
+				ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+				if (sets != null && sets.Count > 0)
 				{
-					iter.Reset();
-					iter.MoveNext();
-					return iter.Current;
+					using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+					{
+						iter.Reset();
+						iter.MoveNext();
+						model = iter.Current;
+					}
 				}
 			}
 
-			return null;
+			return model;
 		}
 		
 		public IMediaItem LookupMediaItem(Guid id)
@@ -282,17 +302,28 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return items;
 		}
 		
-		private void SaveMediaSetInternal(object model)
+		private void SaveMediaSetInternal(IMediaSet model)
 		{
-			IList<IMediaSet> models = new List<IMediaSet>() { (IMediaSet)model };
+			IList<IMediaSet> models = new List<IMediaSet>() { model };
 			repo.Save<IMediaSet>(mediaSetWithAllChildren, models);
 		}
 		
+		private void SaveMediaSetComplete(IAsyncResult result)
+		{
+		}
+		
+		private delegate void SaveMediaSetAsync(IMediaSet model);
+		
 		public void SaveMediaSet(IMediaSet model)
 		{
-			Thread thread = new Thread(new ParameterizedThreadStart(SaveMediaSetInternal));
-			thread.IsBackground = true;
-			thread.Start(model);
+			lastSavedMediaSet = model;
+		
+			SaveMediaSetAsync handle = new SaveMediaSetAsync(SaveMediaSetInternal);
+			handle.BeginInvoke(model, new AsyncCallback(SaveMediaSetComplete), null);
+			
+			//Thread thread = new Thread(new ParameterizedThreadStart(SaveMediaSetInternal));
+			//thread.IsBackground = true;
+			//thread.Start(model);
 		}
 		
 		public void DeleteMediaSet(IMediaSet model)
