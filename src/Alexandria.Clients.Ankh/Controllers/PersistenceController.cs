@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Text;
+using System.Threading;
 
 using Telesophy.Alexandria.Clients.Ankh.Views.Data;
 
@@ -281,10 +282,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return items;
 		}
 		
+		private void SaveMediaSetInternal(object model)
+		{
+			IList<IMediaSet> models = new List<IMediaSet>() { (IMediaSet)model };
+			repo.Save<IMediaSet>(mediaSetWithAllChildren, models);
+		}
+		
 		public void SaveMediaSet(IMediaSet model)
 		{
-			IList<IMediaSet> models = new List<IMediaSet>() { model };
-			repo.Save<IMediaSet>(mediaSetWithAllChildren, models);
+			Thread thread = new Thread(new ParameterizedThreadStart(SaveMediaSetInternal));
+			thread.IsBackground = true;
+			thread.Start(model);
 		}
 		
 		public void DeleteMediaSet(IMediaSet model)
