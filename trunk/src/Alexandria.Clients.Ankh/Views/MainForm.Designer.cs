@@ -34,10 +34,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.PlayPauseButton = new System.Windows.Forms.Button();
 			this.StopButton = new System.Windows.Forms.Button();
 			this.PlaybackTrackBar = new System.Windows.Forms.TrackBar();
@@ -167,6 +167,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.formatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.mediaItemSearchBox = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -744,6 +745,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// QueueGroupBox
 			// 
 			resources.ApplyResources(this.QueueGroupBox, "QueueGroupBox");
+			this.QueueGroupBox.Controls.Add(this.mediaItemSearchBox);
 			this.QueueGroupBox.Controls.Add(this.clearAllFiltersButton);
 			this.QueueGroupBox.Controls.Add(this.clearFilterButton);
 			this.QueueGroupBox.Controls.Add(this.editFilterButton);
@@ -1006,14 +1008,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueDataGrid.AllowUserToResizeRows = false;
 			resources.ApplyResources(this.queueDataGrid, "queueDataGrid");
 			this.queueDataGrid.AutoGenerateColumns = false;
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Status,
@@ -1040,23 +1042,23 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.formatDataGridViewTextBoxColumn,
             this.pathDataGridViewTextBoxColumn,
             this.statusDataGridViewTextBoxColumn});
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.queueDataGrid.DefaultCellStyle = dataGridViewCellStyle7;
 			this.queueDataGrid.Name = "queueDataGrid";
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.queueDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
 			this.queueDataGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.queueDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
 			this.queueDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.queueDataGrid_CellValueChanged);
@@ -1125,8 +1127,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// Duration
 			// 
 			this.Duration.DataPropertyName = "Duration";
-			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+			this.Duration.DefaultCellStyle = dataGridViewCellStyle6;
 			resources.ApplyResources(this.Duration, "Duration");
 			this.Duration.Name = "Duration";
 			this.Duration.ReadOnly = true;
@@ -1235,6 +1237,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.statusDataGridViewTextBoxColumn.DataPropertyName = "Status";
 			resources.ApplyResources(this.statusDataGridViewTextBoxColumn, "statusDataGridViewTextBoxColumn");
 			this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+			// 
+			// mediaItemSearchBox
+			// 
+			resources.ApplyResources(this.mediaItemSearchBox, "mediaItemSearchBox");
+			this.mediaItemSearchBox.Name = "mediaItemSearchBox";
+			this.mediaItemSearchBox.PersistenceController = null;
+			this.mediaItemSearchBox.SearchCompleted = null;
 			// 
 			// MainForm
 			// 
@@ -1407,6 +1416,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn formatDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
+		private MediaItemSearchBox mediaItemSearchBox;
 	}
 }
 

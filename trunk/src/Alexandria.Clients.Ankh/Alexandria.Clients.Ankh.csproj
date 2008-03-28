@@ -58,7 +58,19 @@
     <Compile Include="Views\MediaItemDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\MediaItemSearchBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\MediaItemSearchBox.Designer.cs">
+      <DependentUpon>MediaItemSearchBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MediaItemSearchEventArgs.cs" />
+    <Compile Include="Views\MediaItemSearchResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MediaItemSearchResults.Designer.cs">
+      <DependentUpon>MediaItemSearchResults.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaylistSave.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +163,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Alexandria.Clients.Ankh.ico" />
+    <EmbeddedResource Include="Views\MediaItemSearchBox.resx">
+      <DependentUpon>MediaItemSearchBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MediaItemSearchResults.resx">
+      <DependentUpon>MediaItemSearchResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\PlaylistSave.resx">
       <DependentUpon>PlaylistSave.cs</DependentUpon>
       <SubType>Designer</SubType>

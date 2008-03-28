@@ -22,6 +22,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			InitializeComponent();
 			
 			itemGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(itemGrid_CellFormatting);
+			mediaItemSearchBox.SearchCompleted += new EventHandler<MediaItemSearchEventArgs>(mediaItemSearchBox_SearchCompleted);
 		}
 		#endregion
 		
@@ -43,90 +44,57 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private ToolController toolController;
 		private PlaylistSaveConfirmHandle saveConfirmHandle;
 
-		//private BindingListView<MediaItemData> bindingList;
-		//private BindingSource bindingSource;
 		private ImageList smallImageList;
-		private DataGridViewRow selectedRow;
-		private int selectedRowSaveIndex;
+		//private DataGridViewRow selectedRow;
+		//private int selectedRowSaveIndex;
 		#endregion
 		
 		#region Private Methods
 		private void itemGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			//if (e.Value != null)
-			//{
-				//queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
-				if (itemGrid.Columns[e.ColumnIndex].Name == COLUMN_DURATION)
+			if (itemGrid.Columns[e.ColumnIndex].Name == COLUMN_DURATION)
+			{
+				TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
+				if (duration.Hours > 0)
 				{
-					TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
-					if (duration.Hours > 0)
-					{
-						e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
-					}
-					else if (duration.Minutes > 0)
-					{
-						e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
-					}
-					else
-					{
-						e.Value = string.Format("0:{0:00}", duration.Seconds);
-					}
+					e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
 				}
-				//if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
-				if (itemGrid.Columns[e.ColumnIndex].Name == COLUMN_TYPE)
+				else if (duration.Minutes > 0)
 				{
-					string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
-				
-					switch(value)
-					{
-						case ControllerConstants.TYPE_AUDIO:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-							break;
-						case ControllerConstants.TYPE_BOOK:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
-							break;
-						case ControllerConstants.TYPE_IMAGE:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
-							break;
-						case ControllerConstants.TYPE_MOVIE:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
-							break;
-						case ControllerConstants.TYPE_TELEVISION:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
-							break;
-						default:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-							break;
-					}
+					e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
 				}
-			//}
-			//else e.Value = string.Empty;
+				else
+				{
+					e.Value = string.Format("0:{0:00}", duration.Seconds);
+				}
+			}
+			else if (itemGrid.Columns[e.ColumnIndex].Name == COLUMN_TYPE)
+			{
+				string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
+			
+				switch(value)
+				{
+					case ControllerConstants.TYPE_AUDIO:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+						break;
+					case ControllerConstants.TYPE_BOOK:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
+						break;
+					case ControllerConstants.TYPE_IMAGE:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
+						break;
+					case ControllerConstants.TYPE_MOVIE:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
+						break;
+					case ControllerConstants.TYPE_TELEVISION:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
+						break;
+					default:
+						e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+						break;
+				}
+			}
 		}
-
-		//private void RowDragDropping(object sender, AdvancedDataGridRowDragDropEventArgs e)
-		//{
-		//    if (e != null)
-		//    {
-		//        DataGridViewRow x = e.SourceRow;
-		//    }
-		//}
-
-		//private void RowDragDropped(object sender, AdvancedDataGridRowDragDropEventArgs e)
-		//{
-		//    bindingList.RemoveAt(e.SourceIndex);
-		//    bindingList.Insert(e.TargetIndex, e.MediaItemData);
-		//    itemGrid.Rows[e.TargetIndex].Selected = true;
-		//}
-
-		//private void ColumnDragDropping(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
-		//{
-		//    selectedRowSaveIndex = selectedRow.Index;
-		//}
-
-		//private void ColumnDragDropped(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
-		//{
-		//    selectedRow = itemGrid.Rows[selectedRowSaveIndex];
-		//}
 		
 		private void CheckForValidDrag(DragEventArgs e)
 		{
@@ -170,13 +138,41 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 			Close();
 		}
+		
+		private void mediaItemSearchBox_SearchCompleted(object sender, MediaItemSearchEventArgs e)
+		{
+			if (e != null && e.Data != null && e.Data.Count > 0)
+			{
+				if (e.Data.Count == 1 || e.AllowMultiple)
+				{
+					foreach (MediaItemData item in e.Data)
+						itemGrid.AddItem(item);
+				}
+				else
+				{
+					MediaItemSearchResults results = new MediaItemSearchResults();
+					results.LoadData(e.Data);
+					results.Instructions = "Multiple items matched your search criteria. Please select which item(s) you want to add to the playlist and click OK.";
+					results.SmallImageList = smallImageList;
+					results.ChoiceAccepted += new EventHandler<MediaItemSearchEventArgs>(mediaItemSearchBox_SearchCompleted);
+					results.Show();
+				}
+			}
+		}
 		#endregion
 		
 		#region Public Properties
 		public ToolController ToolController
 		{
 			get { return toolController; }
-			set { toolController = value; }
+			set
+			{
+				toolController = value;
+				if (toolController != null)
+				{
+					mediaItemSearchBox.PersistenceController = toolController.PersistenceController;
+				}
+			}
 		}
 
 		public ImageList SmallImageList
@@ -251,23 +247,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 
 		#region Public Methods
-		//public void Initialize()
-		//{
-		//    bindingList = new BindingListView<MediaItemData>();
-		//    bindingList.AllowRemove = true;
-
-		//    bindingSource = new BindingSource();
-		//    bindingSource.DataSource = bindingList;
-			
-		//    //itemGrid.AutoGenerateColumns = false;
-		//    //itemGrid.DataSource = bindingSource;
-		//    //itemGrid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
-		//    //itemGrid.RowDragDropping += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(RowDragDropping);
-		//    //itemGrid.RowDragDropped += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(RowDragDropped);
-		//    //itemGrid.ColumnDragDropping += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(ColumnDragDropping);
-		//    //itemGrid.ColumnDragDropped += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(ColumnDragDropped);
-		//}
-		
 		public void AddItem(MediaItemData item)
 		{
 			itemGrid.AddItem(item);
