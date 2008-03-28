@@ -425,7 +425,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			// 
 			this.toolManagerToolStripMenuItem.Name = "toolManagerToolStripMenuItem";
 			resources.ApplyResources(this.toolManagerToolStripMenuItem, "toolManagerToolStripMenuItem");
-			this.toolManagerToolStripMenuItem.Click += new System.EventHandler(this.toolManagerToolStripMenuItem_Click);
 			// 
 			// tasksToolStripMenuItem
 			// 

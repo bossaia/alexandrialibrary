@@ -40,6 +40,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 	public class TrackSource : ITrackSource
 	{
 		#region Constructors
+		public TrackSource(Guid id)
+		{
+			this.id = id;
+		}
+		
 		public TrackSource(Uri path)
 		{
 			this.path = path;
@@ -54,11 +59,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 	
 		#region Private Fields
 		private IMediaSetFactory factory = new SimpleAlbumFactory();
+		private Guid id = default(Guid);
 		private Uri path;
 		private AspiDeviceInfo deviceInfo;
 		#endregion
 			
 		#region ITrackSource Members
+		public Guid Id
+		{
+			get { return id; }
+		}
+		
 		public Uri Path
 		{
 			get { return path; }
