@@ -336,7 +336,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				ListViewItem playlistItem = new ListViewItem(playlist.Title, playlistIndex);
 				playlistItem.ToolTipText = playlist.Path.ToString();
 				
-				playlistItem.Tag = new TrackSource(playlist.Path);
+				playlistItem.Tag = new TrackSource(playlist.Id);
 				ToolBoxListView.Items.Add(playlistItem);
 			}
 			
@@ -1622,42 +1622,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 
 		#region Tool Methods
-		private void toolManagerToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			bool testAdd = false;
-			bool testDelete = false;
-			
-			if (testAdd)
-			{
-				if (queueDataGrid.Rows.Count > 0)
-				{
-					Album playlist = new Album();
-					playlist.Id = Guid.NewGuid();
-					playlist.Artist = "Various Artists";
-					playlist.Date = DateTime.Now;
-					playlist.Number = 1;
-					playlist.Path = new Uri(@"playlist:///Sample%20Playlist");
-					playlist.Source = ModelConstants.SOURCE_CATALOG;
-					playlist.Title = "Sample Playlist";
-					playlist.Type = "Playlist";
-					
-					IList<IMediaItem> items = queueController.GetSelectedItems();
-					foreach(IMediaItem item in items)
-						playlist.Items.Add(item);
-						
-					persistenceController.SaveMediaSet(playlist);
-				}
-			}
-			
-			if (testDelete)
-			{
-				Guid id = new Guid("6159e428-4713-4133-b1dd-7b28fd835e94");
-				IMediaSet set = persistenceController.LookupMediaSet(id);
-				if (set != null && set.Items.Count > 0)
-					persistenceController.DeleteMediaSet(set);
-			}
-		}
-
 		private void toolCreatePlaylistMenuItem_Click(object sender, EventArgs e)
 		{
 			PlaylistSave control = toolController.CreatePlaylist();
@@ -1671,16 +1635,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
 			{
 				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
-				if (source != null)
+				if (source != null && source.Id != default(Guid))
 				{
-					IMediaSet playlist = persistenceController.LookupMediaSet(source.Path);
-					if (playlist != null)
+					if (!persistenceController.IsMediaSetPendingSave(source.Id))
 					{
-						PlaylistSave control = toolController.EditPlaylist(playlist);
-						control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
-						control.SmallImageList = queueSmallImageList;
-						control.Show();
+						IMediaSet playlist = persistenceController.LookupMediaSet(source.Id);
+						if (playlist != null)
+						{
+							PlaylistSave control = toolController.EditPlaylist(playlist);
+							control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+							control.SmallImageList = queueSmallImageList;
+							control.Show();
+						}
 					}
+					else MessageBox.Show("Please wait a few seconds for it to be saved and then try editing it again.", "THIS PLAYLIST IS BEING SAVED");
 				}
 			}
 		}
@@ -1690,9 +1658,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
 			{
 				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
-				if (source != null)
+				if (source != null && source.Id != default(Guid))
 				{
-					IMediaSet playlist = persistenceController.LookupMediaSet(source.Path);
+					IMediaSet playlist = persistenceController.LookupMediaSet(source.Id);
 					if (playlist != null)
 					{
 						IList<IMediaItem> items = queueController.GetSelectedItems();

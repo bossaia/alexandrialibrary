@@ -154,7 +154,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					{
 						MediaItemSearchResults results = new MediaItemSearchResults();
 						results.LoadData(e.Data);
-						results.Instructions = "Multiple items matched your search criteria. Please select which item(s) you want to add to the playlist and click OK.";
+						results.Instructions = "Multiple items were found that matched your search criteria. Please select which item(s) you want to add to the playlist and click OK.";
 						results.SmallImageList = smallImageList;
 						results.ChoiceAccepted += new EventHandler<MediaItemSearchEventArgs>(mediaItemSearchBox_SearchCompleted);
 						results.Show();
@@ -162,7 +162,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				}
 				else
 				{
-					MessageBox.Show("No media items where found that matched your search criteria.\nYou may want to widen your search.", "NO MATCHING ITEMS FOUND");
+					MessageBox.Show("No items were found that matched your search criteria.\nYou may want to widen your search.", "NO MATCHING ITEMS FOUND");
 				}
 			}
 		}
