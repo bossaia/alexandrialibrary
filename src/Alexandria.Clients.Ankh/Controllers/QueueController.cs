@@ -384,6 +384,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			LoadTracks(tracks, "MP3tunes");
 		}
 
+		public void LoadTracks(IList<MediaItemData> data)
+		{
+			if (data != null)
+			{
+				foreach (MediaItemData item in data)
+				{
+					LoadTrack(item);
+				}
+			}
+		}
+
 		public void LoadTracks(IList<IMediaItem> tracks, string source)
 		{
 			if (tracks != null)
@@ -498,6 +509,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			
 			grid.AddItem(item);
 			//bindingList.Add(item);
+		}
+		
+		public void LoadTrack(MediaItemData item)
+		{
+			grid.AddItem(item);
 		}
 		
 		public string CleanupFileName(string fileName)

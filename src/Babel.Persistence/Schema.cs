@@ -107,17 +107,17 @@ namespace Telesophy.Babel.Persistence
 			return null;
 		}
 		
-		public IExpression GetFilter<T>(string fieldName, string operatorName, string value)
+		public IExpression GetFilter<T>(string fieldName, string operatorName, object value)
 		{
 			return new Expression(GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
 		}
 
-		public IExpression GetAndFilter<T>(string fieldName, string operatorName, string value)
+		public IExpression GetAndFilter<T>(string fieldName, string operatorName, object value)
 		{
 			return new Expression(OperatorFactory.GetOperator(Schema.FILTER_OP_AND), GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
 		}
 		
-		public IExpression GetOrFilter<T>(string fieldName, string operatorName, string value)
+		public IExpression GetOrFilter<T>(string fieldName, string operatorName, object value)
 		{
 			return new Expression(OperatorFactory.GetOperator(Schema.FILTER_OP_OR), GetField<T>(fieldName), OperatorFactory.GetOperator(operatorName), value);
 		}

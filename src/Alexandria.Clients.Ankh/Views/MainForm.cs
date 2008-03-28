@@ -167,6 +167,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private void CustomInitialize()
 		{
 			InitializeTaskMenu();
+
+			mediaItemSearchBox.PersistenceController = persistenceController;			
+			mediaItemSearchBox.SearchCompleted += new EventHandler<MediaItemSearchEventArgs>(OnMediaItemSearchCompleted);
 		}
 		#endregion
 		
@@ -1517,6 +1520,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				//DoFilter();
 			}
 		}		
+		#endregion
+
+		#region Search Methods
+		private void OnMediaItemSearchCompleted(object sender, MediaItemSearchEventArgs e)
+		{
+			queueController.Clear();
+			queueController.LoadTracks(e.Data);
+		}
 		#endregion
 
 		#region Task Methods

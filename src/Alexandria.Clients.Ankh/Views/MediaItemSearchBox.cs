@@ -27,22 +27,67 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
-namespace Telesophy.Babel.Persistence
+using Telesophy.Alexandria.Clients.Ankh.Controllers;
+using Telesophy.Alexandria.Clients.Ankh.Views.Data;
+
+namespace Telesophy.Alexandria.Clients.Ankh.Views
 {
-	public interface ISchema : INamedItem
+	public partial class MediaItemSearchBox : UserControl
 	{
-		string Namespace { get; }
-		EntityCollection Entities { get; }
-		NamedItemCollection<Aggregate> Aggregates { get; }
-		void Initialize();
-		Entity<T> GetEntity<T>();
-		Aggregate<T> GetAggregate<T>(string name);
-		Field GetField<T>(string name);
-		IExpression GetFilter<T>(string fieldName, string operatorName, object value);
-		IExpression GetAndFilter<T>(string fieldName, string operatorName, object value);
-		IExpression GetOrFilter<T>(string fieldName, string operatorName, object value);
+		#region Constructors
+		public MediaItemSearchBox()
+		{
+			InitializeComponent();
+		}
+		#endregion
+
+		#region Private Fields
+		private PersistenceController persistenceController;
+		private EventHandler<MediaItemSearchEventArgs> searchCompleted;
+		#endregion
+
+		#region Overrides
+		protected override void OnPaint(PaintEventArgs pe)
+		{
+
+			base.OnPaint(pe);
+		}
+		#endregion
+
+		#region Private Event Methods
+		private void searchButton_Click(object sender, EventArgs e)
+		{
+			string search = searchTextBox.Text;
+			IList<MediaItemData> list = persistenceController.ListMediaItemData(search);
+
+			if (SearchCompleted != null)
+			{
+				MediaItemSearchEventArgs searchArgs = new MediaItemSearchEventArgs(list);
+				SearchCompleted(this, searchArgs);
+			}
+		}
+		#endregion
+
+		#region Public Properties
+		[CLSCompliant(false)]
+		public PersistenceController PersistenceController
+		{
+			get { return persistenceController; }
+			set { persistenceController = value; }
+		}
+
+		public EventHandler<MediaItemSearchEventArgs> SearchCompleted
+		{
+			get { return searchCompleted; }
+			set { searchCompleted = value; }
+		}
+		#endregion
 	}
 }

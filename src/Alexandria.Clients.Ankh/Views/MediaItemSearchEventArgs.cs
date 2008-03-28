@@ -14,11 +14,22 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.data = data;
 		}
 		
+		public MediaItemSearchEventArgs(IList<MediaItemData> data, bool allowMultiple) : this(data)
+		{
+			this.allowMultiple = allowMultiple;
+		}
+		
 		private IList<MediaItemData> data;
+		private bool allowMultiple;
 		
 		public IList<MediaItemData> Data
 		{
 			get { return data; }
+		}
+		
+		public bool AllowMultiple
+		{
+			get { return allowMultiple; }
 		}
 	}
 }
