@@ -799,6 +799,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				
 				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
 				
+				grid.Sort(sorts);
+				
 				//((IBindingListView)bindingList).ApplySort(sorts);
 				
 				//if (selectedId != default(Guid))

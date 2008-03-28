@@ -58,6 +58,7 @@
     <Compile Include="Views\MediaItemDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Views\MediaItemSearchEventArgs.cs" />
     <Compile Include="Views\PlaylistSave.cs">
       <SubType>Form</SubType>
     </Compile>
