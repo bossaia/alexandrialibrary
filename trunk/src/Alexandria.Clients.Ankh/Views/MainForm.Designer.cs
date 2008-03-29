@@ -156,17 +156,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.sourceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.numberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.artistDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.albumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.durationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.formatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -1014,18 +1003,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.Date,
             this.Format,
             this.Path,
-            this.Id,
-            this.idDataGridViewTextBoxColumn,
-            this.typeDataGridViewTextBoxColumn,
-            this.sourceDataGridViewTextBoxColumn,
-            this.numberDataGridViewTextBoxColumn,
-            this.titleDataGridViewTextBoxColumn,
-            this.artistDataGridViewTextBoxColumn,
-            this.albumDataGridViewTextBoxColumn,
-            this.durationDataGridViewTextBoxColumn,
-            this.dateDataGridViewTextBoxColumn,
-            this.formatDataGridViewTextBoxColumn,
-            this.pathDataGridViewTextBoxColumn});
+            this.Id});
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1169,72 +1147,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.Id.ReadOnly = true;
 			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
 			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			resources.ApplyResources(this.idDataGridViewTextBoxColumn, "idDataGridViewTextBoxColumn");
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			// 
-			// typeDataGridViewTextBoxColumn
-			// 
-			this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-			resources.ApplyResources(this.typeDataGridViewTextBoxColumn, "typeDataGridViewTextBoxColumn");
-			this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-			// 
-			// sourceDataGridViewTextBoxColumn
-			// 
-			this.sourceDataGridViewTextBoxColumn.DataPropertyName = "Source";
-			resources.ApplyResources(this.sourceDataGridViewTextBoxColumn, "sourceDataGridViewTextBoxColumn");
-			this.sourceDataGridViewTextBoxColumn.Name = "sourceDataGridViewTextBoxColumn";
-			// 
-			// numberDataGridViewTextBoxColumn
-			// 
-			this.numberDataGridViewTextBoxColumn.DataPropertyName = "Number";
-			resources.ApplyResources(this.numberDataGridViewTextBoxColumn, "numberDataGridViewTextBoxColumn");
-			this.numberDataGridViewTextBoxColumn.Name = "numberDataGridViewTextBoxColumn";
-			// 
-			// titleDataGridViewTextBoxColumn
-			// 
-			this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-			resources.ApplyResources(this.titleDataGridViewTextBoxColumn, "titleDataGridViewTextBoxColumn");
-			this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-			// 
-			// artistDataGridViewTextBoxColumn
-			// 
-			this.artistDataGridViewTextBoxColumn.DataPropertyName = "Artist";
-			resources.ApplyResources(this.artistDataGridViewTextBoxColumn, "artistDataGridViewTextBoxColumn");
-			this.artistDataGridViewTextBoxColumn.Name = "artistDataGridViewTextBoxColumn";
-			// 
-			// albumDataGridViewTextBoxColumn
-			// 
-			this.albumDataGridViewTextBoxColumn.DataPropertyName = "Album";
-			resources.ApplyResources(this.albumDataGridViewTextBoxColumn, "albumDataGridViewTextBoxColumn");
-			this.albumDataGridViewTextBoxColumn.Name = "albumDataGridViewTextBoxColumn";
-			// 
-			// durationDataGridViewTextBoxColumn
-			// 
-			this.durationDataGridViewTextBoxColumn.DataPropertyName = "Duration";
-			resources.ApplyResources(this.durationDataGridViewTextBoxColumn, "durationDataGridViewTextBoxColumn");
-			this.durationDataGridViewTextBoxColumn.Name = "durationDataGridViewTextBoxColumn";
-			// 
-			// dateDataGridViewTextBoxColumn
-			// 
-			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-			resources.ApplyResources(this.dateDataGridViewTextBoxColumn, "dateDataGridViewTextBoxColumn");
-			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-			// 
-			// formatDataGridViewTextBoxColumn
-			// 
-			this.formatDataGridViewTextBoxColumn.DataPropertyName = "Format";
-			resources.ApplyResources(this.formatDataGridViewTextBoxColumn, "formatDataGridViewTextBoxColumn");
-			this.formatDataGridViewTextBoxColumn.Name = "formatDataGridViewTextBoxColumn";
-			// 
-			// pathDataGridViewTextBoxColumn
-			// 
-			this.pathDataGridViewTextBoxColumn.DataPropertyName = "Path";
-			resources.ApplyResources(this.pathDataGridViewTextBoxColumn, "pathDataGridViewTextBoxColumn");
-			this.pathDataGridViewTextBoxColumn.Name = "pathDataGridViewTextBoxColumn";
 			// 
 			// MainForm
 			// 
@@ -1396,17 +1308,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn sourceDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn numberDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn artistDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn albumDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn durationDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn formatDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn pathDataGridViewTextBoxColumn;
 	}
 }
 
