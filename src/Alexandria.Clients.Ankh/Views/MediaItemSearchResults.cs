@@ -20,7 +20,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			InitializeComponent();
 
-			grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
+			//grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
 		}
 		#endregion
 		
@@ -45,51 +45,51 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 		
 		#region Private Event Methods
-		private void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-		{
-			if (grid.Columns[e.ColumnIndex].Name == COLUMN_DURATION)
-			{
-				TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
-				if (duration.Hours > 0)
-				{
-					e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
-				}
-				else if (duration.Minutes > 0)
-				{
-					e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
-				}
-				else
-				{
-					e.Value = string.Format("0:{0:00}", duration.Seconds);
-				}
-			}
-			else if (grid.Columns[e.ColumnIndex].Name == COLUMN_TYPE)
-			{
-				string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
+		//private void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		//{
+		//    if (grid.Columns[e.ColumnIndex].Name == COLUMN_DURATION)
+		//    {
+		//        TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
+		//        if (duration.Hours > 0)
+		//        {
+		//            e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
+		//        }
+		//        else if (duration.Minutes > 0)
+		//        {
+		//            e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
+		//        }
+		//        else
+		//        {
+		//            e.Value = string.Format("0:{0:00}", duration.Seconds);
+		//        }
+		//    }
+		//    else if (grid.Columns[e.ColumnIndex].Name == COLUMN_TYPE)
+		//    {
+		//        string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
 
-				switch (value)
-				{
-					case ControllerConstants.TYPE_AUDIO:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-						break;
-					case ControllerConstants.TYPE_BOOK:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
-						break;
-					case ControllerConstants.TYPE_IMAGE:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
-						break;
-					case ControllerConstants.TYPE_MOVIE:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
-						break;
-					case ControllerConstants.TYPE_TELEVISION:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
-						break;
-					default:
-						e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-						break;
-				}
-			}
-		}
+		//        switch (value)
+		//        {
+		//            case ControllerConstants.TYPE_AUDIO:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+		//                break;
+		//            case ControllerConstants.TYPE_BOOK:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
+		//                break;
+		//            case ControllerConstants.TYPE_IMAGE:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
+		//                break;
+		//            case ControllerConstants.TYPE_MOVIE:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
+		//                break;
+		//            case ControllerConstants.TYPE_TELEVISION:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
+		//                break;
+		//            default:
+		//                e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+		//                break;
+		//        }
+		//    }
+		//}
 		
 		private void cancelButton_Click(object sender, EventArgs e)
 		{

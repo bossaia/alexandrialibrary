@@ -83,6 +83,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap book_open {
+            get {
+                object obj = ResourceManager.GetObject("book_open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap cancel {
             get {
                 object obj = ResourceManager.GetObject("cancel", resourceCulture);
@@ -317,6 +324,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap film {
+            get {
+                object obj = ResourceManager.GetObject("film", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         /// <summary>
         ///   Looks up a localized string similar to Copyright (c) 2007 Dan Poage\n\nPermission is hereby granted, free of charge, to any person\nobtaining a copy of this software and associated documentation\nfiles (the &quot;Software&quot;), to deal in the Software without\n\nrestriction, including without limitation the rights to use,\ncopy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the\nSoftware is furnished to do so, subject to the following\nconditions:\n\nThe above copyright notice and this [rest of string was truncated]&quot;;.
         /// </summary>
@@ -326,9 +340,23 @@ namespace Telesophy.Alexandria.Clients.Ankh.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap music {
+            get {
+                object obj = ResourceManager.GetObject("music", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap pencil_add {
             get {
                 object obj = ResourceManager.GetObject("pencil_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap picture {
+            get {
+                object obj = ResourceManager.GetObject("picture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -457,6 +485,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Properties {
         internal static System.Drawing.Bitmap sound_mute {
             get {
                 object obj = ResourceManager.GetObject("sound_mute", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap television {
+            get {
+                object obj = ResourceManager.GetObject("television", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

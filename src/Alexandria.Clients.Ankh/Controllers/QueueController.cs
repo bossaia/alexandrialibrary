@@ -108,7 +108,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set {
 				if (selectedRow != null && selectedRow != value && selectedRow.Index > -1)
 				{
-					grid.Rows[selectedRow.Index].Cells[ControllerConstants.COL_STATUS].Value = string.Empty;
+					grid.Rows[selectedRow.Index].Cells[ControllerConstants.COLUMN_STATUS].Value = string.Empty;
 				}
 				 
 				selectedRow = value;
@@ -151,17 +151,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			if (row.Index > -1)
 			{			
-				Guid id = GetItemGuid(row.Cells[ControllerConstants.COL_ID]);
-				string type = GetItemString(row.Cells[ControllerConstants.COL_TYPE]);
-				string source = GetItemString(row.Cells[ControllerConstants.COL_SOURCE]);
-				int number = GetItemInt(row.Cells[ControllerConstants.COL_NUMBER]);
-				string title = GetItemString(row.Cells[ControllerConstants.COL_TITLE]);
-				string artist = GetItemString(row.Cells[ControllerConstants.COL_ARTIST]);
-				string album = GetItemString(row.Cells[ControllerConstants.COL_ALBUM]);
-				TimeSpan duration = GetItemTimeSpan(row.Cells[ControllerConstants.COL_DURATION]);
-				DateTime date = GetItemDateTime(row.Cells[ControllerConstants.COL_DATE]);
-				string format = GetItemString(row.Cells[ControllerConstants.COL_FORMAT]);
-				Uri path = GetItemUri(row.Cells[ControllerConstants.COL_PATH]);
+				Guid id = GetItemGuid(row.Cells[ControllerConstants.COLUMN_ID]);
+				string type = GetItemString(row.Cells[ControllerConstants.COLUMN_TYPE]);
+				string source = GetItemString(row.Cells[ControllerConstants.COLUMN_SOURCE]);
+				int number = GetItemInt(row.Cells[ControllerConstants.COLUMN_NUMBER]);
+				string title = GetItemString(row.Cells[ControllerConstants.COLUMN_TITLE]);
+				string artist = GetItemString(row.Cells[ControllerConstants.COLUMN_ARTIST]);
+				string album = GetItemString(row.Cells[ControllerConstants.COLUMN_ALBUM]);
+				TimeSpan duration = GetItemTimeSpan(row.Cells[ControllerConstants.COLUMN_DURATION]);
+				DateTime date = GetItemDateTime(row.Cells[ControllerConstants.COLUMN_DATE]);
+				string format = GetItemString(row.Cells[ControllerConstants.COLUMN_FORMAT]);
+				Uri path = GetItemUri(row.Cells[ControllerConstants.COLUMN_PATH]);
 				
 				IMediaItem track = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 				return track;
@@ -235,55 +235,55 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 
 		#region Private Event Methods
-		void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-		{
-			if (e.Value != null)
-			{
-				//queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
-				if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_DURATION)
-				{
-					TimeSpan duration = (TimeSpan)e.Value;
-					if (duration.Hours > 0)
-					{
-						e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
-					}
-					else if (duration.Minutes > 0)
-					{
-						e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
-					}
-					else
-					{
-						e.Value = string.Format("0:{0:00}", duration.Seconds);
-					}
-				}
-				//if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
-				if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_TYPE)
-				{
-					switch(e.Value.ToString())
-					{
-						case ControllerConstants.TYPE_AUDIO:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-							break;
-						case ControllerConstants.TYPE_BOOK:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
-							break;
-						case ControllerConstants.TYPE_IMAGE:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
-							break;
-						case ControllerConstants.TYPE_MOVIE:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
-							break;
-						case ControllerConstants.TYPE_TELEVISION:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
-							break;
-						default:
-							e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
-							break;
-					}
-				}
-			}
-			else e.Value = string.Empty;
-		}
+		//void grid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		//{
+		//    if (e.Value != null)
+		//    {
+		//        //queueTable.Columns[e.ColumnIndex].ColumnName == COL_DURATION)
+		//        if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_DURATION)
+		//        {
+		//            TimeSpan duration = (TimeSpan)e.Value;
+		//            if (duration.Hours > 0)
+		//            {
+		//                e.Value = string.Format("{0:00}:{1:00}:{2:00}", duration.Hours, duration.Minutes, duration.Seconds);
+		//            }
+		//            else if (duration.Minutes > 0)
+		//            {
+		//                e.Value = string.Format("{0:00}:{1:00}", duration.Minutes, duration.Seconds);
+		//            }
+		//            else
+		//            {
+		//                e.Value = string.Format("0:{0:00}", duration.Seconds);
+		//            }
+		//        }
+		//        //if (queueTable.Columns[e.ColumnIndex].ColumnName == COL_TYPE)
+		//        if (grid.Columns[e.ColumnIndex].Name == ControllerConstants.COL_TYPE)
+		//        {
+		//            switch(e.Value.ToString())
+		//            {
+		//                case ControllerConstants.TYPE_AUDIO:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+		//                    break;
+		//                case ControllerConstants.TYPE_BOOK:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_BOOK];
+		//                    break;
+		//                case ControllerConstants.TYPE_IMAGE:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_IMAGE];
+		//                    break;
+		//                case ControllerConstants.TYPE_MOVIE:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_MOVIE];
+		//                    break;
+		//                case ControllerConstants.TYPE_TELEVISION:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_TELEVISION];
+		//                    break;
+		//                default:
+		//                    e.Value = smallImageList.Images[ControllerConstants.INDEX_AUDIO];
+		//                    break;
+		//            }
+		//        }
+		//    }
+		//    else e.Value = string.Empty;
+		//}
 		#endregion
 
 		#region Public Properties
@@ -293,10 +293,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set
 			{
 				grid = value;
-				if (grid != null)
-				{
-					grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
-				}
+				//if (grid != null)
+				//{
+					//grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
+				//}
 				
 				//    grid.AutoGenerateColumns = false;
 				//    grid.DataSource = bindingSource;
@@ -367,12 +367,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			get { 
 				return (SelectedRow != null && SelectedRow.Index > -1)
-					? SelectedRow.Cells[ControllerConstants.COL_STATUS].Value.ToString()
+					? SelectedRow.Cells[ControllerConstants.COLUMN_STATUS].Value.ToString()
 					: null;
 			}
 			set { 
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					SelectedRow.Cells[ControllerConstants.COL_STATUS].Value = value;
+					SelectedRow.Cells[ControllerConstants.COLUMN_STATUS].Value = value;
 			}
 		}
 		#endregion
@@ -464,7 +464,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 						if (audioStream != null && audioStream.Duration != SelectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
-							SelectedRow.Cells[ControllerConstants.COL_DURATION].Value = audioStream.Duration;
+							SelectedRow.Cells[ControllerConstants.COLUMN_DURATION].Value = audioStream.Duration;
 						}
 					}
 					
@@ -634,7 +634,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				}
 				else if (IsFormat(path, ControllerConstants.FORMAT_AUDIO))
 				{
-					LoadTrackFromPath(path, "File");
+					LoadTrackFromPath(path, ModelConstants.SOURCE_FILE);
 				}
 			}
 		}
@@ -810,7 +810,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
 				Guid selectedId = default(Guid);
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					selectedId = (Guid)SelectedRow.Cells[ControllerConstants.COL_ID].Value;
+					selectedId = (Guid)SelectedRow.Cells[ControllerConstants.COLUMN_ID].Value;
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				

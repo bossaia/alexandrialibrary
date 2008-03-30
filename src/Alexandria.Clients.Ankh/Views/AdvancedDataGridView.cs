@@ -196,12 +196,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 						this.ClearSelection();
 						this.Columns[e.ColumnIndex].Selected = true;
 						//show column right-click menu here
-						MessageBox.Show("show column right-click menu");
+						//MessageBox.Show("show column right-click menu");
 					}
 					else //more than one column is selected
 					{
 						//show column right-click menu here
-						MessageBox.Show("show column right-click menu");
+						//MessageBox.Show("show column right-click menu");
 					}
 				}
 			}
