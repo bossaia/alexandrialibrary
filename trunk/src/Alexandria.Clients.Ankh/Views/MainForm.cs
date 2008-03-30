@@ -645,7 +645,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != ControllerConstants.COL_STATUS)
+			if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != ControllerConstants.COLUMN_NAME_STATUS)
 			{
 				queueController.SaveRow(e.RowIndex);
 			}

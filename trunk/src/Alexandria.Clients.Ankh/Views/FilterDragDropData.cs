@@ -75,27 +75,27 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			switch (column)
 			{
-				case ControllerConstants.COL_STATUS:
+				case ControllerConstants.COLUMN_NAME_STATUS:
 					return 1;
-				case ControllerConstants.COL_TYPE:
+				case ControllerConstants.COLUMN_NAME_TYPE:
 					return 2;
-				case ControllerConstants.COL_SOURCE:
+				case ControllerConstants.COLUMN_NAME_SOURCE:
 					return 3;
-				case ControllerConstants.COL_NUMBER:
+				case ControllerConstants.COLUMN_NAME_NUMBER:
 					return 4;
-				case ControllerConstants.COL_TITLE:
+				case ControllerConstants.COLUMN_NAME_TITLE:
 					return 5;
-				case ControllerConstants.COL_ARTIST:
+				case ControllerConstants.COLUMN_NAME_ARTIST:
 					return 6;
-				case ControllerConstants.COL_ALBUM:
+				case ControllerConstants.COLUMN_NAME_ALBUM:
 					return 7;
-				case ControllerConstants.COL_DURATION:
+				case ControllerConstants.COLUMN_NAME_DURATION:
 					return 8;
-				case ControllerConstants.COL_DATE:
+				case ControllerConstants.COLUMN_NAME_DATE:
 					return 9;
-				case ControllerConstants.COL_FORMAT:
+				case ControllerConstants.COLUMN_NAME_FORMAT:
 					return 10;
-				case ControllerConstants.COL_PATH:
+				case ControllerConstants.COLUMN_NAME_PATH:
 					return 11;
 				default:
 					return 0;

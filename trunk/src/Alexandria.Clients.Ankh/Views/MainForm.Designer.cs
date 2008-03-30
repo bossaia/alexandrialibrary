@@ -144,18 +144,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
 			this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
 			this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
-			this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Type = new System.Windows.Forms.DataGridViewImageColumn();
-			this.Source = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Artist = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Album = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Format = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.typeColumn = new System.Windows.Forms.DataGridViewImageColumn();
+			this.sourceColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.numberColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.titleColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.artistColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.albumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.durationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.formatColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.pathColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.idColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
 			this.FileMenuStrip.SuspendLayout();
@@ -992,18 +992,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.queueDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.queueDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.queueDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Status,
-            this.Type,
-            this.Source,
-            this.Number,
-            this.Title,
-            this.Artist,
-            this.Album,
-            this.Duration,
-            this.Date,
-            this.Format,
-            this.Path,
-            this.Id});
+            this.statusColumn,
+            this.typeColumn,
+            this.sourceColumn,
+            this.numberColumn,
+            this.titleColumn,
+            this.artistColumn,
+            this.albumColumn,
+            this.durationColumn,
+            this.dateColumn,
+            this.formatColumn,
+            this.pathColumn,
+            this.idColumn});
 			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
 			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1052,101 +1052,101 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
 			this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
 			// 
-			// Status
+			// statusColumn
 			// 
-			this.Status.DataPropertyName = "Status";
-			resources.ApplyResources(this.Status, "Status");
-			this.Status.Name = "Status";
-			this.Status.ReadOnly = true;
-			this.Status.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.statusColumn.DataPropertyName = "Status";
+			resources.ApplyResources(this.statusColumn, "statusColumn");
+			this.statusColumn.Name = "statusColumn";
+			this.statusColumn.ReadOnly = true;
+			this.statusColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.statusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Type
+			// typeColumn
 			// 
-			this.Type.DataPropertyName = "Type";
-			resources.ApplyResources(this.Type, "Type");
-			this.Type.Name = "Type";
-			this.Type.ReadOnly = true;
-			this.Type.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.typeColumn.DataPropertyName = "Type";
+			resources.ApplyResources(this.typeColumn, "typeColumn");
+			this.typeColumn.Name = "typeColumn";
+			this.typeColumn.ReadOnly = true;
+			this.typeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.typeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Source
+			// sourceColumn
 			// 
-			this.Source.DataPropertyName = "Source";
-			resources.ApplyResources(this.Source, "Source");
-			this.Source.Name = "Source";
-			this.Source.ReadOnly = true;
-			this.Source.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.sourceColumn.DataPropertyName = "Source";
+			resources.ApplyResources(this.sourceColumn, "sourceColumn");
+			this.sourceColumn.Name = "sourceColumn";
+			this.sourceColumn.ReadOnly = true;
+			this.sourceColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Number
+			// numberColumn
 			// 
-			this.Number.DataPropertyName = "Number";
-			resources.ApplyResources(this.Number, "Number");
-			this.Number.Name = "Number";
-			this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.numberColumn.DataPropertyName = "Number";
+			resources.ApplyResources(this.numberColumn, "numberColumn");
+			this.numberColumn.Name = "numberColumn";
+			this.numberColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Title
+			// titleColumn
 			// 
-			this.Title.DataPropertyName = "Title";
-			resources.ApplyResources(this.Title, "Title");
-			this.Title.Name = "Title";
-			this.Title.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.titleColumn.DataPropertyName = "Title";
+			resources.ApplyResources(this.titleColumn, "titleColumn");
+			this.titleColumn.Name = "titleColumn";
+			this.titleColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Artist
+			// artistColumn
 			// 
-			this.Artist.DataPropertyName = "Artist";
-			resources.ApplyResources(this.Artist, "Artist");
-			this.Artist.Name = "Artist";
-			this.Artist.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.artistColumn.DataPropertyName = "Artist";
+			resources.ApplyResources(this.artistColumn, "artistColumn");
+			this.artistColumn.Name = "artistColumn";
+			this.artistColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Album
+			// albumColumn
 			// 
-			this.Album.DataPropertyName = "Album";
-			resources.ApplyResources(this.Album, "Album");
-			this.Album.Name = "Album";
-			this.Album.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.albumColumn.DataPropertyName = "Album";
+			resources.ApplyResources(this.albumColumn, "albumColumn");
+			this.albumColumn.Name = "albumColumn";
+			this.albumColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Duration
+			// durationColumn
 			// 
-			this.Duration.DataPropertyName = "Duration";
+			this.durationColumn.DataPropertyName = "Duration";
 			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-			this.Duration.DefaultCellStyle = dataGridViewCellStyle2;
-			resources.ApplyResources(this.Duration, "Duration");
-			this.Duration.Name = "Duration";
-			this.Duration.ReadOnly = true;
-			this.Duration.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.durationColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			resources.ApplyResources(this.durationColumn, "durationColumn");
+			this.durationColumn.Name = "durationColumn";
+			this.durationColumn.ReadOnly = true;
+			this.durationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Date
+			// dateColumn
 			// 
-			this.Date.DataPropertyName = "Date";
-			resources.ApplyResources(this.Date, "Date");
-			this.Date.Name = "Date";
-			this.Date.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.dateColumn.DataPropertyName = "Date";
+			resources.ApplyResources(this.dateColumn, "dateColumn");
+			this.dateColumn.Name = "dateColumn";
+			this.dateColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Format
+			// formatColumn
 			// 
-			this.Format.DataPropertyName = "Format";
-			resources.ApplyResources(this.Format, "Format");
-			this.Format.Name = "Format";
-			this.Format.ReadOnly = true;
-			this.Format.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.formatColumn.DataPropertyName = "Format";
+			resources.ApplyResources(this.formatColumn, "formatColumn");
+			this.formatColumn.Name = "formatColumn";
+			this.formatColumn.ReadOnly = true;
+			this.formatColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Path
+			// pathColumn
 			// 
-			this.Path.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.Path.DataPropertyName = "Path";
-			resources.ApplyResources(this.Path, "Path");
-			this.Path.Name = "Path";
-			this.Path.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+			this.pathColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.pathColumn.DataPropertyName = "Path";
+			resources.ApplyResources(this.pathColumn, "pathColumn");
+			this.pathColumn.Name = "pathColumn";
+			this.pathColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
 			// 
-			// Id
+			// idColumn
 			// 
-			this.Id.DataPropertyName = "Id";
-			resources.ApplyResources(this.Id, "Id");
-			this.Id.Name = "Id";
-			this.Id.ReadOnly = true;
-			this.Id.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-			this.Id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.idColumn.DataPropertyName = "Id";
+			resources.ApplyResources(this.idColumn, "idColumn");
+			this.idColumn.Name = "idColumn";
+			this.idColumn.ReadOnly = true;
+			this.idColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			this.idColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
 			// 
 			// MainForm
 			// 
@@ -1296,18 +1296,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.ToolStripMenuItem toolEditPlaylistMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolAddSelectedItemsToPlaylistMenuItem;
 		private MediaItemSearchBox mediaItemSearchBox;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Status;
-		private System.Windows.Forms.DataGridViewImageColumn Type;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Source;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Number;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Title;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Artist;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Album;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Duration;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Date;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Format;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Path;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+		private System.Windows.Forms.DataGridViewTextBoxColumn statusColumn;
+		private System.Windows.Forms.DataGridViewImageColumn typeColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn sourceColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn numberColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn titleColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn artistColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn albumColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn durationColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dateColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn formatColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn pathColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idColumn;
 	}
 }
 

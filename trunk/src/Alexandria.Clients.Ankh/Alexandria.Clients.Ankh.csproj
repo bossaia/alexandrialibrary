@@ -186,6 +186,8 @@
     <None Include="Resources\clock_play.png" />
     <None Include="Resources\clock_error.png" />
     <None Include="Resources\clock_edit.png" />
+    <None Include="Resources\book_open.png" />
+    <None Include="Resources\film.png" />
     <Content Include="Resources\Icons\Silk\accept.png" />
     <Content Include="Resources\Icons\Silk\add.png" />
     <Content Include="Resources\Icons\Silk\anchor.png" />
@@ -1186,6 +1188,9 @@
     <Content Include="Resources\Icons\Silk\zoom.png" />
     <Content Include="Resources\Icons\Silk\zoom_in.png" />
     <Content Include="Resources\Icons\Silk\zoom_out.png" />
+    <None Include="Resources\television.png" />
+    <None Include="Resources\picture.png" />
+    <None Include="Resources\music.png" />
     <None Include="Resources\task_cancel.png" />
   </ItemGroup>
   <ItemGroup>
