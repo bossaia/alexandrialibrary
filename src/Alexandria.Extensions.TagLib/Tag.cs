@@ -346,8 +346,8 @@ namespace Alexandria.TagLib
 		
 		public virtual string Type
 		{
-			get { return type; }
-			set { type = value; }
+			get { return ModelConstants.MEDIA_TYPE_AUDIO; }
+			set { }
 		}
 		
 		public virtual string Status
