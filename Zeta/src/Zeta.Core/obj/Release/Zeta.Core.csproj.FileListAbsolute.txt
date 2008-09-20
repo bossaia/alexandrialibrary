@@ -1,5 +1,0 @@
-C:\dev\Zeta\src\Zeta.Core\bin\Release\Zeta.Core.dll
-C:\dev\Zeta\src\Zeta.Core\bin\Release\Zeta.Core.pdb
-C:\dev\Zeta\src\Zeta.Core\obj\Release\ResolveAssemblyReference.cache
-C:\dev\Zeta\src\Zeta.Core\obj\Release\Zeta.Core.dll
-C:\dev\Zeta\src\Zeta.Core\obj\Release\Zeta.Core.pdb
