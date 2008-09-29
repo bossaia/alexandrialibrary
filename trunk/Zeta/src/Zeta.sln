@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeta.Core", "Zeta.Core\Zeta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeta.Model", "Zeta.Model\Zeta.Model.csproj", "{4C96B1AB-3F4B-4924-8DED-64C553A6A32C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeta.NHibernate", "Zeta.NHibernate\Zeta.NHibernate.csproj", "{75BB2B29-C232-4DCD-9C95-F21B683A3B52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{4C96B1AB-3F4B-4924-8DED-64C553A6A32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C96B1AB-3F4B-4924-8DED-64C553A6A32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C96B1AB-3F4B-4924-8DED-64C553A6A32C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75BB2B29-C232-4DCD-9C95-F21B683A3B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75BB2B29-C232-4DCD-9C95-F21B683A3B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75BB2B29-C232-4DCD-9C95-F21B683A3B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75BB2B29-C232-4DCD-9C95-F21B683A3B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
