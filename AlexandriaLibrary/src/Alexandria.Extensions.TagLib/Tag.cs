@@ -40,7 +40,7 @@ namespace Alexandria.TagLib
 		#region Private Fields
 		private Guid id;
 		private string source;
-		private string type;
+		//private string type;
 		
 		private string name;
 		private Uri path;
