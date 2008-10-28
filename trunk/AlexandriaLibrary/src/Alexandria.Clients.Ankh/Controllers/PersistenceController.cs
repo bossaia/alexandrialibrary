@@ -63,7 +63,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Aggregate<IMediaSet> mediaSetWithAllChildren;
 		
 		private Dictionary<Guid, object> mediaSetsPendingSave = new Dictionary<Guid, object>();
-		private IMediaSet lastSavedMediaSet;
+		//private IMediaSet lastSavedMediaSet;
 		
 		private IExpression GetMediaItemFilter(string fieldName, string operatorName, object value)
 		{
@@ -167,12 +167,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			IMediaSet model = null;
 			
-			if (lastSavedMediaSet != null && lastSavedMediaSet.Id == id)
-			{
-				model = lastSavedMediaSet;
-			}
-			else
-			{
+			//if (lastSavedMediaSet != null && lastSavedMediaSet.Id == id)
+			//{
+				//model = lastSavedMediaSet;
+			//}
+			//else
+			//{
 				Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
 				query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
 				
@@ -186,7 +186,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 						model = iter.Current;
 					}
 				}
-			}
+			//}
 			
 			return model;
 		}
