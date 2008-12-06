@@ -81,8 +81,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 		
 		#region Private Fields
-		private const int SUBMIT_ELAPSED_TIME = 30000;
-		
 		private bool disposed;
 		
 		private QueueController queueController;
@@ -90,6 +88,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Button playPauseButton;
 		private IAudioPlayer audioPlayer;
 		private bool currentTrackSubmitted;
+        private DateTime currentTrackStartTime;
 		private EventHandler<PlaybackEventArgs> statusUpdated;
 		private bool enableSubmitTracksToLastFM;
 
@@ -194,14 +193,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#region Public Methods
 		//TODO: move this method into its own controller
 		[CLSCompliant(false)]
-		public void SubmitTrackToLastFM(IMediaItem track)
+		public void SubmitTrackToLastFM(IMediaItem track, DateTime timeStarted)
 		{
 			try
 			{
 				AudioscrobblerRequest request = new AudioscrobblerRequest();
 				request.Username = "uberweasel";
 				request.Password = "automatic";
-				request.SubmitTrack(track);
+				request.SubmitTrack(track, timeStarted);
 
 				//if (StatusUpdated != null)
 					//StatusUpdated(this, new UpdateStatusEventArgs("Track submitted to Last.fm", string.Format("{0} - {1} - {2}", track.Artist, track.Album, track.Name)));
@@ -218,6 +217,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (audioPlayer != null)
 			{
 				currentTrackSubmitted = false;
+                currentTrackStartTime = DateTime.MinValue;
 				audioPlayer.LoadAudioStream(path);
 			}
 		}
@@ -227,14 +227,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (audioPlayer != null)
 			{
 				currentTrackSubmitted = false;
+                currentTrackStartTime = DateTime.MinValue;
 				audioPlayer.LoadAudioStream(audioStream);
 			}
 		}
 		
 		public void Play()
 		{
-			if (audioPlayer != null && audioPlayer.CurrentAudioStream != null)
-				audioPlayer.Play();
+            if (audioPlayer != null && audioPlayer.CurrentAudioStream != null)
+            {
+                if (currentTrackStartTime == DateTime.MinValue)
+                    currentTrackStartTime = DateTime.Now;
+
+                audioPlayer.Play();
+            }
 		}
 		
 		public bool IsPlaying()
@@ -287,14 +293,15 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				audioPlayer.RefreshPlayerStates();
 				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing && !audioPlayer.SeekIsPending)
 				{
-					int value = (int)audioPlayer.CurrentAudioStream.Elapsed.TotalMilliseconds;
-					playbackTrackBar.Value = value;
+					int elapsed = (int)audioPlayer.CurrentAudioStream.Elapsed.TotalMilliseconds;
+                    int halfWayPoint = (int)(audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds / 2);
+					playbackTrackBar.Value = elapsed;
 					
 					if (EnableSubmitTracksToLastFM && !currentTrackSubmitted)
 					{
-						if (value >= SUBMIT_ELAPSED_TIME || audioPlayer.CurrentAudioStream.Duration.TotalMilliseconds < SUBMIT_ELAPSED_TIME)
+						if (elapsed >= halfWayPoint)
 						{
-							SubmitTrackToLastFM(QueueController.SelectedTrack);
+							SubmitTrackToLastFM(QueueController.SelectedTrack, currentTrackStartTime);
 							currentTrackSubmitted = true;
 						}
 					}

@@ -391,22 +391,24 @@ namespace Alexandria.LastFM
 		/// <summary>
 		/// Submit a single track to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IMediaItem track)
+		public void SubmitTrack(IMediaItem track, DateTime timeStarted)
 		{
 			// Create an IList containing a single track
 			// and send it to the overload of SubmitTrack below (which takes an IList).
 			IList<IMediaItem> tracks = new List<IMediaItem>();
 			tracks.Add(track);
-			this.SubmitTrack(tracks);
+            IList<DateTime> timesStarted = new List<DateTime>();
+            timesStarted.Add(timeStarted);
+			this.SubmitTrack(tracks, timesStarted);
 		}
 
 		/// <summary>
 		/// Submits a list of tracks to audioscrobbler
 		/// </summary>
-		public void SubmitTrack(IList<IMediaItem> tracks)
+		public void SubmitTrack(IList<IMediaItem> tracks, IList<DateTime> timesStarted)
 		{
 			// if there are no tracks in this request, return
-			if (tracks.Count == 0)
+			if (tracks.Count == 0 || tracks.Count != timesStarted.Count)
 				return;
 
 			// verify that a successful handshake has occured
@@ -419,7 +421,7 @@ namespace Alexandria.LastFM
 			// loop through each track and append its info to the url
 			for (int i = 0; i < tracks.Count; i++)
 			{
-				url += ProcessTrack(tracks[i], DateTime.Now, i);
+				url += ProcessTrack(tracks[i], timesStarted[i], i);
 			}
 
 			// send the request
