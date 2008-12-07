@@ -733,21 +733,22 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#region DragDrop Methods
 		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == MouseButtons.Left)
-			{
-				ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
-				if (item != null && item.Selected)
-				{
-					if (item.Tag != null && item.Tag is ITrackSource)
-					{
-						ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
-					}
-				}
-			}
 		}
 
 		private void ToolBoxListView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
+            if (e.Button == MouseButtons.Left)
+            {
+                //ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
+                ListViewItem item = e.Item as ListViewItem;
+                if (item != null && item.Selected)
+                {
+                    if (item.Tag != null && item.Tag is ITrackSource)
+                    {
+                        ToolBoxListView.DoDragDrop(item.Tag, DragDropEffects.Copy);
+                    }
+                }
+            }
 		}
 
 		private void ToolBoxListView_DragOver(object sender, DragEventArgs e)
@@ -810,8 +811,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_DragDrop(object sender, DragEventArgs e)
 		{
-			queueController.Clear();
-			queueController.LoadData(e.Data);
+            if (e != null)
+            {
+                switch (e.Effect)
+                {
+                    case DragDropEffects.Copy:
+                        queueController.Clear();
+			            queueController.LoadData(e.Data);
+                        break;
+                    case DragDropEffects.Move:
+                        break;
+                    default:
+                        break;
+                }
+            }
 		}
 		#endregion
 		
