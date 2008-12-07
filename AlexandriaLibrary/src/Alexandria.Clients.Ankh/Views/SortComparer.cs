@@ -104,11 +104,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 			//HACK: PropertyDescriptor.GetValue() is throwing an 'Object Does Not Match Target Type'
 			//      exception so I'm using the PropertyInfo instead. I can't figure out the cause.
-			PropertyInfo prop = typeof(T).GetProperty(listSortDesc.PropertyDescriptor.Name);
+			//PropertyInfo prop = typeof(T).GetProperty(listSortDesc.PropertyDescriptor.Name);
+            PropertyDescriptor prop = listSortDesc.PropertyDescriptor;
 			if (prop != null)
 			{
-				xValue = prop.GetValue(x, null);
-				yValue = prop.GetValue(y, null);
+				xValue = prop.GetValue(x); //, null);
+                yValue = prop.GetValue(y); //, null);
 				//object xValue = listSortDesc.PropertyDescriptor.GetValue(x);
 				//object yValue = listSortDesc.PropertyDescriptor.GetValue(y);
 			}
