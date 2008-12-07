@@ -123,7 +123,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
-		private bool filterInProgress = false;
+		//private bool filterInProgress = false;
 		#endregion
 
 		#region Protected Overrides
@@ -1050,12 +1050,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			else
 			{
 				queueController.RemoveSort();
-				DoFilter();
+				//DoFilter();
 			}		
 		}
 		#endregion
 
 		#region Filter Methods
+        /*
 		private void DoUpdateOperator(string op)
 		{
 			bool addItem = false;
@@ -1529,10 +1530,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				{
 					filterListView.Items.Remove(filterData.Item);
 				}
-
-				//DoFilter();
 			}
-		}		
+		}
+        */
 		#endregion
 
 		#region Search Methods
@@ -1691,7 +1691,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			}
 		}
 		#endregion
-		
+
 		#endregion
 	}
 }
