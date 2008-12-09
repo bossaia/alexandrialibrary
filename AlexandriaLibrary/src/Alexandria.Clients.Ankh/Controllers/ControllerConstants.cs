@@ -40,7 +40,15 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		internal const string TYPE_BOOK = "Book";
 		internal const string TYPE_MOVIE = "Movie";
 		internal const string TYPE_TELEVISION = "TV";
-		
+
+        internal const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
+        internal const int MAX_SORT_COLUMNS = 5;
+        //private const string DEFAULT_COLUMN_FILTER = "Any";
+
+        //private const string OP_TEXT_ADD = "Add Operator";
+        //private const string OP_TEXT_EDIT = "Edit Operator";
+
+
 		//internal const int INDEX_AUDIO = 0;
 		//internal const int INDEX_IMAGE = 1;
 		//internal const int INDEX_BOOK = 2;

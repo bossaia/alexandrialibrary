@@ -94,16 +94,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			}
 		}
 		#endregion
-		
-		#region Private Constants
-		private const string KEY_OPEN_DIR_ROOT = "OpenDirectoryRoot";
-		private const int MAX_SORT_COLUMNS = 5;
-		private const string DEFAULT_COLUMN_FILTER = "Any";
 				
-		private const string OP_TEXT_ADD = "Add Operator";
-		private const string OP_TEXT_EDIT = "Edit Operator";
-		#endregion
-		
 		#region Private Fields
 		private PlaybackController playbackController = new PlaybackController();
 		private QueueController queueController = new QueueController();
@@ -123,7 +114,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private MenuItem notifyShowItem;				
 		private MenuItem notifyExitItem;
 		private FormWindowState oldWindowState = FormWindowState.Normal;
-		//private bool filterInProgress = false;
+        private string lastDirectoryOpened;
 		#endregion
 
 		#region Protected Overrides
@@ -135,7 +126,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 			PlaybackTimer.Start();
 
-			//InitializeTaskMenu();
 			InitializePlugins();
 			InitializeInterface();
 
@@ -371,17 +361,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void OpenDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT] != null)
-			{
-				string rootFolder = ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT].ToString();
-				if (System.IO.Directory.Exists(rootFolder))
-					DirectoryOpenDialog.SelectedPath = rootFolder;
-			}
+            if (string.IsNullOrEmpty(lastDirectoryOpened))
+                lastDirectoryOpened = ControllerHelper.GetDefaultOpenDirectory();
+
+            if (Directory.Exists(lastDirectoryOpened))
+                DirectoryOpenDialog.SelectedPath = lastDirectoryOpened;
 		
 			DialogResult result = DirectoryOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
 				queueController.OpenDirectory(DirectoryOpenDialog.SelectedPath);
+                lastDirectoryOpened = DirectoryOpenDialog.SelectedPath;
 			}
 		}
 
@@ -414,10 +404,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private void NextButton_Click(object sender, EventArgs e)
 		{
 			queueController.Next();
-		}
-
-		private void QueueListView_SelectedIndexChanged(object sender, EventArgs e)
-		{
 		}
 
 		private void notifyIcon_Click(object sender, EventArgs e)
@@ -496,34 +482,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			playbackController.RefreshPlaybackStates();
 		}
-
-		void queueDataGrid_SelectionChanged(object sender, EventArgs e)
-		{
-			//throw new Exception("The method or operation is not implemented.");
-		}
-		
-		private void OnSelectedTrackStart(object sender, EventArgs e)
-		{
-			/*
-			if (controller != null && AudioStream != null)
-			{
-				if (SelectedTrack != null)
-					NowPlayingLabel.Text = string.Format("{0} - {1}", SelectedTrack.Artist, SelectedTrack.Name);
-				
-				Volume = GetVolume();
-				VolumeTrackBar.Enabled = true;
-
-				PlaybackTrackBar.Enabled = true;
-				PlaybackTrackBar.Minimum = 0;
-				PlaybackTrackBar.Maximum = Convert.ToInt32(AudioStream.Duration.TotalSeconds);
-				PlaybackTrackBar.Value = 0;
-			}
-			*/
-		}
 		
 		private void OnCurrentAudioStreamEnded(object sender, EventArgs e)
 		{
-			//This is needed to avoid a momentary flicker
+			//NOTE: This is needed to avoid a momentary flicker
 			PlaybackTrackBar.SuspendLayout();
 			
 			playbackController.Stop();
@@ -549,16 +511,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			playbackController.Seek(PlaybackTrackBar.Value);
 		}
 
-		//private void QueueListView_ItemActivate(object sender, EventArgs e)
-		//{
-			//queueDataGrid.Rows[e].Selected = true;
-			//queueController.LoadSelectedRow();
-			//playbackController.AudioPlayer.Play();
-		//}
-
 		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			string sortName = queueDataGrid.Columns[e.ColumnIndex].Name;
+			string sortName = ControllerHelper.GetPropertyNameFromColumnName(queueDataGrid.Columns[e.ColumnIndex].Name);
 			bool sortExists = false;
 			
 			if (sortListView.Items.Count > 0)
@@ -578,8 +533,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			
 			if (!sortExists)
 			{
-				if (sortListView.Items.Count == MAX_SORT_COLUMNS)
-					sortListView.Items[0].Remove();
+                while (sortListView.Items.Count >= ControllerHelper.GetMaximumSortColumns())
+                    sortListView.Items[0].Remove();
 				
 				sortListView.Items.Add(sortName, 0);
 			}
@@ -693,18 +648,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void importCatalogToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT] != null)
-			{
-				string rootFolder = ConfigurationManager.AppSettings[KEY_OPEN_DIR_ROOT].ToString();
-				if (System.IO.Directory.Exists(rootFolder))
-					DirectoryOpenDialog.SelectedPath = rootFolder;
-			}
+            if (string.IsNullOrEmpty(lastDirectoryOpened))
+                lastDirectoryOpened = ControllerHelper.GetDefaultOpenDirectory();
+
+			if (Directory.Exists(lastDirectoryOpened))
+				DirectoryOpenDialog.SelectedPath = lastDirectoryOpened;
 
 			DialogResult result = DirectoryOpenDialog.ShowDialog();
 			if (result == DialogResult.OK)
 			{
 				ImportStatusUpdateDelegate updateCallback = new ImportStatusUpdateDelegate(importStatusUpdated);
 				taskController.BeginImportDirectory(DirectoryOpenDialog.SelectedPath, updateCallback);
+                lastDirectoryOpened = DirectoryOpenDialog.SelectedPath;
 			}
 		}
 		
@@ -731,15 +686,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		}
 		
 		#region DragDrop Methods
-		private void ToolBoxListView_MouseDown(object sender, MouseEventArgs e)
-		{
-		}
-
 		private void ToolBoxListView_ItemDrag(object sender, ItemDragEventArgs e)
 		{
             if (e.Button == MouseButtons.Left)
             {
-                //ListViewItem item = ToolBoxListView.GetItemAt(e.X, e.Y);
                 ListViewItem item = e.Item as ListViewItem;
                 if (item != null && item.Selected)
                 {
@@ -755,27 +705,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			e.Effect = DragDropEffects.Copy;
 		}
-
-		private void ToolBoxListView_DragLeave(object sender, EventArgs e)
-		{
-		}
-
-		//private void QueueListView_DragEnter(object sender, DragEventArgs e)
-		//{
-		//    e.Effect = DragDropEffects.None;
-
-		//    if (e.Data != null)
-		//    {
-		//        object source = e.Data.GetData(typeof(TrackSource));
-		//        if (source != null)
-		//            e.Effect = DragDropEffects.Copy;
-		//    }
-		//}
-
-		//private void QueueListView_DragDrop(object sender, DragEventArgs e)
-		//{
-		//    queueController.LoadData(e.Data);
-		//}
 
 		private void CheckForValidQueueDrag(DragEventArgs e)
 		{
@@ -1050,7 +979,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			else
 			{
 				queueController.RemoveSort();
-				//DoFilter();
 			}		
 		}
 		#endregion
@@ -1635,6 +1563,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 
 		#region Tool Methods
+        private void toolRefresh_Click(object sender, System.EventArgs e)
+        {
+            InitializeToolbox();
+        }
+
 		private void toolCreatePlaylistMenuItem_Click(object sender, EventArgs e)
 		{
 			PlaylistSave control = toolController.CreatePlaylist();
