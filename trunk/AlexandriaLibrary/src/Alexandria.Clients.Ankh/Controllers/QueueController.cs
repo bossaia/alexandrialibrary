@@ -62,18 +62,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 	{
 		#region Constructors
 		public QueueController()
-		{			
-			//bindingList = new BindingListView<IMediaItem>();
-			//bindingList.AllowRemove = true;
-			
-			//bindingSource = new BindingSource();
-			//bindingSource.DataSource = bindingList;
+		{
 		}
 		#endregion
 
 		#region Private Fields
 		private IMediaItem selectedTrack;
-		//private BindingListView<IMediaItem> bindingList; 
 		private IList<IMediaItem> tracks;
 
 		MusicLocker locker = new MusicLocker();
@@ -84,13 +78,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 		private SimpleAlbumFactory albumFactory = new SimpleAlbumFactory();
 
-		//private BindingSource bindingSource;
 		private MediaItemDataGridView grid;
 		private ListView sortListView;
 		private ImageList smallImageList;
 		
 		private DataGridViewRow selectedRow;
-		//private int selectedRowSaveIndex;
 		
 		private readonly string tempPath = string.Format("{0}Alexandria{1}", System.IO.Path.GetTempPath(), System.IO.Path.DirectorySeparatorChar);
 		
@@ -186,52 +178,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				}
 			}
 		}
-		
-		//private void OnRowDragDropping(object sender, AdvancedDataGridRowDragDropEventArgs e)
-		//{
-		//    string x = "?!!!";
-		//}
-		
-		//private void OnRowDragDropped(object sender, AdvancedDataGridRowDragDropEventArgs e)
-		//{		
-		//    bindingList.RemoveAt(e.SourceIndex);
-		//    bindingList.Insert(e.TargetIndex, e.MediaItem);
-		//    grid.Rows[e.TargetIndex].Selected = true;
-		//}
-		
-		//private void OnColumnDragDropping(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
-		//{
-		//    selectedRowSaveIndex = SelectedRow.Index;
-		//}
-		
-		//private void OnColumnDragDropped(object sender, AdvancedDataGridViewColumnDragDropEventArgs e)
-		//{
-		//    SelectedRow = grid.Rows[selectedRowSaveIndex];
-		//}
-		
-		////remove the source column
-		//this.Columns.RemoveAt(DragDropSourceIndex);
 
-		////insert a new column at the target index using the source column as a template
-		//this.Columns.Insert(DragDropTargetIndex, new DataGridViewColumn(DragDropColumn.CellTemplate));
+        private void DrawSortGlyphs(IDictionary<string, bool> columns)
+        {
+            foreach (DataGridViewColumn column in grid.Columns)
+            {
+                string propertyName = ControllerHelper.GetPropertyNameFromColumnName(column.Name);
 
-		////copy the source column's header cell to the new column
-		//this.Columns[DragDropTargetIndex].HeaderCell = DragDropColumn.HeaderCell;
+                SortOrder direction = SortOrder.None;
+                if (columns.ContainsKey(propertyName))
+                    direction = (columns[propertyName]) ? SortOrder.Ascending : SortOrder.Descending;
 
-		////select the newly-inserted column
-		//this.Columns[DragDropTargetIndex].Selected = true;
-
-		////update the position of the cuurent cell in the DGV
-		//this.CurrentCell = this[DragDropTargetIndex, 0];
-		//for (int i = 0; i < this.RowCount; i++)
-		//{
-		//    //for each cell in the new column
-		//    if (DragDropColumnCellValue[i] != null)
-		//    {
-		//        //set the cell's value equal to that of the corresponding cell in the source column
-		//        this.Rows[i].Cells[DragDropTargetIndex].Value = DragDropColumnCellValue[i];
-		//    }
-		//}
+                column.HeaderCell.SortGlyphDirection = direction;
+            }
+        }
 		#endregion
 
 		#region Private Event Methods
@@ -290,22 +250,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public MediaItemDataGridView Grid
 		{
 			get { return grid; }
-			set
-			{
-				grid = value;
-				//if (grid != null)
-				//{
-					//grid.CellFormatting += new DataGridViewCellFormattingEventHandler(grid_CellFormatting);
-				//}
-				
-				//    grid.AutoGenerateColumns = false;
-				//    grid.DataSource = bindingSource;
-					
-				//    grid.RowDragDropping += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDropping);
-				//    grid.RowDragDropped += new EventHandler<AdvancedDataGridRowDragDropEventArgs>(OnRowDragDropped);
-				//    grid.ColumnDragDropping += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropping);
-				//    grid.ColumnDragDropped += new EventHandler<AdvancedDataGridViewColumnDragDropEventArgs>(OnColumnDragDropped);
-			}
+			set { grid = value; }
 		}
 		
 		public ListView SortListView
@@ -356,12 +301,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			get { return smallImageList; }
 			set { smallImageList = value; }
 		}
-		
-		//public EventHandler<QueueEventArgs> SelectedTrackChanged
-		//{
-			//get { return selectedTrackChanged; }
-			//set { selectedTrackChanged = value; }
-		//}
 		
 		public string SelectedRowStatus
 		{
@@ -508,7 +447,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			MediaItemData item = new MediaItemData(track.Id, track.Type, source, track.Number, GetSafeString(track.Title), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.Date, track.Format.ToLower(), track.Path);
 			
 			grid.AddItem(item);
-			//bindingList.Add(item);
 		}
 		
 		public void LoadTrack(MediaItemData item)
@@ -736,74 +674,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public void Clear()
 		{
 			grid.Clear();
-			
-			//bindingList.Clear();
-			//bindingList.ResetBindings();
 		}
 		
 		public void ClearSelectedRows()
 		{
 			grid.ClearSelectedRows();
-		
-			////if (grid.SelectedRows.Count > 0)
-			////{
-			//    //foreach(DataGridViewRow row in grid.SelectedRows)
-			//    //{
-			//        //bindingList.RemoveAt(row.Index);
-			//    //}
-			//    //bindingList.ResetBindings();
-			////}
-		
-			//if (grid.Rows != null && grid.Rows.Count > 0)
-			//{
-			//    IList<Guid> idList = new List<Guid>();
-			//    foreach(DataGridViewRow row in grid.SelectedRows)
-			//    {
-			//        //bool selected = Convert.ToBoolean(row.Cells[COL_SELECTED].Value);
-			//        //if (selected)
-			//        //{
-			//        idList.Add((Guid)row.Cells[ControllerConstants.COL_ID].Value);
-			//        //}
-			//    }
-				
-			//    if (idList.Count > 0)
-			//    {
-			//        int count = bindingList.Count;
-			//        for(int i=0;idList.Count>0;i++)
-			//        {
-			//            if (bindingList.Count > 0)
-			//            {
-			//                if (i > bindingList.Count - 1) i = 0;
-							
-			//                foreach(Guid id in idList)
-			//                {
-			//                    if (id == bindingList[i].Id)
-			//                    {
-			//                        bindingList.RemoveAt(i);
-			//                        i = 0;
-			//                        idList.Remove(id);
-			//                        break;
-			//                    }
-			//                }
-			//            }
-			//            else break;
-			//        }
-			//        bindingList.ResetBindings();
-			//    }
-			//}
 		}
 		
 		public void ClearRow(int index)
 		{
 			grid.ClearRow(index);
-		
-			//if (index >= 0 && index < bindingList.Count)
-			//{
-			//    bindingList.RemoveAt(index);
-			//    bindingList.ResetBindings();
-			//}
-		}		
-		
+		}
+
 		public void Sort(IDictionary<string, bool> columns)
 		{
 			if (columns != null && columns.Count > 0)
@@ -818,7 +700,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				foreach (KeyValuePair<string, bool> column in columns)
 				{
 					ListSortDirection direction = (column.Value) ? ListSortDirection.Ascending : ListSortDirection.Descending;
-					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[column.Key];
+					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[ControllerHelper.GetPropertyNameFromColumnName(column.Key)];
 					sortArray[columnIndex] = new ListSortDescription(property, direction);
 					columnIndex++;					
 				}
@@ -826,40 +708,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				ListSortDescriptionCollection sorts = new ListSortDescriptionCollection(sortArray);
 				
 				grid.Sort(sorts);
-				
-				//((IBindingListView)bindingList).ApplySort(sorts);
-				
-				//if (selectedId != default(Guid))
-				//{
-				//    for(int i=0; i<bindingList.Count;i++)
-				//    {
-				//        if (bindingList[i].Id == selectedId)
-				//        {
-				//            SelectedRow = grid.Rows[i];
-				//            break;
-				//        }
-				//    }
-				//}
-				
-				foreach(DataGridViewColumn column in grid.Columns)
-				{
-					SortOrder direction = SortOrder.None;
-					if (columns.ContainsKey(column.Name))
-						direction = (columns[column.Name]) ? SortOrder.Ascending : SortOrder.Descending;
-						
-					column.HeaderCell.SortGlyphDirection = direction;
-				}
+
+                DrawSortGlyphs(columns);
 			}
 		}
-		
+
 		public void RemoveSort()
 		{
 			grid.RemoveSort();
-		
-			//((IBindingListView)bindingList).RemoveSort();
-			
-			//foreach(DataGridViewColumn column in grid.Columns)
-			//    column.HeaderCell.SortGlyphDirection = SortOrder.None;
 		}
 		
 		[CLSCompliant(false)]
