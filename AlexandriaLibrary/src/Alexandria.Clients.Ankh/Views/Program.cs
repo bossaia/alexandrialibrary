@@ -41,15 +41,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-
-            try
-            {
-                Application.Run(new MainForm());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "AN ERROR OCCURRED");
-            }
+            Application.Run(new MainForm());
 		}
 	}
 }

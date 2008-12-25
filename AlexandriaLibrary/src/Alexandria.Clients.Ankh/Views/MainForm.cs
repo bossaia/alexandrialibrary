@@ -70,7 +70,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				queueController.PersistenceController = persistenceController;
 				queueController.TaskController = taskController;
 				queueController.SmallImageList = queueSmallImageList;
-				
+                queueController.NowPlayingImage = nowPlayingImage;
+
 				playbackController.PlayToggles = true;
 				playbackController.MuteToggles = true;
 				playbackController.PlaybackTrackBar = PlaybackTrackBar;

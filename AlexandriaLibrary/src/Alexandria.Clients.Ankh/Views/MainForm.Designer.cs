@@ -84,10 +84,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.NextButton = new System.Windows.Forms.Button();
             this.PlaybackTimer = new System.Windows.Forms.Timer(this.components);
             this.PlaybackGroupBox = new System.Windows.Forms.GroupBox();
-            this.modeComboBox = new System.Windows.Forms.ComboBox();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.NowPlayingLabel = new System.Windows.Forms.Label();
-            this.NowPlayingTitle = new System.Windows.Forms.Label();
+            this.modeComboBox = new System.Windows.Forms.ComboBox();
             this.submitCheckBox = new System.Windows.Forms.CheckBox();
             this.TasksGroupBox = new System.Windows.Forms.GroupBox();
             this.taskDataGrid = new System.Windows.Forms.DataGridView();
@@ -112,12 +111,32 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.ToolBoxSmallImageList = new System.Windows.Forms.ImageList(this.components);
             this.QueueGroupBox = new System.Windows.Forms.GroupBox();
             this.SortGroupBox = new System.Windows.Forms.GroupBox();
+            this.modeLabel = new System.Windows.Forms.Label();
             this.sortListView = new System.Windows.Forms.ListView();
             this.sortContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.sortContextMenuStripItemClearSelected = new System.Windows.Forms.ToolStripMenuItem();
             this.sortContextMenuStripItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
             this.sortSmallImageList = new System.Windows.Forms.ImageList(this.components);
             this.sortButton = new System.Windows.Forms.Button();
+            this.filterContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterContextMenuItemUpdateOperator = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterOperatorItemAnd = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterOperatorItemOr = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterOperatorItemNot = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterContextMenuItemEditFilter = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterContextMenuItemClearSelected = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterContextMenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.filterSmallImageList = new System.Windows.Forms.ImageList(this.components);
+            this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
+            this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
+            this.NowPlayingGroupBox = new System.Windows.Forms.GroupBox();
+            this.nowPlayingImage = new System.Windows.Forms.PictureBox();
+            this.ToolBoxTabs = new System.Windows.Forms.TabControl();
+            this.ToolBoxSourcesTab = new System.Windows.Forms.TabPage();
+            this.ToolBoxNowPlayingTab = new System.Windows.Forms.TabPage();
+            this.SourcesGroupBox = new System.Windows.Forms.GroupBox();
             this.mediaItemSearchBox = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox();
             this.queueDataGrid = new Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView();
             this.statusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -144,20 +163,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.formatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.filterContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.filterContextMenuItemAddFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterContextMenuItemUpdateOperator = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterOperatorItemAnd = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterOperatorItemOr = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterOperatorItemNot = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterContextMenuItemEditFilter = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterContextMenuItemClearSelected = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterContextMenuItemClearAll = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterSmallImageList = new System.Windows.Forms.ImageList(this.components);
-            this.queueSmallImageList = new System.Windows.Forms.ImageList(this.components);
-            this.DirectoryOpenDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.taskSmallImageList = new System.Windows.Forms.ImageList(this.components);
-            this.modeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PlaybackTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VolumeTrackBar)).BeginInit();
             this.FileMenuStrip.SuspendLayout();
@@ -174,8 +179,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.QueueGroupBox.SuspendLayout();
             this.SortGroupBox.SuspendLayout();
             this.sortContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
             this.filterContextMenuStrip.SuspendLayout();
+            this.NowPlayingGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nowPlayingImage)).BeginInit();
+            this.ToolBoxTabs.SuspendLayout();
+            this.ToolBoxSourcesTab.SuspendLayout();
+            this.ToolBoxNowPlayingTab.SuspendLayout();
+            this.SourcesGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // PlayPauseButton
@@ -482,9 +493,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             // 
             // PlaybackGroupBox
             // 
+            this.PlaybackGroupBox.Controls.Add(this.submitCheckBox);
             this.PlaybackGroupBox.Controls.Add(this.PreviousButton);
-            this.PlaybackGroupBox.Controls.Add(this.NowPlayingLabel);
-            this.PlaybackGroupBox.Controls.Add(this.NowPlayingTitle);
             this.PlaybackGroupBox.Controls.Add(this.NextButton);
             this.PlaybackGroupBox.Controls.Add(this.MuteButton);
             this.PlaybackGroupBox.Controls.Add(this.VolumeTrackBar);
@@ -494,13 +504,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             resources.ApplyResources(this.PlaybackGroupBox, "PlaybackGroupBox");
             this.PlaybackGroupBox.Name = "PlaybackGroupBox";
             this.PlaybackGroupBox.TabStop = false;
-            // 
-            // modeComboBox
-            // 
-            resources.ApplyResources(this.modeComboBox, "modeComboBox");
-            this.modeComboBox.FormattingEnabled = true;
-            this.modeComboBox.Name = "modeComboBox";
-            this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.modeComboBox_SelectedIndexChanged);
             // 
             // PreviousButton
             // 
@@ -515,10 +518,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.NowPlayingLabel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.NowPlayingLabel.Name = "NowPlayingLabel";
             // 
-            // NowPlayingTitle
+            // modeComboBox
             // 
-            resources.ApplyResources(this.NowPlayingTitle, "NowPlayingTitle");
-            this.NowPlayingTitle.Name = "NowPlayingTitle";
+            resources.ApplyResources(this.modeComboBox, "modeComboBox");
+            this.modeComboBox.FormattingEnabled = true;
+            this.modeComboBox.Name = "modeComboBox";
+            this.modeComboBox.SelectedIndexChanged += new System.EventHandler(this.modeComboBox_SelectedIndexChanged);
             // 
             // submitCheckBox
             // 
@@ -530,7 +535,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             // TasksGroupBox
             // 
             resources.ApplyResources(this.TasksGroupBox, "TasksGroupBox");
-            this.TasksGroupBox.Controls.Add(this.submitCheckBox);
             this.TasksGroupBox.Controls.Add(this.taskDataGrid);
             this.TasksGroupBox.Name = "TasksGroupBox";
             this.TasksGroupBox.TabStop = false;
@@ -628,7 +632,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             // ToolBoxGroupBox
             // 
             resources.ApplyResources(this.ToolBoxGroupBox, "ToolBoxGroupBox");
-            this.ToolBoxGroupBox.Controls.Add(this.ToolBoxListView);
+            this.ToolBoxGroupBox.Controls.Add(this.ToolBoxTabs);
             this.ToolBoxGroupBox.Name = "ToolBoxGroupBox";
             this.ToolBoxGroupBox.TabStop = false;
             // 
@@ -716,6 +720,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.SortGroupBox.Name = "SortGroupBox";
             this.SortGroupBox.TabStop = false;
             // 
+            // modeLabel
+            // 
+            resources.ApplyResources(this.modeLabel, "modeLabel");
+            this.modeLabel.Name = "modeLabel";
+            // 
             // sortListView
             // 
             this.sortListView.AllowDrop = true;
@@ -766,6 +775,142 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.sortButton.Name = "sortButton";
             this.sortButton.UseVisualStyleBackColor = true;
             this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
+            // 
+            // filterContextMenuStrip
+            // 
+            this.filterContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterContextMenuItemAddFilter,
+            this.filterContextMenuItemUpdateOperator,
+            this.filterContextMenuItemEditFilter,
+            this.filterContextMenuItemClearSelected,
+            this.filterContextMenuItemClearAll});
+            this.filterContextMenuStrip.Name = "filterContextMenuStrip";
+            resources.ApplyResources(this.filterContextMenuStrip, "filterContextMenuStrip");
+            // 
+            // filterContextMenuItemAddFilter
+            // 
+            this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
+            resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
+            // 
+            // filterContextMenuItemUpdateOperator
+            // 
+            this.filterContextMenuItemUpdateOperator.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.filterOperatorItemAnd,
+            this.filterOperatorItemOr,
+            this.filterOperatorItemNot});
+            this.filterContextMenuItemUpdateOperator.Name = "filterContextMenuItemUpdateOperator";
+            resources.ApplyResources(this.filterContextMenuItemUpdateOperator, "filterContextMenuItemUpdateOperator");
+            // 
+            // filterOperatorItemAnd
+            // 
+            this.filterOperatorItemAnd.Name = "filterOperatorItemAnd";
+            resources.ApplyResources(this.filterOperatorItemAnd, "filterOperatorItemAnd");
+            // 
+            // filterOperatorItemOr
+            // 
+            this.filterOperatorItemOr.Name = "filterOperatorItemOr";
+            resources.ApplyResources(this.filterOperatorItemOr, "filterOperatorItemOr");
+            // 
+            // filterOperatorItemNot
+            // 
+            this.filterOperatorItemNot.Name = "filterOperatorItemNot";
+            resources.ApplyResources(this.filterOperatorItemNot, "filterOperatorItemNot");
+            // 
+            // filterContextMenuItemEditFilter
+            // 
+            this.filterContextMenuItemEditFilter.Name = "filterContextMenuItemEditFilter";
+            resources.ApplyResources(this.filterContextMenuItemEditFilter, "filterContextMenuItemEditFilter");
+            // 
+            // filterContextMenuItemClearSelected
+            // 
+            this.filterContextMenuItemClearSelected.Name = "filterContextMenuItemClearSelected";
+            resources.ApplyResources(this.filterContextMenuItemClearSelected, "filterContextMenuItemClearSelected");
+            // 
+            // filterContextMenuItemClearAll
+            // 
+            this.filterContextMenuItemClearAll.Name = "filterContextMenuItemClearAll";
+            resources.ApplyResources(this.filterContextMenuItemClearAll, "filterContextMenuItemClearAll");
+            // 
+            // filterSmallImageList
+            // 
+            this.filterSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("filterSmallImageList.ImageStream")));
+            this.filterSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.filterSmallImageList.Images.SetKeyName(0, "asterisk_yellow.png");
+            this.filterSmallImageList.Images.SetKeyName(1, "chart_bar.png");
+            this.filterSmallImageList.Images.SetKeyName(2, "brick.png");
+            this.filterSmallImageList.Images.SetKeyName(3, "database_connect.png");
+            this.filterSmallImageList.Images.SetKeyName(4, "text_list_numbers.png");
+            this.filterSmallImageList.Images.SetKeyName(5, "award_star_bronze_3.png");
+            this.filterSmallImageList.Images.SetKeyName(6, "user.png");
+            this.filterSmallImageList.Images.SetKeyName(7, "cd.png");
+            this.filterSmallImageList.Images.SetKeyName(8, "clock.png");
+            this.filterSmallImageList.Images.SetKeyName(9, "date.png");
+            this.filterSmallImageList.Images.SetKeyName(10, "page_white_cd.png");
+            this.filterSmallImageList.Images.SetKeyName(11, "page_link.png");
+            // 
+            // queueSmallImageList
+            // 
+            this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
+            this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.queueSmallImageList.Images.SetKeyName(0, "music.png");
+            this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
+            this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
+            this.queueSmallImageList.Images.SetKeyName(3, "film.png");
+            this.queueSmallImageList.Images.SetKeyName(4, "television.png");
+            // 
+            // DirectoryOpenDialog
+            // 
+            resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
+            // 
+            // taskSmallImageList
+            // 
+            this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
+            this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // NowPlayingGroupBox
+            // 
+            resources.ApplyResources(this.NowPlayingGroupBox, "NowPlayingGroupBox");
+            this.NowPlayingGroupBox.Controls.Add(this.NowPlayingLabel);
+            this.NowPlayingGroupBox.Controls.Add(this.nowPlayingImage);
+            this.NowPlayingGroupBox.Name = "NowPlayingGroupBox";
+            this.NowPlayingGroupBox.TabStop = false;
+            // 
+            // nowPlayingImage
+            // 
+            resources.ApplyResources(this.nowPlayingImage, "nowPlayingImage");
+            this.nowPlayingImage.ErrorImage = global::Telesophy.Alexandria.Clients.Ankh.Properties.Resources.picture;
+            this.nowPlayingImage.Name = "nowPlayingImage";
+            this.nowPlayingImage.TabStop = false;
+            // 
+            // ToolBoxTabs
+            // 
+            resources.ApplyResources(this.ToolBoxTabs, "ToolBoxTabs");
+            this.ToolBoxTabs.Controls.Add(this.ToolBoxSourcesTab);
+            this.ToolBoxTabs.Controls.Add(this.ToolBoxNowPlayingTab);
+            this.ToolBoxTabs.Name = "ToolBoxTabs";
+            this.ToolBoxTabs.SelectedIndex = 0;
+            // 
+            // ToolBoxSourcesTab
+            // 
+            this.ToolBoxSourcesTab.Controls.Add(this.SourcesGroupBox);
+            resources.ApplyResources(this.ToolBoxSourcesTab, "ToolBoxSourcesTab");
+            this.ToolBoxSourcesTab.Name = "ToolBoxSourcesTab";
+            this.ToolBoxSourcesTab.UseVisualStyleBackColor = true;
+            // 
+            // ToolBoxNowPlayingTab
+            // 
+            this.ToolBoxNowPlayingTab.Controls.Add(this.NowPlayingGroupBox);
+            resources.ApplyResources(this.ToolBoxNowPlayingTab, "ToolBoxNowPlayingTab");
+            this.ToolBoxNowPlayingTab.Name = "ToolBoxNowPlayingTab";
+            this.ToolBoxNowPlayingTab.UseVisualStyleBackColor = true;
+            // 
+            // SourcesGroupBox
+            // 
+            resources.ApplyResources(this.SourcesGroupBox, "SourcesGroupBox");
+            this.SourcesGroupBox.Controls.Add(this.ToolBoxListView);
+            this.SourcesGroupBox.Name = "SourcesGroupBox";
+            this.SourcesGroupBox.TabStop = false;
             // 
             // mediaItemSearchBox
             // 
@@ -1013,103 +1158,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             resources.ApplyResources(this.statusDataGridViewTextBoxColumn, "statusDataGridViewTextBoxColumn");
             this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
             // 
-            // filterContextMenuStrip
-            // 
-            this.filterContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filterContextMenuItemAddFilter,
-            this.filterContextMenuItemUpdateOperator,
-            this.filterContextMenuItemEditFilter,
-            this.filterContextMenuItemClearSelected,
-            this.filterContextMenuItemClearAll});
-            this.filterContextMenuStrip.Name = "filterContextMenuStrip";
-            resources.ApplyResources(this.filterContextMenuStrip, "filterContextMenuStrip");
-            // 
-            // filterContextMenuItemAddFilter
-            // 
-            this.filterContextMenuItemAddFilter.Name = "filterContextMenuItemAddFilter";
-            resources.ApplyResources(this.filterContextMenuItemAddFilter, "filterContextMenuItemAddFilter");
-            // 
-            // filterContextMenuItemUpdateOperator
-            // 
-            this.filterContextMenuItemUpdateOperator.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.filterOperatorItemAnd,
-            this.filterOperatorItemOr,
-            this.filterOperatorItemNot});
-            this.filterContextMenuItemUpdateOperator.Name = "filterContextMenuItemUpdateOperator";
-            resources.ApplyResources(this.filterContextMenuItemUpdateOperator, "filterContextMenuItemUpdateOperator");
-            // 
-            // filterOperatorItemAnd
-            // 
-            this.filterOperatorItemAnd.Name = "filterOperatorItemAnd";
-            resources.ApplyResources(this.filterOperatorItemAnd, "filterOperatorItemAnd");
-            // 
-            // filterOperatorItemOr
-            // 
-            this.filterOperatorItemOr.Name = "filterOperatorItemOr";
-            resources.ApplyResources(this.filterOperatorItemOr, "filterOperatorItemOr");
-            // 
-            // filterOperatorItemNot
-            // 
-            this.filterOperatorItemNot.Name = "filterOperatorItemNot";
-            resources.ApplyResources(this.filterOperatorItemNot, "filterOperatorItemNot");
-            // 
-            // filterContextMenuItemEditFilter
-            // 
-            this.filterContextMenuItemEditFilter.Name = "filterContextMenuItemEditFilter";
-            resources.ApplyResources(this.filterContextMenuItemEditFilter, "filterContextMenuItemEditFilter");
-            // 
-            // filterContextMenuItemClearSelected
-            // 
-            this.filterContextMenuItemClearSelected.Name = "filterContextMenuItemClearSelected";
-            resources.ApplyResources(this.filterContextMenuItemClearSelected, "filterContextMenuItemClearSelected");
-            // 
-            // filterContextMenuItemClearAll
-            // 
-            this.filterContextMenuItemClearAll.Name = "filterContextMenuItemClearAll";
-            resources.ApplyResources(this.filterContextMenuItemClearAll, "filterContextMenuItemClearAll");
-            // 
-            // filterSmallImageList
-            // 
-            this.filterSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("filterSmallImageList.ImageStream")));
-            this.filterSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.filterSmallImageList.Images.SetKeyName(0, "asterisk_yellow.png");
-            this.filterSmallImageList.Images.SetKeyName(1, "chart_bar.png");
-            this.filterSmallImageList.Images.SetKeyName(2, "brick.png");
-            this.filterSmallImageList.Images.SetKeyName(3, "database_connect.png");
-            this.filterSmallImageList.Images.SetKeyName(4, "text_list_numbers.png");
-            this.filterSmallImageList.Images.SetKeyName(5, "award_star_bronze_3.png");
-            this.filterSmallImageList.Images.SetKeyName(6, "user.png");
-            this.filterSmallImageList.Images.SetKeyName(7, "cd.png");
-            this.filterSmallImageList.Images.SetKeyName(8, "clock.png");
-            this.filterSmallImageList.Images.SetKeyName(9, "date.png");
-            this.filterSmallImageList.Images.SetKeyName(10, "page_white_cd.png");
-            this.filterSmallImageList.Images.SetKeyName(11, "page_link.png");
-            // 
-            // queueSmallImageList
-            // 
-            this.queueSmallImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("queueSmallImageList.ImageStream")));
-            this.queueSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.queueSmallImageList.Images.SetKeyName(0, "music.png");
-            this.queueSmallImageList.Images.SetKeyName(1, "picture.png");
-            this.queueSmallImageList.Images.SetKeyName(2, "book_open.png");
-            this.queueSmallImageList.Images.SetKeyName(3, "film.png");
-            this.queueSmallImageList.Images.SetKeyName(4, "television.png");
-            // 
-            // DirectoryOpenDialog
-            // 
-            resources.ApplyResources(this.DirectoryOpenDialog, "DirectoryOpenDialog");
-            // 
-            // taskSmallImageList
-            // 
-            this.taskSmallImageList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            resources.ApplyResources(this.taskSmallImageList, "taskSmallImageList");
-            this.taskSmallImageList.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // modeLabel
-            // 
-            resources.ApplyResources(this.modeLabel, "modeLabel");
-            this.modeLabel.Name = "modeLabel";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1130,7 +1178,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.PlaybackGroupBox.ResumeLayout(false);
             this.PlaybackGroupBox.PerformLayout();
             this.TasksGroupBox.ResumeLayout(false);
-            this.TasksGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.taskDataGrid)).EndInit();
             this.taskContextMenuStrip.ResumeLayout(false);
             this.toolBoxQueueSplit.Panel1.ResumeLayout(false);
@@ -1142,8 +1189,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             this.SortGroupBox.ResumeLayout(false);
             this.SortGroupBox.PerformLayout();
             this.sortContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
             this.filterContextMenuStrip.ResumeLayout(false);
+            this.NowPlayingGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nowPlayingImage)).EndInit();
+            this.ToolBoxTabs.ResumeLayout(false);
+            this.ToolBoxSourcesTab.ResumeLayout(false);
+            this.ToolBoxNowPlayingTab.ResumeLayout(false);
+            this.SourcesGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.queueDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1166,8 +1219,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private System.Windows.Forms.GroupBox PlaybackGroupBox;
 		private System.Windows.Forms.GroupBox QueueGroupBox;
 		private System.Windows.Forms.GroupBox TasksGroupBox;
-		private System.Windows.Forms.Label NowPlayingLabel;
-		private System.Windows.Forms.Label NowPlayingTitle;
+        private System.Windows.Forms.Label NowPlayingLabel;
 		private System.Windows.Forms.Button PreviousButton;
 		private System.Windows.Forms.ToolStripMenuItem ToolsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
@@ -1270,6 +1322,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
         private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox modeComboBox;
         private System.Windows.Forms.Label modeLabel;
+        private System.Windows.Forms.GroupBox NowPlayingGroupBox;
+        private System.Windows.Forms.PictureBox nowPlayingImage;
+        private System.Windows.Forms.TabControl ToolBoxTabs;
+        private System.Windows.Forms.TabPage ToolBoxSourcesTab;
+        private System.Windows.Forms.TabPage ToolBoxNowPlayingTab;
+        private System.Windows.Forms.GroupBox SourcesGroupBox;
 	}
 }
 

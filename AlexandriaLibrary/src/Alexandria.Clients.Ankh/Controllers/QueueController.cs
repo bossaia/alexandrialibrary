@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -93,6 +94,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Dictionary<Uri, AspiDeviceInfo> deviceMaps = new Dictionary<Uri,AspiDeviceInfo>();
 
         private string playbackMode;
+
+        private PictureBox nowPlayingImage;
 		#endregion
 
 		#region Private Properties
@@ -194,6 +197,24 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
                         direction = (columns[propertyName]) ? SortOrder.Ascending : SortOrder.Descending;
 
                     column.HeaderCell.SortGlyphDirection = direction;
+                }
+            }
+        }
+
+        private void LoadNowPlayingImage(Uri trackPath)
+        {
+            const string IMAGE_NAME = "Folder.jpg";
+
+            if (trackPath != null)
+            {
+                FileInfo file = new FileInfo(trackPath.LocalPath);
+                if (file.Directory.Exists)
+                {
+                    string path = Path.Combine(file.Directory.FullName, IMAGE_NAME);
+                    if (System.IO.File.Exists(path))
+                    {
+                        NowPlayingImage.Image = System.Drawing.Image.FromFile(path);
+                    }
                 }
             }
         }
@@ -325,6 +346,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
             get { return playbackMode; }
             set { playbackMode = value; }
         }
+
+        public PictureBox NowPlayingImage
+        {
+            get { return nowPlayingImage; }
+            set { nowPlayingImage = value; }
+        }
 		#endregion
 
 		#region Public Methods
@@ -386,6 +413,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 						{
 							audioStream = new LocalSound(SelectedTrack.Path.LocalPath);
 							audioStream.StreamIndex = 0;
+
+                            LoadNowPlayingImage(track.Path);
 						}
 						else
 						{
@@ -446,7 +475,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				playbackController.Play();
 			}
 		}
-		
+
 		[CLSCompliant(false)]
 		public void LoadTrack(IMediaItem track, string source)
 		{
@@ -456,7 +485,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			//track.Source = source;
 
 			MediaItemData item = new MediaItemData(track.Id, track.Type, source, track.Number, GetSafeString(track.Title), GetSafeString(track.Artist), GetSafeString(track.Album), track.Duration, track.Date, track.Format.ToLower(), track.Path);
-			
+
 			grid.AddItem(item);
 		}
 		
