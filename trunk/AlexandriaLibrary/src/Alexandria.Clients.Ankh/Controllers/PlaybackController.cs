@@ -331,12 +331,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			if (audioPlayer != null && handler != null)
 				audioPlayer.CurrentAudioStreamEnded += handler;
 		}
-		
-		public void WireStatusUpdated(EventHandler<PlaybackEventArgs> handler)
-		{
-			if (handler != null)
-				statusUpdated += handler;
-		}		
+
+        public void WireStatusUpdated(EventHandler<PlaybackEventArgs> handler)
+        {
+            if (handler != null)
+                statusUpdated += handler;
+        }
 		#endregion
 	}
 }
