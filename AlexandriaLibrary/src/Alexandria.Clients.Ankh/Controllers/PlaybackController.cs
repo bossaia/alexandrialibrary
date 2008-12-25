@@ -34,6 +34,7 @@ using Alexandria.LastFM;
 using Alexandria.Fmod;
 
 using Telesophy.Alexandria.Model;
+using Telesophy.Alexandria.Clients.Ankh.Properties;
 
 namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 {
@@ -309,11 +310,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 				if (audioPlayer.CurrentAudioStream.PlaybackState == PlaybackState.Playing)
 				{
-					PlayPauseButton.BackgroundImage = Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_pause_blue;
+					PlayPauseButton.BackgroundImage = Resources.control_pause_blue;
 				}
 				else
 				{
-					PlayPauseButton.BackgroundImage = Telesophy.Alexandria.Clients.Ankh.Properties.Resources.control_play_blue;
+					PlayPauseButton.BackgroundImage = Resources.control_play_blue;
 				}
 			}
 		}

@@ -31,43 +31,49 @@ using System.Text;
 
 namespace Telesophy.Alexandria.Model
 {
+    public class Values
+    {
+        public static class Source
+        {
+            public const string Catalog = "Catalog";
+            public const string File = "File";
+            public const string Web = "Web";
+        }
+    }
+
 	public static class ModelConstants
 	{
-		// Media Type Constants
-		public const string MEDIA_TYPE_AUDIO = "Audio";
-		public const string MEDIA_TYPE_VIDEO = "Video";
-		public const string MEDIA_TYPE_IMAGE = "Image";
-		public const string MEDIA_TYPE_PLAYLIST = "Playlist";
+        // Media Type Constants
+        public const string MEDIA_TYPE_AUDIO = "Audio";
+        public const string MEDIA_TYPE_VIDEO = "Video";
+        public const string MEDIA_TYPE_IMAGE = "Image";
+        public const string MEDIA_TYPE_PLAYLIST = "Playlist";
+        public const string MEDIA_TYPE_TEXT = "Text";
 
-		// Media Source Constants
-		public const string SOURCE_CATALOG = "Catalog";
-		public const string SOURCE_FILE = "File";
-		public const string SOURCE_WEB = "Web";
-		
-		// Artist Type Constants
-		public const string ARTIST_TYPE_PERSON = "Person";
-		public const string ARTIST_TYPE_GROUP = "Group";
-				
-		// Artist Constants
-		public const string ARTIST_NAME_UNKNOWN = "Unknown Artist";
-		public const string ARTIST_NAME_VARIOUS = "Various Artists";
-		
-		// Playlist Constants
-		public const string PLAYLIST_TITLE_DEFAULT = "New Playlist";
-		public const string PLAYLIST_FORMAT_DEFAULT = "application/x-alexandria-playlist";
-		public const string PLAYLIST_PATH_DEFAULT = "http://www.telesophy.org/schema/1.0/playlist/";
-		
-		// MediaItem Column Constants
-		public const string MEDIA_ITEM_COLUMN_ID = "Id";
-		public const string MEDIA_ITEM_COLUMN_TYPE = "Type";
-		public const string MEDIA_ITEM_COLUMN_SOURCE = "Source";
-		public const string MEDIA_ITEM_COLUMN_NUMBER = "Number";
-		public const string MEDIA_ITEM_COLUMN_TITLE = "Title";
-		public const string MEDIA_ITEM_COLUMN_ARTIST = "Artist";
-		public const string MEDIA_ITEM_COLUMN_ALBUM = "Album";
-		public const string MEDIA_ITEM_COLUMN_DURATION = "Duration";
-		public const string MEDIA_ITEM_COLUMN_DATE = "Date";
-		public const string MEDIA_ITEM_COLUMN_FORMAT = "Format";
-		public const string MEDIA_ITEM_COLUMN_PATH = "Path";
+        // Artist Type Constants
+        public const string ARTIST_TYPE_PERSON = "Person";
+        public const string ARTIST_TYPE_GROUP = "Group";
+
+        // Artist Constants
+        public const string ARTIST_NAME_UNKNOWN = "Unknown Artist";
+        public const string ARTIST_NAME_VARIOUS = "Various Artists";
+
+        // Playlist Constants
+        public const string PLAYLIST_TITLE_DEFAULT = "New Playlist";
+        public const string PLAYLIST_FORMAT_DEFAULT = "application/x-alexandria-playlist";
+        public const string PLAYLIST_PATH_DEFAULT = "http://www.telesophy.org/schema/1.0/playlist/";
+
+        // MediaItem Column Constants
+        public const string MEDIA_ITEM_COLUMN_ID = "Id";
+        public const string MEDIA_ITEM_COLUMN_TYPE = "Type";
+        public const string MEDIA_ITEM_COLUMN_SOURCE = "Source";
+        public const string MEDIA_ITEM_COLUMN_NUMBER = "Number";
+        public const string MEDIA_ITEM_COLUMN_TITLE = "Title";
+        public const string MEDIA_ITEM_COLUMN_ARTIST = "Artist";
+        public const string MEDIA_ITEM_COLUMN_ALBUM = "Album";
+        public const string MEDIA_ITEM_COLUMN_DURATION = "Duration";
+        public const string MEDIA_ITEM_COLUMN_DATE = "Date";
+        public const string MEDIA_ITEM_COLUMN_FORMAT = "Format";
+        public const string MEDIA_ITEM_COLUMN_PATH = "Path";
 	}
 }

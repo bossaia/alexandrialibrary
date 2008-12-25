@@ -52,7 +52,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private IMediaSet GetNewPlaylist()
 		{
 			Guid id = Guid.NewGuid();
-			string source = ModelConstants.SOURCE_CATALOG;
+            string source = Values.Source.Catalog;
 			int number = 0;
 			string title = ModelConstants.PLAYLIST_TITLE_DEFAULT;
 			string artist = ModelConstants.ARTIST_NAME_VARIOUS;

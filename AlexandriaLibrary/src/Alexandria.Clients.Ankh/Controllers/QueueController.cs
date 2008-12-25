@@ -91,6 +91,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private TaskController taskController;
 		
 		private Dictionary<Uri, AspiDeviceInfo> deviceMaps = new Dictionary<Uri,AspiDeviceInfo>();
+
+        private string playbackMode;
 		#endregion
 
 		#region Private Properties
@@ -100,7 +102,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set {
 				if (selectedRow != null && selectedRow != value && selectedRow.Index > -1)
 				{
-					grid.Rows[selectedRow.Index].Cells[ControllerConstants.COLUMN_STATUS].Value = string.Empty;
+					grid.Rows[selectedRow.Index].Cells[Columns.Queue.Status.Name].Value = string.Empty;
 				}
 				 
 				selectedRow = value;
@@ -142,18 +144,18 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private IMediaItem GetSelectedAudioTrack(DataGridViewRow row)
 		{
 			if (row.Index > -1)
-			{			
-				Guid id = GetItemGuid(row.Cells[ControllerConstants.COLUMN_ID]);
-				string type = GetItemString(row.Cells[ControllerConstants.COLUMN_TYPE]);
-				string source = GetItemString(row.Cells[ControllerConstants.COLUMN_SOURCE]);
-				int number = GetItemInt(row.Cells[ControllerConstants.COLUMN_NUMBER]);
-				string title = GetItemString(row.Cells[ControllerConstants.COLUMN_TITLE]);
-				string artist = GetItemString(row.Cells[ControllerConstants.COLUMN_ARTIST]);
-				string album = GetItemString(row.Cells[ControllerConstants.COLUMN_ALBUM]);
-				TimeSpan duration = GetItemTimeSpan(row.Cells[ControllerConstants.COLUMN_DURATION]);
-				DateTime date = GetItemDateTime(row.Cells[ControllerConstants.COLUMN_DATE]);
-				string format = GetItemString(row.Cells[ControllerConstants.COLUMN_FORMAT]);
-				Uri path = GetItemUri(row.Cells[ControllerConstants.COLUMN_PATH]);
+			{
+				Guid id = GetItemGuid(row.Cells[Columns.Queue.Id.Name]);
+                string type = GetItemString(row.Cells[Columns.Queue.Type.Name]);
+                string source = GetItemString(row.Cells[Columns.Queue.Source.Name]);
+                int number = GetItemInt(row.Cells[Columns.Queue.Number.Name]);
+                string title = GetItemString(row.Cells[Columns.Queue.Title.Name]);
+                string artist = GetItemString(row.Cells[Columns.Queue.Artist.Name]);
+                string album = GetItemString(row.Cells[Columns.Queue.Album.Name]);
+                TimeSpan duration = GetItemTimeSpan(row.Cells[Columns.Queue.Duration.Name]);
+                DateTime date = GetItemDateTime(row.Cells[Columns.Queue.Date.Name]);
+                string format = GetItemString(row.Cells[Columns.Queue.Format.Name]);
+                Uri path = GetItemUri(row.Cells[Columns.Queue.Path.Name]);
 				
 				IMediaItem track = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
 				return track;
@@ -183,13 +185,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
         {
             foreach (DataGridViewColumn column in grid.Columns)
             {
-                string propertyName = ControllerHelper.GetPropertyNameFromColumnName(column.Name);
+                if (Columns.Queue.ColumnsByName.ContainsKey(column.Name))
+                {
+                    string propertyName = Columns.Queue.ColumnsByName[column.Name].PropertyName;
 
-                SortOrder direction = SortOrder.None;
-                if (columns.ContainsKey(propertyName))
-                    direction = (columns[propertyName]) ? SortOrder.Ascending : SortOrder.Descending;
+                    SortOrder direction = SortOrder.None;
+                    if (columns.ContainsKey(propertyName))
+                        direction = (columns[propertyName]) ? SortOrder.Ascending : SortOrder.Descending;
 
-                column.HeaderCell.SortGlyphDirection = direction;
+                    column.HeaderCell.SortGlyphDirection = direction;
+                }
             }
         }
 		#endregion
@@ -306,14 +311,20 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			get { 
 				return (SelectedRow != null && SelectedRow.Index > -1)
-					? SelectedRow.Cells[ControllerConstants.COLUMN_STATUS].Value.ToString()
+                    ? SelectedRow.Cells[Columns.Queue.Status.Name].Value.ToString()
 					: null;
 			}
 			set { 
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					SelectedRow.Cells[ControllerConstants.COLUMN_STATUS].Value = value;
+                    SelectedRow.Cells[Columns.Queue.Status.Name].Value = value;
 			}
 		}
+
+        public string PlaybackMode
+        {
+            get { return playbackMode; }
+            set { playbackMode = value; }
+        }
 		#endregion
 
 		#region Public Methods
@@ -403,7 +414,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 						if (audioStream != null && audioStream.Duration != SelectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
-							SelectedRow.Cells[ControllerConstants.COLUMN_DURATION].Value = audioStream.Duration;
+							SelectedRow.Cells[Columns.Queue.Duration.Name].Value = audioStream.Duration;
 						}
 					}
 					
@@ -562,7 +573,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			if (!string.IsNullOrEmpty(path))
 			{
-				if (IsFormat(path, ControllerConstants.FORMAT_PLAYLIST))
+				if (IsFormat(path, ContextHelper.GetPlaylistFormats()))
 				{
 					//TODO: Change this to use the new Alexandria.Extensions.Playlist project
 					//IPlaylist playlist = playlistFactory.CreatePlaylist(new Uri(path));
@@ -570,9 +581,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					//foreach (IPlaylistItem item in playlist.Items)
 						//LoadTrackFromPath(item.Path, "Playlist");
 				}
-				else if (IsFormat(path, ControllerConstants.FORMAT_AUDIO))
+				else if (IsFormat(path, ContextHelper.GetAudioFormats()))
 				{
-					LoadTrackFromPath(path, ModelConstants.SOURCE_FILE);
+					LoadTrackFromPath(path, Values.Source.File);
 				}
 			}
 		}
@@ -619,6 +630,45 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 		}
 
+        private DataGridViewRow GetRandomRow()
+        {
+            if (Grid != null && Grid.Rows.Count > 0)
+            {
+                int excludeIndex = (SelectedRow != null) ? SelectedRow.Index : -1;
+                int index = 0;
+
+                Random generator = new Random();
+
+                do
+                {
+                    index = generator.Next(Grid.Rows.Count);
+                }
+                while (index == excludeIndex); //keep getting a random index until we get on that is not excluded
+
+                if (index > -1 && index < Grid.Rows.Count)
+                    return Grid.Rows[index];
+            }
+
+            return null;
+        }
+
+        private DataGridViewRow GetNewRow(bool forward)
+        {
+            switch (PlaybackMode)
+            {
+                case PlayModes.RepeatList:
+                    if (forward)
+                        return (SelectedRow.Index < grid.Rows.Count - 1) ? grid.Rows[SelectedRow.Index + 1] : grid.Rows[0];
+                    else return (SelectedRow.Index > 0) ? grid.Rows[SelectedRow.Index - 1] : grid.Rows[grid.Rows.Count - 1];
+                case PlayModes.RepeatTrack:
+                    return SelectedRow;
+                case PlayModes.Random:
+                    return GetRandomRow();
+                default:
+                    return null;
+            }
+        }
+
 		public void Previous()
 		{
 			if (playbackController != null)
@@ -628,14 +678,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				if (isPlaying)
 					playbackController.Stop();
 
-				//TODO: implement this logic
-				//SelectedTrack = ChangeSelectedTrack(-1); //NOTE: use this to support "shuffle"
-				//if (OnSelectedTrackChanged != null)
-					//OnSelectedTrackChanged(this, new QueueEventArgs());
-
 				if (SelectedRow != null && grid.Rows.Count > 1)
 				{
-					SelectedRow = (SelectedRow.Index > 0) ? grid.Rows[SelectedRow.Index-1] : grid.Rows[grid.Rows.Count-1];
+                    SelectedRow = GetNewRow(false);
+                        //(SelectedRow.Index > 0) ? grid.Rows[SelectedRow.Index-1] : grid.Rows[grid.Rows.Count-1];
 				}
 				
 				LoadSelectedRow();
@@ -654,14 +700,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				if (isPlaying)
 					playbackController.Stop();
 
-				//TODO: implement this logic
-				//SelectedTrack = ChangeSelectedTrack(1);
-				//if (OnSelectedTrackChanged != null)
-				//OnSelectedTrackChanged(this, new QueueEventArgs());
-
 				if (SelectedRow != null && grid.Rows.Count > 1)
 				{
-					SelectedRow = (SelectedRow.Index < grid.Rows.Count-1) ? grid.Rows[SelectedRow.Index+1] : grid.Rows[0];
+                    SelectedRow = GetNewRow(true);
+                        //(SelectedRow.Index < grid.Rows.Count-1) ? grid.Rows[SelectedRow.Index+1] : grid.Rows[0];
 				}
 
 				LoadSelectedRow();
@@ -692,7 +734,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
 				Guid selectedId = default(Guid);
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					selectedId = (Guid)SelectedRow.Cells[ControllerConstants.COLUMN_ID].Value;
+					selectedId = (Guid)SelectedRow.Cells[Columns.Queue.Id.Name].Value;
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				
@@ -700,7 +742,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				foreach (KeyValuePair<string, bool> column in columns)
 				{
 					ListSortDirection direction = (column.Value) ? ListSortDirection.Ascending : ListSortDirection.Descending;
-					PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[ControllerHelper.GetPropertyNameFromColumnName(column.Key)];
+                    PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[Columns.Queue.ColumnsByPropertyName[column.Key].PropertyName];
 					sortArray[columnIndex] = new ListSortDescription(property, direction);
 					columnIndex++;					
 				}
@@ -750,7 +792,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				IMediaItem item = persistenceController.CreateMediaItem(data);
 				
 				//IMediaItem item = bindingList[index];
-				item.Source = ModelConstants.SOURCE_CATALOG;
+				item.Source = Values.Source.Catalog;
 				persistenceController.SaveMediaItem(item);
 			}
 		}

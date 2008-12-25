@@ -57,7 +57,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			this.columnType = columnType;
 			this.@operator = @operator;
 			this.value = value;
-			this.imageIndex = GetFilterImageIndex(column);
+			//this.imageIndex = GetFilterImageIndex(column);
 		}
 		#endregion
 		
@@ -71,36 +71,36 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#endregion
 		
 		#region Private Methods
-		private int GetFilterImageIndex(string column)
-		{
-			switch (column)
-			{
-				case ControllerConstants.COLUMN_NAME_STATUS:
-					return 1;
-				case ControllerConstants.COLUMN_NAME_TYPE:
-					return 2;
-				case ControllerConstants.COLUMN_NAME_SOURCE:
-					return 3;
-				case ControllerConstants.COLUMN_NAME_NUMBER:
-					return 4;
-				case ControllerConstants.COLUMN_NAME_TITLE:
-					return 5;
-				case ControllerConstants.COLUMN_NAME_ARTIST:
-					return 6;
-				case ControllerConstants.COLUMN_NAME_ALBUM:
-					return 7;
-				case ControllerConstants.COLUMN_NAME_DURATION:
-					return 8;
-				case ControllerConstants.COLUMN_NAME_DATE:
-					return 9;
-				case ControllerConstants.COLUMN_NAME_FORMAT:
-					return 10;
-				case ControllerConstants.COLUMN_NAME_PATH:
-					return 11;
-				default:
-					return 0;
-			}
-		}
+        //private int GetFilterImageIndex(string column)
+        //{
+        //    switch (column)
+        //    {
+        //        case ControllerConstants.COLUMN_NAME_STATUS:
+        //            return 1;
+        //        case ControllerConstants.COLUMN_NAME_TYPE:
+        //            return 2;
+        //        case ControllerConstants.COLUMN_NAME_SOURCE:
+        //            return 3;
+        //        case ControllerConstants.COLUMN_NAME_NUMBER:
+        //            return 4;
+        //        case ControllerConstants.COLUMN_NAME_TITLE:
+        //            return 5;
+        //        case ControllerConstants.COLUMN_NAME_ARTIST:
+        //            return 6;
+        //        case ControllerConstants.COLUMN_NAME_ALBUM:
+        //            return 7;
+        //        case ControllerConstants.COLUMN_NAME_DURATION:
+        //            return 8;
+        //        case ControllerConstants.COLUMN_NAME_DATE:
+        //            return 9;
+        //        case ControllerConstants.COLUMN_NAME_FORMAT:
+        //            return 10;
+        //        case ControllerConstants.COLUMN_NAME_PATH:
+        //            return 11;
+        //        default:
+        //            return 0;
+        //    }
+        //}
 		#endregion
 		
 		#region Public Properties

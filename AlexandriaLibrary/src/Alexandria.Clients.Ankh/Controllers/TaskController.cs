@@ -294,7 +294,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{	
 			if (System.IO.File.Exists(path) && !System.IO.Directory.Exists(path))
 			{
-				if (!string.IsNullOrEmpty(path) && QueueController.IsFormat(path, ControllerConstants.FORMAT_AUDIO))
+				if (!string.IsNullOrEmpty(path) && QueueController.IsFormat(path, ContextHelper.GetAudioFormats()))
 				{
 					importFileName = new FileInfo(path).Name;
 					importScanCount++;
@@ -304,8 +304,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 						IMediaItem track = QueueController.GetMediaItem(new Uri(path));
 						if (track != null)
 						{
-							track.Source = ModelConstants.SOURCE_CATALOG;
-							track.Type = ControllerConstants.TYPE_AUDIO;
+                            track.Source = Values.Source.Catalog;
+							track.Type = MediaTypes.Audio;
 							PersistenceController.SaveMediaItem(track);
 							importHitCount++;
 

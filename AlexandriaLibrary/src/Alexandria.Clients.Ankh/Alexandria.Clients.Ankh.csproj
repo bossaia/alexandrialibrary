@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ContextHelper.cs" />
     <Compile Include="Controllers\ControllerHelper.cs" />
     <Compile Include="Views\About.cs">
       <SubType>Form</SubType>
@@ -91,7 +92,6 @@
       <DependentUpon>UpdateFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\BindingListView.cs" />
-    <Compile Include="Controllers\ControllerConstants.cs" />
     <Compile Include="Controllers\ImportStatusUpdateDelegate.cs" />
     <Compile Include="Controllers\ImportStatusUpdateEventArgs.cs" />
     <Compile Include="Controllers\PersistenceController.cs" />
