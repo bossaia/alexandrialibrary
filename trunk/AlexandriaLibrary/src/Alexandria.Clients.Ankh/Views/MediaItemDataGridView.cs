@@ -72,33 +72,30 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#region Private Event Methods
 		private void MediaItemDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if (Columns[e.ColumnIndex].Name == ControllerConstants.COLUMN_TYPE)
+			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Type.Name)
 			{
 				string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
 
 				switch (value)
 				{
-					case ControllerConstants.TYPE_AUDIO:
-						e.Value = musicImage; //smallImageList.Images[INDEX_AUDIO];
+					case MediaTypes.Audio:
+						e.Value = musicImage;
 						break;
-					case ControllerConstants.TYPE_BOOK:
-						e.Value = bookImage; //smallImageList.Images[INDEX_BOOK];
+                    case MediaTypes.Text:
+						e.Value = bookImage;
 						break;
-					case ControllerConstants.TYPE_IMAGE:
-						e.Value = pictureImage; //smallImageList.Images[INDEX_IMAGE];
+					case MediaTypes.Image:
+						e.Value = pictureImage;
 						break;
-					case ControllerConstants.TYPE_MOVIE:
-						e.Value = filmImage; //smallImageList.Images[INDEX_MOVIE];
-						break;
-					case ControllerConstants.TYPE_TELEVISION:
-						e.Value = televisionImage; //smallImageList.Images[INDEX_TELEVISION];
+					case MediaTypes.Video:
+						e.Value = filmImage; 
 						break;
 					default:
-						e.Value = musicImage; //smallImageList.Images[INDEX_AUDIO];
+						e.Value = televisionImage;
 						break;
 				}
 			}
-			if (Columns[e.ColumnIndex].Name == ControllerConstants.COLUMN_DURATION)
+			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Duration.Name)
 			{
 				TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
 				if (duration.Hours > 0)
@@ -114,7 +111,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					e.Value = string.Format("0:{0:00}", duration.Seconds);
 				}
 			}
-			if (Columns[e.ColumnIndex].Name == ControllerConstants.COLUMN_PATH)
+			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Path.Name)
 			{
 				Uri path = e.Value as Uri;
 				if (path != null)

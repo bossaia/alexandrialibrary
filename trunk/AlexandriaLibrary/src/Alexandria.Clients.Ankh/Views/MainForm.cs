@@ -157,6 +157,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private void CustomInitialize()
 		{
 			InitializeTaskMenu();
+            InitializePlayModes();
 
 			mediaItemSearchBox.PersistenceController = persistenceController;			
 			mediaItemSearchBox.SearchCompleted += new EventHandler<MediaItemSearchEventArgs>(OnMediaItemSearchCompleted);
@@ -333,9 +334,19 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			ToolBoxListView.EndUpdate();
 		}
 		#endregion
-		
-		#region GetVolume
-		private float GetVolume()
+
+        #region InitializePlayModes
+        private void InitializePlayModes()
+        {
+            modeComboBox.Items.Add(PlayModes.RepeatList);
+            modeComboBox.Items.Add(PlayModes.RepeatTrack);
+            modeComboBox.Items.Add(PlayModes.Random);
+            modeComboBox.SelectedIndex = 0;
+        }
+        #endregion
+
+        #region GetVolume
+        private float GetVolume()
 		{
 			return Convert.ToSingle(VolumeTrackBar.Value * .1);
 		}
@@ -362,7 +373,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private void OpenDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             if (string.IsNullOrEmpty(lastDirectoryOpened))
-                lastDirectoryOpened = ControllerHelper.GetDefaultOpenDirectory();
+                lastDirectoryOpened = ContextHelper.GetAudioDirectory();
+                    //ControllerHelper.GetDefaultOpenDirectory();
 
             if (Directory.Exists(lastDirectoryOpened))
                 DirectoryOpenDialog.SelectedPath = lastDirectoryOpened;
@@ -513,8 +525,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			string sortName = ControllerHelper.GetPropertyNameFromColumnName(queueDataGrid.Columns[e.ColumnIndex].Name);
-			bool sortExists = false;
+            string columnName = queueDataGrid.Columns[e.ColumnIndex].Name;
+            string sortName = string.Empty;
+            bool sortExists = false;
+
+            if (Columns.Queue.ColumnsByName.ContainsKey(columnName))
+                sortName = Columns.Queue.ColumnsByName[columnName].PropertyName;			
 			
 			if (sortListView.Items.Count > 0)
 			{
@@ -533,7 +549,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			
 			if (!sortExists)
 			{
-                while (sortListView.Items.Count >= ControllerHelper.GetMaximumSortColumns())
+                while (sortListView.Items.Count >= ContextHelper.GetMaximumSortColumns())
                     sortListView.Items[0].Remove();
 				
 				sortListView.Items.Add(sortName, 0);
@@ -600,11 +616,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != ControllerConstants.COLUMN_NAME_STATUS)
-			{
-				queueController.SaveRow(e.RowIndex);
-			}
+            if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != Columns.Queue.Status.Name)
+            {
+                queueController.SaveRow(e.RowIndex);
+            }
 		}
+
+        private void modeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            queueController.PlaybackMode = modeComboBox.SelectedItem.ToString();
+        }
 
 		private void submitCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
@@ -649,7 +670,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		private void importCatalogToolStripMenuItem_Click(object sender, EventArgs e)
 		{
             if (string.IsNullOrEmpty(lastDirectoryOpened))
-                lastDirectoryOpened = ControllerHelper.GetDefaultOpenDirectory();
+                lastDirectoryOpened = ContextHelper.GetPlaylistDirectory();
 
 			if (Directory.Exists(lastDirectoryOpened))
 				DirectoryOpenDialog.SelectedPath = lastDirectoryOpened;

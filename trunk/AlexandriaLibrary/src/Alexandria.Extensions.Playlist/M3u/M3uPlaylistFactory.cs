@@ -46,7 +46,7 @@ namespace Telesophy.Alexandria.Extensions.Playlist.M3u
 			    if (file.Extension.Equals(PlaylistConstants.PLAYLIST_EXT_M3U, StringComparison.OrdinalIgnoreCase))
 			    {
 					Guid id = Guid.NewGuid();
-					string source = ModelConstants.SOURCE_FILE;
+					string source = Values.Source.File;
 					int number = 0;
 					string title = file.Name;
 					string artist = ModelConstants.ARTIST_NAME_UNKNOWN;

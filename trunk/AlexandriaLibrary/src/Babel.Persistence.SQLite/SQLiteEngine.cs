@@ -49,7 +49,7 @@ namespace Telesophy.Babel.Persistence.SQLite
 		#endregion
 	
 		#region Private Constants
-		private const string CONFIG_DATABASE_DIR = "DatabaseDirectory";
+        private const string CONFIG_DATABASE_DIR = "Config.Directory.Data";
 		private const string FORMAT_CONNECTION_STRING = "Data Source={0};New={1};UTF8Encoding=True;Version=3";
 		private const string DATABASE_FILE_EXT = ".db";
         private const bool DEFER_WRITE_LOCK = true;

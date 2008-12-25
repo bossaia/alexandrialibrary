@@ -145,7 +145,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;PlayPauseButton.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="StopButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -175,7 +175,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;StopButton.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="PlaybackTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -202,7 +202,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;PlaybackTrackBar.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="VolumeTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
@@ -232,7 +232,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;VolumeTrackBar.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="MuteButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Right</value>
@@ -262,7 +262,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;MuteButton.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <metadata name="FileMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>0, 0</value>
@@ -556,7 +556,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NextButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <metadata name="PlaybackTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>420, 6</value>
@@ -564,39 +564,6 @@
   <metadata name="PlaybackGroupBox.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="submitCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="submitCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleRight</value>
-  </data>
-  <data name="submitCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="submitCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 119</value>
-  </data>
-  <data name="submitCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 17</value>
-  </data>
-  <data name="submitCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="submitCheckBox.Text" xml:space="preserve">
-    <value>Submit to Last.fm</value>
-  </data>
-  <data name="&gt;&gt;submitCheckBox.Name" xml:space="preserve">
-    <value>submitCheckBox</value>
-  </data>
-  <data name="&gt;&gt;submitCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;submitCheckBox.Parent" xml:space="preserve">
-    <value>PlaybackGroupBox</value>
-  </data>
-  <data name="&gt;&gt;submitCheckBox.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="PreviousButton.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -622,7 +589,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;PreviousButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="NowPlayingLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -655,7 +622,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NowPlayingLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="NowPlayingTitle.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -667,7 +634,7 @@
     <value>NoControl</value>
   </data>
   <data name="NowPlayingTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 114</value>
+    <value>69, 114</value>
   </data>
   <data name="NowPlayingTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 27</value>
@@ -691,7 +658,7 @@
     <value>PlaybackGroupBox</value>
   </data>
   <data name="&gt;&gt;NowPlayingTitle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="PlaybackGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 29</value>
@@ -716,6 +683,63 @@
   </data>
   <data name="&gt;&gt;PlaybackGroupBox.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="modeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="modeComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>796, 19</value>
+  </data>
+  <data name="modeComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 21</value>
+  </data>
+  <data name="modeComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;modeComboBox.Name" xml:space="preserve">
+    <value>modeComboBox</value>
+  </data>
+  <data name="&gt;&gt;modeComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modeComboBox.Parent" xml:space="preserve">
+    <value>SortGroupBox</value>
+  </data>
+  <data name="&gt;&gt;modeComboBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="submitCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="submitCheckBox.CheckAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="submitCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="submitCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 147</value>
+  </data>
+  <data name="submitCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 17</value>
+  </data>
+  <data name="submitCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="submitCheckBox.Text" xml:space="preserve">
+    <value>Submit to Last.fm</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Name" xml:space="preserve">
+    <value>submitCheckBox</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.Parent" xml:space="preserve">
+    <value>TasksGroupBox</value>
+  </data>
+  <data name="&gt;&gt;submitCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="TasksGroupBox.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -790,7 +814,7 @@
     <value>6, 18</value>
   </data>
   <data name="taskDataGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>862, 146</value>
+    <value>862, 123</value>
   </data>
   <data name="taskDataGrid.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -805,7 +829,7 @@
     <value>TasksGroupBox</value>
   </data>
   <data name="&gt;&gt;taskDataGrid.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="TasksGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>315, 29</value>
@@ -846,10 +870,10 @@
   <metadata name="ToolBoxContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>652, 43</value>
   </metadata>
-  <data name="ToolBoxContextMenuItemRefresh.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolRefresh.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 22</value>
   </data>
-  <data name="ToolBoxContextMenuItemRefresh.Text" xml:space="preserve">
+  <data name="toolRefresh.Text" xml:space="preserve">
     <value>Refresh</value>
   </data>
   <data name="toolRipDiscMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -877,7 +901,7 @@
     <value>Add Selected Items To Playlist</value>
   </data>
   <data name="ToolBoxContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 136</value>
+    <value>230, 114</value>
   </data>
   <data name="&gt;&gt;ToolBoxContextMenuStrip.Name" xml:space="preserve">
     <value>ToolBoxContextMenuStrip</value>
@@ -1012,6 +1036,36 @@
   <data name="SortGroupBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
+  <data name="modeLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="modeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="modeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>758, 23</value>
+  </data>
+  <data name="modeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="modeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="modeLabel.Text" xml:space="preserve">
+    <value>Mode</value>
+  </data>
+  <data name="&gt;&gt;modeLabel.Name" xml:space="preserve">
+    <value>modeLabel</value>
+  </data>
+  <data name="&gt;&gt;modeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modeLabel.Parent" xml:space="preserve">
+    <value>SortGroupBox</value>
+  </data>
+  <data name="&gt;&gt;modeLabel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="sortListView.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
   </data>
@@ -1043,7 +1097,7 @@
     <value>10, 15</value>
   </data>
   <data name="sortListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>812, 27</value>
+    <value>609, 27</value>
   </data>
   <metadata name="sortSmallImageList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>324, 80</value>
@@ -1105,7 +1159,7 @@
     <value>SortGroupBox</value>
   </data>
   <data name="&gt;&gt;sortListView.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="sortButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
@@ -1114,7 +1168,7 @@
     <value>NoControl</value>
   </data>
   <data name="sortButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>829, 17</value>
+    <value>625, 15</value>
   </data>
   <data name="sortButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 23</value>
@@ -1135,7 +1189,7 @@
     <value>SortGroupBox</value>
   </data>
   <data name="&gt;&gt;sortButton.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="SortGroupBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 42</value>
@@ -1174,7 +1228,7 @@
     <value>mediaItemSearchBox</value>
   </data>
   <data name="&gt;&gt;mediaItemSearchBox.Type" xml:space="preserve">
-    <value>Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox, Alexandria.Clients.Ankh, Version=1.0.0.9, Culture=neutral, PublicKeyToken=null</value>
+    <value>Telesophy.Alexandria.Clients.Ankh.Views.MediaItemSearchBox, Alexandria.Clients.Ankh, Version=1.0.1.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;mediaItemSearchBox.Parent" xml:space="preserve">
     <value>QueueGroupBox</value>
@@ -1405,7 +1459,7 @@
     <value>queueDataGrid</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.Type" xml:space="preserve">
-    <value>Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView, Alexandria.Clients.Ankh, Version=1.0.0.9, Culture=neutral, PublicKeyToken=null</value>
+    <value>Telesophy.Alexandria.Clients.Ankh.Views.MediaItemDataGridView, Alexandria.Clients.Ankh, Version=1.0.1.1, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;queueDataGrid.Parent" xml:space="preserve">
     <value>QueueGroupBox</value>
@@ -2058,10 +2112,10 @@
   <data name="&gt;&gt;taskCancelAllMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolBoxContextMenuItemRefresh.Name" xml:space="preserve">
-    <value>ToolBoxContextMenuItemRefresh</value>
+  <data name="&gt;&gt;toolRefresh.Name" xml:space="preserve">
+    <value>toolRefresh</value>
   </data>
-  <data name="&gt;&gt;ToolBoxContextMenuItemRefresh.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolRefresh.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolRipDiscMenuItem.Name" xml:space="preserve">
@@ -2184,78 +2238,6 @@
   <data name="&gt;&gt;idColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;filterContextMenuItemAddFilter.Name" xml:space="preserve">
-    <value>filterContextMenuItemAddFilter</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemAddFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemUpdateOperator.Name" xml:space="preserve">
-    <value>filterContextMenuItemUpdateOperator</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemUpdateOperator.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemAnd.Name" xml:space="preserve">
-    <value>filterOperatorItemAnd</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemAnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemOr.Name" xml:space="preserve">
-    <value>filterOperatorItemOr</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemOr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemNot.Name" xml:space="preserve">
-    <value>filterOperatorItemNot</value>
-  </data>
-  <data name="&gt;&gt;filterOperatorItemNot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemEditFilter.Name" xml:space="preserve">
-    <value>filterContextMenuItemEditFilter</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemEditFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemClearSelected.Name" xml:space="preserve">
-    <value>filterContextMenuItemClearSelected</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemClearSelected.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemClearAll.Name" xml:space="preserve">
-    <value>filterContextMenuItemClearAll</value>
-  </data>
-  <data name="&gt;&gt;filterContextMenuItemClearAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;filterSmallImageList.Name" xml:space="preserve">
-    <value>filterSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;filterSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
-    <value>queueSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
-    <value>DirectoryOpenDialog</value>
-  </data>
-  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
-    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;taskSmallImageList.Name" xml:space="preserve">
-    <value>taskSmallImageList</value>
-  </data>
-  <data name="&gt;&gt;taskSmallImageList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;idDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>idDataGridViewTextBoxColumn</value>
   </data>
@@ -2327,6 +2309,78 @@
   </data>
   <data name="&gt;&gt;statusDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemAddFilter.Name" xml:space="preserve">
+    <value>filterContextMenuItemAddFilter</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemAddFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemUpdateOperator.Name" xml:space="preserve">
+    <value>filterContextMenuItemUpdateOperator</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemUpdateOperator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemAnd.Name" xml:space="preserve">
+    <value>filterOperatorItemAnd</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemAnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemOr.Name" xml:space="preserve">
+    <value>filterOperatorItemOr</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemOr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemNot.Name" xml:space="preserve">
+    <value>filterOperatorItemNot</value>
+  </data>
+  <data name="&gt;&gt;filterOperatorItemNot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemEditFilter.Name" xml:space="preserve">
+    <value>filterContextMenuItemEditFilter</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemEditFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemClearSelected.Name" xml:space="preserve">
+    <value>filterContextMenuItemClearSelected</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemClearSelected.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemClearAll.Name" xml:space="preserve">
+    <value>filterContextMenuItemClearAll</value>
+  </data>
+  <data name="&gt;&gt;filterContextMenuItemClearAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filterSmallImageList.Name" xml:space="preserve">
+    <value>filterSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;filterSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Name" xml:space="preserve">
+    <value>queueSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;queueSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Name" xml:space="preserve">
+    <value>DirectoryOpenDialog</value>
+  </data>
+  <data name="&gt;&gt;DirectoryOpenDialog.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;taskSmallImageList.Name" xml:space="preserve">
+    <value>taskSmallImageList</value>
+  </data>
+  <data name="&gt;&gt;taskSmallImageList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ImageList, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
