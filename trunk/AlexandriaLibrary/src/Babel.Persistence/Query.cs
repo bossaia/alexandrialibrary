@@ -39,13 +39,36 @@ namespace Telesophy.Babel.Persistence
 		{
 			id = Guid.NewGuid();
 		}
+
+        public Query(string name, string queryString) : this(name)
+        {
+            this.queryString = queryString;
+        }
 		#endregion
 		
-		#region Private Fields
+		#region Private Members
 		private Guid id;
 		private IList<IExpression> filters = new List<IExpression>();
+        private string queryString;
+
+        private string BuildQueryString()
+        {
+            StringBuilder builder = new StringBuilder("FROM " + Name);
+
+            if (Filters.Count > 0)
+            {
+                builder.Append(" WHERE ");
+                foreach (IExpression expression in Filters)
+                {
+                    //if (expression.
+                    //builder.AppendFormat(
+                }
+            }
+
+            return builder.ToString();
+        }
 		#endregion
-		
+
 		#region IQuery Members
 		public Guid Id
 		{
@@ -57,5 +80,13 @@ namespace Telesophy.Babel.Persistence
 			get { return filters; }
 		}
 		#endregion
-	}
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(queryString))
+                queryString = BuildQueryString();
+
+            return queryString;
+        }
+    }
 }
