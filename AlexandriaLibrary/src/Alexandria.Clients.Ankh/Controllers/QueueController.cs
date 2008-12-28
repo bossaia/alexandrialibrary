@@ -789,28 +789,28 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			grid.RemoveSort();
 		}
 		
-		[CLSCompliant(false)]
-		public void Filter(Query query)
-		{
-			grid.Clear();
-			//bindingList.Clear();
+        //[CLSCompliant(false)]
+        //public void Filter(Query query)
+        //{
+        //    grid.Clear();
+        //    //bindingList.Clear();
 			
-			IList<MediaItem> items = persistenceController.ListMediaItems(query.ToString());
+        //    IList<MediaItem> items = persistenceController.ListMediaItems(query.ToString());
 			
-			foreach (IMediaItem item in (IEnumerable<IMediaItem>)items)
-			{
-				MediaItemData dataItem = new MediaItemData(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
-				grid.AddItem(dataItem);
-				//bindingList.Add(item);
-			}
+        //    foreach (IMediaItem item in (IEnumerable<IMediaItem>)items)
+        //    {
+        //        MediaItemData dataItem = new MediaItemData(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
+        //        grid.AddItem(dataItem);
+        //        //bindingList.Add(item);
+        //    }
 			
-			//using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
-			//{
-			//    iter.Reset();
-			//    while (iter.MoveNext())			
-			//        bindingList.Add(iter.Current);
-			//}
-		}
+        //    //using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+        //    //{
+        //    //    iter.Reset();
+        //    //    while (iter.MoveNext())			
+        //    //        bindingList.Add(iter.Current);
+        //    //}
+        //}
 				
 		public void SaveRow(int index)
 		{

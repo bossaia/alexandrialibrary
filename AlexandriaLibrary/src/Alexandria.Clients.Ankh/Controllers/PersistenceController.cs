@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -90,8 +91,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 			if (!string.IsNullOrEmpty(search))
 			{
-				query = new Query("MediaItem Search");
-				
+                IList<IExpression> filters = new List<IExpression>();
+                StringBuilder queryString = new StringBuilder("FROM MediaItem WHERE");
+
 				int number;
 				bool isNumber = int.TryParse(search, out number);
 				
@@ -104,13 +106,42 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				Uri path;
 				bool isPath = Uri.TryCreate(search, UriKind.Absolute, out path);
 				
-				query.Filters.Add(GetMediaItemFilter("Title", "LIKE", search));
-				query.Filters.Add(GetMediaItemOrFilter("Artist", "LIKE", search));
-				query.Filters.Add(GetMediaItemOrFilter("Album", "LIKE", search));
-				if (isNumber) query.Filters.Add(GetMediaItemOrFilter("Number", "=", number));
-				if (isDate) query.Filters.Add(GetMediaItemOrFilter("Date", "=", date));
-				if (isDuration) query.Filters.Add(GetMediaItemOrFilter("Duration", "=", duration));
-				if (isPath) query.Filters.Add(GetMediaItemOrFilter("Path", "=", path));
+				filters.Add(GetMediaItemFilter("Title", "LIKE", search));
+                queryString.AppendFormat(" (\"Title\" LIKE '%{0}%')", search);
+
+				filters.Add(GetMediaItemOrFilter("Artist", "LIKE", search));
+                queryString.AppendFormat(" OR (\"Artist\" LIKE '%{0}%')", search);
+
+                filters.Add(GetMediaItemOrFilter("Album", "LIKE", search));
+                queryString.AppendFormat(" OR (\"Album\" LIKE '%{0}%')", search);
+
+                if (isNumber)
+                {
+                    filters.Add(GetMediaItemOrFilter("Number", "=", number));
+                    queryString.AppendFormat(" OR (\"Number\" = {0})", number);
+                }
+
+                if (isDate)
+                {
+                    filters.Add(GetMediaItemOrFilter("Date", "=", date));
+                    queryString.AppendFormat(" OR (\"Date\" = '{0}')", date.ToString("s"));
+                }
+
+                if (isDuration)
+                {
+                    filters.Add(GetMediaItemOrFilter("Duration", "=", duration));
+                    queryString.AppendFormat(" OR (\"Duration\" = '{0:D2}:{1:D2}:{2:D2}.{3:D3}')", duration.Hours, duration.Minutes, duration.Seconds, duration.Milliseconds);
+                }
+
+                if (isPath)
+                {
+                    filters.Add(GetMediaItemOrFilter("Path", "=", path));
+                    queryString.AppendFormat(" OR (\"Path\" = '{0}')", path);
+                }
+
+                query = new Query("MediaItem", queryString.ToString());
+                foreach (IExpression filter in filters)
+                    query.Filters.Add(filter);
 			}
 			
 			return query;
@@ -140,14 +171,14 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		public IList<MediaItemData> ListMediaItemData(string search)
 		{
 			IQuery query = GetMediaItemQuery(search);
-			return ListMediaItemData(query);
+            return ListMediaItemData(query);
 		}
 		
-		public IList<MediaItemData> ListMediaItemData(IQuery query)
-		{
-			IList<MediaItem> items = ListMediaItems(query.ToString());
-			return CreateMediaItemDataList(items);
-		}
+        public IList<MediaItemData> ListMediaItemData(IQuery query)
+        {
+            IList<MediaItem> items = ListMediaItems(query.ToString());
+            return CreateMediaItemDataList(items);
+        }
 		
 		public IList<MediaItem> ListAllMediaItems()
 		{
@@ -163,7 +194,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
             }
 		}
 		
-		public IList<MediaItem> ListMediaItems(string queryString) //IQuery query)
+		public IList<MediaItem> ListMediaItems(string queryString)
 		{			
 			//return repo.List<MediaItem>(mediaItemSingleton, query);
             try

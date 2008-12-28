@@ -70,7 +70,7 @@ namespace Telesophy.Alexandria.Persistence
             }
 
             TimeSpan span = (TimeSpan)value;
-            string output = string.Format("{0:00}:{1:00}:{2:00}.{3:000}", span.Hours, span.Minutes, span.Seconds, span.Milliseconds);
+            string output = string.Format("{0:D2}:{1:D2}:{2:D2}.{3:D3}", span.Hours, span.Minutes, span.Seconds, span.Milliseconds);
             //value = value.ToString(); //ToString called on TimeSpan instance  
             NHibernateUtil.String.NullSafeSet(cmd, output, index);
         }
