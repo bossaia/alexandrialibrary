@@ -795,7 +795,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			grid.Clear();
 			//bindingList.Clear();
 			
-			ICollection<IMediaItem> items = persistenceController.ListMediaItems(query);
+			IList<MediaItem> items = persistenceController.ListMediaItems(query.ToString());
 			
 			foreach (IMediaItem item in (IEnumerable<IMediaItem>)items)
 			{
@@ -873,9 +873,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			//bindingList.Clear();
 			grid.Clear();
 			
-			ICollection<IMediaItem> items = persistenceController.ListAllMediaItems();
+			IList<MediaItem> items = persistenceController.ListAllMediaItems();
 			
-			foreach (IMediaItem item in items)
+			foreach (MediaItem item in items)
 			{
 				MediaItemData data = new MediaItemData(item.Id, item.Type, item.Source, item.Number, item.Title, item.Artist, item.Album, item.Duration, item.Date, item.Format, item.Path);
 				grid.AddItem(data);

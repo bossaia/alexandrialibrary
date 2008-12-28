@@ -97,7 +97,7 @@ namespace Telesophy.Alexandria.Model.Data
 						{
 							foreach (IMediaItem child in childrenById[key])
 							{
-								child.Parent = model;
+								//child.Parent = model;
 								model.Items.Add(child);
 							}
 						}

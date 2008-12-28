@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+# Visual C# Express 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Extensions.AsciiGenerator", "Alexandria.Extensions.AsciiGenerator\Alexandria.Extensions.AsciiGenerator.csproj", "{12384EBE-18DD-4C4C-AFE3-10D84B06E718}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Clients.Ankh", "Alexandria.Clients.Ankh\Alexandria.Clients.Ankh.csproj", "{3095580F-8714-4D19-B88E-DB51162D112B}"
@@ -35,6 +35,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel.Persistence", "Babel.Persistence\Babel.Persistence.csproj", "{F824EFE1-595D-40D0-8494-8CB27FE9E603}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel.Persistence.SQLite", "Babel.Persistence.SQLite\Babel.Persistence.SQLite.csproj", "{A6E60DCF-15D9-4608-A86C-3F9A1929CA3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence", "Alexandria.Persistence\Alexandria.Persistence.csproj", "{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Model.Mapping", "Alexandria.Model.Mapping\Alexandria.Model.Mapping.csproj", "{F28BD76C-D748-47AC-9528-EB25BF165A4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "Alexandria.Core\Alexandria.Core.csproj", "{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +120,18 @@ Global
 		{A6E60DCF-15D9-4608-A86C-3F9A1929CA3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E60DCF-15D9-4608-A86C-3F9A1929CA3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E60DCF-15D9-4608-A86C-3F9A1929CA3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F28BD76C-D748-47AC-9528-EB25BF165A4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F28BD76C-D748-47AC-9528-EB25BF165A4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F28BD76C-D748-47AC-9528-EB25BF165A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F28BD76C-D748-47AC-9528-EB25BF165A4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
