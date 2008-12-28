@@ -64,6 +64,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				this.PreviousButton.Click += new EventHandler(PreviousButton_Click);
 				this.MuteButton.Click += new EventHandler(MuteButton_Click);
 
+                queueDataGrid.AutoGenerateColumns = false;
+
 				queueController.Grid = queueDataGrid;
 				queueController.SortListView = sortListView;
 				queueController.PlaybackController = playbackController;

@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
+using Telesophy.Alexandria.Core;
 
 namespace Telesophy.Alexandria.Model
 {
-	public interface IArtist
+	public interface IArtist : IEntity
 	{
-		Guid Id { get; set; }
 		string Type { get; set; }
 		string Name { get; set; }
 		DateTime BeginDate { get; set; }

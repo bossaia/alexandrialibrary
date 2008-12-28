@@ -27,12 +27,12 @@
 
 using System;
 using System.Collections.Generic;
+using Telesophy.Alexandria.Core;
 
 namespace Telesophy.Alexandria.Model
 {
-	public interface IMediaSet
+	public interface IMediaSet : IEntity
 	{
-		Guid Id { get; set; }
 		string Source { get; set; }
 		string Type { get; set; }
 		int Number { get; set; }

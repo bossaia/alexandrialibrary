@@ -26,13 +26,12 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
+using Telesophy.Alexandria.Core;
 
 namespace Telesophy.Alexandria.Model
 {
-	public interface IMediaItem
+	public interface IMediaItem : IEntity
 	{
-		Guid Id { get; set; }
 		string Status { get; set; }
 		string Source { get; set; }
 		string Type { get; set; }
@@ -44,6 +43,5 @@ namespace Telesophy.Alexandria.Model
 		DateTime Date { get; set; }
 		string Format { get; set; }
 		Uri Path { get; set; }
-		IMediaSet Parent { get; set; }
 	}
 }

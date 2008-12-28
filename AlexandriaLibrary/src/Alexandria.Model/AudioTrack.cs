@@ -30,7 +30,7 @@ using System.Collections.Generic;
 
 namespace Telesophy.Alexandria.Model
 {
-	public class AudioTrack : IMediaItem
+	public class AudioTrack : Entity, IMediaItem
 	{
 		#region Constructors
 		public AudioTrack()
@@ -65,87 +65,76 @@ namespace Telesophy.Alexandria.Model
 		private DateTime date;
 		private string format;
 		private Uri path;
-		private IMediaSet parent;
 		#endregion
 
 		#region IMediaItem Members
-		public Guid Id
-		{
-			get { return id; }
-			set { id = value; }
-		}
 
-		public string Status
+		public virtual string Status
 		{
 			get { return status; }
 			set { status = value; }
 		}
 
-		public string Source
+		public virtual string Source
 		{
 			get { return source; }
 			set { source = value; }
 		}
 
-		public string Type
+		public virtual string Type
 		{
 			get { return type; }
-			set { type = value; }
+			set { }
 		}
 
-		public int Number
+		public virtual int Number
 		{
 			get { return number; }
 			set { number = value; }
 		}
 
-		public string Title
+		public virtual string Title
 		{
 			get { return title; }
 			set { title = value; }
 		}
 
-		public string Artist
+		public virtual string Artist
 		{
 			get { return artist; }
 			set { artist = value; }
 		}
 
-		public string Album
+		public virtual string Album
 		{
 			get { return album; }
 			set { album = value; }
 		}
 
-		public TimeSpan Duration
+		public virtual TimeSpan Duration
 		{
 			get { return duration; }
 			set { duration = value; }
 		}
 
-		public DateTime Date
+		public virtual DateTime Date
 		{
 			get { return date; }
 			set { date = value; }
 		}
 
-		public string Format
+		public virtual string Format
 		{
 			get { return format; }
 			set { format = value; }
 		}
 
-		public Uri Path
+		public virtual Uri Path
 		{
 			get { return path; }
 			set { path = value; }
 		}
-		
-		public IMediaSet Parent
-		{
-			get { return parent; }
-			set { parent = value; }
-		} 
+
 		#endregion
 	}
 }

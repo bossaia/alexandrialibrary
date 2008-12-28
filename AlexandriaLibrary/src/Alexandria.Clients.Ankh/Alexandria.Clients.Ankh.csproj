@@ -29,7 +29,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -199,6 +199,9 @@
     <None Include="Resources\clock_edit.png" />
     <None Include="Resources\book_open.png" />
     <None Include="Resources\film.png" />
+    <None Include="hibernate.cfg.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\Icons\Silk\accept.png" />
     <Content Include="Resources\Icons\Silk\add.png" />
     <Content Include="Resources\Icons\Silk\anchor.png" />
@@ -1205,6 +1208,10 @@
     <None Include="Resources\task_cancel.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alexandria.Core\Alexandria.Core.csproj">
+      <Project>{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}</Project>
+      <Name>Alexandria.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Extensions.AsciiGenerator\Alexandria.Extensions.AsciiGenerator.csproj">
       <Project>{12384EBE-18DD-4C4C-AFE3-10D84B06E718}</Project>
       <Name>Alexandria.AsciiGenerator</Name>
@@ -1220,6 +1227,14 @@
     <ProjectReference Include="..\Alexandria.IO\Alexandria.IO.csproj">
       <Project>{97449DEA-C759-4E22-B287-305CA0023749}</Project>
       <Name>Alexandria.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Model.Mapping\Alexandria.Model.Mapping.csproj">
+      <Project>{F28BD76C-D748-47AC-9528-EB25BF165A4E}</Project>
+      <Name>Alexandria.Model.Mapping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Persistence\Alexandria.Persistence.csproj">
+      <Project>{4ECF5140-8062-4B6C-A53E-5CA914CF3A5C}</Project>
+      <Name>Alexandria.Persistence</Name>
     </ProjectReference>
     <ProjectReference Include="..\Alexandria.Services.LastFM\Alexandria.Services.LastFM.csproj">
       <Project>{09E948DB-B5E5-4C6A-9956-0CB025E4FB1A}</Project>

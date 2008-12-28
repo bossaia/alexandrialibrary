@@ -53,7 +53,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			
 			mediaItemSingleton = schema.GetAggregate<IMediaItem>("MediaItemSingleton");
 			mediaSetWithAllChildren = schema.GetAggregate<IMediaSet>("MediaSetWithAllChildren");
+
+            mappingRepo = new Telesophy.Alexandria.Model.Mapping.Repository();
 		}
+
+        private Telesophy.Alexandria.Model.Mapping.Repository mappingRepo;
 
 		private CatalogSchema schema;
 		private IEngine engine;
@@ -129,7 +133,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IList<MediaItemData> ListMediaItemData()
 		{
-			ICollection<IMediaItem> items = ListAllMediaItems();
+			IList<MediaItem> items = ListAllMediaItems();
 			return CreateMediaItemDataList(items);
 		}
 		
@@ -141,18 +145,36 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IList<MediaItemData> ListMediaItemData(IQuery query)
 		{
-			ICollection<IMediaItem> items = ListMediaItems(query);
+			IList<MediaItem> items = ListMediaItems(query.ToString());
 			return CreateMediaItemDataList(items);
 		}
 		
-		public ICollection<IMediaItem> ListAllMediaItems()
+		public IList<MediaItem> ListAllMediaItems()
 		{
-			return repo.List<IMediaItem>(mediaItemSingleton, null);
+			//return repo.List<IMediaItem>(mediaItemSingleton, null);
+            try
+            {
+                return mappingRepo.GetList<MediaItem>("FROM MediaItem WHERE Id IS NOT NULL");
+            }
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+                return null;
+            }
 		}
 		
-		public ICollection<IMediaItem> ListMediaItems(IQuery query)
+		public IList<MediaItem> ListMediaItems(string queryString) //IQuery query)
 		{			
-			return repo.List<IMediaItem>(mediaItemSingleton, query);
+			//return repo.List<MediaItem>(mediaItemSingleton, query);
+            try
+            {
+                return mappingRepo.GetList<MediaItem>(queryString);
+            }
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+                return null;
+            }
 		}
 		
 		public ICollection<IMediaSet> ListPlaylists()
@@ -254,13 +276,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			else return null;
 		}
 		
-		public IList<MediaItemData> CreateMediaItemDataList(IEnumerable<IMediaItem> items)
+		public IList<MediaItemData> CreateMediaItemDataList(IEnumerable<MediaItem> items)
 		{
 			IList<MediaItemData> list = new List<MediaItemData>();
 			
 			if (items != null)
 			{
-				foreach (IMediaItem item in items)
+				foreach (MediaItem item in items)
 					list.Add(CreateMediaItemData(item));
 			}
 			
