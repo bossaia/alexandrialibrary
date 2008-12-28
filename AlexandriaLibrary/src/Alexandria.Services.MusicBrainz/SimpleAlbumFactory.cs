@@ -264,7 +264,8 @@ namespace Telesophy.Alexandria.MusicBrainz
 				string title = client.GetResultData(rdf.ExpressionTrackGetTrackName);
 				int milliseconds = (client.GetResultInt(rdf.ExpressionTrackGetTrackDuration) / 1000);
 				TimeSpan duration = new TimeSpan(0, 0, 0, 0, milliseconds);
-				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), number, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
+				//SimpleTrack track = new SimpleTrack(Guid.NewGuid(), number, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
+                MediaItem track = new MediaItem(Guid.NewGuid(), ModelConstants.MEDIA_SOURCE_CD, ModelConstants.MEDIA_TYPE_AUDIO, number, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
 				album.Items.Add(track);
 				
 				client.Select(rdf.SelectBack);
@@ -317,7 +318,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 						Debug.WriteLine("");
 
 						album = new SimpleAlbum(Guid.NewGuid(), simpleDisc.AlbumName, simpleDisc.ArtistName, simpleDisc.ReleaseDate, path);
-						foreach (SimpleTrack track in simpleDisc.Tracks)
+						foreach (MediaItem track in simpleDisc.Tracks)
 						{
 							//track.Parent = album;
 							album.Items.Add(track);

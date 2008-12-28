@@ -81,7 +81,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			get { return deviceInfo; }
 		}
 		
-		public IList<IMediaItem> GetAudioTracks()
+		public IList<MediaItem> GetAudioTracks()
 		{
 			try
 			{

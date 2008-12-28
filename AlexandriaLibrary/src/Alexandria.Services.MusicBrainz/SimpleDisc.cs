@@ -31,10 +31,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.MusicBrainz
 {
-    public class SimpleDisc : IEnumerable<SimpleTrack>, IDisposable
+    public class SimpleDisc : IEnumerable<MediaItem>, IDisposable
     {
 		#region Constructors
 		public SimpleDisc(string device, MusicBrainzClient client)
@@ -46,23 +48,23 @@ namespace Telesophy.Alexandria.MusicBrainz
 
 			ReadCDToc();
 
-			Debug.WriteLine("After ReadCDToc lengths.Length=" + lengths.Length.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+			Debug.WriteLine("After ReadCDToc lengths.Length=" + lengths.Length.ToString(NumberFormatInfo.InvariantInfo));
 
-			tracks = new List<SimpleTrack>(lengths.Length);
+			tracks = new List<MediaItem>(lengths.Length);
 
-			Debug.WriteLine("tracks.Count=" + tracks.Count.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+			Debug.WriteLine("tracks.Count=" + tracks.Count.ToString(NumberFormatInfo.InvariantInfo));
 
 			for (int i = 0; i < lengths.Length; i++)
 			{
-				Debug.WriteLine("i=" + i.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+				Debug.WriteLine("i=" + i.ToString(NumberFormatInfo.InvariantInfo));
 				if (lengths != null)
-					Debug.WriteLine("lengths[i]=" + lengths[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+					Debug.WriteLine("lengths[i]=" + lengths[i].ToString(NumberFormatInfo.InvariantInfo));
 				else
 					Debug.WriteLine("lengths array is null");
 
 				try
 				{
-					tracks.Add(new SimpleTrack());
+					tracks.Add(new MediaItem());
 					//tracks.Add(new SimpleTrack(i + 1, lengths[i]));
 				}
 				catch (IndexOutOfRangeException)
@@ -107,7 +109,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 
 		#region Private Fields
 		private MusicBrainzClient client;
-		private List<SimpleTrack> tracks;
+		private List<MediaItem> tracks;
 		private int[] lengths;
 		private string artistName;
 		private System.Uri albumUrl;
@@ -211,7 +213,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 				throw new ApplicationException("Invalid track count from album query");
 			}
 
-			tracks = new List<SimpleTrack>(trackCount);
+			tracks = new List<MediaItem>(trackCount);
 
 			string pathRoot = string.Format("file://{0}{1}", client.Device, System.IO.Path.DirectorySeparatorChar);
 
@@ -233,7 +235,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 					duration = new TimeSpan(0, 0, 0, 0, milliseconds);
 				}
 
-				SimpleTrack track = new SimpleTrack(Guid.NewGuid(), trackNumber, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
+				MediaItem track = new MediaItem(Guid.NewGuid(), ModelConstants.MEDIA_SOURCE_CD, ModelConstants.MEDIA_TYPE_AUDIO, trackNumber, title, artist, albumName, duration, releaseDate, MusicBrainzConstants.FORMAT_CD, path);
 				tracks.Add(track);
 
 				client.Select(rdf.SelectBack);
@@ -243,7 +245,7 @@ namespace Telesophy.Alexandria.MusicBrainz
         }
         
         [CLSCompliant(false)]
-        public SimpleTrack this[int index]
+        public MediaItem this[int index]
         {
             get {return tracks[index];}
         }
@@ -258,7 +260,7 @@ namespace Telesophy.Alexandria.MusicBrainz
         }
 		*/
         
-        public IList<SimpleTrack> Tracks
+        public IList<MediaItem> Tracks
         {
             get {return tracks;}
         }
@@ -304,10 +306,10 @@ namespace Telesophy.Alexandria.MusicBrainz
 		}
 		#endregion
 
-		#region IEnumerable<SimpleTrack> Members
-		public IEnumerator<SimpleTrack> GetEnumerator()
+		#region IEnumerable<MediaItem> Members
+		public IEnumerator<MediaItem> GetEnumerator()
 		{
-			foreach (SimpleTrack track in Tracks)
+			foreach (MediaItem track in Tracks)
 			{
 				yield return track;
 			}
@@ -317,7 +319,7 @@ namespace Telesophy.Alexandria.MusicBrainz
 		#region IEnumerable Members
 		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
 		{
-			foreach (SimpleTrack track in Tracks)
+			foreach (MediaItem track in Tracks)
 			{
 				yield return track;
 			}

@@ -140,9 +140,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					playlist.Path = control.Path;
 
 					IList<MediaItemData> itemData = control.GetItemData();
-					IList<IMediaItem> items = persistenceController.CreateMediaItems(itemData);
+					IList<MediaItem> items = persistenceController.CreateMediaItems(itemData);
 
-					foreach (IMediaItem item in items)
+					foreach (MediaItem item in items)
 					{
 						playlist.Items.Add(item);
 					}

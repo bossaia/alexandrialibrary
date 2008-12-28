@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ArtistMap.cs" />
     <Compile Include="MediaItemMap.cs" />
+    <Compile Include="MediaSetMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>

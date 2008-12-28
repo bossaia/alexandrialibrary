@@ -50,6 +50,10 @@ namespace Telesophy.Alexandria.Model
         public const string MEDIA_TYPE_PLAYLIST = "Playlist";
         public const string MEDIA_TYPE_TEXT = "Text";
 
+        // Media Source Constants
+        public const string MEDIA_SOURCE_CATALOG = "Catalog";
+        public const string MEDIA_SOURCE_CD = "CD";
+
         // Artist Type Constants
         public const string ARTIST_TYPE_PERSON = "Person";
         public const string ARTIST_TYPE_GROUP = "Group";

@@ -83,7 +83,7 @@ namespace Telesophy.Alexandria.Model.Data
 		Field format;
 		Field path;
 		
-		Entity<IMediaItem> mediaItemEntity;
+		Entity<MediaItem> mediaItemEntity;
 		Entity<IArtist> artistEntity;
 		#endregion
 	
@@ -92,7 +92,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			base.Initialize(schema);
 
-			mediaItemEntity = schema.GetEntity<IMediaItem>();
+			mediaItemEntity = schema.GetEntity<MediaItem>();
 			artistEntity = schema.GetEntity<IArtist>(); 
 
 			Associations.Add(new Association(ASSOCIATION_ITEMS, this, mediaItemEntity, Relationship.ManyToMany, false));

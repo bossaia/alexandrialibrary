@@ -121,7 +121,7 @@
     <Compile Include="Views\PluginConfiguration.Designer.cs">
       <DependentUpon>PluginConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Views\About.resx">
       <SubType>Designer</SubType>

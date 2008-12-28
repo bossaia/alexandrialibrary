@@ -39,6 +39,6 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		Uri Path { get; }
 		[CLSCompliant(false)]
 		AspiDeviceInfo DeviceInfo { get; }
-		IList<IMediaItem> GetAudioTracks();
+		IList<MediaItem> GetAudioTracks();
 	}
 }

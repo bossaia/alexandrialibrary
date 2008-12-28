@@ -68,8 +68,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 
 		#region Private Fields
-		private IMediaItem selectedTrack;
-		private IList<IMediaItem> tracks;
+		private MediaItem selectedTrack;
+		private IList<MediaItem> tracks;
 
 		MusicLocker locker = new MusicLocker();
 		PlaylistFactory playlistFactory = new PlaylistFactory();
@@ -144,7 +144,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return (cell.Value != null) ? (Uri)cell.Value : null;
 		}
 		
-		private IMediaItem GetSelectedAudioTrack(DataGridViewRow row)
+		private MediaItem GetSelectedMediaItem(DataGridViewRow row)
 		{
 			if (row.Index > -1)
 			{
@@ -160,10 +160,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
                 string format = GetItemString(row.Cells[Columns.Queue.Format.Name]);
                 Uri path = GetItemUri(row.Cells[Columns.Queue.Path.Name]);
 				
-				IMediaItem track = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
-				return track;
+				return new MediaItem(id, source, type, number, title, artist, album, duration, date, format, path);
 			}
-			else throw new ApplicationException("The row currently selected in the queue is invalid");
+			else throw new ApplicationException("Could not determine the currently selected media item.\nThe queue is in an invalid state.");
 		}
 		
 		private void LoadTrackFromPath(string path, string source)
@@ -304,13 +303,13 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set { taskController = value; }
 		}
 		
-		public IList<IMediaItem> Tracks
+		public IList<MediaItem> Tracks
 		{
 			get { return tracks; }
 		}
 
 		[CLSCompliant(false)]
-		public IMediaItem SelectedTrack
+		public MediaItem SelectedTrack
 		{
 			get { return selectedTrack; }
 			set
@@ -357,7 +356,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#region Public Methods
 		public void LoadTracks()
 		{
-			IList<IMediaItem> tracks = GetMp3TunesTracks(false);
+			IList<MediaItem> tracks = GetMp3TunesTracks(false);
 			LoadTracks(tracks, "MP3tunes");
 		}
 
@@ -372,11 +371,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 		}
 
-		public void LoadTracks(IList<IMediaItem> tracks, string source)
+		public void LoadTracks(IList<MediaItem> tracks, string source)
 		{
 			if (tracks != null)
 			{
-				foreach (IMediaItem track in tracks)
+				foreach (MediaItem track in tracks)
 				{
 					LoadTrack(track, source);
 				}
@@ -396,7 +395,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					else SelectedRow = grid.Rows[0];
 				}
 				
-				IMediaItem track = GetSelectedAudioTrack(SelectedRow);
+				MediaItem track = GetSelectedMediaItem(SelectedRow);
 				if (SelectedTrack == null || SelectedTrack.Id != track.Id)
 				{
 					SelectedTrack = track;
@@ -530,7 +529,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return tagLibEngine.GetAudioTrack(path);
 		}
 
-		public IList<IMediaItem> GetMp3TunesTracks(bool ignoreCache)
+		public IList<MediaItem> GetMp3TunesTracks(bool ignoreCache)
 		{
 			try
 			{
@@ -627,7 +626,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					TrackSource trackSource = sourceData as TrackSource;
 					if (trackSource != null)
 					{
-						IList<IMediaItem> tracks = null;
+						IList<MediaItem> tracks = null;
 						string source = string.Empty;
 						
 						if (trackSource.Id != default(Guid))
@@ -895,16 +894,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				selectedTrackChanged += handler;
 		}
 		
-		public IList<IMediaItem> GetSelectedItems()
+		public IList<MediaItem> GetSelectedItems()
 		{
-			IList<IMediaItem> list = new List<IMediaItem>();
+			IList<MediaItem> list = new List<MediaItem>();
 			
 			if (grid.SelectedRows != null && grid.SelectedRows.Count > 0)
 			{
 				foreach(DataGridViewRow row in grid.SelectedRows)
 				{
 					MediaItemData data = grid.GetItem(row.Index);
-					IMediaItem item = persistenceController.CreateMediaItem(data);
+					MediaItem item = persistenceController.CreateMediaItem(data);
 					list.Add(item);
 				
 					//list.Add(bindingList[row.Index]);

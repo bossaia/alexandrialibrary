@@ -49,6 +49,7 @@
     <Compile Include="IGroup.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="MediaItem.cs" />
+    <Compile Include="MediaSet.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="ModelConstants.cs" />
     <Compile Include="IArtist.cs" />

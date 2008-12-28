@@ -324,8 +324,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			}
 			
 			const int playlistIndex = 4;
-			ICollection<IMediaSet> playlists = persistenceController.ListPlaylists();
-			foreach (IMediaSet playlist in playlists)
+			IList<MediaSet> playlists = persistenceController.ListPlaylists();
+			foreach (MediaSet playlist in playlists)
 			{				
 				ListViewItem playlistItem = new ListViewItem(playlist.Title, playlistIndex);
 				playlistItem.ToolTipText = playlist.Path.ToString();
@@ -790,8 +790,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
 				if (source != null && source.DeviceInfo != null)
 				{
-					IList<IMediaItem> tracks = source.GetAudioTracks();
-					foreach(IMediaItem track in tracks)
+					IList<MediaItem> tracks = source.GetAudioTracks();
+					foreach(MediaItem track in tracks)
 					{
 						//TODO: Use a callback to prevent the next track from starting
 						//      until the previous track finishes 
@@ -1633,10 +1633,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					IMediaSet playlist = persistenceController.LookupMediaSet(source.Id);
 					if (playlist != null)
 					{
-						IList<IMediaItem> items = queueController.GetSelectedItems();
+						IList<MediaItem> items = queueController.GetSelectedItems();
 						if (items != null && items.Count > 0)
 						{
-							foreach (IMediaItem item in items)
+							foreach (MediaItem item in items)
 							{
 								playlist.Items.Add(item);
 							}

@@ -30,6 +30,8 @@
  
 using System;
 using System.Diagnostics;
+using System.Globalization;
+using Telesophy.Alexandria.Model;
 
 namespace Telesophy.Alexandria.MusicBrainz
 {
@@ -60,12 +62,12 @@ namespace Telesophy.Alexandria.MusicBrainz
 					Debug.WriteLine("Release Date  : " + disc.ReleaseDate);
 					Debug.WriteLine("");
 	            
-					foreach(SimpleTrack track in disc)
+					foreach(MediaItem track in disc)
 					{
-						string trackInfo = string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0:00}: [{1} - {2}] {3}:{4:00} ({5})", 
-							track.Index, track.Artist, track.Title, 
-							track.Minutes, track.Seconds, track.Length);
-						Debug.WriteLine(trackInfo);
+						//string trackInfo = string.Format(CultureInfo.InvariantCulture, "{0:00}: [{1} - {2}] {3}:{4:00} ({5})", 
+							//track.Index, track.Artist, track.Title, 
+							//track.Minutes, track.Seconds, track.Length);
+						//Debug.WriteLine(trackInfo);
 					}
 				}
 			}

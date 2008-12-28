@@ -35,7 +35,7 @@ using Telesophy.Babel.Persistence;
 
 namespace Telesophy.Alexandria.Model.Data
 {
-	public class MediaItemEntity : Entity<IMediaItem>
+	public class MediaItemEntity : Entity<MediaItem>
 	{
 		#region Constructors
 		public MediaItemEntity() : base("MediaItem")
@@ -100,9 +100,9 @@ namespace Telesophy.Alexandria.Model.Data
 			Associations.Add(new Association(ASSOCIATION_CREATORS, this, artistEntity, Relationship.ManyToMany, false));
 		}
 
-		public override IMediaItem GetModel(DataRow row)
+		public override MediaItem GetModel(DataRow row)
 		{
-			IMediaItem model = null;
+			MediaItem model = null;
 		
 			Guid id = new Guid(row["Id"].ToString());
 			string type = row["Type"].ToString();
@@ -119,10 +119,10 @@ namespace Telesophy.Alexandria.Model.Data
 			switch (type)
 			{
 				case ModelConstants.MEDIA_TYPE_AUDIO:
-					model = new AudioTrack(id, source, number, title, artist, album, duration, date, format, path);
+					model = new MediaItem(id, source, ModelConstants.MEDIA_TYPE_AUDIO, number, title, artist, album, duration, date, format, path);
 					break;
 				case ModelConstants.MEDIA_TYPE_VIDEO:
-					model = new VideoClip(id, source, number, title, artist, album, duration, date, format, path);
+					model = new MediaItem(id, source, ModelConstants.MEDIA_TYPE_VIDEO, number, title, artist, album, duration, date, format, path);
 					break;
 				default:
 					break;
@@ -131,7 +131,7 @@ namespace Telesophy.Alexandria.Model.Data
 			return model;
 		}
 		
-		public override Tuple GetTuple(IMediaItem model)
+		public override Tuple GetTuple(MediaItem model)
 		{
 			Tuple tuple = new Tuple(Name, "Id");
 			
@@ -150,7 +150,7 @@ namespace Telesophy.Alexandria.Model.Data
 			return tuple;
 		}
 
-		public override void AddDataRow(DataTable table, IMediaItem model)
+		public override void AddDataRow(DataTable table, MediaItem model)
 		{
 			if (table != null && model != null)
 			{

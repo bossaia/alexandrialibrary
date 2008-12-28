@@ -26,10 +26,10 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using Telesophy.Alexandria.Clients.Ankh.Views;
 
-namespace Telesophy.Alexandria.Clients.Ankh.Views
+namespace Telesophy.Alexandria.Clients.Ankh
 {
 	static class Program
 	{
