@@ -48,7 +48,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			base.Initialize(schema);
 
-			Map<IMediaSet, IMediaItem> itemsMap = new Map<IMediaSet, IMediaItem>("MediaSetItems", schema);
+			Map<IMediaSet, MediaItem> itemsMap = new Map<IMediaSet, MediaItem>("MediaSetItems", schema);
 			itemsMap.Branches.Add(Root.Associations["MediaSetItems"]);
 			Maps.Add(itemsMap);
 		}
@@ -57,7 +57,7 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			IList<Tuple> tuples = new List<Tuple>();
 		
-			Entity<IMediaItem> itemEntity = Root.Schema.GetEntity<IMediaItem>();
+			Entity<MediaItem> itemEntity = Root.Schema.GetEntity<MediaItem>();
 		
 			foreach (IMediaSet model in models)
 			{
@@ -65,7 +65,7 @@ namespace Telesophy.Alexandria.Model.Data
 				tuples.Add(rootTuple);
 				
 				int sequence = 0;
-				foreach (IMediaItem item in model.Items)
+				foreach (MediaItem item in model.Items)
 				{
 					sequence++;
 					Tuple assocTuple = Root.Associations["MediaSetItems"].GetTuple(model.Id, item.Id, timeStamp, sequence);
@@ -83,8 +83,8 @@ namespace Telesophy.Alexandria.Model.Data
 		{
 			IDictionary<string, ICollection<IMediaSet>> dict = Root.GetModels(dataSet.Tables[Root.Name], null);
 			
-			Entity<IMediaItem> itemEntity = Schema.GetEntity<IMediaItem>();
-			IDictionary<string, ICollection<IMediaItem>> childrenById = itemEntity.GetModels(dataSet.Tables["MediaSetItems"], Root.Associations["MediaSetItems"]);
+			Entity<MediaItem> itemEntity = Schema.GetEntity<MediaItem>();
+			IDictionary<string, ICollection<MediaItem>> childrenById = itemEntity.GetModels(dataSet.Tables["MediaSetItems"], Root.Associations["MediaSetItems"]);
 			
 			if (dict != null)
 			{
@@ -95,7 +95,7 @@ namespace Telesophy.Alexandria.Model.Data
 						string key = model.Id.ToString();
 						if (childrenById.ContainsKey(key))
 						{
-							foreach (IMediaItem child in childrenById[key])
+							foreach (MediaItem child in childrenById[key])
 							{
 								//child.Parent = model;
 								model.Items.Add(child);

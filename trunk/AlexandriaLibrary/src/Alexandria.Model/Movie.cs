@@ -37,7 +37,7 @@ namespace Telesophy.Alexandria.Model
 		{
 		}
 
-		public Movie(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<IMediaItem> items)
+		public Movie(Guid id, string source, int number, string title, string artist, DateTime date, string format, Uri path, IEnumerable<MediaItem> items)
 		{
 			this.id = id;
 			this.source = source;
@@ -50,7 +50,7 @@ namespace Telesophy.Alexandria.Model
 
 			if (items != null)
 			{
-				foreach (IMediaItem item in items)
+				foreach (MediaItem item in items)
 					this.items.Add(item);
 			}
 		}
@@ -66,7 +66,7 @@ namespace Telesophy.Alexandria.Model
 		private DateTime date;
 		private string format;
 		private Uri path;
-		private List<IMediaItem> items = new List<IMediaItem>();
+		private IList<MediaItem> items = new List<MediaItem>();
 		#endregion
 
 		#region IMediaSet Members
@@ -124,9 +124,10 @@ namespace Telesophy.Alexandria.Model
 			set { path = value; }
 		}
 
-		public IList<IMediaItem> Items
+		public IList<MediaItem> Items
 		{
 			get { return items; }
+            set { items = value; }
 		}
 		#endregion
 	}

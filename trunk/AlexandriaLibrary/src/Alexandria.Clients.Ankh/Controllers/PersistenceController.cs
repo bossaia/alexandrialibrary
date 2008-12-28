@@ -159,7 +159,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public void Initialize()
 		{
-			repo.Initialize();
+			//repo.Initialize();
 		}
 		
 		public IList<MediaItemData> ListMediaItemData()
@@ -208,12 +208,21 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
             }
 		}
 		
-		public ICollection<IMediaSet> ListPlaylists()
+		public IList<MediaSet> ListPlaylists()
 		{
-			Query query = new Query("List Playlists");
-			query.Filters.Add(schema.GetFilter<IMediaSet>("Type", "=", ModelConstants.MEDIA_TYPE_PLAYLIST));
+			//Query query = new Query("List Playlists");
+			//query.Filters.Add(schema.GetFilter<IMediaSet>("Type", "=", ModelConstants.MEDIA_TYPE_PLAYLIST));
 			
-			return repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+			//return repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+            try
+            {
+                return mappingRepo.GetList<MediaSet>("FROM MediaSet WHERE \"Type\" = 'Playlist'");
+            }
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+                return null;
+            }
 		}
 		
 		public IMediaSet LookupMediaSet(Guid id)
@@ -291,10 +300,10 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return null;
 		}
 		
-		public IMediaItem CreateMediaItem(MediaItemData data)
+		public MediaItem CreateMediaItem(MediaItemData data)
 		{
 			IList<MediaItemData> list = new List<MediaItemData>() { data };
-			IList<IMediaItem> items = CreateMediaItems(list);
+			IList<MediaItem> items = CreateMediaItems(list);
 			if (items != null && items.Count > 0)
 				return items[0];
 			else return null;
@@ -320,9 +329,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return list;
 		}
 		
-		public IList<IMediaItem> CreateMediaItems(IList<MediaItemData> data)
+		public IList<MediaItem> CreateMediaItems(IList<MediaItemData> data)
 		{
-			Entity<IMediaItem> entity = schema.GetEntity<IMediaItem>();
+			Entity<MediaItem> entity = schema.GetEntity<MediaItem>();
 			DataTable table = entity.GetDataTable(entity.Name);
 			
 			foreach (MediaItemData dataItem in data)
@@ -346,15 +355,15 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			return CreateMediaItems(table);
 		}
 		
-		public IList<IMediaItem> CreateMediaItems(DataTable table)
+		public IList<MediaItem> CreateMediaItems(DataTable table)
 		{
-			IList<IMediaItem> items = new List<IMediaItem>();
+			IList<MediaItem> items = new List<MediaItem>();
 			if (table != null)
 			{
-				Entity<IMediaItem> entity = schema.GetEntity<IMediaItem>();
+				Entity<MediaItem> entity = schema.GetEntity<MediaItem>();
 				foreach (DataRow row in table.Rows)
 				{
-					IMediaItem item = entity.GetModel(row);
+					MediaItem item = entity.GetModel(row);
 					items.Add(item);
 				}
 			}
