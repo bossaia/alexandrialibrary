@@ -790,7 +790,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
 				if (source != null && source.DeviceInfo != null)
 				{
-					IList<MediaItem> tracks = source.GetAudioTracks();
+					ICollection<MediaItem> tracks = source.GetAudioTracks();
 					foreach(MediaItem track in tracks)
 					{
 						//TODO: Use a callback to prevent the next track from starting
@@ -1638,7 +1638,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 						{
 							foreach (MediaItem item in items)
 							{
-								playlist.Items.Add(item);
+								playlist.Items.Add(item.Number, item);
 							}
 							
 							persistenceController.SaveMediaSet(playlist);

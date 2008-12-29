@@ -9,12 +9,13 @@ namespace Telesophy.Alexandria.Persistence
 {
     public class SessionManager
     {
+        private const string KEY_MAPPING_ASSEMBLY = "NHibernate.Mapping.Assembly";
         private readonly string _mappingAssembly;
         private readonly ISessionFactory _sessionFactory;
 
         public SessionManager()
         {
-            _mappingAssembly = ConfigurationManager.AppSettings["NHibernate.Mapping.Assembly"];
+            _mappingAssembly = ConfigurationManager.AppSettings[KEY_MAPPING_ASSEMBLY];
             _sessionFactory = GetSessionFactory();
         }
 
@@ -26,9 +27,20 @@ namespace Telesophy.Alexandria.Persistence
         private ISessionFactory GetSessionFactory()
         {
             Configuration cfg = new Configuration().Configure();
-            var persistenceModel = new PersistenceModel();
-            persistenceModel.addMappingsFromAssembly(Assembly.Load(_mappingAssembly));
-            persistenceModel.Configure(cfg);
+            
+            //bool useFluent = false;
+
+            //if (useFluent)
+            //{
+                var persistenceModel = new PersistenceModel();
+                persistenceModel.addMappingsFromAssembly(Assembly.Load(_mappingAssembly));
+                persistenceModel.Configure(cfg);
+            //}
+            //else
+            //{
+                cfg.AddAssembly(Assembly.Load(_mappingAssembly));
+            //}
+
             return cfg.BuildSessionFactory();
         }
 
@@ -37,7 +49,7 @@ namespace Telesophy.Alexandria.Persistence
             Configuration cfg = new Configuration().Configure();
             var persistenceModel = new PersistenceModel();
             persistenceModel.addMappingsFromAssembly(
-                Assembly.Load(ConfigurationManager.AppSettings["NHibernate.Mapping.Assembly"]));
+                Assembly.Load(ConfigurationManager.AppSettings[KEY_MAPPING_ASSEMBLY]));
             persistenceModel.Configure(cfg);
             new SchemaExport(cfg).Create(true, true);
         }

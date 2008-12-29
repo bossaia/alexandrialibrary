@@ -52,7 +52,7 @@ namespace Telesophy.Alexandria.Model
 			if (items != null)
 			{
 				foreach(MediaItem item in items)
-					this.items.Add(item);
+					this.items.Add(item.Number, item);
 			}
 		}
 		#endregion
@@ -67,7 +67,7 @@ namespace Telesophy.Alexandria.Model
 		private DateTime date;
 		private string format;
 		private Uri path;
-		private IList<MediaItem> items = new List<MediaItem>();
+		private IDictionary<int, MediaItem> items = new Dictionary<int, MediaItem>();
 		#endregion
 	
 		#region IMediaSet Members
@@ -125,7 +125,7 @@ namespace Telesophy.Alexandria.Model
 			set { path = value; }
 		}
 
-		public IList<MediaItem> Items
+		public IDictionary<int, MediaItem> Items
 		{
 			get { return items; }
             set { items = value; }

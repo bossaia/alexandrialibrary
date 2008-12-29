@@ -227,30 +227,41 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IMediaSet LookupMediaSet(Guid id)
 		{
-			IMediaSet model = null;
+            //IMediaSet model = null;
 			
-			//if (lastSavedMediaSet != null && lastSavedMediaSet.Id == id)
-			//{
-				//model = lastSavedMediaSet;
-			//}
-			//else
-			//{
-				Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
-				query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
+            ////if (lastSavedMediaSet != null && lastSavedMediaSet.Id == id)
+            ////{
+            //    //model = lastSavedMediaSet;
+            ////}
+            ////else
+            ////{
+            //    Query query = new Query(string.Format("Search MediaSet: Id={0}", id));
+            //    query.Filters.Add(schema.GetFilter<IMediaSet>("Id", "=", id.ToString()));
 				
-				ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
-				if (sets != null && sets.Count > 0)
-				{
-					using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
-					{
-						iter.Reset();
-						iter.MoveNext();
-						model = iter.Current;
-					}
-				}
-			//}
+            //    ICollection<IMediaSet> sets = repo.List<IMediaSet>(mediaSetWithAllChildren, query);
+            //    if (sets != null && sets.Count > 0)
+            //    {
+            //        using (IEnumerator<IMediaSet> iter = sets.GetEnumerator())
+            //        {
+            //            iter.Reset();
+            //            iter.MoveNext();
+            //            model = iter.Current;
+            //        }
+            //    }
+            ////}
 			
-			return model;
+            //return model;
+
+            try
+            {
+                MediaSet set = mappingRepo.GetById<MediaSet>(id);
+                return set;
+            }
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+                return null;
+            }
 		}
 		
 		//public IMediaSet LookupMediaSet(Uri path)
@@ -283,21 +294,31 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		
 		public IMediaItem LookupMediaItem(Guid id)
 		{
-			Query query = new Query(string.Format("Search MediaItem: Id={0}", id));
-			query.Filters.Add(schema.GetFilter<IMediaItem>("Id", "=", id.ToString()));
+            try
+            {
+                return mappingRepo.GetById<MediaItem>(id);
+            }
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+                return null;
+            }
 
-			ICollection<IMediaItem> items = repo.List<IMediaItem>(mediaItemSingleton, query);
-			if (items != null && items.Count > 0)
-			{
-				using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
-				{
-					iter.Reset();
-					iter.MoveNext();
-					return iter.Current;
-				}
-			}
+            //Query query = new Query(string.Format("Search MediaItem: Id={0}", id));
+            //query.Filters.Add(schema.GetFilter<IMediaItem>("Id", "=", id.ToString()));
 
-			return null;
+            //ICollection<IMediaItem> items = repo.List<IMediaItem>(mediaItemSingleton, query);
+            //if (items != null && items.Count > 0)
+            //{
+            //    using (IEnumerator<IMediaItem> iter = items.GetEnumerator())
+            //    {
+            //        iter.Reset();
+            //        iter.MoveNext();
+            //        return iter.Current;
+            //    }
+            //}
+
+            //return null;
 		}
 		
 		public MediaItem CreateMediaItem(MediaItemData data)

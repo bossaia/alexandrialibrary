@@ -360,7 +360,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			LoadTracks(tracks, "MP3tunes");
 		}
 
-		public void LoadTracks(IList<MediaItemData> data)
+		public void LoadTracks(ICollection<MediaItemData> data)
 		{
 			if (data != null)
 			{
@@ -371,7 +371,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			}
 		}
 
-		public void LoadTracks(IList<MediaItem> tracks, string source)
+		public void LoadTracks(ICollection<MediaItem> tracks, string source)
 		{
 			if (tracks != null)
 			{
@@ -626,7 +626,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 					TrackSource trackSource = sourceData as TrackSource;
 					if (trackSource != null)
 					{
-						IList<MediaItem> tracks = null;
+						ICollection<MediaItem> tracks = null;
 						string source = string.Empty;
 						
 						if (trackSource.Id != default(Guid))
@@ -634,7 +634,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 							IMediaSet set = persistenceController.LookupMediaSet(trackSource.Id);
 							if (set != null)
 							{
-								tracks = set.Items;
+								tracks = set.Items.Values;
 								source = set.Source;
 							}
 						}

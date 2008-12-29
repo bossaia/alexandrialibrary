@@ -13,33 +13,90 @@ namespace Telesophy.Alexandria.Persistence
         {
             manager = new SessionManager();
             session = manager.GetSession();
+            session.FlushMode = FlushMode.Commit;
         }
 
-        protected T GetById<T>(object id)
+        public T GetById<T>(object id)
         {
-            return session.Get<T>(id);
+            //using (ISession session = manager.GetSession())
+            //{
+            //session.Close();
+
+            T record = default(T);
+
+            //ISession s = manager.GetSession();
+            //ITransaction tx = session.BeginTransaction();
+
+            record = session.Get<T>(id);
+            //NHibernateUtil.Initialize(record);
+            //session.Flush();
+            //tx.Commit();
+            //session.Close();
+
+            return record;
+            //}
         }
 
-        protected IList<T> GetListBase<T>(string queryString)
+        public virtual IList<T> GetList<T>(string queryString)
         {
-            IQuery query = session.CreateQuery(queryString);
-            return query.List<T>();
+            //using (ISession session1 = manager.GetSession())
+            //{
+                IList<T> list = new List<T>();
+                IQuery query = session.CreateQuery(queryString);
+                list = query.List<T>();
+                NHibernateUtil.Initialize(list);
+                return list;
+            //}
         }
 
-        protected void Save(object entity)
+        public virtual void Save(object entity)
         {
-            session.SaveOrUpdate(entity);
+            //using (ISession session = manager.GetSession())
+            //{
+                //session.FlushMode = FlushMode.Commit;
+
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    try
+                    {
+                        session.SaveOrUpdate(entity);
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
+            //}
         }
 
-        protected void Delete(object entity)
+        public virtual void Delete(object entity)
         {
-            session.Delete(entity);
+            //using (ISession session = manager.GetSession())
+            //{
+                //session.FlushMode = FlushMode.Commit;
+
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    try
+                    {
+                        session.Delete(entity);
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw ex;
+                    }
+                }
+            //}
         }
 
-        protected void Flush()
-        {
-            session.Flush();
-        }
+        //protected void Flush()
+        //{
+        //    session.Flush();
+        //}
 
         //public string Save(Cat item)
         //{

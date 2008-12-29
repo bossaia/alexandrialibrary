@@ -81,12 +81,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			get { return deviceInfo; }
 		}
 		
-		public IList<MediaItem> GetAudioTracks()
+		public ICollection<MediaItem> GetAudioTracks()
 		{
 			try
 			{
 				IMediaSet album = factory.GetMediaSet(path);
-				return album.Items; 
+				return album.Items.Values;
 			}
 			catch (Exception ex)
 			{

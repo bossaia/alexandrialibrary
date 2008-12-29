@@ -65,7 +65,7 @@ namespace Telesophy.Alexandria.Model.Data
 				tuples.Add(rootTuple);
 				
 				int sequence = 0;
-				foreach (MediaItem item in model.Items)
+				foreach (MediaItem item in model.Items.Values)
 				{
 					sequence++;
 					Tuple assocTuple = Root.Associations["MediaSetItems"].GetTuple(model.Id, item.Id, timeStamp, sequence);
@@ -98,7 +98,7 @@ namespace Telesophy.Alexandria.Model.Data
 							foreach (MediaItem child in childrenById[key])
 							{
 								//child.Parent = model;
-								model.Items.Add(child);
+								model.Items.Add(child.Number, child);
 							}
 						}
 					}
