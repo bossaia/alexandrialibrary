@@ -70,7 +70,7 @@ namespace Telesophy.Alexandria.Extensions.Playlist.M3u
 							//IPlaylistItem item = new PlaylistItem(new Uri(fileName));
 							//Items.Add(item);
 							
-							playlist.Items.Add(track);
+							playlist.Items.Add(track.Number, track);
 						}
 					}
 				}
