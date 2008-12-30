@@ -216,7 +216,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			//return repo.List<IMediaSet>(mediaSetWithAllChildren, query);
             try
             {
-                return mappingRepo.GetList<MediaSet>("FROM MediaSet WHERE \"Type\" = 'Playlist'");
+                IList<MediaSet> playlists = mappingRepo.GetList<MediaSet>("FROM MediaSet WHERE \"Type\" = 'Playlist'");
+                return playlists;
             }
             catch (Exception ex)
             {

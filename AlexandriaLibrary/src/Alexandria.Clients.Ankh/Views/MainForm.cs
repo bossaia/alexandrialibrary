@@ -329,8 +329,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			{				
 				ListViewItem playlistItem = new ListViewItem(playlist.Title, playlistIndex);
 				playlistItem.ToolTipText = playlist.Path.ToString();
-				
-				playlistItem.Tag = new TrackSource(playlist.Id);
+
+                playlistItem.Tag = new TrackSource(playlist);
 				ToolBoxListView.Items.Add(playlistItem);
 			}
 			
@@ -1605,11 +1605,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 			if (ToolBoxListView.SelectedItems != null && ToolBoxListView.SelectedItems.Count > 0)
 			{
 				TrackSource source = ToolBoxListView.SelectedItems[0].Tag as TrackSource;
-				if (source != null && source.Id != default(Guid))
+				if (source != null && source.Set != null) // && source.Id != default(Guid))
 				{
-					if (!persistenceController.IsMediaSetPendingSave(source.Id))
-					{
-						IMediaSet playlist = persistenceController.LookupMediaSet(source.Id);
+					//if (!persistenceController.IsMediaSetPendingSave(source.Id))
+					//{
+                        MediaSet playlist = source.Set; //persistenceController.LookupMediaSet(source.Id);
 						if (playlist != null)
 						{
 							PlaylistSave control = toolController.EditPlaylist(playlist);
@@ -1617,8 +1617,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 							control.SmallImageList = queueSmallImageList;
 							control.Show();
 						}
-					}
-					else MessageBox.Show("Please wait a few seconds for it to be saved and then try editing it again.", "THIS PLAYLIST IS BEING SAVED");
+					//}
+					//else MessageBox.Show("Please wait a few seconds for it to be saved and then try editing it again.", "THIS PLAYLIST IS BEING SAVED");
 				}
 			}
 		}

@@ -55,6 +55,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			this.deviceInfo = deviceInfo;
 		}
+
+        public TrackSource(MediaSet set)
+        {
+            this.set = set;
+        }
 		#endregion
 	
 		#region Private Fields
@@ -62,6 +67,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		private Guid id = default(Guid);
 		private Uri path;
 		private AspiDeviceInfo deviceInfo;
+        private MediaSet set;
 		#endregion
 			
 		#region ITrackSource Members
@@ -80,19 +86,35 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			get { return deviceInfo; }
 		}
-		
+
+        public MediaSet Set
+        {
+            get { return set; }
+        }
+
 		public ICollection<MediaItem> GetAudioTracks()
 		{
+            ICollection<MediaItem> items = new List<MediaItem>();
+
 			try
 			{
-				IMediaSet album = factory.GetMediaSet(path);
-				return album.Items.Values;
+                if (set != null)
+                {
+                    items = set.Items.Values;
+                }
+                else
+                {
+                    IMediaSet album = factory.GetMediaSet(path);
+                    items = album.Items.Values;
+                }
 			}
 			catch (Exception ex)
 			{
 				string x = ex.Message;
+                throw ex;
 			}
-			return null;
+
+			return items;
 		}
 		#endregion
 	}
