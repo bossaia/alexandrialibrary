@@ -49,10 +49,11 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#endregion
 		
 		#region Private Methods
-		private IMediaSet GetNewPlaylist()
+		private MediaSet GetNewPlaylist()
 		{
 			Guid id = Guid.NewGuid();
             string source = Values.Source.Catalog;
+            string type = ModelConstants.MEDIA_TYPE_PLAYLIST;
 			int number = 0;
 			string title = ModelConstants.PLAYLIST_TITLE_DEFAULT;
 			string artist = ModelConstants.ARTIST_NAME_VARIOUS;
@@ -60,7 +61,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			string format = ModelConstants.PLAYLIST_FORMAT_DEFAULT;
 			Uri path = new Uri(ModelConstants.PLAYLIST_PATH_DEFAULT + id.ToString());
 
-			return new Playlist(id, source, number, title, artist, date, format, path, null);
+            return new MediaSet() { Id = id, Source = source, Type = type, Number = number, Title = title, Artist = artist, Date = date, Format = format, Path = path };
+                //Playlist(id, source, number, title, artist, date, format, path, null);
 		}
 		
 		private MediaItemData GetMediaItemData(IMediaItem item)
@@ -86,12 +88,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		#region Public Methods
 		public PlaylistSave CreatePlaylist()
 		{
-			IMediaSet playlist = GetNewPlaylist();
+			MediaSet playlist = GetNewPlaylist();
 			return EditPlaylist(playlist);
 		}
 		
 		[CLSCompliant(false)]
-		public PlaylistSave EditPlaylist(IMediaSet playlist)
+		public PlaylistSave EditPlaylist(MediaSet playlist)
 		{
 			PlaylistSave control = null;
 		
