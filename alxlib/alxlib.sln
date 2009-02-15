@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "src\Core\Alexandria.Core\Alexandria.Core.csproj", "{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus", "src\Clients\Papyrus\Papyrus.csproj", "{CD739E9B-DB3B-4301-BDCB-385B458A3D73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{D145709E-D436-4E2B-965C-D9CD5F0EA517}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{501AB897-B951-485E-8A02-437EECC17472}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{38022C76-C967-4E3B-814D-C97B0D128443}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{9179A7BC-DE0F-412F-A89F-81C2170E804A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Media", "src\Libraries\Mono.Media\Mono.Media.csproj", "{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD739E9B-DB3B-4301-BDCB-385B458A3D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD739E9B-DB3B-4301-BDCB-385B458A3D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD739E9B-DB3B-4301-BDCB-385B458A3D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD739E9B-DB3B-4301-BDCB-385B458A3D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1} = {D145709E-D436-4E2B-965C-D9CD5F0EA517}
+		{CD739E9B-DB3B-4301-BDCB-385B458A3D73} = {501AB897-B951-485E-8A02-437EECC17472}
+		{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6} = {9179A7BC-DE0F-412F-A89F-81C2170E804A}
+	EndGlobalSection
+EndGlobal
