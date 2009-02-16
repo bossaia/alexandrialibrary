@@ -20,16 +20,19 @@ namespace Papyrus
 
         private void lnkAdditional_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            pnlAdditional.Visible = !pnlAdditional.Visible;
+            //pnlAdditional.Visible = !pnlAdditional.Visible;
+            bool visible = !pnlAdditional.Visible;
 
-            //if (visibile)
-            //{
 
-            //}
-            //else
-            //{
-
-            //}
+            if (visible)
+            {
+                pnlAdditional.Visible = true;
+            }
+            else
+            {
+                pnlAdditional.Visible = false;
+                //pnlAdditional.Hide();
+            }
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
