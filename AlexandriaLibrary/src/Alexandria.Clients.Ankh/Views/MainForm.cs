@@ -1609,14 +1609,16 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 				{
 					//if (!persistenceController.IsMediaSetPendingSave(source.Id))
 					//{
-                        MediaSet playlist = source.Set; //persistenceController.LookupMediaSet(source.Id);
-						if (playlist != null)
-						{
-							PlaylistSave control = toolController.EditPlaylist(playlist);
-							control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
-							control.SmallImageList = queueSmallImageList;
-							control.Show();
-						}
+						//source.Set;
+                    MediaSet playlist = persistenceController.LookupMediaSet(source.Set.Id);
+					//MediaSet playlist = source.Set;
+					if (playlist != null)
+					{
+						PlaylistSave control = toolController.EditPlaylist(playlist);
+						control.SaveConfirmHandle += new PlaylistSaveConfirmHandle(InitializeToolbox);
+						control.SmallImageList = queueSmallImageList;
+						control.Show();
+					}
 					//}
 					//else MessageBox.Show("Please wait a few seconds for it to be saved and then try editing it again.", "THIS PLAYLIST IS BEING SAVED");
 				}

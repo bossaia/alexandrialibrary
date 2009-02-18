@@ -29,6 +29,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using Telesophy.Alexandria.Core;
+
 namespace Telesophy.Alexandria.Model
 {
     public class MediaSet : Entity, IMediaSet
@@ -96,5 +98,5 @@ namespace Telesophy.Alexandria.Model
         }
 
         #endregion
-    }
+	}
 }

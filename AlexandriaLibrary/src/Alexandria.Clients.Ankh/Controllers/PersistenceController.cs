@@ -226,7 +226,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
             }
 		}
 		
-		public IMediaSet LookupMediaSet(Guid id)
+		public MediaSet LookupMediaSet(Guid id)
 		{
             //IMediaSet model = null;
 			
