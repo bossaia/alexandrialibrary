@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Reflection;
 //using FluentNHibernate;
 using NHibernate;
@@ -21,7 +22,17 @@ namespace Telesophy.Alexandria.Persistence
 
         public ISession GetSession()
         {
-            return _sessionFactory.OpenSession();
+			try
+			{
+				ISession session = _sessionFactory.OpenSession();
+				session.CacheMode = CacheMode.Ignore;
+				
+				return session;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
         }
 
         private ISessionFactory GetSessionFactory()
@@ -39,6 +50,7 @@ namespace Telesophy.Alexandria.Persistence
             //else
             //{
                 cfg.AddAssembly(Assembly.Load(_mappingAssembly));
+				//cfg.AddAssembly(Assembly.Load("Alexandria.Model"));
             //}
 
             return cfg.BuildSessionFactory();

@@ -20,31 +20,42 @@ namespace Telesophy.Alexandria.Persistence
         {
             //using (ISession session = manager.GetSession())
             //{
-            //session.Close();
+				//session.Close();
 
-            T record = default(T);
+				T record = default(T);
 
-            //ISession s = manager.GetSession();
-            //ITransaction tx = session.BeginTransaction();
+				
+				//ITransaction tx = session.BeginTransaction();
 
-            record = session.Get<T>(id);
-            //NHibernateUtil.Initialize(record);
-            //session.Flush();
-            //tx.Commit();
-            //session.Close();
+				record = (T)session.Get<T>(id, LockMode.None);
+					//session.Get(typeof(T), id); //.Get<T>(id);
+				//session.Flush();
 
-            return record;
+				Telesophy.Alexandria.Model.MediaSet set = record as Telesophy.Alexandria.Model.MediaSet;
+				if (set != null)
+				{
+				    NHibernateUtil.Initialize(set.Items);
+				    int x = set.Items.Count;
+				}
+            
+				//session.Flush();
+				//tx.Commit();
+				//s.Close();
+
+				
+
+				return record;
             //}
         }
 
         public virtual IList<T> GetList<T>(string queryString)
         {
-            //using (ISession session1 = manager.GetSession())
+            //using (ISession session = manager.GetSession())
             //{
                 IList<T> list = new List<T>();
                 IQuery query = session.CreateQuery(queryString);
                 list = query.List<T>();
-                NHibernateUtil.Initialize(list);
+                //NHibernateUtil.Initialize(list);
                 return list;
             //}
         }

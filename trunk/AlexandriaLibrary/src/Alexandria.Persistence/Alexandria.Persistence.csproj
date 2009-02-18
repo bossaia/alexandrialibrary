@@ -85,6 +85,10 @@
       <Project>{5D0C234C-F991-4DDD-AC76-1C90AE7BF582}</Project>
       <Name>Alexandria.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Model\Alexandria.Model.csproj">
+      <Project>{E5F218B8-FD8A-42C3-9409-8539D128F294}</Project>
+      <Name>Alexandria.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
