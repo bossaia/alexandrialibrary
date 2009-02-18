@@ -532,8 +532,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
             string sortName = string.Empty;
             bool sortExists = false;
 
-            if (Columns.Queue.ColumnsByName.ContainsKey(columnName))
-                sortName = Columns.Queue.ColumnsByName[columnName].PropertyName;			
+            if (QueueColumns.ColumnsByName.ContainsKey(columnName))
+                sortName = QueueColumns.ColumnsByName[columnName].PropertyName;			
 			
 			if (sortListView.Items.Count > 0)
 			{
@@ -619,7 +619,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 
 		private void queueDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-            if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != Columns.Queue.Status.Name)
+            if (e.RowIndex > -1 && queueDataGrid.Columns[e.ColumnIndex].Name != QueueColumns.Status.Name)
             {
                 queueController.SaveRow(e.RowIndex);
             }

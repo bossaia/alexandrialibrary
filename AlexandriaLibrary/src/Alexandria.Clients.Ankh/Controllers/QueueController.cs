@@ -105,7 +105,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			set {
 				if (selectedRow != null && selectedRow != value && selectedRow.Index > -1)
 				{
-					grid.Rows[selectedRow.Index].Cells[Columns.Queue.Status.Name].Value = string.Empty;
+					grid.Rows[selectedRow.Index].Cells[QueueColumns.Status.Name].Value = string.Empty;
 				}
 				 
 				selectedRow = value;
@@ -148,17 +148,17 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			if (row.Index > -1)
 			{
-				Guid id = GetItemGuid(row.Cells[Columns.Queue.Id.Name]);
-                string type = GetItemString(row.Cells[Columns.Queue.Type.Name]);
-                string source = GetItemString(row.Cells[Columns.Queue.Source.Name]);
-                int number = GetItemInt(row.Cells[Columns.Queue.Number.Name]);
-                string title = GetItemString(row.Cells[Columns.Queue.Title.Name]);
-                string artist = GetItemString(row.Cells[Columns.Queue.Artist.Name]);
-                string album = GetItemString(row.Cells[Columns.Queue.Album.Name]);
-                TimeSpan duration = GetItemTimeSpan(row.Cells[Columns.Queue.Duration.Name]);
-                DateTime date = GetItemDateTime(row.Cells[Columns.Queue.Date.Name]);
-                string format = GetItemString(row.Cells[Columns.Queue.Format.Name]);
-                Uri path = GetItemUri(row.Cells[Columns.Queue.Path.Name]);
+				Guid id = GetItemGuid(row.Cells[QueueColumns.Id.Name]);
+                string type = GetItemString(row.Cells[QueueColumns.Type.Name]);
+                string source = GetItemString(row.Cells[QueueColumns.Source.Name]);
+                int number = GetItemInt(row.Cells[QueueColumns.Number.Name]);
+                string title = GetItemString(row.Cells[QueueColumns.Title.Name]);
+                string artist = GetItemString(row.Cells[QueueColumns.Artist.Name]);
+                string album = GetItemString(row.Cells[QueueColumns.Album.Name]);
+                TimeSpan duration = GetItemTimeSpan(row.Cells[QueueColumns.Duration.Name]);
+                DateTime date = GetItemDateTime(row.Cells[QueueColumns.Date.Name]);
+                string format = GetItemString(row.Cells[QueueColumns.Format.Name]);
+                Uri path = GetItemUri(row.Cells[QueueColumns.Path.Name]);
 				
 				return new MediaItem(id, source, type, number, title, artist, album, duration, date, format, path);
 			}
@@ -187,9 +187,9 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
         {
             foreach (DataGridViewColumn column in grid.Columns)
             {
-                if (Columns.Queue.ColumnsByName.ContainsKey(column.Name))
+                if (QueueColumns.ColumnsByName.ContainsKey(column.Name))
                 {
-                    string propertyName = Columns.Queue.ColumnsByName[column.Name].PropertyName;
+                    string propertyName = QueueColumns.ColumnsByName[column.Name].PropertyName;
 
                     SortOrder direction = SortOrder.None;
                     if (columns.ContainsKey(propertyName))
@@ -331,12 +331,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 		{
 			get { 
 				return (SelectedRow != null && SelectedRow.Index > -1)
-                    ? SelectedRow.Cells[Columns.Queue.Status.Name].Value.ToString()
+                    ? SelectedRow.Cells[QueueColumns.Status.Name].Value.ToString()
 					: null;
 			}
 			set { 
 				if (SelectedRow != null && SelectedRow.Index > -1)
-                    SelectedRow.Cells[Columns.Queue.Status.Name].Value = value;
+                    SelectedRow.Cells[QueueColumns.Status.Name].Value = value;
 			}
 		}
 
@@ -442,7 +442,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 						if (audioStream != null && audioStream.Duration != SelectedTrack.Duration && audioStream.Duration != TimeSpan.Zero)
 						{
-							SelectedRow.Cells[Columns.Queue.Duration.Name].Value = audioStream.Duration;
+							SelectedRow.Cells[QueueColumns.Duration.Name].Value = audioStream.Duration;
 						}
 					}
 					
@@ -762,7 +762,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
 				Guid selectedId = default(Guid);
 				if (SelectedRow != null && SelectedRow.Index > -1)
-					selectedId = (Guid)SelectedRow.Cells[Columns.Queue.Id.Name].Value;
+					selectedId = (Guid)SelectedRow.Cells[QueueColumns.Id.Name].Value;
 			
 				ListSortDescription[] sortArray = new ListSortDescription[columns.Count];
 				
@@ -770,7 +770,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 				foreach (KeyValuePair<string, bool> column in columns)
 				{
 					ListSortDirection direction = (column.Value) ? ListSortDirection.Ascending : ListSortDirection.Descending;
-                    PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[Columns.Queue.ColumnsByPropertyName[column.Key].PropertyName];
+                    PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(IMediaItem))[QueueColumns.ColumnsByPropertyName[column.Key].PropertyName];
 					sortArray[columnIndex] = new ListSortDescription(property, direction);
 					columnIndex++;					
 				}
