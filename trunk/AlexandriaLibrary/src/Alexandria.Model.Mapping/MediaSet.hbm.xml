@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Alexandria.Model" namespace="Telesophy.Alexandria.Model">
+	<class name="MediaSet" table="MediaSet">
+		<id name="Id" type="Guid" column="Id">
+			<generator class="guid.comb"></generator>
+		</id>		
+		<property name="Source" type="string"></property>
+		<property name="Type" type="string"></property>
+		<property name="Number" type="Int32"></property>
+		<property name="Title" type="string"></property>
+		<property name="Artist" type="string"></property>
+		<property name="Date" type="DateTime"></property>
+		<property name="Format" type="Format"></property>
+		<property name="Path" type="Telesophy.Alexandria.Persistence.UriType, Alexandria.Persistence"></property>
+		<list name="Items" table="MediaSetMediaItem" lazy="false" >
+			<key column="MediaSetId"/>
+			<index column="Sequence"/>
+			<many-to-many column="MediaItemId" class="MediaItem"/>
+		</list>
+	</class>
+</hibernate-mapping>

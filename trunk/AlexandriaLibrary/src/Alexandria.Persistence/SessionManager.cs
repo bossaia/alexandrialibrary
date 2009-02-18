@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using System.Reflection;
-using FluentNHibernate;
+//using FluentNHibernate;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
 using Configuration = NHibernate.Cfg.Configuration;
@@ -32,9 +32,9 @@ namespace Telesophy.Alexandria.Persistence
 
             //if (useFluent)
             //{
-                var persistenceModel = new PersistenceModel();
-                persistenceModel.addMappingsFromAssembly(Assembly.Load(_mappingAssembly));
-                persistenceModel.Configure(cfg);
+                //var persistenceModel = new PersistenceModel();
+                //persistenceModel.addMappingsFromAssembly(Assembly.Load(_mappingAssembly));
+                //persistenceModel.Configure(cfg);
             //}
             //else
             //{
@@ -46,12 +46,13 @@ namespace Telesophy.Alexandria.Persistence
 
         internal static void ExportSchema()
         {
-            Configuration cfg = new Configuration().Configure();
-            var persistenceModel = new PersistenceModel();
-            persistenceModel.addMappingsFromAssembly(
-                Assembly.Load(ConfigurationManager.AppSettings[KEY_MAPPING_ASSEMBLY]));
-            persistenceModel.Configure(cfg);
-            new SchemaExport(cfg).Create(true, true);
+			//NOTE: This is needed for Fluent NHibernate
+			//Configuration cfg = new Configuration().Configure();
+			//var persistenceModel = new PersistenceModel();
+			//persistenceModel.addMappingsFromAssembly(
+			//    Assembly.Load(ConfigurationManager.AppSettings[KEY_MAPPING_ASSEMBLY]));
+			//persistenceModel.Configure(cfg);
+			//new SchemaExport(cfg).Create(true, true);
         }
     }
 }

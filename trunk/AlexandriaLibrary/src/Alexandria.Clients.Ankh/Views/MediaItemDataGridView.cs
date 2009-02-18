@@ -72,7 +72,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 		#region Private Event Methods
 		private void MediaItemDataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Type.Name)
+			if (Columns[e.ColumnIndex].Name == Controllers.QueueColumns.Type.Name)
 			{
 				string value = (e.Value != null) ? e.Value.ToString() : string.Empty;
 
@@ -95,7 +95,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 						break;
 				}
 			}
-			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Duration.Name)
+			if (Columns[e.ColumnIndex].Name == Controllers.QueueColumns.Duration.Name)
 			{
 				TimeSpan duration = (e.Value != null) ? (TimeSpan)e.Value : TimeSpan.Zero;
 				if (duration.Hours > 0)
@@ -111,7 +111,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 					e.Value = string.Format("0:{0:00}", duration.Seconds);
 				}
 			}
-			if (Columns[e.ColumnIndex].Name == Controllers.Columns.Queue.Path.Name)
+			if (Columns[e.ColumnIndex].Name == Controllers.QueueColumns.Path.Name)
 			{
 				Uri path = e.Value as Uri;
 				if (path != null)
