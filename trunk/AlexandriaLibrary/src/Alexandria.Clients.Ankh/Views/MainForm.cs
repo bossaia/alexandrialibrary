@@ -1640,7 +1640,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Views
 						{
 							foreach (MediaItem item in items)
 							{
-								playlist.Items.Add(item.Number, item);
+								playlist.Items.Add(item);
+									//item.Number, item);
 							}
 							
 							persistenceController.SaveMediaSet(playlist);

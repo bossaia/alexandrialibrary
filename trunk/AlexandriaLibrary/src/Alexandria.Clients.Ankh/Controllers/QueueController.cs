@@ -634,7 +634,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 							IMediaSet set = persistenceController.LookupMediaSet(trackSource.Id);
 							if (set != null)
 							{
-								tracks = set.Items.Values;
+								tracks = set.Items; //.Values;
 								source = set.Source;
 							}
 						}

@@ -13,10 +13,10 @@
 		<property name="Format" type="string"></property>
 		<property name="Path" type="Telesophy.Alexandria.Persistence.UriType, Alexandria.Persistence"></property>
 		
-		<map name="Items" table="MediaSetMediaItem" lazy="false" >
+		<bag name="Items" table="MediaSetMediaItem" lazy="false">
 			<key column="MediaSetId"/>
-			<index column="Sequence" type="Int32"/>
+			<!-- <index column="Sequence" type="Int32"/> -->
 			<many-to-many column="MediaItemId" class="MediaItem"/>
-		</map>
+		</bag>
 	</class>
 </hibernate-mapping>

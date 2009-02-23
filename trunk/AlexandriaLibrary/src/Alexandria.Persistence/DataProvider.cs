@@ -52,11 +52,19 @@ namespace Telesophy.Alexandria.Persistence
         {
             //using (ISession session = manager.GetSession())
             //{
-                IList<T> list = new List<T>();
-                IQuery query = session.CreateQuery(queryString);
-                list = query.List<T>();
-                //NHibernateUtil.Initialize(list);
-                return list;
+			try
+			{
+				IList<T> list = new List<T>();
+				IQuery query = session.CreateQuery(queryString);
+				list = query.List<T>();
+				//NHibernateUtil.Initialize(list);
+				return list;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
             //}
         }
 

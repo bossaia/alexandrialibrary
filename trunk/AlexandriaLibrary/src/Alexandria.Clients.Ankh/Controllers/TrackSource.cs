@@ -100,12 +100,12 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 			{
                 if (set != null)
                 {
-                    items = set.Items.Values;
+					items = set.Items; //.Values;
                 }
                 else
                 {
                     IMediaSet album = factory.GetMediaSet(path);
-                    items = album.Items.Values;
+                    items = album.Items; //.Values;
                 }
 			}
 			catch (Exception ex)

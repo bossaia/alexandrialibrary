@@ -45,7 +45,7 @@ namespace Telesophy.Alexandria.Model
 
         #region Private Members
 
-        private IDictionary<int, MediaItem> items = new Dictionary<int, MediaItem>();
+        private IList<MediaItem> items = new List<MediaItem>();
         
 		#endregion
 
@@ -91,10 +91,10 @@ namespace Telesophy.Alexandria.Model
             get; set;
         }
 
-        public virtual IDictionary<int, MediaItem> Items
+        public virtual IList<MediaItem> Items
         {
             get { return items; }
-            set { items = value; }
+			set { items = value; } // as IList<MediaItem>; }
         }
 
         #endregion

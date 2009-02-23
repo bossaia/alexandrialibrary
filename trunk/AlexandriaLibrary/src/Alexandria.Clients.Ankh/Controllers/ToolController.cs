@@ -114,7 +114,7 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
                     int x = playlist.Items.Count;
                 }
 
-				foreach (MediaItem item in playlist.Items.Values)
+				foreach (MediaItem item in playlist.Items) //.Values)
 				{
 					control.AddItem(GetMediaItemData(item));
 				}
@@ -151,7 +151,8 @@ namespace Telesophy.Alexandria.Clients.Ankh.Controllers
 
 					foreach (MediaItem item in items)
 					{
-						playlist.Items.Add(item.Number, item);
+						playlist.Items.Add(item);
+							//item.Number, item);
 					}
 
 					PersistenceController.SaveMediaSet(playlist);
