@@ -69,8 +69,9 @@ namespace Telesophy.Alexandria.Extensions.Playlist.M3u
 							MediaItem track = null;
 							//IPlaylistItem item = new PlaylistItem(new Uri(fileName));
 							//Items.Add(item);
-							
-							playlist.Items.Add(track.Number, track);
+
+							playlist.Items.Add(track);
+								//track.Number, track);
 						}
 					}
 				}

@@ -51,12 +51,13 @@ namespace Telesophy.Alexandria.Model
 			if (items != null)
 			{
 				foreach(MediaItem item in items)
-					this.items.Add(item.Number, item);
+					this.items.Add(item);
 			}
 		}
 		#endregion
 		
 		#region Private Fields
+
 		private Guid id;
 		private string source;
 		private string type = ModelConstants.MEDIA_TYPE_AUDIO;
@@ -66,10 +67,12 @@ namespace Telesophy.Alexandria.Model
 		private DateTime date;
 		private string format;
 		private Uri path;
-		private IDictionary<int, MediaItem> items = new Dictionary<int, MediaItem>();
+		private IList<MediaItem> items = new List<MediaItem>();
+
 		#endregion
 	
 		#region IMediaSet Members
+
 		public Guid Id
 		{
 			get { return id; }
@@ -124,11 +127,12 @@ namespace Telesophy.Alexandria.Model
 			set { path = value; }
 		}
 
-		public IDictionary<int, MediaItem> Items
+		public IList<MediaItem> Items
 		{
 			get { return items; }
             set { items = value; }
 		}
+
 		#endregion
 	}
 }
