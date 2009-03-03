@@ -78,14 +78,18 @@ namespace Papyrus.Forms
 			SetAdditionalInfoVisibility();
         }
 
-		private void txtTitle_Validating(object sender, CancelEventArgs e)
+		private void btnLoad_Click(object sender, EventArgs e)
 		{
-			ValidateTitle();
+			DialogResult result = dlgOpenFile.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+
+			}
 		}
 
-		private void txtInfo_Validating(object sender, CancelEventArgs e)
+		private void btnSave_Click(object sender, EventArgs e)
 		{
-			ValidateInfoUri();
+			Accept();
 		}
 
 		#endregion
