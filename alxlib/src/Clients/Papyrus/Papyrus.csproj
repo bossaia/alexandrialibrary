@@ -48,16 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Controllers\PlaylistController.cs" />
+    <Compile Include="Forms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\MetadataForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MetadataForm.Designer.cs">
+      <DependentUpon>MetadataForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PlaylistForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PlaylistForm.Designer.cs">
+      <DependentUpon>PlaylistForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\PlaylistForm.resx">
+      <DependentUpon>PlaylistForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -79,19 +89,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Views\IPlaylistView.cs" />
+    <Compile Include="Views\IView.cs" />
+    <Compile Include="Views\ViewAction.cs" />
+    <Compile Include="Views\ViewActionCallback.cs" />
+    <Compile Include="Views\ViewActionType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Alexandria.Core\Alexandria.Core.csproj">
       <Project>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</Project>
       <Name>Alexandria.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Mono.Media\Mono.Media.csproj">
-      <Project>{15C62B2E-E34D-41B3-81FD-0AA4E487FFF6}</Project>
-      <Name>Mono.Media</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\licenses.xml" />
+    <Content Include="Data\LicenseData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

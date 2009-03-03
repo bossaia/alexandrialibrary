@@ -45,6 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Attribution.cs" />
+    <Compile Include="Model\Extension.cs" />
+    <Compile Include="Model\Link.cs" />
+    <Compile Include="Model\Meta.cs" />
+    <Compile Include="Model\Namespace.cs" />
+    <Compile Include="Model\Playlist.cs" />
+    <Compile Include="Model\Track.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
