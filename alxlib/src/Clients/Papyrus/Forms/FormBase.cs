@@ -10,45 +10,45 @@ namespace Papyrus.Forms
 {
 	public class FormBase : Form, IView
 	{
-		protected virtual void btnAccept_Click(object sender, EventArgs e)
+		protected virtual void Accept()
 		{
-			ViewAction action = new ViewAction(ViewActionType.Validate);
+			//ViewAction action = new ViewAction(ViewActionType.Validate);
 
-			if (Validating != null)
-				Validating(action);
+			//if (Validating != null)
+			//    Validating(action);
 
-			if (!action.IsValid)
-				return;
+			//if (!action.IsValid)
+			//    return;
 
-			if (Validated != null)
-				Validated(action);
+			//if (Validated != null)
+			//    Validated(action);
 
-			action.Type = ViewActionType.Accept;
+			//action.Type = ViewActionType.Accept;
 
-			if (Accepting != null)
-				Accepting(action);
+			//if (Accepting != null)
+			//    Accepting(action);
 
-			if (!action.IsValid)
-				return;
+			//if (!action.IsValid)
+			//    return;
 
-			if (action.IsValid)
-				Close();
+			//if (action.IsValid)
+			//    Close();
 
-			if (Accepted != null)
-				Accepted(action);
+			//if (Accepted != null)
+			//    Accepted(action);
 		}
 
 		protected virtual void btnCancel_Click(object sender, EventArgs e)
 		{
-			ViewAction cancel = new ViewAction(ViewActionType.Cancel);
+			//ViewAction cancel = new ViewAction(ViewActionType.Cancel);
 
 			//if (OnCancel != null)
 			//{
 			//    OnCancel(cancel);
 			//}
 
-			if (cancel.IsValid)
-				Close();
+			//if (cancel.IsValid)
+				//Close();
 		}
 
 		#region IView Members

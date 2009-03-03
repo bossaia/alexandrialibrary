@@ -93,7 +93,6 @@
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\ViewAction.cs" />
     <Compile Include="Views\ViewActionCallback.cs" />
-    <Compile Include="Views\ViewActionType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Alexandria.Core\Alexandria.Core.csproj">
