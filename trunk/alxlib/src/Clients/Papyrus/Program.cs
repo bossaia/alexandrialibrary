@@ -18,10 +18,9 @@ namespace Papyrus
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run();
-
-			PlaylistController controller = new PlaylistController();
-			controller.DisplayView();
+			PlaylistForm form = new PlaylistForm();
+			PlaylistController controller = new PlaylistController(form);
+            Application.Run(form);
         }
     }
 }
