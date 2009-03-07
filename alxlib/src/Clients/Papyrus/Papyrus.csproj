@@ -48,7 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ControllerBase.cs" />
     <Compile Include="Controllers\PlaylistController.cs" />
+    <Compile Include="Data\AttributionData.cs" />
+    <Compile Include="Data\DataItem.cs" />
+    <Compile Include="Data\DataList.cs" />
+    <Compile Include="Data\DataStatus.cs" />
+    <Compile Include="Data\DataUtility.cs" />
+    <Compile Include="Data\ExtensionData.cs" />
+    <Compile Include="Data\IAggregate.cs" />
+    <Compile Include="Data\LinkData.cs" />
+    <Compile Include="Data\MetaData.cs" />
+    <Compile Include="Data\NamespaceData.cs" />
+    <Compile Include="Data\PlaylistData.cs" />
+    <Compile Include="Data\TrackData.cs" />
     <Compile Include="Forms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>

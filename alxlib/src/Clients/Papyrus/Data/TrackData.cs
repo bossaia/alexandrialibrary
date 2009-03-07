@@ -3,23 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alexandria.Core.Model
+namespace Papyrus.Data
 {
-	public class Track
+	public class TrackData
 	{
-		#region Constructors
-
-		public Track()
+		public TrackData()
 		{
 		}
 
-		#endregion
-
 		#region Private Members
 
-		private IList<Link> link = new List<Link>();
-		private IList<Meta> meta = new List<Meta>();
-		private IList<Extension> extension = new List<Extension>();
+		private IList<LinkData> link = new List<LinkData>();
+		private IList<MetaData> meta = new List<MetaData>();
+		private IList<ExtensionData> extension = new List<ExtensionData>();
 
 		#endregion
 
@@ -33,8 +29,8 @@ namespace Alexandria.Core.Model
 		public string Album { get; set; }
 		public uint TrackNum { get; set; }
 		public TimeSpan Duration { get; set; }
-		public IList<Link> Link { get { return link; } }
-		public IList<Meta> Meta { get { return meta; } }
-		public IList<Extension> Extension { get { return extension; } }
+		public IList<LinkData> Link { get { return link; } }
+		public IList<MetaData> Meta { get { return meta; } }
+		public IList<ExtensionData> Extension { get { return extension; } }
 	}
 }

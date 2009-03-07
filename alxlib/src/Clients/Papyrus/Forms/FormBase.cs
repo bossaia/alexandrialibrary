@@ -10,143 +10,122 @@ namespace Papyrus.Forms
 {
 	public class FormBase : Form, IView
 	{
-		protected virtual void Accept()
+		protected virtual void LoadForm()
 		{
-			//ViewAction action = new ViewAction(ViewActionType.Validate);
-
-			//if (Validating != null)
-			//    Validating(action);
-
-			//if (!action.IsValid)
-			//    return;
-
-			//if (Validated != null)
-			//    Validated(action);
-
-			//action.Type = ViewActionType.Accept;
-
-			//if (Accepting != null)
-			//    Accepting(action);
-
-			//if (!action.IsValid)
-			//    return;
-
-			//if (action.IsValid)
-			//    Close();
-
-			//if (Accepted != null)
-			//    Accepted(action);
+			LoadForm(new ViewAction());
 		}
 
-		protected virtual void btnCancel_Click(object sender, EventArgs e)
+		protected virtual void LoadForm(ViewAction action)
 		{
-			//ViewAction cancel = new ViewAction(ViewActionType.Cancel);
+			if (action != null)
+			{
+				if (Loading != null)
+					Loading(action);
 
-			//if (OnCancel != null)
-			//{
-			//    OnCancel(cancel);
-			//}
+				if (!action.IsRunning)
+					return;
 
-			//if (cancel.IsValid)
-				//Close();
+				if (Loaded != null)
+					Loaded(action);
+			}
+		}
+
+		protected virtual void ValidateForm()
+		{
+			ValidateForm(new ViewAction());
+		}
+
+		protected virtual void ValidateForm(ViewAction action)
+		{
+			if (action != null)
+			{
+				if (Validating != null)
+					Validating(action);
+
+				if (!action.IsRunning)
+					return;
+
+				if (Validated != null)
+					Validated(action);
+			}
+		}
+
+		protected virtual void AcceptForm()
+		{
+			AcceptForm(new ViewAction());
+		}
+
+		protected virtual void AcceptForm(ViewAction action)
+		{
+			if (action != null)
+			{
+				if (Accepting != null)
+					Accepting(action);
+
+				if (!action.IsRunning)
+					return;
+
+				if (Accepted != null)
+					Accepted(action);
+			}
+		}
+
+		protected virtual void CancelForm()
+		{
+			CancelForm(new ViewAction());
+		}
+
+		protected virtual void CancelForm(ViewAction action)
+		{
+			if (action != null)
+			{
+				if (Cancelling != null)
+					Cancelling(action);
+
+				if (!action.IsRunning)
+					return;
+
+				Close();
+
+				if (Cancelled != null)
+					Cancelled(action);
+			}
 		}
 
 		#region IView Members
 
-		public ViewActionCallback Refreshing
+		public ViewActionCallback Loading { get; set; }
+
+		public ViewActionCallback Loaded { get; set; }
+
+		public ViewActionCallback Refreshing { get; set; }
+
+		public ViewActionCallback Refreshed { get; set; }
+
+		public new ViewActionCallback Validating { get; set; }
+
+		public new ViewActionCallback Validated { get; set; }
+
+		public ViewActionCallback Accepting { get; set; }
+
+		public ViewActionCallback Accepted { get; set; }
+
+		public ViewActionCallback Cancelling { get; set; }
+
+		public ViewActionCallback Cancelled { get; set; }
+
+		public virtual void Display()
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
+			Show();
 		}
 
-		public ViewActionCallback Refreshed
+		public virtual void RefreshData()
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
 		}
 
-		public new ViewActionCallback Validating
+		public virtual void ShowMessage(string title, string body)
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public new ViewActionCallback Validated
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public ViewActionCallback Accepting
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public ViewActionCallback Accepted
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public ViewActionCallback Cancelling
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public ViewActionCallback Cancelled
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
+			MessageBox.Show(body, title);
 		}
 
 		#endregion

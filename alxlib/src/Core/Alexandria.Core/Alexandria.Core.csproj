@@ -46,17 +46,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\MessageController.cs" />
+    <Compile Include="Messaging\MessageHandler.cs" />
     <Compile Include="Messaging\MessageStatus.cs" />
     <Compile Include="Model\Attribution.cs" />
     <Compile Include="Model\Extension.cs" />
     <Compile Include="Model\Link.cs" />
+    <Compile Include="Model\M3uPlaylistFormatter.cs" />
     <Compile Include="Model\Meta.cs" />
     <Compile Include="Model\Namespace.cs" />
     <Compile Include="Model\Playlist.cs" />
+    <Compile Include="Model\PlaylistFormatter.cs" />
+    <Compile Include="Model\PlsPlaylistFormatter.cs" />
     <Compile Include="Model\Track.cs" />
+    <Compile Include="Model\XspfPlaylistFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\MessageSchema.cs" />
+    <Compile Include="UriUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

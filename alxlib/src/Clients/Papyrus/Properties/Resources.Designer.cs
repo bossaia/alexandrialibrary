@@ -61,6 +61,127 @@ namespace Papyrus.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to colTrackAlbum.
+        /// </summary>
+        internal static string ColumnTrackAlbum {
+            get {
+                return ResourceManager.GetString("ColumnTrackAlbum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackAnnotation.
+        /// </summary>
+        internal static string ColumnTrackAnnotation {
+            get {
+                return ResourceManager.GetString("ColumnTrackAnnotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackCreator.
+        /// </summary>
+        internal static string ColumnTrackCreator {
+            get {
+                return ResourceManager.GetString("ColumnTrackCreator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackDuration.
+        /// </summary>
+        internal static string ColumnTrackDuration {
+            get {
+                return ResourceManager.GetString("ColumnTrackDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackIdentifier.
+        /// </summary>
+        internal static string ColumnTrackIdentifier {
+            get {
+                return ResourceManager.GetString("ColumnTrackIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackImage.
+        /// </summary>
+        internal static string ColumnTrackImage {
+            get {
+                return ResourceManager.GetString("ColumnTrackImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackInfo.
+        /// </summary>
+        internal static string ColumnTrackInfo {
+            get {
+                return ResourceManager.GetString("ColumnTrackInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackLocation.
+        /// </summary>
+        internal static string ColumnTrackLocation {
+            get {
+                return ResourceManager.GetString("ColumnTrackLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackNumber.
+        /// </summary>
+        internal static string ColumnTrackNumber {
+            get {
+                return ResourceManager.GetString("ColumnTrackNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackSequence.
+        /// </summary>
+        internal static string ColumnTrackSequence {
+            get {
+                return ResourceManager.GetString("ColumnTrackSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to colTrackTitle.
+        /// </summary>
+        internal static string ColumnTrackTitle {
+            get {
+                return ResourceManager.GetString("ColumnTrackTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured:
+        ///
+        ///{0}
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string ErrorGenericBody {
+            get {
+                return ResourceManager.GetString("ErrorGenericBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string ErrorGenericTitle {
+            get {
+                return ResourceManager.GetString("ErrorGenericTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid URI for the info related to this playlist.
         /// </summary>
         internal static string ErrorInfoUriInvalid {
@@ -75,6 +196,82 @@ namespace Papyrus.Properties {
         internal static string ErrorTitleMissing {
             get {
                 return ResourceManager.GetString("ErrorTitleMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter at least one track for this playlist.
+        /// </summary>
+        internal static string ErrorTracksMissing {
+            get {
+                return ResourceManager.GetString("ErrorTracksMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .m3u.
+        /// </summary>
+        internal static string FileExtensionM3u {
+            get {
+                return ResourceManager.GetString("FileExtensionM3u", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .pls.
+        /// </summary>
+        internal static string FileExtensionPls {
+            get {
+                return ResourceManager.GetString("FileExtensionPls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .xspf.
+        /// </summary>
+        internal static string FileExtensionXspf {
+            get {
+                return ResourceManager.GetString("FileExtensionXspf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while attempting to load this playlist.  The file may be invalid or corrupt.
+        ///
+        ///{0}
+        ///
+        ///{1}.
+        /// </summary>
+        internal static string MessageLoadingPlaylistBody {
+            get {
+                return ResourceManager.GetString("MessageLoadingPlaylistBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Loading Playlist.
+        /// </summary>
+        internal static string MessageLoadingPlaylistTitle {
+            get {
+                return ResourceManager.GetString("MessageLoadingPlaylistTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please fix all missing and invalid data for this playlist..
+        /// </summary>
+        internal static string MessageValidationBody {
+            get {
+                return ResourceManager.GetString("MessageValidationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Playlist.
+        /// </summary>
+        internal static string MessageValidationTitle {
+            get {
+                return ResourceManager.GetString("MessageValidationTitle", resourceCulture);
             }
         }
     }
