@@ -36,6 +36,29 @@ namespace Papyrus.Controllers
 			view.Display();
 		}
 
+		private PlaylistFormatter GetFormatterForFile(Uri path)
+		{
+			string fileName = UriUtility.GetFileNameFromUri(path);
+			return GetFormatterForFile(fileName);
+		}
+
+		private PlaylistFormatter GetFormatterForFile(string fileName)
+		{
+			PlaylistFormatter formatter = null;
+
+			if (!string.IsNullOrEmpty(fileName))
+			{
+				if (fileName.EndsWith(Resources.FileExtensionM3u))
+					formatter = new M3uPlaylistFormatter();
+				else if (fileName.EndsWith(Resources.FileExtensionPls))
+					formatter = new PlsPlaylistFormatter();
+				else
+					formatter = new XspfPlaylistFormatter();
+			}
+
+			return formatter;
+		}
+
 		private void ValidatingView(ViewAction action)
 		{
 			if (action != null && action.IsRunning)
@@ -60,16 +83,15 @@ namespace Papyrus.Controllers
 		{
 			if (action != null && action.IsRunning)
 			{
-				Playlist playlist = new Playlist();
+				Playlist playlist = null;
 
 				string fileName = UriUtility.GetFileNameFromUri(action.Path);
-				XmlDocument doc = new XmlDocument();
-				doc.Load(fileName);
 
-				XmlNodeList nodes = doc.SelectNodes("playlist");
-					//.SelectSingleNode("/");
-				if (nodes != null)
+				PlaylistFormatter formatter = GetFormatterForFile(fileName);
+				if (formatter != null)
 				{
+					playlist = formatter.LoadPlaylistFromFile(fileName);
+					string title = playlist.Title;
 				}
 			}
 		}
@@ -132,14 +154,7 @@ namespace Papyrus.Controllers
 						playlist.TrackList.Add(track);
 					}
 
-					PlaylistFormatter formatter;
-
-					if (fileName.EndsWith(Resources.FileExtensionM3u))
-						formatter = new M3uPlaylistFormatter();
-					else if (fileName.EndsWith(Resources.FileExtensionPls))
-						formatter = new PlsPlaylistFormatter();
-					else
-						formatter = new XspfPlaylistFormatter();
+					PlaylistFormatter formatter = GetFormatterForFile(fileName);
 
 					formatter.SavePlaylistToFile(playlist, fileName);
 				}
