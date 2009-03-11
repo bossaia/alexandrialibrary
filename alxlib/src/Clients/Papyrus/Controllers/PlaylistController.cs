@@ -91,7 +91,9 @@ namespace Papyrus.Controllers
 				if (formatter != null)
 				{
 					playlist = formatter.LoadPlaylistFromFile(fileName);
-					string title = playlist.Title;
+					view.Title.Value = playlist.Title;
+					view.Creator.Value = playlist.Creator;
+					view.RefreshView();
 				}
 			}
 		}

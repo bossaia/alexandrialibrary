@@ -227,6 +227,12 @@ namespace Papyrus.Forms
 			}
 		}
 
+		public override void RefreshView()
+		{
+			txtTitle.Text = title.Value;
+			txtCreator.Text = creator.Value;
+		}
+
 		#endregion
 	}
 }
