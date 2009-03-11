@@ -123,6 +123,10 @@ namespace Papyrus.Forms
 		{
 		}
 
+		public virtual void RefreshView()
+		{
+		}
+
 		public virtual void ShowMessage(string title, string body)
 		{
 			MessageBox.Show(body, title);

@@ -19,6 +19,7 @@ namespace Papyrus.Views
 		ViewActionCallback Cancelled { get; set; }
 		void Display();
 		void RefreshData();
+		void RefreshView();
 		void ShowMessage(string title, string body);
 	}
 }
