@@ -91,7 +91,7 @@ namespace Papyrus.Controllers
 				if (formatter != null)
 				{
 					playlist = formatter.LoadPlaylistFromFile(fileName);
-					view.Title.Value = playlist.Title;
+					view.Title.Value = playlist.Name;
 					view.Creator.Value = playlist.Creator;
 					view.RefreshView();
 				}
@@ -106,35 +106,35 @@ namespace Papyrus.Controllers
 				if (!string.IsNullOrEmpty(fileName))
 				{
 					Playlist playlist = new Playlist();
-					playlist.Annotation = view.Comment.Value;
+					//playlist.Annotation = view.Comment.Value;
 					playlist.Creator = view.Creator.Value;
 					playlist.Date = view.Created.Value;
 					playlist.Identifier = view.Identifier.Value;
-					playlist.Image = view.Image.Value;
-					playlist.Info = view.Info.Value;
-					playlist.License = view.License.Value;
-					playlist.Location = view.Location.Value;
-					playlist.Title = view.Title.Value;
+					//playlist.Image = view.Image.Value;
+					//playlist.Info = view.Info.Value;
+					//playlist.License = view.License.Value;
+					//playlist.Location = view.Location.Value;
+					playlist.Name = view.Title.Value;
 
-					foreach (DataItem<AttributionData> item in view.Attribution.Items)
-					{
-						playlist.Attribution.Add(new Attribution(item.Value.IsLocation, item.Value.Value));
-					}
+					//foreach (DataItem<AttributionData> item in view.Attribution.Items)
+					//{
+					//    playlist.Attribution.Add(new Attribution(item.Value.IsLocation, item.Value.Value));
+					//}
 
-					foreach (DataItem<LinkData> item in view.Links.Items)
-					{
-						playlist.Link.Add(new Link(item.Value.Rel, item.Value.Value));
-					}
+					//foreach (DataItem<LinkData> item in view.Links.Items)
+					//{
+					//    playlist.Link.Add(new Link(item.Value.Rel, item.Value.Value));
+					//}
 
-					foreach (DataItem<MetaData> item in view.Metadata.Items)
-					{
-						playlist.Meta.Add(new Meta(item.Value.Rel, item.Value.Value));
-					}
+					//foreach (DataItem<MetaData> item in view.Metadata.Items)
+					//{
+					//    playlist.Meta.Add(new Meta(item.Value.Rel, item.Value.Value));
+					//}
 
-					foreach (DataItem<ExtensionData> item in view.Extensions.Items)
-					{
-						playlist.Extension.Add(new Extension(item.Value.Application, item.Value.Value));
-					}
+					//foreach (DataItem<ExtensionData> item in view.Extensions.Items)
+					//{
+					//    playlist.Extension.Add(new Extension(item.Value.Application, item.Value.Value));
+					//}
 
 					foreach (DataItem<TrackData> item in view.Tracks.Items)
 					{
@@ -153,7 +153,7 @@ namespace Papyrus.Controllers
 							TrackNum = item.Value.TrackNum
 						};
 
-						playlist.TrackList.Add(track);
+						//playlist.TrackList.Add(track);
 					}
 
 					PlaylistFormatter formatter = GetFormatterForFile(fileName);

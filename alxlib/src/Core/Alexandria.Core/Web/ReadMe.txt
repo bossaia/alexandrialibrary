@@ -1,0 +1,1 @@
+﻿http://www.w3.org/TR/REC-html40/types.html#type-links
