@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Alexandria.Core.Model
 {
-	public class Link : Resource
+	public class Tag : Resource
 	{
-		public Link()
-			: base(ResourceTypes.Link)
+		public Tag()
+			: base(ResourceTypes.Tag)
 		{
 		}
 
 		/// <summary>
-		/// The value of this link
+		/// The value of this tag
 		/// </summary>
-		public Uri Value { get; set; }
+		public string Value { get; set; }
 	}
 }

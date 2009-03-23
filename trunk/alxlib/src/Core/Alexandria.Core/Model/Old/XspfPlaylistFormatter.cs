@@ -54,9 +54,9 @@ namespace Alexandria.Core.Model
 				XmlNode playlistNode = doc.SelectSingleNode(XPATH_PLAYLIST, nsmgr);
 				if (playlistNode != null)
 				{
-					playlist.Version = playlistNode.Attributes[ATTRIB_VERSION].Value;
+					//playlist.Version = playlistNode.Attributes[ATTRIB_VERSION].Value;
 
-					playlist.Title = GetNodeValueString(doc, XPATH_PLAYLIST_TITLE, nsmgr);
+					playlist.Name = GetNodeValueString(doc, XPATH_PLAYLIST_TITLE, nsmgr);
 					playlist.Creator = GetNodeValueString(doc, XPATH_PLAYLIST_CREATOR, nsmgr);
 				}
 			}

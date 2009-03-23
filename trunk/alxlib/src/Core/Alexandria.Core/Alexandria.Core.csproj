@@ -48,20 +48,36 @@
     <Compile Include="Messaging\Message.cs" />
     <Compile Include="Messaging\MessageHandler.cs" />
     <Compile Include="Messaging\MessageStatus.cs" />
-    <Compile Include="Model\Attribution.cs" />
-    <Compile Include="Model\Extension.cs" />
+    <Compile Include="Model\Artist.cs" />
+    <Compile Include="Model\Media.cs" />
+    <Compile Include="Model\Old\Attribution.cs" />
+    <Compile Include="Model\Old\Extension.cs" />
     <Compile Include="Model\Link.cs" />
-    <Compile Include="Model\M3uPlaylistFormatter.cs" />
-    <Compile Include="Model\Meta.cs" />
-    <Compile Include="Model\Namespace.cs" />
+    <Compile Include="Model\Old\M3uPlaylistFormatter.cs" />
+    <Compile Include="Model\Old\Meta.cs" />
+    <Compile Include="Model\Old\Namespace.cs" />
     <Compile Include="Model\Playlist.cs" />
-    <Compile Include="Model\PlaylistFormatter.cs" />
-    <Compile Include="Model\PlsPlaylistFormatter.cs" />
-    <Compile Include="Model\Track.cs" />
-    <Compile Include="Model\XspfPlaylistFormatter.cs" />
+    <Compile Include="Model\Old\PlaylistFormatter.cs" />
+    <Compile Include="Model\Old\PlsPlaylistFormatter.cs" />
+    <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\Resource.cs" />
+    <Compile Include="Model\ResourceTypes.cs" />
+    <Compile Include="Model\Tag.cs" />
+    <Compile Include="Model\Old\Track.cs" />
+    <Compile Include="Model\Old\XspfPlaylistFormatter.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schema\MessageSchema.cs" />
+    <Compile Include="Schema\Old\MessageSchema.cs" />
     <Compile Include="UriUtility.cs" />
+    <Compile Include="Web\CharacterEncoding.cs" />
+    <Compile Include="Web\MediaType.cs" />
+    <Compile Include="Web\DateAndTime.cs" />
+    <Compile Include="Web\LanguageCode.cs" />
+    <Compile Include="Web\LinkType.cs" />
+    <Compile Include="Web\MediaDescriptor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web\ReadMe.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

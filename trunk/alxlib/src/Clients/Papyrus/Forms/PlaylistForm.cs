@@ -22,28 +22,15 @@ namespace Papyrus.Forms
         {
             InitializeComponent();
 
-			SetAdditionalInfoVisibility(false);
-
 			Validated += new ViewActionCallback(CheckValidation);
 		}
 
 		#region Private Methods
 
-		private void SetAdditionalInfoVisibility(bool isVisible)
-		{
-			pnlAdditional.Visible = isVisible;
-
-			//HACK: Toggle AutoSize to ensure that MainForm redraws correctly
-			this.SuspendLayout();
-			this.AutoSize = false;
-			this.AutoSize = true;
-			this.ResumeLayout(true);
-		}
-
 		private void CheckValidation(ViewAction action)
 		{
 			errTitle.SetError(txtTitle, string.Empty);
-			errTitle.SetError(txtInfo, string.Empty);
+			errTitle.SetError(txtIdentifier, string.Empty);
 			errTracks.SetError(lblTracks, string.Empty);
 
 			if (action != null)
@@ -54,7 +41,7 @@ namespace Papyrus.Forms
 						errTitle.SetError(txtTitle, Resources.ErrorTitleMissing);
 
 					if (info.Status == DataStatus.Invalid)
-						errInfoUri.SetError(txtInfo, Resources.ErrorInfoUriInvalid);
+						errInfoUri.SetError(txtIdentifier, Resources.ErrorInfoUriInvalid);
 
 					if (tracks.Status == DataStatus.Missing)
 						errTracks.SetError(lblTracks, Resources.ErrorTracksMissing);
@@ -67,11 +54,6 @@ namespace Papyrus.Forms
 		#endregion
 
 		#region Event Methods
-
-		private void lnkAdditional_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-			SetAdditionalInfoVisibility(!pnlAdditional.Visible);
-        }
 
 		private void btnAddTrack_Click(object sender, EventArgs e)
 		{
