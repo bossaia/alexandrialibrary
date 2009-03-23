@@ -1,11 +1,11 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "src\Core\Alexandria.Core\Alexandria.Core.csproj", "{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "src\Alexandria.Core\Alexandria.Core.csproj", "{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus", "src\Clients\Papyrus\Papyrus.csproj", "{CD739E9B-DB3B-4301-BDCB-385B458A3D73}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alxlib.com", "alxlib.com\alxlib.com.csproj", "{257C3E55-8CD5-478E-B4F8-9C9CD7353981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alxlib.com", "src\alxlib.com\alxlib.com.csproj", "{257C3E55-8CD5-478E-B4F8-9C9CD7353981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -108,7 +108,7 @@
     <Compile Include="Views\ViewActionCallback.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Alexandria.Core\Alexandria.Core.csproj">
+    <ProjectReference Include="..\..\Alexandria.Core\Alexandria.Core.csproj">
       <Project>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</Project>
       <Name>Alexandria.Core</Name>
     </ProjectReference>
