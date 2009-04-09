@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Core
 {
-	public static class UriUtility
+	public static class UriExtensions
 	{
 		private static readonly string FilePrefix = Uri.UriSchemeFile + ":///";
 
@@ -24,7 +24,7 @@ namespace Alexandria.Core
 			return null;
 		}
 
-		public static string GetFileNameFromUri(Uri uri)
+		public static string GetFileName(this Uri uri)
 		{
 			if (uri != null)
 			{
@@ -38,7 +38,7 @@ namespace Alexandria.Core
 			return string.Empty;
 		}
 
-		public static bool IsValidUri(string uriString)
+		public static bool IsValidUri(this string uriString)
 		{
 			Uri result = null;
 			TryParse(uriString, out result);

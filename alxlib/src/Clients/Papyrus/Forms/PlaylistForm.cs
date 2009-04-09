@@ -69,7 +69,7 @@ namespace Papyrus.Forms
 				{
 					try
 					{
-						ViewAction action = new ViewAction() { Path = UriUtility.GetUriFromFileName(dlgOpenFile.FileName) };
+						ViewAction action = new ViewAction() { Path = UriExtensions.GetUriFromFileName(dlgOpenFile.FileName) };
 
 						LoadForm(action);
 					}
@@ -91,7 +91,7 @@ namespace Papyrus.Forms
 				DialogResult result = dlgSaveFile.ShowDialog();
 				if (result == DialogResult.OK && !string.IsNullOrEmpty(dlgSaveFile.FileName))
 				{
-					action.Path = UriUtility.GetUriFromFileName(dlgSaveFile.FileName);
+					action.Path = UriExtensions.GetUriFromFileName(dlgSaveFile.FileName);
 					AcceptForm(action);
 				}
 			}
