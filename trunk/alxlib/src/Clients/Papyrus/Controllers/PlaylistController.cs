@@ -38,7 +38,7 @@ namespace Papyrus.Controllers
 
 		private PlaylistFormatter GetFormatterForFile(Uri path)
 		{
-			string fileName = UriUtility.GetFileNameFromUri(path);
+			string fileName = path.GetFileName();
 			return GetFormatterForFile(fileName);
 		}
 
@@ -85,7 +85,7 @@ namespace Papyrus.Controllers
 			{
 				Playlist playlist = null;
 
-				string fileName = UriUtility.GetFileNameFromUri(action.Path);
+				string fileName = action.Path.GetFileName();
 
 				PlaylistFormatter formatter = GetFormatterForFile(fileName);
 				if (formatter != null)
@@ -102,7 +102,7 @@ namespace Papyrus.Controllers
 		{
 			if (action != null && action.IsRunning)
 			{
-				string fileName = UriUtility.GetFileNameFromUri(action.Path);
+				string fileName = action.Path.GetFileName();
 				if (!string.IsNullOrEmpty(fileName))
 				{
 					Playlist playlist = new Playlist();

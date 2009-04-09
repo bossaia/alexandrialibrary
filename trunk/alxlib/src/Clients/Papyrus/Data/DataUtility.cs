@@ -19,7 +19,7 @@ namespace Papyrus.Data
 		public static Uri GetUri(object value)
 		{
 			Uri result;
-			UriUtility.TryParse(GetString(value), out result);
+			UriExtensions.TryParse(GetString(value), out result);
 			
 			return result;
 		}
