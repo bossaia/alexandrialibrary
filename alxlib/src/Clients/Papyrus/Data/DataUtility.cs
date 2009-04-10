@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Alexandria.Core;
+using Alexandria.Resources;
+using Alexandria.Utilities;
 
 namespace Papyrus.Data
 {
@@ -18,10 +19,7 @@ namespace Papyrus.Data
 
 		public static Uri GetUri(object value)
 		{
-			Uri result;
-			UriExtensions.TryParse(GetString(value), out result);
-			
-			return result;
+			return GetString(value).ToFileUri();
 		}
 
 		public static uint GetUInt32(object value)

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</ProjectGuid>
+    <ProjectGuid>{82C41C8E-5848-4B14-BDD1-3C9CC167ECE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Core</RootNamespace>
-    <AssemblyName>Alexandria.Core</AssemblyName>
+    <RootNamespace>Alexandria.Media</RootNamespace>
+    <AssemblyName>Alexandria.Media</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,10 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\MessageHandler.cs" />
-    <Compile Include="Messaging\MessageStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alexandria.Resources\Alexandria.Resources.csproj">
+      <Project>{41BF7438-0813-457F-8B89-45DC6C189FB9}</Project>
+      <Name>Alexandria.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Alexandria.Web\Alexandria.Web.csproj">
+      <Project>{220B8C2F-28B5-464C-9A7D-16711A369A74}</Project>
+      <Name>Alexandria.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

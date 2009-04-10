@@ -10,8 +10,7 @@ using Papyrus.Forms;
 using Papyrus.Properties;
 using Papyrus.Views;
 
-using Alexandria.Core;
-using Alexandria.Core.Model;
+using Alexandria.Utilities;
 
 namespace Papyrus.Controllers
 {
@@ -36,28 +35,28 @@ namespace Papyrus.Controllers
 			view.Display();
 		}
 
-		private PlaylistFormatter GetFormatterForFile(Uri path)
-		{
-			string fileName = path.GetFileName();
-			return GetFormatterForFile(fileName);
-		}
+		//private PlaylistFormatter GetFormatterForFile(Uri path)
+		//{
+		//    string fileName = path.GetFileName();
+		//    return GetFormatterForFile(fileName);
+		//}
 
-		private PlaylistFormatter GetFormatterForFile(string fileName)
-		{
-			PlaylistFormatter formatter = null;
+		//private PlaylistFormatter GetFormatterForFile(string fileName)
+		//{
+		//    PlaylistFormatter formatter = null;
 
-			if (!string.IsNullOrEmpty(fileName))
-			{
-				if (fileName.EndsWith(Resources.FileExtensionM3u))
-					formatter = new M3uPlaylistFormatter();
-				else if (fileName.EndsWith(Resources.FileExtensionPls))
-					formatter = new PlsPlaylistFormatter();
-				else
-					formatter = new XspfPlaylistFormatter();
-			}
+		//    if (!string.IsNullOrEmpty(fileName))
+		//    {
+		//        if (fileName.EndsWith(Resources.FileExtensionM3u))
+		//            formatter = new M3uPlaylistFormatter();
+		//        else if (fileName.EndsWith(Resources.FileExtensionPls))
+		//            formatter = new PlsPlaylistFormatter();
+		//        else
+		//            formatter = new XspfPlaylistFormatter();
+		//    }
 
-			return formatter;
-		}
+		//    return formatter;
+		//}
 
 		private void ValidatingView(ViewAction action)
 		{
@@ -83,18 +82,18 @@ namespace Papyrus.Controllers
 		{
 			if (action != null && action.IsRunning)
 			{
-				Playlist playlist = null;
+				//Playlist playlist = null;
 
-				string fileName = action.Path.GetFileName();
+				//string fileName = action.Path.GetFileName();
 
-				PlaylistFormatter formatter = GetFormatterForFile(fileName);
-				if (formatter != null)
-				{
-					playlist = formatter.LoadPlaylistFromFile(fileName);
-					view.Title.Value = playlist.Name;
-					view.Creator.Value = playlist.Creator;
-					view.RefreshView();
-				}
+				//PlaylistFormatter formatter = GetFormatterForFile(fileName);
+				//if (formatter != null)
+				//{
+				//    playlist = formatter.LoadPlaylistFromFile(fileName);
+				//    view.Title.Value = playlist.Name;
+				//    view.Creator.Value = playlist.Creator;
+				//    view.RefreshView();
+				//}
 			}
 		}
 
@@ -102,9 +101,10 @@ namespace Papyrus.Controllers
 		{
 			if (action != null && action.IsRunning)
 			{
-				string fileName = action.Path.GetFileName();
+				string fileName = action.Path.ToFileName();
 				if (!string.IsNullOrEmpty(fileName))
 				{
+					/*
 					Playlist playlist = new Playlist();
 					//playlist.Annotation = view.Comment.Value;
 					playlist.Creator = view.Creator.Value;
@@ -158,7 +158,8 @@ namespace Papyrus.Controllers
 
 					PlaylistFormatter formatter = GetFormatterForFile(fileName);
 
-					formatter.SavePlaylistToFile(playlist, fileName);
+					formatter.SavePlaylistToFile(playlist, fileName); 
+					*/
 				}
 			}
 		}

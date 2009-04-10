@@ -108,13 +108,17 @@
     <Compile Include="Views\ViewActionCallback.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Alexandria.Core\Alexandria.Core.csproj">
-      <Project>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</Project>
-      <Name>Alexandria.Core</Name>
-    </ProjectReference>
+    <Content Include="Data\LicenseData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\LicenseData.xml" />
+    <ProjectReference Include="..\..\..\Alexandria.Resources\Alexandria.Resources.csproj">
+      <Project>{41BF7438-0813-457F-8B89-45DC6C189FB9}</Project>
+      <Name>Alexandria.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Alexandria.Utilities\Alexandria.Utilities.csproj">
+      <Project>{EBDDCCF5-21B5-46F3-A3E7-94523FAB999A}</Project>
+      <Name>Alexandria.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

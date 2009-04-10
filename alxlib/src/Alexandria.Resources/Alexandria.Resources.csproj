@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</ProjectGuid>
+    <ProjectGuid>{41BF7438-0813-457F-8B89-45DC6C189FB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Core</RootNamespace>
-    <AssemblyName>Alexandria.Core</AssemblyName>
+    <RootNamespace>Alexandria.Resources</RootNamespace>
+    <AssemblyName>Alexandria.Resources</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,10 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\MessageHandler.cs" />
-    <Compile Include="Messaging\MessageStatus.cs" />
+    <Compile Include="Aggregate.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="EntityType.cs" />
+    <Compile Include="IEntity.cs" />
+    <Compile Include="IEntityType.cs" />
+    <Compile Include="ILink.cs" />
+    <Compile Include="ILinkCollection.cs" />
+    <Compile Include="ILinkType.cs" />
+    <Compile Include="IResource.cs" />
+    <Compile Include="Link.cs" />
+    <Compile Include="LinkCollection.cs" />
+    <Compile Include="LinkType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
