@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources.Media.Schema.Types
 {
-	public static class Aggregates
+	public static class Values
 	{
 	}
 }

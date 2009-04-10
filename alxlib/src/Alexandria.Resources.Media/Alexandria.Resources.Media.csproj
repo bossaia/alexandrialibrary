@@ -53,6 +53,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\SchemaConstants.cs" />
     <Compile Include="Schema\Types\Aggregates.cs" />
+    <Compile Include="Schema\Types\Entities.cs" />
+    <Compile Include="Schema\Types\Values.cs" />
     <Compile Include="Track.cs" />
   </ItemGroup>
   <ItemGroup>
