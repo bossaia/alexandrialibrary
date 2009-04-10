@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8D14A9B8-1D6B-4ABA-B425-DEE3BFCBFAF1}</ProjectGuid>
+    <ProjectGuid>{71D4A8B2-2997-4284-9F1A-8954DE4BC1CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Core</RootNamespace>
-    <AssemblyName>Alexandria.Core</AssemblyName>
+    <RootNamespace>Alexandria.Persistence</RootNamespace>
+    <AssemblyName>Alexandria.Persistence</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Messaging\Message.cs" />
-    <Compile Include="Messaging\MessageHandler.cs" />
-    <Compile Include="Messaging\MessageStatus.cs" />
+    <Compile Include="Filter.cs" />
+    <Compile Include="FilterType.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Operator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

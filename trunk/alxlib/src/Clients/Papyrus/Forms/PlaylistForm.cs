@@ -8,11 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 
-using Alexandria.Core;
-using Alexandria.Core.Model;
 using Papyrus.Data;
 using Papyrus.Properties;
 using Papyrus.Views;
+
+using Alexandria.Resources;
+using Alexandria.Utilities;
 
 namespace Papyrus.Forms
 {
@@ -69,7 +70,7 @@ namespace Papyrus.Forms
 				{
 					try
 					{
-						ViewAction action = new ViewAction() { Path = UriExtensions.GetUriFromFileName(dlgOpenFile.FileName) };
+						ViewAction action = new ViewAction() { Path = dlgOpenFile.FileName.ToFileUri() };
 
 						LoadForm(action);
 					}
@@ -91,7 +92,7 @@ namespace Papyrus.Forms
 				DialogResult result = dlgSaveFile.ShowDialog();
 				if (result == DialogResult.OK && !string.IsNullOrEmpty(dlgSaveFile.FileName))
 				{
-					action.Path = UriExtensions.GetUriFromFileName(dlgSaveFile.FileName);
+					action.Path = dlgSaveFile.FileName.ToFileUri();
 					AcceptForm(action);
 				}
 			}
