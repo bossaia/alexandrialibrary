@@ -10,4 +10,14 @@ namespace Alexandria.Resources
 		ILinkCollection FilterByLinkType(ILinkType type);
 		ILinkCollection FilterByValueType(IEntityType type);
 	}
+
+	public interface ISubjectLinkCollection<T> : ILinkCollection
+		where T : IEntityType
+	{
+	}
+
+	public interface IObjectLinkCollection<T> : ILinkCollection
+		where T : IEntityType
+	{
+	}
 }

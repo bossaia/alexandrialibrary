@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public abstract class Aggregate : Entity
+	public interface IObjectLinkType<T> : ILinkType
+		where T: IEntityType
 	{
-		protected Aggregate(Uri id, IEntityType type)
-			: base(id, type)
-		{
-		}
+		T ObjectType { get; }
 	}
 }

@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregate.cs" />
+    <Compile Include="ObjectAggregate.cs" />
+    <Compile Include="SubjectAggregate.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="IEntity.cs" />
@@ -53,7 +54,11 @@
     <Compile Include="ILink.cs" />
     <Compile Include="ILinkCollection.cs" />
     <Compile Include="ILinkType.cs" />
+    <Compile Include="IObjectAggregate.cs" />
+    <Compile Include="IObjectLinkType.cs" />
     <Compile Include="IResource.cs" />
+    <Compile Include="ISubjectAggregate.cs" />
+    <Compile Include="ISubjectLinkType.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="LinkCollection.cs" />
     <Compile Include="LinkType.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources.Media
 {
-	public class File : Aggregate
+	public class File : SubjectAggregate
 	{
 		public File(Uri id, IEntityType type)
 			: base(id, type)
