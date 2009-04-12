@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alexandria.Resources.Media
+namespace Alexandria.Resources
 {
-	public class Artist : SubjectAggregate
+	public class ObjectAggregate : Entity
 	{
-		public Artist(Uri id, IEntityType type)
+		public ObjectAggregate(Uri id, IEntityType type)
 			: base(id, type)
 		{
 		}

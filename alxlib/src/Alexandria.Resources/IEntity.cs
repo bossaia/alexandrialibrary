@@ -10,4 +10,10 @@ namespace Alexandria.Resources
 		void AddLink(ILinkType type, IEntity value, int sequence);
 		void RemoveLink(ILink link);
 	}
+
+	public interface IEntity<T> : IEntity
+	    where T : IEntityType
+	{
+	    new T Type { get; }
+	}
 }
