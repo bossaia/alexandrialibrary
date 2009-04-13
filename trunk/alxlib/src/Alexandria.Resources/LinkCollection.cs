@@ -14,12 +14,20 @@ namespace Alexandria.Resources
 
 		#region ILinkCollection Members
 
-		public ILinkCollection FilterByLinkType(ILinkType type)
+		public ILinkCollection FilterByLinkType<T>()
+			where T : ILinkType
 		{
 			throw new NotImplementedException();
 		}
 
-		public ILinkCollection FilterByValueType(IEntityType type)
+		public ISubjectLinkCollection<X> FilterBySubjectType<X>()
+			where X : IEntityType
+		{
+			throw new NotImplementedException();
+		}
+
+		public IObjectLinkCollection<Y> FilterByObjectType<Y>()
+			where Y : IEntityType
 		{
 			throw new NotImplementedException();
 		}

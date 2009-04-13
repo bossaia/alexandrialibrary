@@ -7,17 +7,17 @@ namespace Alexandria.Resources
 {
 	public class Link : Resource, ILink
 	{
-		public Link(Uri id, LinkType type, IEntity subject, IEntity value)
-			: this(id, type, subject, value, 0)
+		public Link(Uri id, LinkType type, IEntity subject, IEntity obj)
+			: this(id, type, subject, obj, 0)
 		{
 		}
 
-		public Link(Uri id, LinkType type, IEntity subject, IEntity value, int sequence)
+		public Link(Uri id, LinkType type, IEntity subject, IEntity obj, int sequence)
 			: base(id)
 		{
 			this.type = type;
 			this.subject = subject;
-			this.value = value;
+			this.obj = obj;
 			this.sequence = sequence;
 		}
 
@@ -25,7 +25,7 @@ namespace Alexandria.Resources
 
 		private LinkType type;
 		private IEntity subject;
-		private IEntity value;
+		private IEntity obj;
 		private int sequence;
 
 		#endregion
@@ -42,10 +42,10 @@ namespace Alexandria.Resources
 			get { return subject; }
 		}
 
-		public IEntity Value
+		public IEntity Object
 		{
-			get { return value; }
-			set { this.value = value; }
+			get { return obj; }
+			set { obj = value; }
 		}
 
 		public int Sequence

@@ -5,10 +5,19 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface ISubjectAggregate<SubjectType>
-		where SubjectType: IEntityType
+	public interface ISubjectAggregate<X> : IAggregate
+		where X: IEntityType
 	{
-		IEntity<SubjectType> SubjectRoot { get; }
-		ISubjectLinkCollection<SubjectType> SubjectLinks { get; }
+		new IEntity<X> Root { get; }
+		
+		new ISubjectLinkCollection<X> Links { get; }
+		
+		void AddLink<T>(IEntity obj)
+			where T : ISubjectLinkType<X>;
+
+		void AddLink<T>(IEntity obj, int sequence)
+			where T : ISubjectLinkType<X>;
+
+		void AddLinks(ISubjectLinkCollection<X> links);
 	}
 }

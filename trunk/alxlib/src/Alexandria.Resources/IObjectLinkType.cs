@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IObjectLinkType<T> : ILinkType
-		where T: IEntityType
+	public interface IObjectLinkType<Y> : ILinkType
+		where Y: IEntityType
 	{
-		T ObjectType { get; }
+		IObjectLink<Y> CreateLink(IEntity subject, IEntity<Y> obj);
+		IObjectLink<Y> CreateLink(IEntity subject, IEntity<Y> obj, int sequence);
 	}
 }
