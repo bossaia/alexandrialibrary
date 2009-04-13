@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAggregate.cs" />
+    <Compile Include="IObjectLink.cs" />
+    <Compile Include="IObjectLinkCollection.cs" />
+    <Compile Include="ISubjectLink.cs" />
+    <Compile Include="ISubjectLinkCollection.cs" />
     <Compile Include="ObjectAggregate.cs" />
     <Compile Include="SubjectAggregate.cs" />
     <Compile Include="Entity.cs" />

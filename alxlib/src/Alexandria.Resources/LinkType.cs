@@ -7,37 +7,23 @@ namespace Alexandria.Resources
 {
 	public class LinkType : Resource, ILinkType
 	{
-		public LinkType(Uri id)
+		public LinkType(Uri id, bool isSequential)
 			: base(id)
 		{
+			this.isSequential = isSequential;
 		}
 
 		#region Private Members
 
-		private string subjectMask;
-		private string valueMask;
-		private string sequenceMask;
+		private bool isSequential;
 
 		#endregion
 
 		#region ILinkType Members
 
-		public string SubjectMask
+		public bool IsSequential
 		{
-			get { return subjectMask; }
-			set { subjectMask = value; }
-		}
-
-		public string ValueMask
-		{
-			get { return valueMask; }
-			set { valueMask = value; }
-		}
-
-		public string SequenceMask
-		{
-			get { return sequenceMask; }
-			set { sequenceMask = value; }
+			get { return isSequential; }
 		}
 
 		#endregion
