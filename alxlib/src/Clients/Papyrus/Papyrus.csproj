@@ -111,11 +111,11 @@
     <Content Include="Data\LicenseData.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Alexandria.Resources\Alexandria.Resources.csproj">
+    <ProjectReference Include="..\..\Libraries\Alexandria.Resources\Alexandria.Resources.csproj">
       <Project>{41BF7438-0813-457F-8B89-45DC6C189FB9}</Project>
       <Name>Alexandria.Resources</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Alexandria.Utilities\Alexandria.Utilities.csproj">
+    <ProjectReference Include="..\..\Libraries\Alexandria.Utilities\Alexandria.Utilities.csproj">
       <Project>{EBDDCCF5-21B5-46F3-A3E7-94523FAB999A}</Project>
       <Name>Alexandria.Utilities</Name>
     </ProjectReference>
