@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IAggregate
+	public interface IAggregate : IEntity
 	{
 		IEntity Root { get; }
 		
