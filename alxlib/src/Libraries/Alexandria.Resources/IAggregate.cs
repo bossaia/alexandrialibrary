@@ -7,18 +7,12 @@ namespace Alexandria.Resources
 {
 	public interface IAggregate : IEntity
 	{
-		IEntity Root { get; }
-		
-		ILinkCollection Links { get; }
-
-		void AddLink<T>(IEntity subject, IEntity obj)
-			where T : ILinkType;
-
-		void AddLink<T>(IEntity subject, IEntity obj, int sequence)
-			where T : ILinkType;
-		
-		void AddLinks(ILinkCollection links);
-
-		void RemoveLink(ILink link);
+		IEnumerable<ILinkType> GetSubjectLinkTypes();
+		IEnumerable<ILinkType> GetObjectLinkTypes();
+		IEntityCollection GetSubjects(ILinkType type);
+		IEntityCollection GetObjects(ILinkType type);
+		void SetSubjects(IEntityCollection subjects);
+		void SetObjects(IEntityCollection objects);
+		IValidationResult Validate();
 	}
 }

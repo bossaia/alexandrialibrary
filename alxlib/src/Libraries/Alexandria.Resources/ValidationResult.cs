@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IResource
+	public class ValidationResult : IValidationResult
 	{
-		Uri Id { get; }
-		string Hash { get; }
 	}
 }

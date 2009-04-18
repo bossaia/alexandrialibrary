@@ -46,29 +46,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAggregate.cs" />
-    <Compile Include="IObjectLink.cs" />
-    <Compile Include="IObjectLinkCollection.cs" />
-    <Compile Include="ISubjectLink.cs" />
-    <Compile Include="ISubjectLinkCollection.cs" />
-    <Compile Include="ObjectAggregate.cs" />
-    <Compile Include="SubjectAggregate.cs" />
+    <Compile Include="IEntityCollection.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="EntityType.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IEntityType.cs" />
-    <Compile Include="ILink.cs" />
-    <Compile Include="ILinkCollection.cs" />
     <Compile Include="ILinkType.cs" />
-    <Compile Include="IObjectAggregate.cs" />
-    <Compile Include="IObjectLinkType.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="ISubjectAggregate.cs" />
-    <Compile Include="ISubjectLinkType.cs" />
-    <Compile Include="Link.cs" />
-    <Compile Include="LinkCollection.cs" />
+    <Compile Include="IValidationResult.cs" />
+    <Compile Include="IValue.cs" />
+    <Compile Include="IValueType.cs" />
     <Compile Include="LinkType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource.cs" />
+    <Compile Include="ValidationResult.cs" />
+    <Compile Include="Value.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

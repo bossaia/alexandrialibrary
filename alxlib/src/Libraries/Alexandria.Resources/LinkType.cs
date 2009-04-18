@@ -7,23 +7,26 @@ namespace Alexandria.Resources
 {
 	public class LinkType : Resource, ILinkType
 	{
-		public LinkType(Uri id, bool isSequential)
+		public LinkType(Uri id)
 			: base(id)
 		{
-			this.isSequential = isSequential;
 		}
-
-		#region Private Members
-
-		private bool isSequential;
-
-		#endregion
 
 		#region ILinkType Members
 
-		public bool IsSequential
+		public IValidationResult LinkIsValid(IResource subject, IResource obj)
 		{
-			get { return isSequential; }
+			throw new NotImplementedException();
+		}
+
+		public IValidationResult SubjectsAreValid(IResource root, IEnumerable<IResource> subjects)
+		{
+			throw new NotImplementedException();
+		}
+
+		public IValidationResult ObjectsAreValid(IResource root, IEnumerable<IResource> objects)
+		{
+			throw new NotImplementedException();
 		}
 
 		#endregion
