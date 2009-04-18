@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public class ObjectAggregate : Entity
+	public interface IValueType : IResource
 	{
-		public ObjectAggregate(Uri id, IEntityType type)
-			: base(id, type)
-		{
-		}
+		IValidationResult ValueIsValid(IValue value);
 	}
 }

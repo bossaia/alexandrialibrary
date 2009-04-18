@@ -5,10 +5,9 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IObjectLink<Y> : ILink
-		where Y : IEntityType
+	public interface IEntityCollection : IList<IEntity>
 	{
-		new IObjectLinkType<Y> Type { get; }
-		new IEntity<Y> Object { get; }
+		IEntity Root { get; }
+		ILinkType Type { get; }
 	}
 }

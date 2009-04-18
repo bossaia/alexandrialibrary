@@ -7,30 +7,16 @@ namespace Alexandria.Resources
 {
 	public class EntityType : Resource, IEntityType
 	{
-		public EntityType(Uri id, string idMask, string nameMask)
+		public EntityType(Uri id)
 			: base(id)
 		{
-			this.idMask = idMask;
-			this.nameMask = nameMask;
 		}
-
-		#region Private Members
-
-		private string idMask;
-		private string nameMask;
-
-		#endregion
 
 		#region IEntityType Members
 
-		public string IdMask
+		public IValidationResult EntityIsValid(IEntity entity)
 		{
-			get { return idMask; }
-		}
-
-		public string NameMask
-		{
-			get { return nameMask; }
+			throw new NotImplementedException();
 		}
 
 		#endregion

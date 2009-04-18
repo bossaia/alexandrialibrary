@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Alexandria.Resources.Media
 {
-	public class Catalog : Entity, IAggregate
+	public class Stream : Entity, IAggregate
 	{
-		public Catalog(Uri id)
-			: base(id, Schema.Types.Entities.CatalogType)
+		public Stream(Uri id)
+			: base(id, Schema.Types.Entities.StreamType)
 		{
 		}
 

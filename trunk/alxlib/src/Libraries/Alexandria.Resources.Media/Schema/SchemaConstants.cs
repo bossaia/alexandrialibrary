@@ -33,11 +33,14 @@ namespace Alexandria.Resources.Media.Schema
 		public const string SchemaEntitiesArtist = SchemaEntities + "artist";
 		public const string SchemaEntitiesCatalog = SchemaEntities + "catalog";
 		public const string SchemaEntitiesEvent = SchemaEntities + "event";
-		public const string SchemaEntitiesFile = SchemaEntities + "file";
 		public const string SchemaEntitiesPlaylist = SchemaEntities + "playlist";
+		public const string SchemaEntitiesStream = SchemaEntities + "stream";
 		public const string SchemaEntitiesTag = SchemaEntities + "tag";
 		public const string SchemaEntitiesTrack = SchemaEntities + "track";
 		public const string SchemaEntitiesUser = SchemaEntities + "user";
+		public const string SchemaLinks = Schema + "links/";
+		public const string SchemaLinksCatalog_Playlist = SchemaLinks + "catalog_playlist";
+		public const string SchemaLinksPlaylist_Track = SchemaLinks + "playlist_track";
 		public const string SchemaValues = Schema + "values/";
 		public const string SchemaValuesDate = SchemaValues + "date";
 		public const string SchemaValuesDuration = SchemaValues + "duration";

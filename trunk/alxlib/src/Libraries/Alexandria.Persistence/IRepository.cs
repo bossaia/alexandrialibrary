@@ -8,6 +8,7 @@ namespace Alexandria.Persistence
 {
 	public interface IRepository
 	{
+		void Initialize(Uri user);
 		T GetOne<T>(IFilter filter);
 		IList<T> GetMany<T>(IFilter filter);
 		void SaveOne<T>(T value);

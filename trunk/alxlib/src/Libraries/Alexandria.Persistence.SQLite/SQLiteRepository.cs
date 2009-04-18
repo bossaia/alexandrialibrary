@@ -14,7 +14,18 @@ namespace Alexandria.Persistence.SQLite
 		{
 		}
 
+		#region Private Members
+
+		private Uri user;
+
+		#endregion
+
 		#region IRepository Members
+
+		public void Initialize(Uri user)
+		{
+			this.user = user;
+		}
 
 		public T GetOne<T>(IFilter filter)
 		{
@@ -24,7 +35,7 @@ namespace Alexandria.Persistence.SQLite
 			else if (typeof(T) == typeof(Artist))
 			{
 			}
-			else if (typeof(T) == typeof(File))
+			else if (typeof(T) == typeof(Stream))
 			{
 			}
 			else if (typeof(T) == typeof(Playlist))

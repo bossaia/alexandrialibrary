@@ -15,8 +15,8 @@ namespace Alexandria.Resources
 
 		#region Private Members
 
-		protected IEntityType type;
-		private ILinkCollection links = new LinkCollection();
+		private IEntityType type;
+		private string name;
 
 		#endregion
 
@@ -27,21 +27,14 @@ namespace Alexandria.Resources
 			get { return type; }
 		}
 
-		public ILinkCollection Links
+		public string Name
 		{
-			get { return links; }
-		}
-
-		public void AddLink(ILinkType type, IEntity value)
-		{
-		}
-
-		public void AddLink(ILinkType type, IEntity value, int sequence)
-		{
-		}
-
-		public void RemoveLink(ILink link)
-		{
+			get { return name; }
+			set {
+				//TODO: implement some hash-scheme here
+				SetHash(value);
+				name = value;
+			}
 		}
 
 		#endregion
