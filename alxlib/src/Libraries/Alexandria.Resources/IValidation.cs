@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IValidationResult
+	public interface IValidation
 	{
 		//bool Ok { get; }
 		//bool NameIsValid { get; }
