@@ -5,17 +5,18 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IValueBuilder
+	public interface IDetailBuilder
 	{
 		string Name { get; }
-		Uri Type { get; }
+		Uri DetailType { get; }
+		Uri ValueType { get; }
 		int Cardinality { get; }
 		bool IsRequired { get; }
 		void LoadData(string value);
 		void LoadData(IEnumerable<string> values);
 	}
 
-	public interface IValueBuilder<T>
+	public interface IDetailBuilder<T>
 	{
 		T GetOne();
 		IEnumerable<T> GetMany();
