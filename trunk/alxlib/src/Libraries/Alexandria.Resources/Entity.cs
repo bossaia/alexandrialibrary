@@ -7,25 +7,18 @@ namespace Alexandria.Resources
 {
 	public abstract class Entity : Resource, IEntity
 	{
-		protected Entity(Uri id, IEntityType type)
+		protected Entity(Uri id)
 			: base(id)
 		{
-			this.type = type;
 		}
 
 		#region Private Members
 
-		private IEntityType type;
 		private string name;
 
 		#endregion
 
 		#region IEntity Members
-
-		public IEntityType Type
-		{
-			get { return type; }
-		}
 
 		public string Name
 		{

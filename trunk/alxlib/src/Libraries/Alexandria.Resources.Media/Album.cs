@@ -5,11 +5,20 @@ using System.Text;
 
 namespace Alexandria.Resources.Media
 {
-	public class Album : Entity
+	public class Album : Entity, IAggregate
 	{
 		public Album(Uri id)
-			: base(id, Schema.Types.Entities.AlbumType)
+			: base(id)
 		{
 		}
+
+		#region IAggregate Members
+
+		public IValidation Validate()
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
 	}
 }
