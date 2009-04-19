@@ -8,7 +8,7 @@ namespace Alexandria.Resources
 	public interface IAggregateBuilder<T>
 		where T : IAggregate
 	{
-		IEnumerable<IValueBuilder> ValueBuilders { get; }
+		IEnumerable<IDetailBuilder> DetailBuilders { get; }
 		IEnumerable<ILinkBuilder> LinkBuilders { get; }
 		T CreateAggregate(IEntity root);
 	}

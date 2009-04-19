@@ -8,7 +8,8 @@ namespace Alexandria.Resources
 	public interface ILinkBuilder
 	{
 		string Name { get; }
-		Uri Type { get; }
+		Uri LinkType { get; }
+		Uri EntityType { get; }
 		int Cardinality { get; }
 		bool IsRequired { get; }
 		bool IsTopDown { get; }
