@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public class ValidationResult : IValidation
+	public class Validation : IValidation
 	{
 	}
 }
