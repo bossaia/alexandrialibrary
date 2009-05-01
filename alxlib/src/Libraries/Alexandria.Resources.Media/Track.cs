@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources.Media
 {
-	public class Track : Entity, IAggregate
+	public class Track : Resource, IAggregate
 	{
 		public Track(Uri id)
 			: base(id)
@@ -13,6 +13,11 @@ namespace Alexandria.Resources.Media
 		}
 
 		#region IAggregate Members
+
+		public IEnumerable<T> GetChildren<T>(Link link)
+		{
+			throw new NotImplementedException();
+		}
 
 		public IValidation Validate()
 		{

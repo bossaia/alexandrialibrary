@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources.Media
 {
-	public class Album : Entity, IAggregate
+	public class Album : Medium
 	{
 		public Album(Uri id)
 			: base(id)
@@ -14,9 +14,9 @@ namespace Alexandria.Resources.Media
 
 		#region IAggregate Members
 
-		public IValidation Validate()
+		public override IValidation Validate()
 		{
-			throw new NotImplementedException();
+			return base.Validate();
 		}
 
 		#endregion
