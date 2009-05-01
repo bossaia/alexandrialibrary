@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Alexandria.Resources
 {
@@ -15,16 +13,8 @@ namespace Alexandria.Resources
 		#region Private Members
 
 		private Uri id;
-		private string hash;
-
-		#endregion
-
-		#region Protected Members
-
-		protected virtual void SetHash(string value)
-		{
-			hash = value;
-		}
+		private string name;
+		private Dictionary<string, object> extensions = new Dictionary<string, object>();
 
 		#endregion
 
@@ -35,9 +25,24 @@ namespace Alexandria.Resources
 			get { return id; }
 		}
 
-		public string Hash
+		public string Name
 		{
-			get { return hash; }
+			get { return name; }
+			set { name = value; }
+		}
+
+		public virtual IDictionary<string, Type> GetSchema()
+		{
+			return null;
+		}
+
+		public virtual IEnumerable<T> GetValues<T>(string name)
+		{
+			return null;
+		}
+
+		public virtual void SetValues<T>(string name, IEnumerable<T> values)
+		{
 		}
 
 		#endregion

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alexandria.Resources
 {
-	public interface IAggregate : IEntity
+	public interface IAggregate : IResource
 	{
 		IValidation Validate();
 	}
