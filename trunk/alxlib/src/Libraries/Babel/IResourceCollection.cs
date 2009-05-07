@@ -7,12 +7,13 @@ namespace Babel
 {
 	public interface IResourceCollection : IEnumerable<IResource>
 	{
-		EventHandler<ResourceChangeEventArgs> ItemAdded { get; set; }
-		EventHandler<ResourceChangeEventArgs> ItemRemoved { get; set; }
-		uint GetCount();
+		uint Count { get; }
+		bool IsChanged { get; }
 		void Add(IResource item);
 		void Remove(IResource item);
-		IResourceCollection GetAddedItems();
-		IResourceCollection GetRemovedItems();
+		IResourceCollection GetChangedItems();
+		void FlushChanges();
+		void BindToItemAdded(EventHandler<ResourceChangedEventArgs> handler);
+		void BindToItemRemoved(EventHandler<ResourceChangedEventArgs> handler);
 	}
 }

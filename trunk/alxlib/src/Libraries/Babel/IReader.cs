@@ -9,6 +9,6 @@ namespace Babel
 		where T : IResource
 	{
 		IReadCriteria<T> CreateReadCriteria();
-		IResult Read(ICommand command);
+		IResponse Read(IRequest request);
 	}
 }

@@ -11,7 +11,6 @@ namespace Babel
 	{
 		void Add(ILink item);
 		void Remove(ILink item);
-		new ILinkCollection GetAddedItems();
-		new ILinkCollection GetRemovedItems();
+		new ILinkCollection GetChangedItems();
 	}
 }

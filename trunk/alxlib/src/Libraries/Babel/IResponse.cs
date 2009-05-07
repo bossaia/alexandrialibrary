@@ -5,7 +5,10 @@ using System.Text;
 
 namespace Babel
 {
-	public interface IResult
+	public interface IResponse
 	{
+		bool IsAsync { get; }
+		uint Count { get; }
+		IAsyncResult AsynchResult { get; }
 	}
 }

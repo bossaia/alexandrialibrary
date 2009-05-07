@@ -10,6 +10,6 @@ namespace Babel
 		where Y : IResource
 	{
 		ITranslateCriteria<X, Y> CreateTranslateCriteria();
-		IResult Translate(ICommand command);
+		IResponse Translate(IRequest request);
 	}
 }

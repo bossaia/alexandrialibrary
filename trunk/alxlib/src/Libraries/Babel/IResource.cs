@@ -8,19 +8,16 @@ namespace Babel
 	public interface IResource
 	{
 		Uri Id { get; }
-		Uri Schema { get; }
 		string Name{ get; }
 		ILinkCollection Links { get; }
 		IChainCollection Chains { get; }
-		bool IsHidden { get; }
+		bool IsChanged { get; }
+		bool IsDeleted { get; }
 		bool IsRenamed { get; }
-		EventHandler<ResourceChangeEventArgs> LinkAdded { get; set; }
-		EventHandler<ResourceChangeEventArgs> LinkRemoved { get; set; }
-		EventHandler<ResourceChangeEventArgs> ChainAdded { get; set; }
-		EventHandler<ResourceChangeEventArgs> ChainRemoved { get; set; }
-		EventHandler<ResourceChangeEventArgs> Hidden { get; set; }
-		EventHandler<ResourceChangeEventArgs> Renamed { get; set; }
-		void Hide();
+		void BindToDeleted(EventHandler<ResourceChangedEventArgs> handler);
+		void BindToRenamed(EventHandler<ResourceChangedEventArgs> handler);
+		void Delete();
 		void Rename(string name);
+		void Initialize(Uri id, string name, bool isNew);
 	}
 }

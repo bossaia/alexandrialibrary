@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Babel
 {
-	public sealed class ResourceChangeEventArgs : EventArgs
+	public sealed class ResourceChangedEventArgs : EventArgs
 	{
 	}
 }
