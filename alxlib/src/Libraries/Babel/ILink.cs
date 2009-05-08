@@ -7,14 +7,22 @@ namespace Babel
 {
 	public interface ILink : IResource
 	{
-		IResource GetValue();
-		void SetValue(IResource value);
-	}
+		T GetValue<T>()
+			where T : struct;
 
-	public interface ILink<T> : ILink
-		where T : IResource
-	{
-		new T GetValue();
-		void SetValue(T value);
+		T GetReference<T>()
+			where T : class;
+
+		T GetResource<T>()
+			where T : IResource;
+
+		void SetValue<T>(T value)
+			where T : struct;
+
+		void SetReference<T>(T reference)
+			where T : class;
+
+		void SetResource<T>(T resource)
+			where T : IResource;
 	}
 }

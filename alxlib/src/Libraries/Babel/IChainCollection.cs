@@ -9,9 +9,9 @@ namespace Babel
 		IResourceCollection,
 		IEnumerable<KeyValuePair<string, IChain>>
 	{
+		new IChain this[string name] { get; set; }
 		void Add(IChain item);
 		void Remove(IChain item);
-		new IChainCollection GetAddedItems();
-		new IChainCollection GetRemovedItems();
+		new IChainCollection GetChangedItems();
 	}
 }

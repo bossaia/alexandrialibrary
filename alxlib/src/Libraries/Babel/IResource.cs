@@ -14,6 +14,7 @@ namespace Babel
 		bool IsChanged { get; }
 		bool IsDeleted { get; }
 		bool IsRenamed { get; }
+		void BindToChanged(EventHandler<ResourceChangedEventArgs> handler);
 		void BindToDeleted(EventHandler<ResourceChangedEventArgs> handler);
 		void BindToRenamed(EventHandler<ResourceChangedEventArgs> handler);
 		void Delete();
