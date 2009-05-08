@@ -9,6 +9,7 @@ namespace Babel
 		IResourceCollection,
 		IEnumerable<KeyValuePair<string, ILink>>
 	{
+		new ILink this[string name] { get; set; }
 		void Add(ILink item);
 		void Remove(ILink item);
 		new ILinkCollection GetChangedItems();

@@ -9,6 +9,7 @@ namespace Babel
 	{
 		uint Count { get; }
 		bool IsChanged { get; }
+		IResource this[string name] { get; set; }
 		void Add(IResource item);
 		void Remove(IResource item);
 		IResourceCollection GetChangedItems();

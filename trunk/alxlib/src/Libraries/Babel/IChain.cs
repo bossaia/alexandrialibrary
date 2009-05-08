@@ -7,15 +7,24 @@ namespace Babel
 {
 	public interface IChain : IResource
 	{
-		IEnumerable<IResource> GetValues();
-		void SetValues(IEnumerable<IResource> values);
-		long GetCount();
-	}
+		IEnumerable<T> GetValues<T>()
+			where T : struct;
 
-	public interface IChain<T> : IChain
-		where T : IResource
-	{
-		new IEnumerable<T> GetValues();
-		void SetValues(IEnumerable<T> values);
+		IEnumerable<T> GetReferences<T>()
+			where T : class;
+
+		IEnumerable<T> GetResources<T>()
+			where T : IResource;
+
+		void SetValues<T>(IEnumerable<T> values)
+			where T : struct;
+
+		void SetReferences<T>(IEnumerable<T> references)
+			where T : class;
+
+		void SetResources<T>(IEnumerable<T> resources)
+			where T : IResource;
+		
+		long GetCount();
 	}
 }
