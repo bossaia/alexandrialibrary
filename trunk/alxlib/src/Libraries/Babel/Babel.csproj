@@ -45,24 +45,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAggregate.cs" />
     <Compile Include="IChain.cs" />
-    <Compile Include="IChainCollection.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IName.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="IResponse.cs" />
     <Compile Include="ITranslateCriteria.cs" />
     <Compile Include="ITranslator.cs" />
     <Compile Include="ILink.cs" />
-    <Compile Include="ILinkCollection.cs" />
     <Compile Include="ICriteria.cs" />
     <Compile Include="IReadCriteria.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="IResourceCollection.cs" />
+    <Compile Include="IResourceMap.cs" />
     <Compile Include="IWriter.cs" />
     <Compile Include="IReader.cs" />
     <Compile Include="IWriteCriteria.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResourceChangedEventArgs.cs" />
+    <Compile Include="Events\ResourceChangedEventArgs.cs" />
+    <Compile Include="Events\ResourceHiddenEventArgs.cs" />
+    <Compile Include="Events\ResourceMapItemAddedEventArgs.cs" />
+    <Compile Include="Events\ResourceMapItemChangedEventArgs.cs" />
+    <Compile Include="Events\ResourceRenamedEventArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

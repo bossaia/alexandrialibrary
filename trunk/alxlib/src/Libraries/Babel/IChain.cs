@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Babel
 {
-	public interface IChain : IResource
+	public interface IChain :
+		IResource
 	{
 		IEnumerable<T> GetValues<T>()
 			where T : struct;
@@ -25,6 +26,6 @@ namespace Babel
 		void SetResources<T>(IEnumerable<T> resources)
 			where T : IResource;
 		
-		long GetCount();
+		uint GetCount();
 	}
 }

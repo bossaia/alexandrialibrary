@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Babel
 {
-	public interface ILink : IResource
+	public interface ILink :
+		IResource
 	{
 		T GetValue<T>()
 			where T : struct;
