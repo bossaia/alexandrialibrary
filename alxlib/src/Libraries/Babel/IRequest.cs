@@ -7,9 +7,9 @@ namespace Babel
 {
 	public interface IRequest
 	{
-		IResourceCollection Source { get; }
+		IEnumerable<IResource> Source { get; }
 
-		IResourceCollection Target { get; }
+		IEnumerable<IResource> Target { get; }
 
 		void AddReadCriteria<T>(IReadCriteria<T> criteria)
 			where T : IResource;
