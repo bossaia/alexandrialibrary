@@ -4,20 +4,22 @@ using Babel.Events;
 
 namespace Babel
 {
-	public interface IResourceMap<T> :
-		IEnumerable<KeyValuePair<string, T>>
-		where T : IResource
+	public interface IElementMap :
+		IEnumerable<KeyValuePair<string, IElement>>
 	{
-		T this[string name] { get; }
+		IElement this[string name] { get; }
 		int Count { get; }
 		bool IsChanged { get; }
-		bool Add(T item);
+		bool Add(IElement item);
 		void BindToItemAdded(EventHandler<ResourceMapItemAddedEventArgs> handler);
 		void BindToItemChanged(EventHandler<ResourceMapItemChangedEventArgs> handler);
 		void Clear();
-		bool Contains(T item);
+		bool Contains(IElement item);
 		bool ContainsName(string name);
 		void Flush();
-		IResourceMap<T> GetChangedItems();
+		IElementMap GetChangedItems();
+
+		T GetItem<T>(string name)
+			where T : IElement;
 	}
 }

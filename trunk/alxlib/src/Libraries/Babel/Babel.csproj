@@ -46,8 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAggregate.cs" />
-    <Compile Include="IChain.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IElement.cs" />
     <Compile Include="IName.cs" />
     <Compile Include="IRequest.cs" />
     <Compile Include="IResponse.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="ICriteria.cs" />
     <Compile Include="IReadCriteria.cs" />
     <Compile Include="IResource.cs" />
-    <Compile Include="IResourceMap.cs" />
+    <Compile Include="IElementMap.cs" />
     <Compile Include="IWriter.cs" />
     <Compile Include="IReader.cs" />
     <Compile Include="IWriteCriteria.cs" />
