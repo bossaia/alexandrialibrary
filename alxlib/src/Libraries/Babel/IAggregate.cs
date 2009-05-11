@@ -6,13 +6,14 @@ namespace Babel
 	public interface IAggregate :
 		IResource
 	{
-		IResourceMap<ILink> Links { get; }
-		IResourceMap<IChain> Chains { get; }
+		IElementMap Elements { get; }
 		bool IsHidden { get; }
 		bool IsRenamed { get; }
+		bool IsValid { get; }
 		void BindToHidden(EventHandler<ResourceHiddenEventArgs> handler);
 		void BindToRenamed(EventHandler<ResourceRenamedEventArgs> handler);
-		bool Hide();
-		bool Rename(IName name);
+		void Hide();
+		void Rename(IName name);
+		void Validate();
 	}
 }

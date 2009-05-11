@@ -6,24 +6,12 @@ using System.Text;
 namespace Babel
 {
 	public interface ILink :
-		IResource
+		IElement
 	{
-		T GetValue<T>()
-			where T : struct;
-
-		T GetReference<T>()
-			where T : class;
-
-		T GetResource<T>()
+		new T GetValue<T>()
 			where T : IResource;
 
-		void SetValue<T>(T value)
-			where T : struct;
-
-		void SetReference<T>(T reference)
-			where T : class;
-
-		void SetResource<T>(T resource)
+		new void SetValue<T>(T value)
 			where T : IResource;
 	}
 }
