@@ -11,15 +11,15 @@ namespace Babel
 		int Count { get; }
 		bool IsChanged { get; }
 		bool Add(IElement item);
-		void BindToItemAdded(EventHandler<ResourceMapItemAddedEventArgs> handler);
-		void BindToItemChanged(EventHandler<ResourceMapItemChangedEventArgs> handler);
+		void BindToElementAdded(EventHandler<ElementAddedEventArgs> handler);
+		void BindToElementChanged(EventHandler<ElementChangedEventArgs> handler);
 		void Clear();
 		bool Contains(IElement item);
 		bool ContainsName(string name);
 		void Flush();
-		IElementMap GetChangedItems();
+		IElementMap GetChangedElements();
 
-		T GetItem<T>(string name)
+		T GetElement<T>(string name)
 			where T : IElement;
 	}
 }
