@@ -64,8 +64,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Events\ResourceChangedEventArgs.cs" />
     <Compile Include="Events\ResourceHiddenEventArgs.cs" />
-    <Compile Include="Events\ResourceMapItemAddedEventArgs.cs" />
-    <Compile Include="Events\ResourceMapItemChangedEventArgs.cs" />
+    <Compile Include="Events\ElementAddedEventArgs.cs" />
+    <Compile Include="Events\ElementChangedEventArgs.cs" />
     <Compile Include="Events\ResourceRenamedEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,9 +6,16 @@ using System.Text;
 namespace Babel
 {
 	public interface IElement
+		: IResource
 	{
-		T GetValue<T>();
+		int GetCount();
 
-		void SetValue<T>(T value);
+		T GetFirstValue<T>();
+
+		IEnumerable<T> GetValues<T>();
+
+		void SetFirstValue<T>(T value);
+
+		void SetValues<T>(IEnumerable<T> values);
 	}
 }
