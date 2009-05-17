@@ -1,6 +1,14 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F253C260-B728-4603-AE9E-9E8A127DF917}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{F4162685-E4B9-441A-AEA9-5A32F36F26E8}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Papyrus", "src\Clients\Papyrus\Papyrus.csproj", "{CD739E9B-DB3B-4301-BDCB-385B458A3D73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{96090C64-C07D-467D-BDE9-CED1FE2BD272}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria", "src\Libraries\Alexandria\Alexandria.csproj", "{1032B7D4-BB3F-4252-A7F2-0A4BF0BC7CE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Persistence", "src\Libraries\Alexandria.Persistence\Alexandria.Persistence.csproj", "{71D4A8B2-2997-4284-9F1A-8954DE4BC1CF}"
 EndProject
@@ -14,19 +22,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Utilities", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Web", "src\Libraries\Alexandria.Web\Alexandria.Web.csproj", "{220B8C2F-28B5-464C-9A7D-16711A369A74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alxlib.com", "src\Web\alxlib.com\alxlib.com.csproj", "{257C3E55-8CD5-478E-B4F8-9C9CD7353981}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel", "src\Libraries\Babel\Babel.csproj", "{5C49A836-8F5A-4C98-B156-3F120AEF7FA9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F253C260-B728-4603-AE9E-9E8A127DF917}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{F4162685-E4B9-441A-AEA9-5A32F36F26E8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{96090C64-C07D-467D-BDE9-CED1FE2BD272}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scarab", "src\Clients\Scarab\Scarab.csproj", "{E0D29B1C-0E48-4932-AEDB-08D83F617C79}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{26122CCA-41D7-4697-8742-32785BB8AB87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria", "src\Libraries\Alexandria\Alexandria.csproj", "{1032B7D4-BB3F-4252-A7F2-0A4BF0BC7CE8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel", "src\Libraries\Babel\Babel.csproj", "{5C49A836-8F5A-4C98-B156-3F120AEF7FA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alxlib.com", "src\Web\alxlib.com\alxlib.com.csproj", "{257C3E55-8CD5-478E-B4F8-9C9CD7353981}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{5C49A836-8F5A-4C98-B156-3F120AEF7FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C49A836-8F5A-4C98-B156-3F120AEF7FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C49A836-8F5A-4C98-B156-3F120AEF7FA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0D29B1C-0E48-4932-AEDB-08D83F617C79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0D29B1C-0E48-4932-AEDB-08D83F617C79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0D29B1C-0E48-4932-AEDB-08D83F617C79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0D29B1C-0E48-4932-AEDB-08D83F617C79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,5 +98,6 @@ Global
 		{5C49A836-8F5A-4C98-B156-3F120AEF7FA9} = {96090C64-C07D-467D-BDE9-CED1FE2BD272}
 		{257C3E55-8CD5-478E-B4F8-9C9CD7353981} = {26122CCA-41D7-4697-8742-32785BB8AB87}
 		{CD739E9B-DB3B-4301-BDCB-385B458A3D73} = {F4162685-E4B9-441A-AEA9-5A32F36F26E8}
+		{E0D29B1C-0E48-4932-AEDB-08D83F617C79} = {F4162685-E4B9-441A-AEA9-5A32F36F26E8}
 	EndGlobalSection
 EndGlobal
