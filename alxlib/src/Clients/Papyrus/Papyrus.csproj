@@ -12,6 +12,7 @@
     <AssemblyName>Papyrus</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>Papyrus.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +96,9 @@
       <Project>{EBDDCCF5-21B5-46F3-A3E7-94523FAB999A}</Project>
       <Name>Alexandria.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Papyrus.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

@@ -36,22 +36,22 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.mainPanel = new System.Windows.Forms.Panel();
 			this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
-			this.actionPanel = new System.Windows.Forms.Panel();
 			this.toolPanel = new System.Windows.Forms.Panel();
 			this.toolTreeView = new System.Windows.Forms.TreeView();
+			this.toolImageList = new System.Windows.Forms.ImageList(this.components);
+			this.actionPanel = new System.Windows.Forms.Panel();
 			this.actionTabControl = new System.Windows.Forms.TabControl();
 			this.playTab = new System.Windows.Forms.TabPage();
 			this.searchTab = new System.Windows.Forms.TabPage();
 			this.browseTab = new System.Windows.Forms.TabPage();
 			this.tagTab = new System.Windows.Forms.TabPage();
-			this.toolImageList = new System.Windows.Forms.ImageList(this.components);
 			this.actionImageList = new System.Windows.Forms.ImageList(this.components);
 			this.mainPanel.SuspendLayout();
 			this.mainSplitContainer.Panel1.SuspendLayout();
 			this.mainSplitContainer.Panel2.SuspendLayout();
 			this.mainSplitContainer.SuspendLayout();
-			this.actionPanel.SuspendLayout();
 			this.toolPanel.SuspendLayout();
+			this.actionPanel.SuspendLayout();
 			this.actionTabControl.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -84,17 +84,6 @@
 			this.mainSplitContainer.Size = new System.Drawing.Size(910, 242);
 			this.mainSplitContainer.SplitterDistance = 226;
 			this.mainSplitContainer.TabIndex = 0;
-			// 
-			// actionPanel
-			// 
-			this.actionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-						| System.Windows.Forms.AnchorStyles.Left)
-						| System.Windows.Forms.AnchorStyles.Right)));
-			this.actionPanel.Controls.Add(this.actionTabControl);
-			this.actionPanel.Location = new System.Drawing.Point(3, 3);
-			this.actionPanel.Name = "actionPanel";
-			this.actionPanel.Size = new System.Drawing.Size(674, 236);
-			this.actionPanel.TabIndex = 0;
 			// 
 			// toolPanel
 			// 
@@ -140,6 +129,32 @@
 			this.toolTreeView.SelectedImageIndex = 0;
 			this.toolTreeView.Size = new System.Drawing.Size(221, 233);
 			this.toolTreeView.TabIndex = 0;
+			// 
+			// toolImageList
+			// 
+			this.toolImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("toolImageList.ImageStream")));
+			this.toolImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.toolImageList.Images.SetKeyName(0, "catalog.png");
+			this.toolImageList.Images.SetKeyName(1, "catalog_folder.png");
+			this.toolImageList.Images.SetKeyName(2, "device.png");
+			this.toolImageList.Images.SetKeyName(3, "device_disc.png");
+			this.toolImageList.Images.SetKeyName(4, "device_ipod.png");
+			this.toolImageList.Images.SetKeyName(5, "device_phone.png");
+			this.toolImageList.Images.SetKeyName(6, "playlist.png");
+			this.toolImageList.Images.SetKeyName(7, "service.png");
+			this.toolImageList.Images.SetKeyName(8, "service_email.png");
+			this.toolImageList.Images.SetKeyName(9, "service_feed.png");
+			// 
+			// actionPanel
+			// 
+			this.actionPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.actionPanel.Controls.Add(this.actionTabControl);
+			this.actionPanel.Location = new System.Drawing.Point(3, 3);
+			this.actionPanel.Name = "actionPanel";
+			this.actionPanel.Size = new System.Drawing.Size(674, 236);
+			this.actionPanel.TabIndex = 0;
 			// 
 			// actionTabControl
 			// 
@@ -201,21 +216,6 @@
 			this.tagTab.Text = "Tag";
 			this.tagTab.UseVisualStyleBackColor = true;
 			// 
-			// toolImageList
-			// 
-			this.toolImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("toolImageList.ImageStream")));
-			this.toolImageList.TransparentColor = System.Drawing.Color.Transparent;
-			this.toolImageList.Images.SetKeyName(0, "catalog.png");
-			this.toolImageList.Images.SetKeyName(1, "catalog_folder.png");
-			this.toolImageList.Images.SetKeyName(2, "device.png");
-			this.toolImageList.Images.SetKeyName(3, "device_disc.png");
-			this.toolImageList.Images.SetKeyName(4, "device_ipod.png");
-			this.toolImageList.Images.SetKeyName(5, "device_phone.png");
-			this.toolImageList.Images.SetKeyName(6, "playlist.png");
-			this.toolImageList.Images.SetKeyName(7, "service.png");
-			this.toolImageList.Images.SetKeyName(8, "service_email.png");
-			this.toolImageList.Images.SetKeyName(9, "service_feed.png");
-			// 
 			// actionImageList
 			// 
 			this.actionImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("actionImageList.ImageStream")));
@@ -231,14 +231,15 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(934, 266);
 			this.Controls.Add(this.mainPanel);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.Text = "Alexandria";
 			this.mainPanel.ResumeLayout(false);
 			this.mainSplitContainer.Panel1.ResumeLayout(false);
 			this.mainSplitContainer.Panel2.ResumeLayout(false);
 			this.mainSplitContainer.ResumeLayout(false);
-			this.actionPanel.ResumeLayout(false);
 			this.toolPanel.ResumeLayout(false);
+			this.actionPanel.ResumeLayout(false);
 			this.actionTabControl.ResumeLayout(false);
 			this.ResumeLayout(false);
 
