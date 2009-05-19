@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CD739E9B-DB3B-4301-BDCB-385B458A3D73}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -49,39 +49,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ControllerBase.cs" />
-    <Compile Include="Controllers\PlaylistController.cs" />
-    <Compile Include="Data\AttributionData.cs" />
-    <Compile Include="Data\DataItem.cs" />
-    <Compile Include="Data\DataList.cs" />
-    <Compile Include="Data\DataStatus.cs" />
-    <Compile Include="Data\DataUtility.cs" />
-    <Compile Include="Data\ExtensionData.cs" />
-    <Compile Include="Data\IAggregate.cs" />
-    <Compile Include="Data\LinkData.cs" />
-    <Compile Include="Data\MetaData.cs" />
-    <Compile Include="Data\NamespaceData.cs" />
-    <Compile Include="Data\PlaylistData.cs" />
-    <Compile Include="Data\TrackData.cs" />
     <Compile Include="Forms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MetadataForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MetadataForm.Designer.cs">
-      <DependentUpon>MetadataForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\PlaylistForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\PlaylistForm.Designer.cs">
-      <DependentUpon>PlaylistForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\PlaylistForm.resx">
-      <DependentUpon>PlaylistForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,13 +82,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Views\IPlaylistView.cs" />
     <Compile Include="Views\IView.cs" />
     <Compile Include="Views\ViewAction.cs" />
     <Compile Include="Views\ViewActionCallback.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\LicenseData.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\Alexandria.Resources\Alexandria.Resources.csproj">
@@ -119,6 +95,10 @@
       <Project>{EBDDCCF5-21B5-46F3-A3E7-94523FAB999A}</Project>
       <Name>Alexandria.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Papyrus.Forms
 {
-	public partial class MetadataForm : FormBase
+	public partial class MainForm : Form
 	{
-		public MetadataForm()
+		public MainForm()
 		{
 			InitializeComponent();
 		}
