@@ -117,66 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ColumnTrackAlbum" xml:space="preserve">
-    <value>colTrackAlbum</value>
-  </data>
-  <data name="ColumnTrackAnnotation" xml:space="preserve">
-    <value>colTrackAnnotation</value>
-  </data>
-  <data name="ColumnTrackCreator" xml:space="preserve">
-    <value>colTrackCreator</value>
-  </data>
-  <data name="ColumnTrackDuration" xml:space="preserve">
-    <value>colTrackDuration</value>
-  </data>
-  <data name="ColumnTrackIdentifier" xml:space="preserve">
-    <value>colTrackIdentifier</value>
-  </data>
-  <data name="ColumnTrackImage" xml:space="preserve">
-    <value>colTrackImage</value>
-  </data>
-  <data name="ColumnTrackInfo" xml:space="preserve">
-    <value>colTrackInfo</value>
-  </data>
-  <data name="ColumnTrackLocation" xml:space="preserve">
-    <value>colTrackLocation</value>
-  </data>
-  <data name="ColumnTrackNumber" xml:space="preserve">
-    <value>colTrackNumber</value>
-  </data>
-  <data name="ColumnTrackSequence" xml:space="preserve">
-    <value>colTrackSequence</value>
-  </data>
-  <data name="ColumnTrackTitle" xml:space="preserve">
-    <value>colTrackTitle</value>
-  </data>
-  <data name="ErrorGenericBody" xml:space="preserve">
-    <value>An error occured:
-
-{0}
-
-{1}</value>
-  </data>
-  <data name="ErrorGenericTitle" xml:space="preserve">
-    <value>Error</value>
-  </data>
   <data name="ErrorInfoUriInvalid" xml:space="preserve">
     <value>Please enter a valid URI for the info related to this playlist</value>
   </data>
   <data name="ErrorTitleMissing" xml:space="preserve">
     <value>Please enter a title for this playlist</value>
   </data>
-  <data name="ErrorTracksMissing" xml:space="preserve">
-    <value>Please enter at least one track for this playlist</value>
+  <data name="ColumnTrackAlbum" xml:space="preserve">
+    <value>colTrackAlbum</value>
   </data>
-  <data name="FileExtensionM3u" xml:space="preserve">
-    <value>.m3u</value>
-  </data>
-  <data name="FileExtensionPls" xml:space="preserve">
-    <value>.pls</value>
-  </data>
-  <data name="FileExtensionXspf" xml:space="preserve">
-    <value>.xspf</value>
+  <data name="ColumnTrackLocation" xml:space="preserve">
+    <value>colTrackLocation</value>
   </data>
   <data name="MessageLoadingPlaylistBody" xml:space="preserve">
     <value>An error occured while attempting to load this playlist.  The file may be invalid or corrupt.
@@ -185,13 +136,63 @@
 
 {1}</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ColumnTrackSequence" xml:space="preserve">
+    <value>colTrackSequence</value>
+  </data>
+  <data name="ErrorGenericTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FileExtensionXspf" xml:space="preserve">
+    <value>.xspf</value>
+  </data>
   <data name="MessageLoadingPlaylistTitle" xml:space="preserve">
     <value>Error Loading Playlist</value>
+  </data>
+  <data name="ColumnTrackImage" xml:space="preserve">
+    <value>colTrackImage</value>
   </data>
   <data name="MessageValidationBody" xml:space="preserve">
     <value>Please fix all missing and invalid data for this playlist.</value>
   </data>
+  <data name="ColumnTrackDuration" xml:space="preserve">
+    <value>colTrackDuration</value>
+  </data>
+  <data name="ColumnTrackAnnotation" xml:space="preserve">
+    <value>colTrackAnnotation</value>
+  </data>
+  <data name="ColumnTrackCreator" xml:space="preserve">
+    <value>colTrackCreator</value>
+  </data>
   <data name="MessageValidationTitle" xml:space="preserve">
     <value>Invalid Playlist</value>
+  </data>
+  <data name="ColumnTrackTitle" xml:space="preserve">
+    <value>colTrackTitle</value>
+  </data>
+  <data name="ErrorTracksMissing" xml:space="preserve">
+    <value>Please enter at least one track for this playlist</value>
+  </data>
+  <data name="ColumnTrackIdentifier" xml:space="preserve">
+    <value>colTrackIdentifier</value>
+  </data>
+  <data name="ColumnTrackInfo" xml:space="preserve">
+    <value>colTrackInfo</value>
+  </data>
+  <data name="FileExtensionPls" xml:space="preserve">
+    <value>.pls</value>
+  </data>
+  <data name="ColumnTrackNumber" xml:space="preserve">
+    <value>colTrackNumber</value>
+  </data>
+  <data name="ErrorGenericBody" xml:space="preserve">
+    <value>An error occured:
+
+{0}
+
+{1}</value>
+  </data>
+  <data name="FileExtensionM3u" xml:space="preserve">
+    <value>.m3u</value>
   </data>
 </root>
