@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Babel
 {
-	public interface IReadCriteria<T> :
-		ICriteria
-		where T : IResource
+	public interface IContext
 	{
+		IMetadataSet Settings { get; }
+		IResource GetResource(Uri id);
 	}
 }
