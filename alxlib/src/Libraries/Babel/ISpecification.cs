@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Babel
 {
-	public interface ICommand
+	public interface ISpecification
 	{
+		bool IsSatisfiedBy(IResource resource);
 	}
 }

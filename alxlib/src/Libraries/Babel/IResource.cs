@@ -1,13 +1,13 @@
 ﻿using System;
-using Babel.Events;
 
 namespace Babel
 {
 	public interface IResource
 	{
 		Uri Id { get; }
-		IName Name { get; }
-		bool IsChanged { get; }
-		void BindToChanged(EventHandler<ResourceChangedEventArgs> handler);
+		IResponse Read(IRequest request);
+		IResponse Write(IRequest request);
+		IResponse Evaluate(IRequest request);
+		IResponse Delete(IRequest request);
 	}
 }

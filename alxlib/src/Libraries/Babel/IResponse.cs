@@ -5,10 +5,8 @@ using System.Text;
 
 namespace Babel
 {
-	public interface IResponse
+	public interface IResponse : IMessage
 	{
-		bool IsAsync { get; }
-		uint Count { get; }
-		IAsyncResult AsynchResult { get; }
+		ResponseCode Code { get; }
 	}
 }
