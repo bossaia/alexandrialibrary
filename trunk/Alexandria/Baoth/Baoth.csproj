@@ -45,6 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IArtist.cs" />
+    <Compile Include="IIdentifier.cs" />
+    <Compile Include="IName.cs" />
+    <Compile Include="INameEncoding.cs" />
     <Compile Include="IResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
