@@ -7,6 +7,7 @@ namespace Sophia.Core
 {
 	public interface IMessage
 	{
+		MediaType ContentType { get; }
 		string Content { get; }
 	}
 }
