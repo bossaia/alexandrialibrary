@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Sophia.Core
 {
-	public interface IRouter
-		: IReceiver
+	public interface IContext
 	{
 		IEnumerable<INode> Nodes { get; }
+		IEnumerable<IRoute> Routes { get; }
+		void Send(Uri sender, IMessage message);
 	}
 }

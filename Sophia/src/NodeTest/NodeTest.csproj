@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7F917E7A-F555-4ACD-BA88-74AAA1468380}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{87561889-0197-431E-8CED-B32B0B7FE62C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sophia.Core</RootNamespace>
-    <AssemblyName>Sophia.Core</AssemblyName>
+    <RootNamespace>Sophia.NodeTest</RootNamespace>
+    <AssemblyName>NodeTest</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,14 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions.cs" />
-    <Compile Include="IContext.cs" />
-    <Compile Include="IMessage.cs" />
-    <Compile Include="INode.cs" />
-    <Compile Include="IRoute.cs" />
-    <Compile Include="MediaCategory.cs" />
-    <Compile Include="MediaType.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sophia.Core\Sophia.Core.csproj">
+      <Project>{7F917E7A-F555-4ACD-BA88-74AAA1468380}</Project>
+      <Name>Sophia.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

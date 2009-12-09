@@ -5,8 +5,16 @@ using System.Text;
 
 namespace Sophia.Core
 {
-	public interface IReceiver
+	public enum MediaCategory
 	{
-		void Receive(IMessage message);
+		None = 0,
+		Application,
+		Audio,
+		Image,
+		Message,
+		Model,
+		Multipart,
+		Text,
+		Video
 	}
 }
