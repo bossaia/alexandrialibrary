@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "src\Alex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TestClient", "src\Alexandria.TestClient\Alexandria.TestClient.csproj", "{B1466947-A14F-4275-822B-F53606334D91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel", "src\Babel\Babel.csproj", "{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{B1466947-A14F-4275-822B-F53606334D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1466947-A14F-4275-822B-F53606334D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1466947-A14F-4275-822B-F53606334D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,5 +40,6 @@ Global
 		{5DD38B9F-093E-4128-962D-3F1A4C2AA834} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 		{53A95BBC-9511-4EF7-AE5F-BF09D3891512} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 		{B1466947-A14F-4275-822B-F53606334D91} = {0365B805-C7E6-472F-A612-23E74172EF9F}
+		{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 	EndGlobalSection
 EndGlobal

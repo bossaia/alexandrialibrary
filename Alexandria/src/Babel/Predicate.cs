@@ -4,15 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Alexandria.Core
+namespace Babel
 {
 	public class Predicate
 	{
-		public Predicate(PropertyInfo property, ComparisonOperator op, object value)
-			: this(property, op, value, null)
-		{
-		}
-
 		public Predicate(PropertyInfo property, ComparisonOperator op, object value, IList<string> methods)
 		{
 			_property = property;
@@ -37,7 +32,7 @@ namespace Alexandria.Core
 				//NOTE: We need to go backwards through the list
 				for (var i = _methods.Count; i > 0; i--)
 				{
-					name = string.Format("{0}({1})", _methods[i-1], name);
+					name = string.Format("{0}({1})", _methods[i - 1], name);
 				}
 			}
 

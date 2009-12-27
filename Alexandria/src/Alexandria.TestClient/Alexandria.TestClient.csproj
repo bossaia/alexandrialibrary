@@ -52,6 +52,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Babel\Babel.csproj">
+      <Project>{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}</Project>
+      <Name>Babel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Alexandria.Core\Alexandria.Core.csproj">
       <Project>{53A95BBC-9511-4EF7-AE5F-BF09D3891512}</Project>
       <Name>Alexandria.Core</Name>
