@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Abraxas;
-
-namespace Alexandria.Core
+namespace Abraxas
 {
-	public interface ITag
-		: IEntity
+	public interface IMedia
+		: IResource
 	{
-		string Type { get; }
+		MediaType Type { get; }
 	}
 }

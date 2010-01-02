@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Abraxas;
+
 namespace Alexandria.Core
 {
 	public interface IAlbum
@@ -12,6 +14,6 @@ namespace Alexandria.Core
 		IArtist Artist { get; }
 		DateTime Released { get; }
 
-		IEntityList<ITrack> Tracks { get; }
+		IEntityMap<ITrack> Tracks { get; }
 	}
 }

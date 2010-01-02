@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alexandria.Core
+namespace Sophia
 {
-	public interface IEntity
+	public interface IMessage<T>
 	{
-		int Id { get; }
+		Uri ReplyTo { get; }
+		T Body { get; }
 	}
 }
