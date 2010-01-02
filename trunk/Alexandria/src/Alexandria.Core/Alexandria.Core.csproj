@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Abraxas\Abraxas.csproj">
+    <ProjectReference Include="..\..\lib\Abraxas\Abraxas.csproj">
       <Project>{4FA5514D-6C8A-4937-A7E2-873DFB9E09FD}</Project>
       <Name>Abraxas</Name>
     </ProjectReference>

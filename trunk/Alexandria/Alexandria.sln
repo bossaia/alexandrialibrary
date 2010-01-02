@@ -8,13 +8,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.Core", "src\Alex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria.TestClient", "src\Alexandria.TestClient\Alexandria.TestClient.csproj", "{B1466947-A14F-4275-822B-F53606334D91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel", "src\Babel\Babel.csproj", "{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Babel", "lib\Babel\Babel.csproj", "{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abraxas", "Abraxas\Abraxas.csproj", "{4FA5514D-6C8A-4937-A7E2-873DFB9E09FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abraxas", "lib\Abraxas\Abraxas.csproj", "{4FA5514D-6C8A-4937-A7E2-873DFB9E09FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8308834-F89D-4BC9-A3F6-79A14391B7AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophia", "src\Sophia\Sophia.csproj", "{032EB687-B2C6-489D-8A2D-20B9455C7B99}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sophia", "lib\Sophia\Sophia.csproj", "{032EB687-B2C6-489D-8A2D-20B9455C7B99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
