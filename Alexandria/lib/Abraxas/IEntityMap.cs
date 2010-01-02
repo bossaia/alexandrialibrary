@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alexandria.Core
+namespace Abraxas
 {
-	public interface IEntityList<T>
+	public interface IEntityMap<T>
 		: IEnumerable<T>
 		where T : IEntity
 	{
+		IEntity this[string hash] { get; }
 		int Count { get; }
+
+		bool ContainsHash(string hash);
+		bool IsUnique(string hash);
 	}
 }

@@ -13,27 +13,16 @@ namespace Alexandria.TestClient
 	{
 		static void Main(string[] args)
 		{
-			//IArtist pinkFloyd = null;
+			var search = new { Album = "Foiled", Artist = "Snow Patrol", Date = "1999-12-31" };
 
-			/*
-			var c1 =
-				new Alexandria.Core.Criteria<Alexandria.Core.IAlbum>(x => x.Title.TRIM().UPPER().IsEqualTo("THE WALL"), "")
-					.And<string>(x => x.Artist.Name.IsLike("Pink Floyd"), "")
-					.And<DateTime>(x => x.Released.IsGreaterThanOrEqualTo("1970-12-31"), new DateTime(1970, 12, 31));
-			*/
-			
-			var settings = new { Title = "Foiled"  };
-
-			var c2 = new Criteria<IAlbum>(settings)
-				.That(x => x.Title.IsEqualTo(settings.Title))
+			var query = new Query<IAlbum>(search)
+				.Where(x => x.Title.IsEqualTo(search.Album))
 				.Or
-				.That(x => x.Artist.Name.IsEqualTo("Snow Patrol"))
+				.Where(x => x.Artist.Name.IsEqualTo(search.Artist))
 				.Or
-				.That(x => x.Released.IsGreaterThanOrEqualTo("1999-12-31"));
-					
-						//.That(x => x.Title.
+				.Where(x => x.Released.IsGreaterThanOrEqualTo(search.Date));
 
-			Console.WriteLine(c2.ToString());
+			Console.WriteLine(query.ToString());
 			Console.ReadLine();
 		}
 	}

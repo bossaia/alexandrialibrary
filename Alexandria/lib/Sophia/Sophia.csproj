@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{53A95BBC-9511-4EF7-AE5F-BF09D3891512}</ProjectGuid>
+    <ProjectGuid>{032EB687-B2C6-489D-8A2D-20B9455C7B99}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria.Core</RootNamespace>
-    <AssemblyName>Alexandria.Core</AssemblyName>
+    <RootNamespace>Sophia</RootNamespace>
+    <AssemblyName>Sophia</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,18 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAlbum.cs" />
-    <Compile Include="IArtist.cs" />
-    <Compile Include="ITag.cs" />
-    <Compile Include="ITagged.cs" />
-    <Compile Include="ITrack.cs" />
+    <Compile Include="IMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Abraxas\Abraxas.csproj">
-      <Project>{4FA5514D-6C8A-4937-A7E2-873DFB9E09FD}</Project>
-      <Name>Abraxas</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
