@@ -8,7 +8,7 @@ namespace Babel
 {
 	public class Predicate
 	{
-		public Predicate(PropertyInfo property, ComparisonOperator op, object value, IList<string> methods)
+		public Predicate(string property, ComparisonOperator op, object value, IList<string> methods)
 		{
 			_property = property;
 			_op = op;
@@ -18,14 +18,14 @@ namespace Babel
 				_methods = methods;
 		}
 
-		private PropertyInfo _property;
+		private string _property;
 		ComparisonOperator _op;
 		object _value;
 		private IList<string> _methods = new List<string>();
 
 		private string GetName()
 		{
-			string name = _property.Name;
+			string name = _property;
 
 			if (_methods.Count > 0)
 			{
@@ -39,7 +39,7 @@ namespace Babel
 			return name;
 		}
 
-		public PropertyInfo Property
+		public string Property
 		{
 			get { return _property; }
 		}

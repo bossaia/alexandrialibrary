@@ -59,13 +59,35 @@ namespace Babel
 			return arg.ToString();
 		}
 
+		private static string GetTableName(Type type)
+		{
+			var name = type.Name;
+
+			if (name.Length > 2 && name.StartsWith("I"))
+			{
+				if (name[1].ToString() == name[1].ToString().ToUpper())
+					return name.Substring(1, name.Length - 1);
+			}
+
+			return name;
+		}
+
+		private static string GetProperty(Type predicateType, PropertyInfo propertyInfo)
+		{
+			//if (predicateType != propertyInfo.DeclaringType)
+			//{
+				return string.Format("{0}.{1}", GetTableName(propertyInfo.DeclaringType), propertyInfo.Name);
+			//}
+			//return propertyInfo.Name;
+		}
+
 		public static Predicate GetPredicate<T>(Expression<Func<T, object>> expression, object context)
 		{
 			if (expression == null)
 				return null;
 
 			MemberExpression memberExpression = null;
-			PropertyInfo property = null;
+			string property = null;
 			ComparisonOperator op = null;
 			object value = null;
 			IList<string> methods = new List<string>();
@@ -134,7 +156,9 @@ namespace Babel
 			}
 
 			if (memberExpression != null)
-				property = memberExpression.Member as PropertyInfo;
+			{
+				property = GetProperty(typeof(T), memberExpression.Member as PropertyInfo);
+			}
 
 			return new Predicate(property, op, value, methods);
 		}
