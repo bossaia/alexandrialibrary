@@ -29,7 +29,7 @@ namespace Alexandria.TestClient
 				.Or
 				.That(x => x.Artist.Name.IsEqualTo("Snow Patrol"))
 				.Or
-				.That(x => x.Released.IsGreaterThanOrEqualTo(new DateTime(1999, 12, 31)));
+				.That(x => x.Released.IsGreaterThanOrEqualTo("1999-12-31"));
 					
 						//.That(x => x.Title.
 
