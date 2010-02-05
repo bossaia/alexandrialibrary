@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Gnosis.Alexandria;
+using StructureMap;
 
 namespace Gnosis.Sphinx
 {
@@ -16,6 +17,9 @@ namespace Gnosis.Sphinx
 		public Main()
 		{
 			InitializeComponent();
+
+			var album = ObjectFactory.GetInstance<IAlbum>();
+			var x = album;
 		}
 	}
 }

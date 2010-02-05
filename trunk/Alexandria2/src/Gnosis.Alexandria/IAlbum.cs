@@ -9,15 +9,15 @@ namespace Gnosis.Alexandria
 		: INamedEntity, IEquatable<IAlbum>
 	{
 		IArtist Artist { get; }
-		DateTime ReleaseDate { get; }
+		DateTime? ReleaseDate { get; }
 		Country ReleaseCountry { get; }
 		int DiscNumber { get; }
 		ISet<ITrack> Tracks();
 		ISet<IMedia> Media();
 
 		void ChangeArtist(IArtist artist);
-		void ChangeReleaseDate(DateTime date);
-		void ChangeReleaseCountry(Country country);
+		void ChangeReleaseDate(DateTime releaseDate);
+		void ChangeReleaseCountry(Country releaseCountry);
 		void ChangeDiscNumber(int discNumber);
 		void AddTrack(ITrack track);
 		void RemoveTrack(ITrack track);
