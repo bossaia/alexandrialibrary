@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Alexandria;
+using Gnosis.Alexandria;
 
-namespace Sphinx
+namespace Gnosis.Sphinx
 {
 	public partial class Main : Form
 	{
