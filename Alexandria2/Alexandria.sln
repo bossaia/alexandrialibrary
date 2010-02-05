@@ -4,11 +4,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0365B805-C7E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{B8308834-F89D-4BC9-A3F6-79A14391B7AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sphinx", "src\Sphinx\Sphinx.csproj", "{6C1BDCCC-E07F-4F76-982E-BE06E829E25E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Sphinx", "src\Gnosis.Sphinx\Gnosis.Sphinx.csproj", "{6C1BDCCC-E07F-4F76-982E-BE06E829E25E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alexandria", "src\Alexandria\Alexandria.csproj", "{77B5AED2-C558-449C-9396-760641052C83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Alexandria", "src\Gnosis.Alexandria\Gnosis.Alexandria.csproj", "{77B5AED2-C558-449C-9396-760641052C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barbelo", "lib\Barbelo\Barbelo.csproj", "{BAFBF582-24B0-4B84-9CDF-4B701D81463A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Barbelo", "src\Gnosis.Barbelo\Gnosis.Barbelo.csproj", "{BAFBF582-24B0-4B84-9CDF-4B701D81463A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +35,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6C1BDCCC-E07F-4F76-982E-BE06E829E25E} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 		{77B5AED2-C558-449C-9396-760641052C83} = {0365B805-C7E6-472F-A612-23E74172EF9F}
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A} = {B8308834-F89D-4BC9-A3F6-79A14391B7AA}
+		{BAFBF582-24B0-4B84-9CDF-4B701D81463A} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 	EndGlobalSection
 EndGlobal

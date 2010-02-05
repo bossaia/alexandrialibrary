@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -78,11 +82,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="TypeRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alexandria\Alexandria.csproj">
+    <ProjectReference Include="..\Gnosis.Alexandria\Gnosis.Alexandria.csproj">
       <Project>{77B5AED2-C558-449C-9396-760641052C83}</Project>
-      <Name>Alexandria</Name>
+      <Name>Gnosis.Alexandria</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using StructureMap;
+
 namespace Gnosis.Sphinx
 {
 	static class Program
@@ -13,6 +15,8 @@ namespace Gnosis.Sphinx
 		[STAThread]
 		static void Main()
 		{
+			ObjectFactory.Initialize(x => x.AddRegistry<TypeRegistry>());
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Main());
