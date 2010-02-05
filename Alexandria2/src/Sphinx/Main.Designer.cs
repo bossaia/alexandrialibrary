@@ -1,4 +1,4 @@
-﻿namespace Sphinx
+﻿namespace Gnosis.Sphinx
 {
 	partial class Main
 	{

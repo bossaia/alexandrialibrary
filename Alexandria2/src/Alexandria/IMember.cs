@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alexandria
+namespace Gnosis.Alexandria
 {
 	public interface IMember
 		: INamedEntity, IEquatable<IMember>
 	{
-		DateTime Joined { get; }
-		DateTime Left { get; }
-		IGroup Group { get; }
+		DateTime? DateJoined { get; }
+		DateTime? DateLeft { get; }
+		IArtist Group { get; }
 		IPerson Person { get; }
 		ISet<Role> Roles();
 
-		void Join(DateTime date);
-		void Leave(DateTime date);
+		void ChangeDateJoined(DateTime? dateJoined);
+		void ChangeDateLeft(DateTime? dateLeft);
 		void AddRole(Role role);
 		void RemoveRole(Role role);
 	}

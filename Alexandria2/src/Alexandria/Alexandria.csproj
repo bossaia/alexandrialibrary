@@ -8,8 +8,8 @@
     <ProjectGuid>{77B5AED2-C558-449C-9396-760641052C83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alexandria</RootNamespace>
-    <AssemblyName>Alexandria</AssemblyName>
+    <RootNamespace>Gnosis.Alexandria</RootNamespace>
+    <AssemblyName>Gnosis.Alexandria</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,13 +49,12 @@
     <Compile Include="IAlbum.cs" />
     <Compile Include="IAlbumRepository.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="IGroup.cs" />
+    <Compile Include="IArtist.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="IMediaRepository.cs" />
     <Compile Include="IMember.cs" />
     <Compile Include="INamedEntity.cs" />
     <Compile Include="IPerson.cs" />
-    <Compile Include="IRelease.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="ISet.cs" />
