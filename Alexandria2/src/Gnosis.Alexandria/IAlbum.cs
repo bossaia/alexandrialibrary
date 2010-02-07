@@ -6,22 +6,21 @@ using System.Text;
 namespace Gnosis.Alexandria
 {
 	public interface IAlbum
-		: INamedEntity, IEquatable<IAlbum>
+		: INamed, IEquatable<IAlbum>
 	{
 		IArtist Artist { get; }
-		DateTime? ReleaseDate { get; }
-		Country ReleaseCountry { get; }
-		int DiscNumber { get; }
-		ISet<ITrack> Tracks();
-		ISet<IMedia> Media();
+		AlbumType Type { get; }
+		DateTime Date { get; }
+		Country Country { get; }
+		int Number { get; }
+		ITuple<ITrack> Tracks();
 
 		void ChangeArtist(IArtist artist);
-		void ChangeReleaseDate(DateTime releaseDate);
-		void ChangeReleaseCountry(Country releaseCountry);
-		void ChangeDiscNumber(int discNumber);
+		void ChangeType(AlbumType type);
+		void ChangeDate(DateTime releaseDate);
+		void ChangeCountry(Country releaseCountry);
+		void ChangeNumber(int discNumber);
 		void AddTrack(ITrack track);
 		void RemoveTrack(ITrack track);
-		void AddMedia(IMedia media);
-		void RemoveMedia(IMedia media);
 	}
 }

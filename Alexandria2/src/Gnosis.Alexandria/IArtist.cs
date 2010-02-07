@@ -6,19 +6,24 @@ using System.Text;
 namespace Gnosis.Alexandria
 {
 	public interface IArtist
-		: INamedEntity
+		: INamed, IEquatable<IArtist>
 	{
-		DateTime FormedOn { get; }
-		Country FormedIn { get; }
-		DateTime DisbandedOn { get; }
+		DateTime Date { get; }
+		Country Country { get; }
 		ISet<IMember> Members();
-		ISet<IMedia> Media();
+		ISet<IAlbum> Albums();
+		ISet<IVideo> Videos();
 
-		void Formed(DateTime date, Country country);
-		void Disbanded(DateTime date);
+		void ChangeDate(DateTime date);
+		void ChangeCountry(Country country);
+		
 		void AddMember(IMember member);
 		void RemoveMember(IMember member);
-		void AddMedia(IMedia media);
-		void RemoveMedia(IMedia media);
+
+		void AddAlbum(IAlbum album);
+		void RemoveAlbum(IAlbum album);
+
+		void AddVideo(IVideo video);
+		void RemoveVideo(IVideo video);
 	}
 }
