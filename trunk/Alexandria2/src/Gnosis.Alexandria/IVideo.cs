@@ -5,18 +5,19 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface ITrack
-		: INamed, IEquatable<ITrack>, IComparable<ITrack>
+	public interface IVideo
+		: INamed, IEquatable<IVideo>
 	{
 		IArtist Artist { get; }
-		IAlbum Album { get; }
+		DateTime Date { get; }
+		Country Country { get; }
 		int Number { get; }
-		TimeSpan Duration { get; }
+		ISet<IMedia> Media { get; }
 
 		void ChangeArtist(IArtist artist);
-		void ChangeAlbum(IAlbum album);
+		void ChangeDate(DateTime date);
+		void ChangeCountry(Country country);
 		void ChangeNumber(int number);
-		void ChangeDuration(TimeSpan duration);
 
 		void AddMedia(IMedia media);
 		void RemoveMedia(IMedia media);

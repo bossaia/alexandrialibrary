@@ -5,14 +5,11 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface INamedEntity
+	public interface INamed
 		: IEntity
 	{
 		Name Name { get; }
-		ISet<Name> Aliases();
 
 		void Rename(Name name);
-		void AddAlias(Name alias);
-		void RemoveAlias(Name alias);
 	}
 }

@@ -6,16 +6,19 @@ using System.Text;
 namespace Gnosis.Alexandria
 {
 	public interface IMember
-		: INamedEntity, IEquatable<IMember>
+		: INamed, IEquatable<IMember>
 	{
-		DateTime? DateJoined { get; }
-		DateTime? DateLeft { get; }
 		IArtist Group { get; }
-		IPerson Person { get; }
+		IArtist Individual { get; }
+		DateTime Joined { get; }
+		DateTime Left { get; }
 		ISet<Role> Roles();
 
-		void ChangeDateJoined(DateTime? dateJoined);
-		void ChangeDateLeft(DateTime? dateLeft);
+		void ChangeGroup(IArtist group);
+		void ChangeIndividual(IArtist individual);
+		void ChangeJoined(DateTime joined);
+		void ChangeLeft(DateTime left);
+
 		void AddRole(Role role);
 		void RemoveRole(Role role);
 	}

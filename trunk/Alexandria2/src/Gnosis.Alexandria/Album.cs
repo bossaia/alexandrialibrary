@@ -6,9 +6,17 @@ using System.Text;
 namespace Gnosis.Alexandria
 {
 	public class Album
-		: NamedEntityBase, IAlbum
+		: NamedBase, IAlbum
 	{
-		public Album(ITrackRepository trackRepository, IMediaRepository mediaRepository)
+		public Album(ILinkRepository linkRepository, ITagRepository tagRepository, ITrackRepository trackRepository, IMediaRepository mediaRepository)
+			: base(linkRepository, tagRepository)
+		{
+			_trackRepository = trackRepository;
+			_mediaRepository = mediaRepository;
+		}
+
+		public Album(ILinkRepository linkRepository, ITagRepository tagRepository, ITrackRepository trackRepository, IMediaRepository mediaRepository, long id)
+			: base(linkRepository, tagRepository, id)
 		{
 			_trackRepository = trackRepository;
 			_mediaRepository = mediaRepository;
@@ -17,25 +25,17 @@ namespace Gnosis.Alexandria
 		private readonly ITrackRepository _trackRepository;
 		private readonly IMediaRepository _mediaRepository;
 		private IArtist _artist;
-		private DateTime? _releaseDate;
-		private Country _releaseCountry;
-		private int _discNumber;
-		private Set<ITrack> _tracks;
-		private Set<IMedia> _media;
+		private AlbumType _type;
+		private DateTime _date;
+		private Country _country;
+		private int _number;
+		private Tuple<ITrack> _tracks;
 
-		private Set<ITrack> TrackSet
+		private Tuple<ITrack> TrackTuple
 		{
 			get
 			{
-				return _tracks ?? (_tracks = new Set<ITrack>(_trackRepository.GetByAlbum(this)));
-			}
-		}
-
-		private Set<IMedia> MediaSet
-		{
-			get
-			{
-				return _media ?? (_media = new Set<IMedia>(_mediaRepository.GetByParentId(Id)));
+				return _tracks ?? (_tracks = new Tuple<ITrack>(_trackRepository.GetByAlbum(this)));
 			}
 		}
 
@@ -46,29 +46,29 @@ namespace Gnosis.Alexandria
 			get { return _artist; }
 		}
 
-		public DateTime? ReleaseDate
+		public AlbumType Type
 		{
-			get { return _releaseDate; }
+			get { return _type; }
 		}
 
-		public Country ReleaseCountry
+		public DateTime Date
 		{
-			get { return _releaseCountry; }
+			get { return _date; }
 		}
 
-		public int DiscNumber
+		public Country Country
 		{
-			get { return _discNumber; }
+			get { return _country; }
 		}
 
-		public ISet<ITrack> Tracks()
+		public int Number
 		{
-			return TrackSet;
+			get { return _number; }
 		}
 
-		public ISet<IMedia> Media()
+		public ITuple<ITrack> Tracks()
 		{
-			return MediaSet;
+			return TrackTuple;
 		}
 
 		public void ChangeArtist(IArtist artist)
@@ -76,39 +76,34 @@ namespace Gnosis.Alexandria
 			_artist = artist;
 		}
 
-		public void ChangeReleaseDate(DateTime releaseDate)
+		public void ChangeType(AlbumType type)
 		{
-			_releaseDate = releaseDate;
+			_type = type;
 		}
 
-		public void ChangeReleaseCountry(Country releaseCountry)
+		public void ChangeDate(DateTime date)
 		{
-			_releaseCountry = releaseCountry;
+			_date = date;
 		}
 
-		public void ChangeDiscNumber(int discNumber)
+		public void ChangeCountry(Country country)
 		{
-			_discNumber = discNumber;
+			_country = country;
+		}
+
+		public void ChangeNumber(int number)
+		{
+			_number = number;
 		}
 
 		public void AddTrack(ITrack track)
 		{
-			TrackSet.Add(track);
+			TrackTuple.Add(track);
 		}
 
 		public void RemoveTrack(ITrack track)
 		{
-			TrackSet.Remove(track);
-		}
-
-		public void AddMedia(IMedia media)
-		{
-			MediaSet.Add(media);
-		}
-
-		public void RemoveMedia(IMedia media)
-		{
-			MediaSet.Remove(media);
+			TrackTuple.Remove(track);
 		}
 
 		#endregion
