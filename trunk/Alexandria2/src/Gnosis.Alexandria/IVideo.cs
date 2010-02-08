@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria
 		DateTime Date { get; }
 		Country Country { get; }
 		int Number { get; }
-		ISet<IMedia> Media { get; }
+		IEnumerable<IMedia> Media { get; }
 
 		void ChangeArtist(IArtist artist);
 		void ChangeDate(DateTime date);

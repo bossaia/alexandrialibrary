@@ -10,9 +10,9 @@ namespace Gnosis.Alexandria
 	{
 		DateTime Date { get; }
 		Country Country { get; }
-		ISet<IMember> Members();
-		ISet<IAlbum> Albums();
-		ISet<IVideo> Videos();
+		IEnumerable<IMember> Members();
+		IEnumerable<IAlbum> Albums();
+		IEnumerable<IVideo> Videos();
 
 		void ChangeDate(DateTime date);
 		void ChangeCountry(Country country);

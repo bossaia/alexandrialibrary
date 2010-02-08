@@ -12,7 +12,7 @@ namespace Gnosis.Alexandria
 		IArtist Individual { get; }
 		DateTime Joined { get; }
 		DateTime Left { get; }
-		ISet<Role> Roles();
+		IEnumerable<Role> Roles();
 
 		void ChangeGroup(IArtist group);
 		void ChangeIndividual(IArtist individual);

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Collections
 {
-	public interface ITuple<T>
+	public interface ISet<T>
 		: IEnumerable<T>
-		where T : IEquatable<T>, IComparable<T>
+		where T : IEquatable<T>
 	{
 	}
 }

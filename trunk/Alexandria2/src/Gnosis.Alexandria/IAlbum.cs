@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria
 		DateTime Date { get; }
 		Country Country { get; }
 		int Number { get; }
-		ITuple<ITrack> Tracks();
+		IEnumerable<ITrack> Tracks();
 
 		void ChangeArtist(IArtist artist);
 		void ChangeType(AlbumType type);

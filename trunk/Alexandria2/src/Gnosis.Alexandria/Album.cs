@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Collections;
+using Gnosis.Alexandria.Repositories;
+
 namespace Gnosis.Alexandria
 {
 	public class Album
@@ -66,7 +69,7 @@ namespace Gnosis.Alexandria
 			get { return _number; }
 		}
 
-		public ITuple<ITrack> Tracks()
+		public IEnumerable<ITrack> Tracks()
 		{
 			return TrackTuple;
 		}

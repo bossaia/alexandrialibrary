@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Collections
 {
 	public class Tuple<T>
 		: ITuple<T>
