@@ -35,6 +35,10 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.SQLite, Version=1.0.40.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\SQLite\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -46,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
+    <Compile Include="AlbumRepository.cs" />
     <Compile Include="AlbumType.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="EntityBase.cs" />
@@ -55,6 +60,7 @@
     <Compile Include="IArtist.cs" />
     <Compile Include="ILinkRepository.cs" />
     <Compile Include="IMedia.cs" />
+    <Compile Include="IMediaHandlingStrategy.cs" />
     <Compile Include="IMediaRepository.cs" />
     <Compile Include="IMember.cs" />
     <Compile Include="INamed.cs" />
@@ -69,6 +75,7 @@
     <Compile Include="MediaRepository.cs" />
     <Compile Include="MediaType.cs" />
     <Compile Include="NamedBase.cs" />
+    <Compile Include="RepositoryBase.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="ISet.cs" />
     <Compile Include="ITrack.cs" />
@@ -89,4 +96,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
