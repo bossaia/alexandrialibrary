@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Collections;
+using Gnosis.Alexandria.Repositories;
+
 namespace Gnosis.Alexandria
 {
 	public abstract class EntityBase
@@ -43,12 +46,12 @@ namespace Gnosis.Alexandria
 			get { return _id; }
 		}
 
-		public ISet<Link> Links()
+		public IEnumerable<Link> Links()
 		{
 			return LinkSet;
 		}
 
-		public ISet<Tag> Tags()
+		public IEnumerable<Tag> Tags()
 		{
 			return TagSet;
 		}

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using Gnosis.Alexandria;
+using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Sphinx
 {

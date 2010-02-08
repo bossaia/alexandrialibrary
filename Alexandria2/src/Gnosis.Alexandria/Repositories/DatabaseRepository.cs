@@ -5,9 +5,9 @@ using System.Text;
 
 using System.Data.SQLite;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Repositories
 {
-	public abstract class RepositoryBase
+	public abstract class DatabaseRepository
 	{
 		protected string GetConnectionString()
 		{

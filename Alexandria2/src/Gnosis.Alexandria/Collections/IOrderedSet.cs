@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Collections
 {
-	public interface ISet<T>
-		: IEnumerable<T>
-		where T : IEquatable<T>
+	public interface IOrderedSet<K, V>
+		: IEnumerable<V>
 	{
 	}
 }

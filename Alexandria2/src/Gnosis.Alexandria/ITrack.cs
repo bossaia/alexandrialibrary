@@ -17,8 +17,5 @@ namespace Gnosis.Alexandria
 		void ChangeAlbum(IAlbum album);
 		void ChangeNumber(int number);
 		void ChangeDuration(TimeSpan duration);
-
-		void AddMedia(IMedia media);
-		void RemoveMedia(IMedia media);
 	}
 }

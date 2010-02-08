@@ -8,7 +8,7 @@ namespace Gnosis.Alexandria
 	public interface IPlaylist
 		: INamed, IEquatable<IPlaylist>
 	{
-		ITuple<IPlaylistItem> Items { get; }
+		IEnumerable<IPlaylistItem> Items { get; }
 
 		void AddItem(IPlaylistItem item);
 		void RemoveItem(IPlaylistItem item);

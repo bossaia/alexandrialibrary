@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Alexandria.Repositories
 {
 	public interface IMediaRepository
 	{
