@@ -16,6 +16,9 @@ namespace Gnosis.Sphinx
 		public Main()
 		{
 			InitializeComponent();
+
+			AlbumRepository repo = new AlbumRepository();
+			repo.GetAll();
 		}
 	}
 }

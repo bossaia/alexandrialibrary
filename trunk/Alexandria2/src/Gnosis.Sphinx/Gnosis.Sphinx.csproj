@@ -96,4 +96,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>copy ..\..\..\..\lib\SQLite\sqlite3.dll .</PostBuildEvent>
+  </PropertyGroup>
 </Project>
