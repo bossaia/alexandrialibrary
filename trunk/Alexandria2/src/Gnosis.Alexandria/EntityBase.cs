@@ -11,32 +11,35 @@ namespace Gnosis.Alexandria
 	public abstract class EntityBase
 		: IEntity
 	{
-		protected EntityBase(ILinkRepository linkRepository, ITagRepository tagRepository)
-			: this(linkRepository, tagRepository, 0)
+		protected EntityBase(IContext context)
+			: this(context, 0)
 		{
 		}
 
-		protected EntityBase(ILinkRepository linkRepository, ITagRepository tagRepository, long id)
+		protected EntityBase(IContext context, long id)
 		{
-			_linkRepository = linkRepository;
-			_tagRepository = tagRepository;
+			_context = context;
 			_id = id;
 		}
 
 		private long _id;
-		private ILinkRepository _linkRepository;
-		private ITagRepository _tagRepository;
+		private IContext _context;
 		private Set<Link> _links;
 		private Set<Tag> _tags;
 
 		private Set<Link> LinkSet
 		{
-			get { return _links ?? (_links = new Set<Link>(_linkRepository.GetBySource(this))); }
+			get { return _links ?? (_links = new Set<Link>(_context.Links.GetBySource(this))); }
 		}
 
 		private Set<Tag> TagSet
 		{
-			get { return _tags ?? (_tags = new Set<Tag>(_tagRepository.GetByEntity(this))); }
+			get { return _tags ?? (_tags = new Set<Tag>(_context.Tags.GetByEntity(this))); }
+		}
+
+		protected IContext Context
+		{
+			get { return _context; }
 		}
 
 		#region IEntity Members

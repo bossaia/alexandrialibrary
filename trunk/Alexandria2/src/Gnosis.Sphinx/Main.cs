@@ -18,8 +18,8 @@ namespace Gnosis.Sphinx
 		{
 			InitializeComponent();
 
-			AlbumRepository repo = new AlbumRepository();
-			repo.GetAll();
+			IContext context = null;
+			var albums = context.Albums.GetAll();
 		}
 	}
 }

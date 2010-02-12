@@ -11,22 +11,16 @@ namespace Gnosis.Alexandria
 	public class Album
 		: NamedBase, IAlbum
 	{
-		public Album(ILinkRepository linkRepository, ITagRepository tagRepository, ITrackRepository trackRepository, IMediaRepository mediaRepository)
-			: base(linkRepository, tagRepository)
+		public Album(IContext context)
+			: base(context, 0)
 		{
-			_trackRepository = trackRepository;
-			_mediaRepository = mediaRepository;
 		}
 
-		public Album(ILinkRepository linkRepository, ITagRepository tagRepository, ITrackRepository trackRepository, IMediaRepository mediaRepository, long id)
-			: base(linkRepository, tagRepository, id)
+		public Album(IContext context, long id)
+			: base(context, id)
 		{
-			_trackRepository = trackRepository;
-			_mediaRepository = mediaRepository;
 		}
 
-		private readonly ITrackRepository _trackRepository;
-		private readonly IMediaRepository _mediaRepository;
 		private IArtist _artist;
 		private AlbumType _type;
 		private DateTime _date;
@@ -38,7 +32,7 @@ namespace Gnosis.Alexandria
 		{
 			get
 			{
-				return _tracks ?? (_tracks = new Tuple<ITrack>(_trackRepository.GetByAlbum(this)));
+				return _tracks ?? (_tracks = new Tuple<ITrack>(Context.Tracks.GetByAlbum(this)));
 			}
 		}
 

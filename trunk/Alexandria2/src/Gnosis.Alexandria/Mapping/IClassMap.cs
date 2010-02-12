@@ -9,9 +9,13 @@ namespace Gnosis.Alexandria.Mapping
 	public interface IClassMap<T>
 		where T : IEntity
 	{
+		string Key { get; }
+		string Table { get; }
+
+		string GetValue(object value);
 		string GetInitializeCommandText();
 		string GetSaveCommandText(T entity);
-		string GetDeleteCommandText(T entity);
-		IEnumerable<T> Load(IDataReader reader);
+		string GetDeleteCommandText(long id);
+		IList<T> Load(IDataReader reader);
 	}
 }

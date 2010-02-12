@@ -16,7 +16,6 @@ namespace Gnosis.Alexandria.Mapping
 			_table = table;
 		}
 
-		private const string COL_ID = "Id";
 		private const string TYPE_INTEGER = "INTEGER";
 		private const string TYPE_REAL = "REAL";
 		private const string TYPE_TEXT = "TEXT";
@@ -53,12 +52,23 @@ namespace Gnosis.Alexandria.Mapping
 			get { return _context; }
 		}
 
-		protected string Table
+		protected abstract T CreateInstance(long id);
+		protected abstract object GetValue(T entity, string column);
+		protected abstract void SetValue(T entity, string column, object value);
+
+		#region IClassMap<T> Members
+
+		public string Key
+		{
+			get { return "Id"; }
+		}
+
+		public string Table
 		{
 			get { return _table; }
 		}
 
-		protected string GetValue(object value)
+		public virtual string GetValue(object value)
 		{
 			if (value == null)
 				return "''";
@@ -79,15 +89,10 @@ namespace Gnosis.Alexandria.Mapping
 			}
 		}
 
-		protected abstract object GetValue(T entity, string column);
-		protected abstract void SetValue(T entity, string column, object value);
-
-		#region IClassMap<T> Members
-
 		public virtual string GetInitializeCommandText()
 		{
 			var builder = new StringBuilder();
-			builder.AppendFormat("CREATE TABLE IF NOT EXISTS {0} ({1} {2} PRIMARY KEY AUTOINCREMENT", Table, COL_ID, GetDataType(typeof(int)));
+			builder.AppendFormat("CREATE TABLE IF NOT EXISTS {0} ({1} {2} PRIMARY KEY AUTOINCREMENT", Table, Key, GetDataType(typeof(int)));
 
 			foreach (KeyValuePair<string, Type> column in Columns)
 			{
@@ -102,7 +107,7 @@ namespace Gnosis.Alexandria.Mapping
 		public virtual string GetSaveCommandText(T entity)
 		{
 			var cols = new StringBuilder();
-			cols.AppendFormat("REPLACE INTO {0} ({1}", Table, COL_ID);
+			cols.AppendFormat("REPLACE INTO {0} ({1}", Table, Key);
 			var vals = new StringBuilder();
 			vals.Append(") VALUES (");
 
@@ -119,15 +124,15 @@ namespace Gnosis.Alexandria.Mapping
 			return cols.ToString() + vals.ToString();
 		}
 
-		public virtual string GetDeleteCommandText(T entity)
+		public virtual string GetDeleteCommandText(long id)
 		{
 			var builder = new StringBuilder();
-			builder.AppendFormat("DELETE FROM {0} WHERE {1} = {2}", Table, COL_ID, GetValue(entity.Id));
+			builder.AppendFormat("DELETE FROM {0} WHERE {1} = {2}", Table, Key, GetValue(id));
 
 			return builder.ToString();
 		}
 
-		public virtual IEnumerable<T> Load(IDataReader reader)
+		public virtual IList<T> Load(IDataReader reader)
 		{
 			List<T> list = new List<T>();
 
@@ -135,9 +140,9 @@ namespace Gnosis.Alexandria.Mapping
 			{
 				while (reader.Read())
 				{
-					long id = Convert.ToInt64(reader[COL_ID]);
+					long id = Convert.ToInt64(reader[Key]);
 
-					T entity = _context.Get<T>(id);
+					T entity = CreateInstance(id);
 
 					foreach (KeyValuePair<string, Type> column in Columns)
 					{

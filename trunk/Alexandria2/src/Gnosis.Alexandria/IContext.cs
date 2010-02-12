@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Repositories;
+
 namespace Gnosis.Alexandria
 {
 	public interface IContext
 	{
-		T Get<T>()
-			where T : IEntity;
+		IAlbumRepository Albums { get; }
+		IAlbumTypeRepository AlbumTypes { get; }
+		IArtistRepository Artists { get; }
+		ICountryRepository Countries { get; }
+		ILinkRepository Links { get; }
+		IMediaRepository Media { get; }
+		ITagRepository Tags { get; }
+		ITrackRepository Tracks { get; }
 
-		T Get<T>(long id)
-			where T : IEntity;
-
-		T Get<T>(string code)
-			where T : struct;
+		void Initialize();
 	}
 }
