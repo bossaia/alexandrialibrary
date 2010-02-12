@@ -11,13 +11,13 @@ namespace Gnosis.Alexandria
 	public abstract class NamedBase
 		: EntityBase, INamed
 	{
-		protected NamedBase(ILinkRepository linkRepository, ITagRepository tagRepository)
-			: base(linkRepository, tagRepository)
+		protected NamedBase(IContext context)
+			: base(context)
 		{
 		}
 
-		protected NamedBase(ILinkRepository linkRepository, ITagRepository tagRepository, long id)
-			: base(linkRepository, tagRepository, id)
+		protected NamedBase(IContext context, long id)
+			: base(context, id)
 		{
 		}
 

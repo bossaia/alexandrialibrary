@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Album.cs" />
     <Compile Include="Collections\IOrderedSet.cs" />
+    <Compile Include="Factories\IFactory.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="Mapping\AlbumMap.cs" />
     <Compile Include="Mapping\ClassMapBase.cs" />
@@ -63,6 +64,9 @@
     <Compile Include="Repositories\IAlbumRepository.cs" />
     <Compile Include="IEntity.cs" />
     <Compile Include="IArtist.cs" />
+    <Compile Include="Repositories\IAlbumTypeRepository.cs" />
+    <Compile Include="Repositories\IArtistRepository.cs" />
+    <Compile Include="Repositories\ICountryRepository.cs" />
     <Compile Include="Repositories\ILinkRepository.cs" />
     <Compile Include="IMedia.cs" />
     <Compile Include="Handlers\IMediaHandlingStrategy.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="INamed.cs" />
     <Compile Include="IPlaylist.cs" />
     <Compile Include="IPlaylistItem.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ITagRepository.cs" />
     <Compile Include="Repositories\ITrackRepository.cs" />
     <Compile Include="Collections\ITuple.cs" />
@@ -81,6 +86,7 @@
     <Compile Include="MediaType.cs" />
     <Compile Include="NamedBase.cs" />
     <Compile Include="Repositories\DatabaseRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Collections\ISet.cs" />
     <Compile Include="ITrack.cs" />

@@ -3,43 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Factories;
+using Gnosis.Alexandria.Mapping;
+
 namespace Gnosis.Alexandria.Repositories
 {
 	public class AlbumRepository
-		: DatabaseRepository, IAlbumRepository
+		: DatabaseRepository<IAlbum>, IAlbumRepository
 	{
-		#region IAlbumRepository Members
-
-		public IList<IAlbum> GetAll()
+		public AlbumRepository(IContext context, IFactory<IAlbum> factory, IClassMap<IAlbum> map)
+			: base(context, factory, map)
 		{
-			List<IAlbum> albums = new List<IAlbum>();
-
-			using (var connection = GetConnection())
-			{
-				connection.Open();
-			}
-
-			return albums;
 		}
+
+		#region IAlbumRepository Members
 
 		public IList<IAlbum> GetByArtist(IArtist artist)
 		{
-			throw new NotImplementedException();
-		}
+			string commandText = string.Format("SELECT * FROM {0} WHERE Artist = {1}", Map.Table, artist.Id);
 
-		public IList<IAlbum> GetByCriteria(Predicate<IAlbum> criteria)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Save(IAlbum album)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Delete(long id)
-		{
-			throw new NotImplementedException();
+			return List(commandText);
 		}
 
 		#endregion

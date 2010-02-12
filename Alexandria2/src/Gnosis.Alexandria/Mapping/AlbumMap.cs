@@ -7,7 +7,7 @@ using System.Text;
 namespace Gnosis.Alexandria.Mapping
 {
 	public class AlbumMap
-		: ClassMapBase<Album>
+		: ClassMapBase<IAlbum>
 	{
 		public AlbumMap(IContext context)
 			: base(context, "Album")
@@ -33,7 +33,12 @@ namespace Gnosis.Alexandria.Mapping
 		private const string COL_COUNTRY = "Country";
 		private const string COL_NUMBER = "Number";
 
-		protected override object GetValue(Album entity, string column)
+		protected override IAlbum CreateInstance(long id)
+		{
+			return Context.Albums.Get(id);
+		}
+
+		protected override object GetValue(IAlbum entity, string column)
 		{
 			if (entity == null)
 				return null;
@@ -63,17 +68,17 @@ namespace Gnosis.Alexandria.Mapping
 			}
 		}
 
-		protected override void SetValue(Album entity, string column, object value)
+		protected override void SetValue(IAlbum entity, string column, object value)
 		{
 			if (entity != null)
 			{
 				switch (column)
 				{
 					case COL_ARTIST:
-						entity.ChangeArtist(Context.Get<IArtist>(Convert.ToInt64(value)));
+						entity.ChangeArtist(Context.Artists.Get(Convert.ToInt64(value)));
 						break;
 					case COL_COUNTRY:
-						entity.ChangeCountry(Context.Get<Country>((string)value));
+						entity.ChangeCountry(Context.Countries.Get((string)value));
 						break;
 					case COL_DATE:
 						entity.ChangeDate(DateTime.Parse((string)value));
@@ -85,7 +90,7 @@ namespace Gnosis.Alexandria.Mapping
 						entity.ChangeNumber(Convert.ToInt32(value));
 						break;
 					case COL_TYPE:
-						entity.ChangeType(Context.Get<AlbumType>((string)value));
+						entity.ChangeType(Context.AlbumTypes.Get((string)value));
 						break;
 					default:
 						break;

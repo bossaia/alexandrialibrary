@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Repositories
 {
-	public interface IAlbumRepository
-		: IRepository<IAlbum>
+	public interface ICountryRepository
 	{
-		IList<IAlbum> GetByArtist(IArtist artist);
+		Country Get(string code);
+		IEnumerable<Country> GetAll();
 	}
 }
