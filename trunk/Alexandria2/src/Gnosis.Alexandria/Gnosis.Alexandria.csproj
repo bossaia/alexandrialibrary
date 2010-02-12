@@ -51,6 +51,9 @@
   <ItemGroup>
     <Compile Include="Album.cs" />
     <Compile Include="Collections\IOrderedSet.cs" />
+    <Compile Include="IContext.cs" />
+    <Compile Include="Mapping\AlbumMap.cs" />
+    <Compile Include="Mapping\ClassMapBase.cs" />
     <Compile Include="Mapping\IClassMap.cs" />
     <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="AlbumType.cs" />
