@@ -8,25 +8,32 @@ namespace Gnosis.Alexandria
 	public struct Name
 		: IComparable<Name>, IEquatable<Name>
 	{
-		public Name(string original, string normalized, string hash)
+		public Name(string name)
 		{
-			_original = original;
-			_normalized = normalized;
-			_hash = hash;
+			_originalName = name;
+			_displayName = name;
+			_searchName = name;
+			_hash = name;
 		}
 
-		private readonly string _original;
-		private readonly string _normalized;
+		private readonly string _originalName;
+		private readonly string _displayName;
+		private readonly string _searchName;
 		private readonly string _hash;
 
-		public string Original
+		public string OriginalName
 		{
-			get { return _original; }
+			get { return _originalName; }
 		}
 
-		public string Normalized
+		public string DisplayName
 		{
-			get { return _normalized; }
+			get { return _displayName; }
+		}
+
+		public string SearchName
+		{
+			get { return _searchName; }
 		}
 
 		public string Hash
@@ -36,7 +43,7 @@ namespace Gnosis.Alexandria
 
 		#region Static Members
 
-		public static readonly Name Empty = new Name(string.Empty, string.Empty, string.Empty);
+		public static readonly Name Empty = new Name(string.Empty);
 
 		#endregion
 
@@ -72,7 +79,7 @@ namespace Gnosis.Alexandria
 			return name1.CompareTo(name2) <= 0;
 		}
 
-#endregion
+		#endregion
 
 		#region Overrides
 
@@ -86,12 +93,12 @@ namespace Gnosis.Alexandria
 
 		public override int GetHashCode()
 		{
-			return _normalized.GetHashCode();
+			return _searchName.GetHashCode();
 		}
 
 		public override string ToString()
 		{
-			return _normalized;
+			return _displayName;
 		}
 
 		#endregion
@@ -100,7 +107,7 @@ namespace Gnosis.Alexandria
 
 		public int CompareTo(Name other)
 		{
-			return _normalized.CompareTo(other._normalized);
+			return _searchName.CompareTo(other._searchName);
 		}
 
 		#endregion
@@ -109,7 +116,7 @@ namespace Gnosis.Alexandria
 
 		public bool Equals(Name other)
 		{
-			return _normalized == other._normalized;
+			return _searchName == other._searchName;
 		}
 
 		#endregion
