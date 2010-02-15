@@ -5,19 +5,29 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public struct Link
-		: IEquatable<Link>
+	public class Link
+		: EntityBase, ILink
 	{
-		public Link(IEntity source, IEntity target, LinkType type)
+		public Link(IContext context)
+			: base(context)
 		{
-			_source = source;
-			_target = target;
-			_type = type;
+		}
+
+		public Link(IContext context, long id)
+			: base(context, id)
+		{
 		}
 
 		private IEntity _source;
 		private IEntity _target;
 		private LinkType _type;
+
+		public override int GetHashCode()
+		{
+			return string.Format("{0}|{1}|{2}", _source.Id, _target.Id, _type.Name).GetHashCode();
+		}
+
+		#region ILink Members
 
 		public IEntity Source
 		{
@@ -34,14 +44,26 @@ namespace Gnosis.Alexandria
 			get { return _type; }
 		}
 
-		public override int GetHashCode()
+		public void ChangeSource(IEntity source)
 		{
-			return string.Format("{0}|{1}|{2}", _source.Id, _target.Id, _type.Name).GetHashCode();
+			_source = source;
 		}
 
-		#region IEquatable<Link> Members
+		public void ChangeTarget(IEntity target)
+		{
+			_target = target;
+		}
 
-		public bool Equals(Link other)
+		public void ChangeType(LinkType type)
+		{
+			_type = type;
+		}
+
+		#endregion
+
+		#region IEquatable<ILink> Members
+
+		public bool Equals(ILink other)
 		{
 			return GetHashCode() == other.GetHashCode();
 		}

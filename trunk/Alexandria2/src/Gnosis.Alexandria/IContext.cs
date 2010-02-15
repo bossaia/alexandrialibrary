@@ -19,5 +19,6 @@ namespace Gnosis.Alexandria
 		ITrackRepository Tracks { get; }
 
 		void Initialize();
+		void Persist(IChangeSet changeSet);
 	}
 }

@@ -14,8 +14,8 @@ namespace Gnosis.Alexandria.Mapping
 
 		string GetValue(object value);
 		string GetInitializeCommandText();
-		string GetSaveCommandText(T entity);
-		string GetDeleteCommandText(long id);
+		IEnumerable<string> GetSaveCommandTexts(T entity);
+		IEnumerable<string> GetDeleteCommandTexts(long id);
 		IList<T> Load(IDataReader reader);
 	}
 }
