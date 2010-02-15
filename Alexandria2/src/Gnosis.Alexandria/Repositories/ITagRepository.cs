@@ -7,6 +7,6 @@ namespace Gnosis.Alexandria.Repositories
 {
 	public interface ITagRepository
 	{
-		IEnumerable<Tag> GetByEntity(IEntity entity);
+		IEnumerable<ITag> GetByEntity(IEntity entity);
 	}
 }

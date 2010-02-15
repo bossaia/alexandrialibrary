@@ -7,7 +7,7 @@ namespace Gnosis.Alexandria.Repositories
 {
 	public interface ILinkRepository
 	{
-		IEnumerable<Link> GetBySource(IEntity source);
-		IEnumerable<Link> GetByTarget(IEntity target);
+		IEnumerable<ILink> GetBySource(IEntity source);
+		IEnumerable<ILink> GetByTarget(IEntity target);
 	}
 }

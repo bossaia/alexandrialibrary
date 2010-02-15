@@ -104,8 +104,10 @@ namespace Gnosis.Alexandria.Mapping
 			return builder.ToString();
 		}
 
-		public virtual string GetSaveCommandText(T entity)
+		public virtual IEnumerable<string> GetSaveCommandTexts(T entity)
 		{
+			List<string> texts = new List<string>();
+
 			var cols = new StringBuilder();
 			cols.AppendFormat("REPLACE INTO {0} ({1}", Table, Key);
 			var vals = new StringBuilder();
@@ -121,15 +123,21 @@ namespace Gnosis.Alexandria.Mapping
 			
 			vals.Append(")");
 
-			return cols.ToString() + vals.ToString();
+			texts.Add(cols.ToString() + vals.ToString());
+
+			return texts;
 		}
 
-		public virtual string GetDeleteCommandText(long id)
+		public virtual IEnumerable<string> GetDeleteCommandTexts(long id)
 		{
+			List<string> texts = new List<string>();
+
 			var builder = new StringBuilder();
 			builder.AppendFormat("DELETE FROM {0} WHERE {1} = {2}", Table, Key, GetValue(id));
 
-			return builder.ToString();
+			texts.Add(builder.ToString());
+
+			return texts;
 		}
 
 		public virtual IList<T> Load(IDataReader reader)

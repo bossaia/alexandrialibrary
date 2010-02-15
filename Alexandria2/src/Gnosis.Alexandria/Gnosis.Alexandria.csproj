@@ -50,9 +50,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Album.cs" />
+    <Compile Include="ChangeSet.cs" />
+    <Compile Include="ChangeType.cs" />
+    <Compile Include="Change.cs" />
     <Compile Include="Collections\IOrderedSet.cs" />
     <Compile Include="Factories\IFactory.cs" />
+    <Compile Include="IChangeSet.cs" />
     <Compile Include="IContext.cs" />
+    <Compile Include="ILink.cs" />
+    <Compile Include="ITag.cs" />
     <Compile Include="Mapping\AlbumMap.cs" />
     <Compile Include="Mapping\ClassMapBase.cs" />
     <Compile Include="Mapping\IClassMap.cs" />

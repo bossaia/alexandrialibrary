@@ -5,19 +5,24 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public struct Tag
-		: IEquatable<Tag>
+	public class Tag
+		: EntityBase, ITag
 	{
-		public Tag(IEntity entity, object value, TagType type)
+		public Tag(IContext context)
+			: base(context)
 		{
-			_entity = entity;
-			_value = value;
-			_type = type;
+		}
+
+		public Tag(IContext context, long id)
+			: base(context, id)
+		{
 		}
 
 		private IEntity _entity;
 		private object _value;
 		private TagType _type;
+
+		#region ITag Members
 
 		public IEntity Entity
 		{
@@ -34,14 +39,31 @@ namespace Gnosis.Alexandria
 			get { return _type; }
 		}
 
+		public void ChangeEntity(IEntity entity)
+		{
+			_entity = entity;
+		}
+
+		public void ChangeValue(object value)
+		{
+			_value = value;
+		}
+
+		public void ChangeType(TagType type)
+		{
+			_type = type;
+		}
+
+		#endregion
+
 		public override int GetHashCode()
 		{
 			return string.Format("{0}|{1}|{2}", _entity.Id, _value.GetHashCode(), _type.Name).GetHashCode();
 		}
 
-		#region IEquatable<Tag> Members
+		#region IEquatable<ITag> Members
 
-		public bool Equals(Tag other)
+		public bool Equals(ITag other)
 		{
 			return GetHashCode() == other.GetHashCode();
 		}

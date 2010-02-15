@@ -8,12 +8,20 @@ namespace Gnosis.Alexandria
 	public interface IEntity
 	{
 		long Id { get; }
-		IEnumerable<Link> Links();
-		IEnumerable<Tag> Tags();
+		bool IsChanged();
+		bool IsDeleted();
+		bool IsNew();
+		
+		IChangeSet Changes();
+		IEnumerable<ILink> Links();
+		IEnumerable<ITag> Tags();
 
-		void AddLink(Link link);
-		void RemoveLink(Link link);
-		void AddTag(Tag tag);
-		void RemoveTag(Tag tag);
+		void Delete();
+
+		void AddLink(ILink link);
+		void RemoveLink(ILink link);
+		
+		void AddTag(ITag tag);
+		void RemoveTag(ITag tag);
 	}
 }

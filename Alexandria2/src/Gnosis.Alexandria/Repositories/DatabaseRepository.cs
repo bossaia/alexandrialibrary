@@ -60,6 +60,11 @@ namespace Gnosis.Alexandria.Repositories
 
 		protected void ExecuteNonQuery(string commandText)
 		{
+			ExecuteNonQueries(new List<string> { commandText });
+		}
+
+		protected void ExecuteNonQueries(IEnumerable<string> commandTexts)
+		{
 			SQLiteTransaction transaction = null;
 
 			try
@@ -69,10 +74,13 @@ namespace Gnosis.Alexandria.Repositories
 					connection.Open();
 					transaction = connection.BeginTransaction();
 
-					using (var command = connection.CreateCommand())
+					foreach (string commandText in commandTexts)
 					{
-						command.CommandText = commandText;
-						command.ExecuteNonQuery();
+						using (var command = connection.CreateCommand())
+						{
+							command.CommandText = commandText;
+							command.ExecuteNonQuery();
+						}
 					}
 
 					transaction.Commit();
@@ -119,12 +127,12 @@ namespace Gnosis.Alexandria.Repositories
 
 		public void Save(T entity)
 		{
-			ExecuteNonQuery(Map.GetSaveCommandText(entity));
+			ExecuteNonQueries(Map.GetSaveCommandTexts(entity));
 		}
 
 		public void Delete(long id)
 		{
-			ExecuteNonQuery(Map.GetDeleteCommandText(id));
+			ExecuteNonQueries(Map.GetDeleteCommandTexts(id));
 		}
 
 		#endregion
