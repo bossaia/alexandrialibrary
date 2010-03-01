@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Collections
+namespace Gnosis.Alexandria
 {
-	public interface IOrderedSet<K, V>
-		: IEnumerable<V>
+	public interface ICriteria<T> : 
+		IMessage
+		where T : IEntity
 	{
 	}
 }

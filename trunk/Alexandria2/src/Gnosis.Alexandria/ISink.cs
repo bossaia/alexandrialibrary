@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IPlaylistItem
-		: IEntity, IEquatable<IPlaylistItem>, IComparable<IPlaylistItem>
+	public interface ISink<C>
+		where C : IMessage
 	{
+		void Tell(C command);
 	}
 }

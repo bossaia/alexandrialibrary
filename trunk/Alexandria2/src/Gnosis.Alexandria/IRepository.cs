@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface ILink
-		: IEntity, IEquatable<ILink>
+	public interface IRepository<T> :
+		ISource<IKey<T>, T>,
+		ISource<ICriteria<T>, ISet<T>>
+		where T : IEntity, IEquatable<T>
 	{
-		IEntity Source { get; }
-		IEntity Target { get; }
-		LinkType Type { get; }
 	}
 }

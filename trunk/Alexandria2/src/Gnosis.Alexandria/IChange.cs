@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IMedia
-		: IEntity, IEquatable<IMedia>
+	public interface IChange
+		: IEntity
 	{
-		Uri Path { get; }
-		MediaType MediaType { get; }
+		Type Type { get; }
+		string Property { get; }
+		object Value { get; }
 	}
 }

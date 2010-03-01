@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public enum ChangeType
+	public interface ISource<Q,R>
+		where Q : IMessage
+		where R : IMessage
 	{
-		None = 0,
-		Create,
-		Update,
-		Delete
+		R Ask(Q query);
 	}
 }
