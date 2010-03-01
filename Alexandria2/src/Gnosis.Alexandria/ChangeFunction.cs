@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IEntity
-		: IMessage
+	public enum ChangeFunction
 	{
-		IKey<IEntity> Id { get; }
+		None = 0,
+		Create,
+		Update,
+		Delete
 	}
 }

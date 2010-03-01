@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Handlers
+namespace Gnosis.Alexandria
 {
-	public interface IMediaHandlingStrategy
+	public interface IMessage
 	{
 	}
 }

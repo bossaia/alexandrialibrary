@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface INamed
-		: IEntity
+	public interface ISet<T> :
+		IEnumerable<T>,
+		IMessage
+		where T : IEquatable<T>
 	{
-		Name Name { get; }
+		int Count { get; }
 
-		void Rename(Name name);
+		bool Contains(T item);
 	}
 }

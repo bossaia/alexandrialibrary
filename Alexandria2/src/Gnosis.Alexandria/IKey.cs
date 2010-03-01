@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Factories
+namespace Gnosis.Alexandria
 {
-	public interface IFactory<T>
+	public interface IKey<T> :
+		IMessage
 		where T : IEntity
 	{
-		T Create();
 	}
 }
