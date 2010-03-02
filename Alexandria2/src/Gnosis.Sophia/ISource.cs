@@ -3,14 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria
+namespace Gnosis.Sophia
 {
-	public interface ISource<R>
-		where R : IMessage
-	{
-		R Ask();
-	}
-
 	public interface ISource<Q,R>
 		where Q : IMessage
 		where R : IMessage

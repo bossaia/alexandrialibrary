@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IChange
-		: IMessage
+	public interface ISchema :
+		IMessage
 	{
-		Type Type { get; }
-		string Property { get; }
-		object Value { get; }
+		string Name { get; }
+		IMap<string, IElement> Elements { get; }
 	}
 }
