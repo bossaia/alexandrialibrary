@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria
 		T Get<T>()
 			where T : IEntity;
 		
-		T Get<T>(long id)
+		T Get<T>(IKey<IEntity> id)
 			where T : IEntity;
 		
 		ISet<T> Get<T>(ICriteria<T> criteria)

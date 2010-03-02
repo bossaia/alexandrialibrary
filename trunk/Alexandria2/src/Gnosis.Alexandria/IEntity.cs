@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IEntity
-		: IMessage
+	public interface IEntity :
+		IMessage, 
+		ISource<IChangeGraph>
 	{
 		IKey<IEntity> Id { get; }
 	}

@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using Gnosis.Alexandria;
-using Gnosis.Alexandria.Repositories;
 
 namespace Gnosis.Sphinx
 {
@@ -17,9 +16,6 @@ namespace Gnosis.Sphinx
 		public Main()
 		{
 			InitializeComponent();
-
-			IContext context = null;
-			var albums = context.Albums.GetAll();
 		}
 	}
 }

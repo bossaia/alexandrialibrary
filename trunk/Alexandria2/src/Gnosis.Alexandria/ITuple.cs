@@ -5,11 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IChange
-		: IMessage
+	public interface ITuple<T> :
+		IEnumerable<T>,
+		IMessage
 	{
-		Type Type { get; }
-		string Property { get; }
-		object Value { get; }
+		int Count { get; }
 	}
 }

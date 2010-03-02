@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Sphinx", "src\Gnosis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Alexandria", "src\Gnosis.Alexandria\Gnosis.Alexandria.csproj", "{77B5AED2-C558-449C-9396-760641052C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Barbelo", "src\Gnosis.Barbelo\Gnosis.Barbelo.csproj", "{BAFBF582-24B0-4B84-9CDF-4B701D81463A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,10 +22,6 @@ Global
 		{77B5AED2-C558-449C-9396-760641052C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77B5AED2-C558-449C-9396-760641052C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77B5AED2-C558-449C-9396-760641052C83}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,6 +29,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6C1BDCCC-E07F-4F76-982E-BE06E829E25E} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 		{77B5AED2-C558-449C-9396-760641052C83} = {0365B805-C7E6-472F-A612-23E74172EF9F}
-		{BAFBF582-24B0-4B84-9CDF-4B701D81463A} = {0365B805-C7E6-472F-A612-23E74172EF9F}
 	EndGlobalSection
 EndGlobal

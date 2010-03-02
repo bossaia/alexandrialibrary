@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Gnosis.Sophia
 {
-	public interface IMessage
+	public interface ISink<C>
+		where C : IMessage
 	{
+		void Tell(C command);
 	}
 }

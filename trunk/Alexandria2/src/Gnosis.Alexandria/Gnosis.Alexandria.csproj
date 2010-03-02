@@ -50,22 +50,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChangeFunction.cs" />
+    <Compile Include="Entities\Identifier.cs" />
+    <Compile Include="IAction.cs" />
     <Compile Include="IChange.cs" />
     <Compile Include="IChangeGraph.cs" />
     <Compile Include="IContext.cs" />
     <Compile Include="ICriteria.cs" />
+    <Compile Include="IElement.cs" />
     <Compile Include="IEntity.cs" />
-    <Compile Include="IKey.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ISchema.cs" />
     <Compile Include="ISet.cs" />
     <Compile Include="ISink.cs" />
     <Compile Include="ISource.cs" />
+    <Compile Include="IStore.cs" />
+    <Compile Include="ITuple.cs" />
+    <Compile Include="IKey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Folder Include="Collections\" />
     <Folder Include="Persistence\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

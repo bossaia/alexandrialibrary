@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Sophia
+namespace Gnosis.Alexandria
 {
-	public interface IMessage
+	public interface IStore :
+		ISink<ISchema>,
+		ISink<IChangeGraph>
 	{
 	}
 }
