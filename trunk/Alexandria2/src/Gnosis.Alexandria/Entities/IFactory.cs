@@ -9,6 +9,6 @@ namespace Gnosis.Alexandria.Entities
         where T : IEntity
     {
         T CreateInstance();
-        T CreateInstance(IState state);
+        T CreateInstance(IMap<string, object> state);
     }
 }
