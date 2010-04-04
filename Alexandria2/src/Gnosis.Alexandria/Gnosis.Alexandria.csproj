@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{77B5AED2-C558-449C-9396-760641052C83}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -49,31 +49,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeFunction.cs" />
-    <Compile Include="Entities\Identifier.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="IChange.cs" />
-    <Compile Include="IChangeGraph.cs" />
-    <Compile Include="IContext.cs" />
-    <Compile Include="ICriteria.cs" />
-    <Compile Include="IElement.cs" />
-    <Compile Include="IEntity.cs" />
+    <Compile Include="Entities\ChangeType.cs" />
+    <Compile Include="Entities\IAlbum.cs" />
+    <Compile Include="Entities\IArtist.cs" />
+    <Compile Include="Entities\IChange.cs" />
+    <Compile Include="Entities\IChangeSet.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\ILink.cs" />
+    <Compile Include="Entities\ILinked.cs" />
+    <Compile Include="Entities\IPlay.cs" />
+    <Compile Include="Entities\INamed.cs" />
+    <Compile Include="Entities\IPlaylist.cs" />
+    <Compile Include="Entities\ITag.cs" />
+    <Compile Include="Entities\ITagged.cs" />
+    <Compile Include="Entities\ITrack.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="IMessage.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="ISchema.cs" />
-    <Compile Include="ISet.cs" />
-    <Compile Include="ISink.cs" />
-    <Compile Include="ISource.cs" />
-    <Compile Include="IStore.cs" />
-    <Compile Include="ITuple.cs" />
-    <Compile Include="IKey.cs" />
+    <Compile Include="IResource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\IRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Collections\" />
     <Folder Include="Persistence\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

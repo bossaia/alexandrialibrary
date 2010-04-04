@@ -5,15 +5,14 @@ using System.Text;
 
 namespace Gnosis.Alexandria
 {
-	public interface IMap<K, V> :
-		IEnumerable<V>,
-		IMessage
-	{
-		V this[K key] { get; }
+    public interface IMap<K, V>
+        : IEnumerable<KeyValuePair<K, V>>
+    {
+        V this[K key] { get; }
 
-		int Count { get; }
+        int Count { get; }
 
-		bool ContainsKey(K key);
-		bool ContainsValue(V value);
-	}
+        bool ContainsKey(K key);
+        bool ContainsValue(V value);
+    }
 }
