@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Entities
+using Gnosis.Core;
+
+namespace Gnosis.Babel.Domain
 {
     public interface IFactory<T>
         where T : IEntity
     {
-        T CreateInstance();
-        T CreateInstance(IMap<string, object> state);
+        T Create();
+        T Create(IMap<string, object> state);
     }
 }

@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Entities
+using Gnosis.Core;
+
+namespace Gnosis.Babel.Domain
 {
     public interface IRepository
     {
-        T Create<T>();
+        T Create<T>()
+            where T : IEntity;
 
-        T Lookup<T>(long id)
+        T Lookup<T>(object id)
             where T : IEntity;
 
         IEnumerable<T> Search<T>(Predicate<T> criteria)
             where T : IEntity;
 
-        void Persist(IChangeSet changeSet);
+        void Save<T>(ISet<T> entities)
+            where T : IEntity;
     }
 }

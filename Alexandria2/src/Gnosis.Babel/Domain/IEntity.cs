@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Entities
+namespace Gnosis.Babel.Domain
 {
     public interface IEntity
     {
-        long Id { get; }
+        object Id { get; }
+
         bool IsChanged { get; }
         bool IsNew { get; }
 
-        IChangeSet GetChanges();
+
     }
 }
