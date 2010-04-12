@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}</ProjectGuid>
+    <ProjectGuid>{1B427C4B-BC03-45A6-ADAD-DB684B2C83BF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Gnosis.Babel</RootNamespace>
-    <AssemblyName>Gnosis.Babel</AssemblyName>
+    <RootNamespace>Gnosis.Babel.SQLite</RootNamespace>
+    <AssemblyName>Gnosis.Babel.SQLite</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,32 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComparisonOperator.cs" />
-    <Compile Include="Domain\IEntity.cs" />
-    <Compile Include="Domain\IFactory.cs" />
-    <Compile Include="Domain\IRepository.cs" />
-    <Compile Include="Relational\Column.cs" />
-    <Compile Include="Relational\Database.cs" />
-    <Compile Include="Relational\Domain.cs" />
-    <Compile Include="Relational\ICommand.cs" />
-    <Compile Include="Relational\IDomain.cs" />
-    <Compile Include="Relational\IColumn.cs" />
-    <Compile Include="Relational\IEngine.cs" />
-    <Compile Include="Relational\IKey.cs" />
-    <Compile Include="Relational\IQuery.cs" />
-    <Compile Include="Relational\ITable.cs" />
-    <Compile Include="Relational\IDatabase.cs" />
-    <Compile Include="Relational\KeyType.cs" />
-    <Compile Include="Query.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="IQuery.cs" />
-    <Compile Include="LogicalOperator.cs" />
-    <Compile Include="Predicate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="Relational\Table.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gnosis.Babel\Gnosis.Babel.csproj">
+      <Project>{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}</Project>
+      <Name>Gnosis.Babel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
       <Project>{27232101-15E0-4B82-835B-6CEF788F23E8}</Project>
       <Name>Gnosis.Core</Name>

@@ -85,6 +85,14 @@
       <Project>{77B5AED2-C558-449C-9396-760641052C83}</Project>
       <Name>Gnosis.Alexandria</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Babel\Gnosis.Babel.csproj">
+      <Project>{4E11BE73-90FB-4F2D-8D2A-BA1A640DCEF5}</Project>
+      <Name>Gnosis.Babel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
+      <Project>{27232101-15E0-4B82-835B-6CEF788F23E8}</Project>
+      <Name>Gnosis.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
