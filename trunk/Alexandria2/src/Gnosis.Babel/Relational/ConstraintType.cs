@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-
 namespace Gnosis.Babel.Relational
 {
-    public interface ITable : ISource
+    public enum ConstraintType
     {
-        ISet<IConstraint> Constraints { get; }
+        NotNull,
+        Unique,
+        Check
     }
 }

@@ -9,7 +9,6 @@ namespace Gnosis.Core
     {
         string Entity { get; }
         object Id { get; }
-        ChangeType ChangeType { get; }
         IMap<string, object> Changes { get; }
         ITuple<IChangeSet> Children { get; }
     }

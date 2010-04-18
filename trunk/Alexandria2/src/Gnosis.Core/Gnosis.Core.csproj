@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeType.cs" />
     <Compile Include="IChangeSet.cs" />
     <Compile Include="IMap.cs" />
     <Compile Include="IMessage.cs" />

@@ -11,11 +11,8 @@ namespace Gnosis.Babel.Relational
     public interface IDatabase
     {
         string Name { get; }
-        ISet<IDomain> Domains { get; }
+        ISet<IIndex> Indices { get; }
         ISet<ITable> Tables { get; }
-
-        void Initialize();
-        IEnumerable<IMap<string, object>> Read(IQuery query);
-        void Execute(ITuple<ICommand> commands);
+        ISet<IView> Views { get; }
     }
 }

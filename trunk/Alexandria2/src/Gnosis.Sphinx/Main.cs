@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using Gnosis.Babel;
-using Gnosis.Babel.Domain;
-using Gnosis.Babel.Relational;
+//using Gnosis.Babel;
+//using Gnosis.Babel.Domain;
+//using Gnosis.Babel.Relational;
 using Gnosis.Core;
-using Gnosis.Alexandria;
-using Gnosis.Alexandria.Entities;
+//using Gnosis.Alexandria;
+//using Gnosis.Alexandria.Entities;
 
 namespace Gnosis.Sphinx
 {
@@ -22,10 +22,17 @@ namespace Gnosis.Sphinx
 		{
 			InitializeComponent();
 
+            /*
+            Command<IArtist> cmd =
+                new Command<IArtist>(x => x.Name, x => (x.Name.GetValue<string>() == "Radiohead" || x.Name.GetValue<string>() == "Tool") && x.StartDate.GetValue<DateTime>() > new DateTime(1940, 1, 1)); 
+            */
+
+            /*
             IRepository repo = null;
 
             IEnumerable<IAlbum> result = repo.Search<IAlbum>(
                 x => x.Name == "Lateralus" || x.Artist.Name == "Tool");
+            */
 		}
 	}
 }

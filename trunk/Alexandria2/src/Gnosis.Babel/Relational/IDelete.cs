@@ -5,12 +5,9 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public enum KeyType
+    public interface IDelete : IStatement
     {
-        Primary,
-        Candidate,
-        Secondary,
-        Sort,
-        Foreign
+        ISource From { get; }
+        IExpression Where { get; }
     }
 }

@@ -7,14 +7,11 @@ using Gnosis.Core;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IDomain
+    public interface ISource
     {
+        bool Temporary { get; }
         IDatabase Database { get; }
         string Name { get; }
-        Type BaseType { get; }
-        object Default { get; }
-        ITuple<IRule<object>> Rules { get; }
-
-        void SetDatabase(IDatabase database);
+        ISet<IColumnExpression> Columns { get; }
     }
 }
