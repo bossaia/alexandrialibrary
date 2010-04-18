@@ -7,13 +7,12 @@ using Gnosis.Core;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IKey :
-        IEquatable<IKey>
+    public interface IIndex
     {
-        ITable Table { get; }
+        bool Unique { get; }
+        IDatabase Database { get; }
         string Name { get; }
-        KeyType KeyType { get; }
+        ITable On { get; }
         ISet<IColumn> Columns { get; }
-        ISet<IColumn> References { get; }
     }
 }

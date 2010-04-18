@@ -7,8 +7,7 @@ using Gnosis.Core;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface ITable : ISource
+    public interface IView : ISource
     {
-        ISet<IConstraint> Constraints { get; }
     }
 }

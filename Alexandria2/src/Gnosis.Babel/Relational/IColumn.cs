@@ -10,8 +10,11 @@ namespace Gnosis.Babel.Relational
         ITable Table { get; }
         string Name { get; }
         Type DataType { get; }
-        object Default { get; }
-
-        void SetTable(ITable table);
+        bool Unicode { get; }
+        bool VariableLength { get; }
+        int Length { get; }
+        int Precision { get; }
+        int Scale { get; }
+        IExpression Default { get; }
     }
 }

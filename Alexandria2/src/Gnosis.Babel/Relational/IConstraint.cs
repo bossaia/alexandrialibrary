@@ -7,12 +7,12 @@ using Gnosis.Core;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface ICommand
+    public interface IConstraint
     {
         ITable Table { get; }
-        object Id { get; }
-        IMap<string, object> Changes { get; }
-        ICommand Parent { get; }
-        void SetResult(object result);
+        string Name { get; }
+        ConstraintType Type { get; }
+        IExpression Expression { get; }
+        ISet<IColumn> Columns { get; }
     }
 }

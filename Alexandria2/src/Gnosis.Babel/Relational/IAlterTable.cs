@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-
 namespace Gnosis.Babel.Relational
 {
-    public interface ITable : ISource
+    public interface IAlterTable
     {
-        ISet<IConstraint> Constraints { get; }
+        ITable Table { get; }
+        string Rename { get; }
+        IColumn Add { get; }
     }
 }

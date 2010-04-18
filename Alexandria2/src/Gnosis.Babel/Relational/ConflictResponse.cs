@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Core;
-
 namespace Gnosis.Babel.Relational
 {
-    public interface ITable : ISource
+    public enum ConflictResponse
     {
-        ISet<IConstraint> Constraints { get; }
+        Rollback = 0,
+        Abort,
+        Fail,
+        Ignore,
+        Replace
     }
 }
