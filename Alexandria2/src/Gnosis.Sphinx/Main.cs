@@ -10,9 +10,10 @@ using System.Windows.Forms;
 //using Gnosis.Babel;
 //using Gnosis.Babel.Domain;
 //using Gnosis.Babel.Relational;
-using Gnosis.Core;
-//using Gnosis.Alexandria;
-//using Gnosis.Alexandria.Entities;
+//using Gnosis.Core;
+using Gnosis.Alexandria;
+using Gnosis.Alexandria.Persistence;
+using Gnosis.Alexandria.Persistence.SQLite;
 
 namespace Gnosis.Sphinx
 {
@@ -21,6 +22,9 @@ namespace Gnosis.Sphinx
 		public Main()
 		{
 			InitializeComponent();
+
+            ArtistRepository repo = new ArtistRepository();
+            repo.Initialize();
 
             /*
             Command<IArtist> cmd =

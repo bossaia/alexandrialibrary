@@ -51,6 +51,8 @@
     <Compile Include="Domain\IRepository.cs" />
     <Compile Include="Relational\ConflictResponse.cs" />
     <Compile Include="Relational\ConstraintType.cs" />
+    <Compile Include="Relational\IAlterColumn.cs" />
+    <Compile Include="Relational\IAlterConstraint.cs" />
     <Compile Include="Relational\IAlterTable.cs" />
     <Compile Include="Relational\IDelete.cs" />
     <Compile Include="Relational\IInsert.cs" />

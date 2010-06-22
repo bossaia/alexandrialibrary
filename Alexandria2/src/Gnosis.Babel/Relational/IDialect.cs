@@ -17,13 +17,14 @@ namespace Gnosis.Babel.Relational
         IDbTransaction Transaction();
 
         IDbCommand Alter(IAlterTable alterTable);
-
+        
         IDbCommand Create(IDatabase database);
         IDbCommand Create(IIndex index);
         IDbCommand Create(ITable table);
         IDbCommand Create(ITrigger trigger);
         IDbCommand Create(IView view);
 
+        IDbCommand Drop(IConstraint constraint);
         IDbCommand Drop(IDatabase database);
         IDbCommand Drop(IIndex index);
         IDbCommand Drop(ITable table);
