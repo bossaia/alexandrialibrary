@@ -36,6 +36,11 @@ namespace Gnosis.Alexandria.Persistence
             get { return _default; }
         }
 
+        public string GetDatabaseType()
+        {
+            return null;
+        }
+
         #endregion
     }
 }

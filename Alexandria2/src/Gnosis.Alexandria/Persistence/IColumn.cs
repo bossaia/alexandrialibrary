@@ -10,5 +10,6 @@ namespace Gnosis.Alexandria.Persistence
         string Name { get; }
         Type Type { get; }
         object Default { get; }
+        string GetDatabaseType();
     }
 }
