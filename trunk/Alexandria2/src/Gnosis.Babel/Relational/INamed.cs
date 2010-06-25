@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IDelete : IStatement
+    public interface INamed
     {
-        ISource From { get; }
-        IExpression Where { get; }
+        string Name { get; }
+        string QualifiedName { get; }
     }
 }

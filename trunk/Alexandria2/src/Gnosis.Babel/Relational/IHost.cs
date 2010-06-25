@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IDatabase
+    public interface IHost
         : INamed
     {
-        IHost Host { get; }
-        string Path { get; }
-        IEnumerable<ITable> Tables();
+        string Address { get; }
+        int Port { get; }
+        IEnumerable<IDatabase> Databases { get; }
     }
 }
