@@ -6,15 +6,11 @@ using System.Text;
 namespace Gnosis.Babel.Relational
 {
     public interface IColumn
+        : INamed
     {
         ITable Table { get; }
-        string Name { get; }
-        Type DataType { get; }
-        bool Unicode { get; }
-        bool VariableLength { get; }
-        int Length { get; }
-        int Precision { get; }
-        int Scale { get; }
-        IExpression Default { get; }
+        string DataType { get; }
+        Size Size { get; }
+        bool IsRequired { get; }
     }
 }
