@@ -10,6 +10,11 @@ namespace Gnosis.Babel.Relational
     {
         IHost Host { get; }
         string Path { get; }
-        IEnumerable<ITable> Tables();
+        IEnumerable<ITable> GetTables();
+
+        ITable CreateTable(string name);
+        ITable CreateTable(string name, bool isTemporary);
+
+        void AddTable(ITable table);
     }
 }
