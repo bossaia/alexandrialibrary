@@ -5,13 +5,11 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IColumn
+    public interface IConstraint
         : INamed
     {
         ITable Table { get; }
-        string DataType { get; }
-        Size Size { get; }
-        bool IsRequired { get; }
-        object Default { get; }
+        string GetCreateSql();
+        string GetDropSql();
     }
 }
