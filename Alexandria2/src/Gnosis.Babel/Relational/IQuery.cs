@@ -5,12 +5,13 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IIndex :
-        IDatabaseObject,
-        ICreatable,
-        IDropable,
-        INamed,
-        IRenameable,
+    public interface IQuery :
+        ILimitable,
+        IPageable,
+        ISelectable,
+        IJoinable,
+        IFilterable,
+        IGroupable,
         ISortable
     {
     }

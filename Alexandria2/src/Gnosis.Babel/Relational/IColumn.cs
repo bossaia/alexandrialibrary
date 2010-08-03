@@ -5,13 +5,14 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface IColumn
-        : INamed
+    public interface IColumn :
+        ITableObject,
+        IAddable,
+        IRemovable,
+        INamed,
+        IRenameable
     {
-        ITable Table { get; }
-        string DataType { get; }
-        Size Size { get; }
-        bool IsRequired { get; }
-        object Default { get; }
+        IDomain Domain { get; }
+        string GetChangeDomain(IDomain domain);
     }
 }

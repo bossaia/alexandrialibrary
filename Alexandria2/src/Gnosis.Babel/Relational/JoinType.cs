@@ -5,8 +5,11 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public enum JoinType
     {
-        string Name { get; }
+        None = 0,
+        Inner,
+        LeftOuter,
+        RightOuter
     }
 }

@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface IRenameable
     {
-        string Name { get; }
+        string GetRenameClause(string renameTo);
+        string GetRenameStatement(string renameTo);
     }
 }

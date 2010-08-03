@@ -5,8 +5,12 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface IColumnConstraint :
+        IColumnObject,
+        IAddable,
+        IRemovable,
+        INamed,
+        IRenameable
     {
-        string Name { get; }
     }
 }
