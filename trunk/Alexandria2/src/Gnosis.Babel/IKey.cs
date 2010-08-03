@@ -8,7 +8,7 @@ namespace Gnosis.Babel
     public interface IKey :
         INamed
     {
-        KeyType Type { get; }
+        bool IsUnique { get; }
         IEnumerable<string> Elements { get; }
     }
 }
