@@ -7,8 +7,7 @@ namespace Gnosis.Babel
 {
     public interface IRepository<T>
     {
-        T GetByKey(string name, ITuple key);
-        IEnumerable<T> List();
-        IEnumerable<T> List(IExpression<T, bool> predicate);
+        ISet<T> Get();
+        ISet<T> Get(IExpression<T, bool> predicate);
     }
 }
