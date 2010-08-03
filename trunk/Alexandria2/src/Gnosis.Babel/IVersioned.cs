@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Babel.Relational
+namespace Gnosis.Babel
 {
-    public interface INamed
+    public interface IVersioned
     {
-        string Name { get; }
+        decimal Version { get; }
     }
 }

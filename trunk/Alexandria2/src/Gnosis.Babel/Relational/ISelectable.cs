@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface ISelectable
     {
-        string Name { get; }
+        IEnumerable<string> Selections { get; }
     }
 }

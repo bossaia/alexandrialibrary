@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface IJoinable
     {
-        string Name { get; }
+        string Table { get; }
+        string Alias { get; }
+        IEnumerable<IJoin> Joins { get; }
     }
 }

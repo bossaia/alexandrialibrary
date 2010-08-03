@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface IInsertable
     {
-        string Name { get; }
+        string GetInsertStatement(ITuple tuple);
     }
 }

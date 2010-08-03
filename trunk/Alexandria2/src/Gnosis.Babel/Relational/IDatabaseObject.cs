@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Babel.Relational
 {
-    public interface INamed
+    public interface IDatabaseObject
     {
-        string Name { get; }
+        IDatabase Database { get; }
     }
 }
