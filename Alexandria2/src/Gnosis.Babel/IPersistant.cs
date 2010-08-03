@@ -5,11 +5,8 @@ using System.Text;
 
 namespace Gnosis.Babel
 {
-    public enum KeyType
+    public interface IPersistant
     {
-        None = 0,
-        Primary,
-        Candidate,
-        Secondary
+        void Persist();
     }
 }
