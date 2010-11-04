@@ -1,11 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Gnosis.Alexandria
 {
-    public interface IHandler<T>
+    public interface IHandler
+    {
+        Type Type { get; }
+    }
+
+    public interface IHandler<in T> : IHandler
         where T : IMessage
     {
         void Handle(T message);
