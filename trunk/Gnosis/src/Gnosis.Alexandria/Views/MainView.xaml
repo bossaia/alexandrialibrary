@@ -3,6 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Icon="/Alexandria.ico"
         Title="Alexandria" Height="480" Width="640" MinHeight="480" MinWidth="640">
+    <Window.Resources>
+        <ResourceDictionary Source="MainViewResources.xaml" />
+    </Window.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="gridMain">
         <Grid.RowDefinitions>
             <RowDefinition />
