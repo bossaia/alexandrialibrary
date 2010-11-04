@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Handlers
 
         protected abstract void HandleMessage(T message);
 
-        public void Handle(T message)
+        public virtual void Handle(T message)
         {
             HandleMessage(message);
         }

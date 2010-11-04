@@ -2,36 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Messages;
 
 namespace Gnosis.Alexandria.Views
 {
-    /// <summary>
-    /// Interaction logic for MainView.xaml
-    /// </summary>
-    public partial class MainView : Window, IDispatcher, IProcessor
+    public class ControlView : UserControl, IView
     {
-        public MainView()
+        protected ControlView()
         {
-            InitializeComponent();
+        }
 
-            AddChild(new TabController(this, tabControl));
+        protected ControlView(IDispatcher parent)
+        {
+            _parent = parent;
         }
 
         private readonly Guid _id = Guid.NewGuid();
-        private readonly IDispatcher _parent = null;
-        private readonly IDictionary<Guid, IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
+        private readonly IDispatcher _parent;
+        private readonly IDictionary<Guid,IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
 
         #region IDispatcher Members
 
@@ -88,7 +76,6 @@ namespace Gnosis.Alexandria.Views
         protected virtual void MessageReceived<T>(T message)
             where T : IMessage
         {
-            Process<T>(message);
         }
 
         protected virtual void BeforeProcessing<T>(T message)
@@ -149,10 +136,5 @@ namespace Gnosis.Alexandria.Views
         }
 
         #endregion
-
-        private void btnAddTab_Click(object sender, RoutedEventArgs e)
-        {
-            Dispatch<INewHomeTabRequested>(_id, new NewHomeTabRequested());
-        }
     }
 }

@@ -21,7 +21,7 @@ namespace Gnosis.Alexandria.Controllers
 
         protected override void MessageReceived<T>(T message)
         {
-            
+            Process<T>(message);
         }
 
         protected virtual void BeforeProcessing<T>(T message)

@@ -9,29 +9,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Messages;
 
 namespace Gnosis.Alexandria.Views
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for WindowView.xaml
     /// </summary>
-    public partial class MainView : Window, IDispatcher, IProcessor
+    public partial class WindowView : Window
     {
-        public MainView()
+        public WindowView()
         {
             InitializeComponent();
+        }
 
-            AddChild(new TabController(this, tabControl));
+        protected WindowView(IDispatcher parent)
+        {
+            InitializeComponent();
+            _parent = parent;
         }
 
         private readonly Guid _id = Guid.NewGuid();
-        private readonly IDispatcher _parent = null;
-        private readonly IDictionary<Guid, IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
+        private readonly IDispatcher _parent;
+        private readonly IDictionary<Guid,IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
 
         #region IDispatcher Members
 
@@ -149,10 +149,5 @@ namespace Gnosis.Alexandria.Views
         }
 
         #endregion
-
-        private void btnAddTab_Click(object sender, RoutedEventArgs e)
-        {
-            Dispatch<INewHomeTabRequested>(_id, new NewHomeTabRequested());
-        }
     }
 }
