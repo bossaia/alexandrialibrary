@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gnosis.Alexandria</RootNamespace>
-    <AssemblyName>Gnosis.Alexandria</AssemblyName>
+    <AssemblyName>Alexandria</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -38,6 +38,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\lib\SQLite\System.Data.SQLite.DLL</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,7 +66,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\Dispatcher.cs" />
+    <Compile Include="Handlers\Handler.cs" />
+    <Compile Include="IController.cs" />
+    <Compile Include="IDispatcher.cs" />
+    <Compile Include="IHandler.cs" />
     <Compile Include="IMessage.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IMutable.cs" />
+    <Compile Include="IProcessor.cs" />
+    <Compile Include="IStateful.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -95,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Messages\" />
+    <Folder Include="Models\Factories\" />
+    <Folder Include="Models\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

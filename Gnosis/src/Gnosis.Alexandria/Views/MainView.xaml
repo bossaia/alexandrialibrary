@@ -2,7 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Alexandria" Height="480" Width="640">
-    <Grid>
-        
+    <Grid Height="427" Name="GridMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="146*" />
+            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="442*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Height="366" HorizontalAlignment="Stretch" Margin="12,49,0,0" Name="tabControl" VerticalAlignment="Stretch" Width="594" Grid.ColumnSpan="3" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"></TabControl>
+        <Button Content="+" Grid.Column="2" Height="23" HorizontalAlignment="Right" Margin="0,12,12,0" Name="btnAddTab" VerticalAlignment="Top" Width="33" />
     </Grid>
 </Window>
