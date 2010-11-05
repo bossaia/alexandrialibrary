@@ -14,8 +14,10 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <DockPanel Name="dockMain" LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1,32,1,1">
-            <TabControl IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}" ItemTemplate="{StaticResource ClosableTabItemTemplate}" Margin="4" Name="tabControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></TabControl>
+            <TabControl Margin="4" Name="tabControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></TabControl>
         </DockPanel>
-        <Button Content="+" Height="23" HorizontalAlignment="Right" Margin="0,7,5,0" Name="btnAddTab" VerticalAlignment="Top" Width="36" Click="btnAddTab_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button  Height="23" HorizontalAlignment="Right" Margin="0,7,5,0" Name="btnAddTab" VerticalAlignment="Top" Width="36" Click="btnAddTab_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+            <Image Source="/Images/Controls/AddTab.png"/>
+        </Button>
     </Grid>
 </Window>

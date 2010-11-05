@@ -397,6 +397,13 @@
     <Resource Include="Images\Countries\zm.png" />
     <Resource Include="Images\Countries\zw.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Controls\AddTab.png" />
+    <Resource Include="Images\Controls\BrowseBack.png" />
+    <Resource Include="Images\Controls\BrowseForward.png" />
+    <Resource Include="Images\Controls\CloseTab.png" />
+    <Resource Include="Images\Controls\RefreshBrowser.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
