@@ -8,6 +8,7 @@ using System.Windows.Media;
 
 using Gnosis.Alexandria.Handlers;
 using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Views;
 
 namespace Gnosis.Alexandria.Controllers
 {
@@ -29,29 +30,45 @@ namespace Gnosis.Alexandria.Controllers
             AddChild(tabView);
             var tabItem = new TabItem();
 
-            var headerBlock = new TextBlock();
-            headerBlock.Text = header;
-            headerBlock.Margin = new Thickness(0, 1, 8, 0);
-            var closeImage = new Image();
-            closeImage.Source = (ImageSource)new ImageSourceConverter().ConvertFromString("pack://application:,,,/Alexandria;component/Images/Controls/CloseTab.png");
-            var closeButton = new Button();
-            closeButton.Tag = tabView.Id;
-            closeButton.Width = 18;
-            closeButton.Height = 18;
-            closeButton.Content = closeImage;
-            closeButton.Focusable = false;
-            closeButton.Margin = new Thickness(10, 0, 0, 0);
-            closeButton.VerticalAlignment = VerticalAlignment.Top;
-            closeButton.HorizontalAlignment = HorizontalAlignment.Right;
-            closeButton.VerticalContentAlignment = VerticalAlignment.Center;
+            var headerBlock = new TextBlock
+                                  {
+                                      Text = header,
+                                      Margin = new Thickness(0, 1, 8, 0)
+                                  };
+            var closeImage = new Image
+                                 {
+                                     Source =
+                                         (ImageSource)
+                                         new ImageSourceConverter().ConvertFromString(
+                                             "pack://application:,,,/Alexandria;component/Images/Controls/CloseTab.png")
+                                 };
+            var closeButton = new Button
+                                  {
+                                      Tag = tabView.Id,
+                                      Width = 18,
+                                      Height = 18,
+                                      Content = closeImage,
+                                      Focusable = false,
+                                      Margin = new Thickness(10, 0, 0, 0),
+                                      VerticalAlignment = VerticalAlignment.Top,
+                                      HorizontalAlignment = HorizontalAlignment.Right,
+                                      VerticalContentAlignment = VerticalAlignment.Center,
+                                  };
             closeButton.Click += new RoutedEventHandler(CloseTab);
-            var headerPanel = new DockPanel();
+            var headerPanel = new DockPanel {HorizontalAlignment = HorizontalAlignment.Stretch};
             headerPanel.Children.Add(headerBlock);
             headerPanel.Children.Add(closeButton);
-            headerPanel.HorizontalAlignment = HorizontalAlignment.Stretch;
             DockPanel.SetDock(headerBlock, Dock.Left);
             DockPanel.SetDock(closeButton, Dock.Right);
             tabItem.Header = headerPanel;
+            var viewControl = tabView as ControlView;
+            if (viewControl != null)
+            {
+                viewControl.HorizontalAlignment = HorizontalAlignment.Stretch;
+                viewControl.VerticalAlignment = VerticalAlignment.Stretch;
+                viewControl.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+                viewControl.VerticalContentAlignment = VerticalAlignment.Stretch;
+            }
             tabItem.Content = tabView;
             _control.Items.Add(tabItem);
             _tabMap.Add(tabView.Id, tabItem);

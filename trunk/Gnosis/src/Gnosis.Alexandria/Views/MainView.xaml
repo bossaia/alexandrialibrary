@@ -4,7 +4,37 @@
         Icon="/Alexandria.ico"
         Title="Alexandria" Height="480" Width="640" MinHeight="480" MinWidth="640">
     <Window.Resources>
-        <ResourceDictionary Source="MainViewResources.xaml" />
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border 
+                                            Name="Border"
+                                            BorderBrush="Black" 
+                                            BorderThickness="1,1,1,0" 
+                                            CornerRadius="6,6,0,0" >
+                                <ContentPresenter x:Name="ContentSite"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               ContentSource="Header"
+                                               Margin="12,2,12,2"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="LightGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--<ResourceDictionary Source="MainViewResources.xaml" />-->
     </Window.Resources>
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Name="gridMain">
         <Grid.RowDefinitions>
@@ -14,9 +44,9 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <DockPanel Name="dockMain" LastChildFill="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="1,32,1,1">
-            <TabControl Margin="4" Name="tabControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ></TabControl>
+            <TabControl Margin="4" Name="tabControl" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"></TabControl>
         </DockPanel>
-        <Button  Height="23" HorizontalAlignment="Right" Margin="0,7,5,0" Name="btnAddTab" VerticalAlignment="Top" Width="36" Click="btnAddTab_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,7,5,0" Name="btnAddTab" VerticalAlignment="Top" Width="36" Click="btnAddTab_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" >
             <Image Source="/Images/Controls/AddTab.png"/>
         </Button>
     </Grid>

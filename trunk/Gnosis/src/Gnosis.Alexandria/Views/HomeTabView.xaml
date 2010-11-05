@@ -4,13 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:Gnosis.Alexandria.Views"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Grid Height="276" HorizontalAlignment="Left" Margin="12,12,0,0" Name="grid1" VerticalAlignment="Top" Width="276">
-            <Label Content="Search" Height="28" HorizontalAlignment="Left" Margin="34,35,0,0" Name="lblSearch" VerticalAlignment="Top" />
-            <Label Content="Catalog" Height="28" HorizontalAlignment="Left" Margin="183,108,0,0" Name="lblCatalog" VerticalAlignment="Top" />
-            <Label Content="Browse" Height="28" HorizontalAlignment="Left" Margin="34,108,0,0" Name="lblBrowse" VerticalAlignment="Top" />
-            <Label Content="Play" Height="28" HorizontalAlignment="Left" Margin="191,35,0,0" Name="lblPlay" VerticalAlignment="Top" />
-        </Grid>
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="388">
+    <Grid Height="221" Name="gridHome" Width="375">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Button Content="Browse" Height="23" HorizontalAlignment="Center" Margin="25,27,25,23" Name="btnBrowse" VerticalAlignment="Center" Width="75" />
+        <TextBox Height="20" HorizontalAlignment="Stretch" Margin="52,-31,0,0" Name="txtSearch" VerticalAlignment="Top" Width="323" Grid.ColumnSpan="3" />
+        <Label Content="Search" Height="28" HorizontalAlignment="Left" Margin="0,-33,0,0" Name="lblSearch" VerticalAlignment="Top" />
+        <Button Content="Catalog" Grid.Column="1" Height="23" HorizontalAlignment="Center" Margin="24,28,25,23" Name="btnCatalog" VerticalAlignment="Center" Width="75" />
+        <Button Content="Play" Grid.Column="2" Height="23" HorizontalAlignment="Center" Margin="26,27,23,24" Name="btnPlay" VerticalAlignment="Center" Width="75" />
     </Grid>
 </views:ControlView>
