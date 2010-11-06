@@ -6,7 +6,6 @@ using System.Text;
 namespace Gnosis.Alexandria.Models.Interfaces
 {
     public interface IFactory<T>
-        where T : IModel
     {
         T Create();
     }

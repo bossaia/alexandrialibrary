@@ -7,9 +7,9 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
-    public class ArtistMapper : ModelMapper<IArtist>
+    public class ArtistModelMapper : ModelMapper<IArtist>
     {
-        public ArtistMapper(ICountryRepository countryRepository)
+        public ArtistModelMapper(ICountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
 
