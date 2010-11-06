@@ -11,13 +11,10 @@ namespace Gnosis.Alexandria.Models.Repositories
 {
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
-        public ArtistRepository(IFactory<IArtist> factory, ICountryRepository countryRepository)
-            : base(factory, "Artist")
+        public ArtistRepository(IFactory<IArtist> factory, IModelMapper<IArtist> mapper)
+            : base(factory, mapper, "Artist")
         {
-            _countryRepository = countryRepository;
         }
-
-        private readonly ICountryRepository _countryRepository;
 
         protected override ICommand GetInitializeCommand()
         {
@@ -60,16 +57,6 @@ namespace Gnosis.Alexandria.Models.Repositories
                     .AppendParameterReference("Date", model.Date).Append(",")
                     .AppendParameterReference("Note", model.Note).Append(")")
                     .ToCommand();
-        }
-
-        protected override void PopulateModel(IArtist model, IDataRecord record)
-        {
-            //TODO: Refactor this into a Mapper class that uses lambdas...
-            model.Name = (string)record["Name"];
-            model.Abbreviation = (string)record["Abbreviation"];
-            model.Country = _countryRepository.GetOne(record["Country"]);
-            model.Date = DateTime.Parse((string)record["Date"]);
-            model.Note = (string)record["Note"];
         }
 
         public ICollection<IArtist> GetArtistsWithNamesLike(string search)
