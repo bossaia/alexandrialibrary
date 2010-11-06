@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Messages.Interfaces;
 
 namespace Gnosis.Alexandria.Handlers
 {

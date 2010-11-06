@@ -64,6 +64,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\Interfaces\ITabController.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Factories\GenericFactory.cs" />
+    <Compile Include="Models\Interfaces\IArtistRepository.cs" />
+    <Compile Include="Models\Interfaces\ICommand.cs" />
+    <Compile Include="Models\Interfaces\ICountry.cs" />
+    <Compile Include="Models\Interfaces\ICountryRepository.cs" />
+    <Compile Include="Models\Interfaces\IDated.cs" />
+    <Compile Include="Models\Interfaces\IArtist.cs" />
+    <Compile Include="Models\Interfaces\ICoded.cs" />
+    <Compile Include="Models\Interfaces\IFactory.cs" />
+    <Compile Include="Models\Interfaces\INamed.cs" />
+    <Compile Include="Models\Interfaces\INational.cs" />
+    <Compile Include="Models\Interfaces\INoted.cs" />
+    <Compile Include="Models\Interfaces\IRepository.cs" />
+    <Compile Include="Models\Interfaces\ISearchable.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\NamedBase.cs" />
+    <Compile Include="Models\Repositories\ArtistRepository.cs" />
+    <Compile Include="Models\Repositories\CatalogRepository.cs" />
+    <Compile Include="Models\Commands\Command.cs" />
+    <Compile Include="Models\Commands\CommandBuilder.cs" />
+    <Compile Include="Models\Repositories\RepositoryBase.cs" />
+    <Compile Include="Views\Interfaces\ITabView.cs" />
     <Compile Include="Views\WindowView.xaml.cs">
       <DependentUpon>WindowView.xaml</DependentUpon>
     </Compile>
@@ -90,13 +114,11 @@
     <Compile Include="IHandler.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="IModel.cs" />
-    <Compile Include="IMutable.cs" />
     <Compile Include="IProcessor.cs" />
-    <Compile Include="IStateful.cs" />
     <Compile Include="IView.cs" />
-    <Compile Include="Messages\INewHomeTabRequested.cs" />
-    <Compile Include="Messages\ITargetedMessage.cs" />
-    <Compile Include="Messages\NewHomeTabRequested.cs" />
+    <Compile Include="Messages\Interfaces\INewHomeTabRequestedMessage.cs" />
+    <Compile Include="Messages\Interfaces\ITargetedMessage.cs" />
+    <Compile Include="Messages\NewHomeTabRequestedMessage.cs" />
     <Compile Include="Messages\TargetedMessage.cs" />
     <Compile Include="Views\ControlView.cs" />
     <Compile Include="Views\HomeTabView.xaml.cs">
@@ -139,10 +161,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Factories\" />
-    <Folder Include="Models\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Alexandria.ico" />
   </ItemGroup>
