@@ -16,20 +16,56 @@ namespace Gnosis.Alexandria.Models.Mappers
             _actions.Add(name, action);
         }
 
-        protected static string GetString(object value)
-        {
-            if (value == null)
-                return string.Empty;
-            else
-                return value.ToString();
-        }
-
         protected static DateTime GetDateTime(object value)
         {
+            return GetDateTime(value, DateTime.MinValue);
+        }
+
+        protected static DateTime GetDateTime(object value, DateTime defaultValue)
+        {
             if (value == null)
-                return DateTime.MinValue;
+                return defaultValue;
             else
                 return DateTime.Parse((string)value);
+        }
+
+        protected static decimal GetDecimal(object value)
+        {
+            return GetDecimal(value, 0M);
+        }
+
+        protected static decimal GetDecimal(object value, decimal defaultValue)
+        {
+            if (value == null)
+                return defaultValue;
+            else
+                return decimal.Parse((string)value);
+        }
+
+        protected static int GetInteger(object value)
+        {
+            return GetInteger(value, 0);
+        }
+
+        protected static int GetInteger(object value, int defaultValue)
+        {
+            if (value == null)
+                return defaultValue;
+            else
+                return int.Parse((string)value);
+        }
+
+        protected static string GetString(object value)
+        {
+            return GetString(value, string.Empty);
+        }
+
+        protected static string GetString(object value, string defaultValue)
+        {
+            if (value == null)
+                return defaultValue;
+            else
+                return value.ToString();
         }
 
         public void Map(T model, IDataRecord record)

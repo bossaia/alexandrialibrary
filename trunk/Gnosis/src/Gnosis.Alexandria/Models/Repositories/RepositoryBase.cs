@@ -5,7 +5,6 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Models.Commands;
 using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
@@ -14,23 +13,23 @@ namespace Gnosis.Alexandria.Models.Repositories
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IFactory<T> factory, IModelMapper<T> mapper, string modelName)
+        protected RepositoryBase(IFactory<T> factory, IModelMapper<T> modelMapper, ICommandMapper<T> commandMapper)
         {
             if (factory == null)
                 throw new ArgumentNullException("factory");
-            if (mapper == null)
-                throw new ArgumentNullException("mapper");
-            if (string.IsNullOrEmpty(modelName))
-                throw new ArgumentNullException("modelName");
+            if (modelMapper == null)
+                throw new ArgumentNullException("modelMapper");
+            if (commandMapper == null)
+                throw new ArgumentNullException("commandMapper");
 
             _factory = factory;
-            _mapper = mapper;
-            _modelName = modelName;
+            _modelMapper = modelMapper;
+            _commandMapper = commandMapper;
         }
 
         private readonly IFactory<T> _factory;
-        private readonly IModelMapper<T> _mapper;
-        private readonly string _modelName;
+        private readonly IModelMapper<T> _modelMapper;
+        private readonly ICommandMapper<T> _commandMapper;
 
         #region Private Static Helper Methods
 
@@ -71,20 +70,45 @@ namespace Gnosis.Alexandria.Models.Repositories
             get { return _factory; }
         }
 
-        protected IModelMapper<T> Mapper
+        protected IModelMapper<T> ModelMapper
         {
-            get { return _mapper; }
+            get { return _modelMapper; }
         }
 
-        protected static string GerParameterName(string name)
+        protected ICommandMapper<T> CommandMapper
         {
-            return string.Format("@{0}", name);
+            get { return _commandMapper; }
         }
 
-        protected static void ExecuteCommands(IEnumerable<ICommand> commands)
+        #endregion
+
+        #region IRepository Members
+
+        public void Initialize()
+        {
+            var commands = new List<ICommand> { _commandMapper.GetInitializeCommand() };
+            Execute(commands);
+        }
+
+        public virtual void Persist(T model)
+        {
+            Persist(new List<T> { model });
+        }
+
+        public virtual void Persist(IEnumerable<T> models)
+        {
+            var commands = new List<ICommand>();
+
+            foreach (var model in models)
+                commands.Add(_commandMapper.GetPersistCommand(model));
+
+            Execute(commands);
+        }
+
+        public void Execute(IEnumerable<ICommand> commands)
         {
             IDbTransaction transaction = null;
-            
+
             using (var connection = GetDbConnection())
             {
                 try
@@ -110,7 +134,21 @@ namespace Gnosis.Alexandria.Models.Repositories
             }
         }
 
-        protected ICollection<T> GetMany(ICommand command)
+        public ICommand GetPersistCommand(T model)
+        {
+            return _commandMapper.GetPersistCommand(model);
+        }
+        
+        public virtual T GetOne(object id)
+        {
+            var command = _commandMapper.GetSelectOneCommand(id);
+
+            var many = GetMany(command);
+
+            return many.FirstOrDefault<T>();
+        }
+
+        public ICollection<T> GetMany(ICommand command)
         {
             var models = new List<T>();
 
@@ -123,7 +161,7 @@ namespace Gnosis.Alexandria.Models.Repositories
                     {
                         var model = _factory.Create();
                         model.Initialize(reader["Id"]);
-                        _mapper.Map(model, reader);
+                        _modelMapper.Map(model, reader);
                         models.Add(model);
                     }
                 }
@@ -132,61 +170,11 @@ namespace Gnosis.Alexandria.Models.Repositories
             return models;
         }
 
-        protected CommandBuilder GetCommandBuilderWithCallback()
-        {
-            return new CommandBuilder(new Action<IModel, object>((x, y) => x.Initialize(y)));
-        }
-
-        protected abstract ICommand GetInitializeCommand();
-        protected abstract ICommand GetPersistCommand(T model);
-
-        #endregion
-
-        #region IRepository Members
-
-        public void Initialize()
-        {
-            var commands = new List<ICommand> { GetInitializeCommand() };
-            ExecuteCommands(commands);
-        }
-
-        public virtual void Persist(T model)
-        {
-            Persist(new List<T> { model });
-        }
-
-        public virtual void Persist(IEnumerable<T> models)
-        {
-            var commands = new List<ICommand>();
-
-            foreach (var model in models)
-                commands.Add(GetCommand(model));
-
-            ExecuteCommands(commands);
-        }
-
-        public ICommand GetCommand(T model)
-        {
-            return GetPersistCommand(model);
-        }
-        
-        public virtual T GetOne(object id)
-        {
-            var builder = GetCommandBuilderWithCallback();
-            builder.AppendFormat("select * from {0} where Id =", _modelName);
-            builder.AppendParameterReference("Id", id);
-
-            var many = GetMany(builder.ToCommand());
-
-            return many.FirstOrDefault<T>();
-        }
-
         public ICollection<T> GetAll()
         {
-            var builder = GetCommandBuilderWithCallback();
-            builder.AppendFormat("select * from {0}", _modelName);
+            var command = _commandMapper.GetSelectAllCommand();
 
-            return GetMany(builder.ToCommand());
+            return GetMany(command);
         }
 
         #endregion

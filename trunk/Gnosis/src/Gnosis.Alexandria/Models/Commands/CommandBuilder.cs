@@ -9,32 +9,35 @@ namespace Gnosis.Alexandria.Models.Commands
 {
     public class CommandBuilder : ICommandBuilder
     {
-        public CommandBuilder()
+        public CommandBuilder(IFactory<ICommand> factory)
         {
+            _factory = factory;
         }
 
-        public CommandBuilder(Action<IModel, object> callback)
-        {
-            _callback = callback;
-        }
-
+        private readonly IFactory<ICommand> _factory;
         private readonly StringBuilder _text = new StringBuilder();
         private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
-        private readonly Action<IModel, object> _callback;
+        private Action<IModel, object> _callback;
 
-        public CommandBuilder Append(string value)
+        public ICommandBuilder Append(string value)
         {
             _text.Append(value);
             return this;
         }
 
-        public CommandBuilder AppendFormat(string format, params object[] args)
+        public ICommandBuilder AppendFormat(string format, params object[] args)
         {
             _text.AppendFormat(format, args);
             return this;
         }
 
-        public CommandBuilder AppendParameterReference(string name, object value)
+        public ICommandBuilder AppendLine(string value)
+        {
+            _text.AppendLine(value);
+            return this;
+        }
+
+        public ICommandBuilder AppendParameter(string name, object value)
         {
             var parameterName = string.Format("@{0}", name);
             if (!_parameters.ContainsKey(parameterName))
@@ -44,12 +47,24 @@ namespace Gnosis.Alexandria.Models.Commands
             return this;
         }
 
+        public ICommandBuilder SetCallback(Action<IModel, object> callback)
+        {
+            _callback = callback;
+            return this;
+        }
+
         public ICommand ToCommand()
         {
             if (_text.Length > 0 && _text[_text.Length - 1] != ';')
                 _text.Append(';');
 
-            return new Command(_text.ToString(), _parameters, _callback);
+            var command = _factory.Create();
+
+            command.Text = _text.ToString();
+            command.AddParameters(_parameters);
+            command.Callback = _callback;
+
+            return command;
         }
     }
 }

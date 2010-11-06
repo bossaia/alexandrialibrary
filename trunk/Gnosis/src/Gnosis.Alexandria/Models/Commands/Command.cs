@@ -9,40 +9,32 @@ namespace Gnosis.Alexandria.Models.Commands
 {
     public class Command : ICommand
     {
-        public Command(string text)
-            : this(text, null, null)
+        public Command()
         {
         }
 
-        public Command(string text, IEnumerable<KeyValuePair<string, object>> parameters)
-            : this(text, parameters, null)
-        {
-        }
+        private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
 
-        public Command(string text, IEnumerable<KeyValuePair<string, object>> parameters, Action<IModel, object> callback)
-        {
-            _text = text;
-            _parameters = parameters ?? Enumerable.Empty<KeyValuePair<string, object>>();
-            _callback = callback ?? new Action<IModel, object>((x, y) => {});
-        }
-
-        private readonly string _text;
-        private readonly IEnumerable<KeyValuePair<string, object>> _parameters;
-        private readonly Action<IModel, object> _callback;
-
-        public string Text
-        {
-            get { return _text; }
-        }
+        public string Text { get; set; }
 
         public IEnumerable<KeyValuePair<string, object>> Parameters
         {
             get { return _parameters; }
         }
 
-        public Action<IModel, object> Callback
+        public Action<IModel, object> Callback { get; set; }
+
+        public void AddParameter(string name, object value)
         {
-            get { return _callback; }
+            if (!_parameters.ContainsKey(name))
+                _parameters.Add(name, value);
+        }
+
+        public void AddParameters(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            if (parameters != null)
+                foreach (var item in parameters)
+                    _parameters.Add(item);
         }
     }
 }
