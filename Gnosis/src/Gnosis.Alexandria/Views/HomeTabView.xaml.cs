@@ -12,12 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.Views.Interfaces;
+
 namespace Gnosis.Alexandria.Views
 {
     /// <summary>
     /// Interaction logic for HomeTabView.xaml
     /// </summary>
-    public partial class HomeTabView : ControlView
+    public partial class HomeTabView : ControlView, ITabView
     {
         public HomeTabView()
         {
@@ -25,7 +27,13 @@ namespace Gnosis.Alexandria.Views
         }
 
         public HomeTabView(IDispatcher parent)
-            : base(parent)
+            : base(parent, "New Tab")
+        {
+            InitializeComponent();
+        }
+
+        public HomeTabView(IDispatcher parent, string title)
+            : base(parent, title)
         {
             InitializeComponent();
         }

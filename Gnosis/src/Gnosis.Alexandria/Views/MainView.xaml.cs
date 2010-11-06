@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Messages.Interfaces;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -152,7 +153,7 @@ namespace Gnosis.Alexandria.Views
 
         private void btnAddTab_Click(object sender, RoutedEventArgs e)
         {
-            Dispatch<INewHomeTabRequested>(_id, new NewHomeTabRequested());
+            Dispatch<INewHomeTabRequestedMessage>(_id, new NewHomeTabRequestedMessage());
         }
     }
 }

@@ -3,24 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Controllers.Interfaces;
+using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Views;
 
 namespace Gnosis.Alexandria.Handlers
 {
-    public class NewHomeTabRequestedHandler : Handler<INewHomeTabRequested>
+    public class NewHomeTabRequestedHandler : Handler<INewHomeTabRequestedMessage>
     {
-        public NewHomeTabRequestedHandler(TabController parent)
+        public NewHomeTabRequestedHandler(ITabController parent)
         {
             _parent = parent;
         }
 
-        private readonly TabController _parent;
+        private readonly ITabController _parent;
 
-        protected override void HandleMessage(INewHomeTabRequested message)
+        protected override void HandleMessage(INewHomeTabRequestedMessage message)
         {
-            _parent.AddTab(new HomeTabView(_parent), "New Tab");
+            _parent.AddTab(new HomeTabView(_parent));
         }
     }
 }

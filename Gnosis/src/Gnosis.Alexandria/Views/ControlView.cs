@@ -12,12 +12,14 @@ namespace Gnosis.Alexandria.Views
         {
         }
 
-        protected ControlView(IDispatcher parent)
+        protected ControlView(IDispatcher parent, string title)
         {
             _parent = parent;
+            _title = title;
         }
 
         private readonly Guid _id = Guid.NewGuid();
+        private readonly string _title;
         private readonly IDispatcher _parent;
         private readonly IDictionary<Guid,IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
 
@@ -133,6 +135,15 @@ namespace Gnosis.Alexandria.Views
             }
 
             AfterProcessing(message);
+        }
+
+        #endregion
+
+        #region IView Members
+
+        string IView.Title
+        {
+            get { return _title; }
         }
 
         #endregion

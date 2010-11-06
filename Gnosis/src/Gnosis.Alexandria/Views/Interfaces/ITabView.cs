@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gnosis.Alexandria.Messages
+namespace Gnosis.Alexandria.Views.Interfaces
 {
-    public interface INewHomeTabRequested : IMessage
+    public interface ITabView : IView
     {
     }
 }
