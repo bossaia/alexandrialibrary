@@ -7,7 +7,7 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Commands
 {
-    public class CommandBuilder
+    public class CommandBuilder : ICommandBuilder
     {
         public CommandBuilder()
         {
