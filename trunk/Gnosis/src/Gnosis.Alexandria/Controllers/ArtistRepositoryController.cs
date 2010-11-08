@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-
-using Gnosis.Alexandria.Handlers;
+using Gnosis.Alexandria.Controllers.Interfaces;
+using Gnosis.Alexandria.Handlers.Interfaces;
 using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Controllers
 {
-    public class ArtistRepositoryController : Controller
+    public class ArtistRepositoryController : Controller, IArtistRepositoryController
     {
-        public ArtistRepositoryController(IArtistRepository repository)
+        public ArtistRepositoryController(IArtistRepository repository, ISearchRequestedHandler searchRequestedHandler)
         {
             _repository = repository;
+            searchRequestedHandler.Controller = this;
 
-            AddHandler(new SearchRequestedHandler(this));
+            AddHandler(searchRequestedHandler);
         }
 
         private readonly IArtistRepository _repository;

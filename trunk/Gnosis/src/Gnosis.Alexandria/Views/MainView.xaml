@@ -12,7 +12,8 @@
                             <Border 
                                             Name="Border"
                                             BorderBrush="Black" 
-                                            BorderThickness="1,1,1,0" 
+                                            BorderThickness="1,1,1,0"
+                                            Focusable="False"
                                             CornerRadius="6,6,0,0" >
                                 <ContentPresenter x:Name="ContentSite"
                                                VerticalAlignment="Center"
