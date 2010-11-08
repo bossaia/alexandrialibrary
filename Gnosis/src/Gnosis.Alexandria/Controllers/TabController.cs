@@ -1,31 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Handlers;
-using Gnosis.Alexandria.Messages;
-using Gnosis.Alexandria.Views;
 using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Controllers
 {
     public class TabController : Controller, ITabController
     {
-        public TabController(IDispatcher parent, TabControl control)
-            : base(parent)
+        public TabController()
         {
-            _control = control;
-
             AddHandler(new NewHomeTabRequestedHandler(this));
             AddHandler(new NewSearchTabRequestedHandler(this));
         }
 
-        private readonly TabControl _control;
+        private TabControl _control;
         private readonly IDictionary<Guid, TabItem> _tabMap = new Dictionary<Guid, TabItem>();
 
         #region AddTab Helper Methods
@@ -151,6 +144,18 @@ namespace Gnosis.Alexandria.Controllers
         #endregion
 
         #region ITabController Members
+
+        public TabControl TabControl
+        {
+            get { return _control; }
+            set
+            {
+                if (_control != null)
+                    throw new InvalidOperationException("The tab control is already defined for this controller.");
+
+                _control = value;
+            }
+        }
 
         public void AddTab(ITabView tabView)
         {

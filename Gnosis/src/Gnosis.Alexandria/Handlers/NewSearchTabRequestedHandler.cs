@@ -6,6 +6,7 @@ using System.Text;
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Views;
+using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Handlers
 {
@@ -20,7 +21,8 @@ namespace Gnosis.Alexandria.Handlers
 
         protected override void HandleMessage(INewSearchTabRequestedMessage message)
         {
-            var view = new SearchTabView(_parent, message.Search);
+            var view = ServiceLocator.GetObject<ISearchTabView>();
+            view.Search = message.Search;
             _parent.AddTab(view);
         }
     }

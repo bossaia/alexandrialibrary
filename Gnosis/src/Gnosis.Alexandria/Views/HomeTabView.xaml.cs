@@ -21,31 +21,24 @@ namespace Gnosis.Alexandria.Views
     /// <summary>
     /// Interaction logic for HomeTabView.xaml
     /// </summary>
-    public partial class HomeTabView : ControlView, ITabView
+    public partial class HomeTabView : ControlView, IHomeTabView
     {
         public HomeTabView()
         {
             InitializeComponent();
+
+            ((IView) this).Title = "New Tab";
         }
 
-        public HomeTabView(IDispatcher parent)
-            : base(parent, "New Tab")
-        {
-            InitializeComponent();
-        }
-
-        public HomeTabView(IDispatcher parent, string title)
-            : base(parent, title)
-        {
-            InitializeComponent();
-        }
-
-        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        private void SearchEntered(object sender, KeyEventArgs e)
         {
             if ((e.Key == Key.Enter || e.Key == Key.Return) && !string.IsNullOrEmpty(txtSearch.Text))
             {
                 e.Handled = true;
-                Dispatch<INewSearchTabRequestedMessage>(Id, new NewSearchTabRequestedMessage(txtSearch.Text));
+                
+                var message = ServiceLocator.GetObject<INewSearchTabRequestedMessage>();
+                message.Search = txtSearch.Text;
+                Dispatch<INewSearchTabRequestedMessage>(Id, message);
             }
         }
     }

@@ -71,6 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\ArtistRepositoryController.cs" />
     <Compile Include="Controllers\CountryRepositoryController.cs" />
+    <Compile Include="Controllers\Interfaces\IRepositoryController.cs" />
     <Compile Include="Controllers\Interfaces\ITabController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
     <Compile Include="Handlers\NewSearchTabRequestedHandler.cs" />
@@ -115,6 +116,8 @@
     <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Views\Interfaces\IHomeTabView.cs" />
+    <Compile Include="Views\Interfaces\ISearchTabView.cs" />
     <Compile Include="Views\Interfaces\ITabView.cs" />
     <Compile Include="Views\SearchTabView.xaml.cs">
       <DependentUpon>SearchTabView.xaml</DependentUpon>

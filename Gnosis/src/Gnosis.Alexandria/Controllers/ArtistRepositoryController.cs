@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 using Gnosis.Alexandria.Handlers;
 using Gnosis.Alexandria.Models.Interfaces;
@@ -10,8 +7,7 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class ArtistRepositoryController : Controller
     {
-        public ArtistRepositoryController(IDispatcher parent, IArtistRepository repository)
-            : base(parent)
+        public ArtistRepositoryController(IArtistRepository repository)
         {
             _repository = repository;
 

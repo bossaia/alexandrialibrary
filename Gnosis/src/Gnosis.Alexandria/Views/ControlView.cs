@@ -12,15 +12,8 @@ namespace Gnosis.Alexandria.Views
         {
         }
 
-        protected ControlView(IDispatcher parent, string title)
-        {
-            _parent = parent;
-            _title = title;
-        }
-
         private readonly Guid _id = Guid.NewGuid();
-        private readonly string _title;
-        private readonly IDispatcher _parent;
+        private IDispatcher _parent;
         private readonly IDictionary<Guid,IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
 
         #region IDispatcher Members
@@ -30,9 +23,16 @@ namespace Gnosis.Alexandria.Views
             get { return _id; }
         }
 
-        new public IDispatcher Parent
+        IDispatcher IDispatcher.Parent
         {
             get { return _parent; }
+            set
+            {
+                if (_parent != null && value != null)
+                    throw new InvalidOperationException("This dispatcher already has a parent assigned. You cannot change the parent of a dispatcher.");
+
+                _parent = value;
+            }
         }
 
         public IEnumerable<IDispatcher> Children
@@ -52,6 +52,19 @@ namespace Gnosis.Alexandria.Views
         {
             if (_children.ContainsKey(childId))
                 _children.Remove(childId);
+        }
+
+        public void Dispatch<T>()
+            where T : IMessage
+        {
+            var message = ServiceLocator.GetObject<T>();
+            Dispatch(_id, message);
+        }
+
+        public void Dispatch<T>(T message)
+            where T : IMessage
+        {
+            Dispatch(_id, message);
         }
 
         public void Dispatch<T>(Guid sender, T message)
@@ -143,7 +156,8 @@ namespace Gnosis.Alexandria.Views
 
         string IView.Title
         {
-            get { return _title; }
+            get;
+            set;
         }
 
         #endregion

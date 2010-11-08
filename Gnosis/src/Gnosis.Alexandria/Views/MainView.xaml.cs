@@ -1,27 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-using Gnosis.Alexandria.Controllers;
-using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
-using Gnosis.Alexandria.Models;
-using Gnosis.Alexandria.Models.Commands;
-using ICmd = Gnosis.Alexandria.Models.Interfaces.ICommand;
-using Gnosis.Alexandria.Models.Factories;
-using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Alexandria.Models.Mappers;
-using Gnosis.Alexandria.Models.Repositories;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -40,7 +23,6 @@ namespace Gnosis.Alexandria.Views
         }
 
         private readonly Guid _id = Guid.NewGuid();
-        private readonly IDispatcher _parent = null;
         private readonly IDictionary<Guid, IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
 
         #region Initialization Methods
@@ -53,15 +35,17 @@ namespace Gnosis.Alexandria.Views
 
         private void AddTabController()
         {
-            AddChild(new TabController(this, tabControl));
+            var tabController = ServiceLocator.GetObject<ITabController>();
+            tabController.TabControl = tabControl;
+
+            AddChild(tabController);
         }
 
         private void AddRepositoryController()
         {
-            var artistRepository = ServiceLocator.GetObject<IArtistRepository>();
-            var countryRepository = ServiceLocator.GetObject<ICountryRepository>();
+            var repositoryController = ServiceLocator.GetObject<IRepositoryController>();
 
-            AddChild(new RepositoryController(this, artistRepository, countryRepository));
+            AddChild(repositoryController);
         }
 
         #endregion
@@ -73,9 +57,13 @@ namespace Gnosis.Alexandria.Views
             get { return _id; }
         }
 
-        new public IDispatcher Parent
+        IDispatcher IDispatcher.Parent
         {
-            get { return _parent; }
+            get { return null; }
+            set
+            {
+                throw new InvalidOperationException("This root dispatcher cannot have a parent.");
+            }
         }
 
         public IEnumerable<IDispatcher> Children
@@ -88,13 +76,30 @@ namespace Gnosis.Alexandria.Views
             if (child == null)
                 throw new ArgumentNullException("child");
 
+            child.Parent = this;
             _children.Add(child.Id, child);
         }
 
-        public void RemoveChild(Guid childId)
+        public void RemoveChild(Guid id)
         {
-            if (_children.ContainsKey(childId))
-                _children.Remove(childId);
+            if (!_children.ContainsKey(id))
+                return;
+
+            _children[id].Parent = null;
+            _children.Remove(id);
+        }
+
+        public void Dispatch<T>()
+            where T : IMessage
+        {
+            var message = ServiceLocator.GetObject<T>();
+            Dispatch(_id, message);
+        }
+
+        public void Dispatch<T>(T message)
+            where T : IMessage
+        {
+            Dispatch(_id, message);
         }
 
         public void Dispatch<T>(Guid sender, T message)
@@ -104,9 +109,6 @@ namespace Gnosis.Alexandria.Views
                 throw new ArgumentNullException("message");
 
             MessageReceived(message);
-
-            if (_parent != null && _parent.Id != sender)
-                _parent.Dispatch(_id, message);
 
             foreach (var child in _children.Values.Where(x => x.Id != sender))
                 child.Dispatch(_id, message);
@@ -121,7 +123,7 @@ namespace Gnosis.Alexandria.Views
         protected virtual void MessageReceived<T>(T message)
             where T : IMessage
         {
-            Process<T>(message);
+            Process(message);
         }
 
         protected virtual void BeforeProcessing<T>(T message)
@@ -185,10 +187,10 @@ namespace Gnosis.Alexandria.Views
 
         private void AddHomeTab()
         {
-            Dispatch<INewHomeTabRequestedMessage>(_id, new NewHomeTabRequestedMessage());
+            Dispatch<INewHomeTabRequestedMessage>();
         }
 
-        private void btnAddTab_Click(object sender, RoutedEventArgs e)
+        private void AddTabButtonClicked(object sender, RoutedEventArgs e)
         {
             AddHomeTab();
         }
