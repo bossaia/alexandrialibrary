@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Gnosis.Alexandria.Messages;
+using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Views
@@ -36,6 +38,15 @@ namespace Gnosis.Alexandria.Views
             : base(parent, title)
         {
             InitializeComponent();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.Enter || e.Key == Key.Return) && !string.IsNullOrEmpty(txtSearch.Text))
+            {
+                e.Handled = true;
+                Dispatch<INewSearchTabRequestedMessage>(Id, new NewSearchTabRequestedMessage(txtSearch.Text));
+            }
         }
     }
 }

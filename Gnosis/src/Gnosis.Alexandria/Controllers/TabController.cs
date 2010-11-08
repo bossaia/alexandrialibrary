@@ -22,6 +22,7 @@ namespace Gnosis.Alexandria.Controllers
             _control = control;
 
             AddHandler(new NewHomeTabRequestedHandler(this));
+            AddHandler(new NewSearchTabRequestedHandler(this));
         }
 
         private readonly TabControl _control;

@@ -15,6 +15,13 @@ using System.Windows.Shapes;
 using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Messages;
 using Gnosis.Alexandria.Messages.Interfaces;
+using Gnosis.Alexandria.Models;
+using Gnosis.Alexandria.Models.Commands;
+using ICmd = Gnosis.Alexandria.Models.Interfaces.ICommand;
+using Gnosis.Alexandria.Models.Factories;
+using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Alexandria.Models.Mappers;
+using Gnosis.Alexandria.Models.Repositories;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -27,7 +34,22 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
+            //TODO: Replace this with StructureMap
+            var commandFactory = new GenericFactory<ICmd, Command>();
+            var commandBuilderFactory = new CommandBuilderFactory(commandFactory);
+            var countryFactory = new GenericFactory<ICountry, Country>();
+            var countryModelMapper = new CountryModelMapper();
+            var countryCommandMapper = new CountryCommandMapper(commandBuilderFactory);
+            var countryRepository = new CountryRepository(countryFactory, countryModelMapper, countryCommandMapper);
+            var artistFactory = new GenericFactory<IArtist, Artist>();
+            var artistModelMapper = new ArtistModelMapper(countryRepository);
+            var artistCommandMapper = new ArtistCommandMapper(commandBuilderFactory);
+            var artistRepository = new ArtistRepository(artistFactory, artistModelMapper, artistCommandMapper);
+
             AddChild(new TabController(this, tabControl));
+            AddChild(new RepositoryController(this, artistRepository));
+
+            DoAddTabClick();
         }
 
         private readonly Guid _id = Guid.NewGuid();
@@ -151,9 +173,14 @@ namespace Gnosis.Alexandria.Views
 
         #endregion
 
-        private void btnAddTab_Click(object sender, RoutedEventArgs e)
+        private void DoAddTabClick()
         {
             Dispatch<INewHomeTabRequestedMessage>(_id, new NewHomeTabRequestedMessage());
+        }
+
+        private void btnAddTab_Click(object sender, RoutedEventArgs e)
+        {
+            DoAddTabClick();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ISearchable : INamed, ICoded, IDated, INational, INoted
+    public interface IMediaEntity : INamed, ICoded, IDated, INational, INoted
     {
         string Type { get; set; }
     }
