@@ -7,6 +7,6 @@ namespace Gnosis.Alexandria.Messages.Interfaces
 {
     public interface INewSearchTabRequestedMessage : IMessage
     {
-        string Search { get; }
+        string Search { get; set; }
     }
 }

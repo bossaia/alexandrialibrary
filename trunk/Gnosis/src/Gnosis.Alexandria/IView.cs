@@ -2,7 +2,7 @@
 {
     public interface IView : IProcessor, IDispatcher
     {
-        string Title { get; }
+        string Title { get; set; }
         //void Show();
         //void Close();
     }

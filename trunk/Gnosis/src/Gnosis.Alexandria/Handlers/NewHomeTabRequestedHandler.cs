@@ -6,6 +6,7 @@ using System.Text;
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Views;
+using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Handlers
 {
@@ -20,7 +21,8 @@ namespace Gnosis.Alexandria.Handlers
 
         protected override void HandleMessage(INewHomeTabRequestedMessage message)
         {
-            _parent.AddTab(new HomeTabView(_parent));
+            var view = ServiceLocator.GetObject<IHomeTabView>();
+            _parent.AddTab(view);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Gnosis.Alexandria.Controllers;
+﻿using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Handlers;
 using Gnosis.Alexandria.Messages;
@@ -14,6 +9,8 @@ using Gnosis.Alexandria.Models.Factories;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Alexandria.Models.Mappers;
 using Gnosis.Alexandria.Models.Repositories;
+using Gnosis.Alexandria.Views;
+using Gnosis.Alexandria.Views.Interfaces;
 using StructureMap;
 
 namespace Gnosis.Alexandria
@@ -34,7 +31,14 @@ namespace Gnosis.Alexandria
                     x.For<IModelMapper<IArtist>>().Use<ArtistModelMapper>();
                     x.For<ICommandMapper<IArtist>>().Use<ArtistCommandMapper>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();
+                    x.For<IRepositoryController>().Use<RepositoryController>();
+                    x.For<ITabController>().Use<TabController>();
+                    x.For<IHomeTabView>().Use<HomeTabView>();
+                    x.For<ISearchTabView>().Use<SearchTabView>();
 
+                    x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
+                    x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();
+                    x.For<ISearchRequestedMessage>().Use<SearchRequestedMessage>();
                 }
             );
         }

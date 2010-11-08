@@ -7,6 +7,6 @@ namespace Gnosis.Alexandria.Messages.Interfaces
 {
     public interface ITargetedMessage : IMessage
     {
-        Guid Target { get; }
+        Guid Target { get; set; }
     }
 }

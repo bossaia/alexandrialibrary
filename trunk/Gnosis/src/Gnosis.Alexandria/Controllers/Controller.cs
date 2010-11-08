@@ -8,12 +8,6 @@ namespace Gnosis.Alexandria.Controllers
     public abstract class Controller : Dispatcher, IController
     {
         protected Controller()
-            : base()
-        {
-        }
-
-        protected Controller(IDispatcher parent)
-            : base(parent)
         {
         }
 
