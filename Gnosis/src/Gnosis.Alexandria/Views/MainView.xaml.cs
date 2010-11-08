@@ -34,27 +34,37 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
-            //TODO: Replace this with StructureMap
-            var commandFactory = new GenericFactory<ICmd, Command>();
-            var commandBuilderFactory = new CommandBuilderFactory(commandFactory);
-            var countryFactory = new GenericFactory<ICountry, Country>();
-            var countryModelMapper = new CountryModelMapper();
-            var countryCommandMapper = new CountryCommandMapper(commandBuilderFactory);
-            var countryRepository = new CountryRepository(countryFactory, countryModelMapper, countryCommandMapper);
-            var artistFactory = new GenericFactory<IArtist, Artist>();
-            var artistModelMapper = new ArtistModelMapper(countryRepository);
-            var artistCommandMapper = new ArtistCommandMapper(commandBuilderFactory);
-            var artistRepository = new ArtistRepository(artistFactory, artistModelMapper, artistCommandMapper);
+            InitializeDispatchers();
 
-            AddChild(new TabController(this, tabControl));
-            AddChild(new RepositoryController(this, artistRepository));
-
-            DoAddTabClick();
+            AddHomeTab();
         }
 
         private readonly Guid _id = Guid.NewGuid();
         private readonly IDispatcher _parent = null;
         private readonly IDictionary<Guid, IDispatcher> _children = new Dictionary<Guid, IDispatcher>();
+
+        #region Initialization Methods
+
+        private void InitializeDispatchers()
+        {
+            AddTabController();
+            AddRepositoryController();
+        }
+
+        private void AddTabController()
+        {
+            AddChild(new TabController(this, tabControl));
+        }
+
+        private void AddRepositoryController()
+        {
+            var artistRepository = ServiceLocator.GetObject<IArtistRepository>();
+            var countryRepository = ServiceLocator.GetObject<ICountryRepository>();
+
+            AddChild(new RepositoryController(this, artistRepository, countryRepository));
+        }
+
+        #endregion
 
         #region IDispatcher Members
 
@@ -173,14 +183,14 @@ namespace Gnosis.Alexandria.Views
 
         #endregion
 
-        private void DoAddTabClick()
+        private void AddHomeTab()
         {
             Dispatch<INewHomeTabRequestedMessage>(_id, new NewHomeTabRequestedMessage());
         }
 
         private void btnAddTab_Click(object sender, RoutedEventArgs e)
         {
-            DoAddTabClick();
+            AddHomeTab();
         }
     }
 }
