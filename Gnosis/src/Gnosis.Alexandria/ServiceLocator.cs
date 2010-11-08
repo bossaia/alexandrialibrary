@@ -1,6 +1,7 @@
 ﻿using Gnosis.Alexandria.Controllers;
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Handlers;
+using Gnosis.Alexandria.Handlers.Interfaces;
 using Gnosis.Alexandria.Messages;
 using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Models;
@@ -31,10 +32,18 @@ namespace Gnosis.Alexandria
                     x.For<IModelMapper<IArtist>>().Use<ArtistModelMapper>();
                     x.For<ICommandMapper<IArtist>>().Use<ArtistCommandMapper>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();
+                    
                     x.For<IRepositoryController>().Use<RepositoryController>();
+                    x.For<IArtistRepositoryController>().Use<ArtistRepositoryController>();
+                    x.For<ICountryRepositoryController>().Use<CountryRepositoryController>();
                     x.For<ITabController>().Use<TabController>();
+                    
                     x.For<IHomeTabView>().Use<HomeTabView>();
                     x.For<ISearchTabView>().Use<SearchTabView>();
+
+                    x.For<INewHomeTabRequestedHandler>().Use<NewHomeTabRequestedHandler>();
+                    x.For<INewSearchTabRequestedHandler>().Use<NewSearchTabRequestedHandler>();
+                    x.For<ISearchRequestedHandler>().Use<SearchRequestedHandler>();
 
                     x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
                     x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();

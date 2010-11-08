@@ -10,6 +10,8 @@ namespace Gnosis.Alexandria.Views
         public SearchTabView()
         {
             InitializeComponent();
+
+            txtSearch.Focus();
         }
 
         public string Search

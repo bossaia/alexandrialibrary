@@ -71,9 +71,14 @@
     </ApplicationDefinition>
     <Compile Include="Controllers\ArtistRepositoryController.cs" />
     <Compile Include="Controllers\CountryRepositoryController.cs" />
+    <Compile Include="Controllers\Interfaces\IArtistRepositoryController.cs" />
+    <Compile Include="Controllers\Interfaces\ICountryRepositoryController.cs" />
     <Compile Include="Controllers\Interfaces\IRepositoryController.cs" />
     <Compile Include="Controllers\Interfaces\ITabController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
+    <Compile Include="Handlers\Interfaces\INewHomeTabRequestedHandler.cs" />
+    <Compile Include="Handlers\Interfaces\INewSearchTabRequestedHandler.cs" />
+    <Compile Include="Handlers\Interfaces\ISearchRequestedHandler.cs" />
     <Compile Include="Handlers\NewSearchTabRequestedHandler.cs" />
     <Compile Include="Handlers\SearchRequestedHandler.cs" />
     <Compile Include="Messages\Interfaces\INewSearchTabRequestedMessage.cs" />

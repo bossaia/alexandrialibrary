@@ -5,17 +5,20 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
-using Gnosis.Alexandria.Handlers;
+using Gnosis.Alexandria.Handlers.Interfaces;
 using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Controllers
 {
     public class TabController : Controller, ITabController
     {
-        public TabController()
+        public TabController(INewHomeTabRequestedHandler newHomeTabRequestedHandler, INewSearchTabRequestedHandler newSearchTabRequestedHandler)
         {
-            AddHandler(new NewHomeTabRequestedHandler(this));
-            AddHandler(new NewSearchTabRequestedHandler(this));
+            newHomeTabRequestedHandler.Controller = this;
+            newSearchTabRequestedHandler.Controller = this;
+
+            AddHandler(newHomeTabRequestedHandler);
+            AddHandler(newSearchTabRequestedHandler);
         }
 
         private TabControl _control;

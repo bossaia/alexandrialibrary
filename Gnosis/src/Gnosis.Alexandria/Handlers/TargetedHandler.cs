@@ -10,16 +10,15 @@ namespace Gnosis.Alexandria.Handlers
     public abstract class TargetedHandler<T> : Handler<T>
         where T : ITargetedMessage
     {
-        protected TargetedHandler(Guid hostId)
+        protected TargetedHandler()
         {
-            _hostId = hostId;
         }
 
-        private readonly Guid _hostId;
+        public Guid Host { get; set; }
 
         public override void Handle(T message)
         {
-            if (message.Target == _hostId)
+            if (message.Target == Host)
                 HandleMessage(message);
         }
     }
