@@ -4,9 +4,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Models.Interfaces;
+
 namespace Gnosis.Alexandria.Models.Mappers
 {
-    public abstract class ModelMapper<T>
+    public abstract class ModelMapper<T> : IModelMapper<T>
         where T : IModel
     {
         private readonly IDictionary<string, Action<T, object>> _actions = new Dictionary<string, Action<T, object>>();

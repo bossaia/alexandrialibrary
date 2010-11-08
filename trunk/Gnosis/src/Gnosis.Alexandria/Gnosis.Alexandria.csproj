@@ -64,10 +64,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controllers\ArtistRepositoryController.cs" />
     <Compile Include="Controllers\Interfaces\ITabController.cs" />
+    <Compile Include="Controllers\RepositoryController.cs" />
+    <Compile Include="Handlers\NewSearchTabRequestedHandler.cs" />
+    <Compile Include="Handlers\SearchRequestedHandler.cs" />
+    <Compile Include="Messages\Interfaces\INewSearchTabRequestedMessage.cs" />
+    <Compile Include="Messages\Interfaces\ISearchRequestedMessage.cs" />
+    <Compile Include="Messages\NewSearchTabRequestedMessage.cs" />
+    <Compile Include="Messages\SearchRequestedMessage.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Commands\CommandBuilderFactory.cs" />
     <Compile Include="Models\Commands\CommandFactory.cs" />
+    <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Factories\GenericFactory.cs" />
     <Compile Include="Models\Interfaces\IArtistRepository.cs" />
     <Compile Include="Models\Interfaces\ICommand.cs" />
@@ -84,19 +93,25 @@
     <Compile Include="Models\Interfaces\INational.cs" />
     <Compile Include="Models\Interfaces\INoted.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
-    <Compile Include="Models\Interfaces\ISearchable.cs" />
+    <Compile Include="Models\Interfaces\IMediaEntity.cs" />
     <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
     <Compile Include="Models\Mappers\ArtistModelMapper.cs" />
     <Compile Include="Models\Mappers\CommandMapper.cs" />
+    <Compile Include="Models\Mappers\CountryCommandMapper.cs" />
+    <Compile Include="Models\Mappers\CountryModelMapper.cs" />
     <Compile Include="Models\Mappers\ModelMapper.cs" />
     <Compile Include="Models\Model.cs" />
-    <Compile Include="Models\NamedBase.cs" />
+    <Compile Include="Models\Named.cs" />
     <Compile Include="Models\Repositories\ArtistRepository.cs" />
     <Compile Include="Models\Repositories\CatalogRepository.cs" />
     <Compile Include="Models\Commands\Command.cs" />
     <Compile Include="Models\Commands\CommandBuilder.cs" />
+    <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
     <Compile Include="Views\Interfaces\ITabView.cs" />
+    <Compile Include="Views\SearchTabView.xaml.cs">
+      <DependentUpon>SearchTabView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowView.xaml.cs">
       <DependentUpon>WindowView.xaml</DependentUpon>
     </Compile>
@@ -138,6 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\MainViewResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchTabView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

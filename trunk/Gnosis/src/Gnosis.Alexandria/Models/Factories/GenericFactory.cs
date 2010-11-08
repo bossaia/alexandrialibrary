@@ -8,7 +8,6 @@ using Gnosis.Alexandria.Models.Interfaces;
 namespace Gnosis.Alexandria.Models.Factories
 {
     public class GenericFactory<T, C> : IFactory<T>
-        where T : IModel
         where C : T, new()
     {
         public T Create()

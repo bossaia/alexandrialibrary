@@ -12,6 +12,8 @@ namespace Gnosis.Alexandria.Models.Mappers
     {
         protected CommandMapper(IFactory<ICommandBuilder> factory, string modelName)
         {
+            _factory = factory;
+            _modelName = modelName;
         }
 
         private readonly IFactory<ICommandBuilder> _factory;
