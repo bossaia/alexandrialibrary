@@ -160,6 +160,10 @@ namespace Gnosis.Alexandria.Views
             set;
         }
 
+        public virtual void SetFocus()
+        {
+        }
+
         #endregion
     }
 }

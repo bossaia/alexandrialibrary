@@ -19,12 +19,14 @@
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                ContentSource="Header"
+                                               Focusable="False"
                                                Margin="12,2,12,2"/>
                             </Border>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter TargetName="Border" Property="Background" Value="White"/>
+                                <Setter TargetName="Border" Property="Focusable" Value="False"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="False">
                                 <Setter TargetName="Border" Property="Background" Value="LightGray"/>
