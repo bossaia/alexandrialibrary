@@ -1,4 +1,7 @@
-﻿using Gnosis.Alexandria.Views.Interfaces;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -30,6 +33,11 @@ namespace Gnosis.Alexandria.Views
                 return "New Search";
 
             return string.Format("Search: {0}", search);
+        }
+
+        public override void SetFocus()
+        {
+            txtSearch.Focus();
         }
     }
 }

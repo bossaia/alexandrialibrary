@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
@@ -22,7 +23,13 @@ namespace Gnosis.Alexandria.Controllers
         }
 
         private TabControl _control;
-        private readonly IDictionary<Guid, TabItem> _tabMap = new Dictionary<Guid, TabItem>();
+        private readonly IDictionary<Guid, TabItemAndView> _tabMap = new Dictionary<Guid, TabItemAndView>();
+
+        private class TabItemAndView
+        {
+            public TabItem Item { get; set; }
+            public ITabView View { get; set; }
+        }
 
         #region AddTab Helper Methods
 
@@ -114,7 +121,8 @@ namespace Gnosis.Alexandria.Controllers
         private void AddTabItemAndView(TabItem tabItem, ITabView tabView)
         {
             _control.Items.Add(tabItem);
-            _tabMap.Add(tabView.Id, tabItem);
+            var tabItemAndView = new TabItemAndView { Item = tabItem, View = tabView };
+            _tabMap.Add(tabView.Id, tabItemAndView);
         }
 
         #endregion
@@ -134,14 +142,15 @@ namespace Gnosis.Alexandria.Controllers
         private TabItem GetTabItem(Guid id)
         {
             if (_tabMap.ContainsKey(id))
-                return _tabMap[id];
+                return _tabMap[id].Item;
             else
                 throw new InvalidOperationException(string.Format("Tab does not exist: {0}", id));
         }
 
-        private void SelectTabItem(TabItem tabItem)
+        private void SelectTabItem(Guid id)
         {
-            _control.SelectedItem = tabItem;
+            _control.SelectedItem = _tabMap[id].Item;
+            _tabMap[id].View.SetFocus();
         }
 
         #endregion
@@ -168,7 +177,7 @@ namespace Gnosis.Alexandria.Controllers
 
             AddTabItemAndView(tabItem, tabView);
             
-            SelectTabItem(tabItem);
+            SelectTabItem(tabView.Id);
         }
 
         public void RemoveTab(Guid id)
@@ -183,7 +192,7 @@ namespace Gnosis.Alexandria.Controllers
         public void SelectTab(Guid id)
         {
             var tabItem = GetTabItem(id);
-            SelectTabItem(tabItem);
+            SelectTabItem(id);
         }
 
         #endregion
