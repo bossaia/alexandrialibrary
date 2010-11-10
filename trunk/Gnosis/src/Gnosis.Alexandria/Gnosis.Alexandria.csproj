@@ -97,9 +97,12 @@
     <Compile Include="Models\Interfaces\ICommandMapper.cs" />
     <Compile Include="Models\Interfaces\ICountry.cs" />
     <Compile Include="Models\Interfaces\ICountryRepository.cs" />
+    <Compile Include="Models\Interfaces\ICreateTableCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICreateViewCommandBuilder.cs" />
     <Compile Include="Models\Interfaces\IDated.cs" />
     <Compile Include="Models\Interfaces\IArtist.cs" />
     <Compile Include="Models\Interfaces\ICoded.cs" />
+    <Compile Include="Models\Interfaces\IDropCommandBuilder.cs" />
     <Compile Include="Models\Interfaces\IFactory.cs" />
     <Compile Include="Models\Interfaces\IModelMapper.cs" />
     <Compile Include="Models\Interfaces\INamed.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="Models\Interfaces\IQueryCommandBuilder.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
+    <Compile Include="Models\Interfaces\ICreateIndexCommandBuilder.cs" />
     <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
     <Compile Include="Models\Mappers\ArtistModelMapper.cs" />
     <Compile Include="Models\Mappers\CommandMapper.cs" />
