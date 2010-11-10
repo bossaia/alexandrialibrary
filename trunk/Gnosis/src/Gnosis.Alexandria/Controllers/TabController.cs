@@ -7,6 +7,7 @@ using System.Windows.Media;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Handlers.Interfaces;
+using Gnosis.Alexandria.Models.Commands;
 using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Controllers
