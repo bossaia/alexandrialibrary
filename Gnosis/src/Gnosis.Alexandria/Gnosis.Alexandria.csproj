@@ -88,6 +88,7 @@
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Commands\CommandBuilderFactory.cs" />
     <Compile Include="Models\Commands\CommandFactory.cs" />
+    <Compile Include="Models\Commands\QueryCommandBuilder.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Factories\GenericFactory.cs" />
     <Compile Include="Models\Interfaces\IArtistRepository.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="Models\Interfaces\INamed.cs" />
     <Compile Include="Models\Interfaces\INational.cs" />
     <Compile Include="Models\Interfaces\INoted.cs" />
+    <Compile Include="Models\Interfaces\IPersistCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\IQueryCommandBuilder.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
     <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
@@ -121,6 +124,8 @@
     <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Utilities\FluentStringBuilder.cs" />
+    <Compile Include="Utilities\Interfaces\IStringBuilder.cs" />
     <Compile Include="Views\Interfaces\IHomeTabView.cs" />
     <Compile Include="Views\Interfaces\ISearchTabView.cs" />
     <Compile Include="Views\Interfaces\ITabView.cs" />
