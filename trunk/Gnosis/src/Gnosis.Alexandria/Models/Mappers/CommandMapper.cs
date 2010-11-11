@@ -7,25 +7,31 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
+    /*
     public abstract class CommandMapper<T> : ICommandMapper<T>
         where T : IModel
     {
-        protected CommandMapper(IFactory<ICommandBuilder> factory, string modelName)
+        protected CommandMapper(string modelName,
+            IFactory<IDeleteBuilder> deleteBuilderFactory,
+            IFactory<ICreateTableBuilder>
+            )
         {
             _factory = factory;
             _modelName = modelName;
         }
 
-        private readonly IFactory<ICommandBuilder> _factory;
+        private readonly IFactory<IInsertBuilder> _insertBuilderFactory;
+        private readonly IFactory<IUpdateBuilder> _updateBuilderFactory;
+        private readonly IFactory<IDeleteBuilder> _deleteBuilderFactory;
         private readonly string _modelName;
 
-        protected abstract ICommand GetInitializeCommand(ICommandBuilder builder);
+        protected abstract IEnumerable<ICommand> GetInitializeCommandsInternal();
         protected abstract IDictionary<string, object> GetPersistenceMap(T model);
 
         protected virtual ICommand GetSaveCommand(ICommandBuilder builder, T model)
         {
             var map = GetPersistenceMap(model);
-
+            
             //TODO: Change ICommandBuilder to make this less awkward
             builder.AppendFormat("insert or replace into {0} (", _modelName);
 
@@ -47,15 +53,16 @@ namespace Gnosis.Alexandria.Models.Mappers
             }
 
             builder.Append(")");
-
             return builder.ToCommand();
         }
 
-        protected virtual ICommand GetDeleteCommand(ICommandBuilder builder, object id)
+        protected virtual ICommand GetDeleteCommand(IDeleteBuilder builder, object id)
         {
-            builder.AppendFormat("delete from {0} where id =", _modelName);
-            builder.AppendParameter("Id", id);
-            return builder.ToCommand();
+            return builder
+                .DeleteFrom(_modelName)
+                .Where("Id")
+                .IsEqualTo("@Id", id)
+                .ToCommand();
         }
 
         public ICommandBuilder GetCommandBuilder()
@@ -63,10 +70,9 @@ namespace Gnosis.Alexandria.Models.Mappers
             return _factory.Create();
         }
 
-        public ICommand GetInitializeCommand()
+        public IEnumerable<ICommand> GetInitializeCommands()
         {
-            var builder = _factory.Create();
-            return GetInitializeCommand(builder);
+            return GetInitializeCommandsInternal();
         }
 
         public ICommand GetPersistCommand(T model)
@@ -95,5 +101,7 @@ namespace Gnosis.Alexandria.Models.Mappers
             
             return builder.ToCommand();
         }
+        
     }
+    */
 }

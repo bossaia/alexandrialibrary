@@ -9,6 +9,7 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
+    /*
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
         public ArtistRepository(IFactory<IArtist> factory, IModelMapper<IArtist> modelMapper, ICommandMapper<IArtist> commandMapper)
@@ -30,8 +31,8 @@ namespace Gnosis.Alexandria.Models.Repositories
                 .Append(" or NameHash like ")
                 .AppendParameter("NameHash", nameHash)
                 .ToCommand();
-
-            return GetMany(command);
+            return GetMany(null);
         }
     }
+    */
 }

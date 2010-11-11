@@ -9,6 +9,7 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
+    /*
     public abstract class RepositoryBase<T>
         : IRepository<T>
         where T : IModel
@@ -80,32 +81,7 @@ namespace Gnosis.Alexandria.Models.Repositories
             get { return _commandMapper; }
         }
 
-        #endregion
-
-        #region IRepository Members
-
-        public void Initialize()
-        {
-            var commands = new List<ICommand> { _commandMapper.GetInitializeCommand() };
-            Execute(commands);
-        }
-
-        public virtual void Persist(T model)
-        {
-            Persist(new List<T> { model });
-        }
-
-        public virtual void Persist(IEnumerable<T> models)
-        {
-            var commands = new List<ICommand>();
-
-            foreach (var model in models)
-                commands.Add(_commandMapper.GetPersistCommand(model));
-
-            Execute(commands);
-        }
-
-        public void Execute(IEnumerable<ICommand> commands)
+        protected void Execute(IEnumerable<ICommand> commands)
         {
             IDbTransaction transaction = null;
 
@@ -134,9 +110,29 @@ namespace Gnosis.Alexandria.Models.Repositories
             }
         }
 
-        public ICommand GetPersistCommand(T model)
+        #endregion
+
+        #region IRepository Members
+
+        public void Initialize()
         {
-            return _commandMapper.GetPersistCommand(model);
+            var commands = _commandMapper.GetInitializeCommands();
+            Execute(commands);
+        }
+
+        public virtual void Persist(T model)
+        {
+            Persist(new List<T> { model });
+        }
+
+        public virtual void Persist(IEnumerable<T> models)
+        {
+            var commands = new List<ICommand>();
+
+            foreach (var model in models)
+                commands.Add(_commandMapper.GetPersistCommand(model));
+
+            Execute(commands);
         }
         
         public virtual T GetOne(object id)
@@ -179,4 +175,5 @@ namespace Gnosis.Alexandria.Models.Repositories
 
         #endregion
     }
+     * */
 }

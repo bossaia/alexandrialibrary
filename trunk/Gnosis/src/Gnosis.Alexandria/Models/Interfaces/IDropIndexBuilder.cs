@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICommandBuilder
+    public interface IDropIndexBuilder : ICommandBuilder
     {
-        ICommand ToCommand();
+        IDropIndexBuilder DropIndex(string name);
+        IDropIndexBuilder IfExists { get; }
     }
 }

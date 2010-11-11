@@ -7,6 +7,7 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
+    /*
     public class CountryRepository : RepositoryBase<ICountry>, ICountryRepository
     {
         public CountryRepository(IFactory<ICountry> factory, IModelMapper<ICountry> modelMapper, ICommandMapper<ICountry> commandMapper)
@@ -14,4 +15,5 @@ namespace Gnosis.Alexandria.Models.Repositories
         {
         }
     }
+    */
 }

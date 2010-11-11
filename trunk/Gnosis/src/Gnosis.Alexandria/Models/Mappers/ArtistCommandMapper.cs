@@ -7,17 +7,21 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
+    /*
     public class ArtistCommandMapper : CommandMapper<IArtist>
     {
         public ArtistCommandMapper(IFactory<ICommandBuilder> factory)
-            : base(factory, "Artist")
+            : base("Artist"factory, "Artist")
         {
         }
 
-        protected override ICommand GetInitializeCommand(ICommandBuilder builder)
+        protected override IEnumerable<ICommand> GetInitializeCommandsInternal()
         {
+            var commands = new List<ICommand>();
+
+           
             //TODO: Make ICommandBuilder more expressive to make this more natural
-            return builder
+            var command = GetCommandBuilder()
                 .Append("create table if not exists Artist (")
                 .Append("  Id integer not null primary key autoincrement,")
                 .Append("  Country integer not null default 1,")
@@ -34,6 +38,10 @@ namespace Gnosis.Alexandria.Models.Mappers
                 .Append("insert or ignore into Artist (Name, NameHash) values ('None', 'NONE');")
                 .Append("insert or ignore into Artist (Name, NameHash) values ('Various', 'VARIOUS');")
             .ToCommand();
+
+            commands.Add(command);
+
+            return commands;
         }
 
         protected override IDictionary<string, object> GetPersistenceMap(IArtist model)
@@ -49,4 +57,5 @@ namespace Gnosis.Alexandria.Models.Mappers
             };
         }
     }
+     */
 }

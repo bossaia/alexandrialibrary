@@ -7,9 +7,9 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Commands
 {
-    public class CommandBuilder : ICommandBuilder
+    public abstract class CommandBuilder : ICommandBuilder
     {
-        public CommandBuilder(IFactory<ICommand> factory)
+        protected CommandBuilder(IFactory<ICommand> factory)
         {
             _factory = factory;
         }
@@ -19,38 +19,33 @@ namespace Gnosis.Alexandria.Models.Commands
         private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
         private Action<IModel, object> _callback;
 
-        public ICommandBuilder Append(string value)
+        protected void Append(string value)
         {
             _text.Append(value);
-            return this;
         }
 
-        public ICommandBuilder AppendFormat(string format, params object[] args)
+        protected void AppendFormat(string format, params object[] args)
         {
             _text.AppendFormat(format, args);
-            return this;
         }
 
-        public ICommandBuilder AppendLine(string value)
+        protected void AppendLine(string value)
         {
             _text.AppendLine(value);
-            return this;
         }
 
-        public ICommandBuilder AppendParameter(string name, object value)
+        protected void AppendParameter(string name, object value)
         {
             var parameterName = string.Format("@{0}", name);
             if (!_parameters.ContainsKey(parameterName))
                 _parameters.Add(parameterName, value);
 
             Append(parameterName);
-            return this;
         }
 
-        public ICommandBuilder SetCallback(Action<IModel, object> callback)
+        protected void SetCallback(Action<IModel, object> callback)
         {
             _callback = callback;
-            return this;
         }
 
         public ICommand ToCommand()

@@ -23,15 +23,15 @@ namespace Gnosis.Alexandria
             ObjectFactory.Initialize(x =>
                 {
                     x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
-                    x.For<IFactory<ICommandBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ICommandBuilder>>().Use<CommandBuilderFactory>();
                     x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
                     x.For<IModelMapper<ICountry>>().Use<CountryModelMapper>();
-                    x.For<ICommandMapper<ICountry>>().Use<CountryCommandMapper>();
-                    x.For<ICountryRepository>().Use<CountryRepository>();
+                    //x.For<ICommandMapper<ICountry>>().Use<CountryCommandMapper>();
+                    //x.For<ICountryRepository>().Use<CountryRepository>();
                     x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
                     x.For<IModelMapper<IArtist>>().Use<ArtistModelMapper>();
-                    x.For<ICommandMapper<IArtist>>().Use<ArtistCommandMapper>();
-                    x.For<IArtistRepository>().Use<ArtistRepository>();
+                    //x.For<ICommandMapper<IArtist>>().Use<ArtistCommandMapper>();
+                    //x.For<IArtistRepository>().Use<ArtistRepository>();
                     
                     x.For<IRepositoryController>().Use<RepositoryController>();
                     x.For<IArtistRepositoryController>().Use<ArtistRepositoryController>();

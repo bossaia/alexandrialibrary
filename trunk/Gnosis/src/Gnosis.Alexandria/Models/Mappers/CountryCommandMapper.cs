@@ -7,6 +7,7 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
+    /*
     public class CountryCommandMapper : CommandMapper<ICountry>
     {
         public CountryCommandMapper(IFactory<ICommandBuilder> factory)
@@ -14,9 +15,12 @@ namespace Gnosis.Alexandria.Models.Mappers
         {
         }
 
-        protected override ICommand GetInitializeCommand(ICommandBuilder builder)
+        protected override IEnumerable<ICommand> GetInitializeCommandsInternal()
         {
-            return builder.Append(
+            var commands = new List<ICommand>();
+
+            var command = GetCommandBuilder()
+                .Append(
 @"create table if not exists Country (
 	Id integer not null primary key autoincrement,
 	Name text not null unique,
@@ -275,6 +279,10 @@ insert or ignore into Country (Name, NameHash, Code) values ('Yemen','YEMEN','YE
 insert or ignore into Country (Name, NameHash, Code) values ('Zambia','ZAMBIA','ZM');
 insert or ignore into Country (Name, NameHash, Code) values ('Zimbabwe','ZIMBABWE','ZW');")
             .ToCommand();
+
+            commands.Add(command);
+
+            return commands;
  	    }
 
         protected override IDictionary<string, object> GetPersistenceMap(ICountry model)
@@ -288,4 +296,5 @@ insert or ignore into Country (Name, NameHash, Code) values ('Zimbabwe','ZIMBABW
             };
         }
     }
+     */
 }
