@@ -5,6 +5,8 @@ using System.Windows;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
+using Gnosis.Alexandria.Models.Schemas;
+using Gnosis.Alexandria.Utilities;
 
 namespace Gnosis.Alexandria.Views
 {
@@ -17,9 +19,9 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
-            InitializeDispatchers();
+            //InitializeDispatchers();
 
-            AddHomeTab();
+            //AddHomeTab();
         }
 
         private readonly Guid _id = Guid.NewGuid();

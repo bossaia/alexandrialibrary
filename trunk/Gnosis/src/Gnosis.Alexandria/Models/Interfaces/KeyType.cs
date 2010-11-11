@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ISchemaMapper<T>
-        where T : IModel
+    public enum KeyType
     {
-        IEnumerable<ICommand> GetInitializeCommands();
+        PrimaryKey,
+        UniqueKey,
+        Key
     }
 }

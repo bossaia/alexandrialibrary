@@ -22,32 +22,32 @@ namespace Gnosis.Alexandria
         {
             ObjectFactory.Initialize(x =>
                 {
-                    x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
+                    //x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
                     //x.For<IFactory<ICommandBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
-                    x.For<IModelMapper<ICountry>>().Use<CountryModelMapper>();
+                    //x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
+                    //x.For<IModelMapper<ICountry>>().Use<CountryModelMapper>();
                     //x.For<ICommandMapper<ICountry>>().Use<CountryCommandMapper>();
                     //x.For<ICountryRepository>().Use<CountryRepository>();
-                    x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
-                    x.For<IModelMapper<IArtist>>().Use<ArtistModelMapper>();
+                    //x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
+                    //x.For<IModelMapper<IArtist>>().Use<ArtistModelMapper>();
                     //x.For<ICommandMapper<IArtist>>().Use<ArtistCommandMapper>();
                     //x.For<IArtistRepository>().Use<ArtistRepository>();
                     
-                    x.For<IRepositoryController>().Use<RepositoryController>();
-                    x.For<IArtistRepositoryController>().Use<ArtistRepositoryController>();
-                    x.For<ICountryRepositoryController>().Use<CountryRepositoryController>();
-                    x.For<ITabController>().Use<TabController>();
+                    //x.For<IRepositoryController>().Use<RepositoryController>();
+                    //x.For<IArtistRepositoryController>().Use<ArtistRepositoryController>();
+                    //x.For<ICountryRepositoryController>().Use<CountryRepositoryController>();
+                    //x.For<ITabController>().Use<TabController>();
                     
-                    x.For<IHomeTabView>().Use<HomeTabView>();
-                    x.For<ISearchTabView>().Use<SearchTabView>();
+                    //x.For<IHomeTabView>().Use<HomeTabView>();
+                    //x.For<ISearchTabView>().Use<SearchTabView>();
 
-                    x.For<INewHomeTabRequestedHandler>().Use<NewHomeTabRequestedHandler>();
-                    x.For<INewSearchTabRequestedHandler>().Use<NewSearchTabRequestedHandler>();
-                    x.For<ISearchRequestedHandler>().Use<SearchRequestedHandler>();
+                    //x.For<INewHomeTabRequestedHandler>().Use<NewHomeTabRequestedHandler>();
+                    //x.For<INewSearchTabRequestedHandler>().Use<NewSearchTabRequestedHandler>();
+                    //x.For<ISearchRequestedHandler>().Use<SearchRequestedHandler>();
 
-                    x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
-                    x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();
-                    x.For<ISearchRequestedMessage>().Use<SearchRequestedMessage>();
+                    //x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
+                    //x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();
+                    //x.For<ISearchRequestedMessage>().Use<SearchRequestedMessage>();
                 }
             );
         }
