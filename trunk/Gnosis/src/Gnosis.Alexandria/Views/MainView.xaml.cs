@@ -19,6 +19,8 @@ namespace Gnosis.Alexandria.Views
         {
             InitializeComponent();
 
+            var schema = new ArtistSchema();
+
             //InitializeDispatchers();
 
             //AddHomeTab();

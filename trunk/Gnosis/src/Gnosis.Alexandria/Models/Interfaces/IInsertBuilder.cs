@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
@@ -15,8 +16,11 @@ namespace Gnosis.Alexandria.Models.Interfaces
         IInsertBuilder OrFail { get; }
         IInsertBuilder OrIgnore { get; }
 
-        IInsertBuilder ColumnAndValue(string name, object value);
+        IInsertBuilder Set<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
+        IInsertBuilder Set(string name, object value);
+        IInsertBuilder SetAll<T>(IEnumerable<Expression<Func<T, object>>> expressions, T model) where T : IModel;
 
         IInsertBuilder AddParameter(string name, object value);
+        IInsertBuilder AddParameter<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
     }
 }

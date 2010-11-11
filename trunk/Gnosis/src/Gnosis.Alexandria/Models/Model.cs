@@ -20,6 +20,11 @@ namespace Gnosis.Alexandria.Models
             get { return _isDeleted; }
         }
 
+        public bool IsNew
+        {
+            get { return _id == null; }
+        }
+
         public void Delete()
         {
             if (_isDeleted)

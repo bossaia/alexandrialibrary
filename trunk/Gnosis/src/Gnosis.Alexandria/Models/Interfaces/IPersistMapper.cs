@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface IPersistCommandMapper<T>
+    public interface IPersistMapper<T>
         where T : IModel
     {
         ICommand GetPersistCommand(T model);
