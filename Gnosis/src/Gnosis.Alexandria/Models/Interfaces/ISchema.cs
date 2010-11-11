@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICommandBuilder
+    public interface ISchema
     {
-        ICommand ToCommand();
+        string Name { get; }
     }
 }

@@ -86,33 +86,41 @@
     <Compile Include="Messages\NewSearchTabRequestedMessage.cs" />
     <Compile Include="Messages\SearchRequestedMessage.cs" />
     <Compile Include="Models\Artist.cs" />
-    <Compile Include="Models\Commands\CommandBuilderFactory.cs" />
     <Compile Include="Models\Commands\CommandFactory.cs" />
-    <Compile Include="Models\Commands\QueryCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICreateTriggerBuilder.cs" />
+    <Compile Include="Models\Interfaces\IDeleteBuilder.cs" />
+    <Compile Include="Models\Interfaces\IDropTableBuilder.cs" />
+    <Compile Include="Models\Interfaces\IDropTriggerBuilder.cs" />
+    <Compile Include="Models\Interfaces\IDropViewBuilder.cs" />
+    <Compile Include="Models\Interfaces\IPersistMapper.cs" />
+    <Compile Include="Models\Interfaces\ISchema.cs" />
+    <Compile Include="Models\Interfaces\ISelectMapper.cs" />
+    <Compile Include="Models\Interfaces\IUpdateBuilder.cs" />
+    <Compile Include="Models\Commands\SelectBuilder.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Factories\GenericFactory.cs" />
     <Compile Include="Models\Interfaces\IArtistRepository.cs" />
     <Compile Include="Models\Interfaces\ICommand.cs" />
     <Compile Include="Models\Interfaces\ICommandBuilder.cs" />
-    <Compile Include="Models\Interfaces\ICommandMapper.cs" />
+    <Compile Include="Models\Interfaces\ISchemaMapper.cs" />
     <Compile Include="Models\Interfaces\ICountry.cs" />
     <Compile Include="Models\Interfaces\ICountryRepository.cs" />
-    <Compile Include="Models\Interfaces\ICreateTableCommandBuilder.cs" />
-    <Compile Include="Models\Interfaces\ICreateViewCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICreateTableBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICreateViewBuilder.cs" />
     <Compile Include="Models\Interfaces\IDated.cs" />
     <Compile Include="Models\Interfaces\IArtist.cs" />
     <Compile Include="Models\Interfaces\ICoded.cs" />
-    <Compile Include="Models\Interfaces\IDropCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\IDropIndexBuilder.cs" />
     <Compile Include="Models\Interfaces\IFactory.cs" />
     <Compile Include="Models\Interfaces\IModelMapper.cs" />
     <Compile Include="Models\Interfaces\INamed.cs" />
     <Compile Include="Models\Interfaces\INational.cs" />
     <Compile Include="Models\Interfaces\INoted.cs" />
-    <Compile Include="Models\Interfaces\IPersistCommandBuilder.cs" />
-    <Compile Include="Models\Interfaces\IQueryCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\IInsertBuilder.cs" />
+    <Compile Include="Models\Interfaces\ISelectBuilder.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
-    <Compile Include="Models\Interfaces\ICreateIndexCommandBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICreateIndexBuilder.cs" />
     <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
     <Compile Include="Models\Mappers\ArtistModelMapper.cs" />
     <Compile Include="Models\Mappers\CommandMapper.cs" />
@@ -214,7 +222,9 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Schemas\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Alexandria.ico" />
   </ItemGroup>

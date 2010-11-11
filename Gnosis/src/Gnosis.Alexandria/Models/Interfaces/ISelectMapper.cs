@@ -5,12 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICommandMapper<T>
+    public interface ISelectMapper<T>
         where T : IModel
     {
-        ICommandBuilder GetCommandBuilder();
-        ICommand GetInitializeCommand();
-        ICommand GetPersistCommand(T model);
         ICommand GetSelectOneCommand(object id);
         ICommand GetSelectAllCommand();
     }

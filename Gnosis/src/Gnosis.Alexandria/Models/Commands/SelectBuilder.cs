@@ -8,7 +8,7 @@ using Gnosis.Alexandria.Utilities.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Commands
 {
-    public class QueryCommandBuilder : IQueryCommandBuilder
+    public class SelectBuilder : ISelectBuilder
     {
         private enum Clause
         {
@@ -167,7 +167,7 @@ namespace Gnosis.Alexandria.Models.Commands
                 AddParameter(parameter.Key, parameter.Value);
         }
 
-        public IQueryCommandBuilder SelectAll
+        public ISelectBuilder SelectAll
         {
             get
             {
@@ -177,7 +177,7 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder SelectDistinct
+        public ISelectBuilder SelectDistinct
         {
             get
             {
@@ -187,85 +187,85 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder Column(string expression)
+        public ISelectBuilder Column(string expression)
         {
             _currentClause = Clause.Columns;
             AppendToCurrentClause(expression);
             return this;
         }
 
-        public IQueryCommandBuilder Column(string expression, string alias)
+        public ISelectBuilder Column(string expression, string alias)
         {
             _currentClause = Clause.Columns;
             AppendToCurrentClause(expression, alias);
             return this;
         }
 
-        public IQueryCommandBuilder From(string table)
+        public ISelectBuilder From(string table)
         {
             _currentClause = Clause.From;
             AppendToCurrentClause(Constants.From, table);
             return this;
         }
 
-        public IQueryCommandBuilder From(string table, string alias)
+        public ISelectBuilder From(string table, string alias)
         {
             _currentClause = Clause.From;
             AppendToCurrentClause(Constants.From, table, alias);
             return this;
         }
 
-        public IQueryCommandBuilder From(ICommand selectCommand)
+        public ISelectBuilder From(ICommand selectCommand)
         {
             _currentClause = Clause.From;
             AppendCommand(_from, Constants.From, Constants.OpenParen, selectCommand, Constants.CloseParen);
             return this;
         }
 
-        public IQueryCommandBuilder From(ICommand selectCommand, string alias)
+        public ISelectBuilder From(ICommand selectCommand, string alias)
         {
             _currentClause = Clause.From;
             AppendCommand(_from, Constants.From, Constants.OpenParen, selectCommand, Constants.CloseParen, alias);
             return this;
         }
 
-        public IQueryCommandBuilder CrossJoin(string table, string alias)
+        public ISelectBuilder CrossJoin(string table, string alias)
         {
             AppendToCurrentClause(Constants.CrossJoin, table, alias);
             return this;
         }
 
-        public IQueryCommandBuilder InnerJoin(string table, string alias)
+        public ISelectBuilder InnerJoin(string table, string alias)
         {
             AppendToCurrentClause(Constants.InnerJoin, table, alias);
             return this;
         }
 
-        public IQueryCommandBuilder LeftOuterJoin(string table, string alias)
+        public ISelectBuilder LeftOuterJoin(string table, string alias)
         {
             _from.AppendClause(Constants.LeftOuterJoin, table, alias);
             return this;
         }
 
-        public IQueryCommandBuilder On(string expression)
+        public ISelectBuilder On(string expression)
         {
             AppendToCurrentClause(Constants.On, expression);
             return this;
         }
 
-        public IQueryCommandBuilder Or(string expression)
+        public ISelectBuilder Or(string expression)
         {
             AppendToCurrentClause(Constants.Or, expression);
             return this;
         }
 
-        public IQueryCommandBuilder And(string expression)
+        public ISelectBuilder And(string expression)
         {
             AppendToCurrentClause(Constants.And, expression);
             return this;
         }
 
-        public IQueryCommandBuilder OpenParen
+        public ISelectBuilder OpenParen
         {
             get
             {
@@ -274,7 +274,7 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder CloseParen
+        public ISelectBuilder CloseParen
         {
             get
             {
@@ -283,7 +283,7 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder GroupBy
+        public ISelectBuilder GroupBy
         {
             get
             {
@@ -293,21 +293,21 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder Grouping(string expression)
+        public ISelectBuilder Grouping(string expression)
         {
             _currentClause = Clause.Grouping;
             AppendToCurrentClause(expression);
             return this;
         }
 
-        public IQueryCommandBuilder Having(string expression)
+        public ISelectBuilder Having(string expression)
         {
             _currentClause = Clause.Grouping;
             AppendToCurrentClause(Constants.Having, expression);
             return this;
         }
 
-        public IQueryCommandBuilder OrderBy
+        public ISelectBuilder OrderBy
         {
             get 
             {
@@ -317,84 +317,84 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder Ascending(string expression)
+        public ISelectBuilder Ascending(string expression)
         {
             _currentClause = Clause.Ordering;
             AppendToCurrentClause(expression, Constants.Ascending);
             return this;
         }
 
-        public IQueryCommandBuilder Descending(string expression)
+        public ISelectBuilder Descending(string expression)
         {
             _currentClause = Clause.Ordering;
             AppendToCurrentClause(expression, Constants.Descending);
             return this;
         }
 
-        public IQueryCommandBuilder Limit(int number)
+        public ISelectBuilder Limit(int number)
         {
             _currentClause = Clause.Limit;
             AppendToCurrentClause(Constants.Limit, number.ToString());
             return this;
         }
 
-        public IQueryCommandBuilder Offset(int number)
+        public ISelectBuilder Offset(int number)
         {
             _currentClause = Clause.Limit;
             AppendToCurrentClause(Constants.Offset, number.ToString());
             return this;
         }
 
-        public IQueryCommandBuilder Where(string expression)
+        public ISelectBuilder Where(string expression)
         {
             _currentClause = Clause.Where;
             AppendToCurrentClause(Constants.Where, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsEqualTo(string expression)
+        public ISelectBuilder IsEqualTo(string expression)
         {
             AppendToCurrentClause(Constants.IsEqualTo, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsEqualTo(string name, object value)
+        public ISelectBuilder IsEqualTo(string name, object value)
         {
             AppendPredicate(Constants.IsEqualTo, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsGreaterThan(string expression)
+        public ISelectBuilder IsGreaterThan(string expression)
         {
             AppendToCurrentClause(Constants.IsGreaterThan, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsGreaterThan(string name, object value)
+        public ISelectBuilder IsGreaterThan(string name, object value)
         {
             AppendPredicate(Constants.IsGreaterThan, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsGreaterThanOrEqualTo(string expression)
+        public ISelectBuilder IsGreaterThanOrEqualTo(string expression)
         {
             AppendToCurrentClause(Constants.IsGreaterThanOrEqualTo, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsGreaterThanOrEqualTo(string name, object value)
+        public ISelectBuilder IsGreaterThanOrEqualTo(string name, object value)
         {
             AppendPredicate(Constants.IsGreaterThanOrEqualTo, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsIn(string expression)
+        public ISelectBuilder IsIn(string expression)
         {
             AppendToCurrentClause(Constants.IsIn, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsIn(string name, object value)
+        public ISelectBuilder IsIn(string name, object value)
         {
             AppendToCurrentClause(Constants.IsIn, Constants.OpenParen);
             AppendParameter(name, value);
@@ -402,61 +402,61 @@ namespace Gnosis.Alexandria.Models.Commands
             return this;
         }
 
-        public IQueryCommandBuilder IsLessThan(string expression)
+        public ISelectBuilder IsLessThan(string expression)
         {
             AppendToCurrentClause(Constants.IsLessThan, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsLessThan(string name, object value)
+        public ISelectBuilder IsLessThan(string name, object value)
         {
             AppendPredicate(Constants.IsLessThan, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsLessThanOrEqualTo(string expression)
+        public ISelectBuilder IsLessThanOrEqualTo(string expression)
         {
             AppendToCurrentClause(Constants.IsLessThanOrEqualTo, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsLessThanOrEqualTo(string name, object value)
+        public ISelectBuilder IsLessThanOrEqualTo(string name, object value)
         {
             AppendPredicate(Constants.IsLessThanOrEqualTo, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsLike(string expression)
+        public ISelectBuilder IsLike(string expression)
         {
             AppendToCurrentClause(Constants.IsLike, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsLike(string name, object value)
+        public ISelectBuilder IsLike(string name, object value)
         {
             AppendPredicate(Constants.IsLike, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotEqualTo(string expression)
+        public ISelectBuilder IsNotEqualTo(string expression)
         {
             AppendToCurrentClause(Constants.IsNotEqualTo, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotEqualTo(string name, object value)
+        public ISelectBuilder IsNotEqualTo(string name, object value)
         {
             AppendPredicate(Constants.IsNotEqualTo, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotIn(string expression)
+        public ISelectBuilder IsNotIn(string expression)
         {
             AppendToCurrentClause(Constants.IsNotIn, Constants.OpenParen, expression, Constants.CloseParen);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotIn(string name, object value)
+        public ISelectBuilder IsNotIn(string name, object value)
         {
             AppendToCurrentClause(Constants.IsNotIn, Constants.OpenParen);
             AppendParameter(name, value);
@@ -464,19 +464,19 @@ namespace Gnosis.Alexandria.Models.Commands
             return this;
         }
 
-        public IQueryCommandBuilder IsNotLike(string expression)
+        public ISelectBuilder IsNotLike(string expression)
         {
             AppendToCurrentClause(Constants.IsNotLike, expression);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotLike(string name, object value)
+        public ISelectBuilder IsNotLike(string name, object value)
         {
             AppendPredicate(Constants.IsNotLike, name, value);
             return this;
         }
 
-        public IQueryCommandBuilder IsNotNull
+        public ISelectBuilder IsNotNull
         {
             get
             {
@@ -485,7 +485,7 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder IsNull
+        public ISelectBuilder IsNull
         {
             get
             {
@@ -494,35 +494,35 @@ namespace Gnosis.Alexandria.Models.Commands
             }
         }
 
-        public IQueryCommandBuilder Union(ICommand select)
+        public ISelectBuilder Union(ICommand select)
         {
             _currentClause = Clause.Compound;
             AppendCommand(_compound, Constants.Union, select);
             return this;
         }
 
-        public IQueryCommandBuilder UnionAll(ICommand select)
+        public ISelectBuilder UnionAll(ICommand select)
         {
             _currentClause = Clause.Compound;
             AppendCommand(_compound, Constants.UnionAll, select);
             return this;
         }
 
-        public IQueryCommandBuilder Intersect(ICommand select)
+        public ISelectBuilder Intersect(ICommand select)
         {
             _currentClause = Clause.Compound;
             AppendCommand(_compound, Constants.Intersect, select);
             return this;
         }
 
-        public IQueryCommandBuilder Except(ICommand select)
+        public ISelectBuilder Except(ICommand select)
         {
             _currentClause = Clause.Compound;
             AppendCommand(_compound, Constants.Except, select);
             return this;
         }
 
-        public IQueryCommandBuilder AddParameter(string name, object value)
+        public ISelectBuilder AddParameter(string name, object value)
         {
             _parameters[name] = value;
             return this;

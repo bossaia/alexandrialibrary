@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICommandBuilder
+    public interface IDropViewBuilder : ICommandBuilder
     {
-        ICommand ToCommand();
+        IDropViewBuilder DropView(string name);
+        IDropViewBuilder IfExists { get; }
     }
 }

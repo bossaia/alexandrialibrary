@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICommandBuilder
+    public interface ISchemaMapper<T>
+        where T : ISchema
     {
-        ICommand ToCommand();
+        IEnumerable<ICommand> GetInitializeCommands();
     }
 }
