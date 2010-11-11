@@ -9,8 +9,8 @@ namespace Gnosis.Alexandria.Models.Interfaces
         where T : IModel
     {
         string Name { get; }
-        IEnumerable<KeyValuePair<string, IField<T>>> Fields { get; }
-        IField<T> GetField(string name);
-        IEnumerable<KeyValuePair<string, IKey<T>>> Keys { get; }
+        IEnumerable<IField<T>> Fields { get; }
+        IEnumerable<IField<T>> NonPrimaryFields { get; }
+        IEnumerable<IKey<T>> Keys { get; }
     }
 }

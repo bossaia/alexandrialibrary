@@ -129,7 +129,9 @@
     <Compile Include="Models\Mappers\CommandMapper.cs" />
     <Compile Include="Models\Mappers\CountryCommandMapper.cs" />
     <Compile Include="Models\Mappers\CountryModelMapper.cs" />
+    <Compile Include="Models\Mappers\SchemaMapper.cs" />
     <Compile Include="Models\Mappers\ModelMapper.cs" />
+    <Compile Include="Models\Mappers\PersistMapper.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\Named.cs" />
     <Compile Include="Models\Repositories\ArtistRepository.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Utilities\FluentStringBuilder.cs" />
     <Compile Include="Utilities\Interfaces\IStringBuilder.cs" />
     <Compile Include="Utilities\ObjectExtensions.cs" />
+    <Compile Include="Utilities\ReflectionExtensions.cs" />
     <Compile Include="Utilities\Reflection\Accessor.cs" />
     <Compile Include="Utilities\Reflection\DummyPropertyInfo.cs" />
     <Compile Include="Utilities\Reflection\PropertyChain.cs" />

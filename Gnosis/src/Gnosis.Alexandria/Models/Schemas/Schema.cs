@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Alexandria.Utilities;
 
 namespace Gnosis.Alexandria.Models.Schemas
 {
@@ -26,35 +27,11 @@ namespace Gnosis.Alexandria.Models.Schemas
             _keys[keyName] = new Key<T>(keyName, keyType, keyFields);
         }
 
-        private static string GetName(Expression<Func<T, object>> getter)
-        {
-            return GetNameForExpression(getter.Body);
-        }
-
-        private static string GetNameForExpression(Expression expression)
-        {
-            MemberExpression memberExpression = null;
-            if (expression.NodeType == ExpressionType.Convert)
-            {
-                var body = (UnaryExpression)expression;
-                memberExpression = body.Operand as MemberExpression;
-            }
-            else if (expression.NodeType == ExpressionType.MemberAccess)
-            {
-                memberExpression = expression as MemberExpression;
-            }
-
-            if (memberExpression == null)
-                throw new ArgumentException("Getter is not a valid member expression");
-
-            return memberExpression.Member.Name;
-        }
-
-        #region Add Methods
+        #region Protected Methods
 
         protected static Tuple<string, bool> Ascending(Expression<Func<T, object>> getter)
         {
-            var name = GetName(getter);
+            var name = getter.ToName();
             return Ascending(name);
         }
 
@@ -65,7 +42,7 @@ namespace Gnosis.Alexandria.Models.Schemas
 
         protected static Tuple<string, bool> Descending(Expression<Func<T, object>> getter)
         {
-            var name = GetName(getter);
+            var name = getter.ToName();
             return Descending(name);
         }
 
@@ -81,7 +58,7 @@ namespace Gnosis.Alexandria.Models.Schemas
 
         protected void AddField(Expression<Func<T, object>> getter, Action<T, object> setter)
         {
-            var name = GetName(getter);
+            var name = getter.ToName();
             AddField(getter, setter, name);
         }
 
@@ -105,6 +82,25 @@ namespace Gnosis.Alexandria.Models.Schemas
             AddKey(KeyType.Key, keyFields);
         }
 
+        protected IField<T> GetField(string name)
+        {
+            return (_fields.ContainsKey(name))
+                       ? _fields[name]
+                       : null;
+        }
+
+        protected IField<T> GetField(Expression<Func<T, object>> expression)
+        {
+            return GetField(expression.ToName());
+        }
+
+        protected IKey<T> GetKey(string name)
+        {
+            return (_keys.ContainsKey(name))
+                       ? _keys[name]
+                       : null;
+        }
+
         #endregion
 
         public string Name
@@ -112,21 +108,19 @@ namespace Gnosis.Alexandria.Models.Schemas
             get { return _name; }
         }
 
-        public IEnumerable<KeyValuePair<string, IField<T>>> Fields
+        public IEnumerable<IField<T>> Fields
         {
-            get { return _fields; }
+            get { return _fields.Values; }
         }
 
-        public IField<T> GetField(string name)
+        public IEnumerable<IField<T>> NonPrimaryFields
         {
-            return (_fields.ContainsKey(name))
-                       ? _fields[name]
-                       : null;
+            get { return _fields.Values.Except(GetField(x => x.Id)); }
         }
 
-        public IEnumerable<KeyValuePair<string, IKey<T>>> Keys
+        public IEnumerable<IKey<T>> Keys
         {
-            get { return _keys; }
+            get { return _keys.Values; }
         }
     }
 }
