@@ -92,6 +92,8 @@
     <Compile Include="Models\Interfaces\IDropTableBuilder.cs" />
     <Compile Include="Models\Interfaces\IDropTriggerBuilder.cs" />
     <Compile Include="Models\Interfaces\IDropViewBuilder.cs" />
+    <Compile Include="Models\Interfaces\IField.cs" />
+    <Compile Include="Models\Interfaces\IKey.cs" />
     <Compile Include="Models\Interfaces\IPersistMapper.cs" />
     <Compile Include="Models\Interfaces\ISchema.cs" />
     <Compile Include="Models\Interfaces\ISelectMapper.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
     <Compile Include="Models\Interfaces\ICreateIndexBuilder.cs" />
+    <Compile Include="Models\Interfaces\KeyType.cs" />
     <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
     <Compile Include="Models\Mappers\ArtistModelMapper.cs" />
     <Compile Include="Models\Mappers\CommandMapper.cs" />
@@ -135,9 +138,22 @@
     <Compile Include="Models\Commands\CommandBuilder.cs" />
     <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
+    <Compile Include="Models\Schemas\ArtistSchema.cs" />
+    <Compile Include="Models\Schemas\Field.cs" />
+    <Compile Include="Models\Schemas\Key.cs" />
+    <Compile Include="Models\Schemas\Schema.cs" />
     <Compile Include="ServiceLocator.cs" />
+    <Compile Include="Utilities\CollectionExtensions.cs" />
     <Compile Include="Utilities\FluentStringBuilder.cs" />
     <Compile Include="Utilities\Interfaces\IStringBuilder.cs" />
+    <Compile Include="Utilities\ObjectExtensions.cs" />
+    <Compile Include="Utilities\Reflection\Accessor.cs" />
+    <Compile Include="Utilities\Reflection\DummyPropertyInfo.cs" />
+    <Compile Include="Utilities\Reflection\PropertyChain.cs" />
+    <Compile Include="Utilities\Reflection\ReflectionExtensions.cs" />
+    <Compile Include="Utilities\Reflection\ReflectionHelper.cs" />
+    <Compile Include="Utilities\Reflection\Member.cs" />
+    <Compile Include="Utilities\Reflection\SingleMember.cs" />
     <Compile Include="Views\Interfaces\IHomeTabView.cs" />
     <Compile Include="Views\Interfaces\ISearchTabView.cs" />
     <Compile Include="Views\Interfaces\ITabView.cs" />
@@ -222,9 +238,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Schemas\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Alexandria.ico" />
   </ItemGroup>
