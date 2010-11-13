@@ -14,6 +14,8 @@ namespace Gnosis.Alexandria.Models.Mappers
             DeleteFactory = deleteFactory;
         }
 
+        #region Protected Members
+
         protected readonly ISchema<T> Schema;
         protected readonly IFactory<IInsertBuilder> InsertFactory;
         protected readonly IFactory<IUpdateBuilder> UpdateFactory;
@@ -44,6 +46,8 @@ namespace Gnosis.Alexandria.Models.Mappers
                     .IsEqualTo(x => x.Id, model)
                 .ToCommand();
         }
+
+        #endregion
 
         public ICommand GetPersistCommand(T model)
         {

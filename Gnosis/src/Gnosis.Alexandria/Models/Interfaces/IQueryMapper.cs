@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ISelectMapper<T>
+    public interface IQueryMapper<T>
         where T : IModel
     {
         ICommand GetSelectOneCommand(object id);

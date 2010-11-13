@@ -5,75 +5,29 @@ using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Alexandria.Utilities;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
-    public abstract class ModelMapper<T> : IModelMapper<T>
+    public class ModelMapper<T> : IModelMapper<T>
         where T : IModel
     {
-        private readonly IDictionary<string, Action<T, object>> _actions = new Dictionary<string, Action<T, object>>();
-
-        protected void AddAction(string name, Action<T, object> action)
+        public ModelMapper(IFactory<T> factory, ISchema<T> schema)
         {
-            _actions.Add(name, action);
+            _factory = factory;
+            _schema = schema;
         }
 
-        protected static DateTime GetDateTime(object value)
-        {
-            return GetDateTime(value, DateTime.MinValue);
-        }
+        private readonly IFactory<T> _factory;
+        private readonly ISchema<T> _schema;
 
-        protected static DateTime GetDateTime(object value, DateTime defaultValue)
+        public T GetModel(IDataRecord record)
         {
-            if (value == null)
-                return defaultValue;
-            else
-                return DateTime.Parse((string)value);
-        }
+            var model = _factory.Create();
+            _schema.Fields
+                .Each(x => x.Setter(model, record[x.Name]));
 
-        protected static decimal GetDecimal(object value)
-        {
-            return GetDecimal(value, 0M);
-        }
-
-        protected static decimal GetDecimal(object value, decimal defaultValue)
-        {
-            if (value == null)
-                return defaultValue;
-            else
-                return decimal.Parse((string)value);
-        }
-
-        protected static int GetInteger(object value)
-        {
-            return GetInteger(value, 0);
-        }
-
-        protected static int GetInteger(object value, int defaultValue)
-        {
-            if (value == null)
-                return defaultValue;
-            else
-                return int.Parse((string)value);
-        }
-
-        protected static string GetString(object value)
-        {
-            return GetString(value, string.Empty);
-        }
-
-        protected static string GetString(object value, string defaultValue)
-        {
-            if (value == null)
-                return defaultValue;
-            else
-                return value.ToString();
-        }
-
-        public void Map(T model, IDataRecord record)
-        {
-            foreach (var pair in _actions)
-                pair.Value(model, record[pair.Key]);
+            return model;
         }
     }
 }
