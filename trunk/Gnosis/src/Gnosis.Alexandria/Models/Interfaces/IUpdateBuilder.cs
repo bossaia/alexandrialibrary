@@ -35,9 +35,9 @@ namespace Gnosis.Alexandria.Models.Interfaces
         IUpdateBuilder IsGreaterThan(string expression);
         IUpdateBuilder IsGreaterThan(string name, object value);
         IUpdateBuilder IsGreaterThan<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
-        IUpdateBuilder IsGreaterThanOrLessThan(string expression);
-        IUpdateBuilder IsGreaterThanOrLessThan(string name, object value);
-        IUpdateBuilder IsGreaterThanOrLessThan<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
+        IUpdateBuilder IsGreaterThanOrEqualTo(string expression);
+        IUpdateBuilder IsGreaterThanOrEqualTo(string name, object value);
+        IUpdateBuilder IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
         IUpdateBuilder IsIn(string expression);
         IUpdateBuilder IsIn(string name, object value);
         IUpdateBuilder IsIn<T>(Expression<Func<T, object>> expression, T model) where T : IModel;

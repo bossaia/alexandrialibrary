@@ -5,119 +5,44 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
+using Gnosis.Alexandria.Utilities;
 using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
-    /*
     public abstract class RepositoryBase<T>
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IFactory<T> factory, IModelMapper<T> modelMapper, ICommandMapper<T> commandMapper)
+        protected RepositoryBase(IStore store, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper)
         {
-            if (factory == null)
-                throw new ArgumentNullException("factory");
-            if (modelMapper == null)
-                throw new ArgumentNullException("modelMapper");
-            if (commandMapper == null)
-                throw new ArgumentNullException("commandMapper");
-
-            _factory = factory;
-            _modelMapper = modelMapper;
-            _commandMapper = commandMapper;
+            Store = store;
+            Factory = factory;
+            Schema = schema;
+            SchemaMapper = schemaMapper;
+            ModelMapper = modelMapper;
+            PersistMapper = persistMapper;
+            QueryMapper = queryMapper;
         }
-
-        private readonly IFactory<T> _factory;
-        private readonly IModelMapper<T> _modelMapper;
-        private readonly ICommandMapper<T> _commandMapper;
-
-        #region Private Static Helper Methods
-
-        private static IDbConnection GetDbConnection()
-        {
-            return new SQLiteConnection("Data Source=Catalog.db;Version=3;");
-        }
-
-        private static IDbCommand CreateDbCommand(IDbConnection connection, ICommand command)
-        {
-            var dbCommand = connection.CreateCommand();
-            dbCommand.CommandType = CommandType.Text;
-            dbCommand.CommandText = command.Text;
-
-            foreach (KeyValuePair<string, object> pair in command.Parameters)
-            {
-                var parameter = dbCommand.CreateParameter();
-                parameter.ParameterName = pair.Key;
-                parameter.Value = pair.Value;
-                dbCommand.Parameters.Add(parameter);
-            }
-
-            return dbCommand;
-        }
-
-        private static IDataReader GetDataReader(IDbConnection connection, ICommand command)
-        {
-            var dbCommand = CreateDbCommand(connection, command);
-            return dbCommand.ExecuteReader();
-        }
-
-        #endregion
 
         #region Protected Members
 
-        protected IFactory<T> Factory
-        {
-            get { return _factory; }
-        }
-
-        protected IModelMapper<T> ModelMapper
-        {
-            get { return _modelMapper; }
-        }
-
-        protected ICommandMapper<T> CommandMapper
-        {
-            get { return _commandMapper; }
-        }
-
-        protected void Execute(IEnumerable<ICommand> commands)
-        {
-            IDbTransaction transaction = null;
-
-            using (var connection = GetDbConnection())
-            {
-                try
-                {
-                    connection.Open();
-                    transaction = connection.BeginTransaction();
-
-                    foreach (ICommand command in commands)
-                    {
-                        var dbCommand = CreateDbCommand(connection, command);
-                        dbCommand.ExecuteNonQuery();
-                    }
-
-                    transaction.Commit();
-                }
-                catch (Exception)
-                {
-                    if (transaction != null)
-                        transaction.Rollback();
-
-                    throw;
-                }
-            }
-        }
+        protected readonly IStore Store;
+        protected readonly IFactory<T> Factory;
+        protected readonly ISchema<T> Schema;
+        protected readonly ISchemaMapper<T> SchemaMapper;
+        protected readonly IModelMapper<T> ModelMapper;
+        protected readonly IPersistMapper<T> PersistMapper;
+        protected readonly IQueryMapper<T> QueryMapper;
 
         #endregion
 
         #region IRepository Members
 
-        public void Initialize()
+        public virtual void Initialize()
         {
-            var commands = _commandMapper.GetInitializeCommands();
-            Execute(commands);
+            var commands = SchemaMapper.GetInitializeCommands();
+            Store.Execute(commands);
         }
 
         public virtual void Persist(T model)
@@ -129,51 +54,32 @@ namespace Gnosis.Alexandria.Models.Repositories
         {
             var commands = new List<ICommand>();
 
-            foreach (var model in models)
-                commands.Add(_commandMapper.GetPersistCommand(model));
+            models.Each(x => commands.Add(PersistMapper.GetPersistCommand(x)));
 
-            Execute(commands);
+            Store.Execute(commands);
         }
         
         public virtual T GetOne(object id)
         {
-            var command = _commandMapper.GetSelectOneCommand(id);
+            var command = QueryMapper.GetSelectOneCommand(id);
 
             var many = GetMany(command);
 
             return many.FirstOrDefault<T>();
         }
 
-        public ICollection<T> GetMany(ICommand command)
+        public virtual ICollection<T> GetMany(ICommand command)
         {
-            var models = new List<T>();
-
-            using (var connection = GetDbConnection())
-            {
-                connection.Open();
-                using (var reader = GetDataReader(connection, command))
-                {
-                    while (reader.Read())
-                    {
-                        var model = _factory.Create();
-                        model.Initialize(reader["Id"]);
-                        _modelMapper.Map(model, reader);
-                        models.Add(model);
-                    }
-                }
-            }
-
-            return models;
+            return Store.Query(command, ModelMapper);
         }
 
-        public ICollection<T> GetAll()
+        public virtual ICollection<T> GetAll()
         {
-            var command = _commandMapper.GetSelectAllCommand();
+            var command = QueryMapper.GetSelectAllCommand();
 
             return GetMany(command);
         }
 
         #endregion
     }
-     * */
 }

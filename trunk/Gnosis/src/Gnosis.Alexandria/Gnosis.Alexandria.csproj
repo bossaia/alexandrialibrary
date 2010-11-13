@@ -97,7 +97,8 @@
     <Compile Include="Models\Interfaces\IKey.cs" />
     <Compile Include="Models\Interfaces\IPersistMapper.cs" />
     <Compile Include="Models\Interfaces\ISchema.cs" />
-    <Compile Include="Models\Interfaces\ISelectMapper.cs" />
+    <Compile Include="Models\Interfaces\IQueryMapper.cs" />
+    <Compile Include="Models\Interfaces\IStore.cs" />
     <Compile Include="Models\Interfaces\IUpdateBuilder.cs" />
     <Compile Include="Models\Commands\SelectBuilder.cs" />
     <Compile Include="Models\Country.cs" />
@@ -125,11 +126,7 @@
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
     <Compile Include="Models\Interfaces\ICreateIndexBuilder.cs" />
     <Compile Include="Models\Interfaces\KeyType.cs" />
-    <Compile Include="Models\Mappers\ArtistCommandMapper.cs" />
-    <Compile Include="Models\Mappers\ArtistModelMapper.cs" />
-    <Compile Include="Models\Mappers\CommandMapper.cs" />
-    <Compile Include="Models\Mappers\CountryCommandMapper.cs" />
-    <Compile Include="Models\Mappers\CountryModelMapper.cs" />
+    <Compile Include="Models\Mappers\QueryMapper.cs" />
     <Compile Include="Models\Mappers\SchemaMapper.cs" />
     <Compile Include="Models\Mappers\ModelMapper.cs" />
     <Compile Include="Models\Mappers\PersistMapper.cs" />
@@ -145,6 +142,7 @@
     <Compile Include="Models\Schemas\Field.cs" />
     <Compile Include="Models\Schemas\Key.cs" />
     <Compile Include="Models\Schemas\Schema.cs" />
+    <Compile Include="Models\Stores\SQLiteStore.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Utilities\CollectionExtensions.cs" />
     <Compile Include="Utilities\FluentStringBuilder.cs" />
