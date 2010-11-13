@@ -31,9 +31,9 @@ namespace Gnosis.Alexandria.Models.Interfaces
         IDeleteBuilder IsGreaterThan(string expression);
         IDeleteBuilder IsGreaterThan(string name, object value);
         IDeleteBuilder IsGreaterThan<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
-        IDeleteBuilder IsGreaterThanOrLessThan(string expression);
-        IDeleteBuilder IsGreaterThanOrLessThan(string name, object value);
-        IDeleteBuilder IsGreaterThanOrLessThan<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
+        IDeleteBuilder IsGreaterThanOrEqualTo(string expression);
+        IDeleteBuilder IsGreaterThanOrEqualTo(string name, object value);
+        IDeleteBuilder IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
         IDeleteBuilder IsIn(string expression);
         IDeleteBuilder IsIn(string name, object value);
         IDeleteBuilder IsIn<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
