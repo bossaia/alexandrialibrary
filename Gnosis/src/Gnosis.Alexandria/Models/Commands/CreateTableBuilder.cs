@@ -12,6 +12,7 @@ namespace Gnosis.Alexandria.Models.Commands
         public CreateTableBuilder(IFactory<ICommand> factory)
             : base(factory)
         {
+            AddSpaceDelimitedClause(Clauses.Create);
         }
 
         public ICreateTableBuilder CreateTable(string name)

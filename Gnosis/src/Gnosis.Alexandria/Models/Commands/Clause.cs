@@ -17,10 +17,16 @@ namespace Gnosis.Alexandria.Models.Commands
             _builder = new FluentStringBuilder();
         }
 
-        public Clause(string name, string clauseDelimiter, string tokenDelimiter)
+        public Clause(string name, string partDelimiter, string tokenDelimiter)
         {
             _name = name;
-            _builder = new FluentStringBuilder(clauseDelimiter, tokenDelimiter);
+            _builder = new FluentStringBuilder(partDelimiter, tokenDelimiter);
+        }
+
+        public Clause(string name, string partDelimiter, string tokenDelimiter, string prefix, string suffix)
+        {
+            _name = name;
+            _builder = new FluentStringBuilder(partDelimiter, tokenDelimiter, prefix, suffix);
         }
 
         private readonly string _name;
@@ -35,7 +41,7 @@ namespace Gnosis.Alexandria.Models.Commands
 
         public void Append(params string[] tokens)
         {
-            _builder.AppendClause(tokens);
+            _builder.AppendPart(tokens);
         }
 
         public void Append<T>(Expression<Func<T, object>> expression) where T : IModel

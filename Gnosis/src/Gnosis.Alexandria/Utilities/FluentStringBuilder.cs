@@ -8,23 +8,31 @@ namespace Gnosis.Alexandria.Utilities
 {
     public class FluentStringBuilder : IStringBuilder
     {
-        public FluentStringBuilder()
+        public FluentStringBuilder() 
+            : this(", ", " ", string.Empty, string.Empty)
         {
-            ClauseDelimiter = ", ";
-            TokenDelimiter = " ";
         }
 
-        public FluentStringBuilder(string clauseDelimiter, string tokenDelimiter)
+        public FluentStringBuilder(string partDelimiter, string tokenDelimiter)
+            : this(partDelimiter, tokenDelimiter, string.Empty, string.Empty)
         {
-            ClauseDelimiter = clauseDelimiter;
+
+        }
+
+        public FluentStringBuilder(string partDelimiter, string tokenDelimiter, string prefix, string suffix)
+        {
+            PartDelimiter = partDelimiter;
             TokenDelimiter = tokenDelimiter;
+            Prefix = prefix;
+            Suffix = suffix;
         }
 
         private readonly StringBuilder _builder = new StringBuilder();
 
-        public string ClauseDelimiter { get; set; }
-
+        public string PartDelimiter { get; set; }
         public string TokenDelimiter { get; set; }
+        public string Prefix { get; set; }
+        public string Suffix { get; set; }
 
         public IStringBuilder Append(string value)
         {
@@ -41,10 +49,10 @@ namespace Gnosis.Alexandria.Utilities
             return this;
         }
 
-        public IStringBuilder AppendClause(params string[] tokens)
+        public IStringBuilder AppendPart(params string[] tokens)
         {
             if (_builder.Length > 0)
-                Append(ClauseDelimiter);
+                Append(PartDelimiter);
 
             var first = true;
             foreach (var token in tokens)
@@ -73,7 +81,7 @@ namespace Gnosis.Alexandria.Utilities
 
         public override string ToString()
         {
-            return _builder.ToString();
+            return string.Format("{0}{1}{2}", Prefix, _builder.ToString(), Suffix);
         }
     }
 }
