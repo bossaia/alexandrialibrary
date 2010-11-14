@@ -14,7 +14,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IStore store, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper)
+        protected RepositoryBase(IStore store, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ISelectBuilder> selectFactory)
         {
             Store = store;
             Factory = factory;
@@ -23,6 +23,7 @@ namespace Gnosis.Alexandria.Models.Repositories
             ModelMapper = modelMapper;
             PersistMapper = persistMapper;
             QueryMapper = queryMapper;
+            SelectFactory = selectFactory;
         }
 
         #region Protected Members
@@ -34,6 +35,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         protected readonly IModelMapper<T> ModelMapper;
         protected readonly IPersistMapper<T> PersistMapper;
         protected readonly IQueryMapper<T> QueryMapper;
+        protected readonly IFactory<ISelectBuilder> SelectFactory;
 
         #endregion
 

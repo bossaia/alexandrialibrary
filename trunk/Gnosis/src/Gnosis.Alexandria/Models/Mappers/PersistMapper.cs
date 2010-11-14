@@ -24,26 +24,33 @@ namespace Gnosis.Alexandria.Models.Mappers
         protected virtual ICommand GetInsertCommand(T model)
         {
             return InsertFactory.Create()
-                .Insert(Schema.Name)
-                .SetAll(Schema.NonPrimaryFields.Select(x => x.Getter), model)
+                .Insert
+                .OrFail
+                .Into(Schema.Name)
+                .ColumnsToValues<T>(Schema.NonPrimaryFields.Select(x => x.Getter), model)
+                .SetCallback<T>((x, y) => x.Initialize(y), model)
                 .ToCommand();
         }
 
         protected virtual ICommand GetUpdateCommand(T model)
         {
             return UpdateFactory.Create()
-                .Update(Schema.Name)
-                .SetAll(Schema.NonPrimaryFields.Select(x => x.Getter), model)
-                .Where<T>(x => x.Id).IsEqualTo(x => x.Id, model)
+                .Update
+                .OrFail
+                .Table(Schema.Name)
+                .ColumnsToValues(Schema.NonPrimaryFields.Select(x => x.Getter), model)
+                .Where<T>(x => x.Id).IsEqualTo<T>(x => x.Id, model.Id)
                 .ToCommand();
         }
 
         protected virtual ICommand GetDeleteCommand(T model)
         {
             return DeleteFactory.Create()
-                .Delete(Schema.Name)
+                .Delete
+                .OrFail
+                .From(Schema.Name)
                     .Where<T>(x => x.Id)
-                    .IsEqualTo(x => x.Id, model)
+                    .IsEqualTo<T>(x => x.Id, model.Id)
                 .ToCommand();
         }
 

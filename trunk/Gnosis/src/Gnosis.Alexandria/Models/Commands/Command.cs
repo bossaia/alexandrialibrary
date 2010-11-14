@@ -23,6 +23,7 @@ namespace Gnosis.Alexandria.Models.Commands
         }
 
         public Action<IModel, object> Callback { get; set; }
+        public IModel Model { get; set; }
 
         public void AddParameter(string name, object value)
         {

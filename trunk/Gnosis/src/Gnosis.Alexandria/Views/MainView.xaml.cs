@@ -21,9 +21,9 @@ namespace Gnosis.Alexandria.Views
 
             var schema = new ArtistSchema();
 
-            //InitializeDispatchers();
+            InitializeDispatchers();
 
-            //AddHomeTab();
+            AddHomeTab();
         }
 
         private readonly Guid _id = Guid.NewGuid();

@@ -118,6 +118,11 @@ namespace Gnosis.Alexandria.Models.Schemas
             get { return _fields.Values.Except(GetField(x => x.Id)); }
         }
 
+        public IField<T> PrimaryField
+        {
+            get { return GetField(x => x.Id); }
+        }
+
         public IEnumerable<IKey<T>> Keys
         {
             get { return _keys.Values; }
