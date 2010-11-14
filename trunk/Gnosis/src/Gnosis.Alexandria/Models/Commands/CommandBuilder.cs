@@ -33,6 +33,7 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string Insert = "insert";
             public const string Update = "update";
             public const string Delete = "delete";
+            public const string Create = "create";
             public const string Columns = "columns";
             public const string Values = "values";
             public const string Set = "set";
@@ -47,7 +48,6 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string Orderings = "orderings";
             public const string Limit = "limit";
             public const string Compound = "compound";
-            public const string TerminateList = "terminate list";
         }
 
         protected static class Constants
@@ -57,6 +57,9 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string Ascending = "asc";
             public const string CloseParen = ")";
             public const string ColumnAssignment = "=";
+            public const string Comma = ",";
+            public const string CommaSpace = ", ";
+            public const string Create = "create";
             public const string CrossJoin = "cross join";
             public const string Delete = "delete";
             public const string Descending = "desc";
@@ -98,6 +101,7 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string Set = "set";
             public const string Space = " ";
             public const string StatementTerminator = ";";
+            public const string Temp = "temp";
             public const string Union = " union ";
             public const string UnionAll = " union all ";
             public const string Update = "update";
@@ -118,6 +122,13 @@ namespace Gnosis.Alexandria.Models.Commands
         protected void AddCommaDelimitedClause(string name)
         {
             var clause = new Clause(name);
+            AddClause(clause);
+        }
+
+        protected void AddCommaDelimitedClause(string name, string prefix, string suffix)
+        {
+            var clause = new Clause(name, Constants.CommaSpace, Constants.Space, prefix, suffix);
+            AddClause(clause);
         }
 
         protected void AddClause(string name, string clauseDelimiter, string tokenDelimiter)

@@ -16,10 +16,9 @@ namespace Gnosis.Alexandria.Models.Commands
         {
             AddSpaceDelimitedClause(Clauses.Insert);
             AddSpaceDelimitedClause(Clauses.Into);
-            AddCommaDelimitedClause(Clauses.Columns);
+            AddCommaDelimitedClause(Clauses.Columns, Constants.OpenParen, Constants.CloseParen);
             AddSpaceDelimitedClause(Clauses.Values);
-            AddCommaDelimitedClause(Clauses.ColumnAssignments);
-            AddSpaceDelimitedClause(Clauses.TerminateList);
+            AddCommaDelimitedClause(Clauses.ColumnAssignments, Constants.OpenParen, Constants.CloseParen);
         }
 
         public IInsertBuilder Insert
@@ -80,11 +79,9 @@ namespace Gnosis.Alexandria.Models.Commands
         public IInsertBuilder Into(string table)
         {
             SetCurrentClause(Clauses.Into);
-            Append(Constants.Into, table, Constants.OpenParen);
+            Append(Constants.Into, table);
             SetCurrentClause(Clauses.Values);
-            Append(Constants.CloseParen, Constants.Values, Constants.OpenParen);
-            SetCurrentClause(Clauses.TerminateList);
-            Append(Constants.CloseParen);
+            Append(Constants.Values);
             return this;
         }
 
