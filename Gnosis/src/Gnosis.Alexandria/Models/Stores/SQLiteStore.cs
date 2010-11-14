@@ -68,7 +68,10 @@ namespace Gnosis.Alexandria.Models.Stores
         private static void Execute(ICommand command, IDbConnection connection, IDbTransaction transaction)
         {
             var dbCommand = CreateDbCommand(command, connection, transaction);
-            dbCommand.ExecuteNonQuery();
+            object result = dbCommand.ExecuteScalar();
+
+            if (command.Callback != null && command.Model != null)
+                command.Callback(command.Model, result);
         }
 
         public string Name

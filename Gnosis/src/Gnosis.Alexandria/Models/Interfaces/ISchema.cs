@@ -11,6 +11,7 @@ namespace Gnosis.Alexandria.Models.Interfaces
         string Name { get; }
         IEnumerable<IField<T>> Fields { get; }
         IEnumerable<IField<T>> NonPrimaryFields { get; }
+        IField<T> PrimaryField { get; }
         IEnumerable<IKey<T>> Keys { get; }
     }
 }

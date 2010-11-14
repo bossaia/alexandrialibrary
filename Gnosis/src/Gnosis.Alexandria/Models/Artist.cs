@@ -9,6 +9,13 @@ namespace Gnosis.Alexandria.Models
 {
     public class Artist : Named, IArtist
     {
+        public Artist()
+        {
+            Name = "Unknown";
+            Abbreviation = string.Empty;
+            Country = Gnosis.Alexandria.Models.Country.GetDefault();
+        }
+
         public ICountry Country { get; set; }
         public DateTime Date { get; set; }
         public string Note { get; set; }

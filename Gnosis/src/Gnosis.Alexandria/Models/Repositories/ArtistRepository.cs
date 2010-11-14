@@ -9,30 +9,27 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
-    /*
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
-        public ArtistRepository(IFactory<IArtist> factory, IModelMapper<IArtist> modelMapper, ICommandMapper<IArtist> commandMapper)
-            : base(factory, modelMapper, commandMapper)
+        public ArtistRepository(IStore store, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ISelectBuilder> selectFactory)
+            : base(store, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
         {
         }
 
         public ICollection<IArtist> GetArtistsWithNamesLike(string search)
         {
-            if (search == null)
-                return new List<IArtist>();
+            if (string.IsNullOrEmpty(search))
+                return GetAll();
 
-            var name = string.Format("%{0}%", search);
-            var nameHash = string.Format("%{0}%", Named.GetNameHash(search));
-
-            var command = CommandMapper.GetCommandBuilder()
-                .Append("select * from Artist where Name like ")
-                .AppendParameter("Name", name)
-                .Append(" or NameHash like ")
-                .AppendParameter("NameHash", nameHash)
+            var command = SelectFactory.Create()
+                .SelectDistinct
+                .AllColumns
+                .From(Schema.Name)
+                .Where<IArtist>(x => x.Name).IsLike("Name", string.Format("%{0}%", search))
+                .Or<IArtist>(x => x.NameHash).IsLike("NameHash", string.Format("%{0}%", Named.GetNameHash(search)))
                 .ToCommand();
-            return GetMany(null);
+
+            return GetMany(command);
         }
     }
-    */
 }
