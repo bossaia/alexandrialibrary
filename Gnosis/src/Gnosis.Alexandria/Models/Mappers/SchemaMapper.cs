@@ -32,9 +32,11 @@ namespace Gnosis.Alexandria.Models.Mappers
             var model = Factory.Create();
 
             var createTable = CreateTableFactory.Create()
-                .CreateTable(Schema.Name)
+                .CreateTable
                 .IfNotExists
-                .Columns(Schema.Fields.Select(x => x.Getter), model);
+                .Name(Schema.Name)
+                .PrimaryKey<T>(Schema.PrimaryField.Getter, model)
+                .Columns<T>(Schema.NonPrimaryFields.Select(x => x.Getter), model);
 
             commands.Add(createTable.ToCommand());
 

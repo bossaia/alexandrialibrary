@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 using Gnosis.Alexandria.Models.Interfaces;
@@ -12,22 +13,43 @@ namespace Gnosis.Alexandria.Models.Commands
         public CreateTableBuilder(IFactory<ICommand> factory)
             : base(factory)
         {
-            AddSpaceDelimitedClause(Clauses.Create);
+            AddKeywordClause(Clauses.Create);
+            AddListClause(Clauses.Columns);
         }
 
-        public ICreateTableBuilder CreateTable(string name)
+        public ICreateTableBuilder CreateTable
         {
-            throw new NotImplementedException();
+            get
+            {
+                SetCurrentClause(Clauses.Create);
+                Append(Constants.Create, Constants.Table);
+                return this;
+            }
         }
 
-        public ICreateTableBuilder CreateTempTable(string name)
+        public ICreateTableBuilder CreateTempTable
         {
-            throw new NotImplementedException();
+            get
+            {
+                SetCurrentClause(Clauses.Create);
+                Append(Constants.Create, Constants.Temp, Constants.Table);
+                return this;
+            }
         }
 
         public ICreateTableBuilder IfNotExists
         {
-            get { throw new NotImplementedException(); }
+            get
+            { 
+                Append(Constants.IfNotExists);
+                return this;
+            }
+        }
+
+        public ICreateTableBuilder Name(string name)
+        {
+            Append(name);
+            return this;
         }
 
         public ICreateTableBuilder As(ICommand select)
@@ -35,7 +57,7 @@ namespace Gnosis.Alexandria.Models.Commands
             throw new NotImplementedException();
         }
 
-        public ICreateTableBuilder Column<T>(System.Linq.Expressions.Expression<Func<T, object>> expression, T model) where T : IModel
+        public ICreateTableBuilder Column<T>(Expression<Func<T, object>> expression, T model) where T : IModel
         {
             throw new NotImplementedException();
         }
@@ -50,24 +72,30 @@ namespace Gnosis.Alexandria.Models.Commands
             throw new NotImplementedException();
         }
 
-        public ICreateTableBuilder Columns<T>(IEnumerable<System.Linq.Expressions.Expression<Func<T, object>>> expressions, T model) where T : IModel
+        public ICreateTableBuilder Columns<T>(IEnumerable<Expression<Func<T, object>>> expressions, T model) where T : IModel
+        {
+            foreach (var expression in expressions)
+                Column<T>(expression, model);
+
+            return this;
+        }
+
+        public ICreateTableBuilder PrimaryKey<T>(Expression<Func<T, object>> expression, T model) where T : IModel
         {
             throw new NotImplementedException();
         }
 
-        public ICreateTableBuilder PrimaryKey<T>(System.Linq.Expressions.Expression<Func<T, object>> expression) where T : IModel
+        public ICreateTableBuilder PrimaryKey(string name, string type)
         {
-            throw new NotImplementedException();
-        }
-
-        public ICreateTableBuilder PrimaryKey(string column)
-        {
-            throw new NotImplementedException();
+            SetCurrentClause(Clauses.Columns);
+            Append(name, type, Constants.NotNull, Constants.PrimaryKey);
+            return this;
         }
 
         public ICreateTableBuilder Check(string expression)
         {
-            throw new NotImplementedException();
+            Append(Constants.Check, Constants.OpenParen, expression, Constants.CloseParen);
+            return this;
         }
 
         public ICreateTableBuilder ForeignKey

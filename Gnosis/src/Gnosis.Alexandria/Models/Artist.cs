@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria.Models
         {
             Name = "Unknown";
             Abbreviation = string.Empty;
-            Country = Gnosis.Alexandria.Models.Country.GetDefault();
+            Country = Gnosis.Alexandria.Models.Country.Default;
         }
 
         public ICountry Country { get; set; }

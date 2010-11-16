@@ -8,9 +8,10 @@ namespace Gnosis.Alexandria.Models.Interfaces
 {
     public interface ICreateTableBuilder : ICommandBuilder
     {
-        ICreateTableBuilder CreateTable(string name);
-        ICreateTableBuilder CreateTempTable(string name);
+        ICreateTableBuilder CreateTable { get; }
+        ICreateTableBuilder CreateTempTable { get; }
         ICreateTableBuilder IfNotExists { get; }
+        ICreateTableBuilder Name(string name);
         ICreateTableBuilder As(ICommand select);
 
         ICreateTableBuilder Column<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
@@ -18,8 +19,8 @@ namespace Gnosis.Alexandria.Models.Interfaces
         ICreateTableBuilder Column(string name, string type, object defaultValue);
         ICreateTableBuilder Columns<T>(IEnumerable<Expression<Func<T, object>>> expressions, T model) where T : IModel;
 
-        ICreateTableBuilder PrimaryKey<T>(Expression<Func<T, object>> expression) where T : IModel;
-        ICreateTableBuilder PrimaryKey(string column);
+        ICreateTableBuilder PrimaryKey<T>(Expression<Func<T, object>> expression, T model) where T : IModel;
+        ICreateTableBuilder PrimaryKey(string name, string type);
         ICreateTableBuilder Check(string expression);
         ICreateTableBuilder ForeignKey { get; }
         ICreateTableBuilder ForeignKeyColumn(string column);
