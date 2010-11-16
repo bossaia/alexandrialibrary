@@ -55,18 +55,21 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string AllColumns = "*";
             public const string And = "and";
             public const string Ascending = "asc";
+            public const string Check = "check";
             public const string CloseParen = ")";
             public const string ColumnAssignment = "=";
             public const string Comma = ",";
             public const string CommaSpace = ", ";
             public const string Create = "create";
             public const string CrossJoin = "cross join";
+            public const string Default = "default";
             public const string Delete = "delete";
             public const string Descending = "desc";
             public const string Except = " except ";
             public const string From = " from";
             public const string GroupBy = " group by ";
             public const string Having = "having";
+            public const string IfNotExists = "if not exists";
             public const string InnerJoin = "inner join";
             public const string Insert = "insert";
             public const string Intersect = " intersect ";
@@ -85,6 +88,7 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string IsNull = "is null";
             public const string LeftOuterJoin = "left outer join";
             public const string Limit = " limit";
+            public const string NotNull = "not null";
             public const string Offset = "offset";
             public const string On = "on";
             public const string OpenParen = "(";
@@ -95,12 +99,14 @@ namespace Gnosis.Alexandria.Models.Commands
             public const string OrReplace = "or replace";
             public const string OrRollback = "or rollback";
             public const string OrderBy = " order by ";
+            public const string PrimaryKey = "primary key";
             public const string SelectAll = "select all ";
             public const string SelectDistinct = "select distinct ";
             public const string SelectLastInsertedId = "; select last_insert_rowid();";
             public const string Set = "set";
             public const string Space = " ";
             public const string StatementTerminator = ";";
+            public const string Table = "table";
             public const string Temp = "temp";
             public const string Union = " union ";
             public const string UnionAll = " union all ";
@@ -123,6 +129,21 @@ namespace Gnosis.Alexandria.Models.Commands
         {
             var clause = new Clause(name);
             AddClause(clause);
+        }
+
+        protected void AddKeywordClause(string name)
+        {
+            AddSpaceDelimitedClause(name);
+        }
+
+        protected void AddListClause(string name)
+        {
+            AddCommaDelimitedClause(name, "(", ")");
+        }
+
+        protected void AddListClause(string name, string header)
+        {
+            AddCommaDelimitedClause(name, string.Format("{0} (", header), ")");
         }
 
         protected void AddCommaDelimitedClause(string name, string prefix, string suffix)

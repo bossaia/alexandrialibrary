@@ -96,6 +96,7 @@
     <Compile Include="Models\Commands\DeleteBuilder.cs" />
     <Compile Include="Models\Commands\InsertBuilder.cs" />
     <Compile Include="Models\Commands\UpdateBuilder.cs" />
+    <Compile Include="Models\Interfaces\ICache.cs" />
     <Compile Include="Models\Interfaces\IClause.cs" />
     <Compile Include="Models\Interfaces\ICreateTriggerBuilder.cs" />
     <Compile Include="Models\Interfaces\IDeleteBuilder.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Models\Commands\CommandBuilder.cs" />
     <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
+    <Compile Include="Models\Repositories\StaticCache.cs" />
     <Compile Include="Models\Schemas\ArtistSchema.cs" />
     <Compile Include="Models\Schemas\CountrySchema.cs" />
     <Compile Include="Models\Schemas\Field.cs" />

@@ -51,6 +51,8 @@ namespace Gnosis.Alexandria
                     x.For<ISchemaMapper<IArtist>>().Use<SchemaMapper<IArtist>>();
                     x.For<ISchema<ICountry>>().Use<CountrySchema>();
                     x.For<ISchema<IArtist>>().Use<ArtistSchema>();
+                    x.For<ICache<ICountry>>().Use<StaticCache<ICountry>>();
+                    x.For<ICache<IArtist>>().Use<StaticCache<IArtist>>();
                     x.For<IStore>().Use<SQLiteCatalogStore>();
                     x.For<ICountryRepository>().Use<CountryRepository>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();

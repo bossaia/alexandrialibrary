@@ -107,6 +107,12 @@ namespace Gnosis.Alexandria.Models.Stores
         public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper)
             where T : IModel
         {
+            return Query<T>(command, mapper, null);
+        }
+
+        public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper, ICache<T> cache)
+            where T : IModel
+        {
             var results = new List<T>();
 
             using (var connection = GetDbConnection())
@@ -116,7 +122,18 @@ namespace Gnosis.Alexandria.Models.Stores
                 {
                     while (reader.Read())
                     {
-                        results.Add(mapper.GetModel(reader));
+                        T model = default(T);
+
+                        if (cache != null && !cache.IsEmpty)
+                        {
+                            var id = mapper.GetId(reader);
+                            model = cache.GetOne(id);
+                        }
+
+                        if (model == null)
+                            model = mapper.GetModel(reader);
+                        
+                        results.Add(model);
                     }
                 }
             }

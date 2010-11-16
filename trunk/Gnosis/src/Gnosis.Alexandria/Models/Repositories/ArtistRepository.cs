@@ -11,8 +11,8 @@ namespace Gnosis.Alexandria.Models.Repositories
 {
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
-        public ArtistRepository(IStore store, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ISelectBuilder> selectFactory)
-            : base(store, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
+        public ArtistRepository(IStore store, ICache<IArtist> cache, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ISelectBuilder> selectFactory)
+            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
         {
         }
 

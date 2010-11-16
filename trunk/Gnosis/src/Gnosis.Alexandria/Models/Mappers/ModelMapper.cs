@@ -21,6 +21,11 @@ namespace Gnosis.Alexandria.Models.Mappers
         private readonly IFactory<T> _factory;
         private readonly ISchema<T> _schema;
 
+        public object GetId(IDataRecord record)
+        {
+            return record[_schema.PrimaryField.Name];
+        }
+
         public T GetModel(IDataRecord record)
         {
             var model = _factory.Create();
