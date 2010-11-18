@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Alexandria.Utilities;
+using Gnosis.Babel;
+using Gnosis.Babel.SQLite.Schema;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
     public class SchemaMapper<T> : ISchemaMapper<T>
         where T : IModel
     {
-        public SchemaMapper(ISchema<T> schema, IFactory<T> factory, IFactory<ICreateTableBuilder> createTableFactory, IFactory<ICreateIndexBuilder> createIndexFactory, IFactory<ICreateViewBuilder> createViewFactory)
+        public SchemaMapper(ISchema<T> schema, IFactory<T> factory, IFactory<ICreate<T>> createStatementFactory)
         {
             Schema = schema;
             Factory = factory;
-            CreateTableFactory = createTableFactory;
-            CreateIndexFactory = createIndexFactory;
-            CreateViewFactory = createViewFactory;
+            CreateStatementFactory = createStatementFactory;
         }
 
         protected readonly ISchema<T> Schema;
         protected readonly IFactory<T> Factory;
-        protected readonly IFactory<ICreateTableBuilder> CreateTableFactory;
-        protected readonly IFactory<ICreateIndexBuilder> CreateIndexFactory;
-        protected readonly IFactory<ICreateViewBuilder> CreateViewFactory;
+        protected readonly IFactory<ICreate<T>> CreateStatementFactory;
 
         public IEnumerable<ICommand> GetInitializeCommands()
         {
@@ -31,14 +26,25 @@ namespace Gnosis.Alexandria.Models.Mappers
 
             var model = Factory.Create();
 
+            var createTable = CreateStatementFactory.Create()
+                .TableIfNotExists(Schema.Name)
+                .Column(Schema.PrimaryField.Getter).Integer.NotNull;
+
+            foreach (var field in Schema.NonPrimaryFields)
+            {
+                var getter = field.Getter.Compile();
+                createTable = createTable.Column(field.Getter).Text.NotNull.Default(getter(model));
+            }
+
+            /*
             var createTable = CreateTableFactory.Create()
                 .CreateTable
                 .IfNotExists
                 .Name(Schema.Name)
                 .PrimaryKey<T>(Schema.PrimaryField.Getter, model)
                 .Columns<T>(Schema.NonPrimaryFields.Select(x => x.Getter), model);
-
-            commands.Add(createTable.ToCommand());
+            */
+            //commands.Add(createTable.ToCommand());))
 
             return commands;
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models.Schemas
 {

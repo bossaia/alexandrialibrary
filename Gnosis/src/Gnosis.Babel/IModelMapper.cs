@@ -1,9 +1,8 @@
 ﻿using System.Data;
 
-namespace Gnosis.Alexandria.Models.Interfaces
+namespace Gnosis.Babel
 {
     public interface IModelMapper<T>
-        where T : IModel
     {
         object GetId(IDataRecord record);
         T GetModel(IDataRecord record);

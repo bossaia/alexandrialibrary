@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Gnosis.Alexandria.Models.Interfaces
+namespace Gnosis.Babel
 {
     public interface IKey<T>
     {

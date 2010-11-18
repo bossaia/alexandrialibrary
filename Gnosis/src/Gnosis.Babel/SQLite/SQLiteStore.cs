@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
 
-using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Alexandria.Utilities;
-
-namespace Gnosis.Alexandria.Models.Stores
+namespace Gnosis.Babel.SQLite
 {
     public abstract class SQLiteStore : IStore
     {
@@ -34,12 +29,7 @@ namespace Gnosis.Alexandria.Models.Stores
             return new SQLiteConnection(connectionString);
         }
 
-        private static IDbCommand CreateDbCommand(ICommand command, IDbConnection connection)
-        {
-            return CreateDbCommand(command, connection, null);
-        }
-
-        private static IDbCommand CreateDbCommand(ICommand command, IDbConnection connection, IDbTransaction transaction)
+        private static IDbCommand CreateDbCommand(ICommand command, IDbConnection connection, IDbTransaction transaction = null)
         {
             var dbCommand = connection.CreateCommand();
             dbCommand.CommandType = CommandType.Text;
@@ -48,7 +38,7 @@ namespace Gnosis.Alexandria.Models.Stores
             if (transaction != null)
                 dbCommand.Transaction = transaction;
 
-            foreach (KeyValuePair<string, object> pair in command.Parameters)
+            foreach (var pair in command.Parameters)
             {
                 var parameter = dbCommand.CreateParameter();
                 parameter.ParameterName = pair.Key;
@@ -68,10 +58,9 @@ namespace Gnosis.Alexandria.Models.Stores
         private static void Execute(ICommand command, IDbConnection connection, IDbTransaction transaction)
         {
             var dbCommand = CreateDbCommand(command, connection, transaction);
-            object result = dbCommand.ExecuteScalar();
+            var result = dbCommand.ExecuteScalar();
 
-            if (command.Callback != null && command.Model != null)
-                command.Callback(command.Model, result);
+            command.CallbackWithResult(result);
         }
 
         public string Name
@@ -90,7 +79,8 @@ namespace Gnosis.Alexandria.Models.Stores
                     connection.Open();
                     transaction = connection.BeginTransaction();
 
-                    commands.Each(x => Execute(x, connection, transaction));
+                    foreach (var command in commands)
+                        Execute(command, connection, transaction);
 
                     transaction.Commit();
                 }
@@ -105,13 +95,11 @@ namespace Gnosis.Alexandria.Models.Stores
         }
 
         public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper)
-            where T : IModel
         {
             return Query<T>(command, mapper, null);
         }
 
         public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper, ICache<T> cache)
-            where T : IModel
         {
             var results = new List<T>();
 
@@ -122,7 +110,7 @@ namespace Gnosis.Alexandria.Models.Stores
                 {
                     while (reader.Read())
                     {
-                        T model = default(T);
+                        var model = default(T);
 
                         if (cache != null && !cache.IsEmpty)
                         {

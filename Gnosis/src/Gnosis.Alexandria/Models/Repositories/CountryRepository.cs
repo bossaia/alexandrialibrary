@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
+using Gnosis.Babel.SQLite.Persist;
+using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
     public class CountryRepository : RepositoryBase<ICountry>, ICountryRepository
     {
-        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ISelectBuilder> selectFactory, IFactory<IInsertBuilder> insertFactory)
+        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ISelect> selectFactory, IFactory<IInsert> insertFactory)
             : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
         {
             _insertFactory = insertFactory;
         }
 
-        private readonly IFactory<IInsertBuilder> _insertFactory;
+        private readonly IFactory<IInsert> _insertFactory;
 
         #region Cache Methods
 
         private void AddCountryToCache(long id, ICountry country)
         {
             country.Initialize(id);
-            Cache.Put(country);
+            Cache.Put(id, country);
         }
 
         private void AddCountryToCache(long id, string name, string code)
@@ -296,14 +296,14 @@ namespace Gnosis.Alexandria.Models.Repositories
             var commands = new List<ICommand>();
             foreach (var country in Cache.GetAll())
             {
-                var insert = _insertFactory.Create()
-                    .Insert
-                    .OrIgnore
-                    .Into(Schema.Name)
-                    .ColumnsToValues(Schema.Fields.Select(x => x.Getter), country)
-                    .ToCommand();
+                //var insert = _insertFactory.Create()
+                //    .Insert
+                //    .OrIgnore
+                //    .Into(Schema.Name)
+                //    .ColumnsToValues(Schema.Fields.Select(x => x.Getter), country)
+                //    .ToCommand();
 
-                commands.Add(insert);
+                //commands.Add(insert);
             }
 
             Store.Execute(commands);

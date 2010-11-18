@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-
+﻿using System.Data;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Alexandria.Utilities;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
@@ -29,8 +25,10 @@ namespace Gnosis.Alexandria.Models.Mappers
         public T GetModel(IDataRecord record)
         {
             var model = _factory.Create();
-            _schema.Fields
-                .Each(x => x.Setter(model, record[x.Name]));
+
+            model.Initialize(record[_schema.PrimaryField.Name]);
+
+            _schema.Fields.Each(x => x.Setter(model, record[x.Name]));
 
             return model;
         }

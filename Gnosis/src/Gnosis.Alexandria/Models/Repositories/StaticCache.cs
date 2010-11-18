@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Gnosis.Alexandria.Models.Interfaces;
+﻿using System.Collections.Generic;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
     public class StaticCache<T> : ICache<T>
-        where T : IModel
     {
         public StaticCache()
         {
@@ -36,9 +31,9 @@ namespace Gnosis.Alexandria.Models.Repositories
             return _map.Values;
         }
 
-        public void Put(T model)
+        public void Put(object id, T model)
         {
-            _map[model.Id] = model;
+            _map[id] = model;
         }
     }
 }
