@@ -55,7 +55,7 @@
     <Compile Include="IModel.cs" />
     <Compile Include="IModelMapper.cs" />
     <Compile Include="IPersistMapper.cs" />
-    <Compile Include="IPredicate.cs" />
+    <Compile Include="SQLite\IPredicate.cs" />
     <Compile Include="IQueryMapper.cs" />
     <Compile Include="ISchema.cs" />
     <Compile Include="ISchemaMapper.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="SQLite\Persist\Updating\IUpdateColumnar.cs" />
     <Compile Include="SQLite\Persist\Updating\IUpdateConflictClause.cs" />
     <Compile Include="SQLite\Persist\Updating\IUpdateSet.cs" />
+    <Compile Include="SQLite\Predicate.cs" />
     <Compile Include="SQLite\Query\ISelectWhere.cs" />
     <Compile Include="SQLite\SQLiteModelMapper.cs" />
     <Compile Include="SQLite\SQLitePersistMapper.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="SQLite\Schema\ITriggerWhen.cs" />
     <Compile Include="SQLite\Schema\IView.cs" />
     <Compile Include="SQLite\SQLiteStore.cs" />
+    <Compile Include="SQLite\Where.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="StaticCache.cs" />
   </ItemGroup>
