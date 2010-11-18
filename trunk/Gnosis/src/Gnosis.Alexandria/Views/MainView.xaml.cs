@@ -6,7 +6,6 @@ using System.Windows;
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
 using Gnosis.Alexandria.Models.Schemas;
-using Gnosis.Alexandria.Utilities;
 
 namespace Gnosis.Alexandria.Views
 {

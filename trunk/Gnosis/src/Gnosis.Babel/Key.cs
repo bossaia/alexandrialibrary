@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gnosis.Babel;
 
-namespace Gnosis.Alexandria.Models.Schemas
+namespace Gnosis.Babel
 {
     public class Key<T> : IKey<T>
         where T : IModel

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models
 {
     public abstract class Named : Model, INamed
     {
         private string _name;
-        private string _nameHash;
 
         public string Name
         {
@@ -18,7 +17,7 @@ namespace Gnosis.Alexandria.Models
             set
             {
                 _name = value;
-                _nameHash = GetNameHash(_name);
+                NameHash = GetNameHash(_name);
             }
         }
 
@@ -28,23 +27,20 @@ namespace Gnosis.Alexandria.Models
             set;
         }
 
-        public string NameHash
-        {
-            get { return _nameHash; }
-        }
+        public string NameHash { get; private set; }
 
         public static string GetNameHash(string name)
         {
             if (string.IsNullOrEmpty(name))
                 return string.Empty;
 
-            Dictionary<char, string> punctuation = new Dictionary<char, string> {
+            var punctuation = new Dictionary<char, string> {
                 {'!', string.Empty}, {'@', string.Empty}, {'#', string.Empty}, {'$', string.Empty}, {'%', string.Empty}, {'^', string.Empty}, {'&', string.Empty}, {'*', string.Empty}, {'(', string.Empty}, {')', string.Empty}, {'-', string.Empty}, {'_', string.Empty}, {'+', string.Empty}, {'=', string.Empty},
                 {'{', string.Empty}, {'}', string.Empty}, {'[', string.Empty}, {']', string.Empty}, {'|', string.Empty}, {'\\', string.Empty}, {':', string.Empty}, {';', string.Empty}, {'\'', string.Empty}, {'"', string.Empty}, {'<', string.Empty}, {'>', string.Empty}, {',', string.Empty}, {'.', string.Empty},
                 {'?', string.Empty}, {'/', string.Empty}, {'~', string.Empty}, {'`', string.Empty}
             };
 
-            Dictionary<char, string> charactersToNormalize = new Dictionary<char, string> {
+            var charactersToNormalize = new Dictionary<char, string> {
                 {'È', "E"}, {'Ê', "E"}, {'Ë', "E"}, {'Û', "U"}, {'Ù', "U"}, {'Ï', "I"}, {'Î', "I"}, {'À', "A"}, {'Â', "A"}, {'Ô', "O"}, {'Ö', "O"},
                 {'è', "E"}, {'ê', "E"}, {'ë', "E"}, {'û', "U"}, {'ù', "U"}, {'ï', "I"}, {'î', "I"}, {'à', "A"}, {'â', "A"}, {'ô', "O"}, {'ö', "O"}, 
                 //German
@@ -70,7 +66,7 @@ namespace Gnosis.Alexandria.Models
                 {'č', "C"}, {'ȟ', "H"}, {'ǧ', "G"}, {'š', "S"}, {'ž', "Z"}, {'ŋ', "NG"},
             };
 
-            Dictionary<string, string> wordsToNormalize = new Dictionary<string, string> {
+            var wordsToNormalize = new Dictionary<string, string> {
                 {"THE", string.Empty}, {"A", string.Empty}, {"OF", string.Empty}, {"AT", string.Empty}, {"AND", string.Empty}, {"IN", string.Empty}, {"WITH", string.Empty}, {"BUT", string.Empty}, {"OR", string.Empty}, {"FOR", string.Empty}, {"NOR", string.Empty}, {"YET", string.Empty},
                 {"ONE", "1"}, {"TWO", "2"}, {"THREE", "3"}, {"FOUR", "4"}, {"FIVE", "5"}, {"SIX", "6"}, {"SEVEN", "7"}, {"EIGHT", "8"}, {"NINE", "9"}, {"TEN", "10"},
                 {"ELEVEN", "11"}, {"TWELVE", "12"}, {"THIRTEEN", "13"}, {"FOURTEEN", "14"}, {"FIFTEEN", "15"}, {"SIXTEEN", "16"}, {"SEVENTEEN", "17"}, {"EIGHTEEN", "18"}, {"NINETEEN", "19"}, {"TWENTY", "20"},
@@ -81,7 +77,7 @@ namespace Gnosis.Alexandria.Models
             var wordDelimiters = new string[] { " ", "\t", "\r\n", "\n" };
             var words = name.Split(wordDelimiters, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (string word in words)
+            foreach (var word in words)
             {
                 var key = word.Trim().ToUpper();
                 var noPunctuation = new StringBuilder();

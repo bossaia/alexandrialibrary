@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Gnosis.Alexandria.Utilities;
-using Gnosis.Babel;
 
-namespace Gnosis.Alexandria.Models.Schemas
+namespace Gnosis.Babel
 {
     public abstract class Schema<T> : ISchema<T>
         where T : IModel

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
-using Gnosis.Babel;
 
-namespace Gnosis.Alexandria.Models.Schemas
+namespace Gnosis.Babel
 {
     public class Field<T> : IField<T>
         where T : IModel

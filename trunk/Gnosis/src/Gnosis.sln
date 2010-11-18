@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Alexandria", "Gnosis.Alexandria\Gnosis.Alexandria.csproj", "{22CD5A9E-D738-4530-B6C5-F0727F1096B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Babel", "Gnosis.Babel\Gnosis.Babel.csproj", "{255B2F1A-9744-4656-91FB-CDF7E877704D}"

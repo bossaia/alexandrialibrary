@@ -6,17 +6,15 @@ using Gnosis.Alexandria.Handlers;
 using Gnosis.Alexandria.Handlers.Interfaces;
 using Gnosis.Alexandria.Messages;
 using Gnosis.Alexandria.Messages.Interfaces;
-using Gnosis.Alexandria.Models;
-using Gnosis.Alexandria.Models.Commands;
-using Gnosis.Alexandria.Models.Factories;
 using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Alexandria.Models.Mappers;
 using Gnosis.Alexandria.Models.Repositories;
 using Gnosis.Alexandria.Models.Schemas;
-using Gnosis.Alexandria.Models.Stores;
 using Gnosis.Alexandria.Views;
 using Gnosis.Alexandria.Views.Interfaces;
+
 using Gnosis.Babel;
+using Gnosis.Babel.SQLite;
+
 using StructureMap;
 
 namespace Gnosis.Alexandria
@@ -28,10 +26,9 @@ namespace Gnosis.Alexandria
             try {
             ObjectFactory.Initialize(x =>
                 {
-                    x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
-
-                    x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
-                    x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
+                    //x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
+                    //x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
+                    //x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
 
                     //x.For<IFactory<IInsertBuilder>>().Use<CommandBuilderFactory>();
                     //x.For<IFactory<IUpdateBuilder>>().Use<CommandBuilderFactory>();
@@ -42,19 +39,19 @@ namespace Gnosis.Alexandria
                     //x.For<IFactory<ICreateViewBuilder>>().Use<CommandBuilderFactory>();
                     //x.For<IFactory<ICreateTriggerBuilder>>().Use<CommandBuilderFactory>();
 
-                    x.For<IModelMapper<IArtist>>().Use<ModelMapper<IArtist>>();
-                    x.For<IModelMapper<ICountry>>().Use<ModelMapper<ICountry>>();
-                    x.For<IPersistMapper<ICountry>>().Use<PersistMapper<ICountry>>();
-                    x.For<IPersistMapper<IArtist>>().Use<PersistMapper<IArtist>>();
-                    x.For<IQueryMapper<ICountry>>().Use<QueryMapper<ICountry>>();
-                    x.For<IQueryMapper<IArtist>>().Use<QueryMapper<IArtist>>();
-                    x.For<ISchemaMapper<ICountry>>().Use<SchemaMapper<ICountry>>();
-                    x.For<ISchemaMapper<IArtist>>().Use<SchemaMapper<IArtist>>();
+                    x.For<IModelMapper<IArtist>>().Use<SQLiteModelMapper<IArtist>>();
+                    x.For<IModelMapper<ICountry>>().Use<SQLiteModelMapper<ICountry>>();
+                    x.For<IPersistMapper<ICountry>>().Use<SQLitePersistMapper<ICountry>>();
+                    x.For<IPersistMapper<IArtist>>().Use<SQLitePersistMapper<IArtist>>();
+                    x.For<IQueryMapper<ICountry>>().Use<SQLiteQueryMapper<ICountry>>();
+                    x.For<IQueryMapper<IArtist>>().Use<SQLiteQueryMapper<IArtist>>();
+                    x.For<ISchemaMapper<ICountry>>().Use<SQLiteSchemaMapper<ICountry>>();
+                    x.For<ISchemaMapper<IArtist>>().Use<SQLiteSchemaMapper<IArtist>>();
                     x.For<ISchema<ICountry>>().Use<CountrySchema>();
                     x.For<ISchema<IArtist>>().Use<ArtistSchema>();
                     x.For<ICache<ICountry>>().Use<StaticCache<ICountry>>();
                     x.For<ICache<IArtist>>().Use<StaticCache<IArtist>>();
-                    x.For<IStore>().Use<SQLiteCatalogStore>();
+                    x.For<IStore>().Use<SQLiteStore>().Ctor<string>("Catalog");
                     x.For<ICountryRepository>().Use<CountryRepository>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();
                     
