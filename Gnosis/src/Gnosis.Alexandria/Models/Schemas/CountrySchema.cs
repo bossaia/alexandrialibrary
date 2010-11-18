@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Alexandria.Utilities;
+﻿using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models.Schemas
 {

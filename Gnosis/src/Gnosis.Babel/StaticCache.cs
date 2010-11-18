@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Gnosis.Babel;
 
-namespace Gnosis.Alexandria.Models.Repositories
+namespace Gnosis.Babel
 {
     public class StaticCache<T> : ICache<T>
     {

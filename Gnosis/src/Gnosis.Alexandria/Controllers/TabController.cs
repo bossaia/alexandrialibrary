@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Handlers.Interfaces;
-using Gnosis.Alexandria.Models.Commands;
 using Gnosis.Alexandria.Views.Interfaces;
 
 namespace Gnosis.Alexandria.Controllers
