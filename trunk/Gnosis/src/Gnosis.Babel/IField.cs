@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Gnosis.Alexandria.Models.Interfaces
+namespace Gnosis.Babel
 {
     public interface IField<T>
     {

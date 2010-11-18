@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
 
 namespace Gnosis.Alexandria.Models.Commands
 {
@@ -24,6 +21,12 @@ namespace Gnosis.Alexandria.Models.Commands
 
         public Action<IModel, object> Callback { get; set; }
         public IModel Model { get; set; }
+
+        public void CallbackWithResult(object value)
+        {
+            if (Callback != null && Model != null)
+                Callback(Model, value);
+        }
 
         public void AddParameter(string name, object value)
         {

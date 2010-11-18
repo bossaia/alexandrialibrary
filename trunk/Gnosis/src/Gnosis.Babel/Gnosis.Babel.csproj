@@ -33,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\lib\SQLite\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICache.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="IField.cs" />
+    <Compile Include="IKey.cs" />
+    <Compile Include="IModelMapper.cs" />
+    <Compile Include="IPersistMapper.cs" />
     <Compile Include="IPredicate.cs" />
+    <Compile Include="IQueryMapper.cs" />
+    <Compile Include="ISchema.cs" />
+    <Compile Include="ISchemaMapper.cs" />
     <Compile Include="IStatement.cs" />
+    <Compile Include="IStore.cs" />
+    <Compile Include="KeyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLite\Persist\IDelete.cs" />
     <Compile Include="SQLite\Persist\IInsert.cs" />
@@ -94,6 +108,7 @@
     <Compile Include="SQLite\Schema\ITriggerUpdateOf.cs" />
     <Compile Include="SQLite\Schema\ITriggerWhen.cs" />
     <Compile Include="SQLite\Schema\IView.cs" />
+    <Compile Include="SQLite\SQLiteStore.cs" />
     <Compile Include="Statement.cs" />
   </ItemGroup>
   <ItemGroup />

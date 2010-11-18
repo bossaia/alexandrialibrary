@@ -48,10 +48,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.SQLite, Version=1.0.40.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\SQLite\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,55 +83,21 @@
     <Compile Include="Messages\NewSearchTabRequestedMessage.cs" />
     <Compile Include="Messages\SearchRequestedMessage.cs" />
     <Compile Include="Models\Artist.cs" />
-    <Compile Include="Models\Commands\Clause.cs" />
-    <Compile Include="Models\Commands\CommandBuilderFactory.cs" />
-    <Compile Include="Models\Commands\CreateIndexBuilder.cs" />
-    <Compile Include="Models\Commands\CreateTableBuilder.cs" />
-    <Compile Include="Models\Commands\CreateTriggerBuilder.cs" />
-    <Compile Include="Models\Commands\CreateViewBuilder.cs" />
-    <Compile Include="Models\Commands\DeleteBuilder.cs" />
-    <Compile Include="Models\Commands\InsertBuilder.cs" />
-    <Compile Include="Models\Commands\UpdateBuilder.cs" />
-    <Compile Include="Models\Interfaces\ICache.cs" />
     <Compile Include="Models\Interfaces\IClause.cs" />
-    <Compile Include="Models\Interfaces\ICreateTriggerBuilder.cs" />
-    <Compile Include="Models\Interfaces\IDeleteBuilder.cs" />
-    <Compile Include="Models\Interfaces\IDropTableBuilder.cs" />
-    <Compile Include="Models\Interfaces\IDropTriggerBuilder.cs" />
-    <Compile Include="Models\Interfaces\IDropViewBuilder.cs" />
-    <Compile Include="Models\Interfaces\IField.cs" />
-    <Compile Include="Models\Interfaces\IKey.cs" />
-    <Compile Include="Models\Interfaces\IPersistMapper.cs" />
-    <Compile Include="Models\Interfaces\ISchema.cs" />
-    <Compile Include="Models\Interfaces\IQueryMapper.cs" />
-    <Compile Include="Models\Interfaces\IStore.cs" />
-    <Compile Include="Models\Interfaces\IUpdateBuilder.cs" />
-    <Compile Include="Models\Commands\SelectBuilder.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\Factories\GenericFactory.cs" />
     <Compile Include="Models\Interfaces\IArtistRepository.cs" />
-    <Compile Include="Models\Interfaces\ICommand.cs" />
-    <Compile Include="Models\Interfaces\ICommandBuilder.cs" />
-    <Compile Include="Models\Interfaces\ISchemaMapper.cs" />
     <Compile Include="Models\Interfaces\ICountry.cs" />
     <Compile Include="Models\Interfaces\ICountryRepository.cs" />
-    <Compile Include="Models\Interfaces\ICreateTableBuilder.cs" />
-    <Compile Include="Models\Interfaces\ICreateViewBuilder.cs" />
     <Compile Include="Models\Interfaces\IDated.cs" />
     <Compile Include="Models\Interfaces\IArtist.cs" />
     <Compile Include="Models\Interfaces\ICoded.cs" />
-    <Compile Include="Models\Interfaces\IDropIndexBuilder.cs" />
-    <Compile Include="Models\Interfaces\IFactory.cs" />
-    <Compile Include="Models\Interfaces\IModelMapper.cs" />
+    <Compile Include="IFactory.cs" />
     <Compile Include="Models\Interfaces\INamed.cs" />
     <Compile Include="Models\Interfaces\INational.cs" />
     <Compile Include="Models\Interfaces\INoted.cs" />
-    <Compile Include="Models\Interfaces\IInsertBuilder.cs" />
-    <Compile Include="Models\Interfaces\ISelectBuilder.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IMediaEntity.cs" />
-    <Compile Include="Models\Interfaces\ICreateIndexBuilder.cs" />
-    <Compile Include="Models\Interfaces\KeyType.cs" />
     <Compile Include="Models\Mappers\QueryMapper.cs" />
     <Compile Include="Models\Mappers\SchemaMapper.cs" />
     <Compile Include="Models\Mappers\ModelMapper.cs" />
@@ -144,7 +106,6 @@
     <Compile Include="Models\Named.cs" />
     <Compile Include="Models\Repositories\ArtistRepository.cs" />
     <Compile Include="Models\Commands\Command.cs" />
-    <Compile Include="Models\Commands\CommandBuilder.cs" />
     <Compile Include="Models\Repositories\CountryRepository.cs" />
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
     <Compile Include="Models\Repositories\StaticCache.cs" />
@@ -154,7 +115,6 @@
     <Compile Include="Models\Schemas\Key.cs" />
     <Compile Include="Models\Schemas\Schema.cs" />
     <Compile Include="Models\Stores\SQLiteCatalogStore.cs" />
-    <Compile Include="Models\Stores\SQLiteStore.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Utilities\CollectionExtensions.cs" />
     <Compile Include="Utilities\FluentStringBuilder.cs" />

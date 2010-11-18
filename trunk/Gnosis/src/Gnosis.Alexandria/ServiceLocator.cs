@@ -16,6 +16,7 @@ using Gnosis.Alexandria.Models.Schemas;
 using Gnosis.Alexandria.Models.Stores;
 using Gnosis.Alexandria.Views;
 using Gnosis.Alexandria.Views.Interfaces;
+using Gnosis.Babel;
 using StructureMap;
 
 namespace Gnosis.Alexandria
@@ -32,14 +33,14 @@ namespace Gnosis.Alexandria
                     x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
                     x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
 
-                    x.For<IFactory<IInsertBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<IUpdateBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<IDeleteBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ISelectBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ICreateTableBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ICreateIndexBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ICreateViewBuilder>>().Use<CommandBuilderFactory>();
-                    x.For<IFactory<ICreateTriggerBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<IInsertBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<IUpdateBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<IDeleteBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ISelectBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ICreateTableBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ICreateIndexBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ICreateViewBuilder>>().Use<CommandBuilderFactory>();
+                    //x.For<IFactory<ICreateTriggerBuilder>>().Use<CommandBuilderFactory>();
 
                     x.For<IModelMapper<IArtist>>().Use<ModelMapper<IArtist>>();
                     x.For<IModelMapper<ICountry>>().Use<ModelMapper<ICountry>>();

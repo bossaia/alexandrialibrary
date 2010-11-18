@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Gnosis.Alexandria.Models.Interfaces;
+﻿using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
+using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Mappers
 {
     public class QueryMapper<T> : IQueryMapper<T>
         where T : IModel
     {
-        public QueryMapper(ISchema<T> schema, IFactory<ISelectBuilder> factory)
+        public QueryMapper(ISchema<T> schema, IFactory<ISelect> factory)
         {
             Schema = schema;
             Factory = factory;
@@ -19,13 +16,13 @@ namespace Gnosis.Alexandria.Models.Mappers
         #region Protected Members
 
         protected readonly ISchema<T> Schema;
-        protected readonly IFactory<ISelectBuilder> Factory;
+        protected readonly IFactory<ISelect> Factory;
 
-        protected ISelectBuilder GetSelectAllBuilder()
+        protected IStatement GetSelectAllBuilder()
         {
             return Factory.Create()
-                .SelectDistinct
-                .AllColumns
+                .Distinct
+                .AllColumns()
                 .From(Schema.Name);
         }
 
@@ -35,16 +32,20 @@ namespace Gnosis.Alexandria.Models.Mappers
 
         public ICommand GetSelectOneCommand(object id)
         {
-            return GetSelectAllBuilder()
+            var statement = Factory.Create()
+                .Distinct
+                .AllColumns()
+                .From(Schema.Name)
                 .Where<T>(x => x.Id)
-                .IsEqualTo<T>(x => x.Id, id)
-                .ToCommand();
+                .IsEqualTo<T>(x => x.Id, id);
+            return null;
         }
 
         public ICommand GetSelectAllCommand()
         {
-            return GetSelectAllBuilder()
-                .ToCommand();
+            //return GetSelectAllBuilder()
+                //.ToCommand();
+            return null;
         }
 
         #endregion

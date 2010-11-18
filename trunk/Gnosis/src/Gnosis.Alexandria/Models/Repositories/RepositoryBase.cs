@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SQLite;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Gnosis.Alexandria.Utilities;
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
+using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
@@ -14,7 +11,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ISelectBuilder> selectFactory)
+        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ISelect> selectFactory)
         {
             Store = store;
             Cache = cache;
@@ -37,7 +34,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         protected readonly IModelMapper<T> ModelMapper;
         protected readonly IPersistMapper<T> PersistMapper;
         protected readonly IQueryMapper<T> QueryMapper;
-        protected readonly IFactory<ISelectBuilder> SelectFactory;
+        protected readonly IFactory<ISelect> SelectFactory;
 
         #endregion
 
@@ -69,7 +66,7 @@ namespace Gnosis.Alexandria.Models.Repositories
 
             var many = GetMany(command);
 
-            return many.FirstOrDefault<T>();
+            return many.FirstOrDefault();
         }
 
         public virtual ICollection<T> GetMany(ICommand command)
