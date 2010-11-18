@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{255B2F1A-9744-4656-91FB-CDF7E877704D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gnosis.Babel</RootNamespace>
+    <AssemblyName>Gnosis.Babel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IPredicate.cs" />
+    <Compile Include="IStatement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLite\Persist\IDelete.cs" />
+    <Compile Include="SQLite\Persist\IInsert.cs" />
+    <Compile Include="SQLite\Persist\IUpdate.cs" />
+    <Compile Include="SQLite\Query\ICompound.cs" />
+    <Compile Include="SQLite\Query\ICompoundable.cs" />
+    <Compile Include="SQLite\Query\IFilterable.cs" />
+    <Compile Include="SQLite\Query\IFrom.cs" />
+    <Compile Include="SQLite\Query\IGroupable.cs" />
+    <Compile Include="SQLite\Query\IGroupBy.cs" />
+    <Compile Include="SQLite\Query\IGrouping.cs" />
+    <Compile Include="SQLite\Query\IHaving.cs" />
+    <Compile Include="SQLite\Query\IJoin.cs" />
+    <Compile Include="SQLite\Query\IJoinable.cs" />
+    <Compile Include="SQLite\Query\IJoinCondition.cs" />
+    <Compile Include="SQLite\Query\ILimit.cs" />
+    <Compile Include="SQLite\Query\IOrderable.cs" />
+    <Compile Include="SQLite\Query\IOrderBy.cs" />
+    <Compile Include="SQLite\Query\IOrdering.cs" />
+    <Compile Include="SQLite\Query\IResult.cs" />
+    <Compile Include="SQLite\Query\ISelect.cs" />
+    <Compile Include="SQLite\Query\ISourcable.cs" />
+    <Compile Include="SQLite\Query\IWhere.cs" />
+    <Compile Include="SQLite\Schema\IColumnar.cs" />
+    <Compile Include="SQLite\Schema\IColumnConstrained.cs" />
+    <Compile Include="SQLite\Schema\IColumnConstraint.cs" />
+    <Compile Include="SQLite\Schema\IColumnName.cs" />
+    <Compile Include="SQLite\Schema\IColumnType.cs" />
+    <Compile Include="SQLite\Schema\ICreate.cs" />
+    <Compile Include="SQLite\Schema\IDrop.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyColumn.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyColumnar.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyConstraint.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyReferencable.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyReference.cs" />
+    <Compile Include="SQLite\Schema\IForeignKeyReferenceConstraint.cs" />
+    <Compile Include="SQLite\Schema\IIndex.cs" />
+    <Compile Include="SQLite\Schema\IIndexColumnar.cs" />
+    <Compile Include="SQLite\Schema\IIndexTable.cs" />
+    <Compile Include="SQLite\Schema\IKeyColumn.cs" />
+    <Compile Include="SQLite\Schema\IKeyColumnar.cs" />
+    <Compile Include="SQLite\Schema\IKeyConstraint.cs" />
+    <Compile Include="SQLite\Schema\ITable.cs" />
+    <Compile Include="SQLite\Schema\ITableConstrained.cs" />
+    <Compile Include="SQLite\Schema\ITableConstraint.cs" />
+    <Compile Include="SQLite\Schema\ITemporary.cs" />
+    <Compile Include="SQLite\Schema\ITrigger.cs" />
+    <Compile Include="SQLite\Schema\ITriggerBody.cs" />
+    <Compile Include="SQLite\Schema\ITriggerType.cs" />
+    <Compile Include="SQLite\Schema\ITriggerUpdateOf.cs" />
+    <Compile Include="SQLite\Schema\ITriggerWhen.cs" />
+    <Compile Include="SQLite\Schema\IView.cs" />
+    <Compile Include="Statement.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

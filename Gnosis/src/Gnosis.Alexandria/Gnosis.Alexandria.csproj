@@ -252,7 +252,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Gnosis.Babel\Gnosis.Babel.csproj">
+      <Project>{255B2F1A-9744-4656-91FB-CDF7E877704D}</Project>
+      <Name>Gnosis.Babel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Alexandria.ico" />
   </ItemGroup>
