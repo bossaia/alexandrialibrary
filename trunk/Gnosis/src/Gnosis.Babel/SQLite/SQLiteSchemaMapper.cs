@@ -7,22 +7,26 @@ namespace Gnosis.Babel.SQLite
     public class SQLiteSchemaMapper<T> : ISchemaMapper<T>
         where T : IModel
     {
-        public SQLiteSchemaMapper(ISchema<T> schema, IFactory<T> factory, IFactory<ICreate<T>> createStatementFactory)
+        public SQLiteSchemaMapper(ISchema<T> schema, IFactory<T> modelFactory, IFactory<ICommand> commandFactory, IFactory<ICreate<T>> createStatementFactory)
         {
             Schema = schema;
-            Factory = factory;
+            ModelFactory = modelFactory;
+            CommandFactory = commandFactory;
             CreateStatementFactory = createStatementFactory;
         }
 
         protected readonly ISchema<T> Schema;
-        protected readonly IFactory<T> Factory;
+        protected readonly IFactory<T> ModelFactory;
+        protected readonly IFactory<ICommand> CommandFactory;
         protected readonly IFactory<ICreate<T>> CreateStatementFactory;
 
         public IEnumerable<ICommand> GetInitializeCommands()
         {
             var commands = new List<ICommand>();
 
-            var model = Factory.Create();
+            var model = ModelFactory.Create();
+
+            var command = CommandFactory.Create();
 
             var createTable = CreateStatementFactory.Create()
                 .TableIfNotExists(Schema.Name)
@@ -31,18 +35,13 @@ namespace Gnosis.Babel.SQLite
             foreach (var field in Schema.NonPrimaryFields)
             {
                 var getter = field.Getter.Compile();
-                createTable = createTable.Column(field.Getter).Text.NotNull.Default(getter(model));
+                var defaultValue = getter(model);
+                createTable = createTable.Column<T>(field.Getter, defaultValue.AsAffinity()).NotNull.Default(defaultValue);
             }
 
-            /*
-            var createTable = CreateTableFactory.Create()
-                .CreateTable
-                .IfNotExists
-                .Name(Schema.Name)
-                .PrimaryKey<T>(Schema.PrimaryField.Getter, model)
-                .Columns<T>(Schema.NonPrimaryFields.Select(x => x.Getter), model);
-            */
-            //commands.Add(createTable.ToCommand());))
+            command.AddStatement(createTable);
+
+            commands.Add(command);
 
             return commands;
         }
