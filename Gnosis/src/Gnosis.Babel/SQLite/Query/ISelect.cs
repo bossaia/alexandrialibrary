@@ -9,5 +9,6 @@ namespace Gnosis.Babel.SQLite.Query
     {
         IResult All { get; }
         IResult Distinct { get; }
+        IResult LastInsertRowId { get; }
     }
 }

@@ -33,7 +33,7 @@ namespace Gnosis.Babel.SQLite
         {
             var dbCommand = connection.CreateCommand();
             dbCommand.CommandType = CommandType.Text;
-            dbCommand.CommandText = command.Text;
+            dbCommand.CommandText = command.ToString();
 
             if (transaction != null)
                 dbCommand.Transaction = transaction;
@@ -96,7 +96,7 @@ namespace Gnosis.Babel.SQLite
 
         public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper)
         {
-            return Query<T>(command, mapper, null);
+            return Query(command, mapper, null);
         }
 
         public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper, ICache<T> cache)
