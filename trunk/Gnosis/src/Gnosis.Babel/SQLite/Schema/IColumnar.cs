@@ -9,14 +9,14 @@ namespace Gnosis.Babel.SQLite.Schema
     public interface IColumnar
     {
         IColumnName Column(string name);
-        IColumnName Column(string name, string type);
-        IColumnName Column(string name, string type, object defaultValue);
+        IColumnType Column(string name, string type);
+        IColumnType Column(string name, string type, object defaultValue);
     }
 
     public interface IColumnar<T>
     {
         IColumnName<T> Column(Expression<Func<T, object>> expression);
-        IColumnName<T> Column(Expression<Func<T, object>> expression, string type);
-        IColumnName<T> Column(Expression<Func<T, object>> expression, string type, object defaultValue);
+        IColumnType<T> Column(Expression<Func<T, object>> expression, string type);
+        IColumnType<T> Column(Expression<Func<T, object>> expression, string type, object defaultValue);
     }
 }

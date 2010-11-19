@@ -3,7 +3,8 @@ using System.Linq.Expressions;
 
 namespace Gnosis.Babel.SQLite
 {
-    public interface IPredicate<in S> where S : IStatement
+    public interface IPredicate<S> : IStatement
+        where S : IStatement
     {
         S IsEqualTo(string expression);
         S IsEqualTo(string name, object value);

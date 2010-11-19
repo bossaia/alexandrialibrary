@@ -60,7 +60,7 @@ namespace Gnosis.Babel.SQLite
             var dbCommand = CreateDbCommand(command, connection, transaction);
             var result = dbCommand.ExecuteScalar();
 
-            command.CallbackWithResult(result);
+            command.InvokeCallback(result);
         }
 
         public string Name
