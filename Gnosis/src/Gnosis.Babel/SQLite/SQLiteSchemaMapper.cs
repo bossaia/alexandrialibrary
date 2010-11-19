@@ -36,7 +36,7 @@ namespace Gnosis.Babel.SQLite
             {
                 var getter = field.Getter.Compile();
                 var defaultValue = getter(model);
-                createTable = createTable.Column<T>(field.Getter, defaultValue.AsAffinity()).NotNull.Default(defaultValue);
+                createTable = createTable.Column(field.Getter, defaultValue.AsAffinity()).NotNull.Default(defaultValue);
             }
 
             command.AddStatement(createTable);

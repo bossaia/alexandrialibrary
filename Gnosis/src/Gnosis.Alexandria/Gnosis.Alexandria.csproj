@@ -90,7 +90,6 @@
     <Compile Include="Models\Interfaces\IDated.cs" />
     <Compile Include="Models\Interfaces\IArtist.cs" />
     <Compile Include="Models\Interfaces\ICoded.cs" />
-    <Compile Include="IFactory.cs" />
     <Compile Include="Models\Interfaces\INamed.cs" />
     <Compile Include="Models\Interfaces\INational.cs" />
     <Compile Include="Models\Interfaces\INoted.cs" />

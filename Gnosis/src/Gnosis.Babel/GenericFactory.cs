@@ -1,11 +1,11 @@
 ﻿namespace Gnosis.Babel
 {
-    public class GenericFactory<T, C> : IFactory<T>
-        where C : T, new()
+    public class GenericFactory<TInterface, TConcrete> : IFactory<TInterface>
+        where TConcrete: TInterface, new()
     {
-        public T Create()
+        public TInterface Create()
         {
-            return new C();
+            return new TConcrete();
         }
     }
 }

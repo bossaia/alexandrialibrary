@@ -1,6 +1,6 @@
 ﻿namespace Gnosis.Babel
 {
-    public interface IFactory<T>
+    public interface IFactory<in T>
     {
         T Create();
     }

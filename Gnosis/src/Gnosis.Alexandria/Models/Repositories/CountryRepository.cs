@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
-using Gnosis.Babel.SQLite.Persist;
+using Gnosis.Babel.SQLite.Persist.Inserting;
 using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Repositories

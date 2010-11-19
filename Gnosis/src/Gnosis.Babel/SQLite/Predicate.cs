@@ -99,132 +99,156 @@ namespace Gnosis.Babel.SQLite
 
         public TInterface IsLessThanOrEqualTo(string expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLessThanOrEqualTo);
+            return AppendWord<TInterface, TConcrete>(expression);
         }
 
         public TInterface IsLessThanOrEqualTo(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLessThanOrEqualTo);
+            return AppendParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsLessThanOrEqualTo<T>(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLessThanOrEqualTo);
+            return AppendWord<TInterface, TConcrete>(expression.ToName());
         }
 
         public TInterface IsLessThanOrEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLessThanOrEqualTo);
+            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsGreaterThan(string expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThan);
+            return AppendWord<TInterface, TConcrete>(expression);
         }
 
-        public TInterface IsGreaterThan(string expression, object value)
+        public TInterface IsGreaterThan(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThan);
+            return AppendParameter<TInterface, TConcrete>(name, value);
         }
 
-        public TInterface IsGreaterThan<T>(System.Linq.Expressions.Expression<Func<T, object>> expression)
+        public TInterface IsGreaterThan<T>(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThan);
+            return AppendWord<TInterface, TConcrete>(expression.ToName());
         }
 
-        public TInterface IsGreaterThan<T>(System.Linq.Expressions.Expression<Func<T, object>> expression, object value)
+        public TInterface IsGreaterThan<T>(Expression<Func<T, object>> expression, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThan);
+            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsGreaterThanOrEqualTo(string expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThanOrEqualTo);
+            return AppendWord<TInterface, TConcrete>(expression);
         }
 
-        public TInterface IsGreaterThanOrEqualTo(string expression, object value)
+        public TInterface IsGreaterThanOrEqualTo(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThanOrEqualTo);
+            return AppendParameter<TInterface, TConcrete>(name, value);
         }
 
-        public TInterface IsGreaterThanOrEqualTo<T>(System.Linq.Expressions.Expression<Func<T, object>> expression)
+        public TInterface IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThanOrEqualTo);
+            return AppendWord<TInterface, TConcrete>(expression.ToName());
         }
 
-        public TInterface IsGreaterThanOrEqualTo<T>(System.Linq.Expressions.Expression<Func<T, object>> expression, object value)
+        public TInterface IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpGreaterThanOrEqualTo);
+            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsLike(string expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLike);
+            return AppendWord<TInterface, TConcrete>(expression);
         }
 
-        public TInterface IsLike(string expression, object value)
+        public TInterface IsLike(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLike);
+            return AppendParameter<TInterface, TConcrete>(name, value);
         }
 
-        public TInterface IsLike<T>(System.Linq.Expressions.Expression<Func<T, object>> expression)
+        public TInterface IsLike<T>(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLike);
+            return AppendWord<TInterface, TConcrete>(expression.ToName());
         }
 
-        public TInterface IsLike<T>(System.Linq.Expressions.Expression<Func<T, object>> expression, object value)
+        public TInterface IsLike<T>(Expression<Func<T, object>> expression, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpLike);
+            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsNotLike(string expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpNotLike);
+            return AppendWord<TInterface, TConcrete>(expression);
         }
 
-        public TInterface IsNotLike(string expression, object value)
+        public TInterface IsNotLike(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpNotLike);
+            return AppendParameter<TInterface, TConcrete>(name, value);
         }
 
-        public TInterface IsNotLike<T>(System.Linq.Expressions.Expression<Func<T, object>> expression)
+        public TInterface IsNotLike<T>(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            AppendWord(OpNotLike);
+            return AppendWord<TInterface, TConcrete>(expression.ToName());
         }
 
-        public TInterface IsNotLike<T>(System.Linq.Expressions.Expression<Func<T, object>> expression, object value)
+        public TInterface IsNotLike<T>(Expression<Func<T, object>> expression, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpNotLike);
+            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsIn(string expression)
         {
-            throw new NotImplementedException();
+            return AppendWord<TInterface, TConcrete>(OpInPrefix + expression + OpInSuffix);
         }
 
-        public TInterface IsIn(string expression, object value)
+        public TInterface IsIn(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpInPrefix);
+            AppendParameter(name, value);
+            return AppendWord<TInterface, TConcrete>(OpInSuffix);
         }
 
         public TInterface IsNotIn(string expression)
         {
-            throw new NotImplementedException();
+            return AppendWord<TInterface, TConcrete>(OpNotInPrefix + expression + OpInSuffix);
         }
 
-        public TInterface IsNotIn(string expression, object value)
+        public TInterface IsNotIn(string name, object value)
         {
-            throw new NotImplementedException();
+            AppendWord(OpNotInPrefix);
+            AppendParameter(name, value);
+            return AppendWord<TInterface, TConcrete>(OpInSuffix);
         }
 
         public TInterface IsNull
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<TInterface, TConcrete>(OpNull); }
         }
 
         public TInterface IsNotNull
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<TInterface, TConcrete>(OpNotNull); }
         }
     }
 }
