@@ -5,7 +5,7 @@
         private const string KeywordCheck = "check";
         private const string KeywordForeignKey = "foreign key";
         private const string KeywordPrimaryKey = "primary key";
-        private const string KeywordUniqueKey = "unique key";
+        private const string KeywordUniqueKey = "unique";
 
         public ITableConstraint CheckTable(string expression)
         {
