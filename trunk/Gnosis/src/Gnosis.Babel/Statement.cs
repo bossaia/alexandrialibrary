@@ -27,7 +27,9 @@ namespace Gnosis.Babel
         private readonly StringBuilder _text;
         private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
         private bool _listMode = false;
+        private bool _subListMode = false;
         private bool _hasParentheses = false;
+        private bool _hasSubParentheses = false;
 
         private void AddParameter(string name, object value)
         {
@@ -43,6 +45,17 @@ namespace Gnosis.Babel
         }
 
         #region Fluent Append Methods
+
+        protected TInterface Transform<TInterface, TConcrete>()
+            where TInterface : IStatement
+            where TConcrete : Statement, TInterface, new()
+        {
+            var concrete = new TConcrete();
+            concrete.AddParameters(_parameters);
+            concrete.AppendWord(_text.ToString());
+
+            return concrete;
+        }
 
         protected TInterface AppendWord<TInterface, TConcrete>(string word)
             where TInterface : IStatement
@@ -92,6 +105,18 @@ namespace Gnosis.Babel
             return concrete;
         }
 
+        protected TInterface AppendParentheticalSubListItem<TInterface, TConcrete>(string item)
+            where TInterface : IStatement
+            where TConcrete : Statement, TInterface, new()
+        {
+            var concrete = new TConcrete();
+            concrete.AddParameters(_parameters);
+            concrete.AppendWord(_text.ToString());
+            concrete.AppendParentheticalSubListItem(item);
+
+            return concrete;
+        }
+
         protected TInterface AppendParameter<TInterface, TConcrete>(string name, object value)
             where TInterface : IStatement
             where TConcrete : Statement, TInterface, new()
@@ -110,9 +135,15 @@ namespace Gnosis.Babel
 
         protected void AppendWord(string word)
         {
+            if (_subListMode && _hasSubParentheses)
+                _text.Append(")");
+
             if (_text.Length > 0)
                 _text.AppendFormat(" {0}", word);
             else _text.Append(word);
+
+            _subListMode = false;
+            _hasSubParentheses = false;
         }
 
         protected void AppendListItem(string item)
@@ -130,6 +161,9 @@ namespace Gnosis.Babel
 
         protected void AppendClause(string clause)
         {
+            if (_subListMode && _hasSubParentheses)
+                _text.Append(")");
+
             if (_listMode && _hasParentheses)
                 _text.Append(")");
 
@@ -140,6 +174,8 @@ namespace Gnosis.Babel
 
             _listMode = false;
             _hasParentheses = false;
+            _subListMode = false;
+            _hasSubParentheses = false;
         }
 
         protected void AppendParameter(string name, object value)
@@ -150,6 +186,13 @@ namespace Gnosis.Babel
 
         protected void AppendParentheticalListItem(string item)
         {
+            if (_subListMode)
+            {
+                _text.Append(")");
+                _subListMode = false;
+                _hasSubParentheses = false;
+            }
+
             if (_listMode)
                 _text.AppendFormat(", {0}", item);
             else
@@ -157,6 +200,17 @@ namespace Gnosis.Babel
 
             _listMode = true;
             _hasParentheses = true;
+        }
+
+        protected void AppendParentheticalSubListItem(string item)
+        {
+            if (_subListMode)
+                _text.AppendFormat(", {0}", item);
+            else
+                _text.AppendFormat(" ({0}", item);
+
+            _subListMode = true;
+            _hasSubParentheses = true;
         }
 
         #endregion
@@ -168,8 +222,9 @@ namespace Gnosis.Babel
 
         public override string ToString()
         {
-            var suffix = (_listMode && _hasParentheses) ? ");" : ";";
-            return _text.ToString() + suffix;
+            var firstSuffix = (_subListMode && _hasSubParentheses) ? ")" : string.Empty;
+            var secondSuffix = (_listMode && _hasParentheses) ? ");" : ";";
+            return _text.ToString() + firstSuffix + secondSuffix;
         }
     }
 }
