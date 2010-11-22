@@ -12,6 +12,6 @@ namespace Gnosis.Babel.SQLite.Schema
 
     public interface IForeignKeyColumn<T> : IStatement, IForeignKeyColumnar<T>
     {
-        IForeignKeyReferenceConstraint<T, TR> References<TR>();
+        IForeignKeyReferenceConstraint<T, TR> References<TR>(string table);
     }
 }

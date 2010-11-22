@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Gnosis.Babel.SQLite.Schema
 {
@@ -11,7 +8,7 @@ namespace Gnosis.Babel.SQLite.Schema
         private const string KeywordCheck = "check";
         private const string KeywordForeignKey = "foreign key";
         private const string KeywordPrimaryKey = "primary key";
-        private const string KeywordUnique = "unique";
+        private const string KeywordUniqueKey = "unique";
 
         public IForeignKeyReference Column(string name)
         {
@@ -20,22 +17,23 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public ITableConstraint CheckTable(string expression)
         {
-            throw new NotImplementedException();
+            AppendParentheticalListItem(KeywordCheck);
+            return AppendParentheticalSubListItem<ITableConstraint, TableConstraint>(expression);
         }
 
         public IKeyConstraint PrimaryKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IKeyConstraint, KeyConstraint>(KeywordPrimaryKey); }
         }
 
         public IKeyConstraint UniqueKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IKeyConstraint, KeyConstraint>(KeywordUniqueKey); }
         }
 
         public IForeignKeyConstraint ForeignKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IForeignKeyConstraint, ForeignKeyConstraint>(KeywordForeignKey); }
         }
     }
 
@@ -44,7 +42,7 @@ namespace Gnosis.Babel.SQLite.Schema
         private const string KeywordCheck = "check";
         private const string KeywordForeignKey = "foreign key";
         private const string KeywordPrimaryKey = "primary key";
-        private const string KeywordUnique = "unique";
+        private const string KeywordUniqueKey = "unique";
 
         public IForeignKeyReference<T, TR> Column(Expression<Func<TR, object>> expression)
         {
@@ -61,17 +59,17 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IKeyConstraint<T> PrimaryKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IKeyConstraint<T>, KeyConstraint<T>>(KeywordPrimaryKey); }
         }
 
         public IKeyConstraint<T> UniqueKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IKeyConstraint<T>, KeyConstraint<T>>(KeywordUniqueKey); }
         }
 
         public IForeignKeyConstraint<T> ForeignKey
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendParentheticalListItem<IForeignKeyConstraint<T>, ForeignKeyConstraint<T>>(KeywordForeignKey); }
         }
     }
 }

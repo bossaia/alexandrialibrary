@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Gnosis.Babel.SQLite.Schema
 {
@@ -10,7 +7,7 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         public IForeignKeyReference Column(string name)
         {
-            throw new NotImplementedException();
+            return AppendParentheticalSubListItem<IForeignKeyReference, ForeignKeyReference>(name);
         }
     }
 
@@ -18,7 +15,9 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         public IForeignKeyReference<T, TR> Column(Expression<Func<TR, object>> expression)
         {
-            throw new NotImplementedException();
+            return
+                AppendParentheticalSubListItem<IForeignKeyReference<T, TR>, ForeignKeyReference<T, TR>>(
+                    expression.ToName());
         }
     }
 }

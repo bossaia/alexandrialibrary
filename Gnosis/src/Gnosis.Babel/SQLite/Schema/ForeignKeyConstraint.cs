@@ -7,7 +7,7 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         public IForeignKeyColumn Column(string name)
         {
-            throw new NotImplementedException();
+            return AppendParentheticalSubListItem<IForeignKeyColumn, ForeignKeyColumn>(name);
         }
     }
 
@@ -15,7 +15,7 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         public IForeignKeyColumn<T> Column(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            return AppendParentheticalSubListItem<IForeignKeyColumn<T>, ForeignKeyColumn<T>>(expression.ToName());
         }
     }
 }
