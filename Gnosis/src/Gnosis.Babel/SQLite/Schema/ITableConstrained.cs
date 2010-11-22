@@ -15,7 +15,7 @@ namespace Gnosis.Babel.SQLite.Schema
 
     public interface ITableConstrained<T>
     {
-        ITableConstraint<T> CheckTable(Predicate<T> check);
+        ITableConstraint<T> CheckTable(string expression);
         IKeyConstraint<T> PrimaryKey { get; }
         IKeyConstraint<T> UniqueKey { get; }
         IForeignKeyConstraint<T> ForeignKey { get; }

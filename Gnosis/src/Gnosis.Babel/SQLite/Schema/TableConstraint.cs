@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Gnosis.Babel.SQLite.Schema
 {
-    public interface ITableConstraint : IStatement, ITableConstrained
+    public class TableConstraint : TableConstrained, ITableConstraint
     {
     }
 
-    public interface ITableConstraint<T> : IStatement, ITableConstrained<T>
+    public class TableConstraint<T> : TableConstrained<T>, ITableConstraint<T>
     {
     }
 }
