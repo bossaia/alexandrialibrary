@@ -96,6 +96,11 @@ namespace Gnosis.Babel.SQLite.Schema
 
     public class Create<T> : Statement, ICreate<T>
     {
+        const string KeywordCreate = "create";
+        const string KeywordIfNotExists = "if not exists";
+        const string KeywordTable = "table";
+        const string KeywordTemp = "temp";
+
         public IIndex<T> Index(string name)
         {
             throw new NotImplementedException();
@@ -123,7 +128,10 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public ITable<T> TableIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTable);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITable<T>, Table<T>>(name);
         }
 
         public ITable<T> TempTable(string name)

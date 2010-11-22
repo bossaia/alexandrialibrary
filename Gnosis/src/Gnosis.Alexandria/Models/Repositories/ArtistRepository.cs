@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
-using Gnosis.Babel.SQLite.Query;
+using Gnosis.Babel.SQLite;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
-        public ArtistRepository(IStore store, ICache<IArtist> cache, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ISelect> selectFactory)
-            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
+        public ArtistRepository(IStore store, ICache<IArtist> cache, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
+            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory)
         {
         }
 
@@ -17,15 +17,17 @@ namespace Gnosis.Alexandria.Models.Repositories
             if (string.IsNullOrEmpty(search))
                 return GetAll();
 
-            //var command = SelectFactory.Create()
-                //.SelectDistinct
-                //.AllColumns
-                //.From(Schema.Name)
-                //.Where<IArtist>(x => x.Name).IsLike("Name", string.Format("%{0}%", search))
-                //.Or<IArtist>(x => x.NameHash).IsLike("NameHash", string.Format("%{0}%", Named.GetNameHash(search)))
-                //.ToCommand();
+            var command = CommandFactory.Create();
+            command.AddStatement(StatementFactory
+                    .Select()
+                    .Distinct
+                    .AllColumns()
+                    .From(Schema.Name)
+                    .Where<IArtist>(x => x.Name).IsLike("@Name", string.Format("%{0}%", search))
+                    .Or<IArtist>(x => x.NameHash).IsLike("@NameHash", string.Format("%{0}%", Named.GetNameHash(search)))
+                );
 
-            return GetMany(null); //command);
+            return GetMany(command);
         }
     }
 }

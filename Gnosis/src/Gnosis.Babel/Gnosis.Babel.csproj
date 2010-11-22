@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
     <Compile Include="Schema.cs" />
+    <Compile Include="SQLite\ISQLiteStatementFactory.cs" />
     <Compile Include="SQLite\Persist\Deleting\Delete.cs" />
     <Compile Include="SQLite\Persist\Deleting\IDeleteFrom.cs" />
     <Compile Include="SQLite\Persist\IConflicting.cs" />
@@ -103,7 +104,12 @@
     <Compile Include="SQLite\Query\Select.cs" />
     <Compile Include="SQLite\Query\SelectWhere.cs" />
     <Compile Include="SQLite\Query\Sourcable.cs" />
+    <Compile Include="SQLite\Schema\ColumnName.cs" />
+    <Compile Include="SQLite\Schema\ColumnType.cs" />
     <Compile Include="SQLite\Schema\Create.cs" />
+    <Compile Include="SQLite\Schema\Drop.cs" />
+    <Compile Include="SQLite\Schema\Table.cs" />
+    <Compile Include="SQLite\Schema\TableConstrained.cs" />
     <Compile Include="SQLite\SQLiteModelMapper.cs" />
     <Compile Include="SQLite\SQLitePersistMapper.cs" />
     <Compile Include="SQLite\SQLiteQueryMapper.cs" />
@@ -159,6 +165,7 @@
     <Compile Include="SQLite\Schema\ITriggerUpdateOf.cs" />
     <Compile Include="SQLite\Schema\ITriggerWhen.cs" />
     <Compile Include="SQLite\Schema\IView.cs" />
+    <Compile Include="SQLite\SQLiteStatementFactory.cs" />
     <Compile Include="SQLite\SQLiteStore.cs" />
     <Compile Include="SQLite\Where.cs" />
     <Compile Include="Statement.cs" />

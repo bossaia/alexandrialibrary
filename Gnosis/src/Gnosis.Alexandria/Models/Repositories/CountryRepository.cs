@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
+using Gnosis.Babel.SQLite;
 using Gnosis.Babel.SQLite.Persist.Inserting;
-using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
     public class CountryRepository : RepositoryBase<ICountry>, ICountryRepository
     {
-        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ISelect> selectFactory, IFactory<ICommand> commandFactory, IFactory<IInsert> insertFactory)
-            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, selectFactory)
+        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
+            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory)
         {
-            _commandFactory = commandFactory;
-            _insertFactory = insertFactory;
         }
 
-        private readonly IFactory<ICommand> _commandFactory;
-        private readonly IFactory<IInsert> _insertFactory;
-
-        private IInsert Insert { get { return _insertFactory.Create(); } }
+        private IInsert<ICountry> Insert { get { return StatementFactory.Insert<ICountry>(); } }
 
         #region Cache Methods
 
@@ -301,12 +296,12 @@ namespace Gnosis.Alexandria.Models.Repositories
             var commands = new List<ICommand>();
             foreach (var country in Cache.GetAll())
             {
-                var command = _commandFactory.Create();
+                var command = CommandFactory.Create();
 
                 command.AddStatement(Insert
                     .Into(Schema.Name)
-                    .Columns(Schema.NonPrimaryFields.Select(x => x.Getter.Name))
-                    .Values(Schema.NonPrimaryFields.Select(x => new Tuple<string, object>(x.Getter.Name, x.Getter.Compile()(country))))
+                    .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
+                    .Values(Schema.NonPrimaryFields.Select(x => x.Getter), country)
                     );
 
                 commands.Add(command);

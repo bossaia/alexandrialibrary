@@ -42,6 +42,9 @@ namespace Gnosis.Alexandria
             ObjectFactory.Initialize(x =>
                 {
                     x.For<IFactory<ICommand>>().Use<GenericFactory<ICommand, Command>>();
+                    x.For<ISQLiteStatementFactory>().Use<SQLiteStatementFactory>();
+
+                    //TODO: See if there is a way to get rid of this
                     x.For<IFactory<ISelect>>().Use<GenericFactory<ISelect, Select>>();
                     x.For<IFactory<IInsert>>().Use<GenericFactory<IInsert, Insert>>();
                     x.For<IFactory<IInsert<IArtist>>>().Use<GenericFactory<IInsert<IArtist>, Insert<IArtist>>>();
@@ -55,6 +58,7 @@ namespace Gnosis.Alexandria
                     x.For<IFactory<ICreate>>().Use<GenericFactory<ICreate, Create>>();
                     x.For<IFactory<ICreate<IArtist>>>().Use<GenericFactory<ICreate<IArtist>, Create<IArtist>>>();
                     x.For<IFactory<ICreate<ICountry>>>().Use<GenericFactory<ICreate<ICountry>, Create<ICountry>>>();
+                    
 
                     x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
                     x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();
