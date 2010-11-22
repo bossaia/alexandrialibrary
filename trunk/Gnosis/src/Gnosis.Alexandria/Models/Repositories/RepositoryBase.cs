@@ -2,7 +2,7 @@
 using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
-using Gnosis.Babel.SQLite.Query;
+using Gnosis.Babel.SQLite;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
@@ -10,7 +10,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ISelect> selectFactory)
+        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
         {
             Store = store;
             Cache = cache;
@@ -20,7 +20,8 @@ namespace Gnosis.Alexandria.Models.Repositories
             ModelMapper = modelMapper;
             PersistMapper = persistMapper;
             QueryMapper = queryMapper;
-            SelectFactory = selectFactory;
+            CommandFactory = commandFactory;
+            StatementFactory = statementFactory;
         }
 
         #region Protected Members
@@ -33,7 +34,8 @@ namespace Gnosis.Alexandria.Models.Repositories
         protected readonly IModelMapper<T> ModelMapper;
         protected readonly IPersistMapper<T> PersistMapper;
         protected readonly IQueryMapper<T> QueryMapper;
-        protected readonly IFactory<ISelect> SelectFactory;
+        protected readonly IFactory<ICommand> CommandFactory;
+        protected readonly ISQLiteStatementFactory StatementFactory;
 
         #endregion
 

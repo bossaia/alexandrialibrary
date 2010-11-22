@@ -10,8 +10,10 @@ namespace Gnosis.Alexandria.Controllers
         public ArtistRepositoryController(IArtistRepository repository, ISearchRequestedHandler searchRequestedHandler)
         {
             _repository = repository;
-            searchRequestedHandler.Controller = this;
+            _repository.Initialize();
 
+            searchRequestedHandler.Controller = this;
+            
             AddHandler(searchRequestedHandler);
         }
 

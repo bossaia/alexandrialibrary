@@ -8,6 +8,7 @@ namespace Gnosis.Alexandria.Controllers
         public CountryRepositoryController(ICountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
+            _countryRepository.Initialize();
         }
 
         private readonly ICountryRepository _countryRepository;
