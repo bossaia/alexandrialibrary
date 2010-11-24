@@ -24,12 +24,8 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IColumnType Column(string name, string type)
         {
-            throw new NotImplementedException();
-        }
-
-        public IColumnType Column(string name, string type, object defaultValue)
-        {
-            throw new NotImplementedException();
+            AppendParentheticalListItem(name);
+            return AppendWord<IColumnType, ColumnType>(type);
         }
     }
 
@@ -44,17 +40,13 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IColumnName<T> Column(Expression<Func<T, object>> expression)
         {
-            throw new NotImplementedException();
+            return AppendParentheticalListItem<IColumnName<T>, ColumnName<T>>(expression.ToName());
         }
 
         public IColumnType<T> Column(Expression<Func<T, object>> expression, string type)
         {
-            throw new NotImplementedException();
-        }
-
-        public IColumnType<T> Column(Expression<Func<T, object>> expression, string type, object defaultValue)
-        {
-            throw new NotImplementedException();
+            AppendParentheticalListItem(expression.ToName());
+            return AppendWord<IColumnType<T>, ColumnType<T>>(type);
         }
     }
 

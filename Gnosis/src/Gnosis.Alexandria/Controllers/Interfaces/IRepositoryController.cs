@@ -8,5 +8,6 @@ namespace Gnosis.Alexandria.Controllers.Interfaces
 {
     public interface IRepositoryController : IController
     {
+        void Initialize();
     }
 }

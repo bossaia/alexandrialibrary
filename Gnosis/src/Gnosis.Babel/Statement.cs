@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace Gnosis.Babel
@@ -31,11 +32,16 @@ namespace Gnosis.Babel
         private bool _hasParentheses = false;
         private bool _hasSubParentheses = false;
 
-        private void AddParameter(string name, object value)
+        private static string GetParameterName(string name)
         {
             if (!name.StartsWith("@"))
-                name = string.Format("@{0}", name);
+                return string.Format("@{0}", name);
 
+            return name;
+        }
+
+        private void AddParameter(string name, object value)
+        {
             _parameters[name] = value;
         }
 
@@ -178,10 +184,17 @@ namespace Gnosis.Babel
             _hasSubParentheses = false;
         }
 
+        protected string GetAnonymousParameterName()
+        {
+            return "@" + Guid.NewGuid().ToString().Replace("-", string.Empty);
+        }
+
         protected void AppendParameter(string name, object value)
         {
-            AppendWord(name);
-            AddParameter(name, value);
+            var parameterName = GetParameterName(name);
+
+            AppendWord(parameterName);
+            AddParameter(parameterName, value);
         }
 
         protected void AppendParentheticalListItem(string item)

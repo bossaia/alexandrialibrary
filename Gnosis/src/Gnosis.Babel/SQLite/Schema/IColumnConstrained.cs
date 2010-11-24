@@ -17,7 +17,7 @@ namespace Gnosis.Babel.SQLite.Schema
         IColumnConstraint CollateBinary { get; }
         IColumnConstraint CollateCaseInsensitve { get; }
         IColumnConstraint CollateRightTrim { get; }
-        ITableConstrained TableConstraints { get; }
+        ITableConstraint TableConstraints { get; }
     }
 
     public interface IColumnConstrained<T>
@@ -32,6 +32,6 @@ namespace Gnosis.Babel.SQLite.Schema
         IColumnConstraint<T> CollateBinary { get; }
         IColumnConstraint<T> CollateCaseInsensitve { get; }
         IColumnConstraint<T> CollateRightTrim { get; }
-        ITableConstrained<T> TableConstraints { get; }
+        ITableConstraint<T> TableConstraints { get; }
     }
 }

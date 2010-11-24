@@ -85,12 +85,16 @@ namespace Gnosis.Alexandria
                     x.For<IStore>().Use<SQLiteCatalogStore>();
                     x.For<ICountryRepository>().Use<CountryRepository>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();
+                    
                     x.For<INewHomeTabRequestedHandler>().Use<NewHomeTabRequestedHandler>();
                     x.For<INewSearchTabRequestedHandler>().Use<NewSearchTabRequestedHandler>();
                     x.For<ISearchRequestedHandler>().Use<SearchRequestedHandler>();
+                    x.For<IInitializeRepositoriesHandler>().Use<InitializeRepositoriesHandler>();
+                    
                     x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
                     x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();
                     x.For<ISearchRequestedMessage>().Use<SearchRequestedMessage>();
+                    x.For<IInitializeRepositoriesMessage>().Use<InitializeRepositoriesMessage>();
                 }
             );
             }
