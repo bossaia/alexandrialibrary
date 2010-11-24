@@ -32,6 +32,8 @@ namespace Gnosis.Alexandria.Views
         {
             AddTabController();
             AddRepositoryController();
+
+            Dispatch<IInitializeRepositoriesMessage>();
         }
 
         private void AddTabController()

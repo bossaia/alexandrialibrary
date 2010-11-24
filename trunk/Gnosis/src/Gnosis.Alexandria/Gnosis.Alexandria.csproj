@@ -73,11 +73,15 @@
     <Compile Include="Controllers\Interfaces\IRepositoryController.cs" />
     <Compile Include="Controllers\Interfaces\ITabController.cs" />
     <Compile Include="Controllers\RepositoryController.cs" />
+    <Compile Include="Handlers\InitializeRepositoriesHandler.cs" />
+    <Compile Include="Handlers\Interfaces\IInitializeRepositoriesHandler.cs" />
     <Compile Include="Handlers\Interfaces\INewHomeTabRequestedHandler.cs" />
     <Compile Include="Handlers\Interfaces\INewSearchTabRequestedHandler.cs" />
     <Compile Include="Handlers\Interfaces\ISearchRequestedHandler.cs" />
     <Compile Include="Handlers\NewSearchTabRequestedHandler.cs" />
     <Compile Include="Handlers\SearchRequestedHandler.cs" />
+    <Compile Include="Messages\InitializeRepositoriesMessage.cs" />
+    <Compile Include="Messages\Interfaces\IInitializeRepositoriesMessage.cs" />
     <Compile Include="Messages\Interfaces\INewSearchTabRequestedMessage.cs" />
     <Compile Include="Messages\Interfaces\ISearchRequestedMessage.cs" />
     <Compile Include="Messages\NewSearchTabRequestedMessage.cs" />

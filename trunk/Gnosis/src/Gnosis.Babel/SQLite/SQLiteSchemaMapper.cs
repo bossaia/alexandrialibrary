@@ -28,16 +28,14 @@ namespace Gnosis.Babel.SQLite
 
             var command = CommandFactory.Create();
 
-            var createTable = CreateStatementFactory.Create()
-                .TableIfNotExists(Schema.Name)
-                .Column(Schema.PrimaryField.Getter).Integer.NotNull;
+            var createTable = CreateStatementFactory.Create();
+            var x = createTable.TableIfNotExists(Schema.Name);
+            var y = x.Column(Schema.PrimaryField.Getter);
+            var z = y.Integer;
+            var a = z.NotNull;
 
-            foreach (var field in Schema.NonPrimaryFields)
-            {
-                var getter = field.Getter.Compile();
-                var defaultValue = getter(model);
-                createTable = createTable.Column(field.Getter, defaultValue.AsAffinity()).NotNull.Default(defaultValue);
-            }
+            //foreach (var field in Schema.NonPrimaryFields)
+                //createTable = createTable.Column(field.Getter, field.Getter.GetValue(model).AsAffinity()).NotNull.Default(field.Getter.GetValue(model));
 
             command.AddStatement(createTable);
 
