@@ -77,6 +77,10 @@ namespace Gnosis.Babel
         {
             var type = (value != null) ? value.GetType().Name : "String";
 
+            var model = value as IModel;
+            if (model != null)
+                type = "Int64";
+
             switch (type)
             {
                 case "Boolean":
@@ -92,6 +96,23 @@ namespace Gnosis.Babel
                 default:
                     return "TEXT";
             }
+        }
+
+        public static string AsDefaultString(this object value)
+        {
+            if (value == null)
+                return "''";
+
+            var model = value as IModel;
+            if (model != null)
+                return model.Id.ToString();
+
+            if (value is string)
+                return string.Format("'{0}'", value);
+            else if (value is DateTime)
+                return string.Format("'{0:s}'", value);
+
+            return value.ToString();
         }
     }
 }

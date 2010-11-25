@@ -50,6 +50,28 @@ namespace Gnosis.Babel
             parameters.Each(x => AddParameter(x.Key, x.Value));
         }
 
+        private Tuple<int, int> GetNumberOfOpenAndClosedParentheses()
+        {
+            var openCount = 0;
+            var closedCount = 0;
+            foreach (var character in _text.ToString().ToCharArray())
+            {
+                if (character == '(') openCount++;
+                else if (character == ')') closedCount++;
+            }
+
+            return new Tuple<int, int>(openCount, closedCount);
+        }
+
+        private bool HasOpenParentheses
+        {
+            get
+            {
+                var count = GetNumberOfOpenAndClosedParentheses();
+                return (count.Item1 > count.Item2);
+            }
+        }
+
         #region Fluent Append Methods
 
         protected TInterface Transform<TInterface, TConcrete>()
@@ -206,7 +228,7 @@ namespace Gnosis.Babel
                 _hasSubParentheses = false;
             }
 
-            if (_listMode)
+            if (_listMode || HasOpenParentheses)
                 _text.AppendFormat(", {0}", item);
             else
                 _text.AppendFormat(" ({0}", item);
@@ -235,9 +257,17 @@ namespace Gnosis.Babel
 
         public override string ToString()
         {
-            var firstSuffix = (_subListMode && _hasSubParentheses) ? ")" : string.Empty;
-            var secondSuffix = (_listMode && _hasParentheses) ? ");" : ";";
-            return _text.ToString() + firstSuffix + secondSuffix;
+            var suffix = string.Empty;
+            var count = GetNumberOfOpenAndClosedParentheses();
+            var closed = 0;
+
+            while (count.Item1 > count.Item2 + closed)
+            {
+                suffix += ")";
+                closed++;
+            }
+
+            return _text.ToString() + suffix + ";";
         }
     }
 }

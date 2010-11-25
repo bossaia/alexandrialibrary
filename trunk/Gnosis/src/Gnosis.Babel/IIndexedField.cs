@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Gnosis.Babel
 {
-    public interface IKey<T>
+    public interface IIndexedField
     {
         string Name { get; }
-        KeyType KeyType { get; }
-        IEnumerable<IIndexedField> Fields { get; }
+        bool Ascending { get; }
     }
 }

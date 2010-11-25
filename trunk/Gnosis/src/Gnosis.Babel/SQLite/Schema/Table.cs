@@ -19,7 +19,7 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IColumnName Column(string name)
         {
-            return AppendListItem<IColumnName, ColumnName>(name);
+            return AppendParentheticalListItem<IColumnName, ColumnName>(name);
         }
 
         public IColumnType Column(string name, string type)

@@ -82,7 +82,7 @@ namespace Gnosis.Alexandria
                     x.For<ISchema<IArtist>>().Use<ArtistSchema>();
                     x.For<ICache<ICountry>>().Use<StaticCache<ICountry>>();
                     x.For<ICache<IArtist>>().Use<StaticCache<IArtist>>();
-                    x.For<IStore>().Use<SQLiteCatalogStore>();
+                    x.For<IStore>().Use<CatalogStore>();
                     x.For<ICountryRepository>().Use<CountryRepository>();
                     x.For<IArtistRepository>().Use<ArtistRepository>();
                     

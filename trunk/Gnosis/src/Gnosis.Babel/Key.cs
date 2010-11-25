@@ -6,7 +6,7 @@ namespace Gnosis.Babel
     public class Key<T> : IKey<T>
         where T : IModel
     {
-        public Key(string name, KeyType keyType, IEnumerable<Tuple<string, bool>> fields)
+        public Key(string name, KeyType keyType, IEnumerable<IIndexedField> fields)
         {
             _name = name;
             _keyType = keyType;
@@ -15,7 +15,7 @@ namespace Gnosis.Babel
 
         private readonly string _name;
         private readonly KeyType _keyType;
-        private readonly IEnumerable<Tuple<string, bool>> _fields;
+        private readonly IEnumerable<IIndexedField> _fields;
 
         public string Name
         {
@@ -27,7 +27,7 @@ namespace Gnosis.Babel
             get { return _keyType; }
         }
 
-        public IEnumerable<Tuple<string, bool>> Fields
+        public IEnumerable<IIndexedField> Fields
         {
             get { return _fields; }
         }

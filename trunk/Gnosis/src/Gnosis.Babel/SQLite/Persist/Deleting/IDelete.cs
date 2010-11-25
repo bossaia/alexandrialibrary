@@ -5,7 +5,7 @@
         IDeleteFrom From(string table);
     }
 
-    public interface IDelete<T> : IStatement, IFilterable
+    public interface IDelete<T> : IStatement, IFilterable<T>
     {
         IDeleteFrom<T> From(string table);
     }

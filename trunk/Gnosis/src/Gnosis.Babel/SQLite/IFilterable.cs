@@ -7,4 +7,9 @@ namespace Gnosis.Babel.SQLite
     {
         IPredicate<IWhere> Where<T>(Expression<Func<T, object>> expression);
     }
+
+    public interface IFilterable<T>
+    {
+        IPredicate<IWhere> Where(Expression<Func<T, object>> expression);
+    }
 }

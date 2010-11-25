@@ -1,9 +1,10 @@
 ﻿using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
+using Gnosis.Babel.SQLite;
 
 namespace Gnosis.Alexandria.Models.Schemas
 {
-    public class ArtistSchema : Schema<IArtist>
+    public class ArtistSchema : SQLiteSchema<IArtist>
     {
         public ArtistSchema()
             : base("Artist")

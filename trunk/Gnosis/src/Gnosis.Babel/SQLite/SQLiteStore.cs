@@ -24,7 +24,7 @@ namespace Gnosis.Babel.SQLite
             return GetDbConnection(GetConnectionString());
         }
 
-        private static IDbConnection GetDbConnection(string connectionString)
+        private IDbConnection GetDbConnection(string connectionString)
         {
             return new SQLiteConnection(connectionString);
         }

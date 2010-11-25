@@ -6,15 +6,16 @@ using System.Text;
 
 namespace Gnosis.Babel.SQLite.Schema
 {
-    public interface IIndexColumnar
+    public interface IIndexColumnar : IStatement
     {
         IIndexColumnar ColumnAsc(string name);
         IIndexColumnar ColumnDesc(string name);
     }
 
-    public interface IIndexColumnar<T>
+    public interface IIndexColumnar<T> : IStatement
     {
         IIndexColumnar<T> ColumnAsc(Expression<Func<T, object>> expression);
         IIndexColumnar<T> ColumnDesc(Expression<Func<T, object>> expression);
+        IIndexColumnar<T> Columns(IEnumerable<IIndexedField> fields);
     }
 }
