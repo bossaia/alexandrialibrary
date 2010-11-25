@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Gnosis.Babel.SQLite.Schema;
 
@@ -15,29 +16,76 @@ namespace Gnosis.Babel.SQLite
             CreateStatementFactory = createStatementFactory;
         }
 
+        #region Protected Members
+
         protected readonly ISchema<T> Schema;
         protected readonly IFactory<T> ModelFactory;
         protected readonly IFactory<ICommand> CommandFactory;
         protected readonly IFactory<ICreate<T>> CreateStatementFactory;
 
+        protected virtual IStatement GetCreateTableStatment()
+        {
+            var model = ModelFactory.Create();
+
+            var createTable = CreateStatementFactory.Create()
+                .TableIfNotExists(Schema.Name)
+                .Column(Schema.PrimaryField.Getter).Integer.NotNull.PrimaryKeyAsc;
+
+            foreach (var field in Schema.NonPrimaryFields)
+            {
+                var value = field.Getter.GetValue(model);
+
+                createTable = createTable
+                    .Column(field.Getter, value.AsAffinity())
+                    .NotNull
+                    .Default(value);
+            }
+
+            return createTable;
+        }
+
+        protected IStatement GetCreateSecondaryKey(IKey<T> key)
+        {
+            return CreateStatementFactory.Create()
+                .IndexIfNotExists(key.Name)
+                .On(Schema.Name)
+                .Columns(key.Fields);
+        }
+
+        protected IStatement GetCreateUniqueKey(IKey<T> key)
+        {
+            var statement = CreateStatementFactory.Create()
+                .UniqueIndexIfNotExists(key.Name)
+                .On(Schema.Name)
+                .Columns(key.Fields);
+
+            return statement;
+        }
+
+        protected virtual IStatement GetCreateIndexStatement(IKey<T> key)
+        {
+            switch (key.KeyType)
+            {
+                case KeyType.Key:
+                    return GetCreateSecondaryKey(key);
+                case KeyType.UniqueKey:
+                    return GetCreateUniqueKey(key);
+                default:
+                    throw new InvalidOperationException("Could not generate create index statement for key: invalid key type");
+            }
+        }
+
+        #endregion
+
         public IEnumerable<ICommand> GetInitializeCommands()
         {
             var commands = new List<ICommand>();
 
-            var model = ModelFactory.Create();
-
             var command = CommandFactory.Create();
+            command.AddStatement(GetCreateTableStatment());
 
-            var createTable = CreateStatementFactory.Create();
-            var x = createTable.TableIfNotExists(Schema.Name);
-            var y = x.Column(Schema.PrimaryField.Getter);
-            var z = y.Integer;
-            var a = z.NotNull;
-
-            //foreach (var field in Schema.NonPrimaryFields)
-                //createTable = createTable.Column(field.Getter, field.Getter.GetValue(model).AsAffinity()).NotNull.Default(field.Getter.GetValue(model));
-
-            command.AddStatement(createTable);
+            foreach (var key in Schema.Keys)
+                command.AddStatement(GetCreateIndexStatement(key));
 
             commands.Add(command);
 

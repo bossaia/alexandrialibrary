@@ -3,50 +3,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Gnosis.Babel
+namespace Gnosis.Babel.SQLite
 {
-    public abstract class Schema<T> : ISchema<T>
+    public abstract class SQLiteSchema<T> : ISchema<T>
         where T : IModel
     {
-        protected Schema(string name)
+        protected SQLiteSchema(string name)
         {
             _name = name;
             AddField(x => x.Id, (x, y) => x.Initialize(y));
-            AddPrimaryKey(Ascending(x => x.Id));
         }
 
         private readonly string _name;
         private readonly IDictionary<string, IField<T>> _fields = new Dictionary<string, IField<T>>();
         private readonly IDictionary<string, IKey<T>> _keys = new Dictionary<string, IKey<T>>();
 
-        private void AddKey(KeyType keyType, IEnumerable<Tuple<string, bool>> keyFields)
+        private void AddKey(KeyType keyType, IEnumerable<IIndexedField> keyFields)
         {
-            var keyName = _name + keyFields.Aggregate(string.Empty, (x, y) => x += "_" + y.Item1) + "_key";
+            //var indexedFields = keyFields.Select<Tuple<string, bool>, IIndexedField>(x => new IndexedField(x.Item1, x.Item2));
+            var keyName = _name + keyFields.Aggregate(string.Empty, (x, y) => x += "_" + y.Name) + "_key";
             _keys[keyName] = new Key<T>(keyName, keyType, keyFields);
         }
 
         #region Protected Methods
 
-        protected static Tuple<string, bool> Ascending(Expression<Func<T, object>> getter)
+        protected static IIndexedField Ascending(Expression<Func<T, object>> getter)
         {
             var name = getter.ToName();
             return Ascending(name);
         }
 
-        protected static Tuple<string, bool> Ascending(string name)
+        protected static IIndexedField Ascending(string name)
         {
-            return Tuple.Create<string, bool>(name, true);
+            return new IndexedField(name, true);
         }
 
-        protected static Tuple<string, bool> Descending(Expression<Func<T, object>> getter)
+        protected static IIndexedField Descending(Expression<Func<T, object>> getter)
         {
             var name = getter.ToName();
             return Descending(name);
         }
 
-        protected static Tuple<string, bool> Descending(string name)
+        protected static IIndexedField Descending(string name)
         {
-            return Tuple.Create<string, bool>(name, false);
+            return new IndexedField(name, false);
         }
 
         protected void AddField(Expression<Func<T, object>> getter)
@@ -65,17 +65,12 @@ namespace Gnosis.Babel
             _fields[name] = new Field<T>(name, getter, setter);
         }
 
-        protected void AddPrimaryKey(params Tuple<string,bool >[] keyFields)
-        {
-            AddKey(KeyType.PrimaryKey, keyFields);
-        }
-
-        protected void AddUniqueKey(params Tuple<string,bool>[] keyFields)
+        protected void AddUniqueKey(params IIndexedField[] keyFields)
         {
             AddKey(KeyType.UniqueKey, keyFields);
         }
 
-        protected void AddKey(params Tuple<string, bool>[] keyFields)
+        protected void AddKey(params IIndexedField[] keyFields)
         {
             AddKey(KeyType.Key, keyFields);
         }

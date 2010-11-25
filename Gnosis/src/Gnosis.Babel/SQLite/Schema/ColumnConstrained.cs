@@ -51,9 +51,8 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IColumnConstraint Default(object value)
         {
-            var name = GetAnonymousParameterName();
             AppendWord(KeywordDefault);
-            return AppendParameter<IColumnConstraint, ColumnConstraint>(name, value);
+            return AppendWord<IColumnConstraint, ColumnConstraint>(value.AsDefaultString());
         }
 
         public IColumnConstraint CollateBinary
@@ -123,9 +122,8 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public IColumnConstraint<T> Default(object value)
         {
-            var name = GetAnonymousParameterName();
             AppendWord(KeywordDefault);
-            return AppendParameter<IColumnConstraint<T>, ColumnConstraint<T>>(name, value);
+            return AppendWord<IColumnConstraint<T>, ColumnConstraint<T>>(value.AsDefaultString());
         }
 
         public IColumnConstraint<T> CollateBinary

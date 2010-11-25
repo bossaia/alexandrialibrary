@@ -2,9 +2,9 @@
 
 namespace Gnosis.Alexandria.Models.Stores
 {
-    public class SQLiteCatalogStore : SQLiteStore
+    public class CatalogStore : SQLiteStore
     {
-        public SQLiteCatalogStore()
+        public CatalogStore()
             : base("Catalog")
         {
         }

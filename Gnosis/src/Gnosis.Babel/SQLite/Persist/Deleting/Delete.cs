@@ -32,7 +32,7 @@ namespace Gnosis.Babel.SQLite.Persist.Deleting
             throw new NotImplementedException();
         }
 
-        public IPredicate<IWhere> Where<T>(Expression<Func<T, object>> expression)
+        public IPredicate<IWhere> Where(Expression<Func<T, object>> expression)
         {
             throw new NotImplementedException();
         }

@@ -105,7 +105,7 @@
     <Compile Include="Models\Repositories\RepositoryBase.cs" />
     <Compile Include="Models\Schemas\ArtistSchema.cs" />
     <Compile Include="Models\Schemas\CountrySchema.cs" />
-    <Compile Include="Models\Stores\SQLiteCatalogStore.cs" />
+    <Compile Include="Models\Stores\CatalogStore.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Views\Interfaces\IHomeTabView.cs" />

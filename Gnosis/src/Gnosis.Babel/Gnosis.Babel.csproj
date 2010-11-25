@@ -51,9 +51,11 @@
     <Compile Include="ICommand.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IField.cs" />
+    <Compile Include="IIndexedField.cs" />
     <Compile Include="IKey.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IModelMapper.cs" />
+    <Compile Include="IndexedField.cs" />
     <Compile Include="IPersistMapper.cs" />
     <Compile Include="SQLite\IPredicate.cs" />
     <Compile Include="IQueryMapper.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
-    <Compile Include="Schema.cs" />
+    <Compile Include="SQLite\SQLiteSchema.cs" />
     <Compile Include="SQLite\ISQLiteStatementFactory.cs" />
     <Compile Include="SQLite\Persist\Deleting\Delete.cs" />
     <Compile Include="SQLite\Persist\Deleting\IDeleteFrom.cs" />

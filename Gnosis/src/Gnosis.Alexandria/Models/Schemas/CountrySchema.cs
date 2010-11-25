@@ -1,9 +1,10 @@
 ﻿using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
+using Gnosis.Babel.SQLite;
 
 namespace Gnosis.Alexandria.Models.Schemas
 {
-    public class CountrySchema : Schema<ICountry>
+    public class CountrySchema : SQLiteSchema<ICountry>
     {
         public CountrySchema()
             : base("Country")
