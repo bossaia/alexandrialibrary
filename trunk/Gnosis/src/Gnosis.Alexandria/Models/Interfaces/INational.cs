@@ -4,6 +4,6 @@ namespace Gnosis.Alexandria.Models.Interfaces
 {
     public interface INational : IModel
     {
-        ICountry Country { get; set; }
+        ICountry Nationality { get; set; }
     }
 }

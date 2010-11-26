@@ -7,17 +7,20 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models
 {
-    public class Artist : Named, IArtist
+    public class Artist : NamedDatedNational, IArtist
     {
         public Artist()
         {
-            Name = "Unknown";
-            Abbreviation = string.Empty;
-            Country = Gnosis.Alexandria.Models.Country.Default;
+            Note = string.Empty;
         }
 
-        public ICountry Country { get; set; }
-        public DateTime Date { get; set; }
+        private Artist(long id)
+        {
+            Initialize(id);
+        }
+
         public string Note { get; set; }
+
+        public static readonly IArtist Unknown = new Artist(1L);
     }
 }

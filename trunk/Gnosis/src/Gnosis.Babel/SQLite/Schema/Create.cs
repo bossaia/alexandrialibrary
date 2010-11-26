@@ -9,84 +9,140 @@ namespace Gnosis.Babel.SQLite.Schema
 
     public class Create : Statement, ICreate
     {
+        const string KeywordCreate = "create";
+        const string KeywordIfNotExists = "if not exists";
+        const string KeywordIndex = "index";
+        const string KeywordTable = "table";
+        const string KeywordTemp = "temp";
+        const string KeywordTrigger = "trigger";
+        const string KeywordUniqueIndex = "unique index";
+        const string KeywordView = "view";
+
         public IIndex Index(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordIndex);
+            return AppendWord<IIndex, Index>(name);
         }
 
         public IIndex IndexIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordIndex);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IIndex, Index>(name);
         }
 
         public IIndex UniqueIndex(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordUniqueIndex);
+            return AppendWord<IIndex, Index>(name);
         }
 
         public IIndex UniqueIndexIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordUniqueIndex);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IIndex, Index>(name);
         }
 
         public ITable Table(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTable);
+            return AppendWord<ITable, Table>(name);
         }
 
         public ITable TableIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTable);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITable, Table>(name);
         }
 
         public ITable TempTable(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTable);
+            return AppendWord<ITable, Table>(name);
         }
 
         public ITable TempTableIfNotExists(string name)
         {
-            throw new NotImplementedException();
-        }
-
-        public IView TempView(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IView TempViewIfNotExists(string name)
-        {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTable);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITable, Table>(name);
         }
 
         public ITrigger Trigger(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTrigger);
+            return AppendWord<ITrigger, Trigger>(name);
         }
 
         public ITrigger TriggerIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTrigger);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITrigger, Trigger>(name);
         }
 
         public ITrigger TempTrigger(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTrigger);
+            return AppendWord<ITrigger, Trigger>(name);
         }
 
         public ITrigger TempTriggerIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTrigger);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITrigger, Trigger>(name);
         }
 
         public IView View(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView, View>(name);
         }
 
         public IView ViewIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView, View>(name);
+        }
+
+        public IView TempView(string name)
+        {
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordView);
+            return AppendWord<IView, View>(name);
+        }
+
+        public IView TempViewIfNotExists(string name)
+        {
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView, View>(name);
         }
     }
 
@@ -98,32 +154,48 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         const string KeywordCreate = "create";
         const string KeywordIfNotExists = "if not exists";
+        const string KeywordIndex = "index";
         const string KeywordTable = "table";
         const string KeywordTemp = "temp";
+        const string KeywordTrigger = "trigger";
+        const string KeywordUniqueIndex = "unique index";
+        const string KeywordView = "view";
 
         public IIndex<T> Index(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordIndex);
+            return AppendWord<IIndex<T>, Index<T>>(name);
         }
 
         public IIndex<T> IndexIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordIndex);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IIndex<T>, Index<T>>(name);
         }
 
         public IIndex<T> UniqueIndex(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordUniqueIndex);
+            return AppendWord<IIndex<T>, Index<T>>(name);
         }
 
         public IIndex<T> UniqueIndexIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordUniqueIndex);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IIndex<T>, Index<T>>(name);
         }
 
         public ITable<T> Table(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTable);
+            return AppendWord<ITable<T>, Table<T>>(name);
         }
 
         public ITable<T> TableIfNotExists(string name)
@@ -136,52 +208,84 @@ namespace Gnosis.Babel.SQLite.Schema
 
         public ITable<T> TempTable(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTable);
+            return AppendWord<ITable<T>, Table<T>>(name);
         }
 
         public ITable<T> TempTableIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTable);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITable<T>, Table<T>>(name);
         }
 
         public ITrigger<T> Trigger(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTrigger);
+            return AppendWord<ITrigger<T>, Trigger<T>>(name);
         }
 
         public ITrigger<T> TriggerIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTrigger);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITrigger<T>, Trigger<T>>(name);
         }
 
         public ITrigger<T> TempTrigger(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTrigger);
+            return AppendWord<ITrigger<T>, Trigger<T>>(name);
         }
 
         public ITrigger<T> TempTriggerIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordTrigger);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<ITrigger<T>, Trigger<T>>(name);
         }
 
         public IView<T> View(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView<T>, View<T>>(name);
         }
 
         public IView<T> ViewIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView<T>, View<T>>(name);
         }
 
         public IView<T> TempView(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordView);
+            return AppendWord<IView<T>, View<T>>(name);
         }
 
         public IView<T> TempViewIfNotExists(string name)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordCreate);
+            AppendWord(KeywordTemp);
+            AppendWord(KeywordView);
+            AppendWord(KeywordIfNotExists);
+            return AppendWord<IView<T>, View<T>>(name);
         }
     }
 

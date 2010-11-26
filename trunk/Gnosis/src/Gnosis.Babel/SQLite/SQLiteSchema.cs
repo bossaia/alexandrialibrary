@@ -8,6 +8,11 @@ namespace Gnosis.Babel.SQLite
     public abstract class SQLiteSchema<T> : ISchema<T>
         where T : IModel
     {
+        protected SQLiteSchema()
+            : this(typeof(T).AsSchemaName())
+        {
+        }
+
         protected SQLiteSchema(string name)
         {
             _name = name;

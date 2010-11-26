@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface ICountry : INamed, ICoded, IDated
+    public interface ITrack : INamed, IDated, INational, ICreated, INoted
     {
     }
 }

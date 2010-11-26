@@ -69,6 +69,15 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
+    <Compile Include="SQLite\Persist\Inserting\InsertColumn.cs" />
+    <Compile Include="SQLite\Persist\Inserting\InsertColumnar.cs" />
+    <Compile Include="SQLite\Persist\Inserting\InsertConflictClause.cs" />
+    <Compile Include="SQLite\Persist\Inserting\InsertValue.cs" />
+    <Compile Include="SQLite\Schema\Index.cs" />
+    <Compile Include="SQLite\Schema\IndexColumnar.cs" />
+    <Compile Include="SQLite\Schema\IndexTable.cs" />
+    <Compile Include="SQLite\Schema\Trigger.cs" />
+    <Compile Include="SQLite\Schema\View.cs" />
     <Compile Include="SQLite\SQLiteSchema.cs" />
     <Compile Include="SQLite\ISQLiteStatementFactory.cs" />
     <Compile Include="SQLite\Persist\Deleting\Delete.cs" />
@@ -181,6 +190,7 @@
     <Compile Include="SQLite\Where.cs" />
     <Compile Include="Statement.cs" />
     <Compile Include="StaticCache.cs" />
+    <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
