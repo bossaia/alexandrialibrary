@@ -23,6 +23,7 @@ using Gnosis.Babel.SQLite.Persist.Updating;
 using Gnosis.Babel.SQLite.Query;
 using Gnosis.Babel.SQLite.Schema;
 using StructureMap;
+using StructureMap.Pipeline;
 
 namespace Gnosis.Alexandria
 {
@@ -89,7 +90,7 @@ namespace Gnosis.Alexandria
                     x.For<INewHomeTabRequestedHandler>().Use<NewHomeTabRequestedHandler>();
                     x.For<INewSearchTabRequestedHandler>().Use<NewSearchTabRequestedHandler>();
                     x.For<ISearchRequestedHandler>().Use<SearchRequestedHandler>();
-                    x.For<IInitializeRepositoriesHandler>().Use<InitializeRepositoriesHandler>();
+                    x.For<IInitializeRepositoriesHandler>().AlwaysUnique().Use<InitializeRepositoriesHandler>();
                     
                     x.For<INewHomeTabRequestedMessage>().Use<NewHomeTabRequestedMessage>();
                     x.For<INewSearchTabRequestedMessage>().Use<NewSearchTabRequestedMessage>();

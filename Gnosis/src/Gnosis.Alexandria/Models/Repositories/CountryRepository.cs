@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
@@ -18,33 +19,59 @@ namespace Gnosis.Alexandria.Models.Repositories
 
         #region Cache Methods
 
-        private void AddCountryToCache(long id, ICountry country)
+        private void AddCountryToCache(ICountry country)
         {
-            country.Initialize(id);
-            Cache.Put(id, country);
+            Cache.Put(country.Id, country);
         }
 
         private void AddCountryToCache(long id, string name, string code)
         {
-            AddCountryToCache(id, new Country()
+            var country = new Country()
             {
                 Name = name,
                 Code = code
-            });
+            };
+            country.Initialize(id);
+            AddCountryToCache(country);
+        }
+
+        private void AddCountryToCache(long id, string name, string code, DateTime fromDate)
+        {
+            var country = new Country()
+            {
+                Name = name,
+                Code = code,
+                FromDate = fromDate
+            };
+            country.Initialize(id);
+            AddCountryToCache(country);
+        }
+
+        private void AddCountryToCache(long id, string name, string code, DateTime fromDate, DateTime toDate)
+        {
+            var country = new Country()
+            {
+                Name = name,
+                Code = code,
+                FromDate = fromDate,
+                ToDate = toDate
+            };
+            country.Initialize(id);
+            AddCountryToCache(country);
         }
 
         private void CacheCountries()
         {
-            AddCountryToCache(1, new Country());
-            AddCountryToCache(2, "Afghanistan", "AF");
-            AddCountryToCache(3, "Åland Islands", "AX");
-            AddCountryToCache(4, "Albania", "AL");
-            AddCountryToCache(5, "Algeria", "DZ");
-            AddCountryToCache(6, "American Samoa", "AS");
-            AddCountryToCache(7, "Andorra", "AD");
-            AddCountryToCache(8, "Angola", "AO");
-            AddCountryToCache(9, "Anguilla", "AI");
-            AddCountryToCache(10, "Antarctica", "AQ");
+            AddCountryToCache(Country.Unknown);
+            AddCountryToCache(2, "Afghanistan", "AF", new DateTime(1919, 8, 19));
+            AddCountryToCache(3, "Åland Islands", "AX", new DateTime(1920, 1, 1));
+            AddCountryToCache(4, "Albania", "AL", new DateTime(1912, 11, 28));
+            AddCountryToCache(5, "Algeria", "DZ", new DateTime(1962, 7, 5));
+            AddCountryToCache(6, "American Samoa", "AS", new DateTime(1899, 1, 1));
+            AddCountryToCache(7, "Andorra", "AD", new DateTime(1278, 1, 1));
+            AddCountryToCache(8, "Angola", "AO", new DateTime(1975, 11, 11));
+            AddCountryToCache(9, "Anguilla", "AI", new DateTime(1980, 1, 1));
+            AddCountryToCache(10, "Antarctica", "AQ", new DateTime(1951, 12, 1));
             AddCountryToCache(11, "Antigua and Barbuda", "AG");
             AddCountryToCache(12, "Argentina", "AR");
             AddCountryToCache(13, "Armenia", "AM");
@@ -267,9 +294,9 @@ namespace Gnosis.Alexandria.Models.Repositories
             AddCountryToCache(230, "Uganda", "UG");
             AddCountryToCache(231, "Ukraine", "UA");
             AddCountryToCache(232, "United Arab Emirates", "AE");
-            AddCountryToCache(233, "United Kingdom", "GB");
-            AddCountryToCache(234, "United States of America", "US");
-            AddCountryToCache(235, "United States Minor Outlying Islands", "UM");
+            AddCountryToCache(233, "United Kingdom", "GB", new DateTime(1707, 5, 1));
+            AddCountryToCache(234, "United States of America", "US", new DateTime(1776, 7, 4));
+            AddCountryToCache(235, "United States Minor Outlying Islands", "UM", new DateTime(1986, 1, 1));
             AddCountryToCache(236, "Uruguay", "UY");
             AddCountryToCache(237, "Uzbekistan", "UZ");
             AddCountryToCache(238, "Vanuatu", "VU");
@@ -297,7 +324,8 @@ namespace Gnosis.Alexandria.Models.Repositories
             {
                 var command = CommandFactory.Create();
 
-                command.AddStatement(Insert
+                command.AddStatement(
+                    Insert
                     .Into(Schema.Name)
                     .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
                     .Values(Schema.NonPrimaryFields.Select(x => x.Getter), country)

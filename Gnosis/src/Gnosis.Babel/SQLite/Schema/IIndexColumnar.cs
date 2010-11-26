@@ -10,6 +10,7 @@ namespace Gnosis.Babel.SQLite.Schema
     {
         IIndexColumnar ColumnAsc(string name);
         IIndexColumnar ColumnDesc(string name);
+        IIndexColumnar Columns(IEnumerable<IIndexedField> fields);
     }
 
     public interface IIndexColumnar<T> : IStatement

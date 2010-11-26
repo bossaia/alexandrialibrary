@@ -9,34 +9,48 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
 
     public class Insert : Statement, IInsert
     {
+        public Insert()
+        {
+            AppendClause(KeywordInsert);
+        }
+
+        private const string KeywordInsert = "insert";
+        private const string KeywordInto = "into";
+        private const string KeywordOrAbort = "or abort";
+        private const string KeywordOrFail = "or fail";
+        private const string KeywordOrIgnore = "or ignore";
+        private const string KeywordOrReplace = "or replace";
+        private const string KeywordOrRollback = "or rollback";
+
         public IInsertColumn Into(string table)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordInto);
+            return AppendWord<IInsertColumn, InsertColumn>(table);
         }
 
         public IInsertConflictClause OrAbort
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause, InsertConflictClause>(KeywordOrAbort); }
         }
 
         public IInsertConflictClause OrFail
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause, InsertConflictClause>(KeywordOrFail); }
         }
 
         public IInsertConflictClause OrIgnore
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause, InsertConflictClause>(KeywordOrIgnore); }
         }
 
         public IInsertConflictClause OrReplace
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause, InsertConflictClause>(KeywordOrReplace); }
         }
 
         public IInsertConflictClause OrRollback
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause, InsertConflictClause>(KeywordOrRollback); }
         }
     }
 
@@ -46,34 +60,48 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
 
     public class Insert<T> : Statement, IInsert<T>
     {
+        public Insert()
+        {
+            AppendClause(KeywordInsert);
+        }
+
+        private const string KeywordInsert = "insert";
+        private const string KeywordInto = "into";
+        private const string KeywordOrAbort = "or abort";
+        private const string KeywordOrFail = "or fail";
+        private const string KeywordOrIgnore = "or ignore";
+        private const string KeywordOrReplace = "or replace";
+        private const string KeywordOrRollback = "or rollback";
+
         public IInsertColumn<T> Into(string table)
         {
-            throw new NotImplementedException();
+            AppendClause(KeywordInto);
+            return AppendWord<IInsertColumn<T>, InsertColumn<T>>(table);
         }
 
         public IInsertConflictClause<T> OrAbort
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause<T>, InsertConflictClause<T>>(KeywordOrAbort); }
         }
 
         public IInsertConflictClause<T> OrFail
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause<T>, InsertConflictClause<T>>(KeywordOrFail); }
         }
 
         public IInsertConflictClause<T> OrIgnore
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause<T>, InsertConflictClause<T>>(KeywordOrIgnore); }
         }
 
         public IInsertConflictClause<T> OrReplace
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause<T>, InsertConflictClause<T>>(KeywordOrReplace); }
         }
 
         public IInsertConflictClause<T> OrRollback
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendClause<IInsertConflictClause<T>, InsertConflictClause<T>>(KeywordOrRollback); }
         }
     }
 

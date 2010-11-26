@@ -7,9 +7,9 @@ namespace Gnosis.Alexandria.Controllers
 {
     public class ArtistRepositoryController : Controller, IArtistRepositoryController
     {
-        public ArtistRepositoryController(IArtistRepository repository, ISearchRequestedHandler searchRequestedHandler, IInitializeRepositoriesHandler initializeRepositoriesHandler)
+        public ArtistRepositoryController(IArtistRepository artistRepository, ISearchRequestedHandler searchRequestedHandler, IInitializeRepositoriesHandler initializeRepositoriesHandler)
         {
-            _repository = repository;
+            _artistRepository = artistRepository;
             searchRequestedHandler.Controller = this;
             initializeRepositoriesHandler.Controller = this;
             
@@ -17,16 +17,16 @@ namespace Gnosis.Alexandria.Controllers
             AddHandler(initializeRepositoriesHandler);
         }
 
-        private readonly IArtistRepository _repository;
+        private readonly IArtistRepository _artistRepository;
 
         public ICollection<IArtist> GetArtistsWithNamesLike(string search)
         {
-            return _repository.GetArtistsWithNamesLike(search);
+            return _artistRepository.GetArtistsWithNamesLike(search);
         }
 
         public void Initialize()
         {
-            _repository.Initialize();
+            _artistRepository.Initialize();
         }
     }
 }

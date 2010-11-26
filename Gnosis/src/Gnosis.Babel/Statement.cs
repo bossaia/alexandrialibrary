@@ -82,6 +82,12 @@ namespace Gnosis.Babel
             concrete.AddParameters(_parameters);
             concrete.AppendWord(_text.ToString());
 
+            //TODO: Refactor this - transfering object state like this is *UGLY*
+            concrete._listMode = _listMode;
+            concrete._hasParentheses = _hasParentheses;
+            concrete._subListMode = _subListMode;
+            concrete._hasSubParentheses = _hasSubParentheses;
+
             return concrete;
         }
 
@@ -129,6 +135,18 @@ namespace Gnosis.Babel
             concrete.AddParameters(_parameters);
             concrete.AppendWord(_text.ToString());
             concrete.AppendParentheticalListItem(item);
+
+            return concrete;
+        }
+
+        protected TInterface AppendParentheticalListItem<TInterface, TConcrete>(string name, object value)
+            where TInterface : IStatement
+            where TConcrete : Statement, TInterface, new()
+        {
+            var concrete = new TConcrete();
+            concrete.AddParameters(_parameters);
+            concrete.AppendWord(_text.ToString());
+            concrete.AppendParentheticalListItem(name, value);
 
             return concrete;
         }
@@ -232,6 +250,26 @@ namespace Gnosis.Babel
                 _text.AppendFormat(", {0}", item);
             else
                 _text.AppendFormat(" ({0}", item);
+
+            _listMode = true;
+            _hasParentheses = true;
+        }
+
+        protected void AppendParentheticalListItem(string name, object value)
+        {
+            if (_subListMode)
+            {
+                _text.Append(")");
+                _subListMode = false;
+                _hasSubParentheses = false;
+            }
+
+            if (_listMode || HasOpenParentheses)
+                _text.Append(", ");
+            else
+                _text.Append(" (");
+
+            AppendParameter(name, value);
 
             _listMode = true;
             _hasParentheses = true;

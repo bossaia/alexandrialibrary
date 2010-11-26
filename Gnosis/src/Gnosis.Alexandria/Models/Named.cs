@@ -9,6 +9,12 @@ namespace Gnosis.Alexandria.Models
 {
     public abstract class Named : Model, INamed
     {
+        protected Named()
+        {
+            Name = "Unknown";
+            Abbreviation = string.Empty;
+        }
+
         private string _name;
 
         public string Name
@@ -28,6 +34,8 @@ namespace Gnosis.Alexandria.Models
         }
 
         public string NameHash { get; private set; }
+
+        #region GetNameHash
 
         public static string GetNameHash(string name)
         {
@@ -126,5 +134,6 @@ namespace Gnosis.Alexandria.Models
             return result.ToString();
         }
 
+        #endregion
     }
 }

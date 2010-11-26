@@ -6,6 +6,7 @@ namespace Gnosis.Alexandria.Models.Interfaces
 {
     public interface IDated : IModel
     {
-        DateTime Date { get; set; }
+        DateTime FromDate { get; set; }
+        DateTime ToDate { get; set; }
     }
 }

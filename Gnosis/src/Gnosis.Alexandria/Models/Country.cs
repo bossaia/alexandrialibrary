@@ -7,12 +7,10 @@ using Gnosis.Alexandria.Models.Interfaces;
 
 namespace Gnosis.Alexandria.Models
 {
-    public class Country : Named, ICountry
+    public class Country : NamedDated, ICountry
     {
         public Country()
         {
-            Name = "Unknown";
-            Abbreviation = string.Empty;
             Code = "XA";
         }
 
@@ -23,6 +21,6 @@ namespace Gnosis.Alexandria.Models
 
         public string Code { get; set; }
 
-        public static readonly ICountry Default = new Country(1L);
+        public static readonly ICountry Unknown = new Country(1L);
     }
 }
