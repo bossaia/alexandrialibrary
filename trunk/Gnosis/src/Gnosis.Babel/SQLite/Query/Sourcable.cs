@@ -4,6 +4,12 @@
     {
         private const string KeywordFrom = "from";
 
+        public IFrom From<T>()
+        {
+            AppendClause(KeywordFrom);
+            return AppendWord<IFrom, From>(typeof(T).AsSchemaName());
+        }
+
         public IFrom From(string table)
         {
             AppendClause(KeywordFrom);

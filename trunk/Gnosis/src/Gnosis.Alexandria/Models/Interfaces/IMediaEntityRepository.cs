@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Babel;
-
 namespace Gnosis.Alexandria.Models.Interfaces
 {
-    public interface INumbered : IModel
+    public interface IMediaEntityRepository : IRepository<IMediaEntity>
     {
-        int Number { get; set; }
+        ICollection<IMediaEntity> GetMediaEntitiesWithNamesLike(string search);
     }
 }

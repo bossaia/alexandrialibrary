@@ -5,10 +5,10 @@ namespace Gnosis.Babel
 {
     public interface ICommand
     {
+        Guid Id { get; }
         IEnumerable<KeyValuePair<string, object>> Parameters { get; }
         void AddStatement(IStatement statement);
-        void InvokeCallback(object value);
-        void SetCallback(Action<IModel, object> callback, IModel model);
+        void SetParameter(string name, object value);
         string ToString();
     }
 }

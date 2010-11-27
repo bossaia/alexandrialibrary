@@ -9,8 +9,8 @@ namespace Gnosis.Alexandria.Models.Repositories
 {
     public class ArtistRepository : RepositoryBase<IArtist>, IArtistRepository
     {
-        public ArtistRepository(IStore store, ICache<IArtist> cache, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
-            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory)
+        public ArtistRepository(IStore store, ICache<IArtist> cache, IFactory<IArtist> factory, ISchema<IArtist> schema, ISchemaMapper<IArtist> schemaMapper, IModelMapper<IArtist> modelMapper, IPersistMapper<IArtist> persistMapper, IQueryMapper<IArtist> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory, IFactory<IBatch> batchFactory, IFactory<IQuery<IArtist>> queryFactory)
+            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory, batchFactory, queryFactory)
         {
         }
 
@@ -29,6 +29,8 @@ namespace Gnosis.Alexandria.Models.Repositories
 
             AddArtistToCache(Artist.Unknown);
 
+            var batch = BatchFactory.Create();
+
             var commands = new List<ICommand>();
             foreach (var artist in Cache.GetAll())
             {
@@ -45,7 +47,9 @@ namespace Gnosis.Alexandria.Models.Repositories
                 commands.Add(command);
             }
 
-            Store.Execute(commands);
+            commands.Each(x => batch.AddCommand(x));
+
+            Store.Execute(batch);
         }
 
         public ICollection<IArtist> GetArtistsWithNamesLike(string search)
@@ -53,17 +57,21 @@ namespace Gnosis.Alexandria.Models.Repositories
             if (string.IsNullOrEmpty(search))
                 return GetAll();
 
+            var query = QueryFactory.Create();
+
             var command = CommandFactory.Create();
-            command.AddStatement(StatementFactory
-                    .Select()
+            command.AddStatement(
+                    Select
                     .Distinct
                     .AllColumns()
-                    .From(Schema.Name)
+                    .From<IArtist>()
                     .Where<IArtist>(x => x.Name).IsLike("@Name", string.Format("%{0}%", search))
-                    .Or<IArtist>(x => x.NameHash).IsLike("@NameHash", string.Format("%{0}%", Named.GetNameHash(search)))
+                    .Or<IArtist>(x => x.NameHash).IsLike("@NameHash", string.Format("%{0}%", search.AsNameHash()))
                 );
 
-            return GetMany(command);
+            query.AddCommand(command);
+
+            return GetMany(query);
         }
     }
 }

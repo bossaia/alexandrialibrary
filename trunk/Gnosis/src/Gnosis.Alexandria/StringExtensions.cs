@@ -1,43 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-using Gnosis.Alexandria.Models.Interfaces;
-using Gnosis.Babel;
-
-namespace Gnosis.Alexandria.Models
+namespace Gnosis.Alexandria
 {
-    public abstract class Named : Model, INamed
+    public static class StringExtensions
     {
-        protected Named()
-        {
-            Name = "Unknown";
-            Abbreviation = string.Empty;
-        }
-
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set
-            {
-                _name = value;
-                NameHash = GetNameHash(_name);
-            }
-        }
-
-        public string Abbreviation
-        {
-            get;
-            set;
-        }
-
-        public string NameHash { get; private set; }
-
-        #region GetNameHash
-
-        public static string GetNameHash(string name)
+        public static string AsNameHash(this string name)
         {
             if (string.IsNullOrEmpty(name))
                 return string.Empty;
@@ -133,7 +103,5 @@ namespace Gnosis.Alexandria.Models
 
             return result.ToString();
         }
-
-        #endregion
     }
 }

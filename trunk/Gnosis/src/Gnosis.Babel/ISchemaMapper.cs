@@ -4,6 +4,6 @@ namespace Gnosis.Babel
 {
     public interface ISchemaMapper<T>
     {
-        IEnumerable<ICommand> GetInitializeCommands();
+        IBatch GetInitializeBatch();
     }
 }
