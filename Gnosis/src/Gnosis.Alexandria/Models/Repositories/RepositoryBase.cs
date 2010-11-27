@@ -3,6 +3,9 @@ using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
 using Gnosis.Babel.SQLite;
+using Gnosis.Babel.SQLite.Persist.Deleting;
+using Gnosis.Babel.SQLite.Persist.Inserting;
+using Gnosis.Babel.SQLite.Persist.Updating;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
@@ -36,6 +39,10 @@ namespace Gnosis.Alexandria.Models.Repositories
         protected readonly IQueryMapper<T> QueryMapper;
         protected readonly IFactory<ICommand> CommandFactory;
         protected readonly ISQLiteStatementFactory StatementFactory;
+
+        protected IInsert<T> Insert { get { return StatementFactory.Insert<T>(); } }
+        protected IUpdate<T> Update { get { return StatementFactory.Update<T>(); } }
+        protected IDelete<T> Delete { get { return StatementFactory.Delete<T>(); } }
 
         #endregion
 

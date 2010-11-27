@@ -34,7 +34,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
             AppendClause(KeywordValues);
 
             foreach (var pair in values)
-                AppendParentheticalListItem(pair.Item1, pair.Item2);
+                AppendParentheticalListItem(pair.Item1, pair.Item2.AsPersistentValue());
 
             return this;
         }
@@ -66,7 +66,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
             AppendClause(KeywordValues);
 
             foreach (var expression in expressions)
-                AppendParentheticalListItem(expression.ToName(), expression.GetValue(model));
+                AppendParentheticalListItem(expression.ToName(), expression.GetValue(model).AsPersistentValue());
 
             return this;
         }
