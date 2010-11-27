@@ -4,7 +4,7 @@
     {
     }
 
-    public interface IDeleteFrom<T> : IStatement, IFilterable
+    public interface IDeleteFrom<T> : IStatement, IFilterable<T>
     {
     }
 }
