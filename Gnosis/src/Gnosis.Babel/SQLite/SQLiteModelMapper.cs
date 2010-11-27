@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Gnosis.Babel.SQLite
 {
@@ -23,9 +24,18 @@ namespace Gnosis.Babel.SQLite
         {
             var model = _factory.Create();
 
-            model.Initialize(record[_schema.PrimaryField.Name]);
+            if (model is IImmutable)
+            {
+                var data = new Dictionary<string, object>();
+                _schema.NonPrimaryFields.Each(x => data.Add(x.Name, record[x.Name]));
+                ((IImmutable)model).Populate(data);
+            }
+            else
+            {
+                _schema.NonPrimaryFields.Each(x => x.Setter(model, record[x.Name]));
+            }
 
-            _schema.Fields.Each(x => x.Setter(model, record[x.Name]));
+            model.Initialize(record[_schema.PrimaryField.Name]);
 
             return model;
         }

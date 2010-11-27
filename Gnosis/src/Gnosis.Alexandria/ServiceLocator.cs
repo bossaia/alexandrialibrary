@@ -59,7 +59,9 @@ namespace Gnosis.Alexandria
                     x.For<IFactory<ICreate>>().Use<GenericFactory<ICreate, Create>>();
                     x.For<IFactory<ICreate<IArtist>>>().Use<GenericFactory<ICreate<IArtist>, Create<IArtist>>>();
                     x.For<IFactory<ICreate<ICountry>>>().Use<GenericFactory<ICreate<ICountry>, Create<ICountry>>>();
-                    
+                    x.For<IFactory<IQuery<IArtist>>>().Use<GenericFactory<IQuery<IArtist>, Query<IArtist>>>();
+                    x.For<IFactory<IQuery<ICountry>>>().Use<GenericFactory<IQuery<ICountry>, Query<ICountry>>>();
+                    x.For<IFactory<IBatch>>().Use<GenericFactory<IBatch, Batch>>();
 
                     x.For<IFactory<IArtist>>().Use<GenericFactory<IArtist, Artist>>();
                     x.For<IFactory<ICountry>>().Use<GenericFactory<ICountry, Country>>();

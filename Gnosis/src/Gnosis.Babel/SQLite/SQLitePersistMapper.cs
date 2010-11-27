@@ -9,7 +9,7 @@ namespace Gnosis.Babel.SQLite
     public class SQLitePersistMapper<T> : IPersistMapper<T>
         where T : IModel
     {
-        public SQLitePersistMapper(ISchema<T> schema, IFactory<ICommand> commandFactory, IFactory<IDelete<T>> deleteFactory, IFactory<IInsert<T>> insertFactory, IFactory<IUpdate<T>> updateFactory, IFactory<ISelect> selectFactory)
+        public SQLitePersistMapper(ISchema<T> schema, IFactory<ICommand> commandFactory, IFactory<IDelete<T>> deleteFactory, IFactory<IInsert<T>> insertFactory, IFactory<IUpdate<T>> updateFactory, IFactory<ISelect> selectFactory, IFactory<IBatch> batchFactory)
         {
             Schema = schema;
             _commandFactory = commandFactory;
@@ -17,6 +17,7 @@ namespace Gnosis.Babel.SQLite
             _insertFactory = insertFactory;
             _updateFactory = updateFactory;
             _selectFactory = selectFactory;
+            _batchFactory = batchFactory;
         }
 
         #region Private Members
@@ -26,6 +27,7 @@ namespace Gnosis.Babel.SQLite
         private readonly IFactory<IInsert<T>> _insertFactory;
         private readonly IFactory<IUpdate<T>> _updateFactory;
         private readonly IFactory<ISelect> _selectFactory;
+        private readonly IFactory<IBatch> _batchFactory;
 
         #endregion
 
@@ -67,7 +69,8 @@ namespace Gnosis.Babel.SQLite
 
             command.AddStatement(Select.LastInsertRowId);
 
-            command.SetCallback((x,y) => x.Initialize(y), model);
+            //TODO: Work out a generic solution for the insert parent key callback
+            //command.SetCallback((x,y) => x.Initialize(y), model);
 
             return command;
         }
@@ -103,14 +106,27 @@ namespace Gnosis.Babel.SQLite
 
         #endregion
 
-        public ICommand GetPersistCommand(T model)
+        public IBatch GetPersistBatch(T model)
         {
-            if (model.IsDeleted)
-                return GetDeleteCommand(model);
-            
-            return (model.IsNew) ?
-                GetInsertCommand(model) :
-                GetUpdateCommand(model);
+            var batch = _batchFactory.Create();
+
+            var deletable = model as IDeletable;
+            if (deletable != null && deletable.IsDeleted)
+                batch.AddCommand(GetDeleteCommand(model));
+
+            var mutable = model as IMutable;
+            if (mutable != null)
+            {
+                if (mutable.IsNew)
+                    batch.AddCommand(GetInsertCommand(model));
+                else if (mutable.IsChanged)
+                    batch.AddCommand(GetUpdateCommand(model));
+            }
+
+            if (model.IsNew)
+                batch.AddCommand(GetInsertCommand(model));
+
+            return batch;
         }
     }
 }

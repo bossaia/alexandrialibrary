@@ -1,7 +1,9 @@
-﻿namespace Gnosis.Babel
+﻿using System.Collections.Generic;
+
+namespace Gnosis.Babel
 {
     public interface IPersistMapper<T>
     {
-        ICommand GetPersistCommand(T model);
+        IBatch GetPersistBatch(T model);
     }
 }

@@ -10,10 +10,9 @@ namespace Gnosis.Babel
         {
         }
 
+        private readonly Guid _id = Guid.NewGuid();
         private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
         private readonly IList<IStatement> _statements = new List<IStatement>();
-        private Action<IModel, object> _callback { get; set; }
-        private IModel _model { get; set; }
 
         private void AddParameter(string name, object value)
         {
@@ -28,6 +27,11 @@ namespace Gnosis.Babel
                     AddParameter(item.Key, item.Value);
         }
 
+        public Guid Id
+        {
+            get { return _id; }
+        }
+
         public IEnumerable<KeyValuePair<string, object>> Parameters
         {
             get { return _parameters; }
@@ -39,16 +43,10 @@ namespace Gnosis.Babel
             AddParameters(statement.Parameters);
         }
 
-        public void InvokeCallback(object value)
+        public void SetParameter(string name, object value)
         {
-            if (_callback != null && _model != null)
-                _callback(_model, value);
-        }
-
-        public void SetCallback(Action<IModel, object> callback, IModel model)
-        {
-            _callback = callback;
-            _model = model;
+            if (_parameters.ContainsKey(name) && _parameters[name] != null)
+                _parameters[name] = value;
         }
 
         public override string ToString()

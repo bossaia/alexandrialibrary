@@ -8,12 +8,13 @@ namespace Gnosis.Babel.SQLite
     public class SQLiteSchemaMapper<T> : ISchemaMapper<T>
         where T : IModel
     {
-        public SQLiteSchemaMapper(ISchema<T> schema, IFactory<T> modelFactory, IFactory<ICommand> commandFactory, IFactory<ICreate<T>> createStatementFactory)
+        public SQLiteSchemaMapper(ISchema<T> schema, IFactory<T> modelFactory, IFactory<ICommand> commandFactory, IFactory<ICreate<T>> createStatementFactory, IFactory<IBatch> batchFactory)
         {
             Schema = schema;
             ModelFactory = modelFactory;
             CommandFactory = commandFactory;
             CreateStatementFactory = createStatementFactory;
+            BatchFactory = batchFactory;
         }
 
         #region Protected Members
@@ -22,6 +23,7 @@ namespace Gnosis.Babel.SQLite
         protected readonly IFactory<T> ModelFactory;
         protected readonly IFactory<ICommand> CommandFactory;
         protected readonly IFactory<ICreate<T>> CreateStatementFactory;
+        protected readonly IFactory<IBatch> BatchFactory;
 
         protected virtual IStatement GetCreateTableStatment()
         {
@@ -75,9 +77,7 @@ namespace Gnosis.Babel.SQLite
             }
         }
 
-        #endregion
-
-        public IEnumerable<ICommand> GetInitializeCommands()
+        protected IEnumerable<ICommand> GetInitializeCommands()
         {
             var commands = new List<ICommand>();
 
@@ -90,6 +90,17 @@ namespace Gnosis.Babel.SQLite
             commands.Add(command);
 
             return commands;
+        }
+
+        #endregion
+
+        public IBatch GetInitializeBatch()
+        {
+            var batch = BatchFactory.Create();
+
+            GetInitializeCommands().Each(x => batch.AddCommand(x));
+
+            return batch;
         }
     }
 }

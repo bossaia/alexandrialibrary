@@ -55,12 +55,10 @@ namespace Gnosis.Babel.SQLite
             return dbCommand.ExecuteReader();
         }
 
-        private static void Execute(ICommand command, IDbConnection connection, IDbTransaction transaction)
+        private static object GetResult(ICommand command, IDbConnection connection, IDbTransaction transaction)
         {
             var dbCommand = CreateDbCommand(command, connection, transaction);
-            var result = dbCommand.ExecuteScalar();
-
-            command.InvokeCallback(result);
+            return dbCommand.ExecuteScalar();
         }
 
         public string Name
@@ -68,8 +66,16 @@ namespace Gnosis.Babel.SQLite
             get { return _name; }
         }
 
-        public void Execute(IEnumerable<ICommand> commands)
+        public void Execute(IBatch batch)
         {
+            Execute(new List<IBatch> { batch });
+        }
+
+        public void Execute(IEnumerable<IBatch> batches)
+        {
+            if (batches == null)
+                throw new ArgumentNullException("batches");
+
             IDbTransaction transaction = null;
 
             using (var connection = GetDbConnection())
@@ -79,8 +85,14 @@ namespace Gnosis.Babel.SQLite
                     connection.Open();
                     transaction = connection.BeginTransaction();
 
-                    foreach (var command in commands)
-                        Execute(command, connection, transaction);
+                    foreach (var batch in batches)
+                    {
+                        foreach (var command in batch.Commands)
+                        {
+                            var result = GetResult(command, connection, transaction);
+                            batch.InvokeCallback(command.Id, result);
+                        }
+                    }
 
                     transaction.Commit();
                 }
@@ -94,34 +106,41 @@ namespace Gnosis.Babel.SQLite
             }
         }
 
-        public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper)
+        public ICollection<T> Execute<T>(IQuery<T> query)
         {
-            return Query(command, mapper, null);
+            return Execute<T>(new List<IQuery<T>> { query });
         }
 
-        public ICollection<T> Query<T>(ICommand command, IModelMapper<T> mapper, ICache<T> cache)
+        public ICollection<T> Execute<T>(IEnumerable<IQuery<T>> queries)
         {
             var results = new List<T>();
 
             using (var connection = GetDbConnection())
             {
                 connection.Open();
-                using (var reader = GetDataReader(command, connection))
+
+                foreach (IQuery<T> query in queries)
                 {
-                    while (reader.Read())
+                    foreach (var command in query.Commands)
                     {
-                        var model = default(T);
-
-                        if (cache != null && !cache.IsEmpty)
+                        using (var reader = GetDataReader(command, connection))
                         {
-                            var id = mapper.GetId(reader);
-                            model = cache.GetOne(id);
-                        }
+                            while (reader.Read())
+                            {
+                                var model = default(T);
 
-                        if (model == null)
-                            model = mapper.GetModel(reader);
-                        
-                        results.Add(model);
+                                if (query.Cache != null && !query.Cache.IsEmpty)
+                                {
+                                    model = query.Cache.GetOne(reader["Id"]);
+                                }
+
+                                if (model == null && query.ModelMapper != null)
+                                    model = query.ModelMapper.GetModel(reader);
+
+                                if (model != null)
+                                    results.Add(model);
+                            }
+                        }
                     }
                 }
             }

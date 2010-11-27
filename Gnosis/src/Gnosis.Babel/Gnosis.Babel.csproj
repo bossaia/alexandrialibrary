@@ -43,20 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Batch.cs" />
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="GenericFactory.cs" />
     <Compile Include="ICache.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="IDeletable.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IField.cs" />
+    <Compile Include="IImmutable.cs" />
     <Compile Include="IIndexedField.cs" />
     <Compile Include="IKey.cs" />
+    <Compile Include="Immutable.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IModelMapper.cs" />
+    <Compile Include="IMutable.cs" />
     <Compile Include="IndexedField.cs" />
     <Compile Include="IPersistMapper.cs" />
+    <Compile Include="Deletable.cs" />
+    <Compile Include="IBatch.cs" />
+    <Compile Include="IQuery.cs" />
+    <Compile Include="Mutable.cs" />
+    <Compile Include="MutableDeletable.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="SQLite\IPredicate.cs" />
     <Compile Include="IQueryMapper.cs" />
     <Compile Include="ISchema.cs" />

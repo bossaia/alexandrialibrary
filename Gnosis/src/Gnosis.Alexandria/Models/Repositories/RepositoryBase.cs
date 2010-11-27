@@ -6,6 +6,7 @@ using Gnosis.Babel.SQLite;
 using Gnosis.Babel.SQLite.Persist.Deleting;
 using Gnosis.Babel.SQLite.Persist.Inserting;
 using Gnosis.Babel.SQLite.Persist.Updating;
+using Gnosis.Babel.SQLite.Query;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
@@ -13,7 +14,7 @@ namespace Gnosis.Alexandria.Models.Repositories
         : IRepository<T>
         where T : IModel
     {
-        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
+        protected RepositoryBase(IStore store, ICache<T> cache, IFactory<T> factory, ISchema<T> schema, ISchemaMapper<T> schemaMapper, IModelMapper<T> modelMapper, IPersistMapper<T> persistMapper, IQueryMapper<T> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory, IFactory<IBatch> batchFactory, IFactory<IQuery<T>> queryFactory)
         {
             Store = store;
             Cache = cache;
@@ -25,6 +26,8 @@ namespace Gnosis.Alexandria.Models.Repositories
             QueryMapper = queryMapper;
             CommandFactory = commandFactory;
             StatementFactory = statementFactory;
+            BatchFactory = batchFactory;
+            QueryFactory = queryFactory;
         }
 
         #region Protected Members
@@ -39,10 +42,13 @@ namespace Gnosis.Alexandria.Models.Repositories
         protected readonly IQueryMapper<T> QueryMapper;
         protected readonly IFactory<ICommand> CommandFactory;
         protected readonly ISQLiteStatementFactory StatementFactory;
+        protected readonly IFactory<IBatch> BatchFactory;
+        protected readonly IFactory<IQuery<T>> QueryFactory;
 
         protected IInsert<T> Insert { get { return StatementFactory.Insert<T>(); } }
         protected IUpdate<T> Update { get { return StatementFactory.Update<T>(); } }
         protected IDelete<T> Delete { get { return StatementFactory.Delete<T>(); } }
+        protected ISelect Select { get { return StatementFactory.Select(); } }
 
         #endregion
 
@@ -50,8 +56,9 @@ namespace Gnosis.Alexandria.Models.Repositories
 
         public virtual void Initialize()
         {
-            var commands = SchemaMapper.GetInitializeCommands();
-            Store.Execute(commands);
+            var batch = SchemaMapper.GetInitializeBatch();
+
+            Store.Execute(batch);
         }
 
         public virtual void Persist(T model)
@@ -61,32 +68,32 @@ namespace Gnosis.Alexandria.Models.Repositories
 
         public virtual void Persist(IEnumerable<T> models)
         {
-            var commands = new List<ICommand>();
+            var batches = new List<IBatch>();
 
-            models.Each(x => commands.Add(PersistMapper.GetPersistCommand(x)));
+            models.Each(x => batches.Add(PersistMapper.GetPersistBatch(x)));
 
-            Store.Execute(commands);
+            Store.Execute(batches);
         }
         
         public virtual T GetOne(object id)
         {
-            var command = QueryMapper.GetSelectOneCommand(id);
+            var query = QueryMapper.GetSelectOneQuery(id);
 
-            var many = GetMany(command);
+            var many = GetMany(query);
 
             return many.FirstOrDefault();
         }
 
-        public virtual ICollection<T> GetMany(ICommand command)
+        public virtual ICollection<T> GetMany(IQuery<T> query)
         {
-            return Store.Query(command, ModelMapper, Cache);
+            return Store.Execute<T>(query);
         }
 
         public virtual ICollection<T> GetAll()
         {
-            var command = QueryMapper.GetSelectAllCommand();
+            var query = QueryMapper.GetSelectAllQuery();
 
-            return GetMany(command);
+            return GetMany(query);
         }
 
         #endregion

@@ -5,45 +5,72 @@ namespace Gnosis.Babel.SQLite
     public class SQLiteQueryMapper<T> : IQueryMapper<T>
         where T : IModel
     {
-        public SQLiteQueryMapper(ISchema<T> schema, IFactory<ISelect> factory)
+        public SQLiteQueryMapper(ISchema<T> schema, IFactory<ICommand> commandFactory, IFactory<ISelect> selectFactory, IFactory<IQuery<T>> queryFactory)
         {
             Schema = schema;
-            Factory = factory;
+            CommandFactory = commandFactory;
+            SelectFactory = selectFactory;
+            QueryFactory = queryFactory;
         }
 
         #region Protected Members
 
         protected readonly ISchema<T> Schema;
-        protected readonly IFactory<ISelect> Factory;
+        protected readonly IFactory<ICommand> CommandFactory;
+        protected readonly IFactory<ISelect> SelectFactory;
+        protected readonly IFactory<IQuery<T>> QueryFactory;
+        protected ISelect Select { get { return SelectFactory.Create(); } }
 
-        protected IStatement GetSelectAllBuilder()
+        protected ICommand GetSelectOneCommand(object id)
         {
-            return Factory.Create()
+            var command = CommandFactory.Create();
+
+            command.AddStatement(
+                Select
                 .Distinct
                 .AllColumns()
-                .From(Schema.Name);
+                .From(Schema.Name)
+                .Where<T>(x => x.Id)
+                .IsEqualTo<T>(x => x.Id, id)
+            );
+
+            return command;
+        }
+
+        protected ICommand GetSelectAllCommand()
+        {
+            var command = CommandFactory.Create();
+
+            command.AddStatement(
+                Select
+                .Distinct
+                .AllColumns()
+                .From<T>()
+            );
+
+            return command;
         }
 
         #endregion
 
         #region IQueryMapper Members
 
-        public ICommand GetSelectOneCommand(object id)
+        public IQuery<T> GetSelectOneQuery(object id)
         {
-            var statement = Factory.Create()
-                .Distinct
-                .AllColumns()
-                .From(Schema.Name)
-                .Where<T>(x => x.Id)
-                .IsEqualTo<T>(x => x.Id, id);
-            return null;
+            var query = QueryFactory.Create();
+
+            query.AddCommand(GetSelectOneCommand(id));
+
+            return query;
         }
 
-        public ICommand GetSelectAllCommand()
+        public IQuery<T> GetSelectAllQuery()
         {
-            //return GetSelectAllBuilder()
-                //.ToCommand();
-            return null;
+            var query = QueryFactory.Create();
+
+            query.AddCommand(GetSelectAllCommand());
+
+            return query;
         }
 
         #endregion

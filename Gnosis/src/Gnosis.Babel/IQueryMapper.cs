@@ -2,7 +2,7 @@
 {
     public interface IQueryMapper<T>
     {
-        ICommand GetSelectOneCommand(object id);
-        ICommand GetSelectAllCommand();
+        IQuery<T> GetSelectOneQuery(object id);
+        IQuery<T> GetSelectAllQuery();
     }
 }

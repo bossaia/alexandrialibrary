@@ -24,6 +24,12 @@ namespace Gnosis.Babel.SQLite.Query
             return AppendWord<IResult, Result>(alias);
         }
 
+        public IFrom From<T>()
+        {
+            AppendClause(KeywordFrom);
+            return AppendWord<IFrom, From>(typeof(T).AsSchemaName());
+        }
+
         public IFrom From(string table)
         {
             AppendClause(KeywordFrom);

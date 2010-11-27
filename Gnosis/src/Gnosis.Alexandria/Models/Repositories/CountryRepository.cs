@@ -11,8 +11,8 @@ namespace Gnosis.Alexandria.Models.Repositories
 {
     public class CountryRepository : RepositoryBase<ICountry>, ICountryRepository
     {
-        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory)
-            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory)
+        public CountryRepository(IStore store, ICache<ICountry> cache, IFactory<ICountry> factory, ISchema<ICountry> schema, ISchemaMapper<ICountry> schemaMapper, IModelMapper<ICountry> modelMapper, IPersistMapper<ICountry> persistMapper, IQueryMapper<ICountry> queryMapper, IFactory<ICommand> commandFactory, ISQLiteStatementFactory statementFactory, IFactory<IBatch> batchFactory, IFactory<IQuery<ICountry>> queryFactory)
+            : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory, batchFactory, queryFactory)
         {
         }
 
@@ -25,36 +25,24 @@ namespace Gnosis.Alexandria.Models.Repositories
 
         private void AddCountryToCache(long id, string name, string code)
         {
-            var country = new Country()
-            {
-                Name = name,
-                Code = code
-            };
+            var country = Factory.Create();
+            country.Populate(new Dictionary<string, object> { { "Name", name }, { "Code", code } });
             country.Initialize(id);
             AddCountryToCache(country);
         }
 
         private void AddCountryToCache(long id, string name, string code, DateTime fromDate)
         {
-            var country = new Country()
-            {
-                Name = name,
-                Code = code,
-                FromDate = fromDate
-            };
+            var country = Factory.Create();
+            country.Populate(new Dictionary<string, object> {{"Name", name}, {"Code", code}, {"FromDate", fromDate} });
             country.Initialize(id);
             AddCountryToCache(country);
         }
 
         private void AddCountryToCache(long id, string name, string code, DateTime fromDate, DateTime toDate)
         {
-            var country = new Country()
-            {
-                Name = name,
-                Code = code,
-                FromDate = fromDate,
-                ToDate = toDate
-            };
+            var country = Factory.Create();
+            country.Populate(new Dictionary<string, object> { { "Name", name }, { "Code", code }, { "FromDate", fromDate }, {"ToDate", toDate} });
             country.Initialize(id);
             AddCountryToCache(country);
         }
@@ -318,6 +306,8 @@ namespace Gnosis.Alexandria.Models.Repositories
 
             CacheCountries();
 
+            var batch = BatchFactory.Create();
+
             var commands = new List<ICommand>();
             foreach (var country in Cache.GetAll())
             {
@@ -325,7 +315,7 @@ namespace Gnosis.Alexandria.Models.Repositories
 
                 command.AddStatement(
                     Insert
-                    .OrIgnore
+                    .OrReplace
                     .Into(Schema.Name)
                     .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
                     .Values(Schema.NonPrimaryFields.Select(x => x.Getter), country)
@@ -334,15 +324,9 @@ namespace Gnosis.Alexandria.Models.Repositories
                 commands.Add(command);
             }
 
-            Store.Execute(commands);
-        }
+            commands.Each(x => batch.AddCommand(x));
 
-        public override void Persist(ICountry model)
-        {
-        }
-
-        public override void Persist(IEnumerable<ICountry> models)
-        {
+            Store.Execute(batch);
         }
 
         public override ICountry GetOne(object id)

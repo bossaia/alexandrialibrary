@@ -13,7 +13,7 @@ namespace Gnosis.Alexandria.Models.Interfaces
         void Persist(T model);
         void Persist(IEnumerable<T> models);
         T GetOne(object id);
-        ICollection<T> GetMany(ICommand command);
+        ICollection<T> GetMany(IQuery<T> query);
         ICollection<T> GetAll();
     }
 }
