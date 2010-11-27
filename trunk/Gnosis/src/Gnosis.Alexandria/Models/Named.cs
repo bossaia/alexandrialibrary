@@ -49,8 +49,8 @@ namespace Gnosis.Alexandria.Models
             };
 
             var charactersToNormalize = new Dictionary<char, string> {
-                {'À', "A"}, {'Â', "A"}, {'Á', "A"},{'Æ', "AE"},
-                {'à', "A"}, {'â', "A"}, {'ā', "A"},{'æ', "AE"}, {'á', "A"},
+                {'À', "A"}, {'Â', "A"}, {'Á', "A"}, {'Æ', "AE"}, {'Ǣ', "AE"}, {'Å', "A"},
+                {'à', "A"}, {'â', "A"}, {'á', "A"}, {'æ', "AE"}, {'ǣ', "AE"}, {'ā', "A"},
 
                 {'Ç', "C"},
                 {'č', "C"},

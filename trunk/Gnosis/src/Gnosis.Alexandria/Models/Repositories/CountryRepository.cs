@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
 using Gnosis.Babel.SQLite;
@@ -14,8 +15,6 @@ namespace Gnosis.Alexandria.Models.Repositories
             : base(store, cache, factory, schema, schemaMapper, modelMapper, persistMapper, queryMapper, commandFactory, statementFactory)
         {
         }
-
-        private IInsert<ICountry> Insert { get { return StatementFactory.Insert<ICountry>(); } }
 
         #region Cache Methods
 
@@ -326,6 +325,7 @@ namespace Gnosis.Alexandria.Models.Repositories
 
                 command.AddStatement(
                     Insert
+                    .OrIgnore
                     .Into(Schema.Name)
                     .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
                     .Values(Schema.NonPrimaryFields.Select(x => x.Getter), country)

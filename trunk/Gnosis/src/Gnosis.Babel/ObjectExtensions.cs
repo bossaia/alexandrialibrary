@@ -114,5 +114,17 @@ namespace Gnosis.Babel
 
             return value.ToString();
         }
+
+        public static object AsPersistentValue(this object value)
+        {
+            if (value == null)
+                return string.Empty;
+
+            var model = value as IModel;
+            if (model != null)
+                return model.Id;
+
+            return value;
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace Gnosis.Alexandria.Models
         }
 
         private Artist(long id)
+            : this()
         {
             Initialize(id);
         }
