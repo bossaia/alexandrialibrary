@@ -1,11 +1,11 @@
 ﻿namespace Gnosis.Babel.SQLite.Persist.Deleting
 {
-    public interface IDelete : IStatement, IFilterable
+    public interface IDelete : IStatement
     {
         IDeleteFrom From(string table);
     }
 
-    public interface IDelete<T> : IStatement, IFilterable<T>
+    public interface IDelete<T> : IStatement
     {
         IDeleteFrom<T> From(string table);
     }

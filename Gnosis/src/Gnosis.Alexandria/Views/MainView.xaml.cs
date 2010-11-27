@@ -5,6 +5,7 @@ using System.Windows;
 
 using Gnosis.Alexandria.Controllers.Interfaces;
 using Gnosis.Alexandria.Messages.Interfaces;
+using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Alexandria.Models.Schemas;
 
 namespace Gnosis.Alexandria.Views
@@ -30,6 +31,9 @@ namespace Gnosis.Alexandria.Views
 
         private void InitializeDispatchers()
         {
+            ObjectExtensions.ArtistRepository = ServiceLocator.GetObject<IArtistRepository>();
+            ObjectExtensions.CountryRepository = ServiceLocator.GetObject<ICountryRepository>();
+
             AddTabController();
             AddRepositoryController();
 

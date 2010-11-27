@@ -10,14 +10,12 @@ namespace Gnosis.Babel.SQLite.Persist.Deleting
 
     public class Delete : Statement, IDelete
     {
+        private const string KeywordFrom = "from";
+
         public IDeleteFrom From(string table)
         {
-            throw new NotImplementedException();
-        }
-
-        public IPredicate<IWhere> Where<T>(Expression<Func<T, object>> expression)
-        {
-            throw new NotImplementedException();
+            AppendClause(KeywordFrom);
+            return AppendWord<IDeleteFrom, DeleteFrom>(table);
         }
     }
 
@@ -27,14 +25,12 @@ namespace Gnosis.Babel.SQLite.Persist.Deleting
 
     public class Delete<T> : Statement, IDelete<T>
     {
+        private const string KeywordFrom = "from";
+
         public IDeleteFrom<T> From(string table)
         {
-            throw new NotImplementedException();
-        }
-
-        public IPredicate<IWhere> Where(Expression<Func<T, object>> expression)
-        {
-            throw new NotImplementedException();
+            AppendClause(KeywordFrom);
+            return AppendWord<IDeleteFrom<T>, DeleteFrom<T>>(table);
         }
     }
 

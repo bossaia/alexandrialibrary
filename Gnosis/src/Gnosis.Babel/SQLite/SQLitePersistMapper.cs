@@ -82,7 +82,7 @@ namespace Gnosis.Babel.SQLite
                     .Table(Schema.Name)
                     .Set
                     .ColumnsAndValues(Schema.NonPrimaryFields.Select(x => x.Getter), model)
-                    .Where<T>(x => x.Id).IsEqualTo<T>(x => x.Id, model.Id)
+                    .Where(x => x.Id).IsEqualTo<T>(x => x.Id, model.Id)
                 );
 
             return command;

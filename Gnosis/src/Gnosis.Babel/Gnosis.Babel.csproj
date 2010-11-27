@@ -69,10 +69,15 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExtensions.cs" />
+    <Compile Include="SQLite\Persist\Deleting\DeleteFrom.cs" />
     <Compile Include="SQLite\Persist\Inserting\InsertColumn.cs" />
     <Compile Include="SQLite\Persist\Inserting\InsertColumnar.cs" />
     <Compile Include="SQLite\Persist\Inserting\InsertConflictClause.cs" />
     <Compile Include="SQLite\Persist\Inserting\InsertValue.cs" />
+    <Compile Include="SQLite\Persist\Updating\UpdateColumn.cs" />
+    <Compile Include="SQLite\Persist\Updating\UpdateColumnar.cs" />
+    <Compile Include="SQLite\Persist\Updating\UpdateConflictClause.cs" />
+    <Compile Include="SQLite\Persist\Updating\UpdateSet.cs" />
     <Compile Include="SQLite\Schema\Index.cs" />
     <Compile Include="SQLite\Schema\IndexColumnar.cs" />
     <Compile Include="SQLite\Schema\IndexTable.cs" />

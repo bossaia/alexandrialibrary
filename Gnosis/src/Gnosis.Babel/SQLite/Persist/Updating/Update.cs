@@ -9,34 +9,46 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
 
     public class Update : Statement, IUpdate
     {
+        public Update()
+        {
+            AppendClause(KeywordUpdate);
+        }
+
+        private const string KeywordUpdate = "update";
+        private const string KeywordOrAbort = "or abort";
+        private const string KeywordOrFail = "or fail";
+        private const string KeywordOrIgnore = "or ignore";
+        private const string KeywordOrReplace = "or replace";
+        private const string KeywordOrRollback = "or rollback";
+
         public IUpdateSet Table(string table)
         {
-            throw new NotImplementedException();
+            return AppendClause<IUpdateSet, UpdateSet>(table);
         }
 
         public IUpdateConflictClause OrAbort
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause, UpdateConflictClause>(KeywordOrAbort); }
         }
 
         public IUpdateConflictClause OrFail
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause, UpdateConflictClause>(KeywordOrFail); }
         }
 
         public IUpdateConflictClause OrIgnore
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause, UpdateConflictClause>(KeywordOrIgnore); }
         }
 
         public IUpdateConflictClause OrReplace
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause, UpdateConflictClause>(KeywordOrReplace); }
         }
 
         public IUpdateConflictClause OrRollback
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause, UpdateConflictClause>(KeywordOrRollback); }
         }
     }
 
@@ -46,34 +58,46 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
 
     public class Update<T> : Statement, IUpdate<T>
     {
+        public Update()
+        {
+            AppendClause(KeywordUpdate);
+        }
+
+        private const string KeywordUpdate = "update";
+        private const string KeywordOrAbort = "or abort";
+        private const string KeywordOrFail = "or fail";
+        private const string KeywordOrIgnore = "or ignore";
+        private const string KeywordOrReplace = "or replace";
+        private const string KeywordOrRollback = "or rollback";
+
         public IUpdateSet<T> Table(string table)
         {
-            throw new NotImplementedException();
+            return AppendClause<IUpdateSet<T>, UpdateSet<T>>(table);
         }
 
         public IUpdateConflictClause<T> OrAbort
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause<T>, UpdateConflictClause<T>>(KeywordOrAbort); }
         }
 
         public IUpdateConflictClause<T> OrFail
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause<T>, UpdateConflictClause<T>>(KeywordOrFail); }
         }
 
         public IUpdateConflictClause<T> OrIgnore
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause<T>, UpdateConflictClause<T>>(KeywordOrIgnore); }
         }
 
         public IUpdateConflictClause<T> OrReplace
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause<T>, UpdateConflictClause<T>>(KeywordOrReplace); }
         }
 
         public IUpdateConflictClause<T> OrRollback
         {
-            get { throw new NotImplementedException(); }
+            get { return AppendWord<IUpdateConflictClause<T>, UpdateConflictClause<T>>(KeywordOrRollback); }
         }
     }
 
