@@ -59,6 +59,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
     #region Insert<T>
 
     public class Insert<T> : Statement, IInsert<T>
+        where T : IModel
     {
         public Insert()
         {

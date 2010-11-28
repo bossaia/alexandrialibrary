@@ -317,8 +317,8 @@ namespace Gnosis.Alexandria.Models.Repositories
                     Insert
                     .OrReplace
                     .Into(Schema.Name)
-                    .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
-                    .Values(Schema.NonPrimaryFields.Select(x => x.Getter), country)
+                    .Columns(Schema.Fields.Select(x => x.Getter))
+                    //.Values(country, Schema.Fields.Select(x => x.Getter))
                     );
 
                 commands.Add(command);

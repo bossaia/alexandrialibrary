@@ -12,6 +12,7 @@ namespace Gnosis.Alexandria.Models.Interfaces
         string Title { get; set; }
         string TitleHash { get; }
         string Abbreviation { get; set; }
+        IArtist Creator { get; set; }
         DateTime ReleaseDate { get; set; }
         ICountry ReleaseCountry { get; set; }
         string Note { get; set; }

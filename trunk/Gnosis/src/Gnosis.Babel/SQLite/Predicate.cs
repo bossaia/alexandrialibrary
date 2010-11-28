@@ -34,7 +34,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsEqualTo(string name, object value)
         {
             AppendWord(OpEqualTo);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsEqualTo<T>(Expression<Func<T, object>> expression)
@@ -46,7 +46,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpEqualTo);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsNotEqualTo(string expression)
@@ -58,7 +58,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsNotEqualTo(string name, object value)
         {
             AppendWord(OpNotEqualTo);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsNotEqualTo<T>(Expression<Func<T, object>> expression)
@@ -70,7 +70,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsNotEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpNotEqualTo);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsLessThan(string expression)
@@ -82,7 +82,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLessThan(string name, object value)
         {
             AppendWord(OpLessThan);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsLessThan<T>(Expression<Func<T, object>> expression)
@@ -94,7 +94,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLessThan<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpLessThan);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsLessThanOrEqualTo(string expression)
@@ -106,7 +106,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLessThanOrEqualTo(string name, object value)
         {
             AppendWord(OpLessThanOrEqualTo);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsLessThanOrEqualTo<T>(Expression<Func<T, object>> expression)
@@ -118,7 +118,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLessThanOrEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpLessThanOrEqualTo);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsGreaterThan(string expression)
@@ -130,7 +130,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsGreaterThan(string name, object value)
         {
             AppendWord(OpGreaterThan);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsGreaterThan<T>(Expression<Func<T, object>> expression)
@@ -142,7 +142,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsGreaterThan<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpGreaterThan);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsGreaterThanOrEqualTo(string expression)
@@ -154,7 +154,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsGreaterThanOrEqualTo(string name, object value)
         {
             AppendWord(OpGreaterThanOrEqualTo);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression)
@@ -166,7 +166,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsGreaterThanOrEqualTo<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpGreaterThanOrEqualTo);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsLike(string expression)
@@ -178,7 +178,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLike(string name, object value)
         {
             AppendWord(OpLike);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsLike<T>(Expression<Func<T, object>> expression)
@@ -190,7 +190,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsLike<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpLike);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsNotLike(string expression)
@@ -202,7 +202,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsNotLike(string name, object value)
         {
             AppendWord(OpNotLike);
-            return AppendParameter<TInterface, TConcrete>(name, value);
+            return AppendSimpleParameter<TInterface, TConcrete>(name, value);
         }
 
         public TInterface IsNotLike<T>(Expression<Func<T, object>> expression)
@@ -214,7 +214,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsNotLike<T>(Expression<Func<T, object>> expression, object value)
         {
             AppendWord(OpNotLike);
-            return AppendParameter<TInterface, TConcrete>(expression.ToName(), value);
+            return AppendSimpleParameter<TInterface, TConcrete>(expression.ToName(), value);
         }
 
         public TInterface IsIn(string expression)
@@ -225,7 +225,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsIn(string name, object value)
         {
             AppendWord(OpInPrefix);
-            AppendParameter(name, value);
+            AppendSimpleParameter(name, value);
             return AppendWord<TInterface, TConcrete>(OpInSuffix);
         }
 
@@ -237,7 +237,7 @@ namespace Gnosis.Babel.SQLite
         public TInterface IsNotIn(string name, object value)
         {
             AppendWord(OpNotInPrefix);
-            AppendParameter(name, value);
+            AppendSimpleParameter(name, value);
             return AppendWord<TInterface, TConcrete>(OpInSuffix);
         }
 

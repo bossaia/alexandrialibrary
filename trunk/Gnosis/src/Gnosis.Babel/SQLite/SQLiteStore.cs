@@ -38,12 +38,12 @@ namespace Gnosis.Babel.SQLite
             if (transaction != null)
                 dbCommand.Transaction = transaction;
 
-            foreach (var pair in command.Parameters)
+            foreach (var parameter in command.Parameters)
             {
-                var parameter = dbCommand.CreateParameter();
-                parameter.ParameterName = pair.Key;
-                parameter.Value = pair.Value;
-                dbCommand.Parameters.Add(parameter);
+                var dbParameter = dbCommand.CreateParameter();
+                dbParameter.ParameterName = parameter.Name;
+                dbParameter.Value = parameter.GetValue();
+                dbCommand.Parameters.Add(dbParameter);
             }
 
             return dbCommand;

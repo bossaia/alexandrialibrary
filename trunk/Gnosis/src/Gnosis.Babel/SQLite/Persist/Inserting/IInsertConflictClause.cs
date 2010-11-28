@@ -5,6 +5,7 @@
     }
 
     public interface IInsertConflictClause<T> : IStatement, IInsertable<T>
+        where T : IModel
     {
     }
 }

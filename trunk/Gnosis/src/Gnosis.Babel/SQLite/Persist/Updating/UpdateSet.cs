@@ -16,6 +16,7 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     }
 
     public class UpdateSet<T> : Statement, IUpdateSet<T>
+        where T : IModel
     {
         private const string KeywordSet = "set";
 

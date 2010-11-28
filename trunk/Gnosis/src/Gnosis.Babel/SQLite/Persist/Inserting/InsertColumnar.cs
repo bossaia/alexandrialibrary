@@ -23,6 +23,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
     }
 
     public class InsertColumnar<T> : Statement, IInsertColumnar<T>
+        where T : IModel
     {
         public IInsertColumn<T> Column(Expression<Func<T, object>> expression)
         {

@@ -6,6 +6,7 @@
     }
 
     public interface IDelete<T> : IStatement
+        where T : IModel
     {
         IDeleteFrom<T> From(string table);
     }

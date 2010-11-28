@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Gnosis.Babel.SQLite
+namespace Gnosis.Babel
 {
     public interface IPredicate<S> : IStatement
         where S : IStatement

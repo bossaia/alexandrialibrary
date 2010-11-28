@@ -18,9 +18,9 @@ namespace Gnosis.Babel.SQLite
         IDrop Drop();
 
         ISelect Select();
-        
-        IDelete<T> Delete<T>();
-        IInsert<T> Insert<T>();
-        IUpdate<T> Update<T>();
+
+        IDelete<T> Delete<T>() where T : IModel;
+        IInsert<T> Insert<T>() where T : IModel;
+        IUpdate<T> Update<T>() where T : IModel;
     }
 }

@@ -5,6 +5,7 @@
     }
 
     public interface IDeleteFrom<T> : IStatement, IFilterable<T>
+        where T : IModel
     {
     }
 }

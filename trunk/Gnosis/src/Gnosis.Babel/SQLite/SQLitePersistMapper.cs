@@ -64,7 +64,7 @@ namespace Gnosis.Babel.SQLite
                     .OrRollback
                     .Into(Schema.Name)
                     .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
-                    .Values(Schema.NonPrimaryFields.Select(x => x.Getter), model)
+                    .Values(model, Schema.NonPrimaryFields.Select(x => x.Getter))
                 );
 
             command.AddStatement(Select.LastInsertRowId);
@@ -84,7 +84,7 @@ namespace Gnosis.Babel.SQLite
                     .OrRollback
                     .Table(Schema.Name)
                     .Set
-                    .ColumnsAndValues(Schema.NonPrimaryFields.Select(x => x.Getter), model)
+                    .ColumnsAndValues(model, Schema.NonPrimaryFields.Select(x => x.Getter))
                     .Where(x => x.Id).IsEqualTo<T>(x => x.Id, model.Id)
                 );
 

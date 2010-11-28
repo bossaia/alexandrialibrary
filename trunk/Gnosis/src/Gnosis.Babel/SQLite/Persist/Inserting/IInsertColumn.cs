@@ -9,6 +9,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
     }
 
     public interface IInsertColumn<T> : IStatement, IInsertColumnar<T>, IInsertValued<T>
+        where T : IModel
     {
         ISelect SelectAll { get; }
         ISelect SelectDistinct { get; }

@@ -10,6 +10,7 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     }
 
     public interface IUpdateConflictClause<T> : IStatement, IUpdatable<T>
+        where T : IModel
     {
     }
 }
