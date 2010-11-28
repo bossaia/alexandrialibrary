@@ -12,8 +12,6 @@ namespace Gnosis.Babel
         }
 
         private readonly IDictionary<Guid, ICommand> _commands = new Dictionary<Guid, ICommand>();
-        private IModelMapper<T> _modelMapper;
-        private ICache<T> _cache;
 
         public IEnumerable<ICommand> Commands
         {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Gnosis.Babel
 {
-    public interface IStatement
+    public interface IParameter
     {
-        IEnumerable<IParameter> Parameters { get; }
-        string ToString();
+        string Name { get; }
+        object GetValue();
     }
 }

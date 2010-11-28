@@ -5,12 +5,13 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
 {
     public interface IInsertValue : IStatement
     {
-        IInsertValue Value(string name, object value);
+        IInsertValue Value<TModel>(TModel model, Expression<Func<TModel, object>> property) where TModel : IModel;
     }
 
     public interface IInsertValue<T> : IStatement
+        where T : IModel
     {
-        IInsertValue<T> Value(Expression<Func<T, object>> expression, object value);
+        IInsertValue<T> Value(T model, Expression<Func<T, object>> property);
     }
 
 }

@@ -113,5 +113,6 @@ namespace Gnosis.Alexandria.Models
         }
 
         public static readonly IArtist Unknown = new Artist(1L);
+        public static readonly IArtist Various = new Artist(2L) { Name = "Various" };
     }
 }

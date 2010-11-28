@@ -18,10 +18,12 @@ namespace Gnosis.Babel.SQLite.Persist.Deleting
     }
 
     public class DeleteFrom<T> : Statement, IDeleteFrom<T>
+        where T : IModel
     {
         private const string KeywordWhere = "where";
 
         public IPredicate<IWhere> Where<TOther>(Expression<Func<TOther, object>> expression)
+            where TOther : IModel
         {
             AppendClause(KeywordWhere);
             return AppendWord<IPredicate<IWhere>, Predicate<IWhere, Where>>(expression.ToName());

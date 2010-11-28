@@ -29,18 +29,20 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
             return AppendClause<IInsertValue, InsertValue>(KeywordValues);
         }
 
-        public IStatement Values(IEnumerable<Tuple<string, object>> values)
+        public IStatement Values<TModel>(TModel model, params Expression<Func<TModel, object>>[] properties)
+            where TModel : IModel
         {
             AppendClause(KeywordValues);
 
-            foreach (var pair in values)
-                AppendParentheticalListItem(pair.Item1, pair.Item2.AsPersistentValue());
+            foreach (var property in properties)
+                AppendParentheticalListItem(property.ToName(), model, property);
 
             return this;
         }
     }
 
     public class InsertColumn<T> : InsertColumnar<T>, IInsertColumn<T>
+        where T : IModel
     {
         private const string KeywordSelectAll = "select all";
         private const string KeywordSelectDistinct = "select distinct";
@@ -61,12 +63,12 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
             return AppendClause<IInsertValue<T>, InsertValue<T>>(KeywordValues);
         }
 
-        public IStatement Values(IEnumerable<Expression<Func<T, object>>> expressions, T model)
+        public IStatement Values(T model, IEnumerable<Expression<Func<T, object>>> properties)
         {
             AppendClause(KeywordValues);
 
-            foreach (var expression in expressions)
-                AppendParentheticalListItem(expression.ToName(), expression.GetValue(model).AsPersistentValue());
+            foreach (var property in properties)
+                AppendParentheticalListItem<T>(property.ToName(), model, property);
 
             return this;
         }

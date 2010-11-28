@@ -7,6 +7,7 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     }
 
     public interface IUpdateColumn<T> : IStatement, IUpdateColumnar<T>, IFilterable<T>
+        where T : IModel
     {
     }
 }

@@ -6,9 +6,10 @@ namespace Gnosis.Babel
     public interface ICommand
     {
         Guid Id { get; }
-        IEnumerable<KeyValuePair<string, object>> Parameters { get; }
+        IEnumerable<IParameter> Parameters { get; }
         void AddStatement(IStatement statement);
-        void SetParameter(string name, object value);
+        void SetCallback(Action<IModel, object> callback, IModel model);
+        void InvokeCallback(object value);
         string ToString();
     }
 }

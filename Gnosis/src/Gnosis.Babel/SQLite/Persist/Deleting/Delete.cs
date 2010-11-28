@@ -24,6 +24,7 @@ namespace Gnosis.Babel.SQLite.Persist.Deleting
     #region Delete<T>
 
     public class Delete<T> : Statement, IDelete<T>
+        where T : IModel
     {
         private const string KeywordFrom = "from";
 

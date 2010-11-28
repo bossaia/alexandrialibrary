@@ -11,6 +11,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
     }
 
     public interface IInsertable<T>
+        where T : IModel
     {
         IInsertColumn<T> Into(string table);
     }

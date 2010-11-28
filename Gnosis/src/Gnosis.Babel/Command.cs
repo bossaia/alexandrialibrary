@@ -11,20 +11,20 @@ namespace Gnosis.Babel
         }
 
         private readonly Guid _id = Guid.NewGuid();
-        private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
+        private readonly IDictionary<string, IParameter> _parameters = new Dictionary<string, IParameter>();
         private readonly IList<IStatement> _statements = new List<IStatement>();
+        private Action<IModel, object> _callback;
+        private IModel _model;
 
-        private void AddParameter(string name, object value)
+        private void AddParameter(IParameter parameter)
         {
-            if (!_parameters.ContainsKey(name))
-                _parameters.Add(name, value);
+            if (!_parameters.ContainsKey(parameter.Name))
+                _parameters.Add(parameter.Name, parameter);
         }
 
-        private void AddParameters(IEnumerable<KeyValuePair<string, object>> parameters)
+        private void AddParameters(IEnumerable<IParameter> parameters)
         {
-            if (parameters != null)
-                foreach (var item in parameters)
-                    AddParameter(item.Key, item.Value);
+            parameters.Each(x => AddParameter(x));
         }
 
         public Guid Id
@@ -32,9 +32,9 @@ namespace Gnosis.Babel
             get { return _id; }
         }
 
-        public IEnumerable<KeyValuePair<string, object>> Parameters
+        public IEnumerable<IParameter> Parameters
         {
-            get { return _parameters; }
+            get { return _parameters.Values; }
         }
 
         public void AddStatement(IStatement statement)
@@ -43,10 +43,15 @@ namespace Gnosis.Babel
             AddParameters(statement.Parameters);
         }
 
-        public void SetParameter(string name, object value)
+        public void SetCallback(Action<IModel, object> callback, IModel model)
         {
-            if (_parameters.ContainsKey(name) && _parameters[name] != null)
-                _parameters[name] = value;
+            _callback = callback;
+            _model = model;
+        }
+
+        public void InvokeCallback(object value)
+        {
+            _callback(_model, value);
         }
 
         public override string ToString()

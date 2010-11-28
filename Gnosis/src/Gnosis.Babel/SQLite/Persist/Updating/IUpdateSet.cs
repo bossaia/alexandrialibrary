@@ -6,6 +6,7 @@
     }
 
     public interface IUpdateSet<T> : IStatement
+        where T : IModel
     {
         IUpdateColumn<T> Set { get; }
     }

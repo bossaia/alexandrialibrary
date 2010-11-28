@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Gnosis.Babel
@@ -16,17 +17,15 @@ namespace Gnosis.Babel
             _text = new StringBuilder(value);
         }
 
-        protected Statement(string value, IEnumerable<KeyValuePair<string, object>> parameters)
+        protected Statement(string value, IEnumerable<IParameter> parameters)
         {
             _text = new StringBuilder(value);
 
-            if (parameters != null)
-                foreach (var item in parameters)
-                    _parameters.Add(item);
+            AddParameters(parameters);
         }
 
         private readonly StringBuilder _text;
-        private readonly IDictionary<string, object> _parameters = new Dictionary<string, object>();
+        private readonly IDictionary<string, IParameter> _parameters = new Dictionary<string, IParameter>();
         private bool _listMode = false;
         private bool _subListMode = false;
         private bool _hasParentheses = false;
@@ -40,14 +39,31 @@ namespace Gnosis.Babel
             return name;
         }
 
-        private void AddParameter(string name, object value)
+        private void AddSimpleParameter(string name, object value)
         {
-            _parameters[name] = value;
+            AddParameter(new SimpleParameter(name, value));
         }
 
-        private void AddParameters(IEnumerable<KeyValuePair<string, object>> parameters)
+        private void AddParameter(string name, IModel model, Expression<Func<IModel, object>> property)
         {
-            parameters.Each(x => AddParameter(x.Key, x.Value));
+            AddParameter(new Parameter(name, model, property));
+        }
+
+        private void AddParameter<T>(string name, T model, Expression<Func<T, object>> property)
+            where T : IModel
+        {
+            AddParameter(new Parameter<T>(name, model, property));
+        }
+
+        private void AddParameter(IParameter parameter)
+        {
+            if (!_parameters.ContainsKey(parameter.Name))
+                _parameters.Add(parameter.Name, parameter);
+        }
+
+        private void AddParameters(IEnumerable<IParameter> parameters)
+        {
+            parameters.Each(x => AddParameter(x));
         }
 
         private Tuple<int, int> GetNumberOfOpenAndClosedParentheses()
@@ -79,10 +95,10 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
-            concrete.AppendWord(_text.ToString());
 
             //TODO: Refactor this - transfering object state like this is *UGLY*
+            concrete.AddParameters(_parameters.Values);
+            concrete.AppendWord(_text.ToString());
             concrete._listMode = _listMode;
             concrete._hasParentheses = _hasParentheses;
             concrete._subListMode = _subListMode;
@@ -96,7 +112,7 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
             concrete.AppendWord(word);
 
@@ -108,7 +124,7 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
             concrete.AppendClause(clause);
 
@@ -120,7 +136,7 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
             concrete.AppendListItem(item);
 
@@ -132,21 +148,22 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
             concrete.AppendParentheticalListItem(item);
 
             return concrete;
         }
 
-        protected TInterface AppendParentheticalListItem<TInterface, TConcrete>(string name, object value)
+        protected TInterface AppendParentheticalListItem<TInterface, TConcrete, TModel>(string name, TModel model, Expression<Func<TModel, object>> property)
             where TInterface : IStatement
             where TConcrete : Statement, TInterface, new()
+            where TModel : IModel
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
-            concrete.AppendParentheticalListItem(name, value);
+            concrete.AppendParentheticalListItem<TModel>(name, model, property);
 
             return concrete;
         }
@@ -156,21 +173,34 @@ namespace Gnosis.Babel
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
             concrete.AppendParentheticalSubListItem(item);
 
             return concrete;
         }
 
-        protected TInterface AppendParameter<TInterface, TConcrete>(string name, object value)
+        protected TInterface AppendSimpleParameter<TInterface, TConcrete>(string name, object value)
             where TInterface : IStatement
             where TConcrete : Statement, TInterface, new()
         {
             var concrete = new TConcrete();
-            concrete.AddParameters(_parameters);
+            concrete.AddParameters(_parameters.Values);
             concrete.AppendWord(_text.ToString());
-            concrete.AppendParameter(name, value);
+            concrete.AppendSimpleParameter(name, value);
+
+            return concrete;
+        }
+
+        protected TInterface AppendParameter<TInterface, TConcrete, TModel>(string name, TModel model, Expression<Func<TModel, object>> property)
+            where TInterface : IStatement
+            where TConcrete : Statement, TInterface, new()
+            where TModel : IModel
+        {
+            var concrete = new TConcrete();
+            concrete.AddParameters(_parameters.Values);
+            concrete.AppendWord(_text.ToString());
+            concrete.AppendParameter<TModel>(name, model, property);
 
             return concrete;
         }
@@ -224,17 +254,29 @@ namespace Gnosis.Babel
             _hasSubParentheses = false;
         }
 
-        protected string GetAnonymousParameterName()
-        {
-            return "@" + Guid.NewGuid().ToString().Replace("-", string.Empty);
-        }
-
-        protected void AppendParameter(string name, object value)
+        protected void AppendSimpleParameter(string name, object value)
         {
             var parameterName = GetParameterName(name);
 
             AppendWord(parameterName);
-            AddParameter(parameterName, value);
+            AddSimpleParameter(parameterName, value);
+        }
+
+        protected void AppendParameter(string name, IModel model, Expression<Func<IModel, object>> property)
+        {
+            var parameterName = GetParameterName(name);
+
+            AppendWord(parameterName);
+            AddParameter(parameterName, model, property);
+        }
+
+        protected void AppendParameter<T>(string name, T model, Expression<Func<T, object>> property)
+            where T : IModel
+        {
+            var parameterName = GetParameterName(name);
+
+            AppendWord(parameterName);
+            AddParameter<T>(parameterName, model, property);
         }
 
         protected void AppendParentheticalListItem(string item)
@@ -255,7 +297,8 @@ namespace Gnosis.Babel
             _hasParentheses = true;
         }
 
-        protected void AppendParentheticalListItem(string name, object value)
+        protected void AppendParentheticalListItem<TModel>(string name, TModel model, Expression<Func<TModel, object>> property)
+            where TModel : IModel
         {
             if (_subListMode)
             {
@@ -269,7 +312,7 @@ namespace Gnosis.Babel
             else
                 _text.Append(" (");
 
-            AppendParameter(name, value);
+            AppendParameter<TModel>(name, model, property);
 
             _listMode = true;
             _hasParentheses = true;
@@ -288,9 +331,9 @@ namespace Gnosis.Babel
 
         #endregion
 
-        public IEnumerable<KeyValuePair<string, object>> Parameters
+        public IEnumerable<IParameter> Parameters
         {
-            get { return _parameters; }
+            get { return _parameters.Values; }
         }
 
         public override string ToString()

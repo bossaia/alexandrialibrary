@@ -29,16 +29,19 @@ namespace Gnosis.Babel.SQLite
         }
 
         public IDelete<T> Delete<T>()
+            where T : IModel
         {
             return new Delete<T>();
         }
 
         public IInsert<T> Insert<T>()
+            where T : IModel
         {
             return new Insert<T>();
         }
 
         public IUpdate<T> Update<T>()
+            where T : IModel
         {
             return new Update<T>();
         }

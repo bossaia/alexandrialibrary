@@ -5,9 +5,7 @@ using System.Text;
 
 namespace Gnosis.Babel
 {
-    public interface IStatement
+    public interface ICriteria
     {
-        IEnumerable<IParameter> Parameters { get; }
-        string ToString();
     }
 }

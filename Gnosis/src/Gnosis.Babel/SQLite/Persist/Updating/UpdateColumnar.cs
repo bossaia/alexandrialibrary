@@ -10,20 +10,24 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     {
         private const string KeywordAssign = "=";
 
-        public IUpdateColumn ColumnAndValue(string name, object value)
+        public IUpdateColumn ColumnAndValue<TModel>(TModel model, Expression<Func<TModel, object>> property)
+            where TModel : IModel
         {
+            var name = property.ToName();
             AppendListItem(name);
             AppendWord(KeywordAssign);
-            return AppendParameter<IUpdateColumn, UpdateColumn>(name, value);
+            return AppendParameter<IUpdateColumn, UpdateColumn, TModel>(name, model, property);
         }
 
-        public IUpdateColumn ColumnsAndValues(IEnumerable<Tuple<string, object>> items)
+        public IUpdateColumn ColumnsAndValues<TModel>(TModel model, params Expression<Func<TModel, object>>[] properties)
+            where TModel : IModel
         {
-            foreach (var item in items)
+            foreach (var property in properties)
             {
-                AppendListItem(item.Item1);
+                var name = property.ToName();
+                AppendListItem(name);
                 AppendWord(KeywordAssign);
-                AppendParameter(item.Item1, item.Item2);
+                AppendParameter<TModel>(name, model, property);
             }
 
             return Transform<IUpdateColumn, UpdateColumn>();
@@ -31,23 +35,26 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     }
 
     public class UpdateColumnar<T> : Statement, IUpdateColumnar<T>
+        where T : IModel
     {
         private const string KeywordAssign = "=";
 
-        public IUpdateColumn<T> ColumnAndValue(Expression<Func<T, object>> expression, object value)
+        public IUpdateColumn<T> ColumnAndValue(T model, Expression<Func<T, object>> property)
         {
-            AppendListItem(expression.ToName());
+            var name = property.ToName();
+            AppendListItem(name);
             AppendWord(KeywordAssign);
-            return AppendParameter<IUpdateColumn<T>, UpdateColumn<T>>(expression.ToName(), value);
+            return AppendParameter<IUpdateColumn<T>, UpdateColumn<T>, T>(name, model, property);
         }
 
-        public IUpdateColumn<T> ColumnsAndValues(IEnumerable<Expression<Func<T, object>>> expressions, T model)
+        public IUpdateColumn<T> ColumnsAndValues(T model, IEnumerable<Expression<Func<T, object>>> properties)
         {
-            foreach (var expression in expressions)
+            foreach (var property in properties)
             {
-                AppendListItem(expression.ToName());
+                var name = property.ToName();
+                AppendListItem(name);
                 AppendWord(KeywordAssign);
-                AppendParameter(expression.ToName(), expression.GetValue(model).AsPersistentValue());
+                AppendParameter<T>(name, model, property);
             }
 
             return Transform<IUpdateColumn<T>, UpdateColumn<T>>();

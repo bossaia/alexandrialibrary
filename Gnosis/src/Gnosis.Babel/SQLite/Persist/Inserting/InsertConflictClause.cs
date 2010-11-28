@@ -17,6 +17,7 @@ namespace Gnosis.Babel.SQLite.Persist.Inserting
     }
 
     public class InsertConflictClause<T> : Statement, IInsertConflictClause<T>
+        where T : IModel
     {
         private const string KeywordInto = "into";
 

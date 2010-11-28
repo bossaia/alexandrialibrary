@@ -19,12 +19,13 @@ namespace Gnosis.Alexandria.Models
             Initialize(id);
         }
 
-        private string _title;
-        private string _titleHash;
-        private string _abbreviation;
-        private DateTime _releaseDate;
-        private ICountry _releaseCountry;
-        private string _note;
+        private string _title = "Unknown";
+        private string _titleHash = "Unknown".AsNameHash();
+        private string _abbreviation = string.Empty;
+        private IArtist _creator = Artist.Unknown;
+        private DateTime _releaseDate = new DateTime(1900, 1, 1);
+        private ICountry _releaseCountry = Country.Unknown;
+        private string _note = string.Empty;
         private readonly IList<ITrack> _tracks = new List<ITrack>();
         private readonly IList<ITrack> _removedTracks = new List<ITrack>();
 
@@ -55,6 +56,19 @@ namespace Gnosis.Alexandria.Models
                 if (_abbreviation != value)
                 {
                     _abbreviation = value;
+                    IsChanged = true;
+                }
+            }
+        }
+
+        public IArtist Creator
+        {
+            get { return _creator; }
+            set
+            {
+                if (_creator != value)
+                {
+                    _creator = value;
                     IsChanged = true;
                 }
             }

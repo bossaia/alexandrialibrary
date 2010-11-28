@@ -57,6 +57,7 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     #region Update<T>
 
     public class Update<T> : Statement, IUpdate<T>
+        where T : IModel
     {
         public Update()
         {

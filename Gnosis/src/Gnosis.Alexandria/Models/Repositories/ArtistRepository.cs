@@ -28,6 +28,7 @@ namespace Gnosis.Alexandria.Models.Repositories
             base.Initialize();
 
             AddArtistToCache(Artist.Unknown);
+            AddArtistToCache(Artist.Various);
 
             var batch = BatchFactory.Create();
 
@@ -38,10 +39,10 @@ namespace Gnosis.Alexandria.Models.Repositories
 
                 command.AddStatement(
                     Insert
-                    .OrIgnore
+                    .OrReplace
                     .Into(Schema.Name)
-                    .Columns(Schema.NonPrimaryFields.Select(x => x.Getter))
-                    .Values(Schema.NonPrimaryFields.Select(x => x.Getter), artist)
+                    .Columns(Schema.Fields.Select(x => x.Getter))
+                    //.Values(artist, Schema.Fields.Select(x => x.Getter))
                     );
 
                 commands.Add(command);

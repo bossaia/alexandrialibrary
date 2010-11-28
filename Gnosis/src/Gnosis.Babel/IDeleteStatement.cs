@@ -5,9 +5,8 @@ using System.Text;
 
 namespace Gnosis.Babel
 {
-    public interface IStatement
+    public interface IDeleteStatement<T> : IStatement, IFilterable<T>
+        where T : IModel
     {
-        IEnumerable<IParameter> Parameters { get; }
-        string ToString();
     }
 }

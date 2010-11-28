@@ -11,6 +11,7 @@ namespace Gnosis.Babel.SQLite.Persist.Updating
     }
 
     public interface IUpdatable<T>
+        where T : IModel
     {
         IUpdateSet<T> Table(string table);
     }
