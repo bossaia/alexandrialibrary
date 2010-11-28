@@ -69,8 +69,7 @@ namespace Gnosis.Babel.SQLite
 
             command.AddStatement(Select.LastInsertRowId);
 
-            //TODO: Work out a generic solution for the insert parent key callback
-            //command.SetCallback((x,y) => x.Initialize(y), model);
+            command.SetCallback((x,y) => x.Initialize(y), model);
 
             return command;
         }
