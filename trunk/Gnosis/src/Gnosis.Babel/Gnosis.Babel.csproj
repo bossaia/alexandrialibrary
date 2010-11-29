@@ -50,6 +50,10 @@
     <Compile Include="GenericFactory.cs" />
     <Compile Include="ICache.cs" />
     <Compile Include="ICommand.cs" />
+    <Compile Include="ICreateIndexStatement.cs" />
+    <Compile Include="ICreateTableStatement.cs" />
+    <Compile Include="ICreateTriggerStatement.cs" />
+    <Compile Include="ICreateViewStatement.cs" />
     <Compile Include="ICriteria.cs" />
     <Compile Include="IDeletable.cs" />
     <Compile Include="IDeleteStatement.cs" />
@@ -70,6 +74,7 @@
     <Compile Include="IBatch.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="ISelectStatement.cs" />
+    <Compile Include="ISource.cs" />
     <Compile Include="IUpdateStatement.cs" />
     <Compile Include="Mutable.cs" />
     <Compile Include="MutableDeletable.cs" />

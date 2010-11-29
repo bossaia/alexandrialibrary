@@ -51,7 +51,8 @@ namespace Gnosis.Babel
 
         public void InvokeCallback(object value)
         {
-            _callback(_model, value);
+            if (_callback != null && _model != null)
+                _callback(_model, value);
         }
 
         public override string ToString()

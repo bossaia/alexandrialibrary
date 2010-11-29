@@ -9,7 +9,6 @@ namespace Gnosis.Babel
     {
         IEnumerable<ICommand> Commands { get; }
         void AddCommand(ICommand command);
-        void AddCallback(Guid id, Action<IBatch, object> callback);
         void InvokeCallback(Guid id, object value);
         ICommand GetCommand(Guid id);
     }

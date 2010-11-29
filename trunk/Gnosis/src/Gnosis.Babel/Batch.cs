@@ -11,27 +11,23 @@ namespace Gnosis.Babel
 
         public IEnumerable<ICommand> Commands
         {
-            get { throw new NotImplementedException(); }
+            get { return _commands.Values; }
         }
 
         public void AddCommand(ICommand command)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddCallback(Guid id, Action<IBatch, object> callback)
-        {
-            throw new NotImplementedException();
+            _commands.Add(command.Id, command);
         }
 
         public void InvokeCallback(Guid id, object value)
         {
-            throw new NotImplementedException();
+            if (_commands.ContainsKey(id))
+                _commands[id].InvokeCallback(value);
         }
 
         public ICommand GetCommand(Guid id)
         {
-            throw new NotImplementedException();
+            return (_commands.ContainsKey(id)) ? _commands[id] : null;
         }
     }
 }

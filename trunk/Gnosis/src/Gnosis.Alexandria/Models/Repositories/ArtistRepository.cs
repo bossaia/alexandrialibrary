@@ -42,7 +42,7 @@ namespace Gnosis.Alexandria.Models.Repositories
                     .OrReplace
                     .Into(Schema.Name)
                     .Columns(Schema.Fields.Select(x => x.Getter))
-                    //.Values(artist, Schema.Fields.Select(x => x.Getter))
+                    .Values(artist, Schema.Fields.Select(x => x.Getter))
                     );
 
                 commands.Add(command);
