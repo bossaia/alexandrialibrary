@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Gnosis.Babel;
 using Gnosis.Alexandria.Models.Interfaces;
+using Gnosis.Babel;
+using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {

@@ -109,7 +109,6 @@
     <Compile Include="Models\Stores\CatalogStore.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="ServiceLocator.cs" />
-    <Compile Include="StringExtensions.cs" />
     <Compile Include="Views\Interfaces\IHomeTabView.cs" />
     <Compile Include="Views\Interfaces\ISearchTabView.cs" />
     <Compile Include="Views\Interfaces\ITabView.cs" />
@@ -197,6 +196,10 @@
     <ProjectReference Include="..\Gnosis.Babel\Gnosis.Babel.csproj">
       <Project>{255B2F1A-9744-4656-91FB-CDF7E877704D}</Project>
       <Name>Gnosis.Babel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gnosis.Core\Gnosis.Core.csproj">
+      <Project>{37091600-5BFE-4FCB-8A69-F016FF451462}</Project>
+      <Name>Gnosis.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

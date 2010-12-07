@@ -4,6 +4,7 @@ using System.Linq;
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
 using Gnosis.Babel.SQLite;
+using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models.Repositories
 {
