@@ -5,6 +5,7 @@ using System.Text;
 
 using Gnosis.Alexandria.Models.Interfaces;
 using Gnosis.Babel;
+using Gnosis.Core;
 
 namespace Gnosis.Alexandria.Models
 {
