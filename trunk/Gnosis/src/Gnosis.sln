@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.FileAnalyzer", "Gnosis.FileAnalyzer\Gnosis.FileAnalyzer.csproj", "{184D7C04-405F-4C36-AFA1-229E835A3EDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Core", "Gnosis.Core\Gnosis.Core.csproj", "{37091600-5BFE-4FCB-8A69-F016FF451462}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.ListMaker", "Gnosis.ListMaker\Gnosis.ListMaker.csproj", "{475D2EE9-CC6F-45D1-820A-6A6867CD744B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnosis.Archon", "Gnosis.Archon\Gnosis.Archon.csproj", "{1307CB13-F914-4DEC-8198-BBBC571D821C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,16 @@ Global
 		{475D2EE9-CC6F-45D1-820A-6A6867CD744B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{475D2EE9-CC6F-45D1-820A-6A6867CD744B}.Release|x86.ActiveCfg = Release|x86
 		{475D2EE9-CC6F-45D1-820A-6A6867CD744B}.Release|x86.Build.0 = Release|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Debug|x86.ActiveCfg = Debug|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Debug|x86.Build.0 = Debug|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Release|Any CPU.ActiveCfg = Release|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Release|x86.ActiveCfg = Release|x86
+		{1307CB13-F914-4DEC-8198-BBBC571D821C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
